@@ -253,6 +253,28 @@ function generateFile(name) {
 	});
 	files += '</Files>';
 	runXSLTOnStr(files, "fragmentmapper.xsl", "../tsc/src/FragmentMapper.ts", false, true);
+	
+	//font file
+	sortAndConcatFontCssFiles();
+}
+
+function sortAndConcatFontCssFiles() {
+	let dir = '../assets/www/css/';
+	let finalColorFile = '../assets/www/css/font.css';
+	let files = fs.readdirSync(dir);
+	fs.writeFileSync(finalColorFile, "");
+
+	let str = '';
+	for (let i = 0; i < files.length; i++) {
+		let fileName = files[i];
+		
+		if (fileName.startsWith("font_") && fileName.endsWith(".css")) {
+			str += fs.readFileSync(dir + fileName);
+			str += '\n';
+		}
+	}
+	
+	fs.writeFileSync(finalColorFile, str);
 }
 
 function getCamelCaseFileName(outFileName) {
@@ -556,3 +578,4 @@ function updateDrawableSize() {
 
 	fs.writeFileSync(`../resources/drawable/drawable_size.properties`, str);	
 }
+
