@@ -21,5 +21,5 @@ var copyRecursiveSync = function(src, dest) {
   }
 };
  
-copyRecursiveSync("plugins/com.ashera.core/res-onetime", "platforms/android/app/src/main/res");
-copyRecursiveSync("plugins/com.ashera.core/tsc-onetime", "platforms/android/app/src/main/tsc");
+copyRecursiveSync("plugins/com.ashera.core/core/android/res-onetime", "platforms/android/app/src/main/res");
+copyRecursiveSync("plugins/com.ashera.core/core/android/tsc-onetime", "platforms/android/app/src/main/tsc");
