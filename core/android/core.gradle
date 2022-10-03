@@ -19,7 +19,7 @@ dependencies {
     
 }
 
-def cordovaJsStr = new File("app/src/main/assets/www/cordova.js").text
+def cordovaJsStr = new File("${project.rootDir}/app/src/main/assets/www/cordova.js").text
 cordovaJsStr = cordovaJsStr.replace("throw new Error('Unknown event action ' + action);", "cordova.fireDocumentEvent(action, msg);break;");
 
-new File("app/src/main/assets/www/cordova.js").withWriter { w -> w << cordovaJsStr};
+new File("${project.rootDir}/app/src/main/assets/www/cordova.js").withWriter { w -> w << cordovaJsStr};
