@@ -114,8 +114,8 @@ function syncWebRes() {
 	if (fs.existsSync(webPath)) {
 		console.log("web sync");
 		syncRes(webPath, webAssetPath);	
-		cpx.copySync(webAssetPath + "../../../../res/xml/config.xml", webAssetPath + "/www/");
-		cpx.copySync(webAssetPath + "../../../../res/xml/config.xml", webPath + "/res/xml/");
+		cpx.copySync(webAssetPath + "../../../../../res/xml/config.xml", webAssetPath + "/www/");
+		cpx.copySync(webAssetPath + "../../../../../res/xml/config.xml", webPath + "/res/xml/");
 	}
 }
 
