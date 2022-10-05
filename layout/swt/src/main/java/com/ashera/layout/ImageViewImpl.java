@@ -1324,7 +1324,10 @@ public void setCropToPadding(boolean value) {
 			// clean up images before setting new image
 			internalDisposeImage(this.imageResizeListener.getImage());
 		}
-		internalDisposeImage(this.label.getImage());
+		
+		if (!this.label.isDisposed()) {
+			internalDisposeImage(this.label.getImage());
+		}
 	}
 	
 	private void internalDisposeImage(Image image) {

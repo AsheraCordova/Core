@@ -592,7 +592,10 @@ return getBaselineAlignBottom();				}
 			// clean up images before setting new image
 			internalDisposeImage(this.imageResizeListener.getImage());
 		}
-		internalDisposeImage(this.button.getImage());
+		
+		if (!this.button.isDisposed()) {
+			internalDisposeImage(this.button.getImage());
+		}
 	}
 	
 	private void internalDisposeImage(Image image) {

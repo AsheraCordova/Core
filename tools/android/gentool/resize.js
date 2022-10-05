@@ -20,7 +20,11 @@ async function resizeStart() {
     			fs.mkdirSync(dir, { recursive: true });
 			}
 			console.log(destPath);
-			await resize(resolve(baseDir + fileName), destPath, percentages[j]);
+			let percentage = percentages[j];
+			if (fileName.indexOf("_no_resize.") != -1) {
+				percentage = "100%";
+			}
+			await resize(resolve(baseDir + fileName), destPath, percentage);
 		}
 	}
 

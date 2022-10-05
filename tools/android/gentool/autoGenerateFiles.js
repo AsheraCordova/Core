@@ -122,11 +122,22 @@ function syncWebRes() {
 function syncBundleJs() {
 	let swtPath = "../../../../../swt/app/src/main/assets";
 	if (fs.existsSync(swtPath)) {
-		console.log("bundle sync");
+		console.log("bundle swt sync");
 		cpx.copy("../assets/www/js/index.js", swtPath + "/www/js");
 	}
+	
+	let webPath = "../../../../../browser/app/src/main/assets";
+	if (fs.existsSync(webPath)) {
+		console.log("bundle web sync");
+		cpx.copy("../assets/www/js/index.js", webPath + "/www/js");
+	}
+	
+	let iosPath = "../../../../../ios/app/src/main/assets";
+	if (fs.existsSync(iosPath)) {
+		console.log("bundle ios sync");
+		cpx.copy("../assets/www/js/index.js", iosPath + "/www/js");
+	}
 }
-
 function createFolders() {
 	let resMandatory = [
 		"../res-swt/",

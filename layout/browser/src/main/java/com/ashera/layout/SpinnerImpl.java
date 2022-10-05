@@ -1429,7 +1429,7 @@ return hint;				}
 	
 	@Override
 	public void initialized() {
-		super.initialized();
+		super.initialized();triggerChangeOnLoad();
 		if (tmpSelectedValue != null) {
 			setSelectedValue(tmpSelectedValue);
 		}
@@ -2381,4 +2381,20 @@ public void setHint(String value) {
 		}
 		
 	}
+	
+	private void triggerChangeOnLoad() {
+		int selectedPosition = getSelectedItemPosition();
+		
+		if (selectedPosition == 0) {
+			// trigger change
+			triggerChange(select);
+		}
+	}
+	
+
+    @org.teavm.jso.JSBody(params = { "element" }, script = "setTimeout(function() {var event = new Event('change');element.dispatchEvent(event);},0); ")
+    private static native void triggerChange(org.teavm.jso.dom.html.HTMLElement element);
+
+
+
 }
