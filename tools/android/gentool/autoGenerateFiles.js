@@ -20,6 +20,7 @@ fs.readdirSync("../res/").forEach(dir => {
 
 syncPlatformRes();
 
+
 watch('../assets/www/js', { recursive: true }, function (evt, name) {
     syncBundleJs();
 });
@@ -40,6 +41,9 @@ watch('../res', { recursive: true }, function (evt, name) {
 });
 
 function syncPlatformRes() {
+	// android file
+	cpx.copy("../res/layout/*.xml", "../assets/www/layout");
+
 	syncSwtRes();
 	syncWebRes();
 	syncIosRes();
@@ -137,6 +141,9 @@ function syncBundleJs() {
 		console.log("bundle ios sync");
 		cpx.copy("../assets/www/js/index.js", iosPath + "/www/js");
 	}
+	
+	let projectBasePath = "../../../../../../";
+	cpx.copySync("../assets/www/js/index.js", projectBasePath + "/www/js");
 }
 function createFolders() {
 	let resMandatory = [
