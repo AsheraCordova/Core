@@ -109,11 +109,17 @@ public class FragmentManager {
     public FragmentManager(IActivity activity) {
         this.activity = activity;
         this.disableHistory = "true".equals(activity.getPreference("webDisableHistory"));
+        this.historyUrlPrefix = activity.getPreference("webHistoryUrlPrefix");
+        
+        if (this.historyUrlPrefix == null) {
+        	this.historyUrlPrefix = "";
+        }
         addHistoryChangeEvent();
     }
     
     // history related methods - starts here
     private boolean disableHistory;
+    private String historyUrlPrefix;
 	private final class HistoryChangeListener implements org.teavm.jso.dom.events.EventListener<HistoryEvent> {
 		private final IAsyncCallBack callback;
 
@@ -152,7 +158,7 @@ public class FragmentManager {
 	    	String data = String.format("{\"resId\": \"%s\", \"fileName\": \"%s\", \"payload\": \"%s\"}", resId,
 	    			fileName, escape(com.ashera.widget.PluginInvoker.marshal(scopedObjects)));
 			org.teavm.jso.JSObject obj = org.teavm.jso.json.JSON.parse(data);
-			org.teavm.jso.browser.Window.current().getHistory().pushState(obj, "", historyUrl.replace(".xml", ""));
+			org.teavm.jso.browser.Window.current().getHistory().pushState(obj, "", historyUrlPrefix + historyUrl.replace(".xml", ""));
 		}
 	}
 	
@@ -201,6 +207,10 @@ public class FragmentManager {
 			String actionUrl = null;
 			if (fragments.size() - 2 >= 0) {
 				actionUrl = fragments.get(fragments.size() - 2).getActionUrl();
+			}
+			
+			if (!this.historyUrlPrefix.equals("")) {
+				actionUrl = actionUrl.replaceFirst(this.historyUrlPrefix, "");
 			}
 			if (obj.get("fileName").equals(actionUrl)) {
 				pop();	
