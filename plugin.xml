@@ -1284,7 +1284,6 @@
   	<resource-file src="core/browser/www/css/shadowhost.css" target="../../src/main/assets/www/css/shadowhost.css" />
   	<source-file src="core/browser/src/main/other/com/ashera/Client.java" target-dir="com/ashera/"/>
   	<source-file src="core/browser/src/main/other/com/ashera/ResourcesSupplier.java" target-dir="com/ashera/"/>
-  	<source-file src="core/browser/src/main/other/com/ashera/ResourcesSupplierGen.java" target-dir="com/ashera/"/>
   	
   	<resource-file src="core/browser/src/main/resources/META-INF/services/java.util.ResourceBundle" target="../../src/main/resources/META-INF/services/java.util.ResourceBundle" />
   	<resource-file src="core/browser/src/main/resources/META-INF/services/org.teavm.classlib.ResourceSupplier" target="../../src/main/resources/META-INF/services/org.teavm.classlib.ResourceSupplier" />

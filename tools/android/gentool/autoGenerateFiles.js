@@ -20,6 +20,9 @@ fs.readdirSync("../res/").forEach(dir => {
 
 syncPlatformRes();
 
+if (process.argv[2] == 'skip_watch') {
+	return;
+}
 
 watch('../assets/www/js', { recursive: true }, function (evt, name) {
     syncBundleJs();
