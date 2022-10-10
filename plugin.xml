@@ -130,6 +130,7 @@
   
   	<framework src="tools/android/tools.gradle" custom="true" type="gradleReference" />
     <!-- start gentool -->
+     <source-file src="tools/android/gentool/androidbackup.js" target-dir="gentool"/>
      <source-file src="tools/android/gentool/autoGenerateFiles.js" target-dir="gentool"/>
      <source-file src="tools/android/gentool/colors.xsl" target-dir="gentool"/>
      <source-file src="tools/android/gentool/dimens.xsl" target-dir="gentool"/>
