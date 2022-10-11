@@ -17,7 +17,7 @@
       </feature>
     </config-file>
     
-	<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='MainActivity' or @android:name='com.ashera.core.MainActivity']" >
+	<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='MainActivity']" >
             <activity android:name="com.ashera.core.MainActivity" android:theme="@style/AppTheme" />
     </edit-config>
     
