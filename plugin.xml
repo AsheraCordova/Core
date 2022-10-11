@@ -1268,7 +1268,7 @@
      <!-- ios_ext end -->
   </platform>
   <platform name="browser">
-    <config-file target="res/xml/config.xml" parent="/*">
+    <config-file target="config.xml" parent="/*">
       <feature name="CoreCordovaPlugin">
         <param name="android-package" value="com.ashera.core.CoreCordovaPlugin"/>
         <param name="onload" value="true" />
@@ -1290,7 +1290,7 @@
   	<resource-file src="core/browser/src/main/resources/META-INF/services/org.teavm.classlib.ResourceSupplier" target="../../src/main/resources/META-INF/services/org.teavm.classlib.ResourceSupplier" />
   	<resource-file src="core/browser/src/main/resources/META-INF/services/org.xmlpull.v1.XmlPullParserFactory" target="../../src/main/resources/META-INF/services/org.xmlpull.v1.XmlPullParserFactory" />
   
-  	<config-file target="res/xml/config.xml" parent="/*">
+  	<config-file target="config.xml" parent="/*">
       <feature name="ConverterCordovaPlugin">
         <param name="android-package" value="com.ashera.converter.ConverterCordovaPlugin"/>
         <param name="onload" value="true" />
@@ -1298,7 +1298,7 @@
     </config-file>
    	<framework src="converter/browser/converter.gradle" custom="true" type="gradleReference" />
   
-  	<config-file target="res/xml/config.xml" parent="/*">
+  	<config-file target="config.xml" parent="/*">
       <feature name="JSONAdapterCordovaPlugin">
         <param name="android-package" value="com.ashera.jsonadapter.JSONAdapterCordovaPlugin"/>
         <param name="onload" value="true" />
@@ -1306,7 +1306,7 @@
     </config-file>
    	<framework src="json/browser/json.gradle" custom="true" type="gradleReference" />
   
-  	<config-file target="res/xml/config.xml" parent="/*">
+  	<config-file target="config.xml" parent="/*">
       <feature name="AndroidLayoutsCordovaPlugin">
         <param name="android-package" value="com.ashera.layout.AndroidLayoutsCordovaPlugin"/>
         <param name="onload" value="true" />
