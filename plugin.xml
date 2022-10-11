@@ -17,7 +17,7 @@
       </feature>
     </config-file>
     
-	<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[intent-filter/@android:name='android.intent.action.MAIN']" >
+	<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[intent-filter/action/@android:name='android.intent.action.MAIN']" >
             <activity android:name="com.ashera.core.MainActivity" android:theme="@style/AppTheme" />
     </edit-config>
     
