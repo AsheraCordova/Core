@@ -17,8 +17,8 @@
       </feature>
     </config-file>
     
-	<edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity/intent-filter/action[@android:name='android.intent.action.MAIN']/../..">
-            <activity android:name="com.ashera.core.MainActivity" android:theme="@style/AppTheme" />
+	<edit-config file="AndroidManifest.xml" mode="overwrite" target="/manifest/application/activity/intent-filter/action[@android:name='android.intent.action.MAIN']/../..">
+            <activity android:label="@string/app_name" android:name="com.ashera.core.MainActivity" android:theme="@style/AppTheme" />
     </edit-config>
     
 	<hook type="before_plugin_install" src="core/android/hooks/beforeInstall.js" />
