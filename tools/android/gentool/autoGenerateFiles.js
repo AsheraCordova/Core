@@ -48,10 +48,11 @@ function syncPlatformRes() {
 	cpx.copy("../res/layout/*.xml", "../assets/www/layout");
 
 	syncSwtRes();
+	updateDrawableSize();	
 	syncWebRes();
 	syncIosRes();
+	syncSwtRes();
 	syncToWWW();
-	updateDrawableSize();
 }
 
 function syncSwtRes() {
