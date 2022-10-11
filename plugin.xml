@@ -16,11 +16,10 @@
         <param name="onload" value="true" />
       </feature>
     </config-file>
-    
-	<edit-config file="AndroidManifest.xml" mode="overwrite" target="/manifest/application/activity/intent-filter/action[@android:name='android.intent.action.MAIN']/../..">
+    <edit-config file="AndroidManifest.xml" mode="overwrite" target="/manifest/application/activity/intent-filter/action[@android:name='android.intent.action.MAIN']/../..">
             <activity android:label="@string/app_name" android:name="com.ashera.core.MainActivity" android:theme="@style/AppTheme" />
     </edit-config>
-    
+
 	<hook type="before_plugin_install" src="core/android/hooks/beforeInstall.js" />
 	<hook type="after_plugin_install" src="core/android/hooks/afterInstall.js" />
     <framework src="core/android/core.gradle" custom="true" type="gradleReference" />
