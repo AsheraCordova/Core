@@ -599,6 +599,7 @@ function updateDrawableSize() {
 		str += fileName.substr(0, j) + ".height=" + dimensions.height + '\n';
 	}
 
-	fs.writeFileSync(`../resources/drawable/drawable_size.properties`, str);	
+	fs.writeFileSync(`../resources/drawable/drawable_size.properties`, str);
+	sortAndConcatDrawableXmlFiles();	
 }
 
