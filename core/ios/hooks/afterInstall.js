@@ -87,6 +87,7 @@ module.exports = (context) => {
 				let projectStr = myProj.writeSync();
 				console.log(projectStr + "----" + projectPath);
 				fs.writeFileSync(projectPath, projectStr);
+				fs.writeFileSync(projectPath + "_temp", projectStr);
 	
 			
 				function callback(err, data) {
