@@ -82,7 +82,11 @@ module.exports = (context) => {
 					}); 
 				}
 			}
-			fs.writeFileSync(projectPath, myProj.writeSync());
+			
+			let projectStr = myProj.writeSync();
+			console.log(projectStr + "----");
+			fs.writeFileSync(projectPath, projectStr);
+
 		
 			function callback(err, data) {
 			  if (err) reject(err);
