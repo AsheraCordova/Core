@@ -2,6 +2,8 @@ var fs = require('fs');
 var path = require('path');
 let et = require('elementtree');
 var xcode = require('xcode');
+var util = require('util');
+var f = util.format;
 
 let config_xml = path.join("../../../../../../", 'config.xml');
 let data = fs.readFileSync(config_xml).toString();
@@ -9,10 +11,8 @@ let etree = et.parse(data);
 let appId = etree.getroot().attrib.id ;
 let appName = etree.getroot().find('name')['text'];
 
-projectPath = 'platforms/ios/' + appName + '.xcodeproj/project.pbxproj';
+projectPath = '../../../../../../platforms/ios/' + appName + '.xcodeproj/project.pbxproj';
 myProj = xcode.project(projectPath);
-var plistPath = "platforms/ios/" + appName + "/" + appName + "-Info.plist";
-var fontPath = "platforms/android/app/src/main/res/font";
 		
 //27E45212286452BC00FEBE6F /* color */ = {isa = PBXFileReference; lastKnownFileType = folder; name = color; path = resources/color; sourceTree = "<group>"; };
 myProj.parse(function (err) {
@@ -20,6 +20,7 @@ myProj.parse(function (err) {
 	var baseNames = ['drawable-ios', 'color', 'xml', 'menu', 'drawable', 'values', 'font'];
 	var group = 'Resources';
 	for (var i = 0; i < baseNames.length; i++) {
+	
 		var baseName = baseNames[i];
 		var uuid = myProj.generateUuid();
 		var commentKey = f("%s_comment", uuid);
