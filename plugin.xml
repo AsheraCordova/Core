@@ -129,6 +129,7 @@
      <source-file src="tools/android/gentool/autoGenerateFiles.js" target-dir="gentool"/>
      <source-file src="tools/android/gentool/colors.xsl" target-dir="gentool"/>
      <source-file src="tools/android/gentool/dimens.xsl" target-dir="gentool"/>
+     <source-file src="tools/android/gentool/fixIosSymLinks.js" target-dir="gentool"/>
      <source-file src="tools/android/gentool/font.xsl" target-dir="gentool"/>
      <source-file src="tools/android/gentool/fontcss.xsl" target-dir="gentool"/>
      <source-file src="tools/android/gentool/fragment.xsl" target-dir="gentool"/>
