@@ -12,6 +12,9 @@
 #include "CommonConverters.h"
 #include "ConverterFactory.h"
 #include "Drawable.h"
+#include "Event.h"
+#include "EventBus.h"
+#include "EventBusHandler.h"
 #include "EventCommand.h"
 #include "EventCommandFactory.h"
 #include "EventExpressionParser.h"
@@ -84,6 +87,8 @@
   ASSpinnerImpl_SpinnerBean *bean_;
   id<JavaUtilList> entries_;
   id<ASSpinnerImpl_AdapterView_OnItemSelectedListener> onItemSelectedListener_;
+  ASSpinnerImpl_PostMeasureHandler *postMeasureHandler_;
+  NSString *POST_MEASURE_EVENT_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -249,6 +254,10 @@
 
 - (void)setErrorWithId:(id)object;
 
+- (void)triggerChangeOnLoad;
+
+- (void)addTriggerChangeOnLoadListener;
+
 @end
 
 J2OBJC_FIELD_SETTER(ASSpinnerImpl, fontDescriptors_, id<JavaUtilMap>)
@@ -261,6 +270,8 @@ J2OBJC_FIELD_SETTER(ASSpinnerImpl, builder_, ASSpinnerImpl_SpinnerCommandBuilder
 J2OBJC_FIELD_SETTER(ASSpinnerImpl, bean_, ASSpinnerImpl_SpinnerBean *)
 J2OBJC_FIELD_SETTER(ASSpinnerImpl, entries_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASSpinnerImpl, onItemSelectedListener_, id<ASSpinnerImpl_AdapterView_OnItemSelectedListener>)
+J2OBJC_FIELD_SETTER(ASSpinnerImpl, postMeasureHandler_, ASSpinnerImpl_PostMeasureHandler *)
+J2OBJC_FIELD_SETTER(ASSpinnerImpl, POST_MEASURE_EVENT_, NSString *)
 
 inline jint ASSpinnerImpl_get_ITALIC_FONT_TRAIT(void);
 inline jint ASSpinnerImpl_set_ITALIC_FONT_TRAIT(jint value);
@@ -444,6 +455,10 @@ __attribute__((unused)) static jint ASSpinnerImpl_getSelectedItemPosition(ASSpin
 
 __attribute__((unused)) static void ASSpinnerImpl_setErrorWithId_(ASSpinnerImpl *self, id object);
 
+__attribute__((unused)) static void ASSpinnerImpl_triggerChangeOnLoad(ASSpinnerImpl *self);
+
+__attribute__((unused)) static void ASSpinnerImpl_addTriggerChangeOnLoadListener(ASSpinnerImpl *self);
+
 @interface ASSpinnerImpl_DrawableTintMode () {
  @public
   id<JavaUtilMap> mapping_;
@@ -553,6 +568,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_OnItemSelectedListener)
 @interface ASSpinnerImpl_SpinnerBean () {
  @public
   ASSpinnerImpl *this$0_;
+}
+
+@end
+
+@interface ASSpinnerImpl_PostMeasureHandler () {
+ @public
+  __unsafe_unretained ASSpinnerImpl *this$0_;
 }
 
 @end
@@ -1317,6 +1339,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)initialized {
   [super initialized];
+  ASSpinnerImpl_addTriggerChangeOnLoadListener(self);
   if (tmpSelectedValue_ != nil) {
     ASSpinnerImpl_setSelectedValueWithId_(self, tmpSelectedValue_);
   }
@@ -1627,6 +1650,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASSpinnerImpl_setErrorWithId_(self, object);
 }
 
+- (void)triggerChangeOnLoad {
+  ASSpinnerImpl_triggerChangeOnLoad(self);
+}
+
+- (void)addTriggerChangeOnLoadListener {
+  ASSpinnerImpl_addTriggerChangeOnLoadListener(self);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
@@ -1765,6 +1796,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 93, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1905,6 +1938,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[133].selector = @selector(isViewVisible);
   methods[134].selector = @selector(focus);
   methods[135].selector = @selector(setErrorWithId:);
+  methods[136].selector = @selector(triggerChangeOnLoad);
+  methods[137].selector = @selector(addTriggerChangeOnLoadListener);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 94, -1, -1 },
@@ -1927,9 +1962,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "bean_", "LASSpinnerImpl_SpinnerBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "entries_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 99, -1 },
     { "onItemSelectedListener_", "LASSpinnerImpl_AdapterView_OnItemSelectedListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "postMeasureHandler_", "LASSpinnerImpl_PostMeasureHandler;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "POST_MEASURE_EVENT_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "updateMeasuredDimension", "II", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setGravity", "LNSObject;", "onRtlPropertiesChanged", "I", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "setModelOptionTextPath", "setModelOptionValuePath", "getOptionValueFromLoopParam", "LASLoopParam;LNSString;", "setValues", "setSelectedValue", "measureHeight", "setHintColor", "nativeSetHintColor", "nativeSetEnabled", "Z", "setEnabled", "showError", "setHintTextFormat", "setText", "LNSObject;LNSObject;", "setPlaceholder", "setAdjustsFontSizeToFitWidth", "setMinimumFontSize", "setClearsOnBeginEditing", "setClearsOnInsertion", "setAllowsEditingTextAttributes", "setBackground", "setDisabledBackground", "checkIosVersion", "setId", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addItemToParent", "ILNSString;LASLoopParam;", "getSelectedText", "triggerOnSelect", "setOnItemSelectedListener", "LASSpinnerImpl_AdapterView_OnItemSelectedListener;", "setEntries", "setSelection", "nativeSetSelection", "setTextColorLink", "LADColorStateList;", "setError", &ASSpinnerImpl_LOCAL_NAME, &ASSpinnerImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", &ASSpinnerImpl_ITALIC_FONT_TRAIT, &ASSpinnerImpl_BOLD_FONT_TRAIT, "Ljava/util/List<Ljava/lang/String;>;", "LASSpinnerImpl_DrawableTintMode;LASSpinnerImpl_Font;LASSpinnerImpl_TextStyle;LASSpinnerImpl_SpinnerExt;LASSpinnerImpl_AdapterView;LASSpinnerImpl_OnItemSelectedListener;LASSpinnerImpl_SpinnerCommandBuilder;LASSpinnerImpl_SpinnerBean;" };
-  static const J2ObjcClassInfo _ASSpinnerImpl = { "SpinnerImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 136, 20, -1, 100, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "updateMeasuredDimension", "II", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setGravity", "LNSObject;", "onRtlPropertiesChanged", "I", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "setModelOptionTextPath", "setModelOptionValuePath", "getOptionValueFromLoopParam", "LASLoopParam;LNSString;", "setValues", "setSelectedValue", "measureHeight", "setHintColor", "nativeSetHintColor", "nativeSetEnabled", "Z", "setEnabled", "showError", "setHintTextFormat", "setText", "LNSObject;LNSObject;", "setPlaceholder", "setAdjustsFontSizeToFitWidth", "setMinimumFontSize", "setClearsOnBeginEditing", "setClearsOnInsertion", "setAllowsEditingTextAttributes", "setBackground", "setDisabledBackground", "checkIosVersion", "setId", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addItemToParent", "ILNSString;LASLoopParam;", "getSelectedText", "triggerOnSelect", "setOnItemSelectedListener", "LASSpinnerImpl_AdapterView_OnItemSelectedListener;", "setEntries", "setSelection", "nativeSetSelection", "setTextColorLink", "LADColorStateList;", "setError", &ASSpinnerImpl_LOCAL_NAME, &ASSpinnerImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", &ASSpinnerImpl_ITALIC_FONT_TRAIT, &ASSpinnerImpl_BOLD_FONT_TRAIT, "Ljava/util/List<Ljava/lang/String;>;", "LASSpinnerImpl_DrawableTintMode;LASSpinnerImpl_Font;LASSpinnerImpl_TextStyle;LASSpinnerImpl_SpinnerExt;LASSpinnerImpl_AdapterView;LASSpinnerImpl_OnItemSelectedListener;LASSpinnerImpl_SpinnerCommandBuilder;LASSpinnerImpl_SpinnerBean;LASSpinnerImpl_PostMeasureHandler;" };
+  static const J2ObjcClassInfo _ASSpinnerImpl = { "SpinnerImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 138, 22, -1, 100, -1, -1, -1 };
   return &_ASSpinnerImpl;
 }
 
@@ -1945,6 +1982,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void ASSpinnerImpl_init(ASSpinnerImpl *self) {
   ASBaseHasWidgets_initWithNSString_withNSString_(self, ASSpinnerImpl_GROUP_NAME, ASSpinnerImpl_LOCAL_NAME);
+  self->POST_MEASURE_EVENT_ = [((ASEvent_StandardEvents *) nil_chk(JreLoadEnum(ASEvent_StandardEvents, postMeasure))) description];
 }
 
 ASSpinnerImpl *new_ASSpinnerImpl_init() {
@@ -2603,6 +2641,20 @@ jint ASSpinnerImpl_getSelectedItemPosition(ASSpinnerImpl *self) {
 }
 
 void ASSpinnerImpl_setErrorWithId_(ASSpinnerImpl *self, id object) {
+}
+
+void ASSpinnerImpl_triggerChangeOnLoad(ASSpinnerImpl *self) {
+  jint selectedPosition = ASSpinnerImpl_getSelectedItemPosition(self);
+  if (selectedPosition == 0) {
+    ASSpinnerImpl_triggerOnSelectWithInt_(self, 0);
+  }
+}
+
+void ASSpinnerImpl_addTriggerChangeOnLoadListener(ASSpinnerImpl *self) {
+  if (self->postMeasureHandler_ == nil) {
+    self->postMeasureHandler_ = new_ASSpinnerImpl_PostMeasureHandler_initWithASSpinnerImpl_withNSString_(self, self->POST_MEASURE_EVENT_);
+    [((ASEventBus *) nil_chk([((id<ASIFragment>) nil_chk(self->fragment_)) getEventBus])) onWithNSString:self->POST_MEASURE_EVENT_ withASEventBusHandlerArray:[IOSObjectArray newArrayWithObjects:(id[]){ self->postMeasureHandler_ } count:1 type:ASEventBusHandler_class_()]];
+  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSpinnerImpl)
@@ -4636,3 +4688,57 @@ ASSpinnerImpl_SpinnerBean *create_ASSpinnerImpl_SpinnerBean_initWithASSpinnerImp
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSpinnerImpl_SpinnerBean)
+
+@implementation ASSpinnerImpl_PostMeasureHandler
+
+- (instancetype)initWithASSpinnerImpl:(ASSpinnerImpl *)outer$
+                         withNSString:(NSString *)type {
+  ASSpinnerImpl_PostMeasureHandler_initWithASSpinnerImpl_withNSString_(self, outer$, type);
+  return self;
+}
+
+- (void)doPerformWithId:(id)payload {
+  [((ASEventBus *) nil_chk([((id<ASIFragment>) nil_chk(this$0_->fragment_)) getEventBus])) offWithASEventBusHandlerArray:[IOSObjectArray newArrayWithObjects:(id[]){ self } count:1 type:ASEventBusHandler_class_()]];
+  ASSpinnerImpl_triggerChangeOnLoad(this$0_);
+}
+
+- (void)__javaClone:(ASSpinnerImpl_PostMeasureHandler *)original {
+  [super __javaClone:original];
+  JreRelease(this$0_);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithASSpinnerImpl:withNSString:);
+  methods[1].selector = @selector(doPerformWithId:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "this$0_", "LASSpinnerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LASSpinnerImpl;LNSString;", "doPerform", "LNSObject;", "LASSpinnerImpl;" };
+  static const J2ObjcClassInfo _ASSpinnerImpl_PostMeasureHandler = { "PostMeasureHandler", "com.ashera.layout", ptrTable, methods, fields, 7, 0x0, 2, 1, 3, -1, -1, -1, -1 };
+  return &_ASSpinnerImpl_PostMeasureHandler;
+}
+
+@end
+
+void ASSpinnerImpl_PostMeasureHandler_initWithASSpinnerImpl_withNSString_(ASSpinnerImpl_PostMeasureHandler *self, ASSpinnerImpl *outer$, NSString *type) {
+  self->this$0_ = outer$;
+  ASEventBusHandler_initWithNSString_(self, type);
+}
+
+ASSpinnerImpl_PostMeasureHandler *new_ASSpinnerImpl_PostMeasureHandler_initWithASSpinnerImpl_withNSString_(ASSpinnerImpl *outer$, NSString *type) {
+  J2OBJC_NEW_IMPL(ASSpinnerImpl_PostMeasureHandler, initWithASSpinnerImpl_withNSString_, outer$, type)
+}
+
+ASSpinnerImpl_PostMeasureHandler *create_ASSpinnerImpl_PostMeasureHandler_initWithASSpinnerImpl_withNSString_(ASSpinnerImpl *outer$, NSString *type) {
+  J2OBJC_CREATE_IMPL(ASSpinnerImpl_PostMeasureHandler, initWithASSpinnerImpl_withNSString_, outer$, type)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSpinnerImpl_PostMeasureHandler)

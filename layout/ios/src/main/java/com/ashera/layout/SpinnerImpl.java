@@ -1543,7 +1543,7 @@ return getTextColorState();				}
 	
 	@Override
 	public void initialized() {
-		super.initialized();
+		super.initialized();addTriggerChangeOnLoadListener();
 		if (tmpSelectedValue != null) {
 			setSelectedValue(tmpSelectedValue);
 		}
@@ -2910,5 +2910,35 @@ public void setEnabled(boolean value) {
 	
 	private void setError(Object object) {
 		
+	}
+	
+	private void triggerChangeOnLoad() {
+		int selectedPosition = getSelectedItemPosition();
+		
+		if (selectedPosition == 0) {
+			// trigger change
+			triggerOnSelect(0);
+		}
+	}
+	@com.google.j2objc.annotations.WeakOuter
+	class PostMeasureHandler extends com.ashera.widget.bus.EventBusHandler {
+		public PostMeasureHandler(String type) {
+			super(type);
+		}
+
+		@Override
+		protected void doPerform(Object payload) {
+			fragment.getEventBus().off(this);
+			triggerChangeOnLoad();
+		}
+	}
+	
+	private PostMeasureHandler postMeasureHandler;
+	private final String POST_MEASURE_EVENT = StandardEvents.postMeasure.toString();
+    private void addTriggerChangeOnLoadListener() {
+    	if (postMeasureHandler == null) {
+    		postMeasureHandler = new PostMeasureHandler(POST_MEASURE_EVENT);
+			fragment.getEventBus().on(POST_MEASURE_EVENT, postMeasureHandler);
+    	}
 	}
 }

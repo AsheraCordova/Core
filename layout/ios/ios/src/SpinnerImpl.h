@@ -1203,4 +1203,42 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_SpinnerBean)
 
 #endif
 
+#if !defined (ASSpinnerImpl_PostMeasureHandler_) && (INCLUDE_ALL_SpinnerImpl || defined(INCLUDE_ASSpinnerImpl_PostMeasureHandler))
+#define ASSpinnerImpl_PostMeasureHandler_
+
+#define RESTRICT_EventBusHandler 1
+#define INCLUDE_ASEventBusHandler 1
+#include "EventBusHandler.h"
+
+@class ASSpinnerImpl;
+
+@interface ASSpinnerImpl_PostMeasureHandler : ASEventBusHandler
+
+#pragma mark Public
+
+- (instancetype)initWithASSpinnerImpl:(ASSpinnerImpl *)outer$
+                         withNSString:(NSString *)type;
+
+#pragma mark Protected
+
+- (void)doPerformWithId:(id)payload;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)initWithNSString:(NSString *)arg0 NS_UNAVAILABLE;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASSpinnerImpl_PostMeasureHandler)
+
+FOUNDATION_EXPORT void ASSpinnerImpl_PostMeasureHandler_initWithASSpinnerImpl_withNSString_(ASSpinnerImpl_PostMeasureHandler *self, ASSpinnerImpl *outer$, NSString *type);
+
+FOUNDATION_EXPORT ASSpinnerImpl_PostMeasureHandler *new_ASSpinnerImpl_PostMeasureHandler_initWithASSpinnerImpl_withNSString_(ASSpinnerImpl *outer$, NSString *type) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASSpinnerImpl_PostMeasureHandler *create_ASSpinnerImpl_PostMeasureHandler_initWithASSpinnerImpl_withNSString_(ASSpinnerImpl *outer$, NSString *type);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_PostMeasureHandler)
+
+#endif
+
 #pragma pop_macro("INCLUDE_ALL_SpinnerImpl")
