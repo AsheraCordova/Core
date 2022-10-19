@@ -54,6 +54,8 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	private List<Object> disposables;
 	private boolean measuring;
 	private Stack<Boolean> disableRemeasures = new Stack<>();
+	private boolean isPaused;
+	private boolean remeasureOnResume;
 
 	@Override
 	public void addListener(IWidget widget, Object listener) {
@@ -238,6 +240,11 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
     @Override
     public void onResume() {
     	super.onResume();
+    	if (remeasureOnResume) {
+    		remeasure();
+    		remeasureOnResume = false;
+    	}
+    	isPaused = false;
     	sendLifeCycleEvent("onResume", fileName, getEventData("onResume"));
     }
 
@@ -282,7 +289,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	@Override
 	public void onPause() {
 		super.onPause();
-		
+		isPaused = true;
 		sendLifeCycleEvent("onPause", fileName, getEventData("onPause"));
 	}
 	
@@ -447,6 +454,17 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		eventBus.notifyObservers(POSTMEASURE_EVENT, new com.ashera.widget.bus.Event(com.ashera.widget.bus.Event.StandardEvents.postMeasure));
 		measuring = false;
 	}
+	
+	@Override
+	public void resizeWindow(int width, int height) {
+		setFrame(x,	y, width, height);
+
+		if (!isPaused) {
+			remeasure();
+		} else {
+			remeasureOnResume = true;
+		}
+	}
 
 	public boolean isMeasuring() {
 		return measuring || disableRemeasures.size() > 0;
@@ -498,4 +516,5 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		}
 		return errors;
 	}
+	
 }

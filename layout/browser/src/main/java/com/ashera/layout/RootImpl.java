@@ -1771,12 +1771,41 @@ return this;}
 
 	//end - body
 	
-	
+	private final class ResizeListener implements org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.Event> {
+		@Override
+		public void handleEvent(org.teavm.jso.dom.events.Event evt) {
+			int width = org.teavm.jso.dom.html.HTMLDocument.current().getElementById("shadowhost").getClientWidth();
+			int height = org.teavm.jso.dom.html.HTMLDocument.current().getElementById("shadowhost").getClientHeight();
+			getFragment().resizeWindow(width, height);
+		}
+	}
+	private ResizeListener listener = new ResizeListener();
     private void nativeCreate(Map<String, Object> params) {
 		htmlElement = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
 		htmlElement.getStyle().setProperty("overflow", "hidden");
 		htmlElement.getStyle().setProperty("box-sizing", "border-box");
 		htmlElement.setAttribute("class", "root");
         fragment.setRootWidget(this);
+		org.teavm.jso.browser.Window.current().addEventListener("resize", listener);
+		addDellocHandler();
     }
+
+	private final static String DELLOC_EVENT = com.ashera.widget.bus.Event.StandardEvents.dealloc.toString();
+	@com.google.j2objc.annotations.WeakOuter
+	class DallocHandler extends com.ashera.widget.bus.EventBusHandler {
+
+		public DallocHandler(String type) {
+			super(type);
+		}
+
+		@Override
+		protected void doPerform(Object payload) {
+			org.teavm.jso.browser.Window.current().removeEventListener("resize", listener);
+		}
+		
+	}
+	private void addDellocHandler() {
+		fragment.getEventBus().on(DELLOC_EVENT, new DallocHandler(DELLOC_EVENT));
+	}
+
 }

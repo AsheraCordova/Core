@@ -136,6 +136,9 @@
 - (void)removeListenerWithASIWidget:(id<ASIWidget>)widget
                              withId:(id)listener;
 
+- (void)resizeWindowWithInt:(jint)width
+                    withInt:(jint)height;
+
 - (void)setFrameWithInt:(jint)x
                 withInt:(jint)y
                 withInt:(jint)width

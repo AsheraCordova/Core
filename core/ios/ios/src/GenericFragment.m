@@ -80,6 +80,8 @@
   id<JavaUtilList> disposables_;
   jboolean measuring_;
   JavaUtilStack *disableRemeasures_;
+  jboolean isPaused_;
+  jboolean remeasureOnResume_;
 }
 
 - (void)readFileInDevMode;
@@ -313,6 +315,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)onResume {
   [super onResume];
+  if (remeasureOnResume_) {
+    [self remeasure];
+    remeasureOnResume_ = false;
+  }
+  isPaused_ = false;
   ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(self, @"onResume", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onResume"));
 }
 
@@ -348,6 +355,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)onPause {
   [super onPause];
+  isPaused_ = true;
   ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(self, @"onPause", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onPause"));
 }
 
@@ -481,6 +489,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   measuring_ = false;
 }
 
+- (void)resizeWindowWithInt:(jint)width
+                    withInt:(jint)height {
+  [self setFrameWithInt:x_ withInt:y_ withInt:width withInt:height];
+  if (!isPaused_) {
+    [self remeasure];
+  }
+  else {
+    remeasureOnResume_ = true;
+  }
+}
+
 - (jboolean)isMeasuring {
   return measuring_ || [((JavaUtilStack *) nil_chk(disableRemeasures_)) size] > 0;
 }
@@ -562,13 +581,14 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x1, 42, 23, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 43, 44, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 45, 46, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 45, 46, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 47, 48, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASErrors;", 0x2, -1, -1, -1, -1, -1, -1 },
   };
@@ -617,41 +637,44 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[39].selector = @selector(getFromTempCacheWithNSString:);
   methods[40].selector = @selector(setFrameWithInt:withInt:withInt:withInt:);
   methods[41].selector = @selector(remeasure);
-  methods[42].selector = @selector(isMeasuring);
-  methods[43].selector = @selector(getParentForRootWidget);
-  methods[44].selector = @selector(getFragmentId);
-  methods[45].selector = @selector(getActionUrl);
-  methods[46].selector = @selector(disableRemeasure);
-  methods[47].selector = @selector(enableRemeasure);
-  methods[48].selector = @selector(addErrorWithASError:);
-  methods[49].selector = @selector(hasErrors);
-  methods[50].selector = @selector(getFatalErrors);
+  methods[42].selector = @selector(resizeWindowWithInt:withInt:);
+  methods[43].selector = @selector(isMeasuring);
+  methods[44].selector = @selector(getParentForRootWidget);
+  methods[45].selector = @selector(getFragmentId);
+  methods[46].selector = @selector(getActionUrl);
+  methods[47].selector = @selector(disableRemeasure);
+  methods[48].selector = @selector(enableRemeasure);
+  methods[49].selector = @selector(addErrorWithASError:);
+  methods[50].selector = @selector(hasErrors);
+  methods[51].selector = @selector(getFatalErrors);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "activity_", "LASIActivity;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "id__", "LNSString;", .constantValue.asLong = 0, 0x2, 47, -1, -1, -1 },
+    { "id__", "LNSString;", .constantValue.asLong = 0, 0x2, 49, -1, -1, -1 },
     { "fileName_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "view_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "eventBus_", "LASEventBus;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 48, -1 },
+    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 50, -1 },
     { "rootWidget_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "styleSheet_", "LCSSStyleSheet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "devData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 48, -1 },
-    { "tempCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 48, -1 },
+    { "devData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 50, -1 },
+    { "tempCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 50, -1 },
     { "x_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "y_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "width_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "height_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "DELLOC_EVENT_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "POSTMEASURE_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 49, -1, -1 },
-    { "PREMEASURE_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 50, -1, -1 },
-    { "listeners_", "LJavaUtilWeakHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 51, -1 },
-    { "disposables_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 52, -1 },
+    { "POSTMEASURE_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 51, -1, -1 },
+    { "PREMEASURE_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 52, -1, -1 },
+    { "listeners_", "LJavaUtilWeakHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 53, -1 },
+    { "disposables_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 54, -1 },
     { "measuring_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "disableRemeasures_", "LJavaUtilStack;", .constantValue.asLong = 0, 0x2, -1, -1, 53, -1 },
+    { "disableRemeasures_", "LJavaUtilStack;", .constantValue.asLong = 0, 0x2, -1, -1, 55, -1 },
+    { "isPaused_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "remeasureOnResume_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "getInitialBundle", "LNSString;LNSString;LJavaUtilList;", "(Ljava/lang/String;Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;)Lr/android/os/Bundle;", "onAttach", "LADContext;", "LASIActivity;", "onCreate", "LADBundle;", "getFileAsProperties", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Properties;", "getEventData", "LNSString;", "onCreateView", "LADLayoutInflater;LADViewGroup;LADBundle;", "Z", "onViewCreated", "LADView;LADBundle;", "onActivityCreated", "sendLifeCycleEvent", "LNSString;LNSString;LNSString;", "setRootWidget", "LASIWidget;", "getUserData", "storeUserData", "LNSString;LNSObject;", "hasDevData", "getDevData", "setStyleSheet", "LCSSStyleSheet;", "storeInTempCache", "getFromTempCache", "setFrame", "IIII", "addError", "LASError;", "id", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASGenericFragment_POSTMEASURE_EVENT, &ASGenericFragment_PREMEASURE_EVENT, "Ljava/util/WeakHashMap<Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;>;", "Ljava/util/List<Ljava/lang/Object;>;", "Ljava/util/Stack<Ljava/lang/Boolean;>;" };
-  static const J2ObjcClassInfo _ASGenericFragment = { "GenericFragment", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 51, 21, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "getInitialBundle", "LNSString;LNSString;LJavaUtilList;", "(Ljava/lang/String;Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;)Lr/android/os/Bundle;", "onAttach", "LADContext;", "LASIActivity;", "onCreate", "LADBundle;", "getFileAsProperties", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Properties;", "getEventData", "LNSString;", "onCreateView", "LADLayoutInflater;LADViewGroup;LADBundle;", "Z", "onViewCreated", "LADView;LADBundle;", "onActivityCreated", "sendLifeCycleEvent", "LNSString;LNSString;LNSString;", "setRootWidget", "LASIWidget;", "getUserData", "storeUserData", "LNSString;LNSObject;", "hasDevData", "getDevData", "setStyleSheet", "LCSSStyleSheet;", "storeInTempCache", "getFromTempCache", "setFrame", "IIII", "resizeWindow", "II", "addError", "LASError;", "id", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASGenericFragment_POSTMEASURE_EVENT, &ASGenericFragment_PREMEASURE_EVENT, "Ljava/util/WeakHashMap<Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;>;", "Ljava/util/List<Ljava/lang/Object;>;", "Ljava/util/Stack<Ljava/lang/Boolean;>;" };
+  static const J2ObjcClassInfo _ASGenericFragment = { "GenericFragment", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 52, 23, -1, -1, -1, -1, -1 };
   return &_ASGenericFragment;
 }
 
