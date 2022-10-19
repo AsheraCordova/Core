@@ -108,6 +108,9 @@
 
 - (jboolean)hasErrors;
 
+- (void)resizeWindowWithInt:(jint)width
+                    withInt:(jint)height;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASIFragment)

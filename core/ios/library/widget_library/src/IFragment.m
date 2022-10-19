@@ -52,6 +52,7 @@
     { NULL, "V", 0x401, 28, 22, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 29, 30, -1, -1, -1, -1 },
     { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 31, 32, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -93,9 +94,10 @@
   methods[34].selector = @selector(removeListenerWithASIWidget:withId:);
   methods[35].selector = @selector(addErrorWithASError:);
   methods[36].selector = @selector(hasErrors);
+  methods[37].selector = @selector(resizeWindowWithInt:withInt:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "onAttach", "LASIActivity;", "onCreateView", "Z", "hasDevData", "LNSString;", "getDevData", "setRootWidget", "LASIWidget;", "storeUserData", "LNSString;LNSObject;", "getUserData", "storeInTempCache", "getFromTempCache", "setStyleSheet", "LCSSStyleSheet;", "setFrame", "IIII", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "addError", "LASError;" };
-  static const J2ObjcClassInfo _ASIFragment = { "IFragment", "com.ashera.core", ptrTable, methods, NULL, 7, 0x609, 37, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "onAttach", "LASIActivity;", "onCreateView", "Z", "hasDevData", "LNSString;", "getDevData", "setRootWidget", "LASIWidget;", "storeUserData", "LNSString;LNSObject;", "getUserData", "storeInTempCache", "getFromTempCache", "setStyleSheet", "LCSSStyleSheet;", "setFrame", "IIII", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "addError", "LASError;", "resizeWindow", "II" };
+  static const J2ObjcClassInfo _ASIFragment = { "IFragment", "com.ashera.core", ptrTable, methods, NULL, 7, 0x609, 38, 0, -1, -1, -1, -1, -1 };
   return &_ASIFragment;
 }
 
