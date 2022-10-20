@@ -72,7 +72,7 @@ An example of adding validation to an edit text is shown below:
 	android:id="@+id/test1Error"/>
 ```  
 
-The above snippet adds editText with id "test1" to a form group "loginForm" with mandatory validation added. It display the error message on a label with id "test1Error" and changes style to errorStyle when validation fails. It displays an custom error message "Sample text" when validation fails. 
+The above snippet adds editText with id "test1" to a form group "loginForm" with mandatory validation added. It display the error message on a label with id "test1Error" and changes style o errorStyle when validation fails. It displays an custom error message "Sample text" when validation fails. 
 
 validationErrorDisplayType can be of 3 types:
 * popup - Only supported on android. Uses android setError on EditText.
@@ -124,7 +124,7 @@ Get z attribute from object z in scope view.
 * loop var - e.g let x in c from y->view into session as pathmap
 Loop over c attribute of type list on object y in scope view. Create loop var x of type pathmap.
 
-### Methods/Params
+### Custom Methods/Attributes
 
 Name                | Description
 -------------       | -------------
