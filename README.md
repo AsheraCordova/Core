@@ -209,7 +209,9 @@ asDragSource marks View with id **onDrag0** as draggable and associated transfer
 
 The following table lists the custom attributes used in widgets:
 ### View
-Name                | Description
--------------       | -------------
-enableFeatures      | Used for enabling dynamic feature on widgets. By default the feature is disabled. 
-enableFeatures      | Used for enabling dynamic feature on widgets. By default the feature is disabled. 
+Name                	| Description
+-------------       	| -------------
+enableFeatures      	| Used for enabling dynamic feature on widgets. By default the feature is disabled. 
+systemStyle 		| When this flag is set, the widget is invalidated during framelayout pass.
+systemAndroidAttrStyle 	| When this flag is set, the widget is invalidated during framelayout pass.
+swtStyle  		| When this flag is set, the widget is invalidated during framelayout pass.
