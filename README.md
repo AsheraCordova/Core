@@ -212,6 +212,6 @@ The following table lists the custom attributes used in widgets:
 Name                	| Description
 -------------       	| -------------
 enableFeatures      	| Used for enabling dynamic feature on widgets. By default the feature is disabled. 
-systemStyle 		| When this flag is set, the widget is invalidated during framelayout pass.
-systemAndroidAttrStyle 	| When this flag is set, the widget is invalidated during framelayout pass.
-swtStyle  		| When this flag is set, the widget is invalidated during framelayout pass.
+systemStyle 		| When this flag is set, the widget is invalidated on frame change during a measure pass.
+systemAndroidAttrStyle 	| The theming of widget is usally done in system_style.xml. Hence any advanced theming for android can only be done in system_system.xml. To override the look and feel for only one widget, this attribute can be used. E.g. android:attr/progressBarStyleHorizontal
+systemStyle   		| Any style defined in system_style.xml can be referenced using this attribute and is only applied to android widget.
