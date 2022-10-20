@@ -69,7 +69,7 @@ An example of adding validation to an edit text is shown below:
 	android:id="@+id/test1Error"/>
 ```  
 
-The above snippet adds editText with id "test1" to a form group "loginForm" with mandatory validation added. It display the error message on a label with id "test1Error" and changes style o errorStyle when validation fails. It displays an custom error message "Sample text" when validation fails. 
+The above snippet adds editText with id **test1** to a form group **loginForm** with mandatory validation added. It display the error message on a label with id **test1Error** and changes style o errorStyle when validation fails. It displays an custom error message **Sample text** when validation fails. 
 
 validationErrorDisplayType can be of 3 types:
 * popup - Only supported on android. Uses android setError on EditText.
