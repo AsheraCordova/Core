@@ -67,14 +67,37 @@ An example of adding validation to an edit text is shown below:
 <TextView android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:id="@+id/test1Error"/>
-```  
+<Button
+    android:id="@+id/submit"
+    onClick="validateForm"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/register_now"></TextView>
+```
+export default class Login extends Fragment {
+    @Inject({ id: "@+id/submit" })
+    private validateButton!: Button;
+    constructor() {
+        super();
+    }
 
-The above snippet adds editText with id **test1** to a form group **loginForm** with mandatory validation added. It display the error message on a label with id **test1Error** and changes style o errorStyle when validation fails. It displays an custom error message **Sample text** when validation fails. 
+    async validateForm(obj: any) {
+        if (await this.validateForm("loginForm", this.validateButton)) {
+		// go to next screen
+        }
+    }
+}
+```
+```
+
+The above snippet adds editText with id **test1** to a form group **loginForm** with mandatory validation added. It display the error message on a label with id **test1Error** and changes style to errorStyle when validation fails. It displays an custom error message **Sample text** when validation fails. 
 
 validationErrorDisplayType can be of 3 types:
 * popup - Only supported on android. Uses android setError on EditText.
 * label - Display error text in label with id + Error.
 * style - Changes the style property when validation fails. Uses style and errorStyle on the widget.
+
+The validation is trigerred in javascript by invoking method **validateForm**.
 
 ## Unidirectional Databinding framework
 
