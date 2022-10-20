@@ -19,9 +19,6 @@ Windows       | SWT
 Mac           | SWT
 Linux         | SWT
 
-
-The following widgets are supported by this plugin:
-
 ## Layouts
 * View
 * FrameLayout
