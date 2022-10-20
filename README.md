@@ -178,3 +178,38 @@ The object stored in scope are modified in step 2. When event occurs, we can req
 ```	  
 
 The above example requests an object stored with key **items** with scope view on event **onClick** of button.
+
+## Drag & Drop
+
+The drag and drop can be achieved by configuring few attributes as shown below:
+
+```
+<View
+	widget-override="View"
+	android:id="@+id/onDrag0"
+	asDragSource="emailIntent=testObj.emailIntent from testObj->view"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_margin="10dp"
+	android:minHeight="50dp"
+	android:background="#ff0"/>
+<View
+	onDrag="onDrag"
+	android:id="@+id/onDrag1"
+	android:background="@drawable/drag_hovered_selector"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_margin="10dp"
+	android:minHeight="50dp"/>
+```
+
+asDragSource marks View with id **onDrag0** as draggable and associated transfer object **emailIntent**. onDrag marks the View with id **onDrag1** as droppable and associates onDrag listener with it. When a drop happens on **onDrag1** View, transfer object "emailIntent" is transferred to this View.
+
+## Custom Attributes
+
+The following table lists the custom attributes used in widgets:
+### View
+Name                | Description
+-------------       | -------------
+enableFeatures      | Used for enabling dynamic feature on widgets. By default the feature is disabled. 
+enableFeatures      | Used for enabling dynamic feature on widgets. By default the feature is disabled. 
