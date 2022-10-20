@@ -170,6 +170,7 @@ The data stored in scope is synched back and from the ui to object using modelPo
 The above example shows that testObj is present in session scope. The property text of the EditText is always kept in sync with the emailIntent of testObj in session scope. The sync from UI to Object only happens when text change event is triggered.
 
 * Get Modified data
+
 The object stored in scope are modified in step 2. When event occurs, we can request the modified data when a event occurs such as click of a button.
 
 ```
