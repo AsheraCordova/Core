@@ -23,7 +23,7 @@ Linux         | SWT
 The following widgets are supported by this plugin:
 
 ## Layouts
-* [View]([http://www.google.fr/](https://developer.android.com/reference/android/view/View) "View")
+* View
 * FrameLayout
 * LinearLayout
 * RelativeLayout
@@ -171,7 +171,7 @@ The above example shows that testObj is present in session scope. The property t
 
 * Get Modified data
 
-The object stored in scope are modified in step 2. When event occurs, we can request the modified data when a event occurs such as click of a button.
+The object stored in scope are modified in step 2. When event occurs, we can request the modified data such as click of a button.
 
 ```
   <Button android:layout_width="wrap_content"
@@ -180,4 +180,4 @@ The object stored in scope are modified in step 2. When event occurs, we can req
     android:onClick="getData(model=. from items->view)" />
 ```	  
 
-The above example requests an object stored with key "items" with scope view on event onClick of button.
+The above example requests an object stored with key **items** with scope view on event **onClick** of button.
