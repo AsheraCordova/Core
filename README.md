@@ -74,6 +74,8 @@ An example of adding validation to an edit text is shown below:
     android:layout_height="wrap_content"
     android:text="@string/register_now"></TextView>
 ```
+
+```
 export default class Login extends Fragment {
     @Inject({ id: "@+id/submit" })
     private validateButton!: Button;
@@ -87,7 +89,6 @@ export default class Login extends Fragment {
         }
     }
 }
-```
 ```
 
 The above snippet adds editText with id **test1** to a form group **loginForm** with mandatory validation added. It display the error message on a label with id **test1Error** and changes style to errorStyle when validation fails. It displays an custom error message **Sample text** when validation fails. 
