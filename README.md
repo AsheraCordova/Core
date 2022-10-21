@@ -8,6 +8,8 @@ The project provides the following functionality
 * Cross platform JSON
 * Cross platform file system access
 * Converters
+* Drag & Drop
+* Resizing Images
 
 Ashera support the following platforms:
 
@@ -18,6 +20,7 @@ IOS           | J2objc
 Windows       | SWT
 Mac           | SWT
 Linux         | SWT
+Browser	      | Teavm
 
 ## Layouts
 * View
@@ -239,3 +242,17 @@ enableFeatures      	| Used for enabling dynamic feature on widgets. By default 
 invalidateOnFrameChange | When this flag is set, the widget is invalidated on frame change during a measure pass.
 systemAndroidAttrStyle 	| The theming of widget is usally done in system_style.xml. Hence any advanced theming for android can only be done in system_system.xml. To override the look and feel for only one widget, this attribute can be used. E.g. android:attr/progressBarStyleHorizontal
 systemStyle   		| Any style defined in system_style.xml can be referenced using this attribute and is only applied to android widget.
+swtStyle   		| References the style attribute passed to the constructor. e.g. Control(Composite parent, **int style**)
+swtResizeOptions 	| SWT image is resized to fit the view. SWT image can resized using GC or use awt BufferedImage. Resize options is simple css expression which provides control over on how to resize an image to get the desired quality. See section **Resizing Image**
+
+## Resizing Image
+Image can be set using src attribute on ImageView, ImageButton or on background attribute on View in android. To simulate the scaling of images on other platforms, custom attributes has been introduced to give more control over image resizing.
+
+* SWT
+SWT provides low level method for resizing images using GC. Though the quality is acceptable in most cases, the image might not look good after resizing. In such cases when quality of image is not within the acceptable standards, we can use BufferedImage for resizing. It might be noted that the GC is very fast when compared to BufferedImage resizing and has been configured as the default option.
+
+
+
+* IOS
+* Browser
+
