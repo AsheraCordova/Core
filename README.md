@@ -249,9 +249,28 @@ swtResizeOptions 	| SWT image is resized to fit the view. SWT image can resized 
 Image can be set using src attribute on ImageView, ImageButton or on background attribute on View in android. To simulate the scaling of images on other platforms, custom attributes has been introduced to give more control over image resizing.
 
 * SWT
+
 SWT provides low level method for resizing images using GC. Though the quality is acceptable in most cases, the image might not look good after resizing. In such cases when quality of image is not within the acceptable standards, we can use BufferedImage for resizing. It might be noted that the GC is very fast when compared to BufferedImage resizing and has been configured as the default option.
 
+#### Custom Attributes
+swtResizeOptions - Simple CSS expression 
 
+```
+    <string name="profile_img_expr">src: @string/userBufferedImageExpression</string>
+    <string name="userBufferedImageExpression">useBufferedImage: true;useBackgroundHint : false</string>
+```
+The above code snippet configures image resizing to use BufferedImage for the src attribute of an ImageView.
+The following resize option are available:
+
+Name                	| Type 			|Description
+-------------       	| -------------		|-------------	
+useBufferedImage      	| true or false		| When set to true, BufferedImage is used for resizing. Default is GC
+useParentBackground	| true or false		| When set to true, the transparent pixels of the image are replaced with the background of the parent view. This is important attribute as the SWT does not support transparency.
+useBackgroundHint	| true or false		| When set to true, the transparent pixels of the image are replaced with the backgroundHint attribute.
+backgroundHint		| color			| The transparent pixels of the image are replaced with the color specified. Only works if useBackgroundHint is set to true.
+retainGCTransparency	| true or false		| When image is resized in SWT, image looses transparency. When this flag is set to true, transparent pixels are retained by using the first pixel value of the image. For this option to work, the first pixel of the image must be transparent. 
+colorSmoothenGcFilter	| expression		| e.g r > 100 && g > 100 && b > 100. Only works if retainGCTransparency is set to true. The above expression is used on the image to replace all pixels matching the above expression with the first pixel of the image.
+bufferedImageScalingMethod | enum		| Scalr is used for resizing BufferedImage. Scalr provides various methods of resizing. See [https://github.com/rkalla/imgscalr]. Only works if useBufferedImage is set to true.
 
 * IOS
 * Browser
