@@ -8,6 +8,7 @@ The project provides the following functionality
 * Cross platform JSON
 * Cross platform file system access
 * Converters
+* Enable features
 * Drag & Drop
 * Resizing Images
 
@@ -205,6 +206,25 @@ The object stored in scope are modified in step 2. When event occurs, we can req
 ```	  
 
 The above example requests an object stored with key **items** with scope view on event **onClick** of button.
+
+## Enable features
+This is custom attribute on the view. This attribute can take | separated string e.g. decorator|hscroll|vscroll. This attribute has been used to enable features on the widget only if needed.
+
+```
+<ImageView android:visibility="visible"
+	widget-override="ImageView" 
+	android:id="@+id/cropToPadding0"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content" 
+	android:padding="10dp"
+	android:scaleType="fitStart"  
+	enableFeatures="decorator"
+	iosClipsToBounds="true" 
+	android:src="@drawable/paris"
+	android:cropToPadding="true"></ImageView>    
+```
+
+ios natively does not support fitStart scaleType. To enable this feature, we need a wrapper view surrounding the ImageView and the imageview is positioned and clipped with clipBounds attribute. This way ios can support all the scaleType attributes.
 
 ## Drag & Drop
 
