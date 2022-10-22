@@ -135,7 +135,7 @@ maxlength		| Validates whether the text is having maximum length passed in as ar
 minvalue		| Validates whether the text is having minimum value passed in as argumnet. e.g. minvalue(10)
 maxvalue		| Validates whether the text is having maximum value passed in as argumnet. e.g. maxvalue(10)
 url			| Validates whether the text is a valid url.
-strongpassword		| Password should be atleast 8 characters with uppercase letter, numbers and having atleast on special character as specified (.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)
+strongpassword		| Password should be atleast 8 characters with uppercase letter, numbers and having atleast on special character as specified <code>(.*[,~,!,@,#,$,%,^,&,\*,(,),-,_,=,+,[,{,],},\|,;,:,<,>,/,?].*$)</code>
 
 ## Unidirectional Databinding framework
 
