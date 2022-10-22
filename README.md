@@ -63,7 +63,7 @@ An example of adding validation to an edit text is shown below:
 	formGroupId="loginForm"
 	v_required=""
 	android:id="@+id/test1"
-  validationErrorDisplayType="label|style"
+  	validationErrorDisplayType="label|style"
 	customErrorMessageKeys="required"
 	customErrorMessageValues="@string/sample_text"	
 	style="@style/normalStyle"
@@ -103,6 +103,39 @@ validationErrorDisplayType can be of 3 types:
 * style - Changes the style property when validation fails. Uses style and errorStyle on the widget.
 
 The validation is trigerred in javascript by invoking method **validateForm**.
+
+The following table lists the custom attribute on View to support validation:
+
+Name                	| Description
+-------------       	| -------------
+customErrorMessageKeys  | Comma separated value of the validation for which custom message will be specified.
+customErrorMessageValues| Comma separated custom messages for the message keys specified. This has to be used with customErrorMessageKeys attribute. For e.g. customErrorMessageKeys="required,min" customErrorMessageValues="Test, Test1"
+formGroupId		| When a form is validated using validateForm method in javascript, groupId is passed as one of the parameters. This id is used to group widgets to form a form. This is a comma separated string. Hence a widget can belong to multiple forms.
+validateForm		| Method used to validate a group of widgets.
+validationErrorDisplayType | See above section.
+validation		| Validation on the configured on widget using (v_*) attributed or using the validation attribute. This is comma separated string. e.g. validation="required,date(dd/mm/YYYY)"
+
+The following table lists the validators available:
+Name                	| Description
+-------------       	| -------------
+alphabet  		| Text matching regex [a-zA-Z]*
+alphanumeric  		| Text matching regex [0-9a-zA-Z]*
+date  			| Text matching format passed in as argument. See https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html. E.g. date(dd/mm/yyyy).
+inrange  		| Validates whether the text is with the range passed in as arguments. e.g. inrange(0,10)
+email  			| Validates whether the text is a valid email.
+mobilenumber  		| Validates whether the text is a valid 10 digit mobile number.		
+number  		| Text matching regex [0-9]*
+pin  			| Text matching regex \d{6}
+length  		| Validates whether the text is within the length passed in as argument. e.g. length(10)
+required  		| Validates whether the text is not empty.
+time			| Validates whether time in 24 hours format
+pattern			| Validates whether text is as per the regex passed in as argument e.g. pattern(a-z)
+minlength		| Validates whether the text is having minimum length passed in as argumnet. e.g. minlength(10)
+maxlength		| Validates whether the text is having maximum length passed in as argumnet. e.g. maxlength(10)
+minvalue		| Validates whether the text is having minimum value passed in as argumnet. e.g. minvalue(10)
+maxvalue		| Validates whether the text is having maximum value passed in as argumnet. e.g. maxvalue(10)
+url			| Validates whether the text is a valid url.
+strongpassword		| Password should be atleast 8 characters with uppercase letter, numbers and having atleast on special character as specified **(.*[,~,!,@,#,$,%,^,&,*,(,),-,_,=,+,[,{,],},|,;,:,<,>,/,?].*$)**
 
 ## Unidirectional Databinding framework
 
