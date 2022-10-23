@@ -314,7 +314,7 @@ The objects are stored in particular scope on the native side. Let us take a exa
     android:text="10.23"></TextView>
 ```	
 The above example shows a scenario where textView is displaying the total of allocatedItems list which is stored in a view. The total is formatted to 2 decimal format.
-total(.) specifies that when a modelPojoToUi is done, it needs to send the result to total mmethod with params, path as memPrice and numberFormat as ##.00. The Method handler handes the total call, loops over the object and sums the memPrice and finally formats it and returns the result. The result is set on the TextView. This helps to achieve native performance rather than being handled by the webview.
+total(.) specifies that when a modelPojoToUi is done, it needs to send the result to total method with params, path as memPrice and numberFormat as ##.00. The Method handler handes the total call, loops over the object and sums the memPrice and finally formats it and returns the result. The result is set on the TextView. This helps to achieve native performance rather than being handled by the webview.
 	
 The list of method handler are give below:
 	
