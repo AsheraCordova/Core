@@ -11,6 +11,7 @@ The project provides the following functionality
 * Enable features
 * Drag & Drop
 * Resizing Images
+* Method expression
 
 Ashera support the following platforms:
 
@@ -120,7 +121,7 @@ Name                	| Description
 -------------       	| -------------
 alphabet  		| Text matching regex [a-zA-Z]*
 alphanumeric  		| Text matching regex [0-9a-zA-Z]*
-date  			| Text matching format passed in as argument. See https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html. E.g. date(dd/mm/yyyy).
+date  			| Text matching format passed in as argument. See https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html. e.g. date(dd/mm/yyyy).
 inrange  		| Validates whether the text is with the range passed in as arguments. e.g. inrange(0,10)
 email  			| Validates whether the text is a valid email.
 mobilenumber  		| Validates whether the text is a valid 10 digit mobile number.		
@@ -160,12 +161,12 @@ Objects can be stored in scope as:
 ### Expression Statement
 Expression statement is written to identity, move, store objects from ui to object and vice versa.
 
-**var - E.g let x = . from y->view into session as map**
+**var - e.g let x = . from y->view into session as map**
 
 The above statement stores a intermediate variable x into session as map
 Name                	| Description
 -------------       	| -------------
-modelPojoToUi | E.g text=abcd from x->view Set text attribute on widget to abcd attribute from object x stored in scope view. 
+modelPojoToUi | e.g text=abcd from x->view Set text attribute on widget to abcd attribute from object x stored in scope view. 
 modelUiToPojo | e.g abcd=text into x->view Set abcd attribute on object x stored in scope view to text attribute on widget. 
 Event | e.g y=z from z->view Store y to from object in scope view into event map. 
 var store | e.g y->intent as pathmap. Store the object into a variable y on intent with type pathmap. 
@@ -177,7 +178,11 @@ loop var | e.g let x in c from y->view into session as pathmap. Loop over c attr
 Name                | Description
 -------------       | -------------
 modelPojoToUi       | Used for synchronizing object to ui.
+modelPojoToUiParams | Method expression params. 
+modelUiToPojo       | Used for synchronizing ui to object.
+modelUiToPojoEventIds| List of widget ids to be refreshed using refreshUiFromModel after an event occurs.
 modelSyncEvents     | Used for synchronizing ui to object.
+refreshUiFromModel  | Used for refreshing the ui from the path configured using modelUiToPojo.
 modelParam          | Store intermediate variables to scope.
 updateModelData     | Used to update object data in certain scope.
 modelFor            | Used to loop on list to create multiple user interface elements.
@@ -211,7 +216,7 @@ The data stored in scope is synched back and from the ui to object using modelPo
     android:layout_height="wrap_content"
     modelPojoToUi="text = emailIntent from testObj->session"
     modelUiToPojo="emailIntent = text into testObj->session"
-    modelSyncEvents="onKey"
+    modelSyncEvents="onTextChange"
     onTextChange=""/>
 ```	
 
@@ -229,7 +234,26 @@ The object stored in scope are modified in step 2. When event occurs, we can req
 ```	  
 
 The above example requests an object stored with key **items** with scope view on event **onClick** of button.
-
+	
+* Sync dependent widget
+```
+  <EditText 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    modelPojoToUi="text = emailIntent from testObj->session"
+    modelUiToPojo="emailIntent = text into testObj->session"
+    modelSyncEvents="onTextChange"
+    modelUiToPojoEventIds="label"	    
+    onTextChange=""/>
+<TextView 
+    android:id="@+id/label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    modelPojoToUi="text = emailIntent from testObj->session"
+/>
+```
+The above example changes syncs emailIntent on object testObj when onTextChange event occurs. Also after the event has finished, the TextView with id **label** is refreshed with the latest value of emailIntent.
+	
 ## Enable features
 This is custom attribute on the view. This attribute can take | separated string e.g. decorator|hscroll|vscroll. This attribute has been used to enable features on the widget only if needed.
 
