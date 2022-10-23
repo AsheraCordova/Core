@@ -163,24 +163,14 @@ Expression statement is written to identity, move, store objects from ui to obje
 **var - E.g let x = . from y->view into session as map**
 
 The above statement stores a intermediate variable x into session as map
-
-* modelPojoToUi - E.g text=abcd from x->view
-Set text attribute on widget to abcd attribute from object x stored in scope view.
-
-* modelUiToPojo - e.g abcd=text into x->view
-Set abcd attribute on object x stored in scope view to text attribute on widget.
-
-* Event - e.g y=z from z->view
-Store y to from object in scope view into event map.
-
-* var store - e.g y->intent as pathmap
-Store the object into a variable y on intent with type pathmap.
-
-* var get - e.g z from z->view
-Get z attribute from object z in scope view.
-
-* loop var - e.g let x in c from y->view into session as pathmap
-Loop over c attribute of type list on object y in scope view. Create loop var x of type pathmap.
+Name                	| Description
+-------------       	| -------------
+modelPojoToUi | E.g text=abcd from x->view Set text attribute on widget to abcd attribute from object x stored in scope view. 
+modelUiToPojo | e.g abcd=text into x->view Set abcd attribute on object x stored in scope view to text attribute on widget. 
+Event | e.g y=z from z->view Store y to from object in scope view into event map. 
+var store | e.g y->intent as pathmap. Store the object into a variable y on intent with type pathmap. 
+var get | e.g z from z->view Get z attribute from object z in scope view. 
+loop var | e.g let x in c from y->view into session as pathmap. Loop over c attribute of type list on object y in scope view. Create loop var x of type pathmap.- 
 
 ### Custom Methods/Attributes
 
