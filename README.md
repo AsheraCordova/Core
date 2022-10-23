@@ -39,7 +39,6 @@ Browser	      | Teavm
 
 
 ## Widgets
-* View
 * Button
 * CheckBox
 * Chronometer
