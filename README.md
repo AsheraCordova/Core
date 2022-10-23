@@ -11,7 +11,7 @@ The project provides the following functionality
 * Enable features
 * Drag & Drop
 * Resizing Images
-* Method expression
+* Event handler expression
 
 Ashera support the following platforms:
 
@@ -299,6 +299,42 @@ The drag and drop can be achieved by configuring few attributes as shown below:
 
 asDragSource marks View with id **onDrag0** as draggable and associated transfer object **emailIntent**. onDrag marks the View with id **onDrag1** as droppable and associates onDrag listener with it. When a drop happens on **onDrag1** View, transfer object "emailIntent" is transferred to this View.
 
+## Expression Method handler
+
+The objects are stored in particular scope on the native side. Let us take a example, where a list is stored on the native side. If we want to display the sum of an attribute in a list, we need to request the entire list into the webview and loop over it do the sum and update the total on the textView. Instead simple expression method handler support is provided. 
+	
+```	
+<TextView
+    style="@style/h2_bold_black"
+    modelPojoToUi="text = total(.) from allocatedItems->view"
+    modelPojoToUiParams="path:memPrice;numberFormat:##.00"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="10.23"></TextView>
+```	
+The above example shows a scenario where textView is displaying the total of allocatedItems list which is stored in a view. The total is formatted to 2 decimal format.
+total(.) specifies that when a modelPojoToUi is done, it needs to send the result to total mmethod with params, path as memPrice and numberFormat as ##.00. The Method handler handes the total call, loops over the object and sums the memPrice and finally formats it and returns the result. The result is set on the TextView. This helps to achieve native performance rather than being handled by the webview.
+	
+The list of method handler are give below:
+	
+Name                | Params					| Description
+-------------       | -------------				| -------------
+toString       	    | -						| Converts object attribute to string
+not		    | -						| Boolean object is negated
+listToString	    | separator					| list of strings to **separator** separated string. Default is comma
+concat		    | fields, separator				| concat list of fields using separator specified. Default separator is whitespace
+size	    	    | -						| Count of list object.
+visible		    | -						| If the target object is list, size > 0. If the object is string, string is checked if it is not empty. If the object is boolean, the value must be true. In all these cases, the widget is visible else it is hidden
+gone		    | -						| Opposite of visible.
+getDescFromModel    | scope, id, value				| Displays the description for the id passed in. The scope contains the list though which you loop to match the id and return value in the model.
+formatString	    | format, fields				| Display the string using String.format method with the values retirved by path specified in the comma separated field list.
+getDescFromRes	   | separator, entries, values			| Multi selected list is converted to string with separator. The values array is used to match the values in list so that the entries array description are displayed.
+multiply	   | op1, op2					| Multiples model retrieved by op1 and op2.
+total		   | path					| Sum of all list retrieved by path specified.
+baseElapsedTimeInMillis | defaultValue, allowNegativeValues | Used in chronometer to calculate the baseElapsedTimeInMillis. If the object retrieved is null, return defaultValues. If allowNegativeValues is false, the value if negative is zero.
+getFileAsset		| - 					| Get the file asset as a string. 
+	
 ## Custom Attributes
 
 The following table lists the custom attributes used in widgets:
