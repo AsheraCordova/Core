@@ -11,7 +11,7 @@ The project provides the following functionality
 * Enable features
 * Drag & Drop
 * Resizing Images
-* Event handler expression
+* Expression Method handler
 
 Ashera support the following platforms:
 
