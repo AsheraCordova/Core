@@ -335,19 +335,6 @@ total		   | path					| Sum of all list retrieved by path specified.
 baseElapsedTimeInMillis | defaultValue, allowNegativeValues | Used in chronometer to calculate the baseElapsedTimeInMillis. If the object retrieved is null, return defaultValues. If allowNegativeValues is false, the value if negative is zero.
 getFileAsset		| - 					| Get the file asset as a string. 
 	
-## Custom Attributes
-
-The following table lists the custom attributes used in widgets:
-### View
-Name                	| Description
--------------       	| -------------
-enableFeatures      	| Used for enabling dynamic feature on widgets. By default the feature is disabled. 
-invalidateOnFrameChange | When this flag is set, the widget is invalidated on frame change during a measure pass.
-systemAndroidAttrStyle 	| The theming of widget is usally done in system_style.xml. Hence any advanced theming for android can only be done in system_system.xml. To override the look and feel for only one widget, this attribute can be used. E.g. android:attr/progressBarStyleHorizontal
-systemStyle   		| Any style defined in system_style.xml can be referenced using this attribute and is only applied to android widget.
-swtStyle   		| References the style attribute passed to the constructor. e.g. Control(Composite parent, **int style**)
-swtResizeOptions 	| SWT image is resized to fit the view. SWT image can resized using GC or use awt BufferedImage. Resize options is simple css expression which provides control over on how to resize an image to get the desired quality. See section **Resizing Image**
-
 ## Resizing Image
 Image can be set using src attribute on ImageView, ImageButton or on background attribute on View in android. To simulate the scaling of images on other platforms, custom attributes has been introduced to give more control over image resizing.
 
@@ -375,4 +362,15 @@ retainGCTransparency	| true or false		| When image is resized in SWT, image loos
 colorSmoothenGcFilter	| expression		| e.g r > 100 && g > 100 && b > 100. Only works if retainGCTransparency is set to true. The above expression is used on the image to replace all pixels matching the above expression with the first pixel of the image.
 bufferedImageScalingMethod | enum		| Scalr is used for resizing BufferedImage. Scalr provides various methods of resizing. See [https://github.com/rkalla/imgscalr]. Only works if useBufferedImage is set to true.
 
+## Custom Attributes
 
+The following table lists the custom attributes used in widgets:
+### View
+Name                	| Description
+-------------       	| -------------
+enableFeatures      	| Used for enabling dynamic feature on widgets. By default the feature is disabled. 
+invalidateOnFrameChange | When this flag is set, the widget is invalidated on frame change during a measure pass.
+systemAndroidAttrStyle 	| The theming of widget is usally done in system_style.xml. Hence any advanced theming for android can only be done in system_system.xml. To override the look and feel for only one widget, this attribute can be used. E.g. android:attr/progressBarStyleHorizontal
+systemStyle   		| Any style defined in system_style.xml can be referenced using this attribute and is only applied to android widget.
+swtStyle   		| References the style attribute passed to the constructor. e.g. Control(Composite parent, **int style**)
+swtResizeOptions 	| SWT image is resized to fit the view. SWT image can resized using GC or use awt BufferedImage. Resize options is simple css expression which provides control over on how to resize an image to get the desired quality. See section **Resizing Image**
