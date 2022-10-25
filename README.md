@@ -407,7 +407,13 @@ swtResizeOptions 	| SWT image is resized to fit the view. SWT image can resized 
 Name                	| Description
 -------------       	| -------------
 childXml       		| XML from javascript can be set on the ViewGroup. The xml will be added as child of the viewgroup.
-	
+
+### Relativelayout
+Name                	| Description
+-------------       	| -------------	
+layout_removeAllRules 	| Remove all rules associated with the layout.
+layout_removeRule 	| Remove single rule associated with the layout.
+
 ### TextView
 Name                	| Description
 -------------       	| -------------
@@ -415,3 +421,39 @@ html       		| When set to true, the text specified is parsed using html parser.
 startOrStopMarquee	| When set to true, the marquee will start. When set to false, it will stop.
 swtTextStyle		| Textview in android is composite widget consisting of composite, drawables and a label. swtTextStyle references the style attribute passed to the constructor of the label being created.
 textFormat 		| Helps to format text. It uses String.format function. e.g. Rs %s. When text is set, the text is formatted using the textFormat attribute before being set.
+
+### Checkbox
+Name                		| Description
+-------------       		| -------------
+butonSize       		| Set the minimum width and height for the button. Default is 20.
+buttonPadding 			| Sets the padding and marginLeft for the button.
+swtCheckBoxHorizontalPadding 	| Sets the Horizontal padding for the button.
+
+### EditText
+Name                	| Description
+-------------       	| -------------
+hintTextFormat 		| Helps to format hint text. It uses String.format function. e.g. Rs %s. When text is set, the text is formatted using the textFormat attribute before being set.
+
+### ImageView
+Name                	| Description
+-------------       	| -------------
+imageFromUrl 		| http url of the image
+imageFromUrlError 	| Error image when http call fails
+imageFromUrlPlaceHolder | Placeholder image to be displayed when http call is being made
+	
+### Spinner
+Name                	| Description
+-------------       	| -------------
+hintTextFormat		| hint in spinner is used for displaying the first option usually "Please Select".
+values			| The list of values matching the entries. Usually Spinner displays the description backed by value
+selectedValue		| Retrieves/Sets the option selected.
+modelOptionTextPath	| When a dynamic list populated from model, modelOptionTextPath sets the path of the description in the model.
+modelOptionValuePath	|  When a dynamic list populated from model, modelOptionValuePath sets the path of the value in the model.
+ 
+	
+### Chronometer
+Name                	| Description
+-------------       	| -------------
+baseElapsedTimeInMillis	| Sets the base elapsed time from which the counter starts.	
+startStop		| When true, chronometer starts counting. When false, it stops.
+stopWhenReached		| Stop the chronometer on reaching the value specified.
