@@ -12,6 +12,7 @@ The project provides the following functionality
 * Drag & Drop
 * Resizing Images
 * Expression Method handler
+* HTML support for TextView
 
 Ashera support the following platforms:
 
@@ -341,7 +342,7 @@ Image can be set using src attribute on ImageView, ImageButton or on background 
 * SWT
 
 SWT provides low level method for resizing images using GC. Though the quality is acceptable in most cases, the image might not look good after resizing. In such cases when quality of image is not within the acceptable standards, we can use BufferedImage for resizing. It might be noted that the GC is very fast when compared to BufferedImage resizing and has been configured as the default option.
-
+		
 #### Custom Attributes
 swtResizeOptions - Simple CSS expression 
 
@@ -362,6 +363,33 @@ retainGCTransparency	| true or false		| When image is resized in SWT, image loos
 colorSmoothenGcFilter	| expression		| e.g r > 100 && g > 100 && b > 100. Only works if retainGCTransparency is set to true. The above expression is used on the image to replace all pixels matching the above expression with the first pixel of the image.
 bufferedImageScalingMethod | enum		| Scalr is used for resizing BufferedImage. Scalr provides various methods of resizing. See [https://github.com/rkalla/imgscalr]. Only works if useBufferedImage is set to true.
 
+
+## HTML support for TextView	
+Android using Html.fromHtml to display html text in TextView. To provide html support, html boolean attribute has been introduced on the TextView. When set to true, the text is parsed using tag soup HTML parser and is set on the TextView.
+	
+The following table lists of tags supported:
+
+* div
+* br
+* a
+* img
+* ul/li
+* span
+
+List of attributes supported:
+* color/textColor
+* background-color/background
+* textAlignment/text-align/vertical-align
+* gravity
+* font-family/fontFamily
+* font-size/textSize
+* textStyle
+* font-weight
+* font-style
+* text-decoration (underline, line-through)
+* line-height/lineHeight
+* textColorLink
+
 ## Custom Attributes
 
 The following table lists the custom attributes used in widgets:
@@ -374,3 +402,16 @@ systemAndroidAttrStyle 	| The theming of widget is usally done in system_style.x
 systemStyle   		| Any style defined in system_style.xml can be referenced using this attribute and is only applied to android widget.
 swtStyle   		| References the style attribute passed to the constructor. e.g. Control(Composite parent, **int style**)
 swtResizeOptions 	| SWT image is resized to fit the view. SWT image can resized using GC or use awt BufferedImage. Resize options is simple css expression which provides control over on how to resize an image to get the desired quality. See section **Resizing Image**
+
+### ViewGroup
+Name                	| Description
+-------------       	| -------------
+childXml       		| XML from javascript can be set on the ViewGroup. The xml will be added as child of the viewgroup.
+	
+### TextView
+Name                	| Description
+-------------       	| -------------
+html       		| When set to true, the text specified is parsed using html parser. See section **HTML support for TextView**.
+startOrStopMarquee	| When set to true, the marquee will start. When set to false, it will stop.
+swtTextStyle		| Textview in android is composite widget consisting of composite, drawables and a label. swtTextStyle references the style attribute passed to the constructor of the label being created.
+textFormat 		| Helps to format text. It uses String.format function. e.g. Rs %s. When text is set, the text is formatted using the textFormat attribute before being set.
