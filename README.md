@@ -252,7 +252,7 @@ The above example requests an object stored with key **items** with scope view o
     modelPojoToUi="text = emailIntent from testObj->session"
 />
 ```
-The above example changes syncs emailIntent on object testObj when onTextChange event occurs. Also after the event has finished, the TextView with id **label** is refreshed with the latest value of emailIntent.
+The above example syncs emailIntent on object testObj when onTextChange event occurs. Also after the event has finished, the TextView with id **label** is refreshed with the latest value of emailIntent.
 	
 ## Enable features
 This is custom attribute on the view. This attribute can take | separated string e.g. decorator|hscroll|vscroll. This attribute has been used to enable features on the widget only if needed.
