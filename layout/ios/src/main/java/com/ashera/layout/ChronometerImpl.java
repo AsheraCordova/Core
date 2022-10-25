@@ -70,23 +70,6 @@ public class ChronometerImpl extends BaseWidget {
 		fragment.getEventBus().on(DELLOC_EVENT, new DallocHandler(DELLOC_EVENT));
 	}
 		@SuppressLint("NewApi")
-		final static class JustificationMode extends AbstractEnumToIntConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("inter_word",  LayoutNativeVars.NSTextAlignmentJustified);
-				mapping.put("none",  LayoutNativeVars.NSTextAlignmentLeft);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
-		@SuppressLint("NewApi")
 		final static class Font extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
 				{
@@ -195,8 +178,6 @@ public class ChronometerImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxEms").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("minEms").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("ems").withType("int"));
-		ConverterFactory.register("Chronometer.justificationMode", new JustificationMode());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("justificationMode").withType("Chronometer.justificationMode"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDx").withType("float"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDy").withType("float"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("singleLine").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -816,16 +797,6 @@ public class ChronometerImpl extends BaseWidget {
 
 			}
 			break;
-			case "justificationMode": {
-				
-
-
-		 setJustificationMode(objValue, strValue);
-
-
-
-			}
-			break;
 			case "shadowDx": {
 				
 
@@ -1106,8 +1077,6 @@ return getWidth();				}
 return getMaxEms();				}
 			case "minEms": {
 return getMinEms();				}
-			case "justificationMode": {
-return getJustificationMode();				}
 			case "shadowDx": {
 return getShadowDx();				}
 			case "shadowDy": {
@@ -3441,25 +3410,6 @@ public ChronometerCommandBuilder setEms(int value) {
 
 	attrs.put("value", value);
 return this;}
-public ChronometerCommandBuilder tryGetJustificationMode() {
-	Map<String, Object> attrs = initCommand("justificationMode");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getJustificationMode() {
-	Map<String, Object> attrs = initCommand("justificationMode");
-	return attrs.get("commandReturnValue");
-}
-public ChronometerCommandBuilder setJustificationMode(String value) {
-	Map<String, Object> attrs = initCommand("justificationMode");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public ChronometerCommandBuilder tryGetShadowDx() {
 	Map<String, Object> attrs = initCommand("shadowDx");
 	attrs.put("type", "attribute");
@@ -3971,13 +3921,6 @@ public void setMinEms(int value) {
 
 public void setEms(int value) {
 	getBuilder().reset().setEms(value).execute(true);
-}
-
-public Object getJustificationMode() {
-	return getBuilder().reset().tryGetJustificationMode().execute(false).getJustificationMode(); 
-}
-public void setJustificationMode(String value) {
-	getBuilder().reset().setJustificationMode(value).execute(true);
 }
 
 public Object getShadowDx() {

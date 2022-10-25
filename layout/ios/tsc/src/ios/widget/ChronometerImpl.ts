@@ -1,9 +1,5 @@
 // start - imports
 
-export const enum JustificationMode {
-inter_word = "inter_word",
-none = "none",
-}
 export const enum Font {
 monospace = "monospace",
 normal = "normal",
@@ -35,7 +31,6 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
-
 
 
 
@@ -262,9 +257,6 @@ export abstract class ChronometerImpl<T> extends ViewImpl<T>{
 	@Expose({ name: "ems" })
 	ems!:CommandAttr<number>| undefined;
 	@Type(() => CommandAttr)
-	@Expose({ name: "justificationMode" })
-	justificationMode!:CommandAttr<JustificationMode>| undefined;
-	@Type(() => CommandAttr)
 	@Expose({ name: "shadowDx" })
 	shadowDx!:CommandAttr<number>| undefined;
 	@Type(() => CommandAttr)
@@ -372,7 +364,6 @@ export abstract class ChronometerImpl<T> extends ViewImpl<T>{
 		this.maxEms = undefined;
 		this.minEms = undefined;
 		this.ems = undefined;
-		this.justificationMode = undefined;
 		this.shadowDx = undefined;
 		this.shadowDy = undefined;
 		this.singleLine = undefined;
@@ -1639,38 +1630,6 @@ this.gravity.setTransformer('gravity');		return this.thisPointer;
 		this.ems.setValue(value);
 		this.orderSet++;
 		this.ems.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetJustificationMode() : T {
-		this.resetIfRequired();
-		if (this.justificationMode == null || this.justificationMode == undefined) {
-			this.justificationMode = new CommandAttr<JustificationMode>()
-		}
-		
-		this.justificationMode.setGetter(true);
-		this.orderGet++;
-		this.justificationMode.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getJustificationMode() : JustificationMode {
-		if (this.justificationMode == null || this.justificationMode == undefined) {
-			this.justificationMode = new CommandAttr<JustificationMode>();
-		}
-		return this.justificationMode.getCommandReturnValue();
-	}
-	public setJustificationMode(value : JustificationMode) : T {
-		this.resetIfRequired();
-		if (this.justificationMode == null || this.justificationMode == undefined) {
-			this.justificationMode = new CommandAttr<JustificationMode>();
-		}
-		
-		this.justificationMode.setSetter(true);
-		this.justificationMode.setValue(value);
-		this.orderSet++;
-		this.justificationMode.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

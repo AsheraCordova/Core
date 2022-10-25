@@ -251,42 +251,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DallocHandler)
 
 #endif
 
-#if !defined (ASChronometerImpl_JustificationMode_) && (INCLUDE_ALL_ChronometerImpl || defined(INCLUDE_ASChronometerImpl_JustificationMode))
-#define ASChronometerImpl_JustificationMode_
-
-#define RESTRICT_AbstractEnumToIntConverter 1
-#define INCLUDE_ASAbstractEnumToIntConverter 1
-#include "AbstractEnumToIntConverter.h"
-
-@class JavaLangInteger;
-@protocol JavaUtilMap;
-
-@interface ASChronometerImpl_JustificationMode : ASAbstractEnumToIntConverter
-
-#pragma mark Public
-
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASChronometerImpl_JustificationMode)
-
-FOUNDATION_EXPORT void ASChronometerImpl_JustificationMode_init(ASChronometerImpl_JustificationMode *self);
-
-FOUNDATION_EXPORT ASChronometerImpl_JustificationMode *new_ASChronometerImpl_JustificationMode_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ASChronometerImpl_JustificationMode *create_ASChronometerImpl_JustificationMode_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_JustificationMode)
-
-#endif
-
 #if !defined (ASChronometerImpl_Font_) && (INCLUDE_ALL_ChronometerImpl || defined(INCLUDE_ASChronometerImpl_Font))
 #define ASChronometerImpl_Font_
 
@@ -570,8 +534,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (id)getIosTextColor;
 
-- (id)getJustificationMode;
-
 - (id)getLastBaselineToBottomHeight;
 
 - (id)getMaxEms;
@@ -799,8 +761,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 - (ASChronometerImpl_ChronometerCommandBuilder *)setIosTintColorWithNSString:(NSString *)arg0;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setIosTranslatesAutoresizingMaskIntoConstraintsWithBoolean:(jboolean)arg0;
-
-- (ASChronometerImpl_ChronometerCommandBuilder *)setJustificationModeWithNSString:(NSString *)value;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setKeepScreenOnWithBoolean:(jboolean)arg0;
 
@@ -1064,8 +1024,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetIosTranslatesAutoresizingMaskIntoConstraints;
 
-- (ASChronometerImpl_ChronometerCommandBuilder *)tryGetJustificationMode;
-
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetKeepScreenOn;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetLastBaselineToBottomHeight;
@@ -1219,8 +1177,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_ChronometerCommandBuilder)
 
 - (id)getIosTextColor;
 
-- (id)getJustificationMode;
-
 - (id)getLastBaselineToBottomHeight;
 
 - (id)getMaxEms;
@@ -1336,8 +1292,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_ChronometerCommandBuilder)
 - (void)setIosTextWithNSString:(NSString *)value;
 
 - (void)setIosTextColorWithNSString:(NSString *)value;
-
-- (void)setJustificationModeWithNSString:(NSString *)value;
 
 - (void)setLastBaselineToBottomHeightWithNSString:(NSString *)value;
 

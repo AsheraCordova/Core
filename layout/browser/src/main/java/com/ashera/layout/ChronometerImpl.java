@@ -118,23 +118,6 @@ public class ChronometerImpl extends BaseWidget {
 				return 0;
 				}
 				}
-		@SuppressLint("NewApi")
-		final static class JustificationMode extends AbstractEnumToIntConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("inter_word",  0x1);
-				mapping.put("none",  0x0);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
 	
 	@Override
 	public void loadAttributes(String attributeName) {
@@ -192,8 +175,6 @@ public class ChronometerImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate"));
 		ConverterFactory.register("Chronometer.drawableTintMode", new DrawableTintMode());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("Chronometer.drawableTintMode"));
-		ConverterFactory.register("Chronometer.justificationMode", new JustificationMode());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("justificationMode").withType("Chronometer.justificationMode"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("letterSpacing").withType("float"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDx").withType("float"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDy").withType("float"));
@@ -852,16 +833,6 @@ public class ChronometerImpl extends BaseWidget {
 
 			}
 			break;
-			case "justificationMode": {
-				
-
-
-		 setJustificationMode(objValue, strValue);
-
-
-
-			}
-			break;
 			case "letterSpacing": {
 				
 
@@ -1003,8 +974,6 @@ return getPaddingRight();				}
 return getPaddingLeft();				}
 			case "paddingEnd": {
 return getPaddingRight();				}
-			case "justificationMode": {
-return getJustificationMode();				}
 			case "letterSpacing": {
 return getLetterSpacing();				}
 			case "shadowDx": {
@@ -2978,25 +2947,6 @@ public ChronometerCommandBuilder setDrawableTintMode(String value) {
 
 	attrs.put("value", value);
 return this;}
-public ChronometerCommandBuilder tryGetJustificationMode() {
-	Map<String, Object> attrs = initCommand("justificationMode");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getJustificationMode() {
-	Map<String, Object> attrs = initCommand("justificationMode");
-	return attrs.get("commandReturnValue");
-}
-public ChronometerCommandBuilder setJustificationMode(String value) {
-	Map<String, Object> attrs = initCommand("justificationMode");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public ChronometerCommandBuilder tryGetLetterSpacing() {
 	Map<String, Object> attrs = initCommand("letterSpacing");
 	attrs.put("type", "attribute");
@@ -3413,13 +3363,6 @@ public void setDrawableTint(String value) {
 
 public void setDrawableTintMode(String value) {
 	getBuilder().reset().setDrawableTintMode(value).execute(true);
-}
-
-public Object getJustificationMode() {
-	return getBuilder().reset().tryGetJustificationMode().execute(false).getJustificationMode(); 
-}
-public void setJustificationMode(String value) {
-	getBuilder().reset().setJustificationMode(value).execute(true);
 }
 
 public Object getLetterSpacing() {
