@@ -11,6 +11,8 @@ The project provides the following functionality
 * Enable features
 * Drag & Drop
 * Resizing Images
+* Expression Method handler
+* HTML support for TextView
 
 Ashera support the following platforms:
 
@@ -63,7 +65,7 @@ An example of adding validation to an edit text is shown below:
 	formGroupId="loginForm"
 	v_required=""
 	android:id="@+id/test1"
-  validationErrorDisplayType="label|style"
+  	validationErrorDisplayType="label|style"
 	customErrorMessageKeys="required"
 	customErrorMessageValues="@string/sample_text"	
 	style="@style/normalStyle"
@@ -104,6 +106,39 @@ validationErrorDisplayType can be of 3 types:
 
 The validation is trigerred in javascript by invoking method **validateForm**.
 
+The following table lists the custom attribute on View to support validation:
+
+Name                	| Description
+-------------       	| -------------
+customErrorMessageKeys  | Comma separated value of the validation for which custom message will be specified.
+customErrorMessageValues| Comma separated custom messages for the message keys specified. This has to be used with customErrorMessageKeys attribute. For e.g. customErrorMessageKeys="required,min" customErrorMessageValues="Test, Test1"
+formGroupId		| When a form is validated using validateForm method in javascript, groupId is passed as one of the parameters. This id is used to group widgets to form a form. This is a comma separated string. Hence a widget can belong to multiple forms.
+validateForm		| Method used to validate a group of widgets.
+validationErrorDisplayType | See above section.
+validation		| Validation on the configured on widget using (v_*) attributed or using the validation attribute. This is comma separated string. e.g. validation="required,date(dd/mm/YYYY)"
+
+The following table lists the validators available:
+Name                	| Description
+-------------       	| -------------
+alphabet  		| Text matching regex [a-zA-Z]*
+alphanumeric  		| Text matching regex [0-9a-zA-Z]*
+date  			| Text matching format passed in as argument. See https://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html. e.g. date(dd/mm/yyyy).
+inrange  		| Validates whether the text is with the range passed in as arguments. e.g. inrange(0,10)
+email  			| Validates whether the text is a valid email.
+mobilenumber  		| Validates whether the text is a valid 10 digit mobile number.		
+number  		| Text matching regex [0-9]*
+pin  			| Text matching regex \d{6}
+length  		| Validates whether the text is within the length passed in as argument. e.g. length(10)
+required  		| Validates whether the text is not empty.
+time			| Validates whether time in 24 hours format
+pattern			| Validates whether text is as per the regex passed in as argument e.g. pattern(a-z)
+minlength		| Validates whether the text is having minimum length passed in as argumnet. e.g. minlength(10)
+maxlength		| Validates whether the text is having maximum length passed in as argumnet. e.g. maxlength(10)
+minvalue		| Validates whether the text is having minimum value passed in as argumnet. e.g. minvalue(10)
+maxvalue		| Validates whether the text is having maximum value passed in as argumnet. e.g. maxvalue(10)
+url			| Validates whether the text is a valid url.
+strongpassword		| Password should be atleast 8 characters with uppercase letter, numbers and having atleast on special character as specified <code>(.*[,~,!,@,#,$,%,^,&,\*,(,),-,_,=,+,[,{,],},\|,;,:,<,>,/,?].*$)</code>
+
 ## Unidirectional Databinding framework
 
 Object to UI and UI to Object is the provided as part of the core framework. It is achieved using storing objects in certain scope of the application and the ui synchronizing it whenever an event happens. This provides easy but powerful way to achieve synchronizing ui to objects and vice versa by configuring few attributes on widgets.
@@ -127,34 +162,28 @@ Objects can be stored in scope as:
 ### Expression Statement
 Expression statement is written to identity, move, store objects from ui to object and vice versa.
 
-**var - E.g let x = . from y->view into session as map**
+**var - e.g let x = . from y->view into session as map**
 
 The above statement stores a intermediate variable x into session as map
-
-* modelPojoToUi - E.g text=abcd from x->view
-Set text attribute on widget to abcd attribute from object x stored in scope view.
-
-* modelUiToPojo - e.g abcd=text into x->view
-Set abcd attribute on object x stored in scope view to text attribute on widget.
-
-* Event - e.g y=z from z->view
-Store y to from object in scope view into event map.
-
-* var store - e.g y->intent as pathmap
-Store the object into a variable y on intent with type pathmap.
-
-* var get - e.g z from z->view
-Get z attribute from object z in scope view.
-
-* loop var - e.g let x in c from y->view into session as pathmap
-Loop over c attribute of type list on object y in scope view. Create loop var x of type pathmap.
+Name                	| Description
+-------------       	| -------------
+modelPojoToUi | e.g text=abcd from x->view Set text attribute on widget to abcd attribute from object x stored in scope view. 
+modelUiToPojo | e.g abcd=text into x->view Set abcd attribute on object x stored in scope view to text attribute on widget. 
+Event | e.g y=z from z->view Store y to from object in scope view into event map. 
+var store | e.g y->intent as pathmap. Store the object into a variable y on intent with type pathmap. 
+var get | e.g z from z->view Get z attribute from object z in scope view. 
+loop var | e.g let x in c from y->view into session as pathmap. Loop over c attribute of type list on object y in scope view. Create loop var x of type pathmap.- 
 
 ### Custom Methods/Attributes
 
 Name                | Description
 -------------       | -------------
 modelPojoToUi       | Used for synchronizing object to ui.
+modelPojoToUiParams | Method expression params. 
+modelUiToPojo       | Used for synchronizing ui to object.
+modelUiToPojoEventIds| List of widget ids to be refreshed using refreshUiFromModel after an event occurs.
 modelSyncEvents     | Used for synchronizing ui to object.
+refreshUiFromModel  | Used for refreshing the ui from the path configured using modelUiToPojo.
 modelParam          | Store intermediate variables to scope.
 updateModelData     | Used to update object data in certain scope.
 modelFor            | Used to loop on list to create multiple user interface elements.
@@ -188,7 +217,7 @@ The data stored in scope is synched back and from the ui to object using modelPo
     android:layout_height="wrap_content"
     modelPojoToUi="text = emailIntent from testObj->session"
     modelUiToPojo="emailIntent = text into testObj->session"
-    modelSyncEvents="onKey"
+    modelSyncEvents="onTextChange"
     onTextChange=""/>
 ```	
 
@@ -206,7 +235,26 @@ The object stored in scope are modified in step 2. When event occurs, we can req
 ```	  
 
 The above example requests an object stored with key **items** with scope view on event **onClick** of button.
-
+	
+* Sync dependent widget
+```
+  <EditText 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    modelPojoToUi="text = emailIntent from testObj->session"
+    modelUiToPojo="emailIntent = text into testObj->session"
+    modelSyncEvents="onTextChange"
+    modelUiToPojoEventIds="label"	    
+    onTextChange=""/>
+<TextView 
+    android:id="@+id/label"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    modelPojoToUi="text = emailIntent from testObj->session"
+/>
+```
+The above example syncs emailIntent on object testObj when onTextChange event occurs. Also after the event has finished, the TextView with id **label** is refreshed with the latest value of emailIntent.
+	
 ## Enable features
 This is custom attribute on the view. This attribute can take | separated string e.g. decorator|hscroll|vscroll. This attribute has been used to enable features on the widget only if needed.
 
@@ -252,26 +300,49 @@ The drag and drop can be achieved by configuring few attributes as shown below:
 
 asDragSource marks View with id **onDrag0** as draggable and associated transfer object **emailIntent**. onDrag marks the View with id **onDrag1** as droppable and associates onDrag listener with it. When a drop happens on **onDrag1** View, transfer object "emailIntent" is transferred to this View.
 
-## Custom Attributes
+## Expression Method handler
 
-The following table lists the custom attributes used in widgets:
-### View
-Name                	| Description
--------------       	| -------------
-enableFeatures      	| Used for enabling dynamic feature on widgets. By default the feature is disabled. 
-invalidateOnFrameChange | When this flag is set, the widget is invalidated on frame change during a measure pass.
-systemAndroidAttrStyle 	| The theming of widget is usally done in system_style.xml. Hence any advanced theming for android can only be done in system_system.xml. To override the look and feel for only one widget, this attribute can be used. E.g. android:attr/progressBarStyleHorizontal
-systemStyle   		| Any style defined in system_style.xml can be referenced using this attribute and is only applied to android widget.
-swtStyle   		| References the style attribute passed to the constructor. e.g. Control(Composite parent, **int style**)
-swtResizeOptions 	| SWT image is resized to fit the view. SWT image can resized using GC or use awt BufferedImage. Resize options is simple css expression which provides control over on how to resize an image to get the desired quality. See section **Resizing Image**
-
+The objects are stored in particular scope on the native side. Let us take a example, where a list is stored on the native side. If we want to display the sum of an attribute in a list, we need to request the entire list into the webview and loop over it do the sum and update the total on the textView. Instead simple expression method handler support is provided. 
+	
+```	
+<TextView
+    style="@style/h2_bold_black"
+    modelPojoToUi="text = total(.) from allocatedItems->view"
+    modelPojoToUiParams="path:memPrice;numberFormat:##.00"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:text="10.23"></TextView>
+```	
+The above example shows a scenario where textView is displaying the total of allocatedItems list which is stored in a view. The total is formatted to 2 decimal format.
+total(.) specifies that when a modelPojoToUi is done, it needs to send the result to total method with params, path as memPrice and numberFormat as ##.00. The Method handler handes the total call, loops over the object and sums the memPrice and finally formats it and returns the result. The result is set on the TextView. This helps to achieve native performance rather than being handled by the webview.
+	
+The list of method handler are give below:
+	
+Name                | Params					| Description
+-------------       | -------------				| -------------
+toString       	    | -						| Converts object attribute to string
+not		    | -						| Boolean object is negated
+listToString	    | separator					| list of strings to **separator** separated string. Default is comma
+concat		    | fields, separator				| concat list of fields using separator specified. Default separator is whitespace
+size	    	    | -						| Count of list object.
+visible		    | -						| If the target object is list, size > 0. If the object is string, string is checked if it is not empty. If the object is boolean, the value must be true. In all these cases, the widget is visible else it is hidden
+gone		    | -						| Opposite of visible.
+getDescFromModel    | scope, id, value				| Displays the description for the id passed in. The scope contains the list though which you loop to match the id and return value in the model.
+formatString	    | format, fields				| Display the string using String.format method with the values retirved by path specified in the comma separated field list.
+getDescFromRes	   | separator, entries, values			| Multi selected list is converted to string with separator. The values array is used to match the values in list so that the entries array description are displayed.
+multiply	   | op1, op2					| Multiples model retrieved by op1 and op2.
+total		   | path					| Sum of all list retrieved by path specified.
+baseElapsedTimeInMillis | defaultValue, allowNegativeValues | Used in chronometer to calculate the baseElapsedTimeInMillis. If the object retrieved is null, return defaultValues. If allowNegativeValues is false, the value if negative is zero.
+getFileAsset		| - 					| Get the file asset as a string. 
+	
 ## Resizing Image
 Image can be set using src attribute on ImageView, ImageButton or on background attribute on View in android. To simulate the scaling of images on other platforms, custom attributes has been introduced to give more control over image resizing.
 
 * SWT
 
 SWT provides low level method for resizing images using GC. Though the quality is acceptable in most cases, the image might not look good after resizing. In such cases when quality of image is not within the acceptable standards, we can use BufferedImage for resizing. It might be noted that the GC is very fast when compared to BufferedImage resizing and has been configured as the default option.
-
+		
 #### Custom Attributes
 swtResizeOptions - Simple CSS expression 
 
@@ -293,3 +364,96 @@ colorSmoothenGcFilter	| expression		| e.g r > 100 && g > 100 && b > 100. Only wo
 bufferedImageScalingMethod | enum		| Scalr is used for resizing BufferedImage. Scalr provides various methods of resizing. See [https://github.com/rkalla/imgscalr]. Only works if useBufferedImage is set to true.
 
 
+## HTML support for TextView	
+Android using Html.fromHtml to display html text in TextView. To provide html support, html boolean attribute has been introduced on the TextView. When set to true, the text is parsed using tag soup HTML parser and is set on the TextView.
+	
+The following table lists of tags supported:
+
+* div
+* br
+* a
+* img
+* ul/li
+* span
+
+List of attributes supported:
+* color/textColor
+* background-color/background
+* textAlignment/text-align/vertical-align
+* gravity
+* font-family/fontFamily
+* font-size/textSize
+* textStyle
+* font-weight
+* font-style
+* text-decoration (underline, line-through)
+* line-height/lineHeight
+* textColorLink
+
+## Custom Attributes
+
+The following table lists the custom attributes used in widgets:
+### View
+Name                	| Description
+-------------       	| -------------
+enableFeatures      	| Used for enabling dynamic feature on widgets. By default the feature is disabled. 
+invalidateOnFrameChange | When this flag is set, the widget is invalidated on frame change during a measure pass.
+systemAndroidAttrStyle 	| The theming of widget is usally done in system_style.xml. Hence any advanced theming for android can only be done in system_system.xml. To override the look and feel for only one widget, this attribute can be used. E.g. android:attr/progressBarStyleHorizontal
+systemStyle   		| Any style defined in system_style.xml can be referenced using this attribute and is only applied to android widget.
+swtStyle   		| References the style attribute passed to the constructor. e.g. Control(Composite parent, **int style**)
+swtResizeOptions 	| SWT image is resized to fit the view. SWT image can resized using GC or use awt BufferedImage. Resize options is simple css expression which provides control over on how to resize an image to get the desired quality. See section **Resizing Image**
+
+### ViewGroup
+Name                	| Description
+-------------       	| -------------
+childXml       		| XML from javascript can be set on the ViewGroup. The xml will be added as child of the viewgroup.
+
+### Relativelayout
+Name                	| Description
+-------------       	| -------------	
+layout_removeAllRules 	| Remove all rules associated with the layout.
+layout_removeRule 	| Remove single rule associated with the layout.
+
+### TextView
+Name                	| Description
+-------------       	| -------------
+html       		| When set to true, the text specified is parsed using html parser. See section **HTML support for TextView**.
+startOrStopMarquee	| When set to true, the marquee will start. When set to false, it will stop.
+swtTextStyle		| Textview in android is composite widget consisting of composite, drawables and a label. swtTextStyle references the style attribute passed to the constructor of the label being created.
+textFormat 		| Helps to format text. It uses String.format function. e.g. Rs %s. When text is set, the text is formatted using the textFormat attribute before being set.
+
+### Checkbox
+Name                		| Description
+-------------       		| -------------
+butonSize       		| Set the minimum width and height for the button. Default is 20.
+buttonPadding 			| Sets the padding and marginLeft for the button.
+swtCheckBoxHorizontalPadding 	| Sets the Horizontal padding for the button.
+
+### EditText
+Name                	| Description
+-------------       	| -------------
+hintTextFormat 		| Helps to format hint text. It uses String.format function. e.g. Rs %s. When text is set, the text is formatted using the textFormat attribute before being set.
+
+### ImageView
+Name                	| Description
+-------------       	| -------------
+imageFromUrl 		| http url of the image
+imageFromUrlError 	| Error image when http call fails
+imageFromUrlPlaceHolder | Placeholder image to be displayed when http call is being made
+	
+### Spinner
+Name                	| Description
+-------------       	| -------------
+hintTextFormat		| hint in spinner is used for displaying the first option usually "Please Select".
+values			| The list of values matching the entries. Usually Spinner displays the description backed by value
+selectedValue		| Retrieves/Sets the option selected.
+modelOptionTextPath	| When a dynamic list populated from model, modelOptionTextPath sets the path of the description in the model.
+modelOptionValuePath	|  When a dynamic list populated from model, modelOptionValuePath sets the path of the value in the model.
+ 
+	
+### Chronometer
+Name                	| Description
+-------------       	| -------------
+baseElapsedTimeInMillis	| Sets the base elapsed time from which the counter starts.	
+startStop		| When true, chronometer starts counting. When false, it stops.
+stopWhenReached		| Stop the chronometer on reaching the value specified.
