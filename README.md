@@ -13,6 +13,7 @@ The project provides the following functionality
 * Resizing Images
 * Expression Method handler
 * HTML support for TextView
+* Event Bubbling
 
 Ashera support the following platforms:
 
@@ -405,6 +406,35 @@ List of attributes supported:
 * line-height/lineHeight
 * textColorLink
 
+## Event Bubbling
+Android, ios and web platform support event bubbling. i.e. When we click on child widget, if the parent layout has click handler the click handler on the parent is trigerred. However swt does not provide support for event bubbling. To work around this issue, swtAttachEventBubbler attribute has been provided.
+	
+```
+<LinearLayout
+    android:id="@+id/bookItem"
+    style="@style/card_button"
+    onClick="bookItem(model = . from item->loopvar)"
+    swtAttachEventBubbler="mouseup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    tools:ignore="OnClick">
+
+    <ImageView
+	android:layout_width="20dp"
+	android:layout_height="20dp"
+	android:layout_marginRight="6dp"
+	android:src="@drawable/dashboard_book"></ImageView>
+
+    <TextView
+	style="@style/h2_bold_black"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="@string/buy"></TextView>
+</LinearLayout>	
+```
+swtAttachEventBubbler has mousup hander. By configuring this, the child items of LinearLayout recieve a mouseup handler which simply delegates it to the parent.
+	
 ## Custom Attributes
 
 The following table lists the custom attributes used in widgets:
