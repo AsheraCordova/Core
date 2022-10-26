@@ -53,6 +53,8 @@ Browser	      | Teavm
 * Switch
 * TextView
 * ToggleButton
+* com.ashera.layout.Link
+* com.ashera.Model
 
 Important Links:
 
@@ -61,6 +63,10 @@ https://asheracordova.github.io/
 https://asheracordova.github.io/doc/android/view/package-summary.html
 
 https://asheracordova.github.io/doc/android/widget/package-summary.html
+
+https://asheracordova.github.io/doc/com/ashera/layout/Link.html
+
+https://asheracordova.github.io/doc/com/ashera/Model.html
 
 ## Validation support
 
@@ -465,3 +471,23 @@ Name                	| Description
 baseElapsedTimeInMillis	| Sets the base elapsed time from which the counter starts.	
 startStop		| When true, chronometer starts counting. When false, it stops.
 stopWhenReached		| Stop the chronometer on reaching the value specified.
+
+### Model
+Model attribute helps in storing intermidiate objects to scope.
+
+Name                	| Description
+-------------       	| -------------
+path			| The path expression which stores object to particular scope.
+
+```
+<Model
+	android:id="@+id/param0"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	param="let name = name from testObj->view into view as string"></Model>
+```
+	
+The obove example creates an temporary variable name of type string with scope view and initializes it to name attribute on textObj present in view.
+	
+### com.ashera.layout.Link
+Widget which simulates HTML anchor tag.
