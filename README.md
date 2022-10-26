@@ -54,6 +54,14 @@ Browser	      | Teavm
 * TextView
 * ToggleButton
 
+Important Links:
+
+https://asheracordova.github.io/
+
+https://asheracordova.github.io/doc/android/view/package-summary.html
+
+https://asheracordova.github.io/doc/android/widget/package-summary.html
+
 ## Validation support
 
 Ashera provides support for validations by extending the view to add (v_*) attributes. 
