@@ -55,6 +55,7 @@ Browser	      | Teavm
 * com.ashera.layout.Link
 * com.ashera.Model
 * com.ashera.layout.MultiSelectionSpinner
+* android.webkit.WebView
 
 Important Links:
 
@@ -69,6 +70,8 @@ https://asheracordova.github.io/doc/com/ashera/layout/Link.html
 https://asheracordova.github.io/doc/com/ashera/Model.html
 
 https://asheracordova.github.io/doc/com/ashera/layout/MultiSelectionSpinner.html
+
+https://asheracordova.github.io/doc/android/webkit/WebView.html
 
 ## Validation support
 
@@ -534,3 +537,12 @@ selectedValues 		| Retrieves/Sets the options selected.
 modelOptionTextPath	| When a dynamic list populated from model, modelOptionTextPath sets the path of the description in the model.
 modelOptionValuePath	| When a dynamic list populated from model, modelOptionValuePath sets the path of the value in the model.
 	
+### android.webkit.WebView
+Widget which adds displaying simple staic html pages.
+
+Name                	| Description
+-------------       	| -------------
+onPageFinished		| Handler which is called when the webview has loaded the page.
+onPageStarted		| Handler which is called when the webview has is about to load the page.
+onReceivedError		| Handler which is called when the webview has failed to load the page.
+swtExpectedResponseText	| SWT webview requires a response text to be configured so that when the webview fails to load, it can compare the text and call the appropriate handler.
