@@ -37,8 +37,6 @@ Browser	      | Teavm
 * TableLayout
 * TableRow
 
-
-
 ## Widgets
 * Button
 * CheckBox
@@ -55,6 +53,7 @@ Browser	      | Teavm
 * ToggleButton
 * com.ashera.layout.Link
 * com.ashera.Model
+* com.ashera.layout.MultiSelectionSpinner
 
 Important Links:
 
@@ -67,6 +66,8 @@ https://asheracordova.github.io/doc/android/widget/package-summary.html
 https://asheracordova.github.io/doc/com/ashera/layout/Link.html
 
 https://asheracordova.github.io/doc/com/ashera/Model.html
+
+https://asheracordova.github.io/doc/com/ashera/layout/MultiSelectionSpinner.html
 
 ## Validation support
 
@@ -458,7 +459,7 @@ imageFromUrlPlaceHolder | Placeholder image to be displayed when http call is be
 ### Spinner
 Name                	| Description
 -------------       	| -------------
-hintTextFormat		| hint in spinner is used for displaying the first option usually "Please Select".
+hintTextFormat		| hint in spinner is used for displaying the first option usually "Please Select". Helps to format hint text. It uses String.format function. e.g. Rs %s. When text is set, the text is formatted using the textFormat attribute before being set.
 values			| The list of values matching the entries. Usually Spinner displays the description backed by value
 selectedValue		| Retrieves/Sets the option selected.
 modelOptionTextPath	| When a dynamic list populated from model, modelOptionTextPath sets the path of the description in the model.
@@ -491,3 +492,15 @@ The obove example creates an temporary variable name of type string with scope v
 	
 ### com.ashera.layout.Link
 Widget which simulates HTML anchor tag.
+
+### com.ashera.layout.MultiSelectionSpinner
+Widget which adds support for Spinner with multiple selection.
+
+Name                	| Description
+-------------       	| -------------
+hintTextFormat		| hint displayed when no items are seleted. Helps to format hint text. It uses String.format function. e.g. Rs %s. When text is set, the text is formatted using the textFormat attribute before being set.
+values			| The list of values matching the entries. Usually MultiSelectionSpinner displays the description backed by value.
+selectedValues 		| Retrieves/Sets the options selected.
+modelOptionTextPath	| When a dynamic list populated from model, modelOptionTextPath sets the path of the description in the model.
+modelOptionValuePath	| When a dynamic list populated from model, modelOptionValuePath sets the path of the value in the model.
+	
