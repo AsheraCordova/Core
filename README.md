@@ -73,6 +73,12 @@ https://asheracordova.github.io/doc/com/ashera/layout/MultiSelectionSpinner.html
 
 https://asheracordova.github.io/doc/android/webkit/WebView.html
 
+To install the plugin use:
+
+```
+cordova plugin add https://github.com/AsheraCordova/Core.git
+```
+
 ## Validation support
 
 Ashera provides support for validations by extending the view to add (v_*) attributes. 
