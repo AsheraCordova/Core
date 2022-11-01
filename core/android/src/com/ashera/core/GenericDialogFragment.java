@@ -36,7 +36,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class GenericDialogFragment extends androidx.fragment.app.DialogFragment implements IFragment{
-    private IActivity activity;
+	private IActivity activity;
 	private String id;
 	private String fileName;
 	private Object view;
@@ -45,6 +45,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	private IWidget rootWidget;
 	private StyleSheet styleSheet;
 	private Map<String, Object> devData;
+	private Map<String, String> inlineResources;
 	private Map<String, Object> tempCache;
 	private int x = -1, y = -1, width = -1, height = -1;
 	private String DELLOC_EVENT = StandardEvents.dealloc.toString();
@@ -62,7 +63,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		if (listeners == null) {
 			listeners = new WeakHashMap<>();
 		}
-		
+
 		List<Object> objects = this.listeners.get(widget);
 		if (objects == null) {
 			objects = new ArrayList<>();
@@ -70,16 +71,16 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		}
 		objects.add(listener);
 	}
-	
+
 	@Override
 	public <T> List<T> getListener(Class<T> type) {
 		if (listeners == null) {
 			return null;
 		}
-		
+
 		return (List<T>) listeners.values().stream().flatMap(List::stream).filter((o) -> o.getClass() == type).collect(Collectors.toList());
 	}
-	
+
 	@Override
 	public <T> java.util.List<T> getListener(com.ashera.widget.IWidget widget, java.lang.Class<T> type) {
 		if (listeners == null) {
@@ -87,12 +88,12 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		}
 		return (List<T>) listeners.get(widget).stream().filter((o) -> o.getClass() == type).collect(Collectors.toList());
 	}
-	
+
 	@Override
 	public void removeListener(IWidget widget, Object listener) {
 		listeners.get(widget).remove(listener);
 	}
-	
+
 	@Override
 	public List<Object> getDisposables() {
 		return disposables;
@@ -105,10 +106,10 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		}
 		disposables.add(disposable);
 	}
-	
+
 	public void clear() {
-    	eventBus.notifyObservers(DELLOC_EVENT, null);
-    	eventBus.offAll();
+		eventBus.notifyObservers(DELLOC_EVENT, null);
+		eventBus.offAll();
 
 		view = null;
 		rootWidget = null;
@@ -118,135 +119,135 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		eventBus = null;
 		userData = null;
 		PluginInvoker.releaseNativeResources(disposables);
-	}	
+	}
 
-    public static Bundle getInitialBundle(String resId, String fileName, List<Map<String, Object>> scopedObjects) {
-    	Bundle bundle = new Bundle();
-    	bundle.putString("fileName", fileName);
-    	bundle.putString("id", resId);
-    	
-        if (scopedObjects != null && !scopedObjects.isEmpty()) {
-        	int scopedObjectCount = scopedObjects.size();
+	public static Bundle getInitialBundle(String resId, String fileName, List<Map<String, Object>> scopedObjects) {
+		Bundle bundle = new Bundle();
+		bundle.putString("fileName", fileName);
+		bundle.putString("id", resId);
+
+		if (scopedObjects != null && !scopedObjects.isEmpty()) {
+			int scopedObjectCount = scopedObjects.size();
 			bundle.putInt("count", scopedObjectCount);
-        	for (int i = 0; i < scopedObjectCount; i++) {
-        		Map<String, Object> map = scopedObjects.get(i);
-            	bundle.putString("expression" + i, PluginInvoker.getString(map.get("expression")));
+			for (int i = 0; i < scopedObjectCount; i++) {
+				Map<String, Object> map = scopedObjects.get(i);
+				bundle.putString("expression" + i, PluginInvoker.getString(map.get("expression")));
 
-            	Object payload = map.get("payload");
-            	if (payload instanceof java.io.Serializable) {
-            		bundle.putSerializable("payload" + i, (java.io.Serializable) payload);
-            	} else {
-            		PluginInvoker.putObjectToBundle(bundle, "payload" + i, payload);
-            	}
-        	}
-        }
-    	
-        return bundle;
-    }
-    
-    // This event fires 1st, before creation of fragment or any views
-    // The onAttach method is called when the Fragment instance is associated with an Activity. 
-    // This does not mean the Activity is fully initialized.
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof IActivity){
-        	onAttach((IActivity) context);
-        }
-    }
-    
-    @Override
-    public void onAttach(IActivity activity) {
+				Object payload = map.get("payload");
+				if (payload instanceof java.io.Serializable) {
+					bundle.putSerializable("payload" + i, (java.io.Serializable) payload);
+				} else {
+					PluginInvoker.putObjectToBundle(bundle, "payload" + i, payload);
+				}
+			}
+		}
+
+		return bundle;
+	}
+
+	// This event fires 1st, before creation of fragment or any views
+	// The onAttach method is called when the Fragment instance is associated with an Activity.
+	// This does not mean the Activity is fully initialized.
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		if (context instanceof IActivity){
+			onAttach((IActivity) context);
+		}
+	}
+
+	@Override
+	public void onAttach(IActivity activity) {
 		this.activity = activity;
-        this.id = UUID.randomUUID().toString();
-        Bundle args = getArguments();
-        this.fileName = args.getString("fileName");
-        int scopedObjectCount = args.getInt("count");
-        
-        for (int i = 0; i < scopedObjectCount; i++) {
-	        String expression = args.getString("expression" + i);
-			
+		this.id = UUID.randomUUID().toString();
+		Bundle args = getArguments();
+		this.fileName = args.getString("fileName");
+		int scopedObjectCount = args.getInt("count");
+
+		for (int i = 0; i < scopedObjectCount; i++) {
+			String expression = args.getString("expression" + i);
+
 			if (expression != null && !expression.isEmpty()) {
 				Object payload = args.getSerializable("payload" + i);
-		        ModelStoreVarHolder modelStoreVarHolder = ModelExpressionParser.parseModelStoreVarExpression(expression);
-		        String varName = modelStoreVarHolder.varName;
-		        ModelScope varScope = modelStoreVarHolder.varScope;
-		        ModelDataType varType = modelStoreVarHolder.varType;
-		        Object modelData = ModelStore.changeModelDataType(varType, payload);
-		        ModelStore.storeModelToScope(varName, varScope, modelData, this, null, null);
+				ModelStoreVarHolder modelStoreVarHolder = ModelExpressionParser.parseModelStoreVarExpression(expression);
+				String varName = modelStoreVarHolder.varName;
+				ModelScope varScope = modelStoreVarHolder.varScope;
+				ModelDataType varType = modelStoreVarHolder.varType;
+				Object modelData = ModelStore.changeModelDataType(varType, payload);
+				ModelStore.storeModelToScope(varName, varScope, modelData, this, null, null);
 			}
-        }
-		sendLifeCycleEvent("onAttach", fileName, getEventData("onAttach"));
+		}
+		sendLifeCycleEvent("onAttach", fileName, getEventData("onAttach"), null);
 
 	}
-       
-    // This event fires 2nd, before views are created for the fragment
-    // The onCreate method is called when the Fragment instance is being created, or re-created.
-    // Use onCreate for any standard setup that does not require the activity to be fully created
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.onCreate();
-    }
-    
-    @Override
-    public void onCreate() {
-        readFileInDevMode();
-		sendLifeCycleEvent("onCreate", fileName, getEventData("onCreate"));
-    }
-    
-   
-    private void readFileInDevMode() {
-        if ("dev".equals(this.activity.getAssetMode())) {
-        	devData = new HashMap<>();
-            HashMap<String, String> urlMap = new HashMap<>();
-            String devServerIp = activity.getDevServerIp();
+
+	// This event fires 2nd, before views are created for the fragment
+	// The onCreate method is called when the Fragment instance is being created, or re-created.
+	// Use onCreate for any standard setup that does not require the activity to be fully created
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		this.onCreate();
+	}
+
+	@Override
+	public void onCreate() {
+		readFileInDevMode();
+		sendLifeCycleEvent("onCreate", fileName, getEventData("onCreate"), null);
+	}
+
+
+	private void readFileInDevMode() {
+		if ("dev".equals(this.activity.getAssetMode())) {
+			devData = new HashMap<>();
+			HashMap<String, String> urlMap = new HashMap<>();
+			String devServerIp = activity.getDevServerIp();
 			urlMap.put("www/" + this.fileName, String.format("http://%s/%s", devServerIp, "app/src/main/res/" + this.fileName));
-            urlMap.put("www/css/styles.css", String.format("http://%s/%s", devServerIp, "app/src/main/assets/www/css/styles.css"));
+			urlMap.put("www/css/styles.css", String.format("http://%s/%s", devServerIp, "app/src/main/assets/www/css/styles.css"));
 
-            urlMap.put("strings", String.format("http://%s/%s", devServerIp, "src/strings.properties"));
-            urlMap.put("colors", String.format("http://%s/%s", devServerIp, "src/colors.properties"));
-            urlMap.put("dimens", String.format("http://%s/%s", devServerIp, "src/dimens.properties"));
-            Map<String, String> resultMap = FileUtils.readFilesContent(urlMap);
-            
-            devData.putAll(resultMap);
-            Properties strings = getFileAsProperties("strings", resultMap);            
-            Properties colors = getFileAsProperties("colors", resultMap);
-            Properties dimens = getFileAsProperties("dimens", resultMap);
+			urlMap.put("strings", String.format("http://%s/%s", devServerIp, "src/strings.properties"));
+			urlMap.put("colors", String.format("http://%s/%s", devServerIp, "src/colors.properties"));
+			urlMap.put("dimens", String.format("http://%s/%s", devServerIp, "src/dimens.properties"));
+			Map<String, String> resultMap = FileUtils.readFilesContent(urlMap);
 
-            devData.put("strings", strings);
-            devData.put("colors", colors);
-            devData.put("dimens", dimens);
-        }        
-    }
-    
-    
-    @SuppressLint("NewApi")
-    public Properties getFileAsProperties(String property, Map<String, String> resultMap) {
-        StringReader stringReader = new StringReader(resultMap.get(property));
-        Properties properties = new Properties();
-        
-        try {
-            try {
-                properties.load(stringReader);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } finally {
-            stringReader.close();
-        }
-        return properties;
-    }
-    @Override
-    public void onResume() {
-    	super.onResume();
-    	if (remeasureOnResume) {
-    		remeasure();
-    		remeasureOnResume = false;
-    	}
-    	isPaused = false;
-    	sendLifeCycleEvent("onResume", fileName, getEventData("onResume"));
-    }
+			devData.putAll(resultMap);
+			Properties strings = getFileAsProperties("strings", resultMap);
+			Properties colors = getFileAsProperties("colors", resultMap);
+			Properties dimens = getFileAsProperties("dimens", resultMap);
+
+			devData.put("strings", strings);
+			devData.put("colors", colors);
+			devData.put("dimens", dimens);
+		}
+	}
+
+
+	@SuppressLint("NewApi")
+	public Properties getFileAsProperties(String property, Map<String, String> resultMap) {
+		StringReader stringReader = new StringReader(resultMap.get(property));
+		Properties properties = new Properties();
+
+		try {
+			try {
+				properties.load(stringReader);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} finally {
+			stringReader.close();
+		}
+		return properties;
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (remeasureOnResume) {
+			remeasure();
+			remeasureOnResume = false;
+		}
+		isPaused = false;
+		sendLifeCycleEvent("onResume", fileName, getEventData("onResume"), null);
+	}
 
 	private String getEventData(String key) {
 		Object myData = getUserData(key);
@@ -257,93 +258,100 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		return onResumeEventExpr;
 	}
 
-    // The onCreateView method is called when Fragment should create its View object hierarchy,
-    // either dynamically or via XML layout inflation. 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-    	return (View) onCreateView(false);
+	// The onCreateView method is called when Fragment should create its View object hierarchy,
+	// either dynamically or via XML layout inflation.
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		return (View) onCreateView(false);
 
-    }
-    
-    @Override
-    public Object onCreateView(boolean measure) {
+	}
+
+	@Override
+	public Object onCreateView(boolean measure) {
 		if (view == null) {
-            try {
+			try {
 				IWidget widget = PluginInvoker.parseFile(fileName, false, this);
-				
+
 				if (measure) {
 					remeasure();
 				}
-				
+
 				view = widget.asNativeWidget();
+
+				String javascript = getInlineResource("javascript");
+				sendLifeCycleEvent("onCreateView", fileName, null, javascript);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
-            return view;
-        } else {
-    	    return view;
-        }
+			return view;
+		} else {
+			return view;
+		}
 	}
-	
+
 	@Override
 	public void onPause() {
 		super.onPause();
 		isPaused = true;
-		sendLifeCycleEvent("onPause", fileName, getEventData("onPause"));
+		sendLifeCycleEvent("onPause", fileName, getEventData("onPause"), null);
 	}
-	
-    // This event is triggered soon after onCreateView().
-    // onViewCreated() is only called if the view returned from onCreateView() is non-null.
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
 
-    // This method is called when the fragment is no longer connected to the Activity
-    // Any references saved in onAttach should be nulled out here to prevent memory leaks. 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        sendLifeCycleEvent("onDetach", fileName, getEventData("onDetach"));
+	// This event is triggered soon after onCreateView().
+	// onViewCreated() is only called if the view returned from onCreateView() is non-null.
+	// Any view setup should occur here.  E.g., view lookups and attaching view listeners.
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+	}
+
+	// This method is called when the fragment is no longer connected to the Activity
+	// Any references saved in onAttach should be nulled out here to prevent memory leaks.
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		sendLifeCycleEvent("onDetach", fileName, getEventData("onDetach"), null);
 		activity = null;
 
-    }
-    
-    @Override
-    public void onDestroy() {
-    	super.onDestroy();
-    	sendLifeCycleEvent("onDestroy", fileName, getEventData("onDestroy"));
-    	clear();
-    }
-    
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		sendLifeCycleEvent("onDestroy", fileName, getEventData("onDestroy"), null);
+		clear();
+	}
+
 	@Override
 	public void onCloseDialog() {
-		sendLifeCycleEvent("onCloseDialog", fileName, getEventData("onCloseDialog"));
+		sendLifeCycleEvent("onCloseDialog", fileName, getEventData("onCloseDialog"), null);
 	}
-        
-    // This method is called after the parent Activity's onCreate() method has completed.
-    // Accessing the view hierarchy of the parent activity must be done in the onActivityCreated.
-    // At this point, it is safe to search for activity View objects by their ID, for example.
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-    
-	private void sendLifeCycleEvent(String action, String fileName, String eventExpression) {
-	    Map<String, Object> dataMap = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+
+	// This method is called after the parent Activity's onCreate() method has completed.
+	// Accessing the view hierarchy of the parent activity must be done in the onActivityCreated.
+	// At this point, it is safe to search for activity View objects by their ID, for example.
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+	}
+
+	private void sendLifeCycleEvent(String action, String fileName, String eventExpression, String javascript) {
+		Map<String, Object> dataMap = com.ashera.widget.PluginInvoker.getJSONCompatMap();
 		dataMap.put("action", "nativeevent");
 		dataMap.put("event", action);
 		dataMap.put("actionUrl", fileName);
 		dataMap.put("fragmentId", id);
-		
+
+		if (javascript != null) {
+			dataMap.put("javascript", javascript);
+		}
+
 		if (eventExpression != null) {
 			EventExpressionParser.parseEventExpression(eventExpression, dataMap);
 			rootWidget.updateModelToEventMap(dataMap, (String) dataMap.get(EventExpressionParser.KEY_EVENT),
 					(String) dataMap.get(EventExpressionParser.KEY_EVENT_ARGS));
 		}
-		activity.sendEventMessage(dataMap);		
+		activity.sendEventMessage(dataMap);
 	}
 	@Override
 	public EventBus getEventBus() {
@@ -373,19 +381,19 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		if (userData == null) {
 			userData = new HashMap<>();
 		}
-		
-		return userData.get(key);		
+
+		return userData.get(key);
 	}
-	
+
 	@Override
 	public void storeUserData(String key, Object object) {
 		if (userData == null) {
 			userData = new HashMap<>();
 		}
-		
+
 		userData.put(key, object);
 	}
-	
+
 	@Override
 	public boolean hasDevData(String key) {
 		return devData != null && devData.containsKey(key);
@@ -416,7 +424,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		if (tempCache == null) {
 			tempCache = new HashMap<>();
 		}
-		
+
 		tempCache.put(key, object);
 
 	}
@@ -448,13 +456,13 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		if (x == -1 && y == -1 && width == -1 && height == -1) {
 			((IRoot) rootWidget).measure();
 		} else {
-			((IRoot) rootWidget).measure(x, y, width, height);			
+			((IRoot) rootWidget).measure(x, y, width, height);
 		}
-		
+
 		eventBus.notifyObservers(POSTMEASURE_EVENT, new com.ashera.widget.bus.Event(com.ashera.widget.bus.Event.StandardEvents.postMeasure));
 		measuring = false;
 	}
-	
+
 	@Override
 	public void resizeWindow(int width, int height) {
 		setFrame(x,	y, width, height);
@@ -488,7 +496,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	@Override
 	public void disableRemeasure() {
 		disableRemeasures.push(true);
-		
+
 	}
 
 	@Override
@@ -501,12 +509,12 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		getFatalErrors().addError(error);
 		((IRoot)rootWidget).displayErrorIndicator();
 	}
-	
+
 	@Override
 	public boolean hasErrors() {
 		return getFatalErrors().getErrors().size() > 0;
 	}
-	
+
 	private Errors getFatalErrors() {
 		String errorKey = "fatalErrors";
 		Errors errors = (Errors) getUserData(errorKey);
@@ -516,5 +524,26 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		}
 		return errors;
 	}
-	
+
+	@Override
+	public String getInlineResource(String key) {
+		if (inlineResources == null) {
+			return null;
+		}
+		return inlineResources.get(key);
+	}
+
+	@Override
+	public void setInlineResource(String key, String value, boolean append) {
+		if (inlineResources == null) {
+			inlineResources = new HashMap<String, String>();
+		}
+
+		if (!append || inlineResources.get(key) == null) {
+			inlineResources.put(key, value);
+		} else {
+			inlineResources.put(key, inlineResources.get(key) + value);
+		}
+	}
+
 }

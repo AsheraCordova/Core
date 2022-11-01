@@ -70,6 +70,7 @@
   id<ASIWidget> rootWidget_;
   id<CSSStyleSheet> styleSheet_;
   id<JavaUtilMap> devData_;
+  id<JavaUtilMap> inlineResources_;
   id<JavaUtilMap> tempCache_;
   jint x_;
   jint y_;
@@ -90,7 +91,8 @@
 
 - (void)sendLifeCycleEventWithNSString:(NSString *)action
                           withNSString:(NSString *)fileName
-                          withNSString:(NSString *)eventExpression;
+                          withNSString:(NSString *)eventExpression
+                          withNSString:(NSString *)javascript;
 
 - (ASErrors *)getFatalErrors;
 
@@ -105,6 +107,7 @@ J2OBJC_FIELD_SETTER(ASGenericFragment, userData_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(ASGenericFragment, rootWidget_, id<ASIWidget>)
 J2OBJC_FIELD_SETTER(ASGenericFragment, styleSheet_, id<CSSStyleSheet>)
 J2OBJC_FIELD_SETTER(ASGenericFragment, devData_, id<JavaUtilMap>)
+J2OBJC_FIELD_SETTER(ASGenericFragment, inlineResources_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(ASGenericFragment, tempCache_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(ASGenericFragment, DELLOC_EVENT_, NSString *)
 J2OBJC_FIELD_SETTER(ASGenericFragment, listeners_, JavaUtilWeakHashMap *)
@@ -123,7 +126,7 @@ __attribute__((unused)) static void ASGenericFragment_readFileInDevMode(ASGeneri
 
 __attribute__((unused)) static NSString *ASGenericFragment_getEventDataWithNSString_(ASGenericFragment *self, NSString *key);
 
-__attribute__((unused)) static void ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(ASGenericFragment *self, NSString *action, NSString *fileName, NSString *eventExpression);
+__attribute__((unused)) static void ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(ASGenericFragment *self, NSString *action, NSString *fileName, NSString *eventExpression, NSString *javascript);
 
 __attribute__((unused)) static ASErrors *ASGenericFragment_getFatalErrors(ASGenericFragment *self);
 
@@ -278,7 +281,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       ASModelStore_storeModelToScopeWithNSString_withASModelScope_withId_withASIFragment_withASIWidget_withASLoopParam_(varName, varScope, modelData, self, nil, nil);
     }
   }
-  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(self, @"onAttach", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onAttach"));
+  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, @"onAttach", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onAttach"), nil);
 }
 
 - (void)onCreateWithADBundle:(ADBundle *)savedInstanceState {
@@ -288,7 +291,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)onCreate {
   ASGenericFragment_readFileInDevMode(self);
-  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(self, @"onCreate", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onCreate"));
+  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, @"onCreate", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onCreate"), nil);
 }
 
 - (void)readFileInDevMode {
@@ -320,7 +323,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     remeasureOnResume_ = false;
   }
   isPaused_ = false;
-  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(self, @"onResume", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onResume"));
+  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, @"onResume", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onResume"), nil);
 }
 
 - (NSString *)getEventDataWithNSString:(NSString *)key {
@@ -341,6 +344,8 @@ J2OBJC_IGNORE_DESIGNATED_END
         [self remeasure];
       }
       view_ = [((id<ASIWidget>) nil_chk(widget)) asNativeWidget];
+      NSString *javascript = [self getInlineResourceWithNSString:@"javascript"];
+      ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, @"onCreateView", fileName_, nil, javascript);
     }
     @catch (JavaLangException *e) {
       [e printStackTrace];
@@ -356,7 +361,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)onPause {
   [super onPause];
   isPaused_ = true;
-  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(self, @"onPause", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onPause"));
+  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, @"onPause", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onPause"), nil);
 }
 
 - (void)onViewCreatedWithADView:(ADView *)view
@@ -366,18 +371,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)onDetach {
   [super onDetach];
-  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(self, @"onDetach", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onDetach"));
+  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, @"onDetach", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onDetach"), nil);
   activity_ = nil;
 }
 
 - (void)onDestroy {
   [super onDestroy];
-  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(self, @"onDestroy", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onDestroy"));
+  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, @"onDestroy", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onDestroy"), nil);
   [self clear];
 }
 
 - (void)onCloseDialog {
-  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(self, @"onCloseDialog", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onCloseDialog"));
+  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, @"onCloseDialog", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onCloseDialog"), nil);
 }
 
 - (void)onActivityCreatedWithADBundle:(ADBundle *)savedInstanceState {
@@ -386,8 +391,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)sendLifeCycleEventWithNSString:(NSString *)action
                           withNSString:(NSString *)fileName
-                          withNSString:(NSString *)eventExpression {
-  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(self, action, fileName, eventExpression);
+                          withNSString:(NSString *)eventExpression
+                          withNSString:(NSString *)javascript {
+  ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, action, fileName, eventExpression, javascript);
 }
 
 - (ASEventBus *)getEventBus {
@@ -537,6 +543,27 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASGenericFragment_getFatalErrors(self);
 }
 
+- (NSString *)getInlineResourceWithNSString:(NSString *)key {
+  if (inlineResources_ == nil) {
+    return nil;
+  }
+  return [inlineResources_ getWithId:key];
+}
+
+- (void)setInlineResourceWithNSString:(NSString *)key
+                         withNSString:(NSString *)value
+                          withBoolean:(jboolean)append {
+  if (inlineResources_ == nil) {
+    inlineResources_ = new_JavaUtilHashMap_init();
+  }
+  if (!append || [inlineResources_ getWithId:key] == nil) {
+    (void) [((id<JavaUtilMap>) nil_chk(inlineResources_)) putWithId:key withId:value];
+  }
+  else {
+    (void) [((id<JavaUtilMap>) nil_chk(inlineResources_)) putWithId:key withId:JreStrcat("$$", [inlineResources_ getWithId:key], value)];
+  }
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -591,6 +618,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 47, 48, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASErrors;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 49, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 50, 51, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -620,7 +649,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[22].selector = @selector(onDestroy);
   methods[23].selector = @selector(onCloseDialog);
   methods[24].selector = @selector(onActivityCreatedWithADBundle:);
-  methods[25].selector = @selector(sendLifeCycleEventWithNSString:withNSString:withNSString:);
+  methods[25].selector = @selector(sendLifeCycleEventWithNSString:withNSString:withNSString:withNSString:);
   methods[26].selector = @selector(getEventBus);
   methods[27].selector = @selector(getRootWidget);
   methods[28].selector = @selector(getRootActivity);
@@ -647,34 +676,37 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[49].selector = @selector(addErrorWithASError:);
   methods[50].selector = @selector(hasErrors);
   methods[51].selector = @selector(getFatalErrors);
+  methods[52].selector = @selector(getInlineResourceWithNSString:);
+  methods[53].selector = @selector(setInlineResourceWithNSString:withNSString:withBoolean:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "activity_", "LASIActivity;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "id__", "LNSString;", .constantValue.asLong = 0, 0x2, 49, -1, -1, -1 },
+    { "id__", "LNSString;", .constantValue.asLong = 0, 0x2, 52, -1, -1, -1 },
     { "fileName_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "view_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "eventBus_", "LASEventBus;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 50, -1 },
+    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 53, -1 },
     { "rootWidget_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "styleSheet_", "LCSSStyleSheet;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "devData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 50, -1 },
-    { "tempCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 50, -1 },
+    { "devData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 53, -1 },
+    { "inlineResources_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 54, -1 },
+    { "tempCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 53, -1 },
     { "x_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "y_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "width_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "height_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "DELLOC_EVENT_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "POSTMEASURE_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 51, -1, -1 },
-    { "PREMEASURE_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 52, -1, -1 },
-    { "listeners_", "LJavaUtilWeakHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 53, -1 },
-    { "disposables_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 54, -1 },
+    { "POSTMEASURE_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 55, -1, -1 },
+    { "PREMEASURE_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 56, -1, -1 },
+    { "listeners_", "LJavaUtilWeakHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 57, -1 },
+    { "disposables_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 58, -1 },
     { "measuring_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "disableRemeasures_", "LJavaUtilStack;", .constantValue.asLong = 0, 0x2, -1, -1, 55, -1 },
+    { "disableRemeasures_", "LJavaUtilStack;", .constantValue.asLong = 0, 0x2, -1, -1, 59, -1 },
     { "isPaused_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "remeasureOnResume_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "getInitialBundle", "LNSString;LNSString;LJavaUtilList;", "(Ljava/lang/String;Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;)Lr/android/os/Bundle;", "onAttach", "LADContext;", "LASIActivity;", "onCreate", "LADBundle;", "getFileAsProperties", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Properties;", "getEventData", "LNSString;", "onCreateView", "LADLayoutInflater;LADViewGroup;LADBundle;", "Z", "onViewCreated", "LADView;LADBundle;", "onActivityCreated", "sendLifeCycleEvent", "LNSString;LNSString;LNSString;", "setRootWidget", "LASIWidget;", "getUserData", "storeUserData", "LNSString;LNSObject;", "hasDevData", "getDevData", "setStyleSheet", "LCSSStyleSheet;", "storeInTempCache", "getFromTempCache", "setFrame", "IIII", "resizeWindow", "II", "addError", "LASError;", "id", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASGenericFragment_POSTMEASURE_EVENT, &ASGenericFragment_PREMEASURE_EVENT, "Ljava/util/WeakHashMap<Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;>;", "Ljava/util/List<Ljava/lang/Object;>;", "Ljava/util/Stack<Ljava/lang/Boolean;>;" };
-  static const J2ObjcClassInfo _ASGenericFragment = { "GenericFragment", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 52, 23, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "getInitialBundle", "LNSString;LNSString;LJavaUtilList;", "(Ljava/lang/String;Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;)Lr/android/os/Bundle;", "onAttach", "LADContext;", "LASIActivity;", "onCreate", "LADBundle;", "getFileAsProperties", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Properties;", "getEventData", "LNSString;", "onCreateView", "LADLayoutInflater;LADViewGroup;LADBundle;", "Z", "onViewCreated", "LADView;LADBundle;", "onActivityCreated", "sendLifeCycleEvent", "LNSString;LNSString;LNSString;LNSString;", "setRootWidget", "LASIWidget;", "getUserData", "storeUserData", "LNSString;LNSObject;", "hasDevData", "getDevData", "setStyleSheet", "LCSSStyleSheet;", "storeInTempCache", "getFromTempCache", "setFrame", "IIII", "resizeWindow", "II", "addError", "LASError;", "getInlineResource", "setInlineResource", "LNSString;LNSString;Z", "id", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", &ASGenericFragment_POSTMEASURE_EVENT, &ASGenericFragment_PREMEASURE_EVENT, "Ljava/util/WeakHashMap<Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;>;", "Ljava/util/List<Ljava/lang/Object;>;", "Ljava/util/Stack<Ljava/lang/Boolean;>;" };
+  static const J2ObjcClassInfo _ASGenericFragment = { "GenericFragment", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 54, 24, -1, -1, -1, -1, -1 };
   return &_ASGenericFragment;
 }
 
@@ -760,12 +792,15 @@ NSString *ASGenericFragment_getEventDataWithNSString_(ASGenericFragment *self, N
   return onResumeEventExpr;
 }
 
-void ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(ASGenericFragment *self, NSString *action, NSString *fileName, NSString *eventExpression) {
+void ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(ASGenericFragment *self, NSString *action, NSString *fileName, NSString *eventExpression, NSString *javascript) {
   id<JavaUtilMap> dataMap = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(dataMap)) putWithId:@"action" withId:@"nativeevent"];
   (void) [dataMap putWithId:@"event" withId:action];
   (void) [dataMap putWithId:@"actionUrl" withId:fileName];
   (void) [dataMap putWithId:@"fragmentId" withId:self->id__];
+  if (javascript != nil) {
+    (void) [dataMap putWithId:@"javascript" withId:javascript];
+  }
   if (eventExpression != nil) {
     (void) ASEventExpressionParser_parseEventExpressionWithNSString_withJavaUtilMap_(eventExpression, dataMap);
     [((id<ASIWidget>) nil_chk(self->rootWidget_)) updateModelToEventMapWithJavaUtilMap:dataMap withNSString:(NSString *) cast_chk([dataMap getWithId:ASEventExpressionParser_KEY_EVENT], [NSString class]) withNSString:(NSString *) cast_chk([dataMap getWithId:ASEventExpressionParser_KEY_EVENT_ARGS], [NSString class])];

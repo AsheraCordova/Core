@@ -111,6 +111,12 @@
 - (void)resizeWindowWithInt:(jint)width
                     withInt:(jint)height;
 
+- (NSString *)getInlineResourceWithNSString:(NSString *)key;
+
+- (void)setInlineResourceWithNSString:(NSString *)key
+                         withNSString:(NSString *)value
+                          withBoolean:(jboolean)append;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASIFragment)

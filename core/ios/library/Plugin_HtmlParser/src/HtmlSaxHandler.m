@@ -27,6 +27,7 @@
 #include "java/lang/Boolean.h"
 #include "java/lang/Exception.h"
 #include "java/lang/Integer.h"
+#include "java/lang/RuntimeException.h"
 #include "java/util/Arrays.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
@@ -53,9 +54,11 @@
   id<ASIFragment> fragment_;
   JavaUtilStack *widgetsStack_;
   jboolean isTemplate_;
-  JavaUtilStack *templateStack_;
   jint depth_;
   jboolean isAndroid_;
+  NSString *inlineResourceName_;
+  jboolean inlineAppend_;
+  NSString *text_;
 }
 
 - (id<JavaUtilMap>)getParamsWithOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts
@@ -81,7 +84,8 @@ J2OBJC_FIELD_SETTER(ASHtmlSaxHandler, hasWidgets_, JavaUtilStack *)
 J2OBJC_FIELD_SETTER(ASHtmlSaxHandler, pushParent_, JavaUtilStack *)
 J2OBJC_FIELD_SETTER(ASHtmlSaxHandler, fragment_, id<ASIFragment>)
 J2OBJC_FIELD_SETTER(ASHtmlSaxHandler, widgetsStack_, JavaUtilStack *)
-J2OBJC_FIELD_SETTER(ASHtmlSaxHandler, templateStack_, JavaUtilStack *)
+J2OBJC_FIELD_SETTER(ASHtmlSaxHandler, inlineResourceName_, NSString *)
+J2OBJC_FIELD_SETTER(ASHtmlSaxHandler, text_, NSString *)
 
 inline JavaUtilProperties *ASHtmlSaxHandler_get_languageProperties(void);
 inline JavaUtilProperties *ASHtmlSaxHandler_set_languageProperties(JavaUtilProperties *value);
@@ -159,6 +163,9 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
 - (void)charactersWithCharArray:(IOSCharArray *)ch
                         withInt:(jint)start
                         withInt:(jint)length {
+  if (inlineResourceName_ != nil) {
+    JreStrAppendStrong(&text_, "$", [NSString java_stringWithCharacters:ch offset:start length:length]);
+  }
   if (depth_ > 0) {
     return;
   }
@@ -173,11 +180,7 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
     depth_++;
     return;
   }
-  if ([((NSString *) nil_chk(localName)) java_equalsIgnoreCase:@"template"]) {
-    [((JavaUtilStack *) nil_chk(templateStack_)) pushWithId:JavaLangBoolean_valueOfWithBoolean_(true)];
-    isTemplate_ = true;
-  }
-  if ([localName java_equalsIgnoreCase:@"include"]) {
+  if ([((NSString *) nil_chk(localName)) java_equalsIgnoreCase:@"include"]) {
     ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withBoolean_withASIFragment_((ASBaseHasWidgets *) cast_chk([((JavaUtilStack *) nil_chk(hasWidgets_)) peek], [ASBaseHasWidgets class]), ASHtmlSaxHandler_getValueWithNSString_withOrgXmlSaxAttributes_(self, @"layout", atts), isTemplate_, fragment_);
     return;
   }
@@ -229,6 +232,24 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
                        withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts
                       withASWidgetAttributeMap:(ASWidgetAttributeMap *)widgetAttributeMap
                                withJavaUtilMap:(id<JavaUtilMap>)params {
+  if ([((NSString *) nil_chk(localName)) java_equalsIgnoreCase:@"Inline"]) {
+    NSString *type = ASHtmlSaxHandler_getValueWithNSString_withOrgXmlSaxAttributes_(self, @"type", atts);
+    if ([((NSString *) nil_chk(type)) isEqual:@"resource"]) {
+      JreStrongAssign(&inlineResourceName_, ASHtmlSaxHandler_getValueWithNSString_withOrgXmlSaxAttributes_(self, @"name", atts));
+      inlineAppend_ = false;
+    }
+    else if ([type isEqual:@"style"]) {
+      JreStrongAssign(&inlineResourceName_, @"style");
+      inlineAppend_ = true;
+    }
+    else if ([type isEqual:@"javascript"]) {
+      JreStrongAssign(&inlineResourceName_, @"javascript");
+      inlineAppend_ = true;
+    }
+    else {
+      @throw create_JavaLangRuntimeException_initWithNSString_(@"unknown Inline type");
+    }
+  }
   JreStrongAssign(&self->widget_, widget);
   if (widget == nil) {
     widget = ASWidgetFactory_getWithNSString_withBoolean_(localName, isTemplate_);
@@ -318,6 +339,12 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
 - (void)endElementWithNSString:(NSString *)uri
                   withNSString:(NSString *)localName
                   withNSString:(NSString *)qName {
+  if (inlineResourceName_ != nil) {
+    [((id<ASIFragment>) nil_chk(fragment_)) setInlineResourceWithNSString:inlineResourceName_ withNSString:text_ withBoolean:inlineAppend_];
+  }
+  inlineAppend_ = false;
+  JreStrongAssign(&inlineResourceName_, nil);
+  JreStrongAssign(&text_, @"");
   if (depth_ > 0) {
     depth_--;
     return;
@@ -326,10 +353,6 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
     return;
   }
   [self endCreateWidgetWithNSString:localName];
-  if ([localName java_equalsIgnoreCase:@"template"]) {
-    [((JavaUtilStack *) nil_chk(templateStack_)) pop];
-    isTemplate_ = ![((JavaUtilStack *) nil_chk(templateStack_)) isEmpty];
-  }
 }
 
 - (void)endCreateWidgetWithNSString:(NSString *)localName {
@@ -339,9 +362,6 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
   JreStrongAssign(&self->widget_, [((JavaUtilStack *) nil_chk(widgetsStack_)) pop]);
   if (widget_ != nil) {
     [widget_ initialized];
-  }
-  if ([ASHasWidgets_class_() isInstance:self->widget_]) {
-    id<ASHasWidgets> hasWidget = (id<ASHasWidgets>) cast_check(self->widget_, ASHasWidgets_class_());
   }
 }
 
@@ -366,7 +386,8 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
   RELEASE_(pushParent_);
   RELEASE_(fragment_);
   RELEASE_(widgetsStack_);
-  RELEASE_(templateStack_);
+  RELEASE_(inlineResourceName_);
+  RELEASE_(text_);
   [super dealloc];
 }
 
@@ -428,13 +449,15 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
     { "fragment_", "LASIFragment;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "widgetsStack_", "LJavaUtilStack;", .constantValue.asLong = 0, 0x2, -1, -1, 35, -1 },
     { "isTemplate_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "templateStack_", "LJavaUtilStack;", .constantValue.asLong = 0, 0x2, -1, -1, 34, -1 },
     { "depth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "languageProperties", "LJavaUtilProperties;", .constantValue.asLong = 0, 0xa, -1, 36, -1, -1 },
     { "isAndroid_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "inlineResourceName_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "inlineAppend_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "text_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASIFragment;Z", "LOrgXmlSaxSAXException;", "endPrefixMapping", "LNSString;", "ignorableWhitespace", "[CII", "processingInstruction", "LNSString;LNSString;", "setDocumentLocator", "LOrgXmlSaxLocator;", "skippedEntity", "startPrefixMapping", "characters", "startElement", "LNSString;LNSString;LNSString;LOrgXmlSaxAttributes;", "getParams", "LOrgXmlSaxAttributes;LNSString;", "(Lorg/xml/sax/Attributes;Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getAttrKeyWithoutNameSpace", "startCreateWidget", "LNSString;LASIWidget;LNSString;LNSString;ILOrgXmlSaxAttributes;LASWidgetAttributeMap;LJavaUtilMap;", "(Ljava/lang/String;Lcom/ashera/widget/IWidget;Ljava/lang/String;Ljava/lang/String;ILorg/xml/sax/Attributes;Lcom/ashera/widget/WidgetAttributeMap;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Lcom/ashera/widget/IWidget;", "getValue", "LNSString;LOrgXmlSaxAttributes;", "populateAttributes", "LASIWidget;LASHasWidgets;LNSString;LNSString;LOrgXmlSaxAttributes;", "endElement", "LNSString;LNSString;LNSString;", "endCreateWidget", "initRoot", "LASHasWidgets;", "addToCurrentParent", "LASIWidget;", "Ljava/util/Stack<Lcom/ashera/widget/HasWidgets;>;", "Ljava/util/Stack<Ljava/lang/Boolean;>;", "Ljava/util/Stack<Lcom/ashera/widget/IWidget;>;", &ASHtmlSaxHandler_languageProperties };
-  static const J2ObjcClassInfo _ASHtmlSaxHandler = { "HtmlSaxHandler", "com.ashera.parser.html", ptrTable, methods, fields, 7, 0x1, 21, 12, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASHtmlSaxHandler = { "HtmlSaxHandler", "com.ashera.parser.html", ptrTable, methods, fields, 7, 0x1, 21, 14, -1, -1, -1, -1, -1 };
   return &_ASHtmlSaxHandler;
 }
 
@@ -447,8 +470,8 @@ void ASHtmlSaxHandler_initWithASIFragment_withBoolean_(ASHtmlSaxHandler *self, i
   JreStrongAssignAndConsume(&self->pushParent_, new_JavaUtilStack_init());
   JreStrongAssignAndConsume(&self->widgetsStack_, new_JavaUtilStack_init());
   self->isTemplate_ = false;
-  JreStrongAssignAndConsume(&self->templateStack_, new_JavaUtilStack_init());
   self->depth_ = 0;
+  JreStrongAssign(&self->text_, @"");
   self->isAndroid_ = [((NSString *) nil_chk(ASPluginInvoker_getOS())) java_equalsIgnoreCase:@"android"];
   self->isTemplate_ = template_;
   JreStrongAssign(&self->fragment_, fragment);

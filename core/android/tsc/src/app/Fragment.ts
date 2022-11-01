@@ -12,6 +12,8 @@ export class Fragment {
         return new type(id, undefined, undefined);
     }
 
+    public onCreateView (obj:any) {
+    }
 	public onAttach(obj:any) {
     }
 

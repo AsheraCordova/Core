@@ -118,8 +118,15 @@ J2OBJC_IGNORE_DESIGNATED_END
                      withASIFragment:(id<ASIFragment>)fragment {
   ASHtmlSaxHandler *handler = create_ASHtmlSaxHandler_initWithASIFragment_withBoolean_(fragment, template_);
   [handler initRootWithASHasWidgets:parent];
-  fileName = JreStrcat("$$", [((NSString *) nil_chk(fileName)) java_replace:@"@layout/" withSequence:@""], @".xml");
-  NSString *html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", @"www/layout/", fileName), fragment);
+  NSString *html = nil;
+  NSString *inlineResource = JreRetainedLocalValue([((id<ASIFragment>) nil_chk(fragment)) getInlineResourceWithNSString:fileName]);
+  if (inlineResource != nil) {
+    html = inlineResource;
+  }
+  else {
+    fileName = JreStrcat("$$", [((NSString *) nil_chk(fileName)) java_replace:@"@layout/" withSequence:@""], @".xml");
+    html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", @"www/layout/", fileName), fragment);
+  }
   ASHtmlParser_parseWithOrgXmlSaxContentHandler_withNSString_(handler, html);
 }
 

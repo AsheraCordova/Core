@@ -1289,6 +1289,15 @@ return (T) this;}
 			HasWidgets hasWidgets = (HasWidgets) w;
 			hasWidgets.clear();
 			PluginInvoker.parseWithParent((String) xml, false, hasWidgets, w.getFragment());
+
+			String javascript = w.getFragment().getInlineResource("javascript");
+			if (javascript != null) {
+				Map<String, Object> dataMap = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+				dataMap.put("action", "nativeevent");
+				dataMap.put("fragmentId", w.getFragment().getFragmentId());
+				dataMap.put("javascript", javascript);
+				w.getFragment().getRootActivity().sendEventMessage(dataMap);
+			}
 		}
 	}
 

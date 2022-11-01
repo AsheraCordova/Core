@@ -981,6 +981,14 @@ void ASViewGroupImpl_setChildWithASIWidget_withId_(id<ASIWidget> w, id xml) {
     id<ASHasWidgets> hasWidgets = (id<ASHasWidgets>) cast_check(w, ASHasWidgets_class_());
     [((id<ASHasWidgets>) nil_chk(hasWidgets)) clear];
     (void) ASPluginInvoker_parseWithParentWithNSString_withBoolean_withASHasWidgets_withASIFragment_((NSString *) cast_chk(xml, [NSString class]), false, hasWidgets, [((id<ASIWidget>) nil_chk(w)) getFragment]);
+    NSString *javascript = [((id<ASIFragment>) nil_chk([w getFragment])) getInlineResourceWithNSString:@"javascript"];
+    if (javascript != nil) {
+      id<JavaUtilMap> dataMap = ASPluginInvoker_getJSONCompatMap();
+      (void) [((id<JavaUtilMap>) nil_chk(dataMap)) putWithId:@"action" withId:@"nativeevent"];
+      (void) [dataMap putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([w getFragment])) getFragmentId]];
+      (void) [dataMap putWithId:@"javascript" withId:javascript];
+      [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk([w getFragment])) getRootActivity])) sendEventMessageWithJavaUtilMap:dataMap];
+    }
   }
 }
 

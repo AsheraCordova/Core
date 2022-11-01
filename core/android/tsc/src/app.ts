@@ -54,10 +54,16 @@ class App {
         
         console.log(obj.event + " " + obj.actionUrl + obj.fragmentId);
 
-        (currentView as any)[obj.event](obj);
+        if ((currentView as any)[obj.event]) {
+            (currentView as any)[obj.event](obj);
+        }
 
         if (obj.event == 'onDetach') {
             this.currentViewMap.delete(obj.fragmentId);
+        }
+
+        if (obj.javascript) {
+            eval(obj.javascript);
         }
      }
 }

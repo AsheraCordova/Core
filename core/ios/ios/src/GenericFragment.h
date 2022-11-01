@@ -79,6 +79,8 @@
                               withNSString:(NSString *)fileName
                           withJavaUtilList:(id<JavaUtilList>)scopedObjects;
 
+- (NSString *)getInlineResourceWithNSString:(NSString *)key;
+
 - (id<JavaUtilList>)getListenerWithIOSClass:(IOSClass *)type;
 
 - (id<JavaUtilList>)getListenerWithASIWidget:(id<ASIWidget>)widget
@@ -143,6 +145,10 @@
                 withInt:(jint)y
                 withInt:(jint)width
                 withInt:(jint)height;
+
+- (void)setInlineResourceWithNSString:(NSString *)key
+                         withNSString:(NSString *)value
+                          withBoolean:(jboolean)append;
 
 - (void)setRootWidgetWithASIWidget:(id<ASIWidget>)widget;
 
