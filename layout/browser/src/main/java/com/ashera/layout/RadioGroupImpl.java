@@ -866,6 +866,10 @@ public java.util.Map<String, Object> getOnChildViewRemovedEventObj(View parent,V
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
     
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
     
@@ -883,6 +887,10 @@ public java.util.Map<String, Object> getOnChildViewAddedEventObj(View parent,Vie
     obj.put("eventType", "childviewadded");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
     
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
@@ -953,6 +961,10 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(RadioGroup group
     obj.put("eventType", "checkedchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
     
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      

@@ -407,6 +407,10 @@ public java.util.Map<String, Object> getOnPageStartedEventObj(View view) {
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
     
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
     
@@ -476,6 +480,10 @@ public java.util.Map<String, Object> getOnPageFinishedEventObj(View view) {
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
     
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
     
@@ -544,6 +552,10 @@ public java.util.Map<String, Object> getOnReceivedErrorEventObj(View view,String
     obj.put("eventType", "receivederror");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
     
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      

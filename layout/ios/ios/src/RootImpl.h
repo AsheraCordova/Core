@@ -370,6 +370,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RootExt)
 
 - (ASRootImpl_RootCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASRootImpl_RootCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASRootImpl_RootCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASRootImpl_RootCommandBuilder *)setClipChildrenWithBoolean:(jboolean)arg0;

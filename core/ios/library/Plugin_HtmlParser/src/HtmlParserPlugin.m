@@ -39,7 +39,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     case 2:
     return [self parseFileWithNSString:(NSString *) cast_chk(IOSObjectArray_Get(nil_chk(args), 0), [NSString class]) withBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangBoolean class]))) booleanValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 2), ASIFragment_class_())];
     case 3:
-    [self parseIncludeWithASHasWidgets:(id<ASHasWidgets>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), ASHasWidgets_class_()) withNSString:(NSString *) cast_chk(IOSObjectArray_Get(args, 1), [NSString class]) withBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(IOSObjectArray_Get(args, 2), [JavaLangBoolean class]))) booleanValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 3), ASIFragment_class_())];
+    [self parseIncludeWithASHasWidgets:(id<ASHasWidgets>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), ASHasWidgets_class_()) withNSString:(NSString *) cast_chk(IOSObjectArray_Get(args, 1), [NSString class]) withNSString:(NSString *) cast_chk(IOSObjectArray_Get(args, 2), [NSString class]) withBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(IOSObjectArray_Get(args, 3), [JavaLangBoolean class]))) booleanValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 4), ASIFragment_class_())];
     return nil;
     case 4:
     return [self getHandlerWithASHasWidgets:(id<ASHasWidgets>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), ASHasWidgets_class_()) withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangInteger class]))) intValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 2), ASIFragment_class_())];
@@ -114,9 +114,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
+                        withNSString:(NSString *)componentId
                          withBoolean:(jboolean)template_
                      withASIFragment:(id<ASIFragment>)fragment {
-  ASHtmlSaxHandler *handler = create_ASHtmlSaxHandler_initWithASIFragment_withBoolean_(fragment, template_);
+  ASHtmlSaxHandler *handler = create_ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(fragment, componentId, template_);
   [handler initRootWithASHasWidgets:parent];
   NSString *html = nil;
   NSString *inlineResource = JreRetainedLocalValue([((id<ASIFragment>) nil_chk(fragment)) getInlineResourceWithNSString:fileName]);
@@ -157,9 +158,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[7].selector = @selector(handlerStartWithId:withASIWidget:withInt:);
   methods[8].selector = @selector(handlerEndWithId:withASIWidget:);
   methods[9].selector = @selector(addToCurrentParentWithId:withASIWidget:);
-  methods[10].selector = @selector(parseIncludeWithASHasWidgets:withNSString:withBoolean:withASIFragment:);
+  methods[10].selector = @selector(parseIncludeWithASHasWidgets:withNSString:withNSString:withBoolean:withASIFragment:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "parseInclude", "LASHasWidgets;LNSString;ZLASIFragment;" };
+  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;" };
   static const J2ObjcClassInfo _ASHtmlParserPlugin = { "HtmlParserPlugin", "com.ashera.parser.html", ptrTable, methods, NULL, 7, 0x1, 11, 0, -1, -1, -1, -1, -1 };
   return &_ASHtmlParserPlugin;
 }

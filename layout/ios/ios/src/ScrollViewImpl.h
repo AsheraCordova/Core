@@ -301,6 +301,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setClipChildrenWithBoolean:(jboolean)arg0;

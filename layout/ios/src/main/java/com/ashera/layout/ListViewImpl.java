@@ -1409,6 +1409,10 @@ public java.util.Map<String, Object> getOnItemClickEventObj(AdapterView<?> paren
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
     
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
         PluginInvoker.putJSONSafeObjectIntoMap(obj, "position", position);
@@ -1485,6 +1489,10 @@ public java.util.Map<String, Object> getOnItemLongClickEventObj(AdapterView<?> p
     obj.put("eventType", "itemlongclick");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
     
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
@@ -1599,6 +1607,10 @@ public java.util.Map<String, Object> getOnScrollStateChangeEventObj(AbsListView 
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
     
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
         PluginInvoker.putJSONSafeObjectIntoMap(obj, "scrollState", scrollState);
@@ -1617,6 +1629,10 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
     obj.put("eventType", "scrollchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
     
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      

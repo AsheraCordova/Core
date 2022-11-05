@@ -1642,7 +1642,11 @@ return getValidateFormResult(w);			}
 			String[] ids = ((String) objValue).split(",");
 			
 			for (String id : ids) {
-				if (!id.startsWith("@+id/")) {
+				if (id.contains("#")) {
+					String componentId = id.substring(0, id.lastIndexOf("#"));
+					String myId = id.substring(id.lastIndexOf("#") + 1);
+					id = componentId + "#@+id/" + myId;
+				} else {
 					id = "@+id/" + id;
 				}
 				IWidget widget = w.findNearestView(id);
@@ -2351,6 +2355,10 @@ public java.util.Map<String, Object> getOnClickEventObj(View v) {
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
     
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
     
@@ -2424,6 +2432,10 @@ public java.util.Map<String, Object> getOnTouchEventObj(View v,MotionEvent event
     obj.put("eventType", "touch");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
     
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
@@ -2499,6 +2511,10 @@ public java.util.Map<String, Object> getOnLongClickEventObj(View v) {
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
     
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
     
@@ -2572,6 +2588,10 @@ public java.util.Map<String, Object> getOnDragEventObj(View v,DragEvent event) {
     obj.put("eventType", "drag");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
     
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
@@ -2648,6 +2668,10 @@ public java.util.Map<String, Object> getOnKeyEventObj(View v,int keyCode,KeyEven
     obj.put("eventType", "key");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
     
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      

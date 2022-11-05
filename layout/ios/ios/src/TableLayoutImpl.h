@@ -290,6 +290,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setClipChildrenWithBoolean:(jboolean)arg0;

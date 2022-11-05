@@ -283,6 +283,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setClipChildrenWithBoolean:(jboolean)arg0;

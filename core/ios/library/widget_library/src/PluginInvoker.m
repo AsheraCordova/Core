@@ -173,9 +173,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
+                        withNSString:(NSString *)componentId
                          withBoolean:(jboolean)template_
                      withASIFragment:(id<ASIFragment>)fragment {
-  ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withBoolean_withASIFragment_(parent, fileName, template_, fragment);
+  ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withNSString_withBoolean_withASIFragment_(parent, fileName, componentId, template_, fragment);
 }
 
 + (id)getHandlerWithASHasWidgets:(id<ASHasWidgets>)parent
@@ -407,7 +408,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[27].selector = @selector(parseWithNSString:withBoolean:withASIFragment:);
   methods[28].selector = @selector(parseWithParentWithNSString:withBoolean:withASHasWidgets:withASIFragment:);
   methods[29].selector = @selector(parseFileWithNSString:withBoolean:withASIFragment:);
-  methods[30].selector = @selector(parseIncludeWithASHasWidgets:withNSString:withBoolean:withASIFragment:);
+  methods[30].selector = @selector(parseIncludeWithASHasWidgets:withNSString:withNSString:withBoolean:withASIFragment:);
   methods[31].selector = @selector(getHandlerWithASHasWidgets:withInt:withASIFragment:);
   methods[32].selector = @selector(handlerStartWithId:withASIWidget:withInt:);
   methods[33].selector = @selector(handlerEndWithId:withASIWidget:);
@@ -438,7 +439,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[58].selector = @selector(runOnMainThreadWithJavaLangRunnable:);
   methods[59].selector = @selector(registerFontWithNSString:withNSString:withNSString:withNSString:withJavaUtilMap:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "convertFrom", "LASIConverter;LJavaUtilMap;LNSObject;LASIFragment;", "(Lcom/ashera/converter/IConverter;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/Object;Lcom/ashera/core/IFragment;)Ljava/lang/Object;", "convertTo", "LASIConverter;LNSObject;LASIFragment;", "getConverter", "LNSString;", "getDependentAttributes", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/List<Ljava/lang/String;>;", "getColor", "convertDpToPixel", "convertSpToPixel", "convertPixelToDp", "LNSObject;Z", "convertPixelToSp", "getMap", "LNSObject;", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getNativeMap", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "putJSONSafeObjectIntoMap", "LJavaUtilMap;LNSString;LNSObject;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/Object;)V", "getArray", "getList", "(Ljava/lang/Object;)Ljava/util/List<Ljava/lang/Object;>;", "isBoolean", "getBoolean", "getString", "getInt", "getFloat", "getDouble", "marshal", "toJsonTree", "unmarshal", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getJSONSafeObj", "navigate", "LNSString;LNSString;LNSObject;LASIFragment;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseInclude", "LASHasWidgets;LNSString;ZLASIFragment;", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "postDelayed", "LJavaLangRunnable;I", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "registerFont", "LNSString;LNSString;LNSString;LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V" };
+  static const void *ptrTable[] = { "convertFrom", "LASIConverter;LJavaUtilMap;LNSObject;LASIFragment;", "(Lcom/ashera/converter/IConverter;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/Object;Lcom/ashera/core/IFragment;)Ljava/lang/Object;", "convertTo", "LASIConverter;LNSObject;LASIFragment;", "getConverter", "LNSString;", "getDependentAttributes", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/List<Ljava/lang/String;>;", "getColor", "convertDpToPixel", "convertSpToPixel", "convertPixelToDp", "LNSObject;Z", "convertPixelToSp", "getMap", "LNSObject;", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getNativeMap", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "putJSONSafeObjectIntoMap", "LJavaUtilMap;LNSString;LNSObject;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/Object;)V", "getArray", "getList", "(Ljava/lang/Object;)Ljava/util/List<Ljava/lang/Object;>;", "isBoolean", "getBoolean", "getString", "getInt", "getFloat", "getDouble", "marshal", "toJsonTree", "unmarshal", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getJSONSafeObj", "navigate", "LNSString;LNSString;LNSObject;LASIFragment;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "postDelayed", "LJavaLangRunnable;I", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "registerFont", "LNSString;LNSString;LNSString;LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V" };
   static const J2ObjcClassInfo _ASPluginInvoker = { "PluginInvoker", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x1, 60, 0, -1, -1, -1, -1, -1 };
   return &_ASPluginInvoker;
 }
@@ -631,10 +632,10 @@ id<ASIWidget> ASPluginInvoker_parseFileWithNSString_withBoolean_withASIFragment_
   return (id<ASIWidget>) cast_check([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"parseFile" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ fileName, JavaLangBoolean_valueOfWithBoolean_(template_), fragment } count:3 type:NSObject_class_()]], ASIWidget_class_());
 }
 
-void ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withBoolean_withASIFragment_(id<ASHasWidgets> parent, NSString *fileName, jboolean template_, id<ASIFragment> fragment) {
+void ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withNSString_withBoolean_withASIFragment_(id<ASHasWidgets> parent, NSString *fileName, NSString *componentId, jboolean template_, id<ASIFragment> fragment) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"htmlparser");
-  [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"parseInclude" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ parent, fileName, JavaLangBoolean_valueOfWithBoolean_(template_), fragment } count:4 type:NSObject_class_()]];
+  [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"parseInclude" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ parent, fileName, componentId, JavaLangBoolean_valueOfWithBoolean_(template_), fragment } count:5 type:NSObject_class_()]];
 }
 
 id ASPluginInvoker_getHandlerWithASHasWidgets_withInt_withASIFragment_(id<ASHasWidgets> parent, jint index, id<ASIFragment> fragment) {

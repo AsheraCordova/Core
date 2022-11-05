@@ -985,6 +985,10 @@ public java.util.Map<String, Object> getOnItemSelectedEventObj(AdapterView<?> pa
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
     
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      
         PluginInvoker.putJSONSafeObjectIntoMap(obj, "position", position);Object selectedValue = ((SpinnerImpl)w).getSelectedValue(); if (selectedValue != null) { PluginInvoker.putJSONSafeObjectIntoMap(obj, "selectedValue", selectedValue);}
@@ -1041,6 +1045,10 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(AdapterView<?>
     obj.put("eventType", "nothingselected");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
     
     PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
      

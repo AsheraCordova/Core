@@ -176,14 +176,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [ASModelExpressionParser class]) {
-    JreStrongAssign(&ASModelExpressionParser_VAR_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"let\\s*(\\w+)\\s*=\\s*([\\w\\.\\[\\]]+)\\s*from\\s*(\\w+)\\s*\\->(\\w+)\\s*into\\s*(\\w+)\\s*as\\s*(\\w+)\\s*"));
-    JreStrongAssign(&ASModelExpressionParser_LOOP_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"let\\s*(\\w+)\\s*in\\s*([\\w\\.\\[\\]]+)\\s*from\\s*(\\w+)\\s*\\->(\\w+)\\s*into\\s*(\\w+)\\s*as\\s*(\\w+)\\s*"));
-    JreStrongAssign(&ASModelExpressionParser_UISET_FROMMODEL_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"\\s*(\\w+)\\s*=\\s*(\\w*\\()?([\\w\\.\\[\\]]+)\\)?\\s*from\\s*(\\w+)\\s*\\->(\\w+)\\s*"));
-    JreStrongAssign(&ASModelExpressionParser_MODELSET_FROMUI_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w\\.]+)\\s*=\\s*([\\w\\.\\[\\]]+)\\s*into\\s*(\\w+)\\s*\\->(\\w+)\\s*(as\\s*(\\w+)\\s*)?"));
-    JreStrongAssign(&ASModelExpressionParser_EVENT_VAR_EXPRESSION, JavaUtilRegexPattern_compileWithNSString_(@"\\s*(\\w+)\\s*=\\s*(\\w*\\{)?([\\w\\.\\[\\]]+)\\}?\\s*from\\s*(\\w+)\\s*\\->(\\w+)\\s*"));
-    JreStrongAssign(&ASModelExpressionParser_MODEL_FROM_SCOPE_EXPRESSION, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w\\.\\[\\]]+)\\s*from\\s*(\\w+)\\s*\\->(\\w+)\\s*"));
-    JreStrongAssign(&ASModelExpressionParser_MODEL_UPDATE_TO_SCOPE_EXPRESSION, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w\\.\\[\\]]+)\\s*into\\s*(\\w+)\\s*\\->(\\w+)\\s*(as\\s*(\\w+)\\s*)?"));
-    JreStrongAssign(&ASModelExpressionParser_VAR_SET_STORE_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"\\s*(\\w+)\\s*\\->(\\w+)\\s*as\\s*(\\w+)\\s*"));
+    JreStrongAssign(&ASModelExpressionParser_VAR_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"let\\s*(\\w+)\\s*=\\s*([\\w\\.\\[\\]]+)\\s*from\\s*([\\w#]+)\\s*\\->(\\w+)\\s*into\\s*(\\w+)\\s*as\\s*(\\w+)\\s*"));
+    JreStrongAssign(&ASModelExpressionParser_LOOP_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"let\\s*(\\w+)\\s*in\\s*([\\w\\.\\[\\]]+)\\s*from\\s*([\\w#]+)\\s*\\->(\\w+)\\s*into\\s*(\\w+)\\s*as\\s*(\\w+)\\s*"));
+    JreStrongAssign(&ASModelExpressionParser_UISET_FROMMODEL_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"\\s*(\\w+)\\s*=\\s*(\\w*\\()?([\\w\\.\\[\\]]+)\\)?\\s*from\\s*([\\w#]+)\\s*\\->(\\w+)\\s*"));
+    JreStrongAssign(&ASModelExpressionParser_MODELSET_FROMUI_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w\\.]+)\\s*=\\s*([\\w\\.\\[\\]]+)\\s*into\\s*([\\w#]+)\\s*\\->(\\w+)\\s*(as\\s*(\\w+)\\s*)?"));
+    JreStrongAssign(&ASModelExpressionParser_EVENT_VAR_EXPRESSION, JavaUtilRegexPattern_compileWithNSString_(@"\\s*(\\w+)\\s*=\\s*(\\w*\\{)?([\\w\\.\\[\\]]+)\\}?\\s*from\\s*([\\w#]+)\\s*\\->(\\w+)\\s*"));
+    JreStrongAssign(&ASModelExpressionParser_MODEL_FROM_SCOPE_EXPRESSION, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w\\.\\[\\]]+)\\s*from\\s*([\\w#]+)\\s*\\->(\\w+)\\s*"));
+    JreStrongAssign(&ASModelExpressionParser_MODEL_UPDATE_TO_SCOPE_EXPRESSION, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w\\.\\[\\]]+)\\s*into\\s*([\\w#]+)\\s*\\->(\\w+)\\s*(as\\s*(\\w+)\\s*)?"));
+    JreStrongAssign(&ASModelExpressionParser_VAR_SET_STORE_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w#]+)\\s*\\->(\\w+)\\s*as\\s*(\\w+)\\s*"));
     J2OBJC_SET_INITIALIZED(ASModelExpressionParser)
   }
 }
@@ -257,7 +257,7 @@ id<JavaUtilList> ASModelExpressionParser_parseUiToPojoExpressionWithNSString_(NS
 
 ASModelExpressionParser_ModelStoreVarHolder *ASModelExpressionParser_parseModelStoreVarExpressionWithNSString_(NSString *expression) {
   ASModelExpressionParser_initialize();
-  return create_ASModelExpressionParser_ModelStoreVarHolder_initWithJavaUtilList_(ASModelExpressionParser_evelRegExWithNSString_withJavaUtilRegexPattern_withNSString_(expression, ASModelExpressionParser_VAR_SET_STORE_REGEX, @"Invalid expression. e.g. y->intent as pathmap"));
+  return create_ASModelExpressionParser_ModelStoreVarHolder_initWithJavaUtilList_(ASModelExpressionParser_evelRegExWithNSString_withJavaUtilRegexPattern_withNSString_(expression, ASModelExpressionParser_VAR_SET_STORE_REGEX, @"Invalid expression. e.g. y->session as pathmap"));
 }
 
 id<JavaUtilList> ASModelExpressionParser_parseModelVarExpressionWithNSString_(NSString *expression) {
@@ -333,7 +333,7 @@ id<JavaUtilMap> ASModelExpressionParser_parseSimpleCssExpressionWithNSString_wit
 
 void ASModelExpressionParser_mainWithNSStringArray_(IOSObjectArray *args) {
   ASModelExpressionParser_initialize();
-  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithId:((ASModelExpressionParser_ModelUiToPojoHolder *) nil_chk([((id<JavaUtilList>) nil_chk(ASModelExpressionParser_parseUiToPojoExpressionWithNSString_(@"abcd=text into x->view"))) getWithInt:0]))->varType_];
+  [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:((ASModelExpressionParser_ModelVarHolder *) nil_chk([((id<JavaUtilList>) nil_chk(ASModelExpressionParser_parseModelVarExpressionWithNSString_(@"let x = . from y#test1->view into session as pathmap"))) getWithInt:0]))->varName_];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASModelExpressionParser)

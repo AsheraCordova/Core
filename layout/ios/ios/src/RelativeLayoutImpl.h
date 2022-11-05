@@ -357,6 +357,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setClipChildrenWithBoolean:(jboolean)arg0;

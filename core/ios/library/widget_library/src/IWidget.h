@@ -89,6 +89,10 @@
 
 - (void)setBehaviorGroupIdWithNSString:(NSString *)id_;
 
+- (NSString *)getComponentId;
+
+- (void)setComponentIdWithNSString:(NSString *)componentId;
+
 - (NSString *)getAttributeValueWithNSString:(NSString *)attr;
 
 - (ASWidgetAttributeMap *)getAttributes;

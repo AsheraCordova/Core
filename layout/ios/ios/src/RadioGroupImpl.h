@@ -395,6 +395,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setCheckedButtonWithNSString:(NSString *)value;
 
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setClipChildrenWithBoolean:(jboolean)arg0;

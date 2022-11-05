@@ -378,6 +378,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setBaselineAlignedChildIndexWithInt:(jint)value;
 
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setClipChildrenWithBoolean:(jboolean)arg0;

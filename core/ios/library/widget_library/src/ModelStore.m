@@ -106,6 +106,16 @@ void ASModelStore_storeModelToScopeWithNSString_withASModelScope_withId_withASIF
       @throw create_JavaLangRuntimeException_initWithNSString_(@"local scope not supported");
     }
     break;
+    case ASModelScope_Enum_component:
+    if ([((NSString *) nil_chk(varName)) java_contains:@"#"]) {
+      [((id<ASIFragment>) nil_chk(fragment)) storeUserDataWithNSString:varName withId:objValue];
+    }
+    else {
+      if ([((id<ASIWidget>) nil_chk(widget)) getComponentId] != nil) {
+        [((id<ASIFragment>) nil_chk(fragment)) storeUserDataWithNSString:JreStrcat("$C$", [widget getComponentId], '#', varName) withId:objValue];
+      }
+    }
+    break;
     case ASModelScope_Enum_loopvar:
     if (loopVarParams != nil) {
       [loopVarParams putWithId:varName withId:objValue];
@@ -128,6 +138,16 @@ id ASModelStore_getModelFromScopeWithNSString_withASModelScope_withASIFragment_w
     break;
     case ASModelScope_Enum_session:
     obj = [((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk(fragment)) getRootActivity])) getUserDataWithNSString:varName];
+    break;
+    case ASModelScope_Enum_component:
+    if ([((id<ASIWidget>) nil_chk(widget)) getComponentId] != nil) {
+      if ([((NSString *) nil_chk(varName)) java_contains:@"#"]) {
+        obj = [((id<ASIFragment>) nil_chk(fragment)) getUserDataWithNSString:varName];
+      }
+      else {
+        obj = [((id<ASIFragment>) nil_chk(fragment)) getUserDataWithNSString:JreStrcat("$C$", [widget getComponentId], '#', varName)];
+      }
+    }
     break;
     case ASModelScope_Enum_local:
     if (widget != nil) {

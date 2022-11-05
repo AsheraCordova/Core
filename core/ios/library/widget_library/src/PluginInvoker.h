@@ -161,6 +161,7 @@
 
 + (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
+                        withNSString:(NSString *)componentId
                          withBoolean:(jboolean)template_
                      withASIFragment:(id<ASIFragment>)fragment;
 
@@ -266,7 +267,7 @@ FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseWithParentWithNSString_with
 
 FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseFileWithNSString_withBoolean_withASIFragment_(NSString *fileName, jboolean template_, id<ASIFragment> fragment);
 
-FOUNDATION_EXPORT void ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withBoolean_withASIFragment_(id<ASHasWidgets> parent, NSString *fileName, jboolean template_, id<ASIFragment> fragment);
+FOUNDATION_EXPORT void ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withNSString_withBoolean_withASIFragment_(id<ASHasWidgets> parent, NSString *fileName, NSString *componentId, jboolean template_, id<ASIFragment> fragment);
 
 FOUNDATION_EXPORT id ASPluginInvoker_getHandlerWithASHasWidgets_withInt_withASIFragment_(id<ASHasWidgets> parent, jint index, id<ASIFragment> fragment);
 

@@ -145,6 +145,8 @@
 
 - (NSString *)getBehaviorGroupId;
 
+- (NSString *)getComponentId;
+
 - (NSString *)getCustomMessageWithNSString:(NSString *)key;
 
 - (NSString *)getErrorStyle;
@@ -296,6 +298,8 @@
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
 - (void)setBehaviorGroupIdWithNSString:(NSString *)behaviorGroupId;
+
+- (void)setComponentIdWithNSString:(NSString *)componentId;
 
 - (void)setCustomErrorMessageKeysWithJavaUtilList:(id<JavaUtilList>)customErrorMessageKeys;
 

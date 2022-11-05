@@ -39,55 +39,57 @@
     { NULL, "V", 0x401, 15, 10, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 16, 10, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x401, 17, 10, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 17, 10, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 18, 10, -1, -1, -1, -1 },
     { NULL, "LASWidgetAttributeMap;", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 18, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 19, 20, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 19, 21, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x401, 22, 23, -1, -1, -1, -1 },
-    { NULL, "LASWidgetAttribute;", 0x401, 22, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 25, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 25, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 19, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 20, 22, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 23, 24, -1, -1, -1, -1 },
+    { NULL, "LASWidgetAttribute;", 0x401, 23, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 26, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 26, 28, -1, -1, -1, -1 },
     { NULL, "LASHasWidgets;", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 28, 29, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x401, 30, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 29, 30, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x401, 31, 10, -1, -1, -1, -1 },
     { NULL, "LASIWidgetLifeCycleListener;", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 31, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 33, 34, -1, 35, -1, -1 },
-    { NULL, "V", 0x401, 33, 36, -1, 37, -1, -1 },
-    { NULL, "V", 0x401, 38, 39, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 32, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 34, 35, -1, 36, -1, -1 },
+    { NULL, "V", 0x401, 34, 37, -1, 38, -1, -1 },
+    { NULL, "V", 0x401, 39, 40, -1, -1, -1, -1 },
     { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x401, 40, 10, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x401, 41, 10, -1, -1, -1, -1 },
     { NULL, "LASIFragment;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 41, 39, -1, -1, -1, -1 },
-    { NULL, "V", 0x481, 42, 43, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 44, 45, -1, -1, -1, -1 },
-    { NULL, "V", 0x481, 46, 47, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x401, 48, 49, -1, -1, -1, -1 },
-    { NULL, "LASAttributeCommandChain;", 0x401, 50, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x481, 51, 52, -1, -1, -1, -1 },
-    { NULL, "V", 0x481, 53, 54, -1, -1, -1, -1 },
-    { NULL, "V", 0x481, 55, 56, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 42, 40, -1, -1, -1, -1 },
+    { NULL, "V", 0x481, 43, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 45, 46, -1, -1, -1, -1 },
+    { NULL, "V", 0x481, 47, 48, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 49, 50, -1, -1, -1, -1 },
+    { NULL, "LASAttributeCommandChain;", 0x401, 51, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x481, 52, 53, -1, -1, -1, -1 },
+    { NULL, "V", 0x481, 54, 55, -1, -1, -1, -1 },
+    { NULL, "V", 0x481, 56, 57, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x401, 57, 58, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x401, 57, 59, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 58, 59, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 58, 60, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 60, 61, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 61, 62, -1, -1, -1, -1 },
     { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 62, 63, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 64, 65, -1, 66, -1, -1 },
-    { NULL, "LJavaUtilSet;", 0x401, -1, -1, -1, 67, -1, -1 },
-    { NULL, "V", 0x401, 68, 69, -1, 70, -1, -1 },
-    { NULL, "V", 0x401, 71, 10, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x401, 72, 73, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x401, 72, 74, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x401, 72, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 63, 64, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 65, 66, -1, 67, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x401, -1, -1, -1, 68, -1, -1 },
+    { NULL, "V", 0x401, 69, 70, -1, 71, -1, -1 },
+    { NULL, "V", 0x401, 72, 10, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x401, 73, 74, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x401, 73, 75, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x401, 73, 30, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -112,55 +114,57 @@
   methods[17].selector = @selector(setIdWithNSString:);
   methods[18].selector = @selector(getBehaviorGroupId);
   methods[19].selector = @selector(setBehaviorGroupIdWithNSString:);
-  methods[20].selector = @selector(getAttributeValueWithNSString:);
-  methods[21].selector = @selector(getAttributes);
-  methods[22].selector = @selector(loadAttributesWithNSString:);
-  methods[23].selector = @selector(setAttributeWithASWidgetAttribute:withId:withBoolean:);
-  methods[24].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[25].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[26].selector = @selector(getAttributeWithASHasWidgets:withNSString:withNSString:);
-  methods[27].selector = @selector(updateWidgetMapWithASWidgetAttribute:withASWidgetAttributeValue:);
-  methods[28].selector = @selector(updateWidgetMapWithASWidgetAttributeMap:);
-  methods[29].selector = @selector(getParent);
-  methods[30].selector = @selector(setParentWithASHasWidgets:);
-  methods[31].selector = @selector(findWidgetByIdWithNSString:);
-  methods[32].selector = @selector(getListener);
-  methods[33].selector = @selector(setListenerWithASIWidgetLifeCycleListener:);
-  methods[34].selector = @selector(executeCommandWithJavaUtilMap:withASIWidget_CommandCallBack:withInt:);
-  methods[35].selector = @selector(executeCommandWithASIWidget:withJavaUtilList:withASIWidget_CommandCallBack:withInt:);
-  methods[36].selector = @selector(setVisibleWithBoolean:);
-  methods[37].selector = @selector(getBaseLine);
-  methods[38].selector = @selector(isInitialised);
-  methods[39].selector = @selector(findNearestViewWithNSString:);
-  methods[40].selector = @selector(getFragment);
-  methods[41].selector = @selector(afterParentInit);
-  methods[42].selector = @selector(isAfterParentInitRequired);
-  methods[43].selector = @selector(requestLayout);
-  methods[44].selector = @selector(invalidate);
-  methods[45].selector = @selector(isInvalidateOnFrameChange);
-  methods[46].selector = @selector(setInvalidateOnFrameChangeWithBoolean:);
-  methods[47].selector = @selector(applyAttributeCommandWithNSString:withNSString:withNSStringArray:withBoolean:withNSObjectArray:);
-  methods[48].selector = @selector(rerunCommandOnSourceWithNSString:withNSString:);
-  methods[49].selector = @selector(reapplyAttributeCommandWithNSString:withNSString:withNSString:withNSObjectArray:);
-  methods[50].selector = @selector(getAttributeCommandValueWithNSString:withNSString:withNSString:);
-  methods[51].selector = @selector(getAttributeCommandChainWithNSString:);
-  methods[52].selector = @selector(registerForAttributeCommandChainWithNSStringArray:);
-  methods[53].selector = @selector(registerForAttributeCommandChainWithPhaseWithNSString:withNSStringArray:);
-  methods[54].selector = @selector(runAttributeCommandsWithId:withNSString:withNSString:withNSObjectArray:);
-  methods[55].selector = @selector(replayBufferedEvents);
-  methods[56].selector = @selector(quickConvertWithId:withNSString:);
-  methods[57].selector = @selector(quickConvertWithId:withNSString:withNSString:withNSString:);
-  methods[58].selector = @selector(drawableStateChanged);
-  methods[59].selector = @selector(setDrawableBoundsWithInt:withInt:withInt:withInt:);
-  methods[60].selector = @selector(getZIndex);
-  methods[61].selector = @selector(setZIndexWithInt:);
-  methods[62].selector = @selector(setEventBubblersWithJavaUtilCollection:);
-  methods[63].selector = @selector(getEventBubblers);
-  methods[64].selector = @selector(applyThemeConstructorArgsStyleWithNSString:withJavaUtilMap:);
-  methods[65].selector = @selector(applyThemeStyleWithNSString:);
-  methods[66].selector = @selector(loadLazyWidgetsWithASHasWidgets:withInt:withNSString:withASLoopParam:);
-  methods[67].selector = @selector(loadLazyWidgetsWithASLoopParam:);
-  methods[68].selector = @selector(loadLazyWidgetsWithASHasWidgets:);
+  methods[20].selector = @selector(getComponentId);
+  methods[21].selector = @selector(setComponentIdWithNSString:);
+  methods[22].selector = @selector(getAttributeValueWithNSString:);
+  methods[23].selector = @selector(getAttributes);
+  methods[24].selector = @selector(loadAttributesWithNSString:);
+  methods[25].selector = @selector(setAttributeWithASWidgetAttribute:withId:withBoolean:);
+  methods[26].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[27].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[28].selector = @selector(getAttributeWithASHasWidgets:withNSString:withNSString:);
+  methods[29].selector = @selector(updateWidgetMapWithASWidgetAttribute:withASWidgetAttributeValue:);
+  methods[30].selector = @selector(updateWidgetMapWithASWidgetAttributeMap:);
+  methods[31].selector = @selector(getParent);
+  methods[32].selector = @selector(setParentWithASHasWidgets:);
+  methods[33].selector = @selector(findWidgetByIdWithNSString:);
+  methods[34].selector = @selector(getListener);
+  methods[35].selector = @selector(setListenerWithASIWidgetLifeCycleListener:);
+  methods[36].selector = @selector(executeCommandWithJavaUtilMap:withASIWidget_CommandCallBack:withInt:);
+  methods[37].selector = @selector(executeCommandWithASIWidget:withJavaUtilList:withASIWidget_CommandCallBack:withInt:);
+  methods[38].selector = @selector(setVisibleWithBoolean:);
+  methods[39].selector = @selector(getBaseLine);
+  methods[40].selector = @selector(isInitialised);
+  methods[41].selector = @selector(findNearestViewWithNSString:);
+  methods[42].selector = @selector(getFragment);
+  methods[43].selector = @selector(afterParentInit);
+  methods[44].selector = @selector(isAfterParentInitRequired);
+  methods[45].selector = @selector(requestLayout);
+  methods[46].selector = @selector(invalidate);
+  methods[47].selector = @selector(isInvalidateOnFrameChange);
+  methods[48].selector = @selector(setInvalidateOnFrameChangeWithBoolean:);
+  methods[49].selector = @selector(applyAttributeCommandWithNSString:withNSString:withNSStringArray:withBoolean:withNSObjectArray:);
+  methods[50].selector = @selector(rerunCommandOnSourceWithNSString:withNSString:);
+  methods[51].selector = @selector(reapplyAttributeCommandWithNSString:withNSString:withNSString:withNSObjectArray:);
+  methods[52].selector = @selector(getAttributeCommandValueWithNSString:withNSString:withNSString:);
+  methods[53].selector = @selector(getAttributeCommandChainWithNSString:);
+  methods[54].selector = @selector(registerForAttributeCommandChainWithNSStringArray:);
+  methods[55].selector = @selector(registerForAttributeCommandChainWithPhaseWithNSString:withNSStringArray:);
+  methods[56].selector = @selector(runAttributeCommandsWithId:withNSString:withNSString:withNSObjectArray:);
+  methods[57].selector = @selector(replayBufferedEvents);
+  methods[58].selector = @selector(quickConvertWithId:withNSString:);
+  methods[59].selector = @selector(quickConvertWithId:withNSString:withNSString:withNSString:);
+  methods[60].selector = @selector(drawableStateChanged);
+  methods[61].selector = @selector(setDrawableBoundsWithInt:withInt:withInt:withInt:);
+  methods[62].selector = @selector(getZIndex);
+  methods[63].selector = @selector(setZIndexWithInt:);
+  methods[64].selector = @selector(setEventBubblersWithJavaUtilCollection:);
+  methods[65].selector = @selector(getEventBubblers);
+  methods[66].selector = @selector(applyThemeConstructorArgsStyleWithNSString:withJavaUtilMap:);
+  methods[67].selector = @selector(applyThemeStyleWithNSString:);
+  methods[68].selector = @selector(loadLazyWidgetsWithASHasWidgets:withInt:withNSString:withASLoopParam:);
+  methods[69].selector = @selector(loadLazyWidgetsWithASLoopParam:);
+  methods[70].selector = @selector(loadLazyWidgetsWithASHasWidgets:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "COMMAND_EXEC_GETTER_METHOD", "I", .constantValue.asInt = ASIWidget_COMMAND_EXEC_GETTER_METHOD, 0x19, -1, -1, -1, -1 },
@@ -177,8 +181,8 @@
     { "APPLY_TO_FOREGROUND", "I", .constantValue.asInt = ASIWidget_APPLY_TO_FOREGROUND, 0x19, -1, -1, -1, -1 },
     { "APPLY_TO_ALL", "I", .constantValue.asInt = ASIWidget_APPLY_TO_ALL, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "unwrap", "LNSObject;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setParams", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "getUserData", "LNSString;", "storeUserData", "LNSString;LNSObject;", "storeInTempCache", "getFromTempCache", "setId", "setBehaviorGroupId", "getAttributeValue", "loadAttributes", "setAttribute", "LASWidgetAttribute;LNSObject;Z", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "LASHasWidgets;LNSString;LNSString;", "updateWidgetMap", "LASWidgetAttribute;LASWidgetAttributeValue;", "LASWidgetAttributeMap;", "setParent", "LASHasWidgets;", "findWidgetById", "setListener", "LASIWidgetLifeCycleListener;", "executeCommand", "LJavaUtilMap;LASIWidget_CommandCallBack;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "LASIWidget;LJavaUtilList;LASIWidget_CommandCallBack;I", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "setVisible", "Z", "findNearestView", "setInvalidateOnFrameChange", "applyAttributeCommand", "LNSString;LNSString;[LNSString;Z[LNSObject;", "rerunCommandOnSource", "LNSString;LNSString;", "reapplyAttributeCommand", "LNSString;LNSString;LNSString;[LNSObject;", "getAttributeCommandValue", "LNSString;LNSString;LNSString;", "getAttributeCommandChain", "registerForAttributeCommandChain", "[LNSString;", "registerForAttributeCommandChainWithPhase", "LNSString;[LNSString;", "runAttributeCommands", "LNSObject;LNSString;LNSString;[LNSObject;", "quickConvert", "LNSObject;LNSString;", "LNSObject;LNSString;LNSString;LNSString;", "setDrawableBounds", "IIII", "setZIndex", "I", "setEventBubblers", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/Integer;>;)V", "()Ljava/util/Set<Ljava/lang/Integer;>;", "applyThemeConstructorArgsStyle", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "applyThemeStyle", "loadLazyWidgets", "LASHasWidgets;ILNSString;LASLoopParam;", "LASLoopParam;", "LASIWidget_CommandCallBack;" };
-  static const J2ObjcClassInfo _ASIWidget = { "IWidget", "com.ashera.widget", ptrTable, methods, fields, 7, 0x609, 69, 13, -1, 75, -1, -1, -1 };
+  static const void *ptrTable[] = { "unwrap", "LNSObject;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setParams", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "getUserData", "LNSString;", "storeUserData", "LNSString;LNSObject;", "storeInTempCache", "getFromTempCache", "setId", "setBehaviorGroupId", "setComponentId", "getAttributeValue", "loadAttributes", "setAttribute", "LASWidgetAttribute;LNSObject;Z", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "LASHasWidgets;LNSString;LNSString;", "updateWidgetMap", "LASWidgetAttribute;LASWidgetAttributeValue;", "LASWidgetAttributeMap;", "setParent", "LASHasWidgets;", "findWidgetById", "setListener", "LASIWidgetLifeCycleListener;", "executeCommand", "LJavaUtilMap;LASIWidget_CommandCallBack;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "LASIWidget;LJavaUtilList;LASIWidget_CommandCallBack;I", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "setVisible", "Z", "findNearestView", "setInvalidateOnFrameChange", "applyAttributeCommand", "LNSString;LNSString;[LNSString;Z[LNSObject;", "rerunCommandOnSource", "LNSString;LNSString;", "reapplyAttributeCommand", "LNSString;LNSString;LNSString;[LNSObject;", "getAttributeCommandValue", "LNSString;LNSString;LNSString;", "getAttributeCommandChain", "registerForAttributeCommandChain", "[LNSString;", "registerForAttributeCommandChainWithPhase", "LNSString;[LNSString;", "runAttributeCommands", "LNSObject;LNSString;LNSString;[LNSObject;", "quickConvert", "LNSObject;LNSString;", "LNSObject;LNSString;LNSString;LNSString;", "setDrawableBounds", "IIII", "setZIndex", "I", "setEventBubblers", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/Integer;>;)V", "()Ljava/util/Set<Ljava/lang/Integer;>;", "applyThemeConstructorArgsStyle", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "applyThemeStyle", "loadLazyWidgets", "LASHasWidgets;ILNSString;LASLoopParam;", "LASLoopParam;", "LASIWidget_CommandCallBack;" };
+  static const J2ObjcClassInfo _ASIWidget = { "IWidget", "com.ashera.widget", ptrTable, methods, fields, 7, 0x609, 71, 13, -1, 76, -1, -1, -1 };
   return &_ASIWidget;
 }
 

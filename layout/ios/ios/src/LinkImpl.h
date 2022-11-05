@@ -637,8 +637,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 
 - (id)getHeight;
 
-- (id)getIosHighlightedTextColor;
-
 - (id)getIosMinimumScaleFactor;
 
 - (id)getIosNumberOfLines;
@@ -694,8 +692,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 - (id)getText;
 
 - (id)getTextColor;
-
-- (id)getTextColorHighlight;
 
 - (id)getTextSize;
 
@@ -832,8 +828,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 - (ASLinkImpl_LinkCommandBuilder *)setIosClipsToBoundsWithBoolean:(jboolean)arg0;
 
 - (ASLinkImpl_LinkCommandBuilder *)setIosContentScaleFactorWithFloat:(jfloat)arg0;
-
-- (ASLinkImpl_LinkCommandBuilder *)setIosHighlightedTextColorWithNSString:(NSString *)value;
 
 - (ASLinkImpl_LinkCommandBuilder *)setIosInsetsLayoutMarginsFromSafeAreaWithBoolean:(jboolean)arg0;
 
@@ -999,8 +993,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 
 - (ASLinkImpl_LinkCommandBuilder *)setTextColorWithNSString:(NSString *)value;
 
-- (ASLinkImpl_LinkCommandBuilder *)setTextColorHighlightWithNSString:(NSString *)value;
-
 - (ASLinkImpl_LinkCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
 
 - (ASLinkImpl_LinkCommandBuilder *)setTextFormatWithNSString:(NSString *)value;
@@ -1116,8 +1108,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 - (ASLinkImpl_LinkCommandBuilder *)tryGetIosClipsToBounds;
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetIosContentScaleFactor;
-
-- (ASLinkImpl_LinkCommandBuilder *)tryGetIosHighlightedTextColor;
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetIosInsetsLayoutMarginsFromSafeArea;
 
@@ -1241,8 +1231,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetTextColor;
 
-- (ASLinkImpl_LinkCommandBuilder *)tryGetTextColorHighlight;
-
 - (ASLinkImpl_LinkCommandBuilder *)tryGetTextDirection;
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetTextSize;
@@ -1322,8 +1310,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_LinkCommandBuilder)
 
 - (id)getHeight;
 
-- (id)getIosHighlightedTextColor;
-
 - (id)getIosMinimumScaleFactor;
 
 - (id)getIosNumberOfLines;
@@ -1379,8 +1365,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_LinkCommandBuilder)
 - (id)getText;
 
 - (id)getTextColor;
-
-- (id)getTextColorHighlight;
 
 - (id)getTextSize;
 
@@ -1443,8 +1427,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_LinkCommandBuilder)
 - (void)setIosAdjustsFontSizeToFitWidthWithBoolean:(jboolean)value;
 
 - (void)setIosAllowsDefaultTighteningForTruncationWithBoolean:(jboolean)value;
-
-- (void)setIosHighlightedTextColorWithNSString:(NSString *)value;
 
 - (void)setIosIsEnabledWithBoolean:(jboolean)value;
 
@@ -1527,8 +1509,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_LinkCommandBuilder)
 - (void)setTextAllCapsWithBoolean:(jboolean)value;
 
 - (void)setTextColorWithNSString:(NSString *)value;
-
-- (void)setTextColorHighlightWithNSString:(NSString *)value;
 
 - (void)setTextFormatWithNSString:(NSString *)value;
 

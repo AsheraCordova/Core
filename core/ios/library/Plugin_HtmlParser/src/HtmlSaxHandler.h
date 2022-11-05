@@ -36,6 +36,10 @@
 - (instancetype)initWithASIFragment:(id<ASIFragment>)fragment
                         withBoolean:(jboolean)template_;
 
+- (instancetype)initWithASIFragment:(id<ASIFragment>)fragment
+                       withNSString:(NSString *)componentId
+                        withBoolean:(jboolean)template_;
+
 - (void)addToCurrentParentWithASIWidget:(id<ASIWidget>)widget;
 
 - (void)charactersWithCharArray:(IOSCharArray *)ch
@@ -99,6 +103,12 @@ FOUNDATION_EXPORT void ASHtmlSaxHandler_initWithASIFragment_withBoolean_(ASHtmlS
 FOUNDATION_EXPORT ASHtmlSaxHandler *new_ASHtmlSaxHandler_initWithASIFragment_withBoolean_(id<ASIFragment> fragment, jboolean template_) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASHtmlSaxHandler *create_ASHtmlSaxHandler_initWithASIFragment_withBoolean_(id<ASIFragment> fragment, jboolean template_);
+
+FOUNDATION_EXPORT void ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(ASHtmlSaxHandler *self, id<ASIFragment> fragment, NSString *componentId, jboolean template_);
+
+FOUNDATION_EXPORT ASHtmlSaxHandler *new_ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *componentId, jboolean template_) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASHtmlSaxHandler *create_ASHtmlSaxHandler_initWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *componentId, jboolean template_);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASHtmlSaxHandler)
 

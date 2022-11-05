@@ -37,6 +37,7 @@
 
 - (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
+                        withNSString:(NSString *)componentId
                          withBoolean:(jboolean)template_
                      withASIFragment:(id<ASIFragment>)fragment;
 

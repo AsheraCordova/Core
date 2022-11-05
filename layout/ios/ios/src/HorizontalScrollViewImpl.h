@@ -343,6 +343,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setClipChildrenWithBoolean:(jboolean)arg0;

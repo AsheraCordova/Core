@@ -695,6 +695,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
 - (ASListViewImpl_ListViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASListViewImpl_ListViewCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
+
 - (ASListViewImpl_ListViewCommandBuilder *)setChoiceModeWithNSString:(NSString *)value;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;

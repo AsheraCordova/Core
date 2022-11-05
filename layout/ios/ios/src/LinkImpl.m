@@ -898,8 +898,6 @@ NSString *ASLinkImpl_GROUP_NAME = @"com.ashera.layout.Link";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosAllowsDefaultTighteningForTruncation"])) withTypeWithNSString:@"boolean"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosMinimumScaleFactor"])) withTypeWithNSString:@"float"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosNumberOfLines"])) withTypeWithNSString:@"int"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosHighlightedTextColor"])) withTypeWithNSString:@"color"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textColorHighlight"])) withTypeWithNSString:@"color"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosIsHighlighted"])) withTypeWithNSString:@"boolean"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosShadowColor"])) withTypeWithNSString:@"color"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"shadowColor"])) withTypeWithNSString:@"color"]);
@@ -1006,7 +1004,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
   ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"textColorHighlight", @"iosHighlightedTextColor", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"autoSizeTextType", @"autoSizeMaxTextSize", @"autoSizeMinTextSize", @"autoSizeStepGranularity", @"autoSizePresetSizes", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"ellipsize", @"startOrStopMarquee", @"marqueeRepeatLimit", @"justificationMode", @"shadowDx", @"shadowDy", @"singleLine", @"editable", @"textAllCaps", @"maxLength", @"password", @"typeface", @"textStyle", @"fontFamily", @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"scrollHorizontally", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor", @"textFormat" }, 72)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"autoSizeTextType", @"autoSizeMaxTextSize", @"autoSizeMinTextSize", @"autoSizeStepGranularity", @"autoSizePresetSizes", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"ellipsize", @"startOrStopMarquee", @"marqueeRepeatLimit", @"justificationMode", @"shadowDx", @"shadowDy", @"singleLine", @"editable", @"textAllCaps", @"maxLength", @"password", @"typeface", @"textStyle", @"fontFamily", @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"scrollHorizontally", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor", @"textFormat" }, 70)) {
     case 0:
     {
       [self setTextWithId:nativeWidget withId:objValue];
@@ -1044,313 +1042,307 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     break;
     case 8:
-    case 9:
-    {
-      [self setHighlightedTextColorWithId:nativeWidget withId:objValue];
-    }
-    break;
-    case 10:
     {
       [self setIsHighlightedWithId:nativeWidget withId:objValue];
     }
     break;
-    case 11:
-    case 12:
+    case 9:
+    case 10:
     {
       [self setShadowColorWithId:nativeWidget withId:objValue];
     }
     break;
-    case 13:
+    case 11:
     {
       [self setPreferredMaxLayoutWidthWithId:nativeWidget withId:objValue];
     }
     break;
-    case 14:
+    case 12:
     {
       [self setIsUserInteractionEnabledWithId:nativeWidget withId:objValue];
     }
     break;
-    case 15:
+    case 13:
     {
       ASLinkImpl_setMyTextWithId_(self, objValue);
     }
     break;
-    case 16:
+    case 14:
     {
       ASLinkImpl_setGravityWithId_(self, objValue);
     }
     break;
-    case 17:
+    case 15:
     {
       ASLinkImpl_setMyTextSizeWithId_(self, objValue);
     }
     break;
-    case 18:
+    case 16:
     {
       [self setPaddingWithId:objValue];
     }
     break;
-    case 19:
+    case 17:
     {
       [self setPaddingBottomWithId:objValue];
     }
     break;
-    case 20:
+    case 18:
     {
       [self setPaddingRightWithId:objValue];
     }
     break;
-    case 21:
+    case 19:
     {
       [self setPaddingLeftWithId:objValue];
     }
     break;
-    case 22:
+    case 20:
     {
       ASLinkImpl_setPaddingStartWithId_(self, objValue);
     }
     break;
-    case 23:
+    case 21:
     {
       ASLinkImpl_setPaddingEndWithId_(self, objValue);
     }
     break;
-    case 24:
+    case 22:
     {
       [self setPaddingTopWithId:objValue];
     }
     break;
-    case 25:
+    case 23:
     {
       ASLinkImpl_setPaddingHorizontalWithId_(self, objValue);
     }
     break;
-    case 26:
+    case 24:
     {
       ASLinkImpl_setPaddingVerticalWithId_(self, objValue);
     }
     break;
-    case 27:
+    case 25:
     {
       ASLinkImpl_setAutoSizeTextTypeWithId_(self, objValue);
     }
     break;
-    case 28:
+    case 26:
     {
       ASLinkImpl_setAutoMaxTextSizeWithId_(self, objValue);
     }
     break;
-    case 29:
+    case 27:
     {
       ASLinkImpl_setAutoMinTextSizeWithId_(self, objValue);
     }
     break;
-    case 30:
+    case 28:
     {
       ASLinkImpl_setAutoSizeStepGranularityWithId_(self, objValue);
     }
     break;
-    case 31:
+    case 29:
     {
       ASLinkImpl_setAutoSizePresetSizesWithId_(self, objValue);
     }
     break;
-    case 32:
+    case 30:
     {
       ASLinkImpl_setMinLinesWithId_(self, objValue);
     }
     break;
-    case 33:
+    case 31:
     {
       ASLinkImpl_setLinesWithId_(self, objValue);
     }
     break;
-    case 34:
+    case 32:
     {
       ASLinkImpl_setMaxLinesWithId_(self, objValue);
     }
     break;
-    case 35:
+    case 33:
     {
       ASLinkImpl_setMinWidthWithId_(self, objValue);
     }
     break;
-    case 36:
+    case 34:
     {
       ASLinkImpl_setMinHeightWithId_(self, objValue);
     }
     break;
-    case 37:
+    case 35:
     {
       ASLinkImpl_setMaxWidthWithId_(self, objValue);
     }
     break;
-    case 38:
+    case 36:
     {
       ASLinkImpl_setMaxHeightWithId_(self, objValue);
     }
     break;
-    case 39:
+    case 37:
     {
       ASLinkImpl_setHeightWithId_(self, objValue);
     }
     break;
-    case 40:
+    case 38:
     {
       ASLinkImpl_setWidthWithId_(self, objValue);
     }
     break;
-    case 41:
+    case 39:
     {
       ASLinkImpl_setMaxEmsWithId_(self, objValue);
     }
     break;
-    case 42:
+    case 40:
     {
       ASLinkImpl_setMinEmsWithId_(self, objValue);
     }
     break;
-    case 43:
+    case 41:
     {
       ASLinkImpl_setEmsWithId_(self, objValue);
     }
     break;
-    case 44:
+    case 42:
     {
       ASLinkImpl_setEllipsizeWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 45:
+    case 43:
     {
       ASLinkImpl_startOrStopMarqueeWithId_(self, objValue);
     }
     break;
-    case 46:
+    case 44:
     {
       ASLinkImpl_setMarqueeRepeatLimitWithId_(self, objValue);
     }
     break;
-    case 47:
+    case 45:
     {
       ASLinkImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 48:
+    case 46:
     {
       ASLinkImpl_setShadowDxWithJavaLangFloat_withNSString_(self, (JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]), strValue);
     }
     break;
-    case 49:
+    case 47:
     {
       ASLinkImpl_setShadowDyWithJavaLangFloat_withNSString_(self, (JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]), strValue);
     }
     break;
-    case 50:
+    case 48:
     {
       ASLinkImpl_setSingleLineWithId_(self, objValue);
     }
     break;
-    case 51:
+    case 49:
     {
       ASLinkImpl_setEnabledWithId_(self, objValue);
     }
     break;
-    case 52:
+    case 50:
     {
       ASLinkImpl_setTextAllCapsWithId_(self, objValue);
     }
     break;
-    case 53:
+    case 51:
     {
       ASLinkImpl_setMaxLengthWithId_(self, objValue);
     }
     break;
-    case 54:
+    case 52:
     {
       ASLinkImpl_setPasswordWithId_(self, objValue);
     }
     break;
-    case 55:
+    case 53:
     {
       ASLinkImpl_setTypeFaceWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 56:
+    case 54:
     {
       ASLinkImpl_setTextStyleWithId_(self, objValue);
     }
     break;
-    case 57:
+    case 55:
     {
       ASLinkImpl_setFontFamilyWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 58:
+    case 56:
     {
       ASLinkImpl_setDrawableLeftWithNSString_withId_(self, @"drawableLeft", objValue);
     }
     break;
-    case 59:
+    case 57:
     {
       ASLinkImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
     }
     break;
-    case 60:
+    case 58:
     {
       ASLinkImpl_setDrawableRightWithNSString_withId_(self, @"drawableRight", objValue);
     }
     break;
-    case 61:
+    case 59:
     {
       ASLinkImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
     }
     break;
-    case 62:
+    case 60:
     {
       ASLinkImpl_setDrawableTopWithId_(self, objValue);
     }
     break;
-    case 63:
+    case 61:
     {
       ASLinkImpl_setDrawableBottomWithId_(self, objValue);
     }
     break;
-    case 64:
+    case 62:
     {
       ASLinkImpl_setDrawablePaddingWithId_(self, objValue);
     }
     break;
-    case 65:
+    case 63:
     {
       ASLinkImpl_setDrawableTintWithId_(self, objValue);
     }
     break;
-    case 66:
+    case 64:
     {
       ASLinkImpl_setDrawableTintModeWithId_(self, objValue);
     }
     break;
-    case 67:
+    case 65:
     {
       ASLinkImpl_setScrollHorizontallyWithId_(self, objValue);
     }
     break;
-    case 68:
+    case 66:
     {
       ASLinkImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
     }
     break;
-    case 69:
+    case 67:
     {
       ASLinkImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
     }
     break;
-    case 70:
+    case 68:
     {
       ASLinkImpl_setTextColorWithId_(self, objValue);
     }
     break;
-    case 71:
+    case 69:
     {
       ASLinkImpl_setTextFormatWithId_(self, objValue);
     }
@@ -1367,7 +1359,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (attributeValue != nil) {
     return attributeValue;
   }
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"textColorHighlight", @"iosHighlightedTextColor", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"text", @"gravity", @"textSize", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"autoSizeTextType", @"autoSizeMaxTextSize", @"autoSizeMinTextSize", @"autoSizeStepGranularity", @"minLines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ellipsize", @"marqueeRepeatLimit", @"justificationMode", @"shadowDx", @"shadowDy", @"drawablePadding", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor" }, 47)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"text", @"gravity", @"textSize", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"autoSizeTextType", @"autoSizeMaxTextSize", @"autoSizeMinTextSize", @"autoSizeStepGranularity", @"minLines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ellipsize", @"marqueeRepeatLimit", @"justificationMode", @"shadowDx", @"shadowDy", @"drawablePadding", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor" }, 45)) {
     case 0:
     {
       return [self getText];
@@ -1398,152 +1390,147 @@ J2OBJC_IGNORE_DESIGNATED_END
       return [self getNumberOfLines];
     }
     case 8:
-    case 9:
-    {
-      return [self getHighlightedTextColor];
-    }
-    case 10:
     {
       return [self getIsHighlighted];
     }
-    case 11:
-    case 12:
+    case 9:
+    case 10:
     {
       return [self getShadowColor];
     }
-    case 13:
+    case 11:
     {
       return [self getPreferredMaxLayoutWidth];
     }
-    case 14:
+    case 12:
     {
       return [self getIsUserInteractionEnabled];
     }
-    case 15:
+    case 13:
     {
       return ASLinkImpl_getMyText(self);
     }
-    case 16:
+    case 14:
     {
       return ASLinkImpl_getGravity(self);
     }
-    case 17:
+    case 15:
     {
       return ASLinkImpl_getTextSize(self);
     }
-    case 18:
+    case 16:
     {
       return ASLinkImpl_getPaddingBottom(self);
     }
-    case 19:
+    case 17:
     {
       return ASLinkImpl_getPaddingRight(self);
     }
-    case 20:
+    case 18:
     {
       return ASLinkImpl_getPaddingLeft(self);
     }
-    case 21:
+    case 19:
     {
       return ASLinkImpl_getPaddingStart(self);
     }
-    case 22:
+    case 20:
     {
       return ASLinkImpl_getPaddingEnd(self);
     }
-    case 23:
+    case 21:
     {
       return ASLinkImpl_getPaddingTop(self);
     }
-    case 24:
+    case 22:
     {
       return ASLinkImpl_getAutoSizeTextType(self);
     }
-    case 25:
+    case 23:
     {
       return ASLinkImpl_getAutoMaxTextSize(self);
     }
-    case 26:
+    case 24:
     {
       return ASLinkImpl_getAutoMinTextSize(self);
     }
-    case 27:
+    case 25:
     {
       return ASLinkImpl_getAutoSizeStepGranularity(self);
     }
-    case 28:
+    case 26:
     {
       return JavaLangInteger_valueOfWithInt_([self getMinLines]);
     }
-    case 29:
+    case 27:
     {
       return JavaLangInteger_valueOfWithInt_([self getMaxLines]);
     }
-    case 30:
+    case 28:
     {
       return ASLinkImpl_getMinWidth(self);
     }
-    case 31:
+    case 29:
     {
       return ASLinkImpl_getMinHeight(self);
     }
-    case 32:
+    case 30:
     {
       return JavaLangInteger_valueOfWithInt_([self getMaxWidth]);
     }
-    case 33:
+    case 31:
     {
       return JavaLangInteger_valueOfWithInt_([self getMaxHeight]);
     }
-    case 34:
+    case 32:
     {
       return JavaLangInteger_valueOfWithInt_(ASLinkImpl_getHeight(self));
     }
-    case 35:
+    case 33:
     {
       return ASLinkImpl_getWidth(self);
     }
-    case 36:
+    case 34:
     {
       return JavaLangInteger_valueOfWithInt_([self getMaxEms]);
     }
-    case 37:
+    case 35:
     {
       return JavaLangInteger_valueOfWithInt_([self getMinEms]);
     }
-    case 38:
+    case 36:
     {
       return ASLinkImpl_getEllipsize(self);
     }
-    case 39:
+    case 37:
     {
       return ASLinkImpl_getMarqueeRepeatLimit(self);
     }
-    case 40:
+    case 38:
     {
       return ASLinkImpl_getJustificationMode(self);
     }
-    case 41:
+    case 39:
     {
       return ASLinkImpl_getShadowDx(self);
     }
-    case 42:
+    case 40:
     {
       return ASLinkImpl_getShadowDy(self);
     }
-    case 43:
+    case 41:
     {
       return ASLinkImpl_getDrawablePadding(self);
     }
-    case 44:
+    case 42:
     {
       return ASLinkImpl_getFirstBaselineToTopHeight(self);
     }
-    case 45:
+    case 43:
     {
       return ASLinkImpl_getLastBaselineToBottomHeight(self);
     }
-    case 46:
+    case 44:
     {
       return ASLinkImpl_getTextColorState(self);
     }
@@ -4911,50 +4898,6 @@ ASLinkImpl_MarqueeTask_$Lambda$1 *create_ASLinkImpl_MarqueeTask_$Lambda$1_initWi
   return self;
 }
 
-- (ASLinkImpl_LinkCommandBuilder *)tryGetIosHighlightedTextColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHighlightedTextColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosHighlightedTextColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHighlightedTextColor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASLinkImpl_LinkCommandBuilder *)setIosHighlightedTextColorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHighlightedTextColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASLinkImpl_LinkCommandBuilder *)tryGetTextColorHighlight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHighlightedTextColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTextColorHighlight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHighlightedTextColor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASLinkImpl_LinkCommandBuilder *)setTextColorHighlightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textColorHighlight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
 - (ASLinkImpl_LinkCommandBuilder *)tryGetIosIsHighlighted {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsHighlighted"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
@@ -6024,34 +5967,34 @@ ASLinkImpl_MarqueeTask_$Lambda$1 *create_ASLinkImpl_MarqueeTask_$Lambda$1_initWi
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 12, 13, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 14, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 14, 2, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 15, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 16, 2, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 16, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 17, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 17, 11, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 18, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 18, 2, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 19, 11, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 19, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 20, 2, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 20, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 21, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 22, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 23, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 24, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -6065,13 +6008,13 @@ ASLinkImpl_MarqueeTask_$Lambda$1 *create_ASLinkImpl_MarqueeTask_$Lambda$1_initWi
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 28, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 29, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 30, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 30, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 31, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 32, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -6079,20 +6022,20 @@ ASLinkImpl_MarqueeTask_$Lambda$1 *create_ASLinkImpl_MarqueeTask_$Lambda$1_initWi
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 34, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 35, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 36, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 37, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 36, 13, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 37, 13, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 38, 13, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 39, 13, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 40, 13, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 39, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 40, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 41, 4, -1, -1, -1, -1 },
@@ -6107,38 +6050,34 @@ ASLinkImpl_MarqueeTask_$Lambda$1 *create_ASLinkImpl_MarqueeTask_$Lambda$1_initWi
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 44, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 45, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 45, 13, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 46, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 46, 13, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 47, 13, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 48, 13, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 49, 13, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 48, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 49, 2, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 50, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 51, 2, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 52, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 51, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 53, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 52, 11, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 54, 11, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 55, 11, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 53, 11, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 54, 2, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 55, 2, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 56, 2, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 57, 2, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 57, 13, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 58, 2, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 59, 13, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 60, 2, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 59, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 60, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 61, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 62, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 63, 4, -1, -1, -1, -1 },
@@ -6146,24 +6085,22 @@ ASLinkImpl_MarqueeTask_$Lambda$1 *create_ASLinkImpl_MarqueeTask_$Lambda$1_initWi
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 65, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 66, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 67, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 68, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 69, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 68, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 69, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 70, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 71, 4, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 71, 2, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 72, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 73, 2, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 73, 4, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 74, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 75, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 76, 4, -1, -1, -1, -1 },
-    { NULL, "LASLinkImpl_LinkCommandBuilder;", 0x1, 77, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -6194,154 +6131,148 @@ ASLinkImpl_MarqueeTask_$Lambda$1 *create_ASLinkImpl_MarqueeTask_$Lambda$1_initWi
   methods[23].selector = @selector(tryGetIosNumberOfLines);
   methods[24].selector = @selector(getIosNumberOfLines);
   methods[25].selector = @selector(setIosNumberOfLinesWithInt:);
-  methods[26].selector = @selector(tryGetIosHighlightedTextColor);
-  methods[27].selector = @selector(getIosHighlightedTextColor);
-  methods[28].selector = @selector(setIosHighlightedTextColorWithNSString:);
-  methods[29].selector = @selector(tryGetTextColorHighlight);
-  methods[30].selector = @selector(getTextColorHighlight);
-  methods[31].selector = @selector(setTextColorHighlightWithNSString:);
-  methods[32].selector = @selector(tryGetIosIsHighlighted);
-  methods[33].selector = @selector(isIosIsHighlighted);
-  methods[34].selector = @selector(setIosIsHighlightedWithBoolean:);
-  methods[35].selector = @selector(tryGetIosShadowColor);
-  methods[36].selector = @selector(getIosShadowColor);
-  methods[37].selector = @selector(setIosShadowColorWithNSString:);
-  methods[38].selector = @selector(tryGetShadowColor);
-  methods[39].selector = @selector(getShadowColor);
-  methods[40].selector = @selector(setShadowColorWithNSString:);
-  methods[41].selector = @selector(tryGetIosPreferredMaxLayoutWidth);
-  methods[42].selector = @selector(getIosPreferredMaxLayoutWidth);
-  methods[43].selector = @selector(setIosPreferredMaxLayoutWidthWithFloat:);
-  methods[44].selector = @selector(tryGetIosIsUserInteractionEnabled);
-  methods[45].selector = @selector(isIosIsUserInteractionEnabled);
-  methods[46].selector = @selector(setIosIsUserInteractionEnabledWithBoolean:);
-  methods[47].selector = @selector(tryGetText);
-  methods[48].selector = @selector(getText);
-  methods[49].selector = @selector(setTextWithNSString:);
-  methods[50].selector = @selector(tryGetGravity);
-  methods[51].selector = @selector(getGravity);
-  methods[52].selector = @selector(setGravityWithNSString:);
-  methods[53].selector = @selector(tryGetTextSize);
-  methods[54].selector = @selector(getTextSize);
-  methods[55].selector = @selector(setTextSizeWithNSString:);
-  methods[56].selector = @selector(setPaddingWithNSString:);
-  methods[57].selector = @selector(tryGetPaddingBottom);
-  methods[58].selector = @selector(getPaddingBottom);
-  methods[59].selector = @selector(setPaddingBottomWithNSString:);
-  methods[60].selector = @selector(tryGetPaddingRight);
-  methods[61].selector = @selector(getPaddingRight);
-  methods[62].selector = @selector(setPaddingRightWithNSString:);
-  methods[63].selector = @selector(tryGetPaddingLeft);
-  methods[64].selector = @selector(getPaddingLeft);
-  methods[65].selector = @selector(setPaddingLeftWithNSString:);
-  methods[66].selector = @selector(tryGetPaddingStart);
-  methods[67].selector = @selector(getPaddingStart);
-  methods[68].selector = @selector(setPaddingStartWithNSString:);
-  methods[69].selector = @selector(tryGetPaddingEnd);
-  methods[70].selector = @selector(getPaddingEnd);
-  methods[71].selector = @selector(setPaddingEndWithNSString:);
-  methods[72].selector = @selector(tryGetPaddingTop);
-  methods[73].selector = @selector(getPaddingTop);
-  methods[74].selector = @selector(setPaddingTopWithNSString:);
-  methods[75].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[76].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[77].selector = @selector(tryGetAutoSizeTextType);
-  methods[78].selector = @selector(getAutoSizeTextType);
-  methods[79].selector = @selector(setAutoSizeTextTypeWithNSString:);
-  methods[80].selector = @selector(tryGetAutoSizeMaxTextSize);
-  methods[81].selector = @selector(getAutoSizeMaxTextSize);
-  methods[82].selector = @selector(setAutoSizeMaxTextSizeWithNSString:);
-  methods[83].selector = @selector(tryGetAutoSizeMinTextSize);
-  methods[84].selector = @selector(getAutoSizeMinTextSize);
-  methods[85].selector = @selector(setAutoSizeMinTextSizeWithNSString:);
-  methods[86].selector = @selector(tryGetAutoSizeStepGranularity);
-  methods[87].selector = @selector(getAutoSizeStepGranularity);
-  methods[88].selector = @selector(setAutoSizeStepGranularityWithNSString:);
-  methods[89].selector = @selector(setAutoSizePresetSizesWithNSString:);
-  methods[90].selector = @selector(tryGetMinLines);
-  methods[91].selector = @selector(getMinLines);
-  methods[92].selector = @selector(setMinLinesWithInt:);
-  methods[93].selector = @selector(setLinesWithInt:);
-  methods[94].selector = @selector(tryGetMaxLines);
-  methods[95].selector = @selector(getMaxLines);
-  methods[96].selector = @selector(setMaxLinesWithInt:);
-  methods[97].selector = @selector(tryGetMinWidth);
-  methods[98].selector = @selector(getMinWidth);
-  methods[99].selector = @selector(setMinWidthWithNSString:);
-  methods[100].selector = @selector(tryGetMinHeight);
-  methods[101].selector = @selector(getMinHeight);
-  methods[102].selector = @selector(setMinHeightWithNSString:);
-  methods[103].selector = @selector(tryGetMaxWidth);
-  methods[104].selector = @selector(getMaxWidth);
-  methods[105].selector = @selector(setMaxWidthWithNSString:);
-  methods[106].selector = @selector(tryGetMaxHeight);
-  methods[107].selector = @selector(getMaxHeight);
-  methods[108].selector = @selector(setMaxHeightWithNSString:);
-  methods[109].selector = @selector(tryGetHeight);
-  methods[110].selector = @selector(getHeight);
-  methods[111].selector = @selector(setHeightWithNSString:);
-  methods[112].selector = @selector(tryGetWidth);
-  methods[113].selector = @selector(getWidth);
-  methods[114].selector = @selector(setWidthWithNSString:);
-  methods[115].selector = @selector(tryGetMaxEms);
-  methods[116].selector = @selector(getMaxEms);
-  methods[117].selector = @selector(setMaxEmsWithInt:);
-  methods[118].selector = @selector(tryGetMinEms);
-  methods[119].selector = @selector(getMinEms);
-  methods[120].selector = @selector(setMinEmsWithInt:);
-  methods[121].selector = @selector(setEmsWithInt:);
-  methods[122].selector = @selector(tryGetEllipsize);
-  methods[123].selector = @selector(getEllipsize);
-  methods[124].selector = @selector(setEllipsizeWithNSString:);
-  methods[125].selector = @selector(setStartOrStopMarqueeWithBoolean:);
-  methods[126].selector = @selector(tryGetMarqueeRepeatLimit);
-  methods[127].selector = @selector(getMarqueeRepeatLimit);
-  methods[128].selector = @selector(setMarqueeRepeatLimitWithNSString:);
-  methods[129].selector = @selector(tryGetJustificationMode);
-  methods[130].selector = @selector(getJustificationMode);
-  methods[131].selector = @selector(setJustificationModeWithNSString:);
-  methods[132].selector = @selector(tryGetShadowDx);
-  methods[133].selector = @selector(getShadowDx);
-  methods[134].selector = @selector(setShadowDxWithFloat:);
-  methods[135].selector = @selector(tryGetShadowDy);
-  methods[136].selector = @selector(getShadowDy);
-  methods[137].selector = @selector(setShadowDyWithFloat:);
-  methods[138].selector = @selector(setSingleLineWithBoolean:);
-  methods[139].selector = @selector(setEditableWithBoolean:);
-  methods[140].selector = @selector(setTextAllCapsWithBoolean:);
-  methods[141].selector = @selector(setMaxLengthWithInt:);
-  methods[142].selector = @selector(setPasswordWithBoolean:);
-  methods[143].selector = @selector(setTypefaceWithNSString:);
-  methods[144].selector = @selector(setTextStyleWithNSString:);
-  methods[145].selector = @selector(setFontFamilyWithNSString:);
-  methods[146].selector = @selector(setDrawableLeftWithNSString:);
-  methods[147].selector = @selector(setDrawableStartWithNSString:);
-  methods[148].selector = @selector(setDrawableRightWithNSString:);
-  methods[149].selector = @selector(setDrawableEndWithNSString:);
-  methods[150].selector = @selector(setDrawableTopWithNSString:);
-  methods[151].selector = @selector(setDrawableBottomWithNSString:);
-  methods[152].selector = @selector(tryGetDrawablePadding);
-  methods[153].selector = @selector(getDrawablePadding);
-  methods[154].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[155].selector = @selector(setDrawableTintWithNSString:);
-  methods[156].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[157].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[158].selector = @selector(tryGetFirstBaselineToTopHeight);
-  methods[159].selector = @selector(getFirstBaselineToTopHeight);
-  methods[160].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[161].selector = @selector(tryGetLastBaselineToBottomHeight);
-  methods[162].selector = @selector(getLastBaselineToBottomHeight);
-  methods[163].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[164].selector = @selector(tryGetTextColor);
-  methods[165].selector = @selector(getTextColor);
-  methods[166].selector = @selector(setTextColorWithNSString:);
-  methods[167].selector = @selector(setTextFormatWithNSString:);
+  methods[26].selector = @selector(tryGetIosIsHighlighted);
+  methods[27].selector = @selector(isIosIsHighlighted);
+  methods[28].selector = @selector(setIosIsHighlightedWithBoolean:);
+  methods[29].selector = @selector(tryGetIosShadowColor);
+  methods[30].selector = @selector(getIosShadowColor);
+  methods[31].selector = @selector(setIosShadowColorWithNSString:);
+  methods[32].selector = @selector(tryGetShadowColor);
+  methods[33].selector = @selector(getShadowColor);
+  methods[34].selector = @selector(setShadowColorWithNSString:);
+  methods[35].selector = @selector(tryGetIosPreferredMaxLayoutWidth);
+  methods[36].selector = @selector(getIosPreferredMaxLayoutWidth);
+  methods[37].selector = @selector(setIosPreferredMaxLayoutWidthWithFloat:);
+  methods[38].selector = @selector(tryGetIosIsUserInteractionEnabled);
+  methods[39].selector = @selector(isIosIsUserInteractionEnabled);
+  methods[40].selector = @selector(setIosIsUserInteractionEnabledWithBoolean:);
+  methods[41].selector = @selector(tryGetText);
+  methods[42].selector = @selector(getText);
+  methods[43].selector = @selector(setTextWithNSString:);
+  methods[44].selector = @selector(tryGetGravity);
+  methods[45].selector = @selector(getGravity);
+  methods[46].selector = @selector(setGravityWithNSString:);
+  methods[47].selector = @selector(tryGetTextSize);
+  methods[48].selector = @selector(getTextSize);
+  methods[49].selector = @selector(setTextSizeWithNSString:);
+  methods[50].selector = @selector(setPaddingWithNSString:);
+  methods[51].selector = @selector(tryGetPaddingBottom);
+  methods[52].selector = @selector(getPaddingBottom);
+  methods[53].selector = @selector(setPaddingBottomWithNSString:);
+  methods[54].selector = @selector(tryGetPaddingRight);
+  methods[55].selector = @selector(getPaddingRight);
+  methods[56].selector = @selector(setPaddingRightWithNSString:);
+  methods[57].selector = @selector(tryGetPaddingLeft);
+  methods[58].selector = @selector(getPaddingLeft);
+  methods[59].selector = @selector(setPaddingLeftWithNSString:);
+  methods[60].selector = @selector(tryGetPaddingStart);
+  methods[61].selector = @selector(getPaddingStart);
+  methods[62].selector = @selector(setPaddingStartWithNSString:);
+  methods[63].selector = @selector(tryGetPaddingEnd);
+  methods[64].selector = @selector(getPaddingEnd);
+  methods[65].selector = @selector(setPaddingEndWithNSString:);
+  methods[66].selector = @selector(tryGetPaddingTop);
+  methods[67].selector = @selector(getPaddingTop);
+  methods[68].selector = @selector(setPaddingTopWithNSString:);
+  methods[69].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[70].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[71].selector = @selector(tryGetAutoSizeTextType);
+  methods[72].selector = @selector(getAutoSizeTextType);
+  methods[73].selector = @selector(setAutoSizeTextTypeWithNSString:);
+  methods[74].selector = @selector(tryGetAutoSizeMaxTextSize);
+  methods[75].selector = @selector(getAutoSizeMaxTextSize);
+  methods[76].selector = @selector(setAutoSizeMaxTextSizeWithNSString:);
+  methods[77].selector = @selector(tryGetAutoSizeMinTextSize);
+  methods[78].selector = @selector(getAutoSizeMinTextSize);
+  methods[79].selector = @selector(setAutoSizeMinTextSizeWithNSString:);
+  methods[80].selector = @selector(tryGetAutoSizeStepGranularity);
+  methods[81].selector = @selector(getAutoSizeStepGranularity);
+  methods[82].selector = @selector(setAutoSizeStepGranularityWithNSString:);
+  methods[83].selector = @selector(setAutoSizePresetSizesWithNSString:);
+  methods[84].selector = @selector(tryGetMinLines);
+  methods[85].selector = @selector(getMinLines);
+  methods[86].selector = @selector(setMinLinesWithInt:);
+  methods[87].selector = @selector(setLinesWithInt:);
+  methods[88].selector = @selector(tryGetMaxLines);
+  methods[89].selector = @selector(getMaxLines);
+  methods[90].selector = @selector(setMaxLinesWithInt:);
+  methods[91].selector = @selector(tryGetMinWidth);
+  methods[92].selector = @selector(getMinWidth);
+  methods[93].selector = @selector(setMinWidthWithNSString:);
+  methods[94].selector = @selector(tryGetMinHeight);
+  methods[95].selector = @selector(getMinHeight);
+  methods[96].selector = @selector(setMinHeightWithNSString:);
+  methods[97].selector = @selector(tryGetMaxWidth);
+  methods[98].selector = @selector(getMaxWidth);
+  methods[99].selector = @selector(setMaxWidthWithNSString:);
+  methods[100].selector = @selector(tryGetMaxHeight);
+  methods[101].selector = @selector(getMaxHeight);
+  methods[102].selector = @selector(setMaxHeightWithNSString:);
+  methods[103].selector = @selector(tryGetHeight);
+  methods[104].selector = @selector(getHeight);
+  methods[105].selector = @selector(setHeightWithNSString:);
+  methods[106].selector = @selector(tryGetWidth);
+  methods[107].selector = @selector(getWidth);
+  methods[108].selector = @selector(setWidthWithNSString:);
+  methods[109].selector = @selector(tryGetMaxEms);
+  methods[110].selector = @selector(getMaxEms);
+  methods[111].selector = @selector(setMaxEmsWithInt:);
+  methods[112].selector = @selector(tryGetMinEms);
+  methods[113].selector = @selector(getMinEms);
+  methods[114].selector = @selector(setMinEmsWithInt:);
+  methods[115].selector = @selector(setEmsWithInt:);
+  methods[116].selector = @selector(tryGetEllipsize);
+  methods[117].selector = @selector(getEllipsize);
+  methods[118].selector = @selector(setEllipsizeWithNSString:);
+  methods[119].selector = @selector(setStartOrStopMarqueeWithBoolean:);
+  methods[120].selector = @selector(tryGetMarqueeRepeatLimit);
+  methods[121].selector = @selector(getMarqueeRepeatLimit);
+  methods[122].selector = @selector(setMarqueeRepeatLimitWithNSString:);
+  methods[123].selector = @selector(tryGetJustificationMode);
+  methods[124].selector = @selector(getJustificationMode);
+  methods[125].selector = @selector(setJustificationModeWithNSString:);
+  methods[126].selector = @selector(tryGetShadowDx);
+  methods[127].selector = @selector(getShadowDx);
+  methods[128].selector = @selector(setShadowDxWithFloat:);
+  methods[129].selector = @selector(tryGetShadowDy);
+  methods[130].selector = @selector(getShadowDy);
+  methods[131].selector = @selector(setShadowDyWithFloat:);
+  methods[132].selector = @selector(setSingleLineWithBoolean:);
+  methods[133].selector = @selector(setEditableWithBoolean:);
+  methods[134].selector = @selector(setTextAllCapsWithBoolean:);
+  methods[135].selector = @selector(setMaxLengthWithInt:);
+  methods[136].selector = @selector(setPasswordWithBoolean:);
+  methods[137].selector = @selector(setTypefaceWithNSString:);
+  methods[138].selector = @selector(setTextStyleWithNSString:);
+  methods[139].selector = @selector(setFontFamilyWithNSString:);
+  methods[140].selector = @selector(setDrawableLeftWithNSString:);
+  methods[141].selector = @selector(setDrawableStartWithNSString:);
+  methods[142].selector = @selector(setDrawableRightWithNSString:);
+  methods[143].selector = @selector(setDrawableEndWithNSString:);
+  methods[144].selector = @selector(setDrawableTopWithNSString:);
+  methods[145].selector = @selector(setDrawableBottomWithNSString:);
+  methods[146].selector = @selector(tryGetDrawablePadding);
+  methods[147].selector = @selector(getDrawablePadding);
+  methods[148].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[149].selector = @selector(setDrawableTintWithNSString:);
+  methods[150].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[151].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[152].selector = @selector(tryGetFirstBaselineToTopHeight);
+  methods[153].selector = @selector(getFirstBaselineToTopHeight);
+  methods[154].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[155].selector = @selector(tryGetLastBaselineToBottomHeight);
+  methods[156].selector = @selector(getLastBaselineToBottomHeight);
+  methods[157].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[158].selector = @selector(tryGetTextColor);
+  methods[159].selector = @selector(getTextColor);
+  methods[160].selector = @selector(setTextColorWithNSString:);
+  methods[161].selector = @selector(setTextFormatWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASLinkImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASLinkImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setAutoSizeTextType", "setAutoSizeMaxTextSize", "setAutoSizeMinTextSize", "setAutoSizeStepGranularity", "setAutoSizePresetSizes", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setStartOrStopMarquee", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setPassword", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/LinkImpl$LinkCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASLinkImpl_LinkCommandBuilder = { "LinkCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 168, 1, 0, -1, -1, 78, -1 };
+  static const void *ptrTable[] = { "LASLinkImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setAutoSizeTextType", "setAutoSizeMaxTextSize", "setAutoSizeMinTextSize", "setAutoSizeStepGranularity", "setAutoSizePresetSizes", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setStartOrStopMarquee", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setPassword", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/LinkImpl$LinkCommandBuilder;>;" };
+  static const J2ObjcClassInfo _ASLinkImpl_LinkCommandBuilder = { "LinkCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 162, 1, 0, -1, -1, 76, -1 };
   return &_ASLinkImpl_LinkCommandBuilder;
 }
 
@@ -6431,22 +6362,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLinkImpl_LinkCommandBuilder)
 
 - (void)setIosNumberOfLinesWithInt:(jint)value {
   (void) [((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosNumberOfLinesWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getIosHighlightedTextColor {
-  return [((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosHighlightedTextColor])) executeWithBoolean:false])) getIosHighlightedTextColor];
-}
-
-- (void)setIosHighlightedTextColorWithNSString:(NSString *)value {
-  (void) [((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosHighlightedTextColorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getTextColorHighlight {
-  return [((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetTextColorHighlight])) executeWithBoolean:false])) getTextColorHighlight];
-}
-
-- (void)setTextColorHighlightWithNSString:(NSString *)value {
-  (void) [((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([((ASLinkImpl_LinkCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextColorHighlightWithNSString:value])) executeWithBoolean:true];
 }
 
 - (id)isIosIsHighlighted {
@@ -6865,25 +6780,25 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLinkImpl_LinkCommandBuilder)
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 5, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 14, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 10, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 5, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 20, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 21, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 22, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 23, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 24, 2, -1, -1, -1, -1 },
@@ -6893,26 +6808,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLinkImpl_LinkCommandBuilder)
     { NULL, "V", 0x1, 26, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 27, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 28, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 29, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 30, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 31, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 32, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 33, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 34, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 35, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 36, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 35, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 36, 12, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 37, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 38, 12, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 39, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 38, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 39, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 40, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -6922,30 +6837,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLinkImpl_LinkCommandBuilder)
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 43, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 44, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 44, 12, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 45, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 45, 12, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 46, 12, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 47, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 48, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 47, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 48, 5, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 49, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 50, 5, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 51, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 50, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 52, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 51, 10, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 53, 10, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 54, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 52, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 53, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 54, 5, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 55, 5, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 56, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 56, 12, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 57, 5, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 58, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 59, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 58, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 59, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 60, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 61, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 62, 2, -1, -1, -1, -1 },
@@ -6953,20 +6866,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLinkImpl_LinkCommandBuilder)
     { NULL, "V", 0x1, 64, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 65, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 66, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 67, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 68, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 69, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 70, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 70, 5, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 71, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 72, 5, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 72, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 73, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 74, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 75, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 76, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -6988,115 +6899,111 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASLinkImpl_LinkCommandBuilder)
   methods[14].selector = @selector(setIosMinimumScaleFactorWithFloat:);
   methods[15].selector = @selector(getIosNumberOfLines);
   methods[16].selector = @selector(setIosNumberOfLinesWithInt:);
-  methods[17].selector = @selector(getIosHighlightedTextColor);
-  methods[18].selector = @selector(setIosHighlightedTextColorWithNSString:);
-  methods[19].selector = @selector(getTextColorHighlight);
-  methods[20].selector = @selector(setTextColorHighlightWithNSString:);
-  methods[21].selector = @selector(isIosIsHighlighted);
-  methods[22].selector = @selector(setIosIsHighlightedWithBoolean:);
-  methods[23].selector = @selector(getIosShadowColor);
-  methods[24].selector = @selector(setIosShadowColorWithNSString:);
-  methods[25].selector = @selector(getShadowColor);
-  methods[26].selector = @selector(setShadowColorWithNSString:);
-  methods[27].selector = @selector(getIosPreferredMaxLayoutWidth);
-  methods[28].selector = @selector(setIosPreferredMaxLayoutWidthWithFloat:);
-  methods[29].selector = @selector(isIosIsUserInteractionEnabled);
-  methods[30].selector = @selector(setIosIsUserInteractionEnabledWithBoolean:);
-  methods[31].selector = @selector(getText);
-  methods[32].selector = @selector(setTextWithNSString:);
-  methods[33].selector = @selector(getGravity);
-  methods[34].selector = @selector(setGravityWithNSString:);
-  methods[35].selector = @selector(getTextSize);
-  methods[36].selector = @selector(setTextSizeWithNSString:);
-  methods[37].selector = @selector(setPaddingWithNSString:);
-  methods[38].selector = @selector(getPaddingBottom);
-  methods[39].selector = @selector(setPaddingBottomWithNSString:);
-  methods[40].selector = @selector(getPaddingRight);
-  methods[41].selector = @selector(setPaddingRightWithNSString:);
-  methods[42].selector = @selector(getPaddingLeft);
-  methods[43].selector = @selector(setPaddingLeftWithNSString:);
-  methods[44].selector = @selector(getPaddingStart);
-  methods[45].selector = @selector(setPaddingStartWithNSString:);
-  methods[46].selector = @selector(getPaddingEnd);
-  methods[47].selector = @selector(setPaddingEndWithNSString:);
-  methods[48].selector = @selector(getPaddingTop);
-  methods[49].selector = @selector(setPaddingTopWithNSString:);
-  methods[50].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[51].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[52].selector = @selector(getAutoSizeTextType);
-  methods[53].selector = @selector(setAutoSizeTextTypeWithNSString:);
-  methods[54].selector = @selector(getAutoSizeMaxTextSize);
-  methods[55].selector = @selector(setAutoSizeMaxTextSizeWithNSString:);
-  methods[56].selector = @selector(getAutoSizeMinTextSize);
-  methods[57].selector = @selector(setAutoSizeMinTextSizeWithNSString:);
-  methods[58].selector = @selector(getAutoSizeStepGranularity);
-  methods[59].selector = @selector(setAutoSizeStepGranularityWithNSString:);
-  methods[60].selector = @selector(setAutoSizePresetSizesWithNSString:);
-  methods[61].selector = @selector(getMinLines);
-  methods[62].selector = @selector(setMinLinesWithInt:);
-  methods[63].selector = @selector(setLinesWithInt:);
-  methods[64].selector = @selector(getMaxLines);
-  methods[65].selector = @selector(setMaxLinesWithInt:);
-  methods[66].selector = @selector(getMinWidth);
-  methods[67].selector = @selector(setMinWidthWithNSString:);
-  methods[68].selector = @selector(getMinHeight);
-  methods[69].selector = @selector(setMinHeightWithNSString:);
-  methods[70].selector = @selector(getMaxWidth);
-  methods[71].selector = @selector(setMaxWidthWithNSString:);
-  methods[72].selector = @selector(getMaxHeight);
-  methods[73].selector = @selector(setMaxHeightWithNSString:);
-  methods[74].selector = @selector(getHeight);
-  methods[75].selector = @selector(setHeightWithNSString:);
-  methods[76].selector = @selector(getWidth);
-  methods[77].selector = @selector(setWidthWithNSString:);
-  methods[78].selector = @selector(getMaxEms);
-  methods[79].selector = @selector(setMaxEmsWithInt:);
-  methods[80].selector = @selector(getMinEms);
-  methods[81].selector = @selector(setMinEmsWithInt:);
-  methods[82].selector = @selector(setEmsWithInt:);
-  methods[83].selector = @selector(getEllipsize);
-  methods[84].selector = @selector(setEllipsizeWithNSString:);
-  methods[85].selector = @selector(setStartOrStopMarqueeWithBoolean:);
-  methods[86].selector = @selector(getMarqueeRepeatLimit);
-  methods[87].selector = @selector(setMarqueeRepeatLimitWithNSString:);
-  methods[88].selector = @selector(getJustificationMode);
-  methods[89].selector = @selector(setJustificationModeWithNSString:);
-  methods[90].selector = @selector(getShadowDx);
-  methods[91].selector = @selector(setShadowDxWithFloat:);
-  methods[92].selector = @selector(getShadowDy);
-  methods[93].selector = @selector(setShadowDyWithFloat:);
-  methods[94].selector = @selector(setSingleLineWithBoolean:);
-  methods[95].selector = @selector(setEditableWithBoolean:);
-  methods[96].selector = @selector(setTextAllCapsWithBoolean:);
-  methods[97].selector = @selector(setMaxLengthWithInt:);
-  methods[98].selector = @selector(setPasswordWithBoolean:);
-  methods[99].selector = @selector(setTypefaceWithNSString:);
-  methods[100].selector = @selector(setTextStyleWithNSString:);
-  methods[101].selector = @selector(setFontFamilyWithNSString:);
-  methods[102].selector = @selector(setDrawableLeftWithNSString:);
-  methods[103].selector = @selector(setDrawableStartWithNSString:);
-  methods[104].selector = @selector(setDrawableRightWithNSString:);
-  methods[105].selector = @selector(setDrawableEndWithNSString:);
-  methods[106].selector = @selector(setDrawableTopWithNSString:);
-  methods[107].selector = @selector(setDrawableBottomWithNSString:);
-  methods[108].selector = @selector(getDrawablePadding);
-  methods[109].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[110].selector = @selector(setDrawableTintWithNSString:);
-  methods[111].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[112].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[113].selector = @selector(getFirstBaselineToTopHeight);
-  methods[114].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[115].selector = @selector(getLastBaselineToBottomHeight);
-  methods[116].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[117].selector = @selector(getTextColor);
-  methods[118].selector = @selector(setTextColorWithNSString:);
-  methods[119].selector = @selector(setTextFormatWithNSString:);
+  methods[17].selector = @selector(isIosIsHighlighted);
+  methods[18].selector = @selector(setIosIsHighlightedWithBoolean:);
+  methods[19].selector = @selector(getIosShadowColor);
+  methods[20].selector = @selector(setIosShadowColorWithNSString:);
+  methods[21].selector = @selector(getShadowColor);
+  methods[22].selector = @selector(setShadowColorWithNSString:);
+  methods[23].selector = @selector(getIosPreferredMaxLayoutWidth);
+  methods[24].selector = @selector(setIosPreferredMaxLayoutWidthWithFloat:);
+  methods[25].selector = @selector(isIosIsUserInteractionEnabled);
+  methods[26].selector = @selector(setIosIsUserInteractionEnabledWithBoolean:);
+  methods[27].selector = @selector(getText);
+  methods[28].selector = @selector(setTextWithNSString:);
+  methods[29].selector = @selector(getGravity);
+  methods[30].selector = @selector(setGravityWithNSString:);
+  methods[31].selector = @selector(getTextSize);
+  methods[32].selector = @selector(setTextSizeWithNSString:);
+  methods[33].selector = @selector(setPaddingWithNSString:);
+  methods[34].selector = @selector(getPaddingBottom);
+  methods[35].selector = @selector(setPaddingBottomWithNSString:);
+  methods[36].selector = @selector(getPaddingRight);
+  methods[37].selector = @selector(setPaddingRightWithNSString:);
+  methods[38].selector = @selector(getPaddingLeft);
+  methods[39].selector = @selector(setPaddingLeftWithNSString:);
+  methods[40].selector = @selector(getPaddingStart);
+  methods[41].selector = @selector(setPaddingStartWithNSString:);
+  methods[42].selector = @selector(getPaddingEnd);
+  methods[43].selector = @selector(setPaddingEndWithNSString:);
+  methods[44].selector = @selector(getPaddingTop);
+  methods[45].selector = @selector(setPaddingTopWithNSString:);
+  methods[46].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[47].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[48].selector = @selector(getAutoSizeTextType);
+  methods[49].selector = @selector(setAutoSizeTextTypeWithNSString:);
+  methods[50].selector = @selector(getAutoSizeMaxTextSize);
+  methods[51].selector = @selector(setAutoSizeMaxTextSizeWithNSString:);
+  methods[52].selector = @selector(getAutoSizeMinTextSize);
+  methods[53].selector = @selector(setAutoSizeMinTextSizeWithNSString:);
+  methods[54].selector = @selector(getAutoSizeStepGranularity);
+  methods[55].selector = @selector(setAutoSizeStepGranularityWithNSString:);
+  methods[56].selector = @selector(setAutoSizePresetSizesWithNSString:);
+  methods[57].selector = @selector(getMinLines);
+  methods[58].selector = @selector(setMinLinesWithInt:);
+  methods[59].selector = @selector(setLinesWithInt:);
+  methods[60].selector = @selector(getMaxLines);
+  methods[61].selector = @selector(setMaxLinesWithInt:);
+  methods[62].selector = @selector(getMinWidth);
+  methods[63].selector = @selector(setMinWidthWithNSString:);
+  methods[64].selector = @selector(getMinHeight);
+  methods[65].selector = @selector(setMinHeightWithNSString:);
+  methods[66].selector = @selector(getMaxWidth);
+  methods[67].selector = @selector(setMaxWidthWithNSString:);
+  methods[68].selector = @selector(getMaxHeight);
+  methods[69].selector = @selector(setMaxHeightWithNSString:);
+  methods[70].selector = @selector(getHeight);
+  methods[71].selector = @selector(setHeightWithNSString:);
+  methods[72].selector = @selector(getWidth);
+  methods[73].selector = @selector(setWidthWithNSString:);
+  methods[74].selector = @selector(getMaxEms);
+  methods[75].selector = @selector(setMaxEmsWithInt:);
+  methods[76].selector = @selector(getMinEms);
+  methods[77].selector = @selector(setMinEmsWithInt:);
+  methods[78].selector = @selector(setEmsWithInt:);
+  methods[79].selector = @selector(getEllipsize);
+  methods[80].selector = @selector(setEllipsizeWithNSString:);
+  methods[81].selector = @selector(setStartOrStopMarqueeWithBoolean:);
+  methods[82].selector = @selector(getMarqueeRepeatLimit);
+  methods[83].selector = @selector(setMarqueeRepeatLimitWithNSString:);
+  methods[84].selector = @selector(getJustificationMode);
+  methods[85].selector = @selector(setJustificationModeWithNSString:);
+  methods[86].selector = @selector(getShadowDx);
+  methods[87].selector = @selector(setShadowDxWithFloat:);
+  methods[88].selector = @selector(getShadowDy);
+  methods[89].selector = @selector(setShadowDyWithFloat:);
+  methods[90].selector = @selector(setSingleLineWithBoolean:);
+  methods[91].selector = @selector(setEditableWithBoolean:);
+  methods[92].selector = @selector(setTextAllCapsWithBoolean:);
+  methods[93].selector = @selector(setMaxLengthWithInt:);
+  methods[94].selector = @selector(setPasswordWithBoolean:);
+  methods[95].selector = @selector(setTypefaceWithNSString:);
+  methods[96].selector = @selector(setTextStyleWithNSString:);
+  methods[97].selector = @selector(setFontFamilyWithNSString:);
+  methods[98].selector = @selector(setDrawableLeftWithNSString:);
+  methods[99].selector = @selector(setDrawableStartWithNSString:);
+  methods[100].selector = @selector(setDrawableRightWithNSString:);
+  methods[101].selector = @selector(setDrawableEndWithNSString:);
+  methods[102].selector = @selector(setDrawableTopWithNSString:);
+  methods[103].selector = @selector(setDrawableBottomWithNSString:);
+  methods[104].selector = @selector(getDrawablePadding);
+  methods[105].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[106].selector = @selector(setDrawableTintWithNSString:);
+  methods[107].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[108].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[109].selector = @selector(getFirstBaselineToTopHeight);
+  methods[110].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[111].selector = @selector(getLastBaselineToBottomHeight);
+  methods[112].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[113].selector = @selector(getTextColor);
+  methods[114].selector = @selector(setTextColorWithNSString:);
+  methods[115].selector = @selector(setTextFormatWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASLinkImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASLinkImpl;", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "Z", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setAutoSizeTextType", "setAutoSizeMaxTextSize", "setAutoSizeMinTextSize", "setAutoSizeStepGranularity", "setAutoSizePresetSizes", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setStartOrStopMarquee", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setPassword", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat" };
-  static const J2ObjcClassInfo _ASLinkImpl_LinkBean = { "LinkBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 120, 1, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASLinkImpl;", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "Z", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setAutoSizeTextType", "setAutoSizeMaxTextSize", "setAutoSizeMinTextSize", "setAutoSizeStepGranularity", "setAutoSizePresetSizes", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setStartOrStopMarquee", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setPassword", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat" };
+  static const J2ObjcClassInfo _ASLinkImpl_LinkBean = { "LinkBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 116, 1, 0, -1, -1, -1, -1 };
   return &_ASLinkImpl_LinkBean;
 }
 
