@@ -30,10 +30,14 @@ J2OBJC_IGNORE_DESIGNATED_END
                    withJavaUtilMap:(id<JavaUtilMap>)dependentAttributesMap
                    withASIFragment:(id<ASIFragment>)fragment {
   NSString *resPrefix = @"@layout/";
-  if ([((NSString *) nil_chk(ref)) java_hasPrefix:resPrefix]) {
+  NSString *inlineResource = JreRetainedLocalValue([((id<ASIFragment>) nil_chk(fragment)) getInlineResourceWithNSString:ref]);
+  if (inlineResource != nil) {
+    return ASPluginInvoker_parseWithNSString_withBoolean_withASIFragment_(inlineResource, true, fragment);
+  }
+  else if ([((NSString *) nil_chk(ref)) java_hasPrefix:resPrefix]) {
     NSString *fileName = [ref java_replaceFirst:resPrefix withReplacement:@""];
     NSString *fileResourcePath = JreStrcat("$$$", @"layout/", fileName, @".xml");
-    if ([@"dev" isEqual:[((id<ASIActivity>) nil_chk([((id<ASIFragment>) nil_chk(fragment)) getRootActivity])) getAssetMode]]) {
+    if ([@"dev" isEqual:[((id<ASIActivity>) nil_chk([fragment getRootActivity])) getAssetMode]]) {
       JavaUtilHashMap *urlMap = create_JavaUtilHashMap_init();
       [urlMap putWithId:JreStrcat("$$", @"www/", fileResourcePath) withId:NSString_java_formatWithNSString_withNSObjectArray_(@"http://%s/%s", [IOSObjectArray arrayWithObjects:(id[]){ [((id<ASIActivity>) nil_chk([fragment getRootActivity])) getDevServerIp], JreStrcat("$$", @"res/", fileResourcePath) } count:2 type:NSObject_class_()])];
       NSString *html = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(ASFileUtils_readFilesContentWithJavaUtilMap_(urlMap))) getWithId:JreStrcat("$$", @"www/", fileResourcePath)]);
