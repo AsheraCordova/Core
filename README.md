@@ -103,7 +103,7 @@ An example of adding validation to an edit text is shown below:
     onClick="validateForm"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/register_now"></TextView>
+    android:text="@string/register_now"></Button>
 ```
 
 ```
