@@ -1331,11 +1331,11 @@ return getPaddingRight();				}
 
 	private void setEnabled(Object objValue) {
 		if ((boolean) objValue) {
+			hTMLElement.getStyle().removeProperty("disabled");
+			select.removeAttribute("disabled");			
+		} else {
 			hTMLElement.getStyle().setProperty("disabled", "true");
 			select.setAttribute("disabled", "true");
-		} else {
-			hTMLElement.getStyle().removeProperty("disabled");
-			select.removeAttribute("disabled");
 		}
 	}
 	

@@ -587,8 +587,10 @@ id ASExpressionMethodHandler_totalWithASIWidget_withId_withJavaUtilMap_(id<ASIWi
   ASExpressionMethodHandler_initialize();
   id<JavaUtilList> objList = ASPluginInvoker_getListWithId_(obj);
   jfloat sum = 0;
-  for (id __strong object in nil_chk(objList)) {
-    JrePlusAssignFloatF(&sum, [((JavaLangFloat *) nil_chk(ASPluginInvoker_getFloatWithId_([((id<ASIWidget>) nil_chk(widget)) getModelByPathWithNSString:(NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(configMap)) getWithId:@"path"], [NSString class]) withId:object]))) floatValue]);
+  if (objList != nil) {
+    for (id __strong object in objList) {
+      JrePlusAssignFloatF(&sum, [((JavaLangFloat *) nil_chk(ASPluginInvoker_getFloatWithId_([((id<ASIWidget>) nil_chk(widget)) getModelByPathWithNSString:(NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(configMap)) getWithId:@"path"], [NSString class]) withId:object]))) floatValue]);
+    }
   }
   return JavaLangFloat_valueOfWithFloat_(sum);
 }

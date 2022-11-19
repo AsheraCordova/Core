@@ -2247,11 +2247,11 @@ return getCursorVisible();				}
 	//start - enabled
 	private void setEnabled(Object objValue) {
 		if ((boolean) objValue) {
+			hTMLElement.getStyle().removeProperty("disabled");
+			input.removeAttribute("disabled");			
+		} else {
 			hTMLElement.getStyle().setProperty("disabled", "true");
 			input.setAttribute("disabled", "true");
-		} else {
-			hTMLElement.getStyle().removeProperty("disabled");
-			input.removeAttribute("disabled");
 		}
 	}
 	//end - enabled

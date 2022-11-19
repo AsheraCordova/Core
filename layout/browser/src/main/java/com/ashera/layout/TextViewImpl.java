@@ -4040,8 +4040,12 @@ public void setTextFormat(String value) {
 		updateDrawableBounds(l, t, r, b);
 	}
 	private void nativeSetText(Object objValue) {
-		label.setInnerHTML((String) objValue);
+		String str = (String) objValue;
+		setInnerText(label, str);
 	}
+
+    @org.teavm.jso.JSBody(params = { "element", "text" }, script = "element.innerText = text;")
+    private static native void setInnerText(org.teavm.jso.dom.html.HTMLElement element, String text);
 
 
 	public int getLineHeightPadding() {

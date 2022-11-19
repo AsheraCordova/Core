@@ -1,6 +1,7 @@
 package com.ashera.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -179,7 +180,9 @@ public class FragmentManager {
 			} else {
 				int popCount = getPopCounter(destinationId, inclusive, 1);
 				org.teavm.jso.browser.Window.current().addEventListener("historyChange", new HistoryChangeListener(callback));
-				org.teavm.jso.browser.Window.current().getHistory().go(-popCount);
+				for (int i = 0; i < popCount; i++) {
+					org.teavm.jso.browser.Window.current().getHistory().go(-1);
+				}
 			}
 			makeCurrentFragmentActive();
 		} catch (DestinatinNotFoundException e) {
