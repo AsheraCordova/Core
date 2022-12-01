@@ -19,6 +19,13 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>com.simpligility.maven.plugins</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<version>4.3.0</version> <!-- use latest release -->
+				<extensions>true</extensions>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -50,10 +57,17 @@
 			<artifactId>AndroidJsonAdapter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.ashera</groupId>
 			<artifactId>htmlparser</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
 	</dependencies>
 </project>
