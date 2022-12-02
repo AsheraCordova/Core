@@ -22,9 +22,9 @@ dependencies {
     implementation 'com.ashera:tagsouphtmlparser:${project_version}';
     implementation 'com.ashera:cssparser:${project_version}';
 	implementation "com.ashera:widgetlibrary:${project_version}"    
-	implementation "com.ashera:SWTAndroid:${project_version}"
-	implementation "com.ashera:SWTCordovaLib:${project_version}"
-	implementation "com.ashera:SWTAndroidX-core:${project_version}"
+	implementation "com.ashera:AndroidJ:${project_version}"
+	implementation "com.ashera:CordovaAndroidJLib:${project_version}"
+	implementation "com.ashera:AndroidXJ:${project_version}"
 	implementation "com.ashera:WebCorePlugin:${project_version}"
 	implementation "com.google.j2objc:j2objc-annotations:${j2objc_version}"
 	implementation "com.ashera:htmlparser:${project_version}"

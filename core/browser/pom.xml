@@ -24,7 +24,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ashera</groupId>
-			<artifactId>SWTCordovaLib</artifactId>
+			<artifactId>CordovaAndroidJLib</artifactId>
 		</dependency>
 
 		<dependency>
@@ -32,12 +32,6 @@
 			<artifactId>WebLayouts</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>com.ashera</groupId>
-			<artifactId>SWTCordovaLib</artifactId>
-		</dependency>
-
-		<!-- xml end -->
 
 		<dependency>
 			<groupId>com.ashera</groupId>
@@ -47,11 +41,11 @@
 
 		<dependency>
 			<groupId>com.ashera</groupId>
-			<artifactId>SWTAndroid</artifactId>
+			<artifactId>AndroidJ</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.ashera</groupId>
-			<artifactId>SWTAndroidX-core</artifactId>
+			<artifactId>AndroidXJ</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.teavm</groupId>

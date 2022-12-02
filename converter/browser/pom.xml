@@ -23,15 +23,15 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ashera</groupId>
-			<artifactId>SWTAndroid</artifactId>
+			<artifactId>AndroidJ</artifactId>
 		</dependency>
 		<dependency>
-			<artifactId>SWTAndroidX-core</artifactId>
+			<artifactId>AndroidXJ</artifactId>
 			<groupId>com.ashera</groupId>
 		</dependency>
 		<dependency>
 			<groupId>com.ashera</groupId>
-			<artifactId>SWTCordovaLib</artifactId>
+			<artifactId>CordovaAndroidJLib</artifactId>
 		</dependency>
 		
 		<dependency>
