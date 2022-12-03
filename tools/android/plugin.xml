@@ -13,6 +13,7 @@
     <!-- start gentool -->
      <source-file src="gentool/androidbackup.js" target-dir="gentool"/>
      <source-file src="gentool/autoGenerateFiles.js" target-dir="gentool"/>
+     <source-file src="gentool/cleanup.js" target-dir="gentool"/>
      <source-file src="gentool/colors.xsl" target-dir="gentool"/>
      <source-file src="gentool/dimens.xsl" target-dir="gentool"/>
      <source-file src="gentool/fixIosSymLinks.js" target-dir="gentool"/>

@@ -127,6 +127,7 @@
     <!-- start gentool -->
      <source-file src="tools/android/gentool/androidbackup.js" target-dir="gentool"/>
      <source-file src="tools/android/gentool/autoGenerateFiles.js" target-dir="gentool"/>
+     <source-file src="tools/android/gentool/cleanup.js" target-dir="gentool"/>
      <source-file src="tools/android/gentool/colors.xsl" target-dir="gentool"/>
      <source-file src="tools/android/gentool/dimens.xsl" target-dir="gentool"/>
      <source-file src="tools/android/gentool/fixIosSymLinks.js" target-dir="gentool"/>
