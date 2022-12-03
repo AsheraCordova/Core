@@ -47,7 +47,8 @@ if (process.argv[2] == 'restore') {
 	start();
 	
 } else {
-	fs.removeSync(projectBasePath + "android_backup", { recursive: true, force: true });
+	fs.removeSync(projectBasePath + "android_backup/res", { recursive: true, force: true });
+	fs.removeSync(projectBasePath + "android_backup/tsc", { recursive: true, force: true });
 
 	console.log("backing up android res and tsc files.....");
 	cpx.copy("res/**", projectBasePath + "android_backup/res", {ignore : ["config.xml", "drawable-hdpi", "drawable-ldpi", "drawable-mdpi", "drawable-xhdpi", "drawable-xxhdpi" ]});
