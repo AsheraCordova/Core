@@ -52,7 +52,7 @@ if (process.argv[2] == 'restore') {
 
 	console.log("backing up android res and tsc files.....");
 	cpx.copy("res/**", projectBasePath + "android_backup/res", {ignore : ["config.xml", "drawable-hdpi", "drawable-ldpi", "drawable-mdpi", "drawable-xhdpi", "drawable-xxhdpi" ]});
-	cpx.copy("tsc" + "/**", projectBasePath + "android_backup/tsc", {ignore : ["node_modules", "*.lock", "android", "app", "R", "navigation", "app.ts", "ErrorDetailFragment.ts", "widget", "ErrorFragment.ts", "FragmentFactory", "app.ts"]});
+	cpx.copy("tsc" + "/**", projectBasePath + "android_backup/tsc", {ignore : ["node_modules", "*.lock", "android", "app", "R", "navigation", "app.ts", "ErrorDetailFragment.ts", "widget", "ErrorFragment.ts", "FragmentFactory", "app.ts","package-lock.json"]});
 	console.log("backing up android res and tsc files finished");
 }
 
