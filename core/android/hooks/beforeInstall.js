@@ -51,7 +51,11 @@ var filestoreplace = [
     <string name="length_atleast_error_message">Number should be atleast %d.</string>
     <string name="strongpassword_error_message">Password should contains atleast 8 characters, one uppercase letter, number and special character.</string>
     <string name="default_textOff">OFF</string>
-    <string name="default_textOn">ON</string>`
+    <string name="default_textOn">ON</string>`,
+	"node_modules/cordova-common/src/ConfigChanges/ConfigFile.js",
+    "function resolveConfigFilePath (project_dir, platform, file) {",
+    "function resolveConfigFilePath (project_dir, platform, file) {if (file === 'config.xml' && platform === 'browser') {return path.join(project_dir, 'config.xml');}",
+    
 ];
 
 var filestoappend = [
