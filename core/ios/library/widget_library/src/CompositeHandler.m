@@ -74,7 +74,8 @@ withASEventBusHandler_OnCompletedListener:(id<ASEventBusHandler_OnCompletedListe
 }
 
 - (void)doPerformWithId:(id)payload {
-  for (ASEventBusHandler * __strong handler in nil_chk(_handlers_)) [((ASEventBusHandler *) nil_chk(handler)) performWithId:payload withASEventBusHandler_OnCompletedListener:self->_accumulator_];
+  JavaUtilArrayList *handlers = create_JavaUtilArrayList_initWithJavaUtilCollection_(_handlers_);
+  for (ASEventBusHandler * __strong handler in handlers) [((ASEventBusHandler *) nil_chk(handler)) performWithId:payload withASEventBusHandler_OnCompletedListener:self->_accumulator_];
 }
 
 - (void)removeWithASEventBusHandler:(ASEventBusHandler *)eventBusHandler {
