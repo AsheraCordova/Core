@@ -24,13 +24,12 @@ dependencies {
 	def icu4j_version = '64.2';
 	def swt_version = '3.116.100';
 	def project_version = '1.0.0';
-	
+
 	// core
     implementation 'com.ashera:tagsouphtmlparser:${project_version}';
     implementation 'com.ashera:cssparser:${project_version}';
 	implementation "com.ashera:widgetlibrary:${project_version}"    
 	implementation "org.eclipse.platform:org.eclipse.swt:${swt_version}"
-	implementation "org.eclipse.platform:org.eclipse.swt.win32.win32.x86_64:${swt_version}"
 	implementation "com.ibm.icu:icu4j:${icu4j_version}"
 	implementation "org.apache.commons:commons-lang3:${commons_lang3_version}"
 	implementation "com.ashera:AndroidJ:${project_version}"
