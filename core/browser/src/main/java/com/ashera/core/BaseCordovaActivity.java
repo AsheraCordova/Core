@@ -95,6 +95,12 @@ public class BaseCordovaActivity extends org.apache.cordova.CordovaActivity impl
 
 	@Override
 	public float getScaleFactor() {
+		if (getSystemOS() != null) {
+			double scaleFactor = preferences.getDouble(getSystemOS() + "ScaleFactor", 1d);
+			if (scaleFactor != 1d) {
+				return (float) scaleFactor;
+			}
+		}
 		return (float) preferences.getDouble(PluginInvoker.getOS() +  "ScaleFactor", 1d);
 	}
 	
@@ -158,5 +164,9 @@ public class BaseCordovaActivity extends org.apache.cordova.CordovaActivity impl
 	@Override
 	public Object getRootWidget() {
 		throw new RuntimeException("Method not implemented in web");
+	}
+	
+	private String getSystemOS() {
+		return null;
 	}
 }
