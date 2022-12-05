@@ -1895,6 +1895,12 @@ public void setHint(String value) {
 		useSetItems = true;
 		cCombo = new org.eclipse.swt.custom.CCombo(ViewImpl.getParent(this), getStyle(params, fragment) | org.eclipse.swt.SWT.DROP_DOWN | org.eclipse.swt.SWT.READ_ONLY);
 		registerForAttributeCommandChain("hint");
+		cCombo.addDisposeListener((e) -> {
+			// hack for issue in mac
+			if(cCombo.isFocusControl()) { 
+				cCombo.getShell().forceFocus();
+			}
+		});
 	}
 	
 
