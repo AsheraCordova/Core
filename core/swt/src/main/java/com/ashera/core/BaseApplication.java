@@ -50,7 +50,7 @@ public abstract class BaseApplication  {
         browser.setBounds(0, 0, 0, 0);
         browser.setLayout(new AbsoluteLayout());
 
-        final Composite contentPanel = new Composite(shell, SWT.BORDER);
+        final Composite contentPanel = new Composite(shell, SWT.NONE);
 	    final StackLayout layout = new StackLayout();
 	    contentPanel.setLayout(layout);
 	    contentPanel.setBounds(0, 0, PreferenceWrapper.getCurrentWidth(), PreferenceWrapper.getDefaultHeight());

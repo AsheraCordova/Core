@@ -113,13 +113,13 @@ public class CorePlugin implements IPlugin, ICore {
 	@Override
 	public int getScreenWidth() {
 		Shell shell = Display.getDefault().getShells()[0];
-		return com.ashera.common.PreferenceWrapper.getCurrentWidth() - (shell.getBounds().width - shell.getClientArea().width + 4);
+		return com.ashera.common.PreferenceWrapper.getCurrentWidth() - (shell.getBounds().width - shell.getClientArea().width);
 	}
 
 	@Override
 	public int getScreenHeight() {		
 		Shell shell = Display.getDefault().getShells()[0];
-        return com.ashera.common.PreferenceWrapper.getDefaultHeight() - (shell.getBounds().height - shell.getClientArea().height + 4);
+        return com.ashera.common.PreferenceWrapper.getDefaultHeight() - (shell.getBounds().height - shell.getClientArea().height);
 	}
 	
 	@Override
