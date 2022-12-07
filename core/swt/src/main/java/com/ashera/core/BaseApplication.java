@@ -38,7 +38,7 @@ public abstract class BaseApplication  {
 	    	if (!file.getName().endsWith("xml") && !file.getName().endsWith("properties")) {
 	    	    if (!file.getName().endsWith(".xml")) {
 	                if (display.loadFont(file.getAbsolutePath())) {
-	                    System.out.println("loaded " + file.getAbsolutePath());
+	                    System.out.println("loaded font file " + file.getAbsolutePath());
 	                } else {
 	                    System.out.println("failed " + file.getAbsolutePath());
 	                }
