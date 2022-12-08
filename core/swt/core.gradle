@@ -24,6 +24,8 @@ dependencies {
 	def icu4j_version = '64.2';
 	def swt_version = '3.116.100';
 	def project_version = '1.0.0';
+	def aspectj_version = '1.9.1';
+	def logback_classic_version = '1.1.3';
 
 	// core
     implementation 'com.ashera:tagsouphtmlparser:${project_version}';
@@ -44,9 +46,10 @@ dependencies {
 	implementation "org.mini2Dx:universal-tween-engine:${universal_tween_engine_version}"
 	implementation "com.ashera:htmlparser:${project_version}"
 	implementation "org.imgscalr:imgscalr-lib:4.2"
-
-	def os = System.getProperty("os.name").toLowerCase()
-	
+	implementation "org.aspectj:aspectjrt:${aspectj_version}"
+	implementation "ch.qos.logback:logback-classic:${logback_classic_version}"
+ 	
+ 	def os = System.getProperty("os.name").toLowerCase()
 	if (os.contains("mac")) { 
 		implementation "com.ashera:SWTAopMacLib:${project_version}"
 	}
