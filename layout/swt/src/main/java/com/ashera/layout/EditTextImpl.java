@@ -3582,7 +3582,8 @@ public void setLastBaselineToBottomHeight(String value) {
 	    		@Override
 	    		public void focusGained(org.eclipse.swt.events.FocusEvent e) {
 	    			placeholder.setVisible(false);
-	    			text.forceFocus();
+	    			PluginInvoker.postDelayed(() -> text.forceFocus(), 0);
+	    			
 	    		}
 	    	});
 	    	
@@ -3606,6 +3607,7 @@ public void setLastBaselineToBottomHeight(String value) {
 			if (hint != null) {
 				placeholder.setText(hint);
 			}
+	    	clearMessage();
 
 			placeholder.setEditable(false);
 			syncListener(org.eclipse.swt.SWT.MouseEnter);
@@ -3816,6 +3818,10 @@ public void setLastBaselineToBottomHeight(String value) {
 	
 	private void setMessage() {
 		text.setMessage(this.hint);
+	}
+	
+	private void clearMessage() {
+		text.setMessage("");
 	}
 
 	private boolean isNativePlaceHolderSupported() {
