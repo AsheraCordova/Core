@@ -43,21 +43,12 @@
 #include "java/util/Stack.h"
 #include "java/util/UUID.h"
 #include "java/util/WeakHashMap.h"
-#include "java/util/function/Function.h"
-#include "java/util/function/Predicate.h"
-#include "java/util/stream/Collector.h"
-#include "java/util/stream/Collectors.h"
-#include "java/util/stream/Stream.h"
 
 @class JavaUtilStack;
 @class JavaUtilWeakHashMap;
-@protocol JavaUtilFunctionFunction;
-@protocol JavaUtilFunctionPredicate;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
-
-#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface ASGenericFragment () {
  @public
@@ -130,58 +121,6 @@ __attribute__((unused)) static void ASGenericFragment_sendLifeCycleEventWithNSSt
 
 __attribute__((unused)) static ASErrors *ASGenericFragment_getFatalErrors(ASGenericFragment *self);
 
-@interface ASGenericFragment_$Lambda$1 : NSObject < JavaUtilFunctionFunction >
-
-- (id)applyWithId:(id<JavaUtilList>)a;
-
-@end
-
-J2OBJC_STATIC_INIT(ASGenericFragment_$Lambda$1)
-
-inline ASGenericFragment_$Lambda$1 *ASGenericFragment_$Lambda$1_get_instance(void);
-static ASGenericFragment_$Lambda$1 *ASGenericFragment_$Lambda$1_instance;
-J2OBJC_STATIC_FIELD_OBJ_FINAL(ASGenericFragment_$Lambda$1, instance, ASGenericFragment_$Lambda$1 *)
-
-__attribute__((unused)) static void ASGenericFragment_$Lambda$1_init(ASGenericFragment_$Lambda$1 *self);
-
-__attribute__((unused)) static ASGenericFragment_$Lambda$1 *new_ASGenericFragment_$Lambda$1_init(void) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static ASGenericFragment_$Lambda$1 *create_ASGenericFragment_$Lambda$1_init(void);
-
-@interface ASGenericFragment_$Lambda$2 : NSObject < JavaUtilFunctionPredicate > {
- @public
-  IOSClass *val$type_;
-}
-
-- (jboolean)testWithId:(id)o;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASGenericFragment_$Lambda$2)
-
-__attribute__((unused)) static void ASGenericFragment_$Lambda$2_initWithIOSClass_(ASGenericFragment_$Lambda$2 *self, IOSClass *capture$0);
-
-__attribute__((unused)) static ASGenericFragment_$Lambda$2 *new_ASGenericFragment_$Lambda$2_initWithIOSClass_(IOSClass *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static ASGenericFragment_$Lambda$2 *create_ASGenericFragment_$Lambda$2_initWithIOSClass_(IOSClass *capture$0);
-
-@interface ASGenericFragment_$Lambda$3 : NSObject < JavaUtilFunctionPredicate > {
- @public
-  IOSClass *val$type_;
-}
-
-- (jboolean)testWithId:(id)o;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASGenericFragment_$Lambda$3)
-
-__attribute__((unused)) static void ASGenericFragment_$Lambda$3_initWithIOSClass_(ASGenericFragment_$Lambda$3 *self, IOSClass *capture$0);
-
-__attribute__((unused)) static ASGenericFragment_$Lambda$3 *new_ASGenericFragment_$Lambda$3_initWithIOSClass_(IOSClass *capture$0) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static ASGenericFragment_$Lambda$3 *create_ASGenericFragment_$Lambda$3_initWithIOSClass_(IOSClass *capture$0);
-
 J2OBJC_INITIALIZED_DEFN(ASGenericFragment)
 
 @implementation ASGenericFragment
@@ -210,7 +149,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (listeners_ == nil) {
     return nil;
   }
-  return [((id<JavaUtilStreamStream>) nil_chk([((id<JavaUtilStreamStream>) nil_chk([((id<JavaUtilStreamStream>) nil_chk([((id<JavaUtilCollection>) nil_chk([listeners_ values])) stream])) flatMapWithJavaUtilFunctionFunction:JreLoadStatic(ASGenericFragment_$Lambda$1, instance)])) filterWithJavaUtilFunctionPredicate:new_ASGenericFragment_$Lambda$2_initWithIOSClass_(type)])) collectWithJavaUtilStreamCollector:JavaUtilStreamCollectors_toList()];
+  id<JavaUtilCollection> values = [listeners_ values];
+  id<JavaUtilList> matchedListeners = new_JavaUtilArrayList_init();
+  for (id<JavaUtilList> __strong list in nil_chk(values)) {
+    for (id __strong o in nil_chk(list)) {
+      if ([nil_chk(o) java_getClass] == type) {
+        [matchedListeners addWithId:o];
+      }
+    }
+  }
+  return matchedListeners;
 }
 
 - (id<JavaUtilList>)getListenerWithASIWidget:(id<ASIWidget>)widget
@@ -218,7 +166,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (listeners_ == nil) {
     return nil;
   }
-  return [((id<JavaUtilStreamStream>) nil_chk([((id<JavaUtilStreamStream>) nil_chk([((id<JavaUtilList>) nil_chk([listeners_ getWithId:widget])) stream])) filterWithJavaUtilFunctionPredicate:new_ASGenericFragment_$Lambda$3_initWithIOSClass_(type)])) collectWithJavaUtilStreamCollector:JavaUtilStreamCollectors_toList()];
+  id<JavaUtilList> matchedListeners = new_JavaUtilArrayList_init();
+  id<JavaUtilList> list = [((JavaUtilWeakHashMap *) nil_chk(listeners_)) getWithId:widget];
+  if (list != nil) {
+    for (id __strong o in list) {
+      if ([nil_chk(o) java_getClass] == type) {
+        [matchedListeners addWithId:o];
+      }
+    }
+  }
+  return matchedListeners;
 }
 
 - (void)removeListenerWithASIWidget:(id<ASIWidget>)widget
@@ -819,106 +776,3 @@ ASErrors *ASGenericFragment_getFatalErrors(ASGenericFragment *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASGenericFragment)
-
-J2OBJC_INITIALIZED_DEFN(ASGenericFragment_$Lambda$1)
-
-@implementation ASGenericFragment_$Lambda$1
-
-- (id)applyWithId:(id<JavaUtilList>)a {
-  return [((id<JavaUtilList>) nil_chk(a)) stream];
-}
-
-- (id<JavaUtilFunctionFunction>)composeWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
-  return JavaUtilFunctionFunction_composeWithJavaUtilFunctionFunction_(self, arg0);
-}
-
-- (id<JavaUtilFunctionFunction>)andThenWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
-  return JavaUtilFunctionFunction_andThenWithJavaUtilFunctionFunction_(self, arg0);
-}
-
-+ (void)initialize {
-  if (self == [ASGenericFragment_$Lambda$1 class]) {
-    ASGenericFragment_$Lambda$1_instance = new_ASGenericFragment_$Lambda$1_init();
-    J2OBJC_SET_INITIALIZED(ASGenericFragment_$Lambda$1)
-  }
-}
-
-@end
-
-void ASGenericFragment_$Lambda$1_init(ASGenericFragment_$Lambda$1 *self) {
-  NSObject_init(self);
-}
-
-ASGenericFragment_$Lambda$1 *new_ASGenericFragment_$Lambda$1_init() {
-  J2OBJC_NEW_IMPL(ASGenericFragment_$Lambda$1, init)
-}
-
-ASGenericFragment_$Lambda$1 *create_ASGenericFragment_$Lambda$1_init() {
-  J2OBJC_CREATE_IMPL(ASGenericFragment_$Lambda$1, init)
-}
-
-@implementation ASGenericFragment_$Lambda$2
-
-- (jboolean)testWithId:(id)o {
-  return [nil_chk(o) java_getClass] == val$type_;
-}
-
-- (id<JavaUtilFunctionPredicate>)and__WithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
-  return JavaUtilFunctionPredicate_and__WithJavaUtilFunctionPredicate_(self, arg0);
-}
-
-- (id<JavaUtilFunctionPredicate>)negate {
-  return JavaUtilFunctionPredicate_negate(self);
-}
-
-- (id<JavaUtilFunctionPredicate>)or__WithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
-  return JavaUtilFunctionPredicate_or__WithJavaUtilFunctionPredicate_(self, arg0);
-}
-
-@end
-
-void ASGenericFragment_$Lambda$2_initWithIOSClass_(ASGenericFragment_$Lambda$2 *self, IOSClass *capture$0) {
-  self->val$type_ = capture$0;
-  NSObject_init(self);
-}
-
-ASGenericFragment_$Lambda$2 *new_ASGenericFragment_$Lambda$2_initWithIOSClass_(IOSClass *capture$0) {
-  J2OBJC_NEW_IMPL(ASGenericFragment_$Lambda$2, initWithIOSClass_, capture$0)
-}
-
-ASGenericFragment_$Lambda$2 *create_ASGenericFragment_$Lambda$2_initWithIOSClass_(IOSClass *capture$0) {
-  J2OBJC_CREATE_IMPL(ASGenericFragment_$Lambda$2, initWithIOSClass_, capture$0)
-}
-
-@implementation ASGenericFragment_$Lambda$3
-
-- (jboolean)testWithId:(id)o {
-  return [nil_chk(o) java_getClass] == val$type_;
-}
-
-- (id<JavaUtilFunctionPredicate>)and__WithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
-  return JavaUtilFunctionPredicate_and__WithJavaUtilFunctionPredicate_(self, arg0);
-}
-
-- (id<JavaUtilFunctionPredicate>)negate {
-  return JavaUtilFunctionPredicate_negate(self);
-}
-
-- (id<JavaUtilFunctionPredicate>)or__WithJavaUtilFunctionPredicate:(id<JavaUtilFunctionPredicate>)arg0 {
-  return JavaUtilFunctionPredicate_or__WithJavaUtilFunctionPredicate_(self, arg0);
-}
-
-@end
-
-void ASGenericFragment_$Lambda$3_initWithIOSClass_(ASGenericFragment_$Lambda$3 *self, IOSClass *capture$0) {
-  self->val$type_ = capture$0;
-  NSObject_init(self);
-}
-
-ASGenericFragment_$Lambda$3 *new_ASGenericFragment_$Lambda$3_initWithIOSClass_(IOSClass *capture$0) {
-  J2OBJC_NEW_IMPL(ASGenericFragment_$Lambda$3, initWithIOSClass_, capture$0)
-}
-
-ASGenericFragment_$Lambda$3 *create_ASGenericFragment_$Lambda$3_initWithIOSClass_(IOSClass *capture$0) {
-  J2OBJC_CREATE_IMPL(ASGenericFragment_$Lambda$3, initWithIOSClass_, capture$0)
-}

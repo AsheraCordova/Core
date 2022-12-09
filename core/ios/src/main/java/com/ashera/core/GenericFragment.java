@@ -3,6 +3,7 @@ package com.ashera.core;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +79,16 @@ public class GenericFragment extends Fragment implements IFragment{
 			return null;
 		}
 
-		return (List<T>) listeners.values().stream().flatMap(List::stream).filter((o) -> o.getClass() == type).collect(Collectors.toList());
+		Collection<List<Object>> values = listeners.values();
+		List<Object> matchedListeners = new ArrayList<>();
+		for (List<Object> list : values) {
+			for (Object o : list) {
+				if (o.getClass() == type) {
+					matchedListeners.add(o);
+				}
+			}
+		}
+		return (List<T>) matchedListeners;
 	}
 
 	@Override
@@ -86,7 +96,17 @@ public class GenericFragment extends Fragment implements IFragment{
 		if (listeners == null) {
 			return null;
 		}
-		return (List<T>) listeners.get(widget).stream().filter((o) -> o.getClass() == type).collect(Collectors.toList());
+
+		List<Object> matchedListeners = new ArrayList<>();
+		List<Object> list = listeners.get(widget);
+		if (list != null) {
+			for (Object o : list) {
+				if (o.getClass() == type) {
+					matchedListeners.add(o);
+				}
+			}
+		}
+		return (List<T>) matchedListeners;
 	}
 
 	@Override
