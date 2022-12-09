@@ -6476,12 +6476,19 @@ public void setInvalidateOnFrameChange(boolean value) {
 		View v = (View) w.asWidget();
 		View.DragShadowBuilder myShadow = new View.DragShadowBuilder(v);
 
-		// Starts the drag
-		v.startDragAndDrop(dragData,  // the data to be dragged
-		            myShadow,  // the drag shadow builder
-		            null,      // no need to use local data
-		            0          // flags (not currently used, set to 0)
-		);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			v.startDragAndDrop(dragData,  // the data to be dragged
+						myShadow,  // the drag shadow builder
+						null,      // no need to use local data
+						0          // flags (not currently used, set to 0)
+			);
+		} else {
+			v.startDrag(dragData,  // the data to be dragged
+					myShadow,  // the drag shadow builder
+					null,      // no need to use local data
+					0          // flags (not currently used, set to 0)
+			);
+		}
 	}
 	
 	//start - eventInfo
