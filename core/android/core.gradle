@@ -1,7 +1,11 @@
 repositories {
-    mavenLocal();
     google();
     jcenter();
+    
+    maven {
+    	url "https://raw.githubusercontent.com/AsheraCordova/mvn-ashera-java-repo/master/"
+	}
+    
 }
 
 dependencies {
