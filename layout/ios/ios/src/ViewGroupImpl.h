@@ -428,6 +428,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setMinWidthWithNSString:(NSString *)arg0;
 
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setModelDescPathWithNSString:(NSString *)arg0;
+
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setModelForWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setModelIdPathWithNSString:(NSString *)arg0;
@@ -456,7 +458,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setPaddingBottomWithNSString:(NSString *)arg0;
 
@@ -631,6 +637,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetMinHeight;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetMinWidth;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetModelDescPath;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetModelIdPath;
 

@@ -6,6 +6,9 @@
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "WidgetAttribute.h"
+#include "java/lang/Integer.h"
+
+@class JavaLangInteger;
 
 
 @interface ASWidgetAttribute () {
@@ -20,6 +23,7 @@
   jint bufferStrategy_;
   jint updateUiFlag_;
   jboolean applyBeforeChildAdd_;
+  JavaLangInteger *stylePriority_;
   jint simpleWrapableViewStrategy_;
 }
 
@@ -32,6 +36,7 @@ J2OBJC_FIELD_SETTER(ASWidgetAttribute, attributeType_, NSString *)
 J2OBJC_FIELD_SETTER(ASWidgetAttribute, arrayType_, NSString *)
 J2OBJC_FIELD_SETTER(ASWidgetAttribute, arrayListToFinalType_, NSString *)
 J2OBJC_FIELD_SETTER(ASWidgetAttribute, decorator_, NSString *)
+J2OBJC_FIELD_SETTER(ASWidgetAttribute, stylePriority_, JavaLangInteger *)
 
 __attribute__((unused)) static void ASWidgetAttribute_initWithASWidgetAttribute_Builder_(ASWidgetAttribute *self, ASWidgetAttribute_Builder *builder);
 
@@ -52,6 +57,7 @@ __attribute__((unused)) static ASWidgetAttribute *create_ASWidgetAttribute_initW
   jboolean applyBeforeChildAdd_;
   NSString *arrayType_;
   NSString *arrayListToFinalType_;
+  JavaLangInteger *stylePriority_;
 }
 
 @end
@@ -61,8 +67,13 @@ J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, attributeType_, NSString *)
 J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, decorator_, NSString *)
 J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, arrayType_, NSString *)
 J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, arrayListToFinalType_, NSString *)
+J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, stylePriority_, JavaLangInteger *)
 
 @implementation ASWidgetAttribute
+
+- (JavaLangInteger *)getStylePriority {
+  return stylePriority_;
+}
 
 - (instancetype)initWithASWidgetAttribute_Builder:(ASWidgetAttribute_Builder *)builder {
   ASWidgetAttribute_initWithASWidgetAttribute_Builder_(self, builder);
@@ -178,11 +189,13 @@ J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, arrayListToFinalType_, NSString *
   RELEASE_(arrayType_);
   RELEASE_(arrayListToFinalType_);
   RELEASE_(decorator_);
+  RELEASE_(stylePriority_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
+    { NULL, "LJavaLangInteger;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
@@ -213,32 +226,33 @@ J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, arrayListToFinalType_, NSString *
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASWidgetAttribute_Builder:);
-  methods[1].selector = @selector(getArrayListToFinalType);
-  methods[2].selector = @selector(setArrayListToFinalTypeWithNSString:);
-  methods[3].selector = @selector(isApplyBeforeChildAdd);
-  methods[4].selector = @selector(getAttributeName);
-  methods[5].selector = @selector(setAttributeNameWithNSString:);
-  methods[6].selector = @selector(getAttributeType);
-  methods[7].selector = @selector(setAttributeTypeWithNSString:);
-  methods[8].selector = @selector(isEqual:);
-  methods[9].selector = @selector(hash);
-  methods[10].selector = @selector(getOrder);
-  methods[11].selector = @selector(setOrderWithInt:);
-  methods[12].selector = @selector(isForChild);
-  methods[13].selector = @selector(setForChildWithBoolean:);
-  methods[14].selector = @selector(getDecorator);
-  methods[15].selector = @selector(setDecoratorWithNSString:);
-  methods[16].selector = @selector(getBufferStrategy);
-  methods[17].selector = @selector(setBufferStrategyWithInt:);
-  methods[18].selector = @selector(getUpdateUiFlag);
-  methods[19].selector = @selector(setUpdateUiFlagWithInt:);
-  methods[20].selector = @selector(description);
-  methods[21].selector = @selector(getArrayType);
-  methods[22].selector = @selector(setArrayTypeWithNSString:);
-  methods[23].selector = @selector(builder);
-  methods[24].selector = @selector(getSimpleWrapableViewStrategy);
-  methods[25].selector = @selector(setSimpleWrapableViewStrategyWithInt:);
+  methods[0].selector = @selector(getStylePriority);
+  methods[1].selector = @selector(initWithASWidgetAttribute_Builder:);
+  methods[2].selector = @selector(getArrayListToFinalType);
+  methods[3].selector = @selector(setArrayListToFinalTypeWithNSString:);
+  methods[4].selector = @selector(isApplyBeforeChildAdd);
+  methods[5].selector = @selector(getAttributeName);
+  methods[6].selector = @selector(setAttributeNameWithNSString:);
+  methods[7].selector = @selector(getAttributeType);
+  methods[8].selector = @selector(setAttributeTypeWithNSString:);
+  methods[9].selector = @selector(isEqual:);
+  methods[10].selector = @selector(hash);
+  methods[11].selector = @selector(getOrder);
+  methods[12].selector = @selector(setOrderWithInt:);
+  methods[13].selector = @selector(isForChild);
+  methods[14].selector = @selector(setForChildWithBoolean:);
+  methods[15].selector = @selector(getDecorator);
+  methods[16].selector = @selector(setDecoratorWithNSString:);
+  methods[17].selector = @selector(getBufferStrategy);
+  methods[18].selector = @selector(setBufferStrategyWithInt:);
+  methods[19].selector = @selector(getUpdateUiFlag);
+  methods[20].selector = @selector(setUpdateUiFlagWithInt:);
+  methods[21].selector = @selector(description);
+  methods[22].selector = @selector(getArrayType);
+  methods[23].selector = @selector(setArrayTypeWithNSString:);
+  methods[24].selector = @selector(builder);
+  methods[25].selector = @selector(getSimpleWrapableViewStrategy);
+  methods[26].selector = @selector(setSimpleWrapableViewStrategyWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "attributeName_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -251,10 +265,11 @@ J2OBJC_FIELD_SETTER(ASWidgetAttribute_Builder, arrayListToFinalType_, NSString *
     { "bufferStrategy_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "updateUiFlag_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "applyBeforeChildAdd_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "stylePriority_", "LJavaLangInteger;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "simpleWrapableViewStrategy_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASWidgetAttribute_Builder;", "setArrayListToFinalType", "LNSString;", "setAttributeName", "setAttributeType", "equals", "LNSObject;", "hashCode", "setOrder", "I", "setForChild", "Z", "setDecorator", "setBufferStrategy", "setUpdateUiFlag", "toString", "setArrayType", "setSimpleWrapableViewStrategy" };
-  static const J2ObjcClassInfo _ASWidgetAttribute = { "WidgetAttribute", "com.ashera.widget", ptrTable, methods, fields, 7, 0x1, 26, 11, -1, 0, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASWidgetAttribute = { "WidgetAttribute", "com.ashera.widget", ptrTable, methods, fields, 7, 0x1, 27, 12, -1, 0, -1, -1, -1 };
   return &_ASWidgetAttribute;
 }
 
@@ -274,6 +289,7 @@ void ASWidgetAttribute_initWithASWidgetAttribute_Builder_(ASWidgetAttribute *sel
   JreStrongAssign(&self->arrayType_, builder->arrayType_);
   JreStrongAssign(&self->arrayListToFinalType_, builder->arrayListToFinalType_);
   self->simpleWrapableViewStrategy_ = builder->simpleWrapableViewStrategy_;
+  JreStrongAssign(&self->stylePriority_, builder->stylePriority_);
 }
 
 ASWidgetAttribute *new_ASWidgetAttribute_initWithASWidgetAttribute_Builder_(ASWidgetAttribute_Builder *builder) {
@@ -325,6 +341,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
+- (ASWidgetAttribute_Builder *)withStylePriorityWithJavaLangInteger:(JavaLangInteger *)stylePriority {
+  JreStrongAssign(&self->stylePriority_, stylePriority);
+  return self;
+}
+
 - (ASWidgetAttribute_Builder *)forChild {
   self->isForChild_ = true;
   return self;
@@ -365,6 +386,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   RELEASE_(decorator_);
   RELEASE_(arrayType_);
   RELEASE_(arrayListToFinalType_);
+  RELEASE_(stylePriority_);
   [super dealloc];
 }
 
@@ -376,11 +398,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LASWidgetAttribute_Builder;", 0x1, 3, 1, -1, -1, -1, -1 },
     { NULL, "LASWidgetAttribute_Builder;", 0x1, 4, 1, -1, -1, -1, -1 },
     { NULL, "LASWidgetAttribute_Builder;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LASWidgetAttribute_Builder;", 0x1, 7, 8, -1, -1, -1, -1 },
     { NULL, "LASWidgetAttribute_Builder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASWidgetAttribute_Builder;", 0x1, 7, 1, -1, -1, -1, -1 },
-    { NULL, "LASWidgetAttribute_Builder;", 0x1, 8, 6, -1, -1, -1, -1 },
-    { NULL, "LASWidgetAttribute_Builder;", 0x1, 9, 6, -1, -1, -1, -1 },
+    { NULL, "LASWidgetAttribute_Builder;", 0x1, 9, 1, -1, -1, -1, -1 },
     { NULL, "LASWidgetAttribute_Builder;", 0x1, 10, 6, -1, -1, -1, -1 },
+    { NULL, "LASWidgetAttribute_Builder;", 0x1, 11, 6, -1, -1, -1, -1 },
+    { NULL, "LASWidgetAttribute_Builder;", 0x1, 12, 6, -1, -1, -1, -1 },
     { NULL, "LASWidgetAttribute_Builder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASWidgetAttribute;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
@@ -393,13 +416,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[3].selector = @selector(withArrayTypeWithNSString:);
   methods[4].selector = @selector(withArrayListToFinalTypeWithNSString:);
   methods[5].selector = @selector(withOrderWithInt:);
-  methods[6].selector = @selector(forChild);
-  methods[7].selector = @selector(withDecoratorWithNSString:);
-  methods[8].selector = @selector(withBufferStrategyWithInt:);
-  methods[9].selector = @selector(withSimpleWrapableViewStrategyWithInt:);
-  methods[10].selector = @selector(withUiFlagWithInt:);
-  methods[11].selector = @selector(beforeChildAdd);
-  methods[12].selector = @selector(build);
+  methods[6].selector = @selector(withStylePriorityWithJavaLangInteger:);
+  methods[7].selector = @selector(forChild);
+  methods[8].selector = @selector(withDecoratorWithNSString:);
+  methods[9].selector = @selector(withBufferStrategyWithInt:);
+  methods[10].selector = @selector(withSimpleWrapableViewStrategyWithInt:);
+  methods[11].selector = @selector(withUiFlagWithInt:);
+  methods[12].selector = @selector(beforeChildAdd);
+  methods[13].selector = @selector(build);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "attributeName_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -413,9 +437,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "applyBeforeChildAdd_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "arrayType_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "arrayListToFinalType_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "stylePriority_", "LJavaLangInteger;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "withName", "LNSString;", "withType", "withArrayType", "withArrayListToFinalType", "withOrder", "I", "withDecorator", "withBufferStrategy", "withSimpleWrapableViewStrategy", "withUiFlag", "LASWidgetAttribute;" };
-  static const J2ObjcClassInfo _ASWidgetAttribute_Builder = { "Builder", "com.ashera.widget", ptrTable, methods, fields, 7, 0x19, 13, 11, 11, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "withName", "LNSString;", "withType", "withArrayType", "withArrayListToFinalType", "withOrder", "I", "withStylePriority", "LJavaLangInteger;", "withDecorator", "withBufferStrategy", "withSimpleWrapableViewStrategy", "withUiFlag", "LASWidgetAttribute;" };
+  static const J2ObjcClassInfo _ASWidgetAttribute_Builder = { "Builder", "com.ashera.widget", ptrTable, methods, fields, 7, 0x19, 14, 12, 13, -1, -1, -1, -1 };
   return &_ASWidgetAttribute_Builder;
 }
 

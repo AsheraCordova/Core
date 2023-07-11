@@ -16,20 +16,46 @@
 #include "WidgetAttribute.h"
 #include "WidgetAttributeMap.h"
 #include "WidgetFactory.h"
+#include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
+#include "java/util/Comparator.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
 #include "java/util/TreeMap.h"
+#include "java/util/TreeSet.h"
+#include "java/util/function/Function.h"
+#include "java/util/function/ToDoubleFunction.h"
+#include "java/util/function/ToIntFunction.h"
+#include "java/util/function/ToLongFunction.h"
 
+@protocol JavaUtilComparator;
+@protocol JavaUtilFunctionFunction;
+@protocol JavaUtilFunctionToDoubleFunction;
+@protocol JavaUtilFunctionToIntFunction;
+@protocol JavaUtilFunctionToLongFunction;
 @protocol JavaUtilMap;
 
+
+#pragma clang diagnostic ignored "-Wprotocol"
+
+@interface ASWidgetFactory ()
+
++ (void)updateStyleAttrsWithNSString:(NSString *)localname
+               withASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
+
+@end
 
 inline id<JavaUtilMap> ASWidgetFactory_get_attributeMap(void);
 inline id<JavaUtilMap> ASWidgetFactory_set_attributeMap(id<JavaUtilMap> value);
 static id<JavaUtilMap> ASWidgetFactory_attributeMap;
 J2OBJC_STATIC_FIELD_OBJ(ASWidgetFactory, attributeMap, id<JavaUtilMap>)
+
+inline id<JavaUtilMap> ASWidgetFactory_get_styleAttributes(void);
+inline id<JavaUtilMap> ASWidgetFactory_set_styleAttributes(id<JavaUtilMap> value);
+static id<JavaUtilMap> ASWidgetFactory_styleAttributes;
+J2OBJC_STATIC_FIELD_OBJ(ASWidgetFactory, styleAttributes, id<JavaUtilMap>)
 
 inline id<JavaUtilMap> ASWidgetFactory_get_constructorAttributeMap(void);
 inline id<JavaUtilMap> ASWidgetFactory_set_constructorAttributeMap(id<JavaUtilMap> value);
@@ -70,6 +96,25 @@ inline id<ASICompositeDecorator> ASWidgetFactory_get_compositeDecorator(void);
 inline id<ASICompositeDecorator> ASWidgetFactory_set_compositeDecorator(id<ASICompositeDecorator> value);
 static id<ASICompositeDecorator> ASWidgetFactory_compositeDecorator;
 J2OBJC_STATIC_FIELD_OBJ(ASWidgetFactory, compositeDecorator, id<ASICompositeDecorator>)
+
+__attribute__((unused)) static void ASWidgetFactory_updateStyleAttrsWithNSString_withASWidgetAttribute_(NSString *localname, ASWidgetAttribute *widgetAttribute);
+
+@interface ASWidgetFactory_1 : NSObject < JavaUtilComparator >
+
+- (instancetype)init;
+
+- (jint)compareWithId:(ASWidgetAttribute *)o1
+               withId:(ASWidgetAttribute *)o2;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASWidgetFactory_1)
+
+__attribute__((unused)) static void ASWidgetFactory_1_init(ASWidgetFactory_1 *self);
+
+__attribute__((unused)) static ASWidgetFactory_1 *new_ASWidgetFactory_1_init(void) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASWidgetFactory_1 *create_ASWidgetFactory_1_init(void);
 
 J2OBJC_INITIALIZED_DEFN(ASWidgetFactory)
 
@@ -154,6 +199,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_(localname, widgetAttribute);
 }
 
++ (void)updateStyleAttrsWithNSString:(NSString *)localname
+               withASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute {
+  ASWidgetFactory_updateStyleAttrsWithNSString_withASWidgetAttribute_(localname, widgetAttribute);
+}
+
++ (id<JavaUtilSet>)getStyleAttributesWithNSString:(NSString *)localname {
+  return ASWidgetFactory_getStyleAttributesWithNSString_(localname);
+}
+
 + (ASWidgetAttribute *)getAttributeWithNSString:(NSString *)localname
                                    withNSString:(NSString *)attributeName {
   return ASWidgetFactory_getAttributeWithNSString_withNSString_(localname, attributeName);
@@ -174,7 +228,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASWidgetFactory_registerBehaviorWithNSString_withASIBehavior_(decorator, behavior);
 }
 
-+ (id<ASIBehavior>)getBehaviorWithNSString:(NSString *)behavior {
++ (id)getBehaviorWithNSString:(NSString *)behavior {
   return ASWidgetFactory_getBehaviorWithNSString_(behavior);
 }
 
@@ -201,12 +255,14 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x9, 23, 3, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 24, 6, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 24, 25, -1, -1, -1, -1 },
-    { NULL, "LASWidgetAttribute;", 0x9, 26, 27, -1, -1, -1, -1 },
-    { NULL, "LASILifeCycleDecorator;", 0x9, 28, 29, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 30, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 32, 33, -1, -1, -1, -1 },
-    { NULL, "LASIBehavior;", 0x9, 34, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 26, 25, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x9, 27, 3, -1, 28, -1, -1 },
+    { NULL, "LASWidgetAttribute;", 0x9, 29, 30, -1, -1, -1, -1 },
+    { NULL, "LASILifeCycleDecorator;", 0x9, 31, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 33, 34, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 35, 36, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 37, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 38, 39, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -227,32 +283,36 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[13].selector = @selector(isAttributeLoadedWithNSString:);
   methods[14].selector = @selector(registerAttributeWithNSString:withASWidgetAttribute_Builder:);
   methods[15].selector = @selector(registerAttributeWithNSString:withASWidgetAttribute:);
-  methods[16].selector = @selector(getAttributeWithNSString:withNSString:);
-  methods[17].selector = @selector(getLifeCycleDecorWithNSString:withASIWidget:);
-  methods[18].selector = @selector(registerLifeCycleDecoratorWithNSString:withASILifeCycleDecorator:);
-  methods[19].selector = @selector(registerBehaviorWithNSString:withASIBehavior:);
-  methods[20].selector = @selector(getBehaviorWithNSString:);
-  methods[21].selector = @selector(registerAttributableForWithNSString:withASIAttributable:);
+  methods[16].selector = @selector(updateStyleAttrsWithNSString:withASWidgetAttribute:);
+  methods[17].selector = @selector(getStyleAttributesWithNSString:);
+  methods[18].selector = @selector(getAttributeWithNSString:withNSString:);
+  methods[19].selector = @selector(getLifeCycleDecorWithNSString:withASIWidget:);
+  methods[20].selector = @selector(registerLifeCycleDecoratorWithNSString:withASILifeCycleDecorator:);
+  methods[21].selector = @selector(registerBehaviorWithNSString:withASIBehavior:);
+  methods[22].selector = @selector(getBehaviorWithNSString:);
+  methods[23].selector = @selector(registerAttributableForWithNSString:withASIAttributable:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "attributeMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 37, 38, -1 },
-    { "constructorAttributeMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 39, 38, -1 },
-    { "registrationMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 40, 41, -1 },
-    { "decoratorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 42, 43, -1 },
-    { "lifeCycleDecoratorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 44, 45, -1 },
-    { "behaviorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 46, 47, -1 },
-    { "attributableForMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 48, 49, -1 },
-    { "attributableMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 50, 51, -1 },
-    { "compositeDecorator", "LASICompositeDecorator;", .constantValue.asLong = 0, 0xa, -1, 52, -1, -1 },
+    { "attributeMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 40, 41, -1 },
+    { "styleAttributes", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 42, 43, -1 },
+    { "constructorAttributeMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 44, 41, -1 },
+    { "registrationMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 45, 46, -1 },
+    { "decoratorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 47, 48, -1 },
+    { "lifeCycleDecoratorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 49, 50, -1 },
+    { "behaviorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 51, 52, -1 },
+    { "attributableForMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 53, 54, -1 },
+    { "attributableMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 55, 56, -1 },
+    { "compositeDecorator", "LASICompositeDecorator;", .constantValue.asLong = 0, 0xa, -1, 57, -1, -1 },
   };
-  static const void *ptrTable[] = { "createWidget", "LNSString;LNSString;LASHasWidgets;Z", "getConstructorAttributes", "LNSString;", "(Ljava/lang/String;)Ljava/util/Set<Ljava/lang/String;>;", "registerConstructorAttribute", "LNSString;LASWidgetAttribute_Builder;", "register", "LASICompositeDecorator;", "getAttributable", "getAttributables", "[LNSString;", "([Ljava/lang/String;)Ljava/util/List<Lcom/ashera/widget/IAttributable;>;", "get", "LNSString;Z", "getDecorator", "LASICompositeDecorator;LASIWidget;LNSString;", "loadWidget", "LASIWidget;LASWidgetAttributeMap;LASIFragment;LJavaUtilMap;", "(Lcom/ashera/widget/IWidget;Lcom/ashera/widget/WidgetAttributeMap;Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "LASIWidget;", "registerDecorator", "LASIDecorator;", "isAttributeLoaded", "registerAttribute", "LNSString;LASWidgetAttribute;", "getAttribute", "LNSString;LNSString;", "getLifeCycleDecor", "LNSString;LASIWidget;", "registerLifeCycleDecorator", "LNSString;LASILifeCycleDecorator;", "registerBehavior", "LNSString;LASIBehavior;", "getBehavior", "registerAttributableFor", "LNSString;LASIAttributable;", &ASWidgetFactory_attributeMap, "Ljava/util/Map<Ljava/lang/String;Ljava/util/TreeMap<Ljava/lang/String;Lcom/ashera/widget/WidgetAttribute;>;>;", &ASWidgetFactory_constructorAttributeMap, &ASWidgetFactory_registrationMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;", &ASWidgetFactory_decoratorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IDecorator;>;", &ASWidgetFactory_lifeCycleDecoratorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/ILifeCycleDecorator;>;", &ASWidgetFactory_behaviorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IBehavior;>;", &ASWidgetFactory_attributableForMap, "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Lcom/ashera/widget/IAttributable;>;>;", &ASWidgetFactory_attributableMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IAttributable;>;", &ASWidgetFactory_compositeDecorator };
-  static const J2ObjcClassInfo _ASWidgetFactory = { "WidgetFactory", "com.ashera.widget", ptrTable, methods, fields, 7, 0x1, 22, 9, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "createWidget", "LNSString;LNSString;LASHasWidgets;Z", "getConstructorAttributes", "LNSString;", "(Ljava/lang/String;)Ljava/util/Set<Ljava/lang/String;>;", "registerConstructorAttribute", "LNSString;LASWidgetAttribute_Builder;", "register", "LASICompositeDecorator;", "getAttributable", "getAttributables", "[LNSString;", "([Ljava/lang/String;)Ljava/util/List<Lcom/ashera/widget/IAttributable;>;", "get", "LNSString;Z", "getDecorator", "LASICompositeDecorator;LASIWidget;LNSString;", "loadWidget", "LASIWidget;LASWidgetAttributeMap;LASIFragment;LJavaUtilMap;", "(Lcom/ashera/widget/IWidget;Lcom/ashera/widget/WidgetAttributeMap;Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "LASIWidget;", "registerDecorator", "LASIDecorator;", "isAttributeLoaded", "registerAttribute", "LNSString;LASWidgetAttribute;", "updateStyleAttrs", "getStyleAttributes", "(Ljava/lang/String;)Ljava/util/Set<Lcom/ashera/widget/WidgetAttribute;>;", "getAttribute", "LNSString;LNSString;", "getLifeCycleDecor", "LNSString;LASIWidget;", "registerLifeCycleDecorator", "LNSString;LASILifeCycleDecorator;", "registerBehavior", "LNSString;LASIBehavior;", "getBehavior", "registerAttributableFor", "LNSString;LASIAttributable;", &ASWidgetFactory_attributeMap, "Ljava/util/Map<Ljava/lang/String;Ljava/util/TreeMap<Ljava/lang/String;Lcom/ashera/widget/WidgetAttribute;>;>;", &ASWidgetFactory_styleAttributes, "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Lcom/ashera/widget/WidgetAttribute;>;>;", &ASWidgetFactory_constructorAttributeMap, &ASWidgetFactory_registrationMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;", &ASWidgetFactory_decoratorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IDecorator;>;", &ASWidgetFactory_lifeCycleDecoratorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/ILifeCycleDecorator;>;", &ASWidgetFactory_behaviorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IBehavior;>;", &ASWidgetFactory_attributableForMap, "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Lcom/ashera/widget/IAttributable;>;>;", &ASWidgetFactory_attributableMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IAttributable;>;", &ASWidgetFactory_compositeDecorator };
+  static const J2ObjcClassInfo _ASWidgetFactory = { "WidgetFactory", "com.ashera.widget", ptrTable, methods, fields, 7, 0x1, 24, 10, -1, -1, -1, -1, -1 };
   return &_ASWidgetFactory;
 }
 
 + (void)initialize {
   if (self == [ASWidgetFactory class]) {
     JreStrongAssignAndConsume(&ASWidgetFactory_attributeMap, new_JavaUtilHashMap_init());
+    JreStrongAssignAndConsume(&ASWidgetFactory_styleAttributes, new_JavaUtilHashMap_init());
     JreStrongAssignAndConsume(&ASWidgetFactory_constructorAttributeMap, new_JavaUtilHashMap_init());
     JreStrongAssignAndConsume(&ASWidgetFactory_registrationMap, new_JavaUtilHashMap_init());
     JreStrongAssignAndConsume(&ASWidgetFactory_decoratorMap, new_JavaUtilHashMap_init());
@@ -414,13 +474,29 @@ void ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder
 
 void ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_(NSString *localname, ASWidgetAttribute *widgetAttribute) {
   ASWidgetFactory_initialize();
+  if ([((ASWidgetAttribute *) nil_chk(widgetAttribute)) getStylePriority] != nil) {
+    ASWidgetFactory_updateStyleAttrsWithNSString_withASWidgetAttribute_(localname, widgetAttribute);
+  }
   if (![((id<JavaUtilMap>) nil_chk(ASWidgetFactory_attributeMap)) containsKeyWithId:localname]) {
     [((id<JavaUtilMap>) nil_chk(ASWidgetFactory_attributeMap)) putWithId:localname withId:create_JavaUtilTreeMap_init()];
   }
-  NSString *attributeName = JreRetainedLocalValue([((ASWidgetAttribute *) nil_chk(widgetAttribute)) getAttributeName]);
+  NSString *attributeName = JreRetainedLocalValue([widgetAttribute getAttributeName]);
   if (![((JavaUtilTreeMap *) nil_chk([((id<JavaUtilMap>) nil_chk(ASWidgetFactory_attributeMap)) getWithId:localname])) containsKeyWithId:attributeName]) {
     [((JavaUtilTreeMap *) nil_chk([((id<JavaUtilMap>) nil_chk(ASWidgetFactory_attributeMap)) getWithId:localname])) putWithId:attributeName withId:widgetAttribute];
   }
+}
+
+void ASWidgetFactory_updateStyleAttrsWithNSString_withASWidgetAttribute_(NSString *localname, ASWidgetAttribute *widgetAttribute) {
+  ASWidgetFactory_initialize();
+  if (![((id<JavaUtilMap>) nil_chk(ASWidgetFactory_styleAttributes)) containsKeyWithId:localname]) {
+    [((id<JavaUtilMap>) nil_chk(ASWidgetFactory_styleAttributes)) putWithId:localname withId:create_JavaUtilTreeSet_initWithJavaUtilComparator_(create_ASWidgetFactory_1_init())];
+  }
+  [((id<JavaUtilSet>) nil_chk([((id<JavaUtilMap>) nil_chk(ASWidgetFactory_styleAttributes)) getWithId:localname])) addWithId:widgetAttribute];
+}
+
+id<JavaUtilSet> ASWidgetFactory_getStyleAttributesWithNSString_(NSString *localname) {
+  ASWidgetFactory_initialize();
+  return [((id<JavaUtilMap>) nil_chk(ASWidgetFactory_styleAttributes)) getWithId:localname];
 }
 
 ASWidgetAttribute *ASWidgetFactory_getAttributeWithNSString_withNSString_(NSString *localname, NSString *attributeName) {
@@ -451,7 +527,7 @@ void ASWidgetFactory_registerBehaviorWithNSString_withASIBehavior_(NSString *dec
   [((id<JavaUtilMap>) nil_chk(ASWidgetFactory_behaviorMap)) putWithId:decorator withId:behavior];
 }
 
-id<ASIBehavior> ASWidgetFactory_getBehaviorWithNSString_(NSString *behavior) {
+id ASWidgetFactory_getBehaviorWithNSString_(NSString *behavior) {
   ASWidgetFactory_initialize();
   id<ASIBehavior> decorator = JreRetainedLocalValue([((id<JavaUtilMap>) nil_chk(ASWidgetFactory_behaviorMap)) getWithId:behavior]);
   if (decorator != nil) {
@@ -470,3 +546,79 @@ void ASWidgetFactory_registerAttributableForWithNSString_withASIAttributable_(NS
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWidgetFactory)
+
+@implementation ASWidgetFactory_1
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ASWidgetFactory_1_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (jint)compareWithId:(ASWidgetAttribute *)o1
+               withId:(ASWidgetAttribute *)o2 {
+  if ([((NSString *) nil_chk([((ASWidgetAttribute *) nil_chk(o1)) getAttributeName])) isEqual:[((ASWidgetAttribute *) nil_chk(o2)) getAttributeName]]) {
+    return 0;
+  }
+  return [((JavaLangInteger *) nil_chk([o2 getStylePriority])) intValue] - [((JavaLangInteger *) nil_chk([o1 getStylePriority])) intValue];
+}
+
+- (id<JavaUtilComparator>)reversed {
+  return JavaUtilComparator_reversed(self);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilComparator:(id<JavaUtilComparator>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilComparator_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0
+                                             withJavaUtilComparator:(id<JavaUtilComparator>)arg1 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_withJavaUtilComparator_(self, arg0, arg1);
+}
+
+- (id<JavaUtilComparator>)thenComparingWithJavaUtilFunctionFunction:(id<JavaUtilFunctionFunction>)arg0 {
+  return JavaUtilComparator_thenComparingWithJavaUtilFunctionFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingIntWithJavaUtilFunctionToIntFunction:(id<JavaUtilFunctionToIntFunction>)arg0 {
+  return JavaUtilComparator_thenComparingIntWithJavaUtilFunctionToIntFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingLongWithJavaUtilFunctionToLongFunction:(id<JavaUtilFunctionToLongFunction>)arg0 {
+  return JavaUtilComparator_thenComparingLongWithJavaUtilFunctionToLongFunction_(self, arg0);
+}
+
+- (id<JavaUtilComparator>)thenComparingDoubleWithJavaUtilFunctionToDoubleFunction:(id<JavaUtilFunctionToDoubleFunction>)arg0 {
+  return JavaUtilComparator_thenComparingDoubleWithJavaUtilFunctionToDoubleFunction_(self, arg0);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(compareWithId:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "compare", "LASWidgetAttribute;LASWidgetAttribute;", "LASWidgetFactory;", "updateStyleAttrsWithNSString:withASWidgetAttribute:", "Ljava/lang/Object;Ljava/util/Comparator<Lcom/ashera/widget/WidgetAttribute;>;" };
+  static const J2ObjcClassInfo _ASWidgetFactory_1 = { "", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x8018, 2, 0, 2, -1, 3, 4, -1 };
+  return &_ASWidgetFactory_1;
+}
+
+@end
+
+void ASWidgetFactory_1_init(ASWidgetFactory_1 *self) {
+  NSObject_init(self);
+}
+
+ASWidgetFactory_1 *new_ASWidgetFactory_1_init() {
+  J2OBJC_NEW_IMPL(ASWidgetFactory_1, init)
+}
+
+ASWidgetFactory_1 *create_ASWidgetFactory_1_init() {
+  J2OBJC_CREATE_IMPL(ASWidgetFactory_1, init)
+}

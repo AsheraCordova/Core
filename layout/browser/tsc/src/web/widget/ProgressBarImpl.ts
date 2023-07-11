@@ -39,24 +39,6 @@ export abstract class ProgressBarImpl<T> extends ViewImpl<T>{
 	static initialize() {
     }	
 	@Type(() => CommandAttr)
-	@Expose({ name: "min" })
-	min!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "max" })
-	max!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "progress" })
-	progress!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "incrementProgressBy" })
-	incrementProgressBy_!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "progressTint" })
-	progressTint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "progressBackgroundTint" })
-	progressBackgroundTint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
 	@Expose({ name: "padding" })
 	padding!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
@@ -83,18 +65,30 @@ export abstract class ProgressBarImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "paddingVertical" })
 	paddingVertical!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "min" })
+	min!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "max" })
+	max!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "progress" })
+	progress!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "incrementProgressBy" })
+	incrementProgressBy_!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "progressTint" })
+	progressTint!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "progressBackgroundTint" })
+	progressBackgroundTint!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
-		this.min = undefined;
-		this.max = undefined;
-		this.progress = undefined;
-		this.incrementProgressBy_ = undefined;
-		this.progressTint = undefined;
-		this.progressBackgroundTint = undefined;
 		this.padding = undefined;
 		this.paddingTop = undefined;
 		this.paddingBottom = undefined;
@@ -104,6 +98,12 @@ export abstract class ProgressBarImpl<T> extends ViewImpl<T>{
 		this.paddingEnd = undefined;
 		this.paddingHorizontal = undefined;
 		this.paddingVertical = undefined;
+		this.min = undefined;
+		this.max = undefined;
+		this.progress = undefined;
+		this.incrementProgressBy_ = undefined;
+		this.progressTint = undefined;
+		this.progressBackgroundTint = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -111,126 +111,6 @@ export abstract class ProgressBarImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
-
-	public setMin(value : number) : T {
-		this.resetIfRequired();
-		if (this.min == null || this.min == undefined) {
-			this.min = new CommandAttr<number>();
-		}
-		
-		this.min.setSetter(true);
-		this.min.setValue(value);
-		this.orderSet++;
-		this.min.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setMax(value : number) : T {
-		this.resetIfRequired();
-		if (this.max == null || this.max == undefined) {
-			this.max = new CommandAttr<number>();
-		}
-		
-		this.max.setSetter(true);
-		this.max.setValue(value);
-		this.orderSet++;
-		this.max.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setProgress(value : number) : T {
-		this.resetIfRequired();
-		if (this.progress == null || this.progress == undefined) {
-			this.progress = new CommandAttr<number>();
-		}
-		
-		this.progress.setSetter(true);
-		this.progress.setValue(value);
-		this.orderSet++;
-		this.progress.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public incrementProgressBy(value : number) : T {
-		this.resetIfRequired();
-		if (this.incrementProgressBy_ == null || this.incrementProgressBy_ == undefined) {
-			this.incrementProgressBy_ = new CommandAttr<number>();
-		}
-		
-		this.incrementProgressBy_.setSetter(true);
-		this.incrementProgressBy_.setValue(value);
-		this.orderSet++;
-		this.incrementProgressBy_.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetProgressTint() : T {
-		this.resetIfRequired();
-		if (this.progressTint == null || this.progressTint == undefined) {
-			this.progressTint = new CommandAttr<string>()
-		}
-		
-		this.progressTint.setGetter(true);
-		this.orderGet++;
-		this.progressTint.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getProgressTint() : string {
-		if (this.progressTint == null || this.progressTint == undefined) {
-			this.progressTint = new CommandAttr<string>();
-		}
-		return this.progressTint.getCommandReturnValue();
-	}
-	public setProgressTint(value : string) : T {
-		this.resetIfRequired();
-		if (this.progressTint == null || this.progressTint == undefined) {
-			this.progressTint = new CommandAttr<string>();
-		}
-		
-		this.progressTint.setSetter(true);
-		this.progressTint.setValue(value);
-		this.orderSet++;
-		this.progressTint.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetProgressBackgroundTint() : T {
-		this.resetIfRequired();
-		if (this.progressBackgroundTint == null || this.progressBackgroundTint == undefined) {
-			this.progressBackgroundTint = new CommandAttr<string>()
-		}
-		
-		this.progressBackgroundTint.setGetter(true);
-		this.orderGet++;
-		this.progressBackgroundTint.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getProgressBackgroundTint() : string {
-		if (this.progressBackgroundTint == null || this.progressBackgroundTint == undefined) {
-			this.progressBackgroundTint = new CommandAttr<string>();
-		}
-		return this.progressBackgroundTint.getCommandReturnValue();
-	}
-	public setProgressBackgroundTint(value : string) : T {
-		this.resetIfRequired();
-		if (this.progressBackgroundTint == null || this.progressBackgroundTint == undefined) {
-			this.progressBackgroundTint = new CommandAttr<string>();
-		}
-		
-		this.progressBackgroundTint.setSetter(true);
-		this.progressBackgroundTint.setValue(value);
-		this.orderSet++;
-		this.progressBackgroundTint.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
 
 	public setPadding(value : string) : T {
 		this.resetIfRequired();
@@ -462,6 +342,126 @@ export abstract class ProgressBarImpl<T> extends ViewImpl<T>{
 		this.paddingVertical.setValue(value);
 		this.orderSet++;
 		this.paddingVertical.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setMin(value : number) : T {
+		this.resetIfRequired();
+		if (this.min == null || this.min == undefined) {
+			this.min = new CommandAttr<number>();
+		}
+		
+		this.min.setSetter(true);
+		this.min.setValue(value);
+		this.orderSet++;
+		this.min.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setMax(value : number) : T {
+		this.resetIfRequired();
+		if (this.max == null || this.max == undefined) {
+			this.max = new CommandAttr<number>();
+		}
+		
+		this.max.setSetter(true);
+		this.max.setValue(value);
+		this.orderSet++;
+		this.max.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setProgress(value : number) : T {
+		this.resetIfRequired();
+		if (this.progress == null || this.progress == undefined) {
+			this.progress = new CommandAttr<number>();
+		}
+		
+		this.progress.setSetter(true);
+		this.progress.setValue(value);
+		this.orderSet++;
+		this.progress.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public incrementProgressBy(value : number) : T {
+		this.resetIfRequired();
+		if (this.incrementProgressBy_ == null || this.incrementProgressBy_ == undefined) {
+			this.incrementProgressBy_ = new CommandAttr<number>();
+		}
+		
+		this.incrementProgressBy_.setSetter(true);
+		this.incrementProgressBy_.setValue(value);
+		this.orderSet++;
+		this.incrementProgressBy_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetProgressTint() : T {
+		this.resetIfRequired();
+		if (this.progressTint == null || this.progressTint == undefined) {
+			this.progressTint = new CommandAttr<string>()
+		}
+		
+		this.progressTint.setGetter(true);
+		this.orderGet++;
+		this.progressTint.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getProgressTint() : string {
+		if (this.progressTint == null || this.progressTint == undefined) {
+			this.progressTint = new CommandAttr<string>();
+		}
+		return this.progressTint.getCommandReturnValue();
+	}
+	public setProgressTint(value : string) : T {
+		this.resetIfRequired();
+		if (this.progressTint == null || this.progressTint == undefined) {
+			this.progressTint = new CommandAttr<string>();
+		}
+		
+		this.progressTint.setSetter(true);
+		this.progressTint.setValue(value);
+		this.orderSet++;
+		this.progressTint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetProgressBackgroundTint() : T {
+		this.resetIfRequired();
+		if (this.progressBackgroundTint == null || this.progressBackgroundTint == undefined) {
+			this.progressBackgroundTint = new CommandAttr<string>()
+		}
+		
+		this.progressBackgroundTint.setGetter(true);
+		this.orderGet++;
+		this.progressBackgroundTint.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getProgressBackgroundTint() : string {
+		if (this.progressBackgroundTint == null || this.progressBackgroundTint == undefined) {
+			this.progressBackgroundTint = new CommandAttr<string>();
+		}
+		return this.progressBackgroundTint.getCommandReturnValue();
+	}
+	public setProgressBackgroundTint(value : string) : T {
+		this.resetIfRequired();
+		if (this.progressBackgroundTint == null || this.progressBackgroundTint == undefined) {
+			this.progressBackgroundTint = new CommandAttr<string>();
+		}
+		
+		this.progressBackgroundTint.setSetter(true);
+		this.progressBackgroundTint.setValue(value);
+		this.orderSet++;
+		this.progressBackgroundTint.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

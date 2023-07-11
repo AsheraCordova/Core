@@ -73,6 +73,9 @@ public class CorePlugin implements IPlugin, ICore {
 		case "runOnMainThread":
 			runOnMainThread((Runnable) args[0]);
 			return null;
+		case "enqueueTaskForEventLoop":
+			enqueueTaskForEventLoop((Runnable) args[0],(long) args[1]);
+			return null;
 		default:
 			break;
 		}
@@ -225,5 +228,13 @@ public class CorePlugin implements IPlugin, ICore {
 				isMainThreadRunning = false;	
 			}
 		}).start();	
+	}
+	
+	@Override
+	public void enqueueTaskForEventLoop(Runnable runnable, long when) {
+		int delayInMills = (int) (when - System.currentTimeMillis());
+		org.teavm.jso.browser.Window.setTimeout(() -> {
+			runnable.run();
+		}, delayInMills);		
 	}
 }

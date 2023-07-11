@@ -17,6 +17,7 @@
 #define ASWidgetAttribute_
 
 @class ASWidgetAttribute_Builder;
+@class JavaLangInteger;
 
 @interface ASWidgetAttribute : NSObject
 
@@ -45,6 +46,8 @@
 - (jint)getOrder;
 
 - (jint)getSimpleWrapableViewStrategy;
+
+- (JavaLangInteger *)getStylePriority;
 
 - (jint)getUpdateUiFlag;
 
@@ -96,6 +99,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWidgetAttribute)
 #define ASWidgetAttribute_Builder_
 
 @class ASWidgetAttribute;
+@class JavaLangInteger;
 
 /*!
  @brief Builder to build <code>WidgetAttribute</code>.
@@ -125,6 +129,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWidgetAttribute)
 - (ASWidgetAttribute_Builder *)withOrderWithInt:(jint)order;
 
 - (ASWidgetAttribute_Builder *)withSimpleWrapableViewStrategyWithInt:(jint)simpleWrapableViewStrategy;
+
+- (ASWidgetAttribute_Builder *)withStylePriorityWithJavaLangInteger:(JavaLangInteger *)stylePriority;
 
 - (ASWidgetAttribute_Builder *)withTypeWithNSString:(NSString *)attributeType;
 

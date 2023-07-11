@@ -41,6 +41,10 @@
 
 - (void)removeModelByIdWithNSString:(NSString *)id_;
 
+- (NSString *)getModelDescPath;
+
+- (void)setModelDescPathWithNSString:(NSString *)modelDescPath;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASIModelGroup)

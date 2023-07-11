@@ -111,6 +111,12 @@ public class ViewGroupImpl {
 	public static void setAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
 		ViewGroup viewGroup = ((ViewGroup) w.asWidget());
 		ViewGroupModelImpl.setAttribute(w, key, strValue, objValue, decorator);
+		setMyAttribute(w, key, strValue, objValue, decorator);
+	}
+	
+	private static void setMyAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
+		ViewGroup viewGroup = ((ViewGroup) w.asWidget());
+
 		switch (key.getAttributeName()) {
 			case "alwaysDrawnWithCache": {
 
@@ -1330,6 +1336,10 @@ return (T) this;}
 	
 	private static void setOnHierarchyChangeListener(ViewGroup viewGroup, Object objValue) {
 		viewGroup.setOnHierarchyChangeListener((ViewGroup.OnHierarchyChangeListener) objValue);
+	}
+
+	public static void nativeRemoveView(IWidget w) {
+		
 	}
 
 	

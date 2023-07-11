@@ -32,10 +32,11 @@
 #define INCLUDE_ASFormElement 1
 #include "FormElement.h"
 
-@class ASMeasurableCompoundButton;
+@class ADRadioButton;
 @class ASRadioButtonImpl_RadioButtonBean;
 @class ASRadioButtonImpl_RadioButtonCommandBuilder;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -44,13 +45,18 @@
 @interface ASRadioButtonImpl : ASBaseWidget < ASIsRadioButton, ASICustomMeasureWidth, ASFormElement > {
  @public
   id uiView_;
-  ASMeasurableCompoundButton *measurableCompoundButton_;
+  ADRadioButton *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (void)addCheckedListenerWithId:(id)listener
                     withNSString:(NSString *)id_;
@@ -120,6 +126,8 @@
 - (id)getTextColor;
 
 - (NSString *)getTextEntered;
+
+- (IOSClass *)getViewClass;
 
 - (void)invalidate;
 
@@ -196,28 +204,22 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
+- (void)setVisibleWithBoolean:(jboolean)b;
+
 - (void)showErrorWithNSString:(NSString *)message;
 
 + (NSString *)toUpperCaseWithNSString:(NSString *)text;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
-
 - (void)updatePadding;
 
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASRadioButtonImpl)
 
 J2OBJC_FIELD_SETTER(ASRadioButtonImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASRadioButtonImpl, measurableCompoundButton_, ASMeasurableCompoundButton *)
+J2OBJC_FIELD_SETTER(ASRadioButtonImpl, measurableView_, ADRadioButton *)
 
 inline NSString *ASRadioButtonImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -234,6 +236,18 @@ FOUNDATION_EXPORT void ASRadioButtonImpl_init(ASRadioButtonImpl *self);
 FOUNDATION_EXPORT ASRadioButtonImpl *new_ASRadioButtonImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASRadioButtonImpl *create_ASRadioButtonImpl_init(void);
+
+FOUNDATION_EXPORT void ASRadioButtonImpl_initWithNSString_(ASRadioButtonImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASRadioButtonImpl *new_ASRadioButtonImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASRadioButtonImpl *create_ASRadioButtonImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASRadioButtonImpl_initWithNSString_withNSString_(ASRadioButtonImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASRadioButtonImpl *new_ASRadioButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASRadioButtonImpl *create_ASRadioButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
 
 FOUNDATION_EXPORT NSString *ASRadioButtonImpl_toUpperCaseWithNSString_(NSString *text);
 
@@ -500,25 +514,30 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 #if !defined (ASRadioButtonImpl_RadioButtonExt_) && (INCLUDE_ALL_RadioButtonImpl || defined(INCLUDE_ASRadioButtonImpl_RadioButtonExt))
 #define ASRadioButtonImpl_RadioButtonExt_
 
-#define RESTRICT_MeasurableCompoundButton 1
-#define INCLUDE_ASMeasurableCompoundButton 1
-#include "MeasurableCompoundButton.h"
+#define RESTRICT_RadioButton 1
+#define INCLUDE_ADRadioButton 1
+#include "RadioButton.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
+@class ADRect;
+@class ADView;
 @class ASRadioButtonImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASRadioButtonImpl_RadioButtonExt : ASMeasurableCompoundButton < ASILifeCycleDecorator >
+@interface ASRadioButtonImpl_RadioButtonExt : ADRadioButton < ASILifeCycleDecorator >
 
 #pragma mark Public
 
 - (instancetype)initWithASRadioButtonImpl:(ASRadioButtonImpl *)outer$;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)drawableStateChanged;
 
@@ -535,9 +554,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 
 - (jint)getLineHeightPadding;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
 
+- (NSString *)getText;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -548,9 +580,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -960,7 +999,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 
@@ -1009,6 +1052,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setTextAllCapsWithBoolean:(jboolean)value;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setTextAppearanceWithNSString:(NSString *)value;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setTextColorWithNSString:(NSString *)value;
 
@@ -1526,6 +1571,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_RadioButtonCommandBuilder)
 - (void)setTextWithNSString:(NSString *)value;
 
 - (void)setTextAllCapsWithBoolean:(jboolean)value;
+
+- (void)setTextAppearanceWithNSString:(NSString *)value;
 
 - (void)setTextColorWithNSString:(NSString *)value;
 

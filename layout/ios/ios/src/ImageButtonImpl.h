@@ -28,10 +28,11 @@
 #define INCLUDE_ASITarget 1
 #include "ITarget.h"
 
+@class ADImageView;
 @class ASImageButtonImpl_ImageButtonBean;
 @class ASImageButtonImpl_ImageButtonCommandBuilder;
-@class ASMeasurableImageView;
 @class ASWidgetAttribute;
+@class IOSClass;
 @class IOSIntArray;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
@@ -41,13 +42,18 @@
 @interface ASImageButtonImpl : ASBaseWidget < ASIsImage, ASITarget > {
  @public
   id uiView_;
-  ASMeasurableImageView *measurableImageView_;
+  ADImageView *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -83,6 +89,8 @@
 
 - (id)getPluginWithNSString:(NSString *)plugin;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
@@ -114,22 +122,16 @@
 
 - (void)setPaddingTopWithId:(id)paddingTop;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 - (void)updatePadding;
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASImageButtonImpl)
 
 J2OBJC_FIELD_SETTER(ASImageButtonImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASImageButtonImpl, measurableImageView_, ASMeasurableImageView *)
+J2OBJC_FIELD_SETTER(ASImageButtonImpl, measurableView_, ADImageView *)
 
 inline NSString *ASImageButtonImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -146,6 +148,18 @@ FOUNDATION_EXPORT void ASImageButtonImpl_init(ASImageButtonImpl *self);
 FOUNDATION_EXPORT ASImageButtonImpl *new_ASImageButtonImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASImageButtonImpl *create_ASImageButtonImpl_init(void);
+
+FOUNDATION_EXPORT void ASImageButtonImpl_initWithNSString_(ASImageButtonImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASImageButtonImpl *new_ASImageButtonImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASImageButtonImpl *create_ASImageButtonImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASImageButtonImpl_initWithNSString_withNSString_(ASImageButtonImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASImageButtonImpl *new_ASImageButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASImageButtonImpl *create_ASImageButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl)
 
@@ -192,21 +206,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ScaleType)
 #if !defined (ASImageButtonImpl_ImageButtonExt_) && (INCLUDE_ALL_ImageButtonImpl || defined(INCLUDE_ASImageButtonImpl_ImageButtonExt))
 #define ASImageButtonImpl_ImageButtonExt_
 
-#define RESTRICT_MeasurableImageView 1
-#define INCLUDE_ASMeasurableImageView 1
-#include "MeasurableImageView.h"
+#define RESTRICT_ImageView 1
+#define INCLUDE_ADImageView 1
+#include "ImageView.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
+@class ADRect;
+@class ADView;
 @class ASImageButtonImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASImageButtonImpl_ImageButtonExt : ASMeasurableImageView < ASILifeCycleDecorator >
+@interface ASImageButtonImpl_ImageButtonExt : ADImageView < ASILifeCycleDecorator >
 
 #pragma mark Public
 
@@ -219,7 +236,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ScaleType)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -232,9 +255,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ScaleType)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -474,7 +504,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 

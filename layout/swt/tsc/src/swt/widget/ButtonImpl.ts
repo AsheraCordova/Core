@@ -44,6 +44,9 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
+
+
+
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -89,9 +92,6 @@ export class TextStyleTransformer implements ITranform {
 
 
 
-
-
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ButtonImpl<T> extends ViewImpl<T>{
@@ -105,6 +105,15 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "swtImage" })
 	swtImage!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "firstBaselineToTopHeight" })
+	firstBaselineToTopHeight!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "lastBaselineToBottomHeight" })
+	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textFormat" })
+	textFormat!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "text" })
 	text!:CommandAttr<string>| undefined;
@@ -210,15 +219,6 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "gravity" })
 	gravity!:CommandAttr<Gravity[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "firstBaselineToTopHeight" })
-	firstBaselineToTopHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "lastBaselineToBottomHeight" })
-	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textFormat" })
-	textFormat!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -227,6 +227,9 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 		super.reset();
 		this.swtBackground = undefined;
 		this.swtImage = undefined;
+		this.firstBaselineToTopHeight = undefined;
+		this.lastBaselineToBottomHeight = undefined;
+		this.textFormat = undefined;
 		this.text = undefined;
 		this.textSize = undefined;
 		this.textColor = undefined;
@@ -262,9 +265,6 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 		this.textAllCaps = undefined;
 		this.maxLength = undefined;
 		this.gravity = undefined;
-		this.firstBaselineToTopHeight = undefined;
-		this.lastBaselineToBottomHeight = undefined;
-		this.textFormat = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -333,6 +333,84 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 		this.swtImage.setValue(value);
 		this.orderSet++;
 		this.swtImage.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetFirstBaselineToTopHeight() : T {
+		this.resetIfRequired();
+		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
+			this.firstBaselineToTopHeight = new CommandAttr<string>()
+		}
+		
+		this.firstBaselineToTopHeight.setGetter(true);
+		this.orderGet++;
+		this.firstBaselineToTopHeight.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getFirstBaselineToTopHeight() : string {
+		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
+			this.firstBaselineToTopHeight = new CommandAttr<string>();
+		}
+		return this.firstBaselineToTopHeight.getCommandReturnValue();
+	}
+	public setFirstBaselineToTopHeight(value : string) : T {
+		this.resetIfRequired();
+		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
+			this.firstBaselineToTopHeight = new CommandAttr<string>();
+		}
+		
+		this.firstBaselineToTopHeight.setSetter(true);
+		this.firstBaselineToTopHeight.setValue(value);
+		this.orderSet++;
+		this.firstBaselineToTopHeight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetLastBaselineToBottomHeight() : T {
+		this.resetIfRequired();
+		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
+			this.lastBaselineToBottomHeight = new CommandAttr<string>()
+		}
+		
+		this.lastBaselineToBottomHeight.setGetter(true);
+		this.orderGet++;
+		this.lastBaselineToBottomHeight.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getLastBaselineToBottomHeight() : string {
+		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
+			this.lastBaselineToBottomHeight = new CommandAttr<string>();
+		}
+		return this.lastBaselineToBottomHeight.getCommandReturnValue();
+	}
+	public setLastBaselineToBottomHeight(value : string) : T {
+		this.resetIfRequired();
+		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
+			this.lastBaselineToBottomHeight = new CommandAttr<string>();
+		}
+		
+		this.lastBaselineToBottomHeight.setSetter(true);
+		this.lastBaselineToBottomHeight.setValue(value);
+		this.orderSet++;
+		this.lastBaselineToBottomHeight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setTextFormat(value : string) : T {
+		this.resetIfRequired();
+		if (this.textFormat == null || this.textFormat == undefined) {
+			this.textFormat = new CommandAttr<string>();
+		}
+		
+		this.textFormat.setSetter(true);
+		this.textFormat.setValue(value);
+		this.orderSet++;
+		this.textFormat.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -1184,84 +1262,6 @@ this.gravity.setTransformer('gravity');		return this.gravity.getCommandReturnVal
 		this.orderSet++;
 		this.gravity.setOrderSet(this.orderSet);
 this.gravity.setTransformer('gravity');		return this.thisPointer;
-	}
-		
-
-	public tryGetFirstBaselineToTopHeight() : T {
-		this.resetIfRequired();
-		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
-			this.firstBaselineToTopHeight = new CommandAttr<string>()
-		}
-		
-		this.firstBaselineToTopHeight.setGetter(true);
-		this.orderGet++;
-		this.firstBaselineToTopHeight.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getFirstBaselineToTopHeight() : string {
-		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
-			this.firstBaselineToTopHeight = new CommandAttr<string>();
-		}
-		return this.firstBaselineToTopHeight.getCommandReturnValue();
-	}
-	public setFirstBaselineToTopHeight(value : string) : T {
-		this.resetIfRequired();
-		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
-			this.firstBaselineToTopHeight = new CommandAttr<string>();
-		}
-		
-		this.firstBaselineToTopHeight.setSetter(true);
-		this.firstBaselineToTopHeight.setValue(value);
-		this.orderSet++;
-		this.firstBaselineToTopHeight.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetLastBaselineToBottomHeight() : T {
-		this.resetIfRequired();
-		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
-			this.lastBaselineToBottomHeight = new CommandAttr<string>()
-		}
-		
-		this.lastBaselineToBottomHeight.setGetter(true);
-		this.orderGet++;
-		this.lastBaselineToBottomHeight.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getLastBaselineToBottomHeight() : string {
-		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
-			this.lastBaselineToBottomHeight = new CommandAttr<string>();
-		}
-		return this.lastBaselineToBottomHeight.getCommandReturnValue();
-	}
-	public setLastBaselineToBottomHeight(value : string) : T {
-		this.resetIfRequired();
-		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
-			this.lastBaselineToBottomHeight = new CommandAttr<string>();
-		}
-		
-		this.lastBaselineToBottomHeight.setSetter(true);
-		this.lastBaselineToBottomHeight.setValue(value);
-		this.orderSet++;
-		this.lastBaselineToBottomHeight.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setTextFormat(value : string) : T {
-		this.resetIfRequired();
-		if (this.textFormat == null || this.textFormat == undefined) {
-			this.textFormat = new CommandAttr<string>();
-		}
-		
-		this.textFormat.setSetter(true);
-		this.textFormat.setValue(value);
-		this.orderSet++;
-		this.textFormat.setOrderSet(this.orderSet);
-		return this.thisPointer;
 	}
 		
 	//end - body

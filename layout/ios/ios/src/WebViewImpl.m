@@ -7,6 +7,7 @@
 #include "EventCommand.h"
 #include "EventCommandFactory.h"
 #include "EventExpressionParser.h"
+#include "HasWidgets.h"
 #include "IActivity.h"
 #include "IAttributable.h"
 #include "IFragment.h"
@@ -14,16 +15,18 @@
 #include "IListener.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
+#include "IOSPrimitiveArray.h"
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
 #include "IdGenerator.h"
 #include "J2ObjC_source.h"
-#include "MeasurableViewGroup.h"
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
 #include "PluginInvoker.h"
+#include "Rect.h"
 #include "View.h"
 #include "ViewImpl.h"
+#include "WebView.h"
 #include "WebViewImpl.h"
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
@@ -31,6 +34,7 @@
 #include "java/lang/Exception.h"
 #include "java/lang/Integer.h"
 #include "java/lang/UnsupportedOperationException.h"
+#include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 
@@ -109,12 +113,14 @@ __attribute__((unused)) static void ASWebViewImpl_loadUrlWithId_(ASWebViewImpl *
   ASOnLayoutEvent *onLayoutEvent_;
   jint mMaxWidth_;
   jint mMaxHeight_;
+  id<JavaUtilMap> templates_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(ASWebViewImpl_WebViewExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASWebViewImpl_WebViewExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASWebViewImpl_WebViewExt, templates_, id<JavaUtilMap>)
 
 @interface ASWebViewImpl_Loader_WebViewLoadingListener : NSObject
 
@@ -285,10 +291,10 @@ NSString *ASWebViewImpl_GROUP_NAME = @"WebView";
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName {
   ASViewImpl_register__WithNSString_(attributeName);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"loadUrl"])) withTypeWithNSString:@"resourcestring"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onPageStarted"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onPageFinished"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onReceivedError"])) withTypeWithNSString:@"string"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"loadUrl"])) withTypeWithNSString:@"resourcestring"]);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -298,19 +304,29 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
-  [((ASWebViewImpl_WebViewExt *) nil_chk(((ASWebViewImpl_WebViewExt *) cast_chk(measurableViewGroup_, [ASWebViewImpl_WebViewExt class])))) updateMeasuredDimensionWithInt:width withInt:height];
+- (instancetype)initWithNSString:(NSString *)localname {
+  ASWebViewImpl_initWithNSString_(self, localname);
+  return self;
+}
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname {
+  ASWebViewImpl_initWithNSString_withNSString_(self, groupName, localname);
+  return self;
+}
+
+- (IOSClass *)getViewClass {
+  return ASWebViewImpl_WebViewExt_class_();
 }
 
 - (id<ASIWidget>)newInstance {
-  return new_ASWebViewImpl_init();
+  return new_ASWebViewImpl_initWithNSString_withNSString_(groupName_, localName_);
 }
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params {
   [super createWithASIFragment:fragment withJavaUtilMap:params];
-  measurableViewGroup_ = new_ASWebViewImpl_WebViewExt_initWithASWebViewImpl_(self);
+  measurableView_ = new_ASWebViewImpl_WebViewExt_initWithASWebViewImpl_(self);
   [self nativeCreateWithJavaUtilMap:params];
   ASViewImpl_registerCommandConveterWithASIWidget_(self);
   ASWebViewImpl_setWidgetOnNativeClass(self);
@@ -326,25 +342,25 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
   ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"loadUrl", @"onPageStarted", @"onPageFinished", @"onReceivedError" }, 4)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"onPageStarted", @"onPageFinished", @"onReceivedError", @"loadUrl" }, 4)) {
     case 0:
-    {
-      ASWebViewImpl_loadUrlWithId_(self, objValue);
-    }
-    break;
-    case 1:
     {
       ASWebViewImpl_setWebViewLoadingListenerWithASWebViewImpl_WebViewLoadingListener_(self, new_ASWebViewImpl_WebViewLoadingListener_initWithASIWidget_withNSString_withNSString_(self, strValue, @"onPageStarted"));
     }
     break;
-    case 2:
+    case 1:
     {
       ASWebViewImpl_setWebViewLoadedListenerWithASWebViewImpl_WebViewLoadedListener_(self, new_ASWebViewImpl_WebViewLoadedListener_initWithASIWidget_withNSString_withNSString_(self, strValue, @"onPageFinished"));
     }
     break;
-    case 3:
+    case 2:
     {
       ASWebViewImpl_setWebViewErrorListenerWithASWebViewImpl_WebViewErrorListener_(self, new_ASWebViewImpl_WebViewErrorListener_initWithASIWidget_withNSString_withNSString_(self, strValue, @"onReceivedError"));
+    }
+    break;
+    case 3:
+    {
+      ASWebViewImpl_loadUrlWithId_(self, objValue);
     }
     break;
     default:
@@ -365,7 +381,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)asWidget {
-  return measurableViewGroup_;
+  return measurableView_;
 }
 
 - (void)setWebViewLoadedListenerWithASWebViewImpl_WebViewLoadedListener:(ASWebViewImpl_WebViewLoadedListener *)webviewLoadedListener {
@@ -404,8 +420,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
-    [((ASMeasurableViewGroup *) nil_chk(measurableViewGroup_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
+    [((ADWebView *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
   }
+}
+
+- (void)setVisibleWithBoolean:(jboolean)b {
+  [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
 - (void)requestLayout {
@@ -441,7 +461,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
   signal_catch_init();
   signal_try(1) {
-    [self onPageFinishedWithADView: measurableViewGroup_];
+    [self onPageFinishedWithADView: measurableView_];
   }
   signal_catch(1) {
     // do nothing
@@ -450,11 +470,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
-  [self onReceivedErrorWithADView:measurableViewGroup_ withNSString:[error localizedDescription]];
-  [self onPageFinishedWithADView: measurableViewGroup_];
+  [self onReceivedErrorWithADView:measurableView_ withNSString:[error localizedDescription]];
+  [self onPageFinishedWithADView: measurableView_];
 }
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-  [self onPageStartedWithADView: measurableViewGroup_];
+  [self onPageStartedWithADView: measurableView_];
 }
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params {
@@ -472,64 +492,70 @@ J2OBJC_IGNORE_DESIGNATED_END
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 5, -1, 6, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, 5, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 8, 9, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 11, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 13, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 15, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 17, 18, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 19, 18, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 12, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 14, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 16, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 18, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 19, 20, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 22, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 21, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 24, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 24, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 25, 1, -1, -1, -1, -1 },
     { NULL, "LASWebViewImpl_WebViewBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASWebViewImpl_WebViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 25, 26, -1, 27, -1, -1 },
-    { NULL, "V", 0x102, 28, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 26, 27, -1, 28, -1, -1 },
+    { NULL, "V", 0x102, 29, 30, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(loadAttributesWithNSString:);
   methods[1].selector = @selector(init);
-  methods[2].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
-  methods[3].selector = @selector(newInstance);
-  methods[4].selector = @selector(createWithASIFragment:withJavaUtilMap:);
-  methods[5].selector = @selector(setWidgetOnNativeClass);
-  methods[6].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[7].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[8].selector = @selector(asWidget);
-  methods[9].selector = @selector(setWebViewLoadedListenerWithASWebViewImpl_WebViewLoadedListener:);
-  methods[10].selector = @selector(setWebViewErrorListenerWithASWebViewImpl_WebViewErrorListener:);
-  methods[11].selector = @selector(setWebViewLoadingListenerWithASWebViewImpl_WebViewLoadingListener:);
-  methods[12].selector = @selector(onPageFinishedWithADView:);
-  methods[13].selector = @selector(onPageStartedWithADView:);
-  methods[14].selector = @selector(onReceivedErrorWithADView:withNSString:);
-  methods[15].selector = @selector(asNativeWidget);
-  methods[16].selector = @selector(checkIosVersionWithNSString:);
-  methods[17].selector = @selector(setIdWithNSString:);
-  methods[18].selector = @selector(requestLayout);
-  methods[19].selector = @selector(invalidate);
-  methods[20].selector = @selector(getPluginWithNSString:);
-  methods[21].selector = @selector(getBean);
-  methods[22].selector = @selector(getBuilder);
-  methods[23].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[24].selector = @selector(loadUrlWithId:);
+  methods[2].selector = @selector(initWithNSString:);
+  methods[3].selector = @selector(initWithNSString:withNSString:);
+  methods[4].selector = @selector(getViewClass);
+  methods[5].selector = @selector(newInstance);
+  methods[6].selector = @selector(createWithASIFragment:withJavaUtilMap:);
+  methods[7].selector = @selector(setWidgetOnNativeClass);
+  methods[8].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[9].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[10].selector = @selector(asWidget);
+  methods[11].selector = @selector(setWebViewLoadedListenerWithASWebViewImpl_WebViewLoadedListener:);
+  methods[12].selector = @selector(setWebViewErrorListenerWithASWebViewImpl_WebViewErrorListener:);
+  methods[13].selector = @selector(setWebViewLoadingListenerWithASWebViewImpl_WebViewLoadingListener:);
+  methods[14].selector = @selector(onPageFinishedWithADView:);
+  methods[15].selector = @selector(onPageStartedWithADView:);
+  methods[16].selector = @selector(onReceivedErrorWithADView:withNSString:);
+  methods[17].selector = @selector(asNativeWidget);
+  methods[18].selector = @selector(checkIosVersionWithNSString:);
+  methods[19].selector = @selector(setIdWithNSString:);
+  methods[20].selector = @selector(setVisibleWithBoolean:);
+  methods[21].selector = @selector(requestLayout);
+  methods[22].selector = @selector(invalidate);
+  methods[23].selector = @selector(getPluginWithNSString:);
+  methods[24].selector = @selector(getBean);
+  methods[25].selector = @selector(getBuilder);
+  methods[26].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[27].selector = @selector(loadUrlWithId:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 30, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 32, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "measurableViewGroup_", "LASMeasurableViewGroup;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "measurableView_", "LADWebView;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "webviewLoadingListener_", "LASWebViewImpl_Loader_WebViewLoadingListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "webviewLoadedListener_", "LASWebViewImpl_Loader_WebViewLoadedListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "webviewErrorListener_", "LASWebViewImpl_Loader_WebViewErrorListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -537,8 +563,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "builder_", "LASWebViewImpl_WebViewCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bean_", "LASWebViewImpl_WebViewBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "updateMeasuredDimension", "II", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setWebViewLoadedListener", "LASWebViewImpl_WebViewLoadedListener;", "setWebViewErrorListener", "LASWebViewImpl_WebViewErrorListener;", "setWebViewLoadingListener", "LASWebViewImpl_WebViewLoadingListener;", "onPageFinished", "LADView;", "onPageStarted", "onReceivedError", "LADView;LNSString;", "checkIosVersion", "setId", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "loadUrl", "LNSObject;", &ASWebViewImpl_LOCAL_NAME, &ASWebViewImpl_GROUP_NAME, "LASWebViewImpl_WebViewExt;LASWebViewImpl_Loader;LASWebViewImpl_WebViewLoadingListener;LASWebViewImpl_WebViewLoadedListener;LASWebViewImpl_WebViewErrorListener;LASWebViewImpl_WebViewCommandBuilder;LASWebViewImpl_WebViewBean;" };
-  static const J2ObjcClassInfo _ASWebViewImpl = { "WebViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 25, 10, -1, 32, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setWebViewLoadedListener", "LASWebViewImpl_WebViewLoadedListener;", "setWebViewErrorListener", "LASWebViewImpl_WebViewErrorListener;", "setWebViewLoadingListener", "LASWebViewImpl_WebViewLoadingListener;", "onPageFinished", "LADView;", "onPageStarted", "onReceivedError", "LADView;LNSString;", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "loadUrl", "LNSObject;", &ASWebViewImpl_LOCAL_NAME, &ASWebViewImpl_GROUP_NAME, "LASWebViewImpl_WebViewExt;LASWebViewImpl_Loader;LASWebViewImpl_WebViewLoadingListener;LASWebViewImpl_WebViewLoadedListener;LASWebViewImpl_WebViewErrorListener;LASWebViewImpl_WebViewCommandBuilder;LASWebViewImpl_WebViewBean;" };
+  static const J2ObjcClassInfo _ASWebViewImpl = { "WebViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 28, 10, -1, 33, -1, -1, -1 };
   return &_ASWebViewImpl;
 }
 
@@ -555,6 +581,32 @@ ASWebViewImpl *new_ASWebViewImpl_init() {
 
 ASWebViewImpl *create_ASWebViewImpl_init() {
   J2OBJC_CREATE_IMPL(ASWebViewImpl, init)
+}
+
+void ASWebViewImpl_initWithNSString_(ASWebViewImpl *self, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, ASWebViewImpl_GROUP_NAME, localname);
+  self->pageFinished_ = false;
+}
+
+ASWebViewImpl *new_ASWebViewImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_NEW_IMPL(ASWebViewImpl, initWithNSString_, localname)
+}
+
+ASWebViewImpl *create_ASWebViewImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASWebViewImpl, initWithNSString_, localname)
+}
+
+void ASWebViewImpl_initWithNSString_withNSString_(ASWebViewImpl *self, NSString *groupName, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, groupName, localname);
+  self->pageFinished_ = false;
+}
+
+ASWebViewImpl *new_ASWebViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_NEW_IMPL(ASWebViewImpl, initWithNSString_withNSString_, groupName, localname)
+}
+
+ASWebViewImpl *create_ASWebViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASWebViewImpl, initWithNSString_withNSString_, groupName, localname)
 }
 
 void ASWebViewImpl_setWidgetOnNativeClass(ASWebViewImpl *self) {
@@ -703,6 +755,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
   ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
 }
 
+- (ADView *)inflateViewWithNSString:(NSString *)layout {
+  if (templates_ == nil) {
+    templates_ = new_JavaUtilHashMap_init();
+  }
+  id<ASIWidget> template_ = [templates_ getWithId:layout];
+  if (template_ == nil) {
+    template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
+    (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
+  }
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+}
+
+- (void)remeasure {
+  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+}
+
+- (void)removeFromParent {
+  [((id<ASHasWidgets>) nil_chk([this$0_ getParent])) removeWithASIWidget:this$0_];
+}
+
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation {
+  *IOSIntArray_GetRef(nil_chk(appScreenLocation), 0) = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  *IOSIntArray_GetRef(appScreenLocation, 1) = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+}
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame {
+  ((ADRect *) nil_chk(displayFrame))->left_ = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->top_ = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->right_ = displayFrame->left_ + [self getWidth];
+  displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
+}
+
 - (void)offsetTopAndBottomWithInt:(jint)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
@@ -711,6 +796,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
 - (void)offsetLeftAndRightWithInt:(jint)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
+}
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value {
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
 }
 
 - (void)setVisibilityWithInt:(jint)visibility {
@@ -740,9 +830,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 1, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 25, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 28, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -762,9 +858,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
   methods[12].selector = @selector(initialized);
   methods[13].selector = @selector(getAttributeWithASWidgetAttribute:);
   methods[14].selector = @selector(drawableStateChanged);
-  methods[15].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[16].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[17].selector = @selector(setVisibilityWithInt:);
+  methods[15].selector = @selector(inflateViewWithNSString:);
+  methods[16].selector = @selector(remeasure);
+  methods[17].selector = @selector(removeFromParent);
+  methods[18].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[19].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[20].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[21].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[22].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[23].selector = @selector(setVisibilityWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASWebViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -772,9 +874,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 29, -1 },
   };
-  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASWebViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "offsetTopAndBottom", "offsetLeftAndRight", "setVisibility" };
-  static const J2ObjcClassInfo _ASWebViewImpl_WebViewExt = { "WebViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 18, 5, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASWebViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASWebViewImpl_WebViewExt = { "WebViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 24, 6, 3, -1, -1, -1, -1 };
   return &_ASWebViewImpl_WebViewExt;
 }
 
@@ -782,7 +885,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl)
 
 void ASWebViewImpl_WebViewExt_initWithASWebViewImpl_(ASWebViewImpl_WebViewExt *self, ASWebViewImpl *outer$) {
   self->this$0_ = outer$;
-  ASMeasurableViewGroup_initWithASIWidget_(self, outer$);
+  ADWebView_init(self);
   self->measureFinished_ = new_ASMeasureEvent_init();
   self->onLayoutEvent_ = new_ASOnLayoutEvent_init();
   self->mMaxWidth_ = -1;
@@ -1304,15 +1407,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewErrorListener)
   return self;
 }
 
-- (ASWebViewImpl_WebViewCommandBuilder *)loadUrlWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"loadUrl"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
 - (ASWebViewImpl_WebViewCommandBuilder *)setOnPageStartedWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onPageStarted"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
@@ -1340,6 +1434,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewErrorListener)
   return self;
 }
 
+- (ASWebViewImpl_WebViewCommandBuilder *)loadUrlWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"loadUrl"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
@@ -1354,15 +1457,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewErrorListener)
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithASWebViewImpl:);
   methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(loadUrlWithNSString:);
-  methods[3].selector = @selector(setOnPageStartedWithNSString:);
-  methods[4].selector = @selector(setOnPageFinishedWithNSString:);
-  methods[5].selector = @selector(setOnReceivedErrorWithNSString:);
+  methods[2].selector = @selector(setOnPageStartedWithNSString:);
+  methods[3].selector = @selector(setOnPageFinishedWithNSString:);
+  methods[4].selector = @selector(setOnReceivedErrorWithNSString:);
+  methods[5].selector = @selector(loadUrlWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASWebViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASWebViewImpl;", "execute", "Z", "loadUrl", "LNSString;", "setOnPageStarted", "setOnPageFinished", "setOnReceivedError", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/WebViewImpl$WebViewCommandBuilder;>;" };
+  static const void *ptrTable[] = { "LASWebViewImpl;", "execute", "Z", "setOnPageStarted", "LNSString;", "setOnPageFinished", "setOnReceivedError", "loadUrl", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/WebViewImpl$WebViewCommandBuilder;>;" };
   static const J2ObjcClassInfo _ASWebViewImpl_WebViewCommandBuilder = { "WebViewCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 6, 1, 0, -1, -1, 8, -1 };
   return &_ASWebViewImpl_WebViewCommandBuilder;
 }
@@ -1391,10 +1494,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewCommandBuilder)
   return self;
 }
 
-- (void)loadUrlWithNSString:(NSString *)value {
-  (void) [((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) loadUrlWithNSString:value])) executeWithBoolean:true];
-}
-
 - (void)setOnPageStartedWithNSString:(NSString *)value {
   (void) [((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnPageStartedWithNSString:value])) executeWithBoolean:true];
 }
@@ -1405,6 +1504,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewCommandBuilder)
 
 - (void)setOnReceivedErrorWithNSString:(NSString *)value {
   (void) [((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnReceivedErrorWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)loadUrlWithNSString:(NSString *)value {
+  (void) [((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) loadUrlWithNSString:value])) executeWithBoolean:true];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -1419,15 +1522,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewCommandBuilder)
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithASWebViewImpl:);
-  methods[1].selector = @selector(loadUrlWithNSString:);
-  methods[2].selector = @selector(setOnPageStartedWithNSString:);
-  methods[3].selector = @selector(setOnPageFinishedWithNSString:);
-  methods[4].selector = @selector(setOnReceivedErrorWithNSString:);
+  methods[1].selector = @selector(setOnPageStartedWithNSString:);
+  methods[2].selector = @selector(setOnPageFinishedWithNSString:);
+  methods[3].selector = @selector(setOnReceivedErrorWithNSString:);
+  methods[4].selector = @selector(loadUrlWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASWebViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASWebViewImpl;", "loadUrl", "LNSString;", "setOnPageStarted", "setOnPageFinished", "setOnReceivedError" };
+  static const void *ptrTable[] = { "LASWebViewImpl;", "setOnPageStarted", "LNSString;", "setOnPageFinished", "setOnReceivedError", "loadUrl" };
   static const J2ObjcClassInfo _ASWebViewImpl_WebViewBean = { "WebViewBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 5, 1, 0, -1, -1, -1, -1 };
   return &_ASWebViewImpl_WebViewBean;
 }

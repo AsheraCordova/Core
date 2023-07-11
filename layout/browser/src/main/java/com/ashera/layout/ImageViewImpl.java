@@ -39,7 +39,7 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 	public final static String GROUP_NAME = "ImageView";
 
 	protected org.teavm.jso.dom.html.HTMLElement hTMLElement;
-	protected MeasurableImageView measurableImageView;	
+	protected r.android.widget.ImageView measurableView;	
 	
 		@SuppressLint("NewApi")
 		final static class ScaleType extends AbstractEnumToIntConverter{
@@ -70,8 +70,6 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 		ViewImpl.register(attributeName);
 
 
-		ConverterFactory.register("ImageView.scaleType", new ScaleType());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleType").withType("ImageView.scaleType").withUiFlag(UPDATE_UI_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("src").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("adjustViewBounds").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -91,25 +89,28 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingEnd").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		ConverterFactory.register("ImageView.scaleType", new ScaleType());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleType").withType("ImageView.scaleType").withUiFlag(UPDATE_UI_INVALIDATE));
 	}
 	
 	public ImageViewImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ImageViewImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ImageViewImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class ImageViewExt extends MeasurableImageView implements ILifeCycleDecorator{
+	public class ImageViewExt extends r.android.widget.ImageView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 
 		public ImageViewExt() {
-			
-			
-			
-			
-			
-			
 			super(ImageViewImpl.this);
+			
 		}
 		
 		@Override
@@ -191,7 +192,45 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ImageViewImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(ImageViewImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	ImageViewImpl.this.getParent().remove(ImageViewImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = hTMLElement.getBoundingClientRect().getLeft();
+        	appScreenLocation[1] = hTMLElement.getBoundingClientRect().getTop();
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	org.teavm.jso.dom.html.TextRectangle boundingClientRect = hTMLElement.getBoundingClientRect();
+			displayFrame.top = boundingClientRect.getTop();
+        	displayFrame.left = boundingClientRect.getLeft();
+        	displayFrame.bottom = boundingClientRect.getBottom();
+        	displayFrame.right = boundingClientRect.getRight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -201,26 +240,31 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			ImageViewImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ((HTMLElement)asNativeWidget()).getStyle().setProperty("display", visibility != View.VISIBLE ? "none" : "block");
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
+	}	@Override
+	public Class getViewClass() {
+		return ImageViewExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ImageViewImpl();
+		return new ImageViewImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableImageView = new ImageViewExt();
+		measurableView = new ImageViewExt();
 		createSimpleWrapableView();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
@@ -233,16 +277,6 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 		ViewImpl.setAttribute(this, simpleWrapableView, key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "scaleType": {
-				
-
-
-		setScaleType(strValue, objValue);
-
-
-
-			}
-			break;
 			case "src": {
 				
 
@@ -433,6 +467,16 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 
 			}
 			break;
+			case "scaleType": {
+				
+
+
+		setScaleType(strValue, objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -448,8 +492,6 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 			return attributeValue;
 		}
 		switch (key.getAttributeName()) {
-			case "scaleType": {
-return getScaleType();				}
 			case "src": {
 return getSrc();				}
 			case "adjustViewBounds": {
@@ -476,6 +518,8 @@ return getPaddingRight();				}
 return getPaddingLeft();				}
 			case "paddingEnd": {
 return getPaddingRight();				}
+			case "scaleType": {
+return getScaleType();				}
 		}
 		
 		return null;
@@ -483,7 +527,7 @@ return getPaddingRight();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableImageView;
+		return measurableView;
 	}
 
 	
@@ -498,41 +542,41 @@ return getPaddingRight();				}
 	private void setPaddingLeft(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-left", value  + "px");
-		ViewImpl.setPaddingLeft(objValue, measurableImageView);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 	
 	private void setPaddingRight(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-right", value + "px");
-		ViewImpl.setPaddingRight(objValue, measurableImageView);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingTop(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-top", value + "px");
-		ViewImpl.setPaddingTop(objValue, measurableImageView);
+		ViewImpl.setPaddingTop(objValue, measurableView);
 	}
 
 	private void setPaddingBottom(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-bottom", value + "px");
-		ViewImpl.setPaddingBottom(objValue, measurableImageView);
+		ViewImpl.setPaddingBottom(objValue, measurableView);
 	}
 
 	private Object getPaddingTop() {
-		return measurableImageView.getPaddingTop();
+		return measurableView.getPaddingTop();
 	}
 
 	private Object getPaddingBottom() {
-		return measurableImageView.getPaddingBottom();
+		return measurableView.getPaddingBottom();
 	}
 
 	private Object getPaddingLeft() {
-		return measurableImageView.getPaddingStart();
+		return measurableView.getPaddingStart();
 	}
 
 	private Object getPaddingRight() {
-		return measurableImageView.getPaddingEnd();
+		return measurableView.getPaddingEnd();
 	}
 
 	private void setPaddingHorizontal(Object objValue) {
@@ -548,62 +592,62 @@ return getPaddingRight();				}
 
 
 	private Object getBaselineAlignBottom() {
-		return measurableImageView.getBaselineAlignBottom();
+		return measurableView.getBaselineAlignBottom();
 	}
 
 	@Override
 	public int getBaseLine() {
-		return measurableImageView.getBaseline();
+		return measurableView.getBaseline();
 	}
 
 	private void setBaseLine(Object objValue) {
-		measurableImageView.setBaseline((int) objValue);
+		measurableView.setBaseline((int) objValue);
 	}
 	
 	private void setBaselineAlignBottom(Object objValue) {
-		measurableImageView.setBaselineAlignBottom((boolean) objValue);
+		measurableView.setBaselineAlignBottom((boolean) objValue);
 	}
 	
 	
 	private void setCropToPadding(Object objValue) {
-		measurableImageView.setCropToPadding((boolean) objValue); 
+		measurableView.setCropToPadding((boolean) objValue); 
 	}
 
 	private Object getCropToPadding() {
-		return measurableImageView.getCropToPadding();
+		return measurableView.getCropToPadding();
 	}
 	
 	private Object getMaxWidth() {
-		return measurableImageView.getMaxWidth();
+		return measurableView.getMaxWidth();
 	}
 
 	private Object getMaxHeight() {
-		return measurableImageView.getMaxHeight();
+		return measurableView.getMaxHeight();
 	}
     
     private void setMaxWidth(Object objValue) {
-        measurableImageView.setMaxWidth(((int) objValue));
+        measurableView.setMaxWidth(((int) objValue));
     }
 
     private void setMaxHeight(Object objValue) {
-        measurableImageView.setMaxHeight(((int) objValue));
+        measurableView.setMaxHeight(((int) objValue));
     }
 
 
 	private Object getAdjustViewBounds() {
-		return measurableImageView.getAdjustViewBounds();
+		return measurableView.getAdjustViewBounds();
 	}
 	
 
     private void setAdjustViewBounds(Object objValue) {
-        measurableImageView.setAdjustViewBounds((boolean) objValue);
+        measurableView.setAdjustViewBounds((boolean) objValue);
     }
     
 	@Override
 	public void drawableStateChanged() {
 		super.drawableStateChanged();
-		r.android.graphics.drawable.Drawable imageDrawable = measurableImageView.getImageDrawable();
-		if (imageDrawable != null && imageDrawable.isStateful() && imageDrawable.setState(measurableImageView.getDrawableState())) {
+		r.android.graphics.drawable.Drawable imageDrawable = measurableView.getImageDrawable();
+		if (imageDrawable != null && imageDrawable.isStateful() && imageDrawable.setState(measurableView.getDrawableState())) {
 			setImage(imageDrawable);
 		}
 	}
@@ -615,10 +659,14 @@ return getPaddingRight();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableImageView.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -673,25 +721,6 @@ public  class ImageViewCommandBuilder extends com.ashera.layout.ViewImpl.ViewCom
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public ImageViewCommandBuilder tryGetScaleType() {
-	Map<String, Object> attrs = initCommand("scaleType");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getScaleType() {
-	Map<String, Object> attrs = initCommand("scaleType");
-	return attrs.get("commandReturnValue");
-}
-public ImageViewCommandBuilder setScaleType(String value) {
-	Map<String, Object> attrs = initCommand("scaleType");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public ImageViewCommandBuilder tryGetSrc() {
 	Map<String, Object> attrs = initCommand("src");
 	attrs.put("type", "attribute");
@@ -987,18 +1016,30 @@ public ImageViewCommandBuilder setPaddingVertical(String value) {
 
 	attrs.put("value", value);
 return this;}
+public ImageViewCommandBuilder tryGetScaleType() {
+	Map<String, Object> attrs = initCommand("scaleType");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getScaleType() {
+	Map<String, Object> attrs = initCommand("scaleType");
+	return attrs.get("commandReturnValue");
+}
+public ImageViewCommandBuilder setScaleType(String value) {
+	Map<String, Object> attrs = initCommand("scaleType");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class ImageViewBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public ImageViewBean() {
 			super(ImageViewImpl.this);
 		}
-public Object getScaleType() {
-	return getBuilder().reset().tryGetScaleType().execute(false).getScaleType(); 
-}
-public void setScaleType(String value) {
-	getBuilder().reset().setScaleType(value).execute(true);
-}
-
 public Object getSrc() {
 	return getBuilder().reset().tryGetSrc().execute(false).getSrc(); 
 }
@@ -1114,6 +1155,13 @@ public void setPaddingVertical(String value) {
 	getBuilder().reset().setPaddingVertical(value).execute(true);
 }
 
+public Object getScaleType() {
+	return getBuilder().reset().tryGetScaleType().execute(false).getScaleType(); 
+}
+public void setScaleType(String value) {
+	getBuilder().reset().setScaleType(value).execute(true);
+}
+
 }
 
 
@@ -1180,20 +1228,20 @@ public void setPaddingVertical(String value) {
 
 
     private void nativeCreate(Map<String, Object> params) {
-    	measurableImageView.setUsePaddingForBounds(false);
+    	measurableView.setUsePaddingForBounds(false);
     }
 
 	private void nativeMakeFrameForChildWidget(int l, int t, int r, int b) {
 		if (isViewWrapped()) {
-			com.ashera.model.RectM bounds = measurableImageView.getImageBounds(r -l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getImageBounds(r -l, b - t);
 			if (bounds != null) {
 				Object imageView = simpleWrapableView.getWrappedView();
 				ViewImpl.nativeMakeFrame(imageView, bounds.x, bounds.y, bounds.width + bounds.x, bounds.y + bounds.height);
 			}
 			
-			if (measurableImageView.getCropToPadding()) {
-				ViewImpl.createMask(simpleWrapableView.getWrapperViewHolder(), measurableImageView.getPaddingLeft(), measurableImageView.getPaddingTop(), 
-						measurableImageView.getPaddingRight(), measurableImageView.getPaddingBottom());
+			if (measurableView.getCropToPadding()) {
+				ViewImpl.createMask(simpleWrapableView.getWrapperViewHolder(), measurableView.getPaddingLeft(), measurableView.getPaddingTop(), 
+						measurableView.getPaddingRight(), measurableView.getPaddingBottom());
 			} else {
 				ViewImpl.removeMask(simpleWrapableView.getWrapperViewHolder());
 			}
@@ -1202,7 +1250,7 @@ public void setPaddingVertical(String value) {
 
 	private void setScaleType(String strValue, Object objValue) {
 
-        this.measurableImageView.setScaleType(strValue, (int) objValue);
+        this.measurableView.setScaleType(strValue, (int) objValue);
         if (isViewWrapped()) {
 			if ("fitXY".equals(strValue)) {
 				hTMLElement.getStyle().setProperty("object-fit","fill");
@@ -1238,11 +1286,11 @@ public void setPaddingVertical(String value) {
 	
 	//start - image
 	private void setImage(Object objValue) {
-		measurableImageView.setImageDrawable((r.android.graphics.drawable.Drawable) objValue);
-		Object drawable = measurableImageView.getImageDrawable().getDrawable();
+		measurableView.setImageDrawable((r.android.graphics.drawable.Drawable) objValue);
+		Object drawable = measurableView.getImageDrawable().getDrawable();
 		
 		// this is case when image has not been loaded
-		if (measurableImageView.getImageDrawable().getMinimumHeight() == 0 && measurableImageView.getImageDrawable().getMinimumWidth() == 0) {
+		if (measurableView.getImageDrawable().getMinimumHeight() == 0 && measurableView.getImageDrawable().getMinimumWidth() == 0) {
 			addRemeasureListeners();
 		}
 		
@@ -1259,7 +1307,7 @@ public void setPaddingVertical(String value) {
 	
 	
 	private Object getSrc() {
-		Object drawable = measurableImageView.getImageDrawable().getDrawable();
+		Object drawable = measurableView.getImageDrawable().getDrawable();
 		if (drawable instanceof String) {
 			if (((String) drawable).startsWith("res-swt/")) {
 				drawable = getImageAsBase64(hTMLElement);
@@ -1278,11 +1326,11 @@ public void setPaddingVertical(String value) {
 
 	@Override
 	public int[] getImageDimension() {
-		r.android.graphics.drawable.Drawable imageDrawable = measurableImageView.getImageDrawable();
+		r.android.graphics.drawable.Drawable imageDrawable = measurableView.getImageDrawable();
 		if (imageDrawable == null) {
 			return new int[] {-1, -1};
 		}
-		return new int[] { imageDrawable.getMinimumWidth(), measurableImageView.getImageDrawable().getMinimumHeight() };
+		return new int[] { imageDrawable.getMinimumWidth(), measurableView.getImageDrawable().getMinimumHeight() };
 	}
 	
 
@@ -1315,7 +1363,7 @@ public void setPaddingVertical(String value) {
 	}
 
     private Object getScaleType() {
-		return measurableImageView.getScaleTypeInt();
+		return measurableView.getScaleTypeInt();
 	}
     
 
@@ -1365,7 +1413,7 @@ public void setPaddingVertical(String value) {
 			r.android.graphics.drawable.Drawable drawable = new r.android.graphics.drawable.Drawable();
 			drawable.setMinimumHeight(imageElement.getNaturalHeight());
 			drawable.setMinimumWidth(imageElement.getNaturalWidth());
-			measurableImageView.setImageDrawable(drawable);
+			measurableView.setImageDrawable(drawable);
 			remeasureIfRequired();
 			hTMLElement.removeEventListener("load", this);
 		}

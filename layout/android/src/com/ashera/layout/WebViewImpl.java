@@ -62,6 +62,12 @@ public class WebViewImpl extends BaseWidget {
 	public WebViewImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  WebViewImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  WebViewImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class WebViewExt extends android.webkit.WebView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
@@ -95,11 +101,6 @@ public class WebViewImpl extends BaseWidget {
 	    }
 		public WebViewExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -211,14 +212,14 @@ public class WebViewImpl extends BaseWidget {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(WebViewImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((WebViewExt) webView).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return WebViewExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new WebViewImpl();
+		return new WebViewImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")

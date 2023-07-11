@@ -42,7 +42,7 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
 	public final static String GROUP_NAME = "Switch";
 
 	protected org.eclipse.nebula.widgets.opal.switchbutton.SwitchButton switchButton;
-	protected MeasurableSwitch measurableSwitch;	
+	protected r.android.widget.Switch measurableView;	
 	
 		@SuppressLint("NewApi")
 		final static class Font extends AbstractEnumToIntConverter{
@@ -204,6 +204,7 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("swtTextStyle").withType("string"));
 		loadCustomAttributes(attributeName);
 	}
@@ -211,20 +212,21 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
 	public SwitchImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  SwitchImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  SwitchImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class SwitchExt extends MeasurableSwitch implements ILifeCycleDecorator{
+	public class SwitchExt extends r.android.widget.Switch implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 
 		public SwitchExt() {
-			
-			
-			
-			
-			
-			
 			super(SwitchImpl.this);
+			
 		}
 		
 		@Override
@@ -305,7 +307,46 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(SwitchImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(SwitchImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	SwitchImpl.this.getParent().remove(SwitchImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) asNativeWidget();
+			appScreenLocation[0] = control.toDisplay(0, 0).x;
+        	appScreenLocation[1] = control.toDisplay(0, 0).y;
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	org.eclipse.swt.widgets.Shell shell = ((org.eclipse.swt.widgets.Control)asNativeWidget()).getShell();
+        	displayFrame.left = shell.toDisplay(0, 0).x ;
+			displayFrame.top = shell.getShell().toDisplay(0, 0).y ;
+        	displayFrame.bottom = displayFrame.top + shell.getClientArea().height;
+        	displayFrame.right = displayFrame.left + shell.getBounds().width;
+        	
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -314,6 +355,10 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
 		public void offsetLeftAndRight(int offset) {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
+		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			SwitchImpl.this.setAttribute(name, value, true);
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -335,21 +380,39 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
 		  public int getLineHeightPadding(){
 		    return SwitchImpl.this.getLineHeightPadding();
 		  }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((SwitchExt) measurableSwitch).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+        @Override
+        public int computeSize(float width) {
+        	return nativeMeasureHeight(switchButton, (int) width);
+    	}
+		@Override
+		public java.lang.String getText() {
+			return (String) getMyText();
+		}
+
+	}	@Override
+	public Class getViewClass() {
+		return SwitchExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new SwitchImpl();
+		return new SwitchImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableSwitch = new SwitchExt();
+		measurableView = new SwitchExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 	}
@@ -565,7 +628,7 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
 				
 
 
-		measurableSwitch.setSwitchPadding((int) objValue);
+		measurableView.setSwitchPadding((int) objValue);
 
 
 
@@ -575,7 +638,7 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
 				
 
 
-		measurableSwitch.setMinWidth((int) objValue);
+		measurableView.setMinWidth((int) objValue);
 
 
 
@@ -1091,6 +1154,16 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
 
 			}
 			break;
+			case "textAppearance": {
+				
+
+
+		ViewImpl.setStyle(this, objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -1145,9 +1218,9 @@ return getTextOn();				}
 			case "textOff": {
 return getTextOff();				}
 			case "switchPadding": {
-return measurableSwitch.getSwitchPadding();				}
+return measurableView.getSwitchPadding();				}
 			case "switchMinWidth": {
-return measurableSwitch.getMinWidth();				}
+return measurableView.getMinWidth();				}
 			case "trackTint": {
 return getTrackTint();				}
 			case "thumbTint": {
@@ -1213,14 +1286,14 @@ return getLastBaselineToBottomHeight();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableSwitch;
+		return measurableView;
 	}
 
 	
 
 	private void setChecked(Object objValue) {
 		switchButton.setSelection((boolean)objValue);
-		measurableSwitch.setChecked((boolean)objValue);
+		measurableView.setChecked((boolean)objValue);
 	}
 
 	
@@ -1231,8 +1304,8 @@ return getLastBaselineToBottomHeight();				}
 	private final class CheckedListener implements org.eclipse.swt.events.SelectionListener {
 		@Override
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent e) {
-			if (measurableSwitch.isEnabled()) {
-				measurableSwitch.toggle();
+			if (measurableView.isEnabled()) {
+				measurableView.toggle();
 			}
 		}
 
@@ -1254,7 +1327,7 @@ return getLastBaselineToBottomHeight();				}
 		} else {
 			onCheckedChangeListener = (CompoundButton.OnCheckedChangeListener) objValue;
 		}
-		measurableSwitch.setOnCheckedChangeListener(onCheckedChangeListener);
+		measurableView.setOnCheckedChangeListener(onCheckedChangeListener);
 
 	}
 
@@ -1270,7 +1343,7 @@ return getLastBaselineToBottomHeight();				}
 	private Composite wrapperComposite;
 
 	private void setScrollHorizontally(Object objValue) {
-		measurableSwitch.setHorizontallyScrolling(objValue != null && (Boolean) objValue);
+		measurableView.setHorizontallyScrolling(objValue != null && (Boolean) objValue);
 		
 	}
 	
@@ -1355,7 +1428,7 @@ return getLastBaselineToBottomHeight();				}
     //start - gravity
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableSwitch.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -1378,11 +1451,11 @@ return getLastBaselineToBottomHeight();				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableSwitch.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableSwitch.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableSwitch.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -1428,7 +1501,7 @@ return getLastBaselineToBottomHeight();				}
     
 	
 	private Object getGravity() {
-		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableSwitch.getVerticalAligment();
+		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableView.getVerticalAligment();
 		if (verticalAligment == null) {
 			verticalAligment = com.ashera.view.BaseMeasurableView.VerticalAligment.top;
 		}
@@ -1467,7 +1540,7 @@ return getLastBaselineToBottomHeight();				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableSwitch.getRawTextAlignment() != 0 || measurableSwitch.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -1476,15 +1549,15 @@ return getLastBaselineToBottomHeight();				}
 	//start - aligment
     //start - valign
 	private void setVerticalAligmentCenter() {
-		measurableSwitch.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 	}
 
 	private void setVerticalAligmentBottom() {
-		measurableSwitch.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 	}
 
 	private void setVerticalAligmentTop() {
-		measurableSwitch.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 	}
 	//end - valign
 
@@ -1510,19 +1583,19 @@ return getLastBaselineToBottomHeight();				}
 	
 	//start - paddingcopy
 	private Object getPaddingBottom() {
-		return measurableSwitch.getPaddingBottom();
+		return measurableView.getPaddingBottom();
 	}
 	
 	private Object getPaddingTop() {
-		return measurableSwitch.getPaddingTop();
+		return measurableView.getPaddingTop();
 	}
 
 	private Object getPaddingRight() {
-		return measurableSwitch.getPaddingRight();
+		return measurableView.getPaddingRight();
 	}
 	
 	private Object getPaddingLeft() {
-		return measurableSwitch.getPaddingLeft();
+		return measurableView.getPaddingLeft();
 	}
 	
 	private Object getPaddingEnd() {
@@ -1544,27 +1617,27 @@ return getLastBaselineToBottomHeight();				}
     }
 
 	private void setPaddingTop(Object objValue) {
-		ViewImpl.setPaddingTop(objValue, measurableSwitch);
+		ViewImpl.setPaddingTop(objValue, measurableView);
 	}
 
 	private void setPaddingEnd(Object objValue) {
-		ViewImpl.setPaddingRight(objValue, measurableSwitch);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingStart(Object objValue) {
-		ViewImpl.setPaddingLeft(objValue, measurableSwitch);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 
 	private void setPaddingLeft(Object objValue) {
-		ViewImpl.setPaddingLeft(objValue, measurableSwitch);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 
 	private void setPaddingRight(Object objValue) {
-		ViewImpl.setPaddingRight(objValue, measurableSwitch);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingBottom(Object objValue) {
-		ViewImpl.setPaddingBottom(objValue, measurableSwitch);
+		ViewImpl.setPaddingBottom(objValue, measurableView);
 	}
 
     private void setPadding(Object objValue) {
@@ -1687,8 +1760,8 @@ return getLastBaselineToBottomHeight();				}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableSwitch.setTextColor(colorStateList);
-			objValue = measurableSwitch.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		
 		label.setForeground((Color)ViewImpl.getColor(objValue));
@@ -1699,7 +1772,7 @@ return getLastBaselineToBottomHeight();				}
 	}
 
 	private Object getTextColor() {
-		return measurableSwitch.getTextColors();
+		return measurableView.getTextColors();
 	}
     //end - font
     
@@ -1714,20 +1787,20 @@ return getLastBaselineToBottomHeight();				}
     @Override
 	public void drawableStateChanged() {
     	super.drawableStateChanged();
-		drawableStateChange(drawableBottom, measurableSwitch.getBottomDrawable(), "drawableBottom");
-		drawableStateChange(drawableLeft, measurableSwitch.getLeftDrawable(), "drawableLeft");
-		drawableStateChange(drawableRight, measurableSwitch.getRightDrawable(), "drawableRight");
-		drawableStateChange(drawableTop, measurableSwitch.getTopDrawable(), "drawableTop");
+		drawableStateChange(drawableBottom, measurableView.getBottomDrawable(), "drawableBottom");
+		drawableStateChange(drawableLeft, measurableView.getLeftDrawable(), "drawableLeft");
+		drawableStateChange(drawableRight, measurableView.getRightDrawable(), "drawableRight");
+		drawableStateChange(drawableTop, measurableView.getTopDrawable(), "drawableTop");
 		
-		if (measurableSwitch.getTextColors() != null) {
-			setTextColor(measurableSwitch.getCurrentTextColor());
+		if (measurableView.getTextColors() != null) {
+			setTextColor(measurableView.getCurrentTextColor());
 		}
 		drawableStateChangedAdditional();
 	}
 
 	private void drawableStateChange(Label mydrawable, r.android.graphics.drawable.Drawable dr, String attribute) {
 		if (mydrawable != null) {
-			final int[] state = measurableSwitch.getDrawableState();
+			final int[] state = measurableView.getDrawableState();
 			
 			if (dr != null && dr.isStateful() && dr.setState(state)) {
 				int width = mydrawable.getBounds().width;
@@ -1776,7 +1849,7 @@ return getLastBaselineToBottomHeight();				}
 		
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableSwitch.setLeftDrawable(drawable);
+			measurableView.setLeftDrawable(drawable);
 			disposeAll(drawableLeft.getImage());
 			setImageOrColorOnDrawable(drawableLeft, drawable.getDrawable());
 		}
@@ -1791,7 +1864,7 @@ return getLastBaselineToBottomHeight();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableSwitch.setRightDrawable(drawable);
+			measurableView.setRightDrawable(drawable);
 			disposeAll(drawableRight.getImage());
 			setImageOrColorOnDrawable(drawableRight,  drawable.getDrawable());
 		}
@@ -1819,7 +1892,7 @@ return getLastBaselineToBottomHeight();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableSwitch.setBottomDrawable(drawable);
+			measurableView.setBottomDrawable(drawable);
 			disposeAll(drawableBottom.getImage());
 			setImageOrColorOnDrawable(drawableBottom, drawable.getDrawable());
 		}
@@ -1834,18 +1907,18 @@ return getLastBaselineToBottomHeight();				}
 		
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableSwitch.setTopDrawable(drawable);
+			measurableView.setTopDrawable(drawable);
 			disposeAll(drawableTop.getImage());
 			setImageOrColorOnDrawable(drawableTop,  drawable.getDrawable());
 		}
 	}
 
 	private void setDrawablePadding(Object objValue) {
-		measurableSwitch.setDrawablePadding((int) objValue);
+		measurableView.setDrawablePadding((int) objValue);
 	}
 	
 	private Object getDrawablePadding() {
-		return measurableSwitch.getDrawablePadding();
+		return measurableView.getDrawablePadding();
 	}
 	
 	@Override
@@ -1876,11 +1949,11 @@ return getLastBaselineToBottomHeight();				}
 	
     //start - maxminheight
     private Object getMinHeight() {
-        return measurableSwitch.getMinHeight();
+        return measurableView.getMinHeight();
     }
 
     private Object getMinWidth() {
-        return measurableSwitch.getMinWidth();
+        return measurableView.getMinWidth();
     }
     
     private void setEms(Object objValue) {
@@ -1890,27 +1963,27 @@ return getLastBaselineToBottomHeight();				}
     
     
     public int getMaxEms() {
-        return measurableSwitch.getMaxEms();
+        return measurableView.getMaxEms();
     }
     public int getMinEms() {
-        return measurableSwitch.getMinEms();
+        return measurableView.getMinEms();
     }
 
     private void setMinEms(Object objValue) {
-    	measurableSwitch.setMinEms((int) objValue);
+    	measurableView.setMinEms((int) objValue);
         addMinMaxListener();
     }
     
     public int getMinLines() {
-        return measurableSwitch.getMinLines();
+        return measurableView.getMinLines();
     }
     
     public int getMaxLines() {
-        return measurableSwitch.getMaxLines();
+        return measurableView.getMaxLines();
     }
 
     private void setMaxEms(Object objValue) {
-    	measurableSwitch.setMaxEms((int) objValue);
+    	measurableView.setMaxEms((int) objValue);
         addMinMaxListener();
     }
 
@@ -1925,7 +1998,7 @@ return getLastBaselineToBottomHeight();				}
     }
 
     private void setMaxLines(Object objValue) {
-    	measurableSwitch.setMaxLines((int) objValue);
+    	measurableView.setMaxLines((int) objValue);
         addMinMaxListener();
     }
 
@@ -1935,82 +2008,70 @@ return getLastBaselineToBottomHeight();				}
     }
 
     private void setMinLines(Object objValue) {
-    	measurableSwitch.setMinLines((int) objValue);
+    	measurableView.setMinLines((int) objValue);
         addMinMaxListener();
     
     }
     
     private void setMaxHeight(Object objValue) {
-    	measurableSwitch.setMaxHeight((int) objValue);
+    	measurableView.setMaxHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMaxWidth(Object objValue) {
-    	measurableSwitch.setMaxWidth((int) objValue);
+    	measurableView.setMaxWidth((int) objValue);
         addMinMaxListener();
     }
 
     public int getMaxWidth() {
-        return measurableSwitch.getMaxWidth();
+        return measurableView.getMaxWidth();
     }
 
     public int getMaxHeight() {
-        return measurableSwitch.getMaxHeight();
+        return measurableView.getMaxHeight();
     }
     
     
     private void setMinHeight(Object objValue) {
-    	measurableSwitch.setMinHeight((int) objValue);
+    	measurableView.setMinHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMinWidth(Object objValue) {
-    	measurableSwitch.setMinWidth((int) objValue);
+    	measurableView.setMinWidth((int) objValue);
         addMinMaxListener();
     }
 
     
     private Object getWidth() {
-        return measurableSwitch.getWidth();
+        return measurableView.getWidth();
     }
 
     private int getHeight() {
-        return measurableSwitch.getHeight();
+        return measurableView.getHeight();
     }
 
     
     //end - maxminheight
     
     //start - autosize
-	private int getAutoSizeTextType(MeasurableTextView measurableSwitch) {
-		return measurableSwitch.getAutoSizeTextType();
+	private int getAutoSizeTextType(r.android.widget.TextView measurableView) {
+		return measurableView.getAutoSizeTextType();
 	}
 
 	private void setAutoSizeTextTypeInternal(int autoTextType) {
 		removeResizeListener();
         
-		if (measurableSwitch.isAutoSizeTextTypeUniform(autoTextType)) {
-			measurableSwitch.setUpAutoSizeTextTypeUniform(autoSizeMin, autoSizeMax, autoSizeGranular);
+		if (measurableView.isAutoSizeTextTypeUniform(autoTextType)) {
+			measurableView.setUpAutoSizeTextTypeUniform(autoSizeMin, autoSizeMax, autoSizeGranular);
             addAutoResizeListener();
         } else {
-        	measurableSwitch.clearAutoSizeTypeConfiguration();
+        	measurableView.clearAutoSizeTypeConfiguration();
         }
 	}
 	
-	
-	private boolean suggestedSizeFitsInSpace(int suggestedSizeInPx, float width, float height) {
-        setMyTextSize(suggestedSizeInPx * 1f);        
-        int y = computeSize(width);
-
-        // Height overflow.
-		if (y > height) {
-            return false;
-        }
-        return true;
-    }
-	
 	private void setAutoSizePresetSizes(Object objValue) {
-		measurableSwitch.setAutoSizeTextTypeUniformWithPresetSizes((int[]) objValue, 0);
+		measurableView.setAutoSizeTextTypeUniformWithPresetSizes((int[]) objValue, 0);
 		
 	}
 
@@ -2023,8 +2084,8 @@ return getLastBaselineToBottomHeight();				}
 
 		@Override
 		protected void doPerform(Object payload) {
-			if (!onlyOnce || measurableSwitch.isLayoutRequested()) {
-				measurableSwitch.autoResizeText();
+			if (!onlyOnce || measurableView.isLayoutRequested()) {
+				measurableView.autoResizeText();
 				onlyOnce = true;
 			}
 		}
@@ -2044,10 +2105,6 @@ return getLastBaselineToBottomHeight();				}
 			fragment.getEventBus().off(postMeasureHandler);
 			postMeasureHandler = null;
 		}
-	}
-
-	private int computeSize(float width) {
-		return measurableSwitch.nativeMeasureHeight(label, (int) width);
 	}
     
     //end - autosize
@@ -2247,10 +2304,10 @@ return getLastBaselineToBottomHeight();				}
 	}
 	
 	private int getLabelWidth() {
-		if (measurableSwitch.isIgnoreDrawableHeight()) {
-			return measurableSwitch.getMeasuredWidth() - measurableSwitch.getPaddingLeft() - measurableSwitch.getPaddingRight(); 
+		if (measurableView.isIgnoreDrawableHeight()) {
+			return measurableView.getMeasuredWidth() - measurableView.getPaddingLeft() - measurableView.getPaddingRight(); 
 		}
-		return measurableSwitch.getMeasuredWidth() - measurableSwitch.getCompoundPaddingRight() - measurableSwitch.getCompoundPaddingLeft();
+		return measurableView.getMeasuredWidth() - measurableView.getCompoundPaddingRight() - measurableView.getCompoundPaddingLeft();
 	}
 
 	private boolean isLabelMeasured() {
@@ -2317,7 +2374,7 @@ return getLastBaselineToBottomHeight();				}
         // in settings). At the moment, we don't.
         if (firstBaselineToTopHeight > Math.abs(fontMetricsTop)) {
             final int paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-           measurableSwitch.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
+            measurableView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
         }
 	}
 	
@@ -2348,7 +2405,7 @@ return getLastBaselineToBottomHeight();				}
 
         if (lastBaselineToBottomHeight > Math.abs(fontMetricsBottom)) {
             final int paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-            measurableSwitch.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
+            measurableView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
         }		
 	}
 	
@@ -2480,7 +2537,7 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableSwitch.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
@@ -3690,6 +3747,14 @@ public SwitchCommandBuilder setTextFormat(String value) {
 
 	attrs.put("value", value);
 return this;}
+public SwitchCommandBuilder setTextAppearance(String value) {
+	Map<String, Object> attrs = initCommand("textAppearance");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class SwitchBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public SwitchBean() {
@@ -4137,6 +4202,10 @@ public void setTextFormat(String value) {
 	getBuilder().reset().setTextFormat(value).execute(true);
 }
 
+public void setTextAppearance(String value) {
+	getBuilder().reset().setTextAppearance(value).execute(true);
+}
+
 }
 
 
@@ -4149,12 +4218,12 @@ public void setTextFormat(String value) {
 		nativeCreateLabel(params);
 		switchButton = new org.eclipse.nebula.widgets.opal.switchbutton.SwitchButton(wrapperComposite, getStyle(params, fragment));
 		updateIntrinsicBounds();
-		measurableSwitch.setGravity(r.android.view.Gravity.CENTER_VERTICAL);
+		measurableView.setGravity(r.android.view.Gravity.CENTER_VERTICAL);
 	}
 
 	private void updateIntrinsicBounds() {
-		measurableSwitch.setIntrinsicWidth(getSwitchButtonWidth());
-		measurableSwitch.setIntrinsicHeight(getSwitchButtonHeight());
+		measurableView.setIntrinsicWidth(getSwitchButtonWidth());
+		measurableView.setIntrinsicHeight(getSwitchButtonHeight());
 	}
 	
 	private void setTextOff(Object objValue) {
@@ -4200,7 +4269,7 @@ public void setTextFormat(String value) {
 
 		switch (key.getAttributeName()) {
 		case "text":
-			measurableSwitch.setText((String) objValue);
+			measurableView.setText((String) objValue);
 			break;
 		case "textOff":
 		case "textOn":
@@ -4209,7 +4278,7 @@ public void setTextFormat(String value) {
 		case "swtTextForUnselect":
 			updateIntrinsicBounds();
 			if (isInitialised()) {
-				measurableSwitch.requestLayout();
+				measurableView.requestLayout();
 			}
 			break;
 
@@ -4224,7 +4293,7 @@ public void setTextFormat(String value) {
 			}
 			break;
 		case "editable":
-			measurableSwitch.setEnabled((boolean) objValue);
+			measurableView.setEnabled((boolean) objValue);
 		case "enabled":
 			switchButton.setEnabled((boolean) objValue);
 			break;
@@ -4241,7 +4310,7 @@ public void setTextFormat(String value) {
 	
 	private void nativeMakeFrameForChildWidget(int l, int t, int r, int b) {
 		
-		r.android.graphics.Rect switchBounds = measurableSwitch.getSwitchBounds();
+		r.android.graphics.Rect switchBounds = measurableView.getSwitchBounds();
 		switchButton.setBounds(switchBounds.left, switchBounds.top, switchBounds.right - switchBounds.left, switchBounds.bottom - switchBounds.top);
 	}
 	
@@ -4262,7 +4331,7 @@ public void setTextFormat(String value) {
 
 	private void addClickListenerToSyncCheckbox() {
 		ViewImpl.setOnListener(this, org.eclipse.swt.SWT.MouseDown, org.eclipse.swt.SWT.MouseDown + "Chk", (event) -> {
-			if (measurableSwitch.isEnabled()) {
+			if (measurableView.isEnabled()) {
 				boolean isChecked = (boolean)getChecked();
 				switchButton.setSelection(!isChecked);
 				
@@ -4276,39 +4345,39 @@ public void setTextFormat(String value) {
 	
 	
 	private void setThumbTint(Object objValue) {
-		measurableSwitch.setThumbTintList((r.android.content.res.ColorStateList) objValue);
+		measurableView.setThumbTintList((r.android.content.res.ColorStateList) objValue);
 
-		switchButton.setUnselectedBackgroundColor((Color) ViewImpl.getColor(measurableSwitch.getThumbTintList().getColorForState(
-				measurableSwitch.getDrawableState(), r.android.graphics.Color.RED)));
-		switchButton.setSelectedBackgroundColor((Color) ViewImpl.getColor(measurableSwitch.getThumbTintList().getColorForState(
-				measurableSwitch.getDrawableState(), r.android.graphics.Color.RED)));
+		switchButton.setUnselectedBackgroundColor((Color) ViewImpl.getColor(measurableView.getThumbTintList().getColorForState(
+				measurableView.getDrawableState(), r.android.graphics.Color.RED)));
+		switchButton.setSelectedBackgroundColor((Color) ViewImpl.getColor(measurableView.getThumbTintList().getColorForState(
+				measurableView.getDrawableState(), r.android.graphics.Color.RED)));
 	}
 	
 
 	private void setTrackTint(Object objValue) {
-		measurableSwitch.setTrackTintList((r.android.content.res.ColorStateList) objValue);
-		switchButton.setButtonBackgroundColor1((Color) ViewImpl.getColor(measurableSwitch.getTrackTintList().getColorForState(
-				measurableSwitch.getDrawableState(), r.android.graphics.Color.RED)));
+		measurableView.setTrackTintList((r.android.content.res.ColorStateList) objValue);
+		switchButton.setButtonBackgroundColor1((Color) ViewImpl.getColor(measurableView.getTrackTintList().getColorForState(
+				measurableView.getDrawableState(), r.android.graphics.Color.RED)));
 		
 	}
 	
 	
 	private Object getThumbTint() {
-		return measurableSwitch.getThumbTintList();
+		return measurableView.getThumbTintList();
 	}
 
 	private Object getTrackTint() {
-		return measurableSwitch.getTrackTintList();
+		return measurableView.getTrackTintList();
 	}
 	
 
 	private void drawableStateChangedAdditional() {
-		if (measurableSwitch.getTrackTintList() != null) {
-			setTrackTint(measurableSwitch.getTrackTintList());
+		if (measurableView.getTrackTintList() != null) {
+			setTrackTint(measurableView.getTrackTintList());
 		}
 		
-		if (measurableSwitch.getThumbTintList() != null) {
-			setThumbTint(measurableSwitch.getThumbTintList());
+		if (measurableView.getThumbTintList() != null) {
+			setThumbTint(measurableView.getThumbTintList());
 		}
 		
 		switchButton.redraw();

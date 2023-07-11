@@ -38,7 +38,7 @@ public class ViewOnlyImpl extends BaseWidget {
 	public final static String GROUP_NAME = "View";
 
 	protected org.teavm.jso.dom.html.HTMLElement hTMLElement;
-	protected r.android.widget.FrameLayout frameLayout;	
+	protected r.android.widget.FrameLayout measurableView;	
 	
 	
 	@Override
@@ -51,6 +51,12 @@ public class ViewOnlyImpl extends BaseWidget {
 	
 	public ViewOnlyImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
+	}
+	public  ViewOnlyImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ViewOnlyImpl(String groupName, String localname) {
+		super(groupName, localname);
 	}
 
 		
@@ -77,11 +83,6 @@ public class ViewOnlyImpl extends BaseWidget {
 		}
 
 		public ViewOnlyExt() {
-			
-			
-			
-			
-			
 			super();
 			
 		}
@@ -170,7 +171,45 @@ public class ViewOnlyImpl extends BaseWidget {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ViewOnlyImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(ViewOnlyImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	ViewOnlyImpl.this.getParent().remove(ViewOnlyImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = hTMLElement.getBoundingClientRect().getLeft();
+        	appScreenLocation[1] = hTMLElement.getBoundingClientRect().getTop();
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	org.teavm.jso.dom.html.TextRectangle boundingClientRect = hTMLElement.getBoundingClientRect();
+			displayFrame.top = boundingClientRect.getTop();
+        	displayFrame.left = boundingClientRect.getLeft();
+        	displayFrame.bottom = boundingClientRect.getBottom();
+        	displayFrame.right = boundingClientRect.getRight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -180,26 +219,31 @@ public class ViewOnlyImpl extends BaseWidget {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			ViewOnlyImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ((HTMLElement)asNativeWidget()).getStyle().setProperty("display", visibility != View.VISIBLE ? "none" : "block");
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
+	}	@Override
+	public Class getViewClass() {
+		return ViewOnlyExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ViewOnlyImpl();
+		return new ViewOnlyImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		frameLayout = new ViewOnlyExt();
+		measurableView = new ViewOnlyExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 	}
@@ -243,7 +287,7 @@ public class ViewOnlyImpl extends BaseWidget {
 	
 	@Override
 	public Object asWidget() {
-		return frameLayout;
+		return measurableView;
 	}
 
 	
@@ -256,10 +300,14 @@ public class ViewOnlyImpl extends BaseWidget {
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			frameLayout.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {

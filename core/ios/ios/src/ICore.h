@@ -81,6 +81,9 @@
 
 - (void)runOnMainThreadWithJavaLangRunnable:(id<JavaLangRunnable>)runnable;
 
+- (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
+                                           withLong:(jlong)delay;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASICore)

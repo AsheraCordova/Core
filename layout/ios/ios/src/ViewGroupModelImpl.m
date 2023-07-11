@@ -11,6 +11,7 @@
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "PluginInvoker.h"
+#include "SimpleWrapableView.h"
 #include "ViewGroupModelImpl.h"
 #include "ViewImpl.h"
 #include "WidgetAttribute.h"
@@ -26,6 +27,12 @@
 @interface ASViewGroupModelImpl ()
 
 - (instancetype)init;
+
++ (void)setMyAttributeWithASIWidget:(id<ASIWidget>)w
+              withASWidgetAttribute:(ASWidgetAttribute *)key
+                       withNSString:(NSString *)strValue
+                             withId:(id)objValue
+          withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
 + (void)removeModelAtIndexWithASIWidget:(id<ASIWidget>)w
                                  withId:(id)objValue;
@@ -51,6 +58,12 @@
 + (void)addAllModelWithASIWidget:(id<ASIWidget>)w
                           withId:(id)objValue;
 
++ (void)setModelDescPathWithASIWidget:(id<ASIWidget>)w
+                         withNSString:(NSString *)strValue
+                               withId:(id)objValue;
+
++ (id)getModelDescPathWithASIWidget:(id<ASIWidget>)w;
+
 @end
 
 __attribute__((unused)) static void ASViewGroupModelImpl_init(ASViewGroupModelImpl *self);
@@ -58,6 +71,8 @@ __attribute__((unused)) static void ASViewGroupModelImpl_init(ASViewGroupModelIm
 __attribute__((unused)) static ASViewGroupModelImpl *new_ASViewGroupModelImpl_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASViewGroupModelImpl *create_ASViewGroupModelImpl_init(void);
+
+__attribute__((unused)) static void ASViewGroupModelImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
 
 __attribute__((unused)) static void ASViewGroupModelImpl_removeModelAtIndexWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
@@ -74,6 +89,10 @@ __attribute__((unused)) static void ASViewGroupModelImpl_setModelIdPathWithASIWi
 __attribute__((unused)) static id ASViewGroupModelImpl_getModelIdPathWithASIWidget_(id<ASIWidget> w);
 
 __attribute__((unused)) static void ASViewGroupModelImpl_addAllModelWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+
+__attribute__((unused)) static void ASViewGroupModelImpl_setModelDescPathWithASIWidget_withNSString_withId_(id<ASIWidget> w, NSString *strValue, id objValue);
+
+__attribute__((unused)) static id ASViewGroupModelImpl_getModelDescPathWithASIWidget_(id<ASIWidget> w);
 
 @interface ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal () {
  @public
@@ -116,6 +135,14 @@ J2OBJC_IGNORE_DESIGNATED_END
                            withId:(id)objValue
         withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   ASViewGroupModelImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
+}
+
++ (void)setMyAttributeWithASIWidget:(id<ASIWidget>)w
+              withASWidgetAttribute:(ASWidgetAttribute *)key
+                       withNSString:(NSString *)strValue
+                             withId:(id)objValue
+          withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
+  ASViewGroupModelImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
 }
 
 + (void)setChildAttributeWithASIWidget:(id<ASIWidget>)w
@@ -176,8 +203,27 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASViewGroupModelImpl_addAllModelWithASIWidget_withId_(w, objValue);
 }
 
++ (void)setModelDescPathWithASIWidget:(id<ASIWidget>)w
+                         withNSString:(NSString *)strValue
+                               withId:(id)objValue {
+  ASViewGroupModelImpl_setModelDescPathWithASIWidget_withNSString_withId_(w, strValue, objValue);
+}
+
++ (id)getModelDescPathWithASIWidget:(id<ASIWidget>)w {
+  return ASViewGroupModelImpl_getModelDescPathWithASIWidget_(w);
+}
+
 + (jboolean)isAttributeSupportedWithASWidgetAttribute:(ASWidgetAttribute *)key {
   return ASViewGroupModelImpl_isAttributeSupportedWithASWidgetAttribute_(key);
+}
+
++ (void)setAttributeWithASIWidget:(id<ASIWidget>)w
+         withASSimpleWrapableView:(ASSimpleWrapableView *)wrapperView
+            withASWidgetAttribute:(ASWidgetAttribute *)key
+                     withNSString:(NSString *)strValue
+                           withId:(id)objValue
+        withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
+  ASViewGroupModelImpl_setAttributeWithASIWidget_withASSimpleWrapableView_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, wrapperView, key, strValue, objValue, decorator);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -185,18 +231,22 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 0, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 2, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 4, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x9, 6, 7, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x9, 8, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 10, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 12, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 13, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 14, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 15, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 16, 17, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 18, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 20, 11, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 21, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 4, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 13, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 14, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 15, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 16, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 17, 18, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 19, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 21, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 22, 18, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 23, 20, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 2, 26, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -204,21 +254,25 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(register__WithNSString:);
   methods[2].selector = @selector(setAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[3].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withId:withId:);
-  methods[4].selector = @selector(getAttributeWithASIWidget:withASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[5].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
-  methods[6].selector = @selector(removeModelAtIndexWithASIWidget:withId:);
-  methods[7].selector = @selector(addModelByIndexWithASIWidget:withId:);
-  methods[8].selector = @selector(addModelWithASIWidget:withId:);
-  methods[9].selector = @selector(removeModelByIdWithASIWidget:withId:);
-  methods[10].selector = @selector(setModelForWithASIWidget:withId:);
-  methods[11].selector = @selector(setModelIdPathWithASIWidget:withNSString:withId:);
-  methods[12].selector = @selector(getModelIdPathWithASIWidget:);
-  methods[13].selector = @selector(addAllModelWithASIWidget:withId:);
-  methods[14].selector = @selector(isAttributeSupportedWithASWidgetAttribute:);
+  methods[3].selector = @selector(setMyAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[4].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withId:withId:);
+  methods[5].selector = @selector(getAttributeWithASIWidget:withASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[6].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
+  methods[7].selector = @selector(removeModelAtIndexWithASIWidget:withId:);
+  methods[8].selector = @selector(addModelByIndexWithASIWidget:withId:);
+  methods[9].selector = @selector(addModelWithASIWidget:withId:);
+  methods[10].selector = @selector(removeModelByIdWithASIWidget:withId:);
+  methods[11].selector = @selector(setModelForWithASIWidget:withId:);
+  methods[12].selector = @selector(setModelIdPathWithASIWidget:withNSString:withId:);
+  methods[13].selector = @selector(getModelIdPathWithASIWidget:);
+  methods[14].selector = @selector(addAllModelWithASIWidget:withId:);
+  methods[15].selector = @selector(setModelDescPathWithASIWidget:withNSString:withId:);
+  methods[16].selector = @selector(getModelDescPathWithASIWidget:);
+  methods[17].selector = @selector(isAttributeSupportedWithASWidgetAttribute:);
+  methods[18].selector = @selector(setAttributeWithASIWidget:withASSimpleWrapableView:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSObject;LNSObject;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "removeModelAtIndex", "LASIWidget;LNSObject;", "addModelByIndex", "addModel", "removeModelById", "setModelFor", "setModelIdPath", "LASIWidget;LNSString;LNSObject;", "getModelIdPath", "LASIWidget;", "addAllModel", "isAttributeSupported", "LASWidgetAttribute;", "LASViewGroupModelImpl_ViewGroupModelCommandBuilder;LASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal;LASViewGroupModelImpl_ViewGroupModelBean;" };
-  static const J2ObjcClassInfo _ASViewGroupModelImpl = { "ViewGroupModelImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 15, 0, -1, 23, -1, -1, -1 };
+  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "setMyAttribute", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSObject;LNSObject;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "removeModelAtIndex", "LASIWidget;LNSObject;", "addModelByIndex", "addModel", "removeModelById", "setModelFor", "setModelIdPath", "LASIWidget;LNSString;LNSObject;", "getModelIdPath", "LASIWidget;", "addAllModel", "setModelDescPath", "getModelDescPath", "isAttributeSupported", "LASWidgetAttribute;", "LASIWidget;LASSimpleWrapableView;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASViewGroupModelImpl_ViewGroupModelCommandBuilder;LASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal;LASViewGroupModelImpl_ViewGroupModelBean;" };
+  static const J2ObjcClassInfo _ASViewGroupModelImpl = { "ViewGroupModelImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 19, 0, -1, 27, -1, -1, -1 };
   return &_ASViewGroupModelImpl;
 }
 
@@ -246,12 +300,18 @@ void ASViewGroupModelImpl_register__WithNSString_(NSString *localName) {
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"removeModelById"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"modelFor"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"modelIdPath"])) withTypeWithNSString:@"string"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"modelDescPath"])) withTypeWithNSString:@"string"])) withOrderWithInt:-1]);
 }
 
 void ASViewGroupModelImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator) {
   ASViewGroupModelImpl_initialize();
   ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"addModel", @"addAllModel", @"addModelByIndex", @"removeModelAtIndex", @"removeModelById", @"modelFor", @"modelIdPath" }, 7)) {
+  ASViewGroupModelImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
+}
+
+void ASViewGroupModelImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator) {
+  ASViewGroupModelImpl_initialize();
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"addModel", @"addAllModel", @"addModelByIndex", @"removeModelAtIndex", @"removeModelById", @"modelFor", @"modelIdPath", @"modelDescPath" }, 8)) {
     case 0:
     {
       ASViewGroupModelImpl_addModelWithASIWidget_withId_(w, objValue);
@@ -287,6 +347,11 @@ void ASViewGroupModelImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNS
       ASViewGroupModelImpl_setModelIdPathWithASIWidget_withNSString_withId_(w, strValue, objValue);
     }
     break;
+    case 7:
+    {
+      ASViewGroupModelImpl_setModelDescPathWithASIWidget_withNSString_withId_(w, strValue, objValue);
+    }
+    break;
     default:
     break;
   }
@@ -302,10 +367,14 @@ id ASViewGroupModelImpl_getAttributeWithASIWidget_withASWidgetAttribute_withASIL
   if (attributeValue != nil) {
     return attributeValue;
   }
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"modelIdPath" }, 1)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"modelIdPath", @"modelDescPath" }, 2)) {
     case 0:
     {
       return ASViewGroupModelImpl_getModelIdPathWithASIWidget_(w);
+    }
+    case 1:
+    {
+      return ASViewGroupModelImpl_getModelDescPathWithASIWidget_(w);
     }
   }
   return nil;
@@ -358,9 +427,19 @@ void ASViewGroupModelImpl_addAllModelWithASIWidget_withId_(id<ASIWidget> w, id o
   [((id<ASHasWidgets>) nil_chk(((id<ASHasWidgets>) cast_check(w, ASHasWidgets_class_())))) addAllModelWithId:objValue];
 }
 
+void ASViewGroupModelImpl_setModelDescPathWithASIWidget_withNSString_withId_(id<ASIWidget> w, NSString *strValue, id objValue) {
+  ASViewGroupModelImpl_initialize();
+  [((id<ASHasWidgets>) nil_chk(((id<ASHasWidgets>) cast_check(w, ASHasWidgets_class_())))) setModelDescPathWithNSString:(NSString *) cast_chk(objValue, [NSString class])];
+}
+
+id ASViewGroupModelImpl_getModelDescPathWithASIWidget_(id<ASIWidget> w) {
+  ASViewGroupModelImpl_initialize();
+  return [((id<ASHasWidgets>) nil_chk(((id<ASHasWidgets>) cast_check(w, ASHasWidgets_class_())))) getModelDescPath];
+}
+
 jboolean ASViewGroupModelImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key) {
   ASViewGroupModelImpl_initialize();
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"addModel", @"addAllModel", @"addModelByIndex", @"removeModelAtIndex", @"removeModelById", @"modelFor", @"modelIdPath" }, 7)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"addModel", @"addAllModel", @"addModelByIndex", @"removeModelAtIndex", @"removeModelById", @"modelFor", @"modelIdPath", @"modelDescPath" }, 8)) {
     case 0:
     {
       return true;
@@ -389,10 +468,20 @@ jboolean ASViewGroupModelImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidge
     {
       return true;
     }
+    case 7:
+    {
+      return true;
+    }
     default:
     break;
   }
   return false;
+}
+
+void ASViewGroupModelImpl_setAttributeWithASIWidget_withASSimpleWrapableView_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASSimpleWrapableView *wrapperView, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator) {
+  ASViewGroupModelImpl_initialize();
+  ASViewImpl_setAttributeWithASIWidget_withASSimpleWrapableView_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, wrapperView, key, strValue, objValue, decorator);
+  ASViewGroupModelImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupModelImpl)
@@ -486,6 +575,28 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
+- (id)tryGetModelDescPath {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelDescPath"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getModelDescPath {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelDescPath"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (id)setModelDescPathWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelDescPath"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -498,6 +609,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 14, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 15, 11, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 14, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 16, 11, -1, 12, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -512,9 +626,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[7].selector = @selector(tryGetModelIdPath);
   methods[8].selector = @selector(getModelIdPath);
   methods[9].selector = @selector(setModelIdPathWithNSString:);
+  methods[10].selector = @selector(tryGetModelDescPath);
+  methods[11].selector = @selector(getModelDescPath);
+  methods[12].selector = @selector(setModelDescPathWithNSString:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "addModel", "LNSObject;", "(Ljava/lang/Object;)TT;", "addAllModel", "addModelByIndex", "LNSObject;LNSObject;", "(Ljava/lang/Object;Ljava/lang/Object;)TT;", "removeModelAtIndex", "I", "(I)TT;", "removeModelById", "LNSString;", "(Ljava/lang/String;)TT;", "setModelFor", "()TT;", "setModelIdPath", "LASViewGroupModelImpl;", "<T:Ljava/lang/Object;>Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<TT;>;" };
-  static const J2ObjcClassInfo _ASViewGroupModelImpl_ViewGroupModelCommandBuilder = { "ViewGroupModelCommandBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x409, 10, 0, 16, -1, -1, 17, -1 };
+  static const void *ptrTable[] = { "addModel", "LNSObject;", "(Ljava/lang/Object;)TT;", "addAllModel", "addModelByIndex", "LNSObject;LNSObject;", "(Ljava/lang/Object;Ljava/lang/Object;)TT;", "removeModelAtIndex", "I", "(I)TT;", "removeModelById", "LNSString;", "(Ljava/lang/String;)TT;", "setModelFor", "()TT;", "setModelIdPath", "setModelDescPath", "LASViewGroupModelImpl;", "<T:Ljava/lang/Object;>Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<TT;>;" };
+  static const J2ObjcClassInfo _ASViewGroupModelImpl_ViewGroupModelCommandBuilder = { "ViewGroupModelCommandBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x409, 13, 0, 17, -1, -1, 18, -1 };
   return &_ASViewGroupModelImpl_ViewGroupModelCommandBuilder;
 }
 
@@ -622,6 +739,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupModelImpl_ViewGroupModelCommandBuild
   (void) [((ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *) nil_chk([((ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *) nil_chk([((ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *) nil_chk(ASViewGroupModelImpl_ViewGroupModelBean_getBuilder(self))) reset])) setModelIdPathWithNSString:value])) executeWithBoolean:true];
 }
 
+- (id)getModelDescPath {
+  return [((ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *) nil_chk([((ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *) nil_chk([((ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *) nil_chk([((ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *) nil_chk(ASViewGroupModelImpl_ViewGroupModelBean_getBuilder(self))) reset])) tryGetModelDescPath])) executeWithBoolean:false])) getModelDescPath];
+}
+
+- (void)setModelDescPathWithNSString:(NSString *)value {
+  (void) [((ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *) nil_chk([((ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *) nil_chk([((ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *) nil_chk(ASViewGroupModelImpl_ViewGroupModelBean_getBuilder(self))) reset])) setModelDescPathWithNSString:value])) executeWithBoolean:true];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
@@ -634,6 +759,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupModelImpl_ViewGroupModelCommandBuild
     { NULL, "V", 0x1, 10, 9, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 11, 9, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 9, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -648,12 +775,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupModelImpl_ViewGroupModelCommandBuild
   methods[7].selector = @selector(setModelForWithNSString:);
   methods[8].selector = @selector(getModelIdPath);
   methods[9].selector = @selector(setModelIdPathWithNSString:);
+  methods[10].selector = @selector(getModelDescPath);
+  methods[11].selector = @selector(setModelDescPathWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "commandBuilder_ViewGroupModelBean_", "LASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal;", .constantValue.asLong = 0, 0x2, 12, -1, -1, -1 },
+    { "commandBuilder_ViewGroupModelBean_", "LASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal;", .constantValue.asLong = 0, 0x2, 13, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASIWidget;", "addModel", "LNSObject;", "addAllModel", "addModelByIndex", "LNSObject;LNSObject;", "removeModelAtIndex", "I", "removeModelById", "LNSString;", "setModelFor", "setModelIdPath", "commandBuilder", "LASViewGroupModelImpl;" };
-  static const J2ObjcClassInfo _ASViewGroupModelImpl_ViewGroupModelBean = { "ViewGroupModelBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x9, 10, 1, 13, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASIWidget;", "addModel", "LNSObject;", "addAllModel", "addModelByIndex", "LNSObject;LNSObject;", "removeModelAtIndex", "I", "removeModelById", "LNSString;", "setModelFor", "setModelIdPath", "setModelDescPath", "commandBuilder", "LASViewGroupModelImpl;" };
+  static const J2ObjcClassInfo _ASViewGroupModelImpl_ViewGroupModelBean = { "ViewGroupModelBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x9, 12, 1, 14, -1, -1, -1, -1 };
   return &_ASViewGroupModelImpl_ViewGroupModelBean;
 }
 

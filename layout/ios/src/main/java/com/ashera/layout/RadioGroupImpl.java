@@ -116,7 +116,7 @@ public class RadioGroupImpl extends BaseHasWidgets implements com.ashera.validat
 
 	@Override
 	public IWidget newInstance() {
-		return new RadioGroupImpl();
+		return new RadioGroupImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -142,7 +142,7 @@ public class RadioGroupImpl extends BaseHasWidgets implements com.ashera.validat
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		radioGroup.removeView((View) w.asWidget());
          ViewGroupImpl.nativeRemoveView(w);            
@@ -279,12 +279,7 @@ return layoutParams.weight;			}
 		}
 
 		public RadioGroupExt() {
-			
 			super();
-			
-			
-			
-			
 			
 		}
 		
@@ -374,7 +369,44 @@ return layoutParams.weight;			}
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(RadioGroupImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(RadioGroupImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	RadioGroupImpl.this.getParent().remove(RadioGroupImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -384,6 +416,10 @@ return layoutParams.weight;			}
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			RadioGroupImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
@@ -391,12 +427,11 @@ return layoutParams.weight;			}
             
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((RadioGroupExt) radioGroup).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return RadioGroupExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -599,29 +634,37 @@ return getDividerPadding();			}
 	
 
 	@com.google.j2objc.annotations.WeakOuter
-	private static final class LLCanvas implements r.android.graphics.Canvas {
+	private static final class CanvasImpl implements r.android.graphics.Canvas {
+		private boolean canvasReset = true;
 		private List<Object> imageViews = new java.util.ArrayList<Object>();
 		@com.google.j2objc.annotations.Weak private IWidget widget;
-		public LLCanvas(IWidget widget) {
+		public CanvasImpl(IWidget widget) {
 			this.widget = widget;
 		}
 
 		@Override
 		public void draw(r.android.graphics.drawable.Drawable mDivider) {
+			for (Object divider : imageViews) {
+				if (ViewImpl.getX(divider) == mDivider.getLeft() && ViewImpl.getY(divider) == mDivider.getTop()) {
+					return;
+				}
+			}
 			if (mDivider.getDrawable() != null) {
 				Object imageView = nativeCreateImageView(mDivider.getDrawable());
 				ViewImpl.nativeMakeFrame(imageView, mDivider.getLeft(), mDivider.getTop(), mDivider.getRight(), mDivider.getBottom());
-				imageViews.add(imageView);
+				imageViews.add(imageView);				
 				ViewGroupImpl.nativeAddView(widget.asNativeWidget(), imageView);
 			}
 		}
 
 		@Override
 		public void reset() {
-			for (Object imageView : imageViews) {
-				ViewGroupImpl.removeView(imageView);
+			if (canvasReset) {
+				for (Object imageView : imageViews) {
+					ViewGroupImpl.removeView(imageView);
+				}
+				imageViews.clear();
 			}
-			imageViews.clear();
 		}
 		
 		public native Object nativeCreateImageView(Object image)/*-[
@@ -638,7 +681,7 @@ return getDividerPadding();			}
 	}
 
 	private void createCanvas() {
-		canvas = new LLCanvas(this);
+		canvas = new CanvasImpl(this);
 		
 	}
 	
@@ -1015,6 +1058,10 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(RadioGroup group
 	}
 	
     
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
 
 	
 private RadioGroupCommandBuilder builder;

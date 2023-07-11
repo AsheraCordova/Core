@@ -152,6 +152,12 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
 	public ImageViewImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ImageViewImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ImageViewImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class ImageViewExt extends android.widget.ImageView implements ILifeCycleDecorator{
@@ -167,11 +173,6 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
 	    }
 		public ImageViewExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -276,14 +277,14 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ImageViewImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((ImageViewExt) imageView).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return ImageViewExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ImageViewImpl();
+		return new ImageViewImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")

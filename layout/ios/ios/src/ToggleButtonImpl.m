@@ -23,6 +23,7 @@
 #include "FontDescriptor.h"
 #include "FontMetricsDescriptor.h"
 #include "GravityConverter.h"
+#include "HasWidgets.h"
 #include "IActivity.h"
 #include "IAttributable.h"
 #include "IConverter.h"
@@ -39,11 +40,12 @@
 #include "Layout.h"
 #include "LayoutNativeVars.h"
 #include "MarqueeCommandConverter.h"
-#include "MeasurableCompoundButton.h"
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
 #include "PluginInvoker.h"
+#include "Rect.h"
 #include "TextDirectionHeuristic.h"
+#include "ToggleButton.h"
 #include "ToggleButtonImpl.h"
 #include "View.h"
 #include "ViewImpl.h"
@@ -708,24 +710,6 @@ __attribute__((unused)) static id ASToggleButtonImpl_getChecked(ASToggleButtonIm
 
 __attribute__((unused)) static jboolean ASToggleButtonImpl_toggleChecked(ASToggleButtonImpl *self);
 
-@interface ASToggleButtonImpl_Ellipsize () {
- @public
-  id<JavaUtilMap> mapping_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(ASToggleButtonImpl_Ellipsize, mapping_, id<JavaUtilMap>)
-
-@interface ASToggleButtonImpl_JustificationMode () {
- @public
-  id<JavaUtilMap> mapping_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(ASToggleButtonImpl_JustificationMode, mapping_, id<JavaUtilMap>)
-
 @interface ASToggleButtonImpl_DrawableTintMode () {
  @public
   id<JavaUtilMap> mapping_;
@@ -762,17 +746,37 @@ J2OBJC_FIELD_SETTER(ASToggleButtonImpl_Font, mapping_, id<JavaUtilMap>)
 
 J2OBJC_FIELD_SETTER(ASToggleButtonImpl_TextStyle, mapping_, id<JavaUtilMap>)
 
+@interface ASToggleButtonImpl_Ellipsize () {
+ @public
+  id<JavaUtilMap> mapping_;
+}
+
+@end
+
+J2OBJC_FIELD_SETTER(ASToggleButtonImpl_Ellipsize, mapping_, id<JavaUtilMap>)
+
+@interface ASToggleButtonImpl_JustificationMode () {
+ @public
+  id<JavaUtilMap> mapping_;
+}
+
+@end
+
+J2OBJC_FIELD_SETTER(ASToggleButtonImpl_JustificationMode, mapping_, id<JavaUtilMap>)
+
 @interface ASToggleButtonImpl_ToggleButtonExt () {
  @public
   __unsafe_unretained ASToggleButtonImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
+  id<JavaUtilMap> templates_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(ASToggleButtonImpl_ToggleButtonExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASToggleButtonImpl_ToggleButtonExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASToggleButtonImpl_ToggleButtonExt, templates_, id<JavaUtilMap>)
 
 @interface ASToggleButtonImpl_MarqueeTask : NSObject < JavaLangRunnable > {
  @public
@@ -938,35 +942,6 @@ NSString *ASToggleButtonImpl_GROUP_NAME = @"ToggleButton";
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName {
   ASViewImpl_register__WithNSString_(attributeName);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onCheckedChange"])) withTypeWithNSString:@"string"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"checked"])) withTypeWithNSString:@"boolean"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textOn"])) withTypeWithNSString:@"resourcestring"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textOff"])) withTypeWithNSString:@"resourcestring"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"text"])) withTypeWithNSString:@"resourcestring"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"gravity"])) withTypeWithNSString:@"gravity"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textSize"])) withTypeWithNSString:@"dimensionsp"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"padding"])) withTypeWithNSString:@"dimension"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingBottom"])) withTypeWithNSString:@"dimension"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingRight"])) withTypeWithNSString:@"dimension"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingLeft"])) withTypeWithNSString:@"dimension"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingStart"])) withTypeWithNSString:@"dimension"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingEnd"])) withTypeWithNSString:@"dimension"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingTop"])) withTypeWithNSString:@"dimension"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingHorizontal"])) withTypeWithNSString:@"dimension"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingVertical"])) withTypeWithNSString:@"dimension"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textColor"])) withTypeWithNSString:@"colorstate"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textAllCaps"])) withTypeWithNSString:@"boolean"])) withOrderWithInt:-1])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"singleLine"])) withTypeWithNSString:@"boolean"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASConverterFactory_register__WithNSString_withASIConverter_(@"ToggleButton.ellipsize", new_ASToggleButtonImpl_Ellipsize_init());
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"ellipsize"])) withTypeWithNSString:@"ToggleButton.ellipsize"])) withOrderWithInt:100]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"firstBaselineToTopHeight"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"lastBaselineToBottomHeight"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASConverterFactory_register__WithNSString_withASIConverter_(@"ToggleButton.justificationMode", new_ASToggleButtonImpl_JustificationMode_init());
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"justificationMode"])) withTypeWithNSString:@"ToggleButton.justificationMode"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"scrollHorizontally"])) withTypeWithNSString:@"boolean"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"shadowDx"])) withTypeWithNSString:@"float"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"shadowDy"])) withTypeWithNSString:@"float"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"shadowColor"])) withTypeWithNSString:@"color"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableLeft"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableStart"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableRight"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
@@ -1000,6 +975,35 @@ NSString *ASToggleButtonImpl_GROUP_NAME = @"ToggleButton";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"fontFamily"])) withTypeWithNSString:@"font"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textFormat"])) withTypeWithNSString:@"resourcestring"])) withOrderWithInt:-1]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"enabled"])) withTypeWithNSString:@"boolean"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onCheckedChange"])) withTypeWithNSString:@"string"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"checked"])) withTypeWithNSString:@"boolean"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textOn"])) withTypeWithNSString:@"resourcestring"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textOff"])) withTypeWithNSString:@"resourcestring"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"text"])) withTypeWithNSString:@"resourcestring"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"gravity"])) withTypeWithNSString:@"gravity"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textSize"])) withTypeWithNSString:@"dimensionsp"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"padding"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingBottom"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingRight"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingLeft"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingStart"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingEnd"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingTop"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingHorizontal"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingVertical"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textColor"])) withTypeWithNSString:@"colorstate"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textAllCaps"])) withTypeWithNSString:@"boolean"])) withOrderWithInt:-1])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"singleLine"])) withTypeWithNSString:@"boolean"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
+  ASConverterFactory_register__WithNSString_withASIConverter_(@"ToggleButton.ellipsize", new_ASToggleButtonImpl_Ellipsize_init());
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"ellipsize"])) withTypeWithNSString:@"ToggleButton.ellipsize"])) withOrderWithInt:100]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"firstBaselineToTopHeight"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"lastBaselineToBottomHeight"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
+  ASConverterFactory_register__WithNSString_withASIConverter_(@"ToggleButton.justificationMode", new_ASToggleButtonImpl_JustificationMode_init());
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"justificationMode"])) withTypeWithNSString:@"ToggleButton.justificationMode"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"scrollHorizontally"])) withTypeWithNSString:@"boolean"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"shadowDx"])) withTypeWithNSString:@"float"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"shadowDy"])) withTypeWithNSString:@"float"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"shadowColor"])) withTypeWithNSString:@"color"]);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -1009,19 +1013,29 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
-  [((ASToggleButtonImpl_ToggleButtonExt *) nil_chk(((ASToggleButtonImpl_ToggleButtonExt *) cast_chk(measurableCompoundButton_, [ASToggleButtonImpl_ToggleButtonExt class])))) updateMeasuredDimensionWithInt:width withInt:height];
+- (instancetype)initWithNSString:(NSString *)localname {
+  ASToggleButtonImpl_initWithNSString_(self, localname);
+  return self;
+}
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname {
+  ASToggleButtonImpl_initWithNSString_withNSString_(self, groupName, localname);
+  return self;
+}
+
+- (IOSClass *)getViewClass {
+  return ASToggleButtonImpl_ToggleButtonExt_class_();
 }
 
 - (id<ASIWidget>)newInstance {
-  return new_ASToggleButtonImpl_init();
+  return new_ASToggleButtonImpl_initWithNSString_withNSString_(groupName_, localName_);
 }
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params {
   [super createWithASIFragment:fragment withJavaUtilMap:params];
-  measurableCompoundButton_ = new_ASToggleButtonImpl_ToggleButtonExt_initWithASToggleButtonImpl_(self);
+  measurableView_ = new_ASToggleButtonImpl_ToggleButtonExt_initWithASToggleButtonImpl_(self);
   ASToggleButtonImpl_nativeCreateWithJavaUtilMap_(self, params);
   ASViewImpl_registerCommandConveterWithASIWidget_(self);
   ASToggleButtonImpl_setWidgetOnNativeClass(self);
@@ -1037,285 +1051,285 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
   ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"onCheckedChange", @"checked", @"textOn", @"textOff", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"textColor", @"textAllCaps", @"singleLine", @"ellipsize", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"justificationMode", @"scrollHorizontally", @"shadowDx", @"shadowDy", @"shadowColor", @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"marqueeRepeatLimit", @"editable", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"textFormat", @"enabled" }, 56)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"marqueeRepeatLimit", @"editable", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"textFormat", @"enabled", @"onCheckedChange", @"checked", @"textOn", @"textOff", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"textColor", @"textAllCaps", @"singleLine", @"ellipsize", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"justificationMode", @"scrollHorizontally", @"shadowDx", @"shadowDy", @"shadowColor" }, 56)) {
     case 0:
-    {
-      ASToggleButtonImpl_setOnCheckedWithId_(self, objValue);
-    }
-    break;
-    case 1:
-    {
-      ASToggleButtonImpl_setCheckedWithId_(self, objValue);
-    }
-    break;
-    case 2:
-    {
-      ASToggleButtonImpl_setTextOnWithId_(self, objValue);
-    }
-    break;
-    case 3:
-    {
-      ASToggleButtonImpl_setTextOffWithId_(self, objValue);
-    }
-    break;
-    case 4:
-    {
-      [self setMyTextWithId:objValue];
-    }
-    break;
-    case 5:
-    {
-      ASToggleButtonImpl_setGravityWithId_(self, objValue);
-    }
-    break;
-    case 6:
-    {
-      ASToggleButtonImpl_setMyTextSizeWithId_(self, objValue);
-    }
-    break;
-    case 7:
-    {
-      ASToggleButtonImpl_setPaddingWithId_(self, objValue);
-    }
-    break;
-    case 8:
-    {
-      [self setPaddingBottomWithId:objValue];
-    }
-    break;
-    case 9:
-    {
-      [self setPaddingRightWithId:objValue];
-    }
-    break;
-    case 10:
-    {
-      [self setPaddingLeftWithId:objValue];
-    }
-    break;
-    case 11:
-    {
-      ASToggleButtonImpl_setPaddingStartWithId_(self, objValue);
-    }
-    break;
-    case 12:
-    {
-      ASToggleButtonImpl_setPaddingEndWithId_(self, objValue);
-    }
-    break;
-    case 13:
-    {
-      [self setPaddingTopWithId:objValue];
-    }
-    break;
-    case 14:
-    {
-      ASToggleButtonImpl_setPaddingHorizontalWithId_(self, objValue);
-    }
-    break;
-    case 15:
-    {
-      ASToggleButtonImpl_setPaddingVerticalWithId_(self, objValue);
-    }
-    break;
-    case 16:
-    {
-      ASToggleButtonImpl_setTextColorWithId_(self, objValue);
-    }
-    break;
-    case 17:
-    {
-      ASToggleButtonImpl_setTextAllCapsWithId_(self, objValue);
-    }
-    break;
-    case 18:
-    {
-      ASToggleButtonImpl_setSingleLineWithId_(self, objValue);
-    }
-    break;
-    case 19:
-    {
-      ASToggleButtonImpl_setEllipsizeWithId_withNSString_(self, objValue, strValue);
-    }
-    break;
-    case 20:
-    {
-      ASToggleButtonImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
-    }
-    break;
-    case 21:
-    {
-      ASToggleButtonImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
-    }
-    break;
-    case 22:
-    {
-      ASToggleButtonImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
-    }
-    break;
-    case 23:
-    {
-      ASToggleButtonImpl_setScrollHorizontallyWithId_(self, objValue);
-    }
-    break;
-    case 24:
-    {
-      ASToggleButtonImpl_setShadowDxWithJavaLangFloat_withNSString_(self, (JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]), strValue);
-    }
-    break;
-    case 25:
-    {
-      ASToggleButtonImpl_setShadowDyWithJavaLangFloat_withNSString_(self, (JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]), strValue);
-    }
-    break;
-    case 26:
-    {
-      ASToggleButtonImpl_setShadowColorWithId_withNSString_(self, objValue, strValue);
-    }
-    break;
-    case 27:
     {
       ASToggleButtonImpl_setDrawableLeftWithNSString_withId_(self, @"drawableLeft", objValue);
     }
     break;
-    case 28:
+    case 1:
     {
       ASToggleButtonImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
     }
     break;
-    case 29:
+    case 2:
     {
       ASToggleButtonImpl_setDrawableRightWithNSString_withId_(self, @"drawableRight", objValue);
     }
     break;
-    case 30:
+    case 3:
     {
       ASToggleButtonImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
     }
     break;
-    case 31:
+    case 4:
     {
       ASToggleButtonImpl_setDrawableTopWithId_(self, objValue);
     }
     break;
-    case 32:
+    case 5:
     {
       ASToggleButtonImpl_setDrawableBottomWithId_(self, objValue);
     }
     break;
-    case 33:
+    case 6:
     {
       ASToggleButtonImpl_setDrawablePaddingWithId_(self, objValue);
     }
     break;
-    case 34:
+    case 7:
     {
       ASToggleButtonImpl_setDrawableTintWithId_(self, objValue);
     }
     break;
-    case 35:
+    case 8:
     {
       ASToggleButtonImpl_setDrawableTintModeWithId_(self, objValue);
     }
     break;
-    case 36:
+    case 9:
     {
       ASToggleButtonImpl_setMinLinesWithId_(self, objValue);
     }
     break;
-    case 37:
+    case 10:
     {
       ASToggleButtonImpl_setLinesWithId_(self, objValue);
     }
     break;
-    case 38:
+    case 11:
     {
       ASToggleButtonImpl_setMaxLinesWithId_(self, objValue);
     }
     break;
-    case 39:
+    case 12:
     {
       ASToggleButtonImpl_setMinWidthWithId_(self, objValue);
     }
     break;
-    case 40:
+    case 13:
     {
       ASToggleButtonImpl_setMinHeightWithId_(self, objValue);
     }
     break;
-    case 41:
+    case 14:
     {
       ASToggleButtonImpl_setMaxWidthWithId_(self, objValue);
     }
     break;
-    case 42:
+    case 15:
     {
       ASToggleButtonImpl_setMaxHeightWithId_(self, objValue);
     }
     break;
-    case 43:
+    case 16:
     {
       ASToggleButtonImpl_setHeightWithId_(self, objValue);
     }
     break;
-    case 44:
+    case 17:
     {
       ASToggleButtonImpl_setWidthWithId_(self, objValue);
     }
     break;
-    case 45:
+    case 18:
     {
       ASToggleButtonImpl_setMaxEmsWithId_(self, objValue);
     }
     break;
-    case 46:
+    case 19:
     {
       ASToggleButtonImpl_setMinEmsWithId_(self, objValue);
     }
     break;
-    case 47:
+    case 20:
     {
       ASToggleButtonImpl_setEmsWithId_(self, objValue);
     }
     break;
-    case 48:
+    case 21:
     {
       ASToggleButtonImpl_setMarqueeRepeatLimitWithId_(self, objValue);
     }
     break;
-    case 49:
+    case 22:
     {
       ASToggleButtonImpl_setEnabledWithId_(self, objValue);
     }
     break;
-    case 50:
+    case 23:
     {
       ASToggleButtonImpl_setMaxLengthWithId_(self, objValue);
     }
     break;
-    case 51:
+    case 24:
     {
       ASToggleButtonImpl_setTypeFaceWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 52:
+    case 25:
     {
       ASToggleButtonImpl_setTextStyleWithId_(self, objValue);
     }
     break;
-    case 53:
+    case 26:
     {
       ASToggleButtonImpl_setFontFamilyWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 54:
+    case 27:
     {
       ASToggleButtonImpl_setTextFormatWithId_(self, objValue);
     }
     break;
-    case 55:
+    case 28:
     {
       ASToggleButtonImpl_setEnabledWithId_(self, objValue);
+    }
+    break;
+    case 29:
+    {
+      ASToggleButtonImpl_setOnCheckedWithId_(self, objValue);
+    }
+    break;
+    case 30:
+    {
+      ASToggleButtonImpl_setCheckedWithId_(self, objValue);
+    }
+    break;
+    case 31:
+    {
+      ASToggleButtonImpl_setTextOnWithId_(self, objValue);
+    }
+    break;
+    case 32:
+    {
+      ASToggleButtonImpl_setTextOffWithId_(self, objValue);
+    }
+    break;
+    case 33:
+    {
+      [self setMyTextWithId:objValue];
+    }
+    break;
+    case 34:
+    {
+      ASToggleButtonImpl_setGravityWithId_(self, objValue);
+    }
+    break;
+    case 35:
+    {
+      ASToggleButtonImpl_setMyTextSizeWithId_(self, objValue);
+    }
+    break;
+    case 36:
+    {
+      ASToggleButtonImpl_setPaddingWithId_(self, objValue);
+    }
+    break;
+    case 37:
+    {
+      [self setPaddingBottomWithId:objValue];
+    }
+    break;
+    case 38:
+    {
+      [self setPaddingRightWithId:objValue];
+    }
+    break;
+    case 39:
+    {
+      [self setPaddingLeftWithId:objValue];
+    }
+    break;
+    case 40:
+    {
+      ASToggleButtonImpl_setPaddingStartWithId_(self, objValue);
+    }
+    break;
+    case 41:
+    {
+      ASToggleButtonImpl_setPaddingEndWithId_(self, objValue);
+    }
+    break;
+    case 42:
+    {
+      [self setPaddingTopWithId:objValue];
+    }
+    break;
+    case 43:
+    {
+      ASToggleButtonImpl_setPaddingHorizontalWithId_(self, objValue);
+    }
+    break;
+    case 44:
+    {
+      ASToggleButtonImpl_setPaddingVerticalWithId_(self, objValue);
+    }
+    break;
+    case 45:
+    {
+      ASToggleButtonImpl_setTextColorWithId_(self, objValue);
+    }
+    break;
+    case 46:
+    {
+      ASToggleButtonImpl_setTextAllCapsWithId_(self, objValue);
+    }
+    break;
+    case 47:
+    {
+      ASToggleButtonImpl_setSingleLineWithId_(self, objValue);
+    }
+    break;
+    case 48:
+    {
+      ASToggleButtonImpl_setEllipsizeWithId_withNSString_(self, objValue, strValue);
+    }
+    break;
+    case 49:
+    {
+      ASToggleButtonImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
+    }
+    break;
+    case 50:
+    {
+      ASToggleButtonImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
+    }
+    break;
+    case 51:
+    {
+      ASToggleButtonImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
+    }
+    break;
+    case 52:
+    {
+      ASToggleButtonImpl_setScrollHorizontallyWithId_(self, objValue);
+    }
+    break;
+    case 53:
+    {
+      ASToggleButtonImpl_setShadowDxWithJavaLangFloat_withNSString_(self, (JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]), strValue);
+    }
+    break;
+    case 54:
+    {
+      ASToggleButtonImpl_setShadowDyWithJavaLangFloat_withNSString_(self, (JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]), strValue);
+    }
+    break;
+    case 55:
+    {
+      ASToggleButtonImpl_setShadowColorWithId_withNSString_(self, objValue, strValue);
     }
     break;
     default:
@@ -1331,141 +1345,141 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (attributeValue != nil) {
     return attributeValue;
   }
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"checked", @"textOn", @"textOff", @"text", @"gravity", @"textSize", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"textColor", @"ellipsize", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"justificationMode", @"shadowDx", @"shadowDy", @"shadowColor", @"drawablePadding", @"minLines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"marqueeRepeatLimit" }, 32)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"drawablePadding", @"minLines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"marqueeRepeatLimit", @"checked", @"textOn", @"textOff", @"text", @"gravity", @"textSize", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"textColor", @"ellipsize", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"justificationMode", @"shadowDx", @"shadowDy", @"shadowColor" }, 32)) {
     case 0:
-    {
-      return ASToggleButtonImpl_getChecked(self);
-    }
-    case 1:
-    {
-      return ASToggleButtonImpl_getTextOn(self);
-    }
-    case 2:
-    {
-      return ASToggleButtonImpl_getTextOff(self);
-    }
-    case 3:
-    {
-      return ASToggleButtonImpl_getMyText(self);
-    }
-    case 4:
-    {
-      return ASToggleButtonImpl_getGravity(self);
-    }
-    case 5:
-    {
-      return ASToggleButtonImpl_getTextSize(self);
-    }
-    case 6:
-    {
-      return [self getPaddingBottom];
-    }
-    case 7:
-    {
-      return [self getPaddingRight];
-    }
-    case 8:
-    {
-      return [self getPaddingLeft];
-    }
-    case 9:
-    {
-      return ASToggleButtonImpl_getPaddingStart(self);
-    }
-    case 10:
-    {
-      return ASToggleButtonImpl_getPaddingEnd(self);
-    }
-    case 11:
-    {
-      return [self getPaddingTop];
-    }
-    case 12:
-    {
-      return ASToggleButtonImpl_getTextColorState(self);
-    }
-    case 13:
-    {
-      return ASToggleButtonImpl_getEllipsize(self);
-    }
-    case 14:
-    {
-      return ASToggleButtonImpl_getFirstBaselineToTopHeight(self);
-    }
-    case 15:
-    {
-      return ASToggleButtonImpl_getLastBaselineToBottomHeight(self);
-    }
-    case 16:
-    {
-      return ASToggleButtonImpl_getJustificationMode(self);
-    }
-    case 17:
-    {
-      return ASToggleButtonImpl_getShadowDx(self);
-    }
-    case 18:
-    {
-      return ASToggleButtonImpl_getShadowDy(self);
-    }
-    case 19:
-    {
-      return ASToggleButtonImpl_getShadowColor(self);
-    }
-    case 20:
     {
       return ASToggleButtonImpl_getDrawablePadding(self);
     }
-    case 21:
+    case 1:
     {
       return JavaLangInteger_valueOfWithInt_([self getMinLines]);
     }
-    case 22:
+    case 2:
     {
       return JavaLangInteger_valueOfWithInt_([self getMaxLines]);
     }
-    case 23:
+    case 3:
     {
       return ASToggleButtonImpl_getMinWidth(self);
     }
-    case 24:
+    case 4:
     {
       return ASToggleButtonImpl_getMinHeight(self);
     }
-    case 25:
+    case 5:
     {
       return JavaLangInteger_valueOfWithInt_([self getMaxWidth]);
     }
-    case 26:
+    case 6:
     {
       return JavaLangInteger_valueOfWithInt_([self getMaxHeight]);
     }
-    case 27:
+    case 7:
     {
       return JavaLangInteger_valueOfWithInt_(ASToggleButtonImpl_getHeight(self));
     }
-    case 28:
+    case 8:
     {
       return ASToggleButtonImpl_getWidth(self);
     }
-    case 29:
+    case 9:
     {
       return JavaLangInteger_valueOfWithInt_([self getMaxEms]);
     }
-    case 30:
+    case 10:
     {
       return JavaLangInteger_valueOfWithInt_([self getMinEms]);
     }
-    case 31:
+    case 11:
     {
       return ASToggleButtonImpl_getMarqueeRepeatLimit(self);
+    }
+    case 12:
+    {
+      return ASToggleButtonImpl_getChecked(self);
+    }
+    case 13:
+    {
+      return ASToggleButtonImpl_getTextOn(self);
+    }
+    case 14:
+    {
+      return ASToggleButtonImpl_getTextOff(self);
+    }
+    case 15:
+    {
+      return ASToggleButtonImpl_getMyText(self);
+    }
+    case 16:
+    {
+      return ASToggleButtonImpl_getGravity(self);
+    }
+    case 17:
+    {
+      return ASToggleButtonImpl_getTextSize(self);
+    }
+    case 18:
+    {
+      return [self getPaddingBottom];
+    }
+    case 19:
+    {
+      return [self getPaddingRight];
+    }
+    case 20:
+    {
+      return [self getPaddingLeft];
+    }
+    case 21:
+    {
+      return ASToggleButtonImpl_getPaddingStart(self);
+    }
+    case 22:
+    {
+      return ASToggleButtonImpl_getPaddingEnd(self);
+    }
+    case 23:
+    {
+      return [self getPaddingTop];
+    }
+    case 24:
+    {
+      return ASToggleButtonImpl_getTextColorState(self);
+    }
+    case 25:
+    {
+      return ASToggleButtonImpl_getEllipsize(self);
+    }
+    case 26:
+    {
+      return ASToggleButtonImpl_getFirstBaselineToTopHeight(self);
+    }
+    case 27:
+    {
+      return ASToggleButtonImpl_getLastBaselineToBottomHeight(self);
+    }
+    case 28:
+    {
+      return ASToggleButtonImpl_getJustificationMode(self);
+    }
+    case 29:
+    {
+      return ASToggleButtonImpl_getShadowDx(self);
+    }
+    case 30:
+    {
+      return ASToggleButtonImpl_getShadowDy(self);
+    }
+    case 31:
+    {
+      return ASToggleButtonImpl_getShadowColor(self);
     }
   }
   return nil;
 }
 
 - (id)asWidget {
-  return measurableCompoundButton_;
+  return measurableView_;
 }
 
 - (void)createNativeWidgetWithJavaUtilMap:(id<JavaUtilMap>)params {
@@ -1539,34 +1553,34 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)getPaddingLeft {
-  return ASViewImpl_getPaddingLeftWithASIWidget_withADView_(self, measurableCompoundButton_);
+  return ASViewImpl_getPaddingLeftWithASIWidget_withADView_(self, measurableView_);
 }
 
 - (void)setPaddingLeftWithId:(id)paddingLeft {
-  ASViewImpl_setPaddingLeftWithId_withADView_(paddingLeft, measurableCompoundButton_);
-  ASToggleButtonImpl_nativeSetPaddingLeftWithInt_(self, [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getCompoundPaddingLeft]);
+  ASViewImpl_setPaddingLeftWithId_withADView_(paddingLeft, measurableView_);
+  ASToggleButtonImpl_nativeSetPaddingLeftWithInt_(self, [((ADToggleButton *) nil_chk(measurableView_)) getCompoundPaddingLeft]);
 }
 
 - (id)getPaddingRight {
-  return ASViewImpl_getPaddingRightWithASIWidget_withADView_(self, measurableCompoundButton_);
+  return ASViewImpl_getPaddingRightWithASIWidget_withADView_(self, measurableView_);
 }
 
 - (void)setPaddingRightWithId:(id)paddingRight {
-  ASViewImpl_setPaddingRightWithId_withADView_(paddingRight, measurableCompoundButton_);
-  ASToggleButtonImpl_nativeSetPaddingRightWithInt_(self, [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getCompoundPaddingRight]);
+  ASViewImpl_setPaddingRightWithId_withADView_(paddingRight, measurableView_);
+  ASToggleButtonImpl_nativeSetPaddingRightWithInt_(self, [((ADToggleButton *) nil_chk(measurableView_)) getCompoundPaddingRight]);
 }
 
 - (id)getPaddingTop {
-  return ASViewImpl_getPaddingTopWithASIWidget_withADView_(self, measurableCompoundButton_);
+  return ASViewImpl_getPaddingTopWithASIWidget_withADView_(self, measurableView_);
 }
 
 - (void)setPaddingTopWithId:(id)paddingTop {
-  ASViewImpl_setPaddingTopWithId_withADView_(paddingTop, measurableCompoundButton_);
-  ASToggleButtonImpl_nativeSetPaddingTopWithInt_(self, [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getCompoundPaddingTop]);
+  ASViewImpl_setPaddingTopWithId_withADView_(paddingTop, measurableView_);
+  ASToggleButtonImpl_nativeSetPaddingTopWithInt_(self, [((ADToggleButton *) nil_chk(measurableView_)) getCompoundPaddingTop]);
 }
 
 - (id)getPaddingBottom {
-  return ASViewImpl_getPaddingBottomWithASIWidget_withADView_(self, measurableCompoundButton_);
+  return ASViewImpl_getPaddingBottomWithASIWidget_withADView_(self, measurableView_);
 }
 
 - (id)getPaddingEnd {
@@ -1578,8 +1592,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setPaddingBottomWithId:(id)paddingBottom {
-  ASViewImpl_setPaddingBottomWithId_withADView_(paddingBottom, measurableCompoundButton_);
-  ASToggleButtonImpl_nativeSetPaddingBottomWithInt_(self, [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getCompoundPaddingBottom]);
+  ASViewImpl_setPaddingBottomWithId_withADView_(paddingBottom, measurableView_);
+  ASToggleButtonImpl_nativeSetPaddingBottomWithInt_(self, [((ADToggleButton *) nil_chk(measurableView_)) getCompoundPaddingBottom]);
 }
 
 - (void)setPaddingVerticalWithId:(id)objValue {
@@ -1603,10 +1617,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)updatePadding {
-  [self setPaddingLeftWithId:JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getPaddingLeft])];
-  [self setPaddingRightWithId:JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getPaddingRight])];
-  [self setPaddingTopWithId:JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getPaddingTop])];
-  [self setPaddingBottomWithId:JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getPaddingBottom])];
+  [self setPaddingLeftWithId:JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(measurableView_)) getPaddingLeft])];
+  [self setPaddingRightWithId:JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(measurableView_)) getPaddingRight])];
+  [self setPaddingTopWithId:JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(measurableView_)) getPaddingTop])];
+  [self setPaddingBottomWithId:JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(measurableView_)) getPaddingBottom])];
 }
 
 - (void)nativeSetPaddingBottomWithInt:(jint)value {
@@ -1783,7 +1797,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
-  if ([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getRawTextAlignment] != 0 || [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getRawLayoutDirection] != 0) {
+  if ([((ADToggleButton *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADToggleButton *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASToggleButtonImpl_updateTextAlignment(self);
   }
 }
@@ -1801,11 +1815,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getMaxEms {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMaxEms];
+  return [((ADToggleButton *) nil_chk(measurableView_)) getMaxEms];
 }
 
 - (jint)getMinEms {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMinEms];
+  return [((ADToggleButton *) nil_chk(measurableView_)) getMinEms];
 }
 
 - (void)setMinEmsWithId:(id)objValue {
@@ -1813,11 +1827,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getMinLines {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMinLines];
+  return [((ADToggleButton *) nil_chk(measurableView_)) getMinLines];
 }
 
 - (jint)getMaxLines {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMaxLines];
+  return [((ADToggleButton *) nil_chk(measurableView_)) getMaxLines];
 }
 
 - (void)setMaxEmsWithId:(id)objValue {
@@ -1853,11 +1867,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getMaxWidth {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMaxWidth];
+  return [((ADToggleButton *) nil_chk(measurableView_)) getMaxWidth];
 }
 
 - (jint)getMaxHeight {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMaxHeight];
+  return [((ADToggleButton *) nil_chk(measurableView_)) getMaxHeight];
 }
 
 - (void)setMinHeightWithId:(id)objValue {
@@ -2032,23 +2046,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"bottom", [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getBottomDrawable]);
-  ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"left", [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getLeftDrawable]);
-  ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"right", [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getRightDrawable]);
-  ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"top", [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getTopDrawable]);
-  if ([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getTextColors] != nil && [((ADColorStateList *) nil_chk([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getTextColors])) isStateful]) {
-    ASToggleButtonImpl_setTextColorWithId_(self, JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getCurrentTextColor]));
+  ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"bottom", [((ADToggleButton *) nil_chk(measurableView_)) getBottomDrawable]);
+  ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"left", [((ADToggleButton *) nil_chk(measurableView_)) getLeftDrawable]);
+  ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"right", [((ADToggleButton *) nil_chk(measurableView_)) getRightDrawable]);
+  ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"top", [((ADToggleButton *) nil_chk(measurableView_)) getTopDrawable]);
+  if ([((ADToggleButton *) nil_chk(measurableView_)) getTextColors] != nil && [((ADColorStateList *) nil_chk([((ADToggleButton *) nil_chk(measurableView_)) getTextColors])) isStateful]) {
+    ASToggleButtonImpl_setTextColorWithId_(self, JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(measurableView_)) getCurrentTextColor]));
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getHintTextColors] != nil && [((ADColorStateList *) nil_chk([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getHintTextColors])) isStateful]) {
-    ASToggleButtonImpl_setHintColorWithInt_(self, [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getCurrentHintTextColor]);
+  if ([((ADToggleButton *) nil_chk(measurableView_)) getHintTextColors] != nil && [((ADColorStateList *) nil_chk([((ADToggleButton *) nil_chk(measurableView_)) getHintTextColors])) isStateful]) {
+    ASToggleButtonImpl_setHintColorWithInt_(self, [((ADToggleButton *) nil_chk(measurableView_)) getCurrentHintTextColor]);
     ASToggleButtonImpl_syncPlaceholderLabel(self);
   }
   if (drawableTint_ != nil && [drawableTint_ isStateful]) {
     ASToggleButtonImpl_setDrawableTintWithId_(self, drawableTint_);
     [self invalidate];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getLinkTextColors] != nil && [((ADColorStateList *) nil_chk([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getLinkTextColors])) isStateful]) {
-    ASToggleButtonImpl_setTextColorLinkWithADColorStateList_(self, [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getLinkTextColors]);
+  if ([((ADToggleButton *) nil_chk(measurableView_)) getLinkTextColors] != nil && [((ADColorStateList *) nil_chk([((ADToggleButton *) nil_chk(measurableView_)) getLinkTextColors])) isStateful]) {
+    ASToggleButtonImpl_setTextColorLinkWithADColorStateList_(self, [((ADToggleButton *) nil_chk(measurableView_)) getLinkTextColors]);
   }
 }
 
@@ -2142,8 +2156,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
-    [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
+    [((ADToggleButton *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
   }
+}
+
+- (void)setVisibleWithBoolean:(jboolean)b {
+  [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
 - (void)requestLayout {
@@ -2196,18 +2214,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 5, -1, 6, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, 5, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 8, 9, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 11, 12, -1, 13, -1, -1 },
-    { NULL, "I", 0x1, 14, 15, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 16, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 10, 11, -1, 12, -1, -1 },
+    { NULL, "I", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 19, 20, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
@@ -2221,131 +2241,131 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 24, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 25, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 26, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 27, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 29, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 30, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 25, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 26, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 27, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 28, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 29, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 31, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 32, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 33, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 34, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 35, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 36, 37, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 30, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 31, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 32, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 33, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 34, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 35, 36, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 38, 39, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 37, 38, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 40, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 41, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 42, 43, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 39, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 40, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 41, 42, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 44, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 45, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 46, 15, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 43, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 44, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 45, 14, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 47, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 48, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 46, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 47, 14, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 49, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 48, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 50, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 51, 52, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 53, 52, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 49, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 50, 51, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 52, 51, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 54, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 55, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 53, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 54, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 56, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 55, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 57, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 56, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 58, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 57, 14, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 59, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 58, 18, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 60, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 59, 18, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 61, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 62, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 63, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 64, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 65, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 66, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 67, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 68, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 60, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 61, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 62, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 63, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 64, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 65, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 66, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 67, 18, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 69, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 70, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 68, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 69, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 71, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 72, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 73, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 74, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 75, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 76, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 70, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 71, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 72, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 73, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 74, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 75, 18, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 77, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 76, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 78, 12, -1, 13, -1, -1 },
+    { NULL, "V", 0x2, 77, 11, -1, 12, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 79, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 80, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 78, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 79, 18, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 81, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 80, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 82, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 83, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 36, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 81, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 82, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 35, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 84, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 85, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 86, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 87, 88, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 89, 88, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 90, 88, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 91, 88, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 92, 19, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 93, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 83, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 84, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 85, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 86, 87, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 88, 87, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 89, 87, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 90, 87, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 91, 18, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 92, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 94, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 95, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 93, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 94, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 96, 97, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 95, 96, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 98, 99, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 100, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 101, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 97, 98, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 99, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 100, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 102, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 101, 20, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
@@ -2355,17 +2375,18 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 103, 104, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 102, 103, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 105, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 106, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 104, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 105, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 106, 42, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 107, 1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 108, 12, -1, 13, -1, -1 },
-    { NULL, "V", 0x2, 109, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 108, 11, -1, 12, -1, -1 },
+    { NULL, "V", 0x2, 109, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
   };
@@ -2374,184 +2395,187 @@ J2OBJC_IGNORE_DESIGNATED_END
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(loadAttributesWithNSString:);
   methods[1].selector = @selector(init);
-  methods[2].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
-  methods[3].selector = @selector(newInstance);
-  methods[4].selector = @selector(createWithASIFragment:withJavaUtilMap:);
-  methods[5].selector = @selector(setWidgetOnNativeClass);
-  methods[6].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[7].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[8].selector = @selector(asWidget);
-  methods[9].selector = @selector(createNativeWidgetWithJavaUtilMap:);
-  methods[10].selector = @selector(measureHeightWithInt:);
-  methods[11].selector = @selector(nativeMeasureHeightButtonWithId:withInt:);
-  methods[12].selector = @selector(setMyTextWithId:);
-  methods[13].selector = @selector(nativeSetTextWithId:withNSString:);
-  methods[14].selector = @selector(getMyText);
-  methods[15].selector = @selector(getTitleLabel);
-  methods[16].selector = @selector(setHorizontalAligmentCenter);
-  methods[17].selector = @selector(setHorizontalAligmentRight);
-  methods[18].selector = @selector(setHorizontalAligmentLeft);
-  methods[19].selector = @selector(setVerticalAligmentCenter);
-  methods[20].selector = @selector(nativeSetVerticalAligmentBottom);
-  methods[21].selector = @selector(nativeSetVerticalAligmentTop);
-  methods[22].selector = @selector(nativeSetVerticalAligmentCenter);
-  methods[23].selector = @selector(setVerticalAligmentBottom);
-  methods[24].selector = @selector(setVerticalAligmentTop);
-  methods[25].selector = @selector(getTextAlignment);
-  methods[26].selector = @selector(getPaddingLeft);
-  methods[27].selector = @selector(setPaddingLeftWithId:);
-  methods[28].selector = @selector(getPaddingRight);
-  methods[29].selector = @selector(setPaddingRightWithId:);
-  methods[30].selector = @selector(getPaddingTop);
-  methods[31].selector = @selector(setPaddingTopWithId:);
-  methods[32].selector = @selector(getPaddingBottom);
-  methods[33].selector = @selector(getPaddingEnd);
-  methods[34].selector = @selector(getPaddingStart);
-  methods[35].selector = @selector(setPaddingBottomWithId:);
-  methods[36].selector = @selector(setPaddingVerticalWithId:);
-  methods[37].selector = @selector(setPaddingHorizontalWithId:);
-  methods[38].selector = @selector(setPaddingEndWithId:);
-  methods[39].selector = @selector(setPaddingStartWithId:);
-  methods[40].selector = @selector(setPaddingWithId:);
-  methods[41].selector = @selector(updatePadding);
-  methods[42].selector = @selector(nativeSetPaddingBottomWithInt:);
-  methods[43].selector = @selector(nativeSetPaddingLeftWithInt:);
-  methods[44].selector = @selector(nativeSetPaddingRightWithInt:);
-  methods[45].selector = @selector(nativeSetPaddingTopWithInt:);
-  methods[46].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[47].selector = @selector(setTextColorWithId:withId:);
-  methods[48].selector = @selector(addMinMaxListener);
-  methods[49].selector = @selector(setTextColorLinkWithADColorStateList:);
-  methods[50].selector = @selector(syncPlaceholderLabel);
-  methods[51].selector = @selector(setHintColorWithInt:);
-  methods[52].selector = @selector(setEnabledWithId:);
-  methods[53].selector = @selector(nativeSetEnabledWithBoolean:);
-  methods[54].selector = @selector(measureWidth);
-  methods[55].selector = @selector(nativeMeasureWidthButtonWithId:);
-  methods[56].selector = @selector(setNumberOfLinesWithId:withInt:);
-  methods[57].selector = @selector(nativeSetLineBreakModeWithInt:);
-  methods[58].selector = @selector(nativeGetLinBreakMode);
-  methods[59].selector = @selector(getSingleLine);
-  methods[60].selector = @selector(getFont);
-  methods[61].selector = @selector(setJustificationModeWithId:withNSString:);
-  methods[62].selector = @selector(nativeSetTextAligmentWithInt:);
-  methods[63].selector = @selector(getJustificationMode);
-  methods[64].selector = @selector(nativeGetTextAligment);
-  methods[65].selector = @selector(setScrollHorizontallyWithId:);
-  methods[66].selector = @selector(getShadowColor);
-  methods[67].selector = @selector(setShadowColorWithId:withNSString:);
-  methods[68].selector = @selector(setShadowDyWithJavaLangFloat:withNSString:);
-  methods[69].selector = @selector(setShadowDxWithJavaLangFloat:withNSString:);
-  methods[70].selector = @selector(getShadowDy);
-  methods[71].selector = @selector(getShadowDx);
-  methods[72].selector = @selector(setTextOffWithId:);
-  methods[73].selector = @selector(setTextOnWithId:);
-  methods[74].selector = @selector(getTextOff);
-  methods[75].selector = @selector(getTextOn);
-  methods[76].selector = @selector(initTextOnOff);
-  methods[77].selector = @selector(toggle);
-  methods[78].selector = @selector(setOnCheckedWithId:);
-  methods[79].selector = @selector(remeasure);
-  methods[80].selector = @selector(setGravityWithId:);
-  methods[81].selector = @selector(updateTextAlignment);
-  methods[82].selector = @selector(getGravity);
-  methods[83].selector = @selector(onRtlPropertiesChangedWithInt:);
-  methods[84].selector = @selector(getMinHeight);
-  methods[85].selector = @selector(getMinWidth);
-  methods[86].selector = @selector(setEmsWithId:);
-  methods[87].selector = @selector(getMaxEms);
-  methods[88].selector = @selector(getMinEms);
-  methods[89].selector = @selector(setMinEmsWithId:);
-  methods[90].selector = @selector(getMinLines);
-  methods[91].selector = @selector(getMaxLines);
-  methods[92].selector = @selector(setMaxEmsWithId:);
-  methods[93].selector = @selector(setWidthWithId:);
-  methods[94].selector = @selector(setHeightWithId:);
-  methods[95].selector = @selector(setMaxLinesWithId:);
-  methods[96].selector = @selector(setLinesWithId:);
-  methods[97].selector = @selector(setMinLinesWithId:);
-  methods[98].selector = @selector(setMaxHeightWithId:);
-  methods[99].selector = @selector(setMaxWidthWithId:);
-  methods[100].selector = @selector(getMaxWidth);
-  methods[101].selector = @selector(getMaxHeight);
-  methods[102].selector = @selector(setMinHeightWithId:);
-  methods[103].selector = @selector(setMinWidthWithId:);
-  methods[104].selector = @selector(getWidth);
-  methods[105].selector = @selector(getHeight);
-  methods[106].selector = @selector(setTypeFaceWithId:withNSString:);
-  methods[107].selector = @selector(setFontFamilyWithId:withNSString:);
-  methods[108].selector = @selector(setTextStyleWithId:);
-  methods[109].selector = @selector(setMaxLengthWithId:);
-  methods[110].selector = @selector(setTextAllCapsWithId:);
-  methods[111].selector = @selector(setFirstBaselineToTopHeightWithId:);
-  methods[112].selector = @selector(getIncludeFontPadding);
-  methods[113].selector = @selector(getFirstBaselineToTopHeight);
-  methods[114].selector = @selector(setLastBaselineToBottomHeightWithId:);
-  methods[115].selector = @selector(getLastBaselineToBottomHeight);
-  methods[116].selector = @selector(initHtmlWithJavaUtilMap:);
-  methods[117].selector = @selector(calcNumberOfWhiteSpaces);
-  methods[118].selector = @selector(cancelTimer);
-  methods[119].selector = @selector(startTimer);
-  methods[120].selector = @selector(getMarqueeRepeatLimit);
-  methods[121].selector = @selector(setMarqueeRepeatLimitWithId:);
-  methods[122].selector = @selector(startOrStopMarqueeWithId:);
-  methods[123].selector = @selector(getLabelWidth);
-  methods[124].selector = @selector(isLabelMeasured);
-  methods[125].selector = @selector(setTextFormatWithId:);
-  methods[126].selector = @selector(getTextSize);
-  methods[127].selector = @selector(setMyTextSizeWithId:);
-  methods[128].selector = @selector(nativeSetTextSizeWithInt:);
-  methods[129].selector = @selector(setTextColorWithId:);
-  methods[130].selector = @selector(getTextColorState);
-  methods[131].selector = @selector(setDrawablePaddingWithId:);
-  methods[132].selector = @selector(setDrawableBottomWithId:);
-  methods[133].selector = @selector(setDrawableTopWithId:);
-  methods[134].selector = @selector(setDrawableRightWithNSString:withId:);
-  methods[135].selector = @selector(setDrawableRightInternalWithNSString:withId:);
-  methods[136].selector = @selector(setDrawableLeftWithNSString:withId:);
-  methods[137].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
-  methods[138].selector = @selector(getImageHeightWithId:);
-  methods[139].selector = @selector(getImageWidthWithId:);
-  methods[140].selector = @selector(getDrawablePadding);
-  methods[141].selector = @selector(setDrawableTintModeWithId:);
-  methods[142].selector = @selector(setDrawableTintWithId:);
-  methods[143].selector = @selector(drawableStateChanged);
-  methods[144].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
-  methods[145].selector = @selector(nativeGetFontSize);
-  methods[146].selector = @selector(nativeGetFontStyle);
-  methods[147].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
-  methods[148].selector = @selector(nativeSetFontStyleWithInt:);
-  methods[149].selector = @selector(setSingleLineWithId:);
-  methods[150].selector = @selector(getEllipsize);
-  methods[151].selector = @selector(setEllipsizeWithId:withNSString:);
-  methods[152].selector = @selector(getBorderPadding);
-  methods[153].selector = @selector(getLineHeightPadding);
-  methods[154].selector = @selector(getLineHeight);
-  methods[155].selector = @selector(getBorderWidth);
-  methods[156].selector = @selector(canMarquee);
-  methods[157].selector = @selector(cancelNativeTimer);
-  methods[158].selector = @selector(isDisposed);
-  methods[159].selector = @selector(addDeallocHandler);
-  methods[160].selector = @selector(schedule);
-  methods[161].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
-  methods[162].selector = @selector(asNativeWidget);
-  methods[163].selector = @selector(checkIosVersionWithNSString:);
-  methods[164].selector = @selector(setIdWithNSString:);
-  methods[165].selector = @selector(requestLayout);
-  methods[166].selector = @selector(invalidate);
-  methods[167].selector = @selector(getPluginWithNSString:);
-  methods[168].selector = @selector(getBean);
-  methods[169].selector = @selector(getBuilder);
-  methods[170].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[171].selector = @selector(setCheckedWithId:);
-  methods[172].selector = @selector(getChecked);
-  methods[173].selector = @selector(toggleChecked);
+  methods[2].selector = @selector(initWithNSString:);
+  methods[3].selector = @selector(initWithNSString:withNSString:);
+  methods[4].selector = @selector(getViewClass);
+  methods[5].selector = @selector(newInstance);
+  methods[6].selector = @selector(createWithASIFragment:withJavaUtilMap:);
+  methods[7].selector = @selector(setWidgetOnNativeClass);
+  methods[8].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[9].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[10].selector = @selector(asWidget);
+  methods[11].selector = @selector(createNativeWidgetWithJavaUtilMap:);
+  methods[12].selector = @selector(measureHeightWithInt:);
+  methods[13].selector = @selector(nativeMeasureHeightButtonWithId:withInt:);
+  methods[14].selector = @selector(setMyTextWithId:);
+  methods[15].selector = @selector(nativeSetTextWithId:withNSString:);
+  methods[16].selector = @selector(getMyText);
+  methods[17].selector = @selector(getTitleLabel);
+  methods[18].selector = @selector(setHorizontalAligmentCenter);
+  methods[19].selector = @selector(setHorizontalAligmentRight);
+  methods[20].selector = @selector(setHorizontalAligmentLeft);
+  methods[21].selector = @selector(setVerticalAligmentCenter);
+  methods[22].selector = @selector(nativeSetVerticalAligmentBottom);
+  methods[23].selector = @selector(nativeSetVerticalAligmentTop);
+  methods[24].selector = @selector(nativeSetVerticalAligmentCenter);
+  methods[25].selector = @selector(setVerticalAligmentBottom);
+  methods[26].selector = @selector(setVerticalAligmentTop);
+  methods[27].selector = @selector(getTextAlignment);
+  methods[28].selector = @selector(getPaddingLeft);
+  methods[29].selector = @selector(setPaddingLeftWithId:);
+  methods[30].selector = @selector(getPaddingRight);
+  methods[31].selector = @selector(setPaddingRightWithId:);
+  methods[32].selector = @selector(getPaddingTop);
+  methods[33].selector = @selector(setPaddingTopWithId:);
+  methods[34].selector = @selector(getPaddingBottom);
+  methods[35].selector = @selector(getPaddingEnd);
+  methods[36].selector = @selector(getPaddingStart);
+  methods[37].selector = @selector(setPaddingBottomWithId:);
+  methods[38].selector = @selector(setPaddingVerticalWithId:);
+  methods[39].selector = @selector(setPaddingHorizontalWithId:);
+  methods[40].selector = @selector(setPaddingEndWithId:);
+  methods[41].selector = @selector(setPaddingStartWithId:);
+  methods[42].selector = @selector(setPaddingWithId:);
+  methods[43].selector = @selector(updatePadding);
+  methods[44].selector = @selector(nativeSetPaddingBottomWithInt:);
+  methods[45].selector = @selector(nativeSetPaddingLeftWithInt:);
+  methods[46].selector = @selector(nativeSetPaddingRightWithInt:);
+  methods[47].selector = @selector(nativeSetPaddingTopWithInt:);
+  methods[48].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[49].selector = @selector(setTextColorWithId:withId:);
+  methods[50].selector = @selector(addMinMaxListener);
+  methods[51].selector = @selector(setTextColorLinkWithADColorStateList:);
+  methods[52].selector = @selector(syncPlaceholderLabel);
+  methods[53].selector = @selector(setHintColorWithInt:);
+  methods[54].selector = @selector(setEnabledWithId:);
+  methods[55].selector = @selector(nativeSetEnabledWithBoolean:);
+  methods[56].selector = @selector(measureWidth);
+  methods[57].selector = @selector(nativeMeasureWidthButtonWithId:);
+  methods[58].selector = @selector(setNumberOfLinesWithId:withInt:);
+  methods[59].selector = @selector(nativeSetLineBreakModeWithInt:);
+  methods[60].selector = @selector(nativeGetLinBreakMode);
+  methods[61].selector = @selector(getSingleLine);
+  methods[62].selector = @selector(getFont);
+  methods[63].selector = @selector(setJustificationModeWithId:withNSString:);
+  methods[64].selector = @selector(nativeSetTextAligmentWithInt:);
+  methods[65].selector = @selector(getJustificationMode);
+  methods[66].selector = @selector(nativeGetTextAligment);
+  methods[67].selector = @selector(setScrollHorizontallyWithId:);
+  methods[68].selector = @selector(getShadowColor);
+  methods[69].selector = @selector(setShadowColorWithId:withNSString:);
+  methods[70].selector = @selector(setShadowDyWithJavaLangFloat:withNSString:);
+  methods[71].selector = @selector(setShadowDxWithJavaLangFloat:withNSString:);
+  methods[72].selector = @selector(getShadowDy);
+  methods[73].selector = @selector(getShadowDx);
+  methods[74].selector = @selector(setTextOffWithId:);
+  methods[75].selector = @selector(setTextOnWithId:);
+  methods[76].selector = @selector(getTextOff);
+  methods[77].selector = @selector(getTextOn);
+  methods[78].selector = @selector(initTextOnOff);
+  methods[79].selector = @selector(toggle);
+  methods[80].selector = @selector(setOnCheckedWithId:);
+  methods[81].selector = @selector(remeasure);
+  methods[82].selector = @selector(setGravityWithId:);
+  methods[83].selector = @selector(updateTextAlignment);
+  methods[84].selector = @selector(getGravity);
+  methods[85].selector = @selector(onRtlPropertiesChangedWithInt:);
+  methods[86].selector = @selector(getMinHeight);
+  methods[87].selector = @selector(getMinWidth);
+  methods[88].selector = @selector(setEmsWithId:);
+  methods[89].selector = @selector(getMaxEms);
+  methods[90].selector = @selector(getMinEms);
+  methods[91].selector = @selector(setMinEmsWithId:);
+  methods[92].selector = @selector(getMinLines);
+  methods[93].selector = @selector(getMaxLines);
+  methods[94].selector = @selector(setMaxEmsWithId:);
+  methods[95].selector = @selector(setWidthWithId:);
+  methods[96].selector = @selector(setHeightWithId:);
+  methods[97].selector = @selector(setMaxLinesWithId:);
+  methods[98].selector = @selector(setLinesWithId:);
+  methods[99].selector = @selector(setMinLinesWithId:);
+  methods[100].selector = @selector(setMaxHeightWithId:);
+  methods[101].selector = @selector(setMaxWidthWithId:);
+  methods[102].selector = @selector(getMaxWidth);
+  methods[103].selector = @selector(getMaxHeight);
+  methods[104].selector = @selector(setMinHeightWithId:);
+  methods[105].selector = @selector(setMinWidthWithId:);
+  methods[106].selector = @selector(getWidth);
+  methods[107].selector = @selector(getHeight);
+  methods[108].selector = @selector(setTypeFaceWithId:withNSString:);
+  methods[109].selector = @selector(setFontFamilyWithId:withNSString:);
+  methods[110].selector = @selector(setTextStyleWithId:);
+  methods[111].selector = @selector(setMaxLengthWithId:);
+  methods[112].selector = @selector(setTextAllCapsWithId:);
+  methods[113].selector = @selector(setFirstBaselineToTopHeightWithId:);
+  methods[114].selector = @selector(getIncludeFontPadding);
+  methods[115].selector = @selector(getFirstBaselineToTopHeight);
+  methods[116].selector = @selector(setLastBaselineToBottomHeightWithId:);
+  methods[117].selector = @selector(getLastBaselineToBottomHeight);
+  methods[118].selector = @selector(initHtmlWithJavaUtilMap:);
+  methods[119].selector = @selector(calcNumberOfWhiteSpaces);
+  methods[120].selector = @selector(cancelTimer);
+  methods[121].selector = @selector(startTimer);
+  methods[122].selector = @selector(getMarqueeRepeatLimit);
+  methods[123].selector = @selector(setMarqueeRepeatLimitWithId:);
+  methods[124].selector = @selector(startOrStopMarqueeWithId:);
+  methods[125].selector = @selector(getLabelWidth);
+  methods[126].selector = @selector(isLabelMeasured);
+  methods[127].selector = @selector(setTextFormatWithId:);
+  methods[128].selector = @selector(getTextSize);
+  methods[129].selector = @selector(setMyTextSizeWithId:);
+  methods[130].selector = @selector(nativeSetTextSizeWithInt:);
+  methods[131].selector = @selector(setTextColorWithId:);
+  methods[132].selector = @selector(getTextColorState);
+  methods[133].selector = @selector(setDrawablePaddingWithId:);
+  methods[134].selector = @selector(setDrawableBottomWithId:);
+  methods[135].selector = @selector(setDrawableTopWithId:);
+  methods[136].selector = @selector(setDrawableRightWithNSString:withId:);
+  methods[137].selector = @selector(setDrawableRightInternalWithNSString:withId:);
+  methods[138].selector = @selector(setDrawableLeftWithNSString:withId:);
+  methods[139].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
+  methods[140].selector = @selector(getImageHeightWithId:);
+  methods[141].selector = @selector(getImageWidthWithId:);
+  methods[142].selector = @selector(getDrawablePadding);
+  methods[143].selector = @selector(setDrawableTintModeWithId:);
+  methods[144].selector = @selector(setDrawableTintWithId:);
+  methods[145].selector = @selector(drawableStateChanged);
+  methods[146].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
+  methods[147].selector = @selector(nativeGetFontSize);
+  methods[148].selector = @selector(nativeGetFontStyle);
+  methods[149].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
+  methods[150].selector = @selector(nativeSetFontStyleWithInt:);
+  methods[151].selector = @selector(setSingleLineWithId:);
+  methods[152].selector = @selector(getEllipsize);
+  methods[153].selector = @selector(setEllipsizeWithId:withNSString:);
+  methods[154].selector = @selector(getBorderPadding);
+  methods[155].selector = @selector(getLineHeightPadding);
+  methods[156].selector = @selector(getLineHeight);
+  methods[157].selector = @selector(getBorderWidth);
+  methods[158].selector = @selector(canMarquee);
+  methods[159].selector = @selector(cancelNativeTimer);
+  methods[160].selector = @selector(isDisposed);
+  methods[161].selector = @selector(addDeallocHandler);
+  methods[162].selector = @selector(schedule);
+  methods[163].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
+  methods[164].selector = @selector(asNativeWidget);
+  methods[165].selector = @selector(checkIosVersionWithNSString:);
+  methods[166].selector = @selector(setIdWithNSString:);
+  methods[167].selector = @selector(setVisibleWithBoolean:);
+  methods[168].selector = @selector(requestLayout);
+  methods[169].selector = @selector(invalidate);
+  methods[170].selector = @selector(getPluginWithNSString:);
+  methods[171].selector = @selector(getBean);
+  methods[172].selector = @selector(getBuilder);
+  methods[173].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[174].selector = @selector(setCheckedWithId:);
+  methods[175].selector = @selector(getChecked);
+  methods[176].selector = @selector(toggleChecked);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 110, -1, -1 },
     { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 111, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "measurableCompoundButton_", "LASMeasurableCompoundButton;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "measurableView_", "LADToggleButton;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "TEXT_ALIGN_CENTER", "I", .constantValue.asInt = ASToggleButtonImpl_TEXT_ALIGN_CENTER, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_LEFT", "I", .constantValue.asInt = ASToggleButtonImpl_TEXT_ALIGN_LEFT, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_RIGHT", "I", .constantValue.asInt = ASToggleButtonImpl_TEXT_ALIGN_RIGHT, 0x1a, -1, -1, -1, -1 },
@@ -2577,8 +2601,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "bean_", "LASToggleButtonImpl_ToggleButtonBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "checked_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "updateMeasuredDimension", "II", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "createNativeWidget", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "measureHeight", "I", "nativeMeasureHeightButton", "LNSObject;I", "setMyText", "LNSObject;", "nativeSetText", "LNSObject;LNSString;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "postSetAttribute", "setTextColor", "LNSObject;LNSObject;", "setTextColorLink", "LADColorStateList;", "setHintColor", "setEnabled", "nativeSetEnabled", "Z", "nativeMeasureWidthButton", "setNumberOfLines", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setScrollHorizontally", "setShadowColor", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setTextOff", "setTextOn", "setOnChecked", "setGravity", "onRtlPropertiesChanged", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "setTypeFace", "setFontFamily", "setTextStyle", "setMaxLength", "setTextAllCaps", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "initHtml", "setMarqueeRepeatLimit", "startOrStopMarquee", "setTextFormat", "setMyTextSize", "nativeSetTextSize", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "drawableStateChange", "LNSString;LADDrawable;", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setSingleLine", "setEllipsize", "executeOnMainThread", "LJavaLangRunnable;", "checkIosVersion", "setId", "getPlugin", "nativeCreate", "setChecked", &ASToggleButtonImpl_LOCAL_NAME, &ASToggleButtonImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASToggleButtonImpl_ITALIC_FONT_TRAIT, &ASToggleButtonImpl_BOLD_FONT_TRAIT, "LASToggleButtonImpl_Ellipsize;LASToggleButtonImpl_JustificationMode;LASToggleButtonImpl_DrawableTintMode;LASToggleButtonImpl_MarqueeRepeatLimit;LASToggleButtonImpl_Font;LASToggleButtonImpl_TextStyle;LASToggleButtonImpl_ToggleButtonExt;LASToggleButtonImpl_MarqueeTask;LASToggleButtonImpl_DellocHandler;LASToggleButtonImpl_OnCheckedChangeListener;LASToggleButtonImpl_ToggleButtonCommandBuilder;LASToggleButtonImpl_ToggleButtonBean;LASToggleButtonImpl_StateToggler;" };
-  static const J2ObjcClassInfo _ASToggleButtonImpl = { "ToggleButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 174, 28, -1, 116, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "createNativeWidget", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "measureHeight", "I", "nativeMeasureHeightButton", "LNSObject;I", "setMyText", "LNSObject;", "nativeSetText", "LNSObject;LNSString;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "postSetAttribute", "setTextColor", "LNSObject;LNSObject;", "setTextColorLink", "LADColorStateList;", "setHintColor", "setEnabled", "nativeSetEnabled", "Z", "nativeMeasureWidthButton", "setNumberOfLines", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setScrollHorizontally", "setShadowColor", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setTextOff", "setTextOn", "setOnChecked", "setGravity", "onRtlPropertiesChanged", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "setTypeFace", "setFontFamily", "setTextStyle", "setMaxLength", "setTextAllCaps", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "initHtml", "setMarqueeRepeatLimit", "startOrStopMarquee", "setTextFormat", "setMyTextSize", "nativeSetTextSize", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "drawableStateChange", "LNSString;LADDrawable;", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setSingleLine", "setEllipsize", "executeOnMainThread", "LJavaLangRunnable;", "checkIosVersion", "setId", "setVisible", "getPlugin", "nativeCreate", "setChecked", &ASToggleButtonImpl_LOCAL_NAME, &ASToggleButtonImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASToggleButtonImpl_ITALIC_FONT_TRAIT, &ASToggleButtonImpl_BOLD_FONT_TRAIT, "LASToggleButtonImpl_DrawableTintMode;LASToggleButtonImpl_MarqueeRepeatLimit;LASToggleButtonImpl_Font;LASToggleButtonImpl_TextStyle;LASToggleButtonImpl_Ellipsize;LASToggleButtonImpl_JustificationMode;LASToggleButtonImpl_ToggleButtonExt;LASToggleButtonImpl_MarqueeTask;LASToggleButtonImpl_DellocHandler;LASToggleButtonImpl_OnCheckedChangeListener;LASToggleButtonImpl_ToggleButtonCommandBuilder;LASToggleButtonImpl_ToggleButtonBean;LASToggleButtonImpl_StateToggler;" };
+  static const J2ObjcClassInfo _ASToggleButtonImpl = { "ToggleButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 177, 28, -1, 116, -1, -1, -1 };
   return &_ASToggleButtonImpl;
 }
 
@@ -2602,6 +2626,30 @@ ASToggleButtonImpl *new_ASToggleButtonImpl_init() {
 
 ASToggleButtonImpl *create_ASToggleButtonImpl_init() {
   J2OBJC_CREATE_IMPL(ASToggleButtonImpl, init)
+}
+
+void ASToggleButtonImpl_initWithNSString_(ASToggleButtonImpl *self, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, ASToggleButtonImpl_GROUP_NAME, localname);
+}
+
+ASToggleButtonImpl *new_ASToggleButtonImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_NEW_IMPL(ASToggleButtonImpl, initWithNSString_, localname)
+}
+
+ASToggleButtonImpl *create_ASToggleButtonImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASToggleButtonImpl, initWithNSString_, localname)
+}
+
+void ASToggleButtonImpl_initWithNSString_withNSString_(ASToggleButtonImpl *self, NSString *groupName, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, groupName, localname);
+}
+
+ASToggleButtonImpl *new_ASToggleButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_NEW_IMPL(ASToggleButtonImpl, initWithNSString_withNSString_, groupName, localname)
+}
+
+ASToggleButtonImpl *create_ASToggleButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASToggleButtonImpl, initWithNSString_withNSString_, groupName, localname)
 }
 
 void ASToggleButtonImpl_setWidgetOnNativeClass(ASToggleButtonImpl *self) {
@@ -2653,7 +2701,7 @@ void ASToggleButtonImpl_setHorizontalAligmentLeft(ASToggleButtonImpl *self) {
 }
 
 void ASToggleButtonImpl_setVerticalAligmentCenter(ASToggleButtonImpl *self) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, middle)];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, middle)];
   ASToggleButtonImpl_nativeSetVerticalAligmentCenter(self);
 }
 
@@ -2670,12 +2718,12 @@ void ASToggleButtonImpl_nativeSetVerticalAligmentCenter(ASToggleButtonImpl *self
 }
 
 void ASToggleButtonImpl_setVerticalAligmentBottom(ASToggleButtonImpl *self) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, bottom)];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, bottom)];
   ASToggleButtonImpl_nativeSetVerticalAligmentBottom(self);
 }
 
 void ASToggleButtonImpl_setVerticalAligmentTop(ASToggleButtonImpl *self) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top)];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top)];
   ASToggleButtonImpl_nativeSetVerticalAligmentTop(self);
 }
 
@@ -2877,7 +2925,7 @@ void ASToggleButtonImpl_initTextOnOff(ASToggleButtonImpl *self) {
 void ASToggleButtonImpl_toggle(ASToggleButtonImpl *self) {
   ASToggleButtonImpl_setCheckedWithId_(self, JavaLangBoolean_valueOfWithBoolean_(ASToggleButtonImpl_toggleChecked(self)));
   if (self->onCheckedChangeListener_ != nil) {
-    [self->onCheckedChangeListener_ onCheckedChangedWithADCompoundButton:self->measurableCompoundButton_ withBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(ASToggleButtonImpl_getChecked(self), [JavaLangBoolean class]))) booleanValue]];
+    [self->onCheckedChangeListener_ onCheckedChangedWithADCompoundButton:self->measurableView_ withBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(ASToggleButtonImpl_getChecked(self), [JavaLangBoolean class]))) booleanValue]];
   }
 }
 
@@ -2899,7 +2947,7 @@ void ASToggleButtonImpl_remeasure(ASToggleButtonImpl *self) {
 
 void ASToggleButtonImpl_setGravityWithId_(ASToggleButtonImpl *self, id objValue) {
   jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setGravityWithInt:value];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setGravityWithInt:value];
   jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASToggleButtonImpl_updateTextAlignment(self);
   switch (major) {
@@ -2919,11 +2967,11 @@ void ASToggleButtonImpl_setGravityWithId_(ASToggleButtonImpl *self, id objValue)
 }
 
 void ASToggleButtonImpl_updateTextAlignment(ASToggleButtonImpl *self) {
-  ADLayout_Alignment *minor = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getAlignmentOfLayout];
+  ADLayout_Alignment *minor = [((ADToggleButton *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
   jboolean isRtl = false;
-  jboolean hasTextDirection = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getRawTextDirection] != 0;
+  jboolean hasTextDirection = [((ADToggleButton *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
-    id<ADTextDirectionHeuristic> heuristic = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getTextDirectionHeuristic];
+    id<ADTextDirectionHeuristic> heuristic = [((ADToggleButton *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASToggleButtonImpl_getMyText(self), [NSString class]);
     isRtl = [((id<ADTextDirectionHeuristic>) nil_chk(heuristic)) isRtlWithJavaLangCharSequence:text withInt:0 withInt:[((NSString *) nil_chk(text)) java_length]];
   }
@@ -2970,7 +3018,7 @@ void ASToggleButtonImpl_updateTextAlignment(ASToggleButtonImpl *self) {
 }
 
 id ASToggleButtonImpl_getGravity(ASToggleButtonImpl *self) {
-  ASBaseMeasurableView_VerticalAligment *verticalAligment = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getVerticalAligment];
+  ASBaseMeasurableView_VerticalAligment *verticalAligment = [((ADToggleButton *) nil_chk(self->measurableView_)) getVerticalAligment];
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
@@ -3008,11 +3056,11 @@ id ASToggleButtonImpl_getGravity(ASToggleButtonImpl *self) {
 }
 
 id ASToggleButtonImpl_getMinHeight(ASToggleButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getMinHeight]);
+  return JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(self->measurableView_)) getMinHeight]);
 }
 
 id ASToggleButtonImpl_getMinWidth(ASToggleButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getMinWidth]);
+  return JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(self->measurableView_)) getMinWidth]);
 }
 
 void ASToggleButtonImpl_setEmsWithId_(ASToggleButtonImpl *self, id objValue) {
@@ -3021,12 +3069,12 @@ void ASToggleButtonImpl_setEmsWithId_(ASToggleButtonImpl *self, id objValue) {
 }
 
 void ASToggleButtonImpl_setMinEmsWithId_(ASToggleButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMinEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setMinEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASToggleButtonImpl_addMinMaxListener(self);
 }
 
 void ASToggleButtonImpl_setMaxEmsWithId_(ASToggleButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMaxEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setMaxEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASToggleButtonImpl_addMinMaxListener(self);
 }
 
@@ -3041,7 +3089,7 @@ void ASToggleButtonImpl_setHeightWithId_(ASToggleButtonImpl *self, id objValue) 
 }
 
 void ASToggleButtonImpl_setMaxLinesWithId_(ASToggleButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMaxLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setMaxLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASToggleButtonImpl_addMinMaxListener(self);
 }
 
@@ -3051,36 +3099,36 @@ void ASToggleButtonImpl_setLinesWithId_(ASToggleButtonImpl *self, id objValue) {
 }
 
 void ASToggleButtonImpl_setMinLinesWithId_(ASToggleButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMinLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setMinLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASToggleButtonImpl_addMinMaxListener(self);
 }
 
 void ASToggleButtonImpl_setMaxHeightWithId_(ASToggleButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMaxHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setMaxHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASToggleButtonImpl_addMinMaxListener(self);
 }
 
 void ASToggleButtonImpl_setMaxWidthWithId_(ASToggleButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMaxWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setMaxWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASToggleButtonImpl_addMinMaxListener(self);
 }
 
 void ASToggleButtonImpl_setMinHeightWithId_(ASToggleButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMinHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setMinHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASToggleButtonImpl_addMinMaxListener(self);
 }
 
 void ASToggleButtonImpl_setMinWidthWithId_(ASToggleButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMinWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setMinWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASToggleButtonImpl_addMinMaxListener(self);
 }
 
 id ASToggleButtonImpl_getWidth(ASToggleButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getWidth]);
+  return JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(self->measurableView_)) getWidth]);
 }
 
 jint ASToggleButtonImpl_getHeight(ASToggleButtonImpl *self) {
-  return [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getHeight];
+  return [((ADToggleButton *) nil_chk(self->measurableView_)) getHeight];
 }
 
 void ASToggleButtonImpl_setTypeFaceWithId_withNSString_(ASToggleButtonImpl *self, id objValue, NSString *strValue) {
@@ -3163,7 +3211,7 @@ void ASToggleButtonImpl_setFirstBaselineToTopHeightWithId_(ASToggleButtonImpl *s
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
     jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingBottom], [JavaLangInteger class]))) intValue]];
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingBottom], [JavaLangInteger class]))) intValue]];
   }
 }
 
@@ -3188,7 +3236,7 @@ void ASToggleButtonImpl_setLastBaselineToBottomHeightWithId_(ASToggleButtonImpl 
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
     jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingTop], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:paddingBottom];
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingTop], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
 
@@ -3261,10 +3309,10 @@ void ASToggleButtonImpl_startOrStopMarqueeWithId_(ASToggleButtonImpl *self, id o
 }
 
 jint ASToggleButtonImpl_getLabelWidth(ASToggleButtonImpl *self) {
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) isIgnoreDrawableHeight]) {
-    return [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getMeasuredWidth] - [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getPaddingLeft] - [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getPaddingRight];
+  if ([((ADToggleButton *) nil_chk(self->measurableView_)) isIgnoreDrawableHeight]) {
+    return [((ADToggleButton *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADToggleButton *) nil_chk(self->measurableView_)) getPaddingLeft] - [((ADToggleButton *) nil_chk(self->measurableView_)) getPaddingRight];
   }
-  return [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getMeasuredWidth] - [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getCompoundPaddingRight] - [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getCompoundPaddingLeft];
+  return [((ADToggleButton *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADToggleButton *) nil_chk(self->measurableView_)) getCompoundPaddingRight] - [((ADToggleButton *) nil_chk(self->measurableView_)) getCompoundPaddingLeft];
 }
 
 jboolean ASToggleButtonImpl_isLabelMeasured(ASToggleButtonImpl *self) {
@@ -3291,28 +3339,28 @@ void ASToggleButtonImpl_nativeSetTextSizeWithInt_(ASToggleButtonImpl *self, jint
 void ASToggleButtonImpl_setTextColorWithId_(ASToggleButtonImpl *self, id objValue) {
   if ([objValue isKindOfClass:[ADColorStateList class]]) {
     ADColorStateList *colorStateList = (ADColorStateList *) objValue;
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setTextColorWithADColorStateList:colorStateList];
-    objValue = JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getCurrentTextColor]);
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setTextColorWithADColorStateList:colorStateList];
+    objValue = JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(self->measurableView_)) getCurrentTextColor]);
   }
   ASToggleButtonImpl_setTextColorWithId_withId_(self, self->uiView_, ASViewImpl_getColorWithId_(objValue));
 }
 
 id ASToggleButtonImpl_getTextColorState(ASToggleButtonImpl *self) {
-  return [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getTextColors];
+  return [((ADToggleButton *) nil_chk(self->measurableView_)) getTextColors];
 }
 
 void ASToggleButtonImpl_setDrawablePaddingWithId_(ASToggleButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setDrawablePaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADToggleButton *) nil_chk(self->measurableView_)) setDrawablePaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   [self updatePadding];
 }
 
 void ASToggleButtonImpl_setDrawableBottomWithId_(ASToggleButtonImpl *self, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setBottomDrawableWithADDrawable:nil];
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setBottomDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"bottom" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setBottomDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setBottomDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"bottom" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3320,11 +3368,11 @@ void ASToggleButtonImpl_setDrawableBottomWithId_(ASToggleButtonImpl *self, id ob
 
 void ASToggleButtonImpl_setDrawableTopWithId_(ASToggleButtonImpl *self, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setTopDrawableWithADDrawable:nil];
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setTopDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"top" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setTopDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setTopDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"top" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3341,11 +3389,11 @@ void ASToggleButtonImpl_setDrawableRightWithNSString_withId_(ASToggleButtonImpl 
 
 void ASToggleButtonImpl_setDrawableRightInternalWithNSString_withId_(ASToggleButtonImpl *self, NSString *originalAttr, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setRightDrawableWithADDrawable:nil];
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setRightDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"right" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setRightDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setRightDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"right" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3364,11 +3412,11 @@ void ASToggleButtonImpl_setDrawableLeftWithNSString_withId_(ASToggleButtonImpl *
 
 void ASToggleButtonImpl_setDrawableLeftInternalWithNSString_withId_(ASToggleButtonImpl *self, NSString *originalAttr, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setLeftDrawableWithADDrawable:nil];
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setLeftDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"left" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setLeftDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADToggleButton *) nil_chk(self->measurableView_)) setLeftDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"left" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3393,22 +3441,22 @@ jint ASToggleButtonImpl_getImageWidthWithId_(ASToggleButtonImpl *self, id objVal
 }
 
 id ASToggleButtonImpl_getDrawablePadding(ASToggleButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getDrawablePadding]);
+  return JavaLangInteger_valueOfWithInt_([((ADToggleButton *) nil_chk(self->measurableView_)) getDrawablePadding]);
 }
 
 void ASToggleButtonImpl_setDrawableTintModeWithId_(ASToggleButtonImpl *self, id value) {
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getLeftDrawable] != nil) {
+  if ([((ADToggleButton *) nil_chk(self->measurableView_)) getLeftDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableLeft" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getRightDrawable] != nil) {
+  if ([((ADToggleButton *) nil_chk(self->measurableView_)) getRightDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableRight" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getTopDrawable] != nil) {
+  if ([((ADToggleButton *) nil_chk(self->measurableView_)) getTopDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getBottomDrawable] != nil) {
+  if ([((ADToggleButton *) nil_chk(self->measurableView_)) getBottomDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
 }
@@ -3417,26 +3465,26 @@ void ASToggleButtonImpl_setDrawableTintWithId_(ASToggleButtonImpl *self, id objV
   if ([objValue isKindOfClass:[ADColorStateList class]]) {
     ADColorStateList *colorStateList = (ADColorStateList *) objValue;
     self->drawableTint_ = colorStateList;
-    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(self->drawableTint_)) getColorForStateWithIntArray:[((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getDrawableState] withInt:ADColor_RED]);
+    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(self->drawableTint_)) getColorForStateWithIntArray:[((ADToggleButton *) nil_chk(self->measurableView_)) getDrawableState] withInt:ADColor_RED]);
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getLeftDrawable] != nil) {
+  if ([((ADToggleButton *) nil_chk(self->measurableView_)) getLeftDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableLeft" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getRightDrawable] != nil) {
+  if ([((ADToggleButton *) nil_chk(self->measurableView_)) getRightDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableRight" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getTopDrawable] != nil) {
+  if ([((ADToggleButton *) nil_chk(self->measurableView_)) getTopDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getBottomDrawable] != nil) {
+  if ([((ADToggleButton *) nil_chk(self->measurableView_)) getBottomDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
 }
 
 void ASToggleButtonImpl_drawableStateChangeWithNSString_withADDrawable_(ASToggleButtonImpl *self, NSString *type, ADDrawable *dr) {
-  IOSIntArray *state = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getDrawableState];
+  IOSIntArray *state = [((ADToggleButton *) nil_chk(self->measurableView_)) getDrawableState];
   if (dr != nil && [dr isStateful] && [dr setStateWithIntArray:state]) {
     switch (JreIndexOfStr(type, (id[]){ @"bottom", @"top", @"left", @"right" }, 4)) {
       case 0:
@@ -3593,127 +3641,6 @@ jboolean ASToggleButtonImpl_toggleChecked(ASToggleButtonImpl *self) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl)
-
-@implementation ASToggleButtonImpl_Ellipsize
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  ASToggleButtonImpl_Ellipsize_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-- (id<JavaUtilMap>)getMapping {
-  return mapping_;
-}
-
-- (JavaLangInteger *)getDefault {
-  return JavaLangInteger_valueOfWithInt_(0);
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 0, -1, -1 },
-    { NULL, "LJavaLangInteger;", 0x1, -1, -1, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(init);
-  methods[1].selector = @selector(getMapping);
-  methods[2].selector = @selector(getDefault);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "mapping_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 1, -1 },
-  };
-  static const void *ptrTable[] = { "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASToggleButtonImpl;" };
-  static const J2ObjcClassInfo _ASToggleButtonImpl_Ellipsize = { "Ellipsize", "com.ashera.layout", ptrTable, methods, fields, 7, 0x18, 3, 1, 2, -1, -1, -1, -1 };
-  return &_ASToggleButtonImpl_Ellipsize;
-}
-
-@end
-
-void ASToggleButtonImpl_Ellipsize_init(ASToggleButtonImpl_Ellipsize *self) {
-  ASAbstractEnumToIntConverter_init(self);
-  self->mapping_ = new_JavaUtilHashMap_init();
-  {
-    (void) [self->mapping_ putWithId:@"end" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSLineBreakByTruncatingTail))];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"marquee" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSLineBreakByMarquee))];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"middle" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSLineBreakByTruncatingMiddle))];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSLineBreakByClipping))];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"start" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSLineBreakByTruncatingHead))];
-  }
-}
-
-ASToggleButtonImpl_Ellipsize *new_ASToggleButtonImpl_Ellipsize_init() {
-  J2OBJC_NEW_IMPL(ASToggleButtonImpl_Ellipsize, init)
-}
-
-ASToggleButtonImpl_Ellipsize *create_ASToggleButtonImpl_Ellipsize_init() {
-  J2OBJC_CREATE_IMPL(ASToggleButtonImpl_Ellipsize, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_Ellipsize)
-
-@implementation ASToggleButtonImpl_JustificationMode
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  ASToggleButtonImpl_JustificationMode_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-- (id<JavaUtilMap>)getMapping {
-  return mapping_;
-}
-
-- (JavaLangInteger *)getDefault {
-  return JavaLangInteger_valueOfWithInt_(0);
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 0, -1, -1 },
-    { NULL, "LJavaLangInteger;", 0x1, -1, -1, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(init);
-  methods[1].selector = @selector(getMapping);
-  methods[2].selector = @selector(getDefault);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "mapping_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 1, -1 },
-  };
-  static const void *ptrTable[] = { "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASToggleButtonImpl;" };
-  static const J2ObjcClassInfo _ASToggleButtonImpl_JustificationMode = { "JustificationMode", "com.ashera.layout", ptrTable, methods, fields, 7, 0x18, 3, 1, 2, -1, -1, -1, -1 };
-  return &_ASToggleButtonImpl_JustificationMode;
-}
-
-@end
-
-void ASToggleButtonImpl_JustificationMode_init(ASToggleButtonImpl_JustificationMode *self) {
-  ASAbstractEnumToIntConverter_init(self);
-  self->mapping_ = new_JavaUtilHashMap_init();
-  {
-    (void) [self->mapping_ putWithId:@"inter_word" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSTextAlignmentJustified))];
-    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSTextAlignmentLeft))];
-  }
-}
-
-ASToggleButtonImpl_JustificationMode *new_ASToggleButtonImpl_JustificationMode_init() {
-  J2OBJC_NEW_IMPL(ASToggleButtonImpl_JustificationMode, init)
-}
-
-ASToggleButtonImpl_JustificationMode *create_ASToggleButtonImpl_JustificationMode_init() {
-  J2OBJC_CREATE_IMPL(ASToggleButtonImpl_JustificationMode, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
 
 @implementation ASToggleButtonImpl_DrawableTintMode
 
@@ -3963,6 +3890,127 @@ ASToggleButtonImpl_TextStyle *create_ASToggleButtonImpl_TextStyle_init() {
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_TextStyle)
 
+@implementation ASToggleButtonImpl_Ellipsize
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ASToggleButtonImpl_Ellipsize_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilMap>)getMapping {
+  return mapping_;
+}
+
+- (JavaLangInteger *)getDefault {
+  return JavaLangInteger_valueOfWithInt_(0);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 0, -1, -1 },
+    { NULL, "LJavaLangInteger;", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getMapping);
+  methods[2].selector = @selector(getDefault);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "mapping_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 1, -1 },
+  };
+  static const void *ptrTable[] = { "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASToggleButtonImpl;" };
+  static const J2ObjcClassInfo _ASToggleButtonImpl_Ellipsize = { "Ellipsize", "com.ashera.layout", ptrTable, methods, fields, 7, 0x18, 3, 1, 2, -1, -1, -1, -1 };
+  return &_ASToggleButtonImpl_Ellipsize;
+}
+
+@end
+
+void ASToggleButtonImpl_Ellipsize_init(ASToggleButtonImpl_Ellipsize *self) {
+  ASAbstractEnumToIntConverter_init(self);
+  self->mapping_ = new_JavaUtilHashMap_init();
+  {
+    (void) [self->mapping_ putWithId:@"end" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSLineBreakByTruncatingTail))];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"marquee" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSLineBreakByMarquee))];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"middle" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSLineBreakByTruncatingMiddle))];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSLineBreakByClipping))];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"start" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSLineBreakByTruncatingHead))];
+  }
+}
+
+ASToggleButtonImpl_Ellipsize *new_ASToggleButtonImpl_Ellipsize_init() {
+  J2OBJC_NEW_IMPL(ASToggleButtonImpl_Ellipsize, init)
+}
+
+ASToggleButtonImpl_Ellipsize *create_ASToggleButtonImpl_Ellipsize_init() {
+  J2OBJC_CREATE_IMPL(ASToggleButtonImpl_Ellipsize, init)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_Ellipsize)
+
+@implementation ASToggleButtonImpl_JustificationMode
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ASToggleButtonImpl_JustificationMode_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilMap>)getMapping {
+  return mapping_;
+}
+
+- (JavaLangInteger *)getDefault {
+  return JavaLangInteger_valueOfWithInt_(0);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 0, -1, -1 },
+    { NULL, "LJavaLangInteger;", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getMapping);
+  methods[2].selector = @selector(getDefault);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "mapping_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 1, -1 },
+  };
+  static const void *ptrTable[] = { "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASToggleButtonImpl;" };
+  static const J2ObjcClassInfo _ASToggleButtonImpl_JustificationMode = { "JustificationMode", "com.ashera.layout", ptrTable, methods, fields, 7, 0x18, 3, 1, 2, -1, -1, -1, -1 };
+  return &_ASToggleButtonImpl_JustificationMode;
+}
+
+@end
+
+void ASToggleButtonImpl_JustificationMode_init(ASToggleButtonImpl_JustificationMode *self) {
+  ASAbstractEnumToIntConverter_init(self);
+  self->mapping_ = new_JavaUtilHashMap_init();
+  {
+    (void) [self->mapping_ putWithId:@"inter_word" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSTextAlignmentJustified))];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"none" withId:JavaLangInteger_valueOfWithInt_(JreLoadStatic(ASLayoutNativeVars, NSTextAlignmentLeft))];
+  }
+}
+
+ASToggleButtonImpl_JustificationMode *new_ASToggleButtonImpl_JustificationMode_init() {
+  J2OBJC_NEW_IMPL(ASToggleButtonImpl_JustificationMode, init)
+}
+
+ASToggleButtonImpl_JustificationMode *create_ASToggleButtonImpl_JustificationMode_init() {
+  J2OBJC_CREATE_IMPL(ASToggleButtonImpl_JustificationMode, init)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
+
 @implementation ASToggleButtonImpl_ToggleButtonExt
 
 - (instancetype)initWithASToggleButtonImpl:(ASToggleButtonImpl *)outer$ {
@@ -4041,6 +4089,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_TextStyle)
   ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
 }
 
+- (ADView *)inflateViewWithNSString:(NSString *)layout {
+  if (templates_ == nil) {
+    templates_ = new_JavaUtilHashMap_init();
+  }
+  id<ASIWidget> template_ = [templates_ getWithId:layout];
+  if (template_ == nil) {
+    template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
+    (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
+  }
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+}
+
+- (void)remeasure {
+  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+}
+
+- (void)removeFromParent {
+  [((id<ASHasWidgets>) nil_chk([this$0_ getParent])) removeWithASIWidget:this$0_];
+}
+
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation {
+  *IOSIntArray_GetRef(nil_chk(appScreenLocation), 0) = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  *IOSIntArray_GetRef(appScreenLocation, 1) = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+}
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame {
+  ((ADRect *) nil_chk(displayFrame))->left_ = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->top_ = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->right_ = displayFrame->left_ + [self getWidth];
+  displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
+}
+
 - (void)offsetTopAndBottomWithInt:(jint)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
@@ -4049,6 +4130,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_TextStyle)
 - (void)offsetLeftAndRightWithInt:(jint)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
+}
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value {
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
 }
 
 - (void)setVisibilityWithInt:(jint)visibility {
@@ -4072,6 +4158,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_TextStyle)
   return [this$0_ getLineHeightPadding];
 }
 
+- (jint)nativeMeasureWidthWithId:(id)uiView {
+  return ASViewImpl_nativeMeasureWidthWithId_(uiView);
+}
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width {
+  return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
+}
+
+- (jint)computeSizeWithFloat:(jfloat)width {
+  return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
+}
+
+- (NSString *)getText {
+  return (NSString *) cast_chk(ASToggleButtonImpl_getMyText(this$0_), [NSString class]);
+}
+
 - (void)__javaClone:(ASToggleButtonImpl_ToggleButtonExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -4090,13 +4193,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_TextStyle)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 13, 14, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 16, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 22, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 27, 28, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 29, 30, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 31, 32, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -4112,21 +4225,32 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_TextStyle)
   methods[8].selector = @selector(initialized);
   methods[9].selector = @selector(getAttributeWithASWidgetAttribute:);
   methods[10].selector = @selector(drawableStateChanged);
-  methods[11].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[12].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[13].selector = @selector(setVisibilityWithInt:);
-  methods[14].selector = @selector(getBorderPadding);
-  methods[15].selector = @selector(getLineHeight);
-  methods[16].selector = @selector(getBorderWidth);
-  methods[17].selector = @selector(getLineHeightPadding);
+  methods[11].selector = @selector(inflateViewWithNSString:);
+  methods[12].selector = @selector(remeasure);
+  methods[13].selector = @selector(removeFromParent);
+  methods[14].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[15].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[16].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[17].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[18].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[19].selector = @selector(setVisibilityWithInt:);
+  methods[20].selector = @selector(getBorderPadding);
+  methods[21].selector = @selector(getLineHeight);
+  methods[22].selector = @selector(getBorderWidth);
+  methods[23].selector = @selector(getLineHeightPadding);
+  methods[24].selector = @selector(nativeMeasureWidthWithId:);
+  methods[25].selector = @selector(nativeMeasureHeightWithId:withInt:);
+  methods[26].selector = @selector(computeSizeWithFloat:);
+  methods[27].selector = @selector(getText);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASToggleButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
     { "measureFinished_", "LASMeasureEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
   };
-  static const void *ptrTable[] = { "LASToggleButtonImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setVisibility" };
-  static const J2ObjcClassInfo _ASToggleButtonImpl_ToggleButtonExt = { "ToggleButtonExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 18, 3, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASToggleButtonImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "computeSize", "F", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASToggleButtonImpl_ToggleButtonExt = { "ToggleButtonExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 28, 4, 0, -1, -1, -1, -1 };
   return &_ASToggleButtonImpl_ToggleButtonExt;
 }
 
@@ -4134,7 +4258,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_TextStyle)
 
 void ASToggleButtonImpl_ToggleButtonExt_initWithASToggleButtonImpl_(ASToggleButtonImpl_ToggleButtonExt *self, ASToggleButtonImpl *outer$) {
   self->this$0_ = outer$;
-  ASMeasurableCompoundButton_initWithASIWidget_(self, outer$);
+  ADToggleButton_initWithASIWidget_(self, outer$);
   self->measureFinished_ = new_ASMeasureEvent_init();
   self->onLayoutEvent_ = new_ASOnLayoutEvent_init();
 }
@@ -4468,6 +4592,423 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_OnCheckedChangeListener)
     [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
   }
   [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableLeft"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableStartWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableStart"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableRightWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableRight"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableEndWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableEnd"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableTopWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTop"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableBottomWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableBottom"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetDrawablePadding {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawablePadding"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getDrawablePadding {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawablePadding"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawablePadding"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableTintWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTint"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableTintModeWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTintMode"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMinLines {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minLines"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getMinLines {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minLines"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMinLinesWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minLines"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setLinesWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"lines"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMaxLines {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLines"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getMaxLines {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLines"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMaxLinesWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLines"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMinWidth {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getMinWidth {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMinWidthWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMinHeight {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getMinHeight {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMinHeightWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMaxWidth {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getMaxWidth {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMaxWidthWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMaxHeight {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getMaxHeight {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMaxHeightWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetHeight {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"height"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getHeight {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"height"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setHeightWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"height"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetWidth {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"width"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getWidth {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"width"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setWidthWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"width"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMaxEms {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxEms"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getMaxEms {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxEms"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMaxEmsWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxEms"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMinEms {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minEms"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getMinEms {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minEms"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMinEmsWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minEms"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setEmsWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"ems"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMarqueeRepeatLimit {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"marqueeRepeatLimit"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getMarqueeRepeatLimit {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"marqueeRepeatLimit"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMarqueeRepeatLimitWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"marqueeRepeatLimit"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setEditableWithBoolean:(jboolean)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"editable"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMaxLengthWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLength"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setTypefaceWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"typeface"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setTextStyleWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textStyle"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setFontFamilyWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"fontFamily"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setTextFormatWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textFormat"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setEnabledWithBoolean:(jboolean)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"enabled"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
   return self;
 }
 
@@ -4974,512 +5515,92 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_OnCheckedChangeListener)
   return self;
 }
 
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableStartWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableRight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableEndWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableTopWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableBottomWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetDrawablePadding {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawablePadding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getDrawablePadding {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawablePadding"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawablePadding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableTintWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableTintModeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTintMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMinLines {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minLines"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMinLines {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minLines"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMinLinesWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minLines"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setLinesWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"lines"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMaxLines {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLines"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxLines {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLines"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMaxLinesWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLines"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMinWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMinWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMinWidthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMinHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMinHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMinHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMaxWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMaxWidthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMaxHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMaxHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"height"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"height"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"height"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"width"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"width"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setWidthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"width"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMaxEms {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxEms"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxEms {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxEms"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMaxEmsWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxEms"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMinEms {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minEms"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMinEms {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minEms"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMinEmsWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minEms"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setEmsWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"ems"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMarqueeRepeatLimit {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"marqueeRepeatLimit"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMarqueeRepeatLimit {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"marqueeRepeatLimit"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMarqueeRepeatLimitWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"marqueeRepeatLimit"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setEditableWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"editable"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setMaxLengthWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLength"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setTypefaceWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"typeface"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setTextStyleWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textStyle"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setFontFamilyWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"fontFamily"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setTextFormatWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textFormat"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"enabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 5, 2, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 5, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 6, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 7, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 8, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 9, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 10, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 11, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 12, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 13, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 15, 14, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 14, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 15, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 16, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 16, 14, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 17, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 18, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 19, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 20, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 21, 2, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 22, 2, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 23, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 21, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 24, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 22, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 25, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 23, 14, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 24, 14, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 25, 14, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 26, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 27, 2, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 28, 29, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 30, 29, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 28, 14, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 29, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 30, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 31, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 32, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 33, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 33, 2, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 34, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 35, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 35, 2, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 36, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 37, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 38, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 39, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 40, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 41, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 41, 42, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 43, 42, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 42, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 44, 42, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 43, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 44, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 45, 4, -1, -1, -1, -1 },
@@ -5489,163 +5610,166 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_OnCheckedChangeListener)
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 47, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 48, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 49, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 50, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 51, 2, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 52, 2, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 51, 42, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 52, 42, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 53, 42, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 53, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 54, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 55, 2, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 56, 42, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 57, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 58, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 59, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 60, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 61, 2, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 55, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 56, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 57, 2, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 58, 59, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 60, 59, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 61, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithASToggleButtonImpl:);
   methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setOnCheckedChangeWithNSString:);
-  methods[3].selector = @selector(tryGetChecked);
-  methods[4].selector = @selector(isChecked);
-  methods[5].selector = @selector(setCheckedWithBoolean:);
-  methods[6].selector = @selector(tryGetTextOn);
-  methods[7].selector = @selector(getTextOn);
-  methods[8].selector = @selector(setTextOnWithNSString:);
-  methods[9].selector = @selector(tryGetTextOff);
-  methods[10].selector = @selector(getTextOff);
-  methods[11].selector = @selector(setTextOffWithNSString:);
-  methods[12].selector = @selector(tryGetText);
-  methods[13].selector = @selector(getText);
-  methods[14].selector = @selector(setTextWithNSString:);
-  methods[15].selector = @selector(tryGetGravity);
-  methods[16].selector = @selector(getGravity);
-  methods[17].selector = @selector(setGravityWithNSString:);
-  methods[18].selector = @selector(tryGetTextSize);
-  methods[19].selector = @selector(getTextSize);
-  methods[20].selector = @selector(setTextSizeWithNSString:);
-  methods[21].selector = @selector(setPaddingWithNSString:);
-  methods[22].selector = @selector(tryGetPaddingBottom);
-  methods[23].selector = @selector(getPaddingBottom);
-  methods[24].selector = @selector(setPaddingBottomWithNSString:);
-  methods[25].selector = @selector(tryGetPaddingRight);
-  methods[26].selector = @selector(getPaddingRight);
-  methods[27].selector = @selector(setPaddingRightWithNSString:);
-  methods[28].selector = @selector(tryGetPaddingLeft);
-  methods[29].selector = @selector(getPaddingLeft);
-  methods[30].selector = @selector(setPaddingLeftWithNSString:);
-  methods[31].selector = @selector(tryGetPaddingStart);
-  methods[32].selector = @selector(getPaddingStart);
-  methods[33].selector = @selector(setPaddingStartWithNSString:);
-  methods[34].selector = @selector(tryGetPaddingEnd);
-  methods[35].selector = @selector(getPaddingEnd);
-  methods[36].selector = @selector(setPaddingEndWithNSString:);
-  methods[37].selector = @selector(tryGetPaddingTop);
-  methods[38].selector = @selector(getPaddingTop);
-  methods[39].selector = @selector(setPaddingTopWithNSString:);
-  methods[40].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[41].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[42].selector = @selector(tryGetTextColor);
-  methods[43].selector = @selector(getTextColor);
-  methods[44].selector = @selector(setTextColorWithNSString:);
-  methods[45].selector = @selector(setTextAllCapsWithBoolean:);
-  methods[46].selector = @selector(setSingleLineWithBoolean:);
-  methods[47].selector = @selector(tryGetEllipsize);
-  methods[48].selector = @selector(getEllipsize);
-  methods[49].selector = @selector(setEllipsizeWithNSString:);
-  methods[50].selector = @selector(tryGetFirstBaselineToTopHeight);
-  methods[51].selector = @selector(getFirstBaselineToTopHeight);
-  methods[52].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[53].selector = @selector(tryGetLastBaselineToBottomHeight);
-  methods[54].selector = @selector(getLastBaselineToBottomHeight);
-  methods[55].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[56].selector = @selector(tryGetJustificationMode);
-  methods[57].selector = @selector(getJustificationMode);
-  methods[58].selector = @selector(setJustificationModeWithNSString:);
-  methods[59].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[60].selector = @selector(tryGetShadowDx);
-  methods[61].selector = @selector(getShadowDx);
-  methods[62].selector = @selector(setShadowDxWithFloat:);
-  methods[63].selector = @selector(tryGetShadowDy);
-  methods[64].selector = @selector(getShadowDy);
-  methods[65].selector = @selector(setShadowDyWithFloat:);
-  methods[66].selector = @selector(tryGetShadowColor);
-  methods[67].selector = @selector(getShadowColor);
-  methods[68].selector = @selector(setShadowColorWithNSString:);
-  methods[69].selector = @selector(setDrawableLeftWithNSString:);
-  methods[70].selector = @selector(setDrawableStartWithNSString:);
-  methods[71].selector = @selector(setDrawableRightWithNSString:);
-  methods[72].selector = @selector(setDrawableEndWithNSString:);
-  methods[73].selector = @selector(setDrawableTopWithNSString:);
-  methods[74].selector = @selector(setDrawableBottomWithNSString:);
-  methods[75].selector = @selector(tryGetDrawablePadding);
-  methods[76].selector = @selector(getDrawablePadding);
-  methods[77].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[78].selector = @selector(setDrawableTintWithNSString:);
-  methods[79].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[80].selector = @selector(tryGetMinLines);
-  methods[81].selector = @selector(getMinLines);
-  methods[82].selector = @selector(setMinLinesWithInt:);
-  methods[83].selector = @selector(setLinesWithInt:);
-  methods[84].selector = @selector(tryGetMaxLines);
-  methods[85].selector = @selector(getMaxLines);
-  methods[86].selector = @selector(setMaxLinesWithInt:);
-  methods[87].selector = @selector(tryGetMinWidth);
-  methods[88].selector = @selector(getMinWidth);
-  methods[89].selector = @selector(setMinWidthWithNSString:);
-  methods[90].selector = @selector(tryGetMinHeight);
-  methods[91].selector = @selector(getMinHeight);
-  methods[92].selector = @selector(setMinHeightWithNSString:);
-  methods[93].selector = @selector(tryGetMaxWidth);
-  methods[94].selector = @selector(getMaxWidth);
-  methods[95].selector = @selector(setMaxWidthWithNSString:);
-  methods[96].selector = @selector(tryGetMaxHeight);
-  methods[97].selector = @selector(getMaxHeight);
-  methods[98].selector = @selector(setMaxHeightWithNSString:);
-  methods[99].selector = @selector(tryGetHeight);
-  methods[100].selector = @selector(getHeight);
-  methods[101].selector = @selector(setHeightWithNSString:);
-  methods[102].selector = @selector(tryGetWidth);
-  methods[103].selector = @selector(getWidth);
-  methods[104].selector = @selector(setWidthWithNSString:);
-  methods[105].selector = @selector(tryGetMaxEms);
-  methods[106].selector = @selector(getMaxEms);
-  methods[107].selector = @selector(setMaxEmsWithInt:);
-  methods[108].selector = @selector(tryGetMinEms);
-  methods[109].selector = @selector(getMinEms);
-  methods[110].selector = @selector(setMinEmsWithInt:);
-  methods[111].selector = @selector(setEmsWithInt:);
-  methods[112].selector = @selector(tryGetMarqueeRepeatLimit);
-  methods[113].selector = @selector(getMarqueeRepeatLimit);
-  methods[114].selector = @selector(setMarqueeRepeatLimitWithNSString:);
-  methods[115].selector = @selector(setEditableWithBoolean:);
-  methods[116].selector = @selector(setMaxLengthWithInt:);
-  methods[117].selector = @selector(setTypefaceWithNSString:);
-  methods[118].selector = @selector(setTextStyleWithNSString:);
-  methods[119].selector = @selector(setFontFamilyWithNSString:);
-  methods[120].selector = @selector(setTextFormatWithNSString:);
-  methods[121].selector = @selector(setEnabledWithBoolean:);
+  methods[2].selector = @selector(setDrawableLeftWithNSString:);
+  methods[3].selector = @selector(setDrawableStartWithNSString:);
+  methods[4].selector = @selector(setDrawableRightWithNSString:);
+  methods[5].selector = @selector(setDrawableEndWithNSString:);
+  methods[6].selector = @selector(setDrawableTopWithNSString:);
+  methods[7].selector = @selector(setDrawableBottomWithNSString:);
+  methods[8].selector = @selector(tryGetDrawablePadding);
+  methods[9].selector = @selector(getDrawablePadding);
+  methods[10].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[11].selector = @selector(setDrawableTintWithNSString:);
+  methods[12].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[13].selector = @selector(tryGetMinLines);
+  methods[14].selector = @selector(getMinLines);
+  methods[15].selector = @selector(setMinLinesWithInt:);
+  methods[16].selector = @selector(setLinesWithInt:);
+  methods[17].selector = @selector(tryGetMaxLines);
+  methods[18].selector = @selector(getMaxLines);
+  methods[19].selector = @selector(setMaxLinesWithInt:);
+  methods[20].selector = @selector(tryGetMinWidth);
+  methods[21].selector = @selector(getMinWidth);
+  methods[22].selector = @selector(setMinWidthWithNSString:);
+  methods[23].selector = @selector(tryGetMinHeight);
+  methods[24].selector = @selector(getMinHeight);
+  methods[25].selector = @selector(setMinHeightWithNSString:);
+  methods[26].selector = @selector(tryGetMaxWidth);
+  methods[27].selector = @selector(getMaxWidth);
+  methods[28].selector = @selector(setMaxWidthWithNSString:);
+  methods[29].selector = @selector(tryGetMaxHeight);
+  methods[30].selector = @selector(getMaxHeight);
+  methods[31].selector = @selector(setMaxHeightWithNSString:);
+  methods[32].selector = @selector(tryGetHeight);
+  methods[33].selector = @selector(getHeight);
+  methods[34].selector = @selector(setHeightWithNSString:);
+  methods[35].selector = @selector(tryGetWidth);
+  methods[36].selector = @selector(getWidth);
+  methods[37].selector = @selector(setWidthWithNSString:);
+  methods[38].selector = @selector(tryGetMaxEms);
+  methods[39].selector = @selector(getMaxEms);
+  methods[40].selector = @selector(setMaxEmsWithInt:);
+  methods[41].selector = @selector(tryGetMinEms);
+  methods[42].selector = @selector(getMinEms);
+  methods[43].selector = @selector(setMinEmsWithInt:);
+  methods[44].selector = @selector(setEmsWithInt:);
+  methods[45].selector = @selector(tryGetMarqueeRepeatLimit);
+  methods[46].selector = @selector(getMarqueeRepeatLimit);
+  methods[47].selector = @selector(setMarqueeRepeatLimitWithNSString:);
+  methods[48].selector = @selector(setEditableWithBoolean:);
+  methods[49].selector = @selector(setMaxLengthWithInt:);
+  methods[50].selector = @selector(setTypefaceWithNSString:);
+  methods[51].selector = @selector(setTextStyleWithNSString:);
+  methods[52].selector = @selector(setFontFamilyWithNSString:);
+  methods[53].selector = @selector(setTextFormatWithNSString:);
+  methods[54].selector = @selector(setEnabledWithBoolean:);
+  methods[55].selector = @selector(setOnCheckedChangeWithNSString:);
+  methods[56].selector = @selector(tryGetChecked);
+  methods[57].selector = @selector(isChecked);
+  methods[58].selector = @selector(setCheckedWithBoolean:);
+  methods[59].selector = @selector(tryGetTextOn);
+  methods[60].selector = @selector(getTextOn);
+  methods[61].selector = @selector(setTextOnWithNSString:);
+  methods[62].selector = @selector(tryGetTextOff);
+  methods[63].selector = @selector(getTextOff);
+  methods[64].selector = @selector(setTextOffWithNSString:);
+  methods[65].selector = @selector(tryGetText);
+  methods[66].selector = @selector(getText);
+  methods[67].selector = @selector(setTextWithNSString:);
+  methods[68].selector = @selector(tryGetGravity);
+  methods[69].selector = @selector(getGravity);
+  methods[70].selector = @selector(setGravityWithNSString:);
+  methods[71].selector = @selector(tryGetTextSize);
+  methods[72].selector = @selector(getTextSize);
+  methods[73].selector = @selector(setTextSizeWithNSString:);
+  methods[74].selector = @selector(setPaddingWithNSString:);
+  methods[75].selector = @selector(tryGetPaddingBottom);
+  methods[76].selector = @selector(getPaddingBottom);
+  methods[77].selector = @selector(setPaddingBottomWithNSString:);
+  methods[78].selector = @selector(tryGetPaddingRight);
+  methods[79].selector = @selector(getPaddingRight);
+  methods[80].selector = @selector(setPaddingRightWithNSString:);
+  methods[81].selector = @selector(tryGetPaddingLeft);
+  methods[82].selector = @selector(getPaddingLeft);
+  methods[83].selector = @selector(setPaddingLeftWithNSString:);
+  methods[84].selector = @selector(tryGetPaddingStart);
+  methods[85].selector = @selector(getPaddingStart);
+  methods[86].selector = @selector(setPaddingStartWithNSString:);
+  methods[87].selector = @selector(tryGetPaddingEnd);
+  methods[88].selector = @selector(getPaddingEnd);
+  methods[89].selector = @selector(setPaddingEndWithNSString:);
+  methods[90].selector = @selector(tryGetPaddingTop);
+  methods[91].selector = @selector(getPaddingTop);
+  methods[92].selector = @selector(setPaddingTopWithNSString:);
+  methods[93].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[94].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[95].selector = @selector(tryGetTextColor);
+  methods[96].selector = @selector(getTextColor);
+  methods[97].selector = @selector(setTextColorWithNSString:);
+  methods[98].selector = @selector(setTextAllCapsWithBoolean:);
+  methods[99].selector = @selector(setSingleLineWithBoolean:);
+  methods[100].selector = @selector(tryGetEllipsize);
+  methods[101].selector = @selector(getEllipsize);
+  methods[102].selector = @selector(setEllipsizeWithNSString:);
+  methods[103].selector = @selector(tryGetFirstBaselineToTopHeight);
+  methods[104].selector = @selector(getFirstBaselineToTopHeight);
+  methods[105].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[106].selector = @selector(tryGetLastBaselineToBottomHeight);
+  methods[107].selector = @selector(getLastBaselineToBottomHeight);
+  methods[108].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[109].selector = @selector(tryGetJustificationMode);
+  methods[110].selector = @selector(getJustificationMode);
+  methods[111].selector = @selector(setJustificationModeWithNSString:);
+  methods[112].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[113].selector = @selector(tryGetShadowDx);
+  methods[114].selector = @selector(getShadowDx);
+  methods[115].selector = @selector(setShadowDxWithFloat:);
+  methods[116].selector = @selector(tryGetShadowDy);
+  methods[117].selector = @selector(getShadowDy);
+  methods[118].selector = @selector(setShadowDyWithFloat:);
+  methods[119].selector = @selector(tryGetShadowColor);
+  methods[120].selector = @selector(getShadowColor);
+  methods[121].selector = @selector(setShadowColorWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASToggleButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASToggleButtonImpl;", "execute", "Z", "setOnCheckedChange", "LNSString;", "setChecked", "setTextOn", "setTextOff", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ToggleButtonImpl$ToggleButtonCommandBuilder;>;" };
+  static const void *ptrTable[] = { "LASToggleButtonImpl;", "execute", "Z", "setDrawableLeft", "LNSString;", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setOnCheckedChange", "setChecked", "setTextOn", "setTextOff", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ToggleButtonImpl$ToggleButtonCommandBuilder;>;" };
   static const J2ObjcClassInfo _ASToggleButtonImpl_ToggleButtonCommandBuilder = { "ToggleButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 122, 1, 0, -1, -1, 62, -1 };
   return &_ASToggleButtonImpl_ToggleButtonCommandBuilder;
 }
@@ -5672,6 +5796,170 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_ToggleButtonCommandBuilder)
 - (instancetype)initWithASToggleButtonImpl:(ASToggleButtonImpl *)outer$ {
   ASToggleButtonImpl_ToggleButtonBean_initWithASToggleButtonImpl_(self, outer$);
   return self;
+}
+
+- (void)setDrawableLeftWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableLeftWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableStartWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableStartWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableRightWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableRightWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableEndWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableEndWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableTopWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTopWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableBottomWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableBottomWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getDrawablePadding {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetDrawablePadding])) executeWithBoolean:false])) getDrawablePadding];
+}
+
+- (void)setDrawablePaddingWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawablePaddingWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableTintWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTintWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableTintModeWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTintModeWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getMinLines {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinLines])) executeWithBoolean:false])) getMinLines];
+}
+
+- (void)setMinLinesWithInt:(jint)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinLinesWithInt:value])) executeWithBoolean:true];
+}
+
+- (void)setLinesWithInt:(jint)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setLinesWithInt:value])) executeWithBoolean:true];
+}
+
+- (id)getMaxLines {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxLines])) executeWithBoolean:false])) getMaxLines];
+}
+
+- (void)setMaxLinesWithInt:(jint)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxLinesWithInt:value])) executeWithBoolean:true];
+}
+
+- (id)getMinWidth {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinWidth])) executeWithBoolean:false])) getMinWidth];
+}
+
+- (void)setMinWidthWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinWidthWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getMinHeight {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinHeight])) executeWithBoolean:false])) getMinHeight];
+}
+
+- (void)setMinHeightWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinHeightWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getMaxWidth {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxWidth])) executeWithBoolean:false])) getMaxWidth];
+}
+
+- (void)setMaxWidthWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxWidthWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getMaxHeight {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxHeight])) executeWithBoolean:false])) getMaxHeight];
+}
+
+- (void)setMaxHeightWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxHeightWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getHeight {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetHeight])) executeWithBoolean:false])) getHeight];
+}
+
+- (void)setHeightWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setHeightWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getWidth {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetWidth])) executeWithBoolean:false])) getWidth];
+}
+
+- (void)setWidthWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setWidthWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getMaxEms {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxEms])) executeWithBoolean:false])) getMaxEms];
+}
+
+- (void)setMaxEmsWithInt:(jint)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxEmsWithInt:value])) executeWithBoolean:true];
+}
+
+- (id)getMinEms {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinEms])) executeWithBoolean:false])) getMinEms];
+}
+
+- (void)setMinEmsWithInt:(jint)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinEmsWithInt:value])) executeWithBoolean:true];
+}
+
+- (void)setEmsWithInt:(jint)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setEmsWithInt:value])) executeWithBoolean:true];
+}
+
+- (id)getMarqueeRepeatLimit {
+  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMarqueeRepeatLimit])) executeWithBoolean:false])) getMarqueeRepeatLimit];
+}
+
+- (void)setMarqueeRepeatLimitWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMarqueeRepeatLimitWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setEditableWithBoolean:(jboolean)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setEditableWithBoolean:value])) executeWithBoolean:true];
+}
+
+- (void)setMaxLengthWithInt:(jint)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxLengthWithInt:value])) executeWithBoolean:true];
+}
+
+- (void)setTypefaceWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTypefaceWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setTextStyleWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextStyleWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setFontFamilyWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFontFamilyWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setTextFormatWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextFormatWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setEnabledWithBoolean:(jboolean)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setEnabledWithBoolean:value])) executeWithBoolean:true];
 }
 
 - (void)setOnCheckedChangeWithNSString:(NSString *)value {
@@ -5862,359 +6150,195 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_ToggleButtonCommandBuilder)
   (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setShadowColorWithNSString:value])) executeWithBoolean:true];
 }
 
-- (void)setDrawableLeftWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableLeftWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableStartWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableRightWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableRightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableEndWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableEndWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableTopWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTopWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableBottomWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableBottomWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getDrawablePadding {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetDrawablePadding])) executeWithBoolean:false])) getDrawablePadding];
-}
-
-- (void)setDrawablePaddingWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawablePaddingWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableTintWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTintWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableTintModeWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTintModeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMinLines {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinLines])) executeWithBoolean:false])) getMinLines];
-}
-
-- (void)setMinLinesWithInt:(jint)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinLinesWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setLinesWithInt:(jint)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setLinesWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxLines {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxLines])) executeWithBoolean:false])) getMaxLines];
-}
-
-- (void)setMaxLinesWithInt:(jint)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxLinesWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getMinWidth {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinWidth])) executeWithBoolean:false])) getMinWidth];
-}
-
-- (void)setMinWidthWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinWidthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMinHeight {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinHeight])) executeWithBoolean:false])) getMinHeight];
-}
-
-- (void)setMinHeightWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxWidth {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxWidth])) executeWithBoolean:false])) getMaxWidth];
-}
-
-- (void)setMaxWidthWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxWidthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxHeight {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxHeight])) executeWithBoolean:false])) getMaxHeight];
-}
-
-- (void)setMaxHeightWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getHeight {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetHeight])) executeWithBoolean:false])) getHeight];
-}
-
-- (void)setHeightWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getWidth {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetWidth])) executeWithBoolean:false])) getWidth];
-}
-
-- (void)setWidthWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setWidthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxEms {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxEms])) executeWithBoolean:false])) getMaxEms];
-}
-
-- (void)setMaxEmsWithInt:(jint)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxEmsWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getMinEms {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinEms])) executeWithBoolean:false])) getMinEms];
-}
-
-- (void)setMinEmsWithInt:(jint)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinEmsWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setEmsWithInt:(jint)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setEmsWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getMarqueeRepeatLimit {
-  return [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMarqueeRepeatLimit])) executeWithBoolean:false])) getMarqueeRepeatLimit];
-}
-
-- (void)setMarqueeRepeatLimitWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMarqueeRepeatLimitWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setEditableWithBoolean:(jboolean)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setEditableWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setMaxLengthWithInt:(jint)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxLengthWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setTypefaceWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTypefaceWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setTextStyleWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextStyleWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setFontFamilyWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFontFamilyWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setTextFormatWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextFormatWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setEnabledWithBoolean:(jboolean)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 9, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 10, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 12, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 12, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 12, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 15, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 16, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 17, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 18, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 19, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 12, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 12, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 24, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 25, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 26, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 27, 28, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 29, 28, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 25, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 27, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 28, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 29, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 30, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 31, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 32, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 32, 26, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 33, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 34, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 34, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 35, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 36, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 37, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 38, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 39, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 40, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 41, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 42, 41, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 41, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 43, 41, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 42, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 43, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 44, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 45, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 46, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 47, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 48, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 49, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 50, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 51, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 50, 41, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 51, 41, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 52, 41, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 52, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 53, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 54, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 55, 41, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 56, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 57, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 58, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 59, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 60, 4, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 54, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 55, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 56, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 57, 58, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 59, 58, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 60, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithASToggleButtonImpl:);
-  methods[1].selector = @selector(setOnCheckedChangeWithNSString:);
-  methods[2].selector = @selector(isChecked);
-  methods[3].selector = @selector(setCheckedWithBoolean:);
-  methods[4].selector = @selector(getTextOn);
-  methods[5].selector = @selector(setTextOnWithNSString:);
-  methods[6].selector = @selector(getTextOff);
-  methods[7].selector = @selector(setTextOffWithNSString:);
-  methods[8].selector = @selector(getText);
-  methods[9].selector = @selector(setTextWithNSString:);
-  methods[10].selector = @selector(getGravity);
-  methods[11].selector = @selector(setGravityWithNSString:);
-  methods[12].selector = @selector(getTextSize);
-  methods[13].selector = @selector(setTextSizeWithNSString:);
-  methods[14].selector = @selector(setPaddingWithNSString:);
-  methods[15].selector = @selector(getPaddingBottom);
-  methods[16].selector = @selector(setPaddingBottomWithNSString:);
-  methods[17].selector = @selector(getPaddingRight);
-  methods[18].selector = @selector(setPaddingRightWithNSString:);
-  methods[19].selector = @selector(getPaddingLeft);
-  methods[20].selector = @selector(setPaddingLeftWithNSString:);
-  methods[21].selector = @selector(getPaddingStart);
-  methods[22].selector = @selector(setPaddingStartWithNSString:);
-  methods[23].selector = @selector(getPaddingEnd);
-  methods[24].selector = @selector(setPaddingEndWithNSString:);
-  methods[25].selector = @selector(getPaddingTop);
-  methods[26].selector = @selector(setPaddingTopWithNSString:);
-  methods[27].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[28].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[29].selector = @selector(getTextColor);
-  methods[30].selector = @selector(setTextColorWithNSString:);
-  methods[31].selector = @selector(setTextAllCapsWithBoolean:);
-  methods[32].selector = @selector(setSingleLineWithBoolean:);
-  methods[33].selector = @selector(getEllipsize);
-  methods[34].selector = @selector(setEllipsizeWithNSString:);
-  methods[35].selector = @selector(getFirstBaselineToTopHeight);
-  methods[36].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[37].selector = @selector(getLastBaselineToBottomHeight);
-  methods[38].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[39].selector = @selector(getJustificationMode);
-  methods[40].selector = @selector(setJustificationModeWithNSString:);
-  methods[41].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[42].selector = @selector(getShadowDx);
-  methods[43].selector = @selector(setShadowDxWithFloat:);
-  methods[44].selector = @selector(getShadowDy);
-  methods[45].selector = @selector(setShadowDyWithFloat:);
-  methods[46].selector = @selector(getShadowColor);
-  methods[47].selector = @selector(setShadowColorWithNSString:);
-  methods[48].selector = @selector(setDrawableLeftWithNSString:);
-  methods[49].selector = @selector(setDrawableStartWithNSString:);
-  methods[50].selector = @selector(setDrawableRightWithNSString:);
-  methods[51].selector = @selector(setDrawableEndWithNSString:);
-  methods[52].selector = @selector(setDrawableTopWithNSString:);
-  methods[53].selector = @selector(setDrawableBottomWithNSString:);
-  methods[54].selector = @selector(getDrawablePadding);
-  methods[55].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[56].selector = @selector(setDrawableTintWithNSString:);
-  methods[57].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[58].selector = @selector(getMinLines);
-  methods[59].selector = @selector(setMinLinesWithInt:);
-  methods[60].selector = @selector(setLinesWithInt:);
-  methods[61].selector = @selector(getMaxLines);
-  methods[62].selector = @selector(setMaxLinesWithInt:);
-  methods[63].selector = @selector(getMinWidth);
-  methods[64].selector = @selector(setMinWidthWithNSString:);
-  methods[65].selector = @selector(getMinHeight);
-  methods[66].selector = @selector(setMinHeightWithNSString:);
-  methods[67].selector = @selector(getMaxWidth);
-  methods[68].selector = @selector(setMaxWidthWithNSString:);
-  methods[69].selector = @selector(getMaxHeight);
-  methods[70].selector = @selector(setMaxHeightWithNSString:);
-  methods[71].selector = @selector(getHeight);
-  methods[72].selector = @selector(setHeightWithNSString:);
-  methods[73].selector = @selector(getWidth);
-  methods[74].selector = @selector(setWidthWithNSString:);
-  methods[75].selector = @selector(getMaxEms);
-  methods[76].selector = @selector(setMaxEmsWithInt:);
-  methods[77].selector = @selector(getMinEms);
-  methods[78].selector = @selector(setMinEmsWithInt:);
-  methods[79].selector = @selector(setEmsWithInt:);
-  methods[80].selector = @selector(getMarqueeRepeatLimit);
-  methods[81].selector = @selector(setMarqueeRepeatLimitWithNSString:);
-  methods[82].selector = @selector(setEditableWithBoolean:);
-  methods[83].selector = @selector(setMaxLengthWithInt:);
-  methods[84].selector = @selector(setTypefaceWithNSString:);
-  methods[85].selector = @selector(setTextStyleWithNSString:);
-  methods[86].selector = @selector(setFontFamilyWithNSString:);
-  methods[87].selector = @selector(setTextFormatWithNSString:);
-  methods[88].selector = @selector(setEnabledWithBoolean:);
+  methods[1].selector = @selector(setDrawableLeftWithNSString:);
+  methods[2].selector = @selector(setDrawableStartWithNSString:);
+  methods[3].selector = @selector(setDrawableRightWithNSString:);
+  methods[4].selector = @selector(setDrawableEndWithNSString:);
+  methods[5].selector = @selector(setDrawableTopWithNSString:);
+  methods[6].selector = @selector(setDrawableBottomWithNSString:);
+  methods[7].selector = @selector(getDrawablePadding);
+  methods[8].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[9].selector = @selector(setDrawableTintWithNSString:);
+  methods[10].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[11].selector = @selector(getMinLines);
+  methods[12].selector = @selector(setMinLinesWithInt:);
+  methods[13].selector = @selector(setLinesWithInt:);
+  methods[14].selector = @selector(getMaxLines);
+  methods[15].selector = @selector(setMaxLinesWithInt:);
+  methods[16].selector = @selector(getMinWidth);
+  methods[17].selector = @selector(setMinWidthWithNSString:);
+  methods[18].selector = @selector(getMinHeight);
+  methods[19].selector = @selector(setMinHeightWithNSString:);
+  methods[20].selector = @selector(getMaxWidth);
+  methods[21].selector = @selector(setMaxWidthWithNSString:);
+  methods[22].selector = @selector(getMaxHeight);
+  methods[23].selector = @selector(setMaxHeightWithNSString:);
+  methods[24].selector = @selector(getHeight);
+  methods[25].selector = @selector(setHeightWithNSString:);
+  methods[26].selector = @selector(getWidth);
+  methods[27].selector = @selector(setWidthWithNSString:);
+  methods[28].selector = @selector(getMaxEms);
+  methods[29].selector = @selector(setMaxEmsWithInt:);
+  methods[30].selector = @selector(getMinEms);
+  methods[31].selector = @selector(setMinEmsWithInt:);
+  methods[32].selector = @selector(setEmsWithInt:);
+  methods[33].selector = @selector(getMarqueeRepeatLimit);
+  methods[34].selector = @selector(setMarqueeRepeatLimitWithNSString:);
+  methods[35].selector = @selector(setEditableWithBoolean:);
+  methods[36].selector = @selector(setMaxLengthWithInt:);
+  methods[37].selector = @selector(setTypefaceWithNSString:);
+  methods[38].selector = @selector(setTextStyleWithNSString:);
+  methods[39].selector = @selector(setFontFamilyWithNSString:);
+  methods[40].selector = @selector(setTextFormatWithNSString:);
+  methods[41].selector = @selector(setEnabledWithBoolean:);
+  methods[42].selector = @selector(setOnCheckedChangeWithNSString:);
+  methods[43].selector = @selector(isChecked);
+  methods[44].selector = @selector(setCheckedWithBoolean:);
+  methods[45].selector = @selector(getTextOn);
+  methods[46].selector = @selector(setTextOnWithNSString:);
+  methods[47].selector = @selector(getTextOff);
+  methods[48].selector = @selector(setTextOffWithNSString:);
+  methods[49].selector = @selector(getText);
+  methods[50].selector = @selector(setTextWithNSString:);
+  methods[51].selector = @selector(getGravity);
+  methods[52].selector = @selector(setGravityWithNSString:);
+  methods[53].selector = @selector(getTextSize);
+  methods[54].selector = @selector(setTextSizeWithNSString:);
+  methods[55].selector = @selector(setPaddingWithNSString:);
+  methods[56].selector = @selector(getPaddingBottom);
+  methods[57].selector = @selector(setPaddingBottomWithNSString:);
+  methods[58].selector = @selector(getPaddingRight);
+  methods[59].selector = @selector(setPaddingRightWithNSString:);
+  methods[60].selector = @selector(getPaddingLeft);
+  methods[61].selector = @selector(setPaddingLeftWithNSString:);
+  methods[62].selector = @selector(getPaddingStart);
+  methods[63].selector = @selector(setPaddingStartWithNSString:);
+  methods[64].selector = @selector(getPaddingEnd);
+  methods[65].selector = @selector(setPaddingEndWithNSString:);
+  methods[66].selector = @selector(getPaddingTop);
+  methods[67].selector = @selector(setPaddingTopWithNSString:);
+  methods[68].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[69].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[70].selector = @selector(getTextColor);
+  methods[71].selector = @selector(setTextColorWithNSString:);
+  methods[72].selector = @selector(setTextAllCapsWithBoolean:);
+  methods[73].selector = @selector(setSingleLineWithBoolean:);
+  methods[74].selector = @selector(getEllipsize);
+  methods[75].selector = @selector(setEllipsizeWithNSString:);
+  methods[76].selector = @selector(getFirstBaselineToTopHeight);
+  methods[77].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[78].selector = @selector(getLastBaselineToBottomHeight);
+  methods[79].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[80].selector = @selector(getJustificationMode);
+  methods[81].selector = @selector(setJustificationModeWithNSString:);
+  methods[82].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[83].selector = @selector(getShadowDx);
+  methods[84].selector = @selector(setShadowDxWithFloat:);
+  methods[85].selector = @selector(getShadowDy);
+  methods[86].selector = @selector(setShadowDyWithFloat:);
+  methods[87].selector = @selector(getShadowColor);
+  methods[88].selector = @selector(setShadowColorWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASToggleButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASToggleButtonImpl;", "setOnCheckedChange", "LNSString;", "setChecked", "Z", "setTextOn", "setTextOff", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled" };
+  static const void *ptrTable[] = { "LASToggleButtonImpl;", "setDrawableLeft", "LNSString;", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "Z", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setOnCheckedChange", "setChecked", "setTextOn", "setTextOff", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor" };
   static const J2ObjcClassInfo _ASToggleButtonImpl_ToggleButtonBean = { "ToggleButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 89, 1, 0, -1, -1, -1, -1 };
   return &_ASToggleButtonImpl_ToggleButtonBean;
 }

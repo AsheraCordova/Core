@@ -57,8 +57,66 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
 	public final static String GROUP_NAME = "EditText";
 
 	protected @Property Object uiView;
-	protected MeasurableTextView measurableTextView;		
+	protected r.android.widget.EditText measurableView;		
 	
+		@SuppressLint("NewApi")
+		final static class DrawableTintMode extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("add",  LayoutNativeVars.kCGBlendModeOverlay);
+				mapping.put("multiply",  LayoutNativeVars.kCGBlendModeMultiply);
+				mapping.put("screen",  LayoutNativeVars.kCGBlendModeScreen);
+				mapping.put("src_atop",  LayoutNativeVars.kCGBlendModeSourceAtop);
+				mapping.put("src_in",  LayoutNativeVars.kCGBlendModeSourceIn);
+				mapping.put("src_over",  LayoutNativeVars.kCGBlendModeNormal);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
+		final static class Font extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("monospace",  0x3);
+				mapping.put("normal",  0x0);
+				mapping.put("sans",  0x1);
+				mapping.put("serif",  0x2);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
+		final static class TextStyle  extends AbstractBitFlagConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("bold", 0x1);
+				mapping.put("italic", 0x2);
+				mapping.put("normal", 0x0);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
 		@SuppressLint("NewApi")
 		final static class Capitalize extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
@@ -211,64 +269,6 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
 				return 0;
 				}
 				}
-		@SuppressLint("NewApi")
-		final static class DrawableTintMode extends AbstractEnumToIntConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("add",  LayoutNativeVars.kCGBlendModeOverlay);
-				mapping.put("multiply",  LayoutNativeVars.kCGBlendModeMultiply);
-				mapping.put("screen",  LayoutNativeVars.kCGBlendModeScreen);
-				mapping.put("src_atop",  LayoutNativeVars.kCGBlendModeSourceAtop);
-				mapping.put("src_in",  LayoutNativeVars.kCGBlendModeSourceIn);
-				mapping.put("src_over",  LayoutNativeVars.kCGBlendModeNormal);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
-		@SuppressLint("NewApi")
-		final static class Font extends AbstractEnumToIntConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("monospace",  0x3);
-				mapping.put("normal",  0x0);
-				mapping.put("sans",  0x1);
-				mapping.put("serif",  0x2);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
-		@SuppressLint("NewApi")
-		final static class TextStyle  extends AbstractBitFlagConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("bold", 0x1);
-				mapping.put("italic", 0x2);
-				mapping.put("normal", 0x0);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
 	
 	@Override
 	public void loadAttributes(String attributeName) {
@@ -287,40 +287,6 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosAllowsEditingTextAttributes").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosBackground").withType("image"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosDisabledBackground").withType("image"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("text").withType("resourcestring").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("autoText").withType("boolean"));
-		ConverterFactory.register("EditText.capitalize", new Capitalize());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("capitalize").withType("EditText.capitalize"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("cursorVisible").withType("boolean"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		ConverterFactory.register("EditText.numeric", new Numeric());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("numeric").withType("EditText.numeric"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("digits").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("password").withType("boolean"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("phoneNumber").withType("boolean"));
-		ConverterFactory.register("EditText.inputType", new InputType());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("inputType").withType("EditText.inputType"));
-		ConverterFactory.register("EditText.imeOptions", new ImeOptions());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("imeOptions").withType("EditText.imeOptions"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectAllOnFocus").withType("boolean"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectAll").withType("boolean"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scrollHorizontally").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("singleLine").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onEditorAction").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHint").withType("colorstate").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosInputAccessoryViewDoneButton").withType("resourcestring"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onFocusChange").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onTextChange").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onbeforeTextChange").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onafterTextChange").withType("string"));
-		ConverterFactory.register("EditText.iosBorderStyle", new IosBorderStyle());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosBorderStyle").withType("EditText.iosBorderStyle"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hintTextFormat").withType("resourcestring").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAllCaps").withType("boolean").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		ConverterFactory.register("EditText.inputView", new InputView());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosInputView").withType("EditText.inputView"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("padding").withType("dimension").withUiFlag(UPDATE_UI_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingBottom").withType("dimension").withUiFlag(UPDATE_UI_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingRight").withType("dimension").withUiFlag(UPDATE_UI_INVALIDATE));
@@ -363,24 +329,60 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHighlight").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("text").withType("resourcestring").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("autoText").withType("boolean"));
+		ConverterFactory.register("EditText.capitalize", new Capitalize());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("capitalize").withType("EditText.capitalize"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("cursorVisible").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		ConverterFactory.register("EditText.numeric", new Numeric());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("numeric").withType("EditText.numeric"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("digits").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("password").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("phoneNumber").withType("boolean"));
+		ConverterFactory.register("EditText.inputType", new InputType());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("inputType").withType("EditText.inputType"));
+		ConverterFactory.register("EditText.imeOptions", new ImeOptions());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("imeOptions").withType("EditText.imeOptions"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectAllOnFocus").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectAll").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scrollHorizontally").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("singleLine").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onEditorAction").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHint").withType("colorstate").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosInputAccessoryViewDoneButton").withType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onFocusChange").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onTextChange").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onbeforeTextChange").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onafterTextChange").withType("string"));
+		ConverterFactory.register("EditText.iosBorderStyle", new IosBorderStyle());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosBorderStyle").withType("EditText.iosBorderStyle"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hintTextFormat").withType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAllCaps").withType("boolean").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		ConverterFactory.register("EditText.inputView", new InputView());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosInputView").withType("EditText.inputView"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("setFocus").withType("boolean"));
 	}
 	
 	public EditTextImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  EditTextImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  EditTextImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 @com.google.j2objc.annotations.WeakOuter		
-	public class EditTextExt extends MeasurableTextView implements ILifeCycleDecorator{
+	public class EditTextExt extends r.android.widget.EditText implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 
 		public EditTextExt() {
-			
-			
-			
 			super(EditTextImpl.this);
-			
-			
 			
 		}
 		
@@ -462,7 +464,44 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(EditTextImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(EditTextImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	EditTextImpl.this.getParent().remove(EditTextImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -471,6 +510,10 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
 		public void offsetLeftAndRight(int offset) {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
+		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			EditTextImpl.this.setAttribute(name, value, true);
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -492,21 +535,39 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
 		  public int getLineHeightPadding(){
 		    return EditTextImpl.this.getLineHeightPadding();
 		  }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((EditTextExt) measurableTextView).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+        @Override
+        public int computeSize(float width) {
+        	return nativeMeasureHeight(uiView, (int) width);
+    	}
+		@Override
+		public java.lang.String getText() {
+			return (String) getMyText();
+		}
+
+	}	@Override
+	public Class getViewClass() {
+		return EditTextExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new EditTextImpl();
+		return new EditTextImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableTextView = new EditTextExt();
+		measurableView = new EditTextExt();
 		createSimpleWrapableView();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
@@ -623,286 +684,6 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
 
 
 		setDisabledBackground(nativeWidget, objValue);
-
-
-
-			}
-			break;
-			case "text": {
-				
-
-
-		setMyText(objValue);
-
-
-
-			}
-			break;
-			case "gravity": {
-				
-
-
-		setGravity(objValue);
-
-
-
-			}
-			break;
-			case "autoText": {
-				
-
-
-		setAutoText(objValue);
-
-
-
-			}
-			break;
-			case "capitalize": {
-				
-
-
-		setCapitalize(objValue);
-
-
-
-			}
-			break;
-			case "cursorVisible": {
-				
-
-
-		setCursorVisible(objValue);
-
-
-
-			}
-			break;
-			case "textSize": {
-				
-
-
-		setMyTextSize(objValue);
-
-
-
-			}
-			break;
-			case "numeric": {
-				
-
-
-		 setNumeric(objValue); 
-
-
-
-			}
-			break;
-			case "digits": {
-				
-
-
-		 setDigits(objValue); 
-
-
-
-			}
-			break;
-			case "password": {
-				
-
-
-		setPasswordType(objValue);
-
-
-
-			}
-			break;
-			case "phoneNumber": {
-				
-
-
-		setPhoneNumber(objValue);
-
-
-
-			}
-			break;
-			case "inputType": {
-				
-
-
-		setInputType(objValue);
-
-
-
-			}
-			break;
-			case "imeOptions": {
-				
-
-
-		 setImeOptions(objValue, strValue);
-
-
-
-			}
-			break;
-			case "selectAllOnFocus": {
-				
-
-
-		setSelectAllOnFocus(objValue);
-
-
-
-			}
-			break;
-			case "selectAll": {
-				
-
-
-		setSelectAll(objValue);
-
-
-
-			}
-			break;
-			case "scrollHorizontally": {
-				
-
-
-		 setScrollHorizontally(objValue);
-
-
-
-			}
-			break;
-			case "singleLine": {
-				
-
-
-		 setSingleLine(objValue);
-
-
-
-			}
-			break;
-			case "onEditorAction": {
-				
-
-
-		 setOnEditorAction(objValue);
-
-
-
-			}
-			break;
-			case "textColorHint": {
-				
-
-
-		 setHintColor(objValue);
-
-
-
-			}
-			break;
-			case "iosInputAccessoryViewDoneButton": {
-				
-
-
-		setInputAccessoryViewDoneButton(objValue);
-
-
-
-			}
-			break;
-			case "onFocusChange": {
-				
-
-
-		 setOnFocus(objValue);
-
-
-
-			}
-			break;
-			case "textColor": {
-				
-
-
-		setTextColor(objValue);
-
-
-
-			}
-			break;
-			case "onTextChange": {
-				
-
-
-		 setOnTextChange(objValue);
-
-
-
-			}
-			break;
-			case "onbeforeTextChange": {
-				
-
-
-		 setBeforeOnTextChange(objValue);
-
-
-
-			}
-			break;
-			case "onafterTextChange": {
-				
-
-
-		 setOnAfterTextChange(objValue);
-
-
-
-			}
-			break;
-			case "iosBorderStyle": {
-				
-
-
-		 setBorderStyle(objValue);
-
-
-
-			}
-			break;
-			case "hintTextFormat": {
-				
-
-
-		setHintTextFormat(objValue);
-
-
-
-			}
-			break;
-			case "textAllCaps": {
-				
-
-
-		 setTextAllCaps(objValue);
-
-
-
-			}
-			break;
-			case "iosInputView": {
-				
-
-
-		 setInputView(objValue);
 
 
 
@@ -1298,6 +1079,296 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
 
 			}
 			break;
+			case "text": {
+				
+
+
+		setMyText(objValue);
+
+
+
+			}
+			break;
+			case "gravity": {
+				
+
+
+		setGravity(objValue);
+
+
+
+			}
+			break;
+			case "autoText": {
+				
+
+
+		setAutoText(objValue);
+
+
+
+			}
+			break;
+			case "capitalize": {
+				
+
+
+		setCapitalize(objValue);
+
+
+
+			}
+			break;
+			case "cursorVisible": {
+				
+
+
+		setCursorVisible(objValue);
+
+
+
+			}
+			break;
+			case "textSize": {
+				
+
+
+		setMyTextSize(objValue);
+
+
+
+			}
+			break;
+			case "numeric": {
+				
+
+
+		 setNumeric(objValue); 
+
+
+
+			}
+			break;
+			case "digits": {
+				
+
+
+		 setDigits(objValue); 
+
+
+
+			}
+			break;
+			case "password": {
+				
+
+
+		setPasswordType(objValue);
+
+
+
+			}
+			break;
+			case "phoneNumber": {
+				
+
+
+		setPhoneNumber(objValue);
+
+
+
+			}
+			break;
+			case "inputType": {
+				
+
+
+		setInputType(objValue);
+
+
+
+			}
+			break;
+			case "imeOptions": {
+				
+
+
+		 setImeOptions(objValue, strValue);
+
+
+
+			}
+			break;
+			case "selectAllOnFocus": {
+				
+
+
+		setSelectAllOnFocus(objValue);
+
+
+
+			}
+			break;
+			case "selectAll": {
+				
+
+
+		setSelectAll(objValue);
+
+
+
+			}
+			break;
+			case "scrollHorizontally": {
+				
+
+
+		 setScrollHorizontally(objValue);
+
+
+
+			}
+			break;
+			case "singleLine": {
+				
+
+
+		 setSingleLine(objValue);
+
+
+
+			}
+			break;
+			case "onEditorAction": {
+				
+
+
+		 setOnEditorAction(objValue);
+
+
+
+			}
+			break;
+			case "textColorHint": {
+				
+
+
+		 setHintColor(objValue);
+
+
+
+			}
+			break;
+			case "iosInputAccessoryViewDoneButton": {
+				
+
+
+		setInputAccessoryViewDoneButton(objValue);
+
+
+
+			}
+			break;
+			case "onFocusChange": {
+				
+
+
+		 setOnFocus(objValue);
+
+
+
+			}
+			break;
+			case "textColor": {
+				
+
+
+		setTextColor(objValue);
+
+
+
+			}
+			break;
+			case "onTextChange": {
+				
+
+
+		 setOnTextChange(objValue);
+
+
+
+			}
+			break;
+			case "onbeforeTextChange": {
+				
+
+
+		 setBeforeOnTextChange(objValue);
+
+
+
+			}
+			break;
+			case "onafterTextChange": {
+				
+
+
+		 setOnAfterTextChange(objValue);
+
+
+
+			}
+			break;
+			case "iosBorderStyle": {
+				
+
+
+		 setBorderStyle(objValue);
+
+
+
+			}
+			break;
+			case "hintTextFormat": {
+				
+
+
+		setHintTextFormat(objValue);
+
+
+
+			}
+			break;
+			case "textAllCaps": {
+				
+
+
+		 setTextAllCaps(objValue);
+
+
+
+			}
+			break;
+			case "iosInputView": {
+				
+
+
+		 setInputView(objValue);
+
+
+
+			}
+			break;
+			case "setFocus": {
+				
+
+
+		setFocus(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -1336,20 +1407,6 @@ return getAllowsEditingTextAttributes();				}
 return getBackground();				}
 			case "iosDisabledBackground": {
 return getDisabledBackground();				}
-			case "text": {
-return getMyText();				}
-			case "gravity": {
-return getGravity();				}
-			case "cursorVisible": {
-return getCursorVisible();				}
-			case "textSize": {
-return getTextSize();				}
-			case "inputType": {
-return getInputType();				}
-			case "imeOptions": {
-return getImeOptions();				}
-			case "textColor": {
-return getTextColorState();				}
 			case "paddingBottom": {
 return getPaddingBottom();				}
 			case "paddingRight": {
@@ -1390,6 +1447,20 @@ return getTextColorHighlight();				}
 return getFirstBaselineToTopHeight();				}
 			case "lastBaselineToBottomHeight": {
 return getLastBaselineToBottomHeight();				}
+			case "text": {
+return getMyText();				}
+			case "gravity": {
+return getGravity();				}
+			case "cursorVisible": {
+return getCursorVisible();				}
+			case "textSize": {
+return getTextSize();				}
+			case "inputType": {
+return getInputType();				}
+			case "imeOptions": {
+return getImeOptions();				}
+			case "textColor": {
+return getTextColorState();				}
 		}
 		
 		return null;
@@ -1397,7 +1468,7 @@ return getLastBaselineToBottomHeight();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableTextView;
+		return measurableView;
 	}
 
 	
@@ -1444,7 +1515,7 @@ return getLastBaselineToBottomHeight();				}
 
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableTextView.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -1467,11 +1538,11 @@ return getLastBaselineToBottomHeight();				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableTextView.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableTextView.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableTextView.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -1517,7 +1588,7 @@ return getLastBaselineToBottomHeight();				}
     
 	
 	private Object getGravity() {
-		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableTextView.getVerticalAligment();
+		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableView.getVerticalAligment();
 		if (verticalAligment == null) {
 			verticalAligment = com.ashera.view.BaseMeasurableView.VerticalAligment.top;
 		}
@@ -1556,7 +1627,7 @@ return getLastBaselineToBottomHeight();				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableTextView.getRawTextAlignment() != 0 || measurableTextView.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -1623,11 +1694,11 @@ return getLastBaselineToBottomHeight();				}
 
 
     private Object getMinHeight() {
-        return measurableTextView.getMinHeight();
+        return measurableView.getMinHeight();
     }
 
     private Object getMinWidth() {
-        return measurableTextView.getMinWidth();
+        return measurableView.getMinWidth();
     }
     
     private void setEms(Object objValue) {
@@ -1637,27 +1708,27 @@ return getLastBaselineToBottomHeight();				}
     
     
     public int getMaxEms() {
-        return measurableTextView.getMaxEms();
+        return measurableView.getMaxEms();
     }
     public int getMinEms() {
-        return measurableTextView.getMinEms();
+        return measurableView.getMinEms();
     }
 
     private void setMinEms(Object objValue) {
-    	measurableTextView.setMinEms((int) objValue);
+    	measurableView.setMinEms((int) objValue);
         addMinMaxListener();
     }
     
     public int getMinLines() {
-        return measurableTextView.getMinLines();
+        return measurableView.getMinLines();
     }
     
     public int getMaxLines() {
-        return measurableTextView.getMaxLines();
+        return measurableView.getMaxLines();
     }
 
     private void setMaxEms(Object objValue) {
-    	measurableTextView.setMaxEms((int) objValue);
+    	measurableView.setMaxEms((int) objValue);
         addMinMaxListener();
     }
 
@@ -1672,7 +1743,7 @@ return getLastBaselineToBottomHeight();				}
     }
 
     private void setMaxLines(Object objValue) {
-    	measurableTextView.setMaxLines((int) objValue);
+    	measurableView.setMaxLines((int) objValue);
         addMinMaxListener();
     }
 
@@ -1682,47 +1753,47 @@ return getLastBaselineToBottomHeight();				}
     }
 
     private void setMinLines(Object objValue) {
-    	measurableTextView.setMinLines((int) objValue);
+    	measurableView.setMinLines((int) objValue);
         addMinMaxListener();
     
     }
     
     private void setMaxHeight(Object objValue) {
-    	measurableTextView.setMaxHeight((int) objValue);
+    	measurableView.setMaxHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMaxWidth(Object objValue) {
-    	measurableTextView.setMaxWidth((int) objValue);
+    	measurableView.setMaxWidth((int) objValue);
         addMinMaxListener();
     }
 
     public int getMaxWidth() {
-        return measurableTextView.getMaxWidth();
+        return measurableView.getMaxWidth();
     }
 
     public int getMaxHeight() {
-        return measurableTextView.getMaxHeight();
+        return measurableView.getMaxHeight();
     }
     
     
     private void setMinHeight(Object objValue) {
-    	measurableTextView.setMinHeight((int) objValue);
+    	measurableView.setMinHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMinWidth(Object objValue) {
-    	measurableTextView.setMinWidth((int) objValue);
+    	measurableView.setMinWidth((int) objValue);
         addMinMaxListener();
     }
 
     
     private Object getWidth() {
-        return measurableTextView.getWidth();
+        return measurableView.getWidth();
     }
 
     private int getHeight() {
-        return measurableTextView.getHeight();
+        return measurableView.getHeight();
     }
 
     
@@ -1744,7 +1815,7 @@ return getLastBaselineToBottomHeight();				}
         // in settings). At the moment, we don't.
         if (firstBaselineToTopHeight > Math.abs(fontMetricsTop)) {
             final int paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-           measurableTextView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
+            measurableView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
         }
 	}
 	
@@ -1775,7 +1846,7 @@ return getLastBaselineToBottomHeight();				}
 
         if (lastBaselineToBottomHeight > Math.abs(fontMetricsBottom)) {
             final int paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-            measurableTextView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
+            measurableView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
         }		
 	}
 	
@@ -2040,18 +2111,18 @@ return getLastBaselineToBottomHeight();				}
 
 
 	private void setVerticalAligmentCenter() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 		nativeSetVerticalAligmentCenter();
 	}
 
 
 	private void setVerticalAligmentBottom() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 		nativeSetVerticalAligmentBottom();
 	}
 
 	private void setVerticalAligmentTop() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 		nativeSetVerticalAligmentTop();
 	}
 
@@ -2101,16 +2172,16 @@ return getLastBaselineToBottomHeight();				}
 
 
 	private void setDrawablePadding(Object objValue) {
-		measurableTextView.setDrawablePadding((int) objValue);
+		measurableView.setDrawablePadding((int) objValue);
 		updatePadding();
 	}
 
 	private void setDrawableBottom(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setBottomDrawable(null);
+			measurableView.setBottomDrawable(null);
 			applyAttributeCommand("drawableBottom", "drawDrawableIcon", new String[] {}, false, "bottom");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setBottomDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setBottomDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("drawableBottom", "drawDrawableIcon", new String[] {}, true, "bottom");
 			updatePadding();
 		}
@@ -2118,10 +2189,10 @@ return getLastBaselineToBottomHeight();				}
 
 	private void setDrawableTop(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setTopDrawable(null);
+			measurableView.setTopDrawable(null);
 			applyAttributeCommand("drawableTop", "drawDrawableIcon", new String[] {}, false, "top");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setTopDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setTopDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("drawableTop", "drawDrawableIcon", new String[] {}, true, "top");
 			updatePadding();
 		}
@@ -2137,10 +2208,10 @@ return getLastBaselineToBottomHeight();				}
 
 	private void setDrawableRightInternal(String originalAttr, Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setRightDrawable(null);
+			measurableView.setRightDrawable(null);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, false, "right");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setRightDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setRightDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, true, "right");
 			updatePadding();
 		}		
@@ -2158,10 +2229,10 @@ return getLastBaselineToBottomHeight();				}
 
 	private void setDrawableLeftInternal(String originalAttr, Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setLeftDrawable(null);
+			measurableView.setLeftDrawable(null);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, false, "left");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, true, "left");
 			updatePadding();
 		}
@@ -2186,23 +2257,23 @@ return getLastBaselineToBottomHeight();				}
 	]-*/;
 
 	private Object getDrawablePadding() {
-		return measurableTextView.getDrawablePadding();
+		return measurableView.getDrawablePadding();
 	}
 
 	private void setDrawableTintMode(Object value) {
-		if (measurableTextView.getLeftDrawable() != null) {
+		if (measurableView.getLeftDrawable() != null) {
 			applyAttributeCommand("drawableStart", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 			applyAttributeCommand("drawableLeft", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
-		if (measurableTextView.getRightDrawable() != null) {
+		if (measurableView.getRightDrawable() != null) {
 			applyAttributeCommand("drawableRight", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 			applyAttributeCommand("drawableEnd", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
 		
-		if (measurableTextView.getTopDrawable() != null) {
+		if (measurableView.getTopDrawable() != null) {
 			applyAttributeCommand("drawableTop", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
-		if (measurableTextView.getBottomDrawable() != null) {
+		if (measurableView.getBottomDrawable() != null) {
 			applyAttributeCommand("drawableBottom", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
 	}
@@ -2211,21 +2282,21 @@ return getLastBaselineToBottomHeight();				}
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
 			this.drawableTint = colorStateList;
-			objValue = drawableTint.getColorForState(measurableTextView.getDrawableState(), r.android.graphics.Color.RED);
+			objValue = drawableTint.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
 		}
 		
-		if (measurableTextView.getLeftDrawable() != null) {
+		if (measurableView.getLeftDrawable() != null) {
 			applyAttributeCommand("drawableLeft", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 			applyAttributeCommand("drawableStart", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableTextView.getRightDrawable() != null) {
+		if (measurableView.getRightDrawable() != null) {
 			applyAttributeCommand("drawableRight", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));			
 			applyAttributeCommand("drawableEnd", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableTextView.getTopDrawable() != null) {
+		if (measurableView.getTopDrawable() != null) {
 			applyAttributeCommand("drawableTop", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableTextView.getBottomDrawable() != null) {
+		if (measurableView.getBottomDrawable() != null) {
 			applyAttributeCommand("drawableBottom", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
 	}
@@ -2236,15 +2307,15 @@ return getLastBaselineToBottomHeight();				}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setTextColor(colorStateList);
-			objValue = measurableTextView.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		
 		setTextColor(uiView, ViewImpl.getColor(objValue));
 	}
 	
 	private Object getTextColorState() {
-		return measurableTextView.getTextColors();
+		return measurableView.getTextColors();
 	}
 	
 
@@ -2252,17 +2323,17 @@ return getLastBaselineToBottomHeight();				}
 	@Override
 	public void drawableStateChanged() {
 		super.drawableStateChanged();
-		drawableStateChange("bottom", measurableTextView.getBottomDrawable());
-		drawableStateChange("left", measurableTextView.getLeftDrawable());
-		drawableStateChange("right", measurableTextView.getRightDrawable());
-		drawableStateChange("top", measurableTextView.getTopDrawable());
+		drawableStateChange("bottom", measurableView.getBottomDrawable());
+		drawableStateChange("left", measurableView.getLeftDrawable());
+		drawableStateChange("right", measurableView.getRightDrawable());
+		drawableStateChange("top", measurableView.getTopDrawable());
 		
-		if (measurableTextView.getTextColors() != null && measurableTextView.getTextColors().isStateful()) {
-			setTextColor(measurableTextView.getCurrentTextColor());
+		if (measurableView.getTextColors() != null && measurableView.getTextColors().isStateful()) {
+			setTextColor(measurableView.getCurrentTextColor());
 		}
 		
-		if (measurableTextView.getHintTextColors() != null && measurableTextView.getHintTextColors().isStateful()) {
-			setHintColor(measurableTextView.getCurrentHintTextColor());
+		if (measurableView.getHintTextColors() != null && measurableView.getHintTextColors().isStateful()) {
+			setHintColor(measurableView.getCurrentHintTextColor());
 			syncPlaceholderLabel();
 		}
 		
@@ -2271,13 +2342,13 @@ return getLastBaselineToBottomHeight();				}
 			invalidate();
 		}
 		
-		if (measurableTextView.getLinkTextColors() != null && measurableTextView.getLinkTextColors().isStateful()) {
-			setTextColorLink(measurableTextView.getLinkTextColors());
+		if (measurableView.getLinkTextColors() != null && measurableView.getLinkTextColors().isStateful()) {
+			setTextColorLink(measurableView.getLinkTextColors());
 		}
 	}
 
 	private void drawableStateChange(String type, r.android.graphics.drawable.Drawable dr) {
-		final int[] state = measurableTextView.getDrawableState();
+		final int[] state = measurableView.getDrawableState();
 
 		if (dr != null && dr.isStateful() && dr.setState(state)) {
 			switch (type) {
@@ -2764,10 +2835,14 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableTextView.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -3037,307 +3112,6 @@ public Object getIosDisabledBackground() {
 }
 public EditTextCommandBuilder setIosDisabledBackground(String value) {
 	Map<String, Object> attrs = initCommand("iosDisabledBackground");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder tryGetText() {
-	Map<String, Object> attrs = initCommand("text");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getText() {
-	Map<String, Object> attrs = initCommand("text");
-	return attrs.get("commandReturnValue");
-}
-public EditTextCommandBuilder setText(String value) {
-	Map<String, Object> attrs = initCommand("text");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder tryGetGravity() {
-	Map<String, Object> attrs = initCommand("gravity");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getGravity() {
-	Map<String, Object> attrs = initCommand("gravity");
-	return attrs.get("commandReturnValue");
-}
-public EditTextCommandBuilder setGravity(String value) {
-	Map<String, Object> attrs = initCommand("gravity");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setAutoText(boolean value) {
-	Map<String, Object> attrs = initCommand("autoText");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setCapitalize(String value) {
-	Map<String, Object> attrs = initCommand("capitalize");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder tryGetCursorVisible() {
-	Map<String, Object> attrs = initCommand("cursorVisible");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object isCursorVisible() {
-	Map<String, Object> attrs = initCommand("cursorVisible");
-	return attrs.get("commandReturnValue");
-}
-public EditTextCommandBuilder setCursorVisible(boolean value) {
-	Map<String, Object> attrs = initCommand("cursorVisible");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder tryGetTextSize() {
-	Map<String, Object> attrs = initCommand("textSize");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getTextSize() {
-	Map<String, Object> attrs = initCommand("textSize");
-	return attrs.get("commandReturnValue");
-}
-public EditTextCommandBuilder setTextSize(String value) {
-	Map<String, Object> attrs = initCommand("textSize");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setNumeric(String value) {
-	Map<String, Object> attrs = initCommand("numeric");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setDigits(String value) {
-	Map<String, Object> attrs = initCommand("digits");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setPassword(boolean value) {
-	Map<String, Object> attrs = initCommand("password");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setPhoneNumber(boolean value) {
-	Map<String, Object> attrs = initCommand("phoneNumber");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder tryGetInputType() {
-	Map<String, Object> attrs = initCommand("inputType");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getInputType() {
-	Map<String, Object> attrs = initCommand("inputType");
-	return attrs.get("commandReturnValue");
-}
-public EditTextCommandBuilder setInputType(String value) {
-	Map<String, Object> attrs = initCommand("inputType");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder tryGetImeOptions() {
-	Map<String, Object> attrs = initCommand("imeOptions");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getImeOptions() {
-	Map<String, Object> attrs = initCommand("imeOptions");
-	return attrs.get("commandReturnValue");
-}
-public EditTextCommandBuilder setImeOptions(String value) {
-	Map<String, Object> attrs = initCommand("imeOptions");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder selectAllOnFocus(boolean value) {
-	Map<String, Object> attrs = initCommand("selectAllOnFocus");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder selectAll(boolean value) {
-	Map<String, Object> attrs = initCommand("selectAll");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setScrollHorizontally(boolean value) {
-	Map<String, Object> attrs = initCommand("scrollHorizontally");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setSingleLine(boolean value) {
-	Map<String, Object> attrs = initCommand("singleLine");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setOnEditorAction(String value) {
-	Map<String, Object> attrs = initCommand("onEditorAction");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setTextColorHint(String value) {
-	Map<String, Object> attrs = initCommand("textColorHint");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setIosInputAccessoryViewDoneButton(String value) {
-	Map<String, Object> attrs = initCommand("iosInputAccessoryViewDoneButton");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setOnFocusChange(String value) {
-	Map<String, Object> attrs = initCommand("onFocusChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder tryGetTextColor() {
-	Map<String, Object> attrs = initCommand("textColor");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getTextColor() {
-	Map<String, Object> attrs = initCommand("textColor");
-	return attrs.get("commandReturnValue");
-}
-public EditTextCommandBuilder setTextColor(String value) {
-	Map<String, Object> attrs = initCommand("textColor");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setOnTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setOnbeforeTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onbeforeTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setOnafterTextChange(String value) {
-	Map<String, Object> attrs = initCommand("onafterTextChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setIosBorderStyle(String value) {
-	Map<String, Object> attrs = initCommand("iosBorderStyle");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setHintTextFormat(String value) {
-	Map<String, Object> attrs = initCommand("hintTextFormat");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setTextAllCaps(boolean value) {
-	Map<String, Object> attrs = initCommand("textAllCaps");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setIosInputView(String value) {
-	Map<String, Object> attrs = initCommand("iosInputView");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -3876,6 +3650,315 @@ public EditTextCommandBuilder setLastBaselineToBottomHeight(String value) {
 
 	attrs.put("value", value);
 return this;}
+public EditTextCommandBuilder tryGetText() {
+	Map<String, Object> attrs = initCommand("text");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getText() {
+	Map<String, Object> attrs = initCommand("text");
+	return attrs.get("commandReturnValue");
+}
+public EditTextCommandBuilder setText(String value) {
+	Map<String, Object> attrs = initCommand("text");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder tryGetGravity() {
+	Map<String, Object> attrs = initCommand("gravity");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getGravity() {
+	Map<String, Object> attrs = initCommand("gravity");
+	return attrs.get("commandReturnValue");
+}
+public EditTextCommandBuilder setGravity(String value) {
+	Map<String, Object> attrs = initCommand("gravity");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setAutoText(boolean value) {
+	Map<String, Object> attrs = initCommand("autoText");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setCapitalize(String value) {
+	Map<String, Object> attrs = initCommand("capitalize");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder tryGetCursorVisible() {
+	Map<String, Object> attrs = initCommand("cursorVisible");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object isCursorVisible() {
+	Map<String, Object> attrs = initCommand("cursorVisible");
+	return attrs.get("commandReturnValue");
+}
+public EditTextCommandBuilder setCursorVisible(boolean value) {
+	Map<String, Object> attrs = initCommand("cursorVisible");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder tryGetTextSize() {
+	Map<String, Object> attrs = initCommand("textSize");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getTextSize() {
+	Map<String, Object> attrs = initCommand("textSize");
+	return attrs.get("commandReturnValue");
+}
+public EditTextCommandBuilder setTextSize(String value) {
+	Map<String, Object> attrs = initCommand("textSize");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setNumeric(String value) {
+	Map<String, Object> attrs = initCommand("numeric");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setDigits(String value) {
+	Map<String, Object> attrs = initCommand("digits");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setPassword(boolean value) {
+	Map<String, Object> attrs = initCommand("password");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setPhoneNumber(boolean value) {
+	Map<String, Object> attrs = initCommand("phoneNumber");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder tryGetInputType() {
+	Map<String, Object> attrs = initCommand("inputType");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getInputType() {
+	Map<String, Object> attrs = initCommand("inputType");
+	return attrs.get("commandReturnValue");
+}
+public EditTextCommandBuilder setInputType(String value) {
+	Map<String, Object> attrs = initCommand("inputType");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder tryGetImeOptions() {
+	Map<String, Object> attrs = initCommand("imeOptions");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getImeOptions() {
+	Map<String, Object> attrs = initCommand("imeOptions");
+	return attrs.get("commandReturnValue");
+}
+public EditTextCommandBuilder setImeOptions(String value) {
+	Map<String, Object> attrs = initCommand("imeOptions");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder selectAllOnFocus(boolean value) {
+	Map<String, Object> attrs = initCommand("selectAllOnFocus");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder selectAll(boolean value) {
+	Map<String, Object> attrs = initCommand("selectAll");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setScrollHorizontally(boolean value) {
+	Map<String, Object> attrs = initCommand("scrollHorizontally");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setSingleLine(boolean value) {
+	Map<String, Object> attrs = initCommand("singleLine");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setOnEditorAction(String value) {
+	Map<String, Object> attrs = initCommand("onEditorAction");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setTextColorHint(String value) {
+	Map<String, Object> attrs = initCommand("textColorHint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setIosInputAccessoryViewDoneButton(String value) {
+	Map<String, Object> attrs = initCommand("iosInputAccessoryViewDoneButton");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setOnFocusChange(String value) {
+	Map<String, Object> attrs = initCommand("onFocusChange");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder tryGetTextColor() {
+	Map<String, Object> attrs = initCommand("textColor");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getTextColor() {
+	Map<String, Object> attrs = initCommand("textColor");
+	return attrs.get("commandReturnValue");
+}
+public EditTextCommandBuilder setTextColor(String value) {
+	Map<String, Object> attrs = initCommand("textColor");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setOnTextChange(String value) {
+	Map<String, Object> attrs = initCommand("onTextChange");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setOnbeforeTextChange(String value) {
+	Map<String, Object> attrs = initCommand("onbeforeTextChange");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setOnafterTextChange(String value) {
+	Map<String, Object> attrs = initCommand("onafterTextChange");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setIosBorderStyle(String value) {
+	Map<String, Object> attrs = initCommand("iosBorderStyle");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setHintTextFormat(String value) {
+	Map<String, Object> attrs = initCommand("hintTextFormat");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setTextAllCaps(boolean value) {
+	Map<String, Object> attrs = initCommand("textAllCaps");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setIosInputView(String value) {
+	Map<String, Object> attrs = initCommand("iosInputView");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setSetFocus(boolean value) {
+	Map<String, Object> attrs = initCommand("setFocus");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class EditTextBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public EditTextBean() {
@@ -3959,139 +4042,6 @@ public Object getIosDisabledBackground() {
 }
 public void setIosDisabledBackground(String value) {
 	getBuilder().reset().setIosDisabledBackground(value).execute(true);
-}
-
-public Object getText() {
-	return getBuilder().reset().tryGetText().execute(false).getText(); 
-}
-public void setText(String value) {
-	getBuilder().reset().setText(value).execute(true);
-}
-
-public Object getGravity() {
-	return getBuilder().reset().tryGetGravity().execute(false).getGravity(); 
-}
-public void setGravity(String value) {
-	getBuilder().reset().setGravity(value).execute(true);
-}
-
-public void setAutoText(boolean value) {
-	getBuilder().reset().setAutoText(value).execute(true);
-}
-
-public void setCapitalize(String value) {
-	getBuilder().reset().setCapitalize(value).execute(true);
-}
-
-public Object isCursorVisible() {
-	return getBuilder().reset().tryGetCursorVisible().execute(false).isCursorVisible(); 
-}
-public void setCursorVisible(boolean value) {
-	getBuilder().reset().setCursorVisible(value).execute(true);
-}
-
-public Object getTextSize() {
-	return getBuilder().reset().tryGetTextSize().execute(false).getTextSize(); 
-}
-public void setTextSize(String value) {
-	getBuilder().reset().setTextSize(value).execute(true);
-}
-
-public void setNumeric(String value) {
-	getBuilder().reset().setNumeric(value).execute(true);
-}
-
-public void setDigits(String value) {
-	getBuilder().reset().setDigits(value).execute(true);
-}
-
-public void setPassword(boolean value) {
-	getBuilder().reset().setPassword(value).execute(true);
-}
-
-public void setPhoneNumber(boolean value) {
-	getBuilder().reset().setPhoneNumber(value).execute(true);
-}
-
-public Object getInputType() {
-	return getBuilder().reset().tryGetInputType().execute(false).getInputType(); 
-}
-public void setInputType(String value) {
-	getBuilder().reset().setInputType(value).execute(true);
-}
-
-public Object getImeOptions() {
-	return getBuilder().reset().tryGetImeOptions().execute(false).getImeOptions(); 
-}
-public void setImeOptions(String value) {
-	getBuilder().reset().setImeOptions(value).execute(true);
-}
-
-public void selectAllOnFocus(boolean value) {
-	getBuilder().reset().selectAllOnFocus(value).execute(true);
-}
-
-public void selectAll(boolean value) {
-	getBuilder().reset().selectAll(value).execute(true);
-}
-
-public void setScrollHorizontally(boolean value) {
-	getBuilder().reset().setScrollHorizontally(value).execute(true);
-}
-
-public void setSingleLine(boolean value) {
-	getBuilder().reset().setSingleLine(value).execute(true);
-}
-
-public void setOnEditorAction(String value) {
-	getBuilder().reset().setOnEditorAction(value).execute(true);
-}
-
-public void setTextColorHint(String value) {
-	getBuilder().reset().setTextColorHint(value).execute(true);
-}
-
-public void setIosInputAccessoryViewDoneButton(String value) {
-	getBuilder().reset().setIosInputAccessoryViewDoneButton(value).execute(true);
-}
-
-public void setOnFocusChange(String value) {
-	getBuilder().reset().setOnFocusChange(value).execute(true);
-}
-
-public Object getTextColor() {
-	return getBuilder().reset().tryGetTextColor().execute(false).getTextColor(); 
-}
-public void setTextColor(String value) {
-	getBuilder().reset().setTextColor(value).execute(true);
-}
-
-public void setOnTextChange(String value) {
-	getBuilder().reset().setOnTextChange(value).execute(true);
-}
-
-public void setOnbeforeTextChange(String value) {
-	getBuilder().reset().setOnbeforeTextChange(value).execute(true);
-}
-
-public void setOnafterTextChange(String value) {
-	getBuilder().reset().setOnafterTextChange(value).execute(true);
-}
-
-public void setIosBorderStyle(String value) {
-	getBuilder().reset().setIosBorderStyle(value).execute(true);
-}
-
-public void setHintTextFormat(String value) {
-	getBuilder().reset().setHintTextFormat(value).execute(true);
-}
-
-public void setTextAllCaps(boolean value) {
-	getBuilder().reset().setTextAllCaps(value).execute(true);
-}
-
-public void setIosInputView(String value) {
-	getBuilder().reset().setIosInputView(value).execute(true);
 }
 
 public void setPadding(String value) {
@@ -4310,6 +4260,143 @@ public void setLastBaselineToBottomHeight(String value) {
 	getBuilder().reset().setLastBaselineToBottomHeight(value).execute(true);
 }
 
+public Object getText() {
+	return getBuilder().reset().tryGetText().execute(false).getText(); 
+}
+public void setText(String value) {
+	getBuilder().reset().setText(value).execute(true);
+}
+
+public Object getGravity() {
+	return getBuilder().reset().tryGetGravity().execute(false).getGravity(); 
+}
+public void setGravity(String value) {
+	getBuilder().reset().setGravity(value).execute(true);
+}
+
+public void setAutoText(boolean value) {
+	getBuilder().reset().setAutoText(value).execute(true);
+}
+
+public void setCapitalize(String value) {
+	getBuilder().reset().setCapitalize(value).execute(true);
+}
+
+public Object isCursorVisible() {
+	return getBuilder().reset().tryGetCursorVisible().execute(false).isCursorVisible(); 
+}
+public void setCursorVisible(boolean value) {
+	getBuilder().reset().setCursorVisible(value).execute(true);
+}
+
+public Object getTextSize() {
+	return getBuilder().reset().tryGetTextSize().execute(false).getTextSize(); 
+}
+public void setTextSize(String value) {
+	getBuilder().reset().setTextSize(value).execute(true);
+}
+
+public void setNumeric(String value) {
+	getBuilder().reset().setNumeric(value).execute(true);
+}
+
+public void setDigits(String value) {
+	getBuilder().reset().setDigits(value).execute(true);
+}
+
+public void setPassword(boolean value) {
+	getBuilder().reset().setPassword(value).execute(true);
+}
+
+public void setPhoneNumber(boolean value) {
+	getBuilder().reset().setPhoneNumber(value).execute(true);
+}
+
+public Object getInputType() {
+	return getBuilder().reset().tryGetInputType().execute(false).getInputType(); 
+}
+public void setInputType(String value) {
+	getBuilder().reset().setInputType(value).execute(true);
+}
+
+public Object getImeOptions() {
+	return getBuilder().reset().tryGetImeOptions().execute(false).getImeOptions(); 
+}
+public void setImeOptions(String value) {
+	getBuilder().reset().setImeOptions(value).execute(true);
+}
+
+public void selectAllOnFocus(boolean value) {
+	getBuilder().reset().selectAllOnFocus(value).execute(true);
+}
+
+public void selectAll(boolean value) {
+	getBuilder().reset().selectAll(value).execute(true);
+}
+
+public void setScrollHorizontally(boolean value) {
+	getBuilder().reset().setScrollHorizontally(value).execute(true);
+}
+
+public void setSingleLine(boolean value) {
+	getBuilder().reset().setSingleLine(value).execute(true);
+}
+
+public void setOnEditorAction(String value) {
+	getBuilder().reset().setOnEditorAction(value).execute(true);
+}
+
+public void setTextColorHint(String value) {
+	getBuilder().reset().setTextColorHint(value).execute(true);
+}
+
+public void setIosInputAccessoryViewDoneButton(String value) {
+	getBuilder().reset().setIosInputAccessoryViewDoneButton(value).execute(true);
+}
+
+public void setOnFocusChange(String value) {
+	getBuilder().reset().setOnFocusChange(value).execute(true);
+}
+
+public Object getTextColor() {
+	return getBuilder().reset().tryGetTextColor().execute(false).getTextColor(); 
+}
+public void setTextColor(String value) {
+	getBuilder().reset().setTextColor(value).execute(true);
+}
+
+public void setOnTextChange(String value) {
+	getBuilder().reset().setOnTextChange(value).execute(true);
+}
+
+public void setOnbeforeTextChange(String value) {
+	getBuilder().reset().setOnbeforeTextChange(value).execute(true);
+}
+
+public void setOnafterTextChange(String value) {
+	getBuilder().reset().setOnafterTextChange(value).execute(true);
+}
+
+public void setIosBorderStyle(String value) {
+	getBuilder().reset().setIosBorderStyle(value).execute(true);
+}
+
+public void setHintTextFormat(String value) {
+	getBuilder().reset().setHintTextFormat(value).execute(true);
+}
+
+public void setTextAllCaps(boolean value) {
+	getBuilder().reset().setTextAllCaps(value).execute(true);
+}
+
+public void setIosInputView(String value) {
+	getBuilder().reset().setIosInputView(value).execute(true);
+}
+
+public void setSetFocus(boolean value) {
+	getBuilder().reset().setSetFocus(value).execute(true);
+}
+
 }
 
 
@@ -4433,7 +4520,7 @@ public void setLastBaselineToBottomHeight(String value) {
 		return uiview.subviews[0];
 	]-*/;
 	//end - body
-
+	//start - other
 	private void nativeCreate(Map<String, Object> params) {
 		simpleWrapableView.setDisableForeground(true);
 		registerForAttributeCommandChain("hint");
@@ -4458,6 +4545,7 @@ public void setLastBaselineToBottomHeight(String value) {
 		}
 		callMeasureOnChange = true;
 	}
+	//end - other
 
 	//start - edittext
 	public void setMyText(Object text) {
@@ -4594,7 +4682,7 @@ public void setLastBaselineToBottomHeight(String value) {
 	}
 	/*-[
 	-(BOOL) checkIfInputIsValid:(NSString *)string :(NSRange) range{
-		if (maxLength_ > 1) {
+		if (maxLength_ > 0) {
 			return ((ASUITextField*) uiView_).text.length + (string.length - range.length) <= maxLength_;
 		}
     	if (numericPattern_ != nil) {
@@ -4666,7 +4754,7 @@ public void setLastBaselineToBottomHeight(String value) {
 		} else {
 			onEditorActionListener = (TextView.OnEditorActionListener) editorAction;
 		}
-		onEditorActionListener.onEditorAction(measurableTextView, 0, new r.android.view.KeyEvent());
+		onEditorActionListener.onEditorAction(measurableView, 0, new r.android.view.KeyEvent());
 	}
 
 	/*-[
@@ -4762,8 +4850,8 @@ public void setLastBaselineToBottomHeight(String value) {
 			} else {
 				focusChangeListener = (View.OnFocusChangeListener) onFocusChange;
 			}
-			measurableTextView.setFocused(true); 
-			focusChangeListener.onFocusChange(measurableTextView, true);
+			measurableView.setFocused(true); 
+			focusChangeListener.onFocusChange(measurableView, true);
 		}
 	}
 	
@@ -4776,8 +4864,8 @@ public void setLastBaselineToBottomHeight(String value) {
 			} else {
 				focusChangeListener = (View.OnFocusChangeListener) onFocusChange;
 			}
-			measurableTextView.setFocused(false); 
-			focusChangeListener.onFocusChange(measurableTextView, false);
+			measurableView.setFocused(false); 
+			focusChangeListener.onFocusChange(measurableView, false);
 		}
 	}
 	
@@ -4817,16 +4905,16 @@ public void setLastBaselineToBottomHeight(String value) {
 	
 	private void setSingleLine(Object objValue) {
 		if ((boolean) objValue) {
-			measurableTextView.setLines(1);
+			measurableView.setLines(1);
 		} else {
-			measurableTextView.setMaxLines(Integer.MAX_VALUE);
-			measurableTextView.setMinLines(-1);
+			measurableView.setMaxLines(Integer.MAX_VALUE);
+			measurableView.setMinLines(-1);
 		}
 	}
 	
 	
 	private Object getSingleLine() {
-		return measurableTextView.getMaxLines() == 1 && measurableTextView.getMinLines() == 1;
+		return measurableView.getMaxLines() == 1 && measurableView.getMinLines() == 1;
 	}
 
 	private boolean scrollHorizontally;
@@ -4836,9 +4924,9 @@ public void setLastBaselineToBottomHeight(String value) {
 			nativeSetScrollEnabled(getScrollView(), scrollHorizontally);
 			nativeAddTapGesture();
 			addMinMaxListener();
-			measurableTextView.setCompoundHorizontalPaddingConsumed(scrollHorizontally);
+			measurableView.setCompoundHorizontalPaddingConsumed(scrollHorizontally);
 		} else {
-			measurableTextView.setHorizontallyScrolling((boolean) objValue);
+			measurableView.setHorizontallyScrolling((boolean) objValue);
 		}
 	}
 	
@@ -4968,7 +5056,7 @@ public void setLastBaselineToBottomHeight(String value) {
 	    }
 	 ]-*/;	
 	//end - edittext
-	
+	//start - create
 	private native void nativeAddTextFieldDidChange() /*-[
 		[((ASUITextField*)self.uiView) addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
 	]-*/;
@@ -4995,15 +5083,15 @@ public void setLastBaselineToBottomHeight(String value) {
 	private void nativeMakeFrameForChildWidget(int l, int t, int r, int b) {
 		if (isViewWrapped()) {
 			if (hasScrollView()) {
-				int textWidth = measurableTextView.nativeMeasureWidth(uiView);
-				int horizontalPadding = measurableTextView.getCompoundPaddingLeft() + measurableTextView.getCompoundPaddingRight();
+				int textWidth = measurableView.nativeMeasureWidth(uiView);
+				int horizontalPadding = measurableView.getCompoundPaddingLeft() + measurableView.getCompoundPaddingRight();
 				
 				if (textWidth < (r - l - horizontalPadding)) {
 		            textWidth = r - l - horizontalPadding;
 		        }
 				ViewImpl.updateBounds(uiView, 0, 0, textWidth, b-t);
-				ViewImpl.updateBounds(getScrollView(), measurableTextView.getCompoundPaddingLeft(), 0,
-						r-l-measurableTextView.getCompoundPaddingRight() - measurableTextView.getCompoundPaddingLeft(),
+				ViewImpl.updateBounds(getScrollView(), measurableView.getCompoundPaddingLeft(), 0,
+						r-l-measurableView.getCompoundPaddingRight() - measurableView.getCompoundPaddingLeft(),
 						b-t);
 				nativeSetContentSize(getScrollView(), textWidth+10, b-t);
 			}
@@ -5031,17 +5119,17 @@ public void setLastBaselineToBottomHeight(String value) {
 	private native void nativeSetBorderStyle(int value) /*-[
 		[((ASUITextField*)self.uiView) setBorderStyle:value];
 	]-*/;	
-
+	//end - create
 	//start - viewcode
 	@Override
 	public int measureWidth() {
-		int width = measurableTextView.nativeMeasureWidth(uiView);
+		int width = measurableView.nativeMeasureWidth(uiView);
 		return width;
 	}
 	
 	@Override
 	public int measureHeight(int width) {
-		int height = measurableTextView.nativeMeasureHeight(uiView, width);
+		int height = measurableView.nativeMeasureHeight(uiView, width);
 		return height;
 	}
 	
@@ -5065,8 +5153,8 @@ public void setLastBaselineToBottomHeight(String value) {
 	private void setHintColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setHintTextColor(colorStateList);
-			objValue = measurableTextView.getCurrentHintTextColor();
+			measurableView.setHintTextColor(colorStateList);
+			objValue = measurableView.getCurrentHintTextColor();
 		}
 
 		nativeSetHintColor(ViewImpl.getColor(objValue));
@@ -5092,7 +5180,7 @@ public void setLastBaselineToBottomHeight(String value) {
 
 	@Override
 	public boolean isViewVisible() {
-		return measurableTextView.getVisibility() == r.android.view.View.VISIBLE;
+		return measurableView.getVisibility() == r.android.view.View.VISIBLE;
 	}
 
 	@Override
@@ -5143,4 +5231,23 @@ public void setLastBaselineToBottomHeight(String value) {
 		[((ASUITextField*)self.uiView) setInputView:datepicker];
 	]-*/;
 	//end - inputView
+	
+	//start - focus
+	private void setFocus(Object objValue) {
+		if ((boolean) objValue) {
+			becomeFirstResponder();
+		} else {
+			setEnabled(false);
+			setEnabled(true);
+		}
+		
+	}
+	
+	public Object invokeMethod(String methodName, Object... args) {
+		if (methodName.equals("nativeWidgetFor") && args[0].equals("onFocusChange")) {
+			return uiView;
+		}
+		return null;
+	}
+	//end - focus
 }

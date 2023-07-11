@@ -117,7 +117,9 @@ void ASModelStore_storeModelToScopeWithNSString_withASModelScope_withId_withASIF
     }
     break;
     case ASModelScope_Enum_loopvar:
-    if (loopVarParams != nil) {
+    if (objValue == loopVarParams) {
+    }
+    else if (loopVarParams != nil) {
       [loopVarParams putWithId:varName withId:objValue];
     }
     else {

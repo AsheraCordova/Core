@@ -19,6 +19,7 @@
 #if !defined (ASViewGroupModelImpl_) && (INCLUDE_ALL_ViewGroupModelImpl || defined(INCLUDE_ASViewGroupModelImpl))
 #define ASViewGroupModelImpl_
 
+@class ASSimpleWrapableView;
 @class ASWidgetAttribute;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -37,6 +38,13 @@
 + (jboolean)isAttributeSupportedWithASWidgetAttribute:(ASWidgetAttribute *)key;
 
 + (void)register__WithNSString:(NSString *)localName;
+
++ (void)setAttributeWithASIWidget:(id<ASIWidget>)w
+         withASSimpleWrapableView:(ASSimpleWrapableView *)wrapperView
+            withASWidgetAttribute:(ASWidgetAttribute *)key
+                     withNSString:(NSString *)strValue
+                           withId:(id)objValue
+        withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
 
 + (void)setAttributeWithASIWidget:(id<ASIWidget>)w
             withASWidgetAttribute:(ASWidgetAttribute *)key
@@ -65,6 +73,8 @@ FOUNDATION_EXPORT id ASViewGroupModelImpl_getChildAttributeWithASIWidget_withASW
 
 FOUNDATION_EXPORT jboolean ASViewGroupModelImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key);
 
+FOUNDATION_EXPORT void ASViewGroupModelImpl_setAttributeWithASIWidget_withASSimpleWrapableView_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASSimpleWrapableView *wrapperView, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
+
 J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl)
 
 @compatibility_alias ComAsheraLayoutViewGroupModelImpl ASViewGroupModelImpl;
@@ -91,15 +101,21 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl)
 - (id)addModelByIndexWithId:(id)value
                      withId:(id)index;
 
+- (id)getModelDescPath;
+
 - (id)getModelIdPath;
 
 - (id)removeModelAtIndexWithInt:(jint)value;
 
 - (id)removeModelByIdWithNSString:(NSString *)value;
 
+- (id)setModelDescPathWithNSString:(NSString *)value;
+
 - (id)setModelForWithNSString:(NSString *)value;
 
 - (id)setModelIdPathWithNSString:(NSString *)value;
+
+- (id)tryGetModelDescPath;
 
 - (id)tryGetModelIdPath;
 
@@ -265,6 +281,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setMinWidthWithNSString:(NSString *)arg0;
 
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setModelDescPathWithNSString:(NSString *)arg0;
+
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setModelForWithNSString:(NSString *)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setModelIdPathWithNSString:(NSString *)arg0;
@@ -289,7 +307,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setRotationWithFloat:(jfloat)arg0;
 
@@ -439,6 +461,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetMinWidth;
 
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetModelDescPath;
+
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetModelIdPath;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetModelParam;
@@ -528,11 +552,15 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilderInte
 - (void)addModelByIndexWithId:(id)value
                        withId:(id)index;
 
+- (id)getModelDescPath;
+
 - (id)getModelIdPath;
 
 - (void)removeModelAtIndexWithInt:(jint)value;
 
 - (void)removeModelByIdWithNSString:(NSString *)value;
+
+- (void)setModelDescPathWithNSString:(NSString *)value;
 
 - (void)setModelForWithNSString:(NSString *)value;
 

@@ -41,7 +41,7 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
 	public final static String GROUP_NAME = "Spinner";
 
 	protected org.eclipse.swt.custom.CCombo cCombo;
-	protected MeasurableTextView measurableTextView;	
+	protected r.android.widget.Spinner measurableView;	
 	
 		@SuppressLint("NewApi")
 		final static class Font extends AbstractEnumToIntConverter{
@@ -86,7 +86,6 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
 		ViewGroupModelImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onItemSelected").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionTextPath").withType("string").withOrder(-1));
@@ -114,14 +113,21 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hint").withType("resourcestring").withOrder(-2));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("int"));
 	}
 	
 	public CComboImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  CComboImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  CComboImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class CComboExt extends MeasurableTextView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
+	public class CComboExt extends r.android.widget.Spinner implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 		private int mMaxWidth = -1;
@@ -144,13 +150,8 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
 		}
 
 		public CComboExt() {
-			
-			
-			
-			
-			
-			
 			super(CComboImpl.this);
+			
 		}
 		
 		@Override
@@ -238,7 +239,46 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(CComboImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(CComboImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	CComboImpl.this.getParent().remove(CComboImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) asNativeWidget();
+			appScreenLocation[0] = control.toDisplay(0, 0).x;
+        	appScreenLocation[1] = control.toDisplay(0, 0).y;
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	org.eclipse.swt.widgets.Shell shell = ((org.eclipse.swt.widgets.Control)asNativeWidget()).getShell();
+        	displayFrame.left = shell.toDisplay(0, 0).x ;
+			displayFrame.top = shell.getShell().toDisplay(0, 0).y ;
+        	displayFrame.bottom = displayFrame.top + shell.getClientArea().height;
+        	displayFrame.right = displayFrame.left + shell.getBounds().width;
+        	
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -248,27 +288,40 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			CComboImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((CComboExt) measurableTextView).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+	}	@Override
+	public Class getViewClass() {
+		return CComboExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new CComboImpl();
+		return new CComboImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableTextView = new CComboExt();
+		measurableView = new CComboExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 	}
@@ -280,16 +333,6 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
 		ViewGroupModelImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		objValue = preSetAttribute(key, strValue, objValue, decorator);
 		switch (key.getAttributeName()) {
-			case "selection": {
-				
-
-
-		setSelection(objValue);
-
-
-
-			}
-			break;
 			case "entries": {
 				
 
@@ -540,6 +583,16 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
 
 			}
 			break;
+			case "selection": {
+				
+
+
+		setSelection(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -584,7 +637,7 @@ return hint;				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableTextView;
+		return measurableView;
 	}
 
 	
@@ -630,19 +683,19 @@ return hint;				}
 
 
 	private Object getPaddingBottom() {
-		return measurableTextView.getPaddingBottom();
+		return measurableView.getPaddingBottom();
 	}
 	
 	private Object getPaddingTop() {
-		return measurableTextView.getPaddingTop();
+		return measurableView.getPaddingTop();
 	}
 
 	private Object getPaddingRight() {
-		return measurableTextView.getPaddingRight();
+		return measurableView.getPaddingRight();
 	}
 	
 	private Object getPaddingLeft() {
-		return measurableTextView.getPaddingLeft();
+		return measurableView.getPaddingLeft();
 	}
 	
 	private Object getPaddingEnd() {
@@ -664,27 +717,27 @@ return hint;				}
     }
 
 	private void setPaddingTop(Object objValue) {
-		ViewImpl.setPaddingTop(objValue, measurableTextView);
+		ViewImpl.setPaddingTop(objValue, measurableView);
 	}
 
 	private void setPaddingEnd(Object objValue) {
-		ViewImpl.setPaddingRight(objValue, measurableTextView);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingStart(Object objValue) {
-		ViewImpl.setPaddingLeft(objValue, measurableTextView);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 
 	private void setPaddingLeft(Object objValue) {
-		ViewImpl.setPaddingLeft(objValue, measurableTextView);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 
 	private void setPaddingRight(Object objValue) {
-		ViewImpl.setPaddingRight(objValue, measurableTextView);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingBottom(Object objValue) {
-		ViewImpl.setPaddingBottom(objValue, measurableTextView);
+		ViewImpl.setPaddingBottom(objValue, measurableView);
 	}
 
     private void setPadding(Object objValue) {
@@ -808,8 +861,8 @@ return hint;				}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setTextColor(colorStateList);
-			objValue = measurableTextView.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		
 		cCombo.setForeground((Color)ViewImpl.getColor(objValue));
@@ -820,7 +873,7 @@ return hint;				}
 	}
 
 	private Object getTextColor() {
-		return measurableTextView.getTextColors();
+		return measurableView.getTextColors();
 	}
     
 
@@ -833,7 +886,7 @@ return hint;				}
 
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableTextView.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -856,11 +909,11 @@ return hint;				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableTextView.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableTextView.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableTextView.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -906,7 +959,7 @@ return hint;				}
     
 	
 	private Object getGravity() {
-		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableTextView.getVerticalAligment();
+		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableView.getVerticalAligment();
 		if (verticalAligment == null) {
 			verticalAligment = com.ashera.view.BaseMeasurableView.VerticalAligment.top;
 		}
@@ -945,7 +998,7 @@ return hint;				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableTextView.getRawTextAlignment() != 0 || measurableTextView.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -961,15 +1014,15 @@ return hint;				}
 
     //start - valign
 	private void setVerticalAligmentCenter() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 	}
 
 	private void setVerticalAligmentBottom() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 	}
 
 	private void setVerticalAligmentTop() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 	}
 	//end - valign
 
@@ -1036,7 +1089,7 @@ return hint;				}
 		}
 
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent event) {
-			  onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableTextView, cCombo.getSelectionIndex(), 0);
+			  onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableView, cCombo.getSelectionIndex(), 0);
 		  }
 	}
 	private SelectionListener listener;
@@ -1048,7 +1101,7 @@ return hint;				}
 		
 		cCombo.addSelectionListener(listener);
 		if (!isInitialised() && cCombo.getItems().length > 0) {
-			onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableTextView, cCombo.getSelectionIndex(), 0);
+			onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableView, cCombo.getSelectionIndex(), 0);
 		}
 	}
 
@@ -1338,7 +1391,7 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(AdapterView<?>
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableTextView.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
@@ -1414,14 +1467,6 @@ public  class CComboCommandBuilder extends com.ashera.layout.ViewImpl.ViewComman
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public CComboCommandBuilder setSelection(int value) {
-	Map<String, Object> attrs = initCommand("selection");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public CComboCommandBuilder setEntries(String value) {
 	Map<String, Object> attrs = initCommand("entries");
 	attrs.put("type", "attribute");
@@ -1743,15 +1788,19 @@ public CComboCommandBuilder setHint(String value) {
 
 	attrs.put("value", value);
 return this;}
+public CComboCommandBuilder setSelection(int value) {
+	Map<String, Object> attrs = initCommand("selection");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class CComboBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public CComboBean() {
 			super(CComboImpl.this);
 		}
-public void setSelection(int value) {
-	getBuilder().reset().setSelection(value).execute(true);
-}
-
 public void setEntries(String value) {
 	getBuilder().reset().setEntries(value).execute(true);
 }
@@ -1885,6 +1934,10 @@ public void setHint(String value) {
 	getBuilder().reset().setHint(value).execute(true);
 }
 
+public void setSelection(int value) {
+	getBuilder().reset().setSelection(value).execute(true);
+}
+
 }
 
 
@@ -1907,7 +1960,7 @@ public void setHint(String value) {
 	public void nativeMakeFrameForChildWidget(int l, int t, int r, int b) {
 		Button arrow = (Button) getFieldValueUsingReflection(cCombo, "arrow");
 		Point arrowSize = arrow.computeSize (org.eclipse.swt.SWT.DEFAULT, b-t, false);
-		com.ashera.model.RectM widgetBounds = measurableTextView.getWidgetBounds(r - l - arrowSize.x, b - t);
+		com.ashera.model.RectM widgetBounds = measurableView.getWidgetBounds(r - l - arrowSize.x, b - t);
 		Text text = (Text) getFieldValueUsingReflection(cCombo, "text");
 		
 		ViewImpl.updateBounds(text, widgetBounds.x, widgetBounds.y, widgetBounds.width, widgetBounds.height);

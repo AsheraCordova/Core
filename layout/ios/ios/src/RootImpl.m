@@ -9,12 +9,14 @@
 #include "Event.h"
 #include "EventBus.h"
 #include "EventBusHandler.h"
+#include "HasWidgets.h"
 #include "IAttributable.h"
 #include "IConverter.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
+#include "IOSPrimitiveArray.h"
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
 #include "IdGenerator.h"
@@ -22,6 +24,7 @@
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
 #include "PluginInvoker.h"
+#include "Rect.h"
 #include "RelativeLayout.h"
 #include "RootImpl.h"
 #include "View.h"
@@ -165,12 +168,14 @@ J2OBJC_FIELD_SETTER(ASRootImpl_RemoveRule, mapping_, id<JavaUtilMap>)
   ASOnLayoutEvent *onLayoutEvent_;
   jint mMaxWidth_;
   jint mMaxHeight_;
+  id<JavaUtilMap> templates_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(ASRootImpl_RootExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASRootImpl_RootExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASRootImpl_RootExt, templates_, id<JavaUtilMap>)
 
 @interface ASRootImpl_RootCommandBuilder () {
  @public
@@ -257,7 +262,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<ASIWidget>)newInstance {
-  return new_ASRootImpl_init();
+  return new_ASRootImpl_initWithNSString_withNSString_(groupName_, localName_);
 }
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
@@ -579,9 +584,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
-  [((ASRootImpl_RootExt *) nil_chk(((ASRootImpl_RootExt *) cast_chk(relativeLayout_, [ASRootImpl_RootExt class])))) updateMeasuredDimensionWithInt:width withInt:height];
+- (IOSClass *)getViewClass {
+  return ASRootImpl_RootExt_class_();
 }
 
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
@@ -722,8 +726,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   else {
     id<ASIWidget> button = ASWidgetFactory_createWidgetWithNSString_withNSString_withASHasWidgets_withBoolean_(@"TextView", @"TextView", self, false);
     [((id<ASIWidget>) nil_chk(button)) setIdWithNSString:@"@+id/errorBanner"];
-    [button setAttributeWithASWidgetAttribute:ASWidgetFactory_getAttributeWithNSString_withNSString_(@"TextView", @"style") withId:@"@style/error_banner" withBoolean:false];
-    [button setAttributeWithASWidgetAttribute:ASWidgetFactory_getAttributeWithNSString_withNSString_(@"TextView", @"onClick") withId:@"onError(data = . from fatalErrors->view)" withBoolean:false];
+    [button setAttributeWithNSString:@"style" withId:@"@style/error_banner" withBoolean:false];
+    [button setAttributeWithNSString:@"onClick" withId:@"onError(data = . from fatalErrors->view)" withBoolean:false];
   }
 }
 
@@ -732,6 +736,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     [super setIdWithNSString:id_];
     [((ADRelativeLayout *) nil_chk(relativeLayout_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
   }
+}
+
+- (void)setVisibleWithBoolean:(jboolean)b {
+  [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
 - (id)getPluginWithNSString:(NSString *)plugin {
@@ -798,33 +806,34 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LADRelativeLayout_LayoutParams;", 0x2, 13, 12, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 18, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 20, 21, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 24, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 22, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 25, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 27, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 29, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 30, 29, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 31, 29, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 32, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 33, 34, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x2, 35, 36, -1, 37, -1, -1 },
-    { NULL, "V", 0x2, 28, 38, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 23, 24, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 25, 24, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 26, 27, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 28, 27, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 29, 27, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 30, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 31, 32, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x2, 33, 34, -1, 35, -1, -1 },
+    { NULL, "V", 0x2, 26, 36, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 39, 40, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 37, 38, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 41, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 39, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 40, 41, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 42, 1, -1, -1, -1, -1 },
     { NULL, "LASRootImpl_RootBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRootImpl_RootCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRootImpl_RootParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRootImpl_RootCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 43, 36, -1, 44, -1, -1 },
-    { NULL, "V", 0x2, 45, 36, -1, 44, -1, -1 },
+    { NULL, "V", 0x101, 43, 34, -1, 44, -1, -1 },
+    { NULL, "V", 0x2, 45, 34, -1, 44, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -846,7 +855,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[13].selector = @selector(getLayoutParamsWithADView:);
   methods[14].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
   methods[15].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
-  methods[16].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
+  methods[16].selector = @selector(getViewClass);
   methods[17].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
   methods[18].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
   methods[19].selector = @selector(asNativeWidget);
@@ -866,14 +875,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[33].selector = @selector(measureWithInt:withInt:withInt:withInt:);
   methods[34].selector = @selector(displayErrorIndicator);
   methods[35].selector = @selector(setIdWithNSString:);
-  methods[36].selector = @selector(getPluginWithNSString:);
-  methods[37].selector = @selector(getBean);
-  methods[38].selector = @selector(getBuilder);
-  methods[39].selector = @selector(getParamsBean);
-  methods[40].selector = @selector(getParamsBuilder);
-  methods[41].selector = @selector(createViewWithJavaUtilMap:);
-  methods[42].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[43].selector = @selector(setupForInsets);
+  methods[36].selector = @selector(setVisibleWithBoolean:);
+  methods[37].selector = @selector(getPluginWithNSString:);
+  methods[38].selector = @selector(getBean);
+  methods[39].selector = @selector(getBuilder);
+  methods[40].selector = @selector(getParamsBean);
+  methods[41].selector = @selector(getParamsBuilder);
+  methods[42].selector = @selector(createViewWithJavaUtilMap:);
+  methods[43].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[44].selector = @selector(setupForInsets);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -887,8 +897,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "paramsBuilder_", "LASRootImpl_RootCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "paramsBean_", "LASRootImpl_RootParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "updateMeasuredDimension", "II", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "addRule", "LADRelativeLayout_LayoutParams;ILNSObject;", "addRemoveRule", "removeRule", "LADRelativeLayout_LayoutParams;I", "getRule", "getBoolRule", "getInferredRule", "removeAllRules", "LADRelativeLayout_LayoutParams;", "invertMap", "LJavaUtilMap;", "<A:Ljava/lang/Object;B:Ljava/lang/Object;>(Ljava/util/Map<TA;TB;>;)Ljava/util/Map<TB;TA;>;", "LADRelativeLayout_LayoutParams;LNSObject;", "measure", "IIII", "setId", "getPlugin", "createView", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "nativeCreate", &ASRootImpl_LOCAL_NAME, &ASRootImpl_GROUP_NAME, &ASRootImpl_DELLOC_EVENT, "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Integer;>;", "LASRootImpl_DallocHandler;LASRootImpl_RemoveRule;LASRootImpl_RootExt;LASRootImpl_RootCommandBuilder;LASRootImpl_RootBean;LASRootImpl_RootParamsBean;LASRootImpl_RootCommandParamsBuilder;" };
-  static const J2ObjcClassInfo _ASRootImpl = { "RootImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 44, 10, -1, 50, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "addRule", "LADRelativeLayout_LayoutParams;ILNSObject;", "addRemoveRule", "removeRule", "LADRelativeLayout_LayoutParams;I", "getRule", "getBoolRule", "getInferredRule", "removeAllRules", "LADRelativeLayout_LayoutParams;", "invertMap", "LJavaUtilMap;", "<A:Ljava/lang/Object;B:Ljava/lang/Object;>(Ljava/util/Map<TA;TB;>;)Ljava/util/Map<TB;TA;>;", "LADRelativeLayout_LayoutParams;LNSObject;", "measure", "IIII", "setId", "setVisible", "Z", "getPlugin", "createView", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "nativeCreate", &ASRootImpl_LOCAL_NAME, &ASRootImpl_GROUP_NAME, &ASRootImpl_DELLOC_EVENT, "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Integer;>;", "LASRootImpl_DallocHandler;LASRootImpl_RemoveRule;LASRootImpl_RootExt;LASRootImpl_RootCommandBuilder;LASRootImpl_RootBean;LASRootImpl_RootParamsBean;LASRootImpl_RootCommandParamsBuilder;" };
+  static const J2ObjcClassInfo _ASRootImpl = { "RootImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 45, 10, -1, 50, -1, -1, -1 };
   return &_ASRootImpl;
 }
 
@@ -1132,6 +1142,7 @@ void ASRootImpl_removeRuleWithADRelativeLayout_LayoutParams_withId_(ASRootImpl *
 void ASRootImpl_nativeCreateWithJavaUtilMap_(ASRootImpl *self, id<JavaUtilMap> params) {
   [self createViewWithJavaUtilMap:params];
   [((id<ASIFragment>) nil_chk(self->fragment_)) setRootWidgetWithASIWidget:self];
+  [((ADRelativeLayout *) nil_chk(self->relativeLayout_)) initAttachInfo];
 }
 
 void ASRootImpl_setupForInsets(ASRootImpl *self) {
@@ -1371,6 +1382,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
   ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
 }
 
+- (ADView *)inflateViewWithNSString:(NSString *)layout {
+  if (templates_ == nil) {
+    templates_ = new_JavaUtilHashMap_init();
+  }
+  id<ASIWidget> template_ = [templates_ getWithId:layout];
+  if (template_ == nil) {
+    template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
+    (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
+  }
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+}
+
+- (void)remeasure {
+  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+}
+
+- (void)removeFromParent {
+  [((id<ASHasWidgets>) nil_chk([this$0_ getParent])) removeWithASIWidget:this$0_];
+}
+
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation {
+  *IOSIntArray_GetRef(nil_chk(appScreenLocation), 0) = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  *IOSIntArray_GetRef(appScreenLocation, 1) = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+}
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame {
+  ((ADRect *) nil_chk(displayFrame))->left_ = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->top_ = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->right_ = displayFrame->left_ + [self getWidth];
+  displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
+}
+
 - (void)offsetTopAndBottomWithInt:(jint)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
@@ -1379,6 +1423,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
 - (void)offsetLeftAndRightWithInt:(jint)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
+}
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value {
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
 }
 
 - (void)setVisibilityWithInt:(jint)visibility {
@@ -1408,9 +1457,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 1, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 25, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 28, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1430,9 +1485,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
   methods[12].selector = @selector(initialized);
   methods[13].selector = @selector(getAttributeWithASWidgetAttribute:);
   methods[14].selector = @selector(drawableStateChanged);
-  methods[15].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[16].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[17].selector = @selector(setVisibilityWithInt:);
+  methods[15].selector = @selector(inflateViewWithNSString:);
+  methods[16].selector = @selector(remeasure);
+  methods[17].selector = @selector(removeFromParent);
+  methods[18].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[19].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[20].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[21].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[22].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[23].selector = @selector(setVisibilityWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASRootImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -1440,9 +1501,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 29, -1 },
   };
-  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASRootImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "offsetTopAndBottom", "offsetLeftAndRight", "setVisibility" };
-  static const J2ObjcClassInfo _ASRootImpl_RootExt = { "RootExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 18, 5, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASRootImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASRootImpl_RootExt = { "RootExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 24, 6, 3, -1, -1, -1, -1 };
   return &_ASRootImpl_RootExt;
 }
 

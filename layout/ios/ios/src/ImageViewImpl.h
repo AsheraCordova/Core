@@ -28,10 +28,11 @@
 #define INCLUDE_ASITarget 1
 #include "ITarget.h"
 
+@class ADImageView;
 @class ASImageViewImpl_ImageViewBean;
 @class ASImageViewImpl_ImageViewCommandBuilder;
-@class ASMeasurableImageView;
 @class ASWidgetAttribute;
+@class IOSClass;
 @class IOSIntArray;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
@@ -41,13 +42,18 @@
 @interface ASImageViewImpl : ASBaseWidget < ASIsImage, ASITarget > {
  @public
   id uiView_;
-  ASMeasurableImageView *measurableImageView_;
+  ADImageView *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (void)addForegroundIfNeeded;
 
@@ -94,6 +100,8 @@
 
 - (id)getPluginWithNSString:(NSString *)plugin;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
@@ -125,20 +133,14 @@
 
 - (void)setImageNativeWithId:(id)value;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 @end
 
 J2OBJC_STATIC_INIT(ASImageViewImpl)
 
 J2OBJC_FIELD_SETTER(ASImageViewImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASImageViewImpl, measurableImageView_, ASMeasurableImageView *)
+J2OBJC_FIELD_SETTER(ASImageViewImpl, measurableView_, ADImageView *)
 
 inline NSString *ASImageViewImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -155,6 +157,18 @@ FOUNDATION_EXPORT void ASImageViewImpl_init(ASImageViewImpl *self);
 FOUNDATION_EXPORT ASImageViewImpl *new_ASImageViewImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASImageViewImpl *create_ASImageViewImpl_init(void);
+
+FOUNDATION_EXPORT void ASImageViewImpl_initWithNSString_(ASImageViewImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASImageViewImpl *new_ASImageViewImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASImageViewImpl *create_ASImageViewImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASImageViewImpl_initWithNSString_withNSString_(ASImageViewImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASImageViewImpl *new_ASImageViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASImageViewImpl *create_ASImageViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl)
 
@@ -201,21 +215,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ScaleType)
 #if !defined (ASImageViewImpl_ImageViewExt_) && (INCLUDE_ALL_ImageViewImpl || defined(INCLUDE_ASImageViewImpl_ImageViewExt))
 #define ASImageViewImpl_ImageViewExt_
 
-#define RESTRICT_MeasurableImageView 1
-#define INCLUDE_ASMeasurableImageView 1
-#include "MeasurableImageView.h"
+#define RESTRICT_ImageView 1
+#define INCLUDE_ADImageView 1
+#include "ImageView.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
+@class ADRect;
+@class ADView;
 @class ASImageViewImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASImageViewImpl_ImageViewExt : ASMeasurableImageView < ASILifeCycleDecorator >
+@interface ASImageViewImpl_ImageViewExt : ADImageView < ASILifeCycleDecorator >
 
 #pragma mark Public
 
@@ -228,7 +245,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ScaleType)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -241,9 +264,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ScaleType)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -487,7 +517,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASImageViewImpl_ImageViewCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASImageViewImpl_ImageViewCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 

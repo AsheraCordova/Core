@@ -22,10 +22,17 @@
 
 - (instancetype)init;
 
++ (jboolean)isTagEnabledWithLong:(jlong)traceTag;
+
 + (void)traceBeginWithInt:(jint)traceTagView
              withNSString:(NSString *)string;
 
++ (void)traceBeginWithLong:(jlong)traceTag
+              withNSString:(NSString *)traceName;
+
 + (void)traceEndWithInt:(jint)traceTagView;
+
++ (void)traceEndWithLong:(jlong)traceTag;
 
 @end
 
@@ -44,6 +51,12 @@ FOUNDATION_EXPORT ADTrace *create_ADTrace_init(void);
 FOUNDATION_EXPORT void ADTrace_traceBeginWithInt_withNSString_(jint traceTagView, NSString *string);
 
 FOUNDATION_EXPORT void ADTrace_traceEndWithInt_(jint traceTagView);
+
+FOUNDATION_EXPORT jboolean ADTrace_isTagEnabledWithLong_(jlong traceTag);
+
+FOUNDATION_EXPORT void ADTrace_traceBeginWithLong_withNSString_(jlong traceTag, NSString *traceName);
+
+FOUNDATION_EXPORT void ADTrace_traceEndWithLong_(jlong traceTag);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTrace)
 

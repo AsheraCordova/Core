@@ -49,7 +49,7 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 	public final static String GROUP_NAME = "Spinner";
 
 	protected @Property Object uiView;
-	protected MeasurableTextView measurableTextView;		
+	protected r.android.widget.Spinner measurableView;		
 	
 		@SuppressLint("NewApi")
 		final static class DrawableTintMode extends AbstractEnumToIntConverter{
@@ -127,10 +127,6 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosAllowsEditingTextAttributes").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosBackground").withType("image"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosDisabledBackground").withType("image"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("int"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHint").withType("colorstate").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onItemSelected").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionTextPath").withType("string").withOrder(-1));
@@ -165,14 +161,24 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHint").withType("colorstate").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 	}
 	
 	public SpinnerImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  SpinnerImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  SpinnerImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 @com.google.j2objc.annotations.WeakOuter		
-	public class SpinnerExt extends MeasurableTextView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
+	public class SpinnerExt extends r.android.widget.Spinner implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 		private int mMaxWidth = -1;
@@ -195,12 +201,7 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 		}
 
 		public SpinnerExt() {
-			
-			
-			
 			super(SpinnerImpl.this);
-			
-			
 			
 		}
 		
@@ -288,7 +289,44 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(SpinnerImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(SpinnerImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	SpinnerImpl.this.getParent().remove(SpinnerImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -298,27 +336,40 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			SpinnerImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ViewImpl.nativeSetVisibility(asNativeWidget(), visibility != View.VISIBLE);
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((SpinnerExt) measurableTextView).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+	}	@Override
+	public Class getViewClass() {
+		return SpinnerExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new SpinnerImpl();
+		return new SpinnerImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableTextView = new SpinnerExt();
+		measurableView = new SpinnerExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 		setWidgetOnNativeClass();
@@ -434,46 +485,6 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 
 
 		setDisabledBackground(nativeWidget, objValue);
-
-
-
-			}
-			break;
-			case "selection": {
-				
-
-
-		setSelection(objValue);
-
-
-
-			}
-			break;
-			case "gravity": {
-				
-
-
-		setGravity(objValue);
-
-
-
-			}
-			break;
-			case "textSize": {
-				
-
-
-		setMyTextSize(objValue);
-
-
-
-			}
-			break;
-			case "textColorHint": {
-				
-
-
-		 setHintColor(objValue);
 
 
 
@@ -789,6 +800,46 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 
 			}
 			break;
+			case "selection": {
+				
+
+
+		setSelection(objValue);
+
+
+
+			}
+			break;
+			case "gravity": {
+				
+
+
+		setGravity(objValue);
+
+
+
+			}
+			break;
+			case "textSize": {
+				
+
+
+		setMyTextSize(objValue);
+
+
+
+			}
+			break;
+			case "textColorHint": {
+				
+
+
+		 setHintColor(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -827,10 +878,6 @@ return getAllowsEditingTextAttributes();				}
 return getBackground();				}
 			case "iosDisabledBackground": {
 return getDisabledBackground();				}
-			case "gravity": {
-return getGravity();				}
-			case "textSize": {
-return getTextSize();				}
 			case "selectedValue": {
 return getSelectedValue();				}
 			case "paddingBottom": {
@@ -849,6 +896,10 @@ return getPaddingTop();				}
 return this.getDrawablePadding();				}
 			case "textColor": {
 return getTextColorState();				}
+			case "gravity": {
+return getGravity();				}
+			case "textSize": {
+return getTextSize();				}
 		}
 		
 		return null;
@@ -856,14 +907,14 @@ return getTextColorState();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableTextView;
+		return measurableView;
 	}
 
 	
 
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableTextView.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -886,11 +937,11 @@ return getTextColorState();				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableTextView.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableTextView.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableTextView.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -936,7 +987,7 @@ return getTextColorState();				}
     
 	
 	private Object getGravity() {
-		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableTextView.getVerticalAligment();
+		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableView.getVerticalAligment();
 		if (verticalAligment == null) {
 			verticalAligment = com.ashera.view.BaseMeasurableView.VerticalAligment.top;
 		}
@@ -975,7 +1026,7 @@ return getTextColorState();				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableTextView.getRawTextAlignment() != 0 || measurableTextView.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -1161,18 +1212,18 @@ return getTextColorState();				}
 
 
 	private void setVerticalAligmentCenter() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 		nativeSetVerticalAligmentCenter();
 	}
 
 
 	private void setVerticalAligmentBottom() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 		nativeSetVerticalAligmentBottom();
 	}
 
 	private void setVerticalAligmentTop() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 		nativeSetVerticalAligmentTop();
 	}
 
@@ -1222,16 +1273,16 @@ return getTextColorState();				}
 
 
 	private void setDrawablePadding(Object objValue) {
-		measurableTextView.setDrawablePadding((int) objValue);
+		measurableView.setDrawablePadding((int) objValue);
 		updatePadding();
 	}
 
 	private void setDrawableBottom(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setBottomDrawable(null);
+			measurableView.setBottomDrawable(null);
 			applyAttributeCommand("drawableBottom", "drawDrawableIcon", new String[] {}, false, "bottom");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setBottomDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setBottomDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("drawableBottom", "drawDrawableIcon", new String[] {}, true, "bottom");
 			updatePadding();
 		}
@@ -1239,10 +1290,10 @@ return getTextColorState();				}
 
 	private void setDrawableTop(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setTopDrawable(null);
+			measurableView.setTopDrawable(null);
 			applyAttributeCommand("drawableTop", "drawDrawableIcon", new String[] {}, false, "top");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setTopDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setTopDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("drawableTop", "drawDrawableIcon", new String[] {}, true, "top");
 			updatePadding();
 		}
@@ -1258,10 +1309,10 @@ return getTextColorState();				}
 
 	private void setDrawableRightInternal(String originalAttr, Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setRightDrawable(null);
+			measurableView.setRightDrawable(null);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, false, "right");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setRightDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setRightDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, true, "right");
 			updatePadding();
 		}		
@@ -1279,10 +1330,10 @@ return getTextColorState();				}
 
 	private void setDrawableLeftInternal(String originalAttr, Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setLeftDrawable(null);
+			measurableView.setLeftDrawable(null);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, false, "left");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, true, "left");
 			updatePadding();
 		}
@@ -1307,23 +1358,23 @@ return getTextColorState();				}
 	]-*/;
 
 	private Object getDrawablePadding() {
-		return measurableTextView.getDrawablePadding();
+		return measurableView.getDrawablePadding();
 	}
 
 	private void setDrawableTintMode(Object value) {
-		if (measurableTextView.getLeftDrawable() != null) {
+		if (measurableView.getLeftDrawable() != null) {
 			applyAttributeCommand("drawableStart", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 			applyAttributeCommand("drawableLeft", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
-		if (measurableTextView.getRightDrawable() != null) {
+		if (measurableView.getRightDrawable() != null) {
 			applyAttributeCommand("drawableRight", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 			applyAttributeCommand("drawableEnd", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
 		
-		if (measurableTextView.getTopDrawable() != null) {
+		if (measurableView.getTopDrawable() != null) {
 			applyAttributeCommand("drawableTop", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
-		if (measurableTextView.getBottomDrawable() != null) {
+		if (measurableView.getBottomDrawable() != null) {
 			applyAttributeCommand("drawableBottom", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
 	}
@@ -1332,21 +1383,21 @@ return getTextColorState();				}
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
 			this.drawableTint = colorStateList;
-			objValue = drawableTint.getColorForState(measurableTextView.getDrawableState(), r.android.graphics.Color.RED);
+			objValue = drawableTint.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
 		}
 		
-		if (measurableTextView.getLeftDrawable() != null) {
+		if (measurableView.getLeftDrawable() != null) {
 			applyAttributeCommand("drawableLeft", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 			applyAttributeCommand("drawableStart", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableTextView.getRightDrawable() != null) {
+		if (measurableView.getRightDrawable() != null) {
 			applyAttributeCommand("drawableRight", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));			
 			applyAttributeCommand("drawableEnd", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableTextView.getTopDrawable() != null) {
+		if (measurableView.getTopDrawable() != null) {
 			applyAttributeCommand("drawableTop", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableTextView.getBottomDrawable() != null) {
+		if (measurableView.getBottomDrawable() != null) {
 			applyAttributeCommand("drawableBottom", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
 	}
@@ -1357,15 +1408,15 @@ return getTextColorState();				}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setTextColor(colorStateList);
-			objValue = measurableTextView.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		
 		setTextColor(uiView, ViewImpl.getColor(objValue));
 	}
 	
 	private Object getTextColorState() {
-		return measurableTextView.getTextColors();
+		return measurableView.getTextColors();
 	}
 	
 
@@ -1373,17 +1424,17 @@ return getTextColorState();				}
 	@Override
 	public void drawableStateChanged() {
 		super.drawableStateChanged();
-		drawableStateChange("bottom", measurableTextView.getBottomDrawable());
-		drawableStateChange("left", measurableTextView.getLeftDrawable());
-		drawableStateChange("right", measurableTextView.getRightDrawable());
-		drawableStateChange("top", measurableTextView.getTopDrawable());
+		drawableStateChange("bottom", measurableView.getBottomDrawable());
+		drawableStateChange("left", measurableView.getLeftDrawable());
+		drawableStateChange("right", measurableView.getRightDrawable());
+		drawableStateChange("top", measurableView.getTopDrawable());
 		
-		if (measurableTextView.getTextColors() != null && measurableTextView.getTextColors().isStateful()) {
-			setTextColor(measurableTextView.getCurrentTextColor());
+		if (measurableView.getTextColors() != null && measurableView.getTextColors().isStateful()) {
+			setTextColor(measurableView.getCurrentTextColor());
 		}
 		
-		if (measurableTextView.getHintTextColors() != null && measurableTextView.getHintTextColors().isStateful()) {
-			setHintColor(measurableTextView.getCurrentHintTextColor());
+		if (measurableView.getHintTextColors() != null && measurableView.getHintTextColors().isStateful()) {
+			setHintColor(measurableView.getCurrentHintTextColor());
 			syncPlaceholderLabel();
 		}
 		
@@ -1392,13 +1443,13 @@ return getTextColorState();				}
 			invalidate();
 		}
 		
-		if (measurableTextView.getLinkTextColors() != null && measurableTextView.getLinkTextColors().isStateful()) {
-			setTextColorLink(measurableTextView.getLinkTextColors());
+		if (measurableView.getLinkTextColors() != null && measurableView.getLinkTextColors().isStateful()) {
+			setTextColorLink(measurableView.getLinkTextColors());
 		}
 	}
 
 	private void drawableStateChange(String type, r.android.graphics.drawable.Drawable dr) {
-		final int[] state = measurableTextView.getDrawableState();
+		final int[] state = measurableView.getDrawableState();
 
 		if (dr != null && dr.isStateful() && dr.setState(state)) {
 			switch (type) {
@@ -1561,13 +1612,13 @@ return getTextColorState();				}
 
 	@Override
 	public int measureWidth() {
-		int width = measurableTextView.nativeMeasureWidth(uiView);
+		int width = measurableView.nativeMeasureWidth(uiView);
 		return width;
 	}
 	
 	@Override
 	public int measureHeight(int width) {
-		int height = measurableTextView.nativeMeasureHeight(uiView, width);
+		int height = measurableView.nativeMeasureHeight(uiView, width);
 		return height;
 	}
 	
@@ -1591,8 +1642,8 @@ return getTextColorState();				}
 	private void setHintColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setHintTextColor(colorStateList);
-			objValue = measurableTextView.getCurrentHintTextColor();
+			measurableView.setHintTextColor(colorStateList);
+			objValue = measurableView.getCurrentHintTextColor();
 		}
 
 		nativeSetHintColor(ViewImpl.getColor(objValue));
@@ -1874,10 +1925,14 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(AdapterView<?>
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableTextView.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -2142,60 +2197,6 @@ public Object getIosDisabledBackground() {
 }
 public SpinnerCommandBuilder setIosDisabledBackground(String value) {
 	Map<String, Object> attrs = initCommand("iosDisabledBackground");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setSelection(int value) {
-	Map<String, Object> attrs = initCommand("selection");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder tryGetGravity() {
-	Map<String, Object> attrs = initCommand("gravity");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getGravity() {
-	Map<String, Object> attrs = initCommand("gravity");
-	return attrs.get("commandReturnValue");
-}
-public SpinnerCommandBuilder setGravity(String value) {
-	Map<String, Object> attrs = initCommand("gravity");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder tryGetTextSize() {
-	Map<String, Object> attrs = initCommand("textSize");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getTextSize() {
-	Map<String, Object> attrs = initCommand("textSize");
-	return attrs.get("commandReturnValue");
-}
-public SpinnerCommandBuilder setTextSize(String value) {
-	Map<String, Object> attrs = initCommand("textSize");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setTextColorHint(String value) {
-	Map<String, Object> attrs = initCommand("textColorHint");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -2549,6 +2550,60 @@ public SpinnerCommandBuilder setEnabled(boolean value) {
 
 	attrs.put("value", value);
 return this;}
+public SpinnerCommandBuilder setSelection(int value) {
+	Map<String, Object> attrs = initCommand("selection");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder tryGetGravity() {
+	Map<String, Object> attrs = initCommand("gravity");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getGravity() {
+	Map<String, Object> attrs = initCommand("gravity");
+	return attrs.get("commandReturnValue");
+}
+public SpinnerCommandBuilder setGravity(String value) {
+	Map<String, Object> attrs = initCommand("gravity");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder tryGetTextSize() {
+	Map<String, Object> attrs = initCommand("textSize");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getTextSize() {
+	Map<String, Object> attrs = initCommand("textSize");
+	return attrs.get("commandReturnValue");
+}
+public SpinnerCommandBuilder setTextSize(String value) {
+	Map<String, Object> attrs = initCommand("textSize");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setTextColorHint(String value) {
+	Map<String, Object> attrs = initCommand("textColorHint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class SpinnerBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public SpinnerBean() {
@@ -2632,28 +2687,6 @@ public Object getIosDisabledBackground() {
 }
 public void setIosDisabledBackground(String value) {
 	getBuilder().reset().setIosDisabledBackground(value).execute(true);
-}
-
-public void setSelection(int value) {
-	getBuilder().reset().setSelection(value).execute(true);
-}
-
-public Object getGravity() {
-	return getBuilder().reset().tryGetGravity().execute(false).getGravity(); 
-}
-public void setGravity(String value) {
-	getBuilder().reset().setGravity(value).execute(true);
-}
-
-public Object getTextSize() {
-	return getBuilder().reset().tryGetTextSize().execute(false).getTextSize(); 
-}
-public void setTextSize(String value) {
-	getBuilder().reset().setTextSize(value).execute(true);
-}
-
-public void setTextColorHint(String value) {
-	getBuilder().reset().setTextColorHint(value).execute(true);
 }
 
 public void setEntries(String value) {
@@ -2807,6 +2840,28 @@ public void setEnabled(boolean value) {
 	getBuilder().reset().setEnabled(value).execute(true);
 }
 
+public void setSelection(int value) {
+	getBuilder().reset().setSelection(value).execute(true);
+}
+
+public Object getGravity() {
+	return getBuilder().reset().tryGetGravity().execute(false).getGravity(); 
+}
+public void setGravity(String value) {
+	getBuilder().reset().setGravity(value).execute(true);
+}
+
+public Object getTextSize() {
+	return getBuilder().reset().tryGetTextSize().execute(false).getTextSize(); 
+}
+public void setTextSize(String value) {
+	getBuilder().reset().setTextSize(value).execute(true);
+}
+
+public void setTextColorHint(String value) {
+	getBuilder().reset().setTextColorHint(value).execute(true);
+}
+
 }
 
 
@@ -2870,7 +2925,7 @@ public void setEnabled(boolean value) {
 	
 	private void triggerOnSelect(int selectedIndex) {
 		if (onItemSelectedListener != null) {
-			onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableTextView, selectedIndex, 0);
+			onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableView, selectedIndex, 0);
 		}
 	}
 
@@ -2908,7 +2963,7 @@ public void setEnabled(boolean value) {
 
 	@Override
 	public boolean isViewVisible() {
-		return measurableTextView.getVisibility() == View.VISIBLE;
+		return measurableView.getVisibility() == View.VISIBLE;
 		}
 
 	@Override

@@ -29,6 +29,7 @@
 @class ASRadioGroupImpl_RadioGroupCommandParamsBuilder;
 @class ASRadioGroupImpl_RadioGroupParamsBean;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -78,6 +79,8 @@
 
 - (NSString *)getTextEntered;
 
+- (IOSClass *)getViewClass;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
 - (void)invalidate;
@@ -110,10 +113,9 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)showErrorWithNSString:(NSString *)message;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)showErrorWithNSString:(NSString *)message;
 
 @end
 
@@ -240,8 +242,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_Divider)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADRect;
+@class ADView;
 @class ASRadioGroupImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
@@ -259,11 +264,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_Divider)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -276,6 +287,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_Divider)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -283,6 +298,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_Divider)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -519,6 +537,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setMinWidthWithNSString:(NSString *)arg0;
 
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setModelDescPathWithNSString:(NSString *)arg0;
+
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setModelForWithNSString:(NSString *)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setModelIdPathWithNSString:(NSString *)arg0;
@@ -549,9 +569,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOrientationWithNSString:(NSString *)value;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setPaddingBottomWithNSString:(NSString *)arg0;
 
@@ -744,6 +768,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetMinHeight;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetMinWidth;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetModelDescPath;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetModelIdPath;
 

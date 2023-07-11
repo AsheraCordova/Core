@@ -44,8 +44,6 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
-
-
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -77,6 +75,8 @@ export class TextStyleTransformer implements ITranform {
 
 
 
+
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class SpinnerImpl<T> extends ViewImpl<T>{
@@ -84,12 +84,6 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 	static initialize() {
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "selection" })
-	selection!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hint" })
-	hint!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "entries" })
 	entries!:CommandAttr<string>| undefined;
@@ -159,14 +153,18 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "editable" })
 	editable!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "selection" })
+	selection!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "hint" })
+	hint!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
-		this.selection = undefined;
-		this.hint = undefined;
 		this.entries = undefined;
 		this.onItemSelected = undefined;
 		this.modelOptionTextPath = undefined;
@@ -190,6 +188,8 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 		this.fontFamily = undefined;
 		this.enabled = undefined;
 		this.editable = undefined;
+		this.selection = undefined;
+		this.hint = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -197,52 +197,6 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
-
-	public setSelection(value : number) : T {
-		this.resetIfRequired();
-		if (this.selection == null || this.selection == undefined) {
-			this.selection = new CommandAttr<number>();
-		}
-		
-		this.selection.setSetter(true);
-		this.selection.setValue(value);
-		this.orderSet++;
-		this.selection.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetHint() : T {
-		this.resetIfRequired();
-		if (this.hint == null || this.hint == undefined) {
-			this.hint = new CommandAttr<string>()
-		}
-		
-		this.hint.setGetter(true);
-		this.orderGet++;
-		this.hint.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getHint() : string {
-		if (this.hint == null || this.hint == undefined) {
-			this.hint = new CommandAttr<string>();
-		}
-		return this.hint.getCommandReturnValue();
-	}
-	public setHint(value : string) : T {
-		this.resetIfRequired();
-		if (this.hint == null || this.hint == undefined) {
-			this.hint = new CommandAttr<string>();
-		}
-		
-		this.hint.setSetter(true);
-		this.hint.setValue(value);
-		this.orderSet++;
-		this.hint.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
 
 	public setEntries(value : string) : T {
 		this.resetIfRequired();
@@ -724,6 +678,52 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.editable.setValue(value);
 		this.orderSet++;
 		this.editable.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSelection(value : number) : T {
+		this.resetIfRequired();
+		if (this.selection == null || this.selection == undefined) {
+			this.selection = new CommandAttr<number>();
+		}
+		
+		this.selection.setSetter(true);
+		this.selection.setValue(value);
+		this.orderSet++;
+		this.selection.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetHint() : T {
+		this.resetIfRequired();
+		if (this.hint == null || this.hint == undefined) {
+			this.hint = new CommandAttr<string>()
+		}
+		
+		this.hint.setGetter(true);
+		this.orderGet++;
+		this.hint.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getHint() : string {
+		if (this.hint == null || this.hint == undefined) {
+			this.hint = new CommandAttr<string>();
+		}
+		return this.hint.getCommandReturnValue();
+	}
+	public setHint(value : string) : T {
+		this.resetIfRequired();
+		if (this.hint == null || this.hint == undefined) {
+			this.hint = new CommandAttr<string>();
+		}
+		
+		this.hint.setSetter(true);
+		this.hint.setValue(value);
+		this.orderSet++;
+		this.hint.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

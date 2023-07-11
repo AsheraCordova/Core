@@ -121,6 +121,9 @@
                                        withNSString:(NSString *)localName
                                        withNSString:(NSString *)key;
 
+- (id)getAttributeWithNSString:(NSString *)attributeName
+                   withBoolean:(jboolean)skipConvert;
+
 - (id<ASAttributeCommand>)getAttributeCommandWithNSString:(NSString *)sourceName
                                              withNSString:(NSString *)commandName
                                         withNSObjectArray:(IOSObjectArray *)args;
@@ -225,6 +228,9 @@
 
 - (void)invalidate;
 
+- (id)invokeMethodWithNSString:(NSString *)methodName
+             withNSObjectArray:(IOSObjectArray *)args;
+
 + (id)invokePrivateMethodUsingReflectionWithId:(id)obj
                                   withNSString:(NSString *)methodName
                              withNSObjectArray:(IOSObjectArray *)params;
@@ -288,9 +294,9 @@
                       withNSString:(NSString *)commandFilterRegex
                  withNSObjectArray:(IOSObjectArray *)args;
 
-- (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
-                                   withId:(id)objValue
-                              withBoolean:(jboolean)skipConvert;
+- (void)setAttributeWithNSString:(NSString *)key
+                          withId:(id)objValue
+                     withBoolean:(jboolean)skipConvert;
 
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
                              withNSString:(NSString *)strValue
@@ -446,6 +452,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseWidget)
 
 @class ASBaseWidget;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -470,6 +477,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseWidget)
 - (NSString *)getGroupName;
 
 - (NSString *)getLocalName;
+
+- (IOSClass *)getViewClass;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 

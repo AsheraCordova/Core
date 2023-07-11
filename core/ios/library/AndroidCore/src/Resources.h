@@ -68,14 +68,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADResources)
 #if !defined (ADResources_NotFoundException_) && (INCLUDE_ALL_Resources || defined(INCLUDE_ADResources_NotFoundException))
 #define ADResources_NotFoundException_
 
-#define RESTRICT_JavaLangException 1
-#define INCLUDE_JavaLangException 1
-#include "java/lang/Exception.h"
+#define RESTRICT_JavaLangRuntimeException 1
+#define INCLUDE_JavaLangRuntimeException 1
+#include "java/lang/RuntimeException.h"
 
 @class ADResources;
 @class JavaLangThrowable;
 
-@interface ADResources_NotFoundException : JavaLangException
+@interface ADResources_NotFoundException : JavaLangRuntimeException
 
 #pragma mark Public
 

@@ -64,7 +64,7 @@ public class TableLayoutImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new TableLayoutImpl();
+		return new TableLayoutImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -87,7 +87,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		tableLayout.removeView((View) w.asWidget());
 		return remove;
@@ -224,11 +224,6 @@ return layoutParams.weight;			}
 		public TableLayoutExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -340,12 +335,11 @@ return layoutParams.weight;			}
         	ViewImpl.drawableStateChanged(TableLayoutImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((TableLayoutExt) tableLayout).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return TableLayoutExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {

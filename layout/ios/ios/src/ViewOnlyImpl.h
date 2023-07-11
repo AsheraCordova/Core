@@ -24,6 +24,7 @@
 @class ASViewOnlyImpl_ViewOnlyBean;
 @class ASViewOnlyImpl_ViewOnlyCommandBuilder;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -32,13 +33,18 @@
 @interface ASViewOnlyImpl : ASBaseWidget {
  @public
   id uiView_;
-  ADFrameLayout *frameLayout_;
+  ADFrameLayout *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -60,6 +66,8 @@
 
 - (id)getPluginWithNSString:(NSString *)plugin;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
@@ -75,20 +83,14 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASViewOnlyImpl)
 
 J2OBJC_FIELD_SETTER(ASViewOnlyImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASViewOnlyImpl, frameLayout_, ADFrameLayout *)
+J2OBJC_FIELD_SETTER(ASViewOnlyImpl, measurableView_, ADFrameLayout *)
 
 inline NSString *ASViewOnlyImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -105,6 +107,18 @@ FOUNDATION_EXPORT void ASViewOnlyImpl_init(ASViewOnlyImpl *self);
 FOUNDATION_EXPORT ASViewOnlyImpl *new_ASViewOnlyImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASViewOnlyImpl *create_ASViewOnlyImpl_init(void);
+
+FOUNDATION_EXPORT void ASViewOnlyImpl_initWithNSString_(ASViewOnlyImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASViewOnlyImpl *new_ASViewOnlyImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASViewOnlyImpl *create_ASViewOnlyImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASViewOnlyImpl_initWithNSString_withNSString_(ASViewOnlyImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASViewOnlyImpl *new_ASViewOnlyImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASViewOnlyImpl *create_ASViewOnlyImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl)
 
@@ -127,8 +141,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADRect;
+@class ADView;
 @class ASViewOnlyImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
@@ -146,11 +163,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -163,6 +186,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -170,6 +197,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -369,7 +399,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl_ViewOnlyExt)
 
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 

@@ -25,11 +25,27 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADTrace_traceEndWithInt_(traceTagView);
 }
 
++ (jboolean)isTagEnabledWithLong:(jlong)traceTag {
+  return ADTrace_isTagEnabledWithLong_(traceTag);
+}
+
++ (void)traceBeginWithLong:(jlong)traceTag
+              withNSString:(NSString *)traceName {
+  ADTrace_traceBeginWithLong_withNSString_(traceTag, traceName);
+}
+
++ (void)traceEndWithLong:(jlong)traceTag {
+  ADTrace_traceEndWithLong_(traceTag);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 0, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 0, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 2, 5, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -37,12 +53,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(traceBeginWithInt:withNSString:);
   methods[2].selector = @selector(traceEndWithInt:);
+  methods[3].selector = @selector(isTagEnabledWithLong:);
+  methods[4].selector = @selector(traceBeginWithLong:withNSString:);
+  methods[5].selector = @selector(traceEndWithLong:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "TRACE_TAG_VIEW", "I", .constantValue.asInt = ADTrace_TRACE_TAG_VIEW, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "traceBegin", "ILNSString;", "traceEnd", "I" };
-  static const J2ObjcClassInfo _ADTrace = { "Trace", "r.android.os", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "traceBegin", "ILNSString;", "traceEnd", "I", "isTagEnabled", "J", "JLNSString;" };
+  static const J2ObjcClassInfo _ADTrace = { "Trace", "r.android.os", ptrTable, methods, fields, 7, 0x1, 6, 1, -1, -1, -1, -1, -1 };
   return &_ADTrace;
 }
 
@@ -65,6 +84,19 @@ void ADTrace_traceBeginWithInt_withNSString_(jint traceTagView, NSString *string
 }
 
 void ADTrace_traceEndWithInt_(jint traceTagView) {
+  ADTrace_initialize();
+}
+
+jboolean ADTrace_isTagEnabledWithLong_(jlong traceTag) {
+  ADTrace_initialize();
+  return false;
+}
+
+void ADTrace_traceBeginWithLong_withNSString_(jlong traceTag, NSString *traceName) {
+  ADTrace_initialize();
+}
+
+void ADTrace_traceEndWithLong_(jlong traceTag) {
   ADTrace_initialize();
 }
 

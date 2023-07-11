@@ -21,6 +21,7 @@
 #include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Runnable.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
@@ -304,6 +305,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASPluginInvoker_runOnMainThreadWithJavaLangRunnable_(runnable);
 }
 
++ (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
+                                           withLong:(jlong)delay {
+  ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(runnable, delay);
+}
+
 + (void)registerFontWithNSString:(NSString *)fontFamily
                     withNSString:(NSString *)src
                     withNSString:(NSString *)fontStyle
@@ -373,7 +379,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "I", 0x9, 76, 17, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x9, 77, 78, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 79, 80, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 81, 82, -1, 83, -1, -1 },
+    { NULL, "V", 0x9, 81, 82, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 83, 84, -1, 85, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -437,10 +444,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[56].selector = @selector(getMaxMemoryWithId:);
   methods[57].selector = @selector(decodeBitmapStreamWithJavaIoInputStream:withId:);
   methods[58].selector = @selector(runOnMainThreadWithJavaLangRunnable:);
-  methods[59].selector = @selector(registerFontWithNSString:withNSString:withNSString:withNSString:withJavaUtilMap:);
+  methods[59].selector = @selector(enqueueTaskForEventLoopWithJavaLangRunnable:withLong:);
+  methods[60].selector = @selector(registerFontWithNSString:withNSString:withNSString:withNSString:withJavaUtilMap:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "convertFrom", "LASIConverter;LJavaUtilMap;LNSObject;LASIFragment;", "(Lcom/ashera/converter/IConverter;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/Object;Lcom/ashera/core/IFragment;)Ljava/lang/Object;", "convertTo", "LASIConverter;LNSObject;LASIFragment;", "getConverter", "LNSString;", "getDependentAttributes", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/List<Ljava/lang/String;>;", "getColor", "convertDpToPixel", "convertSpToPixel", "convertPixelToDp", "LNSObject;Z", "convertPixelToSp", "getMap", "LNSObject;", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getNativeMap", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "putJSONSafeObjectIntoMap", "LJavaUtilMap;LNSString;LNSObject;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/Object;)V", "getArray", "getList", "(Ljava/lang/Object;)Ljava/util/List<Ljava/lang/Object;>;", "isBoolean", "getBoolean", "getString", "getInt", "getFloat", "getDouble", "marshal", "toJsonTree", "unmarshal", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getJSONSafeObj", "navigate", "LNSString;LNSString;LNSObject;LASIFragment;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "postDelayed", "LJavaLangRunnable;I", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "registerFont", "LNSString;LNSString;LNSString;LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V" };
-  static const J2ObjcClassInfo _ASPluginInvoker = { "PluginInvoker", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x1, 60, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "convertFrom", "LASIConverter;LJavaUtilMap;LNSObject;LASIFragment;", "(Lcom/ashera/converter/IConverter;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/Object;Lcom/ashera/core/IFragment;)Ljava/lang/Object;", "convertTo", "LASIConverter;LNSObject;LASIFragment;", "getConverter", "LNSString;", "getDependentAttributes", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/List<Ljava/lang/String;>;", "getColor", "convertDpToPixel", "convertSpToPixel", "convertPixelToDp", "LNSObject;Z", "convertPixelToSp", "getMap", "LNSObject;", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getNativeMap", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "putJSONSafeObjectIntoMap", "LJavaUtilMap;LNSString;LNSObject;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/Object;)V", "getArray", "getList", "(Ljava/lang/Object;)Ljava/util/List<Ljava/lang/Object;>;", "isBoolean", "getBoolean", "getString", "getInt", "getFloat", "getDouble", "marshal", "toJsonTree", "unmarshal", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getJSONSafeObj", "navigate", "LNSString;LNSString;LNSObject;LASIFragment;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "postDelayed", "LJavaLangRunnable;I", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "enqueueTaskForEventLoop", "LJavaLangRunnable;J", "registerFont", "LNSString;LNSString;LNSString;LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V" };
+  static const J2ObjcClassInfo _ASPluginInvoker = { "PluginInvoker", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x1, 61, 0, -1, -1, -1, -1, -1 };
   return &_ASPluginInvoker;
 }
 
@@ -804,6 +812,12 @@ void ASPluginInvoker_runOnMainThreadWithJavaLangRunnable_(id<JavaLangRunnable> r
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"runOnMainThread" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ runnable } count:1 type:NSObject_class_()]];
+}
+
+void ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(id<JavaLangRunnable> runnable, jlong delay) {
+  ASPluginInvoker_initialize();
+  id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
+  [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"enqueueTaskForEventLoop" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ runnable, JavaLangLong_valueOfWithLong_(delay) } count:2 type:NSObject_class_()]];
 }
 
 void ASPluginInvoker_registerFontWithNSString_withNSString_withNSString_withNSString_withJavaUtilMap_(NSString *fontFamily, NSString *src, NSString *fontStyle, NSString *fontWeight, id<JavaUtilMap> metadata) {

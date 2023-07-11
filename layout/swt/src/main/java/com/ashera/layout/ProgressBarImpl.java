@@ -41,7 +41,7 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 	public final static String GROUP_NAME = "ProgressBar";
 
 	protected org.eclipse.swt.widgets.Composite composite;
-	protected MeasurableView measurableView;	
+	protected r.android.widget.ProgressBar measurableView;	
 	
 	
 	@Override
@@ -49,10 +49,6 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 		ViewImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("max").withType("int"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("min").withType("int"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progress").withType("int"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("incrementProgressBy").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("padding").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingBottom").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingRight").withType("dimension"));
@@ -62,15 +58,25 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("max").withType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("min").withType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progress").withType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("incrementProgressBy").withType("int"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("indeterminate").withType("boolean"));
 	}
 	
 	public ProgressBarImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ProgressBarImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ProgressBarImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class ProgressBarExt extends MeasurableView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
+	public class ProgressBarExt extends r.android.widget.ProgressBar implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 		private int mMaxWidth = -1;
@@ -93,13 +99,8 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 		}
 
 		public ProgressBarExt() {
-			
-			
-			
-			
-			
-			
 			super(ProgressBarImpl.this);
+			
 		}
 		
 		@Override
@@ -187,7 +188,46 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ProgressBarImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(ProgressBarImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	ProgressBarImpl.this.getParent().remove(ProgressBarImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) asNativeWidget();
+			appScreenLocation[0] = control.toDisplay(0, 0).x;
+        	appScreenLocation[1] = control.toDisplay(0, 0).y;
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	org.eclipse.swt.widgets.Shell shell = ((org.eclipse.swt.widgets.Control)asNativeWidget()).getShell();
+        	displayFrame.left = shell.toDisplay(0, 0).x ;
+			displayFrame.top = shell.getShell().toDisplay(0, 0).y ;
+        	displayFrame.bottom = displayFrame.top + shell.getClientArea().height;
+        	displayFrame.right = displayFrame.left + shell.getBounds().width;
+        	
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -197,20 +237,33 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			ProgressBarImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((ProgressBarExt) measurableView).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+	}	@Override
+	public Class getViewClass() {
+		return ProgressBarExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ProgressBarImpl();
+		return new ProgressBarImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -229,46 +282,6 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 		ViewImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "max": {
-				
-
-
-		setMax(objValue);
-
-
-
-			}
-			break;
-			case "min": {
-				
-
-
-		setMin(objValue);
-
-
-
-			}
-			break;
-			case "progress": {
-				
-
-
-		setProgress(objValue);
-
-
-
-			}
-			break;
-			case "incrementProgressBy": {
-				
-
-
-		incrementProgressBy(objValue);
-
-
-
-			}
-			break;
 			case "padding": {
 				
 
@@ -354,6 +367,46 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 
 
 		setPaddingVertical(objValue);
+
+
+
+			}
+			break;
+			case "max": {
+				
+
+
+		setMax(objValue);
+
+
+
+			}
+			break;
+			case "min": {
+				
+
+
+		setMin(objValue);
+
+
+
+			}
+			break;
+			case "progress": {
+				
+
+
+		setProgress(objValue);
+
+
+
+			}
+			break;
+			case "incrementProgressBy": {
+				
+
+
+		incrementProgressBy(objValue);
 
 
 
@@ -545,38 +598,6 @@ public  class ProgressBarCommandBuilder extends com.ashera.layout.ViewImpl.ViewC
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public ProgressBarCommandBuilder setMax(int value) {
-	Map<String, Object> attrs = initCommand("max");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ProgressBarCommandBuilder setMin(int value) {
-	Map<String, Object> attrs = initCommand("min");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ProgressBarCommandBuilder setProgress(int value) {
-	Map<String, Object> attrs = initCommand("progress");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ProgressBarCommandBuilder incrementProgressBy(int value) {
-	Map<String, Object> attrs = initCommand("incrementProgressBy");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public ProgressBarCommandBuilder setPadding(String value) {
 	Map<String, Object> attrs = initCommand("padding");
 	attrs.put("type", "attribute");
@@ -715,27 +736,43 @@ public ProgressBarCommandBuilder setPaddingVertical(String value) {
 
 	attrs.put("value", value);
 return this;}
+public ProgressBarCommandBuilder setMax(int value) {
+	Map<String, Object> attrs = initCommand("max");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ProgressBarCommandBuilder setMin(int value) {
+	Map<String, Object> attrs = initCommand("min");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ProgressBarCommandBuilder setProgress(int value) {
+	Map<String, Object> attrs = initCommand("progress");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ProgressBarCommandBuilder incrementProgressBy(int value) {
+	Map<String, Object> attrs = initCommand("incrementProgressBy");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class ProgressBarBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public ProgressBarBean() {
 			super(ProgressBarImpl.this);
 		}
-public void setMax(int value) {
-	getBuilder().reset().setMax(value).execute(true);
-}
-
-public void setMin(int value) {
-	getBuilder().reset().setMin(value).execute(true);
-}
-
-public void setProgress(int value) {
-	getBuilder().reset().setProgress(value).execute(true);
-}
-
-public void incrementProgressBy(int value) {
-	getBuilder().reset().incrementProgressBy(value).execute(true);
-}
-
 public void setPadding(String value) {
 	getBuilder().reset().setPadding(value).execute(true);
 }
@@ -788,6 +825,22 @@ public void setPaddingHorizontal(String value) {
 
 public void setPaddingVertical(String value) {
 	getBuilder().reset().setPaddingVertical(value).execute(true);
+}
+
+public void setMax(int value) {
+	getBuilder().reset().setMax(value).execute(true);
+}
+
+public void setMin(int value) {
+	getBuilder().reset().setMin(value).execute(true);
+}
+
+public void setProgress(int value) {
+	getBuilder().reset().setProgress(value).execute(true);
+}
+
+public void incrementProgressBy(int value) {
+	getBuilder().reset().incrementProgressBy(value).execute(true);
 }
 
 }

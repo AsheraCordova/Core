@@ -41,27 +41,25 @@ J2OBJC_TYPE_LITERAL_HEADER(ADR)
 #if !defined (ADR_id_) && (INCLUDE_ALL_R || defined(INCLUDE_ADR_id))
 #define ADR_id_
 
-@class ADR;
-
 @interface ADR_id : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithADR:(ADR *)outer$;
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADR_id)
 
-FOUNDATION_EXPORT void ADR_id_initWithADR_(ADR_id *self, ADR *outer$);
+inline jint ADR_id_get_content(void);
+#define ADR_id_content 0
+J2OBJC_STATIC_FIELD_CONSTANT(ADR_id, content, jint)
 
-FOUNDATION_EXPORT ADR_id *new_ADR_id_initWithADR_(ADR *outer$) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void ADR_id_init(ADR_id *self);
 
-FOUNDATION_EXPORT ADR_id *create_ADR_id_initWithADR_(ADR *outer$);
+FOUNDATION_EXPORT ADR_id *new_ADR_id_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ADR_id *create_ADR_id_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADR_id)
 

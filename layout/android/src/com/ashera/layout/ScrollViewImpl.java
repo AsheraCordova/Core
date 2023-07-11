@@ -63,7 +63,7 @@ public class ScrollViewImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new ScrollViewImpl();
+		return new ScrollViewImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -109,7 +109,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		scrollView.removeView((View) w.asWidget());
 		return remove;
@@ -244,11 +244,6 @@ return layoutParams.gravity;			}
 		public ScrollViewExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -360,12 +355,11 @@ return layoutParams.gravity;			}
         	ViewImpl.drawableStateChanged(ScrollViewImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((ScrollViewExt) scrollView).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return ScrollViewExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {

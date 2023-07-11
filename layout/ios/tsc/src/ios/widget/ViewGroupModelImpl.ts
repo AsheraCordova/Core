@@ -23,6 +23,7 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ViewGroupModelImpl<T> extends ViewImpl<T>{
@@ -50,6 +51,9 @@ export abstract class ViewGroupModelImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "modelIdPath" })
 	modelIdPath!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "modelDescPath" })
+	modelDescPath!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -63,6 +67,7 @@ export abstract class ViewGroupModelImpl<T> extends ViewImpl<T>{
 		this.removeModelById_ = undefined;
 		this.modelFor = undefined;
 		this.modelIdPath = undefined;
+		this.modelDescPath = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -186,6 +191,38 @@ export abstract class ViewGroupModelImpl<T> extends ViewImpl<T>{
 		this.modelIdPath.setValue(value);
 		this.orderSet++;
 		this.modelIdPath.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetModelDescPath() : T {
+		this.resetIfRequired();
+		if (this.modelDescPath == null || this.modelDescPath == undefined) {
+			this.modelDescPath = new CommandAttr<string>()
+		}
+		
+		this.modelDescPath.setGetter(true);
+		this.orderGet++;
+		this.modelDescPath.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getModelDescPath() : string {
+		if (this.modelDescPath == null || this.modelDescPath == undefined) {
+			this.modelDescPath = new CommandAttr<string>();
+		}
+		return this.modelDescPath.getCommandReturnValue();
+	}
+	public setModelDescPath(value : string) : T {
+		this.resetIfRequired();
+		if (this.modelDescPath == null || this.modelDescPath == undefined) {
+			this.modelDescPath = new CommandAttr<string>();
+		}
+		
+		this.modelDescPath.setSetter(true);
+		this.modelDescPath.setValue(value);
+		this.orderSet++;
+		this.modelDescPath.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

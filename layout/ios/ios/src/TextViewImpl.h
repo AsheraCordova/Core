@@ -24,10 +24,11 @@
 #define INCLUDE_ASValidationErrorLabel 1
 #include "ValidationErrorLabel.h"
 
-@class ASMeasurableTextView;
+@class ADTextView;
 @class ASTextViewImpl_TextViewBean;
 @class ASTextViewImpl_TextViewCommandBuilder;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -36,13 +37,18 @@
 @interface ASTextViewImpl : ASBaseWidget < ASValidationErrorLabel > {
  @public
   id uiView_;
-  ASMeasurableTextView *measurableTextView_;
+  ADTextView *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -105,6 +111,8 @@
 - (id)getText;
 
 - (id)getTextColor;
+
+- (IOSClass *)getViewClass;
 
 - (void)invalidate;
 
@@ -171,26 +179,20 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-+ (NSString *)toUpperCaseWithNSString:(NSString *)text;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
++ (NSString *)toUpperCaseWithNSString:(NSString *)text;
 
 - (void)updatePadding;
 
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASTextViewImpl)
 
 J2OBJC_FIELD_SETTER(ASTextViewImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASTextViewImpl, measurableTextView_, ASMeasurableTextView *)
+J2OBJC_FIELD_SETTER(ASTextViewImpl, measurableView_, ADTextView *)
 
 inline NSString *ASTextViewImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -207,6 +209,18 @@ FOUNDATION_EXPORT void ASTextViewImpl_init(ASTextViewImpl *self);
 FOUNDATION_EXPORT ASTextViewImpl *new_ASTextViewImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASTextViewImpl *create_ASTextViewImpl_init(void);
+
+FOUNDATION_EXPORT void ASTextViewImpl_initWithNSString_(ASTextViewImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASTextViewImpl *new_ASTextViewImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASTextViewImpl *create_ASTextViewImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASTextViewImpl_initWithNSString_withNSString_(ASTextViewImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASTextViewImpl *new_ASTextViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASTextViewImpl *create_ASTextViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
 
 FOUNDATION_EXPORT NSString *ASTextViewImpl_toUpperCaseWithNSString_(NSString *text);
 
@@ -473,26 +487,30 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_DrawableTintMode)
 #if !defined (ASTextViewImpl_TextViewExt_) && (INCLUDE_ALL_TextViewImpl || defined(INCLUDE_ASTextViewImpl_TextViewExt))
 #define ASTextViewImpl_TextViewExt_
 
-#define RESTRICT_MeasurableTextView 1
-#define INCLUDE_ASMeasurableTextView 1
-#include "MeasurableTextView.h"
+#define RESTRICT_TextView 1
+#define INCLUDE_ADTextView 1
+#include "TextView.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
-@class ADRectF;
+@class ADRect;
+@class ADView;
 @class ASTextViewImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASTextViewImpl_TextViewExt : ASMeasurableTextView < ASILifeCycleDecorator >
+@interface ASTextViewImpl_TextViewExt : ADTextView < ASILifeCycleDecorator >
 
 #pragma mark Public
 
 - (instancetype)initWithASTextViewImpl:(ASTextViewImpl *)outer$;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)drawableStateChanged;
 
@@ -509,9 +527,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_DrawableTintMode)
 
 - (jint)getLineHeightPadding;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
 
+- (NSString *)getText;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -524,14 +555,18 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_DrawableTintMode)
 
 - (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)mAutoSizeTextSizeInPx
-                                withADRectF:(ADRectF *)availableSpace;
+- (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)updateMeasuredDimensionWithInt:(jint)width
                                withInt:(jint)height;
@@ -543,10 +578,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_DrawableTintMode)
                     withInt:(jint)t
                     withInt:(jint)r
                     withInt:(jint)b;
-
-- (void)setTextSizeInternalWithInt:(jint)unit
-                         withFloat:(jfloat)optimalTextSize
-                       withBoolean:(jboolean)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -947,7 +978,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASTextViewImpl_TextViewCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASTextViewImpl_TextViewCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 
@@ -1000,6 +1035,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 - (ASTextViewImpl_TextViewCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setTextAllCapsWithBoolean:(jboolean)value;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)setTextAppearanceWithNSString:(NSString *)value;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setTextColorWithNSString:(NSString *)value;
 
@@ -1529,6 +1566,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_TextViewCommandBuilder)
 - (void)setTextWithNSString:(NSString *)value;
 
 - (void)setTextAllCapsWithBoolean:(jboolean)value;
+
+- (void)setTextAppearanceWithNSString:(NSString *)value;
 
 - (void)setTextColorWithNSString:(NSString *)value;
 

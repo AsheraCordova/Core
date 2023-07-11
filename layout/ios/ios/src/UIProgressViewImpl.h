@@ -28,10 +28,11 @@
 #define INCLUDE_ASICustomMeasureWidth 1
 #include "ICustomMeasureWidth.h"
 
-@class ASMeasurableView;
+@class ADProgressBar;
 @class ASUIProgressViewImpl_UIProgressViewBean;
 @class ASUIProgressViewImpl_UIProgressViewCommandBuilder;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -40,13 +41,18 @@
 @interface ASUIProgressViewImpl : ASBaseWidget < ASICustomMeasureHeight, ASICustomMeasureWidth > {
  @public
   id uiView_;
-  ASMeasurableView *measurableView_;
+  ADProgressBar *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (void)addForegroundIfNeeded;
 
@@ -85,6 +91,8 @@
 
 - (id)getTrackTintColor;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
@@ -118,20 +126,14 @@
 - (void)setTrackTintColorWithId:(id)nativeWidget
                          withId:(id)value;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASUIProgressViewImpl)
 
 J2OBJC_FIELD_SETTER(ASUIProgressViewImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASUIProgressViewImpl, measurableView_, ASMeasurableView *)
+J2OBJC_FIELD_SETTER(ASUIProgressViewImpl, measurableView_, ADProgressBar *)
 
 inline NSString *ASUIProgressViewImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -149,6 +151,18 @@ FOUNDATION_EXPORT ASUIProgressViewImpl *new_ASUIProgressViewImpl_init(void) NS_R
 
 FOUNDATION_EXPORT ASUIProgressViewImpl *create_ASUIProgressViewImpl_init(void);
 
+FOUNDATION_EXPORT void ASUIProgressViewImpl_initWithNSString_(ASUIProgressViewImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASUIProgressViewImpl *new_ASUIProgressViewImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASUIProgressViewImpl *create_ASUIProgressViewImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASUIProgressViewImpl_initWithNSString_withNSString_(ASUIProgressViewImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASUIProgressViewImpl *new_ASUIProgressViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASUIProgressViewImpl *create_ASUIProgressViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
+
 J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl)
 
 @compatibility_alias ComAsheraLayoutUIProgressViewImpl ASUIProgressViewImpl;
@@ -158,9 +172,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl)
 #if !defined (ASUIProgressViewImpl_UIProgressViewExt_) && (INCLUDE_ALL_UIProgressViewImpl || defined(INCLUDE_ASUIProgressViewImpl_UIProgressViewExt))
 #define ASUIProgressViewImpl_UIProgressViewExt_
 
-#define RESTRICT_MeasurableView 1
-#define INCLUDE_ASMeasurableView 1
-#include "MeasurableView.h"
+#define RESTRICT_ProgressBar 1
+#define INCLUDE_ADProgressBar 1
+#include "ProgressBar.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
@@ -170,13 +184,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADContext;
+@class ADRect;
+@class ADView;
 @class ASUIProgressViewImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASUIProgressViewImpl_UIProgressViewExt : ASMeasurableView < ASILifeCycleDecorator, ASIMaxDimension >
+@interface ASUIProgressViewImpl_UIProgressViewExt : ADProgressBar < ASILifeCycleDecorator, ASIMaxDimension >
 
 #pragma mark Public
 
@@ -189,13 +207,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
 
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -206,6 +235,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -213,6 +246,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -228,6 +264,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl)
                     withInt:(jint)b;
 
 // Disallowed inherited constructors, do not use.
+
+- (instancetype)initWithADContext:(ADContext *)arg0 NS_UNAVAILABLE;
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)arg0 NS_UNAVAILABLE;
 
@@ -450,7 +488,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 

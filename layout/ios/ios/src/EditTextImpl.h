@@ -32,10 +32,12 @@
 #define INCLUDE_ASFormElement 1
 #include "FormElement.h"
 
+@class ADEditText;
 @class ASEditTextImpl_EditTextBean;
 @class ASEditTextImpl_EditTextCommandBuilder;
-@class ASMeasurableTextView;
 @class ASWidgetAttribute;
+@class IOSClass;
+@class IOSObjectArray;
 @protocol ADTextWatcher;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
@@ -45,13 +47,18 @@
 @interface ASEditTextImpl : ASBaseWidget < ASICustomMeasureHeight, ASICustomMeasureWidth, ASFormElement > {
  @public
   id uiView_;
-  ASMeasurableTextView *measurableTextView_;
+  ADEditText *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (void)addForegroundIfNeeded;
 
@@ -128,7 +135,12 @@
 
 - (NSString *)getTextEntered;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
+
+- (id)invokeMethodWithNSString:(NSString *)methodName
+             withNSObjectArray:(IOSObjectArray *)args;
 
 - (jboolean)isViewVisible;
 
@@ -201,24 +213,18 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
+- (void)setVisibleWithBoolean:(jboolean)b;
+
 - (void)showErrorWithNSString:(NSString *)message;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
-
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASEditTextImpl)
 
 J2OBJC_FIELD_SETTER(ASEditTextImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASEditTextImpl, measurableTextView_, ASMeasurableTextView *)
+J2OBJC_FIELD_SETTER(ASEditTextImpl, measurableView_, ADEditText *)
 
 inline NSString *ASEditTextImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -236,9 +242,129 @@ FOUNDATION_EXPORT ASEditTextImpl *new_ASEditTextImpl_init(void) NS_RETURNS_RETAI
 
 FOUNDATION_EXPORT ASEditTextImpl *create_ASEditTextImpl_init(void);
 
+FOUNDATION_EXPORT void ASEditTextImpl_initWithNSString_(ASEditTextImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASEditTextImpl *new_ASEditTextImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASEditTextImpl *create_ASEditTextImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASEditTextImpl_initWithNSString_withNSString_(ASEditTextImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASEditTextImpl *new_ASEditTextImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASEditTextImpl *create_ASEditTextImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
+
 J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl)
 
 @compatibility_alias ComAsheraLayoutEditTextImpl ASEditTextImpl;
+
+#endif
+
+#if !defined (ASEditTextImpl_DrawableTintMode_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_DrawableTintMode))
+#define ASEditTextImpl_DrawableTintMode_
+
+#define RESTRICT_AbstractEnumToIntConverter 1
+#define INCLUDE_ASAbstractEnumToIntConverter 1
+#include "AbstractEnumToIntConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASEditTextImpl_DrawableTintMode : ASAbstractEnumToIntConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASEditTextImpl_DrawableTintMode)
+
+FOUNDATION_EXPORT void ASEditTextImpl_DrawableTintMode_init(ASEditTextImpl_DrawableTintMode *self);
+
+FOUNDATION_EXPORT ASEditTextImpl_DrawableTintMode *new_ASEditTextImpl_DrawableTintMode_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASEditTextImpl_DrawableTintMode *create_ASEditTextImpl_DrawableTintMode_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_DrawableTintMode)
+
+#endif
+
+#if !defined (ASEditTextImpl_Font_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_Font))
+#define ASEditTextImpl_Font_
+
+#define RESTRICT_AbstractEnumToIntConverter 1
+#define INCLUDE_ASAbstractEnumToIntConverter 1
+#include "AbstractEnumToIntConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASEditTextImpl_Font : ASAbstractEnumToIntConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASEditTextImpl_Font)
+
+FOUNDATION_EXPORT void ASEditTextImpl_Font_init(ASEditTextImpl_Font *self);
+
+FOUNDATION_EXPORT ASEditTextImpl_Font *new_ASEditTextImpl_Font_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASEditTextImpl_Font *create_ASEditTextImpl_Font_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_Font)
+
+#endif
+
+#if !defined (ASEditTextImpl_TextStyle_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_TextStyle))
+#define ASEditTextImpl_TextStyle_
+
+#define RESTRICT_AbstractBitFlagConverter 1
+#define INCLUDE_ASAbstractBitFlagConverter 1
+#include "AbstractBitFlagConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASEditTextImpl_TextStyle : ASAbstractBitFlagConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASEditTextImpl_TextStyle)
+
+FOUNDATION_EXPORT void ASEditTextImpl_TextStyle_init(ASEditTextImpl_TextStyle *self);
+
+FOUNDATION_EXPORT ASEditTextImpl_TextStyle *new_ASEditTextImpl_TextStyle_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASEditTextImpl_TextStyle *create_ASEditTextImpl_TextStyle_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_TextStyle)
 
 #endif
 
@@ -458,136 +584,34 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputView)
 
 #endif
 
-#if !defined (ASEditTextImpl_DrawableTintMode_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_DrawableTintMode))
-#define ASEditTextImpl_DrawableTintMode_
-
-#define RESTRICT_AbstractEnumToIntConverter 1
-#define INCLUDE_ASAbstractEnumToIntConverter 1
-#include "AbstractEnumToIntConverter.h"
-
-@class JavaLangInteger;
-@protocol JavaUtilMap;
-
-@interface ASEditTextImpl_DrawableTintMode : ASAbstractEnumToIntConverter
-
-#pragma mark Public
-
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASEditTextImpl_DrawableTintMode)
-
-FOUNDATION_EXPORT void ASEditTextImpl_DrawableTintMode_init(ASEditTextImpl_DrawableTintMode *self);
-
-FOUNDATION_EXPORT ASEditTextImpl_DrawableTintMode *new_ASEditTextImpl_DrawableTintMode_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ASEditTextImpl_DrawableTintMode *create_ASEditTextImpl_DrawableTintMode_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_DrawableTintMode)
-
-#endif
-
-#if !defined (ASEditTextImpl_Font_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_Font))
-#define ASEditTextImpl_Font_
-
-#define RESTRICT_AbstractEnumToIntConverter 1
-#define INCLUDE_ASAbstractEnumToIntConverter 1
-#include "AbstractEnumToIntConverter.h"
-
-@class JavaLangInteger;
-@protocol JavaUtilMap;
-
-@interface ASEditTextImpl_Font : ASAbstractEnumToIntConverter
-
-#pragma mark Public
-
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASEditTextImpl_Font)
-
-FOUNDATION_EXPORT void ASEditTextImpl_Font_init(ASEditTextImpl_Font *self);
-
-FOUNDATION_EXPORT ASEditTextImpl_Font *new_ASEditTextImpl_Font_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ASEditTextImpl_Font *create_ASEditTextImpl_Font_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_Font)
-
-#endif
-
-#if !defined (ASEditTextImpl_TextStyle_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_TextStyle))
-#define ASEditTextImpl_TextStyle_
-
-#define RESTRICT_AbstractBitFlagConverter 1
-#define INCLUDE_ASAbstractBitFlagConverter 1
-#include "AbstractBitFlagConverter.h"
-
-@class JavaLangInteger;
-@protocol JavaUtilMap;
-
-@interface ASEditTextImpl_TextStyle : ASAbstractBitFlagConverter
-
-#pragma mark Public
-
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASEditTextImpl_TextStyle)
-
-FOUNDATION_EXPORT void ASEditTextImpl_TextStyle_init(ASEditTextImpl_TextStyle *self);
-
-FOUNDATION_EXPORT ASEditTextImpl_TextStyle *new_ASEditTextImpl_TextStyle_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ASEditTextImpl_TextStyle *create_ASEditTextImpl_TextStyle_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_TextStyle)
-
-#endif
-
 #if !defined (ASEditTextImpl_EditTextExt_) && (INCLUDE_ALL_EditTextImpl || defined(INCLUDE_ASEditTextImpl_EditTextExt))
 #define ASEditTextImpl_EditTextExt_
 
-#define RESTRICT_MeasurableTextView 1
-#define INCLUDE_ASMeasurableTextView 1
-#include "MeasurableTextView.h"
+#define RESTRICT_EditText 1
+#define INCLUDE_ADEditText 1
+#include "EditText.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
+@class ADContext;
+@class ADRect;
+@class ADView;
 @class ASEditTextImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASEditTextImpl_EditTextExt : ASMeasurableTextView < ASILifeCycleDecorator >
+@interface ASEditTextImpl_EditTextExt : ADEditText < ASILifeCycleDecorator >
 
 #pragma mark Public
 
 - (instancetype)initWithASEditTextImpl:(ASEditTextImpl *)outer$;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)drawableStateChanged;
 
@@ -604,9 +628,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_TextStyle)
 
 - (jint)getLineHeightPadding;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
 
+- (NSString *)getText;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -617,9 +654,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_TextStyle)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -635,6 +679,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_TextStyle)
                     withInt:(jint)b;
 
 // Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithADContext:(ADContext *)arg0 NS_UNAVAILABLE;
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)arg0 NS_UNAVAILABLE;
 
@@ -997,9 +1045,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASEditTextImpl_EditTextCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASEditTextImpl_EditTextCommandBuilder *)setOnTextChangeWithNSString:(NSString *)value;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 
@@ -1036,6 +1088,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 - (ASEditTextImpl_EditTextCommandBuilder *)setScrollHorizontallyWithBoolean:(jboolean)value;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setSelectedWithBoolean:(jboolean)arg0;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)setSetFocusWithBoolean:(jboolean)value;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setSingleLineWithBoolean:(jboolean)value;
 
@@ -1553,6 +1607,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextCommandBuilder)
 - (void)setPhoneNumberWithBoolean:(jboolean)value;
 
 - (void)setScrollHorizontallyWithBoolean:(jboolean)value;
+
+- (void)setSetFocusWithBoolean:(jboolean)value;
 
 - (void)setSingleLineWithBoolean:(jboolean)value;
 

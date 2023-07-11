@@ -53,7 +53,7 @@
 + (ASWidgetAttribute *)getAttributeWithNSString:(NSString *)localname
                                    withNSString:(NSString *)attributeName;
 
-+ (id<ASIBehavior>)getBehaviorWithNSString:(NSString *)behavior;
++ (id)getBehaviorWithNSString:(NSString *)behavior;
 
 + (id<ASICompositeDecorator>)getCompositeDecorator;
 
@@ -65,6 +65,8 @@
 
 + (id<ASILifeCycleDecorator>)getLifeCycleDecorWithNSString:(NSString *)lifeCycleDecorator
                                              withASIWidget:(id<ASIWidget>)widget;
+
++ (id<JavaUtilSet>)getStyleAttributesWithNSString:(NSString *)localname;
 
 + (jboolean)isAttributeLoadedWithNSString:(NSString *)localname;
 
@@ -137,6 +139,8 @@ FOUNDATION_EXPORT void ASWidgetFactory_registerAttributeWithNSString_withASWidge
 
 FOUNDATION_EXPORT void ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_(NSString *localname, ASWidgetAttribute *widgetAttribute);
 
+FOUNDATION_EXPORT id<JavaUtilSet> ASWidgetFactory_getStyleAttributesWithNSString_(NSString *localname);
+
 FOUNDATION_EXPORT ASWidgetAttribute *ASWidgetFactory_getAttributeWithNSString_withNSString_(NSString *localname, NSString *attributeName);
 
 FOUNDATION_EXPORT id<ASILifeCycleDecorator> ASWidgetFactory_getLifeCycleDecorWithNSString_withASIWidget_(NSString *lifeCycleDecorator, id<ASIWidget> widget);
@@ -145,7 +149,7 @@ FOUNDATION_EXPORT void ASWidgetFactory_registerLifeCycleDecoratorWithNSString_wi
 
 FOUNDATION_EXPORT void ASWidgetFactory_registerBehaviorWithNSString_withASIBehavior_(NSString *decorator, id<ASIBehavior> behavior);
 
-FOUNDATION_EXPORT id<ASIBehavior> ASWidgetFactory_getBehaviorWithNSString_(NSString *behavior);
+FOUNDATION_EXPORT id ASWidgetFactory_getBehaviorWithNSString_(NSString *behavior);
 
 FOUNDATION_EXPORT void ASWidgetFactory_registerAttributableForWithNSString_withASIAttributable_(NSString *localName, id<ASIAttributable> attributable);
 

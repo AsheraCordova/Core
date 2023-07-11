@@ -1,16 +1,5 @@
 // start - imports
 
-export const enum Ellipsize {
-end = "end",
-marquee = "marquee",
-middle = "middle",
-none = "none",
-start = "start",
-}
-export const enum JustificationMode {
-inter_word = "inter_word",
-none = "none",
-}
 export const enum DrawableTintMode {
 add = "add",
 multiply = "multiply",
@@ -32,6 +21,17 @@ export const enum TextStyle {
 bold = "bold",
 italic = "italic",
 normal = "normal",
+}
+export const enum Ellipsize {
+end = "end",
+marquee = "marquee",
+middle = "middle",
+none = "none",
+start = "start",
+}
+export const enum JustificationMode {
+inter_word = "inter_word",
+none = "none",
 }	
 import CommandAttr from '../../widget/CommandAttr';
 import IWidget from '../../widget/IWidget';
@@ -45,29 +45,6 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -126,6 +103,29 @@ export class TextStyleTransformer implements ITranform {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ButtonImpl<T> extends ViewImpl<T>{
@@ -133,75 +133,6 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 	static initialize() {
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "text" })
-	text!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "gravity" })
-	gravity!:CommandAttr<Gravity[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textSize" })
-	textSize!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "padding" })
-	padding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingBottom" })
-	paddingBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingRight" })
-	paddingRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingLeft" })
-	paddingLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingStart" })
-	paddingStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingEnd" })
-	paddingEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingTop" })
-	paddingTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingHorizontal" })
-	paddingHorizontal!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingVertical" })
-	paddingVertical!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textColor" })
-	textColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textAllCaps" })
-	textAllCaps!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "singleLine" })
-	singleLine!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "ellipsize" })
-	ellipsize!:CommandAttr<Ellipsize>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "firstBaselineToTopHeight" })
-	firstBaselineToTopHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "lastBaselineToBottomHeight" })
-	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "justificationMode" })
-	justificationMode!:CommandAttr<JustificationMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "scrollHorizontally" })
-	scrollHorizontally!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "shadowDx" })
-	shadowDx!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "shadowDy" })
-	shadowDy!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "shadowColor" })
-	shadowColor!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "drawableLeft" })
 	drawableLeft!:CommandAttr<string>| undefined;
@@ -289,35 +220,81 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "enabled" })
 	enabled!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "text" })
+	text!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "gravity" })
+	gravity!:CommandAttr<Gravity[]>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textSize" })
+	textSize!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "padding" })
+	padding!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "paddingBottom" })
+	paddingBottom!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "paddingRight" })
+	paddingRight!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "paddingLeft" })
+	paddingLeft!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "paddingStart" })
+	paddingStart!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "paddingEnd" })
+	paddingEnd!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "paddingTop" })
+	paddingTop!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "paddingHorizontal" })
+	paddingHorizontal!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "paddingVertical" })
+	paddingVertical!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textColor" })
+	textColor!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textAllCaps" })
+	textAllCaps!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "singleLine" })
+	singleLine!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "ellipsize" })
+	ellipsize!:CommandAttr<Ellipsize>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "firstBaselineToTopHeight" })
+	firstBaselineToTopHeight!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "lastBaselineToBottomHeight" })
+	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "justificationMode" })
+	justificationMode!:CommandAttr<JustificationMode>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "scrollHorizontally" })
+	scrollHorizontally!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "shadowDx" })
+	shadowDx!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "shadowDy" })
+	shadowDy!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "shadowColor" })
+	shadowColor!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
-		this.text = undefined;
-		this.gravity = undefined;
-		this.textSize = undefined;
-		this.padding = undefined;
-		this.paddingBottom = undefined;
-		this.paddingRight = undefined;
-		this.paddingLeft = undefined;
-		this.paddingStart = undefined;
-		this.paddingEnd = undefined;
-		this.paddingTop = undefined;
-		this.paddingHorizontal = undefined;
-		this.paddingVertical = undefined;
-		this.textColor = undefined;
-		this.textAllCaps = undefined;
-		this.singleLine = undefined;
-		this.ellipsize = undefined;
-		this.firstBaselineToTopHeight = undefined;
-		this.lastBaselineToBottomHeight = undefined;
-		this.justificationMode = undefined;
-		this.scrollHorizontally = undefined;
-		this.shadowDx = undefined;
-		this.shadowDy = undefined;
-		this.shadowColor = undefined;
 		this.drawableLeft = undefined;
 		this.drawableStart = undefined;
 		this.drawableRight = undefined;
@@ -347,6 +324,29 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 		this.fontFamily = undefined;
 		this.textFormat = undefined;
 		this.enabled = undefined;
+		this.text = undefined;
+		this.gravity = undefined;
+		this.textSize = undefined;
+		this.padding = undefined;
+		this.paddingBottom = undefined;
+		this.paddingRight = undefined;
+		this.paddingLeft = undefined;
+		this.paddingStart = undefined;
+		this.paddingEnd = undefined;
+		this.paddingTop = undefined;
+		this.paddingHorizontal = undefined;
+		this.paddingVertical = undefined;
+		this.textColor = undefined;
+		this.textAllCaps = undefined;
+		this.singleLine = undefined;
+		this.ellipsize = undefined;
+		this.firstBaselineToTopHeight = undefined;
+		this.lastBaselineToBottomHeight = undefined;
+		this.justificationMode = undefined;
+		this.scrollHorizontally = undefined;
+		this.shadowDx = undefined;
+		this.shadowDy = undefined;
+		this.shadowColor = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -354,6 +354,628 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
+
+	public setDrawableLeft(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableLeft == null || this.drawableLeft == undefined) {
+			this.drawableLeft = new CommandAttr<string>();
+		}
+		
+		this.drawableLeft.setSetter(true);
+		this.drawableLeft.setValue(value);
+		this.orderSet++;
+		this.drawableLeft.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableStart(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableStart == null || this.drawableStart == undefined) {
+			this.drawableStart = new CommandAttr<string>();
+		}
+		
+		this.drawableStart.setSetter(true);
+		this.drawableStart.setValue(value);
+		this.orderSet++;
+		this.drawableStart.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableRight(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableRight == null || this.drawableRight == undefined) {
+			this.drawableRight = new CommandAttr<string>();
+		}
+		
+		this.drawableRight.setSetter(true);
+		this.drawableRight.setValue(value);
+		this.orderSet++;
+		this.drawableRight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableEnd(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableEnd == null || this.drawableEnd == undefined) {
+			this.drawableEnd = new CommandAttr<string>();
+		}
+		
+		this.drawableEnd.setSetter(true);
+		this.drawableEnd.setValue(value);
+		this.orderSet++;
+		this.drawableEnd.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableTop(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableTop == null || this.drawableTop == undefined) {
+			this.drawableTop = new CommandAttr<string>();
+		}
+		
+		this.drawableTop.setSetter(true);
+		this.drawableTop.setValue(value);
+		this.orderSet++;
+		this.drawableTop.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableBottom(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableBottom == null || this.drawableBottom == undefined) {
+			this.drawableBottom = new CommandAttr<string>();
+		}
+		
+		this.drawableBottom.setSetter(true);
+		this.drawableBottom.setValue(value);
+		this.orderSet++;
+		this.drawableBottom.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetDrawablePadding() : T {
+		this.resetIfRequired();
+		if (this.drawablePadding == null || this.drawablePadding == undefined) {
+			this.drawablePadding = new CommandAttr<string>()
+		}
+		
+		this.drawablePadding.setGetter(true);
+		this.orderGet++;
+		this.drawablePadding.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getDrawablePadding() : string {
+		if (this.drawablePadding == null || this.drawablePadding == undefined) {
+			this.drawablePadding = new CommandAttr<string>();
+		}
+		return this.drawablePadding.getCommandReturnValue();
+	}
+	public setDrawablePadding(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawablePadding == null || this.drawablePadding == undefined) {
+			this.drawablePadding = new CommandAttr<string>();
+		}
+		
+		this.drawablePadding.setSetter(true);
+		this.drawablePadding.setValue(value);
+		this.orderSet++;
+		this.drawablePadding.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableTint(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableTint == null || this.drawableTint == undefined) {
+			this.drawableTint = new CommandAttr<string>();
+		}
+		
+		this.drawableTint.setSetter(true);
+		this.drawableTint.setValue(value);
+		this.orderSet++;
+		this.drawableTint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableTintMode(value : DrawableTintMode) : T {
+		this.resetIfRequired();
+		if (this.drawableTintMode == null || this.drawableTintMode == undefined) {
+			this.drawableTintMode = new CommandAttr<DrawableTintMode>();
+		}
+		
+		this.drawableTintMode.setSetter(true);
+		this.drawableTintMode.setValue(value);
+		this.orderSet++;
+		this.drawableTintMode.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetMinLines() : T {
+		this.resetIfRequired();
+		if (this.minLines == null || this.minLines == undefined) {
+			this.minLines = new CommandAttr<number>()
+		}
+		
+		this.minLines.setGetter(true);
+		this.orderGet++;
+		this.minLines.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getMinLines() : number {
+		if (this.minLines == null || this.minLines == undefined) {
+			this.minLines = new CommandAttr<number>();
+		}
+		return this.minLines.getCommandReturnValue();
+	}
+	public setMinLines(value : number) : T {
+		this.resetIfRequired();
+		if (this.minLines == null || this.minLines == undefined) {
+			this.minLines = new CommandAttr<number>();
+		}
+		
+		this.minLines.setSetter(true);
+		this.minLines.setValue(value);
+		this.orderSet++;
+		this.minLines.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setLines(value : number) : T {
+		this.resetIfRequired();
+		if (this.lines == null || this.lines == undefined) {
+			this.lines = new CommandAttr<number>();
+		}
+		
+		this.lines.setSetter(true);
+		this.lines.setValue(value);
+		this.orderSet++;
+		this.lines.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetMaxLines() : T {
+		this.resetIfRequired();
+		if (this.maxLines == null || this.maxLines == undefined) {
+			this.maxLines = new CommandAttr<number>()
+		}
+		
+		this.maxLines.setGetter(true);
+		this.orderGet++;
+		this.maxLines.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getMaxLines() : number {
+		if (this.maxLines == null || this.maxLines == undefined) {
+			this.maxLines = new CommandAttr<number>();
+		}
+		return this.maxLines.getCommandReturnValue();
+	}
+	public setMaxLines(value : number) : T {
+		this.resetIfRequired();
+		if (this.maxLines == null || this.maxLines == undefined) {
+			this.maxLines = new CommandAttr<number>();
+		}
+		
+		this.maxLines.setSetter(true);
+		this.maxLines.setValue(value);
+		this.orderSet++;
+		this.maxLines.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetMinWidth() : T {
+		this.resetIfRequired();
+		if (this.minWidth == null || this.minWidth == undefined) {
+			this.minWidth = new CommandAttr<string>()
+		}
+		
+		this.minWidth.setGetter(true);
+		this.orderGet++;
+		this.minWidth.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getMinWidth() : string {
+		if (this.minWidth == null || this.minWidth == undefined) {
+			this.minWidth = new CommandAttr<string>();
+		}
+		return this.minWidth.getCommandReturnValue();
+	}
+	public setMinWidth(value : string) : T {
+		this.resetIfRequired();
+		if (this.minWidth == null || this.minWidth == undefined) {
+			this.minWidth = new CommandAttr<string>();
+		}
+		
+		this.minWidth.setSetter(true);
+		this.minWidth.setValue(value);
+		this.orderSet++;
+		this.minWidth.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetMinHeight() : T {
+		this.resetIfRequired();
+		if (this.minHeight == null || this.minHeight == undefined) {
+			this.minHeight = new CommandAttr<string>()
+		}
+		
+		this.minHeight.setGetter(true);
+		this.orderGet++;
+		this.minHeight.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getMinHeight() : string {
+		if (this.minHeight == null || this.minHeight == undefined) {
+			this.minHeight = new CommandAttr<string>();
+		}
+		return this.minHeight.getCommandReturnValue();
+	}
+	public setMinHeight(value : string) : T {
+		this.resetIfRequired();
+		if (this.minHeight == null || this.minHeight == undefined) {
+			this.minHeight = new CommandAttr<string>();
+		}
+		
+		this.minHeight.setSetter(true);
+		this.minHeight.setValue(value);
+		this.orderSet++;
+		this.minHeight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetMaxWidth() : T {
+		this.resetIfRequired();
+		if (this.maxWidth == null || this.maxWidth == undefined) {
+			this.maxWidth = new CommandAttr<string>()
+		}
+		
+		this.maxWidth.setGetter(true);
+		this.orderGet++;
+		this.maxWidth.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getMaxWidth() : string {
+		if (this.maxWidth == null || this.maxWidth == undefined) {
+			this.maxWidth = new CommandAttr<string>();
+		}
+		return this.maxWidth.getCommandReturnValue();
+	}
+	public setMaxWidth(value : string) : T {
+		this.resetIfRequired();
+		if (this.maxWidth == null || this.maxWidth == undefined) {
+			this.maxWidth = new CommandAttr<string>();
+		}
+		
+		this.maxWidth.setSetter(true);
+		this.maxWidth.setValue(value);
+		this.orderSet++;
+		this.maxWidth.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetMaxHeight() : T {
+		this.resetIfRequired();
+		if (this.maxHeight == null || this.maxHeight == undefined) {
+			this.maxHeight = new CommandAttr<string>()
+		}
+		
+		this.maxHeight.setGetter(true);
+		this.orderGet++;
+		this.maxHeight.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getMaxHeight() : string {
+		if (this.maxHeight == null || this.maxHeight == undefined) {
+			this.maxHeight = new CommandAttr<string>();
+		}
+		return this.maxHeight.getCommandReturnValue();
+	}
+	public setMaxHeight(value : string) : T {
+		this.resetIfRequired();
+		if (this.maxHeight == null || this.maxHeight == undefined) {
+			this.maxHeight = new CommandAttr<string>();
+		}
+		
+		this.maxHeight.setSetter(true);
+		this.maxHeight.setValue(value);
+		this.orderSet++;
+		this.maxHeight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetHeight() : T {
+		this.resetIfRequired();
+		if (this.height == null || this.height == undefined) {
+			this.height = new CommandAttr<string>()
+		}
+		
+		this.height.setGetter(true);
+		this.orderGet++;
+		this.height.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getHeight() : string {
+		if (this.height == null || this.height == undefined) {
+			this.height = new CommandAttr<string>();
+		}
+		return this.height.getCommandReturnValue();
+	}
+	public setHeight(value : string) : T {
+		this.resetIfRequired();
+		if (this.height == null || this.height == undefined) {
+			this.height = new CommandAttr<string>();
+		}
+		
+		this.height.setSetter(true);
+		this.height.setValue(value);
+		this.orderSet++;
+		this.height.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetWidth() : T {
+		this.resetIfRequired();
+		if (this.width == null || this.width == undefined) {
+			this.width = new CommandAttr<string>()
+		}
+		
+		this.width.setGetter(true);
+		this.orderGet++;
+		this.width.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getWidth() : string {
+		if (this.width == null || this.width == undefined) {
+			this.width = new CommandAttr<string>();
+		}
+		return this.width.getCommandReturnValue();
+	}
+	public setWidth(value : string) : T {
+		this.resetIfRequired();
+		if (this.width == null || this.width == undefined) {
+			this.width = new CommandAttr<string>();
+		}
+		
+		this.width.setSetter(true);
+		this.width.setValue(value);
+		this.orderSet++;
+		this.width.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetMaxEms() : T {
+		this.resetIfRequired();
+		if (this.maxEms == null || this.maxEms == undefined) {
+			this.maxEms = new CommandAttr<number>()
+		}
+		
+		this.maxEms.setGetter(true);
+		this.orderGet++;
+		this.maxEms.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getMaxEms() : number {
+		if (this.maxEms == null || this.maxEms == undefined) {
+			this.maxEms = new CommandAttr<number>();
+		}
+		return this.maxEms.getCommandReturnValue();
+	}
+	public setMaxEms(value : number) : T {
+		this.resetIfRequired();
+		if (this.maxEms == null || this.maxEms == undefined) {
+			this.maxEms = new CommandAttr<number>();
+		}
+		
+		this.maxEms.setSetter(true);
+		this.maxEms.setValue(value);
+		this.orderSet++;
+		this.maxEms.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetMinEms() : T {
+		this.resetIfRequired();
+		if (this.minEms == null || this.minEms == undefined) {
+			this.minEms = new CommandAttr<number>()
+		}
+		
+		this.minEms.setGetter(true);
+		this.orderGet++;
+		this.minEms.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getMinEms() : number {
+		if (this.minEms == null || this.minEms == undefined) {
+			this.minEms = new CommandAttr<number>();
+		}
+		return this.minEms.getCommandReturnValue();
+	}
+	public setMinEms(value : number) : T {
+		this.resetIfRequired();
+		if (this.minEms == null || this.minEms == undefined) {
+			this.minEms = new CommandAttr<number>();
+		}
+		
+		this.minEms.setSetter(true);
+		this.minEms.setValue(value);
+		this.orderSet++;
+		this.minEms.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setEms(value : number) : T {
+		this.resetIfRequired();
+		if (this.ems == null || this.ems == undefined) {
+			this.ems = new CommandAttr<number>();
+		}
+		
+		this.ems.setSetter(true);
+		this.ems.setValue(value);
+		this.orderSet++;
+		this.ems.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetMarqueeRepeatLimit() : T {
+		this.resetIfRequired();
+		if (this.marqueeRepeatLimit == null || this.marqueeRepeatLimit == undefined) {
+			this.marqueeRepeatLimit = new CommandAttr<string>()
+		}
+		
+		this.marqueeRepeatLimit.setGetter(true);
+		this.orderGet++;
+		this.marqueeRepeatLimit.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getMarqueeRepeatLimit() : string {
+		if (this.marqueeRepeatLimit == null || this.marqueeRepeatLimit == undefined) {
+			this.marqueeRepeatLimit = new CommandAttr<string>();
+		}
+		return this.marqueeRepeatLimit.getCommandReturnValue();
+	}
+	public setMarqueeRepeatLimit(value : string) : T {
+		this.resetIfRequired();
+		if (this.marqueeRepeatLimit == null || this.marqueeRepeatLimit == undefined) {
+			this.marqueeRepeatLimit = new CommandAttr<string>();
+		}
+		
+		this.marqueeRepeatLimit.setSetter(true);
+		this.marqueeRepeatLimit.setValue(value);
+		this.orderSet++;
+		this.marqueeRepeatLimit.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setEditable(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.editable == null || this.editable == undefined) {
+			this.editable = new CommandAttr<boolean>();
+		}
+		
+		this.editable.setSetter(true);
+		this.editable.setValue(value);
+		this.orderSet++;
+		this.editable.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setMaxLength(value : number) : T {
+		this.resetIfRequired();
+		if (this.maxLength == null || this.maxLength == undefined) {
+			this.maxLength = new CommandAttr<number>();
+		}
+		
+		this.maxLength.setSetter(true);
+		this.maxLength.setValue(value);
+		this.orderSet++;
+		this.maxLength.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setTypeface(value : string) : T {
+		this.resetIfRequired();
+		if (this.typeface == null || this.typeface == undefined) {
+			this.typeface = new CommandAttr<string>();
+		}
+		
+		this.typeface.setSetter(true);
+		this.typeface.setValue(value);
+		this.orderSet++;
+		this.typeface.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setTextStyle(...value : TextStyle[]) : T {
+		this.resetIfRequired();
+		if (this.textStyle == null || this.textStyle == undefined) {
+			this.textStyle = new CommandAttr<TextStyle[]>();
+		}
+		
+		this.textStyle.setSetter(true);
+		this.textStyle.setValue(value);
+		this.orderSet++;
+		this.textStyle.setOrderSet(this.orderSet);
+this.textStyle.setTransformer('textStyle');		return this.thisPointer;
+	}
+		
+
+	public setFontFamily(value : string) : T {
+		this.resetIfRequired();
+		if (this.fontFamily == null || this.fontFamily == undefined) {
+			this.fontFamily = new CommandAttr<string>();
+		}
+		
+		this.fontFamily.setSetter(true);
+		this.fontFamily.setValue(value);
+		this.orderSet++;
+		this.fontFamily.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setTextFormat(value : string) : T {
+		this.resetIfRequired();
+		if (this.textFormat == null || this.textFormat == undefined) {
+			this.textFormat = new CommandAttr<string>();
+		}
+		
+		this.textFormat.setSetter(true);
+		this.textFormat.setValue(value);
+		this.orderSet++;
+		this.textFormat.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setEnabled(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.enabled == null || this.enabled == undefined) {
+			this.enabled = new CommandAttr<boolean>();
+		}
+		
+		this.enabled.setSetter(true);
+		this.enabled.setValue(value);
+		this.orderSet++;
+		this.enabled.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
 
 	public tryGetText() : T {
 		this.resetIfRequired();
@@ -979,628 +1601,6 @@ this.gravity.setTransformer('gravity');		return this.thisPointer;
 		this.shadowColor.setValue(value);
 		this.orderSet++;
 		this.shadowColor.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableLeft(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableLeft == null || this.drawableLeft == undefined) {
-			this.drawableLeft = new CommandAttr<string>();
-		}
-		
-		this.drawableLeft.setSetter(true);
-		this.drawableLeft.setValue(value);
-		this.orderSet++;
-		this.drawableLeft.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableStart(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableStart == null || this.drawableStart == undefined) {
-			this.drawableStart = new CommandAttr<string>();
-		}
-		
-		this.drawableStart.setSetter(true);
-		this.drawableStart.setValue(value);
-		this.orderSet++;
-		this.drawableStart.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableRight(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableRight == null || this.drawableRight == undefined) {
-			this.drawableRight = new CommandAttr<string>();
-		}
-		
-		this.drawableRight.setSetter(true);
-		this.drawableRight.setValue(value);
-		this.orderSet++;
-		this.drawableRight.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableEnd(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableEnd == null || this.drawableEnd == undefined) {
-			this.drawableEnd = new CommandAttr<string>();
-		}
-		
-		this.drawableEnd.setSetter(true);
-		this.drawableEnd.setValue(value);
-		this.orderSet++;
-		this.drawableEnd.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableTop(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableTop == null || this.drawableTop == undefined) {
-			this.drawableTop = new CommandAttr<string>();
-		}
-		
-		this.drawableTop.setSetter(true);
-		this.drawableTop.setValue(value);
-		this.orderSet++;
-		this.drawableTop.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableBottom(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableBottom == null || this.drawableBottom == undefined) {
-			this.drawableBottom = new CommandAttr<string>();
-		}
-		
-		this.drawableBottom.setSetter(true);
-		this.drawableBottom.setValue(value);
-		this.orderSet++;
-		this.drawableBottom.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetDrawablePadding() : T {
-		this.resetIfRequired();
-		if (this.drawablePadding == null || this.drawablePadding == undefined) {
-			this.drawablePadding = new CommandAttr<string>()
-		}
-		
-		this.drawablePadding.setGetter(true);
-		this.orderGet++;
-		this.drawablePadding.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getDrawablePadding() : string {
-		if (this.drawablePadding == null || this.drawablePadding == undefined) {
-			this.drawablePadding = new CommandAttr<string>();
-		}
-		return this.drawablePadding.getCommandReturnValue();
-	}
-	public setDrawablePadding(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawablePadding == null || this.drawablePadding == undefined) {
-			this.drawablePadding = new CommandAttr<string>();
-		}
-		
-		this.drawablePadding.setSetter(true);
-		this.drawablePadding.setValue(value);
-		this.orderSet++;
-		this.drawablePadding.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableTint(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableTint == null || this.drawableTint == undefined) {
-			this.drawableTint = new CommandAttr<string>();
-		}
-		
-		this.drawableTint.setSetter(true);
-		this.drawableTint.setValue(value);
-		this.orderSet++;
-		this.drawableTint.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableTintMode(value : DrawableTintMode) : T {
-		this.resetIfRequired();
-		if (this.drawableTintMode == null || this.drawableTintMode == undefined) {
-			this.drawableTintMode = new CommandAttr<DrawableTintMode>();
-		}
-		
-		this.drawableTintMode.setSetter(true);
-		this.drawableTintMode.setValue(value);
-		this.orderSet++;
-		this.drawableTintMode.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetMinLines() : T {
-		this.resetIfRequired();
-		if (this.minLines == null || this.minLines == undefined) {
-			this.minLines = new CommandAttr<number>()
-		}
-		
-		this.minLines.setGetter(true);
-		this.orderGet++;
-		this.minLines.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getMinLines() : number {
-		if (this.minLines == null || this.minLines == undefined) {
-			this.minLines = new CommandAttr<number>();
-		}
-		return this.minLines.getCommandReturnValue();
-	}
-	public setMinLines(value : number) : T {
-		this.resetIfRequired();
-		if (this.minLines == null || this.minLines == undefined) {
-			this.minLines = new CommandAttr<number>();
-		}
-		
-		this.minLines.setSetter(true);
-		this.minLines.setValue(value);
-		this.orderSet++;
-		this.minLines.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setLines(value : number) : T {
-		this.resetIfRequired();
-		if (this.lines == null || this.lines == undefined) {
-			this.lines = new CommandAttr<number>();
-		}
-		
-		this.lines.setSetter(true);
-		this.lines.setValue(value);
-		this.orderSet++;
-		this.lines.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetMaxLines() : T {
-		this.resetIfRequired();
-		if (this.maxLines == null || this.maxLines == undefined) {
-			this.maxLines = new CommandAttr<number>()
-		}
-		
-		this.maxLines.setGetter(true);
-		this.orderGet++;
-		this.maxLines.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getMaxLines() : number {
-		if (this.maxLines == null || this.maxLines == undefined) {
-			this.maxLines = new CommandAttr<number>();
-		}
-		return this.maxLines.getCommandReturnValue();
-	}
-	public setMaxLines(value : number) : T {
-		this.resetIfRequired();
-		if (this.maxLines == null || this.maxLines == undefined) {
-			this.maxLines = new CommandAttr<number>();
-		}
-		
-		this.maxLines.setSetter(true);
-		this.maxLines.setValue(value);
-		this.orderSet++;
-		this.maxLines.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetMinWidth() : T {
-		this.resetIfRequired();
-		if (this.minWidth == null || this.minWidth == undefined) {
-			this.minWidth = new CommandAttr<string>()
-		}
-		
-		this.minWidth.setGetter(true);
-		this.orderGet++;
-		this.minWidth.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getMinWidth() : string {
-		if (this.minWidth == null || this.minWidth == undefined) {
-			this.minWidth = new CommandAttr<string>();
-		}
-		return this.minWidth.getCommandReturnValue();
-	}
-	public setMinWidth(value : string) : T {
-		this.resetIfRequired();
-		if (this.minWidth == null || this.minWidth == undefined) {
-			this.minWidth = new CommandAttr<string>();
-		}
-		
-		this.minWidth.setSetter(true);
-		this.minWidth.setValue(value);
-		this.orderSet++;
-		this.minWidth.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetMinHeight() : T {
-		this.resetIfRequired();
-		if (this.minHeight == null || this.minHeight == undefined) {
-			this.minHeight = new CommandAttr<string>()
-		}
-		
-		this.minHeight.setGetter(true);
-		this.orderGet++;
-		this.minHeight.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getMinHeight() : string {
-		if (this.minHeight == null || this.minHeight == undefined) {
-			this.minHeight = new CommandAttr<string>();
-		}
-		return this.minHeight.getCommandReturnValue();
-	}
-	public setMinHeight(value : string) : T {
-		this.resetIfRequired();
-		if (this.minHeight == null || this.minHeight == undefined) {
-			this.minHeight = new CommandAttr<string>();
-		}
-		
-		this.minHeight.setSetter(true);
-		this.minHeight.setValue(value);
-		this.orderSet++;
-		this.minHeight.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetMaxWidth() : T {
-		this.resetIfRequired();
-		if (this.maxWidth == null || this.maxWidth == undefined) {
-			this.maxWidth = new CommandAttr<string>()
-		}
-		
-		this.maxWidth.setGetter(true);
-		this.orderGet++;
-		this.maxWidth.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getMaxWidth() : string {
-		if (this.maxWidth == null || this.maxWidth == undefined) {
-			this.maxWidth = new CommandAttr<string>();
-		}
-		return this.maxWidth.getCommandReturnValue();
-	}
-	public setMaxWidth(value : string) : T {
-		this.resetIfRequired();
-		if (this.maxWidth == null || this.maxWidth == undefined) {
-			this.maxWidth = new CommandAttr<string>();
-		}
-		
-		this.maxWidth.setSetter(true);
-		this.maxWidth.setValue(value);
-		this.orderSet++;
-		this.maxWidth.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetMaxHeight() : T {
-		this.resetIfRequired();
-		if (this.maxHeight == null || this.maxHeight == undefined) {
-			this.maxHeight = new CommandAttr<string>()
-		}
-		
-		this.maxHeight.setGetter(true);
-		this.orderGet++;
-		this.maxHeight.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getMaxHeight() : string {
-		if (this.maxHeight == null || this.maxHeight == undefined) {
-			this.maxHeight = new CommandAttr<string>();
-		}
-		return this.maxHeight.getCommandReturnValue();
-	}
-	public setMaxHeight(value : string) : T {
-		this.resetIfRequired();
-		if (this.maxHeight == null || this.maxHeight == undefined) {
-			this.maxHeight = new CommandAttr<string>();
-		}
-		
-		this.maxHeight.setSetter(true);
-		this.maxHeight.setValue(value);
-		this.orderSet++;
-		this.maxHeight.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetHeight() : T {
-		this.resetIfRequired();
-		if (this.height == null || this.height == undefined) {
-			this.height = new CommandAttr<string>()
-		}
-		
-		this.height.setGetter(true);
-		this.orderGet++;
-		this.height.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getHeight() : string {
-		if (this.height == null || this.height == undefined) {
-			this.height = new CommandAttr<string>();
-		}
-		return this.height.getCommandReturnValue();
-	}
-	public setHeight(value : string) : T {
-		this.resetIfRequired();
-		if (this.height == null || this.height == undefined) {
-			this.height = new CommandAttr<string>();
-		}
-		
-		this.height.setSetter(true);
-		this.height.setValue(value);
-		this.orderSet++;
-		this.height.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetWidth() : T {
-		this.resetIfRequired();
-		if (this.width == null || this.width == undefined) {
-			this.width = new CommandAttr<string>()
-		}
-		
-		this.width.setGetter(true);
-		this.orderGet++;
-		this.width.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getWidth() : string {
-		if (this.width == null || this.width == undefined) {
-			this.width = new CommandAttr<string>();
-		}
-		return this.width.getCommandReturnValue();
-	}
-	public setWidth(value : string) : T {
-		this.resetIfRequired();
-		if (this.width == null || this.width == undefined) {
-			this.width = new CommandAttr<string>();
-		}
-		
-		this.width.setSetter(true);
-		this.width.setValue(value);
-		this.orderSet++;
-		this.width.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetMaxEms() : T {
-		this.resetIfRequired();
-		if (this.maxEms == null || this.maxEms == undefined) {
-			this.maxEms = new CommandAttr<number>()
-		}
-		
-		this.maxEms.setGetter(true);
-		this.orderGet++;
-		this.maxEms.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getMaxEms() : number {
-		if (this.maxEms == null || this.maxEms == undefined) {
-			this.maxEms = new CommandAttr<number>();
-		}
-		return this.maxEms.getCommandReturnValue();
-	}
-	public setMaxEms(value : number) : T {
-		this.resetIfRequired();
-		if (this.maxEms == null || this.maxEms == undefined) {
-			this.maxEms = new CommandAttr<number>();
-		}
-		
-		this.maxEms.setSetter(true);
-		this.maxEms.setValue(value);
-		this.orderSet++;
-		this.maxEms.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetMinEms() : T {
-		this.resetIfRequired();
-		if (this.minEms == null || this.minEms == undefined) {
-			this.minEms = new CommandAttr<number>()
-		}
-		
-		this.minEms.setGetter(true);
-		this.orderGet++;
-		this.minEms.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getMinEms() : number {
-		if (this.minEms == null || this.minEms == undefined) {
-			this.minEms = new CommandAttr<number>();
-		}
-		return this.minEms.getCommandReturnValue();
-	}
-	public setMinEms(value : number) : T {
-		this.resetIfRequired();
-		if (this.minEms == null || this.minEms == undefined) {
-			this.minEms = new CommandAttr<number>();
-		}
-		
-		this.minEms.setSetter(true);
-		this.minEms.setValue(value);
-		this.orderSet++;
-		this.minEms.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setEms(value : number) : T {
-		this.resetIfRequired();
-		if (this.ems == null || this.ems == undefined) {
-			this.ems = new CommandAttr<number>();
-		}
-		
-		this.ems.setSetter(true);
-		this.ems.setValue(value);
-		this.orderSet++;
-		this.ems.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetMarqueeRepeatLimit() : T {
-		this.resetIfRequired();
-		if (this.marqueeRepeatLimit == null || this.marqueeRepeatLimit == undefined) {
-			this.marqueeRepeatLimit = new CommandAttr<string>()
-		}
-		
-		this.marqueeRepeatLimit.setGetter(true);
-		this.orderGet++;
-		this.marqueeRepeatLimit.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getMarqueeRepeatLimit() : string {
-		if (this.marqueeRepeatLimit == null || this.marqueeRepeatLimit == undefined) {
-			this.marqueeRepeatLimit = new CommandAttr<string>();
-		}
-		return this.marqueeRepeatLimit.getCommandReturnValue();
-	}
-	public setMarqueeRepeatLimit(value : string) : T {
-		this.resetIfRequired();
-		if (this.marqueeRepeatLimit == null || this.marqueeRepeatLimit == undefined) {
-			this.marqueeRepeatLimit = new CommandAttr<string>();
-		}
-		
-		this.marqueeRepeatLimit.setSetter(true);
-		this.marqueeRepeatLimit.setValue(value);
-		this.orderSet++;
-		this.marqueeRepeatLimit.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setEditable(value : boolean) : T {
-		this.resetIfRequired();
-		if (this.editable == null || this.editable == undefined) {
-			this.editable = new CommandAttr<boolean>();
-		}
-		
-		this.editable.setSetter(true);
-		this.editable.setValue(value);
-		this.orderSet++;
-		this.editable.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setMaxLength(value : number) : T {
-		this.resetIfRequired();
-		if (this.maxLength == null || this.maxLength == undefined) {
-			this.maxLength = new CommandAttr<number>();
-		}
-		
-		this.maxLength.setSetter(true);
-		this.maxLength.setValue(value);
-		this.orderSet++;
-		this.maxLength.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setTypeface(value : string) : T {
-		this.resetIfRequired();
-		if (this.typeface == null || this.typeface == undefined) {
-			this.typeface = new CommandAttr<string>();
-		}
-		
-		this.typeface.setSetter(true);
-		this.typeface.setValue(value);
-		this.orderSet++;
-		this.typeface.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setTextStyle(...value : TextStyle[]) : T {
-		this.resetIfRequired();
-		if (this.textStyle == null || this.textStyle == undefined) {
-			this.textStyle = new CommandAttr<TextStyle[]>();
-		}
-		
-		this.textStyle.setSetter(true);
-		this.textStyle.setValue(value);
-		this.orderSet++;
-		this.textStyle.setOrderSet(this.orderSet);
-this.textStyle.setTransformer('textStyle');		return this.thisPointer;
-	}
-		
-
-	public setFontFamily(value : string) : T {
-		this.resetIfRequired();
-		if (this.fontFamily == null || this.fontFamily == undefined) {
-			this.fontFamily = new CommandAttr<string>();
-		}
-		
-		this.fontFamily.setSetter(true);
-		this.fontFamily.setValue(value);
-		this.orderSet++;
-		this.fontFamily.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setTextFormat(value : string) : T {
-		this.resetIfRequired();
-		if (this.textFormat == null || this.textFormat == undefined) {
-			this.textFormat = new CommandAttr<string>();
-		}
-		
-		this.textFormat.setSetter(true);
-		this.textFormat.setValue(value);
-		this.orderSet++;
-		this.textFormat.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setEnabled(value : boolean) : T {
-		this.resetIfRequired();
-		if (this.enabled == null || this.enabled == undefined) {
-			this.enabled = new CommandAttr<boolean>();
-		}
-		
-		this.enabled.setSetter(true);
-		this.enabled.setValue(value);
-		this.orderSet++;
-		this.enabled.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

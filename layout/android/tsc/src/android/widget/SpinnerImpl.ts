@@ -44,19 +44,6 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -93,6 +80,19 @@ export class TextStyleTransformer implements ITranform {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class SpinnerImpl<T> extends ViewImpl<T>{
@@ -100,45 +100,6 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 	static initialize() {
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "dropDownHorizontalOffset" })
-	dropDownHorizontalOffset!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "dropDownVerticalOffset" })
-	dropDownVerticalOffset!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "dropDownWidth" })
-	dropDownWidth!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "prompt" })
-	prompt!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "selection" })
-	selection!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "entries" })
-	entries!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onItemSelected" })
-	onItemSelected!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "modelOptionTextPath" })
-	modelOptionTextPath!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "modelOptionValuePath" })
-	modelOptionValuePath!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "listitem" })
-	listitem!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "values" })
-	values!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "selectedValue" })
-	selectedValue!:CommandAttr<any>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hintTextFormat" })
-	hintTextFormat!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "drawablePadding" })
 	drawablePadding!:CommandAttr<string>| undefined;
@@ -196,25 +157,51 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "textColorHint" })
 	textColorHint!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "dropDownHorizontalOffset" })
+	dropDownHorizontalOffset!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "dropDownVerticalOffset" })
+	dropDownVerticalOffset!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "dropDownWidth" })
+	dropDownWidth!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "prompt" })
+	prompt!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "selection" })
+	selection!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "entries" })
+	entries!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onItemSelected" })
+	onItemSelected!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "modelOptionTextPath" })
+	modelOptionTextPath!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "modelOptionValuePath" })
+	modelOptionValuePath!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "listitem" })
+	listitem!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "values" })
+	values!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "selectedValue" })
+	selectedValue!:CommandAttr<any>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "hintTextFormat" })
+	hintTextFormat!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
-		this.dropDownHorizontalOffset = undefined;
-		this.dropDownVerticalOffset = undefined;
-		this.dropDownWidth = undefined;
-		this.prompt = undefined;
-		this.selection = undefined;
-		this.entries = undefined;
-		this.onItemSelected = undefined;
-		this.modelOptionTextPath = undefined;
-		this.modelOptionValuePath = undefined;
-		this.listitem = undefined;
-		this.values = undefined;
-		this.selectedValue = undefined;
-		this.hintTextFormat = undefined;
 		this.drawablePadding = undefined;
 		this.gravity = undefined;
 		this.textColor = undefined;
@@ -234,6 +221,19 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 		this.drawableTintMode = undefined;
 		this.hint = undefined;
 		this.textColorHint = undefined;
+		this.dropDownHorizontalOffset = undefined;
+		this.dropDownVerticalOffset = undefined;
+		this.dropDownWidth = undefined;
+		this.prompt = undefined;
+		this.selection = undefined;
+		this.entries = undefined;
+		this.onItemSelected = undefined;
+		this.modelOptionTextPath = undefined;
+		this.modelOptionValuePath = undefined;
+		this.listitem = undefined;
+		this.values = undefined;
+		this.selectedValue = undefined;
+		this.hintTextFormat = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -241,260 +241,6 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
-
-	public tryGetDropDownHorizontalOffset() : T {
-		this.resetIfRequired();
-		if (this.dropDownHorizontalOffset == null || this.dropDownHorizontalOffset == undefined) {
-			this.dropDownHorizontalOffset = new CommandAttr<string>()
-		}
-		
-		this.dropDownHorizontalOffset.setGetter(true);
-		this.orderGet++;
-		this.dropDownHorizontalOffset.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getDropDownHorizontalOffset() : string {
-		if (this.dropDownHorizontalOffset == null || this.dropDownHorizontalOffset == undefined) {
-			this.dropDownHorizontalOffset = new CommandAttr<string>();
-		}
-		return this.dropDownHorizontalOffset.getCommandReturnValue();
-	}
-	public setDropDownHorizontalOffset(value : string) : T {
-		this.resetIfRequired();
-		if (this.dropDownHorizontalOffset == null || this.dropDownHorizontalOffset == undefined) {
-			this.dropDownHorizontalOffset = new CommandAttr<string>();
-		}
-		
-		this.dropDownHorizontalOffset.setSetter(true);
-		this.dropDownHorizontalOffset.setValue(value);
-		this.orderSet++;
-		this.dropDownHorizontalOffset.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetDropDownVerticalOffset() : T {
-		this.resetIfRequired();
-		if (this.dropDownVerticalOffset == null || this.dropDownVerticalOffset == undefined) {
-			this.dropDownVerticalOffset = new CommandAttr<string>()
-		}
-		
-		this.dropDownVerticalOffset.setGetter(true);
-		this.orderGet++;
-		this.dropDownVerticalOffset.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getDropDownVerticalOffset() : string {
-		if (this.dropDownVerticalOffset == null || this.dropDownVerticalOffset == undefined) {
-			this.dropDownVerticalOffset = new CommandAttr<string>();
-		}
-		return this.dropDownVerticalOffset.getCommandReturnValue();
-	}
-	public setDropDownVerticalOffset(value : string) : T {
-		this.resetIfRequired();
-		if (this.dropDownVerticalOffset == null || this.dropDownVerticalOffset == undefined) {
-			this.dropDownVerticalOffset = new CommandAttr<string>();
-		}
-		
-		this.dropDownVerticalOffset.setSetter(true);
-		this.dropDownVerticalOffset.setValue(value);
-		this.orderSet++;
-		this.dropDownVerticalOffset.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetDropDownWidth() : T {
-		this.resetIfRequired();
-		if (this.dropDownWidth == null || this.dropDownWidth == undefined) {
-			this.dropDownWidth = new CommandAttr<string>()
-		}
-		
-		this.dropDownWidth.setGetter(true);
-		this.orderGet++;
-		this.dropDownWidth.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getDropDownWidth() : string {
-		if (this.dropDownWidth == null || this.dropDownWidth == undefined) {
-			this.dropDownWidth = new CommandAttr<string>();
-		}
-		return this.dropDownWidth.getCommandReturnValue();
-	}
-	public setDropDownWidth(value : string) : T {
-		this.resetIfRequired();
-		if (this.dropDownWidth == null || this.dropDownWidth == undefined) {
-			this.dropDownWidth = new CommandAttr<string>();
-		}
-		
-		this.dropDownWidth.setSetter(true);
-		this.dropDownWidth.setValue(value);
-		this.orderSet++;
-		this.dropDownWidth.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setPrompt(value : string) : T {
-		this.resetIfRequired();
-		if (this.prompt == null || this.prompt == undefined) {
-			this.prompt = new CommandAttr<string>();
-		}
-		
-		this.prompt.setSetter(true);
-		this.prompt.setValue(value);
-		this.orderSet++;
-		this.prompt.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setSelection(value : number) : T {
-		this.resetIfRequired();
-		if (this.selection == null || this.selection == undefined) {
-			this.selection = new CommandAttr<number>();
-		}
-		
-		this.selection.setSetter(true);
-		this.selection.setValue(value);
-		this.orderSet++;
-		this.selection.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setEntries(value : string) : T {
-		this.resetIfRequired();
-		if (this.entries == null || this.entries == undefined) {
-			this.entries = new CommandAttr<string>();
-		}
-		
-		this.entries.setSetter(true);
-		this.entries.setValue(value);
-		this.orderSet++;
-		this.entries.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnItemSelected(value : string) : T {
-		this.resetIfRequired();
-		if (this.onItemSelected == null || this.onItemSelected == undefined) {
-			this.onItemSelected = new CommandAttr<string>();
-		}
-		
-		this.onItemSelected.setSetter(true);
-		this.onItemSelected.setValue(value);
-		this.orderSet++;
-		this.onItemSelected.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setModelOptionTextPath(value : string) : T {
-		this.resetIfRequired();
-		if (this.modelOptionTextPath == null || this.modelOptionTextPath == undefined) {
-			this.modelOptionTextPath = new CommandAttr<string>();
-		}
-		
-		this.modelOptionTextPath.setSetter(true);
-		this.modelOptionTextPath.setValue(value);
-		this.orderSet++;
-		this.modelOptionTextPath.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setModelOptionValuePath(value : string) : T {
-		this.resetIfRequired();
-		if (this.modelOptionValuePath == null || this.modelOptionValuePath == undefined) {
-			this.modelOptionValuePath = new CommandAttr<string>();
-		}
-		
-		this.modelOptionValuePath.setSetter(true);
-		this.modelOptionValuePath.setValue(value);
-		this.orderSet++;
-		this.modelOptionValuePath.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setListitem(value : string) : T {
-		this.resetIfRequired();
-		if (this.listitem == null || this.listitem == undefined) {
-			this.listitem = new CommandAttr<string>();
-		}
-		
-		this.listitem.setSetter(true);
-		this.listitem.setValue(value);
-		this.orderSet++;
-		this.listitem.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setValues(value : string) : T {
-		this.resetIfRequired();
-		if (this.values == null || this.values == undefined) {
-			this.values = new CommandAttr<string>();
-		}
-		
-		this.values.setSetter(true);
-		this.values.setValue(value);
-		this.orderSet++;
-		this.values.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetSelectedValue() : T {
-		this.resetIfRequired();
-		if (this.selectedValue == null || this.selectedValue == undefined) {
-			this.selectedValue = new CommandAttr<any>()
-		}
-		
-		this.selectedValue.setGetter(true);
-		this.orderGet++;
-		this.selectedValue.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getSelectedValue() : any {
-		if (this.selectedValue == null || this.selectedValue == undefined) {
-			this.selectedValue = new CommandAttr<any>();
-		}
-		return this.selectedValue.getCommandReturnValue();
-	}
-	public setSelectedValue(value : any) : T {
-		this.resetIfRequired();
-		if (this.selectedValue == null || this.selectedValue == undefined) {
-			this.selectedValue = new CommandAttr<any>();
-		}
-		
-		this.selectedValue.setSetter(true);
-		this.selectedValue.setValue(value);
-		this.orderSet++;
-		this.selectedValue.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setHintTextFormat(value : string) : T {
-		this.resetIfRequired();
-		if (this.hintTextFormat == null || this.hintTextFormat == undefined) {
-			this.hintTextFormat = new CommandAttr<string>();
-		}
-		
-		this.hintTextFormat.setSetter(true);
-		this.hintTextFormat.setValue(value);
-		this.orderSet++;
-		this.hintTextFormat.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
 
 	public tryGetDrawablePadding() : T {
 		this.resetIfRequired();
@@ -848,6 +594,260 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.textColorHint.setValue(value);
 		this.orderSet++;
 		this.textColorHint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetDropDownHorizontalOffset() : T {
+		this.resetIfRequired();
+		if (this.dropDownHorizontalOffset == null || this.dropDownHorizontalOffset == undefined) {
+			this.dropDownHorizontalOffset = new CommandAttr<string>()
+		}
+		
+		this.dropDownHorizontalOffset.setGetter(true);
+		this.orderGet++;
+		this.dropDownHorizontalOffset.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getDropDownHorizontalOffset() : string {
+		if (this.dropDownHorizontalOffset == null || this.dropDownHorizontalOffset == undefined) {
+			this.dropDownHorizontalOffset = new CommandAttr<string>();
+		}
+		return this.dropDownHorizontalOffset.getCommandReturnValue();
+	}
+	public setDropDownHorizontalOffset(value : string) : T {
+		this.resetIfRequired();
+		if (this.dropDownHorizontalOffset == null || this.dropDownHorizontalOffset == undefined) {
+			this.dropDownHorizontalOffset = new CommandAttr<string>();
+		}
+		
+		this.dropDownHorizontalOffset.setSetter(true);
+		this.dropDownHorizontalOffset.setValue(value);
+		this.orderSet++;
+		this.dropDownHorizontalOffset.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetDropDownVerticalOffset() : T {
+		this.resetIfRequired();
+		if (this.dropDownVerticalOffset == null || this.dropDownVerticalOffset == undefined) {
+			this.dropDownVerticalOffset = new CommandAttr<string>()
+		}
+		
+		this.dropDownVerticalOffset.setGetter(true);
+		this.orderGet++;
+		this.dropDownVerticalOffset.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getDropDownVerticalOffset() : string {
+		if (this.dropDownVerticalOffset == null || this.dropDownVerticalOffset == undefined) {
+			this.dropDownVerticalOffset = new CommandAttr<string>();
+		}
+		return this.dropDownVerticalOffset.getCommandReturnValue();
+	}
+	public setDropDownVerticalOffset(value : string) : T {
+		this.resetIfRequired();
+		if (this.dropDownVerticalOffset == null || this.dropDownVerticalOffset == undefined) {
+			this.dropDownVerticalOffset = new CommandAttr<string>();
+		}
+		
+		this.dropDownVerticalOffset.setSetter(true);
+		this.dropDownVerticalOffset.setValue(value);
+		this.orderSet++;
+		this.dropDownVerticalOffset.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetDropDownWidth() : T {
+		this.resetIfRequired();
+		if (this.dropDownWidth == null || this.dropDownWidth == undefined) {
+			this.dropDownWidth = new CommandAttr<string>()
+		}
+		
+		this.dropDownWidth.setGetter(true);
+		this.orderGet++;
+		this.dropDownWidth.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getDropDownWidth() : string {
+		if (this.dropDownWidth == null || this.dropDownWidth == undefined) {
+			this.dropDownWidth = new CommandAttr<string>();
+		}
+		return this.dropDownWidth.getCommandReturnValue();
+	}
+	public setDropDownWidth(value : string) : T {
+		this.resetIfRequired();
+		if (this.dropDownWidth == null || this.dropDownWidth == undefined) {
+			this.dropDownWidth = new CommandAttr<string>();
+		}
+		
+		this.dropDownWidth.setSetter(true);
+		this.dropDownWidth.setValue(value);
+		this.orderSet++;
+		this.dropDownWidth.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setPrompt(value : string) : T {
+		this.resetIfRequired();
+		if (this.prompt == null || this.prompt == undefined) {
+			this.prompt = new CommandAttr<string>();
+		}
+		
+		this.prompt.setSetter(true);
+		this.prompt.setValue(value);
+		this.orderSet++;
+		this.prompt.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSelection(value : number) : T {
+		this.resetIfRequired();
+		if (this.selection == null || this.selection == undefined) {
+			this.selection = new CommandAttr<number>();
+		}
+		
+		this.selection.setSetter(true);
+		this.selection.setValue(value);
+		this.orderSet++;
+		this.selection.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setEntries(value : string) : T {
+		this.resetIfRequired();
+		if (this.entries == null || this.entries == undefined) {
+			this.entries = new CommandAttr<string>();
+		}
+		
+		this.entries.setSetter(true);
+		this.entries.setValue(value);
+		this.orderSet++;
+		this.entries.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnItemSelected(value : string) : T {
+		this.resetIfRequired();
+		if (this.onItemSelected == null || this.onItemSelected == undefined) {
+			this.onItemSelected = new CommandAttr<string>();
+		}
+		
+		this.onItemSelected.setSetter(true);
+		this.onItemSelected.setValue(value);
+		this.orderSet++;
+		this.onItemSelected.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setModelOptionTextPath(value : string) : T {
+		this.resetIfRequired();
+		if (this.modelOptionTextPath == null || this.modelOptionTextPath == undefined) {
+			this.modelOptionTextPath = new CommandAttr<string>();
+		}
+		
+		this.modelOptionTextPath.setSetter(true);
+		this.modelOptionTextPath.setValue(value);
+		this.orderSet++;
+		this.modelOptionTextPath.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setModelOptionValuePath(value : string) : T {
+		this.resetIfRequired();
+		if (this.modelOptionValuePath == null || this.modelOptionValuePath == undefined) {
+			this.modelOptionValuePath = new CommandAttr<string>();
+		}
+		
+		this.modelOptionValuePath.setSetter(true);
+		this.modelOptionValuePath.setValue(value);
+		this.orderSet++;
+		this.modelOptionValuePath.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setListitem(value : string) : T {
+		this.resetIfRequired();
+		if (this.listitem == null || this.listitem == undefined) {
+			this.listitem = new CommandAttr<string>();
+		}
+		
+		this.listitem.setSetter(true);
+		this.listitem.setValue(value);
+		this.orderSet++;
+		this.listitem.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setValues(value : string) : T {
+		this.resetIfRequired();
+		if (this.values == null || this.values == undefined) {
+			this.values = new CommandAttr<string>();
+		}
+		
+		this.values.setSetter(true);
+		this.values.setValue(value);
+		this.orderSet++;
+		this.values.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetSelectedValue() : T {
+		this.resetIfRequired();
+		if (this.selectedValue == null || this.selectedValue == undefined) {
+			this.selectedValue = new CommandAttr<any>()
+		}
+		
+		this.selectedValue.setGetter(true);
+		this.orderGet++;
+		this.selectedValue.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getSelectedValue() : any {
+		if (this.selectedValue == null || this.selectedValue == undefined) {
+			this.selectedValue = new CommandAttr<any>();
+		}
+		return this.selectedValue.getCommandReturnValue();
+	}
+	public setSelectedValue(value : any) : T {
+		this.resetIfRequired();
+		if (this.selectedValue == null || this.selectedValue == undefined) {
+			this.selectedValue = new CommandAttr<any>();
+		}
+		
+		this.selectedValue.setSetter(true);
+		this.selectedValue.setValue(value);
+		this.orderSet++;
+		this.selectedValue.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setHintTextFormat(value : string) : T {
+		this.resetIfRequired();
+		if (this.hintTextFormat == null || this.hintTextFormat == undefined) {
+			this.hintTextFormat = new CommandAttr<string>();
+		}
+		
+		this.hintTextFormat.setSetter(true);
+		this.hintTextFormat.setValue(value);
+		this.orderSet++;
+		this.hintTextFormat.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

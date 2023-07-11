@@ -172,7 +172,7 @@ public class ListViewImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new ListViewImpl();
+		return new ListViewImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -297,12 +297,7 @@ public class ListViewImpl extends BaseHasWidgets {
 		}
 
 		public ListViewExt() {
-			
 			super();
-			
-			
-			
-			
 			
 		}
 		
@@ -390,7 +385,44 @@ public class ListViewImpl extends BaseHasWidgets {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ListViewImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(ListViewImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	ListViewImpl.this.getParent().remove(ListViewImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -400,19 +432,32 @@ public class ListViewImpl extends BaseHasWidgets {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			ListViewImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ViewImpl.nativeSetVisibility(asNativeWidget(), visibility != View.VISIBLE);
             
         }
+        @Override
+        public int measureHeightOfChildren(int widthMeasureSpec, int startPosition, int endPosition, int maxHeight,
+        	int disallowPartialChildPosition) {
+        	int height = 0;
+        	
+        	for (int i = 0; i < dataList.size(); i++) {
+        		height += calculateHeightOfRow(i);
+			}
+        	return height;
+        }
+	}
+	@Override
+	public Class getViewClass() {
+		return ListViewExt.class;
 	}
 	
-	public void updateMeasuredDimension(int width, int height) {
-		((ListViewExt) listView).updateMeasuredDimension(width, height);
-	}
-	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -1064,22 +1109,30 @@ return getDividerHeight();			}
 
 
     private ListAdapter listAdapter;
-    class ListAdapter extends BaseAdapter{
+    public ListAdapter getListAdapter() {
+		return listAdapter;
+	}
+
+	class ListAdapter extends BaseAdapter  implements Filterable{
+    	private final Object mLock = new Object();
+    	private ArrayFilter mFilter;
+    	private List<com.ashera.model.LoopParam> mObjects;
         @Override
         public boolean isEnabled(int position) {
             return true;
         }
         public ListAdapter() {
+        	mObjects = dataList;
         }
         
         @Override
         public int getCount() {
-            return dataList.size();
+            return mObjects.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return dataList.get(position);
+            return mObjects.get(position);
         }
         
         @Override
@@ -1094,7 +1147,7 @@ return getDividerHeight();			}
         
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            com.ashera.model.LoopParam model = dataList.get(position);
+            com.ashera.model.LoopParam model = mObjects.get(position);
             IWidget myWidget;
             if (convertView == null) {
                 myWidget = (IWidget) getListItem().loadLazyWidgets(model);
@@ -1108,7 +1161,79 @@ return getDividerHeight();			}
             return (View) myWidget.asNativeWidget();
         }
         
+        public Filter getFilter() {
+            if (mFilter == null) {
+                mFilter = new ArrayFilter();
+            }
+            return mFilter;
+        }
+        
+        public void dofilterSync(String text) {
+        	getFilter();
+        	mFilter.publishResults(text, mFilter.performFiltering(text));
+        }
+        
+        private class ArrayFilter extends Filter {
+            @Override
+            protected FilterResults performFiltering(CharSequence prefix) {
+                final FilterResults results = new FilterResults();
+
+                if (prefix == null || prefix.length() == 0) {
+                    final ArrayList<com.ashera.model.LoopParam> list;
+                    synchronized (mLock) {
+                        list = new ArrayList<>(dataList);
+                    }
+                    results.values = list;
+                    results.count = list.size();
+                } else {
+                    final String prefixString = prefix.toString().toLowerCase();
+
+                    final ArrayList<com.ashera.model.LoopParam> values;
+                    synchronized (mLock) {
+                        values = new ArrayList<>(dataList);
+                    }
+
+                    final int count = values.size();
+                    final ArrayList<com.ashera.model.LoopParam> newValues = new ArrayList<>();
+
+                    for (int i = 0; i < count; i++) {
+                        final com.ashera.model.LoopParam value = values.get(i);
+                        final String valueText = value.toString().toLowerCase();
+
+                        // First match against the whole, non-splitted value
+                        if (valueText.startsWith(prefixString)) {
+                            newValues.add(value);
+                        } else {
+                            final String[] words = valueText.split(" ");
+                            for (String word : words) {
+                                if (word.startsWith(prefixString)) {
+                                    newValues.add(value);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    results.values = newValues;
+                    results.count = newValues.size();
+                }
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                //noinspection unchecked
+                mObjects = (List<com.ashera.model.LoopParam>) results.values;
+                if (results.count > 0) {
+                    notifyDataSetChanged();
+                } else {
+                    notifyDataSetInvalidated();
+                }
+            }
+        }
     }
+
     
 
 
@@ -1659,6 +1784,10 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 	}
 	
     
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
 
 	
 private ListViewCommandBuilder builder;
@@ -2831,7 +2960,7 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
         }
 	}
 	
-	private void setOnItemClick(Object objValue) {
+	public void setOnItemClick(Object objValue) {
 		this.onItemClick = objValue;
 		updateTableSelection();
 	}
@@ -3336,6 +3465,9 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
 			}
 		}
 		
+	}
+	public List<com.ashera.model.LoopParam> getData() {
+		return dataList;
 	}
 
 }

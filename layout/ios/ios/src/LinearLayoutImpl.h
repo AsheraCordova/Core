@@ -25,6 +25,7 @@
 @class ASLinearLayoutImpl_LinearLayoutCommandParamsBuilder;
 @class ASLinearLayoutImpl_LinearLayoutParamsBean;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -70,6 +71,8 @@
 
 - (id)getPluginWithNSString:(NSString *)plugin;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)localName;
@@ -96,8 +99,7 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 @end
 
@@ -225,8 +227,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 #include "IMaxDimension.h"
 
 @class ADContext;
+@class ADRect;
+@class ADView;
 @class ASLinearLayoutImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
@@ -244,11 +249,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -261,6 +272,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -268,6 +283,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -502,6 +520,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setMinWidthWithNSString:(NSString *)arg0;
 
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setModelDescPathWithNSString:(NSString *)arg0;
+
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setModelForWithNSString:(NSString *)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setModelIdPathWithNSString:(NSString *)arg0;
@@ -530,9 +550,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOrientationWithNSString:(NSString *)value;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setPaddingBottomWithNSString:(NSString *)arg0;
 
@@ -723,6 +747,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetMinHeight;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetMinWidth;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetModelDescPath;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetModelIdPath;
 

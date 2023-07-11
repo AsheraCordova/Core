@@ -29,6 +29,7 @@ public class ViewGroupModelImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("removeModelById").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelFor").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelIdPath").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelDescPath").withType("string").withOrder(-1));
 		
 	}
 	
@@ -37,6 +38,13 @@ public class ViewGroupModelImpl {
 		//ViewGroup viewGroup = ((ViewGroup) w.asWidget());
 		org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) w.asNativeWidget();
 		ViewImpl.setAttribute(w, key, strValue, objValue, decorator);
+		setMyAttribute(w, key, strValue, objValue, decorator);
+	}
+	
+	private static void setMyAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
+		//ViewGroup viewGroup = ((ViewGroup) w.asWidget());
+		org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) w.asNativeWidget();
+
 		switch (key.getAttributeName()) {
 			case "addModel": {
 
@@ -101,6 +109,15 @@ public class ViewGroupModelImpl {
 
 			}
 			break;
+			case "modelDescPath": {
+
+
+		setModelDescPath(w, strValue, objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -121,6 +138,8 @@ public class ViewGroupModelImpl {
 		switch (key.getAttributeName()) {
 			case "modelIdPath": {				
 return getModelIdPath(w);			}
+			case "modelDescPath": {				
+return getModelDescPath(w);			}
 		}
 		return null;
 	}
@@ -172,6 +191,14 @@ return getModelIdPath(w);			}
 		((HasWidgets)w).addAllModel(objValue);
 	}
 	
+	private static void setModelDescPath(IWidget w, String strValue, Object objValue) {
+		((HasWidgets)w).setModelDescPath((String) objValue);
+	}
+	
+	private static Object getModelDescPath(IWidget w) {
+		return ((HasWidgets)w).getModelDescPath();
+	}
+	
 
 	
 	@SuppressLint("NewApi")
@@ -196,6 +223,9 @@ return getModelIdPath(w);			}
 				return true;
 			}
 			case "modelIdPath": {
+				return true;
+			}
+			case "modelDescPath": {
 				return true;
 			}
 		default:
@@ -282,6 +312,25 @@ public T setModelIdPath(String value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T tryGetModelDescPath() {
+	Map<String, Object> attrs = initCommand("modelDescPath");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getModelDescPath() {
+	Map<String, Object> attrs = initCommand("modelDescPath");
+	return attrs.get("commandReturnValue");
+}
+public T setModelDescPath(String value) {
+	Map<String, Object> attrs = initCommand("modelDescPath");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 }
 static class ViewGroupModelCommandBuilderInternal extends ViewGroupModelCommandBuilder<ViewGroupModelCommandBuilderInternal> {
 	private IWidget widget;
@@ -337,6 +386,13 @@ public Object getModelIdPath() {
 }
 public void setModelIdPath(String value) {
 	getBuilder().reset().setModelIdPath(value).execute(true);
+}
+
+public Object getModelDescPath() {
+	return getBuilder().reset().tryGetModelDescPath().execute(false).getModelDescPath(); 
+}
+public void setModelDescPath(String value) {
+	getBuilder().reset().setModelDescPath(value).execute(true);
 }
 
 }

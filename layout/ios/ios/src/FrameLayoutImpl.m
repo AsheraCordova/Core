@@ -6,16 +6,20 @@
 #include "BaseHasWidgets.h"
 #include "FrameLayout.h"
 #include "FrameLayoutImpl.h"
+#include "HasWidgets.h"
 #include "IAttributable.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
+#include "IOSPrimitiveArray.h"
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
 #include "IdGenerator.h"
 #include "J2ObjC_source.h"
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
+#include "Rect.h"
 #include "View.h"
 #include "ViewGroup.h"
 #include "ViewGroupImpl.h"
@@ -32,6 +36,8 @@
 #include <UIKit/UIKit.h>
 #include "ASUIView.h"
 #include "HasLifeCycleDecorators.h"
+
+@protocol JavaUtilMap;
 
 
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
@@ -74,12 +80,14 @@ __attribute__((unused)) static ADFrameLayout_LayoutParams *ASFrameLayoutImpl_get
   ASOnLayoutEvent *onLayoutEvent_;
   jint mMaxWidth_;
   jint mMaxHeight_;
+  id<JavaUtilMap> templates_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(ASFrameLayoutImpl_FrameLayoutExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASFrameLayoutImpl_FrameLayoutExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASFrameLayoutImpl_FrameLayoutExt, templates_, id<JavaUtilMap>)
 
 @interface ASFrameLayoutImpl_FrameLayoutCommandBuilder () {
  @public
@@ -135,7 +143,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<ASIWidget>)newInstance {
-  return new_ASFrameLayoutImpl_init();
+  return new_ASFrameLayoutImpl_initWithNSString_withNSString_(groupName_, localName_);
 }
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
@@ -242,9 +250,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
-  [((ASFrameLayoutImpl_FrameLayoutExt *) nil_chk(((ASFrameLayoutImpl_FrameLayoutExt *) cast_chk(frameLayout_, [ASFrameLayoutImpl_FrameLayoutExt class])))) updateMeasuredDimensionWithInt:width withInt:height];
+- (IOSClass *)getViewClass {
+  return ASFrameLayoutImpl_FrameLayoutExt_class_();
 }
 
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
@@ -320,6 +327,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
+- (void)setVisibleWithBoolean:(jboolean)b {
+  [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
+}
+
 - (id)getPluginWithNSString:(NSString *)plugin {
   return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
 }
@@ -369,15 +380,16 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LADFrameLayout_LayoutParams;", 0x2, 13, 12, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 18, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 20, 21, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 24, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 25, 26, -1, 27, -1, -1 },
+    { NULL, "Z", 0x101, 22, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 23, 24, -1, 25, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 28, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 27, 28, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 29, 1, -1, -1, -1, -1 },
     { NULL, "LASFrameLayoutImpl_FrameLayoutBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASFrameLayoutImpl_FrameLayoutCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -402,7 +414,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[12].selector = @selector(getLayoutParamsWithADView:);
   methods[13].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
   methods[14].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
-  methods[15].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
+  methods[15].selector = @selector(getViewClass);
   methods[16].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
   methods[17].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
   methods[18].selector = @selector(asNativeWidget);
@@ -411,11 +423,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[21].selector = @selector(requestLayout);
   methods[22].selector = @selector(invalidate);
   methods[23].selector = @selector(setIdWithNSString:);
-  methods[24].selector = @selector(getPluginWithNSString:);
-  methods[25].selector = @selector(getBean);
-  methods[26].selector = @selector(getBuilder);
-  methods[27].selector = @selector(getParamsBean);
-  methods[28].selector = @selector(getParamsBuilder);
+  methods[24].selector = @selector(setVisibleWithBoolean:);
+  methods[25].selector = @selector(getPluginWithNSString:);
+  methods[26].selector = @selector(getBean);
+  methods[27].selector = @selector(getBuilder);
+  methods[28].selector = @selector(getParamsBean);
+  methods[29].selector = @selector(getParamsBuilder);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -427,8 +440,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "paramsBuilder_", "LASFrameLayoutImpl_FrameLayoutCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "paramsBean_", "LASFrameLayoutImpl_FrameLayoutParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "updateMeasuredDimension", "II", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setId", "getPlugin", &ASFrameLayoutImpl_LOCAL_NAME, &ASFrameLayoutImpl_GROUP_NAME, "LASFrameLayoutImpl_FrameLayoutExt;LASFrameLayoutImpl_FrameLayoutCommandBuilder;LASFrameLayoutImpl_FrameLayoutBean;LASFrameLayoutImpl_FrameLayoutParamsBean;LASFrameLayoutImpl_FrameLayoutCommandParamsBuilder;" };
-  static const J2ObjcClassInfo _ASFrameLayoutImpl = { "FrameLayoutImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 29, 8, -1, 32, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setId", "setVisible", "Z", "getPlugin", &ASFrameLayoutImpl_LOCAL_NAME, &ASFrameLayoutImpl_GROUP_NAME, "LASFrameLayoutImpl_FrameLayoutExt;LASFrameLayoutImpl_FrameLayoutCommandBuilder;LASFrameLayoutImpl_FrameLayoutBean;LASFrameLayoutImpl_FrameLayoutParamsBean;LASFrameLayoutImpl_FrameLayoutCommandParamsBuilder;" };
+  static const J2ObjcClassInfo _ASFrameLayoutImpl = { "FrameLayoutImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 30, 8, -1, 32, -1, -1, -1 };
   return &_ASFrameLayoutImpl;
 }
 
@@ -593,6 +606,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFrameLayoutImpl)
   ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
 }
 
+- (ADView *)inflateViewWithNSString:(NSString *)layout {
+  if (templates_ == nil) {
+    templates_ = new_JavaUtilHashMap_init();
+  }
+  id<ASIWidget> template_ = [templates_ getWithId:layout];
+  if (template_ == nil) {
+    template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
+    (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
+  }
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+}
+
+- (void)remeasure {
+  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+}
+
+- (void)removeFromParent {
+  [((id<ASHasWidgets>) nil_chk([this$0_ getParent])) removeWithASIWidget:this$0_];
+}
+
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation {
+  *IOSIntArray_GetRef(nil_chk(appScreenLocation), 0) = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  *IOSIntArray_GetRef(appScreenLocation, 1) = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+}
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame {
+  ((ADRect *) nil_chk(displayFrame))->left_ = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->top_ = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->right_ = displayFrame->left_ + [self getWidth];
+  displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
+}
+
 - (void)offsetTopAndBottomWithInt:(jint)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
@@ -601,6 +647,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFrameLayoutImpl)
 - (void)offsetLeftAndRightWithInt:(jint)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
+}
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value {
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
 }
 
 - (void)setVisibilityWithInt:(jint)visibility {
@@ -630,9 +681,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFrameLayoutImpl)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 1, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 25, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 28, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -652,9 +709,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFrameLayoutImpl)
   methods[12].selector = @selector(initialized);
   methods[13].selector = @selector(getAttributeWithASWidgetAttribute:);
   methods[14].selector = @selector(drawableStateChanged);
-  methods[15].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[16].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[17].selector = @selector(setVisibilityWithInt:);
+  methods[15].selector = @selector(inflateViewWithNSString:);
+  methods[16].selector = @selector(remeasure);
+  methods[17].selector = @selector(removeFromParent);
+  methods[18].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[19].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[20].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[21].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[22].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[23].selector = @selector(setVisibilityWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASFrameLayoutImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -662,9 +725,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFrameLayoutImpl)
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 29, -1 },
   };
-  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASFrameLayoutImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "offsetTopAndBottom", "offsetLeftAndRight", "setVisibility" };
-  static const J2ObjcClassInfo _ASFrameLayoutImpl_FrameLayoutExt = { "FrameLayoutExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 18, 5, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASFrameLayoutImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASFrameLayoutImpl_FrameLayoutExt = { "FrameLayoutExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 24, 6, 3, -1, -1, -1, -1 };
   return &_ASFrameLayoutImpl_FrameLayoutExt;
 }
 

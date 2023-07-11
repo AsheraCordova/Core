@@ -4,8 +4,10 @@
 //
 
 #include "BaseWidget.h"
+#include "HasWidgets.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
@@ -14,6 +16,7 @@
 #include "ViewImpl.h"
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
+#include "java/util/HashMap.h"
 #include "java/util/Map.h"
 
 #include <UIKit/UIKit.h>
@@ -36,6 +39,16 @@ J2OBJC_FIELD_SETTER(ASModelImpl, viewStub_, ADView *)
 
 __attribute__((unused)) static void ASModelImpl_nativeCreateWithASIFragment_withJavaUtilMap_(ASModelImpl *self, id<ASIFragment> fragment, id<JavaUtilMap> params);
 
+@interface ASModelImpl_ViewExt () {
+ @public
+  ASModelImpl *this$0_;
+  id<JavaUtilMap> templates_;
+}
+
+@end
+
+J2OBJC_FIELD_SETTER(ASModelImpl_ViewExt, templates_, id<JavaUtilMap>)
+
 NSString *ASModelImpl_LOCAL_NAME = @"com.ashera.layout.Model";
 NSString *ASModelImpl_GROUP_NAME = @"Model";
 
@@ -44,7 +57,6 @@ NSString *ASModelImpl_GROUP_NAME = @"Model";
 @synthesize uiView = uiView_;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName {
-  ASViewImpl_register__WithNSString_(attributeName);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"param"])) withTypeWithNSString:@"string"]);
 }
 
@@ -62,7 +74,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params {
   [super createWithASIFragment:fragment withJavaUtilMap:params];
-  viewStub_ = new_ADView_init();
+  viewStub_ = new_ASModelImpl_ViewExt_initWithASModelImpl_(self);
   [self createView];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView_, 0, 0, 0, 0);
   ASModelImpl_nativeCreateWithASIFragment_withJavaUtilMap_(self, fragment, params);
@@ -79,7 +91,6 @@ J2OBJC_IGNORE_DESIGNATED_END
                                    withId:(id)objValue
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
-  ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
   switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"param" }, 1)) {
     case 0:
     {
@@ -97,10 +108,6 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
-  id attributeValue = ASViewImpl_getAttributeWithASIWidget_withASWidgetAttribute_withASILifeCycleDecorator_(self, key, decorator);
-  if (attributeValue != nil) {
-    return attributeValue;
-  }
   id nativeWidget = [self asNativeWidget];
   switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"param" }, 1)) {
     case 0:
@@ -124,6 +131,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASModelImpl_nativeCreateWithASIFragment_withJavaUtilMap_(self, fragment, params);
 }
 
+- (IOSClass *)getViewClass {
+  return ADView_class_();
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
@@ -137,6 +148,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 9, 3, -1, 4, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -152,6 +164,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[8].selector = @selector(applyModelAttributes);
   methods[9].selector = @selector(asNativeWidget);
   methods[10].selector = @selector(nativeCreateWithASIFragment:withJavaUtilMap:);
+  methods[11].selector = @selector(getViewClass);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "viewStub_", "LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -159,8 +172,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 10, -1, -1 },
     { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 11, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "nativeCreate", &ASModelImpl_LOCAL_NAME, &ASModelImpl_GROUP_NAME };
-  static const J2ObjcClassInfo _ASModelImpl = { "ModelImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 11, 4, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "nativeCreate", &ASModelImpl_LOCAL_NAME, &ASModelImpl_GROUP_NAME, "LASModelImpl_ViewExt;" };
+  static const J2ObjcClassInfo _ASModelImpl = { "ModelImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 12, 4, -1, 12, -1, -1, -1 };
   return &_ASModelImpl;
 }
 
@@ -182,3 +195,66 @@ void ASModelImpl_nativeCreateWithASIFragment_withJavaUtilMap_(ASModelImpl *self,
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASModelImpl)
+
+@implementation ASModelImpl_ViewExt
+
+- (instancetype)initWithASModelImpl:(ASModelImpl *)outer$ {
+  ASModelImpl_ViewExt_initWithASModelImpl_(self, outer$);
+  return self;
+}
+
+- (void)remeasure {
+  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+}
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout {
+  if (templates_ == nil) {
+    templates_ = new_JavaUtilHashMap_init();
+  }
+  id<ASIWidget> template_ = [templates_ getWithId:layout];
+  if (template_ == nil) {
+    template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
+    (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
+  }
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 1, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithASModelImpl:);
+  methods[1].selector = @selector(remeasure);
+  methods[2].selector = @selector(inflateViewWithNSString:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "this$0_", "LASModelImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 3, -1 },
+  };
+  static const void *ptrTable[] = { "LASModelImpl;", "inflateView", "LNSString;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASModelImpl_ViewExt = { "ViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 3, 2, 0, -1, -1, -1, -1 };
+  return &_ASModelImpl_ViewExt;
+}
+
+@end
+
+void ASModelImpl_ViewExt_initWithASModelImpl_(ASModelImpl_ViewExt *self, ASModelImpl *outer$) {
+  self->this$0_ = outer$;
+  ADView_init(self);
+}
+
+ASModelImpl_ViewExt *new_ASModelImpl_ViewExt_initWithASModelImpl_(ASModelImpl *outer$) {
+  J2OBJC_NEW_IMPL(ASModelImpl_ViewExt, initWithASModelImpl_, outer$)
+}
+
+ASModelImpl_ViewExt *create_ASModelImpl_ViewExt_initWithASModelImpl_(ASModelImpl *outer$) {
+  J2OBJC_CREATE_IMPL(ASModelImpl_ViewExt, initWithASModelImpl_, outer$)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASModelImpl_ViewExt)

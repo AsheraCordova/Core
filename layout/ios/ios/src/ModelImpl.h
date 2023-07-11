@@ -21,6 +21,7 @@
 #include "BaseWidget.h"
 
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -47,6 +48,8 @@
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
               withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
+
+- (IOSClass *)getViewClass;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
 
@@ -91,6 +94,43 @@ FOUNDATION_EXPORT ASModelImpl *create_ASModelImpl_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ASModelImpl)
 
 @compatibility_alias ComAsheraLayoutModelImpl ASModelImpl;
+
+#endif
+
+#if !defined (ASModelImpl_ViewExt_) && (INCLUDE_ALL_ModelImpl || defined(INCLUDE_ASModelImpl_ViewExt))
+#define ASModelImpl_ViewExt_
+
+#define RESTRICT_View 1
+#define INCLUDE_ADView 1
+#include "View.h"
+
+@class ASModelImpl;
+
+@interface ASModelImpl_ViewExt : ADView
+
+#pragma mark Public
+
+- (instancetype)initWithASModelImpl:(ASModelImpl *)outer$;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
+- (void)remeasure;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASModelImpl_ViewExt)
+
+FOUNDATION_EXPORT void ASModelImpl_ViewExt_initWithASModelImpl_(ASModelImpl_ViewExt *self, ASModelImpl *outer$);
+
+FOUNDATION_EXPORT ASModelImpl_ViewExt *new_ASModelImpl_ViewExt_initWithASModelImpl_(ASModelImpl *outer$) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASModelImpl_ViewExt *create_ASModelImpl_ViewExt_initWithASModelImpl_(ASModelImpl *outer$);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASModelImpl_ViewExt)
 
 #endif
 

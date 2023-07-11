@@ -63,7 +63,7 @@ public class HorizontalScrollViewImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new HorizontalScrollViewImpl();
+		return new HorizontalScrollViewImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -109,7 +109,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		horizontalScrollView.removeView((View) w.asWidget());
 		return remove;
@@ -244,11 +244,6 @@ return layoutParams.gravity;			}
 		public HorizontalScrollViewExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -360,12 +355,11 @@ return layoutParams.gravity;			}
         	ViewImpl.drawableStateChanged(HorizontalScrollViewImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((HorizontalScrollViewExt) horizontalScrollView).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return HorizontalScrollViewExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {

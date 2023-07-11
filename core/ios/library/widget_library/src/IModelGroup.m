@@ -23,6 +23,8 @@
     { NULL, "V", 0x401, 3, 6, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 7, 8, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 9, 2, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 10, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -35,9 +37,11 @@
   methods[5].selector = @selector(addModelWithId:withInt:);
   methods[6].selector = @selector(removeModelAtIndexWithInt:);
   methods[7].selector = @selector(removeModelByIdWithNSString:);
+  methods[8].selector = @selector(getModelDescPath);
+  methods[9].selector = @selector(setModelDescPathWithNSString:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "()Ljava/util/List<Ljava/lang/String;>;", "setModelFor", "LNSString;", "addModel", "LNSObject;", "addAllModel", "LNSObject;I", "removeModelAtIndex", "I", "removeModelById" };
-  static const J2ObjcClassInfo _ASIModelGroup = { "IModelGroup", "com.ashera.model", ptrTable, methods, NULL, 7, 0x609, 8, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "()Ljava/util/List<Ljava/lang/String;>;", "setModelFor", "LNSString;", "addModel", "LNSObject;", "addAllModel", "LNSObject;I", "removeModelAtIndex", "I", "removeModelById", "setModelDescPath" };
+  static const J2ObjcClassInfo _ASIModelGroup = { "IModelGroup", "com.ashera.model", ptrTable, methods, NULL, 7, 0x609, 10, 0, -1, -1, -1, -1, -1 };
   return &_ASIModelGroup;
 }
 

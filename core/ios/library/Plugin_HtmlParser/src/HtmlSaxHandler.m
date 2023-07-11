@@ -323,7 +323,7 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
   if (widget != nil) {
     id<ASHasWidgets> parent = nil;
     if (![((JavaUtilStack *) nil_chk(hasWidgets_)) isEmpty]) {
-      parent = [((JavaUtilStack *) nil_chk(hasWidgets_)) peek];
+      parent = [((id<ASHasWidgets>) nil_chk([((JavaUtilStack *) nil_chk(hasWidgets_)) peek])) getCompositeLeafWithASIWidget:widget];
     }
     if (parent != nil) {
       [widget setParentWithASHasWidgets:parent];
@@ -596,11 +596,16 @@ void ASHtmlSaxHandler_populateAttributesWithASIWidget_withASHasWidgets_withNSStr
   if (!self->isAndroid_) {
     [((id<ASIWidget>) nil_chk(widget)) applyThemeStyleWithNSString:[widget getGroupName]];
   }
-  NSString *style = JreRetainedLocalValue([((id<OrgXmlSaxAttributes>) nil_chk(atts)) getValueWithNSString:@"style"]);
-  if (style != nil) {
-    [((CSSCssDataHolder *) nil_chk(self->pageData_)) getCssWithNSString:tagName withNSString:[style java_replaceFirst:@"@style/" withReplacement:@""] withNSString:[atts getValueWithNSString:@"id"] withCSSCssResult:create_ASHtmlSaxHandler_1_initWithASIWidget_withASHasWidgets_withNSString_(widget, parent, localName)];
+  id<JavaUtilSet> attributes = ASWidgetFactory_getStyleAttributesWithNSString_(localName);
+  if (attributes != nil) {
+    for (ASWidgetAttribute * __strong widgetAttribute in attributes) {
+      NSString *style = JreRetainedLocalValue([((id<OrgXmlSaxAttributes>) nil_chk(atts)) getValueWithNSString:[((ASWidgetAttribute *) nil_chk(widgetAttribute)) getAttributeName]]);
+      if (style != nil) {
+        [((CSSCssDataHolder *) nil_chk(self->pageData_)) getCssWithNSString:tagName withNSString:[style java_replaceFirst:@"@style/" withReplacement:@""] withNSString:[atts getValueWithNSString:@"id"] withCSSCssResult:create_ASHtmlSaxHandler_1_initWithASIWidget_withASHasWidgets_withNSString_(widget, parent, localName)];
+      }
+    }
   }
-  for (jint i = 0; i < [atts getLength]; i++) {
+  for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *key = JreRetainedLocalValue([atts getLocalNameWithInt:i]);
     ASWidgetAttribute *attribute = [((id<ASIWidget>) nil_chk(widget)) getAttributeWithASHasWidgets:parent withNSString:localName withNSString:key];
     if (attribute != nil) {

@@ -76,6 +76,13 @@ public class ViewGroupImpl {
 		ViewGroup viewGroup = ((ViewGroup) w.asWidget());
 		org.eclipse.swt.widgets.Composite composite = (org.eclipse.swt.widgets.Composite) w.asNativeWidget();
 		ViewGroupModelImpl.setAttribute(w, key, strValue, objValue, decorator);
+		setMyAttribute(w, key, strValue, objValue, decorator);
+	}
+	
+	private static void setMyAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
+		ViewGroup viewGroup = ((ViewGroup) w.asWidget());
+		org.eclipse.swt.widgets.Composite composite = (org.eclipse.swt.widgets.Composite) w.asNativeWidget();
+
 		switch (key.getAttributeName()) {
 			case "swtBackgroundMode": {
 

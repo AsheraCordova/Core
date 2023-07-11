@@ -43,7 +43,7 @@ public class ToggleButtonImpl extends BaseWidget {
 	public final static String GROUP_NAME = "ToggleButton";
 
 	protected org.eclipse.swt.widgets.Button button;
-	protected MeasurableCompoundButton measurableCompoundButton;	
+	protected r.android.widget.ToggleButton measurableView;	
 	
 		@SuppressLint("NewApi")
 		final static class Font extends AbstractEnumToIntConverter{
@@ -90,6 +90,9 @@ public class ToggleButtonImpl extends BaseWidget {
 
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtBackground").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtImage").withType("image"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onCheckedChange").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("checked").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textOn").withType("resourcestring"));
@@ -131,29 +134,27 @@ public class ToggleButtonImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAllCaps").withType("boolean").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxLength").withType("int").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
 		loadCustomAttributes(attributeName);
 	}
 	
 	public ToggleButtonImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ToggleButtonImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ToggleButtonImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class ToggleButtonExt extends MeasurableCompoundButton implements ILifeCycleDecorator{
+	public class ToggleButtonExt extends r.android.widget.ToggleButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 
 		public ToggleButtonExt() {
-			
-			
-			
-			
-			
-			
 			super(ToggleButtonImpl.this);
+			
 		}
 		
 		@Override
@@ -233,7 +234,46 @@ public class ToggleButtonImpl extends BaseWidget {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ToggleButtonImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(ToggleButtonImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	ToggleButtonImpl.this.getParent().remove(ToggleButtonImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) asNativeWidget();
+			appScreenLocation[0] = control.toDisplay(0, 0).x;
+        	appScreenLocation[1] = control.toDisplay(0, 0).y;
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	org.eclipse.swt.widgets.Shell shell = ((org.eclipse.swt.widgets.Control)asNativeWidget()).getShell();
+        	displayFrame.left = shell.toDisplay(0, 0).x ;
+			displayFrame.top = shell.getShell().toDisplay(0, 0).y ;
+        	displayFrame.bottom = displayFrame.top + shell.getClientArea().height;
+        	displayFrame.right = displayFrame.left + shell.getBounds().width;
+        	
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -242,6 +282,10 @@ public class ToggleButtonImpl extends BaseWidget {
 		public void offsetLeftAndRight(int offset) {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
+		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			ToggleButtonImpl.this.setAttribute(name, value, true);
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -263,21 +307,39 @@ public class ToggleButtonImpl extends BaseWidget {
 		  public int getLineHeightPadding(){
 		    return ToggleButtonImpl.this.getLineHeightPadding();
 		  }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((ToggleButtonExt) measurableCompoundButton).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+        @Override
+        public int computeSize(float width) {
+        	return nativeMeasureHeight(button, (int) width);
+    	}
+		@Override
+		public java.lang.String getText() {
+			return (String) getMyText();
+		}
+
+	}	@Override
+	public Class getViewClass() {
+		return ToggleButtonExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ToggleButtonImpl();
+		return new ToggleButtonImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableCompoundButton = new ToggleButtonExt();
+		measurableView = new ToggleButtonExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 	}
@@ -305,6 +367,36 @@ public class ToggleButtonImpl extends BaseWidget {
 
 		disposeAll(button.getImage());
 		 button.setImage((Image)objValue);
+
+
+
+			}
+			break;
+			case "firstBaselineToTopHeight": {
+				
+
+
+		setFirstBaselineToTopHeight(objValue);
+
+
+
+			}
+			break;
+			case "lastBaselineToBottomHeight": {
+				
+
+
+		setLastBaselineToBottomHeight(objValue);
+
+
+
+			}
+			break;
+			case "textFormat": {
+				
+
+
+		setTextFormat(objValue);
 
 
 
@@ -700,36 +792,6 @@ public class ToggleButtonImpl extends BaseWidget {
 
 			}
 			break;
-			case "firstBaselineToTopHeight": {
-				
-
-
-		setFirstBaselineToTopHeight(objValue);
-
-
-
-			}
-			break;
-			case "lastBaselineToBottomHeight": {
-				
-
-
-		setLastBaselineToBottomHeight(objValue);
-
-
-
-			}
-			break;
-			case "textFormat": {
-				
-
-
-		setTextFormat(objValue);
-
-
-
-			}
-			break;
 		default:
 			break;
 		}
@@ -749,6 +811,10 @@ public class ToggleButtonImpl extends BaseWidget {
 return button.getBackground();				}
 			case "swtImage": {
 return button.getImage();				}
+			case "firstBaselineToTopHeight": {
+return getFirstBaselineToTopHeight();				}
+			case "lastBaselineToBottomHeight": {
+return getLastBaselineToBottomHeight();				}
 			case "checked": {
 return getChecked();				}
 			case "textOn": {
@@ -795,10 +861,6 @@ return getMaxEms();				}
 return getMinEms();				}
 			case "gravity": {
 return getGravity();				}
-			case "firstBaselineToTopHeight": {
-return getFirstBaselineToTopHeight();				}
-			case "lastBaselineToBottomHeight": {
-return getLastBaselineToBottomHeight();				}
 		}
 		
 		return null;
@@ -806,7 +868,7 @@ return getLastBaselineToBottomHeight();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableCompoundButton;
+		return measurableView;
 	}
 
 	
@@ -827,7 +889,7 @@ return getLastBaselineToBottomHeight();				}
 	
 	private void setDrawableLeft(Object objValue) {
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableCompoundButton.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
 			objValue = ((r.android.graphics.drawable.Drawable) objValue).getDrawable();
 		}
 		
@@ -974,7 +1036,7 @@ return getLastBaselineToBottomHeight();				}
     
 	private void drawableStateChange(Image mydrawable, r.android.graphics.drawable.Drawable dr, String attribute) {
 		if (mydrawable != null) {
-			final int[] state = measurableCompoundButton.getDrawableState();
+			final int[] state = measurableView.getDrawableState();
 			
 			if (dr != null && dr.isStateful() && dr.setState(state)) {
 				int width = mydrawable.getBounds().width;
@@ -1150,8 +1212,8 @@ return getLastBaselineToBottomHeight();				}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableCompoundButton.setTextColor(colorStateList);
-			objValue = measurableCompoundButton.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		
 		button.setForeground((Color)ViewImpl.getColor(objValue));
@@ -1162,40 +1224,28 @@ return getLastBaselineToBottomHeight();				}
 	}
 
 	private Object getTextColor() {
-		return measurableCompoundButton.getTextColors();
+		return measurableView.getTextColors();
 	}
     
 
 
-	private int getAutoSizeTextType(MeasurableCompoundButton measurableCompoundButton) {
-		return measurableCompoundButton.getAutoSizeTextType();
+	private int getAutoSizeTextType(r.android.widget.TextView measurableView) {
+		return measurableView.getAutoSizeTextType();
 	}
 
 	private void setAutoSizeTextTypeInternal(int autoTextType) {
 		removeResizeListener();
         
-		if (measurableCompoundButton.isAutoSizeTextTypeUniform(autoTextType)) {
-			measurableCompoundButton.setUpAutoSizeTextTypeUniform(autoSizeMin, autoSizeMax, autoSizeGranular);
+		if (measurableView.isAutoSizeTextTypeUniform(autoTextType)) {
+			measurableView.setUpAutoSizeTextTypeUniform(autoSizeMin, autoSizeMax, autoSizeGranular);
             addAutoResizeListener();
         } else {
-        	measurableCompoundButton.clearAutoSizeTypeConfiguration();
+        	measurableView.clearAutoSizeTypeConfiguration();
         }
 	}
 	
-	
-	private boolean suggestedSizeFitsInSpace(int suggestedSizeInPx, float width, float height) {
-        setMyTextSize(suggestedSizeInPx * 1f);        
-        int y = computeSize(width);
-
-        // Height overflow.
-		if (y > height) {
-            return false;
-        }
-        return true;
-    }
-	
 	private void setAutoSizePresetSizes(Object objValue) {
-		measurableCompoundButton.setAutoSizeTextTypeUniformWithPresetSizes((int[]) objValue, 0);
+		measurableView.setAutoSizeTextTypeUniformWithPresetSizes((int[]) objValue, 0);
 		
 	}
 
@@ -1208,8 +1258,8 @@ return getLastBaselineToBottomHeight();				}
 
 		@Override
 		protected void doPerform(Object payload) {
-			if (!onlyOnce || measurableCompoundButton.isLayoutRequested()) {
-				measurableCompoundButton.autoResizeText();
+			if (!onlyOnce || measurableView.isLayoutRequested()) {
+				measurableView.autoResizeText();
 				onlyOnce = true;
 			}
 		}
@@ -1230,20 +1280,16 @@ return getLastBaselineToBottomHeight();				}
 			postMeasureHandler = null;
 		}
 	}
-
-	private int computeSize(float width) {
-		return measurableCompoundButton.nativeMeasureHeight(button, (int) width);
-	}
     
     
 
 
     private Object getMinHeight() {
-        return measurableCompoundButton.getMinHeight();
+        return measurableView.getMinHeight();
     }
 
     private Object getMinWidth() {
-        return measurableCompoundButton.getMinWidth();
+        return measurableView.getMinWidth();
     }
     
     private void setEms(Object objValue) {
@@ -1253,27 +1299,27 @@ return getLastBaselineToBottomHeight();				}
     
     
     public int getMaxEms() {
-        return measurableCompoundButton.getMaxEms();
+        return measurableView.getMaxEms();
     }
     public int getMinEms() {
-        return measurableCompoundButton.getMinEms();
+        return measurableView.getMinEms();
     }
 
     private void setMinEms(Object objValue) {
-    	measurableCompoundButton.setMinEms((int) objValue);
+    	measurableView.setMinEms((int) objValue);
         addMinMaxListener();
     }
     
     public int getMinLines() {
-        return measurableCompoundButton.getMinLines();
+        return measurableView.getMinLines();
     }
     
     public int getMaxLines() {
-        return measurableCompoundButton.getMaxLines();
+        return measurableView.getMaxLines();
     }
 
     private void setMaxEms(Object objValue) {
-    	measurableCompoundButton.setMaxEms((int) objValue);
+    	measurableView.setMaxEms((int) objValue);
         addMinMaxListener();
     }
 
@@ -1288,7 +1334,7 @@ return getLastBaselineToBottomHeight();				}
     }
 
     private void setMaxLines(Object objValue) {
-    	measurableCompoundButton.setMaxLines((int) objValue);
+    	measurableView.setMaxLines((int) objValue);
         addMinMaxListener();
     }
 
@@ -1298,47 +1344,47 @@ return getLastBaselineToBottomHeight();				}
     }
 
     private void setMinLines(Object objValue) {
-    	measurableCompoundButton.setMinLines((int) objValue);
+    	measurableView.setMinLines((int) objValue);
         addMinMaxListener();
     
     }
     
     private void setMaxHeight(Object objValue) {
-    	measurableCompoundButton.setMaxHeight((int) objValue);
+    	measurableView.setMaxHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMaxWidth(Object objValue) {
-    	measurableCompoundButton.setMaxWidth((int) objValue);
+    	measurableView.setMaxWidth((int) objValue);
         addMinMaxListener();
     }
 
     public int getMaxWidth() {
-        return measurableCompoundButton.getMaxWidth();
+        return measurableView.getMaxWidth();
     }
 
     public int getMaxHeight() {
-        return measurableCompoundButton.getMaxHeight();
+        return measurableView.getMaxHeight();
     }
     
     
     private void setMinHeight(Object objValue) {
-    	measurableCompoundButton.setMinHeight((int) objValue);
+    	measurableView.setMinHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMinWidth(Object objValue) {
-    	measurableCompoundButton.setMinWidth((int) objValue);
+    	measurableView.setMinWidth((int) objValue);
         addMinMaxListener();
     }
 
     
     private Object getWidth() {
-        return measurableCompoundButton.getWidth();
+        return measurableView.getWidth();
     }
 
     private int getHeight() {
-        return measurableCompoundButton.getHeight();
+        return measurableView.getHeight();
     }
 
     
@@ -1410,7 +1456,7 @@ return getLastBaselineToBottomHeight();				}
         // in settings). At the moment, we don't.
         if (firstBaselineToTopHeight > Math.abs(fontMetricsTop)) {
             final int paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-           measurableCompoundButton.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
+            measurableView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
         }
 	}
 	
@@ -1441,7 +1487,7 @@ return getLastBaselineToBottomHeight();				}
 
         if (lastBaselineToBottomHeight > Math.abs(fontMetricsBottom)) {
             final int paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-            measurableCompoundButton.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
+            measurableView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
         }		
 	}
 	
@@ -1461,7 +1507,7 @@ return getLastBaselineToBottomHeight();				}
 		autoSizeGranular = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableCompoundButton));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 
@@ -1469,7 +1515,7 @@ return getLastBaselineToBottomHeight();				}
 		autoSizeMin = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableCompoundButton));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 
@@ -1477,7 +1523,7 @@ return getLastBaselineToBottomHeight();				}
 		autoSizeMax = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableCompoundButton));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 	
@@ -1500,7 +1546,7 @@ return getLastBaselineToBottomHeight();				}
 	}
 
 	private Object getAutoSizeTextType() {
-		return getAutoSizeTextType(measurableCompoundButton);
+		return getAutoSizeTextType(measurableView);
 	}
 	
 
@@ -1590,7 +1636,7 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableCompoundButton.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
@@ -1698,6 +1744,52 @@ public Object getSwtImage() {
 }
 public ToggleButtonCommandBuilder setSwtImage(String value) {
 	Map<String, Object> attrs = initCommand("swtImage");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetFirstBaselineToTopHeight() {
+	Map<String, Object> attrs = initCommand("firstBaselineToTopHeight");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getFirstBaselineToTopHeight() {
+	Map<String, Object> attrs = initCommand("firstBaselineToTopHeight");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setFirstBaselineToTopHeight(String value) {
+	Map<String, Object> attrs = initCommand("firstBaselineToTopHeight");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetLastBaselineToBottomHeight() {
+	Map<String, Object> attrs = initCommand("lastBaselineToBottomHeight");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getLastBaselineToBottomHeight() {
+	Map<String, Object> attrs = initCommand("lastBaselineToBottomHeight");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setLastBaselineToBottomHeight(String value) {
+	Map<String, Object> attrs = initCommand("lastBaselineToBottomHeight");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setTextFormat(String value) {
+	Map<String, Object> attrs = initCommand("textFormat");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -2269,52 +2361,6 @@ public ToggleButtonCommandBuilder setGravity(String value) {
 
 	attrs.put("value", value);
 return this;}
-public ToggleButtonCommandBuilder tryGetFirstBaselineToTopHeight() {
-	Map<String, Object> attrs = initCommand("firstBaselineToTopHeight");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getFirstBaselineToTopHeight() {
-	Map<String, Object> attrs = initCommand("firstBaselineToTopHeight");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setFirstBaselineToTopHeight(String value) {
-	Map<String, Object> attrs = initCommand("firstBaselineToTopHeight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetLastBaselineToBottomHeight() {
-	Map<String, Object> attrs = initCommand("lastBaselineToBottomHeight");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getLastBaselineToBottomHeight() {
-	Map<String, Object> attrs = initCommand("lastBaselineToBottomHeight");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setLastBaselineToBottomHeight(String value) {
-	Map<String, Object> attrs = initCommand("lastBaselineToBottomHeight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setTextFormat(String value) {
-	Map<String, Object> attrs = initCommand("textFormat");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 }
 public class ToggleButtonBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public ToggleButtonBean() {
@@ -2332,6 +2378,24 @@ public Object getSwtImage() {
 }
 public void setSwtImage(String value) {
 	getBuilder().reset().setSwtImage(value).execute(true);
+}
+
+public Object getFirstBaselineToTopHeight() {
+	return getBuilder().reset().tryGetFirstBaselineToTopHeight().execute(false).getFirstBaselineToTopHeight(); 
+}
+public void setFirstBaselineToTopHeight(String value) {
+	getBuilder().reset().setFirstBaselineToTopHeight(value).execute(true);
+}
+
+public Object getLastBaselineToBottomHeight() {
+	return getBuilder().reset().tryGetLastBaselineToBottomHeight().execute(false).getLastBaselineToBottomHeight(); 
+}
+public void setLastBaselineToBottomHeight(String value) {
+	getBuilder().reset().setLastBaselineToBottomHeight(value).execute(true);
+}
+
+public void setTextFormat(String value) {
+	getBuilder().reset().setTextFormat(value).execute(true);
 }
 
 public void setOnCheckedChange(String value) {
@@ -2559,24 +2623,6 @@ public void setGravity(String value) {
 	getBuilder().reset().setGravity(value).execute(true);
 }
 
-public Object getFirstBaselineToTopHeight() {
-	return getBuilder().reset().tryGetFirstBaselineToTopHeight().execute(false).getFirstBaselineToTopHeight(); 
-}
-public void setFirstBaselineToTopHeight(String value) {
-	getBuilder().reset().setFirstBaselineToTopHeight(value).execute(true);
-}
-
-public Object getLastBaselineToBottomHeight() {
-	return getBuilder().reset().tryGetLastBaselineToBottomHeight().execute(false).getLastBaselineToBottomHeight(); 
-}
-public void setLastBaselineToBottomHeight(String value) {
-	getBuilder().reset().setLastBaselineToBottomHeight(value).execute(true);
-}
-
-public void setTextFormat(String value) {
-	getBuilder().reset().setTextFormat(value).execute(true);
-}
-
 }
 
 
@@ -2617,7 +2663,7 @@ public void setTextFormat(String value) {
 		setChecked(toggleChecked());
 		
 		if (onCheckedChangeListener != null) {
-			onCheckedChangeListener.onCheckedChanged(measurableCompoundButton, (boolean) getChecked());
+			onCheckedChangeListener.onCheckedChanged(measurableView, (boolean) getChecked());
 		}
 	}
 	
@@ -2642,8 +2688,8 @@ public void setTextFormat(String value) {
 	@Override
 	public void drawableStateChanged() {
 		super.drawableStateChanged();
-		drawableStateChange(button.getImage(), measurableCompoundButton.getLeftDrawable(), "drawableLeft");
-		drawableStateChange(button.getImage(), measurableCompoundButton.getButtonDrawable(), "button");
+		drawableStateChange(button.getImage(), measurableView.getLeftDrawable(), "drawableLeft");
+		drawableStateChange(button.getImage(), measurableView.getButtonDrawable(), "button");
 	}
 	
 	private void initCustomAttributes() {

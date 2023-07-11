@@ -22,6 +22,10 @@
 
 - (instancetype)init;
 
+- (instancetype)initWithADBundle:(ADBundle *)data;
+
+- (id)java_clone;
+
 - (id)getWithNSString:(NSString *)key;
 
 - (ADBundle *)getBundleWithNSString:(NSString *)name;
@@ -53,6 +57,12 @@
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADBundle)
+
+FOUNDATION_EXPORT void ADBundle_initWithADBundle_(ADBundle *self, ADBundle *data);
+
+FOUNDATION_EXPORT ADBundle *new_ADBundle_initWithADBundle_(ADBundle *data) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ADBundle *create_ADBundle_initWithADBundle_(ADBundle *data);
 
 FOUNDATION_EXPORT void ADBundle_init(ADBundle *self);
 

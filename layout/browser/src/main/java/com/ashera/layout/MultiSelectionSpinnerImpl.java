@@ -38,7 +38,7 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 	public final static String GROUP_NAME = "com.ashera.layout.MultiSelectionSpinner";
 
 	protected org.teavm.jso.dom.html.HTMLElement hTMLElement;
-	protected MeasurableTextView measurableTextView;	
+	protected r.android.widget.Spinner measurableView;	
 	
 		@SuppressLint("NewApi")
 		final static class Font extends AbstractEnumToIntConverter{
@@ -104,13 +104,6 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 		ViewGroupModelImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("array").withArrayType("int"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionTextPath").withType("string").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onItemSelected").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionValuePath").withType("string").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectedValues").withType("object"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("values").withType("array").withArrayType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -140,15 +133,28 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate"));
 		ConverterFactory.register("com.ashera.layout.MultiSelectionSpinner.drawableTintMode", new DrawableTintMode());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("com.ashera.layout.MultiSelectionSpinner.drawableTintMode"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("array").withArrayType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionTextPath").withType("string").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onItemSelected").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionValuePath").withType("string").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectedValues").withType("object"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("values").withType("array").withArrayType("resourcestring").withOrder(-1));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("webEnableTintFilter").withType("boolean"));
 	}
 	
 	public MultiSelectionSpinnerImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  MultiSelectionSpinnerImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  MultiSelectionSpinnerImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class MultiSelectionSpinnerExt extends MeasurableTextView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
+	public class MultiSelectionSpinnerExt extends r.android.widget.Spinner implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 		private int mMaxWidth = -1;
@@ -171,13 +177,8 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 		}
 
 		public MultiSelectionSpinnerExt() {
-			
-			
-			
-			
-			
-			
 			super(MultiSelectionSpinnerImpl.this);
+			
 		}
 		
 		@Override
@@ -265,7 +266,45 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(MultiSelectionSpinnerImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(MultiSelectionSpinnerImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	MultiSelectionSpinnerImpl.this.getParent().remove(MultiSelectionSpinnerImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = hTMLElement.getBoundingClientRect().getLeft();
+        	appScreenLocation[1] = hTMLElement.getBoundingClientRect().getTop();
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	org.teavm.jso.dom.html.TextRectangle boundingClientRect = hTMLElement.getBoundingClientRect();
+			displayFrame.top = boundingClientRect.getTop();
+        	displayFrame.left = boundingClientRect.getLeft();
+        	displayFrame.bottom = boundingClientRect.getBottom();
+        	displayFrame.right = boundingClientRect.getRight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -274,6 +313,10 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 		public void offsetLeftAndRight(int offset) {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
+		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			MultiSelectionSpinnerImpl.this.setAttribute(name, value, true);
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -290,20 +333,21 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
         public int nativeMeasureHeight(java.lang.Object uiView, int width) {
         	return MultiSelectionSpinnerImpl.this.nativeMeasureHeight(uiView, width);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
+	}	@Override
+	public Class getViewClass() {
+		return MultiSelectionSpinnerExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new MultiSelectionSpinnerImpl();
+		return new MultiSelectionSpinnerImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableTextView = new MultiSelectionSpinnerExt();
+		measurableView = new MultiSelectionSpinnerExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 	}
@@ -315,76 +359,6 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 		ViewGroupModelImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "entries": {
-				
-
-
-		setEntries(objValue);
-
-
-
-			}
-			break;
-			case "selection": {
-				
-
-
-		setSelection(objValue);
-
-
-
-			}
-			break;
-			case "modelOptionTextPath": {
-				
-
-
-		setModelOptionTextPath(objValue);
-
-
-
-			}
-			break;
-			case "onItemSelected": {
-				
-
-
-		if (objValue instanceof String) {setOnMultiItemSelectedListener(new OnMultiItemSelectedListener(this, strValue, "onItemSelected"));} else {setOnMultiItemSelectedListener((MultiSelectionSpinner.OnMultiItemSelectedListener) objValue);}
-
-
-
-			}
-			break;
-			case "modelOptionValuePath": {
-				
-
-
-		setModelOptionValuePath(objValue);
-
-
-
-			}
-			break;
-			case "selectedValues": {
-				
-
-
-		setSelectedValues(objValue);
-
-
-
-			}
-			break;
-			case "values": {
-				
-
-
-		setValues(objValue);
-
-
-
-			}
-			break;
 			case "textColor": {
 				
 
@@ -645,6 +619,76 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 
 			}
 			break;
+			case "entries": {
+				
+
+
+		setEntries(objValue);
+
+
+
+			}
+			break;
+			case "selection": {
+				
+
+
+		setSelection(objValue);
+
+
+
+			}
+			break;
+			case "modelOptionTextPath": {
+				
+
+
+		setModelOptionTextPath(objValue);
+
+
+
+			}
+			break;
+			case "onItemSelected": {
+				
+
+
+		if (objValue instanceof String) {setOnMultiItemSelectedListener(new OnMultiItemSelectedListener(this, strValue, "onItemSelected"));} else {setOnMultiItemSelectedListener((MultiSelectionSpinner.OnMultiItemSelectedListener) objValue);}
+
+
+
+			}
+			break;
+			case "modelOptionValuePath": {
+				
+
+
+		setModelOptionValuePath(objValue);
+
+
+
+			}
+			break;
+			case "selectedValues": {
+				
+
+
+		setSelectedValues(objValue);
+
+
+
+			}
+			break;
+			case "values": {
+				
+
+
+		setValues(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -660,8 +704,6 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 			return attributeValue;
 		}
 		switch (key.getAttributeName()) {
-			case "selectedValues": {
-return getSelectedValues();				}
 			case "textColor": {
 return getTextColor();				}
 			case "gravity": {
@@ -682,6 +724,8 @@ return getPaddingRight();				}
 return getPaddingLeft();				}
 			case "paddingEnd": {
 return getPaddingRight();				}
+			case "selectedValues": {
+return getSelectedValues();				}
 		}
 		
 		return null;
@@ -689,7 +733,7 @@ return getPaddingRight();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableTextView;
+		return measurableView;
 	}
 
 	
@@ -766,10 +810,10 @@ return getPaddingRight();				}
 
 	private void nativeMakeFrameForChildWidget(int l, int t, int r, int b) {
 		ViewImpl.updateBounds(select, 0, 0, r - l, b - t);
-		select.getStyle().setProperty("padding-left", measurableTextView.getCompoundPaddingLeft()  + "px");
-		select.getStyle().setProperty("padding-right", measurableTextView.getCompoundPaddingRight()  + "px");
-		select.getStyle().setProperty("padding-top", measurableTextView.getCompoundPaddingTop()  + "px");
-		select.getStyle().setProperty("padding-bottom", measurableTextView.getCompoundPaddingBottom()  + "px");
+		select.getStyle().setProperty("padding-left", measurableView.getCompoundPaddingLeft()  + "px");
+		select.getStyle().setProperty("padding-right", measurableView.getCompoundPaddingRight()  + "px");
+		select.getStyle().setProperty("padding-top", measurableView.getCompoundPaddingTop()  + "px");
+		select.getStyle().setProperty("padding-bottom", measurableView.getCompoundPaddingBottom()  + "px");
 		updateDrawableBounds(l, t, r, b);
 	}
 	
@@ -903,7 +947,7 @@ return getPaddingRight();				}
 
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableTextView.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -926,11 +970,11 @@ return getPaddingRight();				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableTextView.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableTextView.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableTextView.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -1015,7 +1059,7 @@ return getPaddingRight();				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableTextView.getRawTextAlignment() != 0 || measurableTextView.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -1033,41 +1077,41 @@ return getPaddingRight();				}
 	private void setPaddingLeft(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-left", value  + "px");
-		ViewImpl.setPaddingLeft(objValue, measurableTextView);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 	
 	private void setPaddingRight(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-right", value + "px");
-		ViewImpl.setPaddingRight(objValue, measurableTextView);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingTop(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-top", value + "px");
-		ViewImpl.setPaddingTop(objValue, measurableTextView);
+		ViewImpl.setPaddingTop(objValue, measurableView);
 	}
 
 	private void setPaddingBottom(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-bottom", value + "px");
-		ViewImpl.setPaddingBottom(objValue, measurableTextView);
+		ViewImpl.setPaddingBottom(objValue, measurableView);
 	}
 
 	private Object getPaddingTop() {
-		return measurableTextView.getPaddingTop();
+		return measurableView.getPaddingTop();
 	}
 
 	private Object getPaddingBottom() {
-		return measurableTextView.getPaddingBottom();
+		return measurableView.getPaddingBottom();
 	}
 
 	private Object getPaddingLeft() {
-		return measurableTextView.getPaddingStart();
+		return measurableView.getPaddingStart();
 	}
 
 	private Object getPaddingRight() {
-		return measurableTextView.getPaddingEnd();
+		return measurableView.getPaddingEnd();
 	}
 
 	private void setPaddingHorizontal(Object objValue) {
@@ -1103,7 +1147,7 @@ return getPaddingRight();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setBottomDrawable(drawable);
+			measurableView.setBottomDrawable(drawable);
 			updateImageSrc(drawable, drawableBottom);
 		}
 	}
@@ -1120,7 +1164,7 @@ return getPaddingRight();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setTopDrawable(drawable);
+			measurableView.setTopDrawable(drawable);
 			updateImageSrc(drawable, drawableTop);
 		}
 	}
@@ -1161,7 +1205,7 @@ return getPaddingRight();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setRightDrawable(drawable);
+			measurableView.setRightDrawable(drawable);
 			updateImageSrc(drawable, drawableRight);
 		}
 	}
@@ -1179,7 +1223,7 @@ return getPaddingRight();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setLeftDrawable(drawable);
+			measurableView.setLeftDrawable(drawable);
 			updateImageSrc(drawable, drawableLeft);
 		}
 	}
@@ -1194,31 +1238,31 @@ return getPaddingRight();				}
 
 	
 	private void setDrawablePadding(Object objValue) {
-		measurableTextView.setDrawablePadding((int) objValue);
+		measurableView.setDrawablePadding((int) objValue);
 	}
 	
 	private Object getDrawablePadding() {
-		return measurableTextView.getDrawablePadding();
+		return measurableView.getDrawablePadding();
 	}
 	
 	private void updateDrawableBounds(int l, int t, int r, int b) {
 		if (drawableBottom != null) {
-			com.ashera.model.RectM bounds = measurableTextView.getBottomDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getBottomDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableBottomWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}	
 		
 		if (drawableTop != null) {
-			com.ashera.model.RectM bounds = measurableTextView.getTopDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getTopDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableTopWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}
 		
 		if (drawableLeft != null) {
-			com.ashera.model.RectM bounds = measurableTextView.getLeftDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getLeftDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableLeftWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}
 		
 		if (drawableRight != null) {
-			com.ashera.model.RectM bounds = measurableTextView.getRightDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getRightDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableRightWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}
 	}
@@ -1265,7 +1309,7 @@ return getPaddingRight();				}
 	private void setDrawableTint(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			objValue = colorStateList.getColorForState(measurableTextView.getDrawableState(), r.android.graphics.Color.RED);
+			objValue = colorStateList.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
 			this.drawableTint = colorStateList;
 		}
 		
@@ -1294,21 +1338,21 @@ return getPaddingRight();				}
     @Override
 	public void drawableStateChanged() {
     	super.drawableStateChanged();
-		drawableStateChange(drawableBottom, measurableTextView.getBottomDrawable(), () -> {
-			setDrawableBottom(measurableTextView.getBottomDrawable());
+		drawableStateChange(drawableBottom, measurableView.getBottomDrawable(), () -> {
+			setDrawableBottom(measurableView.getBottomDrawable());
 		});
-		drawableStateChange(drawableLeft, measurableTextView.getLeftDrawable(), () -> {
-			setDrawableLeft(measurableTextView.getLeftDrawable());
+		drawableStateChange(drawableLeft, measurableView.getLeftDrawable(), () -> {
+			setDrawableLeft(measurableView.getLeftDrawable());
 		});
-		drawableStateChange(drawableRight, measurableTextView.getRightDrawable(), () -> {
-			setDrawableRight(measurableTextView.getRightDrawable());
+		drawableStateChange(drawableRight, measurableView.getRightDrawable(), () -> {
+			setDrawableRight(measurableView.getRightDrawable());
 		});
-		drawableStateChange(drawableTop, measurableTextView.getTopDrawable(), () -> {
-			setDrawableTop(measurableTextView.getTopDrawable());
+		drawableStateChange(drawableTop, measurableView.getTopDrawable(), () -> {
+			setDrawableTop(measurableView.getTopDrawable());
 		});
 		
-		if (measurableTextView.getTextColors() != null) {
-			setTextColor(measurableTextView.getCurrentTextColor());
+		if (measurableView.getTextColors() != null) {
+			setTextColor(measurableView.getCurrentTextColor());
 		}
 		
 		if (drawableTint != null && drawableTint.isStateful()) {
@@ -1319,7 +1363,7 @@ return getPaddingRight();				}
     
 	private void drawableStateChange(HTMLElement mydrawable, r.android.graphics.drawable.Drawable dr, Runnable run) {
 		if (mydrawable != null) {
-			final int[] state = measurableTextView.getDrawableState();
+			final int[] state = measurableView.getDrawableState();
 			
 			if (dr != null && dr.isStateful() && dr.setState(state)) {
 				run.run();
@@ -1342,13 +1386,13 @@ return getPaddingRight();				}
 
 
 	private Object getTextColor() {
-		return measurableTextView.getTextColors();
+		return measurableView.getTextColors();
 	}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setTextColor(colorStateList);
-			objValue = measurableTextView.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		hTMLElement.getStyle().setProperty("color", (String) ViewImpl.getColor(objValue));
 	}
@@ -1418,17 +1462,17 @@ return getPaddingRight();				}
 
 	private void setVerticalAligmentCenter() {
 		hTMLElement.getStyle().setProperty("vertical-align", "middle");
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 	}
 
 	private void setVerticalAligmentBottom() {
 		hTMLElement.getStyle().setProperty("vertical-align", "bottom");		
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 	}
 
 	private void setVerticalAligmentTop() {
 		hTMLElement.getStyle().setProperty("vertical-align", "top");		
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 	}
 	
 	private static final int TEXT_ALIGN_CENTER = 0;
@@ -1676,10 +1720,14 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(View view,List
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableTextView.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -1729,73 +1777,6 @@ public  class MultiSelectionSpinnerCommandBuilder extends com.ashera.layout.View
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public MultiSelectionSpinnerCommandBuilder setEntries(String value) {
-	Map<String, Object> attrs = initCommand("entries");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setSelection(String value) {
-	Map<String, Object> attrs = initCommand("selection");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setModelOptionTextPath(String value) {
-	Map<String, Object> attrs = initCommand("modelOptionTextPath");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setOnItemSelected(String value) {
-	Map<String, Object> attrs = initCommand("onItemSelected");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setModelOptionValuePath(String value) {
-	Map<String, Object> attrs = initCommand("modelOptionValuePath");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder tryGetSelectedValues() {
-	Map<String, Object> attrs = initCommand("selectedValues");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getSelectedValues() {
-	Map<String, Object> attrs = initCommand("selectedValues");
-	return attrs.get("commandReturnValue");
-}
-public MultiSelectionSpinnerCommandBuilder setSelectedValues(Object value) {
-	Map<String, Object> attrs = initCommand("selectedValues");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setValues(String value) {
-	Map<String, Object> attrs = initCommand("values");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public MultiSelectionSpinnerCommandBuilder tryGetTextColor() {
 	Map<String, Object> attrs = initCommand("textColor");
 	attrs.put("type", "attribute");
@@ -2114,42 +2095,78 @@ public MultiSelectionSpinnerCommandBuilder setDrawableTintMode(String value) {
 
 	attrs.put("value", value);
 return this;}
+public MultiSelectionSpinnerCommandBuilder setEntries(String value) {
+	Map<String, Object> attrs = initCommand("entries");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setSelection(String value) {
+	Map<String, Object> attrs = initCommand("selection");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setModelOptionTextPath(String value) {
+	Map<String, Object> attrs = initCommand("modelOptionTextPath");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setOnItemSelected(String value) {
+	Map<String, Object> attrs = initCommand("onItemSelected");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setModelOptionValuePath(String value) {
+	Map<String, Object> attrs = initCommand("modelOptionValuePath");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder tryGetSelectedValues() {
+	Map<String, Object> attrs = initCommand("selectedValues");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getSelectedValues() {
+	Map<String, Object> attrs = initCommand("selectedValues");
+	return attrs.get("commandReturnValue");
+}
+public MultiSelectionSpinnerCommandBuilder setSelectedValues(Object value) {
+	Map<String, Object> attrs = initCommand("selectedValues");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setValues(String value) {
+	Map<String, Object> attrs = initCommand("values");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class MultiSelectionSpinnerBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public MultiSelectionSpinnerBean() {
 			super(MultiSelectionSpinnerImpl.this);
 		}
-public void setEntries(String value) {
-	getBuilder().reset().setEntries(value).execute(true);
-}
-
-public void setSelection(String value) {
-	getBuilder().reset().setSelection(value).execute(true);
-}
-
-public void setModelOptionTextPath(String value) {
-	getBuilder().reset().setModelOptionTextPath(value).execute(true);
-}
-
-public void setOnItemSelected(String value) {
-	getBuilder().reset().setOnItemSelected(value).execute(true);
-}
-
-public void setModelOptionValuePath(String value) {
-	getBuilder().reset().setModelOptionValuePath(value).execute(true);
-}
-
-public Object getSelectedValues() {
-	return getBuilder().reset().tryGetSelectedValues().execute(false).getSelectedValues(); 
-}
-public void setSelectedValues(Object value) {
-	getBuilder().reset().setSelectedValues(value).execute(true);
-}
-
-public void setValues(String value) {
-	getBuilder().reset().setValues(value).execute(true);
-}
-
 public Object getTextColor() {
 	return getBuilder().reset().tryGetTextColor().execute(false).getTextColor(); 
 }
@@ -2284,6 +2301,37 @@ public void setDrawableTintMode(String value) {
 	getBuilder().reset().setDrawableTintMode(value).execute(true);
 }
 
+public void setEntries(String value) {
+	getBuilder().reset().setEntries(value).execute(true);
+}
+
+public void setSelection(String value) {
+	getBuilder().reset().setSelection(value).execute(true);
+}
+
+public void setModelOptionTextPath(String value) {
+	getBuilder().reset().setModelOptionTextPath(value).execute(true);
+}
+
+public void setOnItemSelected(String value) {
+	getBuilder().reset().setOnItemSelected(value).execute(true);
+}
+
+public void setModelOptionValuePath(String value) {
+	getBuilder().reset().setModelOptionValuePath(value).execute(true);
+}
+
+public Object getSelectedValues() {
+	return getBuilder().reset().tryGetSelectedValues().execute(false).getSelectedValues(); 
+}
+public void setSelectedValues(Object value) {
+	getBuilder().reset().setSelectedValues(value).execute(true);
+}
+
+public void setValues(String value) {
+	getBuilder().reset().setValues(value).execute(true);
+}
+
 }
 
 
@@ -2351,7 +2399,7 @@ private HTMLElement select;
 			for (int position : getSelectedIndexes(select)) {
 				positions.add(position);
 			}
-			onMultiItemSelectedListener.onItemSelected(measurableTextView, positions);
+			onMultiItemSelectedListener.onItemSelected(measurableView, positions);
 		};
 		ViewImpl.setOnListener(this, select, listener, "change", "change");
 	}
@@ -2377,7 +2425,7 @@ private HTMLElement select;
     
 	@Override
 	public boolean isViewVisible() {
-		return measurableTextView.getVisibility() == View.VISIBLE;
+		return measurableView.getVisibility() == View.VISIBLE;
 	}
 
 	@Override

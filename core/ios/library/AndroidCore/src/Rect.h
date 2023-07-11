@@ -16,6 +16,8 @@
 #if !defined (ADRect_) && (INCLUDE_ALL_Rect || defined(INCLUDE_ADRect))
 #define ADRect_
 
+@class JavaLangStringBuilder;
+
 /*!
  @brief Rect holds four integer coordinates for a rectangle.The rectangle is
   represented by the coordinates of its 4 edges (left, top, right bottom).
@@ -60,6 +62,8 @@
  */
 - (instancetype)initWithADRect:(ADRect *)r;
 
+- (jboolean)containsWithADRect:(ADRect *)r;
+
 /*!
  @return the rectangle's height. This does not check for a valid rectangle
           (i.e. top <= bottom) so the result may be negative.
@@ -94,6 +98,13 @@
 - (void)setWithADRect:(ADRect *)src;
 
 - (void)setEmpty;
+
+- (NSString *)toShortString;
+
+/*!
+ @brief Return a string representation of the rectangle in a compact form.
+ */
+- (NSString *)toShortStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)sb;
 
 /*!
  @return the rectangle's width. This does not check for a valid rectangle

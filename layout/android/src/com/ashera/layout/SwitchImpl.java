@@ -396,7 +396,8 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
 		ConverterFactory.register("Switch.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("Switch.textStyle"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("systemTextAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate"));
@@ -418,6 +419,12 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
 	public SwitchImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  SwitchImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  SwitchImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class SwitchExt extends androidx.appcompat.widget.SwitchCompat implements ILifeCycleDecorator{
@@ -430,11 +437,6 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
 
 		public SwitchExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -539,14 +541,14 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(SwitchImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((SwitchExt) switchCompat).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return SwitchExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new SwitchImpl();
+		return new SwitchImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -1289,11 +1291,21 @@ if (Build.VERSION.SDK_INT >= 23) {
 
 			}
 			break;
-			case "textAppearance": {
+			case "systemTextAppearance": {
 				
 
 
 		TextViewCompat.setTextAppearance(switchCompat, (int)objValue);
+
+
+
+			}
+			break;
+			case "textAppearance": {
+				
+
+
+		ViewImpl.setStyle(this, objValue);
 
 
 
@@ -3570,6 +3582,14 @@ public SwitchCommandBuilder setFontFamily(String value) {
 
 	attrs.put("value", value);
 return this;}
+public SwitchCommandBuilder setSystemTextAppearance(String value) {
+	Map<String, Object> attrs = initCommand("systemTextAppearance");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public SwitchCommandBuilder setTextAppearance(String value) {
 	Map<String, Object> attrs = initCommand("textAppearance");
 	attrs.put("type", "attribute");
@@ -4198,6 +4218,10 @@ public void setTextStyle(String value) {
 
 public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
+}
+
+public void setSystemTextAppearance(String value) {
+	getBuilder().reset().setSystemTextAppearance(value).execute(true);
 }
 
 public void setTextAppearance(String value) {

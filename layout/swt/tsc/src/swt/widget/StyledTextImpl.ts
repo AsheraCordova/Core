@@ -87,6 +87,8 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
+
+
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -149,7 +151,6 @@ export class NumericTransformer implements ITranform {
         }
     }
 }
-
 
 
 
@@ -272,6 +273,12 @@ export abstract class StyledTextImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "swtWrapIndent" })
 	swtWrapIndent!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "firstBaselineToTopHeight" })
+	firstBaselineToTopHeight!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "lastBaselineToBottomHeight" })
+	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "lineSpacingExtra" })
 	lineSpacingExtra!:CommandAttr<string>| undefined;
@@ -435,11 +442,8 @@ export abstract class StyledTextImpl<T> extends ViewImpl<T>{
 	@Expose({ name: "swtUseTabForNavigation" })
 	swtUseTabForNavigation!:CommandAttr<boolean>| undefined;
 	@Type(() => CommandAttr)
-	@Expose({ name: "firstBaselineToTopHeight" })
-	firstBaselineToTopHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "lastBaselineToBottomHeight" })
-	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
+	@Expose({ name: "setFocus" })
+	setFocus!:CommandAttr<boolean>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -477,6 +481,8 @@ export abstract class StyledTextImpl<T> extends ViewImpl<T>{
 		this.swtTopPixel = undefined;
 		this.swtWordWrap = undefined;
 		this.swtWrapIndent = undefined;
+		this.firstBaselineToTopHeight = undefined;
+		this.lastBaselineToBottomHeight = undefined;
 		this.lineSpacingExtra = undefined;
 		this.lineSpacingMultiplier = undefined;
 		this.textIsSelectable = undefined;
@@ -531,8 +537,7 @@ export abstract class StyledTextImpl<T> extends ViewImpl<T>{
 		this.editable = undefined;
 		this.scrollHorizontally = undefined;
 		this.swtUseTabForNavigation = undefined;
-		this.firstBaselineToTopHeight = undefined;
-		this.lastBaselineToBottomHeight = undefined;
+		this.setFocus = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -1557,6 +1562,70 @@ export abstract class StyledTextImpl<T> extends ViewImpl<T>{
 		this.swtWrapIndent.setValue(value);
 		this.orderSet++;
 		this.swtWrapIndent.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetFirstBaselineToTopHeight() : T {
+		this.resetIfRequired();
+		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
+			this.firstBaselineToTopHeight = new CommandAttr<string>()
+		}
+		
+		this.firstBaselineToTopHeight.setGetter(true);
+		this.orderGet++;
+		this.firstBaselineToTopHeight.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getFirstBaselineToTopHeight() : string {
+		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
+			this.firstBaselineToTopHeight = new CommandAttr<string>();
+		}
+		return this.firstBaselineToTopHeight.getCommandReturnValue();
+	}
+	public setFirstBaselineToTopHeight(value : string) : T {
+		this.resetIfRequired();
+		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
+			this.firstBaselineToTopHeight = new CommandAttr<string>();
+		}
+		
+		this.firstBaselineToTopHeight.setSetter(true);
+		this.firstBaselineToTopHeight.setValue(value);
+		this.orderSet++;
+		this.firstBaselineToTopHeight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetLastBaselineToBottomHeight() : T {
+		this.resetIfRequired();
+		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
+			this.lastBaselineToBottomHeight = new CommandAttr<string>()
+		}
+		
+		this.lastBaselineToBottomHeight.setGetter(true);
+		this.orderGet++;
+		this.lastBaselineToBottomHeight.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getLastBaselineToBottomHeight() : string {
+		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
+			this.lastBaselineToBottomHeight = new CommandAttr<string>();
+		}
+		return this.lastBaselineToBottomHeight.getCommandReturnValue();
+	}
+	public setLastBaselineToBottomHeight(value : string) : T {
+		this.resetIfRequired();
+		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
+			this.lastBaselineToBottomHeight = new CommandAttr<string>();
+		}
+		
+		this.lastBaselineToBottomHeight.setSetter(true);
+		this.lastBaselineToBottomHeight.setValue(value);
+		this.orderSet++;
+		this.lastBaselineToBottomHeight.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -2695,66 +2764,16 @@ this.gravity.setTransformer('gravity');		return this.thisPointer;
 	}
 		
 
-	public tryGetFirstBaselineToTopHeight() : T {
+	public setSetFocus(value : boolean) : T {
 		this.resetIfRequired();
-		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
-			this.firstBaselineToTopHeight = new CommandAttr<string>()
+		if (this.setFocus == null || this.setFocus == undefined) {
+			this.setFocus = new CommandAttr<boolean>();
 		}
 		
-		this.firstBaselineToTopHeight.setGetter(true);
-		this.orderGet++;
-		this.firstBaselineToTopHeight.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getFirstBaselineToTopHeight() : string {
-		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
-			this.firstBaselineToTopHeight = new CommandAttr<string>();
-		}
-		return this.firstBaselineToTopHeight.getCommandReturnValue();
-	}
-	public setFirstBaselineToTopHeight(value : string) : T {
-		this.resetIfRequired();
-		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
-			this.firstBaselineToTopHeight = new CommandAttr<string>();
-		}
-		
-		this.firstBaselineToTopHeight.setSetter(true);
-		this.firstBaselineToTopHeight.setValue(value);
+		this.setFocus.setSetter(true);
+		this.setFocus.setValue(value);
 		this.orderSet++;
-		this.firstBaselineToTopHeight.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetLastBaselineToBottomHeight() : T {
-		this.resetIfRequired();
-		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
-			this.lastBaselineToBottomHeight = new CommandAttr<string>()
-		}
-		
-		this.lastBaselineToBottomHeight.setGetter(true);
-		this.orderGet++;
-		this.lastBaselineToBottomHeight.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getLastBaselineToBottomHeight() : string {
-		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
-			this.lastBaselineToBottomHeight = new CommandAttr<string>();
-		}
-		return this.lastBaselineToBottomHeight.getCommandReturnValue();
-	}
-	public setLastBaselineToBottomHeight(value : string) : T {
-		this.resetIfRequired();
-		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
-			this.lastBaselineToBottomHeight = new CommandAttr<string>();
-		}
-		
-		this.lastBaselineToBottomHeight.setSetter(true);
-		this.lastBaselineToBottomHeight.setValue(value);
-		this.orderSet++;
-		this.lastBaselineToBottomHeight.setOrderSet(this.orderSet);
+		this.setFocus.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

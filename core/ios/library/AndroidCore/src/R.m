@@ -48,37 +48,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADR)
 
 @implementation ADR_id
 
-- (instancetype)initWithADR:(ADR *)outer$ {
-  ADR_id_initWithADR_(self, outer$);
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ADR_id_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithADR:);
+  methods[0].selector = @selector(init);
   #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "content", "I", .constantValue.asInt = ADR_id_content, 0x19, -1, -1, -1, -1 },
+  };
   static const void *ptrTable[] = { "LADR;" };
-  static const J2ObjcClassInfo _ADR_id = { "id", "r.android", ptrTable, methods, NULL, 7, 0x1, 1, 0, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADR_id = { "id", "r.android", ptrTable, methods, fields, 7, 0x9, 1, 1, 0, -1, -1, -1, -1 };
   return &_ADR_id;
 }
 
 @end
 
-void ADR_id_initWithADR_(ADR_id *self, ADR *outer$) {
+void ADR_id_init(ADR_id *self) {
   NSObject_init(self);
 }
 
-ADR_id *new_ADR_id_initWithADR_(ADR *outer$) {
-  J2OBJC_NEW_IMPL(ADR_id, initWithADR_, outer$)
+ADR_id *new_ADR_id_init() {
+  J2OBJC_NEW_IMPL(ADR_id, init)
 }
 
-ADR_id *create_ADR_id_initWithADR_(ADR *outer$) {
-  J2OBJC_CREATE_IMPL(ADR_id, initWithADR_, outer$)
+ADR_id *create_ADR_id_init() {
+  J2OBJC_CREATE_IMPL(ADR_id, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADR_id)

@@ -33,6 +33,7 @@
 @class ASWidgetAttribute;
 @class ASWidgetAttributeMap;
 @class ASWidgetAttributeValue;
+@class IOSClass;
 @class IOSObjectArray;
 @protocol ASHasWidgets;
 @protocol ASIFragment;
@@ -53,6 +54,8 @@
 - (NSString *)getLocalName;
 
 - (NSString *)getGroupName;
+
+- (IOSClass *)getViewClass;
 
 - (id)unwrapWithId:(id)widget;
 
@@ -99,9 +102,12 @@
 
 - (void)loadAttributesWithNSString:(NSString *)localName;
 
-- (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
-                                   withId:(id)objValue
-                              withBoolean:(jboolean)skipConvert;
+- (void)setAttributeWithNSString:(NSString *)key
+                          withId:(id)objValue
+                     withBoolean:(jboolean)skipConvert;
+
+- (id)getAttributeWithNSString:(NSString *)key
+                   withBoolean:(jboolean)skipConvert;
 
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
                              withNSString:(NSString *)strValue
@@ -229,6 +235,9 @@
 - (id<ASIWidget>)loadLazyWidgetsWithASLoopParam:(ASLoopParam *)model;
 
 - (id<ASIWidget>)loadLazyWidgetsWithASHasWidgets:(id<ASHasWidgets>)hasWidgets;
+
+- (id)invokeMethodWithNSString:(NSString *)methodName
+             withNSObjectArray:(IOSObjectArray *)args;
 
 @end
 

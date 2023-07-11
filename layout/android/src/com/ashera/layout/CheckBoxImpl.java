@@ -352,7 +352,8 @@ public class CheckBoxImpl extends BaseWidget implements com.ashera.validations.F
 		ConverterFactory.register("CheckBox.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("CheckBox.textStyle"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("systemTextAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate"));
@@ -374,6 +375,12 @@ public class CheckBoxImpl extends BaseWidget implements com.ashera.validations.F
 	public CheckBoxImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  CheckBoxImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  CheckBoxImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class CheckBoxExt extends androidx.appcompat.widget.AppCompatCheckBox implements ILifeCycleDecorator{
@@ -386,11 +393,6 @@ public class CheckBoxImpl extends BaseWidget implements com.ashera.validations.F
 
 		public CheckBoxExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -495,14 +497,14 @@ public class CheckBoxImpl extends BaseWidget implements com.ashera.validations.F
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(CheckBoxImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((CheckBoxExt) appCompatCheckBox).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return CheckBoxExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new CheckBoxImpl();
+		return new CheckBoxImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -1135,11 +1137,21 @@ if (Build.VERSION.SDK_INT >= 21) {
 
 			}
 			break;
-			case "textAppearance": {
+			case "systemTextAppearance": {
 				
 
 
 		TextViewCompat.setTextAppearance(appCompatCheckBox, (int)objValue);
+
+
+
+			}
+			break;
+			case "textAppearance": {
+				
+
+
+		ViewImpl.setStyle(this, objValue);
 
 
 
@@ -3168,6 +3180,14 @@ public CheckBoxCommandBuilder setFontFamily(String value) {
 
 	attrs.put("value", value);
 return this;}
+public CheckBoxCommandBuilder setSystemTextAppearance(String value) {
+	Map<String, Object> attrs = initCommand("systemTextAppearance");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public CheckBoxCommandBuilder setTextAppearance(String value) {
 	Map<String, Object> attrs = initCommand("textAppearance");
 	attrs.put("type", "attribute");
@@ -3722,6 +3742,10 @@ public void setTextStyle(String value) {
 
 public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
+}
+
+public void setSystemTextAppearance(String value) {
+	getBuilder().reset().setSystemTextAppearance(value).execute(true);
 }
 
 public void setTextAppearance(String value) {

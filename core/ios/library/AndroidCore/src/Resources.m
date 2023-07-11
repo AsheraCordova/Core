@@ -12,7 +12,7 @@
 #include "R.h"
 #include "Resources.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/Exception.h"
+#include "java/lang/RuntimeException.h"
 
 
 J2OBJC_INITIALIZED_DEFN(ADResources)
@@ -143,7 +143,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADResources)
 @end
 
 void ADResources_NotFoundException_initWithADResources_(ADResources_NotFoundException *self, ADResources *outer$) {
-  JavaLangException_init(self);
+  JavaLangRuntimeException_init(self);
 }
 
 ADResources_NotFoundException *new_ADResources_NotFoundException_initWithADResources_(ADResources *outer$) {

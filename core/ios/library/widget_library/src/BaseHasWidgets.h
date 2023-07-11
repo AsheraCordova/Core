@@ -74,6 +74,8 @@
 
 - (void)clear;
 
+- (ASLoopParam *)createLoopParam;
+
 - (ASWidgetViewHolder *)createWidgetViewHolderWithJavaUtilList:(id<JavaUtilList>)viewHolderIds
                                                  withASIWidget:(id<ASIWidget>)widget;
 
@@ -81,9 +83,11 @@
 
 - (id<ASIWidget>)getWithInt:(jint)index;
 
-- (id<ASHasWidgets>)getCompositeLeaf;
+- (id<ASHasWidgets>)getCompositeLeafWithASIWidget:(id<ASIWidget>)w;
 
 - (id<ASIWidget>)getListItem;
+
+- (NSString *)getModelDescPath;
 
 - (NSString *)getModelFor;
 
@@ -124,10 +128,17 @@
 - (void)setChildAttributeWithASIWidget:(id<ASIWidget>)w
                  withASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)setChildAttributeWithASIWidget:(id<ASIWidget>)w
+                 withASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
+                                withId:(id)objValue
+                           withBoolean:(jboolean)skipConvert;
+
 - (void)setChildAttributeWithASIWidget:(id<ASIWidget>)widget
                  withASWidgetAttribute:(ASWidgetAttribute *)key
                           withNSString:(NSString *)strValue
                                 withId:(id)value;
+
+- (void)setModelDescPathWithNSString:(NSString *)modelDescPath;
 
 - (void)setModelForWithNSString:(NSString *)modelFor;
 
@@ -184,6 +195,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseHasWidgets)
 @class ASBaseHasWidgets;
 @class ASLoopParam;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -223,6 +235,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASBaseHasWidgets)
 - (NSString *)getLocalName;
 
 - (id<JavaUtilList>)getStableIds;
+
+- (IOSClass *)getViewClass;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 

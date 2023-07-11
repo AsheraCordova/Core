@@ -16,9 +16,9 @@
 #if !defined (ADWebView_) && (INCLUDE_ALL_WebView || defined(INCLUDE_ADWebView))
 #define ADWebView_
 
-#define RESTRICT_View 1
-#define INCLUDE_ADView 1
-#include "View.h"
+#define RESTRICT_ViewGroup 1
+#define INCLUDE_ADViewGroup 1
+#include "ViewGroup.h"
 
 @class ADAttributeSet;
 @class ADContext;
@@ -28,9 +28,11 @@
 @class ADWebSettings;
 @class ADWebViewClient;
 
-@interface ADWebView : ADView
+@interface ADWebView : ADViewGroup
 
 #pragma mark Public
+
+- (instancetype)init;
 
 - (instancetype)initWithADContext:(ADContext *)context
                withADAttributeSet:(ADAttributeSet *)attrs;
@@ -81,10 +83,6 @@
 
 - (void)stopLoading;
 
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)init NS_UNAVAILABLE;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADWebView)
@@ -94,6 +92,12 @@ FOUNDATION_EXPORT void ADWebView_initWithADContext_withADAttributeSet_(ADWebView
 FOUNDATION_EXPORT ADWebView *new_ADWebView_initWithADContext_withADAttributeSet_(ADContext *context, ADAttributeSet *attrs) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADWebView *create_ADWebView_initWithADContext_withADAttributeSet_(ADContext *context, ADAttributeSet *attrs);
+
+FOUNDATION_EXPORT void ADWebView_init(ADWebView *self);
+
+FOUNDATION_EXPORT ADWebView *new_ADWebView_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ADWebView *create_ADWebView_init(void);
 
 FOUNDATION_EXPORT void ADWebView_setWebContentsDebuggingEnabledWithBoolean_(jboolean b);
 

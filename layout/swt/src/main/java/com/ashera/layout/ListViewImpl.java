@@ -233,22 +233,30 @@ return getListSelector();			}
 
 
     private ListAdapter listAdapter;
-    class ListAdapter extends BaseAdapter{
+    public ListAdapter getListAdapter() {
+		return listAdapter;
+	}
+
+	class ListAdapter extends BaseAdapter  implements Filterable{
+    	private final Object mLock = new Object();
+    	private ArrayFilter mFilter;
+    	private List<com.ashera.model.LoopParam> mObjects;
         @Override
         public boolean isEnabled(int position) {
             return true;
         }
         public ListAdapter() {
+        	mObjects = dataList;
         }
         
         @Override
         public int getCount() {
-            return dataList.size();
+            return mObjects.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return dataList.get(position);
+            return mObjects.get(position);
         }
         
         @Override
@@ -263,7 +271,7 @@ return getListSelector();			}
         
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            com.ashera.model.LoopParam model = dataList.get(position);
+            com.ashera.model.LoopParam model = mObjects.get(position);
             IWidget myWidget;
             if (convertView == null) {
                 myWidget = (IWidget) getListItem().loadLazyWidgets(model);
@@ -277,7 +285,79 @@ return getListSelector();			}
             return (View) myWidget.asNativeWidget();
         }
         
+        public Filter getFilter() {
+            if (mFilter == null) {
+                mFilter = new ArrayFilter();
+            }
+            return mFilter;
+        }
+        
+        public void dofilterSync(String text) {
+        	getFilter();
+        	mFilter.publishResults(text, mFilter.performFiltering(text));
+        }
+        
+        private class ArrayFilter extends Filter {
+            @Override
+            protected FilterResults performFiltering(CharSequence prefix) {
+                final FilterResults results = new FilterResults();
+
+                if (prefix == null || prefix.length() == 0) {
+                    final ArrayList<com.ashera.model.LoopParam> list;
+                    synchronized (mLock) {
+                        list = new ArrayList<>(dataList);
+                    }
+                    results.values = list;
+                    results.count = list.size();
+                } else {
+                    final String prefixString = prefix.toString().toLowerCase();
+
+                    final ArrayList<com.ashera.model.LoopParam> values;
+                    synchronized (mLock) {
+                        values = new ArrayList<>(dataList);
+                    }
+
+                    final int count = values.size();
+                    final ArrayList<com.ashera.model.LoopParam> newValues = new ArrayList<>();
+
+                    for (int i = 0; i < count; i++) {
+                        final com.ashera.model.LoopParam value = values.get(i);
+                        final String valueText = value.toString().toLowerCase();
+
+                        // First match against the whole, non-splitted value
+                        if (valueText.startsWith(prefixString)) {
+                            newValues.add(value);
+                        } else {
+                            final String[] words = valueText.split(" ");
+                            for (String word : words) {
+                                if (word.startsWith(prefixString)) {
+                                    newValues.add(value);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    results.values = newValues;
+                    results.count = newValues.size();
+                }
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                //noinspection unchecked
+                mObjects = (List<com.ashera.model.LoopParam>) results.values;
+                if (results.count > 0) {
+                    notifyDataSetChanged();
+                } else {
+                    notifyDataSetInvalidated();
+                }
+            }
+        }
     }
+
     
 
 
@@ -595,7 +675,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 	private int selectedPosition;
 	private ListView listView;
 	
-    //start - adapter
+	//start - adapter
 	private void setChoiceMode(Object objValue) {
 		listView.setChoiceMode((int) objValue);
 	}
@@ -628,12 +708,17 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
     }
 
     private Object itemClick;
-    private void setOnItemClick(Object objValue) {
+    public void setOnItemClick(Object objValue) {
         this.itemClick = objValue;
     }
 
     private void nativeCreate(Map<String, Object> params) {
-    	listView = new ListView();
+    	listView = new ListView() {
+    		@Override
+    		public r.android.view.View getRootView() {
+    			return (r.android.view.View) getFragment().getRootWidget().asWidget();
+    		}
+    	};
     	initListAdapter();
         linearLayoutImpl = new LinearLayoutImpl();
         linearLayoutImpl.setParent(this);
@@ -688,9 +773,9 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
     }
 
     @Override
-    public HasWidgets getCompositeLeaf() {
+    public HasWidgets getCompositeLeaf(IWidget w) {
         if (linearLayoutImpl.asNativeWidget() == null) {
-            return super.getCompositeLeaf();
+            return super.getCompositeLeaf(w);
         }
         return linearLayoutImpl;
     }
@@ -895,7 +980,9 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
     private Object getListSelector() {
 		return listSelector;
 	}
-	
+	public List<com.ashera.model.LoopParam> getData() {
+		return dataList;
+	}
 	//end - viewcode
 	
 
@@ -907,7 +994,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 		    }
 		};
 		org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control)widget.asNativeWidget();
-		ViewImpl.addListener(control, listener);
+		ViewImpl.addClickListener(control, listener);
 	}
 
 	private void addLongClickListener(IWidget widget, View.OnLongClickListener listener) {

@@ -61,7 +61,7 @@ public class TableLayoutImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new TableLayoutImpl();
+		return new TableLayoutImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -82,7 +82,7 @@ public class TableLayoutImpl extends BaseHasWidgets {
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		tableLayout.removeView((View) w.asWidget());
          ViewGroupImpl.nativeRemoveView(w);            
@@ -219,12 +219,7 @@ return layoutParams.weight;			}
 		}
 
 		public TableLayoutExt() {
-			
-			
-			
-			
 			super();
-			
 			
 		}
 		
@@ -312,7 +307,46 @@ return layoutParams.weight;			}
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(TableLayoutImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(TableLayoutImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	TableLayoutImpl.this.getParent().remove(TableLayoutImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) asNativeWidget();
+			appScreenLocation[0] = control.toDisplay(0, 0).x;
+        	appScreenLocation[1] = control.toDisplay(0, 0).y;
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	org.eclipse.swt.widgets.Shell shell = ((org.eclipse.swt.widgets.Control)asNativeWidget()).getShell();
+        	displayFrame.left = shell.toDisplay(0, 0).x ;
+			displayFrame.top = shell.getShell().toDisplay(0, 0).y ;
+        	displayFrame.bottom = displayFrame.top + shell.getClientArea().height;
+        	displayFrame.right = displayFrame.left + shell.getBounds().width;
+        	
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -322,6 +356,10 @@ return layoutParams.weight;			}
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			TableLayoutImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
@@ -329,12 +367,11 @@ return layoutParams.weight;			}
             
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((TableLayoutExt) tableLayout).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return TableLayoutExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {

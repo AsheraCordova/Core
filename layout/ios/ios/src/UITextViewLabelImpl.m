@@ -20,6 +20,7 @@
 #include "FontDescriptor.h"
 #include "FontMetricsDescriptor.h"
 #include "GravityConverter.h"
+#include "HasWidgets.h"
 #include "Html.h"
 #include "IActivity.h"
 #include "IAttributable.h"
@@ -36,11 +37,10 @@
 #include "Layout.h"
 #include "LayoutNativeVars.h"
 #include "MarqueeCommandConverter.h"
-#include "MeasurableTextView.h"
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
 #include "PluginInvoker.h"
-#include "RectF.h"
+#include "Rect.h"
 #include "RectM.h"
 #include "TextDirectionHeuristic.h"
 #include "TextView.h"
@@ -251,21 +251,15 @@
 
 - (jint)getHeight;
 
-- (jint)getAutoSizeTextTypeWithASMeasurableTextView:(ASMeasurableTextView *)measurableTextView;
+- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView;
 
 - (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType;
-
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)suggestedSizeInPx
-                                  withFloat:(jfloat)width
-                                  withFloat:(jfloat)height;
 
 - (void)setAutoSizePresetSizesWithId:(id)objValue;
 
 - (void)addAutoResizeListener;
 
 - (void)removeResizeListener;
-
-- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)setMaxLengthWithId:(id)objValue;
 
@@ -604,19 +598,15 @@ __attribute__((unused)) static id ASUITextViewLabelImpl_getWidth(ASUITextViewLab
 
 __attribute__((unused)) static jint ASUITextViewLabelImpl_getHeight(ASUITextViewLabelImpl *self);
 
-__attribute__((unused)) static jint ASUITextViewLabelImpl_getAutoSizeTextTypeWithASMeasurableTextView_(ASUITextViewLabelImpl *self, ASMeasurableTextView *measurableTextView);
+__attribute__((unused)) static jint ASUITextViewLabelImpl_getAutoSizeTextTypeWithADTextView_(ASUITextViewLabelImpl *self, ADTextView *measurableView);
 
 __attribute__((unused)) static void ASUITextViewLabelImpl_setAutoSizeTextTypeInternalWithInt_(ASUITextViewLabelImpl *self, jint autoTextType);
-
-__attribute__((unused)) static jboolean ASUITextViewLabelImpl_suggestedSizeFitsInSpaceWithInt_withFloat_withFloat_(ASUITextViewLabelImpl *self, jint suggestedSizeInPx, jfloat width, jfloat height);
 
 __attribute__((unused)) static void ASUITextViewLabelImpl_setAutoSizePresetSizesWithId_(ASUITextViewLabelImpl *self, id objValue);
 
 __attribute__((unused)) static void ASUITextViewLabelImpl_addAutoResizeListener(ASUITextViewLabelImpl *self);
 
 __attribute__((unused)) static void ASUITextViewLabelImpl_removeResizeListener(ASUITextViewLabelImpl *self);
-
-__attribute__((unused)) static jint ASUITextViewLabelImpl_computeSizeWithFloat_(ASUITextViewLabelImpl *self, jfloat width);
 
 __attribute__((unused)) static void ASUITextViewLabelImpl_setMaxLengthWithId_(ASUITextViewLabelImpl *self, id objValue);
 
@@ -841,12 +831,14 @@ J2OBJC_FIELD_SETTER(ASUITextViewLabelImpl_DrawableTintMode, mapping_, id<JavaUti
   __unsafe_unretained ASUITextViewLabelImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
+  id<JavaUtilMap> templates_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(ASUITextViewLabelImpl_UITextViewLabelExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASUITextViewLabelImpl_UITextViewLabelExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASUITextViewLabelImpl_UITextViewLabelExt, templates_, id<JavaUtilMap>)
 
 @interface ASUITextViewLabelImpl_DellocHandler : ASEventBusHandler {
  @public
@@ -1039,19 +1031,29 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
-  [((ASUITextViewLabelImpl_UITextViewLabelExt *) nil_chk(((ASUITextViewLabelImpl_UITextViewLabelExt *) cast_chk(measurableTextView_, [ASUITextViewLabelImpl_UITextViewLabelExt class])))) updateMeasuredDimensionWithInt:width withInt:height];
+- (instancetype)initWithNSString:(NSString *)localname {
+  ASUITextViewLabelImpl_initWithNSString_(self, localname);
+  return self;
+}
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname {
+  ASUITextViewLabelImpl_initWithNSString_withNSString_(self, groupName, localname);
+  return self;
+}
+
+- (IOSClass *)getViewClass {
+  return ASUITextViewLabelImpl_UITextViewLabelExt_class_();
 }
 
 - (id<ASIWidget>)newInstance {
-  return new_ASUITextViewLabelImpl_init();
+  return new_ASUITextViewLabelImpl_initWithNSString_withNSString_(groupName_, localName_);
 }
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params {
   [super createWithASIFragment:fragment withJavaUtilMap:params];
-  measurableTextView_ = new_ASUITextViewLabelImpl_UITextViewLabelExt_initWithASUITextViewLabelImpl_(self);
+  measurableView_ = new_ASUITextViewLabelImpl_UITextViewLabelExt_initWithASUITextViewLabelImpl_(self);
   ASUITextViewLabelImpl_nativeCreateWithJavaUtilMap_(self, params);
   ASViewImpl_registerCommandConveterWithASIWidget_(self);
   ASUITextViewLabelImpl_setWidgetOnNativeClass(self);
@@ -1588,28 +1590,28 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)asWidget {
-  return measurableTextView_;
+  return measurableView_;
 }
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASUITextViewLabelImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"bottom", [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getBottomDrawable]);
-  ASUITextViewLabelImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"left", [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getLeftDrawable]);
-  ASUITextViewLabelImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"right", [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getRightDrawable]);
-  ASUITextViewLabelImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"top", [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getTopDrawable]);
-  if ([((ASMeasurableTextView *) nil_chk(measurableTextView_)) getTextColors] != nil && [((ADColorStateList *) nil_chk([((ASMeasurableTextView *) nil_chk(measurableTextView_)) getTextColors])) isStateful]) {
-    ASUITextViewLabelImpl_setTextColorWithId_(self, JavaLangInteger_valueOfWithInt_([((ASMeasurableTextView *) nil_chk(measurableTextView_)) getCurrentTextColor]));
+  ASUITextViewLabelImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"bottom", [((ADTextView *) nil_chk(measurableView_)) getBottomDrawable]);
+  ASUITextViewLabelImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"left", [((ADTextView *) nil_chk(measurableView_)) getLeftDrawable]);
+  ASUITextViewLabelImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"right", [((ADTextView *) nil_chk(measurableView_)) getRightDrawable]);
+  ASUITextViewLabelImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"top", [((ADTextView *) nil_chk(measurableView_)) getTopDrawable]);
+  if ([((ADTextView *) nil_chk(measurableView_)) getTextColors] != nil && [((ADColorStateList *) nil_chk([((ADTextView *) nil_chk(measurableView_)) getTextColors])) isStateful]) {
+    ASUITextViewLabelImpl_setTextColorWithId_(self, JavaLangInteger_valueOfWithInt_([((ADTextView *) nil_chk(measurableView_)) getCurrentTextColor]));
   }
-  if ([((ASMeasurableTextView *) nil_chk(measurableTextView_)) getHintTextColors] != nil && [((ADColorStateList *) nil_chk([((ASMeasurableTextView *) nil_chk(measurableTextView_)) getHintTextColors])) isStateful]) {
-    ASUITextViewLabelImpl_setHintColorWithInt_(self, [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getCurrentHintTextColor]);
+  if ([((ADTextView *) nil_chk(measurableView_)) getHintTextColors] != nil && [((ADColorStateList *) nil_chk([((ADTextView *) nil_chk(measurableView_)) getHintTextColors])) isStateful]) {
+    ASUITextViewLabelImpl_setHintColorWithInt_(self, [((ADTextView *) nil_chk(measurableView_)) getCurrentHintTextColor]);
     ASUITextViewLabelImpl_syncPlaceholderLabel(self);
   }
   if (drawableTint_ != nil && [drawableTint_ isStateful]) {
     ASUITextViewLabelImpl_setDrawableTintWithId_(self, drawableTint_);
     [self invalidate];
   }
-  if ([((ASMeasurableTextView *) nil_chk(measurableTextView_)) getLinkTextColors] != nil && [((ADColorStateList *) nil_chk([((ASMeasurableTextView *) nil_chk(measurableTextView_)) getLinkTextColors])) isStateful]) {
-    ASUITextViewLabelImpl_setTextColorLinkWithId_(self, [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getLinkTextColors]);
+  if ([((ADTextView *) nil_chk(measurableView_)) getLinkTextColors] != nil && [((ADColorStateList *) nil_chk([((ADTextView *) nil_chk(measurableView_)) getLinkTextColors])) isStateful]) {
+    ASUITextViewLabelImpl_setTextColorLinkWithId_(self, [((ADTextView *) nil_chk(measurableView_)) getLinkTextColors]);
   }
 }
 
@@ -1841,7 +1843,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
-  if ([((ASMeasurableTextView *) nil_chk(measurableTextView_)) getRawTextAlignment] != 0 || [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getRawLayoutDirection] != 0) {
+  if ([((ADTextView *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADTextView *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASUITextViewLabelImpl_updateTextAlignment(self);
   }
 }
@@ -1863,11 +1865,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getMaxEms {
-  return [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getMaxEms];
+  return [((ADTextView *) nil_chk(measurableView_)) getMaxEms];
 }
 
 - (jint)getMinEms {
-  return [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getMinEms];
+  return [((ADTextView *) nil_chk(measurableView_)) getMinEms];
 }
 
 - (void)setMinEmsWithId:(id)objValue {
@@ -1875,11 +1877,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getMinLines {
-  return [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getMinLines];
+  return [((ADTextView *) nil_chk(measurableView_)) getMinLines];
 }
 
 - (jint)getMaxLines {
-  return [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getMaxLines];
+  return [((ADTextView *) nil_chk(measurableView_)) getMaxLines];
 }
 
 - (void)setMaxEmsWithId:(id)objValue {
@@ -1915,11 +1917,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getMaxWidth {
-  return [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getMaxWidth];
+  return [((ADTextView *) nil_chk(measurableView_)) getMaxWidth];
 }
 
 - (jint)getMaxHeight {
-  return [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getMaxHeight];
+  return [((ADTextView *) nil_chk(measurableView_)) getMaxHeight];
 }
 
 - (void)setMinHeightWithId:(id)objValue {
@@ -1938,18 +1940,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASUITextViewLabelImpl_getHeight(self);
 }
 
-- (jint)getAutoSizeTextTypeWithASMeasurableTextView:(ASMeasurableTextView *)measurableTextView {
-  return ASUITextViewLabelImpl_getAutoSizeTextTypeWithASMeasurableTextView_(self, measurableTextView);
+- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView {
+  return ASUITextViewLabelImpl_getAutoSizeTextTypeWithADTextView_(self, measurableView);
 }
 
 - (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType {
   ASUITextViewLabelImpl_setAutoSizeTextTypeInternalWithInt_(self, autoTextType);
-}
-
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)suggestedSizeInPx
-                                  withFloat:(jfloat)width
-                                  withFloat:(jfloat)height {
-  return ASUITextViewLabelImpl_suggestedSizeFitsInSpaceWithInt_withFloat_withFloat_(self, suggestedSizeInPx, width, height);
 }
 
 - (void)setAutoSizePresetSizesWithId:(id)objValue {
@@ -1962,10 +1958,6 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)removeResizeListener {
   ASUITextViewLabelImpl_removeResizeListener(self);
-}
-
-- (jint)computeSizeWithFloat:(jfloat)width {
-  return ASUITextViewLabelImpl_computeSizeWithFloat_(self, width);
 }
 
 - (void)setMaxLengthWithId:(id)objValue {
@@ -2164,8 +2156,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
-    [((ASMeasurableTextView *) nil_chk(measurableTextView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
+    [((ADTextView *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
   }
+}
+
+- (void)setVisibleWithBoolean:(jboolean)b {
+  [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
 - (void)requestLayout {
@@ -2224,7 +2220,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPaddingLeftWithId:(id)paddingLeft {
   self->paddingLeft_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingLeft, [JavaLangInteger class]))) intValue];
-  ASUITextViewLabelImpl_nativeSetPaddingLeftWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingLeft, [JavaLangInteger class]))) intValue] + [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getCompoundPaddingLeft]);
+  ASUITextViewLabelImpl_nativeSetPaddingLeftWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingLeft, [JavaLangInteger class]))) intValue] + [((ADTextView *) nil_chk(measurableView_)) getCompoundPaddingLeft]);
 }
 
 - (id)getPaddingRight {
@@ -2233,29 +2229,29 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPaddingRightWithId:(id)paddingRight {
   self->paddingRight_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingRight, [JavaLangInteger class]))) intValue];
-  ASUITextViewLabelImpl_nativeSetPaddingRightWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingRight, [JavaLangInteger class]))) intValue] + [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getCompoundPaddingRight]);
+  ASUITextViewLabelImpl_nativeSetPaddingRightWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingRight, [JavaLangInteger class]))) intValue] + [((ADTextView *) nil_chk(measurableView_)) getCompoundPaddingRight]);
 }
 
 - (id)getPaddingTop {
   if ([self hasFeatureWithNSString:@"enableFeatures" withNSString:@"cropToPadding"]) {
-    return JavaLangInteger_valueOfWithInt_([((ASMeasurableTextView *) nil_chk(measurableTextView_)) getPaddingTop]);
+    return JavaLangInteger_valueOfWithInt_([((ADTextView *) nil_chk(measurableView_)) getPaddingTop]);
   }
   return JavaLangInteger_valueOfWithInt_(paddingTop_);
 }
 
 - (void)setPaddingTopWithId:(id)paddingTop {
   if ([self hasFeatureWithNSString:@"enableFeatures" withNSString:@"cropToPadding"]) {
-    ASViewImpl_setPaddingTopWithId_withADView_((JavaLangInteger *) cast_chk(paddingTop, [JavaLangInteger class]), measurableTextView_);
+    ASViewImpl_setPaddingTopWithId_withADView_((JavaLangInteger *) cast_chk(paddingTop, [JavaLangInteger class]), measurableView_);
   }
   else {
     self->paddingTop_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingTop, [JavaLangInteger class]))) intValue];
-    ASUITextViewLabelImpl_nativeSetPaddingTopWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingTop, [JavaLangInteger class]))) intValue] + [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getCompoundPaddingTop]);
+    ASUITextViewLabelImpl_nativeSetPaddingTopWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingTop, [JavaLangInteger class]))) intValue] + [((ADTextView *) nil_chk(measurableView_)) getCompoundPaddingTop]);
   }
 }
 
 - (id)getPaddingBottom {
   if ([self hasFeatureWithNSString:@"enableFeatures" withNSString:@"cropToPadding"]) {
-    return JavaLangInteger_valueOfWithInt_([((ASMeasurableTextView *) nil_chk(measurableTextView_)) getPaddingBottom]);
+    return JavaLangInteger_valueOfWithInt_([((ADTextView *) nil_chk(measurableView_)) getPaddingBottom]);
   }
   return JavaLangInteger_valueOfWithInt_(paddingBottom_);
 }
@@ -2270,11 +2266,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPaddingBottomWithId:(id)paddingBottom {
   if ([self hasFeatureWithNSString:@"enableFeatures" withNSString:@"cropToPadding"]) {
-    ASViewImpl_setPaddingBottomWithId_withADView_((JavaLangInteger *) cast_chk(paddingBottom, [JavaLangInteger class]), measurableTextView_);
+    ASViewImpl_setPaddingBottomWithId_withADView_((JavaLangInteger *) cast_chk(paddingBottom, [JavaLangInteger class]), measurableView_);
   }
   else {
     self->paddingBottom_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingBottom, [JavaLangInteger class]))) intValue];
-    ASUITextViewLabelImpl_nativeSetPaddingBottomWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingBottom, [JavaLangInteger class]))) intValue] + [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getCompoundPaddingBottom]);
+    ASUITextViewLabelImpl_nativeSetPaddingBottomWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingBottom, [JavaLangInteger class]))) intValue] + [((ADTextView *) nil_chk(measurableView_)) getCompoundPaddingBottom]);
   }
 }
 
@@ -2404,7 +2400,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getBaseLine {
-  return ASUITextViewLabelImpl_nativeGetBaseLine(self) + [((ASMeasurableTextView *) nil_chk(measurableTextView_)) getPaddingTop];
+  return ASUITextViewLabelImpl_nativeGetBaseLine(self) + [((ADTextView *) nil_chk(measurableView_)) getPaddingTop];
 }
 
 - (jint)nativeGetBaseLine {
@@ -2448,29 +2444,31 @@ J2OBJC_IGNORE_DESIGNATED_END
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 5, -1, 6, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, 5, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 8, 9, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 11, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 13, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 14, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 12, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 13, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 14, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 17, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 16, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 17, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 19, 20, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 22, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 24, 19, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x9, 25, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 21, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 23, 18, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 24, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
@@ -2492,160 +2490,159 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 26, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 29, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 30, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 31, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 33, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 34, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 35, 32, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 36, 16, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 37, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 25, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 27, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 28, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 29, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 30, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 32, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 33, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 34, 31, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 35, 15, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 36, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 38, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 40, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 37, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 38, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 39, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 41, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 40, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 42, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 43, 44, -1, 45, -1, -1 },
+    { NULL, "V", 0x1, 41, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 42, 43, -1, 44, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 46, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 45, 15, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 47, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 46, 15, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 48, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 49, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 50, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 51, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 52, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 53, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 54, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 55, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 47, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 48, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 49, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 50, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 51, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 52, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 53, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 54, 15, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 56, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 57, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 55, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 56, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 58, 59, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 60, 19, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, 61, 62, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 63, 16, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 57, 58, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 59, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 60, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 64, 65, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 66, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 67, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 68, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 69, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 61, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 62, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 63, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 64, 15, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 70, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 71, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 65, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 66, 15, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 72, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 73, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 74, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 75, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 67, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 68, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 69, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 70, 15, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 76, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 71, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 77, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 78, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 79, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 80, 16, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 72, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 73, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 74, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 75, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 81, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 82, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 83, 84, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 76, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 77, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 78, 79, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 40, 84, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 39, 79, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 85, 84, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 80, 79, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 86, 84, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 81, 79, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 87, 84, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 82, 79, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 88, 84, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 83, 79, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 89, 84, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 84, 79, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 90, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 91, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 85, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 86, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 87, 88, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 92, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 89, 1, -1, -1, -1, -1 },
     { NULL, "LASUITextViewLabelImpl_UITextViewLabelBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASUITextViewLabelImpl_UITextViewLabelCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 93, 44, -1, 45, -1, -1 },
-    { NULL, "V", 0x102, 94, 44, -1, 45, -1, -1 },
+    { NULL, "V", 0x2, 90, 43, -1, 44, -1, -1 },
+    { NULL, "V", 0x102, 91, 43, -1, 44, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 95, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 92, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 96, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 93, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 97, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 94, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 98, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 95, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 99, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 100, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 101, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 102, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 103, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 104, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 96, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 97, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 98, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 99, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 100, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 101, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 105, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 106, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 107, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 108, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 109, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 102, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 103, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 104, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 105, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 106, 18, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 110, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 111, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 107, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 108, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 112, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 113, 114, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 109, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 110, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 115, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 116, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 112, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 113, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 117, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 118, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 119, 120, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 121, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 122, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 123, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 124, 120, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 114, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 115, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 116, 88, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 117, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 118, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 119, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 120, 88, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 125, 126, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 127, 3, -1, -1, -1, -1 },
-    { NULL, "Z", 0x102, 128, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 129, 130, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 131, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 121, 122, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 123, 124, -1, -1, -1, -1 },
+    { NULL, "Z", 0x102, 125, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 126, 127, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 128, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -2653,99 +2650,99 @@ J2OBJC_IGNORE_DESIGNATED_END
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(loadAttributesWithNSString:);
   methods[1].selector = @selector(init);
-  methods[2].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
-  methods[3].selector = @selector(newInstance);
-  methods[4].selector = @selector(createWithASIFragment:withJavaUtilMap:);
-  methods[5].selector = @selector(setWidgetOnNativeClass);
-  methods[6].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[7].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[8].selector = @selector(asWidget);
-  methods[9].selector = @selector(drawableStateChanged);
-  methods[10].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
-  methods[11].selector = @selector(handleHtmlTextWithNSString:);
-  methods[12].selector = @selector(nativeSetTextWithNSString:);
-  methods[13].selector = @selector(nativeSetHtmlTextWithId:);
-  methods[14].selector = @selector(getMyText);
-  methods[15].selector = @selector(getTextSize);
-  methods[16].selector = @selector(setMyTextSizeWithId:);
-  methods[17].selector = @selector(nativeSetTextSizeWithInt:);
-  methods[18].selector = @selector(getEllipsize);
-  methods[19].selector = @selector(setEllipsizeWithId:withNSString:);
-  methods[20].selector = @selector(nativeGetFontSize);
-  methods[21].selector = @selector(nativeGetFontStyle);
-  methods[22].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
-  methods[23].selector = @selector(nativeSetFontStyleWithInt:);
-  methods[24].selector = @selector(toUpperCaseWithNSString:);
-  methods[25].selector = @selector(setVerticalAligmentCenter);
-  methods[26].selector = @selector(setVerticalAligmentBottom);
-  methods[27].selector = @selector(setVerticalAligmentTop);
-  methods[28].selector = @selector(setHorizontalAligmentCenter);
-  methods[29].selector = @selector(setHorizontalAligmentRight);
-  methods[30].selector = @selector(setHorizontalAligmentRightInternal);
-  methods[31].selector = @selector(setHorizontalAligmentLeft);
-  methods[32].selector = @selector(setHorizontalAligmentLeftInternal);
-  methods[33].selector = @selector(getTextAlignment);
-  methods[34].selector = @selector(nativeSetVerticalAligmentBottom);
-  methods[35].selector = @selector(nativeSetVerticalAligmentTop);
-  methods[36].selector = @selector(nativeSetVerticalAligmentCenter);
-  methods[37].selector = @selector(getBorderPadding);
-  methods[38].selector = @selector(getLineHeightPadding);
-  methods[39].selector = @selector(getLineHeight);
-  methods[40].selector = @selector(getBorderWidth);
-  methods[41].selector = @selector(canMarquee);
-  methods[42].selector = @selector(cancelNativeTimer);
-  methods[43].selector = @selector(isDisposed);
-  methods[44].selector = @selector(addDeallocHandler);
-  methods[45].selector = @selector(schedule);
-  methods[46].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
-  methods[47].selector = @selector(setDrawablePaddingWithId:);
-  methods[48].selector = @selector(setDrawableBottomWithId:);
-  methods[49].selector = @selector(setDrawableTopWithId:);
-  methods[50].selector = @selector(setDrawableRightWithNSString:withId:);
-  methods[51].selector = @selector(setDrawableRightInternalWithNSString:withId:);
-  methods[52].selector = @selector(setDrawableLeftWithNSString:withId:);
-  methods[53].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
-  methods[54].selector = @selector(getImageHeightWithId:);
-  methods[55].selector = @selector(getImageWidthWithId:);
-  methods[56].selector = @selector(getDrawablePadding);
-  methods[57].selector = @selector(setDrawableTintModeWithId:);
-  methods[58].selector = @selector(setDrawableTintWithId:);
-  methods[59].selector = @selector(setTextColorWithId:);
-  methods[60].selector = @selector(getTextColorState);
-  methods[61].selector = @selector(setGravityWithId:);
-  methods[62].selector = @selector(updateTextAlignment);
-  methods[63].selector = @selector(getGravity);
-  methods[64].selector = @selector(onRtlPropertiesChangedWithInt:);
-  methods[65].selector = @selector(initHtmlWithJavaUtilMap:);
-  methods[66].selector = @selector(getMinHeight);
-  methods[67].selector = @selector(getMinWidth);
-  methods[68].selector = @selector(setEmsWithId:);
-  methods[69].selector = @selector(getMaxEms);
-  methods[70].selector = @selector(getMinEms);
-  methods[71].selector = @selector(setMinEmsWithId:);
-  methods[72].selector = @selector(getMinLines);
-  methods[73].selector = @selector(getMaxLines);
-  methods[74].selector = @selector(setMaxEmsWithId:);
-  methods[75].selector = @selector(setWidthWithId:);
-  methods[76].selector = @selector(setHeightWithId:);
-  methods[77].selector = @selector(setMaxLinesWithId:);
-  methods[78].selector = @selector(setLinesWithId:);
-  methods[79].selector = @selector(setMinLinesWithId:);
-  methods[80].selector = @selector(setMaxHeightWithId:);
-  methods[81].selector = @selector(setMaxWidthWithId:);
-  methods[82].selector = @selector(getMaxWidth);
-  methods[83].selector = @selector(getMaxHeight);
-  methods[84].selector = @selector(setMinHeightWithId:);
-  methods[85].selector = @selector(setMinWidthWithId:);
-  methods[86].selector = @selector(getWidth);
-  methods[87].selector = @selector(getHeight);
-  methods[88].selector = @selector(getAutoSizeTextTypeWithASMeasurableTextView:);
-  methods[89].selector = @selector(setAutoSizeTextTypeInternalWithInt:);
-  methods[90].selector = @selector(suggestedSizeFitsInSpaceWithInt:withFloat:withFloat:);
-  methods[91].selector = @selector(setAutoSizePresetSizesWithId:);
-  methods[92].selector = @selector(addAutoResizeListener);
-  methods[93].selector = @selector(removeResizeListener);
-  methods[94].selector = @selector(computeSizeWithFloat:);
+  methods[2].selector = @selector(initWithNSString:);
+  methods[3].selector = @selector(initWithNSString:withNSString:);
+  methods[4].selector = @selector(getViewClass);
+  methods[5].selector = @selector(newInstance);
+  methods[6].selector = @selector(createWithASIFragment:withJavaUtilMap:);
+  methods[7].selector = @selector(setWidgetOnNativeClass);
+  methods[8].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[9].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[10].selector = @selector(asWidget);
+  methods[11].selector = @selector(drawableStateChanged);
+  methods[12].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
+  methods[13].selector = @selector(handleHtmlTextWithNSString:);
+  methods[14].selector = @selector(nativeSetTextWithNSString:);
+  methods[15].selector = @selector(nativeSetHtmlTextWithId:);
+  methods[16].selector = @selector(getMyText);
+  methods[17].selector = @selector(getTextSize);
+  methods[18].selector = @selector(setMyTextSizeWithId:);
+  methods[19].selector = @selector(nativeSetTextSizeWithInt:);
+  methods[20].selector = @selector(getEllipsize);
+  methods[21].selector = @selector(setEllipsizeWithId:withNSString:);
+  methods[22].selector = @selector(nativeGetFontSize);
+  methods[23].selector = @selector(nativeGetFontStyle);
+  methods[24].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
+  methods[25].selector = @selector(nativeSetFontStyleWithInt:);
+  methods[26].selector = @selector(toUpperCaseWithNSString:);
+  methods[27].selector = @selector(setVerticalAligmentCenter);
+  methods[28].selector = @selector(setVerticalAligmentBottom);
+  methods[29].selector = @selector(setVerticalAligmentTop);
+  methods[30].selector = @selector(setHorizontalAligmentCenter);
+  methods[31].selector = @selector(setHorizontalAligmentRight);
+  methods[32].selector = @selector(setHorizontalAligmentRightInternal);
+  methods[33].selector = @selector(setHorizontalAligmentLeft);
+  methods[34].selector = @selector(setHorizontalAligmentLeftInternal);
+  methods[35].selector = @selector(getTextAlignment);
+  methods[36].selector = @selector(nativeSetVerticalAligmentBottom);
+  methods[37].selector = @selector(nativeSetVerticalAligmentTop);
+  methods[38].selector = @selector(nativeSetVerticalAligmentCenter);
+  methods[39].selector = @selector(getBorderPadding);
+  methods[40].selector = @selector(getLineHeightPadding);
+  methods[41].selector = @selector(getLineHeight);
+  methods[42].selector = @selector(getBorderWidth);
+  methods[43].selector = @selector(canMarquee);
+  methods[44].selector = @selector(cancelNativeTimer);
+  methods[45].selector = @selector(isDisposed);
+  methods[46].selector = @selector(addDeallocHandler);
+  methods[47].selector = @selector(schedule);
+  methods[48].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
+  methods[49].selector = @selector(setDrawablePaddingWithId:);
+  methods[50].selector = @selector(setDrawableBottomWithId:);
+  methods[51].selector = @selector(setDrawableTopWithId:);
+  methods[52].selector = @selector(setDrawableRightWithNSString:withId:);
+  methods[53].selector = @selector(setDrawableRightInternalWithNSString:withId:);
+  methods[54].selector = @selector(setDrawableLeftWithNSString:withId:);
+  methods[55].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
+  methods[56].selector = @selector(getImageHeightWithId:);
+  methods[57].selector = @selector(getImageWidthWithId:);
+  methods[58].selector = @selector(getDrawablePadding);
+  methods[59].selector = @selector(setDrawableTintModeWithId:);
+  methods[60].selector = @selector(setDrawableTintWithId:);
+  methods[61].selector = @selector(setTextColorWithId:);
+  methods[62].selector = @selector(getTextColorState);
+  methods[63].selector = @selector(setGravityWithId:);
+  methods[64].selector = @selector(updateTextAlignment);
+  methods[65].selector = @selector(getGravity);
+  methods[66].selector = @selector(onRtlPropertiesChangedWithInt:);
+  methods[67].selector = @selector(initHtmlWithJavaUtilMap:);
+  methods[68].selector = @selector(getMinHeight);
+  methods[69].selector = @selector(getMinWidth);
+  methods[70].selector = @selector(setEmsWithId:);
+  methods[71].selector = @selector(getMaxEms);
+  methods[72].selector = @selector(getMinEms);
+  methods[73].selector = @selector(setMinEmsWithId:);
+  methods[74].selector = @selector(getMinLines);
+  methods[75].selector = @selector(getMaxLines);
+  methods[76].selector = @selector(setMaxEmsWithId:);
+  methods[77].selector = @selector(setWidthWithId:);
+  methods[78].selector = @selector(setHeightWithId:);
+  methods[79].selector = @selector(setMaxLinesWithId:);
+  methods[80].selector = @selector(setLinesWithId:);
+  methods[81].selector = @selector(setMinLinesWithId:);
+  methods[82].selector = @selector(setMaxHeightWithId:);
+  methods[83].selector = @selector(setMaxWidthWithId:);
+  methods[84].selector = @selector(getMaxWidth);
+  methods[85].selector = @selector(getMaxHeight);
+  methods[86].selector = @selector(setMinHeightWithId:);
+  methods[87].selector = @selector(setMinWidthWithId:);
+  methods[88].selector = @selector(getWidth);
+  methods[89].selector = @selector(getHeight);
+  methods[90].selector = @selector(getAutoSizeTextTypeWithADTextView:);
+  methods[91].selector = @selector(setAutoSizeTextTypeInternalWithInt:);
+  methods[92].selector = @selector(setAutoSizePresetSizesWithId:);
+  methods[93].selector = @selector(addAutoResizeListener);
+  methods[94].selector = @selector(removeResizeListener);
   methods[95].selector = @selector(setMaxLengthWithId:);
   methods[96].selector = @selector(setPasswordWithId:);
   methods[97].selector = @selector(setMyTextWithId:);
@@ -2793,74 +2790,75 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[139].selector = @selector(asNativeWidget);
   methods[140].selector = @selector(checkIosVersionWithNSString:);
   methods[141].selector = @selector(setIdWithNSString:);
-  methods[142].selector = @selector(requestLayout);
-  methods[143].selector = @selector(invalidate);
-  methods[144].selector = @selector(getPluginWithNSString:);
-  methods[145].selector = @selector(getBean);
-  methods[146].selector = @selector(getBuilder);
-  methods[147].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[148].selector = @selector(createNativeWidgetWithJavaUtilMap:);
-  methods[149].selector = @selector(addMinMaxListener);
-  methods[150].selector = @selector(setTextColorHighlightWithId:);
-  methods[151].selector = @selector(getTextColorHighlight);
-  methods[152].selector = @selector(getPaddingLeft);
-  methods[153].selector = @selector(setPaddingLeftWithId:);
-  methods[154].selector = @selector(getPaddingRight);
-  methods[155].selector = @selector(setPaddingRightWithId:);
-  methods[156].selector = @selector(getPaddingTop);
-  methods[157].selector = @selector(setPaddingTopWithId:);
-  methods[158].selector = @selector(getPaddingBottom);
-  methods[159].selector = @selector(getPaddingEnd);
-  methods[160].selector = @selector(getPaddingStart);
-  methods[161].selector = @selector(setPaddingBottomWithId:);
-  methods[162].selector = @selector(setPaddingVerticalWithId:);
-  methods[163].selector = @selector(setPaddingHorizontalWithId:);
-  methods[164].selector = @selector(setPaddingEndWithId:);
-  methods[165].selector = @selector(setPaddingStartWithId:);
-  methods[166].selector = @selector(setPaddingWithId:);
-  methods[167].selector = @selector(updatePadding);
-  methods[168].selector = @selector(nativeSetPaddingBottomWithInt:);
-  methods[169].selector = @selector(nativeSetPaddingLeftWithInt:);
-  methods[170].selector = @selector(nativeSetPaddingRightWithInt:);
-  methods[171].selector = @selector(nativeSetPaddingTopWithInt:);
-  methods[172].selector = @selector(nativeSetLineBreakModeWithInt:);
-  methods[173].selector = @selector(nativeGetLinBreakMode);
-  methods[174].selector = @selector(setJustificationModeWithId:withNSString:);
-  methods[175].selector = @selector(nativeSetTextAligmentWithInt:);
-  methods[176].selector = @selector(getJustificationMode);
-  methods[177].selector = @selector(nativeGetTextAligment);
-  methods[178].selector = @selector(setSingleLineWithId:);
-  methods[179].selector = @selector(setNumberOfLinesWithId:withInt:);
-  methods[180].selector = @selector(getSingleLine);
-  methods[181].selector = @selector(setAutoLinkWithId:);
-  methods[182].selector = @selector(nativeSetAutoLinkWithInt:);
-  methods[183].selector = @selector(getAutoLink);
-  methods[184].selector = @selector(setEnabledWithId:);
-  methods[185].selector = @selector(setScrollHorizontallyWithId:);
-  methods[186].selector = @selector(nativeSetScrollHorizontallyWithBoolean:);
-  methods[187].selector = @selector(setTextColorLinkWithId:);
-  methods[188].selector = @selector(nativesetTextColorLinkWithId:);
-  methods[189].selector = @selector(setLinksClickableWithId:);
-  methods[190].selector = @selector(nativeSetLinksClickableWithBoolean:);
-  methods[191].selector = @selector(getLinksClickable);
-  methods[192].selector = @selector(getBaseLine);
-  methods[193].selector = @selector(nativeGetBaseLine);
-  methods[194].selector = @selector(getFont);
-  methods[195].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
-  methods[196].selector = @selector(adjustContentSizeWithInt:withInt:);
-  methods[197].selector = @selector(isContentOffsetCorrectionNeededWithId:);
-  methods[198].selector = @selector(setContentOffsetWithInt:withId:);
-  methods[199].selector = @selector(setHintColorWithInt:);
-  methods[200].selector = @selector(syncPlaceholderLabel);
+  methods[142].selector = @selector(setVisibleWithBoolean:);
+  methods[143].selector = @selector(requestLayout);
+  methods[144].selector = @selector(invalidate);
+  methods[145].selector = @selector(getPluginWithNSString:);
+  methods[146].selector = @selector(getBean);
+  methods[147].selector = @selector(getBuilder);
+  methods[148].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[149].selector = @selector(createNativeWidgetWithJavaUtilMap:);
+  methods[150].selector = @selector(addMinMaxListener);
+  methods[151].selector = @selector(setTextColorHighlightWithId:);
+  methods[152].selector = @selector(getTextColorHighlight);
+  methods[153].selector = @selector(getPaddingLeft);
+  methods[154].selector = @selector(setPaddingLeftWithId:);
+  methods[155].selector = @selector(getPaddingRight);
+  methods[156].selector = @selector(setPaddingRightWithId:);
+  methods[157].selector = @selector(getPaddingTop);
+  methods[158].selector = @selector(setPaddingTopWithId:);
+  methods[159].selector = @selector(getPaddingBottom);
+  methods[160].selector = @selector(getPaddingEnd);
+  methods[161].selector = @selector(getPaddingStart);
+  methods[162].selector = @selector(setPaddingBottomWithId:);
+  methods[163].selector = @selector(setPaddingVerticalWithId:);
+  methods[164].selector = @selector(setPaddingHorizontalWithId:);
+  methods[165].selector = @selector(setPaddingEndWithId:);
+  methods[166].selector = @selector(setPaddingStartWithId:);
+  methods[167].selector = @selector(setPaddingWithId:);
+  methods[168].selector = @selector(updatePadding);
+  methods[169].selector = @selector(nativeSetPaddingBottomWithInt:);
+  methods[170].selector = @selector(nativeSetPaddingLeftWithInt:);
+  methods[171].selector = @selector(nativeSetPaddingRightWithInt:);
+  methods[172].selector = @selector(nativeSetPaddingTopWithInt:);
+  methods[173].selector = @selector(nativeSetLineBreakModeWithInt:);
+  methods[174].selector = @selector(nativeGetLinBreakMode);
+  methods[175].selector = @selector(setJustificationModeWithId:withNSString:);
+  methods[176].selector = @selector(nativeSetTextAligmentWithInt:);
+  methods[177].selector = @selector(getJustificationMode);
+  methods[178].selector = @selector(nativeGetTextAligment);
+  methods[179].selector = @selector(setSingleLineWithId:);
+  methods[180].selector = @selector(setNumberOfLinesWithId:withInt:);
+  methods[181].selector = @selector(getSingleLine);
+  methods[182].selector = @selector(setAutoLinkWithId:);
+  methods[183].selector = @selector(nativeSetAutoLinkWithInt:);
+  methods[184].selector = @selector(getAutoLink);
+  methods[185].selector = @selector(setEnabledWithId:);
+  methods[186].selector = @selector(setScrollHorizontallyWithId:);
+  methods[187].selector = @selector(nativeSetScrollHorizontallyWithBoolean:);
+  methods[188].selector = @selector(setTextColorLinkWithId:);
+  methods[189].selector = @selector(nativesetTextColorLinkWithId:);
+  methods[190].selector = @selector(setLinksClickableWithId:);
+  methods[191].selector = @selector(nativeSetLinksClickableWithBoolean:);
+  methods[192].selector = @selector(getLinksClickable);
+  methods[193].selector = @selector(getBaseLine);
+  methods[194].selector = @selector(nativeGetBaseLine);
+  methods[195].selector = @selector(getFont);
+  methods[196].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[197].selector = @selector(adjustContentSizeWithInt:withInt:);
+  methods[198].selector = @selector(isContentOffsetCorrectionNeededWithId:);
+  methods[199].selector = @selector(setContentOffsetWithInt:withId:);
+  methods[200].selector = @selector(setHintColorWithInt:);
+  methods[201].selector = @selector(syncPlaceholderLabel);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 132, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 133, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 129, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 130, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "measurableTextView_", "LASMeasurableTextView;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "measurableView_", "LADTextView;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "ellipsize_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 134, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 135, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 131, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 132, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASUITextViewLabelImpl_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_CENTER", "I", .constantValue.asInt = ASUITextViewLabelImpl_TEXT_ALIGN_CENTER, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_LEFT", "I", .constantValue.asInt = ASUITextViewLabelImpl_TEXT_ALIGN_LEFT, 0x1a, -1, -1, -1, -1 },
@@ -2871,13 +2869,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "drawableTint_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "html_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "escapeHtml_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 136, -1 },
+    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 133, -1 },
     { "postMeasureHandler_", "LASUITextViewLabelImpl_PostMeasureHandler;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "POST_MEASURE_EVENT_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
     { "marqueeTask_", "LASUITextViewLabelImpl_MarqueeTask;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeRepeatLimit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeCommandConverter_", "LASMarqueeCommandConverter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 137, -1 },
+    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 134, -1 },
     { "autoSizeMin_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "autoSizeMax_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "autoSizeGranular_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2889,8 +2887,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "paddingBottom_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "preVerticalAligment_", "LASBaseMeasurableView_VerticalAligment;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "updateMeasuredDimension", "II", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "drawableStateChange", "LNSString;LADDrawable;", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "LNSObject;", "setMyTextSize", "nativeSetTextSize", "I", "setEllipsize", "LNSObject;LNSString;", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "toUpperCase", "executeOnMainThread", "LJavaLangRunnable;", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setTextColor", "setGravity", "onRtlPropertiesChanged", "initHtml", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "getAutoSizeTextType", "LASMeasurableTextView;", "setAutoSizeTextTypeInternal", "suggestedSizeFitsInSpace", "IFF", "setAutoSizePresetSizes", "computeSize", "F", "setMaxLength", "setPassword", "setMyText", "setTextAllCaps", "setMarqueeRepeatLimit", "startOrStopMarquee", "setTypeFace", "setFontFamily", "setTextStyle", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setAutoSizeStepGranularity", "setAutoMinTextSize", "setAutoMaxTextSize", "setAutoSizeTextType", "setErrorMessage", "setTextFormat", "setText", "LNSObject;LNSObject;", "setUsesStandardTextScaling", "setIsEditable", "setAllowsEditingTextAttributes", "setClearsOnInsertion", "setIsSelectable", "checkIosVersion", "setId", "getPlugin", "nativeCreate", "createNativeWidget", "setTextColorHighlight", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setSingleLine", "setNumberOfLines", "LNSObject;I", "setAutoLink", "nativeSetAutoLink", "setEnabled", "setScrollHorizontally", "nativeSetScrollHorizontally", "Z", "setTextColorLink", "nativesetTextColorLink", "setLinksClickable", "nativeSetLinksClickable", "nativeMakeFrameForChildWidget", "IIII", "adjustContentSize", "isContentOffsetCorrectionNeeded", "setContentOffset", "ILNSObject;", "setHintColor", &ASUITextViewLabelImpl_LOCAL_NAME, &ASUITextViewLabelImpl_GROUP_NAME, &ASUITextViewLabelImpl_ITALIC_FONT_TRAIT, &ASUITextViewLabelImpl_BOLD_FONT_TRAIT, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "LASUITextViewLabelImpl_AutoSizeTextType;LASUITextViewLabelImpl_Ellipsize;LASUITextViewLabelImpl_MarqueeRepeatLimit;LASUITextViewLabelImpl_JustificationMode;LASUITextViewLabelImpl_AutoLink;LASUITextViewLabelImpl_Font;LASUITextViewLabelImpl_TextStyle;LASUITextViewLabelImpl_DrawableTintMode;LASUITextViewLabelImpl_UITextViewLabelExt;LASUITextViewLabelImpl_DellocHandler;LASUITextViewLabelImpl_PostMeasureHandler;LASUITextViewLabelImpl_MarqueeTask;LASUITextViewLabelImpl_UITextViewLabelCommandBuilder;LASUITextViewLabelImpl_UITextViewLabelBean;" };
-  static const J2ObjcClassInfo _ASUITextViewLabelImpl = { "UITextViewLabelImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 201, 34, -1, 138, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "drawableStateChange", "LNSString;LADDrawable;", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "LNSObject;", "setMyTextSize", "nativeSetTextSize", "I", "setEllipsize", "LNSObject;LNSString;", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "toUpperCase", "executeOnMainThread", "LJavaLangRunnable;", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setTextColor", "setGravity", "onRtlPropertiesChanged", "initHtml", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "getAutoSizeTextType", "LADTextView;", "setAutoSizeTextTypeInternal", "setAutoSizePresetSizes", "setMaxLength", "setPassword", "setMyText", "setTextAllCaps", "setMarqueeRepeatLimit", "startOrStopMarquee", "setTypeFace", "setFontFamily", "setTextStyle", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setAutoSizeStepGranularity", "setAutoMinTextSize", "setAutoMaxTextSize", "setAutoSizeTextType", "setErrorMessage", "setTextFormat", "setText", "LNSObject;LNSObject;", "setUsesStandardTextScaling", "setIsEditable", "setAllowsEditingTextAttributes", "setClearsOnInsertion", "setIsSelectable", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "createNativeWidget", "setTextColorHighlight", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setSingleLine", "setNumberOfLines", "LNSObject;I", "setAutoLink", "nativeSetAutoLink", "setEnabled", "setScrollHorizontally", "nativeSetScrollHorizontally", "setTextColorLink", "nativesetTextColorLink", "setLinksClickable", "nativeSetLinksClickable", "nativeMakeFrameForChildWidget", "IIII", "adjustContentSize", "II", "isContentOffsetCorrectionNeeded", "setContentOffset", "ILNSObject;", "setHintColor", &ASUITextViewLabelImpl_LOCAL_NAME, &ASUITextViewLabelImpl_GROUP_NAME, &ASUITextViewLabelImpl_ITALIC_FONT_TRAIT, &ASUITextViewLabelImpl_BOLD_FONT_TRAIT, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "LASUITextViewLabelImpl_AutoSizeTextType;LASUITextViewLabelImpl_Ellipsize;LASUITextViewLabelImpl_MarqueeRepeatLimit;LASUITextViewLabelImpl_JustificationMode;LASUITextViewLabelImpl_AutoLink;LASUITextViewLabelImpl_Font;LASUITextViewLabelImpl_TextStyle;LASUITextViewLabelImpl_DrawableTintMode;LASUITextViewLabelImpl_UITextViewLabelExt;LASUITextViewLabelImpl_DellocHandler;LASUITextViewLabelImpl_PostMeasureHandler;LASUITextViewLabelImpl_MarqueeTask;LASUITextViewLabelImpl_UITextViewLabelCommandBuilder;LASUITextViewLabelImpl_UITextViewLabelBean;" };
+  static const J2ObjcClassInfo _ASUITextViewLabelImpl = { "UITextViewLabelImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 202, 34, -1, 135, -1, -1, -1 };
   return &_ASUITextViewLabelImpl;
 }
 
@@ -2920,12 +2918,44 @@ ASUITextViewLabelImpl *create_ASUITextViewLabelImpl_init() {
   J2OBJC_CREATE_IMPL(ASUITextViewLabelImpl, init)
 }
 
+void ASUITextViewLabelImpl_initWithNSString_(ASUITextViewLabelImpl *self, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, ASUITextViewLabelImpl_GROUP_NAME, localname);
+  self->POST_MEASURE_EVENT_ = [((ASEvent_StandardEvents *) nil_chk(JreLoadEnum(ASEvent_StandardEvents, postMeasure))) description];
+  self->autoSizeMin_ = -1;
+  self->autoSizeMax_ = -1;
+  self->autoSizeGranular_ = -1;
+}
+
+ASUITextViewLabelImpl *new_ASUITextViewLabelImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_NEW_IMPL(ASUITextViewLabelImpl, initWithNSString_, localname)
+}
+
+ASUITextViewLabelImpl *create_ASUITextViewLabelImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASUITextViewLabelImpl, initWithNSString_, localname)
+}
+
+void ASUITextViewLabelImpl_initWithNSString_withNSString_(ASUITextViewLabelImpl *self, NSString *groupName, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, groupName, localname);
+  self->POST_MEASURE_EVENT_ = [((ASEvent_StandardEvents *) nil_chk(JreLoadEnum(ASEvent_StandardEvents, postMeasure))) description];
+  self->autoSizeMin_ = -1;
+  self->autoSizeMax_ = -1;
+  self->autoSizeGranular_ = -1;
+}
+
+ASUITextViewLabelImpl *new_ASUITextViewLabelImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_NEW_IMPL(ASUITextViewLabelImpl, initWithNSString_withNSString_, groupName, localname)
+}
+
+ASUITextViewLabelImpl *create_ASUITextViewLabelImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASUITextViewLabelImpl, initWithNSString_withNSString_, groupName, localname)
+}
+
 void ASUITextViewLabelImpl_setWidgetOnNativeClass(ASUITextViewLabelImpl *self) {
   ((ASUITextViewLabel*) self.uiView).widget = self;
 }
 
 void ASUITextViewLabelImpl_drawableStateChangeWithNSString_withADDrawable_(ASUITextViewLabelImpl *self, NSString *type, ADDrawable *dr) {
-  IOSIntArray *state = [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getDrawableState];
+  IOSIntArray *state = [((ADTextView *) nil_chk(self->measurableView_)) getDrawableState];
   if (dr != nil && [dr isStateful] && [dr setStateWithIntArray:state]) {
     switch (JreIndexOfStr(type, (id[]){ @"bottom", @"top", @"left", @"right" }, 4)) {
       case 0:
@@ -3039,17 +3069,17 @@ NSString *ASUITextViewLabelImpl_toUpperCaseWithNSString_(NSString *text) {
 }
 
 void ASUITextViewLabelImpl_setVerticalAligmentCenter(ASUITextViewLabelImpl *self) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, middle)];
+  [((ADTextView *) nil_chk(self->measurableView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, middle)];
   ASUITextViewLabelImpl_nativeSetVerticalAligmentCenter(self);
 }
 
 void ASUITextViewLabelImpl_setVerticalAligmentBottom(ASUITextViewLabelImpl *self) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, bottom)];
+  [((ADTextView *) nil_chk(self->measurableView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, bottom)];
   ASUITextViewLabelImpl_nativeSetVerticalAligmentBottom(self);
 }
 
 void ASUITextViewLabelImpl_setVerticalAligmentTop(ASUITextViewLabelImpl *self) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top)];
+  [((ADTextView *) nil_chk(self->measurableView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top)];
   ASUITextViewLabelImpl_nativeSetVerticalAligmentTop(self);
 }
 
@@ -3147,17 +3177,17 @@ void ASUITextViewLabelImpl_executeOnMainThreadWithJavaLangRunnable_(ASUITextView
 }
 
 void ASUITextViewLabelImpl_setDrawablePaddingWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setDrawablePaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADTextView *) nil_chk(self->measurableView_)) setDrawablePaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   [self updatePadding];
 }
 
 void ASUITextViewLabelImpl_setDrawableBottomWithId_(ASUITextViewLabelImpl *self, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setBottomDrawableWithADDrawable:nil];
+    [((ADTextView *) nil_chk(self->measurableView_)) setBottomDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"bottom" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setBottomDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADTextView *) nil_chk(self->measurableView_)) setBottomDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"bottom" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3165,11 +3195,11 @@ void ASUITextViewLabelImpl_setDrawableBottomWithId_(ASUITextViewLabelImpl *self,
 
 void ASUITextViewLabelImpl_setDrawableTopWithId_(ASUITextViewLabelImpl *self, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setTopDrawableWithADDrawable:nil];
+    [((ADTextView *) nil_chk(self->measurableView_)) setTopDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"top" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setTopDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADTextView *) nil_chk(self->measurableView_)) setTopDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"top" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3186,11 +3216,11 @@ void ASUITextViewLabelImpl_setDrawableRightWithNSString_withId_(ASUITextViewLabe
 
 void ASUITextViewLabelImpl_setDrawableRightInternalWithNSString_withId_(ASUITextViewLabelImpl *self, NSString *originalAttr, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setRightDrawableWithADDrawable:nil];
+    [((ADTextView *) nil_chk(self->measurableView_)) setRightDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"right" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setRightDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADTextView *) nil_chk(self->measurableView_)) setRightDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"right" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3209,11 +3239,11 @@ void ASUITextViewLabelImpl_setDrawableLeftWithNSString_withId_(ASUITextViewLabel
 
 void ASUITextViewLabelImpl_setDrawableLeftInternalWithNSString_withId_(ASUITextViewLabelImpl *self, NSString *originalAttr, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setLeftDrawableWithADDrawable:nil];
+    [((ADTextView *) nil_chk(self->measurableView_)) setLeftDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"left" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setLeftDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADTextView *) nil_chk(self->measurableView_)) setLeftDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"left" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3238,22 +3268,22 @@ jint ASUITextViewLabelImpl_getImageWidthWithId_(ASUITextViewLabelImpl *self, id 
 }
 
 id ASUITextViewLabelImpl_getDrawablePadding(ASUITextViewLabelImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getDrawablePadding]);
+  return JavaLangInteger_valueOfWithInt_([((ADTextView *) nil_chk(self->measurableView_)) getDrawablePadding]);
 }
 
 void ASUITextViewLabelImpl_setDrawableTintModeWithId_(ASUITextViewLabelImpl *self, id value) {
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getLeftDrawable] != nil) {
+  if ([((ADTextView *) nil_chk(self->measurableView_)) getLeftDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableLeft" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getRightDrawable] != nil) {
+  if ([((ADTextView *) nil_chk(self->measurableView_)) getRightDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableRight" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getTopDrawable] != nil) {
+  if ([((ADTextView *) nil_chk(self->measurableView_)) getTopDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getBottomDrawable] != nil) {
+  if ([((ADTextView *) nil_chk(self->measurableView_)) getBottomDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
 }
@@ -3262,20 +3292,20 @@ void ASUITextViewLabelImpl_setDrawableTintWithId_(ASUITextViewLabelImpl *self, i
   if ([objValue isKindOfClass:[ADColorStateList class]]) {
     ADColorStateList *colorStateList = (ADColorStateList *) objValue;
     self->drawableTint_ = colorStateList;
-    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(self->drawableTint_)) getColorForStateWithIntArray:[((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getDrawableState] withInt:ADColor_RED]);
+    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(self->drawableTint_)) getColorForStateWithIntArray:[((ADTextView *) nil_chk(self->measurableView_)) getDrawableState] withInt:ADColor_RED]);
   }
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getLeftDrawable] != nil) {
+  if ([((ADTextView *) nil_chk(self->measurableView_)) getLeftDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableLeft" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getRightDrawable] != nil) {
+  if ([((ADTextView *) nil_chk(self->measurableView_)) getRightDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableRight" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getTopDrawable] != nil) {
+  if ([((ADTextView *) nil_chk(self->measurableView_)) getTopDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getBottomDrawable] != nil) {
+  if ([((ADTextView *) nil_chk(self->measurableView_)) getBottomDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
 }
@@ -3283,19 +3313,19 @@ void ASUITextViewLabelImpl_setDrawableTintWithId_(ASUITextViewLabelImpl *self, i
 void ASUITextViewLabelImpl_setTextColorWithId_(ASUITextViewLabelImpl *self, id objValue) {
   if ([objValue isKindOfClass:[ADColorStateList class]]) {
     ADColorStateList *colorStateList = (ADColorStateList *) objValue;
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setTextColorWithADColorStateList:colorStateList];
-    objValue = JavaLangInteger_valueOfWithInt_([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getCurrentTextColor]);
+    [((ADTextView *) nil_chk(self->measurableView_)) setTextColorWithADColorStateList:colorStateList];
+    objValue = JavaLangInteger_valueOfWithInt_([((ADTextView *) nil_chk(self->measurableView_)) getCurrentTextColor]);
   }
   [self setTextColorWithId:self->uiView_ withId:ASViewImpl_getColorWithId_(objValue)];
 }
 
 id ASUITextViewLabelImpl_getTextColorState(ASUITextViewLabelImpl *self) {
-  return [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getTextColors];
+  return [((ADTextView *) nil_chk(self->measurableView_)) getTextColors];
 }
 
 void ASUITextViewLabelImpl_setGravityWithId_(ASUITextViewLabelImpl *self, id objValue) {
   jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setGravityWithInt:value];
+  [((ADTextView *) nil_chk(self->measurableView_)) setGravityWithInt:value];
   jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASUITextViewLabelImpl_updateTextAlignment(self);
   switch (major) {
@@ -3315,11 +3345,11 @@ void ASUITextViewLabelImpl_setGravityWithId_(ASUITextViewLabelImpl *self, id obj
 }
 
 void ASUITextViewLabelImpl_updateTextAlignment(ASUITextViewLabelImpl *self) {
-  ADLayout_Alignment *minor = [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getAlignmentOfLayout];
+  ADLayout_Alignment *minor = [((ADTextView *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
   jboolean isRtl = false;
-  jboolean hasTextDirection = [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getRawTextDirection] != 0;
+  jboolean hasTextDirection = [((ADTextView *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
-    id<ADTextDirectionHeuristic> heuristic = [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getTextDirectionHeuristic];
+    id<ADTextDirectionHeuristic> heuristic = [((ADTextView *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASUITextViewLabelImpl_getMyText(self), [NSString class]);
     isRtl = [((id<ADTextDirectionHeuristic>) nil_chk(heuristic)) isRtlWithJavaLangCharSequence:text withInt:0 withInt:[((NSString *) nil_chk(text)) java_length]];
   }
@@ -3366,7 +3396,7 @@ void ASUITextViewLabelImpl_updateTextAlignment(ASUITextViewLabelImpl *self) {
 }
 
 id ASUITextViewLabelImpl_getGravity(ASUITextViewLabelImpl *self) {
-  ASBaseMeasurableView_VerticalAligment *verticalAligment = [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getVerticalAligment];
+  ASBaseMeasurableView_VerticalAligment *verticalAligment = [((ADTextView *) nil_chk(self->measurableView_)) getVerticalAligment];
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
@@ -3418,11 +3448,11 @@ void ASUITextViewLabelImpl_initHtmlWithJavaUtilMap_(ASUITextViewLabelImpl *self,
 }
 
 id ASUITextViewLabelImpl_getMinHeight(ASUITextViewLabelImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getMinHeight]);
+  return JavaLangInteger_valueOfWithInt_([((ADTextView *) nil_chk(self->measurableView_)) getMinHeight]);
 }
 
 id ASUITextViewLabelImpl_getMinWidth(ASUITextViewLabelImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getMinWidth]);
+  return JavaLangInteger_valueOfWithInt_([((ADTextView *) nil_chk(self->measurableView_)) getMinWidth]);
 }
 
 void ASUITextViewLabelImpl_setEmsWithId_(ASUITextViewLabelImpl *self, id objValue) {
@@ -3431,12 +3461,12 @@ void ASUITextViewLabelImpl_setEmsWithId_(ASUITextViewLabelImpl *self, id objValu
 }
 
 void ASUITextViewLabelImpl_setMinEmsWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setMinEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADTextView *) nil_chk(self->measurableView_)) setMinEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASUITextViewLabelImpl_addMinMaxListener(self);
 }
 
 void ASUITextViewLabelImpl_setMaxEmsWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setMaxEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADTextView *) nil_chk(self->measurableView_)) setMaxEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASUITextViewLabelImpl_addMinMaxListener(self);
 }
 
@@ -3451,7 +3481,7 @@ void ASUITextViewLabelImpl_setHeightWithId_(ASUITextViewLabelImpl *self, id objV
 }
 
 void ASUITextViewLabelImpl_setMaxLinesWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setMaxLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADTextView *) nil_chk(self->measurableView_)) setMaxLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASUITextViewLabelImpl_addMinMaxListener(self);
 }
 
@@ -3461,64 +3491,55 @@ void ASUITextViewLabelImpl_setLinesWithId_(ASUITextViewLabelImpl *self, id objVa
 }
 
 void ASUITextViewLabelImpl_setMinLinesWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setMinLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADTextView *) nil_chk(self->measurableView_)) setMinLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASUITextViewLabelImpl_addMinMaxListener(self);
 }
 
 void ASUITextViewLabelImpl_setMaxHeightWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setMaxHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADTextView *) nil_chk(self->measurableView_)) setMaxHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASUITextViewLabelImpl_addMinMaxListener(self);
 }
 
 void ASUITextViewLabelImpl_setMaxWidthWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setMaxWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADTextView *) nil_chk(self->measurableView_)) setMaxWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASUITextViewLabelImpl_addMinMaxListener(self);
 }
 
 void ASUITextViewLabelImpl_setMinHeightWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setMinHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADTextView *) nil_chk(self->measurableView_)) setMinHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASUITextViewLabelImpl_addMinMaxListener(self);
 }
 
 void ASUITextViewLabelImpl_setMinWidthWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setMinWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADTextView *) nil_chk(self->measurableView_)) setMinWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASUITextViewLabelImpl_addMinMaxListener(self);
 }
 
 id ASUITextViewLabelImpl_getWidth(ASUITextViewLabelImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getWidth]);
+  return JavaLangInteger_valueOfWithInt_([((ADTextView *) nil_chk(self->measurableView_)) getWidth]);
 }
 
 jint ASUITextViewLabelImpl_getHeight(ASUITextViewLabelImpl *self) {
-  return [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getHeight];
+  return [((ADTextView *) nil_chk(self->measurableView_)) getHeight];
 }
 
-jint ASUITextViewLabelImpl_getAutoSizeTextTypeWithASMeasurableTextView_(ASUITextViewLabelImpl *self, ASMeasurableTextView *measurableTextView) {
-  return [((ASMeasurableTextView *) nil_chk(measurableTextView)) getAutoSizeTextType];
+jint ASUITextViewLabelImpl_getAutoSizeTextTypeWithADTextView_(ASUITextViewLabelImpl *self, ADTextView *measurableView) {
+  return [((ADTextView *) nil_chk(measurableView)) getAutoSizeTextType];
 }
 
 void ASUITextViewLabelImpl_setAutoSizeTextTypeInternalWithInt_(ASUITextViewLabelImpl *self, jint autoTextType) {
   ASUITextViewLabelImpl_removeResizeListener(self);
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) isAutoSizeTextTypeUniformWithInt:autoTextType]) {
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setUpAutoSizeTextTypeUniformWithInt:self->autoSizeMin_ withInt:self->autoSizeMax_ withInt:self->autoSizeGranular_];
+  if ([((ADTextView *) nil_chk(self->measurableView_)) isAutoSizeTextTypeUniformWithInt:autoTextType]) {
+    [((ADTextView *) nil_chk(self->measurableView_)) setUpAutoSizeTextTypeUniformWithInt:self->autoSizeMin_ withInt:self->autoSizeMax_ withInt:self->autoSizeGranular_];
     ASUITextViewLabelImpl_addAutoResizeListener(self);
   }
   else {
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) clearAutoSizeTypeConfiguration];
+    [((ADTextView *) nil_chk(self->measurableView_)) clearAutoSizeTypeConfiguration];
   }
-}
-
-jboolean ASUITextViewLabelImpl_suggestedSizeFitsInSpaceWithInt_withFloat_withFloat_(ASUITextViewLabelImpl *self, jint suggestedSizeInPx, jfloat width, jfloat height) {
-  ASUITextViewLabelImpl_setMyTextSizeWithId_(self, JavaLangFloat_valueOfWithFloat_(suggestedSizeInPx * 1.0f));
-  jint y = ASUITextViewLabelImpl_computeSizeWithFloat_(self, width);
-  if (y > height) {
-    return false;
-  }
-  return true;
 }
 
 void ASUITextViewLabelImpl_setAutoSizePresetSizesWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setAutoSizeTextTypeUniformWithPresetSizesWithIntArray:(IOSIntArray *) cast_chk(objValue, [IOSIntArray class]) withInt:0];
+  [((ADTextView *) nil_chk(self->measurableView_)) setAutoSizeTextTypeUniformWithPresetSizesWithIntArray:(IOSIntArray *) cast_chk(objValue, [IOSIntArray class]) withInt:0];
 }
 
 void ASUITextViewLabelImpl_addAutoResizeListener(ASUITextViewLabelImpl *self) {
@@ -3533,10 +3554,6 @@ void ASUITextViewLabelImpl_removeResizeListener(ASUITextViewLabelImpl *self) {
     [((ASEventBus *) nil_chk([((id<ASIFragment>) nil_chk(self->fragment_)) getEventBus])) offWithASEventBusHandlerArray:[IOSObjectArray newArrayWithObjects:(id[]){ self->postMeasureHandler_ } count:1 type:ASEventBusHandler_class_()]];
     self->postMeasureHandler_ = nil;
   }
-}
-
-jint ASUITextViewLabelImpl_computeSizeWithFloat_(ASUITextViewLabelImpl *self, jfloat width) {
-  return [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) nativeMeasureHeightWithId:self->uiView_ withInt:JreFpToInt(width)];
 }
 
 void ASUITextViewLabelImpl_setMaxLengthWithId_(ASUITextViewLabelImpl *self, id objValue) {
@@ -3629,10 +3646,10 @@ void ASUITextViewLabelImpl_startOrStopMarqueeWithId_(ASUITextViewLabelImpl *self
 }
 
 jint ASUITextViewLabelImpl_getLabelWidth(ASUITextViewLabelImpl *self) {
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) isIgnoreDrawableHeight]) {
-    return [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getMeasuredWidth] - [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getPaddingLeft] - [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getPaddingRight];
+  if ([((ADTextView *) nil_chk(self->measurableView_)) isIgnoreDrawableHeight]) {
+    return [((ADTextView *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADTextView *) nil_chk(self->measurableView_)) getPaddingLeft] - [((ADTextView *) nil_chk(self->measurableView_)) getPaddingRight];
   }
-  return [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getMeasuredWidth] - [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getCompoundPaddingRight] - [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getCompoundPaddingLeft];
+  return [((ADTextView *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADTextView *) nil_chk(self->measurableView_)) getCompoundPaddingRight] - [((ADTextView *) nil_chk(self->measurableView_)) getCompoundPaddingLeft];
 }
 
 jboolean ASUITextViewLabelImpl_isLabelMeasured(ASUITextViewLabelImpl *self) {
@@ -3701,7 +3718,7 @@ void ASUITextViewLabelImpl_setFirstBaselineToTopHeightWithId_(ASUITextViewLabelI
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
     jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingBottom], [JavaLangInteger class]))) intValue]];
+    [((ADTextView *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingBottom], [JavaLangInteger class]))) intValue]];
   }
 }
 
@@ -3726,7 +3743,7 @@ void ASUITextViewLabelImpl_setLastBaselineToBottomHeightWithId_(ASUITextViewLabe
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
     jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingTop], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:paddingBottom];
+    [((ADTextView *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingLeft], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingTop], [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self getPaddingRight], [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
 
@@ -3738,21 +3755,21 @@ id ASUITextViewLabelImpl_getLastBaselineToBottomHeight(ASUITextViewLabelImpl *se
 void ASUITextViewLabelImpl_setAutoSizeStepGranularityWithId_(ASUITextViewLabelImpl *self, id objValue) {
   self->autoSizeGranular_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([self isInitialised]) {
-    ASUITextViewLabelImpl_setAutoSizeTextTypeInternalWithInt_(self, ASUITextViewLabelImpl_getAutoSizeTextTypeWithASMeasurableTextView_(self, self->measurableTextView_));
+    ASUITextViewLabelImpl_setAutoSizeTextTypeInternalWithInt_(self, ASUITextViewLabelImpl_getAutoSizeTextTypeWithADTextView_(self, self->measurableView_));
   }
 }
 
 void ASUITextViewLabelImpl_setAutoMinTextSizeWithId_(ASUITextViewLabelImpl *self, id objValue) {
   self->autoSizeMin_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([self isInitialised]) {
-    ASUITextViewLabelImpl_setAutoSizeTextTypeInternalWithInt_(self, ASUITextViewLabelImpl_getAutoSizeTextTypeWithASMeasurableTextView_(self, self->measurableTextView_));
+    ASUITextViewLabelImpl_setAutoSizeTextTypeInternalWithInt_(self, ASUITextViewLabelImpl_getAutoSizeTextTypeWithADTextView_(self, self->measurableView_));
   }
 }
 
 void ASUITextViewLabelImpl_setAutoMaxTextSizeWithId_(ASUITextViewLabelImpl *self, id objValue) {
   self->autoSizeMax_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([self isInitialised]) {
-    ASUITextViewLabelImpl_setAutoSizeTextTypeInternalWithInt_(self, ASUITextViewLabelImpl_getAutoSizeTextTypeWithASMeasurableTextView_(self, self->measurableTextView_));
+    ASUITextViewLabelImpl_setAutoSizeTextTypeInternalWithInt_(self, ASUITextViewLabelImpl_getAutoSizeTextTypeWithADTextView_(self, self->measurableView_));
   }
 }
 
@@ -3774,7 +3791,7 @@ id ASUITextViewLabelImpl_getAutoMaxTextSize(ASUITextViewLabelImpl *self) {
 }
 
 id ASUITextViewLabelImpl_getAutoSizeTextType(ASUITextViewLabelImpl *self) {
-  return JavaLangInteger_valueOfWithInt_(ASUITextViewLabelImpl_getAutoSizeTextTypeWithASMeasurableTextView_(self, self->measurableTextView_));
+  return JavaLangInteger_valueOfWithInt_(ASUITextViewLabelImpl_getAutoSizeTextTypeWithADTextView_(self, self->measurableView_));
 }
 
 void ASUITextViewLabelImpl_setTextFormatWithId_(ASUITextViewLabelImpl *self, id objValue) {
@@ -3783,7 +3800,7 @@ void ASUITextViewLabelImpl_setTextFormatWithId_(ASUITextViewLabelImpl *self, id 
 
 void ASUITextViewLabelImpl_nativeCreateWithJavaUtilMap_(ASUITextViewLabelImpl *self, id<JavaUtilMap> params) {
   ASUITextViewLabelImpl_initHtmlWithJavaUtilMap_(self, params);
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setIgnoreDrawableHeightWithBoolean:true];
+  [((ADTextView *) nil_chk(self->measurableView_)) setIgnoreDrawableHeightWithBoolean:true];
   ASUITextViewLabelImpl_createNativeWidgetWithJavaUtilMap_(self, params);
   [self registerForAttributeCommandChainWithNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"text" } count:1 type:NSString_class_()]];
   [self registerForAttributeCommandChainWithPhaseWithNSString:@"predraw" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableStart", @"drawableEnd", @"drawableLeft", @"drawableTop", @"drawableRight", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode" } count:9 type:NSString_class_()]];
@@ -3928,7 +3945,7 @@ void ASUITextViewLabelImpl_setEnabledWithId_(ASUITextViewLabelImpl *self, id obj
 }
 
 void ASUITextViewLabelImpl_setScrollHorizontallyWithId_(ASUITextViewLabelImpl *self, id objValue) {
-  [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setHorizontallyScrollingWithBoolean:objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue]];
+  [((ADTextView *) nil_chk(self->measurableView_)) setHorizontallyScrollingWithBoolean:objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue]];
   ASUITextViewLabelImpl_nativeSetScrollHorizontallyWithBoolean_(self, objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue]);
 }
 
@@ -3940,8 +3957,8 @@ void ASUITextViewLabelImpl_nativeSetScrollHorizontallyWithBoolean_(ASUITextViewL
 void ASUITextViewLabelImpl_setTextColorLinkWithId_(ASUITextViewLabelImpl *self, id objValue) {
   if ([objValue isKindOfClass:[ADColorStateList class]]) {
     ADColorStateList *colorStateList = (ADColorStateList *) objValue;
-    [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) setLinkTextColorWithADColorStateList:colorStateList];
-    objValue = JavaLangInteger_valueOfWithInt_(((ADTextView_TextPaint *) nil_chk([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getPaint]))->linkColor_);
+    [((ADTextView *) nil_chk(self->measurableView_)) setLinkTextColorWithADColorStateList:colorStateList];
+    objValue = JavaLangInteger_valueOfWithInt_(((ADTextView_TextPaint *) nil_chk([((ADTextView *) nil_chk(self->measurableView_)) getPaint]))->linkColor_);
   }
   ASUITextViewLabelImpl_nativesetTextColorLinkWithId_(self, ASViewImpl_getColorWithId_(objValue));
 }
@@ -3980,21 +3997,21 @@ void ASUITextViewLabelImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_
 }
 
 void ASUITextViewLabelImpl_adjustContentSizeWithInt_withInt_(ASUITextViewLabelImpl *self, jint width, jint height) {
-  if ([((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getVerticalAligment] == nil && self->preVerticalAligment_ == nil) {
+  if ([((ADTextView *) nil_chk(self->measurableView_)) getVerticalAligment] == nil && self->preVerticalAligment_ == nil) {
     return;
   }
-  if (![((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) isVerticalAlignTop]) {
+  if (![((ADTextView *) nil_chk(self->measurableView_)) isVerticalAlignTop]) {
     if (ASUITextViewLabelImpl_isContentOffsetCorrectionNeededWithId_(self, self->uiView_)) {
-      ASRectM *bounds = [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getWidgetBoundsWithInt:width withInt:height withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ self->uiView_ } count:1 type:NSObject_class_()]];
+      ASRectM *bounds = [((ADTextView *) nil_chk(self->measurableView_)) getWidgetBoundsWithInt:width withInt:height withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ self->uiView_ } count:1 type:NSObject_class_()]];
       ASUITextViewLabelImpl_setContentOffsetWithInt_withId_(self, ((ASRectM *) nil_chk(bounds))->y_, self->uiView_);
     }
   }
   else {
-    if (self->preVerticalAligment_ == nil || [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getVerticalAligment] != self->preVerticalAligment_) {
+    if (self->preVerticalAligment_ == nil || [((ADTextView *) nil_chk(self->measurableView_)) getVerticalAligment] != self->preVerticalAligment_) {
       ASUITextViewLabelImpl_setContentOffsetWithInt_withId_(self, 0, self->uiView_);
     }
   }
-  self->preVerticalAligment_ = [((ASMeasurableTextView *) nil_chk(self->measurableTextView_)) getVerticalAligment];
+  self->preVerticalAligment_ = [((ADTextView *) nil_chk(self->measurableView_)) getVerticalAligment];
 }
 
 jboolean ASUITextViewLabelImpl_isContentOffsetCorrectionNeededWithId_(ASUITextViewLabelImpl *self, id view) {
@@ -4591,6 +4608,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUITextViewLabelImpl_DrawableTintMode)
   ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
 }
 
+- (ADView *)inflateViewWithNSString:(NSString *)layout {
+  if (templates_ == nil) {
+    templates_ = new_JavaUtilHashMap_init();
+  }
+  id<ASIWidget> template_ = [templates_ getWithId:layout];
+  if (template_ == nil) {
+    template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
+    (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
+  }
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+}
+
+- (void)remeasure {
+  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+}
+
+- (void)removeFromParent {
+  [((id<ASHasWidgets>) nil_chk([this$0_ getParent])) removeWithASIWidget:this$0_];
+}
+
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation {
+  *IOSIntArray_GetRef(nil_chk(appScreenLocation), 0) = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  *IOSIntArray_GetRef(appScreenLocation, 1) = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+}
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame {
+  ((ADRect *) nil_chk(displayFrame))->left_ = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->top_ = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->right_ = displayFrame->left_ + [self getWidth];
+  displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
+}
+
 - (void)offsetTopAndBottomWithInt:(jint)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
@@ -4601,20 +4651,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUITextViewLabelImpl_DrawableTintMode)
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value {
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
+}
+
 - (void)setVisibilityWithInt:(jint)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
-}
-
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)mAutoSizeTextSizeInPx
-                                withADRectF:(ADRectF *)availableSpace {
-  return ASUITextViewLabelImpl_suggestedSizeFitsInSpaceWithInt_withFloat_withFloat_(this$0_, mAutoSizeTextSizeInPx, [((ADRectF *) nil_chk(availableSpace)) width], [availableSpace height]);
-}
-
-- (void)setTextSizeInternalWithInt:(jint)unit
-                         withFloat:(jfloat)optimalTextSize
-                       withBoolean:(jboolean)b {
-  ASUITextViewLabelImpl_setMyTextSizeWithId_(this$0_, JavaLangFloat_valueOfWithFloat_(optimalTextSize));
 }
 
 - (jint)getBorderPadding {
@@ -4637,6 +4681,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUITextViewLabelImpl_DrawableTintMode)
   [this$0_ onRtlPropertiesChangedWithInt:layoutDirection];
 }
 
+- (jint)nativeMeasureWidthWithId:(id)uiView {
+  return ASViewImpl_nativeMeasureWidthWithId_(uiView);
+}
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width {
+  return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
+}
+
+- (jint)computeSizeWithFloat:(jfloat)width {
+  return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
+}
+
+- (NSString *)getText {
+  return (NSString *) cast_chk(ASUITextViewLabelImpl_getMyText(this$0_), [NSString class]);
+}
+
 - (void)__javaClone:(ASUITextViewLabelImpl_UITextViewLabelExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -4655,16 +4716,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUITextViewLabelImpl_DrawableTintMode)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 13, 14, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 16, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 19, 20, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 21, 22, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 22, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 27, 22, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 28, 29, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 30, 31, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 32, 33, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -4680,24 +4749,33 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUITextViewLabelImpl_DrawableTintMode)
   methods[8].selector = @selector(initialized);
   methods[9].selector = @selector(getAttributeWithASWidgetAttribute:);
   methods[10].selector = @selector(drawableStateChanged);
-  methods[11].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[12].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[13].selector = @selector(setVisibilityWithInt:);
-  methods[14].selector = @selector(suggestedSizeFitsInSpaceWithInt:withADRectF:);
-  methods[15].selector = @selector(setTextSizeInternalWithInt:withFloat:withBoolean:);
-  methods[16].selector = @selector(getBorderPadding);
-  methods[17].selector = @selector(getLineHeight);
-  methods[18].selector = @selector(getBorderWidth);
-  methods[19].selector = @selector(getLineHeightPadding);
-  methods[20].selector = @selector(onRtlPropertiesChangedWithInt:);
+  methods[11].selector = @selector(inflateViewWithNSString:);
+  methods[12].selector = @selector(remeasure);
+  methods[13].selector = @selector(removeFromParent);
+  methods[14].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[15].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[16].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[17].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[18].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[19].selector = @selector(setVisibilityWithInt:);
+  methods[20].selector = @selector(getBorderPadding);
+  methods[21].selector = @selector(getLineHeight);
+  methods[22].selector = @selector(getBorderWidth);
+  methods[23].selector = @selector(getLineHeightPadding);
+  methods[24].selector = @selector(onRtlPropertiesChangedWithInt:);
+  methods[25].selector = @selector(nativeMeasureWidthWithId:);
+  methods[26].selector = @selector(nativeMeasureHeightWithId:withInt:);
+  methods[27].selector = @selector(computeSizeWithFloat:);
+  methods[28].selector = @selector(getText);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASUITextViewLabelImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
     { "measureFinished_", "LASMeasureEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 34, -1 },
   };
-  static const void *ptrTable[] = { "LASUITextViewLabelImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setVisibility", "suggestedSizeFitsInSpace", "ILADRectF;", "setTextSizeInternal", "IFZ", "onRtlPropertiesChanged" };
-  static const J2ObjcClassInfo _ASUITextViewLabelImpl_UITextViewLabelExt = { "UITextViewLabelExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 21, 3, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASUITextViewLabelImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "onRtlPropertiesChanged", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "computeSize", "F", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASUITextViewLabelImpl_UITextViewLabelExt = { "UITextViewLabelExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 29, 4, 0, -1, -1, -1, -1 };
   return &_ASUITextViewLabelImpl_UITextViewLabelExt;
 }
 
@@ -4705,7 +4783,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUITextViewLabelImpl_DrawableTintMode)
 
 void ASUITextViewLabelImpl_UITextViewLabelExt_initWithASUITextViewLabelImpl_(ASUITextViewLabelImpl_UITextViewLabelExt *self, ASUITextViewLabelImpl *outer$) {
   self->this$0_ = outer$;
-  ASMeasurableTextView_initWithASIWidget_(self, outer$);
+  ADTextView_initWithASIWidget_(self, outer$);
   self->measureFinished_ = new_ASMeasureEvent_init();
   self->onLayoutEvent_ = new_ASOnLayoutEvent_init();
 }
@@ -4783,8 +4861,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUITextViewLabelImpl_DellocHandler)
 }
 
 - (void)doPerformWithId:(id)payload {
-  if (!onlyOnce_ || [((ASMeasurableTextView *) nil_chk(this$0_->measurableTextView_)) isLayoutRequested]) {
-    [((ASMeasurableTextView *) nil_chk(this$0_->measurableTextView_)) autoResizeText];
+  if (!onlyOnce_ || [((ADTextView *) nil_chk(this$0_->measurableView_)) isLayoutRequested]) {
+    [((ADTextView *) nil_chk(this$0_->measurableView_)) autoResizeText];
     onlyOnce_ = true;
   }
 }

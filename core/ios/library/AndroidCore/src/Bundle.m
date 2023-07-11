@@ -22,6 +22,11 @@ J2OBJC_FIELD_SETTER(ADBundle, mExtras_, JavaUtilHashMap *)
 
 @implementation ADBundle
 
+- (instancetype)initWithADBundle:(ADBundle *)data {
+  ADBundle_initWithADBundle_(self, data);
+  return self;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   ADBundle_init(self);
@@ -85,6 +90,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return object == nil ? 0 : [(JavaLangInteger *) cast_chk(object, [JavaLangInteger class]) intValue];
 }
 
+- (id)java_clone {
+  return nil;
+}
+
 - (void)dealloc {
   RELEASE_(mExtras_);
   [super dealloc];
@@ -92,44 +101,60 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LADBundle;", 0x1, 5, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 9, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, 11, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 12, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 13, 4, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 14, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LADBundle;", 0x1, 6, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 10, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 12, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 13, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 14, 5, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 15, 5, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 16, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(init);
-  methods[1].selector = @selector(putSerializableWithNSString:withId:);
-  methods[2].selector = @selector(putObjectWithNSString:withId:);
-  methods[3].selector = @selector(getWithNSString:);
-  methods[4].selector = @selector(getBundleWithNSString:);
-  methods[5].selector = @selector(putIntWithNSString:withInt:);
-  methods[6].selector = @selector(putStringWithNSString:withNSString:);
-  methods[7].selector = @selector(putBundleWithNSString:withNSString:);
-  methods[8].selector = @selector(getStringWithNSString:);
-  methods[9].selector = @selector(putBundleWithNSString:withADBundle:);
-  methods[10].selector = @selector(getSerializableWithNSString:);
-  methods[11].selector = @selector(getIntWithNSString:);
+  methods[0].selector = @selector(initWithADBundle:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(putSerializableWithNSString:withId:);
+  methods[3].selector = @selector(putObjectWithNSString:withId:);
+  methods[4].selector = @selector(getWithNSString:);
+  methods[5].selector = @selector(getBundleWithNSString:);
+  methods[6].selector = @selector(putIntWithNSString:withInt:);
+  methods[7].selector = @selector(putStringWithNSString:withNSString:);
+  methods[8].selector = @selector(putBundleWithNSString:withNSString:);
+  methods[9].selector = @selector(getStringWithNSString:);
+  methods[10].selector = @selector(putBundleWithNSString:withADBundle:);
+  methods[11].selector = @selector(getSerializableWithNSString:);
+  methods[12].selector = @selector(getIntWithNSString:);
+  methods[13].selector = @selector(java_clone);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "mExtras_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 15, -1 },
+    { "mExtras_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 17, -1 },
   };
-  static const void *ptrTable[] = { "putSerializable", "LNSString;LNSObject;", "putObject", "get", "LNSString;", "getBundle", "putInt", "LNSString;I", "putString", "LNSString;LNSString;", "putBundle", "getString", "LNSString;LADBundle;", "getSerializable", "getInt", "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Object;>;" };
-  static const J2ObjcClassInfo _ADBundle = { "Bundle", "r.android.os", ptrTable, methods, fields, 7, 0x1, 12, 1, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LADBundle;", "putSerializable", "LNSString;LNSObject;", "putObject", "get", "LNSString;", "getBundle", "putInt", "LNSString;I", "putString", "LNSString;LNSString;", "putBundle", "getString", "LNSString;LADBundle;", "getSerializable", "getInt", "clone", "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _ADBundle = { "Bundle", "r.android.os", ptrTable, methods, fields, 7, 0x1, 14, 1, -1, -1, -1, -1, -1 };
   return &_ADBundle;
 }
 
 @end
+
+void ADBundle_initWithADBundle_(ADBundle *self, ADBundle *data) {
+  NSObject_init(self);
+}
+
+ADBundle *new_ADBundle_initWithADBundle_(ADBundle *data) {
+  J2OBJC_NEW_IMPL(ADBundle, initWithADBundle_, data)
+}
+
+ADBundle *create_ADBundle_initWithADBundle_(ADBundle *data) {
+  J2OBJC_CREATE_IMPL(ADBundle, initWithADBundle_, data)
+}
 
 void ADBundle_init(ADBundle *self) {
   NSObject_init(self);

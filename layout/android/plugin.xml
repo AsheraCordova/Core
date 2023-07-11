@@ -20,10 +20,13 @@
     <framework src="layout.gradle" custom="true" type="gradleReference" />
 
 	 <!-- start res -->
+     <source-file src="res/layout/autocomplete_completion.xml" target-dir="res/layout"/>
+     <source-file src="res/layout/autocomplete_entries.xml" target-dir="res/layout"/>
      <source-file src="res/values/model_attrs.xml" target-dir="res/values"/>
      <!-- res end -->
 	 <!-- start src -->
      <source-file src="src/com/ashera/layout/AndroidLayoutsCordovaPlugin.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="src/com/ashera/layout/AutoCompleteTextViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ButtonImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/CheckBoxImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ChronometerImpl.java" target-dir="src/com/ashera/layout"/>
@@ -40,6 +43,8 @@
      <source-file src="src/com/ashera/layout/ModelImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/MultiSelectionSpinner.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/MultiSelectionSpinnerImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="src/com/ashera/layout/PopupWindow.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="src/com/ashera/layout/PopupWindowImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ProgressBarImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/RadioButtonImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/RadioGroupImpl.java" target-dir="src/com/ashera/layout"/>
@@ -47,6 +52,7 @@
      <source-file src="src/com/ashera/layout/RootImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ScrollViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/SpinnerImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="src/com/ashera/layout/SwipeHelper.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/SwitchImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/TableLayoutImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/TableRowImpl.java" target-dir="src/com/ashera/layout"/>
@@ -60,6 +66,7 @@
      <!-- src end -->
      
      <!-- start tsc -->
+     <source-file src="tsc/src/android/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ButtonImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/CheckBoxImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ChronometerImpl.ts" target-dir="tsc/src/android/widget"/>
@@ -73,6 +80,7 @@
      <source-file src="tsc/src/android/widget/ListViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ModelImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/android/widget"/>
+     <source-file src="tsc/src/android/widget/PopupWindowImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ProgressBarImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/RadioButtonImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/RadioGroupImpl.ts" target-dir="tsc/src/android/widget"/>

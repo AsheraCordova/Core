@@ -118,6 +118,7 @@ export class TextStyleTransformer implements ITranform {
 
 
 
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ChronometerImpl<T> extends ViewImpl<T>{
@@ -293,6 +294,9 @@ export abstract class ChronometerImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "textColorHighlight" })
 	textColorHighlight!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textAppearance" })
+	textAppearance!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -355,6 +359,7 @@ export abstract class ChronometerImpl<T> extends ViewImpl<T>{
 		this.textIsSelectable = undefined;
 		this.lineHeight = undefined;
 		this.textColorHighlight = undefined;
+		this.textAppearance = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -1701,6 +1706,20 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.textColorHighlight.setValue(value);
 		this.orderSet++;
 		this.textColorHighlight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setTextAppearance(value : string) : T {
+		this.resetIfRequired();
+		if (this.textAppearance == null || this.textAppearance == undefined) {
+			this.textAppearance = new CommandAttr<string>();
+		}
+		
+		this.textAppearance.setSetter(true);
+		this.textAppearance.setValue(value);
+		this.orderSet++;
+		this.textAppearance.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

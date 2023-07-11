@@ -28,10 +28,11 @@
 #define INCLUDE_ASICustomMeasureWidth 1
 #include "ICustomMeasureWidth.h"
 
+@class ADButton;
 @class ASButtonImpl_ButtonBean;
 @class ASButtonImpl_ButtonCommandBuilder;
-@class ASMeasurableTextView;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -40,13 +41,18 @@
 @interface ASButtonImpl : ASBaseWidget < ASICustomMeasureHeight, ASICustomMeasureWidth > {
  @public
   id uiView_;
-  ASMeasurableTextView *measurableTextView_;
+  ADButton *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -92,6 +98,8 @@
 
 - (id)getPluginWithNSString:(NSString *)plugin;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
@@ -123,24 +131,18 @@
 
 - (void)setPaddingTopWithId:(id)paddingTop;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 - (void)updatePadding;
 
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASButtonImpl)
 
 J2OBJC_FIELD_SETTER(ASButtonImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASButtonImpl, measurableTextView_, ASMeasurableTextView *)
+J2OBJC_FIELD_SETTER(ASButtonImpl, measurableView_, ADButton *)
 
 inline NSString *ASButtonImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -158,81 +160,21 @@ FOUNDATION_EXPORT ASButtonImpl *new_ASButtonImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASButtonImpl *create_ASButtonImpl_init(void);
 
+FOUNDATION_EXPORT void ASButtonImpl_initWithNSString_(ASButtonImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASButtonImpl *new_ASButtonImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASButtonImpl *create_ASButtonImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASButtonImpl_initWithNSString_withNSString_(ASButtonImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASButtonImpl *new_ASButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASButtonImpl *create_ASButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
+
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl)
 
 @compatibility_alias ComAsheraLayoutButtonImpl ASButtonImpl;
-
-#endif
-
-#if !defined (ASButtonImpl_Ellipsize_) && (INCLUDE_ALL_ButtonImpl || defined(INCLUDE_ASButtonImpl_Ellipsize))
-#define ASButtonImpl_Ellipsize_
-
-#define RESTRICT_AbstractEnumToIntConverter 1
-#define INCLUDE_ASAbstractEnumToIntConverter 1
-#include "AbstractEnumToIntConverter.h"
-
-@class JavaLangInteger;
-@protocol JavaUtilMap;
-
-@interface ASButtonImpl_Ellipsize : ASAbstractEnumToIntConverter
-
-#pragma mark Public
-
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASButtonImpl_Ellipsize)
-
-FOUNDATION_EXPORT void ASButtonImpl_Ellipsize_init(ASButtonImpl_Ellipsize *self);
-
-FOUNDATION_EXPORT ASButtonImpl_Ellipsize *new_ASButtonImpl_Ellipsize_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ASButtonImpl_Ellipsize *create_ASButtonImpl_Ellipsize_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_Ellipsize)
-
-#endif
-
-#if !defined (ASButtonImpl_JustificationMode_) && (INCLUDE_ALL_ButtonImpl || defined(INCLUDE_ASButtonImpl_JustificationMode))
-#define ASButtonImpl_JustificationMode_
-
-#define RESTRICT_AbstractEnumToIntConverter 1
-#define INCLUDE_ASAbstractEnumToIntConverter 1
-#include "AbstractEnumToIntConverter.h"
-
-@class JavaLangInteger;
-@protocol JavaUtilMap;
-
-@interface ASButtonImpl_JustificationMode : ASAbstractEnumToIntConverter
-
-#pragma mark Public
-
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASButtonImpl_JustificationMode)
-
-FOUNDATION_EXPORT void ASButtonImpl_JustificationMode_init(ASButtonImpl_JustificationMode *self);
-
-FOUNDATION_EXPORT ASButtonImpl_JustificationMode *new_ASButtonImpl_JustificationMode_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ASButtonImpl_JustificationMode *create_ASButtonImpl_JustificationMode_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_JustificationMode)
 
 #endif
 
@@ -382,28 +324,105 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_TextStyle)
 
 #endif
 
+#if !defined (ASButtonImpl_Ellipsize_) && (INCLUDE_ALL_ButtonImpl || defined(INCLUDE_ASButtonImpl_Ellipsize))
+#define ASButtonImpl_Ellipsize_
+
+#define RESTRICT_AbstractEnumToIntConverter 1
+#define INCLUDE_ASAbstractEnumToIntConverter 1
+#include "AbstractEnumToIntConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASButtonImpl_Ellipsize : ASAbstractEnumToIntConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASButtonImpl_Ellipsize)
+
+FOUNDATION_EXPORT void ASButtonImpl_Ellipsize_init(ASButtonImpl_Ellipsize *self);
+
+FOUNDATION_EXPORT ASButtonImpl_Ellipsize *new_ASButtonImpl_Ellipsize_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASButtonImpl_Ellipsize *create_ASButtonImpl_Ellipsize_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_Ellipsize)
+
+#endif
+
+#if !defined (ASButtonImpl_JustificationMode_) && (INCLUDE_ALL_ButtonImpl || defined(INCLUDE_ASButtonImpl_JustificationMode))
+#define ASButtonImpl_JustificationMode_
+
+#define RESTRICT_AbstractEnumToIntConverter 1
+#define INCLUDE_ASAbstractEnumToIntConverter 1
+#include "AbstractEnumToIntConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASButtonImpl_JustificationMode : ASAbstractEnumToIntConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASButtonImpl_JustificationMode)
+
+FOUNDATION_EXPORT void ASButtonImpl_JustificationMode_init(ASButtonImpl_JustificationMode *self);
+
+FOUNDATION_EXPORT ASButtonImpl_JustificationMode *new_ASButtonImpl_JustificationMode_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASButtonImpl_JustificationMode *create_ASButtonImpl_JustificationMode_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_JustificationMode)
+
+#endif
+
 #if !defined (ASButtonImpl_ButtonExt_) && (INCLUDE_ALL_ButtonImpl || defined(INCLUDE_ASButtonImpl_ButtonExt))
 #define ASButtonImpl_ButtonExt_
 
-#define RESTRICT_MeasurableTextView 1
-#define INCLUDE_ASMeasurableTextView 1
-#include "MeasurableTextView.h"
+#define RESTRICT_Button 1
+#define INCLUDE_ADButton 1
+#include "Button.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
+@class ADRect;
+@class ADView;
 @class ASButtonImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASButtonImpl_ButtonExt : ASMeasurableTextView < ASILifeCycleDecorator >
+@interface ASButtonImpl_ButtonExt : ADButton < ASILifeCycleDecorator >
 
 #pragma mark Public
 
 - (instancetype)initWithASButtonImpl:(ASButtonImpl *)outer$;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)drawableStateChanged;
 
@@ -420,9 +439,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_TextStyle)
 
 - (jint)getLineHeightPadding;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
 
+- (NSString *)getText;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -433,9 +465,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_TextStyle)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -743,7 +782,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 
 - (ASButtonImpl_ButtonCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASButtonImpl_ButtonCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASButtonImpl_ButtonCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASButtonImpl_ButtonCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 

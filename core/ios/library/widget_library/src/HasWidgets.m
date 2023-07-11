@@ -25,7 +25,7 @@
     { NULL, "V", 0x401, 8, 9, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x401, 10, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 12, 13, -1, -1, -1, -1 },
-    { NULL, "LASHasWidgets;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASHasWidgets;", 0x401, 14, 7, -1, -1, -1, -1 },
     { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -41,10 +41,10 @@
   methods[7].selector = @selector(addTemplateWithId:);
   methods[8].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
   methods[9].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
-  methods[10].selector = @selector(getCompositeLeaf);
+  methods[10].selector = @selector(getCompositeLeafWithASIWidget:);
   methods[11].selector = @selector(areWidgetItemsRecycled);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "add", "LASIWidget;I", "get", "I", "()Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "()Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;", "remove", "LASIWidget;", "addTemplate", "LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;" };
+  static const void *ptrTable[] = { "add", "LASIWidget;I", "get", "I", "()Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "()Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;", "remove", "LASIWidget;", "addTemplate", "LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getCompositeLeaf" };
   static const J2ObjcClassInfo _ASHasWidgets = { "HasWidgets", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x609, 12, 0, -1, -1, -1, -1, -1 };
   return &_ASHasWidgets;
 }

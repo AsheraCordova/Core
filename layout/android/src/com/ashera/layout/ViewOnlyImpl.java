@@ -57,6 +57,12 @@ public class ViewOnlyImpl extends BaseWidget {
 	public ViewOnlyImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ViewOnlyImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ViewOnlyImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class ViewOnlyExt extends android.widget.FrameLayout implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
@@ -90,11 +96,6 @@ public class ViewOnlyImpl extends BaseWidget {
 	    }
 		public ViewOnlyExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -206,14 +207,14 @@ public class ViewOnlyImpl extends BaseWidget {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ViewOnlyImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((ViewOnlyExt) frameLayout).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return ViewOnlyExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ViewOnlyImpl();
+		return new ViewOnlyImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")

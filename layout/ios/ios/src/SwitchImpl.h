@@ -24,10 +24,11 @@
 #define INCLUDE_ASICustomMeasureWidth 1
 #include "ICustomMeasureWidth.h"
 
-@class ASMeasurableSwitch;
+@class ADSwitch;
 @class ASSwitchImpl_SwitchBean;
 @class ASSwitchImpl_SwitchCommandBuilder;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -36,7 +37,7 @@
 @interface ASSwitchImpl : ASBaseWidget < ASICustomMeasureWidth > {
  @public
   id uiView_;
-  ASMeasurableSwitch *measurableSwitch_;
+  ADSwitch *measurableView_;
 }
 @property id uiView;
 @property id switchButton;
@@ -44,6 +45,11 @@
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -116,6 +122,8 @@
 - (id)getTextColor;
 
 - (id)getThumbTintColor;
+
+- (IOSClass *)getViewClass;
 
 - (void)invalidate;
 
@@ -206,26 +214,20 @@
 - (void)setThumbTintColorWithId:(id)nativeWidget
                          withId:(id)value;
 
-+ (NSString *)toUpperCaseWithNSString:(NSString *)text;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
++ (NSString *)toUpperCaseWithNSString:(NSString *)text;
 
 - (void)updatePadding;
 
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASSwitchImpl)
 
 J2OBJC_FIELD_SETTER(ASSwitchImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASSwitchImpl, measurableSwitch_, ASMeasurableSwitch *)
+J2OBJC_FIELD_SETTER(ASSwitchImpl, measurableView_, ADSwitch *)
 
 inline NSString *ASSwitchImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -242,6 +244,18 @@ FOUNDATION_EXPORT void ASSwitchImpl_init(ASSwitchImpl *self);
 FOUNDATION_EXPORT ASSwitchImpl *new_ASSwitchImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASSwitchImpl *create_ASSwitchImpl_init(void);
+
+FOUNDATION_EXPORT void ASSwitchImpl_initWithNSString_(ASSwitchImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASSwitchImpl *new_ASSwitchImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASSwitchImpl *create_ASSwitchImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASSwitchImpl_initWithNSString_withNSString_(ASSwitchImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASSwitchImpl *new_ASSwitchImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASSwitchImpl *create_ASSwitchImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
 
 FOUNDATION_EXPORT NSString *ASSwitchImpl_toUpperCaseWithNSString_(NSString *text);
 
@@ -472,25 +486,30 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 #if !defined (ASSwitchImpl_SwitchExt_) && (INCLUDE_ALL_SwitchImpl || defined(INCLUDE_ASSwitchImpl_SwitchExt))
 #define ASSwitchImpl_SwitchExt_
 
-#define RESTRICT_MeasurableSwitch 1
-#define INCLUDE_ASMeasurableSwitch 1
-#include "MeasurableSwitch.h"
+#define RESTRICT_Switch 1
+#define INCLUDE_ADSwitch 1
+#include "Switch.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
+@class ADRect;
+@class ADView;
 @class ASSwitchImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASSwitchImpl_SwitchExt : ASMeasurableSwitch < ASILifeCycleDecorator >
+@interface ASSwitchImpl_SwitchExt : ADSwitch < ASILifeCycleDecorator >
 
 #pragma mark Public
 
 - (instancetype)initWithASSwitchImpl:(ASSwitchImpl *)outer$;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)drawableStateChanged;
 
@@ -507,9 +526,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 
 - (jint)getLineHeightPadding;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
 
+- (NSString *)getText;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -520,9 +552,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -952,7 +991,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASSwitchImpl_SwitchCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASSwitchImpl_SwitchCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 
@@ -1007,6 +1050,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 - (ASSwitchImpl_SwitchCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setTextAllCapsWithBoolean:(jboolean)value;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)setTextAppearanceWithNSString:(NSString *)value;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setTextColorWithNSString:(NSString *)value;
 
@@ -1570,6 +1615,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_SwitchCommandBuilder)
 - (void)setTextWithNSString:(NSString *)value;
 
 - (void)setTextAllCapsWithBoolean:(jboolean)value;
+
+- (void)setTextAppearanceWithNSString:(NSString *)value;
 
 - (void)setTextColorWithNSString:(NSString *)value;
 

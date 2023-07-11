@@ -44,14 +44,6 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
-
-
-
-
-
-
-
-
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -87,6 +79,14 @@ export class TextStyleTransformer implements ITranform {
 
 
 
+
+
+
+
+
+
+
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
@@ -94,30 +94,6 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 	static initialize() {
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "entries" })
-	entries!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "selection" })
-	selection!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onItemSelected" })
-	onItemSelected!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "modelOptionTextPath" })
-	modelOptionTextPath!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "modelOptionValuePath" })
-	modelOptionValuePath!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "values" })
-	values!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "selectedValues" })
-	selectedValues!:CommandAttr<any>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hintTextFormat" })
-	hintTextFormat!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "drawablePadding" })
 	drawablePadding!:CommandAttr<string>| undefined;
@@ -175,20 +151,36 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "textColorHint" })
 	textColorHint!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "entries" })
+	entries!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "selection" })
+	selection!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onItemSelected" })
+	onItemSelected!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "modelOptionTextPath" })
+	modelOptionTextPath!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "modelOptionValuePath" })
+	modelOptionValuePath!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "values" })
+	values!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "selectedValues" })
+	selectedValues!:CommandAttr<any>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "hintTextFormat" })
+	hintTextFormat!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
-		this.entries = undefined;
-		this.selection = undefined;
-		this.onItemSelected = undefined;
-		this.modelOptionTextPath = undefined;
-		this.modelOptionValuePath = undefined;
-		this.values = undefined;
-		this.selectedValues = undefined;
-		this.hintTextFormat = undefined;
 		this.drawablePadding = undefined;
 		this.gravity = undefined;
 		this.textColor = undefined;
@@ -208,6 +200,14 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 		this.drawableTintMode = undefined;
 		this.hint = undefined;
 		this.textColorHint = undefined;
+		this.entries = undefined;
+		this.selection = undefined;
+		this.onItemSelected = undefined;
+		this.modelOptionTextPath = undefined;
+		this.modelOptionValuePath = undefined;
+		this.values = undefined;
+		this.selectedValues = undefined;
+		this.hintTextFormat = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -215,136 +215,6 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
-
-	public setEntries(value : string) : T {
-		this.resetIfRequired();
-		if (this.entries == null || this.entries == undefined) {
-			this.entries = new CommandAttr<string>();
-		}
-		
-		this.entries.setSetter(true);
-		this.entries.setValue(value);
-		this.orderSet++;
-		this.entries.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setSelection(value : string) : T {
-		this.resetIfRequired();
-		if (this.selection == null || this.selection == undefined) {
-			this.selection = new CommandAttr<string>();
-		}
-		
-		this.selection.setSetter(true);
-		this.selection.setValue(value);
-		this.orderSet++;
-		this.selection.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnItemSelected(value : string) : T {
-		this.resetIfRequired();
-		if (this.onItemSelected == null || this.onItemSelected == undefined) {
-			this.onItemSelected = new CommandAttr<string>();
-		}
-		
-		this.onItemSelected.setSetter(true);
-		this.onItemSelected.setValue(value);
-		this.orderSet++;
-		this.onItemSelected.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setModelOptionTextPath(value : string) : T {
-		this.resetIfRequired();
-		if (this.modelOptionTextPath == null || this.modelOptionTextPath == undefined) {
-			this.modelOptionTextPath = new CommandAttr<string>();
-		}
-		
-		this.modelOptionTextPath.setSetter(true);
-		this.modelOptionTextPath.setValue(value);
-		this.orderSet++;
-		this.modelOptionTextPath.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setModelOptionValuePath(value : string) : T {
-		this.resetIfRequired();
-		if (this.modelOptionValuePath == null || this.modelOptionValuePath == undefined) {
-			this.modelOptionValuePath = new CommandAttr<string>();
-		}
-		
-		this.modelOptionValuePath.setSetter(true);
-		this.modelOptionValuePath.setValue(value);
-		this.orderSet++;
-		this.modelOptionValuePath.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setValues(value : string) : T {
-		this.resetIfRequired();
-		if (this.values == null || this.values == undefined) {
-			this.values = new CommandAttr<string>();
-		}
-		
-		this.values.setSetter(true);
-		this.values.setValue(value);
-		this.orderSet++;
-		this.values.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetSelectedValues() : T {
-		this.resetIfRequired();
-		if (this.selectedValues == null || this.selectedValues == undefined) {
-			this.selectedValues = new CommandAttr<any>()
-		}
-		
-		this.selectedValues.setGetter(true);
-		this.orderGet++;
-		this.selectedValues.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getSelectedValues() : any {
-		if (this.selectedValues == null || this.selectedValues == undefined) {
-			this.selectedValues = new CommandAttr<any>();
-		}
-		return this.selectedValues.getCommandReturnValue();
-	}
-	public setSelectedValues(value : any) : T {
-		this.resetIfRequired();
-		if (this.selectedValues == null || this.selectedValues == undefined) {
-			this.selectedValues = new CommandAttr<any>();
-		}
-		
-		this.selectedValues.setSetter(true);
-		this.selectedValues.setValue(value);
-		this.orderSet++;
-		this.selectedValues.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setHintTextFormat(value : string) : T {
-		this.resetIfRequired();
-		if (this.hintTextFormat == null || this.hintTextFormat == undefined) {
-			this.hintTextFormat = new CommandAttr<string>();
-		}
-		
-		this.hintTextFormat.setSetter(true);
-		this.hintTextFormat.setValue(value);
-		this.orderSet++;
-		this.hintTextFormat.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
 
 	public tryGetDrawablePadding() : T {
 		this.resetIfRequired();
@@ -698,6 +568,136 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.textColorHint.setValue(value);
 		this.orderSet++;
 		this.textColorHint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setEntries(value : string) : T {
+		this.resetIfRequired();
+		if (this.entries == null || this.entries == undefined) {
+			this.entries = new CommandAttr<string>();
+		}
+		
+		this.entries.setSetter(true);
+		this.entries.setValue(value);
+		this.orderSet++;
+		this.entries.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSelection(value : string) : T {
+		this.resetIfRequired();
+		if (this.selection == null || this.selection == undefined) {
+			this.selection = new CommandAttr<string>();
+		}
+		
+		this.selection.setSetter(true);
+		this.selection.setValue(value);
+		this.orderSet++;
+		this.selection.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnItemSelected(value : string) : T {
+		this.resetIfRequired();
+		if (this.onItemSelected == null || this.onItemSelected == undefined) {
+			this.onItemSelected = new CommandAttr<string>();
+		}
+		
+		this.onItemSelected.setSetter(true);
+		this.onItemSelected.setValue(value);
+		this.orderSet++;
+		this.onItemSelected.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setModelOptionTextPath(value : string) : T {
+		this.resetIfRequired();
+		if (this.modelOptionTextPath == null || this.modelOptionTextPath == undefined) {
+			this.modelOptionTextPath = new CommandAttr<string>();
+		}
+		
+		this.modelOptionTextPath.setSetter(true);
+		this.modelOptionTextPath.setValue(value);
+		this.orderSet++;
+		this.modelOptionTextPath.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setModelOptionValuePath(value : string) : T {
+		this.resetIfRequired();
+		if (this.modelOptionValuePath == null || this.modelOptionValuePath == undefined) {
+			this.modelOptionValuePath = new CommandAttr<string>();
+		}
+		
+		this.modelOptionValuePath.setSetter(true);
+		this.modelOptionValuePath.setValue(value);
+		this.orderSet++;
+		this.modelOptionValuePath.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setValues(value : string) : T {
+		this.resetIfRequired();
+		if (this.values == null || this.values == undefined) {
+			this.values = new CommandAttr<string>();
+		}
+		
+		this.values.setSetter(true);
+		this.values.setValue(value);
+		this.orderSet++;
+		this.values.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetSelectedValues() : T {
+		this.resetIfRequired();
+		if (this.selectedValues == null || this.selectedValues == undefined) {
+			this.selectedValues = new CommandAttr<any>()
+		}
+		
+		this.selectedValues.setGetter(true);
+		this.orderGet++;
+		this.selectedValues.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getSelectedValues() : any {
+		if (this.selectedValues == null || this.selectedValues == undefined) {
+			this.selectedValues = new CommandAttr<any>();
+		}
+		return this.selectedValues.getCommandReturnValue();
+	}
+	public setSelectedValues(value : any) : T {
+		this.resetIfRequired();
+		if (this.selectedValues == null || this.selectedValues == undefined) {
+			this.selectedValues = new CommandAttr<any>();
+		}
+		
+		this.selectedValues.setSetter(true);
+		this.selectedValues.setValue(value);
+		this.orderSet++;
+		this.selectedValues.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setHintTextFormat(value : string) : T {
+		this.resetIfRequired();
+		if (this.hintTextFormat == null || this.hintTextFormat == undefined) {
+			this.hintTextFormat = new CommandAttr<string>();
+		}
+		
+		this.hintTextFormat.setSetter(true);
+		this.hintTextFormat.setValue(value);
+		this.orderSet++;
+		this.hintTextFormat.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

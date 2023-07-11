@@ -60,7 +60,7 @@ public class FrameLayoutImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new FrameLayoutImpl();
+		return new FrameLayoutImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -106,7 +106,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		frameLayout.removeView((View) w.asWidget());
 		return remove;
@@ -241,11 +241,6 @@ return layoutParams.gravity;			}
 		public FrameLayoutExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -357,12 +352,11 @@ return layoutParams.gravity;			}
         	ViewImpl.drawableStateChanged(FrameLayoutImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((FrameLayoutExt) frameLayout).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return FrameLayoutExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {

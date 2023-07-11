@@ -28,12 +28,6 @@ export abstract class WebViewImpl<T> extends ViewImpl<T>{
 	static initialize() {
     }	
 	@Type(() => CommandAttr)
-	@Expose({ name: "loadUrl" })
-	loadUrl_!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtExpectedResponseText" })
-	swtExpectedResponseText!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
 	@Expose({ name: "onPageStarted" })
 	onPageStarted!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
@@ -42,17 +36,23 @@ export abstract class WebViewImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "onReceivedError" })
 	onReceivedError!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "loadUrl" })
+	loadUrl_!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "swtExpectedResponseText" })
+	swtExpectedResponseText!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
-		this.loadUrl_ = undefined;
-		this.swtExpectedResponseText = undefined;
 		this.onPageStarted = undefined;
 		this.onPageFinished = undefined;
 		this.onReceivedError = undefined;
+		this.loadUrl_ = undefined;
+		this.swtExpectedResponseText = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -60,34 +60,6 @@ export abstract class WebViewImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
-
-	public loadUrl(value : string) : T {
-		this.resetIfRequired();
-		if (this.loadUrl_ == null || this.loadUrl_ == undefined) {
-			this.loadUrl_ = new CommandAttr<string>();
-		}
-		
-		this.loadUrl_.setSetter(true);
-		this.loadUrl_.setValue(value);
-		this.orderSet++;
-		this.loadUrl_.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setSwtExpectedResponseText(value : string) : T {
-		this.resetIfRequired();
-		if (this.swtExpectedResponseText == null || this.swtExpectedResponseText == undefined) {
-			this.swtExpectedResponseText = new CommandAttr<string>();
-		}
-		
-		this.swtExpectedResponseText.setSetter(true);
-		this.swtExpectedResponseText.setValue(value);
-		this.orderSet++;
-		this.swtExpectedResponseText.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
 
 	public setOnPageStarted(value : string) : T {
 		this.resetIfRequired();
@@ -127,6 +99,34 @@ export abstract class WebViewImpl<T> extends ViewImpl<T>{
 		this.onReceivedError.setValue(value);
 		this.orderSet++;
 		this.onReceivedError.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public loadUrl(value : string) : T {
+		this.resetIfRequired();
+		if (this.loadUrl_ == null || this.loadUrl_ == undefined) {
+			this.loadUrl_ = new CommandAttr<string>();
+		}
+		
+		this.loadUrl_.setSetter(true);
+		this.loadUrl_.setValue(value);
+		this.orderSet++;
+		this.loadUrl_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSwtExpectedResponseText(value : string) : T {
+		this.resetIfRequired();
+		if (this.swtExpectedResponseText == null || this.swtExpectedResponseText == undefined) {
+			this.swtExpectedResponseText = new CommandAttr<string>();
+		}
+		
+		this.swtExpectedResponseText.setSetter(true);
+		this.swtExpectedResponseText.setValue(value);
+		this.orderSet++;
+		this.swtExpectedResponseText.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

@@ -188,15 +188,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ADChronometer_TickableRunnable)
   return self;
 }
 
-- (jint)nativeMeasureWidthWithId:(id)uiView {
-  return 0;
-}
-
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width {
-  return 0;
-}
-
 - (void)dealloc {
   RELEASE_(mFormat_);
   RELEASE_(mFormatter_);
@@ -228,8 +219,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ADChronometer_TickableRunnable)
     { NULL, "V", 0x0, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 11, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 12, 13, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 14, 15, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -251,11 +240,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ADChronometer_TickableRunnable)
   methods[14].selector = @selector(dispatchChronometerTick);
   methods[15].selector = @selector(postInit);
   methods[16].selector = @selector(initWithASIWidget:);
-  methods[17].selector = @selector(nativeMeasureWidthWithId:);
-  methods[18].selector = @selector(nativeMeasureHeightWithId:withInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 16, -1, -1 },
+    { "TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
     { "mBase_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mNow_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mVisible_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -272,10 +259,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ADChronometer_TickableRunnable)
     { "mCountDown_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "MIN_IN_SEC", "I", .constantValue.asInt = ADChronometer_MIN_IN_SEC, 0x1a, -1, -1, -1, -1 },
     { "HOUR_IN_SEC", "I", .constantValue.asInt = ADChronometer_HOUR_IN_SEC, 0x1a, -1, -1, -1, -1 },
-    { "mTickRunnable_Chronometer_", "LJavaLangRunnable;", .constantValue.asLong = 0, 0x12, 17, -1, -1, -1 },
+    { "mTickRunnable_Chronometer_", "LJavaLangRunnable;", .constantValue.asLong = 0, 0x12, 13, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "init", "setCountDown", "Z", "setBase", "J", "setFormat", "LNSString;", "setOnChronometerTickListener", "LADChronometer_OnChronometerTickListener;", "setStarted", "updateText", "LASIWidget;", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", &ADChronometer_TAG, "mTickRunnable", "LADChronometer_OnChronometerTickListener;LADChronometer_TickableRunnable;" };
-  static const J2ObjcClassInfo _ADChronometer = { "Chronometer", "r.android.widget", ptrTable, methods, fields, 7, 0x1, 19, 18, -1, 18, -1, -1, -1 };
+  static const void *ptrTable[] = { "init", "setCountDown", "Z", "setBase", "J", "setFormat", "LNSString;", "setOnChronometerTickListener", "LADChronometer_OnChronometerTickListener;", "setStarted", "updateText", "LASIWidget;", &ADChronometer_TAG, "mTickRunnable", "LADChronometer_OnChronometerTickListener;LADChronometer_TickableRunnable;" };
+  static const J2ObjcClassInfo _ADChronometer = { "Chronometer", "r.android.widget", ptrTable, methods, fields, 7, 0x401, 17, 18, -1, 14, -1, -1, -1 };
   return &_ADChronometer;
 }
 
@@ -343,14 +330,6 @@ void ADChronometer_initWithASIWidget_(ADChronometer *self, id<ASIWidget> widget)
   JreStrongAssignAndConsume(&self->mFormatterArgs_, [IOSObjectArray newArrayWithLength:1 type:NSObject_class_()]);
   JreStrongAssignAndConsume(&self->mRecycle_, new_JavaLangStringBuilder_initWithInt_(8));
   JreStrongAssignAndConsume(&self->mTickRunnable_Chronometer_, new_ADChronometer_TickableRunnable_initWithADChronometer_(self));
-}
-
-ADChronometer *new_ADChronometer_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_NEW_IMPL(ADChronometer, initWithASIWidget_, widget)
-}
-
-ADChronometer *create_ADChronometer_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_CREATE_IMPL(ADChronometer, initWithASIWidget_, widget)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADChronometer)

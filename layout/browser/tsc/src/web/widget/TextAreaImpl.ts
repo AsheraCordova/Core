@@ -1,11 +1,5 @@
 // start - imports
 
-export const enum Capitalize {
-characters = "characters",
-none = "none",
-sentences = "sentences",
-words = "words",
-}
 export const enum Font {
 monospace = "monospace",
 normal = "normal",
@@ -29,6 +23,12 @@ export const enum Numeric {
 decimal = "decimal",
 integer = "integer",
 signed = "signed",
+}
+export const enum Capitalize {
+characters = "characters",
+none = "none",
+sentences = "sentences",
+words = "words",
 }	
 import CommandAttr from '../../widget/CommandAttr';
 import IWidget from '../../widget/IWidget';
@@ -42,12 +42,6 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
-
-
-
-
-
-
 
 
 
@@ -165,6 +159,12 @@ export class NumericTransformer implements ITranform {
 
 
 
+
+
+
+
+
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class TextAreaImpl<T> extends ViewImpl<T>{
@@ -173,24 +173,6 @@ export abstract class TextAreaImpl<T> extends ViewImpl<T>{
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
 		TransformerFactory.getInstance().register("numeric", new NumericTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "capitalize" })
-	capitalize!:CommandAttr<Capitalize>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onFocusChange" })
-	onFocusChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onTextChange" })
-	onTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onbeforeTextChange" })
-	onbeforeTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onafterTextChange" })
-	onafterTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hintTextFormat" })
-	hintTextFormat!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "text" })
 	text!:CommandAttr<string>| undefined;
@@ -374,18 +356,30 @@ export abstract class TextAreaImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "cursorVisible" })
 	cursorVisible!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "capitalize" })
+	capitalize!:CommandAttr<Capitalize>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onFocusChange" })
+	onFocusChange!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onTextChange" })
+	onTextChange!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onbeforeTextChange" })
+	onbeforeTextChange!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onafterTextChange" })
+	onafterTextChange!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "hintTextFormat" })
+	hintTextFormat!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
-		this.capitalize = undefined;
-		this.onFocusChange = undefined;
-		this.onTextChange = undefined;
-		this.onbeforeTextChange = undefined;
-		this.onafterTextChange = undefined;
-		this.hintTextFormat = undefined;
 		this.text = undefined;
 		this.textColor = undefined;
 		this.gravity = undefined;
@@ -447,6 +441,12 @@ export abstract class TextAreaImpl<T> extends ViewImpl<T>{
 		this.digits = undefined;
 		this.hint = undefined;
 		this.cursorVisible = undefined;
+		this.capitalize = undefined;
+		this.onFocusChange = undefined;
+		this.onTextChange = undefined;
+		this.onbeforeTextChange = undefined;
+		this.onafterTextChange = undefined;
+		this.hintTextFormat = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -454,90 +454,6 @@ export abstract class TextAreaImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
-
-	public setCapitalize(value : Capitalize) : T {
-		this.resetIfRequired();
-		if (this.capitalize == null || this.capitalize == undefined) {
-			this.capitalize = new CommandAttr<Capitalize>();
-		}
-		
-		this.capitalize.setSetter(true);
-		this.capitalize.setValue(value);
-		this.orderSet++;
-		this.capitalize.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnFocusChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onFocusChange == null || this.onFocusChange == undefined) {
-			this.onFocusChange = new CommandAttr<string>();
-		}
-		
-		this.onFocusChange.setSetter(true);
-		this.onFocusChange.setValue(value);
-		this.orderSet++;
-		this.onFocusChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnTextChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onTextChange == null || this.onTextChange == undefined) {
-			this.onTextChange = new CommandAttr<string>();
-		}
-		
-		this.onTextChange.setSetter(true);
-		this.onTextChange.setValue(value);
-		this.orderSet++;
-		this.onTextChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnbeforeTextChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onbeforeTextChange == null || this.onbeforeTextChange == undefined) {
-			this.onbeforeTextChange = new CommandAttr<string>();
-		}
-		
-		this.onbeforeTextChange.setSetter(true);
-		this.onbeforeTextChange.setValue(value);
-		this.orderSet++;
-		this.onbeforeTextChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnafterTextChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onafterTextChange == null || this.onafterTextChange == undefined) {
-			this.onafterTextChange = new CommandAttr<string>();
-		}
-		
-		this.onafterTextChange.setSetter(true);
-		this.onafterTextChange.setValue(value);
-		this.orderSet++;
-		this.onafterTextChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setHintTextFormat(value : string) : T {
-		this.resetIfRequired();
-		if (this.hintTextFormat == null || this.hintTextFormat == undefined) {
-			this.hintTextFormat = new CommandAttr<string>();
-		}
-		
-		this.hintTextFormat.setSetter(true);
-		this.hintTextFormat.setValue(value);
-		this.orderSet++;
-		this.hintTextFormat.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
 
 	public tryGetText() : T {
 		this.resetIfRequired();
@@ -2001,6 +1917,90 @@ this.numeric.setTransformer('numeric');		return this.thisPointer;
 		this.cursorVisible.setValue(value);
 		this.orderSet++;
 		this.cursorVisible.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setCapitalize(value : Capitalize) : T {
+		this.resetIfRequired();
+		if (this.capitalize == null || this.capitalize == undefined) {
+			this.capitalize = new CommandAttr<Capitalize>();
+		}
+		
+		this.capitalize.setSetter(true);
+		this.capitalize.setValue(value);
+		this.orderSet++;
+		this.capitalize.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnFocusChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onFocusChange == null || this.onFocusChange == undefined) {
+			this.onFocusChange = new CommandAttr<string>();
+		}
+		
+		this.onFocusChange.setSetter(true);
+		this.onFocusChange.setValue(value);
+		this.orderSet++;
+		this.onFocusChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnTextChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onTextChange == null || this.onTextChange == undefined) {
+			this.onTextChange = new CommandAttr<string>();
+		}
+		
+		this.onTextChange.setSetter(true);
+		this.onTextChange.setValue(value);
+		this.orderSet++;
+		this.onTextChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnbeforeTextChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onbeforeTextChange == null || this.onbeforeTextChange == undefined) {
+			this.onbeforeTextChange = new CommandAttr<string>();
+		}
+		
+		this.onbeforeTextChange.setSetter(true);
+		this.onbeforeTextChange.setValue(value);
+		this.orderSet++;
+		this.onbeforeTextChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnafterTextChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onafterTextChange == null || this.onafterTextChange == undefined) {
+			this.onafterTextChange = new CommandAttr<string>();
+		}
+		
+		this.onafterTextChange.setSetter(true);
+		this.onafterTextChange.setValue(value);
+		this.orderSet++;
+		this.onafterTextChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setHintTextFormat(value : string) : T {
+		this.resetIfRequired();
+		if (this.hintTextFormat == null || this.hintTextFormat == undefined) {
+			this.hintTextFormat = new CommandAttr<string>();
+		}
+		
+		this.hintTextFormat.setSetter(true);
+		this.hintTextFormat.setValue(value);
+		this.orderSet++;
+		this.hintTextFormat.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

@@ -42,6 +42,12 @@
 
 - (instancetype)init;
 
++ (void)setMyAttributeWithASIWidget:(id<ASIWidget>)w
+              withASWidgetAttribute:(ASWidgetAttribute *)key
+                       withNSString:(NSString *)strValue
+                             withId:(id)objValue
+          withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
+
 + (void)setVerticalMarginWithId:(id)objValue
                          withId:(id)layoutParams
                   withASIWidget:(id<ASIWidget>)w;
@@ -117,6 +123,8 @@ __attribute__((unused)) static void ASViewGroupImpl_init(ASViewGroupImpl *self);
 __attribute__((unused)) static ASViewGroupImpl *new_ASViewGroupImpl_init(void) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ASViewGroupImpl *create_ASViewGroupImpl_init(void);
+
+__attribute__((unused)) static void ASViewGroupImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
 
 __attribute__((unused)) static void ASViewGroupImpl_setVerticalMarginWithId_withId_withASIWidget_(id objValue, id layoutParams, id<ASIWidget> w);
 
@@ -297,6 +305,14 @@ J2OBJC_IGNORE_DESIGNATED_END
                            withId:(id)objValue
         withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   ASViewGroupImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
+}
+
++ (void)setMyAttributeWithASIWidget:(id<ASIWidget>)w
+              withASWidgetAttribute:(ASWidgetAttribute *)key
+                       withNSString:(NSString *)strValue
+                             withId:(id)objValue
+          withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
+  ASViewGroupImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
 }
 
 + (void)setChildAttributeWithASIWidget:(id<ASIWidget>)w
@@ -499,45 +515,46 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 0, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 2, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 4, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x9, 6, 7, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x9, 8, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 10, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 12, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 14, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 15, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 16, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 17, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 18, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 19, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 20, 11, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 21, 22, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 23, 22, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 24, 22, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 25, 22, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 26, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 28, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 29, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 30, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 31, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 32, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 33, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 34, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 35, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 36, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 37, 27, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 38, 39, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 40, 39, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 41, 39, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 42, 39, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 43, 44, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 45, 44, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 46, 47, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 48, 39, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 49, 50, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 51, 39, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 52, 53, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 54, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 4, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 7, 8, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 11, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 13, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 15, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 16, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 17, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 18, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 19, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 20, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 21, 12, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 22, 23, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 24, 23, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 25, 23, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 26, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 27, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 29, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 30, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 31, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 32, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 33, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 34, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 35, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 36, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 37, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 38, 28, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 39, 40, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 41, 40, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 42, 40, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 43, 40, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 44, 45, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 46, 45, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 47, 48, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 49, 40, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 50, 51, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 52, 40, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 53, 54, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 55, 14, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -545,48 +562,49 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(register__WithNSString:);
   methods[2].selector = @selector(setAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[3].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withId:withId:);
-  methods[4].selector = @selector(getAttributeWithASIWidget:withASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[5].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
-  methods[6].selector = @selector(setMarginWithId:withId:withASIWidget:);
-  methods[7].selector = @selector(setBottomMarginWithId:withId:);
-  methods[8].selector = @selector(setTopMarginWithId:withId:);
-  methods[9].selector = @selector(setVerticalMarginWithId:withId:withASIWidget:);
-  methods[10].selector = @selector(setLeftMarginWithId:withId:withASIWidget:);
-  methods[11].selector = @selector(setRightMarginWithId:withId:withASIWidget:);
-  methods[12].selector = @selector(setHorizontalMarginWithId:withId:withASIWidget:);
-  methods[13].selector = @selector(setEndMarginWithId:withId:withASIWidget:);
-  methods[14].selector = @selector(setStartMarginWithId:withId:withASIWidget:);
-  methods[15].selector = @selector(getRightMarginWithADView:);
-  methods[16].selector = @selector(getLeftMarginWithADView:);
-  methods[17].selector = @selector(getTopMarginWithADView:);
-  methods[18].selector = @selector(getBottomMarginWithADView:);
-  methods[19].selector = @selector(addTemplateWithASIWidget:withId:);
-  methods[20].selector = @selector(setChildWithASIWidget:withId:);
-  methods[21].selector = @selector(setPaddingVerticalWithASIWidget:withId:);
-  methods[22].selector = @selector(setPaddingHorizontalWithASIWidget:withId:);
-  methods[23].selector = @selector(setPaddingTopWithASIWidget:withId:);
-  methods[24].selector = @selector(setPaddingEndWithASIWidget:withId:);
-  methods[25].selector = @selector(setPaddingStartWithASIWidget:withId:);
-  methods[26].selector = @selector(setPaddingLeftWithASIWidget:withId:);
-  methods[27].selector = @selector(setPaddingRightWithASIWidget:withId:);
-  methods[28].selector = @selector(setPaddingBottomWithASIWidget:withId:);
-  methods[29].selector = @selector(setPaddingWithASIWidget:withId:);
-  methods[30].selector = @selector(getPaddingTopWithASIWidget:);
-  methods[31].selector = @selector(getPaddingLeftWithASIWidget:);
-  methods[32].selector = @selector(getPaddingRightWithASIWidget:);
-  methods[33].selector = @selector(getPaddingBottomWithASIWidget:);
-  methods[34].selector = @selector(setOnChildViewRemovedWithADViewGroup:withASIWidget:withId:);
-  methods[35].selector = @selector(setOnChildViewAddedWithADViewGroup:withASIWidget:withId:);
-  methods[36].selector = @selector(isAttributeSupportedWithASWidgetAttribute:);
-  methods[37].selector = @selector(registerCommandConveterWithASIWidget:);
-  methods[38].selector = @selector(applyClipToPaddingCommandWithASIWidget:withBoolean:);
-  methods[39].selector = @selector(nativeRemoveViewWithASIWidget:);
-  methods[40].selector = @selector(removeViewWithId:);
-  methods[41].selector = @selector(nativeAddViewWithId:withId:);
+  methods[3].selector = @selector(setMyAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[4].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withId:withId:);
+  methods[5].selector = @selector(getAttributeWithASIWidget:withASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[6].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
+  methods[7].selector = @selector(setMarginWithId:withId:withASIWidget:);
+  methods[8].selector = @selector(setBottomMarginWithId:withId:);
+  methods[9].selector = @selector(setTopMarginWithId:withId:);
+  methods[10].selector = @selector(setVerticalMarginWithId:withId:withASIWidget:);
+  methods[11].selector = @selector(setLeftMarginWithId:withId:withASIWidget:);
+  methods[12].selector = @selector(setRightMarginWithId:withId:withASIWidget:);
+  methods[13].selector = @selector(setHorizontalMarginWithId:withId:withASIWidget:);
+  methods[14].selector = @selector(setEndMarginWithId:withId:withASIWidget:);
+  methods[15].selector = @selector(setStartMarginWithId:withId:withASIWidget:);
+  methods[16].selector = @selector(getRightMarginWithADView:);
+  methods[17].selector = @selector(getLeftMarginWithADView:);
+  methods[18].selector = @selector(getTopMarginWithADView:);
+  methods[19].selector = @selector(getBottomMarginWithADView:);
+  methods[20].selector = @selector(addTemplateWithASIWidget:withId:);
+  methods[21].selector = @selector(setChildWithASIWidget:withId:);
+  methods[22].selector = @selector(setPaddingVerticalWithASIWidget:withId:);
+  methods[23].selector = @selector(setPaddingHorizontalWithASIWidget:withId:);
+  methods[24].selector = @selector(setPaddingTopWithASIWidget:withId:);
+  methods[25].selector = @selector(setPaddingEndWithASIWidget:withId:);
+  methods[26].selector = @selector(setPaddingStartWithASIWidget:withId:);
+  methods[27].selector = @selector(setPaddingLeftWithASIWidget:withId:);
+  methods[28].selector = @selector(setPaddingRightWithASIWidget:withId:);
+  methods[29].selector = @selector(setPaddingBottomWithASIWidget:withId:);
+  methods[30].selector = @selector(setPaddingWithASIWidget:withId:);
+  methods[31].selector = @selector(getPaddingTopWithASIWidget:);
+  methods[32].selector = @selector(getPaddingLeftWithASIWidget:);
+  methods[33].selector = @selector(getPaddingRightWithASIWidget:);
+  methods[34].selector = @selector(getPaddingBottomWithASIWidget:);
+  methods[35].selector = @selector(setOnChildViewRemovedWithADViewGroup:withASIWidget:withId:);
+  methods[36].selector = @selector(setOnChildViewAddedWithADViewGroup:withASIWidget:withId:);
+  methods[37].selector = @selector(isAttributeSupportedWithASWidgetAttribute:);
+  methods[38].selector = @selector(registerCommandConveterWithASIWidget:);
+  methods[39].selector = @selector(applyClipToPaddingCommandWithASIWidget:withBoolean:);
+  methods[40].selector = @selector(nativeRemoveViewWithASIWidget:);
+  methods[41].selector = @selector(removeViewWithId:);
+  methods[42].selector = @selector(nativeAddViewWithId:withId:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSObject;LNSObject;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setMargin", "LNSObject;LNSObject;LASIWidget;", "setBottomMargin", "LNSObject;LNSObject;", "setTopMargin", "setVerticalMargin", "setLeftMargin", "setRightMargin", "setHorizontalMargin", "setEndMargin", "setStartMargin", "getRightMargin", "LADView;", "getLeftMargin", "getTopMargin", "getBottomMargin", "addTemplate", "LASIWidget;LNSObject;", "setChild", "setPaddingVertical", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "getPaddingTop", "LASIWidget;", "getPaddingLeft", "getPaddingRight", "getPaddingBottom", "setOnChildViewRemoved", "LADViewGroup;LASIWidget;LNSObject;", "setOnChildViewAdded", "isAttributeSupported", "LASWidgetAttribute;", "registerCommandConveter", "applyClipToPaddingCommand", "LASIWidget;Z", "nativeRemoveView", "removeView", "LNSObject;", "nativeAddView", "LASViewGroupImpl_LayoutMode;LASViewGroupImpl_OnHierarchyChangeListener;LASViewGroupImpl_ViewGroupCommandBuilder;LASViewGroupImpl_ViewGroupCommandBuilderInternal;LASViewGroupImpl_ViewGroupBean;LASViewGroupImpl_ViewGroupParamsBean;LASViewGroupImpl_ViewGroupCommandParamsBuilderInternal;LASViewGroupImpl_ViewGroupCommandParamsBuilder;LASViewGroupImpl_ClipPaddingMaskCommand;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl = { "ViewGroupImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 42, 0, -1, 55, -1, -1, -1 };
+  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "setMyAttribute", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSObject;LNSObject;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setMargin", "LNSObject;LNSObject;LASIWidget;", "setBottomMargin", "LNSObject;LNSObject;", "setTopMargin", "setVerticalMargin", "setLeftMargin", "setRightMargin", "setHorizontalMargin", "setEndMargin", "setStartMargin", "getRightMargin", "LADView;", "getLeftMargin", "getTopMargin", "getBottomMargin", "addTemplate", "LASIWidget;LNSObject;", "setChild", "setPaddingVertical", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "getPaddingTop", "LASIWidget;", "getPaddingLeft", "getPaddingRight", "getPaddingBottom", "setOnChildViewRemoved", "LADViewGroup;LASIWidget;LNSObject;", "setOnChildViewAdded", "isAttributeSupported", "LASWidgetAttribute;", "registerCommandConveter", "applyClipToPaddingCommand", "LASIWidget;Z", "nativeRemoveView", "removeView", "LNSObject;", "nativeAddView", "LASViewGroupImpl_LayoutMode;LASViewGroupImpl_OnHierarchyChangeListener;LASViewGroupImpl_ViewGroupCommandBuilder;LASViewGroupImpl_ViewGroupCommandBuilderInternal;LASViewGroupImpl_ViewGroupBean;LASViewGroupImpl_ViewGroupParamsBean;LASViewGroupImpl_ViewGroupCommandParamsBuilderInternal;LASViewGroupImpl_ViewGroupCommandParamsBuilder;LASViewGroupImpl_ClipPaddingMaskCommand;" };
+  static const J2ObjcClassInfo _ASViewGroupImpl = { "ViewGroupImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 43, 0, -1, 56, -1, -1, -1 };
   return &_ASViewGroupImpl;
 }
 
@@ -642,6 +660,12 @@ void ASViewGroupImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSStrin
   ASViewGroupImpl_initialize();
   ADViewGroup *viewGroup = ((ADViewGroup *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADViewGroup class]));
   ASViewGroupModelImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
+  ASViewGroupImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
+}
+
+void ASViewGroupImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator) {
+  ASViewGroupImpl_initialize();
+  ADViewGroup *viewGroup = ((ADViewGroup *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADViewGroup class]));
   switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"listitem", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"addStatesFromChildren", @"onChildViewAdded", @"clipChildren", @"clipToPadding", @"layoutMode", @"onChildViewRemoved", @"childXml" }, 17)) {
     case 0:
     {

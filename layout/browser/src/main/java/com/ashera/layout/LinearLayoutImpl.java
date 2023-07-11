@@ -105,7 +105,7 @@ public class LinearLayoutImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new LinearLayoutImpl();
+		return new LinearLayoutImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -127,7 +127,7 @@ public class LinearLayoutImpl extends BaseHasWidgets {
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		linearLayout.removeView((View) w.asWidget());
          ViewGroupImpl.nativeRemoveView(w);            
@@ -264,12 +264,7 @@ return layoutParams.weight;			}
 		}
 
 		public LinearLayoutExt() {
-			
-			
-			
-			
 			super();
-			
 			
 		}
 		
@@ -359,7 +354,45 @@ return layoutParams.weight;			}
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(LinearLayoutImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(LinearLayoutImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	LinearLayoutImpl.this.getParent().remove(LinearLayoutImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = htmlElement.getBoundingClientRect().getLeft();
+        	appScreenLocation[1] = htmlElement.getBoundingClientRect().getTop();
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	org.teavm.jso.dom.html.TextRectangle boundingClientRect = htmlElement.getBoundingClientRect();
+			displayFrame.top = boundingClientRect.getTop();
+        	displayFrame.left = boundingClientRect.getLeft();
+        	displayFrame.bottom = boundingClientRect.getBottom();
+        	displayFrame.right = boundingClientRect.getRight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -369,6 +402,10 @@ return layoutParams.weight;			}
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			LinearLayoutImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
@@ -376,12 +413,11 @@ return layoutParams.weight;			}
             
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((LinearLayoutExt) linearLayout).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return LinearLayoutExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -583,6 +619,10 @@ return getDividerPadding();			}
 	}
 	
     
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
 
 	
 private LinearLayoutCommandBuilder builder;
@@ -956,38 +996,52 @@ return this;}
 
 	//end - body
 	//start - canvas
-
-
-	private void createCanvas() {
-		canvas= new r.android.graphics.Canvas() {
-	    	List<HTMLElement> dividers = new java.util.ArrayList<>();
-			@Override
-			public void draw(r.android.graphics.drawable.Drawable mDivider) {
-				HTMLElement imageElement = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-				dividers.add(imageElement);
-				ViewImpl.nativeMakeFrame(imageElement, mDivider.getLeft(), mDivider.getTop(), mDivider.getRight(), mDivider.getBottom());
-				ViewGroupImpl.nativeAddView((HTMLElement) asNativeWidget(), imageElement);
-				Object drawable = mDivider.getDrawable();
-				if (drawable instanceof String) {
-					String drawableStr = (String) drawable;
-					if (drawableStr.startsWith("#")) {
-						imageElement.removeAttribute("src");
-						imageElement.getStyle().setProperty("background-color", drawableStr);
-					} else {
-						imageElement.setAttribute("src", drawableStr);
-						imageElement.getStyle().removeProperty("background-color");
-					}
+	
+	private final static class CanvasImpl implements r.android.graphics.Canvas {
+		private boolean canvasReset = true;
+		private List<HTMLElement> dividers = new java.util.ArrayList<>();
+		private IWidget widget;
+		public CanvasImpl(IWidget widget) {
+			this.widget = widget;
+		}
+		@Override
+		public void draw(r.android.graphics.drawable.Drawable mDivider) {
+			for (HTMLElement divider : dividers) {
+				if (ViewImpl.getPropertyValueAsInt(divider, "left") == mDivider.getLeft() && ViewImpl.getPropertyValueAsInt(divider, "top") == mDivider.getTop()) {
+					return;
 				}
 			}
-	
-			@Override
-			public void reset() {
+			HTMLElement imageElement = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+			dividers.add(imageElement);
+			ViewImpl.nativeMakeFrame(imageElement, mDivider.getLeft(), mDivider.getTop(), mDivider.getRight(),
+					mDivider.getBottom());
+			ViewGroupImpl.nativeAddView((HTMLElement) widget.asNativeWidget(), imageElement);
+			Object drawable = mDivider.getDrawable();
+			if (drawable instanceof String) {
+				String drawableStr = (String) drawable;
+				if (drawableStr.startsWith("#")) {
+					imageElement.removeAttribute("src");
+					imageElement.getStyle().setProperty("background-color", drawableStr);
+				} else {
+					imageElement.setAttribute("src", drawableStr);
+					imageElement.getStyle().removeProperty("background-color");
+				}
+			}
+		}
+
+		@Override
+		public void reset() {
+			if (canvasReset) {
 				for (HTMLElement divider : dividers) {
 					divider.getParentNode().removeChild(divider);
 				}
 				dividers.clear();
 			}
-		};
+		}
+	}
+
+	private void createCanvas() {
+		canvas= new CanvasImpl(this);
 	}
 	//end - canvas
 }

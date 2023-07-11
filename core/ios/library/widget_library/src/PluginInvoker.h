@@ -70,6 +70,9 @@
 + (id)decodeBitmapStreamWithJavaIoInputStream:(JavaIoInputStream *)stream
                                        withId:(id)options;
 
++ (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
+                                           withLong:(jlong)delay;
+
 + (IOSObjectArray *)getArrayWithId:(id)payLoad;
 
 + (NSString *)getAssetModeWithASIFragment:(id<ASIFragment>)fragment;
@@ -324,6 +327,8 @@ FOUNDATION_EXPORT jint ASPluginInvoker_getMaxMemoryWithId_(id context);
 FOUNDATION_EXPORT id ASPluginInvoker_decodeBitmapStreamWithJavaIoInputStream_withId_(JavaIoInputStream *stream, id options);
 
 FOUNDATION_EXPORT void ASPluginInvoker_runOnMainThreadWithJavaLangRunnable_(id<JavaLangRunnable> runnable);
+
+FOUNDATION_EXPORT void ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(id<JavaLangRunnable> runnable, jlong delay);
 
 FOUNDATION_EXPORT void ASPluginInvoker_registerFontWithNSString_withNSString_withNSString_withNSString_withJavaUtilMap_(NSString *fontFamily, NSString *src, NSString *fontStyle, NSString *fontWeight, id<JavaUtilMap> metadata);
 

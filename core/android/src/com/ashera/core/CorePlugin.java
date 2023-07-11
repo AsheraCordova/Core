@@ -83,6 +83,9 @@ public class CorePlugin implements IPlugin, ICore {
 		case "runOnMainThread":
 			runOnMainThread((Runnable) args[0]);
 			return null;
+		case "enqueueTaskForEventLoop":
+			enqueueTaskForEventLoop((Runnable) args[0],(long) args[1]);
+			return null;
 		default:
 			break;
 		}
@@ -317,6 +320,12 @@ public class CorePlugin implements IPlugin, ICore {
 	public void runOnMainThread(Runnable runnable) {
 		Handler mainHandler = new Handler(Looper.getMainLooper());
 		mainHandler.post(runnable);
-		
+	}
+
+
+	@Override
+	public void enqueueTaskForEventLoop(Runnable runnable, long delay) {
+		Handler mainHandler = new Handler(Looper.getMainLooper());
+		mainHandler.postDelayed(runnable, delay);
 	}
 }

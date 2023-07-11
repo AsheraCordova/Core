@@ -152,6 +152,12 @@ public class ImageButtonImpl extends BaseWidget implements com.ashera.image.ITar
 	public ImageButtonImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ImageButtonImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ImageButtonImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class ImageButtonExt extends android.widget.ImageButton implements ILifeCycleDecorator{
@@ -167,11 +173,6 @@ public class ImageButtonImpl extends BaseWidget implements com.ashera.image.ITar
 	    }
 		public ImageButtonExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -276,14 +277,14 @@ public class ImageButtonImpl extends BaseWidget implements com.ashera.image.ITar
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ImageButtonImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((ImageButtonExt) imageButton).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return ImageButtonExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ImageButtonImpl();
+		return new ImageButtonImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")

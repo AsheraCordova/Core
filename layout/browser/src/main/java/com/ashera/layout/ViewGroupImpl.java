@@ -77,6 +77,13 @@ public class ViewGroupImpl {
 		ViewGroup viewGroup = ((ViewGroup) w.asWidget());
 		org.teavm.jso.dom.html.HTMLElement hTMLElement = (org.teavm.jso.dom.html.HTMLElement) w.asNativeWidget();
 		ViewGroupModelImpl.setAttribute(w, key, strValue, objValue, decorator);
+		setMyAttribute(w, key, strValue, objValue, decorator);
+	}
+	
+	private static void setMyAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
+		ViewGroup viewGroup = ((ViewGroup) w.asWidget());
+		org.teavm.jso.dom.html.HTMLElement hTMLElement = (org.teavm.jso.dom.html.HTMLElement) w.asNativeWidget();
+
 		switch (key.getAttributeName()) {
 			case "listitem": {
 
@@ -1433,7 +1440,9 @@ return (T) this;}
 
 	public static void nativeRemoveView(IWidget widget) {
 		org.teavm.jso.dom.html.HTMLElement htmlElement = (org.teavm.jso.dom.html.HTMLElement)widget.asNativeWidget();
-		htmlElement.getParentNode().removeChild(htmlElement);
+		if (htmlElement.getParentNode() != null) {
+			htmlElement.getParentNode().removeChild(htmlElement);
+		}
 	}
 
 	public static void nativeAddView(Object parent, Object child) {

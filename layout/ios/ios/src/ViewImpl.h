@@ -20,6 +20,8 @@
 #define ASViewImpl_
 
 @class ADChronometer;
+@class ADColorStateList;
+@class ADDrawable;
 @class ADKeyEvent;
 @class ADView;
 @class ADView_DragEvent;
@@ -33,6 +35,8 @@
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
+@protocol ASViewImpl_AnimationCallBack;
+@protocol ASViewImpl_PanCallBack;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
@@ -55,6 +59,10 @@
 
 + (void)addEventInfoWithJavaUtilMap:(id<JavaUtilMap>)obj
              withADView_MotionEvent:(ADView_MotionEvent *)event;
+
++ (void)addPanListenerWithASIWidget:(id<ASIWidget>)widget
+                             withId:(id)uiView
+         withASViewImpl_PanCallBack:(id<ASViewImpl_PanCallBack>)callback;
 
 + (void)addValidatorWithASIWidget:(id<ASIWidget>)w
                      withNSString:(NSString *)validationName
@@ -97,6 +105,8 @@
 
 + (id)getContentScaleFactorWithId:(id)uiView;
 
++ (ADDrawable *)getDrawableWithADColorStateList:(ADColorStateList *)colorStateList;
+
 + (id)getFirstChildOrSelfWithId:(id)objview;
 
 + (id<JavaUtilList>)getFormsWithASIWidget:(id<ASIWidget>)w;
@@ -126,6 +136,10 @@
 + (id)getLargeContentImageWithId:(id)uiView;
 
 + (id)getLargeContentTitleWithId:(id)uiView;
+
++ (jint)getLocationXOnScreenWithId:(id)nativeWidget;
+
++ (jint)getLocationYOnScreenWithId:(id)nativeWidget;
 
 + (id)getMaxHeightWithASIWidget:(id<ASIWidget>)w;
 
@@ -158,6 +172,10 @@
 + (id)getTintColorWithId:(id)uiView;
 
 + (id)getTranslatesAutoresizingMaskIntoConstraintsWithId:(id)uiView;
+
++ (jint)getXWithId:(id)objview;
+
++ (jint)getYWithId:(id)objview;
 
 + (void)invalidateWithASIWidget:(id<ASIWidget>)w
                          withId:(id)nativeView;
@@ -195,6 +213,11 @@
                                              withInt:(jint)r
                                              withInt:(jint)b
                                              withInt:(jint)width;
+
++ (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
++ (jint)nativeMeasureWidthWithId:(id)uiView;
 
 + (void)nativeRequestLayoutWithId:(id)view;
 
@@ -387,11 +410,20 @@
 + (void)startDragWithASIWidget:(id<ASIWidget>)w
                   withNSString:(NSString *)eventData;
 
++ (void)translateWithAnimationWithId:(id)objview
+                             withInt:(jint)x
+                             withInt:(jint)y
+                             withInt:(jint)animationDurationInMs
+    withASViewImpl_AnimationCallBack:(id<ASViewImpl_AnimationCallBack>)callBack;
+
 + (void)updateBoundsWithId:(id)objview
                    withInt:(jint)x
                    withInt:(jint)y
                    withInt:(jint)width
                    withInt:(jint)height;
+
++ (void)updateBoundsXWithId:(id)objview
+                    withInt:(jint)x;
 
 @end
 
@@ -472,6 +504,10 @@ FOUNDATION_EXPORT id ASViewImpl_getColorWithId_(id objValue);
 FOUNDATION_EXPORT void ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(id<ASIWidget> widget, jint l, jint t, jint r, jint b);
 
 FOUNDATION_EXPORT void ASViewImpl_redrawDrawablesWithASIWidget_(id<ASIWidget> w);
+
+FOUNDATION_EXPORT void ASViewImpl_requestLayoutWithASIWidget_(id<ASIWidget> w);
+
+FOUNDATION_EXPORT ADDrawable *ASViewImpl_getDrawableWithADColorStateList_(ADColorStateList *colorStateList);
 
 FOUNDATION_EXPORT void ASViewImpl_setBackgroundColorWithId_withId_(id nativeWidget, id value);
 
@@ -621,8 +657,6 @@ FOUNDATION_EXPORT void ASViewImpl_nativeSetVisibilityWithId_withBoolean_(id view
 
 FOUNDATION_EXPORT void ASViewImpl_setOnLongClickWithASIWidget_withId_withADView_OnLongClickListener_(id<ASIWidget> w, id nativeView, id<ADView_OnLongClickListener> listener);
 
-FOUNDATION_EXPORT void ASViewImpl_requestLayoutWithASIWidget_(id<ASIWidget> w);
-
 FOUNDATION_EXPORT void ASViewImpl_requestLayoutWithASIWidget_withId_(id<ASIWidget> w, id nativeView);
 
 FOUNDATION_EXPORT void ASViewImpl_invalidateWithASIWidget_withId_(id<ASIWidget> w, id nativeView);
@@ -640,6 +674,24 @@ FOUNDATION_EXPORT void ASViewImpl_startDragWithASIWidget_withNSString_(id<ASIWid
 FOUNDATION_EXPORT void ASViewImpl_nativeBringToFrontWithId_(id nativeWidget);
 
 FOUNDATION_EXPORT void ASViewImpl_addEventInfoWithJavaUtilMap_withADMenuItem_(id<JavaUtilMap> obj, id<ADMenuItem> item);
+
+FOUNDATION_EXPORT jint ASViewImpl_getLocationXOnScreenWithId_(id nativeWidget);
+
+FOUNDATION_EXPORT jint ASViewImpl_getLocationYOnScreenWithId_(id nativeWidget);
+
+FOUNDATION_EXPORT jint ASViewImpl_nativeMeasureWidthWithId_(id uiView);
+
+FOUNDATION_EXPORT jint ASViewImpl_nativeMeasureHeightWithId_withInt_(id uiView, jint width);
+
+FOUNDATION_EXPORT void ASViewImpl_addPanListenerWithASIWidget_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id<ASViewImpl_PanCallBack> callback);
+
+FOUNDATION_EXPORT jint ASViewImpl_getXWithId_(id objview);
+
+FOUNDATION_EXPORT jint ASViewImpl_getYWithId_(id objview);
+
+FOUNDATION_EXPORT void ASViewImpl_updateBoundsXWithId_withInt_(id objview, jint x);
+
+FOUNDATION_EXPORT void ASViewImpl_translateWithAnimationWithId_withInt_withInt_withInt_withASViewImpl_AnimationCallBack_(id objview, jint x, jint y, jint animationDurationInMs, id<ASViewImpl_AnimationCallBack> callBack);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl)
 
@@ -680,6 +732,78 @@ FOUNDATION_EXPORT ASViewImpl_IosAccessibilityTraits *new_ASViewImpl_IosAccessibi
 FOUNDATION_EXPORT ASViewImpl_IosAccessibilityTraits *create_ASViewImpl_IosAccessibilityTraits_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_IosAccessibilityTraits)
+
+#endif
+
+#if !defined (ASViewImpl_Vtype_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_Vtype))
+#define ASViewImpl_Vtype_
+
+#define RESTRICT_AbstractEnumToIntConverter 1
+#define INCLUDE_ASAbstractEnumToIntConverter 1
+#include "AbstractEnumToIntConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASViewImpl_Vtype : ASAbstractEnumToIntConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_Vtype)
+
+FOUNDATION_EXPORT void ASViewImpl_Vtype_init(ASViewImpl_Vtype *self);
+
+FOUNDATION_EXPORT ASViewImpl_Vtype *new_ASViewImpl_Vtype_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASViewImpl_Vtype *create_ASViewImpl_Vtype_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_Vtype)
+
+#endif
+
+#if !defined (ASViewImpl_ValidationErrorDisplay_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_ValidationErrorDisplay))
+#define ASViewImpl_ValidationErrorDisplay_
+
+#define RESTRICT_AbstractBitFlagConverter 1
+#define INCLUDE_ASAbstractBitFlagConverter 1
+#include "AbstractBitFlagConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASViewImpl_ValidationErrorDisplay : ASAbstractBitFlagConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_ValidationErrorDisplay)
+
+FOUNDATION_EXPORT void ASViewImpl_ValidationErrorDisplay_init(ASViewImpl_ValidationErrorDisplay *self);
+
+FOUNDATION_EXPORT ASViewImpl_ValidationErrorDisplay *new_ASViewImpl_ValidationErrorDisplay_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASViewImpl_ValidationErrorDisplay *create_ASViewImpl_ValidationErrorDisplay_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ValidationErrorDisplay)
 
 #endif
 
@@ -971,75 +1095,66 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_TextAlignment)
 
 #endif
 
-#if !defined (ASViewImpl_Vtype_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_Vtype))
-#define ASViewImpl_Vtype_
+#if !defined (ASViewImpl_AddRemoveCallBack_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_AddRemoveCallBack))
+#define ASViewImpl_AddRemoveCallBack_
 
-#define RESTRICT_AbstractEnumToIntConverter 1
-#define INCLUDE_ASAbstractEnumToIntConverter 1
-#include "AbstractEnumToIntConverter.h"
+@protocol ASViewImpl_AddRemoveCallBack < JavaObject >
 
-@class JavaLangInteger;
-@protocol JavaUtilMap;
+- (void)addListenerWithId:(id)listener;
 
-@interface ASViewImpl_Vtype : ASAbstractEnumToIntConverter
-
-#pragma mark Public
-
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
+- (void)removeListenerWithId:(id)listener;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_Vtype)
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_AddRemoveCallBack)
 
-FOUNDATION_EXPORT void ASViewImpl_Vtype_init(ASViewImpl_Vtype *self);
-
-FOUNDATION_EXPORT ASViewImpl_Vtype *new_ASViewImpl_Vtype_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ASViewImpl_Vtype *create_ASViewImpl_Vtype_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_Vtype)
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AddRemoveCallBack)
 
 #endif
 
-#if !defined (ASViewImpl_ValidationErrorDisplay_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_ValidationErrorDisplay))
-#define ASViewImpl_ValidationErrorDisplay_
+#if !defined (ASViewImpl_PanCallBack_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_PanCallBack))
+#define ASViewImpl_PanCallBack_
 
-#define RESTRICT_AbstractBitFlagConverter 1
-#define INCLUDE_ASAbstractBitFlagConverter 1
-#include "AbstractBitFlagConverter.h"
+@protocol ASIWidget;
 
-@class JavaLangInteger;
-@protocol JavaUtilMap;
+@protocol ASViewImpl_PanCallBack < JavaObject >
 
-@interface ASViewImpl_ValidationErrorDisplay : ASAbstractBitFlagConverter
+- (void)handlePanStartWithASIWidget:(id<ASIWidget>)widget
+                             withId:(id)eventWidget
+                            withInt:(jint)x
+                            withInt:(jint)y;
 
-#pragma mark Public
+- (void)handlePanDragWithASIWidget:(id<ASIWidget>)widget
+                            withId:(id)eventWidget
+                           withInt:(jint)x
+                           withInt:(jint)y;
 
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
+- (void)handlePanEndWithASIWidget:(id<ASIWidget>)widget
+                           withId:(id)eventWidget
+                          withInt:(jint)x
+                          withInt:(jint)y;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_ValidationErrorDisplay)
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_PanCallBack)
 
-FOUNDATION_EXPORT void ASViewImpl_ValidationErrorDisplay_init(ASViewImpl_ValidationErrorDisplay *self);
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_PanCallBack)
 
-FOUNDATION_EXPORT ASViewImpl_ValidationErrorDisplay *new_ASViewImpl_ValidationErrorDisplay_init(void) NS_RETURNS_RETAINED;
+#endif
 
-FOUNDATION_EXPORT ASViewImpl_ValidationErrorDisplay *create_ASViewImpl_ValidationErrorDisplay_init(void);
+#if !defined (ASViewImpl_AnimationCallBack_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_AnimationCallBack))
+#define ASViewImpl_AnimationCallBack_
 
-J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ValidationErrorDisplay)
+@protocol ASViewImpl_AnimationCallBack < JavaObject >
+
+- (void)animatingWithInt:(jint)x
+                 withInt:(jint)y;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_AnimationCallBack)
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 #endif
 
@@ -1347,7 +1462,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ValidationErrorDisplay)
 
 - (id)setOnLongClickWithNSString:(NSString *)value;
 
+- (id)setOnSwipedWithNSString:(NSString *)value;
+
 - (id)setOnTouchWithNSString:(NSString *)value;
+
+- (id)setOutsideTouchableWithBoolean:(jboolean)value;
 
 - (id)setRotationWithFloat:(jfloat)value;
 
@@ -1717,7 +1836,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASViewImpl_ViewCommandBuilderInternal *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASViewImpl_ViewCommandBuilderInternal *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setRotationWithFloat:(jfloat)arg0;
 
@@ -2223,7 +2346,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 
 - (void)setOnLongClickWithNSString:(NSString *)value;
 
+- (void)setOnSwipedWithNSString:(NSString *)value;
+
 - (void)setOnTouchWithNSString:(NSString *)value;
+
+- (void)setOutsideTouchableWithBoolean:(jboolean)value;
 
 - (void)setRotationWithFloat:(jfloat)value;
 
@@ -2529,6 +2656,110 @@ FOUNDATION_EXPORT ASViewImpl_UIDropInteractionDelegate *new_ASViewImpl_UIDropInt
 FOUNDATION_EXPORT ASViewImpl_UIDropInteractionDelegate *create_ASViewImpl_UIDropInteractionDelegate_initWithASIWidget_withADView_OnDragListener_(id<ASIWidget> widget, id<ADView_OnDragListener> onDragListener);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UIDropInteractionDelegate)
+
+#endif
+
+#if !defined (ASViewImpl_UISwipeGestureRecognizerDelegate_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_UISwipeGestureRecognizerDelegate))
+#define ASViewImpl_UISwipeGestureRecognizerDelegate_
+
+@protocol ASIWidget;
+@protocol ASSwipeHelper_SwipeListener;
+
+@interface ASViewImpl_UISwipeGestureRecognizerDelegate : NSObject
+
+#pragma mark Public
+
+- (instancetype)initWithASIWidget:(id<ASIWidget>)widget
+  withASSwipeHelper_SwipeListener:(id<ASSwipeHelper_SwipeListener>)listener;
+
+- (void)nativeAddSwipeListenerWithNSString:(NSString *)id_
+                                    withId:(id)nativeWidget;
+
+- (void)swipeWithNSString:(NSString *)direction;
+
+#pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_UISwipeGestureRecognizerDelegate)
+
+FOUNDATION_EXPORT void ASViewImpl_UISwipeGestureRecognizerDelegate_initWithASIWidget_withASSwipeHelper_SwipeListener_(ASViewImpl_UISwipeGestureRecognizerDelegate *self, id<ASIWidget> widget, id<ASSwipeHelper_SwipeListener> listener);
+
+FOUNDATION_EXPORT ASViewImpl_UISwipeGestureRecognizerDelegate *new_ASViewImpl_UISwipeGestureRecognizerDelegate_initWithASIWidget_withASSwipeHelper_SwipeListener_(id<ASIWidget> widget, id<ASSwipeHelper_SwipeListener> listener) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASViewImpl_UISwipeGestureRecognizerDelegate *create_ASViewImpl_UISwipeGestureRecognizerDelegate_initWithASIWidget_withASSwipeHelper_SwipeListener_(id<ASIWidget> widget, id<ASSwipeHelper_SwipeListener> listener);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UISwipeGestureRecognizerDelegate)
+
+#endif
+
+#if !defined (ASViewImpl_PanGestureRecognizer_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_PanGestureRecognizer))
+#define ASViewImpl_PanGestureRecognizer_
+
+@protocol ASIWidget;
+@protocol ASViewImpl_PanCallBack;
+
+@interface ASViewImpl_PanGestureRecognizer : NSObject
+
+#pragma mark Public
+
+- (instancetype)initWithASIWidget:(id<ASIWidget>)widget
+                           withId:(id)uiView
+       withASViewImpl_PanCallBack:(id<ASViewImpl_PanCallBack>)callback;
+
+#pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_PanGestureRecognizer)
+
+FOUNDATION_EXPORT void ASViewImpl_PanGestureRecognizer_initWithASIWidget_withId_withASViewImpl_PanCallBack_(ASViewImpl_PanGestureRecognizer *self, id<ASIWidget> widget, id uiView, id<ASViewImpl_PanCallBack> callback);
+
+FOUNDATION_EXPORT ASViewImpl_PanGestureRecognizer *new_ASViewImpl_PanGestureRecognizer_initWithASIWidget_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id<ASViewImpl_PanCallBack> callback) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASViewImpl_PanGestureRecognizer *create_ASViewImpl_PanGestureRecognizer_initWithASIWidget_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id<ASViewImpl_PanCallBack> callback);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_PanGestureRecognizer)
+
+#endif
+
+#if !defined (ASViewImpl_AnimationUtils_) && (INCLUDE_ALL_ViewImpl || defined(INCLUDE_ASViewImpl_AnimationUtils))
+#define ASViewImpl_AnimationUtils_
+
+@protocol ASViewImpl_AnimationCallBack;
+
+@interface ASViewImpl_AnimationUtils : NSObject
+
+#pragma mark Public
+
+- (instancetype)initWithId:(id)objview
+withASViewImpl_AnimationCallBack:(id<ASViewImpl_AnimationCallBack>)callBack;
+
+#pragma mark Package-Private
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_AnimationUtils)
+
+FOUNDATION_EXPORT void ASViewImpl_AnimationUtils_initWithId_withASViewImpl_AnimationCallBack_(ASViewImpl_AnimationUtils *self, id objview, id<ASViewImpl_AnimationCallBack> callBack);
+
+FOUNDATION_EXPORT ASViewImpl_AnimationUtils *new_ASViewImpl_AnimationUtils_initWithId_withASViewImpl_AnimationCallBack_(id objview, id<ASViewImpl_AnimationCallBack> callBack) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASViewImpl_AnimationUtils *create_ASViewImpl_AnimationUtils_initWithId_withASViewImpl_AnimationCallBack_(id objview, id<ASViewImpl_AnimationCallBack> callBack);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationUtils)
 
 #endif
 

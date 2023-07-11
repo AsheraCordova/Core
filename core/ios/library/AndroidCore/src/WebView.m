@@ -8,7 +8,7 @@
 #include "J2ObjC_source.h"
 #include "KeyEvent.h"
 #include "ValueCallback.h"
-#include "View.h"
+#include "ViewGroup.h"
 #include "WebChromeClient.h"
 #include "WebSettings.h"
 #include "WebView.h"
@@ -22,6 +22,13 @@
   ADWebView_initWithADContext_withADAttributeSet_(self, context, attrs);
   return self;
 }
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ADWebView_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setWebViewClientWithADWebViewClient:(ADWebViewClient *)client {
 }
@@ -99,6 +106,7 @@
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, 5, 6, -1, -1, -1, -1 },
@@ -126,38 +134,39 @@
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithADContext:withADAttributeSet:);
-  methods[1].selector = @selector(setWebViewClientWithADWebViewClient:);
-  methods[2].selector = @selector(setWebChromeClientWithADWebChromeClient:);
-  methods[3].selector = @selector(dispatchKeyEventWithADKeyEvent:);
-  methods[4].selector = @selector(setNetworkAvailableWithBoolean:);
-  methods[5].selector = @selector(setInitialScaleWithInt:);
-  methods[6].selector = @selector(setVerticalScrollBarEnabledWithBoolean:);
-  methods[7].selector = @selector(setWebContentsDebuggingEnabledWithBoolean:);
-  methods[8].selector = @selector(getSettings);
-  methods[9].selector = @selector(loadUrlWithNSString:);
-  methods[10].selector = @selector(getUrl);
-  methods[11].selector = @selector(clearCacheWithBoolean:);
-  methods[12].selector = @selector(stopLoading);
-  methods[13].selector = @selector(clearHistory);
-  methods[14].selector = @selector(canGoBack);
-  methods[15].selector = @selector(goBack);
-  methods[16].selector = @selector(onPause);
-  methods[17].selector = @selector(pauseTimers);
-  methods[18].selector = @selector(onResume);
-  methods[19].selector = @selector(resumeTimers);
-  methods[20].selector = @selector(destroy);
-  methods[21].selector = @selector(evaluateJavascriptWithNSString:withADValueCallback:);
-  methods[22].selector = @selector(addJavascriptInterfaceWithId:withNSString:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(setWebViewClientWithADWebViewClient:);
+  methods[3].selector = @selector(setWebChromeClientWithADWebChromeClient:);
+  methods[4].selector = @selector(dispatchKeyEventWithADKeyEvent:);
+  methods[5].selector = @selector(setNetworkAvailableWithBoolean:);
+  methods[6].selector = @selector(setInitialScaleWithInt:);
+  methods[7].selector = @selector(setVerticalScrollBarEnabledWithBoolean:);
+  methods[8].selector = @selector(setWebContentsDebuggingEnabledWithBoolean:);
+  methods[9].selector = @selector(getSettings);
+  methods[10].selector = @selector(loadUrlWithNSString:);
+  methods[11].selector = @selector(getUrl);
+  methods[12].selector = @selector(clearCacheWithBoolean:);
+  methods[13].selector = @selector(stopLoading);
+  methods[14].selector = @selector(clearHistory);
+  methods[15].selector = @selector(canGoBack);
+  methods[16].selector = @selector(goBack);
+  methods[17].selector = @selector(onPause);
+  methods[18].selector = @selector(pauseTimers);
+  methods[19].selector = @selector(onResume);
+  methods[20].selector = @selector(resumeTimers);
+  methods[21].selector = @selector(destroy);
+  methods[22].selector = @selector(evaluateJavascriptWithNSString:withADValueCallback:);
+  methods[23].selector = @selector(addJavascriptInterfaceWithId:withNSString:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "LADContext;LADAttributeSet;", "setWebViewClient", "LADWebViewClient;", "setWebChromeClient", "LADWebChromeClient;", "dispatchKeyEvent", "LADKeyEvent;", "setNetworkAvailable", "Z", "setInitialScale", "I", "setVerticalScrollBarEnabled", "setWebContentsDebuggingEnabled", "loadUrl", "LNSString;", "clearCache", "evaluateJavascript", "LNSString;LADValueCallback;", "(Ljava/lang/String;Lr/android/webkit/ValueCallback<Ljava/lang/String;>;)V", "addJavascriptInterface", "LNSObject;LNSString;" };
-  static const J2ObjcClassInfo _ADWebView = { "WebView", "r.android.webkit", ptrTable, methods, NULL, 7, 0x1, 23, 0, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADWebView = { "WebView", "r.android.webkit", ptrTable, methods, NULL, 7, 0x1, 24, 0, -1, -1, -1, -1, -1 };
   return &_ADWebView;
 }
 
 @end
 
 void ADWebView_initWithADContext_withADAttributeSet_(ADWebView *self, ADContext *context, ADAttributeSet *attrs) {
-  ADView_init(self);
+  ADViewGroup_init(self);
 }
 
 ADWebView *new_ADWebView_initWithADContext_withADAttributeSet_(ADContext *context, ADAttributeSet *attrs) {
@@ -166,6 +175,18 @@ ADWebView *new_ADWebView_initWithADContext_withADAttributeSet_(ADContext *contex
 
 ADWebView *create_ADWebView_initWithADContext_withADAttributeSet_(ADContext *context, ADAttributeSet *attrs) {
   J2OBJC_CREATE_IMPL(ADWebView, initWithADContext_withADAttributeSet_, context, attrs)
+}
+
+void ADWebView_init(ADWebView *self) {
+  ADViewGroup_init(self);
+}
+
+ADWebView *new_ADWebView_init() {
+  J2OBJC_NEW_IMPL(ADWebView, init)
+}
+
+ADWebView *create_ADWebView_init() {
+  J2OBJC_CREATE_IMPL(ADWebView, init)
 }
 
 void ADWebView_setWebContentsDebuggingEnabledWithBoolean_(jboolean b) {

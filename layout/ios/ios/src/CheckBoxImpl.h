@@ -28,10 +28,11 @@
 #define INCLUDE_ASFormElement 1
 #include "FormElement.h"
 
+@class ADCheckBox;
 @class ASCheckBoxImpl_CheckBoxBean;
 @class ASCheckBoxImpl_CheckBoxCommandBuilder;
-@class ASMeasurableCompoundButton;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -40,13 +41,18 @@
 @interface ASCheckBoxImpl : ASBaseWidget < ASICustomMeasureWidth, ASFormElement > {
  @public
   id uiView_;
-  ASMeasurableCompoundButton *measurableCompoundButton_;
+  ADCheckBox *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -113,6 +119,8 @@
 - (id)getTextColor;
 
 - (NSString *)getTextEntered;
+
+- (IOSClass *)getViewClass;
 
 - (void)invalidate;
 
@@ -185,28 +193,22 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
+- (void)setVisibleWithBoolean:(jboolean)b;
+
 - (void)showErrorWithNSString:(NSString *)message;
 
 + (NSString *)toUpperCaseWithNSString:(NSString *)text;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
-
 - (void)updatePadding;
 
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASCheckBoxImpl)
 
 J2OBJC_FIELD_SETTER(ASCheckBoxImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASCheckBoxImpl, measurableCompoundButton_, ASMeasurableCompoundButton *)
+J2OBJC_FIELD_SETTER(ASCheckBoxImpl, measurableView_, ADCheckBox *)
 
 inline NSString *ASCheckBoxImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -223,6 +225,18 @@ FOUNDATION_EXPORT void ASCheckBoxImpl_init(ASCheckBoxImpl *self);
 FOUNDATION_EXPORT ASCheckBoxImpl *new_ASCheckBoxImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASCheckBoxImpl *create_ASCheckBoxImpl_init(void);
+
+FOUNDATION_EXPORT void ASCheckBoxImpl_initWithNSString_(ASCheckBoxImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASCheckBoxImpl *new_ASCheckBoxImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASCheckBoxImpl *create_ASCheckBoxImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASCheckBoxImpl_initWithNSString_withNSString_(ASCheckBoxImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASCheckBoxImpl *new_ASCheckBoxImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASCheckBoxImpl *create_ASCheckBoxImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
 
 FOUNDATION_EXPORT NSString *ASCheckBoxImpl_toUpperCaseWithNSString_(NSString *text);
 
@@ -489,25 +503,30 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 #if !defined (ASCheckBoxImpl_CheckBoxExt_) && (INCLUDE_ALL_CheckBoxImpl || defined(INCLUDE_ASCheckBoxImpl_CheckBoxExt))
 #define ASCheckBoxImpl_CheckBoxExt_
 
-#define RESTRICT_MeasurableCompoundButton 1
-#define INCLUDE_ASMeasurableCompoundButton 1
-#include "MeasurableCompoundButton.h"
+#define RESTRICT_CheckBox 1
+#define INCLUDE_ADCheckBox 1
+#include "CheckBox.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
+@class ADRect;
+@class ADView;
 @class ASCheckBoxImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASCheckBoxImpl_CheckBoxExt : ASMeasurableCompoundButton < ASILifeCycleDecorator >
+@interface ASCheckBoxImpl_CheckBoxExt : ADCheckBox < ASILifeCycleDecorator >
 
 #pragma mark Public
 
 - (instancetype)initWithASCheckBoxImpl:(ASCheckBoxImpl *)outer$;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)drawableStateChanged;
 
@@ -524,9 +543,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 
 - (jint)getLineHeightPadding;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
 
+- (NSString *)getText;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -537,9 +569,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -949,7 +988,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 
@@ -998,6 +1041,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setTextAllCapsWithBoolean:(jboolean)value;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setTextAppearanceWithNSString:(NSString *)value;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setTextColorWithNSString:(NSString *)value;
 
@@ -1515,6 +1560,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_CheckBoxCommandBuilder)
 - (void)setTextWithNSString:(NSString *)value;
 
 - (void)setTextAllCapsWithBoolean:(jboolean)value;
+
+- (void)setTextAppearanceWithNSString:(NSString *)value;
 
 - (void)setTextColorWithNSString:(NSString *)value;
 

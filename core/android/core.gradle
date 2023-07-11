@@ -13,6 +13,7 @@ dependencies {
     implementation 'com.ashera:htmlparser:1.0.0';
     implementation 'com.ashera:cssparser:1.0.0';
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation group: 'com.google.android.material', name: 'material', version: '1.2.0'
     implementation 'com.ashera:widgetlibrary:1.0.0';
     
 	def nav_version = "2.3.0"

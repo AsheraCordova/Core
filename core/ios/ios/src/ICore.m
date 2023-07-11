@@ -39,6 +39,7 @@
     { NULL, "I", 0x401, 21, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x401, 22, 23, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 26, 27, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -67,9 +68,10 @@
   methods[21].selector = @selector(getMaxMemoryWithId:);
   methods[22].selector = @selector(decodeBitmapStreamWithJavaIoInputStream:withId:);
   methods[23].selector = @selector(runOnMainThreadWithJavaLangRunnable:);
+  methods[24].selector = @selector(enqueueTaskForEventLoopWithJavaLangRunnable:withLong:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "postDelayed", "LJavaLangRunnable;I", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "LNSObject;", "createDrawable", "LNSString;", "createAttributedString", "LASIFragment;LNSString;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;" };
-  static const J2ObjcClassInfo _ASICore = { "ICore", "com.ashera.core", ptrTable, methods, NULL, 7, 0x608, 24, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "postDelayed", "LJavaLangRunnable;I", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "LNSObject;", "createDrawable", "LNSString;", "createAttributedString", "LASIFragment;LNSString;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "enqueueTaskForEventLoop", "LJavaLangRunnable;J" };
+  static const J2ObjcClassInfo _ASICore = { "ICore", "com.ashera.core", ptrTable, methods, NULL, 7, 0x608, 25, 0, -1, -1, -1, -1, -1 };
   return &_ASICore;
 }
 

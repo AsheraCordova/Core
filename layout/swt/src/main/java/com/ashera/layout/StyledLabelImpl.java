@@ -41,7 +41,7 @@ public class StyledLabelImpl extends BaseWidget implements IDrawable, IHasMultiN
 	public final static String GROUP_NAME = "TextView";
 
 	protected org.eclipse.swt.custom.StyledText styledText;
-	protected MeasurableTextView measurableTextView;	
+	protected r.android.widget.TextView measurableView;	
 	
 		@SuppressLint("NewApi")
 		final static class JustificationMode extends AbstractEnumToIntConverter{
@@ -277,6 +277,7 @@ public class StyledLabelImpl extends BaseWidget implements IDrawable, IHasMultiN
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("autoSizePresetSizes").withType("array").withArrayType("dimensionsppxint").withArrayListToFinalType("listtointarray"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("html").withType("boolean"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("swtTextStyle").withType("string"));
 		loadCustomAttributes(attributeName);
@@ -285,20 +286,21 @@ public class StyledLabelImpl extends BaseWidget implements IDrawable, IHasMultiN
 	public StyledLabelImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  StyledLabelImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  StyledLabelImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class StyledLabelExt extends MeasurableTextView implements ILifeCycleDecorator{
+	public class StyledLabelExt extends r.android.widget.TextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 
 		public StyledLabelExt() {
-			
-			
-			
-			
-			
-			
 			super(StyledLabelImpl.this);
+			
 		}
 		
 		@Override
@@ -378,7 +380,46 @@ public class StyledLabelImpl extends BaseWidget implements IDrawable, IHasMultiN
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(StyledLabelImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(StyledLabelImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	StyledLabelImpl.this.getParent().remove(StyledLabelImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) asNativeWidget();
+			appScreenLocation[0] = control.toDisplay(0, 0).x;
+        	appScreenLocation[1] = control.toDisplay(0, 0).y;
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	org.eclipse.swt.widgets.Shell shell = ((org.eclipse.swt.widgets.Control)asNativeWidget()).getShell();
+        	displayFrame.left = shell.toDisplay(0, 0).x ;
+			displayFrame.top = shell.getShell().toDisplay(0, 0).y ;
+        	displayFrame.bottom = displayFrame.top + shell.getClientArea().height;
+        	displayFrame.right = displayFrame.left + shell.getBounds().width;
+        	
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -388,20 +429,15 @@ public class StyledLabelImpl extends BaseWidget implements IDrawable, IHasMultiN
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			StyledLabelImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
             
-        }
-	 	@Override
-        public boolean suggestedSizeFitsInSpace(int mAutoSizeTextSizeInPx, r.android.graphics.RectF availableSpace) {
-        	return StyledLabelImpl.this.suggestedSizeFitsInSpace(mAutoSizeTextSizeInPx, availableSpace.width(), availableSpace.height());
-        }
-        
-        @Override
-        protected void setTextSizeInternal(int unit, float optimalTextSize, boolean b) {
-        	StyledLabelImpl.this.setMyTextSize(optimalTextSize);
         }
 		  public int getBorderPadding(){
 		    return StyledLabelImpl.this.getBorderPadding();
@@ -421,21 +457,39 @@ public class StyledLabelImpl extends BaseWidget implements IDrawable, IHasMultiN
 		 public void onRtlPropertiesChanged(int layoutDirection) {
 			 StyledLabelImpl.this.onRtlPropertiesChanged(layoutDirection);
 		 }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((StyledLabelExt) measurableTextView).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+        @Override
+        public int computeSize(float width) {
+        	return nativeMeasureHeight(styledText, (int) width);
+    	}
+		@Override
+		public java.lang.String getText() {
+			return (String) getMyText();
+		}
+
+	}	@Override
+	public Class getViewClass() {
+		return StyledLabelExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new StyledLabelImpl();
+		return new StyledLabelImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableTextView = new StyledLabelExt();
+		measurableView = new StyledLabelExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 	}
@@ -1297,6 +1351,16 @@ public class StyledLabelImpl extends BaseWidget implements IDrawable, IHasMultiN
 
 			}
 			break;
+			case "textAppearance": {
+				
+
+
+		ViewImpl.setStyle(this, objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -1437,7 +1501,7 @@ return getLastBaselineToBottomHeight();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableTextView;
+		return measurableView;
 	}
 
 	
@@ -1445,7 +1509,7 @@ return getLastBaselineToBottomHeight();				}
 	private Composite wrapperComposite;
 
 	private void setScrollHorizontally(Object objValue) {
-		measurableTextView.setHorizontallyScrolling(objValue != null && (Boolean) objValue);
+		measurableView.setHorizontallyScrolling(objValue != null && (Boolean) objValue);
 		
 	}
 	
@@ -1530,7 +1594,7 @@ return getLastBaselineToBottomHeight();				}
     //start - gravity
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableTextView.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -1553,11 +1617,11 @@ return getLastBaselineToBottomHeight();				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableTextView.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableTextView.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableTextView.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -1603,7 +1667,7 @@ return getLastBaselineToBottomHeight();				}
     
 	
 	private Object getGravity() {
-		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableTextView.getVerticalAligment();
+		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableView.getVerticalAligment();
 		if (verticalAligment == null) {
 			verticalAligment = com.ashera.view.BaseMeasurableView.VerticalAligment.top;
 		}
@@ -1642,7 +1706,7 @@ return getLastBaselineToBottomHeight();				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableTextView.getRawTextAlignment() != 0 || measurableTextView.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -1651,15 +1715,15 @@ return getLastBaselineToBottomHeight();				}
 	//start - aligment
     //start - valign
 	private void setVerticalAligmentCenter() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 	}
 
 	private void setVerticalAligmentBottom() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 	}
 
 	private void setVerticalAligmentTop() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 	}
 	//end - valign
 
@@ -1685,19 +1749,19 @@ return getLastBaselineToBottomHeight();				}
 	
 	//start - paddingcopy
 	private Object getPaddingBottom() {
-		return measurableTextView.getPaddingBottom();
+		return measurableView.getPaddingBottom();
 	}
 	
 	private Object getPaddingTop() {
-		return measurableTextView.getPaddingTop();
+		return measurableView.getPaddingTop();
 	}
 
 	private Object getPaddingRight() {
-		return measurableTextView.getPaddingRight();
+		return measurableView.getPaddingRight();
 	}
 	
 	private Object getPaddingLeft() {
-		return measurableTextView.getPaddingLeft();
+		return measurableView.getPaddingLeft();
 	}
 	
 	private Object getPaddingEnd() {
@@ -1719,27 +1783,27 @@ return getLastBaselineToBottomHeight();				}
     }
 
 	private void setPaddingTop(Object objValue) {
-		ViewImpl.setPaddingTop(objValue, measurableTextView);
+		ViewImpl.setPaddingTop(objValue, measurableView);
 	}
 
 	private void setPaddingEnd(Object objValue) {
-		ViewImpl.setPaddingRight(objValue, measurableTextView);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingStart(Object objValue) {
-		ViewImpl.setPaddingLeft(objValue, measurableTextView);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 
 	private void setPaddingLeft(Object objValue) {
-		ViewImpl.setPaddingLeft(objValue, measurableTextView);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 
 	private void setPaddingRight(Object objValue) {
-		ViewImpl.setPaddingRight(objValue, measurableTextView);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingBottom(Object objValue) {
-		ViewImpl.setPaddingBottom(objValue, measurableTextView);
+		ViewImpl.setPaddingBottom(objValue, measurableView);
 	}
 
     private void setPadding(Object objValue) {
@@ -1862,8 +1926,8 @@ return getLastBaselineToBottomHeight();				}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setTextColor(colorStateList);
-			objValue = measurableTextView.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		
 		styledText.setForeground((Color)ViewImpl.getColor(objValue));
@@ -1874,7 +1938,7 @@ return getLastBaselineToBottomHeight();				}
 	}
 
 	private Object getTextColor() {
-		return measurableTextView.getTextColors();
+		return measurableView.getTextColors();
 	}
     //end - font
     
@@ -1889,20 +1953,20 @@ return getLastBaselineToBottomHeight();				}
     @Override
 	public void drawableStateChanged() {
     	super.drawableStateChanged();
-		drawableStateChange(drawableBottom, measurableTextView.getBottomDrawable(), "drawableBottom");
-		drawableStateChange(drawableLeft, measurableTextView.getLeftDrawable(), "drawableLeft");
-		drawableStateChange(drawableRight, measurableTextView.getRightDrawable(), "drawableRight");
-		drawableStateChange(drawableTop, measurableTextView.getTopDrawable(), "drawableTop");
+		drawableStateChange(drawableBottom, measurableView.getBottomDrawable(), "drawableBottom");
+		drawableStateChange(drawableLeft, measurableView.getLeftDrawable(), "drawableLeft");
+		drawableStateChange(drawableRight, measurableView.getRightDrawable(), "drawableRight");
+		drawableStateChange(drawableTop, measurableView.getTopDrawable(), "drawableTop");
 		
-		if (measurableTextView.getTextColors() != null) {
-			setTextColor(measurableTextView.getCurrentTextColor());
+		if (measurableView.getTextColors() != null) {
+			setTextColor(measurableView.getCurrentTextColor());
 		}
 		drawableStateChangedAdditional();
 	}
 
 	private void drawableStateChange(Label mydrawable, r.android.graphics.drawable.Drawable dr, String attribute) {
 		if (mydrawable != null) {
-			final int[] state = measurableTextView.getDrawableState();
+			final int[] state = measurableView.getDrawableState();
 			
 			if (dr != null && dr.isStateful() && dr.setState(state)) {
 				int width = mydrawable.getBounds().width;
@@ -1951,7 +2015,7 @@ return getLastBaselineToBottomHeight();				}
 		
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setLeftDrawable(drawable);
+			measurableView.setLeftDrawable(drawable);
 			disposeAll(drawableLeft.getImage());
 			setImageOrColorOnDrawable(drawableLeft, drawable.getDrawable());
 		}
@@ -1966,7 +2030,7 @@ return getLastBaselineToBottomHeight();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setRightDrawable(drawable);
+			measurableView.setRightDrawable(drawable);
 			disposeAll(drawableRight.getImage());
 			setImageOrColorOnDrawable(drawableRight,  drawable.getDrawable());
 		}
@@ -1994,7 +2058,7 @@ return getLastBaselineToBottomHeight();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setBottomDrawable(drawable);
+			measurableView.setBottomDrawable(drawable);
 			disposeAll(drawableBottom.getImage());
 			setImageOrColorOnDrawable(drawableBottom, drawable.getDrawable());
 		}
@@ -2009,18 +2073,18 @@ return getLastBaselineToBottomHeight();				}
 		
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setTopDrawable(drawable);
+			measurableView.setTopDrawable(drawable);
 			disposeAll(drawableTop.getImage());
 			setImageOrColorOnDrawable(drawableTop,  drawable.getDrawable());
 		}
 	}
 
 	private void setDrawablePadding(Object objValue) {
-		measurableTextView.setDrawablePadding((int) objValue);
+		measurableView.setDrawablePadding((int) objValue);
 	}
 	
 	private Object getDrawablePadding() {
-		return measurableTextView.getDrawablePadding();
+		return measurableView.getDrawablePadding();
 	}
 	
 	@Override
@@ -2051,11 +2115,11 @@ return getLastBaselineToBottomHeight();				}
 	
     //start - maxminheight
     private Object getMinHeight() {
-        return measurableTextView.getMinHeight();
+        return measurableView.getMinHeight();
     }
 
     private Object getMinWidth() {
-        return measurableTextView.getMinWidth();
+        return measurableView.getMinWidth();
     }
     
     private void setEms(Object objValue) {
@@ -2065,27 +2129,27 @@ return getLastBaselineToBottomHeight();				}
     
     
     public int getMaxEms() {
-        return measurableTextView.getMaxEms();
+        return measurableView.getMaxEms();
     }
     public int getMinEms() {
-        return measurableTextView.getMinEms();
+        return measurableView.getMinEms();
     }
 
     private void setMinEms(Object objValue) {
-    	measurableTextView.setMinEms((int) objValue);
+    	measurableView.setMinEms((int) objValue);
         addMinMaxListener();
     }
     
     public int getMinLines() {
-        return measurableTextView.getMinLines();
+        return measurableView.getMinLines();
     }
     
     public int getMaxLines() {
-        return measurableTextView.getMaxLines();
+        return measurableView.getMaxLines();
     }
 
     private void setMaxEms(Object objValue) {
-    	measurableTextView.setMaxEms((int) objValue);
+    	measurableView.setMaxEms((int) objValue);
         addMinMaxListener();
     }
 
@@ -2100,7 +2164,7 @@ return getLastBaselineToBottomHeight();				}
     }
 
     private void setMaxLines(Object objValue) {
-    	measurableTextView.setMaxLines((int) objValue);
+    	measurableView.setMaxLines((int) objValue);
         addMinMaxListener();
     }
 
@@ -2110,82 +2174,70 @@ return getLastBaselineToBottomHeight();				}
     }
 
     private void setMinLines(Object objValue) {
-    	measurableTextView.setMinLines((int) objValue);
+    	measurableView.setMinLines((int) objValue);
         addMinMaxListener();
     
     }
     
     private void setMaxHeight(Object objValue) {
-    	measurableTextView.setMaxHeight((int) objValue);
+    	measurableView.setMaxHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMaxWidth(Object objValue) {
-    	measurableTextView.setMaxWidth((int) objValue);
+    	measurableView.setMaxWidth((int) objValue);
         addMinMaxListener();
     }
 
     public int getMaxWidth() {
-        return measurableTextView.getMaxWidth();
+        return measurableView.getMaxWidth();
     }
 
     public int getMaxHeight() {
-        return measurableTextView.getMaxHeight();
+        return measurableView.getMaxHeight();
     }
     
     
     private void setMinHeight(Object objValue) {
-    	measurableTextView.setMinHeight((int) objValue);
+    	measurableView.setMinHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMinWidth(Object objValue) {
-    	measurableTextView.setMinWidth((int) objValue);
+    	measurableView.setMinWidth((int) objValue);
         addMinMaxListener();
     }
 
     
     private Object getWidth() {
-        return measurableTextView.getWidth();
+        return measurableView.getWidth();
     }
 
     private int getHeight() {
-        return measurableTextView.getHeight();
+        return measurableView.getHeight();
     }
 
     
     //end - maxminheight
     
     //start - autosize
-	private int getAutoSizeTextType(MeasurableTextView measurableTextView) {
-		return measurableTextView.getAutoSizeTextType();
+	private int getAutoSizeTextType(r.android.widget.TextView measurableView) {
+		return measurableView.getAutoSizeTextType();
 	}
 
 	private void setAutoSizeTextTypeInternal(int autoTextType) {
 		removeResizeListener();
         
-		if (measurableTextView.isAutoSizeTextTypeUniform(autoTextType)) {
-			measurableTextView.setUpAutoSizeTextTypeUniform(autoSizeMin, autoSizeMax, autoSizeGranular);
+		if (measurableView.isAutoSizeTextTypeUniform(autoTextType)) {
+			measurableView.setUpAutoSizeTextTypeUniform(autoSizeMin, autoSizeMax, autoSizeGranular);
             addAutoResizeListener();
         } else {
-        	measurableTextView.clearAutoSizeTypeConfiguration();
+        	measurableView.clearAutoSizeTypeConfiguration();
         }
 	}
 	
-	
-	private boolean suggestedSizeFitsInSpace(int suggestedSizeInPx, float width, float height) {
-        setMyTextSize(suggestedSizeInPx * 1f);        
-        int y = computeSize(width);
-
-        // Height overflow.
-		if (y > height) {
-            return false;
-        }
-        return true;
-    }
-	
 	private void setAutoSizePresetSizes(Object objValue) {
-		measurableTextView.setAutoSizeTextTypeUniformWithPresetSizes((int[]) objValue, 0);
+		measurableView.setAutoSizeTextTypeUniformWithPresetSizes((int[]) objValue, 0);
 		
 	}
 
@@ -2198,8 +2250,8 @@ return getLastBaselineToBottomHeight();				}
 
 		@Override
 		protected void doPerform(Object payload) {
-			if (!onlyOnce || measurableTextView.isLayoutRequested()) {
-				measurableTextView.autoResizeText();
+			if (!onlyOnce || measurableView.isLayoutRequested()) {
+				measurableView.autoResizeText();
 				onlyOnce = true;
 			}
 		}
@@ -2219,10 +2271,6 @@ return getLastBaselineToBottomHeight();				}
 			fragment.getEventBus().off(postMeasureHandler);
 			postMeasureHandler = null;
 		}
-	}
-
-	private int computeSize(float width) {
-		return measurableTextView.nativeMeasureHeight(styledText, (int) width);
 	}
     
     //end - autosize
@@ -2422,10 +2470,10 @@ return getLastBaselineToBottomHeight();				}
 	}
 	
 	private int getLabelWidth() {
-		if (measurableTextView.isIgnoreDrawableHeight()) {
-			return measurableTextView.getMeasuredWidth() - measurableTextView.getPaddingLeft() - measurableTextView.getPaddingRight(); 
+		if (measurableView.isIgnoreDrawableHeight()) {
+			return measurableView.getMeasuredWidth() - measurableView.getPaddingLeft() - measurableView.getPaddingRight(); 
 		}
-		return measurableTextView.getMeasuredWidth() - measurableTextView.getCompoundPaddingRight() - measurableTextView.getCompoundPaddingLeft();
+		return measurableView.getMeasuredWidth() - measurableView.getCompoundPaddingRight() - measurableView.getCompoundPaddingLeft();
 	}
 
 	private boolean isLabelMeasured() {
@@ -2492,7 +2540,7 @@ return getLastBaselineToBottomHeight();				}
         // in settings). At the moment, we don't.
         if (firstBaselineToTopHeight > Math.abs(fontMetricsTop)) {
             final int paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-           measurableTextView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
+            measurableView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
         }
 	}
 	
@@ -2523,7 +2571,7 @@ return getLastBaselineToBottomHeight();				}
 
         if (lastBaselineToBottomHeight > Math.abs(fontMetricsBottom)) {
             final int paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-            measurableTextView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
+            measurableView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
         }		
 	}
 	
@@ -2548,7 +2596,7 @@ return getLastBaselineToBottomHeight();				}
 		autoSizeGranular = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableTextView));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 
@@ -2556,7 +2604,7 @@ return getLastBaselineToBottomHeight();				}
 		autoSizeMin = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableTextView));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 
@@ -2564,7 +2612,7 @@ return getLastBaselineToBottomHeight();				}
 		autoSizeMax = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableTextView));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 	
@@ -2587,7 +2635,7 @@ return getLastBaselineToBottomHeight();				}
 	}
 
 	private Object getAutoSizeTextType() {
-		return getAutoSizeTextType(measurableTextView);
+		return getAutoSizeTextType(measurableView);
 	}
 	
 
@@ -2609,7 +2657,7 @@ return getLastBaselineToBottomHeight();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableTextView.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
@@ -4014,6 +4062,14 @@ public StyledLabelCommandBuilder setTextFormat(String value) {
 
 	attrs.put("value", value);
 return this;}
+public StyledLabelCommandBuilder setTextAppearance(String value) {
+	Map<String, Object> attrs = initCommand("textAppearance");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class StyledLabelBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public StyledLabelBean() {
@@ -4536,6 +4592,10 @@ public void setTextFormat(String value) {
 	getBuilder().reset().setTextFormat(value).execute(true);
 }
 
+public void setTextAppearance(String value) {
+	getBuilder().reset().setTextAppearance(value).execute(true);
+}
+
 }
 
 
@@ -4617,7 +4677,7 @@ public void setTextFormat(String value) {
 	
 	@Override
 	public int getBaseLine() {
-		int baseline = styledText.getBaseline(styledText.getCharCount()) + measurableTextView.getPaddingTop();
+		int baseline = styledText.getBaseline(styledText.getCharCount()) + measurableView.getPaddingTop();
 		return baseline;
 	}
 
@@ -4758,8 +4818,8 @@ public void setTextFormat(String value) {
 	private void setTextColorLink(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setLinkTextColor(colorStateList);
-			objValue = measurableTextView.getPaint().linkColor;
+			measurableView.setLinkTextColor(colorStateList);
+			objValue = measurableView.getPaint().linkColor;
 		}
 		if (html) {
 			htmlConfig.put("textColorLink", ViewImpl.getColor(objValue));
@@ -4771,8 +4831,8 @@ public void setTextFormat(String value) {
 	}
 	
 	private void drawableStateChangedForTextLinkColor() {
-		if (measurableTextView.getLinkTextColors() != null && measurableTextView.getLinkTextColors().isStateful()) {
-			setTextColorLink(measurableTextView.getLinkTextColors());
+		if (measurableView.getLinkTextColors() != null && measurableView.getLinkTextColors().isStateful()) {
+			setTextColorLink(measurableView.getLinkTextColors());
 		}
 	}	
 

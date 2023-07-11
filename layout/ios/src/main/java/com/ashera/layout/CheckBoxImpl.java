@@ -50,7 +50,7 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 	public final static String GROUP_NAME = "CheckBox";
 
 	protected @Property Object uiView;
-	protected MeasurableCompoundButton measurableCompoundButton;		
+	protected r.android.widget.CheckBox measurableView;		
 	private r.android.graphics.Canvas canvas;
 	
 		@SuppressLint("NewApi")
@@ -272,25 +272,27 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("html").withType("boolean"));
 	}
 	
 	public CheckBoxImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  CheckBoxImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  CheckBoxImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 @com.google.j2objc.annotations.WeakOuter		
-	public class CheckBoxExt extends MeasurableCompoundButton implements ILifeCycleDecorator{
+	public class CheckBoxExt extends r.android.widget.CheckBox implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 
 		public CheckBoxExt() {
-			
-			
-			
 			super(CheckBoxImpl.this);
-			
-			
 			
 		}
 		
@@ -373,7 +375,44 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(CheckBoxImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(CheckBoxImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	CheckBoxImpl.this.getParent().remove(CheckBoxImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -382,6 +421,10 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 		public void offsetLeftAndRight(int offset) {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
+		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			CheckBoxImpl.this.setAttribute(name, value, true);
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -403,21 +446,39 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 		  public int getLineHeightPadding(){
 		    return CheckBoxImpl.this.getLineHeightPadding();
 		  }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((CheckBoxExt) measurableCompoundButton).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+        @Override
+        public int computeSize(float width) {
+        	return nativeMeasureHeight(uiView, (int) width);
+    	}
+		@Override
+		public java.lang.String getText() {
+			return (String) getMyText();
+		}
+
+	}	@Override
+	public Class getViewClass() {
+		return CheckBoxExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new CheckBoxImpl();
+		return new CheckBoxImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableCompoundButton = new CheckBoxExt();
+		measurableView = new CheckBoxExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 		setWidgetOnNativeClass();
@@ -1106,6 +1167,16 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 
 			}
 			break;
+			case "textAppearance": {
+				
+
+
+		ViewImpl.setStyle(this, objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -1215,15 +1286,15 @@ return getTextColorState();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableCompoundButton;
+		return measurableView;
 	}
 
 	
 
 	private void nativeCreate(Map<String, Object> params) {
 		initHtml(params);
-		createLabel(params, (MeasurableCompoundButton) asWidget());
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		createLabel(params, (r.android.widget.TextView) asWidget());
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
     	registerForAttributeCommandChain("text");
     	registerForAttributeCommandChainWithPhase("predraw", "drawableStart",  "drawableEnd", "drawableLeft", "drawableTop", "drawableRight", "drawableBottom",
     			"drawablePadding", "drawableTint", "drawableTintMode", "button", "buttonTint", "buttonTintMode");
@@ -1336,18 +1407,18 @@ return getTextColorState();				}
 	//start - gravity
 	//start - aligmentgravity
 	private void setVerticalAligmentCenter() {
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 		nativeSetVerticalAligmentCenter();
 	}
 
 
 	private void setVerticalAligmentBottom() {
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 		nativeSetVerticalAligmentBottom();
 	}
 
 	private void setVerticalAligmentTop() {
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 		nativeSetVerticalAligmentTop();
 	}
 
@@ -1564,16 +1635,16 @@ return getTextColorState();				}
     
     //start - drawable
 	private void setDrawablePadding(Object objValue) {
-		measurableCompoundButton.setDrawablePadding((int) objValue);
+		measurableView.setDrawablePadding((int) objValue);
 		updatePadding();
 	}
 
 	private void setDrawableBottom(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableCompoundButton.setBottomDrawable(null);
+			measurableView.setBottomDrawable(null);
 			applyAttributeCommand("drawableBottom", "drawDrawableIcon", new String[] {}, false, "bottom");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableCompoundButton.setBottomDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setBottomDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("drawableBottom", "drawDrawableIcon", new String[] {}, true, "bottom");
 			updatePadding();
 		}
@@ -1581,10 +1652,10 @@ return getTextColorState();				}
 
 	private void setDrawableTop(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableCompoundButton.setTopDrawable(null);
+			measurableView.setTopDrawable(null);
 			applyAttributeCommand("drawableTop", "drawDrawableIcon", new String[] {}, false, "top");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableCompoundButton.setTopDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setTopDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("drawableTop", "drawDrawableIcon", new String[] {}, true, "top");
 			updatePadding();
 		}
@@ -1600,10 +1671,10 @@ return getTextColorState();				}
 
 	private void setDrawableRightInternal(String originalAttr, Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableCompoundButton.setRightDrawable(null);
+			measurableView.setRightDrawable(null);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, false, "right");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableCompoundButton.setRightDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setRightDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, true, "right");
 			updatePadding();
 		}		
@@ -1621,10 +1692,10 @@ return getTextColorState();				}
 
 	private void setDrawableLeftInternal(String originalAttr, Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableCompoundButton.setLeftDrawable(null);
+			measurableView.setLeftDrawable(null);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, false, "left");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableCompoundButton.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, true, "left");
 			updatePadding();
 		}
@@ -1649,23 +1720,23 @@ return getTextColorState();				}
 	]-*/;
 
 	private Object getDrawablePadding() {
-		return measurableCompoundButton.getDrawablePadding();
+		return measurableView.getDrawablePadding();
 	}
 
 	private void setDrawableTintMode(Object value) {
-		if (measurableCompoundButton.getLeftDrawable() != null) {
+		if (measurableView.getLeftDrawable() != null) {
 			applyAttributeCommand("drawableStart", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 			applyAttributeCommand("drawableLeft", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
-		if (measurableCompoundButton.getRightDrawable() != null) {
+		if (measurableView.getRightDrawable() != null) {
 			applyAttributeCommand("drawableRight", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 			applyAttributeCommand("drawableEnd", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
 		
-		if (measurableCompoundButton.getTopDrawable() != null) {
+		if (measurableView.getTopDrawable() != null) {
 			applyAttributeCommand("drawableTop", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
-		if (measurableCompoundButton.getBottomDrawable() != null) {
+		if (measurableView.getBottomDrawable() != null) {
 			applyAttributeCommand("drawableBottom", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
 	}
@@ -1674,21 +1745,21 @@ return getTextColorState();				}
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
 			this.drawableTint = colorStateList;
-			objValue = drawableTint.getColorForState(measurableCompoundButton.getDrawableState(), r.android.graphics.Color.RED);
+			objValue = drawableTint.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
 		}
 		
-		if (measurableCompoundButton.getLeftDrawable() != null) {
+		if (measurableView.getLeftDrawable() != null) {
 			applyAttributeCommand("drawableLeft", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 			applyAttributeCommand("drawableStart", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableCompoundButton.getRightDrawable() != null) {
+		if (measurableView.getRightDrawable() != null) {
 			applyAttributeCommand("drawableRight", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));			
 			applyAttributeCommand("drawableEnd", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableCompoundButton.getTopDrawable() != null) {
+		if (measurableView.getTopDrawable() != null) {
 			applyAttributeCommand("drawableTop", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableCompoundButton.getBottomDrawable() != null) {
+		if (measurableView.getBottomDrawable() != null) {
 			applyAttributeCommand("drawableBottom", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
 	}
@@ -1700,7 +1771,7 @@ return getTextColorState();				}
 	}
 	
 	private void setScrollHorizontally(Object objValue) {
-		measurableCompoundButton.setHorizontallyScrolling(objValue != null && (boolean) objValue);
+		measurableView.setHorizontallyScrolling(objValue != null && (boolean) objValue);
 	}
 	
 	//start - iosmarquee
@@ -1770,15 +1841,15 @@ return getTextColorState();				}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableCompoundButton.setTextColor(colorStateList);
-			objValue = measurableCompoundButton.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		
 		setTextColor(uiView, ViewImpl.getColor(objValue));
 	}
 	
 	private Object getTextColorState() {
-		return measurableCompoundButton.getTextColors();
+		return measurableView.getTextColors();
 	}
 	//end - textcolor
 	
@@ -1787,17 +1858,17 @@ return getTextColorState();				}
 	@Override
 	public void drawableStateChanged() {
 		super.drawableStateChanged();
-		drawableStateChange("bottom", measurableCompoundButton.getBottomDrawable());
-		drawableStateChange("left", measurableCompoundButton.getLeftDrawable());
-		drawableStateChange("right", measurableCompoundButton.getRightDrawable());
-		drawableStateChange("top", measurableCompoundButton.getTopDrawable());drawableStateChangedAdditionalAttrs();
+		drawableStateChange("bottom", measurableView.getBottomDrawable());
+		drawableStateChange("left", measurableView.getLeftDrawable());
+		drawableStateChange("right", measurableView.getRightDrawable());
+		drawableStateChange("top", measurableView.getTopDrawable());drawableStateChangedAdditionalAttrs();
 		
-		if (measurableCompoundButton.getTextColors() != null && measurableCompoundButton.getTextColors().isStateful()) {
-			setTextColor(measurableCompoundButton.getCurrentTextColor());
+		if (measurableView.getTextColors() != null && measurableView.getTextColors().isStateful()) {
+			setTextColor(measurableView.getCurrentTextColor());
 		}
 		
-		if (measurableCompoundButton.getHintTextColors() != null && measurableCompoundButton.getHintTextColors().isStateful()) {
-			setHintColor(measurableCompoundButton.getCurrentHintTextColor());
+		if (measurableView.getHintTextColors() != null && measurableView.getHintTextColors().isStateful()) {
+			setHintColor(measurableView.getCurrentHintTextColor());
 			syncPlaceholderLabel();
 		}
 		
@@ -1806,13 +1877,13 @@ return getTextColorState();				}
 			invalidate();
 		}
 		
-		if (measurableCompoundButton.getLinkTextColors() != null && measurableCompoundButton.getLinkTextColors().isStateful()) {
-			setTextColorLink(measurableCompoundButton.getLinkTextColors());
+		if (measurableView.getLinkTextColors() != null && measurableView.getLinkTextColors().isStateful()) {
+			setTextColorLink(measurableView.getLinkTextColors());
 		}
 	}
 
 	private void drawableStateChange(String type, r.android.graphics.drawable.Drawable dr) {
-		final int[] state = measurableCompoundButton.getDrawableState();
+		final int[] state = measurableView.getDrawableState();
 
 		if (dr != null && dr.isStateful() && dr.setState(state)) {
 			switch (type) {
@@ -1847,7 +1918,7 @@ return getTextColorState();				}
 	
 	@Override
 	public int getBaseLine() {
-		return nativeGetBaseLine() + measurableCompoundButton.getPaddingTop();
+		return nativeGetBaseLine() + measurableView.getPaddingTop();
 	}
 	
 	 private native int nativeGetBaseLine() /*-[
@@ -1903,7 +1974,7 @@ return getTextColorState();				}
 
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableCompoundButton.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -1926,11 +1997,11 @@ return getTextColorState();				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableCompoundButton.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableCompoundButton.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableCompoundButton.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -1976,7 +2047,7 @@ return getTextColorState();				}
     
 	
 	private Object getGravity() {
-		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableCompoundButton.getVerticalAligment();
+		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableView.getVerticalAligment();
 		if (verticalAligment == null) {
 			verticalAligment = com.ashera.view.BaseMeasurableView.VerticalAligment.top;
 		}
@@ -2015,7 +2086,7 @@ return getTextColorState();				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableCompoundButton.getRawTextAlignment() != 0 || measurableCompoundButton.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -2024,11 +2095,11 @@ return getTextColorState();				}
 
 
     private Object getMinHeight() {
-        return measurableCompoundButton.getMinHeight();
+        return measurableView.getMinHeight();
     }
 
     private Object getMinWidth() {
-        return measurableCompoundButton.getMinWidth();
+        return measurableView.getMinWidth();
     }
     
     private void setEms(Object objValue) {
@@ -2038,27 +2109,27 @@ return getTextColorState();				}
     
     
     public int getMaxEms() {
-        return measurableCompoundButton.getMaxEms();
+        return measurableView.getMaxEms();
     }
     public int getMinEms() {
-        return measurableCompoundButton.getMinEms();
+        return measurableView.getMinEms();
     }
 
     private void setMinEms(Object objValue) {
-    	measurableCompoundButton.setMinEms((int) objValue);
+    	measurableView.setMinEms((int) objValue);
         addMinMaxListener();
     }
     
     public int getMinLines() {
-        return measurableCompoundButton.getMinLines();
+        return measurableView.getMinLines();
     }
     
     public int getMaxLines() {
-        return measurableCompoundButton.getMaxLines();
+        return measurableView.getMaxLines();
     }
 
     private void setMaxEms(Object objValue) {
-    	measurableCompoundButton.setMaxEms((int) objValue);
+    	measurableView.setMaxEms((int) objValue);
         addMinMaxListener();
     }
 
@@ -2073,7 +2144,7 @@ return getTextColorState();				}
     }
 
     private void setMaxLines(Object objValue) {
-    	measurableCompoundButton.setMaxLines((int) objValue);
+    	measurableView.setMaxLines((int) objValue);
         addMinMaxListener();
     }
 
@@ -2083,82 +2154,70 @@ return getTextColorState();				}
     }
 
     private void setMinLines(Object objValue) {
-    	measurableCompoundButton.setMinLines((int) objValue);
+    	measurableView.setMinLines((int) objValue);
         addMinMaxListener();
     
     }
     
     private void setMaxHeight(Object objValue) {
-    	measurableCompoundButton.setMaxHeight((int) objValue);
+    	measurableView.setMaxHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMaxWidth(Object objValue) {
-    	measurableCompoundButton.setMaxWidth((int) objValue);
+    	measurableView.setMaxWidth((int) objValue);
         addMinMaxListener();
     }
 
     public int getMaxWidth() {
-        return measurableCompoundButton.getMaxWidth();
+        return measurableView.getMaxWidth();
     }
 
     public int getMaxHeight() {
-        return measurableCompoundButton.getMaxHeight();
+        return measurableView.getMaxHeight();
     }
     
     
     private void setMinHeight(Object objValue) {
-    	measurableCompoundButton.setMinHeight((int) objValue);
+    	measurableView.setMinHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMinWidth(Object objValue) {
-    	measurableCompoundButton.setMinWidth((int) objValue);
+    	measurableView.setMinWidth((int) objValue);
         addMinMaxListener();
     }
 
     
     private Object getWidth() {
-        return measurableCompoundButton.getWidth();
+        return measurableView.getWidth();
     }
 
     private int getHeight() {
-        return measurableCompoundButton.getHeight();
+        return measurableView.getHeight();
     }
 
     
     
 
 
-	private int getAutoSizeTextType(MeasurableCompoundButton measurableCompoundButton) {
-		return measurableCompoundButton.getAutoSizeTextType();
+	private int getAutoSizeTextType(r.android.widget.TextView measurableView) {
+		return measurableView.getAutoSizeTextType();
 	}
 
 	private void setAutoSizeTextTypeInternal(int autoTextType) {
 		removeResizeListener();
         
-		if (measurableCompoundButton.isAutoSizeTextTypeUniform(autoTextType)) {
-			measurableCompoundButton.setUpAutoSizeTextTypeUniform(autoSizeMin, autoSizeMax, autoSizeGranular);
+		if (measurableView.isAutoSizeTextTypeUniform(autoTextType)) {
+			measurableView.setUpAutoSizeTextTypeUniform(autoSizeMin, autoSizeMax, autoSizeGranular);
             addAutoResizeListener();
         } else {
-        	measurableCompoundButton.clearAutoSizeTypeConfiguration();
+        	measurableView.clearAutoSizeTypeConfiguration();
         }
 	}
 	
-	
-	private boolean suggestedSizeFitsInSpace(int suggestedSizeInPx, float width, float height) {
-        setMyTextSize(suggestedSizeInPx * 1f);        
-        int y = computeSize(width);
-
-        // Height overflow.
-		if (y > height) {
-            return false;
-        }
-        return true;
-    }
-	
 	private void setAutoSizePresetSizes(Object objValue) {
-		measurableCompoundButton.setAutoSizeTextTypeUniformWithPresetSizes((int[]) objValue, 0);
+		measurableView.setAutoSizeTextTypeUniformWithPresetSizes((int[]) objValue, 0);
 		
 	}
 
@@ -2171,8 +2230,8 @@ return getTextColorState();				}
 
 		@Override
 		protected void doPerform(Object payload) {
-			if (!onlyOnce || measurableCompoundButton.isLayoutRequested()) {
-				measurableCompoundButton.autoResizeText();
+			if (!onlyOnce || measurableView.isLayoutRequested()) {
+				measurableView.autoResizeText();
 				onlyOnce = true;
 			}
 		}
@@ -2192,10 +2251,6 @@ return getTextColorState();				}
 			fragment.getEventBus().off(postMeasureHandler);
 			postMeasureHandler = null;
 		}
-	}
-
-	private int computeSize(float width) {
-		return measurableCompoundButton.nativeMeasureHeight(uiView, (int) width);
 	}
     
     
@@ -2423,10 +2478,10 @@ return getTextColorState();				}
 	}
 	
 	private int getLabelWidth() {
-		if (measurableCompoundButton.isIgnoreDrawableHeight()) {
-			return measurableCompoundButton.getMeasuredWidth() - measurableCompoundButton.getPaddingLeft() - measurableCompoundButton.getPaddingRight(); 
+		if (measurableView.isIgnoreDrawableHeight()) {
+			return measurableView.getMeasuredWidth() - measurableView.getPaddingLeft() - measurableView.getPaddingRight(); 
 		}
-		return measurableCompoundButton.getMeasuredWidth() - measurableCompoundButton.getCompoundPaddingRight() - measurableCompoundButton.getCompoundPaddingLeft();
+		return measurableView.getMeasuredWidth() - measurableView.getCompoundPaddingRight() - measurableView.getCompoundPaddingLeft();
 	}
 
 	private boolean isLabelMeasured() {
@@ -2460,7 +2515,7 @@ return getTextColorState();				}
         // in settings). At the moment, we don't.
         if (firstBaselineToTopHeight > Math.abs(fontMetricsTop)) {
             final int paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-           measurableCompoundButton.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
+            measurableView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
         }
 	}
 	
@@ -2491,7 +2546,7 @@ return getTextColorState();				}
 
         if (lastBaselineToBottomHeight > Math.abs(fontMetricsBottom)) {
             final int paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-            measurableCompoundButton.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
+            measurableView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
         }		
 	}
 	
@@ -2511,7 +2566,7 @@ return getTextColorState();				}
 		autoSizeGranular = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableCompoundButton));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 
@@ -2519,7 +2574,7 @@ return getTextColorState();				}
 		autoSizeMin = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableCompoundButton));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 
@@ -2527,7 +2582,7 @@ return getTextColorState();				}
 		autoSizeMax = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableCompoundButton));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 	
@@ -2550,7 +2605,7 @@ return getTextColorState();				}
 	}
 
 	private Object getAutoSizeTextType() {
-		return getAutoSizeTextType(measurableCompoundButton);
+		return getAutoSizeTextType(measurableView);
 	}
 	
 
@@ -2722,10 +2777,14 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableCompoundButton.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -3830,6 +3889,14 @@ public CheckBoxCommandBuilder setTextFormat(String value) {
 
 	attrs.put("value", value);
 return this;}
+public CheckBoxCommandBuilder setTextAppearance(String value) {
+	Map<String, Object> attrs = initCommand("textAppearance");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class CheckBoxBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public CheckBoxBean() {
@@ -4250,6 +4317,10 @@ public void setTextFormat(String value) {
 	getBuilder().reset().setTextFormat(value).execute(true);
 }
 
+public void setTextAppearance(String value) {
+	getBuilder().reset().setTextAppearance(value).execute(true);
+}
+
 }
 
 
@@ -4258,10 +4329,10 @@ public void setTextFormat(String value) {
 	//start - codecopy
 	private void setButton(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableCompoundButton.setButtonDrawable(null);
+			measurableView.setButtonDrawable(null);
 			applyAttributeCommand("button", "drawDrawableIcon", new String[] {}, false, "button");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableCompoundButton.setButtonDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setButtonDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("button", "drawDrawableIcon", new String[] {}, true, "button");
 		}
 	}
@@ -4274,12 +4345,12 @@ public void setTextFormat(String value) {
 		} else {
 			onCheckedChangeListener = (CompoundButton.OnCheckedChangeListener) objValue;
 		}
-		measurableCompoundButton.setOnCheckedChangeListener(onCheckedChangeListener);
+		measurableView.setOnCheckedChangeListener(onCheckedChangeListener);
 		
 	}
 	
 	private void setChecked(Object objValue) {
-		measurableCompoundButton.setChecked((boolean) objValue);
+		measurableView.setChecked((boolean) objValue);
 		
 	}
 	
@@ -4289,7 +4360,7 @@ public void setTextFormat(String value) {
 
 		switch (key.getAttributeName()) {
 		case "editable":
-			measurableCompoundButton.setEnabled((boolean) objValue);
+			measurableView.setEnabled((boolean) objValue);
 			break;
 		default:
 			break;
@@ -4299,11 +4370,11 @@ public void setTextFormat(String value) {
 	
 	
 	private Object getButton() {
-		return measurableCompoundButton.getButtonDrawable();
+		return measurableView.getButtonDrawable();
 	}
 
 	private Object getChecked() {
-		return measurableCompoundButton.isChecked();
+		return measurableView.isChecked();
 	}
 
 	@Override
@@ -4314,10 +4385,10 @@ public void setTextFormat(String value) {
 	private class StateToggler implements View.OnClickListener {
 		@Override
 		public void onClick(View v) {
-			if (measurableCompoundButton.isEnabled()) {
+			if (measurableView.isEnabled()) {
 				boolean isChecked = (boolean)getChecked();
 				if (!isChecked || (isChecked && allowUnCheck())) {
-					measurableCompoundButton.toggle();
+					measurableView.toggle();
 				}
 			}
 		}
@@ -4334,7 +4405,7 @@ public void setTextFormat(String value) {
 			
 		}
 	}
-	private void createLabel(Map<String, Object> params, MeasurableCompoundButton asWidget) {
+	private void createLabel(Map<String, Object> params, r.android.widget.TextView asWidget) {
 		createLabel(params);
 		ViewImpl.setOnClick(this, "statetoggler", asNativeWidget(), new StateToggler());
 		canvas = new MyCanvas();
@@ -4348,8 +4419,8 @@ public void setTextFormat(String value) {
 	
 
 	private void drawableStateChangedAdditionalAttrs() {
-		r.android.graphics.drawable.Drawable dr = measurableCompoundButton.getButtonDrawable();
-		if (dr != null && dr.isStateful() && dr.setState(measurableCompoundButton.getDrawableState())) {
+		r.android.graphics.drawable.Drawable dr = measurableView.getButtonDrawable();
+		if (dr != null && dr.isStateful() && dr.setState(measurableView.getDrawableState())) {
 			setButton(dr);
 			invalidate();
 		}
@@ -4365,7 +4436,7 @@ public void setTextFormat(String value) {
 
 	@Override
 	public int measureWidth() {
-		return measurableCompoundButton.nativeMeasureWidth(uiView) + measurableCompoundButton.getButtonDrawable().getMinimumWidth();
+		return measurableView.nativeMeasureWidth(uiView) + measurableView.getButtonDrawable().getMinimumWidth();
 	}
 	//end - codecopy
 	
@@ -4379,12 +4450,12 @@ public void setTextFormat(String value) {
 
 	@Override
 	public String getTextEntered() {
-		return measurableCompoundButton.isChecked() ? "checked" : "";
+		return measurableView.isChecked() ? "checked" : "";
 	}
 
 	@Override
 	public boolean isViewVisible() {
-		return measurableCompoundButton.getVisibility() == View.VISIBLE;
+		return measurableView.getVisibility() == View.VISIBLE;
 	}
 
 	@Override

@@ -65,9 +65,19 @@
 
 + (jboolean)hasTransientStateWithADView:(ADView *)view;
 
++ (jboolean)isLaidOutWithADView:(ADView *)view;
+
 + (jboolean)isLayoutDirectionResolvedWithADView:(ADView *)view;
 
++ (jboolean)isPaddingRelativeWithADView:(ADView *)view;
+
 + (void)jumpDrawablesToCurrentStateWithADView:(ADView *)itemView;
+
++ (void)offsetLeftAndRightWithADView:(ADView *)child
+                             withInt:(jint)dx;
+
++ (void)offsetTopAndBottomWithADView:(ADView *)child
+                             withInt:(jint)dy;
 
 + (jint)resolveSizeAndStateWithInt:(jint)size
                            withInt:(jint)measureSpec
@@ -191,6 +201,14 @@ FOUNDATION_EXPORT void ADXViewCompat_dispatchStartTemporaryDetachWithADView_(ADV
 FOUNDATION_EXPORT jboolean ADXViewCompat_hasTransientStateWithADView_(ADView *view);
 
 FOUNDATION_EXPORT jboolean ADXViewCompat_isLayoutDirectionResolvedWithADView_(ADView *view);
+
+FOUNDATION_EXPORT void ADXViewCompat_offsetLeftAndRightWithADView_withInt_(ADView *child, jint dx);
+
+FOUNDATION_EXPORT void ADXViewCompat_offsetTopAndBottomWithADView_withInt_(ADView *child, jint dy);
+
+FOUNDATION_EXPORT jboolean ADXViewCompat_isLaidOutWithADView_(ADView *view);
+
+FOUNDATION_EXPORT jboolean ADXViewCompat_isPaddingRelativeWithADView_(ADView *view);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXViewCompat)
 

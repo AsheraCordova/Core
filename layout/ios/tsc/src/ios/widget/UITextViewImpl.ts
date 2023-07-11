@@ -1,9 +1,5 @@
 // start - imports
 
-export const enum InputView {
-picker = "picker",
-datepicker = "datepicker",
-}
 export const enum DrawableTintMode {
 add = "add",
 multiply = "multiply",
@@ -86,6 +82,10 @@ flagNoExtractUi = "flagNoExtractUi",
 flagNoFullscreen = "flagNoFullscreen",
 flagNoPersonalizedLearning = "flagNoPersonalizedLearning",
 normal = "normal",
+}
+export const enum InputView {
+picker = "picker",
+datepicker = "datepicker",
 }	
 import CommandAttr from '../../widget/CommandAttr';
 import IWidget from '../../widget/IWidget';
@@ -99,20 +99,6 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -188,6 +174,8 @@ export class TextStyleTransformer implements ITranform {
 
 
 
+
+
 export class NumericTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -214,6 +202,18 @@ export class NumericTransformer implements ITranform {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -258,48 +258,6 @@ export abstract class UITextViewImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "iosIsSelectable" })
 	iosIsSelectable!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "text" })
-	text!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "gravity" })
-	gravity!:CommandAttr<Gravity[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textSize" })
-	textSize!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "lineSpacingExtra" })
-	lineSpacingExtra!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "lineSpacingMultiplier" })
-	lineSpacingMultiplier!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textColorHint" })
-	textColorHint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hint" })
-	hint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onEditorAction" })
-	onEditorAction!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onFocusChange" })
-	onFocusChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onTextChange" })
-	onTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onbeforeTextChange" })
-	onbeforeTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onafterTextChange" })
-	onafterTextChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosInputView" })
-	iosInputView!:CommandAttr<InputView>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hintTextFormat" })
-	hintTextFormat!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "padding" })
 	padding!:CommandAttr<string>| undefined;
@@ -412,6 +370,12 @@ export abstract class UITextViewImpl<T> extends ViewImpl<T>{
 	@Expose({ name: "fontFamily" })
 	fontFamily!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
+	@Expose({ name: "firstBaselineToTopHeight" })
+	firstBaselineToTopHeight!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "lastBaselineToBottomHeight" })
+	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
 	@Expose({ name: "autoText" })
 	autoText!:CommandAttr<boolean>| undefined;
 	@Type(() => CommandAttr)
@@ -457,11 +421,47 @@ export abstract class UITextViewImpl<T> extends ViewImpl<T>{
 	@Expose({ name: "textAllCaps" })
 	textAllCaps!:CommandAttr<boolean>| undefined;
 	@Type(() => CommandAttr)
-	@Expose({ name: "firstBaselineToTopHeight" })
-	firstBaselineToTopHeight!:CommandAttr<string>| undefined;
+	@Expose({ name: "text" })
+	text!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
-	@Expose({ name: "lastBaselineToBottomHeight" })
-	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
+	@Expose({ name: "gravity" })
+	gravity!:CommandAttr<Gravity[]>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textSize" })
+	textSize!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "lineSpacingExtra" })
+	lineSpacingExtra!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "lineSpacingMultiplier" })
+	lineSpacingMultiplier!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textColorHint" })
+	textColorHint!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "hint" })
+	hint!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onEditorAction" })
+	onEditorAction!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onFocusChange" })
+	onFocusChange!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onTextChange" })
+	onTextChange!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onbeforeTextChange" })
+	onbeforeTextChange!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onafterTextChange" })
+	onafterTextChange!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "iosInputView" })
+	iosInputView!:CommandAttr<InputView>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "hintTextFormat" })
+	hintTextFormat!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -475,20 +475,6 @@ export abstract class UITextViewImpl<T> extends ViewImpl<T>{
 		this.iosAllowsEditingTextAttributes = undefined;
 		this.iosClearsOnInsertion = undefined;
 		this.iosIsSelectable = undefined;
-		this.text = undefined;
-		this.gravity = undefined;
-		this.textSize = undefined;
-		this.lineSpacingExtra = undefined;
-		this.lineSpacingMultiplier = undefined;
-		this.textColorHint = undefined;
-		this.hint = undefined;
-		this.onEditorAction = undefined;
-		this.onFocusChange = undefined;
-		this.onTextChange = undefined;
-		this.onbeforeTextChange = undefined;
-		this.onafterTextChange = undefined;
-		this.iosInputView = undefined;
-		this.hintTextFormat = undefined;
 		this.padding = undefined;
 		this.paddingBottom = undefined;
 		this.paddingRight = undefined;
@@ -526,6 +512,8 @@ export abstract class UITextViewImpl<T> extends ViewImpl<T>{
 		this.typeface = undefined;
 		this.textStyle = undefined;
 		this.fontFamily = undefined;
+		this.firstBaselineToTopHeight = undefined;
+		this.lastBaselineToBottomHeight = undefined;
 		this.autoText = undefined;
 		this.capitalize = undefined;
 		this.cursorVisible = undefined;
@@ -541,8 +529,20 @@ export abstract class UITextViewImpl<T> extends ViewImpl<T>{
 		this.iosInputAccessoryViewDoneButton = undefined;
 		this.textColor = undefined;
 		this.textAllCaps = undefined;
-		this.firstBaselineToTopHeight = undefined;
-		this.lastBaselineToBottomHeight = undefined;
+		this.text = undefined;
+		this.gravity = undefined;
+		this.textSize = undefined;
+		this.lineSpacingExtra = undefined;
+		this.lineSpacingMultiplier = undefined;
+		this.textColorHint = undefined;
+		this.hint = undefined;
+		this.onEditorAction = undefined;
+		this.onFocusChange = undefined;
+		this.onTextChange = undefined;
+		this.onbeforeTextChange = undefined;
+		this.onafterTextChange = undefined;
+		this.iosInputView = undefined;
+		this.hintTextFormat = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -803,310 +803,6 @@ export abstract class UITextViewImpl<T> extends ViewImpl<T>{
 		this.iosIsSelectable.setValue(value);
 		this.orderSet++;
 		this.iosIsSelectable.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetText() : T {
-		this.resetIfRequired();
-		if (this.text == null || this.text == undefined) {
-			this.text = new CommandAttr<string>()
-		}
-		
-		this.text.setGetter(true);
-		this.orderGet++;
-		this.text.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getText() : string {
-		if (this.text == null || this.text == undefined) {
-			this.text = new CommandAttr<string>();
-		}
-		return this.text.getCommandReturnValue();
-	}
-	public setText(value : string) : T {
-		this.resetIfRequired();
-		if (this.text == null || this.text == undefined) {
-			this.text = new CommandAttr<string>();
-		}
-		
-		this.text.setSetter(true);
-		this.text.setValue(value);
-		this.orderSet++;
-		this.text.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetGravity() : T {
-		this.resetIfRequired();
-		if (this.gravity == null || this.gravity == undefined) {
-			this.gravity = new CommandAttr<Gravity[]>()
-		}
-		
-		this.gravity.setGetter(true);
-		this.orderGet++;
-		this.gravity.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getGravity() : Gravity[] {
-		if (this.gravity == null || this.gravity == undefined) {
-			this.gravity = new CommandAttr<Gravity[]>();
-		}
-this.gravity.setTransformer('gravity');		return this.gravity.getCommandReturnValue();
-	}
-	public setGravity(...value : Gravity[]) : T {
-		this.resetIfRequired();
-		if (this.gravity == null || this.gravity == undefined) {
-			this.gravity = new CommandAttr<Gravity[]>();
-		}
-		
-		this.gravity.setSetter(true);
-		this.gravity.setValue(value);
-		this.orderSet++;
-		this.gravity.setOrderSet(this.orderSet);
-this.gravity.setTransformer('gravity');		return this.thisPointer;
-	}
-		
-
-	public tryGetTextSize() : T {
-		this.resetIfRequired();
-		if (this.textSize == null || this.textSize == undefined) {
-			this.textSize = new CommandAttr<string>()
-		}
-		
-		this.textSize.setGetter(true);
-		this.orderGet++;
-		this.textSize.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getTextSize() : string {
-		if (this.textSize == null || this.textSize == undefined) {
-			this.textSize = new CommandAttr<string>();
-		}
-		return this.textSize.getCommandReturnValue();
-	}
-	public setTextSize(value : string) : T {
-		this.resetIfRequired();
-		if (this.textSize == null || this.textSize == undefined) {
-			this.textSize = new CommandAttr<string>();
-		}
-		
-		this.textSize.setSetter(true);
-		this.textSize.setValue(value);
-		this.orderSet++;
-		this.textSize.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetLineSpacingExtra() : T {
-		this.resetIfRequired();
-		if (this.lineSpacingExtra == null || this.lineSpacingExtra == undefined) {
-			this.lineSpacingExtra = new CommandAttr<string>()
-		}
-		
-		this.lineSpacingExtra.setGetter(true);
-		this.orderGet++;
-		this.lineSpacingExtra.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getLineSpacingExtra() : string {
-		if (this.lineSpacingExtra == null || this.lineSpacingExtra == undefined) {
-			this.lineSpacingExtra = new CommandAttr<string>();
-		}
-		return this.lineSpacingExtra.getCommandReturnValue();
-	}
-	public setLineSpacingExtra(value : string) : T {
-		this.resetIfRequired();
-		if (this.lineSpacingExtra == null || this.lineSpacingExtra == undefined) {
-			this.lineSpacingExtra = new CommandAttr<string>();
-		}
-		
-		this.lineSpacingExtra.setSetter(true);
-		this.lineSpacingExtra.setValue(value);
-		this.orderSet++;
-		this.lineSpacingExtra.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetLineSpacingMultiplier() : T {
-		this.resetIfRequired();
-		if (this.lineSpacingMultiplier == null || this.lineSpacingMultiplier == undefined) {
-			this.lineSpacingMultiplier = new CommandAttr<number>()
-		}
-		
-		this.lineSpacingMultiplier.setGetter(true);
-		this.orderGet++;
-		this.lineSpacingMultiplier.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getLineSpacingMultiplier() : number {
-		if (this.lineSpacingMultiplier == null || this.lineSpacingMultiplier == undefined) {
-			this.lineSpacingMultiplier = new CommandAttr<number>();
-		}
-		return this.lineSpacingMultiplier.getCommandReturnValue();
-	}
-	public setLineSpacingMultiplier(value : number) : T {
-		this.resetIfRequired();
-		if (this.lineSpacingMultiplier == null || this.lineSpacingMultiplier == undefined) {
-			this.lineSpacingMultiplier = new CommandAttr<number>();
-		}
-		
-		this.lineSpacingMultiplier.setSetter(true);
-		this.lineSpacingMultiplier.setValue(value);
-		this.orderSet++;
-		this.lineSpacingMultiplier.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setTextColorHint(value : string) : T {
-		this.resetIfRequired();
-		if (this.textColorHint == null || this.textColorHint == undefined) {
-			this.textColorHint = new CommandAttr<string>();
-		}
-		
-		this.textColorHint.setSetter(true);
-		this.textColorHint.setValue(value);
-		this.orderSet++;
-		this.textColorHint.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetHint() : T {
-		this.resetIfRequired();
-		if (this.hint == null || this.hint == undefined) {
-			this.hint = new CommandAttr<string>()
-		}
-		
-		this.hint.setGetter(true);
-		this.orderGet++;
-		this.hint.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getHint() : string {
-		if (this.hint == null || this.hint == undefined) {
-			this.hint = new CommandAttr<string>();
-		}
-		return this.hint.getCommandReturnValue();
-	}
-	public setHint(value : string) : T {
-		this.resetIfRequired();
-		if (this.hint == null || this.hint == undefined) {
-			this.hint = new CommandAttr<string>();
-		}
-		
-		this.hint.setSetter(true);
-		this.hint.setValue(value);
-		this.orderSet++;
-		this.hint.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnEditorAction(value : string) : T {
-		this.resetIfRequired();
-		if (this.onEditorAction == null || this.onEditorAction == undefined) {
-			this.onEditorAction = new CommandAttr<string>();
-		}
-		
-		this.onEditorAction.setSetter(true);
-		this.onEditorAction.setValue(value);
-		this.orderSet++;
-		this.onEditorAction.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnFocusChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onFocusChange == null || this.onFocusChange == undefined) {
-			this.onFocusChange = new CommandAttr<string>();
-		}
-		
-		this.onFocusChange.setSetter(true);
-		this.onFocusChange.setValue(value);
-		this.orderSet++;
-		this.onFocusChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnTextChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onTextChange == null || this.onTextChange == undefined) {
-			this.onTextChange = new CommandAttr<string>();
-		}
-		
-		this.onTextChange.setSetter(true);
-		this.onTextChange.setValue(value);
-		this.orderSet++;
-		this.onTextChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnbeforeTextChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onbeforeTextChange == null || this.onbeforeTextChange == undefined) {
-			this.onbeforeTextChange = new CommandAttr<string>();
-		}
-		
-		this.onbeforeTextChange.setSetter(true);
-		this.onbeforeTextChange.setValue(value);
-		this.orderSet++;
-		this.onbeforeTextChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnafterTextChange(value : string) : T {
-		this.resetIfRequired();
-		if (this.onafterTextChange == null || this.onafterTextChange == undefined) {
-			this.onafterTextChange = new CommandAttr<string>();
-		}
-		
-		this.onafterTextChange.setSetter(true);
-		this.onafterTextChange.setValue(value);
-		this.orderSet++;
-		this.onafterTextChange.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setIosInputView(value : InputView) : T {
-		this.resetIfRequired();
-		if (this.iosInputView == null || this.iosInputView == undefined) {
-			this.iosInputView = new CommandAttr<InputView>();
-		}
-		
-		this.iosInputView.setSetter(true);
-		this.iosInputView.setValue(value);
-		this.orderSet++;
-		this.iosInputView.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setHintTextFormat(value : string) : T {
-		this.resetIfRequired();
-		if (this.hintTextFormat == null || this.hintTextFormat == undefined) {
-			this.hintTextFormat = new CommandAttr<string>();
-		}
-		
-		this.hintTextFormat.setSetter(true);
-		this.hintTextFormat.setValue(value);
-		this.orderSet++;
-		this.hintTextFormat.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -1953,6 +1649,70 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 	}
 		
 
+	public tryGetFirstBaselineToTopHeight() : T {
+		this.resetIfRequired();
+		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
+			this.firstBaselineToTopHeight = new CommandAttr<string>()
+		}
+		
+		this.firstBaselineToTopHeight.setGetter(true);
+		this.orderGet++;
+		this.firstBaselineToTopHeight.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getFirstBaselineToTopHeight() : string {
+		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
+			this.firstBaselineToTopHeight = new CommandAttr<string>();
+		}
+		return this.firstBaselineToTopHeight.getCommandReturnValue();
+	}
+	public setFirstBaselineToTopHeight(value : string) : T {
+		this.resetIfRequired();
+		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
+			this.firstBaselineToTopHeight = new CommandAttr<string>();
+		}
+		
+		this.firstBaselineToTopHeight.setSetter(true);
+		this.firstBaselineToTopHeight.setValue(value);
+		this.orderSet++;
+		this.firstBaselineToTopHeight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetLastBaselineToBottomHeight() : T {
+		this.resetIfRequired();
+		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
+			this.lastBaselineToBottomHeight = new CommandAttr<string>()
+		}
+		
+		this.lastBaselineToBottomHeight.setGetter(true);
+		this.orderGet++;
+		this.lastBaselineToBottomHeight.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getLastBaselineToBottomHeight() : string {
+		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
+			this.lastBaselineToBottomHeight = new CommandAttr<string>();
+		}
+		return this.lastBaselineToBottomHeight.getCommandReturnValue();
+	}
+	public setLastBaselineToBottomHeight(value : string) : T {
+		this.resetIfRequired();
+		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
+			this.lastBaselineToBottomHeight = new CommandAttr<string>();
+		}
+		
+		this.lastBaselineToBottomHeight.setSetter(true);
+		this.lastBaselineToBottomHeight.setValue(value);
+		this.orderSet++;
+		this.lastBaselineToBottomHeight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
 	public setAutoText(value : boolean) : T {
 		this.resetIfRequired();
 		if (this.autoText == null || this.autoText == undefined) {
@@ -2235,66 +1995,306 @@ this.numeric.setTransformer('numeric');		return this.thisPointer;
 	}
 		
 
-	public tryGetFirstBaselineToTopHeight() : T {
+	public tryGetText() : T {
 		this.resetIfRequired();
-		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
-			this.firstBaselineToTopHeight = new CommandAttr<string>()
+		if (this.text == null || this.text == undefined) {
+			this.text = new CommandAttr<string>()
 		}
 		
-		this.firstBaselineToTopHeight.setGetter(true);
+		this.text.setGetter(true);
 		this.orderGet++;
-		this.firstBaselineToTopHeight.setOrderGet(this.orderGet);
+		this.text.setOrderGet(this.orderGet);
 		return this.thisPointer;
 	}
 	
-	public getFirstBaselineToTopHeight() : string {
-		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
-			this.firstBaselineToTopHeight = new CommandAttr<string>();
+	public getText() : string {
+		if (this.text == null || this.text == undefined) {
+			this.text = new CommandAttr<string>();
 		}
-		return this.firstBaselineToTopHeight.getCommandReturnValue();
+		return this.text.getCommandReturnValue();
 	}
-	public setFirstBaselineToTopHeight(value : string) : T {
+	public setText(value : string) : T {
 		this.resetIfRequired();
-		if (this.firstBaselineToTopHeight == null || this.firstBaselineToTopHeight == undefined) {
-			this.firstBaselineToTopHeight = new CommandAttr<string>();
+		if (this.text == null || this.text == undefined) {
+			this.text = new CommandAttr<string>();
 		}
 		
-		this.firstBaselineToTopHeight.setSetter(true);
-		this.firstBaselineToTopHeight.setValue(value);
+		this.text.setSetter(true);
+		this.text.setValue(value);
 		this.orderSet++;
-		this.firstBaselineToTopHeight.setOrderSet(this.orderSet);
+		this.text.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
 
-	public tryGetLastBaselineToBottomHeight() : T {
+	public tryGetGravity() : T {
 		this.resetIfRequired();
-		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
-			this.lastBaselineToBottomHeight = new CommandAttr<string>()
+		if (this.gravity == null || this.gravity == undefined) {
+			this.gravity = new CommandAttr<Gravity[]>()
 		}
 		
-		this.lastBaselineToBottomHeight.setGetter(true);
+		this.gravity.setGetter(true);
 		this.orderGet++;
-		this.lastBaselineToBottomHeight.setOrderGet(this.orderGet);
+		this.gravity.setOrderGet(this.orderGet);
 		return this.thisPointer;
 	}
 	
-	public getLastBaselineToBottomHeight() : string {
-		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
-			this.lastBaselineToBottomHeight = new CommandAttr<string>();
+	public getGravity() : Gravity[] {
+		if (this.gravity == null || this.gravity == undefined) {
+			this.gravity = new CommandAttr<Gravity[]>();
 		}
-		return this.lastBaselineToBottomHeight.getCommandReturnValue();
+this.gravity.setTransformer('gravity');		return this.gravity.getCommandReturnValue();
 	}
-	public setLastBaselineToBottomHeight(value : string) : T {
+	public setGravity(...value : Gravity[]) : T {
 		this.resetIfRequired();
-		if (this.lastBaselineToBottomHeight == null || this.lastBaselineToBottomHeight == undefined) {
-			this.lastBaselineToBottomHeight = new CommandAttr<string>();
+		if (this.gravity == null || this.gravity == undefined) {
+			this.gravity = new CommandAttr<Gravity[]>();
 		}
 		
-		this.lastBaselineToBottomHeight.setSetter(true);
-		this.lastBaselineToBottomHeight.setValue(value);
+		this.gravity.setSetter(true);
+		this.gravity.setValue(value);
 		this.orderSet++;
-		this.lastBaselineToBottomHeight.setOrderSet(this.orderSet);
+		this.gravity.setOrderSet(this.orderSet);
+this.gravity.setTransformer('gravity');		return this.thisPointer;
+	}
+		
+
+	public tryGetTextSize() : T {
+		this.resetIfRequired();
+		if (this.textSize == null || this.textSize == undefined) {
+			this.textSize = new CommandAttr<string>()
+		}
+		
+		this.textSize.setGetter(true);
+		this.orderGet++;
+		this.textSize.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getTextSize() : string {
+		if (this.textSize == null || this.textSize == undefined) {
+			this.textSize = new CommandAttr<string>();
+		}
+		return this.textSize.getCommandReturnValue();
+	}
+	public setTextSize(value : string) : T {
+		this.resetIfRequired();
+		if (this.textSize == null || this.textSize == undefined) {
+			this.textSize = new CommandAttr<string>();
+		}
+		
+		this.textSize.setSetter(true);
+		this.textSize.setValue(value);
+		this.orderSet++;
+		this.textSize.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetLineSpacingExtra() : T {
+		this.resetIfRequired();
+		if (this.lineSpacingExtra == null || this.lineSpacingExtra == undefined) {
+			this.lineSpacingExtra = new CommandAttr<string>()
+		}
+		
+		this.lineSpacingExtra.setGetter(true);
+		this.orderGet++;
+		this.lineSpacingExtra.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getLineSpacingExtra() : string {
+		if (this.lineSpacingExtra == null || this.lineSpacingExtra == undefined) {
+			this.lineSpacingExtra = new CommandAttr<string>();
+		}
+		return this.lineSpacingExtra.getCommandReturnValue();
+	}
+	public setLineSpacingExtra(value : string) : T {
+		this.resetIfRequired();
+		if (this.lineSpacingExtra == null || this.lineSpacingExtra == undefined) {
+			this.lineSpacingExtra = new CommandAttr<string>();
+		}
+		
+		this.lineSpacingExtra.setSetter(true);
+		this.lineSpacingExtra.setValue(value);
+		this.orderSet++;
+		this.lineSpacingExtra.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetLineSpacingMultiplier() : T {
+		this.resetIfRequired();
+		if (this.lineSpacingMultiplier == null || this.lineSpacingMultiplier == undefined) {
+			this.lineSpacingMultiplier = new CommandAttr<number>()
+		}
+		
+		this.lineSpacingMultiplier.setGetter(true);
+		this.orderGet++;
+		this.lineSpacingMultiplier.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getLineSpacingMultiplier() : number {
+		if (this.lineSpacingMultiplier == null || this.lineSpacingMultiplier == undefined) {
+			this.lineSpacingMultiplier = new CommandAttr<number>();
+		}
+		return this.lineSpacingMultiplier.getCommandReturnValue();
+	}
+	public setLineSpacingMultiplier(value : number) : T {
+		this.resetIfRequired();
+		if (this.lineSpacingMultiplier == null || this.lineSpacingMultiplier == undefined) {
+			this.lineSpacingMultiplier = new CommandAttr<number>();
+		}
+		
+		this.lineSpacingMultiplier.setSetter(true);
+		this.lineSpacingMultiplier.setValue(value);
+		this.orderSet++;
+		this.lineSpacingMultiplier.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setTextColorHint(value : string) : T {
+		this.resetIfRequired();
+		if (this.textColorHint == null || this.textColorHint == undefined) {
+			this.textColorHint = new CommandAttr<string>();
+		}
+		
+		this.textColorHint.setSetter(true);
+		this.textColorHint.setValue(value);
+		this.orderSet++;
+		this.textColorHint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetHint() : T {
+		this.resetIfRequired();
+		if (this.hint == null || this.hint == undefined) {
+			this.hint = new CommandAttr<string>()
+		}
+		
+		this.hint.setGetter(true);
+		this.orderGet++;
+		this.hint.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getHint() : string {
+		if (this.hint == null || this.hint == undefined) {
+			this.hint = new CommandAttr<string>();
+		}
+		return this.hint.getCommandReturnValue();
+	}
+	public setHint(value : string) : T {
+		this.resetIfRequired();
+		if (this.hint == null || this.hint == undefined) {
+			this.hint = new CommandAttr<string>();
+		}
+		
+		this.hint.setSetter(true);
+		this.hint.setValue(value);
+		this.orderSet++;
+		this.hint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnEditorAction(value : string) : T {
+		this.resetIfRequired();
+		if (this.onEditorAction == null || this.onEditorAction == undefined) {
+			this.onEditorAction = new CommandAttr<string>();
+		}
+		
+		this.onEditorAction.setSetter(true);
+		this.onEditorAction.setValue(value);
+		this.orderSet++;
+		this.onEditorAction.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnFocusChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onFocusChange == null || this.onFocusChange == undefined) {
+			this.onFocusChange = new CommandAttr<string>();
+		}
+		
+		this.onFocusChange.setSetter(true);
+		this.onFocusChange.setValue(value);
+		this.orderSet++;
+		this.onFocusChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnTextChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onTextChange == null || this.onTextChange == undefined) {
+			this.onTextChange = new CommandAttr<string>();
+		}
+		
+		this.onTextChange.setSetter(true);
+		this.onTextChange.setValue(value);
+		this.orderSet++;
+		this.onTextChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnbeforeTextChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onbeforeTextChange == null || this.onbeforeTextChange == undefined) {
+			this.onbeforeTextChange = new CommandAttr<string>();
+		}
+		
+		this.onbeforeTextChange.setSetter(true);
+		this.onbeforeTextChange.setValue(value);
+		this.orderSet++;
+		this.onbeforeTextChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnafterTextChange(value : string) : T {
+		this.resetIfRequired();
+		if (this.onafterTextChange == null || this.onafterTextChange == undefined) {
+			this.onafterTextChange = new CommandAttr<string>();
+		}
+		
+		this.onafterTextChange.setSetter(true);
+		this.onafterTextChange.setValue(value);
+		this.orderSet++;
+		this.onafterTextChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setIosInputView(value : InputView) : T {
+		this.resetIfRequired();
+		if (this.iosInputView == null || this.iosInputView == undefined) {
+			this.iosInputView = new CommandAttr<InputView>();
+		}
+		
+		this.iosInputView.setSetter(true);
+		this.iosInputView.setValue(value);
+		this.orderSet++;
+		this.iosInputView.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setHintTextFormat(value : string) : T {
+		this.resetIfRequired();
+		if (this.hintTextFormat == null || this.hintTextFormat == undefined) {
+			this.hintTextFormat = new CommandAttr<string>();
+		}
+		
+		this.hintTextFormat.setSetter(true);
+		this.hintTextFormat.setValue(value);
+		this.orderSet++;
+		this.hintTextFormat.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

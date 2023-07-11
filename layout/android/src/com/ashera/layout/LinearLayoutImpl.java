@@ -107,7 +107,7 @@ public class LinearLayoutImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new LinearLayoutImpl();
+		return new LinearLayoutImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -153,7 +153,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		linearLayout.removeView((View) w.asWidget());
 		return remove;
@@ -297,11 +297,6 @@ return layoutParams.weight;			}
 		public LinearLayoutExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -413,12 +408,11 @@ return layoutParams.weight;			}
         	ViewImpl.drawableStateChanged(LinearLayoutImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((LinearLayoutExt) linearLayout).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return LinearLayoutExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {

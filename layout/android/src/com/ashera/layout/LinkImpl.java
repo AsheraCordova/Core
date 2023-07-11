@@ -306,7 +306,8 @@ public class LinkImpl extends BaseWidget {
 		ConverterFactory.register("com.ashera.layout.Link.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("com.ashera.layout.Link.textStyle"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("systemTextAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("password").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
@@ -335,6 +336,12 @@ public class LinkImpl extends BaseWidget {
 	public LinkImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  LinkImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  LinkImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class LinkExt extends androidx.appcompat.widget.AppCompatTextView implements ILifeCycleDecorator{
@@ -347,11 +354,6 @@ public class LinkImpl extends BaseWidget {
 
 		public LinkExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -456,14 +458,14 @@ public class LinkImpl extends BaseWidget {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(LinkImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((LinkExt) appCompatTextView).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return LinkExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new LinkImpl();
+		return new LinkImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -1066,11 +1068,21 @@ if (Build.VERSION.SDK_INT >= 11) {
 
 			}
 			break;
-			case "textAppearance": {
+			case "systemTextAppearance": {
 				
 
 
 		TextViewCompat.setTextAppearance(appCompatTextView, (int)objValue);
+
+
+
+			}
+			break;
+			case "textAppearance": {
+				
+
+
+		ViewImpl.setStyle(this, objValue);
 
 
 
@@ -3056,6 +3068,14 @@ public LinkCommandBuilder setFontFamily(String value) {
 
 	attrs.put("value", value);
 return this;}
+public LinkCommandBuilder setSystemTextAppearance(String value) {
+	Map<String, Object> attrs = initCommand("systemTextAppearance");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public LinkCommandBuilder setTextAppearance(String value) {
 	Map<String, Object> attrs = initCommand("textAppearance");
 	attrs.put("type", "attribute");
@@ -3686,6 +3706,10 @@ public void setTextStyle(String value) {
 
 public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
+}
+
+public void setSystemTextAppearance(String value) {
+	getBuilder().reset().setSystemTextAppearance(value).execute(true);
 }
 
 public void setTextAppearance(String value) {

@@ -127,6 +127,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ADTableRow)
 
 - (instancetype)initWithADLinearLayout_LayoutParams:(ADLinearLayout_LayoutParams *)arg0 NS_UNAVAILABLE;
 
+- (instancetype)initWithInt:(jint)arg0
+                    withInt:(jint)arg1
+                  withFloat:(jfloat)arg2 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADTableRow_LayoutParams)

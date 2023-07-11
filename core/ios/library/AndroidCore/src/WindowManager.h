@@ -16,40 +16,84 @@
 #if !defined (ADWindowManager_) && (INCLUDE_ALL_WindowManager || defined(INCLUDE_ADWindowManager))
 #define ADWindowManager_
 
-@interface ADWindowManager : NSObject
+@class ADView;
+@class ADWindowManager_LayoutParams;
 
-#pragma mark Public
+@protocol ADWindowManager < JavaObject >
 
-- (instancetype)init;
+- (void)addViewWithADView:(ADView *)decorView
+withADWindowManager_LayoutParams:(ADWindowManager_LayoutParams *)p;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADWindowManager)
 
-FOUNDATION_EXPORT void ADWindowManager_init(ADWindowManager *self);
-
-FOUNDATION_EXPORT ADWindowManager *new_ADWindowManager_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ADWindowManager *create_ADWindowManager_init(void);
-
 J2OBJC_TYPE_LITERAL_HEADER(ADWindowManager)
 
-@compatibility_alias RAndroidViewWindowManager ADWindowManager;
+#define RAndroidViewWindowManager ADWindowManager
 
 #endif
 
 #if !defined (ADWindowManager_LayoutParams_) && (INCLUDE_ALL_WindowManager || defined(INCLUDE_ADWindowManager_LayoutParams))
 #define ADWindowManager_LayoutParams_
 
-@interface ADWindowManager_LayoutParams : NSObject
+#define RESTRICT_RelativeLayout 1
+#define INCLUDE_ADRelativeLayout_LayoutParams 1
+#include "RelativeLayout.h"
+
+@class ADView;
+@class ADViewGroup_LayoutParams;
+@protocol ADIBinder;
+
+@interface ADWindowManager_LayoutParams : ADRelativeLayout_LayoutParams {
+ @public
+  id accessibilityIdOfAnchor_;
+  NSString *accessibilityTitle_;
+  NSString *packageName_;
+  jint flags_;
+  jint type_;
+  id<ADIBinder> token_;
+  jint format_;
+  jint windowAnimations_;
+  jint softInputMode_;
+  jint privateFlags_;
+}
 
 #pragma mark Public
 
 - (instancetype)init;
 
+- (instancetype)initWithInt:(jint)w
+                    withInt:(jint)h;
+
+- (void)setSurfaceInsetsWithADView:(ADView *)mBackgroundView
+                       withBoolean:(jboolean)b
+                       withBoolean:(jboolean)c;
+
+- (void)setTitleWithNSString:(NSString *)string;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)initWithADRelativeLayout_LayoutParams:(ADRelativeLayout_LayoutParams *)arg0 NS_UNAVAILABLE;
+
+- (instancetype)initWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)arg0 NS_UNAVAILABLE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADWindowManager_LayoutParams)
+
+J2OBJC_FIELD_SETTER(ADWindowManager_LayoutParams, accessibilityIdOfAnchor_, id)
+J2OBJC_FIELD_SETTER(ADWindowManager_LayoutParams, accessibilityTitle_, NSString *)
+J2OBJC_FIELD_SETTER(ADWindowManager_LayoutParams, packageName_, NSString *)
+J2OBJC_FIELD_SETTER(ADWindowManager_LayoutParams, token_, id<ADIBinder>)
+
+inline jint ADWindowManager_LayoutParams_get_PRIVATE_FLAG_WILL_NOT_REPLACE_ON_RELAUNCH(void);
+#define ADWindowManager_LayoutParams_PRIVATE_FLAG_WILL_NOT_REPLACE_ON_RELAUNCH 32768
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, PRIVATE_FLAG_WILL_NOT_REPLACE_ON_RELAUNCH, jint)
+
+inline jint ADWindowManager_LayoutParams_get_PRIVATE_FLAG_LAYOUT_CHILD_WINDOW_IN_PARENT_FRAME(void);
+#define ADWindowManager_LayoutParams_PRIVATE_FLAG_LAYOUT_CHILD_WINDOW_IN_PARENT_FRAME 65536
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, PRIVATE_FLAG_LAYOUT_CHILD_WINDOW_IN_PARENT_FRAME, jint)
 
 inline jint ADWindowManager_LayoutParams_get_FLAG_FULLSCREEN(void);
 #define ADWindowManager_LayoutParams_FLAG_FULLSCREEN 0
@@ -58,6 +102,20 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, FLAG_FULLSCREEN, jint
 inline jint ADWindowManager_LayoutParams_get_FLAG_FORCE_NOT_FULLSCREEN(void);
 #define ADWindowManager_LayoutParams_FLAG_FORCE_NOT_FULLSCREEN 0
 J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, FLAG_FORCE_NOT_FULLSCREEN, jint)
+
+inline jint ADWindowManager_LayoutParams_get_SOFT_INPUT_STATE_UNCHANGED(void);
+#define ADWindowManager_LayoutParams_SOFT_INPUT_STATE_UNCHANGED 0
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, SOFT_INPUT_STATE_UNCHANGED, jint)
+
+inline jint ADWindowManager_LayoutParams_get_TYPE_APPLICATION_PANEL(void);
+#define ADWindowManager_LayoutParams_TYPE_APPLICATION_PANEL 0
+J2OBJC_STATIC_FIELD_CONSTANT(ADWindowManager_LayoutParams, TYPE_APPLICATION_PANEL, jint)
+
+FOUNDATION_EXPORT void ADWindowManager_LayoutParams_initWithInt_withInt_(ADWindowManager_LayoutParams *self, jint w, jint h);
+
+FOUNDATION_EXPORT ADWindowManager_LayoutParams *new_ADWindowManager_LayoutParams_initWithInt_withInt_(jint w, jint h) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ADWindowManager_LayoutParams *create_ADWindowManager_LayoutParams_initWithInt_withInt_(jint w, jint h);
 
 FOUNDATION_EXPORT void ADWindowManager_LayoutParams_init(ADWindowManager_LayoutParams *self);
 

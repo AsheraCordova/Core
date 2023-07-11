@@ -51,7 +51,7 @@
   ADSwitch_Layout *mOnLayout_;
   ADSwitch_Layout *mOffLayout_;
   ADRect *mTempRect_;
-  NSString *text_Switch_;
+  NSString *text_;
   jint intrinsicWidth_;
   jint intrinsicHeight_;
 }
@@ -71,7 +71,7 @@ J2OBJC_FIELD_SETTER(ADSwitch, mTextOff_, id<JavaLangCharSequence>)
 J2OBJC_FIELD_SETTER(ADSwitch, mOnLayout_, ADSwitch_Layout *)
 J2OBJC_FIELD_SETTER(ADSwitch, mOffLayout_, ADSwitch_Layout *)
 J2OBJC_FIELD_SETTER(ADSwitch, mTempRect_, ADRect *)
-J2OBJC_FIELD_SETTER(ADSwitch, text_Switch_, NSString *)
+J2OBJC_FIELD_SETTER(ADSwitch, text_, NSString *)
 
 inline jint ADSwitch_get_THUMB_ANIMATION_DURATION(void);
 #define ADSwitch_THUMB_ANIMATION_DURATION 250
@@ -278,11 +278,11 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
 }
 
 - (NSString *)getText {
-  return text_Switch_;
+  return text_;
 }
 
 - (void)setTextWithNSString:(NSString *)text {
-  JreStrongAssign(&self->text_Switch_, text);
+  JreStrongAssign(&self->text_, text);
 }
 
 - (void)setIntrinsicWidthWithInt:(jint)intrinsicWidth {
@@ -349,7 +349,7 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
   RELEASE_(mOnLayout_);
   RELEASE_(mOffLayout_);
   RELEASE_(mTempRect_);
-  RELEASE_(text_Switch_);
+  RELEASE_(text_);
   [super dealloc];
 }
 
@@ -445,12 +445,12 @@ __attribute__((unused)) static void ADSwitch_applyThumbTint(ADSwitch *self);
     { "mOnLayout_", "LADSwitch_Layout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mOffLayout_", "LADSwitch_Layout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mTempRect_", "LADRect;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
-    { "text_Switch_", "LNSString;", .constantValue.asLong = 0, 0x2, 22, -1, -1, -1 },
+    { "text_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "intrinsicWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "intrinsicHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setSwitchPadding", "I", "setSwitchMinWidth", "setTrackTintList", "LADColorStateList;", "setThumbTintList", "onMeasure", "II", "onLayout", "ZIIII", "setText", "LNSString;", "setIntrinsicWidth", "LASIWidget;", "setIntrinsicHeight", "makeLayout", "LJavaLangCharSequence;", "getRightDrawableBounds", "IIII", "getBottomDrawableBounds", "getTopDrawableBounds", "mTouchSlop", "text", "LADSwitch_Layout;" };
-  static const J2ObjcClassInfo _ADSwitch = { "Switch", "r.android.widget", ptrTable, methods, fields, 7, 0x401, 24, 39, -1, 23, -1, -1, -1 };
+  static const void *ptrTable[] = { "setSwitchPadding", "I", "setSwitchMinWidth", "setTrackTintList", "LADColorStateList;", "setThumbTintList", "onMeasure", "II", "onLayout", "ZIIII", "setText", "LNSString;", "setIntrinsicWidth", "LASIWidget;", "setIntrinsicHeight", "makeLayout", "LJavaLangCharSequence;", "getRightDrawableBounds", "IIII", "getBottomDrawableBounds", "getTopDrawableBounds", "mTouchSlop", "LADSwitch_Layout;" };
+  static const J2ObjcClassInfo _ADSwitch = { "Switch", "r.android.widget", ptrTable, methods, fields, 7, 0x401, 24, 39, -1, 22, -1, -1, -1 };
   return &_ADSwitch;
 }
 

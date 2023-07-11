@@ -29,6 +29,7 @@
 @class ASRootImpl_RootCommandParamsBuilder;
 @class ASRootImpl_RootParamsBean;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -78,6 +79,8 @@
 
 - (id)getPluginWithNSString:(NSString *)plugin;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)localName;
@@ -109,8 +112,7 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 @end
 
@@ -239,8 +241,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RemoveRule)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADRect;
+@class ADView;
 @class ASRootImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
@@ -258,11 +263,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RemoveRule)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -275,6 +286,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RemoveRule)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -282,6 +297,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RemoveRule)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -490,6 +508,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RootExt)
 
 - (ASRootImpl_RootCommandBuilder *)setMinWidthWithNSString:(NSString *)arg0;
 
+- (ASRootImpl_RootCommandBuilder *)setModelDescPathWithNSString:(NSString *)arg0;
+
 - (ASRootImpl_RootCommandBuilder *)setModelForWithNSString:(NSString *)arg0;
 
 - (ASRootImpl_RootCommandBuilder *)setModelIdPathWithNSString:(NSString *)arg0;
@@ -518,7 +538,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RootExt)
 
 - (ASRootImpl_RootCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASRootImpl_RootCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASRootImpl_RootCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASRootImpl_RootCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASRootImpl_RootCommandBuilder *)setPaddingBottomWithNSString:(NSString *)arg0;
 
@@ -695,6 +719,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RootExt)
 - (ASRootImpl_RootCommandBuilder *)tryGetMinHeight;
 
 - (ASRootImpl_RootCommandBuilder *)tryGetMinWidth;
+
+- (ASRootImpl_RootCommandBuilder *)tryGetModelDescPath;
 
 - (ASRootImpl_RootCommandBuilder *)tryGetModelIdPath;
 

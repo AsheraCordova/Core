@@ -89,6 +89,9 @@ public class CorePlugin implements IPlugin, ICore {
 		case "runOnMainThread":
 			runOnMainThread((Runnable) args[0]);
 			return null;
+		case "enqueueTaskForEventLoop":
+			enqueueTaskForEventLoop((Runnable) args[0],(long) args[1]);
+			return null;
 		default:
 			break;
 		}
@@ -644,5 +647,17 @@ public class CorePlugin implements IPlugin, ICore {
 		    [runnable run];
 		});
 	]-*/;
+
+	@Override
+	public void enqueueTaskForEventLoop(Runnable runnable, long when) {
+		int delayInMills = (int) (when - System.currentTimeMillis());
+		if (delayInMills <= 0) {
+			nativeRunOnMainThread(runnable);
+		} else {
+			postDelayed(() -> {
+				nativeRunOnMainThread(runnable);
+			}, delayInMills);
+		}
+	}
 	
 }

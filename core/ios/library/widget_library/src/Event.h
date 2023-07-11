@@ -84,6 +84,7 @@ typedef NS_ENUM(NSUInteger, ASEvent_StandardEvents_Enum) {
   ASEvent_StandardEvents_Enum_postMeasure = 4,
   ASEvent_StandardEvents_Enum_preMeasure = 5,
   ASEvent_StandardEvents_Enum_dealloc = 6,
+  ASEvent_StandardEvents_Enum_outsideClicked = 7,
 };
 
 @interface ASEvent_StandardEvents : JavaLangEnum
@@ -125,6 +126,9 @@ J2OBJC_ENUM_CONSTANT(ASEvent_StandardEvents, preMeasure)
 
 inline ASEvent_StandardEvents *ASEvent_StandardEvents_get_dealloc(void);
 J2OBJC_ENUM_CONSTANT(ASEvent_StandardEvents, dealloc)
+
+inline ASEvent_StandardEvents *ASEvent_StandardEvents_get_outsideClicked(void);
+J2OBJC_ENUM_CONSTANT(ASEvent_StandardEvents, outsideClicked)
 
 FOUNDATION_EXPORT IOSObjectArray *ASEvent_StandardEvents_values(void);
 

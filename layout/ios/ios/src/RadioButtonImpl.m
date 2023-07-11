@@ -26,6 +26,7 @@
 #include "FontMetricsDescriptor.h"
 #include "FormElement.h"
 #include "GravityConverter.h"
+#include "HasWidgets.h"
 #include "Html.h"
 #include "IActivity.h"
 #include "IAttributable.h"
@@ -43,12 +44,14 @@
 #include "Layout.h"
 #include "LayoutNativeVars.h"
 #include "MarqueeCommandConverter.h"
-#include "MeasurableCompoundButton.h"
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
 #include "PluginInvoker.h"
+#include "RadioButton.h"
 #include "RadioButtonImpl.h"
+#include "Rect.h"
 #include "TextDirectionHeuristic.h"
+#include "TextView.h"
 #include "View.h"
 #include "ViewImpl.h"
 #include "WidgetAttribute.h"
@@ -293,7 +296,7 @@
 - (id)getChecked;
 
 - (void)createLabelWithJavaUtilMap:(id<JavaUtilMap>)params
-    withASMeasurableCompoundButton:(ASMeasurableCompoundButton *)asWidget;
+                    withADTextView:(ADTextView *)asWidget;
 
 - (void)createLabelWithJavaUtilMap:(id<JavaUtilMap>)params;
 
@@ -341,21 +344,15 @@
 
 - (jint)getHeight;
 
-- (jint)getAutoSizeTextTypeWithASMeasurableCompoundButton:(ASMeasurableCompoundButton *)measurableCompoundButton;
+- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView;
 
 - (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType;
-
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)suggestedSizeInPx
-                                  withFloat:(jfloat)width
-                                  withFloat:(jfloat)height;
 
 - (void)setAutoSizePresetSizesWithId:(id)objValue;
 
 - (void)addAutoResizeListener;
 
 - (void)removeResizeListener;
-
-- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)setMaxLengthWithId:(id)objValue;
 
@@ -639,7 +636,7 @@ __attribute__((unused)) static id ASRadioButtonImpl_getButton(ASRadioButtonImpl 
 
 __attribute__((unused)) static id ASRadioButtonImpl_getChecked(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static void ASRadioButtonImpl_createLabelWithJavaUtilMap_withASMeasurableCompoundButton_(ASRadioButtonImpl *self, id<JavaUtilMap> params, ASMeasurableCompoundButton *asWidget);
+__attribute__((unused)) static void ASRadioButtonImpl_createLabelWithJavaUtilMap_withADTextView_(ASRadioButtonImpl *self, id<JavaUtilMap> params, ADTextView *asWidget);
 
 __attribute__((unused)) static void ASRadioButtonImpl_createLabelWithJavaUtilMap_(ASRadioButtonImpl *self, id<JavaUtilMap> params);
 
@@ -687,19 +684,15 @@ __attribute__((unused)) static id ASRadioButtonImpl_getWidth(ASRadioButtonImpl *
 
 __attribute__((unused)) static jint ASRadioButtonImpl_getHeight(ASRadioButtonImpl *self);
 
-__attribute__((unused)) static jint ASRadioButtonImpl_getAutoSizeTextTypeWithASMeasurableCompoundButton_(ASRadioButtonImpl *self, ASMeasurableCompoundButton *measurableCompoundButton);
+__attribute__((unused)) static jint ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(ASRadioButtonImpl *self, ADTextView *measurableView);
 
 __attribute__((unused)) static void ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(ASRadioButtonImpl *self, jint autoTextType);
-
-__attribute__((unused)) static jboolean ASRadioButtonImpl_suggestedSizeFitsInSpaceWithInt_withFloat_withFloat_(ASRadioButtonImpl *self, jint suggestedSizeInPx, jfloat width, jfloat height);
 
 __attribute__((unused)) static void ASRadioButtonImpl_setAutoSizePresetSizesWithId_(ASRadioButtonImpl *self, id objValue);
 
 __attribute__((unused)) static void ASRadioButtonImpl_addAutoResizeListener(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static void ASRadioButtonImpl_removeResizeListener(ASRadioButtonImpl *self);
-
-__attribute__((unused)) static jint ASRadioButtonImpl_computeSizeWithFloat_(ASRadioButtonImpl *self, jfloat width);
 
 __attribute__((unused)) static void ASRadioButtonImpl_setMaxLengthWithId_(ASRadioButtonImpl *self, id objValue);
 
@@ -833,12 +826,14 @@ J2OBJC_FIELD_SETTER(ASRadioButtonImpl_DrawableTintMode, mapping_, id<JavaUtilMap
   __unsafe_unretained ASRadioButtonImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
+  id<JavaUtilMap> templates_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(ASRadioButtonImpl_RadioButtonExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASRadioButtonImpl_RadioButtonExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASRadioButtonImpl_RadioButtonExt, templates_, id<JavaUtilMap>)
 
 @interface ASRadioButtonImpl_DellocHandler : ASEventBusHandler {
  @public
@@ -1109,6 +1104,7 @@ NSString *ASRadioButtonImpl_GROUP_NAME = @"RadioButton";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"lastBaselineToBottomHeight"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textColor"])) withTypeWithNSString:@"colorstate"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textFormat"])) withTypeWithNSString:@"resourcestring"])) withOrderWithInt:-1]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textAppearance"])) withTypeWithNSString:@"string"])) withStylePriorityWithJavaLangInteger:JavaLangInteger_valueOfWithInt_(1)]);
   ASWidgetFactory_registerConstructorAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"html"])) withTypeWithNSString:@"boolean"]);
 }
 
@@ -1119,19 +1115,29 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
-  [((ASRadioButtonImpl_RadioButtonExt *) nil_chk(((ASRadioButtonImpl_RadioButtonExt *) cast_chk(measurableCompoundButton_, [ASRadioButtonImpl_RadioButtonExt class])))) updateMeasuredDimensionWithInt:width withInt:height];
+- (instancetype)initWithNSString:(NSString *)localname {
+  ASRadioButtonImpl_initWithNSString_(self, localname);
+  return self;
+}
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname {
+  ASRadioButtonImpl_initWithNSString_withNSString_(self, groupName, localname);
+  return self;
+}
+
+- (IOSClass *)getViewClass {
+  return ASRadioButtonImpl_RadioButtonExt_class_();
 }
 
 - (id<ASIWidget>)newInstance {
-  return new_ASRadioButtonImpl_init();
+  return new_ASRadioButtonImpl_initWithNSString_withNSString_(groupName_, localName_);
 }
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params {
   [super createWithASIFragment:fragment withJavaUtilMap:params];
-  measurableCompoundButton_ = new_ASRadioButtonImpl_RadioButtonExt_initWithASRadioButtonImpl_(self);
+  measurableView_ = new_ASRadioButtonImpl_RadioButtonExt_initWithASRadioButtonImpl_(self);
   ASRadioButtonImpl_nativeCreateWithJavaUtilMap_(self, params);
   ASViewImpl_registerCommandConveterWithASIWidget_(self);
   ASRadioButtonImpl_setWidgetOnNativeClass(self);
@@ -1147,7 +1153,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
   ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"textColorHighlight", @"iosHighlightedTextColor", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"checked", @"onCheckedChange", @"button", @"buttonTint", @"buttonTintMode", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"ellipsize", @"marqueeRepeatLimit", @"justificationMode", @"shadowDx", @"shadowDy", @"singleLine", @"editable", @"textAllCaps", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"scrollHorizontally", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor", @"textFormat" }, 70)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"textColorHighlight", @"iosHighlightedTextColor", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"checked", @"onCheckedChange", @"button", @"buttonTint", @"buttonTintMode", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"ellipsize", @"marqueeRepeatLimit", @"justificationMode", @"shadowDx", @"shadowDy", @"singleLine", @"editable", @"textAllCaps", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"scrollHorizontally", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor", @"textFormat", @"textAppearance" }, 71)) {
     case 0:
     {
       [self setTextWithId:nativeWidget withId:objValue];
@@ -1486,6 +1492,11 @@ J2OBJC_IGNORE_DESIGNATED_END
       ASRadioButtonImpl_setTextFormatWithId_(self, objValue);
     }
     break;
+    case 70:
+    {
+      ASViewImpl_setStyleWithASIWidget_withId_(self, objValue);
+    }
+    break;
     default:
     break;
   }
@@ -1676,7 +1687,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)asWidget {
-  return measurableCompoundButton_;
+  return measurableView_;
 }
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params {
@@ -2031,24 +2042,24 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"bottom", [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getBottomDrawable]);
-  ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"left", [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getLeftDrawable]);
-  ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"right", [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getRightDrawable]);
-  ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"top", [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getTopDrawable]);
+  ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"bottom", [((ADRadioButton *) nil_chk(measurableView_)) getBottomDrawable]);
+  ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"left", [((ADRadioButton *) nil_chk(measurableView_)) getLeftDrawable]);
+  ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"right", [((ADRadioButton *) nil_chk(measurableView_)) getRightDrawable]);
+  ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(self, @"top", [((ADRadioButton *) nil_chk(measurableView_)) getTopDrawable]);
   ASRadioButtonImpl_drawableStateChangedAdditionalAttrs(self);
-  if ([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getTextColors] != nil && [((ADColorStateList *) nil_chk([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getTextColors])) isStateful]) {
-    ASRadioButtonImpl_setTextColorWithId_(self, JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getCurrentTextColor]));
+  if ([((ADRadioButton *) nil_chk(measurableView_)) getTextColors] != nil && [((ADColorStateList *) nil_chk([((ADRadioButton *) nil_chk(measurableView_)) getTextColors])) isStateful]) {
+    ASRadioButtonImpl_setTextColorWithId_(self, JavaLangInteger_valueOfWithInt_([((ADRadioButton *) nil_chk(measurableView_)) getCurrentTextColor]));
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getHintTextColors] != nil && [((ADColorStateList *) nil_chk([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getHintTextColors])) isStateful]) {
-    ASRadioButtonImpl_setHintColorWithInt_(self, [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getCurrentHintTextColor]);
+  if ([((ADRadioButton *) nil_chk(measurableView_)) getHintTextColors] != nil && [((ADColorStateList *) nil_chk([((ADRadioButton *) nil_chk(measurableView_)) getHintTextColors])) isStateful]) {
+    ASRadioButtonImpl_setHintColorWithInt_(self, [((ADRadioButton *) nil_chk(measurableView_)) getCurrentHintTextColor]);
     ASRadioButtonImpl_syncPlaceholderLabel(self);
   }
   if (drawableTint_ != nil && [drawableTint_ isStateful]) {
     ASRadioButtonImpl_setDrawableTintWithId_(self, drawableTint_);
     [self invalidate];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getLinkTextColors] != nil && [((ADColorStateList *) nil_chk([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getLinkTextColors])) isStateful]) {
-    ASRadioButtonImpl_setTextColorLinkWithADColorStateList_(self, [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getLinkTextColors]);
+  if ([((ADRadioButton *) nil_chk(measurableView_)) getLinkTextColors] != nil && [((ADColorStateList *) nil_chk([((ADRadioButton *) nil_chk(measurableView_)) getLinkTextColors])) isStateful]) {
+    ASRadioButtonImpl_setTextColorLinkWithADColorStateList_(self, [((ADRadioButton *) nil_chk(measurableView_)) getLinkTextColors]);
   }
 }
 
@@ -2066,7 +2077,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getBaseLine {
-  return ASRadioButtonImpl_nativeGetBaseLine(self) + [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getPaddingTop];
+  return ASRadioButtonImpl_nativeGetBaseLine(self) + [((ADRadioButton *) nil_chk(measurableView_)) getPaddingTop];
 }
 
 - (jint)nativeGetBaseLine {
@@ -2113,8 +2124,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)createLabelWithJavaUtilMap:(id<JavaUtilMap>)params
-    withASMeasurableCompoundButton:(ASMeasurableCompoundButton *)asWidget {
-  ASRadioButtonImpl_createLabelWithJavaUtilMap_withASMeasurableCompoundButton_(self, params, asWidget);
+                    withADTextView:(ADTextView *)asWidget {
+  ASRadioButtonImpl_createLabelWithJavaUtilMap_withADTextView_(self, params, asWidget);
 }
 
 - (void)createLabelWithJavaUtilMap:(id<JavaUtilMap>)params {
@@ -2134,7 +2145,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)measureWidth {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) nativeMeasureWidthWithId:uiView_] + [((ADDrawable *) nil_chk([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getButtonDrawable])) getMinimumWidth];
+  return [((ADRadioButton *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_] + [((ADDrawable *) nil_chk([((ADRadioButton *) nil_chk(measurableView_)) getButtonDrawable])) getMinimumWidth];
 }
 
 - (void)resetError {
@@ -2176,7 +2187,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection {
-  if ([((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getRawTextAlignment] != 0 || [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getRawLayoutDirection] != 0) {
+  if ([((ADRadioButton *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADRadioButton *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASRadioButtonImpl_updateTextAlignment(self);
   }
 }
@@ -2194,11 +2205,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getMaxEms {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMaxEms];
+  return [((ADRadioButton *) nil_chk(measurableView_)) getMaxEms];
 }
 
 - (jint)getMinEms {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMinEms];
+  return [((ADRadioButton *) nil_chk(measurableView_)) getMinEms];
 }
 
 - (void)setMinEmsWithId:(id)objValue {
@@ -2206,11 +2217,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getMinLines {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMinLines];
+  return [((ADRadioButton *) nil_chk(measurableView_)) getMinLines];
 }
 
 - (jint)getMaxLines {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMaxLines];
+  return [((ADRadioButton *) nil_chk(measurableView_)) getMaxLines];
 }
 
 - (void)setMaxEmsWithId:(id)objValue {
@@ -2246,11 +2257,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getMaxWidth {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMaxWidth];
+  return [((ADRadioButton *) nil_chk(measurableView_)) getMaxWidth];
 }
 
 - (jint)getMaxHeight {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getMaxHeight];
+  return [((ADRadioButton *) nil_chk(measurableView_)) getMaxHeight];
 }
 
 - (void)setMinHeightWithId:(id)objValue {
@@ -2269,18 +2280,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASRadioButtonImpl_getHeight(self);
 }
 
-- (jint)getAutoSizeTextTypeWithASMeasurableCompoundButton:(ASMeasurableCompoundButton *)measurableCompoundButton {
-  return ASRadioButtonImpl_getAutoSizeTextTypeWithASMeasurableCompoundButton_(self, measurableCompoundButton);
+- (jint)getAutoSizeTextTypeWithADTextView:(ADTextView *)measurableView {
+  return ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(self, measurableView);
 }
 
 - (void)setAutoSizeTextTypeInternalWithInt:(jint)autoTextType {
   ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(self, autoTextType);
-}
-
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)suggestedSizeInPx
-                                  withFloat:(jfloat)width
-                                  withFloat:(jfloat)height {
-  return ASRadioButtonImpl_suggestedSizeFitsInSpaceWithInt_withFloat_withFloat_(self, suggestedSizeInPx, width, height);
 }
 
 - (void)setAutoSizePresetSizesWithId:(id)objValue {
@@ -2293,10 +2298,6 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)removeResizeListener {
   ASRadioButtonImpl_removeResizeListener(self);
-}
-
-- (jint)computeSizeWithFloat:(jfloat)width {
-  return ASRadioButtonImpl_computeSizeWithFloat_(self, width);
 }
 
 - (void)setMaxLengthWithId:(id)objValue {
@@ -2540,8 +2541,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
-    [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
+    [((ADRadioButton *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
   }
+}
+
+- (void)setVisibleWithBoolean:(jboolean)b {
+  [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
 - (void)requestLayout {
@@ -2579,11 +2584,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setCheckedWithBoolean:(jboolean)checked {
-  [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) setCheckedWithBoolean:checked];
+  [((ADRadioButton *) nil_chk(measurableView_)) setCheckedWithBoolean:checked];
 }
 
 - (jboolean)isChecked {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) isChecked];
+  return [((ADRadioButton *) nil_chk(measurableView_)) isChecked];
 }
 
 - (void)addCheckedListenerWithId:(id)listener
@@ -2596,11 +2601,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)getTextEntered {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) isChecked] ? @"checked" : @"";
+  return [((ADRadioButton *) nil_chk(measurableView_)) isChecked] ? @"checked" : @"";
 }
 
 - (jboolean)isViewVisible {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton_)) getVisibility] == ADView_VISIBLE;
+  return [((ADRadioButton *) nil_chk(measurableView_)) getVisibility] == ADView_VISIBLE;
 }
 
 - (void)focus {
@@ -2610,36 +2615,38 @@ J2OBJC_IGNORE_DESIGNATED_END
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 5, -1, 6, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, 5, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 8, 9, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 11, 12, -1, 13, -1, -1 },
-    { NULL, "V", 0x2, 14, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 15, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 16, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 10, 11, -1, 12, -1, -1 },
+    { NULL, "V", 0x2, 13, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 14, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 15, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 23, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 24, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 25, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 26, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 22, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 23, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 24, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 25, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 27, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 28, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 26, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 27, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
@@ -2658,170 +2665,169 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 30, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 29, 30, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 32, 29, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 33, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 34, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 31, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 32, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 33, 28, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 35, 36, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 37, 36, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 34, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 36, 35, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 38, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 37, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 17, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x9, 40, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 38, 16, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 39, 1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 41, 42, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 43, 29, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 44, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 45, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 46, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 47, 48, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 49, 48, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 50, 48, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 51, 48, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 52, 17, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 53, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 40, 41, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 42, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 43, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 44, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 45, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 46, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 48, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 49, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 50, 47, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 51, 16, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 52, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 54, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 55, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 53, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 54, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 56, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 55, 16, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 57, 58, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 59, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 56, 57, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 58, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 60, 61, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 62, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 59, 60, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 61, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 63, 64, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 65, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 66, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 67, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 68, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 62, 63, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 64, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 65, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 66, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 67, 7, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 69, 70, -1, 71, -1, -1 },
-    { NULL, "V", 0x102, 69, 12, -1, 13, -1, -1 },
+    { NULL, "V", 0x2, 68, 69, -1, 70, -1, -1 },
+    { NULL, "V", 0x102, 68, 11, -1, 12, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 72, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 73, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 71, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 72, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 74, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 75, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 73, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 74, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 76, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 75, 28, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 77, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 76, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 78, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 77, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 79, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 80, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 81, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 82, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 83, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 84, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 85, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 86, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 78, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 79, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 80, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 81, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 82, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 83, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 84, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 85, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 87, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 88, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 86, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 87, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 89, 90, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 91, 29, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, 92, 93, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 94, 17, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 88, 89, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 90, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 91, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 95, 96, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 97, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 98, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 99, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 100, 12, -1, 13, -1, -1 },
-    { NULL, "V", 0x2, 101, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 102, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 103, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 92, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 93, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 94, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 95, 11, -1, 12, -1, -1 },
+    { NULL, "V", 0x2, 96, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 97, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 98, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 104, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 105, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 99, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 100, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 106, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 107, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 101, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 102, 16, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 108, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 103, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 109, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 110, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 111, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 112, 17, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 104, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 105, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 106, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 107, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 113, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 114, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 115, 116, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 108, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 109, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 110, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 59, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 58, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 117, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 112, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 118, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 113, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 119, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 114, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 120, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 115, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 121, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 116, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 122, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 117, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 123, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 118, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 124, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 119, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 125, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 120, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 126, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 121, 111, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 127, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 128, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 122, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 123, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 124, 125, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 129, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 126, 1, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 67, 130, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 66, 125, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 131, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 132, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 127, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 128, 16, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -2831,151 +2837,151 @@ J2OBJC_IGNORE_DESIGNATED_END
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(loadAttributesWithNSString:);
   methods[1].selector = @selector(init);
-  methods[2].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
-  methods[3].selector = @selector(newInstance);
-  methods[4].selector = @selector(createWithASIFragment:withJavaUtilMap:);
-  methods[5].selector = @selector(setWidgetOnNativeClass);
-  methods[6].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[7].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[8].selector = @selector(asWidget);
-  methods[9].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[10].selector = @selector(handleHtmlTextWithNSString:);
-  methods[11].selector = @selector(nativeSetTextWithNSString:);
-  methods[12].selector = @selector(nativeSetHtmlTextWithId:);
-  methods[13].selector = @selector(getMyText);
-  methods[14].selector = @selector(setPaddingWithId:);
-  methods[15].selector = @selector(setPaddingBottomWithId:);
-  methods[16].selector = @selector(setPaddingTopWithId:);
-  methods[17].selector = @selector(setPaddingLeftWithId:);
-  methods[18].selector = @selector(setPaddingRightWithId:);
-  methods[19].selector = @selector(getPaddingTop);
-  methods[20].selector = @selector(getPaddingEnd);
-  methods[21].selector = @selector(getPaddingStart);
-  methods[22].selector = @selector(getPaddingLeft);
-  methods[23].selector = @selector(getPaddingRight);
-  methods[24].selector = @selector(getPaddingBottom);
-  methods[25].selector = @selector(setPaddingVerticalWithId:);
-  methods[26].selector = @selector(setPaddingHorizontalWithId:);
-  methods[27].selector = @selector(setPaddingEndWithId:);
-  methods[28].selector = @selector(setPaddingStartWithId:);
-  methods[29].selector = @selector(getTextSize);
-  methods[30].selector = @selector(setMyTextSizeWithId:);
-  methods[31].selector = @selector(nativeSetTextSizeWithInt:);
-  methods[32].selector = @selector(setVerticalAligmentCenter);
-  methods[33].selector = @selector(setVerticalAligmentBottom);
-  methods[34].selector = @selector(setVerticalAligmentTop);
-  methods[35].selector = @selector(setHorizontalAligmentCenter);
-  methods[36].selector = @selector(setHorizontalAligmentRight);
-  methods[37].selector = @selector(setHorizontalAligmentRightInternal);
-  methods[38].selector = @selector(setHorizontalAligmentLeft);
-  methods[39].selector = @selector(setHorizontalAligmentLeftInternal);
-  methods[40].selector = @selector(getTextAlignment);
-  methods[41].selector = @selector(nativeSetVerticalAligmentBottom);
-  methods[42].selector = @selector(nativeSetVerticalAligmentTop);
-  methods[43].selector = @selector(nativeSetVerticalAligmentCenter);
-  methods[44].selector = @selector(addMinMaxListener);
-  methods[45].selector = @selector(getBorderPadding);
-  methods[46].selector = @selector(getLineHeightPadding);
-  methods[47].selector = @selector(getLineHeight);
-  methods[48].selector = @selector(getBorderWidth);
-  methods[49].selector = @selector(getEllipsize);
-  methods[50].selector = @selector(setEllipsizeWithId:withNSString:);
-  methods[51].selector = @selector(nativeGetLinBreakMode);
-  methods[52].selector = @selector(nativeSetLineBreakModeWithInt:);
-  methods[53].selector = @selector(setJustificationModeWithId:withNSString:);
-  methods[54].selector = @selector(nativeSetTextAligmentWithInt:);
-  methods[55].selector = @selector(getJustificationMode);
-  methods[56].selector = @selector(nativeGetTextAligment);
-  methods[57].selector = @selector(setShadowDyWithJavaLangFloat:withNSString:);
-  methods[58].selector = @selector(setShadowDxWithJavaLangFloat:withNSString:);
-  methods[59].selector = @selector(getShadowDy);
-  methods[60].selector = @selector(getShadowDx);
-  methods[61].selector = @selector(setSingleLineWithId:);
-  methods[62].selector = @selector(getSingleLine);
-  methods[63].selector = @selector(setEnabledWithId:);
-  methods[64].selector = @selector(toUpperCaseWithNSString:);
-  methods[65].selector = @selector(nativeGetFontSize);
-  methods[66].selector = @selector(nativeGetFontStyle);
-  methods[67].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
-  methods[68].selector = @selector(nativeSetFontStyleWithInt:);
-  methods[69].selector = @selector(setDrawablePaddingWithId:);
-  methods[70].selector = @selector(setDrawableBottomWithId:);
-  methods[71].selector = @selector(setDrawableTopWithId:);
-  methods[72].selector = @selector(setDrawableRightWithNSString:withId:);
-  methods[73].selector = @selector(setDrawableRightInternalWithNSString:withId:);
-  methods[74].selector = @selector(setDrawableLeftWithNSString:withId:);
-  methods[75].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
-  methods[76].selector = @selector(getImageHeightWithId:);
-  methods[77].selector = @selector(getImageWidthWithId:);
-  methods[78].selector = @selector(getDrawablePadding);
-  methods[79].selector = @selector(setDrawableTintModeWithId:);
-  methods[80].selector = @selector(setDrawableTintWithId:);
-  methods[81].selector = @selector(updatePadding);
-  methods[82].selector = @selector(setScrollHorizontallyWithId:);
-  methods[83].selector = @selector(canMarquee);
-  methods[84].selector = @selector(cancelNativeTimer);
-  methods[85].selector = @selector(isDisposed);
-  methods[86].selector = @selector(addDeallocHandler);
-  methods[87].selector = @selector(schedule);
-  methods[88].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
-  methods[89].selector = @selector(setTextColorWithId:);
-  methods[90].selector = @selector(getTextColorState);
-  methods[91].selector = @selector(drawableStateChanged);
-  methods[92].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
-  methods[93].selector = @selector(setHintColorWithInt:);
-  methods[94].selector = @selector(syncPlaceholderLabel);
-  methods[95].selector = @selector(getBaseLine);
-  methods[96].selector = @selector(nativeGetBaseLine);
-  methods[97].selector = @selector(getFont);
-  methods[98].selector = @selector(setTextColorLinkWithADColorStateList:);
-  methods[99].selector = @selector(setButtonWithId:);
-  methods[100].selector = @selector(setOnCheckedWithId:);
-  methods[101].selector = @selector(setCheckedWithId:);
-  methods[102].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[103].selector = @selector(getButton);
-  methods[104].selector = @selector(getChecked);
-  methods[105].selector = @selector(asNativeWidget);
-  methods[106].selector = @selector(createLabelWithJavaUtilMap:withASMeasurableCompoundButton:);
-  methods[107].selector = @selector(createLabelWithJavaUtilMap:);
-  methods[108].selector = @selector(drawableStateChangedAdditionalAttrs);
-  methods[109].selector = @selector(setButtonTintWithId:);
-  methods[110].selector = @selector(setButtonTintModeWithId:);
-  methods[111].selector = @selector(measureWidth);
-  methods[112].selector = @selector(resetError);
-  methods[113].selector = @selector(showErrorWithNSString:);
-  methods[114].selector = @selector(setGravityWithId:);
-  methods[115].selector = @selector(updateTextAlignment);
-  methods[116].selector = @selector(getGravity);
-  methods[117].selector = @selector(onRtlPropertiesChangedWithInt:);
-  methods[118].selector = @selector(getMinHeight);
-  methods[119].selector = @selector(getMinWidth);
-  methods[120].selector = @selector(setEmsWithId:);
-  methods[121].selector = @selector(getMaxEms);
-  methods[122].selector = @selector(getMinEms);
-  methods[123].selector = @selector(setMinEmsWithId:);
-  methods[124].selector = @selector(getMinLines);
-  methods[125].selector = @selector(getMaxLines);
-  methods[126].selector = @selector(setMaxEmsWithId:);
-  methods[127].selector = @selector(setWidthWithId:);
-  methods[128].selector = @selector(setHeightWithId:);
-  methods[129].selector = @selector(setMaxLinesWithId:);
-  methods[130].selector = @selector(setLinesWithId:);
-  methods[131].selector = @selector(setMinLinesWithId:);
-  methods[132].selector = @selector(setMaxHeightWithId:);
-  methods[133].selector = @selector(setMaxWidthWithId:);
-  methods[134].selector = @selector(getMaxWidth);
-  methods[135].selector = @selector(getMaxHeight);
-  methods[136].selector = @selector(setMinHeightWithId:);
-  methods[137].selector = @selector(setMinWidthWithId:);
-  methods[138].selector = @selector(getWidth);
-  methods[139].selector = @selector(getHeight);
-  methods[140].selector = @selector(getAutoSizeTextTypeWithASMeasurableCompoundButton:);
-  methods[141].selector = @selector(setAutoSizeTextTypeInternalWithInt:);
-  methods[142].selector = @selector(suggestedSizeFitsInSpaceWithInt:withFloat:withFloat:);
-  methods[143].selector = @selector(setAutoSizePresetSizesWithId:);
-  methods[144].selector = @selector(addAutoResizeListener);
-  methods[145].selector = @selector(removeResizeListener);
-  methods[146].selector = @selector(computeSizeWithFloat:);
+  methods[2].selector = @selector(initWithNSString:);
+  methods[3].selector = @selector(initWithNSString:withNSString:);
+  methods[4].selector = @selector(getViewClass);
+  methods[5].selector = @selector(newInstance);
+  methods[6].selector = @selector(createWithASIFragment:withJavaUtilMap:);
+  methods[7].selector = @selector(setWidgetOnNativeClass);
+  methods[8].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[9].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[10].selector = @selector(asWidget);
+  methods[11].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[12].selector = @selector(handleHtmlTextWithNSString:);
+  methods[13].selector = @selector(nativeSetTextWithNSString:);
+  methods[14].selector = @selector(nativeSetHtmlTextWithId:);
+  methods[15].selector = @selector(getMyText);
+  methods[16].selector = @selector(setPaddingWithId:);
+  methods[17].selector = @selector(setPaddingBottomWithId:);
+  methods[18].selector = @selector(setPaddingTopWithId:);
+  methods[19].selector = @selector(setPaddingLeftWithId:);
+  methods[20].selector = @selector(setPaddingRightWithId:);
+  methods[21].selector = @selector(getPaddingTop);
+  methods[22].selector = @selector(getPaddingEnd);
+  methods[23].selector = @selector(getPaddingStart);
+  methods[24].selector = @selector(getPaddingLeft);
+  methods[25].selector = @selector(getPaddingRight);
+  methods[26].selector = @selector(getPaddingBottom);
+  methods[27].selector = @selector(setPaddingVerticalWithId:);
+  methods[28].selector = @selector(setPaddingHorizontalWithId:);
+  methods[29].selector = @selector(setPaddingEndWithId:);
+  methods[30].selector = @selector(setPaddingStartWithId:);
+  methods[31].selector = @selector(getTextSize);
+  methods[32].selector = @selector(setMyTextSizeWithId:);
+  methods[33].selector = @selector(nativeSetTextSizeWithInt:);
+  methods[34].selector = @selector(setVerticalAligmentCenter);
+  methods[35].selector = @selector(setVerticalAligmentBottom);
+  methods[36].selector = @selector(setVerticalAligmentTop);
+  methods[37].selector = @selector(setHorizontalAligmentCenter);
+  methods[38].selector = @selector(setHorizontalAligmentRight);
+  methods[39].selector = @selector(setHorizontalAligmentRightInternal);
+  methods[40].selector = @selector(setHorizontalAligmentLeft);
+  methods[41].selector = @selector(setHorizontalAligmentLeftInternal);
+  methods[42].selector = @selector(getTextAlignment);
+  methods[43].selector = @selector(nativeSetVerticalAligmentBottom);
+  methods[44].selector = @selector(nativeSetVerticalAligmentTop);
+  methods[45].selector = @selector(nativeSetVerticalAligmentCenter);
+  methods[46].selector = @selector(addMinMaxListener);
+  methods[47].selector = @selector(getBorderPadding);
+  methods[48].selector = @selector(getLineHeightPadding);
+  methods[49].selector = @selector(getLineHeight);
+  methods[50].selector = @selector(getBorderWidth);
+  methods[51].selector = @selector(getEllipsize);
+  methods[52].selector = @selector(setEllipsizeWithId:withNSString:);
+  methods[53].selector = @selector(nativeGetLinBreakMode);
+  methods[54].selector = @selector(nativeSetLineBreakModeWithInt:);
+  methods[55].selector = @selector(setJustificationModeWithId:withNSString:);
+  methods[56].selector = @selector(nativeSetTextAligmentWithInt:);
+  methods[57].selector = @selector(getJustificationMode);
+  methods[58].selector = @selector(nativeGetTextAligment);
+  methods[59].selector = @selector(setShadowDyWithJavaLangFloat:withNSString:);
+  methods[60].selector = @selector(setShadowDxWithJavaLangFloat:withNSString:);
+  methods[61].selector = @selector(getShadowDy);
+  methods[62].selector = @selector(getShadowDx);
+  methods[63].selector = @selector(setSingleLineWithId:);
+  methods[64].selector = @selector(getSingleLine);
+  methods[65].selector = @selector(setEnabledWithId:);
+  methods[66].selector = @selector(toUpperCaseWithNSString:);
+  methods[67].selector = @selector(nativeGetFontSize);
+  methods[68].selector = @selector(nativeGetFontStyle);
+  methods[69].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
+  methods[70].selector = @selector(nativeSetFontStyleWithInt:);
+  methods[71].selector = @selector(setDrawablePaddingWithId:);
+  methods[72].selector = @selector(setDrawableBottomWithId:);
+  methods[73].selector = @selector(setDrawableTopWithId:);
+  methods[74].selector = @selector(setDrawableRightWithNSString:withId:);
+  methods[75].selector = @selector(setDrawableRightInternalWithNSString:withId:);
+  methods[76].selector = @selector(setDrawableLeftWithNSString:withId:);
+  methods[77].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
+  methods[78].selector = @selector(getImageHeightWithId:);
+  methods[79].selector = @selector(getImageWidthWithId:);
+  methods[80].selector = @selector(getDrawablePadding);
+  methods[81].selector = @selector(setDrawableTintModeWithId:);
+  methods[82].selector = @selector(setDrawableTintWithId:);
+  methods[83].selector = @selector(updatePadding);
+  methods[84].selector = @selector(setScrollHorizontallyWithId:);
+  methods[85].selector = @selector(canMarquee);
+  methods[86].selector = @selector(cancelNativeTimer);
+  methods[87].selector = @selector(isDisposed);
+  methods[88].selector = @selector(addDeallocHandler);
+  methods[89].selector = @selector(schedule);
+  methods[90].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
+  methods[91].selector = @selector(setTextColorWithId:);
+  methods[92].selector = @selector(getTextColorState);
+  methods[93].selector = @selector(drawableStateChanged);
+  methods[94].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
+  methods[95].selector = @selector(setHintColorWithInt:);
+  methods[96].selector = @selector(syncPlaceholderLabel);
+  methods[97].selector = @selector(getBaseLine);
+  methods[98].selector = @selector(nativeGetBaseLine);
+  methods[99].selector = @selector(getFont);
+  methods[100].selector = @selector(setTextColorLinkWithADColorStateList:);
+  methods[101].selector = @selector(setButtonWithId:);
+  methods[102].selector = @selector(setOnCheckedWithId:);
+  methods[103].selector = @selector(setCheckedWithId:);
+  methods[104].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[105].selector = @selector(getButton);
+  methods[106].selector = @selector(getChecked);
+  methods[107].selector = @selector(asNativeWidget);
+  methods[108].selector = @selector(createLabelWithJavaUtilMap:withADTextView:);
+  methods[109].selector = @selector(createLabelWithJavaUtilMap:);
+  methods[110].selector = @selector(drawableStateChangedAdditionalAttrs);
+  methods[111].selector = @selector(setButtonTintWithId:);
+  methods[112].selector = @selector(setButtonTintModeWithId:);
+  methods[113].selector = @selector(measureWidth);
+  methods[114].selector = @selector(resetError);
+  methods[115].selector = @selector(showErrorWithNSString:);
+  methods[116].selector = @selector(setGravityWithId:);
+  methods[117].selector = @selector(updateTextAlignment);
+  methods[118].selector = @selector(getGravity);
+  methods[119].selector = @selector(onRtlPropertiesChangedWithInt:);
+  methods[120].selector = @selector(getMinHeight);
+  methods[121].selector = @selector(getMinWidth);
+  methods[122].selector = @selector(setEmsWithId:);
+  methods[123].selector = @selector(getMaxEms);
+  methods[124].selector = @selector(getMinEms);
+  methods[125].selector = @selector(setMinEmsWithId:);
+  methods[126].selector = @selector(getMinLines);
+  methods[127].selector = @selector(getMaxLines);
+  methods[128].selector = @selector(setMaxEmsWithId:);
+  methods[129].selector = @selector(setWidthWithId:);
+  methods[130].selector = @selector(setHeightWithId:);
+  methods[131].selector = @selector(setMaxLinesWithId:);
+  methods[132].selector = @selector(setLinesWithId:);
+  methods[133].selector = @selector(setMinLinesWithId:);
+  methods[134].selector = @selector(setMaxHeightWithId:);
+  methods[135].selector = @selector(setMaxWidthWithId:);
+  methods[136].selector = @selector(getMaxWidth);
+  methods[137].selector = @selector(getMaxHeight);
+  methods[138].selector = @selector(setMinHeightWithId:);
+  methods[139].selector = @selector(setMinWidthWithId:);
+  methods[140].selector = @selector(getWidth);
+  methods[141].selector = @selector(getHeight);
+  methods[142].selector = @selector(getAutoSizeTextTypeWithADTextView:);
+  methods[143].selector = @selector(setAutoSizeTextTypeInternalWithInt:);
+  methods[144].selector = @selector(setAutoSizePresetSizesWithId:);
+  methods[145].selector = @selector(addAutoResizeListener);
+  methods[146].selector = @selector(removeResizeListener);
   methods[147].selector = @selector(setMaxLengthWithId:);
   methods[148].selector = @selector(setMyTextWithId:);
   methods[149].selector = @selector(setTextAllCapsWithId:);
@@ -3033,32 +3039,33 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[201].selector = @selector(getIsUserInteractionEnabled);
   methods[202].selector = @selector(checkIosVersionWithNSString:);
   methods[203].selector = @selector(setIdWithNSString:);
-  methods[204].selector = @selector(requestLayout);
-  methods[205].selector = @selector(invalidate);
-  methods[206].selector = @selector(getPluginWithNSString:);
-  methods[207].selector = @selector(getBean);
-  methods[208].selector = @selector(getBuilder);
-  methods[209].selector = @selector(allowUnCheck);
-  methods[210].selector = @selector(setCheckedWithBoolean:);
-  methods[211].selector = @selector(isChecked);
-  methods[212].selector = @selector(addCheckedListenerWithId:withNSString:);
-  methods[213].selector = @selector(setErrorWithId:);
-  methods[214].selector = @selector(getTextEntered);
-  methods[215].selector = @selector(isViewVisible);
-  methods[216].selector = @selector(focus);
+  methods[204].selector = @selector(setVisibleWithBoolean:);
+  methods[205].selector = @selector(requestLayout);
+  methods[206].selector = @selector(invalidate);
+  methods[207].selector = @selector(getPluginWithNSString:);
+  methods[208].selector = @selector(getBean);
+  methods[209].selector = @selector(getBuilder);
+  methods[210].selector = @selector(allowUnCheck);
+  methods[211].selector = @selector(setCheckedWithBoolean:);
+  methods[212].selector = @selector(isChecked);
+  methods[213].selector = @selector(addCheckedListenerWithId:withNSString:);
+  methods[214].selector = @selector(setErrorWithId:);
+  methods[215].selector = @selector(getTextEntered);
+  methods[216].selector = @selector(isViewVisible);
+  methods[217].selector = @selector(focus);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 133, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 134, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 129, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 130, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "measurableCompoundButton_", "LASMeasurableCompoundButton;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "measurableView_", "LADRadioButton;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "canvas_", "LADCanvas;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "TEXT_ALIGN_CENTER", "I", .constantValue.asInt = ASRadioButtonImpl_TEXT_ALIGN_CENTER, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_LEFT", "I", .constantValue.asInt = ASRadioButtonImpl_TEXT_ALIGN_LEFT, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_RIGHT", "I", .constantValue.asInt = ASRadioButtonImpl_TEXT_ALIGN_RIGHT, 0x1a, -1, -1, -1, -1 },
     { "ellipsize_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 135, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 136, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 131, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 132, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASRadioButtonImpl_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
     { "drawableTint_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "timer_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -3068,8 +3075,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "POST_MEASURE_EVENT_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
     { "html_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "escapeHtml_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 137, -1 },
-    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 138, -1 },
+    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 133, -1 },
+    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 134, -1 },
     { "marqueeTask_", "LASRadioButtonImpl_MarqueeTask;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeRepeatLimit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeCommandConverter_", "LASMarqueeCommandConverter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -3079,8 +3086,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "builder_", "LASRadioButtonImpl_RadioButtonCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bean_", "LASRadioButtonImpl_RadioButtonBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "updateMeasuredDimension", "II", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "LNSObject;", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "I", "setEllipsize", "LNSObject;LNSString;", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setSingleLine", "setEnabled", "toUpperCase", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setScrollHorizontally", "executeOnMainThread", "LJavaLangRunnable;", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "setHintColor", "setTextColorLink", "LADColorStateList;", "setButton", "setOnChecked", "setChecked", "postSetAttribute", "createLabel", "LJavaUtilMap;LASMeasurableCompoundButton;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/layout/MeasurableCompoundButton;)V", "setButtonTint", "setButtonTintMode", "showError", "setGravity", "onRtlPropertiesChanged", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "getAutoSizeTextType", "LASMeasurableCompoundButton;", "setAutoSizeTextTypeInternal", "suggestedSizeFitsInSpace", "IFF", "setAutoSizePresetSizes", "computeSize", "F", "setMaxLength", "setMyText", "setTextAllCaps", "initHtml", "setTypeFace", "setFontFamily", "setTextStyle", "setMarqueeRepeatLimit", "startOrStopMarquee", "setPassword", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setAutoSizeStepGranularity", "setAutoMinTextSize", "setAutoMaxTextSize", "setAutoSizeTextType", "setErrorMessage", "setTextFormat", "setText", "LNSObject;LNSObject;", "setIsEnabled", "setAdjustsFontSizeToFitWidth", "setAllowsDefaultTighteningForTruncation", "setMinimumScaleFactor", "setNumberOfLines", "setHighlightedTextColor", "setIsHighlighted", "setShadowColor", "setPreferredMaxLayoutWidth", "setIsUserInteractionEnabled", "checkIosVersion", "setId", "getPlugin", "Z", "addCheckedListener", "setError", &ASRadioButtonImpl_LOCAL_NAME, &ASRadioButtonImpl_GROUP_NAME, &ASRadioButtonImpl_ITALIC_FONT_TRAIT, &ASRadioButtonImpl_BOLD_FONT_TRAIT, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "LASRadioButtonImpl_ButtonTinttMode;LASRadioButtonImpl_Ellipsize;LASRadioButtonImpl_MarqueeRepeatLimit;LASRadioButtonImpl_JustificationMode;LASRadioButtonImpl_Font;LASRadioButtonImpl_TextStyle;LASRadioButtonImpl_DrawableTintMode;LASRadioButtonImpl_RadioButtonExt;LASRadioButtonImpl_DellocHandler;LASRadioButtonImpl_StateToggler;LASRadioButtonImpl_MyCanvas;LASRadioButtonImpl_PostMeasureHandler;LASRadioButtonImpl_MarqueeTask;LASRadioButtonImpl_OnCheckedChangeListener;LASRadioButtonImpl_RadioButtonCommandBuilder;LASRadioButtonImpl_RadioButtonBean;" };
-  static const J2ObjcClassInfo _ASRadioButtonImpl = { "RadioButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 217, 30, -1, 139, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "LNSObject;", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "I", "setEllipsize", "LNSObject;LNSString;", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setSingleLine", "setEnabled", "toUpperCase", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setScrollHorizontally", "executeOnMainThread", "LJavaLangRunnable;", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "setHintColor", "setTextColorLink", "LADColorStateList;", "setButton", "setOnChecked", "setChecked", "postSetAttribute", "createLabel", "LJavaUtilMap;LADTextView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/TextView;)V", "setButtonTint", "setButtonTintMode", "showError", "setGravity", "onRtlPropertiesChanged", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "getAutoSizeTextType", "LADTextView;", "setAutoSizeTextTypeInternal", "setAutoSizePresetSizes", "setMaxLength", "setMyText", "setTextAllCaps", "initHtml", "setTypeFace", "setFontFamily", "setTextStyle", "setMarqueeRepeatLimit", "startOrStopMarquee", "setPassword", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setAutoSizeStepGranularity", "setAutoMinTextSize", "setAutoMaxTextSize", "setAutoSizeTextType", "setErrorMessage", "setTextFormat", "setText", "LNSObject;LNSObject;", "setIsEnabled", "setAdjustsFontSizeToFitWidth", "setAllowsDefaultTighteningForTruncation", "setMinimumScaleFactor", "setNumberOfLines", "setHighlightedTextColor", "setIsHighlighted", "setShadowColor", "setPreferredMaxLayoutWidth", "setIsUserInteractionEnabled", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "addCheckedListener", "setError", &ASRadioButtonImpl_LOCAL_NAME, &ASRadioButtonImpl_GROUP_NAME, &ASRadioButtonImpl_ITALIC_FONT_TRAIT, &ASRadioButtonImpl_BOLD_FONT_TRAIT, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "LASRadioButtonImpl_ButtonTinttMode;LASRadioButtonImpl_Ellipsize;LASRadioButtonImpl_MarqueeRepeatLimit;LASRadioButtonImpl_JustificationMode;LASRadioButtonImpl_Font;LASRadioButtonImpl_TextStyle;LASRadioButtonImpl_DrawableTintMode;LASRadioButtonImpl_RadioButtonExt;LASRadioButtonImpl_DellocHandler;LASRadioButtonImpl_StateToggler;LASRadioButtonImpl_MyCanvas;LASRadioButtonImpl_PostMeasureHandler;LASRadioButtonImpl_MarqueeTask;LASRadioButtonImpl_OnCheckedChangeListener;LASRadioButtonImpl_RadioButtonCommandBuilder;LASRadioButtonImpl_RadioButtonBean;" };
+  static const J2ObjcClassInfo _ASRadioButtonImpl = { "RadioButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 218, 30, -1, 135, -1, -1, -1 };
   return &_ASRadioButtonImpl;
 }
 
@@ -3110,14 +3117,46 @@ ASRadioButtonImpl *create_ASRadioButtonImpl_init() {
   J2OBJC_CREATE_IMPL(ASRadioButtonImpl, init)
 }
 
+void ASRadioButtonImpl_initWithNSString_(ASRadioButtonImpl *self, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, ASRadioButtonImpl_GROUP_NAME, localname);
+  self->POST_MEASURE_EVENT_ = [((ASEvent_StandardEvents *) nil_chk(JreLoadEnum(ASEvent_StandardEvents, postMeasure))) description];
+  self->autoSizeMin_ = -1;
+  self->autoSizeMax_ = -1;
+  self->autoSizeGranular_ = -1;
+}
+
+ASRadioButtonImpl *new_ASRadioButtonImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_NEW_IMPL(ASRadioButtonImpl, initWithNSString_, localname)
+}
+
+ASRadioButtonImpl *create_ASRadioButtonImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASRadioButtonImpl, initWithNSString_, localname)
+}
+
+void ASRadioButtonImpl_initWithNSString_withNSString_(ASRadioButtonImpl *self, NSString *groupName, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, groupName, localname);
+  self->POST_MEASURE_EVENT_ = [((ASEvent_StandardEvents *) nil_chk(JreLoadEnum(ASEvent_StandardEvents, postMeasure))) description];
+  self->autoSizeMin_ = -1;
+  self->autoSizeMax_ = -1;
+  self->autoSizeGranular_ = -1;
+}
+
+ASRadioButtonImpl *new_ASRadioButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_NEW_IMPL(ASRadioButtonImpl, initWithNSString_withNSString_, groupName, localname)
+}
+
+ASRadioButtonImpl *create_ASRadioButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASRadioButtonImpl, initWithNSString_withNSString_, groupName, localname)
+}
+
 void ASRadioButtonImpl_setWidgetOnNativeClass(ASRadioButtonImpl *self) {
   ((ASUILabel*) self.uiView).widget = self;
 }
 
 void ASRadioButtonImpl_nativeCreateWithJavaUtilMap_(ASRadioButtonImpl *self, id<JavaUtilMap> params) {
   ASRadioButtonImpl_initHtmlWithJavaUtilMap_(self, params);
-  ASRadioButtonImpl_createLabelWithJavaUtilMap_withASMeasurableCompoundButton_(self, params, (ASMeasurableCompoundButton *) cast_chk([self asWidget], [ASMeasurableCompoundButton class]));
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top)];
+  ASRadioButtonImpl_createLabelWithJavaUtilMap_withADTextView_(self, params, (ADTextView *) cast_chk([self asWidget], [ADTextView class]));
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top)];
   [self registerForAttributeCommandChainWithNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"text" } count:1 type:NSString_class_()]];
   [self registerForAttributeCommandChainWithPhaseWithNSString:@"predraw" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableStart", @"drawableEnd", @"drawableLeft", @"drawableTop", @"drawableRight", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"button", @"buttonTint", @"buttonTintMode" } count:12 type:NSString_class_()]];
 }
@@ -3194,17 +3233,17 @@ void ASRadioButtonImpl_nativeSetTextSizeWithInt_(ASRadioButtonImpl *self, jint v
 }
 
 void ASRadioButtonImpl_setVerticalAligmentCenter(ASRadioButtonImpl *self) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, middle)];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, middle)];
   ASRadioButtonImpl_nativeSetVerticalAligmentCenter(self);
 }
 
 void ASRadioButtonImpl_setVerticalAligmentBottom(ASRadioButtonImpl *self) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, bottom)];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, bottom)];
   ASRadioButtonImpl_nativeSetVerticalAligmentBottom(self);
 }
 
 void ASRadioButtonImpl_setVerticalAligmentTop(ASRadioButtonImpl *self) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top)];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setVerticalAligmentWithASBaseMeasurableView_VerticalAligment:JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top)];
   ASRadioButtonImpl_nativeSetVerticalAligmentTop(self);
 }
 
@@ -3388,17 +3427,17 @@ void ASRadioButtonImpl_nativeSetFontStyleWithInt_(ASRadioButtonImpl *self, jint 
 }
 
 void ASRadioButtonImpl_setDrawablePaddingWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setDrawablePaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setDrawablePaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   [self updatePadding];
 }
 
 void ASRadioButtonImpl_setDrawableBottomWithId_(ASRadioButtonImpl *self, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setBottomDrawableWithADDrawable:nil];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setBottomDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"bottom" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setBottomDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setBottomDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"bottom" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3406,11 +3445,11 @@ void ASRadioButtonImpl_setDrawableBottomWithId_(ASRadioButtonImpl *self, id objV
 
 void ASRadioButtonImpl_setDrawableTopWithId_(ASRadioButtonImpl *self, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setTopDrawableWithADDrawable:nil];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setTopDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"top" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setTopDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setTopDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"top" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3427,11 +3466,11 @@ void ASRadioButtonImpl_setDrawableRightWithNSString_withId_(ASRadioButtonImpl *s
 
 void ASRadioButtonImpl_setDrawableRightInternalWithNSString_withId_(ASRadioButtonImpl *self, NSString *originalAttr, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setRightDrawableWithADDrawable:nil];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setRightDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"right" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setRightDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setRightDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"right" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3450,11 +3489,11 @@ void ASRadioButtonImpl_setDrawableLeftWithNSString_withId_(ASRadioButtonImpl *se
 
 void ASRadioButtonImpl_setDrawableLeftInternalWithNSString_withId_(ASRadioButtonImpl *self, NSString *originalAttr, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setLeftDrawableWithADDrawable:nil];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setLeftDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"left" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setLeftDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setLeftDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:originalAttr withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"left" } count:1 type:NSObject_class_()]];
     [self updatePadding];
   }
@@ -3479,22 +3518,22 @@ jint ASRadioButtonImpl_getImageWidthWithId_(ASRadioButtonImpl *self, id objValue
 }
 
 id ASRadioButtonImpl_getDrawablePadding(ASRadioButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getDrawablePadding]);
+  return JavaLangInteger_valueOfWithInt_([((ADRadioButton *) nil_chk(self->measurableView_)) getDrawablePadding]);
 }
 
 void ASRadioButtonImpl_setDrawableTintModeWithId_(ASRadioButtonImpl *self, id value) {
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getLeftDrawable] != nil) {
+  if ([((ADRadioButton *) nil_chk(self->measurableView_)) getLeftDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableLeft" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getRightDrawable] != nil) {
+  if ([((ADRadioButton *) nil_chk(self->measurableView_)) getRightDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableRight" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getTopDrawable] != nil) {
+  if ([((ADRadioButton *) nil_chk(self->measurableView_)) getTopDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getBottomDrawable] != nil) {
+  if ([((ADRadioButton *) nil_chk(self->measurableView_)) getBottomDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTintMode", value } count:2 type:NSObject_class_()]];
   }
 }
@@ -3503,26 +3542,26 @@ void ASRadioButtonImpl_setDrawableTintWithId_(ASRadioButtonImpl *self, id objVal
   if ([objValue isKindOfClass:[ADColorStateList class]]) {
     ADColorStateList *colorStateList = (ADColorStateList *) objValue;
     self->drawableTint_ = colorStateList;
-    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(self->drawableTint_)) getColorForStateWithIntArray:[((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getDrawableState] withInt:ADColor_RED]);
+    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(self->drawableTint_)) getColorForStateWithIntArray:[((ADRadioButton *) nil_chk(self->measurableView_)) getDrawableState] withInt:ADColor_RED]);
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getLeftDrawable] != nil) {
+  if ([((ADRadioButton *) nil_chk(self->measurableView_)) getLeftDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableLeft" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getRightDrawable] != nil) {
+  if ([((ADRadioButton *) nil_chk(self->measurableView_)) getRightDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableRight" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
     [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getTopDrawable] != nil) {
+  if ([((ADRadioButton *) nil_chk(self->measurableView_)) getTopDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getBottomDrawable] != nil) {
+  if ([((ADRadioButton *) nil_chk(self->measurableView_)) getBottomDrawable] != nil) {
     [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"cgTintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableTint", ASViewImpl_getColorWithId_(objValue) } count:2 type:NSObject_class_()]];
   }
 }
 
 void ASRadioButtonImpl_setScrollHorizontallyWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setHorizontallyScrollingWithBoolean:objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setHorizontallyScrollingWithBoolean:objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue]];
 }
 
 jboolean ASRadioButtonImpl_canMarquee(ASRadioButtonImpl *self) {
@@ -3566,18 +3605,18 @@ void ASRadioButtonImpl_executeOnMainThreadWithJavaLangRunnable_(ASRadioButtonImp
 void ASRadioButtonImpl_setTextColorWithId_(ASRadioButtonImpl *self, id objValue) {
   if ([objValue isKindOfClass:[ADColorStateList class]]) {
     ADColorStateList *colorStateList = (ADColorStateList *) objValue;
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setTextColorWithADColorStateList:colorStateList];
-    objValue = JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getCurrentTextColor]);
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setTextColorWithADColorStateList:colorStateList];
+    objValue = JavaLangInteger_valueOfWithInt_([((ADRadioButton *) nil_chk(self->measurableView_)) getCurrentTextColor]);
   }
   [self setTextColorWithId:self->uiView_ withId:ASViewImpl_getColorWithId_(objValue)];
 }
 
 id ASRadioButtonImpl_getTextColorState(ASRadioButtonImpl *self) {
-  return [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getTextColors];
+  return [((ADRadioButton *) nil_chk(self->measurableView_)) getTextColors];
 }
 
 void ASRadioButtonImpl_drawableStateChangeWithNSString_withADDrawable_(ASRadioButtonImpl *self, NSString *type, ADDrawable *dr) {
-  IOSIntArray *state = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getDrawableState];
+  IOSIntArray *state = [((ADRadioButton *) nil_chk(self->measurableView_)) getDrawableState];
   if (dr != nil && [dr isStateful] && [dr setStateWithIntArray:state]) {
     switch (JreIndexOfStr(type, (id[]){ @"bottom", @"top", @"left", @"right" }, 4)) {
       case 0:
@@ -3620,11 +3659,11 @@ void ASRadioButtonImpl_setTextColorLinkWithADColorStateList_(ASRadioButtonImpl *
 
 void ASRadioButtonImpl_setButtonWithId_(ASRadioButtonImpl *self, id objValue) {
   if ([@"@null" isEqual:objValue]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setButtonDrawableWithADDrawable:nil];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setButtonDrawableWithADDrawable:nil];
     [self applyAttributeCommandWithNSString:@"button" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:false withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"button" } count:1 type:NSObject_class_()]];
   }
   else if (objValue != nil && [objValue isKindOfClass:[ADDrawable class]]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setButtonDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setButtonDrawableWithADDrawable:(ADDrawable *) cast_chk(objValue, [ADDrawable class])];
     [self applyAttributeCommandWithNSString:@"button" withNSString:@"drawDrawableIcon" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){  } count:0 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"button" } count:1 type:NSObject_class_()]];
   }
 }
@@ -3637,17 +3676,17 @@ void ASRadioButtonImpl_setOnCheckedWithId_(ASRadioButtonImpl *self, id objValue)
   else {
     onCheckedChangeListener = (id<ADCompoundButton_OnCheckedChangeListener>) cast_check(objValue, ADCompoundButton_OnCheckedChangeListener_class_());
   }
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setOnCheckedChangeListenerWithADCompoundButton_OnCheckedChangeListener:onCheckedChangeListener];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setOnCheckedChangeListenerWithADCompoundButton_OnCheckedChangeListener:onCheckedChangeListener];
 }
 
 void ASRadioButtonImpl_setCheckedWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setCheckedWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setCheckedWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
 }
 
 void ASRadioButtonImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(ASRadioButtonImpl *self, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator) {
   switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"editable" }, 1)) {
     case 0:
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setEnabledWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setEnabledWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
     break;
     default:
     break;
@@ -3655,14 +3694,14 @@ void ASRadioButtonImpl_postSetAttributeWithASWidgetAttribute_withNSString_withId
 }
 
 id ASRadioButtonImpl_getButton(ASRadioButtonImpl *self) {
-  return [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getButtonDrawable];
+  return [((ADRadioButton *) nil_chk(self->measurableView_)) getButtonDrawable];
 }
 
 id ASRadioButtonImpl_getChecked(ASRadioButtonImpl *self) {
-  return JavaLangBoolean_valueOfWithBoolean_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) isChecked]);
+  return JavaLangBoolean_valueOfWithBoolean_([((ADRadioButton *) nil_chk(self->measurableView_)) isChecked]);
 }
 
-void ASRadioButtonImpl_createLabelWithJavaUtilMap_withASMeasurableCompoundButton_(ASRadioButtonImpl *self, id<JavaUtilMap> params, ASMeasurableCompoundButton *asWidget) {
+void ASRadioButtonImpl_createLabelWithJavaUtilMap_withADTextView_(ASRadioButtonImpl *self, id<JavaUtilMap> params, ADTextView *asWidget) {
   ASRadioButtonImpl_createLabelWithJavaUtilMap_(self, params);
   ASViewImpl_setOnClickWithASIWidget_withNSString_withId_withADView_OnClickListener_(self, @"statetoggler", [self asNativeWidget], new_ASRadioButtonImpl_StateToggler_initWithASRadioButtonImpl_(self));
   self->canvas_ = new_ASRadioButtonImpl_MyCanvas_initWithASRadioButtonImpl_(self);
@@ -3675,8 +3714,8 @@ void ASRadioButtonImpl_createLabelWithJavaUtilMap_(ASRadioButtonImpl *self, id<J
 }
 
 void ASRadioButtonImpl_drawableStateChangedAdditionalAttrs(ASRadioButtonImpl *self) {
-  ADDrawable *dr = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getButtonDrawable];
-  if (dr != nil && [dr isStateful] && [dr setStateWithIntArray:[((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getDrawableState]]) {
+  ADDrawable *dr = [((ADRadioButton *) nil_chk(self->measurableView_)) getButtonDrawable];
+  if (dr != nil && [dr isStateful] && [dr setStateWithIntArray:[((ADRadioButton *) nil_chk(self->measurableView_)) getDrawableState]]) {
     ASRadioButtonImpl_setButtonWithId_(self, dr);
     [self invalidate];
   }
@@ -3692,7 +3731,7 @@ void ASRadioButtonImpl_setButtonTintModeWithId_(ASRadioButtonImpl *self, id objV
 
 void ASRadioButtonImpl_setGravityWithId_(ASRadioButtonImpl *self, id objValue) {
   jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setGravityWithInt:value];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setGravityWithInt:value];
   jint major = value & ASGravityConverter_VERTICAL_GRAVITY_MASK;
   ASRadioButtonImpl_updateTextAlignment(self);
   switch (major) {
@@ -3712,11 +3751,11 @@ void ASRadioButtonImpl_setGravityWithId_(ASRadioButtonImpl *self, id objValue) {
 }
 
 void ASRadioButtonImpl_updateTextAlignment(ASRadioButtonImpl *self) {
-  ADLayout_Alignment *minor = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getAlignmentOfLayout];
+  ADLayout_Alignment *minor = [((ADRadioButton *) nil_chk(self->measurableView_)) getAlignmentOfLayout];
   jboolean isRtl = false;
-  jboolean hasTextDirection = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getRawTextDirection] != 0;
+  jboolean hasTextDirection = [((ADRadioButton *) nil_chk(self->measurableView_)) getRawTextDirection] != 0;
   if (hasTextDirection) {
-    id<ADTextDirectionHeuristic> heuristic = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getTextDirectionHeuristic];
+    id<ADTextDirectionHeuristic> heuristic = [((ADRadioButton *) nil_chk(self->measurableView_)) getTextDirectionHeuristic];
     NSString *text = (NSString *) cast_chk(ASRadioButtonImpl_getMyText(self), [NSString class]);
     isRtl = [((id<ADTextDirectionHeuristic>) nil_chk(heuristic)) isRtlWithJavaLangCharSequence:text withInt:0 withInt:[((NSString *) nil_chk(text)) java_length]];
   }
@@ -3763,7 +3802,7 @@ void ASRadioButtonImpl_updateTextAlignment(ASRadioButtonImpl *self) {
 }
 
 id ASRadioButtonImpl_getGravity(ASRadioButtonImpl *self) {
-  ASBaseMeasurableView_VerticalAligment *verticalAligment = [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getVerticalAligment];
+  ASBaseMeasurableView_VerticalAligment *verticalAligment = [((ADRadioButton *) nil_chk(self->measurableView_)) getVerticalAligment];
   if (verticalAligment == nil) {
     verticalAligment = JreLoadEnum(ASBaseMeasurableView_VerticalAligment, top);
   }
@@ -3801,11 +3840,11 @@ id ASRadioButtonImpl_getGravity(ASRadioButtonImpl *self) {
 }
 
 id ASRadioButtonImpl_getMinHeight(ASRadioButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getMinHeight]);
+  return JavaLangInteger_valueOfWithInt_([((ADRadioButton *) nil_chk(self->measurableView_)) getMinHeight]);
 }
 
 id ASRadioButtonImpl_getMinWidth(ASRadioButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getMinWidth]);
+  return JavaLangInteger_valueOfWithInt_([((ADRadioButton *) nil_chk(self->measurableView_)) getMinWidth]);
 }
 
 void ASRadioButtonImpl_setEmsWithId_(ASRadioButtonImpl *self, id objValue) {
@@ -3814,12 +3853,12 @@ void ASRadioButtonImpl_setEmsWithId_(ASRadioButtonImpl *self, id objValue) {
 }
 
 void ASRadioButtonImpl_setMinEmsWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMinEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setMinEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASRadioButtonImpl_addMinMaxListener(self);
 }
 
 void ASRadioButtonImpl_setMaxEmsWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMaxEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setMaxEmsWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASRadioButtonImpl_addMinMaxListener(self);
 }
 
@@ -3834,7 +3873,7 @@ void ASRadioButtonImpl_setHeightWithId_(ASRadioButtonImpl *self, id objValue) {
 }
 
 void ASRadioButtonImpl_setMaxLinesWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMaxLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setMaxLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASRadioButtonImpl_addMinMaxListener(self);
 }
 
@@ -3844,64 +3883,55 @@ void ASRadioButtonImpl_setLinesWithId_(ASRadioButtonImpl *self, id objValue) {
 }
 
 void ASRadioButtonImpl_setMinLinesWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMinLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setMinLinesWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASRadioButtonImpl_addMinMaxListener(self);
 }
 
 void ASRadioButtonImpl_setMaxHeightWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMaxHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setMaxHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASRadioButtonImpl_addMinMaxListener(self);
 }
 
 void ASRadioButtonImpl_setMaxWidthWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMaxWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setMaxWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASRadioButtonImpl_addMinMaxListener(self);
 }
 
 void ASRadioButtonImpl_setMinHeightWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMinHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setMinHeightWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASRadioButtonImpl_addMinMaxListener(self);
 }
 
 void ASRadioButtonImpl_setMinWidthWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setMinWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setMinWidthWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   ASRadioButtonImpl_addMinMaxListener(self);
 }
 
 id ASRadioButtonImpl_getWidth(ASRadioButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getWidth]);
+  return JavaLangInteger_valueOfWithInt_([((ADRadioButton *) nil_chk(self->measurableView_)) getWidth]);
 }
 
 jint ASRadioButtonImpl_getHeight(ASRadioButtonImpl *self) {
-  return [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getHeight];
+  return [((ADRadioButton *) nil_chk(self->measurableView_)) getHeight];
 }
 
-jint ASRadioButtonImpl_getAutoSizeTextTypeWithASMeasurableCompoundButton_(ASRadioButtonImpl *self, ASMeasurableCompoundButton *measurableCompoundButton) {
-  return [((ASMeasurableCompoundButton *) nil_chk(measurableCompoundButton)) getAutoSizeTextType];
+jint ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(ASRadioButtonImpl *self, ADTextView *measurableView) {
+  return [((ADTextView *) nil_chk(measurableView)) getAutoSizeTextType];
 }
 
 void ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(ASRadioButtonImpl *self, jint autoTextType) {
   ASRadioButtonImpl_removeResizeListener(self);
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) isAutoSizeTextTypeUniformWithInt:autoTextType]) {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setUpAutoSizeTextTypeUniformWithInt:self->autoSizeMin_ withInt:self->autoSizeMax_ withInt:self->autoSizeGranular_];
+  if ([((ADRadioButton *) nil_chk(self->measurableView_)) isAutoSizeTextTypeUniformWithInt:autoTextType]) {
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setUpAutoSizeTextTypeUniformWithInt:self->autoSizeMin_ withInt:self->autoSizeMax_ withInt:self->autoSizeGranular_];
     ASRadioButtonImpl_addAutoResizeListener(self);
   }
   else {
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) clearAutoSizeTypeConfiguration];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) clearAutoSizeTypeConfiguration];
   }
-}
-
-jboolean ASRadioButtonImpl_suggestedSizeFitsInSpaceWithInt_withFloat_withFloat_(ASRadioButtonImpl *self, jint suggestedSizeInPx, jfloat width, jfloat height) {
-  ASRadioButtonImpl_setMyTextSizeWithId_(self, JavaLangFloat_valueOfWithFloat_(suggestedSizeInPx * 1.0f));
-  jint y = ASRadioButtonImpl_computeSizeWithFloat_(self, width);
-  if (y > height) {
-    return false;
-  }
-  return true;
 }
 
 void ASRadioButtonImpl_setAutoSizePresetSizesWithId_(ASRadioButtonImpl *self, id objValue) {
-  [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setAutoSizeTextTypeUniformWithPresetSizesWithIntArray:(IOSIntArray *) cast_chk(objValue, [IOSIntArray class]) withInt:0];
+  [((ADRadioButton *) nil_chk(self->measurableView_)) setAutoSizeTextTypeUniformWithPresetSizesWithIntArray:(IOSIntArray *) cast_chk(objValue, [IOSIntArray class]) withInt:0];
 }
 
 void ASRadioButtonImpl_addAutoResizeListener(ASRadioButtonImpl *self) {
@@ -3916,10 +3946,6 @@ void ASRadioButtonImpl_removeResizeListener(ASRadioButtonImpl *self) {
     [((ASEventBus *) nil_chk([((id<ASIFragment>) nil_chk(self->fragment_)) getEventBus])) offWithASEventBusHandlerArray:[IOSObjectArray newArrayWithObjects:(id[]){ self->postMeasureHandler_ } count:1 type:ASEventBusHandler_class_()]];
     self->postMeasureHandler_ = nil;
   }
-}
-
-jint ASRadioButtonImpl_computeSizeWithFloat_(ASRadioButtonImpl *self, jfloat width) {
-  return [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) nativeMeasureHeightWithId:self->uiView_ withInt:JreFpToInt(width)];
 }
 
 void ASRadioButtonImpl_setMaxLengthWithId_(ASRadioButtonImpl *self, id objValue) {
@@ -4067,10 +4093,10 @@ void ASRadioButtonImpl_startOrStopMarqueeWithId_(ASRadioButtonImpl *self, id obj
 }
 
 jint ASRadioButtonImpl_getLabelWidth(ASRadioButtonImpl *self) {
-  if ([((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) isIgnoreDrawableHeight]) {
-    return [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getMeasuredWidth] - [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getPaddingLeft] - [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getPaddingRight];
+  if ([((ADRadioButton *) nil_chk(self->measurableView_)) isIgnoreDrawableHeight]) {
+    return [((ADRadioButton *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADRadioButton *) nil_chk(self->measurableView_)) getPaddingLeft] - [((ADRadioButton *) nil_chk(self->measurableView_)) getPaddingRight];
   }
-  return [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getMeasuredWidth] - [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getCompoundPaddingRight] - [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) getCompoundPaddingLeft];
+  return [((ADRadioButton *) nil_chk(self->measurableView_)) getMeasuredWidth] - [((ADRadioButton *) nil_chk(self->measurableView_)) getCompoundPaddingRight] - [((ADRadioButton *) nil_chk(self->measurableView_)) getCompoundPaddingLeft];
 }
 
 jboolean ASRadioButtonImpl_isLabelMeasured(ASRadioButtonImpl *self) {
@@ -4098,7 +4124,7 @@ void ASRadioButtonImpl_setFirstBaselineToTopHeightWithId_(ASRadioButtonImpl *sel
   }
   if (firstBaselineToTopHeight > JavaLangMath_absWithInt_(fontMetricsTop)) {
     jint paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingBottom(self), [JavaLangInteger class]))) intValue]];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:paddingTop withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingBottom(self), [JavaLangInteger class]))) intValue]];
   }
 }
 
@@ -4123,7 +4149,7 @@ void ASRadioButtonImpl_setLastBaselineToBottomHeightWithId_(ASRadioButtonImpl *s
   }
   if (lastBaselineToBottomHeight > JavaLangMath_absWithInt_(fontMetricsBottom)) {
     jint paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-    [((ASMeasurableCompoundButton *) nil_chk(self->measurableCompoundButton_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingTop(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:paddingBottom];
+    [((ADRadioButton *) nil_chk(self->measurableView_)) setPaddingWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingLeft(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingTop(self), [JavaLangInteger class]))) intValue] withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASRadioButtonImpl_getPaddingRight(self), [JavaLangInteger class]))) intValue] withInt:paddingBottom];
   }
 }
 
@@ -4135,21 +4161,21 @@ id ASRadioButtonImpl_getLastBaselineToBottomHeight(ASRadioButtonImpl *self) {
 void ASRadioButtonImpl_setAutoSizeStepGranularityWithId_(ASRadioButtonImpl *self, id objValue) {
   self->autoSizeGranular_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([self isInitialised]) {
-    ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(self, ASRadioButtonImpl_getAutoSizeTextTypeWithASMeasurableCompoundButton_(self, self->measurableCompoundButton_));
+    ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(self, ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(self, self->measurableView_));
   }
 }
 
 void ASRadioButtonImpl_setAutoMinTextSizeWithId_(ASRadioButtonImpl *self, id objValue) {
   self->autoSizeMin_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([self isInitialised]) {
-    ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(self, ASRadioButtonImpl_getAutoSizeTextTypeWithASMeasurableCompoundButton_(self, self->measurableCompoundButton_));
+    ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(self, ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(self, self->measurableView_));
   }
 }
 
 void ASRadioButtonImpl_setAutoMaxTextSizeWithId_(ASRadioButtonImpl *self, id objValue) {
   self->autoSizeMax_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
   if ([self isInitialised]) {
-    ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(self, ASRadioButtonImpl_getAutoSizeTextTypeWithASMeasurableCompoundButton_(self, self->measurableCompoundButton_));
+    ASRadioButtonImpl_setAutoSizeTextTypeInternalWithInt_(self, ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(self, self->measurableView_));
   }
 }
 
@@ -4171,7 +4197,7 @@ id ASRadioButtonImpl_getAutoMaxTextSize(ASRadioButtonImpl *self) {
 }
 
 id ASRadioButtonImpl_getAutoSizeTextType(ASRadioButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_(ASRadioButtonImpl_getAutoSizeTextTypeWithASMeasurableCompoundButton_(self, self->measurableCompoundButton_));
+  return JavaLangInteger_valueOfWithInt_(ASRadioButtonImpl_getAutoSizeTextTypeWithADTextView_(self, self->measurableView_));
 }
 
 void ASRadioButtonImpl_setTextFormatWithId_(ASRadioButtonImpl *self, id objValue) {
@@ -4699,6 +4725,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
   ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
 }
 
+- (ADView *)inflateViewWithNSString:(NSString *)layout {
+  if (templates_ == nil) {
+    templates_ = new_JavaUtilHashMap_init();
+  }
+  id<ASIWidget> template_ = [templates_ getWithId:layout];
+  if (template_ == nil) {
+    template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
+    (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
+  }
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+}
+
+- (void)remeasure {
+  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+}
+
+- (void)removeFromParent {
+  [((id<ASHasWidgets>) nil_chk([this$0_ getParent])) removeWithASIWidget:this$0_];
+}
+
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation {
+  *IOSIntArray_GetRef(nil_chk(appScreenLocation), 0) = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  *IOSIntArray_GetRef(appScreenLocation, 1) = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+}
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame {
+  ((ADRect *) nil_chk(displayFrame))->left_ = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->top_ = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->right_ = displayFrame->left_ + [self getWidth];
+  displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
+}
+
 - (void)offsetTopAndBottomWithInt:(jint)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
@@ -4707,6 +4766,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
 - (void)offsetLeftAndRightWithInt:(jint)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
+}
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value {
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
 }
 
 - (void)setVisibilityWithInt:(jint)visibility {
@@ -4730,6 +4794,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
   return [this$0_ getLineHeightPadding];
 }
 
+- (jint)nativeMeasureWidthWithId:(id)uiView {
+  return ASViewImpl_nativeMeasureWidthWithId_(uiView);
+}
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width {
+  return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
+}
+
+- (jint)computeSizeWithFloat:(jfloat)width {
+  return [self nativeMeasureHeightWithId:this$0_->uiView_ withInt:JreFpToInt(width)];
+}
+
+- (NSString *)getText {
+  return (NSString *) cast_chk(ASRadioButtonImpl_getMyText(this$0_), [NSString class]);
+}
+
 - (void)__javaClone:(ASRadioButtonImpl_RadioButtonExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -4748,13 +4829,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 13, 14, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 16, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 22, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 27, 28, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 29, 30, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 31, 32, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -4770,21 +4861,32 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
   methods[8].selector = @selector(initialized);
   methods[9].selector = @selector(getAttributeWithASWidgetAttribute:);
   methods[10].selector = @selector(drawableStateChanged);
-  methods[11].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[12].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[13].selector = @selector(setVisibilityWithInt:);
-  methods[14].selector = @selector(getBorderPadding);
-  methods[15].selector = @selector(getLineHeight);
-  methods[16].selector = @selector(getBorderWidth);
-  methods[17].selector = @selector(getLineHeightPadding);
+  methods[11].selector = @selector(inflateViewWithNSString:);
+  methods[12].selector = @selector(remeasure);
+  methods[13].selector = @selector(removeFromParent);
+  methods[14].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[15].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[16].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[17].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[18].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[19].selector = @selector(setVisibilityWithInt:);
+  methods[20].selector = @selector(getBorderPadding);
+  methods[21].selector = @selector(getLineHeight);
+  methods[22].selector = @selector(getBorderWidth);
+  methods[23].selector = @selector(getLineHeightPadding);
+  methods[24].selector = @selector(nativeMeasureWidthWithId:);
+  methods[25].selector = @selector(nativeMeasureHeightWithId:withInt:);
+  methods[26].selector = @selector(computeSizeWithFloat:);
+  methods[27].selector = @selector(getText);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASRadioButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
     { "measureFinished_", "LASMeasureEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
   };
-  static const void *ptrTable[] = { "LASRadioButtonImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setVisibility" };
-  static const J2ObjcClassInfo _ASRadioButtonImpl_RadioButtonExt = { "RadioButtonExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 18, 3, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASRadioButtonImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "computeSize", "F", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASRadioButtonImpl_RadioButtonExt = { "RadioButtonExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 28, 4, 0, -1, -1, -1, -1 };
   return &_ASRadioButtonImpl_RadioButtonExt;
 }
 
@@ -4792,7 +4894,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
 
 void ASRadioButtonImpl_RadioButtonExt_initWithASRadioButtonImpl_(ASRadioButtonImpl_RadioButtonExt *self, ASRadioButtonImpl *outer$) {
   self->this$0_ = outer$;
-  ASMeasurableCompoundButton_initWithASIWidget_(self, outer$);
+  ADRadioButton_initWithASIWidget_(self, outer$);
   self->measureFinished_ = new_ASMeasureEvent_init();
   self->onLayoutEvent_ = new_ASOnLayoutEvent_init();
 }
@@ -4869,10 +4971,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DellocHandler)
 }
 
 - (void)onClickWithADView:(ADView *)v {
-  if ([((ASMeasurableCompoundButton *) nil_chk(this$0_->measurableCompoundButton_)) isEnabled]) {
+  if ([((ADRadioButton *) nil_chk(this$0_->measurableView_)) isEnabled]) {
     jboolean isChecked = [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(ASRadioButtonImpl_getChecked(this$0_), [JavaLangBoolean class]))) booleanValue];
     if (!isChecked || (isChecked && ASRadioButtonImpl_allowUnCheck(this$0_))) {
-      [((ASMeasurableCompoundButton *) nil_chk(this$0_->measurableCompoundButton_)) toggle];
+      [((ADRadioButton *) nil_chk(this$0_->measurableView_)) toggle];
     }
   }
 }
@@ -4979,8 +5081,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_MyCanvas)
 }
 
 - (void)doPerformWithId:(id)payload {
-  if (!onlyOnce_ || [((ASMeasurableCompoundButton *) nil_chk(this$0_->measurableCompoundButton_)) isLayoutRequested]) {
-    [((ASMeasurableCompoundButton *) nil_chk(this$0_->measurableCompoundButton_)) autoResizeText];
+  if (!onlyOnce_ || [((ADRadioButton *) nil_chk(this$0_->measurableView_)) isLayoutRequested]) {
+    [((ADRadioButton *) nil_chk(this$0_->measurableView_)) autoResizeText];
     onlyOnce_ = true;
   }
 }
@@ -6510,6 +6612,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_OnCheckedChangeListener)
   return self;
 }
 
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setTextAppearanceWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textAppearance"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
@@ -6674,6 +6785,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_OnCheckedChangeListener)
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 74, 4, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 75, 4, -1, -1, -1, -1 },
+    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 76, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -6840,12 +6952,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_OnCheckedChangeListener)
   methods[159].selector = @selector(getTextColor);
   methods[160].selector = @selector(setTextColorWithNSString:);
   methods[161].selector = @selector(setTextFormatWithNSString:);
+  methods[162].selector = @selector(setTextAppearanceWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASRadioButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASRadioButtonImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setChecked", "setOnCheckedChange", "setButton", "setButtonTint", "setButtonTintMode", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/RadioButtonImpl$RadioButtonCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASRadioButtonImpl_RadioButtonCommandBuilder = { "RadioButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 162, 1, 0, -1, -1, 76, -1 };
+  static const void *ptrTable[] = { "LASRadioButtonImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setChecked", "setOnCheckedChange", "setButton", "setButtonTint", "setButtonTintMode", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "setTextAppearance", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/RadioButtonImpl$RadioButtonCommandBuilder;>;" };
+  static const J2ObjcClassInfo _ASRadioButtonImpl_RadioButtonCommandBuilder = { "RadioButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 163, 1, 0, -1, -1, 77, -1 };
   return &_ASRadioButtonImpl_RadioButtonCommandBuilder;
 }
 
@@ -7333,6 +7446,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_RadioButtonCommandBuilder)
   (void) [((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextFormatWithNSString:value])) executeWithBoolean:true];
 }
 
+- (void)setTextAppearanceWithNSString:(NSString *)value {
+  (void) [((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextAppearanceWithNSString:value])) executeWithBoolean:true];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
@@ -7451,6 +7568,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_RadioButtonCommandBuilder)
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 73, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 74, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 75, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -7571,12 +7689,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_RadioButtonCommandBuilder)
   methods[113].selector = @selector(getTextColor);
   methods[114].selector = @selector(setTextColorWithNSString:);
   methods[115].selector = @selector(setTextFormatWithNSString:);
+  methods[116].selector = @selector(setTextAppearanceWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASRadioButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASRadioButtonImpl;", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "Z", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setChecked", "setOnCheckedChange", "setButton", "setButtonTint", "setButtonTintMode", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat" };
-  static const J2ObjcClassInfo _ASRadioButtonImpl_RadioButtonBean = { "RadioButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 116, 1, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASRadioButtonImpl;", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "Z", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setChecked", "setOnCheckedChange", "setButton", "setButtonTint", "setButtonTintMode", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "setTextAppearance" };
+  static const J2ObjcClassInfo _ASRadioButtonImpl_RadioButtonBean = { "RadioButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 117, 1, 0, -1, -1, -1, -1 };
   return &_ASRadioButtonImpl_RadioButtonBean;
 }
 

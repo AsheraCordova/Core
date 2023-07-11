@@ -28,10 +28,11 @@
 #define INCLUDE_ASICustomMeasureWidth 1
 #include "ICustomMeasureWidth.h"
 
-@class ASMeasurableCompoundButton;
+@class ADToggleButton;
 @class ASToggleButtonImpl_ToggleButtonBean;
 @class ASToggleButtonImpl_ToggleButtonCommandBuilder;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -40,13 +41,18 @@
 @interface ASToggleButtonImpl : ASBaseWidget < ASICustomMeasureHeight, ASICustomMeasureWidth > {
  @public
   id uiView_;
-  ASMeasurableCompoundButton *measurableCompoundButton_;
+  ADToggleButton *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -92,6 +98,8 @@
 
 - (id)getPluginWithNSString:(NSString *)plugin;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
@@ -123,24 +131,18 @@
 
 - (void)setPaddingTopWithId:(id)paddingTop;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 - (void)updatePadding;
 
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASToggleButtonImpl)
 
 J2OBJC_FIELD_SETTER(ASToggleButtonImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASToggleButtonImpl, measurableCompoundButton_, ASMeasurableCompoundButton *)
+J2OBJC_FIELD_SETTER(ASToggleButtonImpl, measurableView_, ADToggleButton *)
 
 inline NSString *ASToggleButtonImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -158,81 +160,21 @@ FOUNDATION_EXPORT ASToggleButtonImpl *new_ASToggleButtonImpl_init(void) NS_RETUR
 
 FOUNDATION_EXPORT ASToggleButtonImpl *create_ASToggleButtonImpl_init(void);
 
+FOUNDATION_EXPORT void ASToggleButtonImpl_initWithNSString_(ASToggleButtonImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASToggleButtonImpl *new_ASToggleButtonImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASToggleButtonImpl *create_ASToggleButtonImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASToggleButtonImpl_initWithNSString_withNSString_(ASToggleButtonImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASToggleButtonImpl *new_ASToggleButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASToggleButtonImpl *create_ASToggleButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
+
 J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl)
 
 @compatibility_alias ComAsheraLayoutToggleButtonImpl ASToggleButtonImpl;
-
-#endif
-
-#if !defined (ASToggleButtonImpl_Ellipsize_) && (INCLUDE_ALL_ToggleButtonImpl || defined(INCLUDE_ASToggleButtonImpl_Ellipsize))
-#define ASToggleButtonImpl_Ellipsize_
-
-#define RESTRICT_AbstractEnumToIntConverter 1
-#define INCLUDE_ASAbstractEnumToIntConverter 1
-#include "AbstractEnumToIntConverter.h"
-
-@class JavaLangInteger;
-@protocol JavaUtilMap;
-
-@interface ASToggleButtonImpl_Ellipsize : ASAbstractEnumToIntConverter
-
-#pragma mark Public
-
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASToggleButtonImpl_Ellipsize)
-
-FOUNDATION_EXPORT void ASToggleButtonImpl_Ellipsize_init(ASToggleButtonImpl_Ellipsize *self);
-
-FOUNDATION_EXPORT ASToggleButtonImpl_Ellipsize *new_ASToggleButtonImpl_Ellipsize_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ASToggleButtonImpl_Ellipsize *create_ASToggleButtonImpl_Ellipsize_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_Ellipsize)
-
-#endif
-
-#if !defined (ASToggleButtonImpl_JustificationMode_) && (INCLUDE_ALL_ToggleButtonImpl || defined(INCLUDE_ASToggleButtonImpl_JustificationMode))
-#define ASToggleButtonImpl_JustificationMode_
-
-#define RESTRICT_AbstractEnumToIntConverter 1
-#define INCLUDE_ASAbstractEnumToIntConverter 1
-#include "AbstractEnumToIntConverter.h"
-
-@class JavaLangInteger;
-@protocol JavaUtilMap;
-
-@interface ASToggleButtonImpl_JustificationMode : ASAbstractEnumToIntConverter
-
-#pragma mark Public
-
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASToggleButtonImpl_JustificationMode)
-
-FOUNDATION_EXPORT void ASToggleButtonImpl_JustificationMode_init(ASToggleButtonImpl_JustificationMode *self);
-
-FOUNDATION_EXPORT ASToggleButtonImpl_JustificationMode *new_ASToggleButtonImpl_JustificationMode_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ASToggleButtonImpl_JustificationMode *create_ASToggleButtonImpl_JustificationMode_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_JustificationMode)
 
 #endif
 
@@ -382,28 +324,105 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_TextStyle)
 
 #endif
 
+#if !defined (ASToggleButtonImpl_Ellipsize_) && (INCLUDE_ALL_ToggleButtonImpl || defined(INCLUDE_ASToggleButtonImpl_Ellipsize))
+#define ASToggleButtonImpl_Ellipsize_
+
+#define RESTRICT_AbstractEnumToIntConverter 1
+#define INCLUDE_ASAbstractEnumToIntConverter 1
+#include "AbstractEnumToIntConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASToggleButtonImpl_Ellipsize : ASAbstractEnumToIntConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASToggleButtonImpl_Ellipsize)
+
+FOUNDATION_EXPORT void ASToggleButtonImpl_Ellipsize_init(ASToggleButtonImpl_Ellipsize *self);
+
+FOUNDATION_EXPORT ASToggleButtonImpl_Ellipsize *new_ASToggleButtonImpl_Ellipsize_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASToggleButtonImpl_Ellipsize *create_ASToggleButtonImpl_Ellipsize_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_Ellipsize)
+
+#endif
+
+#if !defined (ASToggleButtonImpl_JustificationMode_) && (INCLUDE_ALL_ToggleButtonImpl || defined(INCLUDE_ASToggleButtonImpl_JustificationMode))
+#define ASToggleButtonImpl_JustificationMode_
+
+#define RESTRICT_AbstractEnumToIntConverter 1
+#define INCLUDE_ASAbstractEnumToIntConverter 1
+#include "AbstractEnumToIntConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASToggleButtonImpl_JustificationMode : ASAbstractEnumToIntConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASToggleButtonImpl_JustificationMode)
+
+FOUNDATION_EXPORT void ASToggleButtonImpl_JustificationMode_init(ASToggleButtonImpl_JustificationMode *self);
+
+FOUNDATION_EXPORT ASToggleButtonImpl_JustificationMode *new_ASToggleButtonImpl_JustificationMode_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASToggleButtonImpl_JustificationMode *create_ASToggleButtonImpl_JustificationMode_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_JustificationMode)
+
+#endif
+
 #if !defined (ASToggleButtonImpl_ToggleButtonExt_) && (INCLUDE_ALL_ToggleButtonImpl || defined(INCLUDE_ASToggleButtonImpl_ToggleButtonExt))
 #define ASToggleButtonImpl_ToggleButtonExt_
 
-#define RESTRICT_MeasurableCompoundButton 1
-#define INCLUDE_ASMeasurableCompoundButton 1
-#include "MeasurableCompoundButton.h"
+#define RESTRICT_ToggleButton 1
+#define INCLUDE_ADToggleButton 1
+#include "ToggleButton.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
+@class ADRect;
+@class ADView;
 @class ASToggleButtonImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASToggleButtonImpl_ToggleButtonExt : ASMeasurableCompoundButton < ASILifeCycleDecorator >
+@interface ASToggleButtonImpl_ToggleButtonExt : ADToggleButton < ASILifeCycleDecorator >
 
 #pragma mark Public
 
 - (instancetype)initWithASToggleButtonImpl:(ASToggleButtonImpl *)outer$;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)drawableStateChanged;
 
@@ -420,9 +439,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_TextStyle)
 
 - (jint)getLineHeightPadding;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
 
+- (NSString *)getText;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -433,9 +465,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_TextStyle)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -753,7 +792,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 

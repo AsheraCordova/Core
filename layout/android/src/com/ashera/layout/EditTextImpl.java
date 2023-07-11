@@ -296,6 +296,7 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editorExtras").withType("xmlresource"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("autoText").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAllCaps").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("setFocus").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectAll").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hintTextFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("text").withType("resourcestring"));
@@ -312,7 +313,8 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
 		ConverterFactory.register("EditText.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("EditText.textStyle"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("systemTextAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("password").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
@@ -334,6 +336,12 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
 	public EditTextImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  EditTextImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  EditTextImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class EditTextExt extends androidx.appcompat.widget.AppCompatEditText implements ILifeCycleDecorator{
@@ -346,11 +354,6 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
 
 		public EditTextExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -455,14 +458,14 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(EditTextImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((EditTextExt) appCompatEditText).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return EditTextExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new EditTextImpl();
+		return new EditTextImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -1045,6 +1048,16 @@ if (Build.VERSION.SDK_INT >= 11) {
 
 			}
 			break;
+			case "setFocus": {
+				
+
+
+		setFocus(objValue);
+
+
+
+			}
+			break;
 			case "selectAll": {
 				
 
@@ -1185,11 +1198,21 @@ if (Build.VERSION.SDK_INT >= 11) {
 
 			}
 			break;
-			case "textAppearance": {
+			case "systemTextAppearance": {
 				
 
 
 		TextViewCompat.setTextAppearance(appCompatEditText, (int)objValue);
+
+
+
+			}
+			break;
+			case "textAppearance": {
+				
+
+
+		ViewImpl.setStyle(this, objValue);
 
 
 
@@ -2993,6 +3016,14 @@ public EditTextCommandBuilder setTextAllCaps(boolean value) {
 
 	attrs.put("value", value);
 return this;}
+public EditTextCommandBuilder setSetFocus(boolean value) {
+	Map<String, Object> attrs = initCommand("setFocus");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public EditTextCommandBuilder selectAll(boolean value) {
 	Map<String, Object> attrs = initCommand("selectAll");
 	attrs.put("type", "attribute");
@@ -3121,6 +3152,14 @@ public EditTextCommandBuilder setTextStyle(String value) {
 return this;}
 public EditTextCommandBuilder setFontFamily(String value) {
 	Map<String, Object> attrs = initCommand("fontFamily");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public EditTextCommandBuilder setSystemTextAppearance(String value) {
+	Map<String, Object> attrs = initCommand("systemTextAppearance");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -3636,6 +3675,10 @@ public void setTextAllCaps(boolean value) {
 	getBuilder().reset().setTextAllCaps(value).execute(true);
 }
 
+public void setSetFocus(boolean value) {
+	getBuilder().reset().setSetFocus(value).execute(true);
+}
+
 public void selectAll(boolean value) {
 	getBuilder().reset().selectAll(value).execute(true);
 }
@@ -3696,6 +3739,10 @@ public void setTextStyle(String value) {
 
 public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
+}
+
+public void setSystemTextAppearance(String value) {
+	getBuilder().reset().setSystemTextAppearance(value).execute(true);
 }
 
 public void setTextAppearance(String value) {
@@ -3781,7 +3828,7 @@ public void setPaddingVertical(String value) {
 
     
 	//end - body
-	
+	//start - edittext
 	private static final int SIGNED = 2;
     private static final int DECIMAL = 4;
 	private void setNumeric(Object objValue) {
@@ -3996,4 +4043,14 @@ public void setPaddingVertical(String value) {
 		applyAttributeCommand("hint", CommonConverters.command_textformatter, new String[] {"hintTextFormat"}, true, (String) objValue);
 	}
 	//end - hinttextformat
+	
+	private void setFocus(Object objValue) {
+		if ((boolean)  objValue) {
+			appCompatEditText.requestFocus();
+		} else {
+			appCompatEditText.clearFocus();
+		}
+	}
+
+	//end - edittext	
 }

@@ -122,7 +122,7 @@ public class RelativeLayoutImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new RelativeLayoutImpl();
+		return new RelativeLayoutImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -168,7 +168,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		relativeLayout.removeView((View) w.asWidget());
 		return remove;
@@ -515,11 +515,6 @@ return layoutParams.alignWithParent;			}
 		public RelativeLayoutExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -631,12 +626,11 @@ return layoutParams.alignWithParent;			}
         	ViewImpl.drawableStateChanged(RelativeLayoutImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((RelativeLayoutExt) relativeLayout).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return RelativeLayoutExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {

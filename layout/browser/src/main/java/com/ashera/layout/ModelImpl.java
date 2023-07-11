@@ -28,10 +28,9 @@ public class ModelImpl extends BaseWidget {
 	public final static String LOCAL_NAME = "com.ashera.layout.Model"; 
 	public final static String GROUP_NAME = "Model";
 	
+	
 	@Override
 	public void loadAttributes(String attributeName) {
-		ViewImpl.register(attributeName);
-
 
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("param").withType("string"));
 
@@ -51,12 +50,32 @@ public class ModelImpl extends BaseWidget {
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
 		
-        viewStub = new View();
+        viewStub = new ViewExt();
         createView();
         ViewImpl.nativeMakeFrame(htmlElement, 0, 0, 0, 0);
 		nativeCreate(fragment, params);	
 	}
 	
+	public class ViewExt extends View{
+		@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(ModelImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}
+	}
 
     
     private void createView() {
@@ -69,7 +88,6 @@ public class ModelImpl extends BaseWidget {
 	@SuppressLint("NewApi")
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {		
 		Object nativeWidget = asNativeWidget();
-		ViewImpl.setAttribute(this, key, strValue, objValue, decorator);
 
 		switch (key.getAttributeName()) {
 			case "param": {
@@ -94,10 +112,6 @@ public class ModelImpl extends BaseWidget {
 	@Override
 	@SuppressLint("NewApi")
 	public Object getAttribute(WidgetAttribute key, ILifeCycleDecorator decorator) {
-		Object attributeValue = ViewImpl.getAttribute(this, key, decorator);
-		if (attributeValue != null) {
-			return attributeValue;
-		}
 		Object nativeWidget = asNativeWidget();
 		switch (key.getAttributeName()) {
 			case "param": {
@@ -124,5 +138,9 @@ return this.getModelParam();				}
     private void nativeCreate(IFragment fragment, Map<String, Object> params) {
     }
     
+    @Override
+	public Class getViewClass() {
+		return View.class;
+	}
 	//end - body
 }

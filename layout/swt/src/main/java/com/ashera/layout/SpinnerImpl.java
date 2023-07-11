@@ -41,7 +41,7 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 	public final static String GROUP_NAME = "Spinner";
 
 	protected org.eclipse.swt.widgets.Combo combo;
-	protected MeasurableTextView measurableTextView;	
+	protected r.android.widget.Spinner measurableView;	
 	
 		@SuppressLint("NewApi")
 		final static class Font extends AbstractEnumToIntConverter{
@@ -86,8 +86,6 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		ViewGroupModelImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("int"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hint").withType("resourcestring").withOrder(-2));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onItemSelected").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionTextPath").withType("string").withOrder(-1));
@@ -113,14 +111,22 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hint").withType("resourcestring").withOrder(-2));
 	}
 	
 	public SpinnerImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  SpinnerImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  SpinnerImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class SpinnerExt extends MeasurableTextView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
+	public class SpinnerExt extends r.android.widget.Spinner implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 		private int mMaxWidth = -1;
@@ -143,13 +149,8 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		}
 
 		public SpinnerExt() {
-			
-			
-			
-			
-			
-			
 			super(SpinnerImpl.this);
+			
 		}
 		
 		@Override
@@ -236,7 +237,46 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(SpinnerImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(SpinnerImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	SpinnerImpl.this.getParent().remove(SpinnerImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) asNativeWidget();
+			appScreenLocation[0] = control.toDisplay(0, 0).x;
+        	appScreenLocation[1] = control.toDisplay(0, 0).y;
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	org.eclipse.swt.widgets.Shell shell = ((org.eclipse.swt.widgets.Control)asNativeWidget()).getShell();
+        	displayFrame.left = shell.toDisplay(0, 0).x ;
+			displayFrame.top = shell.getShell().toDisplay(0, 0).y ;
+        	displayFrame.bottom = displayFrame.top + shell.getClientArea().height;
+        	displayFrame.right = displayFrame.left + shell.getBounds().width;
+        	
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -246,27 +286,40 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			SpinnerImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((SpinnerExt) measurableTextView).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+	}	@Override
+	public Class getViewClass() {
+		return SpinnerExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new SpinnerImpl();
+		return new SpinnerImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableTextView = new SpinnerExt();
+		measurableView = new SpinnerExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 	}
@@ -278,26 +331,6 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		ViewGroupModelImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "selection": {
-				
-
-
-		setSelection(objValue);
-
-
-
-			}
-			break;
-			case "hint": {
-				
-
-
-		setHint(objValue);
-
-
-
-			}
-			break;
 			case "entries": {
 				
 
@@ -528,6 +561,26 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 
 			}
 			break;
+			case "selection": {
+				
+
+
+		setSelection(objValue);
+
+
+
+			}
+			break;
+			case "hint": {
+				
+
+
+		setHint(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -543,8 +596,6 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 			return attributeValue;
 		}
 		switch (key.getAttributeName()) {
-			case "hint": {
-return hint;				}
 			case "selectedValue": {
 return getSelectedValue();				}
 			case "textColor": {
@@ -563,6 +614,8 @@ return getPaddingStart();				}
 return getPaddingEnd();				}
 			case "paddingTop": {
 return getPaddingTop();				}
+			case "hint": {
+return hint;				}
 		}
 		
 		return null;
@@ -570,7 +623,7 @@ return getPaddingTop();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableTextView;
+		return measurableView;
 	}
 
 	
@@ -616,19 +669,19 @@ return getPaddingTop();				}
 
 
 	private Object getPaddingBottom() {
-		return measurableTextView.getPaddingBottom();
+		return measurableView.getPaddingBottom();
 	}
 	
 	private Object getPaddingTop() {
-		return measurableTextView.getPaddingTop();
+		return measurableView.getPaddingTop();
 	}
 
 	private Object getPaddingRight() {
-		return measurableTextView.getPaddingRight();
+		return measurableView.getPaddingRight();
 	}
 	
 	private Object getPaddingLeft() {
-		return measurableTextView.getPaddingLeft();
+		return measurableView.getPaddingLeft();
 	}
 	
 	private Object getPaddingEnd() {
@@ -650,27 +703,27 @@ return getPaddingTop();				}
     }
 
 	private void setPaddingTop(Object objValue) {
-		ViewImpl.setPaddingTop(objValue, measurableTextView);
+		ViewImpl.setPaddingTop(objValue, measurableView);
 	}
 
 	private void setPaddingEnd(Object objValue) {
-		ViewImpl.setPaddingRight(objValue, measurableTextView);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingStart(Object objValue) {
-		ViewImpl.setPaddingLeft(objValue, measurableTextView);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 
 	private void setPaddingLeft(Object objValue) {
-		ViewImpl.setPaddingLeft(objValue, measurableTextView);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 
 	private void setPaddingRight(Object objValue) {
-		ViewImpl.setPaddingRight(objValue, measurableTextView);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingBottom(Object objValue) {
-		ViewImpl.setPaddingBottom(objValue, measurableTextView);
+		ViewImpl.setPaddingBottom(objValue, measurableView);
 	}
 
     private void setPadding(Object objValue) {
@@ -794,8 +847,8 @@ return getPaddingTop();				}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setTextColor(colorStateList);
-			objValue = measurableTextView.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		
 		combo.setForeground((Color)ViewImpl.getColor(objValue));
@@ -806,7 +859,7 @@ return getPaddingTop();				}
 	}
 
 	private Object getTextColor() {
-		return measurableTextView.getTextColors();
+		return measurableView.getTextColors();
 	}
     
 
@@ -1071,7 +1124,7 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(AdapterView<?>
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableTextView.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
@@ -1147,33 +1200,6 @@ public  class SpinnerCommandBuilder extends com.ashera.layout.ViewImpl.ViewComma
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public SpinnerCommandBuilder setSelection(int value) {
-	Map<String, Object> attrs = initCommand("selection");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder tryGetHint() {
-	Map<String, Object> attrs = initCommand("hint");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getHint() {
-	Map<String, Object> attrs = initCommand("hint");
-	return attrs.get("commandReturnValue");
-}
-public SpinnerCommandBuilder setHint(String value) {
-	Map<String, Object> attrs = initCommand("hint");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public SpinnerCommandBuilder setEntries(String value) {
 	Map<String, Object> attrs = initCommand("entries");
 	attrs.put("type", "attribute");
@@ -1457,22 +1483,38 @@ public SpinnerCommandBuilder setEditable(boolean value) {
 
 	attrs.put("value", value);
 return this;}
+public SpinnerCommandBuilder setSelection(int value) {
+	Map<String, Object> attrs = initCommand("selection");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder tryGetHint() {
+	Map<String, Object> attrs = initCommand("hint");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getHint() {
+	Map<String, Object> attrs = initCommand("hint");
+	return attrs.get("commandReturnValue");
+}
+public SpinnerCommandBuilder setHint(String value) {
+	Map<String, Object> attrs = initCommand("hint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class SpinnerBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public SpinnerBean() {
 			super(SpinnerImpl.this);
 		}
-public void setSelection(int value) {
-	getBuilder().reset().setSelection(value).execute(true);
-}
-
-public Object getHint() {
-	return getBuilder().reset().tryGetHint().execute(false).getHint(); 
-}
-public void setHint(String value) {
-	getBuilder().reset().setHint(value).execute(true);
-}
-
 public void setEntries(String value) {
 	getBuilder().reset().setEntries(value).execute(true);
 }
@@ -1592,6 +1634,17 @@ public void setEditable(boolean value) {
 	getBuilder().reset().setEditable(value).execute(true);
 }
 
+public void setSelection(int value) {
+	getBuilder().reset().setSelection(value).execute(true);
+}
+
+public Object getHint() {
+	return getBuilder().reset().tryGetHint().execute(false).getHint(); 
+}
+public void setHint(String value) {
+	getBuilder().reset().setHint(value).execute(true);
+}
+
 }
 
 
@@ -1651,7 +1704,7 @@ public void setEditable(boolean value) {
 		}
 
 		public void widgetSelected(org.eclipse.swt.events.SelectionEvent event) {
-			  onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableTextView, combo.getSelectionIndex(), 0);
+			  onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableView, combo.getSelectionIndex(), 0);
 		  }
 	}
 	private SelectionListener listener;
@@ -1663,7 +1716,7 @@ public void setEditable(boolean value) {
 		
 		combo.addSelectionListener(listener);
 		if (!isInitialised() && combo.getItems().length > 0) {
-			onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableTextView, combo.getSelectionIndex(), 0);
+			onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableView, combo.getSelectionIndex(), 0);
 		}
 	}
 

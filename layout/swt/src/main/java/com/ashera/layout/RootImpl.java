@@ -120,7 +120,7 @@ public class RootImpl extends BaseHasWidgets implements com.ashera.widget.IRoot 
 
 	@Override
 	public IWidget newInstance() {
-		return new RootImpl();
+		return new RootImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -146,7 +146,7 @@ public class RootImpl extends BaseHasWidgets implements com.ashera.widget.IRoot 
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		relativeLayout.removeView((View) w.asWidget());
          ViewGroupImpl.nativeRemoveView(w);            
@@ -486,12 +486,7 @@ return layoutParams.alignWithParent;			}
 		}
 
 		public RootExt() {
-			
-			
-			
-			
 			super();
-			
 			
 		}
 		
@@ -579,7 +574,46 @@ return layoutParams.alignWithParent;			}
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(RootImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(RootImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	RootImpl.this.getParent().remove(RootImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) asNativeWidget();
+			appScreenLocation[0] = control.toDisplay(0, 0).x;
+        	appScreenLocation[1] = control.toDisplay(0, 0).y;
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	org.eclipse.swt.widgets.Shell shell = ((org.eclipse.swt.widgets.Control)asNativeWidget()).getShell();
+        	displayFrame.left = shell.toDisplay(0, 0).x ;
+			displayFrame.top = shell.getShell().toDisplay(0, 0).y ;
+        	displayFrame.bottom = displayFrame.top + shell.getClientArea().height;
+        	displayFrame.right = displayFrame.left + shell.getBounds().width;
+        	
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -589,6 +623,10 @@ return layoutParams.alignWithParent;			}
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			RootImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
@@ -596,12 +634,11 @@ return layoutParams.alignWithParent;			}
             
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((RootExt) relativeLayout).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return RootExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -803,9 +840,8 @@ return relativeLayout.getGravity();			}
 		} else {
 			IWidget button = WidgetFactory.createWidget("TextView", "TextView", this, false);
 			button.setId("@+id/errorBanner");
-			button.setAttribute(WidgetFactory.getAttribute("TextView", "style"), "@style/error_banner", false);
-			button.setAttribute(WidgetFactory.getAttribute("TextView", "onClick"),
-					"onError(data = . from fatalErrors->view)", false);
+			button.setAttribute("style", "@style/error_banner", false);
+			button.setAttribute("onClick", "onError(data = . from fatalErrors->view)", false);
 		}}
 	
 
@@ -1796,6 +1832,7 @@ return this;}
     private void nativeCreate(Map<String, Object> params) {
 		org.eclipse.swt.widgets.Composite parent = (org.eclipse.swt.widgets.Composite) fragment.getParentForRootWidget();
 		pane = new org.eclipse.swt.widgets.Composite(parent, getStyle(params, fragment));
+		relativeLayout.initAttachInfo();
         ((org.eclipse.swt.widgets.Composite)pane).setLayout(new org.eclipse.nebula.widgets.layout.AbsoluteLayout());
         fragment.setRootWidget(this);
     }

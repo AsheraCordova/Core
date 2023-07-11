@@ -44,7 +44,6 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
-
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -96,6 +95,7 @@ export class TextStyleTransformer implements ITranform {
 
 
 
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class SpinnerImpl<T> extends ViewImpl<T>{
@@ -103,9 +103,6 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 	static initialize() {
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "selection" })
-	selection!:CommandAttr<number>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "entries" })
 	entries!:CommandAttr<string>| undefined;
@@ -208,13 +205,15 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "hint" })
 	hint!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "selection" })
+	selection!:CommandAttr<number>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
-		this.selection = undefined;
 		this.entries = undefined;
 		this.onItemSelected = undefined;
 		this.modelOptionTextPath = undefined;
@@ -249,6 +248,7 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 		this.drawableTint = undefined;
 		this.drawableTintMode = undefined;
 		this.hint = undefined;
+		this.selection = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -256,20 +256,6 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
-
-	public setSelection(value : number) : T {
-		this.resetIfRequired();
-		if (this.selection == null || this.selection == undefined) {
-			this.selection = new CommandAttr<number>();
-		}
-		
-		this.selection.setSetter(true);
-		this.selection.setValue(value);
-		this.orderSet++;
-		this.selection.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
 
 	public setEntries(value : string) : T {
 		this.resetIfRequired();
@@ -959,6 +945,20 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.hint.setValue(value);
 		this.orderSet++;
 		this.hint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSelection(value : number) : T {
+		this.resetIfRequired();
+		if (this.selection == null || this.selection == undefined) {
+			this.selection = new CommandAttr<number>();
+		}
+		
+		this.selection.setSetter(true);
+		this.selection.setValue(value);
+		this.orderSet++;
+		this.selection.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

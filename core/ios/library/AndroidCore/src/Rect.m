@@ -5,6 +5,7 @@
 
 #include "J2ObjC_source.h"
 #include "Rect.h"
+#include "java/lang/StringBuilder.h"
 
 
 @implementation ADRect
@@ -70,6 +71,28 @@ J2OBJC_IGNORE_DESIGNATED_END
   bottom_ += dy;
 }
 
+- (jboolean)containsWithADRect:(ADRect *)r {
+  return self->left_ < self->right_ && self->top_ < self->bottom_ && left_ <= ((ADRect *) nil_chk(r))->left_ && top_ <= r->top_ && right_ >= r->right_ && bottom_ >= r->bottom_;
+}
+
+- (NSString *)toShortString {
+  return [self toShortStringWithJavaLangStringBuilder:create_JavaLangStringBuilder_initWithInt_(32)];
+}
+
+- (NSString *)toShortStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)sb {
+  [((JavaLangStringBuilder *) nil_chk(sb)) setLengthWithInt:0];
+  [sb appendWithChar:'['];
+  [sb appendWithInt:left_];
+  [sb appendWithChar:','];
+  [sb appendWithInt:top_];
+  [sb appendWithNSString:@"]["];
+  [sb appendWithInt:right_];
+  [sb appendWithChar:','];
+  [sb appendWithInt:bottom_];
+  [sb appendWithChar:']'];
+  return [sb description];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -82,6 +105,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x11, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 6, 7, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -96,6 +122,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[7].selector = @selector(setEmpty);
   methods[8].selector = @selector(isEmpty);
   methods[9].selector = @selector(offsetWithInt:withInt:);
+  methods[10].selector = @selector(containsWithADRect:);
+  methods[11].selector = @selector(toShortString);
+  methods[12].selector = @selector(toShortStringWithJavaLangStringBuilder:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "left_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
@@ -103,8 +132,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "right_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
     { "bottom_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "IIII", "LADRect;", "set", "offset", "II" };
-  static const J2ObjcClassInfo _ADRect = { "Rect", "r.android.graphics", ptrTable, methods, fields, 7, 0x11, 10, 4, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "IIII", "LADRect;", "set", "offset", "II", "contains", "toShortString", "LJavaLangStringBuilder;" };
+  static const J2ObjcClassInfo _ADRect = { "Rect", "r.android.graphics", ptrTable, methods, fields, 7, 0x11, 13, 4, -1, -1, -1, -1, -1 };
   return &_ADRect;
 }
 

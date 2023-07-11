@@ -49,45 +49,8 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 	public final static String GROUP_NAME = "Button";
 
 	protected @Property Object uiView;
-	protected MeasurableTextView measurableTextView;		
+	protected r.android.widget.Button measurableView;		
 	
-		@SuppressLint("NewApi")
-		final static class Ellipsize extends AbstractEnumToIntConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("end",  LayoutNativeVars.NSLineBreakByTruncatingTail);
-				mapping.put("marquee",  LayoutNativeVars.NSLineBreakByMarquee);
-				mapping.put("middle",  LayoutNativeVars.NSLineBreakByTruncatingMiddle);
-				mapping.put("none",  LayoutNativeVars.NSLineBreakByClipping);
-				mapping.put("start",  LayoutNativeVars.NSLineBreakByTruncatingHead);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
-		@SuppressLint("NewApi")
-		final static class JustificationMode extends AbstractEnumToIntConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("inter_word",  LayoutNativeVars.NSTextAlignmentJustified);
-				mapping.put("none",  LayoutNativeVars.NSTextAlignmentLeft);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
 		@SuppressLint("NewApi")
 		final static class DrawableTintMode extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
@@ -166,37 +129,49 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 				return 0;
 				}
 				}
+		@SuppressLint("NewApi")
+		final static class Ellipsize extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("end",  LayoutNativeVars.NSLineBreakByTruncatingTail);
+				mapping.put("marquee",  LayoutNativeVars.NSLineBreakByMarquee);
+				mapping.put("middle",  LayoutNativeVars.NSLineBreakByTruncatingMiddle);
+				mapping.put("none",  LayoutNativeVars.NSLineBreakByClipping);
+				mapping.put("start",  LayoutNativeVars.NSLineBreakByTruncatingHead);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
+		final static class JustificationMode extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("inter_word",  LayoutNativeVars.NSTextAlignmentJustified);
+				mapping.put("none",  LayoutNativeVars.NSTextAlignmentLeft);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
 	
 	@Override
 	public void loadAttributes(String attributeName) {
 		ViewImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("text").withType("resourcestring").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("padding").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingBottom").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingRight").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingLeft").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingStart").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingEnd").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAllCaps").withType("boolean").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("singleLine").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		ConverterFactory.register("Button.ellipsize", new Ellipsize());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("ellipsize").withType("Button.ellipsize").withOrder(100));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		ConverterFactory.register("Button.justificationMode", new JustificationMode());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("justificationMode").withType("Button.justificationMode"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scrollHorizontally").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDx").withType("float"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDy").withType("float"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowColor").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
@@ -230,24 +205,50 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("text").withType("resourcestring").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("padding").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingBottom").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingRight").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingLeft").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingStart").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingEnd").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAllCaps").withType("boolean").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("singleLine").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		ConverterFactory.register("Button.ellipsize", new Ellipsize());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("ellipsize").withType("Button.ellipsize").withOrder(100));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		ConverterFactory.register("Button.justificationMode", new JustificationMode());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("justificationMode").withType("Button.justificationMode"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scrollHorizontally").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDx").withType("float"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDy").withType("float"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowColor").withType("color"));
 	}
 	
 	public ButtonImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ButtonImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ButtonImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 @com.google.j2objc.annotations.WeakOuter		
-	public class ButtonExt extends MeasurableTextView implements ILifeCycleDecorator{
+	public class ButtonExt extends r.android.widget.Button implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 
 		public ButtonExt() {
-			
-			
-			
 			super(ButtonImpl.this);
-			
-			
 			
 		}
 		
@@ -329,7 +330,44 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ButtonImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(ButtonImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	ButtonImpl.this.getParent().remove(ButtonImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -338,6 +376,10 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 		public void offsetLeftAndRight(int offset) {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
+		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			ButtonImpl.this.setAttribute(name, value, true);
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -359,21 +401,39 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 		  public int getLineHeightPadding(){
 		    return ButtonImpl.this.getLineHeightPadding();
 		  }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((ButtonExt) measurableTextView).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+        @Override
+        public int computeSize(float width) {
+        	return nativeMeasureHeight(uiView, (int) width);
+    	}
+		@Override
+		public java.lang.String getText() {
+			return (String) getMyText();
+		}
+
+	}	@Override
+	public Class getViewClass() {
+		return ButtonExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ButtonImpl();
+		return new ButtonImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableTextView = new ButtonExt();
+		measurableView = new ButtonExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 		setWidgetOnNativeClass();
@@ -389,236 +449,6 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 		ViewImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "text": {
-				
-
-
-		setMyText(objValue);
-
-
-
-			}
-			break;
-			case "gravity": {
-				
-
-
-		setGravity(objValue);
-
-
-
-			}
-			break;
-			case "textSize": {
-				
-
-
-		setMyTextSize(objValue);
-
-
-
-			}
-			break;
-			case "padding": {
-				
-
-
-		setPadding(objValue);
-
-
-
-			}
-			break;
-			case "paddingBottom": {
-				
-
-
-		setPaddingBottom(objValue);
-
-
-
-			}
-			break;
-			case "paddingRight": {
-				
-
-
-		setPaddingRight(objValue);
-
-
-
-			}
-			break;
-			case "paddingLeft": {
-				
-
-
-		setPaddingLeft(objValue);
-
-
-
-			}
-			break;
-			case "paddingStart": {
-				
-
-
-		setPaddingStart(objValue);
-
-
-
-			}
-			break;
-			case "paddingEnd": {
-				
-
-
-		setPaddingEnd(objValue);
-
-
-
-			}
-			break;
-			case "paddingTop": {
-				
-
-
-		setPaddingTop(objValue);
-
-
-
-			}
-			break;
-			case "paddingHorizontal": {
-				
-
-
-		setPaddingHorizontal(objValue);
-
-
-
-			}
-			break;
-			case "paddingVertical": {
-				
-
-
-		setPaddingVertical(objValue);
-
-
-
-			}
-			break;
-			case "textColor": {
-				
-
-
-		setTextColor(objValue);
-
-
-
-			}
-			break;
-			case "textAllCaps": {
-				
-
-
-		 setTextAllCaps(objValue);
-
-
-
-			}
-			break;
-			case "singleLine": {
-				
-
-
-		 setSingleLine(objValue);
-
-
-
-			}
-			break;
-			case "ellipsize": {
-				
-
-
-		 setEllipsize(objValue, strValue);
-
-
-
-			}
-			break;
-			case "firstBaselineToTopHeight": {
-				
-
-
-		setFirstBaselineToTopHeight(objValue);
-
-
-
-			}
-			break;
-			case "lastBaselineToBottomHeight": {
-				
-
-
-		setLastBaselineToBottomHeight(objValue);
-
-
-
-			}
-			break;
-			case "justificationMode": {
-				
-
-
-		 setJustificationMode(objValue, strValue);
-
-
-
-			}
-			break;
-			case "scrollHorizontally": {
-				
-
-
-		 setScrollHorizontally(objValue);
-
-
-
-			}
-			break;
-			case "shadowDx": {
-				
-
-
-		 setShadowDx((Float) objValue, strValue);
-
-
-
-			}
-			break;
-			case "shadowDy": {
-				
-
-
-		 setShadowDy((Float) objValue, strValue);
-
-
-
-			}
-			break;
-			case "shadowColor": {
-				
-
-
-		 setShadowColor(objValue, strValue);
-
-
-
-			}
-			break;
 			case "drawableLeft": {
 				
 
@@ -909,6 +739,236 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 
 			}
 			break;
+			case "text": {
+				
+
+
+		setMyText(objValue);
+
+
+
+			}
+			break;
+			case "gravity": {
+				
+
+
+		setGravity(objValue);
+
+
+
+			}
+			break;
+			case "textSize": {
+				
+
+
+		setMyTextSize(objValue);
+
+
+
+			}
+			break;
+			case "padding": {
+				
+
+
+		setPadding(objValue);
+
+
+
+			}
+			break;
+			case "paddingBottom": {
+				
+
+
+		setPaddingBottom(objValue);
+
+
+
+			}
+			break;
+			case "paddingRight": {
+				
+
+
+		setPaddingRight(objValue);
+
+
+
+			}
+			break;
+			case "paddingLeft": {
+				
+
+
+		setPaddingLeft(objValue);
+
+
+
+			}
+			break;
+			case "paddingStart": {
+				
+
+
+		setPaddingStart(objValue);
+
+
+
+			}
+			break;
+			case "paddingEnd": {
+				
+
+
+		setPaddingEnd(objValue);
+
+
+
+			}
+			break;
+			case "paddingTop": {
+				
+
+
+		setPaddingTop(objValue);
+
+
+
+			}
+			break;
+			case "paddingHorizontal": {
+				
+
+
+		setPaddingHorizontal(objValue);
+
+
+
+			}
+			break;
+			case "paddingVertical": {
+				
+
+
+		setPaddingVertical(objValue);
+
+
+
+			}
+			break;
+			case "textColor": {
+				
+
+
+		setTextColor(objValue);
+
+
+
+			}
+			break;
+			case "textAllCaps": {
+				
+
+
+		 setTextAllCaps(objValue);
+
+
+
+			}
+			break;
+			case "singleLine": {
+				
+
+
+		 setSingleLine(objValue);
+
+
+
+			}
+			break;
+			case "ellipsize": {
+				
+
+
+		 setEllipsize(objValue, strValue);
+
+
+
+			}
+			break;
+			case "firstBaselineToTopHeight": {
+				
+
+
+		setFirstBaselineToTopHeight(objValue);
+
+
+
+			}
+			break;
+			case "lastBaselineToBottomHeight": {
+				
+
+
+		setLastBaselineToBottomHeight(objValue);
+
+
+
+			}
+			break;
+			case "justificationMode": {
+				
+
+
+		 setJustificationMode(objValue, strValue);
+
+
+
+			}
+			break;
+			case "scrollHorizontally": {
+				
+
+
+		 setScrollHorizontally(objValue);
+
+
+
+			}
+			break;
+			case "shadowDx": {
+				
+
+
+		 setShadowDx((Float) objValue, strValue);
+
+
+
+			}
+			break;
+			case "shadowDy": {
+				
+
+
+		 setShadowDy((Float) objValue, strValue);
+
+
+
+			}
+			break;
+			case "shadowColor": {
+				
+
+
+		 setShadowColor(objValue, strValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -924,6 +984,30 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 			return attributeValue;
 		}
 		switch (key.getAttributeName()) {
+			case "drawablePadding": {
+return this.getDrawablePadding();				}
+			case "minLines": {
+return getMinLines();				}
+			case "maxLines": {
+return getMaxLines();				}
+			case "minWidth": {
+return getMinWidth();				}
+			case "minHeight": {
+return getMinHeight();				}
+			case "maxWidth": {
+return getMaxWidth();				}
+			case "maxHeight": {
+return getMaxHeight();				}
+			case "height": {
+return getHeight();				}
+			case "width": {
+return getWidth();				}
+			case "maxEms": {
+return getMaxEms();				}
+			case "minEms": {
+return getMinEms();				}
+			case "marqueeRepeatLimit": {
+return getMarqueeRepeatLimit();				}
 			case "text": {
 return getMyText();				}
 			case "gravity": {
@@ -958,30 +1042,6 @@ return getShadowDx();				}
 return getShadowDy();				}
 			case "shadowColor": {
 return getShadowColor();				}
-			case "drawablePadding": {
-return this.getDrawablePadding();				}
-			case "minLines": {
-return getMinLines();				}
-			case "maxLines": {
-return getMaxLines();				}
-			case "minWidth": {
-return getMinWidth();				}
-			case "minHeight": {
-return getMinHeight();				}
-			case "maxWidth": {
-return getMaxWidth();				}
-			case "maxHeight": {
-return getMaxHeight();				}
-			case "height": {
-return getHeight();				}
-			case "width": {
-return getWidth();				}
-			case "maxEms": {
-return getMaxEms();				}
-			case "minEms": {
-return getMinEms();				}
-			case "marqueeRepeatLimit": {
-return getMarqueeRepeatLimit();				}
 		}
 		
 		return null;
@@ -989,14 +1049,14 @@ return getMarqueeRepeatLimit();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableTextView;
+		return measurableView;
 	}
 
 	
 
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableTextView.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -1019,11 +1079,11 @@ return getMarqueeRepeatLimit();				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableTextView.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableTextView.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableTextView.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -1069,7 +1129,7 @@ return getMarqueeRepeatLimit();				}
     
 	
 	private Object getGravity() {
-		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableTextView.getVerticalAligment();
+		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableView.getVerticalAligment();
 		if (verticalAligment == null) {
 			verticalAligment = com.ashera.view.BaseMeasurableView.VerticalAligment.top;
 		}
@@ -1108,7 +1168,7 @@ return getMarqueeRepeatLimit();				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableTextView.getRawTextAlignment() != 0 || measurableTextView.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -1117,11 +1177,11 @@ return getMarqueeRepeatLimit();				}
 
 
     private Object getMinHeight() {
-        return measurableTextView.getMinHeight();
+        return measurableView.getMinHeight();
     }
 
     private Object getMinWidth() {
-        return measurableTextView.getMinWidth();
+        return measurableView.getMinWidth();
     }
     
     private void setEms(Object objValue) {
@@ -1131,27 +1191,27 @@ return getMarqueeRepeatLimit();				}
     
     
     public int getMaxEms() {
-        return measurableTextView.getMaxEms();
+        return measurableView.getMaxEms();
     }
     public int getMinEms() {
-        return measurableTextView.getMinEms();
+        return measurableView.getMinEms();
     }
 
     private void setMinEms(Object objValue) {
-    	measurableTextView.setMinEms((int) objValue);
+    	measurableView.setMinEms((int) objValue);
         addMinMaxListener();
     }
     
     public int getMinLines() {
-        return measurableTextView.getMinLines();
+        return measurableView.getMinLines();
     }
     
     public int getMaxLines() {
-        return measurableTextView.getMaxLines();
+        return measurableView.getMaxLines();
     }
 
     private void setMaxEms(Object objValue) {
-    	measurableTextView.setMaxEms((int) objValue);
+    	measurableView.setMaxEms((int) objValue);
         addMinMaxListener();
     }
 
@@ -1166,7 +1226,7 @@ return getMarqueeRepeatLimit();				}
     }
 
     private void setMaxLines(Object objValue) {
-    	measurableTextView.setMaxLines((int) objValue);
+    	measurableView.setMaxLines((int) objValue);
         addMinMaxListener();
     }
 
@@ -1176,47 +1236,47 @@ return getMarqueeRepeatLimit();				}
     }
 
     private void setMinLines(Object objValue) {
-    	measurableTextView.setMinLines((int) objValue);
+    	measurableView.setMinLines((int) objValue);
         addMinMaxListener();
     
     }
     
     private void setMaxHeight(Object objValue) {
-    	measurableTextView.setMaxHeight((int) objValue);
+    	measurableView.setMaxHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMaxWidth(Object objValue) {
-    	measurableTextView.setMaxWidth((int) objValue);
+    	measurableView.setMaxWidth((int) objValue);
         addMinMaxListener();
     }
 
     public int getMaxWidth() {
-        return measurableTextView.getMaxWidth();
+        return measurableView.getMaxWidth();
     }
 
     public int getMaxHeight() {
-        return measurableTextView.getMaxHeight();
+        return measurableView.getMaxHeight();
     }
     
     
     private void setMinHeight(Object objValue) {
-    	measurableTextView.setMinHeight((int) objValue);
+    	measurableView.setMinHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMinWidth(Object objValue) {
-    	measurableTextView.setMinWidth((int) objValue);
+    	measurableView.setMinWidth((int) objValue);
         addMinMaxListener();
     }
 
     
     private Object getWidth() {
-        return measurableTextView.getWidth();
+        return measurableView.getWidth();
     }
 
     private int getHeight() {
-        return measurableTextView.getHeight();
+        return measurableView.getHeight();
     }
 
     
@@ -1320,7 +1380,7 @@ return getMarqueeRepeatLimit();				}
         // in settings). At the moment, we don't.
         if (firstBaselineToTopHeight > Math.abs(fontMetricsTop)) {
             final int paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-           measurableTextView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
+            measurableView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
         }
 	}
 	
@@ -1351,7 +1411,7 @@ return getMarqueeRepeatLimit();				}
 
         if (lastBaselineToBottomHeight > Math.abs(fontMetricsBottom)) {
             final int paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-            measurableTextView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
+            measurableView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
         }		
 	}
 	
@@ -1489,10 +1549,10 @@ return getMarqueeRepeatLimit();				}
 	}
 	
 	private int getLabelWidth() {
-		if (measurableTextView.isIgnoreDrawableHeight()) {
-			return measurableTextView.getMeasuredWidth() - measurableTextView.getPaddingLeft() - measurableTextView.getPaddingRight(); 
+		if (measurableView.isIgnoreDrawableHeight()) {
+			return measurableView.getMeasuredWidth() - measurableView.getPaddingLeft() - measurableView.getPaddingRight(); 
 		}
-		return measurableTextView.getMeasuredWidth() - measurableTextView.getCompoundPaddingRight() - measurableTextView.getCompoundPaddingLeft();
+		return measurableView.getMeasuredWidth() - measurableView.getCompoundPaddingRight() - measurableView.getCompoundPaddingLeft();
 	}
 
 	private boolean isLabelMeasured() {
@@ -1524,30 +1584,30 @@ return getMarqueeRepeatLimit();				}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setTextColor(colorStateList);
-			objValue = measurableTextView.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		
 		setTextColor(uiView, ViewImpl.getColor(objValue));
 	}
 	
 	private Object getTextColorState() {
-		return measurableTextView.getTextColors();
+		return measurableView.getTextColors();
 	}
 	
 
 
 	private void setDrawablePadding(Object objValue) {
-		measurableTextView.setDrawablePadding((int) objValue);
+		measurableView.setDrawablePadding((int) objValue);
 		updatePadding();
 	}
 
 	private void setDrawableBottom(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setBottomDrawable(null);
+			measurableView.setBottomDrawable(null);
 			applyAttributeCommand("drawableBottom", "drawDrawableIcon", new String[] {}, false, "bottom");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setBottomDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setBottomDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("drawableBottom", "drawDrawableIcon", new String[] {}, true, "bottom");
 			updatePadding();
 		}
@@ -1555,10 +1615,10 @@ return getMarqueeRepeatLimit();				}
 
 	private void setDrawableTop(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setTopDrawable(null);
+			measurableView.setTopDrawable(null);
 			applyAttributeCommand("drawableTop", "drawDrawableIcon", new String[] {}, false, "top");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setTopDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setTopDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("drawableTop", "drawDrawableIcon", new String[] {}, true, "top");
 			updatePadding();
 		}
@@ -1574,10 +1634,10 @@ return getMarqueeRepeatLimit();				}
 
 	private void setDrawableRightInternal(String originalAttr, Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setRightDrawable(null);
+			measurableView.setRightDrawable(null);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, false, "right");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setRightDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setRightDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, true, "right");
 			updatePadding();
 		}		
@@ -1595,10 +1655,10 @@ return getMarqueeRepeatLimit();				}
 
 	private void setDrawableLeftInternal(String originalAttr, Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableTextView.setLeftDrawable(null);
+			measurableView.setLeftDrawable(null);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, false, "left");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableTextView.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, true, "left");
 			updatePadding();
 		}
@@ -1623,23 +1683,23 @@ return getMarqueeRepeatLimit();				}
 	]-*/;
 
 	private Object getDrawablePadding() {
-		return measurableTextView.getDrawablePadding();
+		return measurableView.getDrawablePadding();
 	}
 
 	private void setDrawableTintMode(Object value) {
-		if (measurableTextView.getLeftDrawable() != null) {
+		if (measurableView.getLeftDrawable() != null) {
 			applyAttributeCommand("drawableStart", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 			applyAttributeCommand("drawableLeft", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
-		if (measurableTextView.getRightDrawable() != null) {
+		if (measurableView.getRightDrawable() != null) {
 			applyAttributeCommand("drawableRight", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 			applyAttributeCommand("drawableEnd", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
 		
-		if (measurableTextView.getTopDrawable() != null) {
+		if (measurableView.getTopDrawable() != null) {
 			applyAttributeCommand("drawableTop", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
-		if (measurableTextView.getBottomDrawable() != null) {
+		if (measurableView.getBottomDrawable() != null) {
 			applyAttributeCommand("drawableBottom", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
 	}
@@ -1648,21 +1708,21 @@ return getMarqueeRepeatLimit();				}
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
 			this.drawableTint = colorStateList;
-			objValue = drawableTint.getColorForState(measurableTextView.getDrawableState(), r.android.graphics.Color.RED);
+			objValue = drawableTint.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
 		}
 		
-		if (measurableTextView.getLeftDrawable() != null) {
+		if (measurableView.getLeftDrawable() != null) {
 			applyAttributeCommand("drawableLeft", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 			applyAttributeCommand("drawableStart", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableTextView.getRightDrawable() != null) {
+		if (measurableView.getRightDrawable() != null) {
 			applyAttributeCommand("drawableRight", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));			
 			applyAttributeCommand("drawableEnd", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableTextView.getTopDrawable() != null) {
+		if (measurableView.getTopDrawable() != null) {
 			applyAttributeCommand("drawableTop", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableTextView.getBottomDrawable() != null) {
+		if (measurableView.getBottomDrawable() != null) {
 			applyAttributeCommand("drawableBottom", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
 	}
@@ -1673,17 +1733,17 @@ return getMarqueeRepeatLimit();				}
 	@Override
 	public void drawableStateChanged() {
 		super.drawableStateChanged();
-		drawableStateChange("bottom", measurableTextView.getBottomDrawable());
-		drawableStateChange("left", measurableTextView.getLeftDrawable());
-		drawableStateChange("right", measurableTextView.getRightDrawable());
-		drawableStateChange("top", measurableTextView.getTopDrawable());
+		drawableStateChange("bottom", measurableView.getBottomDrawable());
+		drawableStateChange("left", measurableView.getLeftDrawable());
+		drawableStateChange("right", measurableView.getRightDrawable());
+		drawableStateChange("top", measurableView.getTopDrawable());
 		
-		if (measurableTextView.getTextColors() != null && measurableTextView.getTextColors().isStateful()) {
-			setTextColor(measurableTextView.getCurrentTextColor());
+		if (measurableView.getTextColors() != null && measurableView.getTextColors().isStateful()) {
+			setTextColor(measurableView.getCurrentTextColor());
 		}
 		
-		if (measurableTextView.getHintTextColors() != null && measurableTextView.getHintTextColors().isStateful()) {
-			setHintColor(measurableTextView.getCurrentHintTextColor());
+		if (measurableView.getHintTextColors() != null && measurableView.getHintTextColors().isStateful()) {
+			setHintColor(measurableView.getCurrentHintTextColor());
 			syncPlaceholderLabel();
 		}
 		
@@ -1692,13 +1752,13 @@ return getMarqueeRepeatLimit();				}
 			invalidate();
 		}
 		
-		if (measurableTextView.getLinkTextColors() != null && measurableTextView.getLinkTextColors().isStateful()) {
-			setTextColorLink(measurableTextView.getLinkTextColors());
+		if (measurableView.getLinkTextColors() != null && measurableView.getLinkTextColors().isStateful()) {
+			setTextColorLink(measurableView.getLinkTextColors());
 		}
 	}
 
 	private void drawableStateChange(String type, r.android.graphics.drawable.Drawable dr) {
-		final int[] state = measurableTextView.getDrawableState();
+		final int[] state = measurableView.getDrawableState();
 
 		if (dr != null && dr.isStateful() && dr.setState(state)) {
 			switch (type) {
@@ -1891,10 +1951,14 @@ return getMarqueeRepeatLimit();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableTextView.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -1944,6 +2008,370 @@ public  class ButtonCommandBuilder extends com.ashera.layout.ViewImpl.ViewComman
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
+public ButtonCommandBuilder setDrawableLeft(String value) {
+	Map<String, Object> attrs = initCommand("drawableLeft");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setDrawableStart(String value) {
+	Map<String, Object> attrs = initCommand("drawableStart");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setDrawableRight(String value) {
+	Map<String, Object> attrs = initCommand("drawableRight");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setDrawableEnd(String value) {
+	Map<String, Object> attrs = initCommand("drawableEnd");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setDrawableTop(String value) {
+	Map<String, Object> attrs = initCommand("drawableTop");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setDrawableBottom(String value) {
+	Map<String, Object> attrs = initCommand("drawableBottom");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetDrawablePadding() {
+	Map<String, Object> attrs = initCommand("drawablePadding");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getDrawablePadding() {
+	Map<String, Object> attrs = initCommand("drawablePadding");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setDrawablePadding(String value) {
+	Map<String, Object> attrs = initCommand("drawablePadding");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setDrawableTint(String value) {
+	Map<String, Object> attrs = initCommand("drawableTint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setDrawableTintMode(String value) {
+	Map<String, Object> attrs = initCommand("drawableTintMode");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetMinLines() {
+	Map<String, Object> attrs = initCommand("minLines");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMinLines() {
+	Map<String, Object> attrs = initCommand("minLines");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setMinLines(int value) {
+	Map<String, Object> attrs = initCommand("minLines");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setLines(int value) {
+	Map<String, Object> attrs = initCommand("lines");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetMaxLines() {
+	Map<String, Object> attrs = initCommand("maxLines");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMaxLines() {
+	Map<String, Object> attrs = initCommand("maxLines");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setMaxLines(int value) {
+	Map<String, Object> attrs = initCommand("maxLines");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetMinWidth() {
+	Map<String, Object> attrs = initCommand("minWidth");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMinWidth() {
+	Map<String, Object> attrs = initCommand("minWidth");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setMinWidth(String value) {
+	Map<String, Object> attrs = initCommand("minWidth");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetMinHeight() {
+	Map<String, Object> attrs = initCommand("minHeight");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMinHeight() {
+	Map<String, Object> attrs = initCommand("minHeight");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setMinHeight(String value) {
+	Map<String, Object> attrs = initCommand("minHeight");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetMaxWidth() {
+	Map<String, Object> attrs = initCommand("maxWidth");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMaxWidth() {
+	Map<String, Object> attrs = initCommand("maxWidth");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setMaxWidth(String value) {
+	Map<String, Object> attrs = initCommand("maxWidth");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetMaxHeight() {
+	Map<String, Object> attrs = initCommand("maxHeight");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMaxHeight() {
+	Map<String, Object> attrs = initCommand("maxHeight");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setMaxHeight(String value) {
+	Map<String, Object> attrs = initCommand("maxHeight");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetHeight() {
+	Map<String, Object> attrs = initCommand("height");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getHeight() {
+	Map<String, Object> attrs = initCommand("height");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setHeight(String value) {
+	Map<String, Object> attrs = initCommand("height");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetWidth() {
+	Map<String, Object> attrs = initCommand("width");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getWidth() {
+	Map<String, Object> attrs = initCommand("width");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setWidth(String value) {
+	Map<String, Object> attrs = initCommand("width");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetMaxEms() {
+	Map<String, Object> attrs = initCommand("maxEms");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMaxEms() {
+	Map<String, Object> attrs = initCommand("maxEms");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setMaxEms(int value) {
+	Map<String, Object> attrs = initCommand("maxEms");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetMinEms() {
+	Map<String, Object> attrs = initCommand("minEms");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMinEms() {
+	Map<String, Object> attrs = initCommand("minEms");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setMinEms(int value) {
+	Map<String, Object> attrs = initCommand("minEms");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setEms(int value) {
+	Map<String, Object> attrs = initCommand("ems");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder tryGetMarqueeRepeatLimit() {
+	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMarqueeRepeatLimit() {
+	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
+	return attrs.get("commandReturnValue");
+}
+public ButtonCommandBuilder setMarqueeRepeatLimit(String value) {
+	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setEditable(boolean value) {
+	Map<String, Object> attrs = initCommand("editable");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setMaxLength(int value) {
+	Map<String, Object> attrs = initCommand("maxLength");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setTypeface(String value) {
+	Map<String, Object> attrs = initCommand("typeface");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setTextStyle(String value) {
+	Map<String, Object> attrs = initCommand("textStyle");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setFontFamily(String value) {
+	Map<String, Object> attrs = initCommand("fontFamily");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setTextFormat(String value) {
+	Map<String, Object> attrs = initCommand("textFormat");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ButtonCommandBuilder setEnabled(boolean value) {
+	Map<String, Object> attrs = initCommand("enabled");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public ButtonCommandBuilder tryGetText() {
 	Map<String, Object> attrs = initCommand("text");
 	attrs.put("type", "attribute");
@@ -2315,518 +2743,11 @@ public ButtonCommandBuilder setShadowColor(String value) {
 
 	attrs.put("value", value);
 return this;}
-public ButtonCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setDrawableStart(String value) {
-	Map<String, Object> attrs = initCommand("drawableStart");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setDrawableEnd(String value) {
-	Map<String, Object> attrs = initCommand("drawableEnd");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setDrawableTop(String value) {
-	Map<String, Object> attrs = initCommand("drawableTop");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setDrawableBottom(String value) {
-	Map<String, Object> attrs = initCommand("drawableBottom");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetDrawablePadding() {
-	Map<String, Object> attrs = initCommand("drawablePadding");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getDrawablePadding() {
-	Map<String, Object> attrs = initCommand("drawablePadding");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setDrawablePadding(String value) {
-	Map<String, Object> attrs = initCommand("drawablePadding");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setDrawableTint(String value) {
-	Map<String, Object> attrs = initCommand("drawableTint");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setDrawableTintMode(String value) {
-	Map<String, Object> attrs = initCommand("drawableTintMode");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetMinLines() {
-	Map<String, Object> attrs = initCommand("minLines");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMinLines() {
-	Map<String, Object> attrs = initCommand("minLines");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setMinLines(int value) {
-	Map<String, Object> attrs = initCommand("minLines");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setLines(int value) {
-	Map<String, Object> attrs = initCommand("lines");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetMaxLines() {
-	Map<String, Object> attrs = initCommand("maxLines");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMaxLines() {
-	Map<String, Object> attrs = initCommand("maxLines");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setMaxLines(int value) {
-	Map<String, Object> attrs = initCommand("maxLines");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetMinWidth() {
-	Map<String, Object> attrs = initCommand("minWidth");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMinWidth() {
-	Map<String, Object> attrs = initCommand("minWidth");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setMinWidth(String value) {
-	Map<String, Object> attrs = initCommand("minWidth");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetMinHeight() {
-	Map<String, Object> attrs = initCommand("minHeight");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMinHeight() {
-	Map<String, Object> attrs = initCommand("minHeight");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setMinHeight(String value) {
-	Map<String, Object> attrs = initCommand("minHeight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetMaxWidth() {
-	Map<String, Object> attrs = initCommand("maxWidth");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMaxWidth() {
-	Map<String, Object> attrs = initCommand("maxWidth");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setMaxWidth(String value) {
-	Map<String, Object> attrs = initCommand("maxWidth");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetMaxHeight() {
-	Map<String, Object> attrs = initCommand("maxHeight");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMaxHeight() {
-	Map<String, Object> attrs = initCommand("maxHeight");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setMaxHeight(String value) {
-	Map<String, Object> attrs = initCommand("maxHeight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetHeight() {
-	Map<String, Object> attrs = initCommand("height");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getHeight() {
-	Map<String, Object> attrs = initCommand("height");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setHeight(String value) {
-	Map<String, Object> attrs = initCommand("height");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetWidth() {
-	Map<String, Object> attrs = initCommand("width");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getWidth() {
-	Map<String, Object> attrs = initCommand("width");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setWidth(String value) {
-	Map<String, Object> attrs = initCommand("width");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetMaxEms() {
-	Map<String, Object> attrs = initCommand("maxEms");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMaxEms() {
-	Map<String, Object> attrs = initCommand("maxEms");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setMaxEms(int value) {
-	Map<String, Object> attrs = initCommand("maxEms");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetMinEms() {
-	Map<String, Object> attrs = initCommand("minEms");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMinEms() {
-	Map<String, Object> attrs = initCommand("minEms");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setMinEms(int value) {
-	Map<String, Object> attrs = initCommand("minEms");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setEms(int value) {
-	Map<String, Object> attrs = initCommand("ems");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder tryGetMarqueeRepeatLimit() {
-	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMarqueeRepeatLimit() {
-	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
-	return attrs.get("commandReturnValue");
-}
-public ButtonCommandBuilder setMarqueeRepeatLimit(String value) {
-	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setEditable(boolean value) {
-	Map<String, Object> attrs = initCommand("editable");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setMaxLength(int value) {
-	Map<String, Object> attrs = initCommand("maxLength");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setTypeface(String value) {
-	Map<String, Object> attrs = initCommand("typeface");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setTextStyle(String value) {
-	Map<String, Object> attrs = initCommand("textStyle");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setFontFamily(String value) {
-	Map<String, Object> attrs = initCommand("fontFamily");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setTextFormat(String value) {
-	Map<String, Object> attrs = initCommand("textFormat");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ButtonCommandBuilder setEnabled(boolean value) {
-	Map<String, Object> attrs = initCommand("enabled");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 }
 public class ButtonBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public ButtonBean() {
 			super(ButtonImpl.this);
 		}
-public Object getText() {
-	return getBuilder().reset().tryGetText().execute(false).getText(); 
-}
-public void setText(String value) {
-	getBuilder().reset().setText(value).execute(true);
-}
-
-public Object getGravity() {
-	return getBuilder().reset().tryGetGravity().execute(false).getGravity(); 
-}
-public void setGravity(String value) {
-	getBuilder().reset().setGravity(value).execute(true);
-}
-
-public Object getTextSize() {
-	return getBuilder().reset().tryGetTextSize().execute(false).getTextSize(); 
-}
-public void setTextSize(String value) {
-	getBuilder().reset().setTextSize(value).execute(true);
-}
-
-public void setPadding(String value) {
-	getBuilder().reset().setPadding(value).execute(true);
-}
-
-public Object getPaddingBottom() {
-	return getBuilder().reset().tryGetPaddingBottom().execute(false).getPaddingBottom(); 
-}
-public void setPaddingBottom(String value) {
-	getBuilder().reset().setPaddingBottom(value).execute(true);
-}
-
-public Object getPaddingRight() {
-	return getBuilder().reset().tryGetPaddingRight().execute(false).getPaddingRight(); 
-}
-public void setPaddingRight(String value) {
-	getBuilder().reset().setPaddingRight(value).execute(true);
-}
-
-public Object getPaddingLeft() {
-	return getBuilder().reset().tryGetPaddingLeft().execute(false).getPaddingLeft(); 
-}
-public void setPaddingLeft(String value) {
-	getBuilder().reset().setPaddingLeft(value).execute(true);
-}
-
-public Object getPaddingStart() {
-	return getBuilder().reset().tryGetPaddingStart().execute(false).getPaddingStart(); 
-}
-public void setPaddingStart(String value) {
-	getBuilder().reset().setPaddingStart(value).execute(true);
-}
-
-public Object getPaddingEnd() {
-	return getBuilder().reset().tryGetPaddingEnd().execute(false).getPaddingEnd(); 
-}
-public void setPaddingEnd(String value) {
-	getBuilder().reset().setPaddingEnd(value).execute(true);
-}
-
-public Object getPaddingTop() {
-	return getBuilder().reset().tryGetPaddingTop().execute(false).getPaddingTop(); 
-}
-public void setPaddingTop(String value) {
-	getBuilder().reset().setPaddingTop(value).execute(true);
-}
-
-public void setPaddingHorizontal(String value) {
-	getBuilder().reset().setPaddingHorizontal(value).execute(true);
-}
-
-public void setPaddingVertical(String value) {
-	getBuilder().reset().setPaddingVertical(value).execute(true);
-}
-
-public Object getTextColor() {
-	return getBuilder().reset().tryGetTextColor().execute(false).getTextColor(); 
-}
-public void setTextColor(String value) {
-	getBuilder().reset().setTextColor(value).execute(true);
-}
-
-public void setTextAllCaps(boolean value) {
-	getBuilder().reset().setTextAllCaps(value).execute(true);
-}
-
-public void setSingleLine(boolean value) {
-	getBuilder().reset().setSingleLine(value).execute(true);
-}
-
-public Object getEllipsize() {
-	return getBuilder().reset().tryGetEllipsize().execute(false).getEllipsize(); 
-}
-public void setEllipsize(String value) {
-	getBuilder().reset().setEllipsize(value).execute(true);
-}
-
-public Object getFirstBaselineToTopHeight() {
-	return getBuilder().reset().tryGetFirstBaselineToTopHeight().execute(false).getFirstBaselineToTopHeight(); 
-}
-public void setFirstBaselineToTopHeight(String value) {
-	getBuilder().reset().setFirstBaselineToTopHeight(value).execute(true);
-}
-
-public Object getLastBaselineToBottomHeight() {
-	return getBuilder().reset().tryGetLastBaselineToBottomHeight().execute(false).getLastBaselineToBottomHeight(); 
-}
-public void setLastBaselineToBottomHeight(String value) {
-	getBuilder().reset().setLastBaselineToBottomHeight(value).execute(true);
-}
-
-public Object getJustificationMode() {
-	return getBuilder().reset().tryGetJustificationMode().execute(false).getJustificationMode(); 
-}
-public void setJustificationMode(String value) {
-	getBuilder().reset().setJustificationMode(value).execute(true);
-}
-
-public void setScrollHorizontally(boolean value) {
-	getBuilder().reset().setScrollHorizontally(value).execute(true);
-}
-
-public Object getShadowDx() {
-	return getBuilder().reset().tryGetShadowDx().execute(false).getShadowDx(); 
-}
-public void setShadowDx(float value) {
-	getBuilder().reset().setShadowDx(value).execute(true);
-}
-
-public Object getShadowDy() {
-	return getBuilder().reset().tryGetShadowDy().execute(false).getShadowDy(); 
-}
-public void setShadowDy(float value) {
-	getBuilder().reset().setShadowDy(value).execute(true);
-}
-
-public Object getShadowColor() {
-	return getBuilder().reset().tryGetShadowColor().execute(false).getShadowColor(); 
-}
-public void setShadowColor(String value) {
-	getBuilder().reset().setShadowColor(value).execute(true);
-}
-
 public void setDrawableLeft(String value) {
 	getBuilder().reset().setDrawableLeft(value).execute(true);
 }
@@ -2979,6 +2900,149 @@ public void setEnabled(boolean value) {
 	getBuilder().reset().setEnabled(value).execute(true);
 }
 
+public Object getText() {
+	return getBuilder().reset().tryGetText().execute(false).getText(); 
+}
+public void setText(String value) {
+	getBuilder().reset().setText(value).execute(true);
+}
+
+public Object getGravity() {
+	return getBuilder().reset().tryGetGravity().execute(false).getGravity(); 
+}
+public void setGravity(String value) {
+	getBuilder().reset().setGravity(value).execute(true);
+}
+
+public Object getTextSize() {
+	return getBuilder().reset().tryGetTextSize().execute(false).getTextSize(); 
+}
+public void setTextSize(String value) {
+	getBuilder().reset().setTextSize(value).execute(true);
+}
+
+public void setPadding(String value) {
+	getBuilder().reset().setPadding(value).execute(true);
+}
+
+public Object getPaddingBottom() {
+	return getBuilder().reset().tryGetPaddingBottom().execute(false).getPaddingBottom(); 
+}
+public void setPaddingBottom(String value) {
+	getBuilder().reset().setPaddingBottom(value).execute(true);
+}
+
+public Object getPaddingRight() {
+	return getBuilder().reset().tryGetPaddingRight().execute(false).getPaddingRight(); 
+}
+public void setPaddingRight(String value) {
+	getBuilder().reset().setPaddingRight(value).execute(true);
+}
+
+public Object getPaddingLeft() {
+	return getBuilder().reset().tryGetPaddingLeft().execute(false).getPaddingLeft(); 
+}
+public void setPaddingLeft(String value) {
+	getBuilder().reset().setPaddingLeft(value).execute(true);
+}
+
+public Object getPaddingStart() {
+	return getBuilder().reset().tryGetPaddingStart().execute(false).getPaddingStart(); 
+}
+public void setPaddingStart(String value) {
+	getBuilder().reset().setPaddingStart(value).execute(true);
+}
+
+public Object getPaddingEnd() {
+	return getBuilder().reset().tryGetPaddingEnd().execute(false).getPaddingEnd(); 
+}
+public void setPaddingEnd(String value) {
+	getBuilder().reset().setPaddingEnd(value).execute(true);
+}
+
+public Object getPaddingTop() {
+	return getBuilder().reset().tryGetPaddingTop().execute(false).getPaddingTop(); 
+}
+public void setPaddingTop(String value) {
+	getBuilder().reset().setPaddingTop(value).execute(true);
+}
+
+public void setPaddingHorizontal(String value) {
+	getBuilder().reset().setPaddingHorizontal(value).execute(true);
+}
+
+public void setPaddingVertical(String value) {
+	getBuilder().reset().setPaddingVertical(value).execute(true);
+}
+
+public Object getTextColor() {
+	return getBuilder().reset().tryGetTextColor().execute(false).getTextColor(); 
+}
+public void setTextColor(String value) {
+	getBuilder().reset().setTextColor(value).execute(true);
+}
+
+public void setTextAllCaps(boolean value) {
+	getBuilder().reset().setTextAllCaps(value).execute(true);
+}
+
+public void setSingleLine(boolean value) {
+	getBuilder().reset().setSingleLine(value).execute(true);
+}
+
+public Object getEllipsize() {
+	return getBuilder().reset().tryGetEllipsize().execute(false).getEllipsize(); 
+}
+public void setEllipsize(String value) {
+	getBuilder().reset().setEllipsize(value).execute(true);
+}
+
+public Object getFirstBaselineToTopHeight() {
+	return getBuilder().reset().tryGetFirstBaselineToTopHeight().execute(false).getFirstBaselineToTopHeight(); 
+}
+public void setFirstBaselineToTopHeight(String value) {
+	getBuilder().reset().setFirstBaselineToTopHeight(value).execute(true);
+}
+
+public Object getLastBaselineToBottomHeight() {
+	return getBuilder().reset().tryGetLastBaselineToBottomHeight().execute(false).getLastBaselineToBottomHeight(); 
+}
+public void setLastBaselineToBottomHeight(String value) {
+	getBuilder().reset().setLastBaselineToBottomHeight(value).execute(true);
+}
+
+public Object getJustificationMode() {
+	return getBuilder().reset().tryGetJustificationMode().execute(false).getJustificationMode(); 
+}
+public void setJustificationMode(String value) {
+	getBuilder().reset().setJustificationMode(value).execute(true);
+}
+
+public void setScrollHorizontally(boolean value) {
+	getBuilder().reset().setScrollHorizontally(value).execute(true);
+}
+
+public Object getShadowDx() {
+	return getBuilder().reset().tryGetShadowDx().execute(false).getShadowDx(); 
+}
+public void setShadowDx(float value) {
+	getBuilder().reset().setShadowDx(value).execute(true);
+}
+
+public Object getShadowDy() {
+	return getBuilder().reset().tryGetShadowDy().execute(false).getShadowDy(); 
+}
+public void setShadowDy(float value) {
+	getBuilder().reset().setShadowDy(value).execute(true);
+}
+
+public Object getShadowColor() {
+	return getBuilder().reset().tryGetShadowColor().execute(false).getShadowColor(); 
+}
+public void setShadowColor(String value) {
+	getBuilder().reset().setShadowColor(value).execute(true);
+}
+
 }
 
 
@@ -3048,7 +3112,7 @@ public void setEnabled(boolean value) {
 	]-*/;
 	
 	private void setVerticalAligmentCenter() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 		nativeSetVerticalAligmentCenter();
 	}
 
@@ -3067,12 +3131,12 @@ public void setEnabled(boolean value) {
 
 
 	private void setVerticalAligmentBottom() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 		nativeSetVerticalAligmentBottom();
 	}
 
 	private void setVerticalAligmentTop() {
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 		nativeSetVerticalAligmentTop();
 	}
 
@@ -3100,34 +3164,34 @@ public void setEnabled(boolean value) {
     
     //start - paddingcopy
 	public Object getPaddingLeft() {
-		return ViewImpl.getPaddingLeft(this, measurableTextView);
+		return ViewImpl.getPaddingLeft(this, measurableView);
 	}
 
 	public void setPaddingLeft(Object paddingLeft) {
-		ViewImpl.setPaddingLeft(paddingLeft, measurableTextView);
-		nativeSetPaddingLeft(measurableTextView.getCompoundPaddingLeft());
+		ViewImpl.setPaddingLeft(paddingLeft, measurableView);
+		nativeSetPaddingLeft(measurableView.getCompoundPaddingLeft());
 	}
 
 	public Object getPaddingRight() {
-		return ViewImpl.getPaddingRight(this, measurableTextView);
+		return ViewImpl.getPaddingRight(this, measurableView);
 	}
 
 	public void setPaddingRight(Object paddingRight) {
-		ViewImpl.setPaddingRight(paddingRight, measurableTextView);
-		nativeSetPaddingRight(measurableTextView.getCompoundPaddingRight());
+		ViewImpl.setPaddingRight(paddingRight, measurableView);
+		nativeSetPaddingRight(measurableView.getCompoundPaddingRight());
 	}
 
 	public Object getPaddingTop() {
-		return ViewImpl.getPaddingTop(this, measurableTextView);
+		return ViewImpl.getPaddingTop(this, measurableView);
 	}
 
 	public void setPaddingTop(Object paddingTop) {
-		ViewImpl.setPaddingTop(paddingTop, measurableTextView);
-		nativeSetPaddingTop(measurableTextView.getCompoundPaddingTop());
+		ViewImpl.setPaddingTop(paddingTop, measurableView);
+		nativeSetPaddingTop(measurableView.getCompoundPaddingTop());
 	}
 
 	public Object getPaddingBottom() {
-		return ViewImpl.getPaddingBottom(this, measurableTextView);
+		return ViewImpl.getPaddingBottom(this, measurableView);
 	}
 	
 	private Object getPaddingEnd() {
@@ -3139,8 +3203,8 @@ public void setEnabled(boolean value) {
 	}	
 
 	public void setPaddingBottom(Object paddingBottom) {
-		ViewImpl.setPaddingBottom(paddingBottom, measurableTextView);
-		nativeSetPaddingBottom(measurableTextView.getCompoundPaddingBottom());
+		ViewImpl.setPaddingBottom(paddingBottom, measurableView);
+		nativeSetPaddingBottom(measurableView.getCompoundPaddingBottom());
 	}
 
 	private void setPaddingVertical(Object objValue) {
@@ -3167,10 +3231,10 @@ public void setEnabled(boolean value) {
 	}
 
     public void updatePadding() {
-    	setPaddingLeft(measurableTextView.getPaddingLeft());
-    	setPaddingRight(measurableTextView.getPaddingRight());
-    	setPaddingTop(measurableTextView.getPaddingTop());
-    	setPaddingBottom(measurableTextView.getPaddingBottom());
+    	setPaddingLeft(measurableView.getPaddingLeft());
+    	setPaddingRight(measurableView.getPaddingRight());
+    	setPaddingTop(measurableView.getPaddingTop());
+    	setPaddingBottom(measurableView.getPaddingBottom());
     }
 	private native void nativeSetPaddingBottom(int value) /*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);

@@ -213,6 +213,12 @@ public class ProgressBarImpl extends BaseWidget {
 	public ProgressBarImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ProgressBarImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ProgressBarImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class ProgressBarExt extends android.widget.ProgressBar implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
@@ -246,11 +252,6 @@ public class ProgressBarImpl extends BaseWidget {
 	    }
 		public ProgressBarExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -362,14 +363,14 @@ public class ProgressBarImpl extends BaseWidget {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ProgressBarImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((ProgressBarExt) progressBar).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return ProgressBarExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ProgressBarImpl();
+		return new ProgressBarImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")

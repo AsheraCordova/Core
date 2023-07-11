@@ -60,7 +60,7 @@ public class TableRowImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new TableRowImpl();
+		return new TableRowImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -81,7 +81,7 @@ public class TableRowImpl extends BaseHasWidgets {
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		tableRow.removeView((View) w.asWidget());
          ViewGroupImpl.nativeRemoveView(w);            
@@ -236,12 +236,7 @@ return layoutParams.span;			}
 		}
 
 		public TableRowExt() {
-			
-			
-			
-			
 			super();
-			
 			
 		}
 		
@@ -329,7 +324,45 @@ return layoutParams.span;			}
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(TableRowImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(TableRowImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	TableRowImpl.this.getParent().remove(TableRowImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = htmlElement.getBoundingClientRect().getLeft();
+        	appScreenLocation[1] = htmlElement.getBoundingClientRect().getTop();
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	org.teavm.jso.dom.html.TextRectangle boundingClientRect = htmlElement.getBoundingClientRect();
+			displayFrame.top = boundingClientRect.getTop();
+        	displayFrame.left = boundingClientRect.getLeft();
+        	displayFrame.bottom = boundingClientRect.getBottom();
+        	displayFrame.right = boundingClientRect.getRight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -339,6 +372,10 @@ return layoutParams.span;			}
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			TableRowImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
@@ -346,12 +383,11 @@ return layoutParams.span;			}
             
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((TableRowExt) tableRow).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return TableRowExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -573,6 +609,10 @@ public java.util.Map<String, Object> getOnChildViewAddedEventObj(View parent,Vie
 	}
 	
     
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
 
 	
 private TableRowCommandBuilder builder;

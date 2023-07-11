@@ -25,6 +25,7 @@
 @class ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;
 @class ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -74,6 +75,8 @@
 
 - (id)getScrollY;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)localName;
@@ -110,8 +113,7 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 @end
 
@@ -166,8 +168,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADRect;
+@class ADView;
 @class ASHorizontalScrollViewImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
@@ -185,11 +190,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -202,6 +213,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -209,6 +224,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -465,6 +483,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setMinWidthWithNSString:(NSString *)arg0;
 
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setModelDescPathWithNSString:(NSString *)arg0;
+
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setModelForWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setModelIdPathWithNSString:(NSString *)arg0;
@@ -495,7 +515,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOnScrollChangeWithNSString:(NSString *)value;
 
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setPaddingBottomWithNSString:(NSString *)arg0;
 
@@ -676,6 +700,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetMinHeight;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetMinWidth;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetModelDescPath;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetModelIdPath;
 

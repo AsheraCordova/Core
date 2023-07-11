@@ -9,6 +9,7 @@
 #include "Context.h"
 #include "ConverterFactory.h"
 #include "Drawable.h"
+#include "HasWidgets.h"
 #include "IAttributable.h"
 #include "IFragment.h"
 #include "IImageDownloader.h"
@@ -21,11 +22,12 @@
 #include "IdGenerator.h"
 #include "ImageButtonImpl.h"
 #include "ImageDownloaderFactory.h"
+#include "ImageView.h"
 #include "J2ObjC_source.h"
 #include "LayoutNativeVars.h"
-#include "MeasurableImageView.h"
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
+#include "Rect.h"
 #include "View.h"
 #include "ViewImpl.h"
 #include "WidgetAttribute.h"
@@ -259,12 +261,14 @@ J2OBJC_FIELD_SETTER(ASImageButtonImpl_ScaleType, mapping_, id<JavaUtilMap>)
   __unsafe_unretained ASImageButtonImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
+  id<JavaUtilMap> templates_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, templates_, id<JavaUtilMap>)
 
 @interface ASImageButtonImpl_ImageButtonCommandBuilder () {
  @public
@@ -321,19 +325,29 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
-  [((ASImageButtonImpl_ImageButtonExt *) nil_chk(((ASImageButtonImpl_ImageButtonExt *) cast_chk(measurableImageView_, [ASImageButtonImpl_ImageButtonExt class])))) updateMeasuredDimensionWithInt:width withInt:height];
+- (instancetype)initWithNSString:(NSString *)localname {
+  ASImageButtonImpl_initWithNSString_(self, localname);
+  return self;
+}
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname {
+  ASImageButtonImpl_initWithNSString_withNSString_(self, groupName, localname);
+  return self;
+}
+
+- (IOSClass *)getViewClass {
+  return ASImageButtonImpl_ImageButtonExt_class_();
 }
 
 - (id<ASIWidget>)newInstance {
-  return new_ASImageButtonImpl_init();
+  return new_ASImageButtonImpl_initWithNSString_withNSString_(groupName_, localName_);
 }
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
               withJavaUtilMap:(id<JavaUtilMap>)params {
   [super createWithASIFragment:fragment withJavaUtilMap:params];
-  measurableImageView_ = new_ASImageButtonImpl_ImageButtonExt_initWithASImageButtonImpl_(self);
+  measurableView_ = new_ASImageButtonImpl_ImageButtonExt_initWithASImageButtonImpl_(self);
   ASImageButtonImpl_nativeCreateWithJavaUtilMap_(self, params);
   ASViewImpl_registerCommandConveterWithASIWidget_(self);
   ASImageButtonImpl_setWidgetOnNativeClass(self);
@@ -524,7 +538,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)asWidget {
-  return measurableImageView_;
+  return measurableView_;
 }
 
 - (id)getImage {
@@ -549,7 +563,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setImageWithId:(id)value {
-  [((ASMeasurableImageView *) nil_chk(measurableImageView_)) setImageDrawableWithADDrawable:(ADDrawable *) cast_chk(value, [ADDrawable class])];
+  [((ADImageView *) nil_chk(measurableView_)) setImageDrawableWithADDrawable:(ADDrawable *) cast_chk(value, [ADDrawable class])];
   ASImageButtonImpl_setImageNativeWithId_(self, [((ADDrawable *) nil_chk(((ADDrawable *) cast_chk(value, [ADDrawable class])))) getDrawable]);
 }
 
@@ -619,7 +633,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)getBaseLine {
-  return [((ASMeasurableImageView *) nil_chk(measurableImageView_)) getBaseline];
+  return [((ADImageView *) nil_chk(measurableView_)) getBaseline];
 }
 
 - (void)setBaseLineWithId:(id)objValue {
@@ -664,41 +678,41 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ADDrawable *imageDrawable = [((ASMeasurableImageView *) nil_chk(measurableImageView_)) getImageDrawable];
-  if (imageDrawable != nil && [imageDrawable isStateful] && [imageDrawable setStateWithIntArray:[((ASMeasurableImageView *) nil_chk(measurableImageView_)) getDrawableState]]) {
+  ADDrawable *imageDrawable = [((ADImageView *) nil_chk(measurableView_)) getImageDrawable];
+  if (imageDrawable != nil && [imageDrawable isStateful] && [imageDrawable setStateWithIntArray:[((ADImageView *) nil_chk(measurableView_)) getDrawableState]]) {
     [self setImageWithId:imageDrawable];
   }
 }
 
 - (id)getPaddingLeft {
-  return ASViewImpl_getPaddingLeftWithASIWidget_withADView_(self, measurableImageView_);
+  return ASViewImpl_getPaddingLeftWithASIWidget_withADView_(self, measurableView_);
 }
 
 - (void)setPaddingLeftWithId:(id)paddingLeft {
-  ASViewImpl_setPaddingLeftWithId_withADView_(paddingLeft, measurableImageView_);
+  ASViewImpl_setPaddingLeftWithId_withADView_(paddingLeft, measurableView_);
   ASImageButtonImpl_nativeSetPaddingLeftWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingLeft, [JavaLangInteger class]))) intValue]);
 }
 
 - (id)getPaddingRight {
-  return ASViewImpl_getPaddingRightWithASIWidget_withADView_(self, measurableImageView_);
+  return ASViewImpl_getPaddingRightWithASIWidget_withADView_(self, measurableView_);
 }
 
 - (void)setPaddingRightWithId:(id)paddingRight {
-  ASViewImpl_setPaddingRightWithId_withADView_(paddingRight, measurableImageView_);
+  ASViewImpl_setPaddingRightWithId_withADView_(paddingRight, measurableView_);
   ASImageButtonImpl_nativeSetPaddingRightWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingRight, [JavaLangInteger class]))) intValue]);
 }
 
 - (id)getPaddingTop {
-  return ASViewImpl_getPaddingTopWithASIWidget_withADView_(self, measurableImageView_);
+  return ASViewImpl_getPaddingTopWithASIWidget_withADView_(self, measurableView_);
 }
 
 - (void)setPaddingTopWithId:(id)paddingTop {
-  ASViewImpl_setPaddingTopWithId_withADView_(paddingTop, measurableImageView_);
+  ASViewImpl_setPaddingTopWithId_withADView_(paddingTop, measurableView_);
   ASImageButtonImpl_nativeSetPaddingTopWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingTop, [JavaLangInteger class]))) intValue]);
 }
 
 - (id)getPaddingBottom {
-  return ASViewImpl_getPaddingBottomWithASIWidget_withADView_(self, measurableImageView_);
+  return ASViewImpl_getPaddingBottomWithASIWidget_withADView_(self, measurableView_);
 }
 
 - (id)getPaddingEnd {
@@ -710,7 +724,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setPaddingBottomWithId:(id)paddingBottom {
-  ASViewImpl_setPaddingBottomWithId_withADView_(paddingBottom, measurableImageView_);
+  ASViewImpl_setPaddingBottomWithId_withADView_(paddingBottom, measurableView_);
   ASImageButtonImpl_nativeSetPaddingBottomWithInt_(self, [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(paddingBottom, [JavaLangInteger class]))) intValue]);
 }
 
@@ -735,10 +749,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)updatePadding {
-  [self setPaddingLeftWithId:JavaLangInteger_valueOfWithInt_([((ASMeasurableImageView *) nil_chk(measurableImageView_)) getPaddingLeft])];
-  [self setPaddingRightWithId:JavaLangInteger_valueOfWithInt_([((ASMeasurableImageView *) nil_chk(measurableImageView_)) getPaddingRight])];
-  [self setPaddingTopWithId:JavaLangInteger_valueOfWithInt_([((ASMeasurableImageView *) nil_chk(measurableImageView_)) getPaddingTop])];
-  [self setPaddingBottomWithId:JavaLangInteger_valueOfWithInt_([((ASMeasurableImageView *) nil_chk(measurableImageView_)) getPaddingBottom])];
+  [self setPaddingLeftWithId:JavaLangInteger_valueOfWithInt_([((ADImageView *) nil_chk(measurableView_)) getPaddingLeft])];
+  [self setPaddingRightWithId:JavaLangInteger_valueOfWithInt_([((ADImageView *) nil_chk(measurableView_)) getPaddingRight])];
+  [self setPaddingTopWithId:JavaLangInteger_valueOfWithInt_([((ADImageView *) nil_chk(measurableView_)) getPaddingTop])];
+  [self setPaddingBottomWithId:JavaLangInteger_valueOfWithInt_([((ADImageView *) nil_chk(measurableView_)) getPaddingBottom])];
 }
 
 - (void)nativeSetPaddingBottomWithInt:(jint)value {
@@ -764,8 +778,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
-    [((ASMeasurableImageView *) nil_chk(measurableImageView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
+    [((ADImageView *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
   }
+}
+
+- (void)setVisibleWithBoolean:(jboolean)b {
+  [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
 - (void)requestLayout {
@@ -850,56 +868,58 @@ J2OBJC_IGNORE_DESIGNATED_END
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 5, -1, 6, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, 5, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 8, 9, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "[I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 11, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 15, 14, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 16, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 17, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 18, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 19, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 23, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 14, 13, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 15, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 16, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 17, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 18, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 22, 23, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 24, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 25, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 26, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 24, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 25, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 26, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 27, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 27, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 28, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 29, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 29, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 30, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 30, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 31, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 31, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 32, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 32, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 33, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 34, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 35, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 36, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 37, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 38, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 33, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 34, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 35, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 36, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 37, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 38, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 39, 40, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 41, 40, -1, -1, -1, -1 },
@@ -907,118 +927,122 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x102, 43, 40, -1, -1, -1, -1 },
     { NULL, "Z", 0x101, 44, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 45, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 46, 47, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 46, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 48, 1, -1, -1, -1, -1 },
     { NULL, "LASImageButtonImpl_ImageButtonBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 47, 48, -1, 49, -1, -1 },
+    { NULL, "V", 0x2, 49, 50, -1, 51, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 50, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 51, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 52, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 53, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 52, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 53, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 54, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 55, 40, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 54, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 55, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 56, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 57, 40, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(loadAttributesWithNSString:);
   methods[1].selector = @selector(init);
-  methods[2].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
-  methods[3].selector = @selector(newInstance);
-  methods[4].selector = @selector(createWithASIFragment:withJavaUtilMap:);
-  methods[5].selector = @selector(setWidgetOnNativeClass);
-  methods[6].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[7].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[8].selector = @selector(asWidget);
-  methods[9].selector = @selector(getImage);
-  methods[10].selector = @selector(getImageDimension);
-  methods[11].selector = @selector(getScaleType);
-  methods[12].selector = @selector(setScaleTypeWithNSString:withId:);
-  methods[13].selector = @selector(setImageWithId:);
-  methods[14].selector = @selector(getSrc);
-  methods[15].selector = @selector(getImageHeightWithId:);
-  methods[16].selector = @selector(getImageWidthWithId:);
-  methods[17].selector = @selector(setImageFromUrlErrorWithId:);
-  methods[18].selector = @selector(setImageFromUrlPlaceHolderWithId:);
-  methods[19].selector = @selector(setImageFromUrlWithId:);
-  methods[20].selector = @selector(onBitmapFailedWithId:);
-  methods[21].selector = @selector(onPrepareLoadWithId:);
-  methods[22].selector = @selector(onBitmapLoadedWithId:);
-  methods[23].selector = @selector(postOnMeasureWithInt:withInt:);
-  methods[24].selector = @selector(getBaselineAlignBottom);
-  methods[25].selector = @selector(getBaseLine);
-  methods[26].selector = @selector(setBaseLineWithId:);
-  methods[27].selector = @selector(setBaselineAlignBottomWithId:);
-  methods[28].selector = @selector(setCropToPaddingWithId:);
-  methods[29].selector = @selector(getCropToPadding);
-  methods[30].selector = @selector(getMaxWidth);
-  methods[31].selector = @selector(getMaxHeight);
-  methods[32].selector = @selector(setMaxWidthWithId:);
-  methods[33].selector = @selector(setMaxHeightWithId:);
-  methods[34].selector = @selector(getAdjustViewBounds);
-  methods[35].selector = @selector(setAdjustViewBoundsWithId:);
-  methods[36].selector = @selector(drawableStateChanged);
-  methods[37].selector = @selector(getPaddingLeft);
-  methods[38].selector = @selector(setPaddingLeftWithId:);
-  methods[39].selector = @selector(getPaddingRight);
-  methods[40].selector = @selector(setPaddingRightWithId:);
-  methods[41].selector = @selector(getPaddingTop);
-  methods[42].selector = @selector(setPaddingTopWithId:);
-  methods[43].selector = @selector(getPaddingBottom);
-  methods[44].selector = @selector(getPaddingEnd);
-  methods[45].selector = @selector(getPaddingStart);
-  methods[46].selector = @selector(setPaddingBottomWithId:);
-  methods[47].selector = @selector(setPaddingVerticalWithId:);
-  methods[48].selector = @selector(setPaddingHorizontalWithId:);
-  methods[49].selector = @selector(setPaddingEndWithId:);
-  methods[50].selector = @selector(setPaddingStartWithId:);
-  methods[51].selector = @selector(setPaddingWithId:);
-  methods[52].selector = @selector(updatePadding);
-  methods[53].selector = @selector(nativeSetPaddingBottomWithInt:);
-  methods[54].selector = @selector(nativeSetPaddingLeftWithInt:);
-  methods[55].selector = @selector(nativeSetPaddingRightWithInt:);
-  methods[56].selector = @selector(nativeSetPaddingTopWithInt:);
-  methods[57].selector = @selector(checkIosVersionWithNSString:);
-  methods[58].selector = @selector(setIdWithNSString:);
-  methods[59].selector = @selector(requestLayout);
-  methods[60].selector = @selector(invalidate);
-  methods[61].selector = @selector(getPluginWithNSString:);
-  methods[62].selector = @selector(getBean);
-  methods[63].selector = @selector(getBuilder);
-  methods[64].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[65].selector = @selector(createButton);
-  methods[66].selector = @selector(asNativeWidget);
-  methods[67].selector = @selector(isViewWrapped);
-  methods[68].selector = @selector(setTintColorWithId:);
-  methods[69].selector = @selector(nativeSetTintColorWithId:);
-  methods[70].selector = @selector(getTintColor);
-  methods[71].selector = @selector(getImageNative);
-  methods[72].selector = @selector(setImageNativeWithId:);
-  methods[73].selector = @selector(setImageNativeSimpleWithId:);
-  methods[74].selector = @selector(setImageNativeWithTemplateWithId:);
-  methods[75].selector = @selector(nativeSetContentModeWithInt:);
+  methods[2].selector = @selector(initWithNSString:);
+  methods[3].selector = @selector(initWithNSString:withNSString:);
+  methods[4].selector = @selector(getViewClass);
+  methods[5].selector = @selector(newInstance);
+  methods[6].selector = @selector(createWithASIFragment:withJavaUtilMap:);
+  methods[7].selector = @selector(setWidgetOnNativeClass);
+  methods[8].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[9].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[10].selector = @selector(asWidget);
+  methods[11].selector = @selector(getImage);
+  methods[12].selector = @selector(getImageDimension);
+  methods[13].selector = @selector(getScaleType);
+  methods[14].selector = @selector(setScaleTypeWithNSString:withId:);
+  methods[15].selector = @selector(setImageWithId:);
+  methods[16].selector = @selector(getSrc);
+  methods[17].selector = @selector(getImageHeightWithId:);
+  methods[18].selector = @selector(getImageWidthWithId:);
+  methods[19].selector = @selector(setImageFromUrlErrorWithId:);
+  methods[20].selector = @selector(setImageFromUrlPlaceHolderWithId:);
+  methods[21].selector = @selector(setImageFromUrlWithId:);
+  methods[22].selector = @selector(onBitmapFailedWithId:);
+  methods[23].selector = @selector(onPrepareLoadWithId:);
+  methods[24].selector = @selector(onBitmapLoadedWithId:);
+  methods[25].selector = @selector(postOnMeasureWithInt:withInt:);
+  methods[26].selector = @selector(getBaselineAlignBottom);
+  methods[27].selector = @selector(getBaseLine);
+  methods[28].selector = @selector(setBaseLineWithId:);
+  methods[29].selector = @selector(setBaselineAlignBottomWithId:);
+  methods[30].selector = @selector(setCropToPaddingWithId:);
+  methods[31].selector = @selector(getCropToPadding);
+  methods[32].selector = @selector(getMaxWidth);
+  methods[33].selector = @selector(getMaxHeight);
+  methods[34].selector = @selector(setMaxWidthWithId:);
+  methods[35].selector = @selector(setMaxHeightWithId:);
+  methods[36].selector = @selector(getAdjustViewBounds);
+  methods[37].selector = @selector(setAdjustViewBoundsWithId:);
+  methods[38].selector = @selector(drawableStateChanged);
+  methods[39].selector = @selector(getPaddingLeft);
+  methods[40].selector = @selector(setPaddingLeftWithId:);
+  methods[41].selector = @selector(getPaddingRight);
+  methods[42].selector = @selector(setPaddingRightWithId:);
+  methods[43].selector = @selector(getPaddingTop);
+  methods[44].selector = @selector(setPaddingTopWithId:);
+  methods[45].selector = @selector(getPaddingBottom);
+  methods[46].selector = @selector(getPaddingEnd);
+  methods[47].selector = @selector(getPaddingStart);
+  methods[48].selector = @selector(setPaddingBottomWithId:);
+  methods[49].selector = @selector(setPaddingVerticalWithId:);
+  methods[50].selector = @selector(setPaddingHorizontalWithId:);
+  methods[51].selector = @selector(setPaddingEndWithId:);
+  methods[52].selector = @selector(setPaddingStartWithId:);
+  methods[53].selector = @selector(setPaddingWithId:);
+  methods[54].selector = @selector(updatePadding);
+  methods[55].selector = @selector(nativeSetPaddingBottomWithInt:);
+  methods[56].selector = @selector(nativeSetPaddingLeftWithInt:);
+  methods[57].selector = @selector(nativeSetPaddingRightWithInt:);
+  methods[58].selector = @selector(nativeSetPaddingTopWithInt:);
+  methods[59].selector = @selector(checkIosVersionWithNSString:);
+  methods[60].selector = @selector(setIdWithNSString:);
+  methods[61].selector = @selector(setVisibleWithBoolean:);
+  methods[62].selector = @selector(requestLayout);
+  methods[63].selector = @selector(invalidate);
+  methods[64].selector = @selector(getPluginWithNSString:);
+  methods[65].selector = @selector(getBean);
+  methods[66].selector = @selector(getBuilder);
+  methods[67].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[68].selector = @selector(createButton);
+  methods[69].selector = @selector(asNativeWidget);
+  methods[70].selector = @selector(isViewWrapped);
+  methods[71].selector = @selector(setTintColorWithId:);
+  methods[72].selector = @selector(nativeSetTintColorWithId:);
+  methods[73].selector = @selector(getTintColor);
+  methods[74].selector = @selector(getImageNative);
+  methods[75].selector = @selector(setImageNativeWithId:);
+  methods[76].selector = @selector(setImageNativeSimpleWithId:);
+  methods[77].selector = @selector(setImageNativeWithTemplateWithId:);
+  methods[78].selector = @selector(nativeSetContentModeWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 56, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 57, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 58, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 59, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "measurableImageView_", "LASMeasurableImageView;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "scaleTypeToContentModeMapping", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 58, 59, -1 },
+    { "measurableView_", "LADImageView;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "scaleTypeToContentModeMapping", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 60, 61, -1 },
     { "imageFromUrlPlaceHolder_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "measureCalled_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "imageFromUrlError_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "builder_", "LASImageButtonImpl_ImageButtonCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bean_", "LASImageButtonImpl_ImageButtonBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "updateMeasuredDimension", "II", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setScaleType", "LNSString;LNSObject;", "setImage", "LNSObject;", "getImageHeight", "getImageWidth", "setImageFromUrlError", "setImageFromUrlPlaceHolder", "setImageFromUrl", "onBitmapFailed", "onPrepareLoad", "onBitmapLoaded", "postOnMeasure", "setBaseLine", "setBaselineAlignBottom", "setCropToPadding", "setMaxWidth", "setMaxHeight", "setAdjustViewBounds", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "I", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "checkIosVersion", "setId", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setTintColor", "nativeSetTintColor", "setImageNative", "setImageNativeSimple", "setImageNativeWithTemplate", "nativeSetContentMode", &ASImageButtonImpl_LOCAL_NAME, &ASImageButtonImpl_GROUP_NAME, &ASImageButtonImpl_scaleTypeToContentModeMapping, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageButtonImpl_ScaleType;LASImageButtonImpl_ImageButtonExt;LASImageButtonImpl_ImageButtonCommandBuilder;LASImageButtonImpl_ImageButtonBean;" };
-  static const J2ObjcClassInfo _ASImageButtonImpl = { "ImageButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 76, 10, -1, 60, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setScaleType", "LNSString;LNSObject;", "setImage", "LNSObject;", "getImageHeight", "getImageWidth", "setImageFromUrlError", "setImageFromUrlPlaceHolder", "setImageFromUrl", "onBitmapFailed", "onPrepareLoad", "onBitmapLoaded", "postOnMeasure", "II", "setBaseLine", "setBaselineAlignBottom", "setCropToPadding", "setMaxWidth", "setMaxHeight", "setAdjustViewBounds", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "I", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setTintColor", "nativeSetTintColor", "setImageNative", "setImageNativeSimple", "setImageNativeWithTemplate", "nativeSetContentMode", &ASImageButtonImpl_LOCAL_NAME, &ASImageButtonImpl_GROUP_NAME, &ASImageButtonImpl_scaleTypeToContentModeMapping, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageButtonImpl_ScaleType;LASImageButtonImpl_ImageButtonExt;LASImageButtonImpl_ImageButtonCommandBuilder;LASImageButtonImpl_ImageButtonBean;" };
+  static const J2ObjcClassInfo _ASImageButtonImpl = { "ImageButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 79, 10, -1, 62, -1, -1, -1 };
   return &_ASImageButtonImpl;
 }
 
@@ -1053,16 +1077,42 @@ ASImageButtonImpl *create_ASImageButtonImpl_init() {
   J2OBJC_CREATE_IMPL(ASImageButtonImpl, init)
 }
 
+void ASImageButtonImpl_initWithNSString_(ASImageButtonImpl *self, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, ASImageButtonImpl_GROUP_NAME, localname);
+  self->measureCalled_ = false;
+}
+
+ASImageButtonImpl *new_ASImageButtonImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_NEW_IMPL(ASImageButtonImpl, initWithNSString_, localname)
+}
+
+ASImageButtonImpl *create_ASImageButtonImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASImageButtonImpl, initWithNSString_, localname)
+}
+
+void ASImageButtonImpl_initWithNSString_withNSString_(ASImageButtonImpl *self, NSString *groupName, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, groupName, localname);
+  self->measureCalled_ = false;
+}
+
+ASImageButtonImpl *new_ASImageButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_NEW_IMPL(ASImageButtonImpl, initWithNSString_withNSString_, groupName, localname)
+}
+
+ASImageButtonImpl *create_ASImageButtonImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASImageButtonImpl, initWithNSString_withNSString_, groupName, localname)
+}
+
 void ASImageButtonImpl_setWidgetOnNativeClass(ASImageButtonImpl *self) {
   ((ASUIButton*) self.uiView).widget = self;
 }
 
 id ASImageButtonImpl_getScaleType(ASImageButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) getScaleTypeInt]);
+  return JavaLangInteger_valueOfWithInt_([((ADImageView *) nil_chk(self->measurableView_)) getScaleTypeInt]);
 }
 
 void ASImageButtonImpl_setScaleTypeWithNSString_withId_(ASImageButtonImpl *self, NSString *strValue, id objValue) {
-  [((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) setScaleTypeWithNSString:strValue withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADImageView *) nil_chk(self->measurableView_)) setScaleTypeWithNSString:strValue withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
   if (ASImageButtonImpl_isViewWrapped(self)) {
     if ([@"fitXY" isEqual:strValue]) {
       ASImageButtonImpl_nativeSetContentModeWithInt_(self, [((JavaLangInteger *) nil_chk([((id<JavaUtilMap>) nil_chk(ASImageButtonImpl_scaleTypeToContentModeMapping)) getWithId:strValue])) intValue]);
@@ -1080,7 +1130,7 @@ void ASImageButtonImpl_setScaleTypeWithNSString_withId_(ASImageButtonImpl *self,
 }
 
 id ASImageButtonImpl_getSrc(ASImageButtonImpl *self) {
-  return [((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) getImageDrawable];
+  return [((ADImageView *) nil_chk(self->measurableView_)) getImageDrawable];
 }
 
 jint ASImageButtonImpl_getImageHeightWithId_(ASImageButtonImpl *self, id image) {
@@ -1109,47 +1159,47 @@ void ASImageButtonImpl_postOnMeasureWithInt_withInt_(ASImageButtonImpl *self, ji
 }
 
 id ASImageButtonImpl_getBaselineAlignBottom(ASImageButtonImpl *self) {
-  return JavaLangBoolean_valueOfWithBoolean_([((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) getBaselineAlignBottom]);
+  return JavaLangBoolean_valueOfWithBoolean_([((ADImageView *) nil_chk(self->measurableView_)) getBaselineAlignBottom]);
 }
 
 void ASImageButtonImpl_setBaseLineWithId_(ASImageButtonImpl *self, id objValue) {
-  [((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) setBaselineWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  [((ADImageView *) nil_chk(self->measurableView_)) setBaselineWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
 }
 
 void ASImageButtonImpl_setBaselineAlignBottomWithId_(ASImageButtonImpl *self, id objValue) {
-  [((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) setBaselineAlignBottomWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+  [((ADImageView *) nil_chk(self->measurableView_)) setBaselineAlignBottomWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
 }
 
 void ASImageButtonImpl_setCropToPaddingWithId_(ASImageButtonImpl *self, id objValue) {
-  [((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) setCropToPaddingWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+  [((ADImageView *) nil_chk(self->measurableView_)) setCropToPaddingWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
 }
 
 id ASImageButtonImpl_getCropToPadding(ASImageButtonImpl *self) {
-  return JavaLangBoolean_valueOfWithBoolean_([((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) getCropToPadding]);
+  return JavaLangBoolean_valueOfWithBoolean_([((ADImageView *) nil_chk(self->measurableView_)) getCropToPadding]);
 }
 
 id ASImageButtonImpl_getMaxWidth(ASImageButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) getMaxWidth]);
+  return JavaLangInteger_valueOfWithInt_([((ADImageView *) nil_chk(self->measurableView_)) getMaxWidth]);
 }
 
 id ASImageButtonImpl_getMaxHeight(ASImageButtonImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) getMaxHeight]);
+  return JavaLangInteger_valueOfWithInt_([((ADImageView *) nil_chk(self->measurableView_)) getMaxHeight]);
 }
 
 void ASImageButtonImpl_setMaxWidthWithId_(ASImageButtonImpl *self, id objValue) {
-  [((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) setMaxWidthWithInt:[((JavaLangInteger *) nil_chk(((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class])))) intValue]];
+  [((ADImageView *) nil_chk(self->measurableView_)) setMaxWidthWithInt:[((JavaLangInteger *) nil_chk(((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class])))) intValue]];
 }
 
 void ASImageButtonImpl_setMaxHeightWithId_(ASImageButtonImpl *self, id objValue) {
-  [((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) setMaxHeightWithInt:[((JavaLangInteger *) nil_chk(((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class])))) intValue]];
+  [((ADImageView *) nil_chk(self->measurableView_)) setMaxHeightWithInt:[((JavaLangInteger *) nil_chk(((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class])))) intValue]];
 }
 
 id ASImageButtonImpl_getAdjustViewBounds(ASImageButtonImpl *self) {
-  return JavaLangBoolean_valueOfWithBoolean_([((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) getAdjustViewBounds]);
+  return JavaLangBoolean_valueOfWithBoolean_([((ADImageView *) nil_chk(self->measurableView_)) getAdjustViewBounds]);
 }
 
 void ASImageButtonImpl_setAdjustViewBoundsWithId_(ASImageButtonImpl *self, id objValue) {
-  [((ASMeasurableImageView *) nil_chk(self->measurableImageView_)) setAdjustViewBoundsWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+  [((ADImageView *) nil_chk(self->measurableView_)) setAdjustViewBoundsWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
 }
 
 id ASImageButtonImpl_getPaddingEnd(ASImageButtonImpl *self) {
@@ -1415,6 +1465,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
   ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
 }
 
+- (ADView *)inflateViewWithNSString:(NSString *)layout {
+  if (templates_ == nil) {
+    templates_ = new_JavaUtilHashMap_init();
+  }
+  id<ASIWidget> template_ = [templates_ getWithId:layout];
+  if (template_ == nil) {
+    template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
+    (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
+  }
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+}
+
+- (void)remeasure {
+  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+}
+
+- (void)removeFromParent {
+  [((id<ASHasWidgets>) nil_chk([this$0_ getParent])) removeWithASIWidget:this$0_];
+}
+
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation {
+  *IOSIntArray_GetRef(nil_chk(appScreenLocation), 0) = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  *IOSIntArray_GetRef(appScreenLocation, 1) = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+}
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame {
+  ((ADRect *) nil_chk(displayFrame))->left_ = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->top_ = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->right_ = displayFrame->left_ + [self getWidth];
+  displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
+}
+
 - (void)offsetTopAndBottomWithInt:(jint)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
@@ -1423,6 +1506,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
 - (void)offsetLeftAndRightWithInt:(jint)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
+}
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value {
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
 }
 
 - (void)setVisibilityWithInt:(jint)visibility {
@@ -1448,9 +1536,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 13, 14, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 16, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 22, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1466,17 +1560,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
   methods[8].selector = @selector(initialized);
   methods[9].selector = @selector(getAttributeWithASWidgetAttribute:);
   methods[10].selector = @selector(drawableStateChanged);
-  methods[11].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[12].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[13].selector = @selector(setVisibilityWithInt:);
+  methods[11].selector = @selector(inflateViewWithNSString:);
+  methods[12].selector = @selector(remeasure);
+  methods[13].selector = @selector(removeFromParent);
+  methods[14].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[15].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[16].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[17].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[18].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[19].selector = @selector(setVisibilityWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASImageButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
     { "measureFinished_", "LASMeasureEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 27, -1 },
   };
-  static const void *ptrTable[] = { "LASImageButtonImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setVisibility" };
-  static const J2ObjcClassInfo _ASImageButtonImpl_ImageButtonExt = { "ImageButtonExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 14, 3, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASImageButtonImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASImageButtonImpl_ImageButtonExt = { "ImageButtonExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 20, 4, 0, -1, -1, -1, -1 };
   return &_ASImageButtonImpl_ImageButtonExt;
 }
 
@@ -1484,7 +1585,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
 
 void ASImageButtonImpl_ImageButtonExt_initWithASImageButtonImpl_(ASImageButtonImpl_ImageButtonExt *self, ASImageButtonImpl *outer$) {
   self->this$0_ = outer$;
-  ASMeasurableImageView_initWithASIWidget_(self, outer$);
+  ADImageView_initWithASIWidget_(self, outer$);
   self->measureFinished_ = new_ASMeasureEvent_init();
   self->onLayoutEvent_ = new_ASOnLayoutEvent_init();
 }

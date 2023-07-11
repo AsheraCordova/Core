@@ -25,10 +25,9 @@ public class ModelImpl extends BaseWidget implements com.ashera.model.IModel {
 	public final static String LOCAL_NAME = "com.ashera.layout.Model"; 
 	public final static String GROUP_NAME = "Model";
 	
+	
 	@Override
 	public void loadAttributes(String attributeName) {
-		ViewImpl.register(attributeName);
-
 
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("param").withType("string"));
 
@@ -59,7 +58,6 @@ public class ModelImpl extends BaseWidget implements com.ashera.model.IModel {
 	@SuppressLint("NewApi")
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {		
 		Object nativeWidget = asNativeWidget();
-		ViewImpl.setAttribute(this, key, strValue, objValue, decorator);
 
 		switch (key.getAttributeName()) {
 			case "param": {
@@ -84,10 +82,6 @@ public class ModelImpl extends BaseWidget implements com.ashera.model.IModel {
 	@Override
 	@SuppressLint("NewApi")
 	public Object getAttribute(WidgetAttribute key, ILifeCycleDecorator decorator) {
-		Object attributeValue = ViewImpl.getAttribute(this, key, decorator);
-		if (attributeValue != null) {
-			return attributeValue;
-		}
 		Object nativeWidget = asNativeWidget();
 		switch (key.getAttributeName()) {
 			case "param": {
@@ -107,6 +101,10 @@ return this.getModelParam();				}
     private void nativeCreate(IFragment fragment, Map<String, Object> params) {
     }
     
+    @Override
+	public Class getViewClass() {
+		return View.class;
+	}
 	//end - body
     //start - codecopy
 	@Override

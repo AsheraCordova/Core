@@ -37,11 +37,6 @@
 
 - (jboolean)isCountDown;
 
-- (jint)nativeMeasureHeightWithId:(id)uiView
-                          withInt:(jint)width;
-
-- (jint)nativeMeasureWidthWithId:(id)uiView;
-
 - (void)postInit;
 
 - (void)setBaseWithLong:(jlong)base;
@@ -67,10 +62,6 @@
 J2OBJC_EMPTY_STATIC_INIT(ADChronometer)
 
 FOUNDATION_EXPORT void ADChronometer_initWithASIWidget_(ADChronometer *self, id<ASIWidget> widget);
-
-FOUNDATION_EXPORT ADChronometer *new_ADChronometer_initWithASIWidget_(id<ASIWidget> widget) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ADChronometer *create_ADChronometer_initWithASIWidget_(id<ASIWidget> widget);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADChronometer)
 

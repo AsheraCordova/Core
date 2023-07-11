@@ -64,14 +64,6 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
-
-
-
-
-
-
-
-
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -98,6 +90,14 @@ export class TextStyleTransformer implements ITranform {
         }
     }
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -146,30 +146,6 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "iosDisabledBackground" })
 	iosDisabledBackground!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "entries" })
-	entries!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "selection" })
-	selection!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "modelOptionTextPath" })
-	modelOptionTextPath!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onItemSelected" })
-	onItemSelected!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "modelOptionValuePath" })
-	modelOptionValuePath!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "gravity" })
-	gravity!:CommandAttr<Gravity[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textSize" })
-	textSize!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textColorHint" })
-	textColorHint!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "padding" })
 	padding!:CommandAttr<string>| undefined;
@@ -251,6 +227,30 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "hintTextFormat" })
 	hintTextFormat!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "entries" })
+	entries!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "selection" })
+	selection!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "modelOptionTextPath" })
+	modelOptionTextPath!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onItemSelected" })
+	onItemSelected!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "modelOptionValuePath" })
+	modelOptionValuePath!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "gravity" })
+	gravity!:CommandAttr<Gravity[]>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textSize" })
+	textSize!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textColorHint" })
+	textColorHint!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -268,14 +268,6 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 		this.iosAllowsEditingTextAttributes = undefined;
 		this.iosBackground = undefined;
 		this.iosDisabledBackground = undefined;
-		this.entries = undefined;
-		this.selection = undefined;
-		this.modelOptionTextPath = undefined;
-		this.onItemSelected = undefined;
-		this.modelOptionValuePath = undefined;
-		this.gravity = undefined;
-		this.textSize = undefined;
-		this.textColorHint = undefined;
 		this.padding = undefined;
 		this.paddingBottom = undefined;
 		this.paddingRight = undefined;
@@ -303,6 +295,14 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 		this.values = undefined;
 		this.selectedValues = undefined;
 		this.hintTextFormat = undefined;
+		this.entries = undefined;
+		this.selection = undefined;
+		this.modelOptionTextPath = undefined;
+		this.onItemSelected = undefined;
+		this.modelOptionValuePath = undefined;
+		this.gravity = undefined;
+		this.textSize = undefined;
+		this.textColorHint = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -680,154 +680,6 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 		this.iosDisabledBackground.setValue(value);
 		this.orderSet++;
 		this.iosDisabledBackground.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setEntries(value : string) : T {
-		this.resetIfRequired();
-		if (this.entries == null || this.entries == undefined) {
-			this.entries = new CommandAttr<string>();
-		}
-		
-		this.entries.setSetter(true);
-		this.entries.setValue(value);
-		this.orderSet++;
-		this.entries.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setSelection(value : string) : T {
-		this.resetIfRequired();
-		if (this.selection == null || this.selection == undefined) {
-			this.selection = new CommandAttr<string>();
-		}
-		
-		this.selection.setSetter(true);
-		this.selection.setValue(value);
-		this.orderSet++;
-		this.selection.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setModelOptionTextPath(value : string) : T {
-		this.resetIfRequired();
-		if (this.modelOptionTextPath == null || this.modelOptionTextPath == undefined) {
-			this.modelOptionTextPath = new CommandAttr<string>();
-		}
-		
-		this.modelOptionTextPath.setSetter(true);
-		this.modelOptionTextPath.setValue(value);
-		this.orderSet++;
-		this.modelOptionTextPath.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setOnItemSelected(value : string) : T {
-		this.resetIfRequired();
-		if (this.onItemSelected == null || this.onItemSelected == undefined) {
-			this.onItemSelected = new CommandAttr<string>();
-		}
-		
-		this.onItemSelected.setSetter(true);
-		this.onItemSelected.setValue(value);
-		this.orderSet++;
-		this.onItemSelected.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setModelOptionValuePath(value : string) : T {
-		this.resetIfRequired();
-		if (this.modelOptionValuePath == null || this.modelOptionValuePath == undefined) {
-			this.modelOptionValuePath = new CommandAttr<string>();
-		}
-		
-		this.modelOptionValuePath.setSetter(true);
-		this.modelOptionValuePath.setValue(value);
-		this.orderSet++;
-		this.modelOptionValuePath.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetGravity() : T {
-		this.resetIfRequired();
-		if (this.gravity == null || this.gravity == undefined) {
-			this.gravity = new CommandAttr<Gravity[]>()
-		}
-		
-		this.gravity.setGetter(true);
-		this.orderGet++;
-		this.gravity.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getGravity() : Gravity[] {
-		if (this.gravity == null || this.gravity == undefined) {
-			this.gravity = new CommandAttr<Gravity[]>();
-		}
-this.gravity.setTransformer('gravity');		return this.gravity.getCommandReturnValue();
-	}
-	public setGravity(...value : Gravity[]) : T {
-		this.resetIfRequired();
-		if (this.gravity == null || this.gravity == undefined) {
-			this.gravity = new CommandAttr<Gravity[]>();
-		}
-		
-		this.gravity.setSetter(true);
-		this.gravity.setValue(value);
-		this.orderSet++;
-		this.gravity.setOrderSet(this.orderSet);
-this.gravity.setTransformer('gravity');		return this.thisPointer;
-	}
-		
-
-	public tryGetTextSize() : T {
-		this.resetIfRequired();
-		if (this.textSize == null || this.textSize == undefined) {
-			this.textSize = new CommandAttr<string>()
-		}
-		
-		this.textSize.setGetter(true);
-		this.orderGet++;
-		this.textSize.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getTextSize() : string {
-		if (this.textSize == null || this.textSize == undefined) {
-			this.textSize = new CommandAttr<string>();
-		}
-		return this.textSize.getCommandReturnValue();
-	}
-	public setTextSize(value : string) : T {
-		this.resetIfRequired();
-		if (this.textSize == null || this.textSize == undefined) {
-			this.textSize = new CommandAttr<string>();
-		}
-		
-		this.textSize.setSetter(true);
-		this.textSize.setValue(value);
-		this.orderSet++;
-		this.textSize.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setTextColorHint(value : string) : T {
-		this.resetIfRequired();
-		if (this.textColorHint == null || this.textColorHint == undefined) {
-			this.textColorHint = new CommandAttr<string>();
-		}
-		
-		this.textColorHint.setSetter(true);
-		this.textColorHint.setValue(value);
-		this.orderSet++;
-		this.textColorHint.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -1368,6 +1220,154 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.hintTextFormat.setValue(value);
 		this.orderSet++;
 		this.hintTextFormat.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setEntries(value : string) : T {
+		this.resetIfRequired();
+		if (this.entries == null || this.entries == undefined) {
+			this.entries = new CommandAttr<string>();
+		}
+		
+		this.entries.setSetter(true);
+		this.entries.setValue(value);
+		this.orderSet++;
+		this.entries.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSelection(value : string) : T {
+		this.resetIfRequired();
+		if (this.selection == null || this.selection == undefined) {
+			this.selection = new CommandAttr<string>();
+		}
+		
+		this.selection.setSetter(true);
+		this.selection.setValue(value);
+		this.orderSet++;
+		this.selection.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setModelOptionTextPath(value : string) : T {
+		this.resetIfRequired();
+		if (this.modelOptionTextPath == null || this.modelOptionTextPath == undefined) {
+			this.modelOptionTextPath = new CommandAttr<string>();
+		}
+		
+		this.modelOptionTextPath.setSetter(true);
+		this.modelOptionTextPath.setValue(value);
+		this.orderSet++;
+		this.modelOptionTextPath.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnItemSelected(value : string) : T {
+		this.resetIfRequired();
+		if (this.onItemSelected == null || this.onItemSelected == undefined) {
+			this.onItemSelected = new CommandAttr<string>();
+		}
+		
+		this.onItemSelected.setSetter(true);
+		this.onItemSelected.setValue(value);
+		this.orderSet++;
+		this.onItemSelected.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setModelOptionValuePath(value : string) : T {
+		this.resetIfRequired();
+		if (this.modelOptionValuePath == null || this.modelOptionValuePath == undefined) {
+			this.modelOptionValuePath = new CommandAttr<string>();
+		}
+		
+		this.modelOptionValuePath.setSetter(true);
+		this.modelOptionValuePath.setValue(value);
+		this.orderSet++;
+		this.modelOptionValuePath.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetGravity() : T {
+		this.resetIfRequired();
+		if (this.gravity == null || this.gravity == undefined) {
+			this.gravity = new CommandAttr<Gravity[]>()
+		}
+		
+		this.gravity.setGetter(true);
+		this.orderGet++;
+		this.gravity.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getGravity() : Gravity[] {
+		if (this.gravity == null || this.gravity == undefined) {
+			this.gravity = new CommandAttr<Gravity[]>();
+		}
+this.gravity.setTransformer('gravity');		return this.gravity.getCommandReturnValue();
+	}
+	public setGravity(...value : Gravity[]) : T {
+		this.resetIfRequired();
+		if (this.gravity == null || this.gravity == undefined) {
+			this.gravity = new CommandAttr<Gravity[]>();
+		}
+		
+		this.gravity.setSetter(true);
+		this.gravity.setValue(value);
+		this.orderSet++;
+		this.gravity.setOrderSet(this.orderSet);
+this.gravity.setTransformer('gravity');		return this.thisPointer;
+	}
+		
+
+	public tryGetTextSize() : T {
+		this.resetIfRequired();
+		if (this.textSize == null || this.textSize == undefined) {
+			this.textSize = new CommandAttr<string>()
+		}
+		
+		this.textSize.setGetter(true);
+		this.orderGet++;
+		this.textSize.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getTextSize() : string {
+		if (this.textSize == null || this.textSize == undefined) {
+			this.textSize = new CommandAttr<string>();
+		}
+		return this.textSize.getCommandReturnValue();
+	}
+	public setTextSize(value : string) : T {
+		this.resetIfRequired();
+		if (this.textSize == null || this.textSize == undefined) {
+			this.textSize = new CommandAttr<string>();
+		}
+		
+		this.textSize.setSetter(true);
+		this.textSize.setValue(value);
+		this.orderSet++;
+		this.textSize.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setTextColorHint(value : string) : T {
+		this.resetIfRequired();
+		if (this.textColorHint == null || this.textColorHint == undefined) {
+			this.textColorHint = new CommandAttr<string>();
+		}
+		
+		this.textColorHint.setSetter(true);
+		this.textColorHint.setValue(value);
+		this.orderSet++;
+		this.textColorHint.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

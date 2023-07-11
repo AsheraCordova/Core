@@ -16,6 +16,7 @@
 #include "PackageManager.h"
 #include "PluginInvoker.h"
 #include "Resources.h"
+#include "WindowManager.h"
 #include "java/io/File.h"
 #include "java/lang/RuntimeException.h"
 
@@ -23,6 +24,7 @@
 J2OBJC_INITIALIZED_DEFN(ADContext)
 
 IOSClass *ADContext_ACTIVITY_SERVICE;
+IOSClass *ADContext_WINDOW_SERVICE;
 
 @implementation ADContext
 
@@ -132,15 +134,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcFieldInfo fields[] = {
     { "MODE_PRIVATE", "I", .constantValue.asInt = ADContext_MODE_PRIVATE, 0x19, -1, -1, -1, -1 },
     { "ACTIVITY_SERVICE", "LIOSClass;", .constantValue.asLong = 0, 0x19, -1, 13, -1, -1 },
+    { "WINDOW_SERVICE", "LIOSClass;", .constantValue.asLong = 0, 0x19, -1, 14, -1, -1 },
   };
-  static const void *ptrTable[] = { "registerReceiver", "LADBroadcastReceiver;LADIntentFilter;", "unregisterReceiver", "LADBroadcastReceiver;", "getDir", "LNSString;I", "getDrawable", "I", "getSystemService", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)TT;", "getExternalFilesDir", "LNSObject;", &ADContext_ACTIVITY_SERVICE };
-  static const J2ObjcClassInfo _ADContext = { "Context", "r.android.content", ptrTable, methods, fields, 7, 0x1, 15, 2, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "registerReceiver", "LADBroadcastReceiver;LADIntentFilter;", "unregisterReceiver", "LADBroadcastReceiver;", "getDir", "LNSString;I", "getDrawable", "I", "getSystemService", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)TT;", "getExternalFilesDir", "LNSObject;", &ADContext_ACTIVITY_SERVICE, &ADContext_WINDOW_SERVICE };
+  static const J2ObjcClassInfo _ADContext = { "Context", "r.android.content", ptrTable, methods, fields, 7, 0x1, 15, 3, -1, -1, -1, -1, -1 };
   return &_ADContext;
 }
 
 + (void)initialize {
   if (self == [ADContext class]) {
     JreStrongAssign(&ADContext_ACTIVITY_SERVICE, ADActivityManager_class_());
+    JreStrongAssign(&ADContext_WINDOW_SERVICE, ADWindowManager_class_());
     J2OBJC_SET_INITIALIZED(ADContext)
   }
 }

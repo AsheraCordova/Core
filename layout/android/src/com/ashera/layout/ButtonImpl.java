@@ -242,7 +242,8 @@ public class ButtonImpl extends BaseWidget {
 		ConverterFactory.register("Button.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("Button.textStyle"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("systemTextAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate"));
@@ -264,6 +265,12 @@ public class ButtonImpl extends BaseWidget {
 	public ButtonImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ButtonImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ButtonImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class ButtonExt extends androidx.appcompat.widget.AppCompatButton implements ILifeCycleDecorator{
@@ -276,11 +283,6 @@ public class ButtonImpl extends BaseWidget {
 
 		public ButtonExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -385,14 +387,14 @@ public class ButtonImpl extends BaseWidget {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ButtonImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((ButtonExt) appCompatButton).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return ButtonExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ButtonImpl();
+		return new ButtonImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -915,11 +917,21 @@ if (Build.VERSION.SDK_INT >= 14) {
 
 			}
 			break;
-			case "textAppearance": {
+			case "systemTextAppearance": {
 				
 
 
 		TextViewCompat.setTextAppearance(appCompatButton, (int)objValue);
+
+
+
+			}
+			break;
+			case "textAppearance": {
+				
+
+
+		ViewImpl.setStyle(this, objValue);
 
 
 
@@ -2596,6 +2608,14 @@ public ButtonCommandBuilder setFontFamily(String value) {
 
 	attrs.put("value", value);
 return this;}
+public ButtonCommandBuilder setSystemTextAppearance(String value) {
+	Map<String, Object> attrs = initCommand("systemTextAppearance");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public ButtonCommandBuilder setTextAppearance(String value) {
 	Map<String, Object> attrs = initCommand("textAppearance");
 	attrs.put("type", "attribute");
@@ -3079,6 +3099,10 @@ public void setTextStyle(String value) {
 
 public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
+}
+
+public void setSystemTextAppearance(String value) {
+	getBuilder().reset().setSystemTextAppearance(value).execute(true);
 }
 
 public void setTextAppearance(String value) {

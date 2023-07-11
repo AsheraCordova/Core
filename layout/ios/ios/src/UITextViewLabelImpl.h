@@ -24,10 +24,11 @@
 #define INCLUDE_ASValidationErrorLabel 1
 #include "ValidationErrorLabel.h"
 
-@class ASMeasurableTextView;
+@class ADTextView;
 @class ASUITextViewLabelImpl_UITextViewLabelBean;
 @class ASUITextViewLabelImpl_UITextViewLabelCommandBuilder;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -36,13 +37,18 @@
 @interface ASUITextViewLabelImpl : ASBaseWidget < ASValidationErrorLabel > {
  @public
   id uiView_;
-  ASMeasurableTextView *measurableTextView_;
+  ADTextView *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -104,6 +110,8 @@
 
 - (id)getUsesStandardTextScaling;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
@@ -152,26 +160,20 @@
 - (void)setUsesStandardTextScalingWithId:(id)nativeWidget
                                   withId:(id)value;
 
-+ (NSString *)toUpperCaseWithNSString:(NSString *)text;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
++ (NSString *)toUpperCaseWithNSString:(NSString *)text;
 
 - (void)updatePadding;
 
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASUITextViewLabelImpl)
 
 J2OBJC_FIELD_SETTER(ASUITextViewLabelImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASUITextViewLabelImpl, measurableTextView_, ASMeasurableTextView *)
+J2OBJC_FIELD_SETTER(ASUITextViewLabelImpl, measurableView_, ADTextView *)
 
 inline NSString *ASUITextViewLabelImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -188,6 +190,18 @@ FOUNDATION_EXPORT void ASUITextViewLabelImpl_init(ASUITextViewLabelImpl *self);
 FOUNDATION_EXPORT ASUITextViewLabelImpl *new_ASUITextViewLabelImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASUITextViewLabelImpl *create_ASUITextViewLabelImpl_init(void);
+
+FOUNDATION_EXPORT void ASUITextViewLabelImpl_initWithNSString_(ASUITextViewLabelImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASUITextViewLabelImpl *new_ASUITextViewLabelImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASUITextViewLabelImpl *create_ASUITextViewLabelImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASUITextViewLabelImpl_initWithNSString_withNSString_(ASUITextViewLabelImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASUITextViewLabelImpl *new_ASUITextViewLabelImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASUITextViewLabelImpl *create_ASUITextViewLabelImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
 
 FOUNDATION_EXPORT NSString *ASUITextViewLabelImpl_toUpperCaseWithNSString_(NSString *text);
 
@@ -492,26 +506,30 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 #if !defined (ASUITextViewLabelImpl_UITextViewLabelExt_) && (INCLUDE_ALL_UITextViewLabelImpl || defined(INCLUDE_ASUITextViewLabelImpl_UITextViewLabelExt))
 #define ASUITextViewLabelImpl_UITextViewLabelExt_
 
-#define RESTRICT_MeasurableTextView 1
-#define INCLUDE_ASMeasurableTextView 1
-#include "MeasurableTextView.h"
+#define RESTRICT_TextView 1
+#define INCLUDE_ADTextView 1
+#include "TextView.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
-@class ADRectF;
+@class ADRect;
+@class ADView;
 @class ASUITextViewLabelImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASUITextViewLabelImpl_UITextViewLabelExt : ASMeasurableTextView < ASILifeCycleDecorator >
+@interface ASUITextViewLabelImpl_UITextViewLabelExt : ADTextView < ASILifeCycleDecorator >
 
 #pragma mark Public
 
 - (instancetype)initWithASUITextViewLabelImpl:(ASUITextViewLabelImpl *)outer$;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)drawableStateChanged;
 
@@ -528,9 +546,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 
 - (jint)getLineHeightPadding;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
 
+- (NSString *)getText;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -543,14 +574,18 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 
 - (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)mAutoSizeTextSizeInPx
-                                withADRectF:(ADRectF *)availableSpace;
+- (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)updateMeasuredDimensionWithInt:(jint)width
                                withInt:(jint)height;
@@ -562,10 +597,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
                     withInt:(jint)t
                     withInt:(jint)r
                     withInt:(jint)b;
-
-- (void)setTextSizeInternalWithInt:(jint)unit
-                         withFloat:(jfloat)optimalTextSize
-                       withBoolean:(jboolean)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -950,7 +981,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 

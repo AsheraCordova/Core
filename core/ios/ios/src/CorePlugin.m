@@ -27,9 +27,11 @@
 #include "java/io/InputStream.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Long.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/Runtime.h"
 #include "java/lang/RuntimeException.h"
+#include "java/lang/System.h"
 #include "java/util/ArrayList.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
@@ -39,6 +41,8 @@
 @class JavaIoInputStream;
 @protocol JavaLangRunnable;
 
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface ASCorePlugin ()
 
@@ -139,6 +143,24 @@ __attribute__((unused)) static jint ASCorePlugin_MyBitmap_getImageHeightWithId_(
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCorePlugin_MyBitmap)
 
+@interface ASCorePlugin_$Lambda$1 : NSObject < JavaLangRunnable > {
+ @public
+  ASCorePlugin *this$0_;
+  id<JavaLangRunnable> val$runnable_;
+}
+
+- (void)run;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASCorePlugin_$Lambda$1)
+
+__attribute__((unused)) static void ASCorePlugin_$Lambda$1_initWithASCorePlugin_withJavaLangRunnable_(ASCorePlugin_$Lambda$1 *self, ASCorePlugin *outer$, id<JavaLangRunnable> capture$0);
+
+__attribute__((unused)) static ASCorePlugin_$Lambda$1 *new_ASCorePlugin_$Lambda$1_initWithASCorePlugin_withJavaLangRunnable_(ASCorePlugin *outer$, id<JavaLangRunnable> capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASCorePlugin_$Lambda$1 *create_ASCorePlugin_$Lambda$1_initWithASCorePlugin_withJavaLangRunnable_(ASCorePlugin *outer$, id<JavaLangRunnable> capture$0);
+
 J2OBJC_INITIALIZED_DEFN(ASCorePlugin)
 
 @implementation ASCorePlugin
@@ -160,7 +182,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)invokeWithNSString:(NSString *)name
        withNSObjectArray:(IOSObjectArray *)args {
-  switch (JreIndexOfStr(name, (id[]){ @"getAssetMode", @"getDevServerIp", @"getOrientation", @"getScreenWidth", @"getScreenHeight", @"getScreenWidthDp", @"getScreenHeightDp", @"getOS", @"getFileAsset", @"getDensityName", @"getDensity", @"postDelayed", @"removeCallbacks", @"putObjectToBundle", @"releaseNativeResources", @"getFontMetrics", @"createDrawable", @"createAttributedString", @"getDisplayMetricDensity", @"getAttributedBulletHtml", @"getExternalFilesDir", @"getMaxMemory", @"decodeBitmapStream", @"runOnMainThread" }, 24)) {
+  switch (JreIndexOfStr(name, (id[]){ @"getAssetMode", @"getDevServerIp", @"getOrientation", @"getScreenWidth", @"getScreenHeight", @"getScreenWidthDp", @"getScreenHeightDp", @"getOS", @"getFileAsset", @"getDensityName", @"getDensity", @"postDelayed", @"removeCallbacks", @"putObjectToBundle", @"releaseNativeResources", @"getFontMetrics", @"createDrawable", @"createAttributedString", @"getDisplayMetricDensity", @"getAttributedBulletHtml", @"getExternalFilesDir", @"getMaxMemory", @"decodeBitmapStream", @"runOnMainThread", @"enqueueTaskForEventLoop" }, 25)) {
     case 0:
     return [self getAssetModeWithASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), ASIFragment_class_())];
     case 1:
@@ -212,6 +234,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     return [self decodeBitmapStreamWithJavaIoInputStream:(JavaIoInputStream *) cast_chk(IOSObjectArray_Get(nil_chk(args), 0), [JavaIoInputStream class]) withId:IOSObjectArray_Get(args, 1)];
     case 23:
     [self runOnMainThreadWithJavaLangRunnable:(id<JavaLangRunnable>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), JavaLangRunnable_class_())];
+    return nil;
+    case 24:
+    [self enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), JavaLangRunnable_class_()) withLong:[((JavaLangLong *) nil_chk((JavaLangLong *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangLong class]))) longLongValue]];
     return nil;
     default:
     break;
@@ -471,6 +496,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCorePlugin_nativeRunOnMainThreadWithJavaLangRunnable_(self, runnable);
 }
 
+- (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
+                                           withLong:(jlong)when {
+  jint delayInMills = (jint) (when - JavaLangSystem_currentTimeMillis());
+  if (delayInMills <= 0) {
+    ASCorePlugin_nativeRunOnMainThreadWithJavaLangRunnable_(self, runnable);
+  }
+  else {
+    (void) [self postDelayedWithJavaLangRunnable:new_ASCorePlugin_$Lambda$1_initWithASCorePlugin_withJavaLangRunnable_(self, runnable) withInt:delayInMills];
+  }
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -524,6 +560,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x1, 44, 45, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 46, 47, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 48, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 49, 50, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -579,14 +616,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[48].selector = @selector(decodeBitmapStreamWithJavaIoInputStream:withId:);
   methods[49].selector = @selector(runOnMainThreadWithJavaLangRunnable:);
   methods[50].selector = @selector(nativeRunOnMainThreadWithJavaLangRunnable:);
+  methods[51].selector = @selector(enqueueTaskForEventLoopWithJavaLangRunnable:withLong:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "PLUGIN_NAME_CORE", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 49, -1, -1 },
-    { "density", "I", .constantValue.asLong = 0, 0xa, -1, 50, -1, -1 },
-    { "navigator", "LASUINavigatorImpl;", .constantValue.asLong = 0, 0xa, -1, 51, -1, -1 },
+    { "PLUGIN_NAME_CORE", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 51, -1, -1 },
+    { "density", "I", .constantValue.asLong = 0, 0xa, -1, 52, -1, -1 },
+    { "navigator", "LASUINavigatorImpl;", .constantValue.asLong = 0, 0xa, -1, 53, -1, -1 },
   };
-  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "LNSString;", "postDelayed", "LJavaLangRunnable;I", "scheduledTimerWithTimeInterval", "LJavaLangRunnable;F", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "invalidateTimer", "LNSObject;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "getMaxAscent", "getAscent", "getDescent", "getMaxDescent", "getLeading", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "navigateAsTop", "LNSString;LNSObject;LASIFragment;", "navigate", "getScopedObjectArray", "(Ljava/lang/Object;)Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLNSObject;LASIFragment;", "navigateWithPopBackStack", "popBackStack", "LASIFragment;LNSString;Z", "executeSimpleCommand", "LNSObject;LASIFragment;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "nativeRunOnMainThread", &ASCorePlugin_PLUGIN_NAME_CORE, &ASCorePlugin_density, &ASCorePlugin_navigator, "LASCorePlugin_MyBitmap;" };
-  static const J2ObjcClassInfo _ASCorePlugin = { "CorePlugin", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 51, 3, -1, 52, -1, -1, -1 };
+  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "LNSString;", "postDelayed", "LJavaLangRunnable;I", "scheduledTimerWithTimeInterval", "LJavaLangRunnable;F", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "invalidateTimer", "LNSObject;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "getMaxAscent", "getAscent", "getDescent", "getMaxDescent", "getLeading", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "navigateAsTop", "LNSString;LNSObject;LASIFragment;", "navigate", "getScopedObjectArray", "(Ljava/lang/Object;)Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLNSObject;LASIFragment;", "navigateWithPopBackStack", "popBackStack", "LASIFragment;LNSString;Z", "executeSimpleCommand", "LNSObject;LASIFragment;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "nativeRunOnMainThread", "enqueueTaskForEventLoop", "LJavaLangRunnable;J", &ASCorePlugin_PLUGIN_NAME_CORE, &ASCorePlugin_density, &ASCorePlugin_navigator, "LASCorePlugin_MyBitmap;" };
+  static const J2ObjcClassInfo _ASCorePlugin = { "CorePlugin", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 52, 3, -1, 54, -1, -1, -1 };
   return &_ASCorePlugin;
 }
 
@@ -870,3 +908,25 @@ jint ASCorePlugin_MyBitmap_getImageHeightWithId_(id value) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCorePlugin_MyBitmap)
+
+@implementation ASCorePlugin_$Lambda$1
+
+- (void)run {
+  ASCorePlugin_nativeRunOnMainThreadWithJavaLangRunnable_(this$0_, val$runnable_);
+}
+
+@end
+
+void ASCorePlugin_$Lambda$1_initWithASCorePlugin_withJavaLangRunnable_(ASCorePlugin_$Lambda$1 *self, ASCorePlugin *outer$, id<JavaLangRunnable> capture$0) {
+  self->this$0_ = outer$;
+  self->val$runnable_ = capture$0;
+  NSObject_init(self);
+}
+
+ASCorePlugin_$Lambda$1 *new_ASCorePlugin_$Lambda$1_initWithASCorePlugin_withJavaLangRunnable_(ASCorePlugin *outer$, id<JavaLangRunnable> capture$0) {
+  J2OBJC_NEW_IMPL(ASCorePlugin_$Lambda$1, initWithASCorePlugin_withJavaLangRunnable_, outer$, capture$0)
+}
+
+ASCorePlugin_$Lambda$1 *create_ASCorePlugin_$Lambda$1_initWithASCorePlugin_withJavaLangRunnable_(ASCorePlugin *outer$, id<JavaLangRunnable> capture$0) {
+  J2OBJC_CREATE_IMPL(ASCorePlugin_$Lambda$1, initWithASCorePlugin_withJavaLangRunnable_, outer$, capture$0)
+}

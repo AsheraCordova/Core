@@ -51,7 +51,7 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
 	public final static String GROUP_NAME = "ImageButton";
 
 	protected @Property Object uiView;
-	protected MeasurableImageView measurableImageView;		
+	protected r.android.widget.ImageView measurableView;		
 	
 		@SuppressLint("NewApi")
 		final static class ScaleType extends AbstractEnumToIntConverter{
@@ -108,19 +108,20 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
 	public ImageButtonImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ImageButtonImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ImageButtonImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 @com.google.j2objc.annotations.WeakOuter		
-	public class ImageButtonExt extends MeasurableImageView implements ILifeCycleDecorator{
+	public class ImageButtonExt extends r.android.widget.ImageView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 
 		public ImageButtonExt() {
-			
-			
-			
 			super(ImageButtonImpl.this);
-			
-			
 			
 		}
 		
@@ -202,7 +203,44 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ImageButtonImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(ImageButtonImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	ImageButtonImpl.this.getParent().remove(ImageButtonImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -212,27 +250,31 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			ImageButtonImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ViewImpl.nativeSetVisibility(asNativeWidget(), visibility != View.VISIBLE);
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((ImageButtonExt) measurableImageView).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return ImageButtonExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ImageButtonImpl();
+		return new ImageButtonImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableImageView = new ImageButtonExt();
+		measurableView = new ImageButtonExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 		setWidgetOnNativeClass();
@@ -498,7 +540,7 @@ return getTintColor();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableImageView;
+		return measurableView;
 	}
 
 	
@@ -530,11 +572,11 @@ return getTintColor();				}
 	}
 	
 	private Object getScaleType() {
-		return measurableImageView.getScaleTypeInt();
+		return measurableView.getScaleTypeInt();
 	}
 	
 	private void setScaleType(String strValue, Object objValue) {
-		measurableImageView.setScaleType(strValue, (int) objValue);
+		measurableView.setScaleType(strValue, (int) objValue);
 		
 		if (isViewWrapped()) {
 			if ("fitXY".equals(strValue)) {
@@ -551,14 +593,14 @@ return getTintColor();				}
 	}	
 
 	public void setImage(Object value) {
-		measurableImageView.setImageDrawable((r.android.graphics.drawable.Drawable) value);
+		measurableView.setImageDrawable((r.android.graphics.drawable.Drawable) value);
 		
 		setImageNative(((r.android.graphics.drawable.Drawable) value).getDrawable());
 	}
 	
 	
 	private Object getSrc() {
-		return measurableImageView.getImageDrawable();
+		return measurableView.getImageDrawable();
 	}
 	
 	private native int getImageHeight(Object image) /*-[
@@ -628,62 +670,62 @@ return getTintColor();				}
 
 
 	private Object getBaselineAlignBottom() {
-		return measurableImageView.getBaselineAlignBottom();
+		return measurableView.getBaselineAlignBottom();
 	}
 
 	@Override
 	public int getBaseLine() {
-		return measurableImageView.getBaseline();
+		return measurableView.getBaseline();
 	}
 
 	private void setBaseLine(Object objValue) {
-		measurableImageView.setBaseline((int) objValue);
+		measurableView.setBaseline((int) objValue);
 	}
 	
 	private void setBaselineAlignBottom(Object objValue) {
-		measurableImageView.setBaselineAlignBottom((boolean) objValue);
+		measurableView.setBaselineAlignBottom((boolean) objValue);
 	}
 	
 	
 	private void setCropToPadding(Object objValue) {
-		measurableImageView.setCropToPadding((boolean) objValue); 
+		measurableView.setCropToPadding((boolean) objValue); 
 	}
 
 	private Object getCropToPadding() {
-		return measurableImageView.getCropToPadding();
+		return measurableView.getCropToPadding();
 	}
 	
 	private Object getMaxWidth() {
-		return measurableImageView.getMaxWidth();
+		return measurableView.getMaxWidth();
 	}
 
 	private Object getMaxHeight() {
-		return measurableImageView.getMaxHeight();
+		return measurableView.getMaxHeight();
 	}
     
     private void setMaxWidth(Object objValue) {
-        measurableImageView.setMaxWidth(((int) objValue));
+        measurableView.setMaxWidth(((int) objValue));
     }
 
     private void setMaxHeight(Object objValue) {
-        measurableImageView.setMaxHeight(((int) objValue));
+        measurableView.setMaxHeight(((int) objValue));
     }
 
 
 	private Object getAdjustViewBounds() {
-		return measurableImageView.getAdjustViewBounds();
+		return measurableView.getAdjustViewBounds();
 	}
 	
 
     private void setAdjustViewBounds(Object objValue) {
-        measurableImageView.setAdjustViewBounds((boolean) objValue);
+        measurableView.setAdjustViewBounds((boolean) objValue);
     }
     
 	@Override
 	public void drawableStateChanged() {
 		super.drawableStateChanged();
-		r.android.graphics.drawable.Drawable imageDrawable = measurableImageView.getImageDrawable();
-		if (imageDrawable != null && imageDrawable.isStateful() && imageDrawable.setState(measurableImageView.getDrawableState())) {
+		r.android.graphics.drawable.Drawable imageDrawable = measurableView.getImageDrawable();
+		if (imageDrawable != null && imageDrawable.isStateful() && imageDrawable.setState(measurableView.getDrawableState())) {
 			setImage(imageDrawable);
 		}
 	}
@@ -692,34 +734,34 @@ return getTintColor();				}
 
 
 	public Object getPaddingLeft() {
-		return ViewImpl.getPaddingLeft(this, measurableImageView);
+		return ViewImpl.getPaddingLeft(this, measurableView);
 	}
 
 	public void setPaddingLeft(Object paddingLeft) {
-		ViewImpl.setPaddingLeft(paddingLeft, measurableImageView);
+		ViewImpl.setPaddingLeft(paddingLeft, measurableView);
 		nativeSetPaddingLeft((int) paddingLeft);
 	}
 
 	public Object getPaddingRight() {
-		return ViewImpl.getPaddingRight(this, measurableImageView);
+		return ViewImpl.getPaddingRight(this, measurableView);
 	}
 
 	public void setPaddingRight(Object paddingRight) {
-		ViewImpl.setPaddingRight(paddingRight, measurableImageView);
+		ViewImpl.setPaddingRight(paddingRight, measurableView);
 		nativeSetPaddingRight((int) paddingRight);
 	}
 
 	public Object getPaddingTop() {
-		return ViewImpl.getPaddingTop(this, measurableImageView);
+		return ViewImpl.getPaddingTop(this, measurableView);
 	}
 
 	public void setPaddingTop(Object paddingTop) {
-		ViewImpl.setPaddingTop(paddingTop, measurableImageView);
+		ViewImpl.setPaddingTop(paddingTop, measurableView);
 		nativeSetPaddingTop((int) paddingTop);
 	}
 
 	public Object getPaddingBottom() {
-		return ViewImpl.getPaddingBottom(this, measurableImageView);
+		return ViewImpl.getPaddingBottom(this, measurableView);
 	}
 	
 	private Object getPaddingEnd() {
@@ -731,7 +773,7 @@ return getTintColor();				}
 	}	
 
 	public void setPaddingBottom(Object paddingBottom) {
-		ViewImpl.setPaddingBottom(paddingBottom, measurableImageView);
+		ViewImpl.setPaddingBottom(paddingBottom, measurableView);
 		nativeSetPaddingBottom((int) paddingBottom);
 	}
 
@@ -759,10 +801,10 @@ return getTintColor();				}
 	}
 
     public void updatePadding() {
-    	setPaddingLeft(measurableImageView.getPaddingLeft());
-    	setPaddingRight(measurableImageView.getPaddingRight());
-    	setPaddingTop(measurableImageView.getPaddingTop());
-    	setPaddingBottom(measurableImageView.getPaddingBottom());
+    	setPaddingLeft(measurableView.getPaddingLeft());
+    	setPaddingRight(measurableView.getPaddingRight());
+    	setPaddingTop(measurableView.getPaddingTop());
+    	setPaddingBottom(measurableView.getPaddingBottom());
     }
 	private native void nativeSetPaddingBottom(int value) /*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);
@@ -798,10 +840,14 @@ return getTintColor();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableImageView.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {

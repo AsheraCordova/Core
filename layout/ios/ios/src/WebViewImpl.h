@@ -20,10 +20,11 @@
 #define INCLUDE_ASBaseWidget 1
 #include "BaseWidget.h"
 
-@class ASMeasurableViewGroup;
+@class ADWebView;
 @class ASWebViewImpl_WebViewBean;
 @class ASWebViewImpl_WebViewCommandBuilder;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -32,13 +33,18 @@
 @interface ASWebViewImpl : ASBaseWidget {
  @public
   id uiView_;
-  ASMeasurableViewGroup *measurableViewGroup_;
+  ADWebView *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -58,6 +64,8 @@
 
 - (id)getPluginWithNSString:(NSString *)plugin;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName;
@@ -75,22 +83,16 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASWebViewImpl)
 
 J2OBJC_FIELD_SETTER(ASWebViewImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASWebViewImpl, measurableViewGroup_, ASMeasurableViewGroup *)
+J2OBJC_FIELD_SETTER(ASWebViewImpl, measurableView_, ADWebView *)
 
 inline NSString *ASWebViewImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -108,6 +110,18 @@ FOUNDATION_EXPORT ASWebViewImpl *new_ASWebViewImpl_init(void) NS_RETURNS_RETAINE
 
 FOUNDATION_EXPORT ASWebViewImpl *create_ASWebViewImpl_init(void);
 
+FOUNDATION_EXPORT void ASWebViewImpl_initWithNSString_(ASWebViewImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASWebViewImpl *new_ASWebViewImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASWebViewImpl *create_ASWebViewImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASWebViewImpl_initWithNSString_withNSString_(ASWebViewImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASWebViewImpl *new_ASWebViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASWebViewImpl *create_ASWebViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
+
 J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl)
 
 @compatibility_alias ComAsheraLayoutWebViewImpl ASWebViewImpl;
@@ -117,9 +131,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl)
 #if !defined (ASWebViewImpl_WebViewExt_) && (INCLUDE_ALL_WebViewImpl || defined(INCLUDE_ASWebViewImpl_WebViewExt))
 #define ASWebViewImpl_WebViewExt_
 
-#define RESTRICT_MeasurableViewGroup 1
-#define INCLUDE_ASMeasurableViewGroup 1
-#include "MeasurableViewGroup.h"
+#define RESTRICT_WebView 1
+#define INCLUDE_ADWebView 1
+#include "WebView.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
@@ -129,13 +143,18 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADAttributeSet;
+@class ADContext;
+@class ADRect;
+@class ADView;
 @class ASWebViewImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASWebViewImpl_WebViewExt : ASMeasurableViewGroup < ASILifeCycleDecorator, ASIMaxDimension >
+@interface ASWebViewImpl_WebViewExt : ADWebView < ASILifeCycleDecorator, ASIMaxDimension >
 
 #pragma mark Public
 
@@ -148,11 +167,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -165,6 +190,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -172,6 +201,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -188,7 +220,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl)
 
 // Disallowed inherited constructors, do not use.
 
-- (instancetype)initWithASIWidget:(id<ASIWidget>)arg0 NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithADContext:(ADContext *)arg0
+               withADAttributeSet:(ADAttributeSet *)arg1 NS_UNAVAILABLE;
 
 @end
 
@@ -454,7 +489,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setOnReceivedErrorWithNSString:(NSString *)value;
 
+- (ASWebViewImpl_WebViewCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASWebViewImpl_WebViewCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASWebViewImpl_WebViewCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 

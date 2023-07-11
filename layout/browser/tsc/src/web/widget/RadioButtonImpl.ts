@@ -75,6 +75,7 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
+
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -192,6 +193,9 @@ export abstract class RadioButtonImpl<T> extends ViewImpl<T>{
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
 		TransformerFactory.getInstance().register("autoLink", new AutoLinkTransformer());
     }	
+	@Type(() => CommandAttr)
+	@Expose({ name: "checked" })
+	checked!:CommandAttr<boolean>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "onCheckedChange" })
 	onCheckedChange!:CommandAttr<string>| undefined;
@@ -385,14 +389,15 @@ export abstract class RadioButtonImpl<T> extends ViewImpl<T>{
 	@Expose({ name: "textFormat" })
 	textFormat!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
-	@Expose({ name: "checked" })
-	checked!:CommandAttr<boolean>| undefined;
+	@Expose({ name: "textAppearance" })
+	textAppearance!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
+		this.checked = undefined;
 		this.onCheckedChange = undefined;
 		this.buttonSize = undefined;
 		this.buttonPadding = undefined;
@@ -457,7 +462,7 @@ export abstract class RadioButtonImpl<T> extends ViewImpl<T>{
 		this.autoLink = undefined;
 		this.textColorLink = undefined;
 		this.textFormat = undefined;
-		this.checked = undefined;
+		this.textAppearance = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -465,6 +470,38 @@ export abstract class RadioButtonImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
+
+	public tryGetChecked() : T {
+		this.resetIfRequired();
+		if (this.checked == null || this.checked == undefined) {
+			this.checked = new CommandAttr<boolean>()
+		}
+		
+		this.checked.setGetter(true);
+		this.orderGet++;
+		this.checked.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public isChecked() : boolean {
+		if (this.checked == null || this.checked == undefined) {
+			this.checked = new CommandAttr<boolean>();
+		}
+		return this.checked.getCommandReturnValue();
+	}
+	public setChecked(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.checked == null || this.checked == undefined) {
+			this.checked = new CommandAttr<boolean>();
+		}
+		
+		this.checked.setSetter(true);
+		this.checked.setValue(value);
+		this.orderSet++;
+		this.checked.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
 
 	public setOnCheckedChange(value : string) : T {
 		this.resetIfRequired();
@@ -2028,34 +2065,16 @@ this.autoLink.setTransformer('autoLink');		return this.thisPointer;
 	}
 		
 
-	public tryGetChecked() : T {
+	public setTextAppearance(value : string) : T {
 		this.resetIfRequired();
-		if (this.checked == null || this.checked == undefined) {
-			this.checked = new CommandAttr<boolean>()
+		if (this.textAppearance == null || this.textAppearance == undefined) {
+			this.textAppearance = new CommandAttr<string>();
 		}
 		
-		this.checked.setGetter(true);
-		this.orderGet++;
-		this.checked.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public isChecked() : boolean {
-		if (this.checked == null || this.checked == undefined) {
-			this.checked = new CommandAttr<boolean>();
-		}
-		return this.checked.getCommandReturnValue();
-	}
-	public setChecked(value : boolean) : T {
-		this.resetIfRequired();
-		if (this.checked == null || this.checked == undefined) {
-			this.checked = new CommandAttr<boolean>();
-		}
-		
-		this.checked.setSetter(true);
-		this.checked.setValue(value);
+		this.textAppearance.setSetter(true);
+		this.textAppearance.setValue(value);
 		this.orderSet++;
-		this.checked.setOrderSet(this.orderSet);
+		this.textAppearance.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

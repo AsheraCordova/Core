@@ -38,7 +38,7 @@ public class WebViewImpl extends BaseWidget {
 	public final static String GROUP_NAME = "WebView";
 
 	protected org.teavm.jso.dom.html.HTMLElement hTMLElement;
-	protected MeasurableViewGroup measurableViewGroup;	
+	protected r.android.webkit.WebView measurableView;	
 	
 	
 	@Override
@@ -46,18 +46,24 @@ public class WebViewImpl extends BaseWidget {
 		ViewImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("loadUrl").withType("resourcestring").withOrder(10));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onPageStarted").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onPageFinished").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onReceivedError").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("loadUrl").withType("resourcestring").withOrder(10));
 	}
 	
 	public WebViewImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  WebViewImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  WebViewImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class WebViewExt extends MeasurableViewGroup implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
+	public class WebViewExt extends r.android.webkit.WebView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 		private int mMaxWidth = -1;
@@ -80,13 +86,8 @@ public class WebViewImpl extends BaseWidget {
 		}
 
 		public WebViewExt() {
+			super();
 			
-			
-			
-			
-			
-			
-			super(WebViewImpl.this);
 		}
 		
 		@Override
@@ -173,7 +174,45 @@ public class WebViewImpl extends BaseWidget {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(WebViewImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(WebViewImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	WebViewImpl.this.getParent().remove(WebViewImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = hTMLElement.getBoundingClientRect().getLeft();
+        	appScreenLocation[1] = hTMLElement.getBoundingClientRect().getTop();
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	org.teavm.jso.dom.html.TextRectangle boundingClientRect = hTMLElement.getBoundingClientRect();
+			displayFrame.top = boundingClientRect.getTop();
+        	displayFrame.left = boundingClientRect.getLeft();
+        	displayFrame.bottom = boundingClientRect.getBottom();
+        	displayFrame.right = boundingClientRect.getRight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -183,26 +222,31 @@ public class WebViewImpl extends BaseWidget {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			WebViewImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ((HTMLElement)asNativeWidget()).getStyle().setProperty("display", visibility != View.VISIBLE ? "none" : "block");
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
+	}	@Override
+	public Class getViewClass() {
+		return WebViewExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new WebViewImpl();
+		return new WebViewImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableViewGroup = new WebViewExt();
+		measurableView = new WebViewExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 	}
@@ -214,16 +258,6 @@ public class WebViewImpl extends BaseWidget {
 		ViewImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "loadUrl": {
-				
-
-
-		loadUrl(objValue);
-
-
-
-			}
-			break;
 			case "onPageStarted": {
 				
 
@@ -254,6 +288,16 @@ public class WebViewImpl extends BaseWidget {
 
 			}
 			break;
+			case "loadUrl": {
+				
+
+
+		loadUrl(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -276,7 +320,7 @@ public class WebViewImpl extends BaseWidget {
 	
 	@Override
 	public Object asWidget() {
-		return measurableViewGroup;
+		return measurableView;
 	}
 
 	
@@ -564,10 +608,14 @@ public java.util.Map<String, Object> getOnReceivedErrorEventObj(View view,String
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableViewGroup.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -617,14 +665,6 @@ public  class WebViewCommandBuilder extends com.ashera.layout.ViewImpl.ViewComma
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public WebViewCommandBuilder loadUrl(String value) {
-	Map<String, Object> attrs = initCommand("loadUrl");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public WebViewCommandBuilder setOnPageStarted(String value) {
 	Map<String, Object> attrs = initCommand("onPageStarted");
 	attrs.put("type", "attribute");
@@ -649,15 +689,19 @@ public WebViewCommandBuilder setOnReceivedError(String value) {
 
 	attrs.put("value", value);
 return this;}
+public WebViewCommandBuilder loadUrl(String value) {
+	Map<String, Object> attrs = initCommand("loadUrl");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class WebViewBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public WebViewBean() {
 			super(WebViewImpl.this);
 		}
-public void loadUrl(String value) {
-	getBuilder().reset().loadUrl(value).execute(true);
-}
-
 public void setOnPageStarted(String value) {
 	getBuilder().reset().setOnPageStarted(value).execute(true);
 }
@@ -668,6 +712,10 @@ public void setOnPageFinished(String value) {
 
 public void setOnReceivedError(String value) {
 	getBuilder().reset().setOnReceivedError(value).execute(true);
+}
+
+public void loadUrl(String value) {
+	getBuilder().reset().loadUrl(value).execute(true);
 }
 
 }
@@ -681,18 +729,27 @@ public void setOnReceivedError(String value) {
 		hTMLElement.getStyle().setProperty("box-sizing", "border-box");
 		hTMLElement.setAttribute("type", "text/html");
 		hTMLElement.addEventListener("load", (e) -> {
-			WebViewImpl.this.onPageFinished(measurableViewGroup);	
+			WebViewImpl.this.onPageFinished(measurableView);	
 		});
 		
 		hTMLElement.addEventListener("error", (e) -> {
-			WebViewImpl.this.onReceivedError(measurableViewGroup, hTMLElement.getInnerHTML());
-			WebViewImpl.this.onPageFinished(measurableViewGroup);
+			WebViewImpl.this.onReceivedError(measurableView, hTMLElement.getInnerHTML());
+			WebViewImpl.this.onPageFinished(measurableView);
 		});
 	}
 	
 	
 	private void loadUrl(Object objValue) {
-		WebViewImpl.this.onPageStarted(measurableViewGroup);
+		WebViewImpl.this.onPageStarted(measurableView);
 		hTMLElement.setAttribute("data", (String) objValue);
 	}
+	
+	private int nativeMeasureHeight(Object uiView, int width) {
+		return 0;
+	}
+
+	private int nativeMeasureWidth(Object uiView) {
+		return 0;
+	}
+
 }

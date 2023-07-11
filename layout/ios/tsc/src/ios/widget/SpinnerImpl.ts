@@ -71,10 +71,6 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
-
-
-
-
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -101,6 +97,10 @@ export class TextStyleTransformer implements ITranform {
         }
     }
 }
+
+
+
+
 
 
 
@@ -146,18 +146,6 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "iosDisabledBackground" })
 	iosDisabledBackground!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "selection" })
-	selection!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "gravity" })
-	gravity!:CommandAttr<Gravity[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textSize" })
-	textSize!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textColorHint" })
-	textColorHint!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "entries" })
 	entries!:CommandAttr<string>| undefined;
@@ -251,6 +239,18 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "enabled" })
 	enabled!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "selection" })
+	selection!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "gravity" })
+	gravity!:CommandAttr<Gravity[]>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textSize" })
+	textSize!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "textColorHint" })
+	textColorHint!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -268,10 +268,6 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 		this.iosAllowsEditingTextAttributes = undefined;
 		this.iosBackground = undefined;
 		this.iosDisabledBackground = undefined;
-		this.selection = undefined;
-		this.gravity = undefined;
-		this.textSize = undefined;
-		this.textColorHint = undefined;
 		this.entries = undefined;
 		this.onItemSelected = undefined;
 		this.modelOptionTextPath = undefined;
@@ -303,6 +299,10 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 		this.fontFamily = undefined;
 		this.textColor = undefined;
 		this.enabled = undefined;
+		this.selection = undefined;
+		this.gravity = undefined;
+		this.textSize = undefined;
+		this.textColorHint = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -680,98 +680,6 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 		this.iosDisabledBackground.setValue(value);
 		this.orderSet++;
 		this.iosDisabledBackground.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setSelection(value : number) : T {
-		this.resetIfRequired();
-		if (this.selection == null || this.selection == undefined) {
-			this.selection = new CommandAttr<number>();
-		}
-		
-		this.selection.setSetter(true);
-		this.selection.setValue(value);
-		this.orderSet++;
-		this.selection.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetGravity() : T {
-		this.resetIfRequired();
-		if (this.gravity == null || this.gravity == undefined) {
-			this.gravity = new CommandAttr<Gravity[]>()
-		}
-		
-		this.gravity.setGetter(true);
-		this.orderGet++;
-		this.gravity.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getGravity() : Gravity[] {
-		if (this.gravity == null || this.gravity == undefined) {
-			this.gravity = new CommandAttr<Gravity[]>();
-		}
-this.gravity.setTransformer('gravity');		return this.gravity.getCommandReturnValue();
-	}
-	public setGravity(...value : Gravity[]) : T {
-		this.resetIfRequired();
-		if (this.gravity == null || this.gravity == undefined) {
-			this.gravity = new CommandAttr<Gravity[]>();
-		}
-		
-		this.gravity.setSetter(true);
-		this.gravity.setValue(value);
-		this.orderSet++;
-		this.gravity.setOrderSet(this.orderSet);
-this.gravity.setTransformer('gravity');		return this.thisPointer;
-	}
-		
-
-	public tryGetTextSize() : T {
-		this.resetIfRequired();
-		if (this.textSize == null || this.textSize == undefined) {
-			this.textSize = new CommandAttr<string>()
-		}
-		
-		this.textSize.setGetter(true);
-		this.orderGet++;
-		this.textSize.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getTextSize() : string {
-		if (this.textSize == null || this.textSize == undefined) {
-			this.textSize = new CommandAttr<string>();
-		}
-		return this.textSize.getCommandReturnValue();
-	}
-	public setTextSize(value : string) : T {
-		this.resetIfRequired();
-		if (this.textSize == null || this.textSize == undefined) {
-			this.textSize = new CommandAttr<string>();
-		}
-		
-		this.textSize.setSetter(true);
-		this.textSize.setValue(value);
-		this.orderSet++;
-		this.textSize.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setTextColorHint(value : string) : T {
-		this.resetIfRequired();
-		if (this.textColorHint == null || this.textColorHint == undefined) {
-			this.textColorHint = new CommandAttr<string>();
-		}
-		
-		this.textColorHint.setSetter(true);
-		this.textColorHint.setValue(value);
-		this.orderSet++;
-		this.textColorHint.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -1368,6 +1276,98 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.enabled.setValue(value);
 		this.orderSet++;
 		this.enabled.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSelection(value : number) : T {
+		this.resetIfRequired();
+		if (this.selection == null || this.selection == undefined) {
+			this.selection = new CommandAttr<number>();
+		}
+		
+		this.selection.setSetter(true);
+		this.selection.setValue(value);
+		this.orderSet++;
+		this.selection.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetGravity() : T {
+		this.resetIfRequired();
+		if (this.gravity == null || this.gravity == undefined) {
+			this.gravity = new CommandAttr<Gravity[]>()
+		}
+		
+		this.gravity.setGetter(true);
+		this.orderGet++;
+		this.gravity.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getGravity() : Gravity[] {
+		if (this.gravity == null || this.gravity == undefined) {
+			this.gravity = new CommandAttr<Gravity[]>();
+		}
+this.gravity.setTransformer('gravity');		return this.gravity.getCommandReturnValue();
+	}
+	public setGravity(...value : Gravity[]) : T {
+		this.resetIfRequired();
+		if (this.gravity == null || this.gravity == undefined) {
+			this.gravity = new CommandAttr<Gravity[]>();
+		}
+		
+		this.gravity.setSetter(true);
+		this.gravity.setValue(value);
+		this.orderSet++;
+		this.gravity.setOrderSet(this.orderSet);
+this.gravity.setTransformer('gravity');		return this.thisPointer;
+	}
+		
+
+	public tryGetTextSize() : T {
+		this.resetIfRequired();
+		if (this.textSize == null || this.textSize == undefined) {
+			this.textSize = new CommandAttr<string>()
+		}
+		
+		this.textSize.setGetter(true);
+		this.orderGet++;
+		this.textSize.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getTextSize() : string {
+		if (this.textSize == null || this.textSize == undefined) {
+			this.textSize = new CommandAttr<string>();
+		}
+		return this.textSize.getCommandReturnValue();
+	}
+	public setTextSize(value : string) : T {
+		this.resetIfRequired();
+		if (this.textSize == null || this.textSize == undefined) {
+			this.textSize = new CommandAttr<string>();
+		}
+		
+		this.textSize.setSetter(true);
+		this.textSize.setValue(value);
+		this.orderSet++;
+		this.textSize.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setTextColorHint(value : string) : T {
+		this.resetIfRequired();
+		if (this.textColorHint == null || this.textColorHint == undefined) {
+			this.textColorHint = new CommandAttr<string>();
+		}
+		
+		this.textColorHint.setSetter(true);
+		this.textColorHint.setValue(value);
+		this.orderSet++;
+		this.textColorHint.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

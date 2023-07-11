@@ -32,10 +32,11 @@
 #define INCLUDE_ASFormElement 1
 #include "FormElement.h"
 
-@class ASMeasurableTextView;
+@class ADTextView;
 @class ASUITextViewImpl_UITextViewBean;
 @class ASUITextViewImpl_UITextViewCommandBuilder;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ADTextWatcher;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
@@ -45,7 +46,7 @@
 @interface ASUITextViewImpl : ASBaseWidget < ASICustomMeasureHeight, ASICustomMeasureWidth, ASFormElement > {
  @public
   id uiView_;
-  ASMeasurableTextView *measurableTextView_;
+  ADTextView *measurableView_;
   id hintColor_;
 }
 @property id uiView;
@@ -53,6 +54,11 @@
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (void)addForegroundIfNeeded;
 
@@ -129,6 +135,8 @@
 
 - (id)getUsesStandardTextScaling;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (jboolean)isViewVisible;
@@ -189,26 +197,20 @@
 - (void)setUsesStandardTextScalingWithId:(id)nativeWidget
                                   withId:(id)value;
 
-- (void)showErrorWithNSString:(NSString *)message;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)showErrorWithNSString:(NSString *)message;
 
 - (void)updatePadding;
 
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASUITextViewImpl)
 
 J2OBJC_FIELD_SETTER(ASUITextViewImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASUITextViewImpl, measurableTextView_, ASMeasurableTextView *)
+J2OBJC_FIELD_SETTER(ASUITextViewImpl, measurableView_, ADTextView *)
 J2OBJC_FIELD_SETTER(ASUITextViewImpl, hintColor_, id)
 
 inline NSString *ASUITextViewImpl_get_LOCAL_NAME(void);
@@ -227,45 +229,21 @@ FOUNDATION_EXPORT ASUITextViewImpl *new_ASUITextViewImpl_init(void) NS_RETURNS_R
 
 FOUNDATION_EXPORT ASUITextViewImpl *create_ASUITextViewImpl_init(void);
 
+FOUNDATION_EXPORT void ASUITextViewImpl_initWithNSString_(ASUITextViewImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASUITextViewImpl *new_ASUITextViewImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASUITextViewImpl *create_ASUITextViewImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASUITextViewImpl_initWithNSString_withNSString_(ASUITextViewImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASUITextViewImpl *new_ASUITextViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASUITextViewImpl *create_ASUITextViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
+
 J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl)
 
 @compatibility_alias ComAsheraLayoutUITextViewImpl ASUITextViewImpl;
-
-#endif
-
-#if !defined (ASUITextViewImpl_InputView_) && (INCLUDE_ALL_UITextViewImpl || defined(INCLUDE_ASUITextViewImpl_InputView))
-#define ASUITextViewImpl_InputView_
-
-#define RESTRICT_AbstractEnumToIntConverter 1
-#define INCLUDE_ASAbstractEnumToIntConverter 1
-#include "AbstractEnumToIntConverter.h"
-
-@class JavaLangInteger;
-@protocol JavaUtilMap;
-
-@interface ASUITextViewImpl_InputView : ASAbstractEnumToIntConverter
-
-#pragma mark Public
-
-- (JavaLangInteger *)getDefault;
-
-- (id<JavaUtilMap>)getMapping;
-
-#pragma mark Package-Private
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ASUITextViewImpl_InputView)
-
-FOUNDATION_EXPORT void ASUITextViewImpl_InputView_init(ASUITextViewImpl_InputView *self);
-
-FOUNDATION_EXPORT ASUITextViewImpl_InputView *new_ASUITextViewImpl_InputView_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ASUITextViewImpl_InputView *create_ASUITextViewImpl_InputView_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputView)
 
 #endif
 
@@ -521,28 +499,69 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_ImeOptions)
 
 #endif
 
+#if !defined (ASUITextViewImpl_InputView_) && (INCLUDE_ALL_UITextViewImpl || defined(INCLUDE_ASUITextViewImpl_InputView))
+#define ASUITextViewImpl_InputView_
+
+#define RESTRICT_AbstractEnumToIntConverter 1
+#define INCLUDE_ASAbstractEnumToIntConverter 1
+#include "AbstractEnumToIntConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASUITextViewImpl_InputView : ASAbstractEnumToIntConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASUITextViewImpl_InputView)
+
+FOUNDATION_EXPORT void ASUITextViewImpl_InputView_init(ASUITextViewImpl_InputView *self);
+
+FOUNDATION_EXPORT ASUITextViewImpl_InputView *new_ASUITextViewImpl_InputView_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASUITextViewImpl_InputView *create_ASUITextViewImpl_InputView_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputView)
+
+#endif
+
 #if !defined (ASUITextViewImpl_UITextViewExt_) && (INCLUDE_ALL_UITextViewImpl || defined(INCLUDE_ASUITextViewImpl_UITextViewExt))
 #define ASUITextViewImpl_UITextViewExt_
 
-#define RESTRICT_MeasurableTextView 1
-#define INCLUDE_ASMeasurableTextView 1
-#include "MeasurableTextView.h"
+#define RESTRICT_TextView 1
+#define INCLUDE_ADTextView 1
+#include "TextView.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
+@class ADRect;
+@class ADView;
 @class ASUITextViewImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASUITextViewImpl_UITextViewExt : ASMeasurableTextView < ASILifeCycleDecorator >
+@interface ASUITextViewImpl_UITextViewExt : ADTextView < ASILifeCycleDecorator >
 
 #pragma mark Public
 
 - (instancetype)initWithASUITextViewImpl:(ASUITextViewImpl *)outer$;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)drawableStateChanged;
 
@@ -559,9 +578,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_ImeOptions)
 
 - (jint)getLineHeightPadding;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
 
+- (NSString *)getText;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -572,9 +604,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_ImeOptions)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -946,9 +985,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setOnTextChangeWithNSString:(NSString *)value;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 

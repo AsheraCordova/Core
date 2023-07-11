@@ -23,8 +23,8 @@
 @class ADChronometer;
 @class ASChronometerImpl_ChronometerBean;
 @class ASChronometerImpl_ChronometerCommandBuilder;
-@class ASMeasurableTextView;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -33,14 +33,18 @@
 @interface ASChronometerImpl : ASBaseWidget {
  @public
   id uiView_;
-  ASMeasurableTextView *measurableTextView_;
-  ADChronometer *chronometer_;
+  ADChronometer *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -103,6 +107,8 @@
 - (id)getText;
 
 - (id)getTextColor;
+
+- (IOSClass *)getViewClass;
 
 - (void)invalidate;
 
@@ -167,27 +173,20 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-+ (NSString *)toUpperCaseWithNSString:(NSString *)text;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
++ (NSString *)toUpperCaseWithNSString:(NSString *)text;
 
 - (void)updatePadding;
 
 #pragma mark Package-Private
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_STATIC_INIT(ASChronometerImpl)
 
 J2OBJC_FIELD_SETTER(ASChronometerImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASChronometerImpl, measurableTextView_, ASMeasurableTextView *)
-J2OBJC_FIELD_SETTER(ASChronometerImpl, chronometer_, ADChronometer *)
+J2OBJC_FIELD_SETTER(ASChronometerImpl, measurableView_, ADChronometer *)
 
 inline NSString *ASChronometerImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -204,6 +203,18 @@ FOUNDATION_EXPORT void ASChronometerImpl_init(ASChronometerImpl *self);
 FOUNDATION_EXPORT ASChronometerImpl *new_ASChronometerImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASChronometerImpl *create_ASChronometerImpl_init(void);
+
+FOUNDATION_EXPORT void ASChronometerImpl_initWithNSString_(ASChronometerImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASChronometerImpl *new_ASChronometerImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASChronometerImpl *create_ASChronometerImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASChronometerImpl_initWithNSString_withNSString_(ASChronometerImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASChronometerImpl *new_ASChronometerImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASChronometerImpl *create_ASChronometerImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
 
 FOUNDATION_EXPORT NSString *ASChronometerImpl_toUpperCaseWithNSString_(NSString *text);
 
@@ -362,26 +373,30 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 #if !defined (ASChronometerImpl_ChronometerExt_) && (INCLUDE_ALL_ChronometerImpl || defined(INCLUDE_ASChronometerImpl_ChronometerExt))
 #define ASChronometerImpl_ChronometerExt_
 
-#define RESTRICT_MeasurableTextView 1
-#define INCLUDE_ASMeasurableTextView 1
-#include "MeasurableTextView.h"
+#define RESTRICT_Chronometer 1
+#define INCLUDE_ADChronometer 1
+#include "Chronometer.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
 #include "ILifeCycleDecorator.h"
 
-@class ADRectF;
+@class ADRect;
+@class ADView;
 @class ASChronometerImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASChronometerImpl_ChronometerExt : ASMeasurableTextView < ASILifeCycleDecorator >
+@interface ASChronometerImpl_ChronometerExt : ADChronometer < ASILifeCycleDecorator >
 
 #pragma mark Public
 
 - (instancetype)initWithASChronometerImpl:(ASChronometerImpl *)outer$;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (void)drawableStateChanged;
 
@@ -398,9 +413,22 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 
 - (jint)getLineHeightPadding;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (id<JavaUtilList>)getMethods;
 
+- (NSString *)getText;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -413,14 +441,18 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 
 - (void)onRtlPropertiesChangedWithInt:(jint)layoutDirection;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
 
-- (void)setVisibilityWithInt:(jint)visibility;
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)mAutoSizeTextSizeInPx
-                                withADRectF:(ADRectF *)availableSpace;
+- (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)updateMeasuredDimensionWithInt:(jint)width
                                withInt:(jint)height;
@@ -432,10 +464,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
                     withInt:(jint)t
                     withInt:(jint)r
                     withInt:(jint)b;
-
-- (void)setTextSizeInternalWithInt:(jint)unit
-                         withFloat:(jfloat)optimalTextSize
-                       withBoolean:(jboolean)b;
 
 // Disallowed inherited constructors, do not use.
 
@@ -810,7 +838,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASChronometerImpl_ChronometerCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASChronometerImpl_ChronometerCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 
@@ -863,6 +895,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 - (ASChronometerImpl_ChronometerCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setTextAllCapsWithBoolean:(jboolean)value;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)setTextAppearanceWithNSString:(NSString *)value;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setTextColorWithNSString:(NSString *)value;
 
@@ -1350,6 +1384,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_ChronometerCommandBuilder)
 - (void)setTextWithNSString:(NSString *)value;
 
 - (void)setTextAllCapsWithBoolean:(jboolean)value;
+
+- (void)setTextAppearanceWithNSString:(NSString *)value;
 
 - (void)setTextColorWithNSString:(NSString *)value;
 

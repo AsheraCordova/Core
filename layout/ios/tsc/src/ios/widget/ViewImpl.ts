@@ -20,6 +20,18 @@ uiaccessibilitytraitsummaryelement = "uiaccessibilitytraitsummaryelement",
 uiaccessibilitytraittabbar = "uiaccessibilitytraittabbar",
 uiaccessibilitytraitupdatesfrequently = "uiaccessibilitytraitupdatesfrequently",
 }
+export const enum Vtype {
+email = "email",
+time = "time",
+date = "date",
+url = "url",
+tel = "tel",
+}
+export const enum ValidationErrorDisplay {
+popup = "popup",
+label = "label",
+style = "style",
+}
 export const enum BackgroundRepeat {
 no_repeat = "no-repeat",
 repeat = "repeat",
@@ -73,18 +85,6 @@ textEnd = "textEnd",
 textStart = "textStart",
 viewEnd = "viewEnd",
 viewStart = "viewStart",
-}
-export const enum Vtype {
-email = "email",
-time = "time",
-date = "date",
-url = "url",
-tel = "tel",
-}
-export const enum ValidationErrorDisplay {
-popup = "popup",
-label = "label",
-style = "style",
 }	
 import CommandAttr from '../../widget/CommandAttr';
 import IWidget from '../../widget/IWidget';
@@ -98,63 +98,6 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -223,6 +166,65 @@ export class ValidationErrorDisplayTransformer implements ITranform {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -320,6 +322,54 @@ export abstract class ViewImpl<T> {
 	@Type(() => CommandAttr)
 	@Expose({ name: "iosAccessibilityTraits" })
 	iosAccessibilityTraits!:CommandAttr<IosAccessibilityTraits>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "selected" })
+	selected!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "style" })
+	style!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "errorStyle" })
+	errorStyle!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "validateForm" })
+	validateForm_!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "validation" })
+	validation!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "v_required" })
+	v_required!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "v_minlength" })
+	v_minlength!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "v_maxlength" })
+	v_maxlength!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "v_min" })
+	v_min!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "v_max" })
+	v_max!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "v_pattern" })
+	v_pattern!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "v_type" })
+	v_type!:CommandAttr<Vtype>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "validationErrorDisplayType" })
+	validationErrorDisplayType!:CommandAttr<ValidationErrorDisplay[]>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "customErrorMessageValues" })
+	customErrorMessageValues!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "customErrorMessageKeys" })
+	customErrorMessageKeys!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "invalidateOnFrameChange" })
+	invalidateOnFrameChange!:CommandAttr<boolean>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "modelSyncEvents" })
 	modelSyncEvents!:CommandAttr<string>| undefined;
@@ -489,53 +539,11 @@ export abstract class ViewImpl<T> {
 	@Expose({ name: "maxHeight" })
 	maxHeight!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
-	@Expose({ name: "selected" })
-	selected!:CommandAttr<boolean>| undefined;
+	@Expose({ name: "onSwiped" })
+	onSwiped!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
-	@Expose({ name: "style" })
-	style!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "errorStyle" })
-	errorStyle!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "validateForm" })
-	validateForm_!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "validation" })
-	validation!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "v_required" })
-	v_required!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "v_minlength" })
-	v_minlength!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "v_maxlength" })
-	v_maxlength!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "v_min" })
-	v_min!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "v_max" })
-	v_max!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "v_pattern" })
-	v_pattern!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "v_type" })
-	v_type!:CommandAttr<Vtype>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "validationErrorDisplayType" })
-	validationErrorDisplayType!:CommandAttr<ValidationErrorDisplay[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "customErrorMessageValues" })
-	customErrorMessageValues!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "customErrorMessageKeys" })
-	customErrorMessageKeys!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "invalidateOnFrameChange" })
-	invalidateOnFrameChange!:CommandAttr<boolean>| undefined;
+	@Expose({ name: "outsideTouchable" })
+	outsideTouchable!:CommandAttr<boolean>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -582,6 +590,22 @@ export abstract class ViewImpl<T> {
 		this.iosAccessibilityHint = undefined;
 		this.iosAccessibilityValue = undefined;
 		this.iosAccessibilityTraits = undefined;
+		this.selected = undefined;
+		this.style = undefined;
+		this.errorStyle = undefined;
+		this.validateForm_ = undefined;
+		this.validation = undefined;
+		this.v_required = undefined;
+		this.v_minlength = undefined;
+		this.v_maxlength = undefined;
+		this.v_min = undefined;
+		this.v_max = undefined;
+		this.v_pattern = undefined;
+		this.v_type = undefined;
+		this.validationErrorDisplayType = undefined;
+		this.customErrorMessageValues = undefined;
+		this.customErrorMessageKeys = undefined;
+		this.invalidateOnFrameChange = undefined;
 		this.modelSyncEvents = undefined;
 		this.modelParam = undefined;
 		this.modelPojoToUi = undefined;
@@ -638,22 +662,8 @@ export abstract class ViewImpl<T> {
 		this.zIndex = undefined;
 		this.maxWidth = undefined;
 		this.maxHeight = undefined;
-		this.selected = undefined;
-		this.style = undefined;
-		this.errorStyle = undefined;
-		this.validateForm_ = undefined;
-		this.validation = undefined;
-		this.v_required = undefined;
-		this.v_minlength = undefined;
-		this.v_maxlength = undefined;
-		this.v_min = undefined;
-		this.v_max = undefined;
-		this.v_pattern = undefined;
-		this.v_type = undefined;
-		this.validationErrorDisplayType = undefined;
-		this.customErrorMessageValues = undefined;
-		this.customErrorMessageKeys = undefined;
-		this.invalidateOnFrameChange = undefined;
+		this.onSwiped = undefined;
+		this.outsideTouchable = undefined;
 		this.orderGet = 0;
 		this.orderSet = 0;
 		this.flush = false;
@@ -1627,6 +1637,266 @@ export abstract class ViewImpl<T> {
 		this.iosAccessibilityTraits.setValue(value);
 		this.orderSet++;
 		this.iosAccessibilityTraits.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetSelected() : T {
+		this.resetIfRequired();
+		if (this.selected == null || this.selected == undefined) {
+			this.selected = new CommandAttr<boolean>()
+		}
+		
+		this.selected.setGetter(true);
+		this.orderGet++;
+		this.selected.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public isSelected() : boolean {
+		if (this.selected == null || this.selected == undefined) {
+			this.selected = new CommandAttr<boolean>();
+		}
+		return this.selected.getCommandReturnValue();
+	}
+	public setSelected(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.selected == null || this.selected == undefined) {
+			this.selected = new CommandAttr<boolean>();
+		}
+		
+		this.selected.setSetter(true);
+		this.selected.setValue(value);
+		this.orderSet++;
+		this.selected.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setStyle(value : string) : T {
+		this.resetIfRequired();
+		if (this.style == null || this.style == undefined) {
+			this.style = new CommandAttr<string>();
+		}
+		
+		this.style.setSetter(true);
+		this.style.setValue(value);
+		this.orderSet++;
+		this.style.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setErrorStyle(value : string) : T {
+		this.resetIfRequired();
+		if (this.errorStyle == null || this.errorStyle == undefined) {
+			this.errorStyle = new CommandAttr<string>();
+		}
+		
+		this.errorStyle.setSetter(true);
+		this.errorStyle.setValue(value);
+		this.orderSet++;
+		this.errorStyle.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetValidateForm() : T {
+		this.resetIfRequired();
+		if (this.validateForm_ == null || this.validateForm_ == undefined) {
+			this.validateForm_ = new CommandAttr<string>()
+		}
+		
+		this.validateForm_.setGetter(true);
+		this.orderGet++;
+		this.validateForm_.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getValidateForm() : string {
+		if (this.validateForm_ == null || this.validateForm_ == undefined) {
+			this.validateForm_ = new CommandAttr<string>();
+		}
+		return this.validateForm_.getCommandReturnValue();
+	}
+	public validateForm(value : string) : T {
+		this.resetIfRequired();
+		if (this.validateForm_ == null || this.validateForm_ == undefined) {
+			this.validateForm_ = new CommandAttr<string>();
+		}
+		
+		this.validateForm_.setSetter(true);
+		this.validateForm_.setValue(value);
+		this.orderSet++;
+		this.validateForm_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setValidation(value : string) : T {
+		this.resetIfRequired();
+		if (this.validation == null || this.validation == undefined) {
+			this.validation = new CommandAttr<string>();
+		}
+		
+		this.validation.setSetter(true);
+		this.validation.setValue(value);
+		this.orderSet++;
+		this.validation.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setV_required(value : string) : T {
+		this.resetIfRequired();
+		if (this.v_required == null || this.v_required == undefined) {
+			this.v_required = new CommandAttr<string>();
+		}
+		
+		this.v_required.setSetter(true);
+		this.v_required.setValue(value);
+		this.orderSet++;
+		this.v_required.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setV_minlength(value : string) : T {
+		this.resetIfRequired();
+		if (this.v_minlength == null || this.v_minlength == undefined) {
+			this.v_minlength = new CommandAttr<string>();
+		}
+		
+		this.v_minlength.setSetter(true);
+		this.v_minlength.setValue(value);
+		this.orderSet++;
+		this.v_minlength.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setV_maxlength(value : string) : T {
+		this.resetIfRequired();
+		if (this.v_maxlength == null || this.v_maxlength == undefined) {
+			this.v_maxlength = new CommandAttr<string>();
+		}
+		
+		this.v_maxlength.setSetter(true);
+		this.v_maxlength.setValue(value);
+		this.orderSet++;
+		this.v_maxlength.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setV_min(value : string) : T {
+		this.resetIfRequired();
+		if (this.v_min == null || this.v_min == undefined) {
+			this.v_min = new CommandAttr<string>();
+		}
+		
+		this.v_min.setSetter(true);
+		this.v_min.setValue(value);
+		this.orderSet++;
+		this.v_min.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setV_max(value : string) : T {
+		this.resetIfRequired();
+		if (this.v_max == null || this.v_max == undefined) {
+			this.v_max = new CommandAttr<string>();
+		}
+		
+		this.v_max.setSetter(true);
+		this.v_max.setValue(value);
+		this.orderSet++;
+		this.v_max.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setV_pattern(value : string) : T {
+		this.resetIfRequired();
+		if (this.v_pattern == null || this.v_pattern == undefined) {
+			this.v_pattern = new CommandAttr<string>();
+		}
+		
+		this.v_pattern.setSetter(true);
+		this.v_pattern.setValue(value);
+		this.orderSet++;
+		this.v_pattern.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setV_type(value : Vtype) : T {
+		this.resetIfRequired();
+		if (this.v_type == null || this.v_type == undefined) {
+			this.v_type = new CommandAttr<Vtype>();
+		}
+		
+		this.v_type.setSetter(true);
+		this.v_type.setValue(value);
+		this.orderSet++;
+		this.v_type.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setValidationErrorDisplayType(...value : ValidationErrorDisplay[]) : T {
+		this.resetIfRequired();
+		if (this.validationErrorDisplayType == null || this.validationErrorDisplayType == undefined) {
+			this.validationErrorDisplayType = new CommandAttr<ValidationErrorDisplay[]>();
+		}
+		
+		this.validationErrorDisplayType.setSetter(true);
+		this.validationErrorDisplayType.setValue(value);
+		this.orderSet++;
+		this.validationErrorDisplayType.setOrderSet(this.orderSet);
+this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		return this.thisPointer;
+	}
+		
+
+	public setCustomErrorMessageValues(value : string) : T {
+		this.resetIfRequired();
+		if (this.customErrorMessageValues == null || this.customErrorMessageValues == undefined) {
+			this.customErrorMessageValues = new CommandAttr<string>();
+		}
+		
+		this.customErrorMessageValues.setSetter(true);
+		this.customErrorMessageValues.setValue(value);
+		this.orderSet++;
+		this.customErrorMessageValues.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setCustomErrorMessageKeys(value : string) : T {
+		this.resetIfRequired();
+		if (this.customErrorMessageKeys == null || this.customErrorMessageKeys == undefined) {
+			this.customErrorMessageKeys = new CommandAttr<string>();
+		}
+		
+		this.customErrorMessageKeys.setSetter(true);
+		this.customErrorMessageKeys.setValue(value);
+		this.orderSet++;
+		this.customErrorMessageKeys.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setInvalidateOnFrameChange(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.invalidateOnFrameChange == null || this.invalidateOnFrameChange == undefined) {
+			this.invalidateOnFrameChange = new CommandAttr<boolean>();
+		}
+		
+		this.invalidateOnFrameChange.setSetter(true);
+		this.invalidateOnFrameChange.setValue(value);
+		this.orderSet++;
+		this.invalidateOnFrameChange.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -3061,262 +3331,30 @@ this.foregroundGravity.setTransformer('gravity');		return this.thisPointer;
 	}
 		
 
-	public tryGetSelected() : T {
+	public setOnSwiped(value : string) : T {
 		this.resetIfRequired();
-		if (this.selected == null || this.selected == undefined) {
-			this.selected = new CommandAttr<boolean>()
+		if (this.onSwiped == null || this.onSwiped == undefined) {
+			this.onSwiped = new CommandAttr<string>();
 		}
 		
-		this.selected.setGetter(true);
-		this.orderGet++;
-		this.selected.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public isSelected() : boolean {
-		if (this.selected == null || this.selected == undefined) {
-			this.selected = new CommandAttr<boolean>();
-		}
-		return this.selected.getCommandReturnValue();
-	}
-	public setSelected(value : boolean) : T {
-		this.resetIfRequired();
-		if (this.selected == null || this.selected == undefined) {
-			this.selected = new CommandAttr<boolean>();
-		}
-		
-		this.selected.setSetter(true);
-		this.selected.setValue(value);
+		this.onSwiped.setSetter(true);
+		this.onSwiped.setValue(value);
 		this.orderSet++;
-		this.selected.setOrderSet(this.orderSet);
+		this.onSwiped.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
 
-	public setStyle(value : string) : T {
+	public setOutsideTouchable(value : boolean) : T {
 		this.resetIfRequired();
-		if (this.style == null || this.style == undefined) {
-			this.style = new CommandAttr<string>();
+		if (this.outsideTouchable == null || this.outsideTouchable == undefined) {
+			this.outsideTouchable = new CommandAttr<boolean>();
 		}
 		
-		this.style.setSetter(true);
-		this.style.setValue(value);
+		this.outsideTouchable.setSetter(true);
+		this.outsideTouchable.setValue(value);
 		this.orderSet++;
-		this.style.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setErrorStyle(value : string) : T {
-		this.resetIfRequired();
-		if (this.errorStyle == null || this.errorStyle == undefined) {
-			this.errorStyle = new CommandAttr<string>();
-		}
-		
-		this.errorStyle.setSetter(true);
-		this.errorStyle.setValue(value);
-		this.orderSet++;
-		this.errorStyle.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetValidateForm() : T {
-		this.resetIfRequired();
-		if (this.validateForm_ == null || this.validateForm_ == undefined) {
-			this.validateForm_ = new CommandAttr<string>()
-		}
-		
-		this.validateForm_.setGetter(true);
-		this.orderGet++;
-		this.validateForm_.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getValidateForm() : string {
-		if (this.validateForm_ == null || this.validateForm_ == undefined) {
-			this.validateForm_ = new CommandAttr<string>();
-		}
-		return this.validateForm_.getCommandReturnValue();
-	}
-	public validateForm(value : string) : T {
-		this.resetIfRequired();
-		if (this.validateForm_ == null || this.validateForm_ == undefined) {
-			this.validateForm_ = new CommandAttr<string>();
-		}
-		
-		this.validateForm_.setSetter(true);
-		this.validateForm_.setValue(value);
-		this.orderSet++;
-		this.validateForm_.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setValidation(value : string) : T {
-		this.resetIfRequired();
-		if (this.validation == null || this.validation == undefined) {
-			this.validation = new CommandAttr<string>();
-		}
-		
-		this.validation.setSetter(true);
-		this.validation.setValue(value);
-		this.orderSet++;
-		this.validation.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setV_required(value : string) : T {
-		this.resetIfRequired();
-		if (this.v_required == null || this.v_required == undefined) {
-			this.v_required = new CommandAttr<string>();
-		}
-		
-		this.v_required.setSetter(true);
-		this.v_required.setValue(value);
-		this.orderSet++;
-		this.v_required.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setV_minlength(value : string) : T {
-		this.resetIfRequired();
-		if (this.v_minlength == null || this.v_minlength == undefined) {
-			this.v_minlength = new CommandAttr<string>();
-		}
-		
-		this.v_minlength.setSetter(true);
-		this.v_minlength.setValue(value);
-		this.orderSet++;
-		this.v_minlength.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setV_maxlength(value : string) : T {
-		this.resetIfRequired();
-		if (this.v_maxlength == null || this.v_maxlength == undefined) {
-			this.v_maxlength = new CommandAttr<string>();
-		}
-		
-		this.v_maxlength.setSetter(true);
-		this.v_maxlength.setValue(value);
-		this.orderSet++;
-		this.v_maxlength.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setV_min(value : string) : T {
-		this.resetIfRequired();
-		if (this.v_min == null || this.v_min == undefined) {
-			this.v_min = new CommandAttr<string>();
-		}
-		
-		this.v_min.setSetter(true);
-		this.v_min.setValue(value);
-		this.orderSet++;
-		this.v_min.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setV_max(value : string) : T {
-		this.resetIfRequired();
-		if (this.v_max == null || this.v_max == undefined) {
-			this.v_max = new CommandAttr<string>();
-		}
-		
-		this.v_max.setSetter(true);
-		this.v_max.setValue(value);
-		this.orderSet++;
-		this.v_max.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setV_pattern(value : string) : T {
-		this.resetIfRequired();
-		if (this.v_pattern == null || this.v_pattern == undefined) {
-			this.v_pattern = new CommandAttr<string>();
-		}
-		
-		this.v_pattern.setSetter(true);
-		this.v_pattern.setValue(value);
-		this.orderSet++;
-		this.v_pattern.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setV_type(value : Vtype) : T {
-		this.resetIfRequired();
-		if (this.v_type == null || this.v_type == undefined) {
-			this.v_type = new CommandAttr<Vtype>();
-		}
-		
-		this.v_type.setSetter(true);
-		this.v_type.setValue(value);
-		this.orderSet++;
-		this.v_type.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setValidationErrorDisplayType(...value : ValidationErrorDisplay[]) : T {
-		this.resetIfRequired();
-		if (this.validationErrorDisplayType == null || this.validationErrorDisplayType == undefined) {
-			this.validationErrorDisplayType = new CommandAttr<ValidationErrorDisplay[]>();
-		}
-		
-		this.validationErrorDisplayType.setSetter(true);
-		this.validationErrorDisplayType.setValue(value);
-		this.orderSet++;
-		this.validationErrorDisplayType.setOrderSet(this.orderSet);
-this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		return this.thisPointer;
-	}
-		
-
-	public setCustomErrorMessageValues(value : string) : T {
-		this.resetIfRequired();
-		if (this.customErrorMessageValues == null || this.customErrorMessageValues == undefined) {
-			this.customErrorMessageValues = new CommandAttr<string>();
-		}
-		
-		this.customErrorMessageValues.setSetter(true);
-		this.customErrorMessageValues.setValue(value);
-		this.orderSet++;
-		this.customErrorMessageValues.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setCustomErrorMessageKeys(value : string) : T {
-		this.resetIfRequired();
-		if (this.customErrorMessageKeys == null || this.customErrorMessageKeys == undefined) {
-			this.customErrorMessageKeys = new CommandAttr<string>();
-		}
-		
-		this.customErrorMessageKeys.setSetter(true);
-		this.customErrorMessageKeys.setValue(value);
-		this.orderSet++;
-		this.customErrorMessageKeys.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setInvalidateOnFrameChange(value : boolean) : T {
-		this.resetIfRequired();
-		if (this.invalidateOnFrameChange == null || this.invalidateOnFrameChange == undefined) {
-			this.invalidateOnFrameChange = new CommandAttr<boolean>();
-		}
-		
-		this.invalidateOnFrameChange.setSetter(true);
-		this.invalidateOnFrameChange.setValue(value);
-		this.orderSet++;
-		this.invalidateOnFrameChange.setOrderSet(this.orderSet);
+		this.outsideTouchable.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -3341,5 +3379,10 @@ export class View extends ViewImpl<View> implements IWidget{
 }
 
 ViewImpl.initialize();
+export interface OnSwipedEvent extends Event{
+        //direction:String;
+
+
+}
 
 //end - staticinit

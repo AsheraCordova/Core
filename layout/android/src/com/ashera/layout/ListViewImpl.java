@@ -116,7 +116,7 @@ public class ListViewImpl extends BaseHasWidgets {
 
 	@Override
 	public IWidget newInstance() {
-		return new ListViewImpl();
+		return new ListViewImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -271,11 +271,6 @@ Context context = (Context) fragment.getRootActivity();
 		public ListViewExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -387,12 +382,11 @@ Context context = (Context) fragment.getRootActivity();
         	ViewImpl.drawableStateChanged(ListViewImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((ListViewExt) listView).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return ListViewExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -1420,22 +1414,30 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
     private IWidget footerTemplate;
     //start - listAdapter
     private ListAdapter listAdapter;
-    class ListAdapter extends BaseAdapter{
+    public ListAdapter getListAdapter() {
+		return listAdapter;
+	}
+
+	class ListAdapter extends BaseAdapter  implements Filterable{
+    	private final Object mLock = new Object();
+    	private ArrayFilter mFilter;
+    	private List<com.ashera.model.LoopParam> mObjects;
         @Override
         public boolean isEnabled(int position) {
             return true;
         }
         public ListAdapter() {
+        	mObjects = dataList;
         }
         
         @Override
         public int getCount() {
-            return dataList.size();
+            return mObjects.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return dataList.get(position);
+            return mObjects.get(position);
         }
         
         @Override
@@ -1450,7 +1452,7 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
         
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            com.ashera.model.LoopParam model = dataList.get(position);
+            com.ashera.model.LoopParam model = mObjects.get(position);
             IWidget myWidget;
             if (convertView == null) {
                 myWidget = (IWidget) getListItem().loadLazyWidgets(model);
@@ -1464,7 +1466,79 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
             return (View) myWidget.asNativeWidget();
         }
         
+        public Filter getFilter() {
+            if (mFilter == null) {
+                mFilter = new ArrayFilter();
+            }
+            return mFilter;
+        }
+        
+        public void dofilterSync(String text) {
+        	getFilter();
+        	mFilter.publishResults(text, mFilter.performFiltering(text));
+        }
+        
+        private class ArrayFilter extends Filter {
+            @Override
+            protected FilterResults performFiltering(CharSequence prefix) {
+                final FilterResults results = new FilterResults();
+
+                if (prefix == null || prefix.length() == 0) {
+                    final ArrayList<com.ashera.model.LoopParam> list;
+                    synchronized (mLock) {
+                        list = new ArrayList<>(dataList);
+                    }
+                    results.values = list;
+                    results.count = list.size();
+                } else {
+                    final String prefixString = prefix.toString().toLowerCase();
+
+                    final ArrayList<com.ashera.model.LoopParam> values;
+                    synchronized (mLock) {
+                        values = new ArrayList<>(dataList);
+                    }
+
+                    final int count = values.size();
+                    final ArrayList<com.ashera.model.LoopParam> newValues = new ArrayList<>();
+
+                    for (int i = 0; i < count; i++) {
+                        final com.ashera.model.LoopParam value = values.get(i);
+                        final String valueText = value.toString().toLowerCase();
+
+                        // First match against the whole, non-splitted value
+                        if (valueText.startsWith(prefixString)) {
+                            newValues.add(value);
+                        } else {
+                            final String[] words = valueText.split(" ");
+                            for (String word : words) {
+                                if (word.startsWith(prefixString)) {
+                                    newValues.add(value);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    results.values = newValues;
+                    results.count = newValues.size();
+                }
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                //noinspection unchecked
+                mObjects = (List<com.ashera.model.LoopParam>) results.values;
+                if (results.count > 0) {
+                    notifyDataSetChanged();
+                } else {
+                    notifyDataSetInvalidated();
+                }
+            }
+        }
     }
+
     //end - listAdapter
     
     @Override

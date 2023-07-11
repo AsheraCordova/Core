@@ -16,28 +16,38 @@
 #if !defined (ADProgressBar_) && (INCLUDE_ALL_ProgressBar || defined(INCLUDE_ADProgressBar))
 #define ADProgressBar_
 
-#define RESTRICT_View 1
-#define INCLUDE_ADView 1
-#include "View.h"
+#define RESTRICT_BaseMeasurableView 1
+#define INCLUDE_ASBaseMeasurableView 1
+#include "BaseMeasurableView.h"
 
 @class ADContext;
 @class ADLinearLayout_LayoutParams;
+@protocol ASIWidget;
 
-@interface ADProgressBar : ADView
+@interface ADProgressBar : ASBaseMeasurableView
 
 #pragma mark Public
 
 - (instancetype)initWithADContext:(ADContext *)context;
 
+- (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
+
 - (void)setLayoutParamsWithADLinearLayout_LayoutParams:(ADLinearLayout_LayoutParams *)barLayoutParams;
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADProgressBar)
+
+FOUNDATION_EXPORT void ADProgressBar_initWithASIWidget_(ADProgressBar *self, id<ASIWidget> widget);
+
+FOUNDATION_EXPORT ADProgressBar *new_ADProgressBar_initWithASIWidget_(id<ASIWidget> widget) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ADProgressBar *create_ADProgressBar_initWithASIWidget_(id<ASIWidget> widget);
 
 FOUNDATION_EXPORT void ADProgressBar_initWithADContext_(ADProgressBar *self, ADContext *context);
 

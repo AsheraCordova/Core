@@ -38,7 +38,7 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 	public final static String GROUP_NAME = "Spinner";
 
 	protected org.teavm.jso.dom.html.HTMLElement hTMLElement;
-	protected MeasurableTextView measurableTextView;	
+	protected r.android.widget.Spinner measurableView;	
 	
 		@SuppressLint("NewApi")
 		final static class Font extends AbstractEnumToIntConverter{
@@ -104,7 +104,6 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		ViewGroupModelImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onItemSelected").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionTextPath").withType("string").withOrder(-1));
@@ -142,15 +141,22 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		ConverterFactory.register("Spinner.drawableTintMode", new DrawableTintMode());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("Spinner.drawableTintMode"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hint").withType("resourcestring").withOrder(-2));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("int"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("webEnableTintFilter").withType("boolean"));
 	}
 	
 	public SpinnerImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  SpinnerImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  SpinnerImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class SpinnerExt extends MeasurableTextView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
+	public class SpinnerExt extends r.android.widget.Spinner implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 		private int mMaxWidth = -1;
@@ -173,13 +179,8 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		}
 
 		public SpinnerExt() {
-			
-			
-			
-			
-			
-			
 			super(SpinnerImpl.this);
+			
 		}
 		
 		@Override
@@ -267,7 +268,45 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(SpinnerImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(SpinnerImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	SpinnerImpl.this.getParent().remove(SpinnerImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = hTMLElement.getBoundingClientRect().getLeft();
+        	appScreenLocation[1] = hTMLElement.getBoundingClientRect().getTop();
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	org.teavm.jso.dom.html.TextRectangle boundingClientRect = hTMLElement.getBoundingClientRect();
+			displayFrame.top = boundingClientRect.getTop();
+        	displayFrame.left = boundingClientRect.getLeft();
+        	displayFrame.bottom = boundingClientRect.getBottom();
+        	displayFrame.right = boundingClientRect.getRight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -276,6 +315,10 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		public void offsetLeftAndRight(int offset) {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
+		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			SpinnerImpl.this.setAttribute(name, value, true);
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -292,20 +335,21 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
         public int nativeMeasureHeight(java.lang.Object uiView, int width) {
         	return SpinnerImpl.this.nativeMeasureHeight(uiView, width);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
+	}	@Override
+	public Class getViewClass() {
+		return SpinnerExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new SpinnerImpl();
+		return new SpinnerImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableTextView = new SpinnerExt();
+		measurableView = new SpinnerExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 	}
@@ -317,16 +361,6 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		ViewGroupModelImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "selection": {
-				
-
-
-		setSelection(objValue);
-
-
-
-			}
-			break;
 			case "entries": {
 				
 
@@ -667,6 +701,16 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 
 			}
 			break;
+			case "selection": {
+				
+
+
+		setSelection(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -713,14 +757,14 @@ return hint;				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableTextView;
+		return measurableView;
 	}
 
 	
 
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableTextView.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -743,11 +787,11 @@ return hint;				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableTextView.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableTextView.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableTextView.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -832,7 +876,7 @@ return hint;				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableTextView.getRawTextAlignment() != 0 || measurableTextView.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -850,41 +894,41 @@ return hint;				}
 	private void setPaddingLeft(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-left", value  + "px");
-		ViewImpl.setPaddingLeft(objValue, measurableTextView);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 	
 	private void setPaddingRight(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-right", value + "px");
-		ViewImpl.setPaddingRight(objValue, measurableTextView);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingTop(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-top", value + "px");
-		ViewImpl.setPaddingTop(objValue, measurableTextView);
+		ViewImpl.setPaddingTop(objValue, measurableView);
 	}
 
 	private void setPaddingBottom(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-bottom", value + "px");
-		ViewImpl.setPaddingBottom(objValue, measurableTextView);
+		ViewImpl.setPaddingBottom(objValue, measurableView);
 	}
 
 	private Object getPaddingTop() {
-		return measurableTextView.getPaddingTop();
+		return measurableView.getPaddingTop();
 	}
 
 	private Object getPaddingBottom() {
-		return measurableTextView.getPaddingBottom();
+		return measurableView.getPaddingBottom();
 	}
 
 	private Object getPaddingLeft() {
-		return measurableTextView.getPaddingStart();
+		return measurableView.getPaddingStart();
 	}
 
 	private Object getPaddingRight() {
-		return measurableTextView.getPaddingEnd();
+		return measurableView.getPaddingEnd();
 	}
 
 	private void setPaddingHorizontal(Object objValue) {
@@ -920,7 +964,7 @@ return hint;				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setBottomDrawable(drawable);
+			measurableView.setBottomDrawable(drawable);
 			updateImageSrc(drawable, drawableBottom);
 		}
 	}
@@ -937,7 +981,7 @@ return hint;				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setTopDrawable(drawable);
+			measurableView.setTopDrawable(drawable);
 			updateImageSrc(drawable, drawableTop);
 		}
 	}
@@ -978,7 +1022,7 @@ return hint;				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setRightDrawable(drawable);
+			measurableView.setRightDrawable(drawable);
 			updateImageSrc(drawable, drawableRight);
 		}
 	}
@@ -996,7 +1040,7 @@ return hint;				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableTextView.setLeftDrawable(drawable);
+			measurableView.setLeftDrawable(drawable);
 			updateImageSrc(drawable, drawableLeft);
 		}
 	}
@@ -1011,31 +1055,31 @@ return hint;				}
 
 	
 	private void setDrawablePadding(Object objValue) {
-		measurableTextView.setDrawablePadding((int) objValue);
+		measurableView.setDrawablePadding((int) objValue);
 	}
 	
 	private Object getDrawablePadding() {
-		return measurableTextView.getDrawablePadding();
+		return measurableView.getDrawablePadding();
 	}
 	
 	private void updateDrawableBounds(int l, int t, int r, int b) {
 		if (drawableBottom != null) {
-			com.ashera.model.RectM bounds = measurableTextView.getBottomDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getBottomDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableBottomWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}	
 		
 		if (drawableTop != null) {
-			com.ashera.model.RectM bounds = measurableTextView.getTopDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getTopDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableTopWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}
 		
 		if (drawableLeft != null) {
-			com.ashera.model.RectM bounds = measurableTextView.getLeftDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getLeftDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableLeftWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}
 		
 		if (drawableRight != null) {
-			com.ashera.model.RectM bounds = measurableTextView.getRightDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getRightDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableRightWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}
 	}
@@ -1082,7 +1126,7 @@ return hint;				}
 	private void setDrawableTint(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			objValue = colorStateList.getColorForState(measurableTextView.getDrawableState(), r.android.graphics.Color.RED);
+			objValue = colorStateList.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
 			this.drawableTint = colorStateList;
 		}
 		
@@ -1111,21 +1155,21 @@ return hint;				}
     @Override
 	public void drawableStateChanged() {
     	super.drawableStateChanged();
-		drawableStateChange(drawableBottom, measurableTextView.getBottomDrawable(), () -> {
-			setDrawableBottom(measurableTextView.getBottomDrawable());
+		drawableStateChange(drawableBottom, measurableView.getBottomDrawable(), () -> {
+			setDrawableBottom(measurableView.getBottomDrawable());
 		});
-		drawableStateChange(drawableLeft, measurableTextView.getLeftDrawable(), () -> {
-			setDrawableLeft(measurableTextView.getLeftDrawable());
+		drawableStateChange(drawableLeft, measurableView.getLeftDrawable(), () -> {
+			setDrawableLeft(measurableView.getLeftDrawable());
 		});
-		drawableStateChange(drawableRight, measurableTextView.getRightDrawable(), () -> {
-			setDrawableRight(measurableTextView.getRightDrawable());
+		drawableStateChange(drawableRight, measurableView.getRightDrawable(), () -> {
+			setDrawableRight(measurableView.getRightDrawable());
 		});
-		drawableStateChange(drawableTop, measurableTextView.getTopDrawable(), () -> {
-			setDrawableTop(measurableTextView.getTopDrawable());
+		drawableStateChange(drawableTop, measurableView.getTopDrawable(), () -> {
+			setDrawableTop(measurableView.getTopDrawable());
 		});
 		
-		if (measurableTextView.getTextColors() != null) {
-			setTextColor(measurableTextView.getCurrentTextColor());
+		if (measurableView.getTextColors() != null) {
+			setTextColor(measurableView.getCurrentTextColor());
 		}
 		
 		if (drawableTint != null && drawableTint.isStateful()) {
@@ -1136,7 +1180,7 @@ return hint;				}
     
 	private void drawableStateChange(HTMLElement mydrawable, r.android.graphics.drawable.Drawable dr, Runnable run) {
 		if (mydrawable != null) {
-			final int[] state = measurableTextView.getDrawableState();
+			final int[] state = measurableView.getDrawableState();
 			
 			if (dr != null && dr.isStateful() && dr.setState(state)) {
 				run.run();
@@ -1159,13 +1203,13 @@ return hint;				}
 
 
 	private Object getTextColor() {
-		return measurableTextView.getTextColors();
+		return measurableView.getTextColors();
 	}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableTextView.setTextColor(colorStateList);
-			objValue = measurableTextView.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		hTMLElement.getStyle().setProperty("color", (String) ViewImpl.getColor(objValue));
 	}
@@ -1235,17 +1279,17 @@ return hint;				}
 
 	private void setVerticalAligmentCenter() {
 		hTMLElement.getStyle().setProperty("vertical-align", "middle");
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 	}
 
 	private void setVerticalAligmentBottom() {
 		hTMLElement.getStyle().setProperty("vertical-align", "bottom");		
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 	}
 
 	private void setVerticalAligmentTop() {
 		hTMLElement.getStyle().setProperty("vertical-align", "top");		
-		measurableTextView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 	}
 	
 	private static final int TEXT_ALIGN_CENTER = 0;
@@ -1604,10 +1648,14 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(AdapterView<?>
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableTextView.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -1657,14 +1705,6 @@ public  class SpinnerCommandBuilder extends com.ashera.layout.ViewImpl.ViewComma
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public SpinnerCommandBuilder setSelection(int value) {
-	Map<String, Object> attrs = initCommand("selection");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public SpinnerCommandBuilder setEntries(String value) {
 	Map<String, Object> attrs = initCommand("entries");
 	attrs.put("type", "attribute");
@@ -2069,15 +2109,19 @@ public SpinnerCommandBuilder setHint(String value) {
 
 	attrs.put("value", value);
 return this;}
+public SpinnerCommandBuilder setSelection(int value) {
+	Map<String, Object> attrs = initCommand("selection");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class SpinnerBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public SpinnerBean() {
 			super(SpinnerImpl.this);
 		}
-public void setSelection(int value) {
-	getBuilder().reset().setSelection(value).execute(true);
-}
-
 public void setEntries(String value) {
 	getBuilder().reset().setEntries(value).execute(true);
 }
@@ -2250,6 +2294,10 @@ public void setHint(String value) {
 	getBuilder().reset().setHint(value).execute(true);
 }
 
+public void setSelection(int value) {
+	getBuilder().reset().setSelection(value).execute(true);
+}
+
 }
 
 
@@ -2281,7 +2329,7 @@ public void setHint(String value) {
 	private void setOnItemSelectedListener(AdapterView.OnItemSelectedListener onItemSelectedListener) {
 		org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.KeyboardEvent> listener = (event) -> {
 			int position = getSelectedIndex(select);
-			onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableTextView, position, 0);
+			onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableView, position, 0);
 		};
 		ViewImpl.setOnListener(this, select, listener, "change", "change");
 	}
@@ -2335,10 +2383,10 @@ public void setHint(String value) {
 	//start - spinnercode
 	private void nativeMakeFrameForChildWidget(int l, int t, int r, int b) {
 		ViewImpl.updateBounds(select, 0, 0, r - l, b - t);
-		select.getStyle().setProperty("padding-left", measurableTextView.getCompoundPaddingLeft()  + "px");
-		select.getStyle().setProperty("padding-right", measurableTextView.getCompoundPaddingRight()  + "px");
-		select.getStyle().setProperty("padding-top", measurableTextView.getCompoundPaddingTop()  + "px");
-		select.getStyle().setProperty("padding-bottom", measurableTextView.getCompoundPaddingBottom()  + "px");
+		select.getStyle().setProperty("padding-left", measurableView.getCompoundPaddingLeft()  + "px");
+		select.getStyle().setProperty("padding-right", measurableView.getCompoundPaddingRight()  + "px");
+		select.getStyle().setProperty("padding-top", measurableView.getCompoundPaddingTop()  + "px");
+		select.getStyle().setProperty("padding-bottom", measurableView.getCompoundPaddingBottom()  + "px");
 		updateDrawableBounds(l, t, r, b);
 	}
 	
@@ -2368,7 +2416,7 @@ public void setHint(String value) {
 
 	@Override
 	public boolean isViewVisible() {
-		return measurableTextView.getVisibility() == View.VISIBLE;
+		return measurableView.getVisibility() == View.VISIBLE;
 		}
 
 	@Override

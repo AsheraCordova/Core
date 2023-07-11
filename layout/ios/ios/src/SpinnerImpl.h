@@ -32,11 +32,12 @@
 #define INCLUDE_ASFormElement 1
 #include "FormElement.h"
 
+@class ADSpinner;
 @class ASLoopParam;
-@class ASMeasurableTextView;
 @class ASSpinnerImpl_SpinnerBean;
 @class ASSpinnerImpl_SpinnerCommandBuilder;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -45,13 +46,18 @@
 @interface ASSpinnerImpl : ASBaseHasWidgets < ASICustomMeasureHeight, ASICustomMeasureWidth, ASFormElement > {
  @public
   id uiView_;
-  ASMeasurableTextView *measurableTextView_;
+  ADSpinner *measurableView_;
 }
 @property id uiView;
 
 #pragma mark Public
 
 - (instancetype)init;
+
+- (instancetype)initWithNSString:(NSString *)localname;
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname;
 
 - (id)asNativeWidget;
 
@@ -105,6 +111,8 @@
 - (id)getTextColor;
 
 - (NSString *)getTextEntered;
+
+- (IOSClass *)getViewClass;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -182,10 +190,9 @@
 - (void)setTextColorWithId:(id)nativeWidget
                     withId:(id)value;
 
-- (void)showErrorWithNSString:(NSString *)message;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)showErrorWithNSString:(NSString *)message;
 
 #pragma mark Protected
 
@@ -195,17 +202,12 @@
 
 #pragma mark Package-Private
 
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)initWithNSString:(NSString *)arg0
-                    withNSString:(NSString *)arg1 NS_UNAVAILABLE;
-
 @end
 
 J2OBJC_STATIC_INIT(ASSpinnerImpl)
 
 J2OBJC_FIELD_SETTER(ASSpinnerImpl, uiView_, id)
-J2OBJC_FIELD_SETTER(ASSpinnerImpl, measurableTextView_, ASMeasurableTextView *)
+J2OBJC_FIELD_SETTER(ASSpinnerImpl, measurableView_, ADSpinner *)
 
 inline NSString *ASSpinnerImpl_get_LOCAL_NAME(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
@@ -222,6 +224,18 @@ FOUNDATION_EXPORT void ASSpinnerImpl_init(ASSpinnerImpl *self);
 FOUNDATION_EXPORT ASSpinnerImpl *new_ASSpinnerImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASSpinnerImpl *create_ASSpinnerImpl_init(void);
+
+FOUNDATION_EXPORT void ASSpinnerImpl_initWithNSString_(ASSpinnerImpl *self, NSString *localname);
+
+FOUNDATION_EXPORT ASSpinnerImpl *new_ASSpinnerImpl_initWithNSString_(NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASSpinnerImpl *create_ASSpinnerImpl_initWithNSString_(NSString *localname);
+
+FOUNDATION_EXPORT void ASSpinnerImpl_initWithNSString_withNSString_(ASSpinnerImpl *self, NSString *groupName, NSString *localname);
+
+FOUNDATION_EXPORT ASSpinnerImpl *new_ASSpinnerImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASSpinnerImpl *create_ASSpinnerImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl)
 
@@ -340,9 +354,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 #if !defined (ASSpinnerImpl_SpinnerExt_) && (INCLUDE_ALL_SpinnerImpl || defined(INCLUDE_ASSpinnerImpl_SpinnerExt))
 #define ASSpinnerImpl_SpinnerExt_
 
-#define RESTRICT_MeasurableTextView 1
-#define INCLUDE_ASMeasurableTextView 1
-#include "MeasurableTextView.h"
+#define RESTRICT_Spinner 1
+#define INCLUDE_ADSpinner 1
+#include "Spinner.h"
 
 #define RESTRICT_ILifeCycleDecorator 1
 #define INCLUDE_ASILifeCycleDecorator 1
@@ -352,13 +366,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADRect;
+@class ADView;
 @class ASSpinnerImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
 
-@interface ASSpinnerImpl_SpinnerExt : ASMeasurableTextView < ASILifeCycleDecorator, ASIMaxDimension >
+@interface ASSpinnerImpl_SpinnerExt : ADSpinner < ASILifeCycleDecorator, ASIMaxDimension >
 
 #pragma mark Public
 
@@ -371,13 +388,24 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
 
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width;
+
+- (jint)nativeMeasureWidthWithId:(id)uiView;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -388,6 +416,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -395,6 +427,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -740,7 +775,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setPaddingWithNSString:(NSString *)value;
 

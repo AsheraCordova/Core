@@ -55,7 +55,7 @@
                           withNSString:(NSString *)strValue
                                 withId:(id)objValue;
 
-- (id<ASHasWidgets>)getCompositeLeaf;
+- (id<ASHasWidgets>)getCompositeLeafWithASIWidget:(id<ASIWidget>)w;
 
 - (jboolean)areWidgetItemsRecycled;
 

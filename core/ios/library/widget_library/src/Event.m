@@ -119,7 +119,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASEvent)
 
 J2OBJC_INITIALIZED_DEFN(ASEvent_StandardEvents)
 
-ASEvent_StandardEvents *ASEvent_StandardEvents_values_[7];
+ASEvent_StandardEvents *ASEvent_StandardEvents_values_[8];
 
 @implementation ASEvent_StandardEvents
 
@@ -154,19 +154,20 @@ ASEvent_StandardEvents *ASEvent_StandardEvents_values_[7];
     { "postMeasure", "LASEvent_StandardEvents;", .constantValue.asLong = 0, 0x4019, -1, 6, -1, -1 },
     { "preMeasure", "LASEvent_StandardEvents;", .constantValue.asLong = 0, 0x4019, -1, 7, -1, -1 },
     { "dealloc", "LASEvent_StandardEvents;", .constantValue.asLong = 0, 0x4019, -1, 8, -1, -1 },
+    { "outsideClicked", "LASEvent_StandardEvents;", .constantValue.asLong = 0, 0x4019, -1, 9, -1, -1 },
   };
-  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(ASEvent_StandardEvents, orientationChange), &JreEnum(ASEvent_StandardEvents, customEvent), &JreEnum(ASEvent_StandardEvents, initialise), &JreEnum(ASEvent_StandardEvents, orientationChangePostParentMeasure), &JreEnum(ASEvent_StandardEvents, postMeasure), &JreEnum(ASEvent_StandardEvents, preMeasure), &JreEnum(ASEvent_StandardEvents, dealloc), "LASEvent;", "Ljava/lang/Enum<Lcom/ashera/widget/bus/Event$StandardEvents;>;" };
-  static const J2ObjcClassInfo _ASEvent_StandardEvents = { "StandardEvents", "com.ashera.widget.bus", ptrTable, methods, fields, 7, 0x4019, 2, 7, 9, -1, -1, 10, -1 };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(ASEvent_StandardEvents, orientationChange), &JreEnum(ASEvent_StandardEvents, customEvent), &JreEnum(ASEvent_StandardEvents, initialise), &JreEnum(ASEvent_StandardEvents, orientationChangePostParentMeasure), &JreEnum(ASEvent_StandardEvents, postMeasure), &JreEnum(ASEvent_StandardEvents, preMeasure), &JreEnum(ASEvent_StandardEvents, dealloc), &JreEnum(ASEvent_StandardEvents, outsideClicked), "LASEvent;", "Ljava/lang/Enum<Lcom/ashera/widget/bus/Event$StandardEvents;>;" };
+  static const J2ObjcClassInfo _ASEvent_StandardEvents = { "StandardEvents", "com.ashera.widget.bus", ptrTable, methods, fields, 7, 0x4019, 2, 8, 10, -1, -1, 11, -1 };
   return &_ASEvent_StandardEvents;
 }
 
 + (void)initialize {
   if (self == [ASEvent_StandardEvents class]) {
     size_t objSize = class_getInstanceSize(self);
-    size_t allocSize = 7 * objSize;
+    size_t allocSize = 8 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 7; i++) {
+    for (jint i = 0; i < 8; i++) {
       ((void)(ASEvent_StandardEvents_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ASEvent_StandardEvents_initWithNSString_withInt_(e, JreEnumConstantName(ASEvent_StandardEvents_class_(), i), i);
     }
@@ -182,12 +183,12 @@ void ASEvent_StandardEvents_initWithNSString_withInt_(ASEvent_StandardEvents *se
 
 IOSObjectArray *ASEvent_StandardEvents_values() {
   ASEvent_StandardEvents_initialize();
-  return [IOSObjectArray arrayWithObjects:ASEvent_StandardEvents_values_ count:7 type:ASEvent_StandardEvents_class_()];
+  return [IOSObjectArray arrayWithObjects:ASEvent_StandardEvents_values_ count:8 type:ASEvent_StandardEvents_class_()];
 }
 
 ASEvent_StandardEvents *ASEvent_StandardEvents_valueOfWithNSString_(NSString *name) {
   ASEvent_StandardEvents_initialize();
-  for (int i = 0; i < 7; i++) {
+  for (int i = 0; i < 8; i++) {
     ASEvent_StandardEvents *e = ASEvent_StandardEvents_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
@@ -199,7 +200,7 @@ ASEvent_StandardEvents *ASEvent_StandardEvents_valueOfWithNSString_(NSString *na
 
 ASEvent_StandardEvents *ASEvent_StandardEvents_fromOrdinal(NSUInteger ordinal) {
   ASEvent_StandardEvents_initialize();
-  if (ordinal >= 7) {
+  if (ordinal >= 8) {
     return nil;
   }
   return ASEvent_StandardEvents_values_[ordinal];

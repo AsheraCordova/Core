@@ -370,6 +370,7 @@ export class NumericTransformer implements ITranform {
 
 
 
+
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -396,6 +397,7 @@ export class TextStyleTransformer implements ITranform {
         }
     }
 }
+
 
 
 
@@ -588,6 +590,9 @@ export abstract class EditTextImpl<T> extends ViewImpl<T>{
 	@Expose({ name: "textAllCaps" })
 	textAllCaps!:CommandAttr<boolean>| undefined;
 	@Type(() => CommandAttr)
+	@Expose({ name: "setFocus" })
+	setFocus!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
 	@Expose({ name: "selectAll" })
 	selectAll_!:CommandAttr<boolean>| undefined;
 	@Type(() => CommandAttr)
@@ -629,6 +634,9 @@ export abstract class EditTextImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "fontFamily" })
 	fontFamily!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "systemTextAppearance" })
+	systemTextAppearance!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "textAppearance" })
 	textAppearance!:CommandAttr<string>| undefined;
@@ -734,6 +742,7 @@ export abstract class EditTextImpl<T> extends ViewImpl<T>{
 		this.editorExtras = undefined;
 		this.autoText = undefined;
 		this.textAllCaps = undefined;
+		this.setFocus = undefined;
 		this.selectAll_ = undefined;
 		this.hintTextFormat = undefined;
 		this.text = undefined;
@@ -748,6 +757,7 @@ export abstract class EditTextImpl<T> extends ViewImpl<T>{
 		this.typeface = undefined;
 		this.textStyle = undefined;
 		this.fontFamily = undefined;
+		this.systemTextAppearance = undefined;
 		this.textAppearance = undefined;
 		this.password = undefined;
 		this.enabled = undefined;
@@ -2139,6 +2149,20 @@ this.numeric.setTransformer('numeric');		return this.thisPointer;
 	}
 		
 
+	public setSetFocus(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.setFocus == null || this.setFocus == undefined) {
+			this.setFocus = new CommandAttr<boolean>();
+		}
+		
+		this.setFocus.setSetter(true);
+		this.setFocus.setValue(value);
+		this.orderSet++;
+		this.setFocus.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
 	public selectAll(value : boolean) : T {
 		this.resetIfRequired();
 		if (this.selectAll_ == null || this.selectAll_ == undefined) {
@@ -2367,6 +2391,20 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.fontFamily.setValue(value);
 		this.orderSet++;
 		this.fontFamily.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSystemTextAppearance(value : string) : T {
+		this.resetIfRequired();
+		if (this.systemTextAppearance == null || this.systemTextAppearance == undefined) {
+			this.systemTextAppearance = new CommandAttr<string>();
+		}
+		
+		this.systemTextAppearance.setSetter(true);
+		this.systemTextAppearance.setValue(value);
+		this.orderSet++;
+		this.systemTextAppearance.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

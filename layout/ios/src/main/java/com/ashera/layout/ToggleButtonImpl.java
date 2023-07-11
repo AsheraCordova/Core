@@ -50,45 +50,8 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 	public final static String GROUP_NAME = "ToggleButton";
 
 	protected @Property Object uiView;
-	protected MeasurableCompoundButton measurableCompoundButton;		
+	protected r.android.widget.ToggleButton measurableView;		
 	
-		@SuppressLint("NewApi")
-		final static class Ellipsize extends AbstractEnumToIntConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("end",  LayoutNativeVars.NSLineBreakByTruncatingTail);
-				mapping.put("marquee",  LayoutNativeVars.NSLineBreakByMarquee);
-				mapping.put("middle",  LayoutNativeVars.NSLineBreakByTruncatingMiddle);
-				mapping.put("none",  LayoutNativeVars.NSLineBreakByClipping);
-				mapping.put("start",  LayoutNativeVars.NSLineBreakByTruncatingHead);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
-		@SuppressLint("NewApi")
-		final static class JustificationMode extends AbstractEnumToIntConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("inter_word",  LayoutNativeVars.NSTextAlignmentJustified);
-				mapping.put("none",  LayoutNativeVars.NSTextAlignmentLeft);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
 		@SuppressLint("NewApi")
 		final static class DrawableTintMode extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
@@ -167,41 +130,49 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 				return 0;
 				}
 				}
+		@SuppressLint("NewApi")
+		final static class Ellipsize extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("end",  LayoutNativeVars.NSLineBreakByTruncatingTail);
+				mapping.put("marquee",  LayoutNativeVars.NSLineBreakByMarquee);
+				mapping.put("middle",  LayoutNativeVars.NSLineBreakByTruncatingMiddle);
+				mapping.put("none",  LayoutNativeVars.NSLineBreakByClipping);
+				mapping.put("start",  LayoutNativeVars.NSLineBreakByTruncatingHead);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
+		final static class JustificationMode extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("inter_word",  LayoutNativeVars.NSTextAlignmentJustified);
+				mapping.put("none",  LayoutNativeVars.NSTextAlignmentLeft);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
 	
 	@Override
 	public void loadAttributes(String attributeName) {
 		ViewImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onCheckedChange").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("checked").withType("boolean"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textOn").withType("resourcestring"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textOff").withType("resourcestring"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("text").withType("resourcestring").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("padding").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingBottom").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingRight").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingLeft").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingStart").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingEnd").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAllCaps").withType("boolean").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("singleLine").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		ConverterFactory.register("ToggleButton.ellipsize", new Ellipsize());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("ellipsize").withType("ToggleButton.ellipsize").withOrder(100));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		ConverterFactory.register("ToggleButton.justificationMode", new JustificationMode());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("justificationMode").withType("ToggleButton.justificationMode"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scrollHorizontally").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDx").withType("float"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDy").withType("float"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowColor").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
@@ -235,24 +206,54 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onCheckedChange").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("checked").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textOn").withType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textOff").withType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("text").withType("resourcestring").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("padding").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingBottom").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingRight").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingLeft").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingStart").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingEnd").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAllCaps").withType("boolean").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("singleLine").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		ConverterFactory.register("ToggleButton.ellipsize", new Ellipsize());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("ellipsize").withType("ToggleButton.ellipsize").withOrder(100));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		ConverterFactory.register("ToggleButton.justificationMode", new JustificationMode());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("justificationMode").withType("ToggleButton.justificationMode"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scrollHorizontally").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDx").withType("float"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowDy").withType("float"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("shadowColor").withType("color"));
 	}
 	
 	public ToggleButtonImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ToggleButtonImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ToggleButtonImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 @com.google.j2objc.annotations.WeakOuter		
-	public class ToggleButtonExt extends MeasurableCompoundButton implements ILifeCycleDecorator{
+	public class ToggleButtonExt extends r.android.widget.ToggleButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 
 		public ToggleButtonExt() {
-			
-			
-			
 			super(ToggleButtonImpl.this);
-			
-			
 			
 		}
 		
@@ -333,7 +334,44 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ToggleButtonImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(ToggleButtonImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	ToggleButtonImpl.this.getParent().remove(ToggleButtonImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -342,6 +380,10 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 		public void offsetLeftAndRight(int offset) {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
+		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			ToggleButtonImpl.this.setAttribute(name, value, true);
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -363,21 +405,39 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 		  public int getLineHeightPadding(){
 		    return ToggleButtonImpl.this.getLineHeightPadding();
 		  }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((ToggleButtonExt) measurableCompoundButton).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+        @Override
+        public int computeSize(float width) {
+        	return nativeMeasureHeight(uiView, (int) width);
+    	}
+		@Override
+		public java.lang.String getText() {
+			return (String) getMyText();
+		}
+
+	}	@Override
+	public Class getViewClass() {
+		return ToggleButtonExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ToggleButtonImpl();
+		return new ToggleButtonImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableCompoundButton = new ToggleButtonExt();
+		measurableView = new ToggleButtonExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 		setWidgetOnNativeClass();
@@ -393,276 +453,6 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 		ViewImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "onCheckedChange": {
-				
-
-
-		setOnChecked(objValue);
-
-
-
-			}
-			break;
-			case "checked": {
-				
-
-
-		setChecked(objValue);
-
-
-
-			}
-			break;
-			case "textOn": {
-				
-
-
-		setTextOn(objValue);
-
-
-
-			}
-			break;
-			case "textOff": {
-				
-
-
-		setTextOff(objValue);
-
-
-
-			}
-			break;
-			case "text": {
-				
-
-
-		setMyText(objValue);
-
-
-
-			}
-			break;
-			case "gravity": {
-				
-
-
-		setGravity(objValue);
-
-
-
-			}
-			break;
-			case "textSize": {
-				
-
-
-		setMyTextSize(objValue);
-
-
-
-			}
-			break;
-			case "padding": {
-				
-
-
-		setPadding(objValue);
-
-
-
-			}
-			break;
-			case "paddingBottom": {
-				
-
-
-		setPaddingBottom(objValue);
-
-
-
-			}
-			break;
-			case "paddingRight": {
-				
-
-
-		setPaddingRight(objValue);
-
-
-
-			}
-			break;
-			case "paddingLeft": {
-				
-
-
-		setPaddingLeft(objValue);
-
-
-
-			}
-			break;
-			case "paddingStart": {
-				
-
-
-		setPaddingStart(objValue);
-
-
-
-			}
-			break;
-			case "paddingEnd": {
-				
-
-
-		setPaddingEnd(objValue);
-
-
-
-			}
-			break;
-			case "paddingTop": {
-				
-
-
-		setPaddingTop(objValue);
-
-
-
-			}
-			break;
-			case "paddingHorizontal": {
-				
-
-
-		setPaddingHorizontal(objValue);
-
-
-
-			}
-			break;
-			case "paddingVertical": {
-				
-
-
-		setPaddingVertical(objValue);
-
-
-
-			}
-			break;
-			case "textColor": {
-				
-
-
-		setTextColor(objValue);
-
-
-
-			}
-			break;
-			case "textAllCaps": {
-				
-
-
-		 setTextAllCaps(objValue);
-
-
-
-			}
-			break;
-			case "singleLine": {
-				
-
-
-		 setSingleLine(objValue);
-
-
-
-			}
-			break;
-			case "ellipsize": {
-				
-
-
-		 setEllipsize(objValue, strValue);
-
-
-
-			}
-			break;
-			case "firstBaselineToTopHeight": {
-				
-
-
-		setFirstBaselineToTopHeight(objValue);
-
-
-
-			}
-			break;
-			case "lastBaselineToBottomHeight": {
-				
-
-
-		setLastBaselineToBottomHeight(objValue);
-
-
-
-			}
-			break;
-			case "justificationMode": {
-				
-
-
-		 setJustificationMode(objValue, strValue);
-
-
-
-			}
-			break;
-			case "scrollHorizontally": {
-				
-
-
-		 setScrollHorizontally(objValue);
-
-
-
-			}
-			break;
-			case "shadowDx": {
-				
-
-
-		 setShadowDx((Float) objValue, strValue);
-
-
-
-			}
-			break;
-			case "shadowDy": {
-				
-
-
-		 setShadowDy((Float) objValue, strValue);
-
-
-
-			}
-			break;
-			case "shadowColor": {
-				
-
-
-		 setShadowColor(objValue, strValue);
-
-
-
-			}
-			break;
 			case "drawableLeft": {
 				
 
@@ -953,6 +743,276 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 
 			}
 			break;
+			case "onCheckedChange": {
+				
+
+
+		setOnChecked(objValue);
+
+
+
+			}
+			break;
+			case "checked": {
+				
+
+
+		setChecked(objValue);
+
+
+
+			}
+			break;
+			case "textOn": {
+				
+
+
+		setTextOn(objValue);
+
+
+
+			}
+			break;
+			case "textOff": {
+				
+
+
+		setTextOff(objValue);
+
+
+
+			}
+			break;
+			case "text": {
+				
+
+
+		setMyText(objValue);
+
+
+
+			}
+			break;
+			case "gravity": {
+				
+
+
+		setGravity(objValue);
+
+
+
+			}
+			break;
+			case "textSize": {
+				
+
+
+		setMyTextSize(objValue);
+
+
+
+			}
+			break;
+			case "padding": {
+				
+
+
+		setPadding(objValue);
+
+
+
+			}
+			break;
+			case "paddingBottom": {
+				
+
+
+		setPaddingBottom(objValue);
+
+
+
+			}
+			break;
+			case "paddingRight": {
+				
+
+
+		setPaddingRight(objValue);
+
+
+
+			}
+			break;
+			case "paddingLeft": {
+				
+
+
+		setPaddingLeft(objValue);
+
+
+
+			}
+			break;
+			case "paddingStart": {
+				
+
+
+		setPaddingStart(objValue);
+
+
+
+			}
+			break;
+			case "paddingEnd": {
+				
+
+
+		setPaddingEnd(objValue);
+
+
+
+			}
+			break;
+			case "paddingTop": {
+				
+
+
+		setPaddingTop(objValue);
+
+
+
+			}
+			break;
+			case "paddingHorizontal": {
+				
+
+
+		setPaddingHorizontal(objValue);
+
+
+
+			}
+			break;
+			case "paddingVertical": {
+				
+
+
+		setPaddingVertical(objValue);
+
+
+
+			}
+			break;
+			case "textColor": {
+				
+
+
+		setTextColor(objValue);
+
+
+
+			}
+			break;
+			case "textAllCaps": {
+				
+
+
+		 setTextAllCaps(objValue);
+
+
+
+			}
+			break;
+			case "singleLine": {
+				
+
+
+		 setSingleLine(objValue);
+
+
+
+			}
+			break;
+			case "ellipsize": {
+				
+
+
+		 setEllipsize(objValue, strValue);
+
+
+
+			}
+			break;
+			case "firstBaselineToTopHeight": {
+				
+
+
+		setFirstBaselineToTopHeight(objValue);
+
+
+
+			}
+			break;
+			case "lastBaselineToBottomHeight": {
+				
+
+
+		setLastBaselineToBottomHeight(objValue);
+
+
+
+			}
+			break;
+			case "justificationMode": {
+				
+
+
+		 setJustificationMode(objValue, strValue);
+
+
+
+			}
+			break;
+			case "scrollHorizontally": {
+				
+
+
+		 setScrollHorizontally(objValue);
+
+
+
+			}
+			break;
+			case "shadowDx": {
+				
+
+
+		 setShadowDx((Float) objValue, strValue);
+
+
+
+			}
+			break;
+			case "shadowDy": {
+				
+
+
+		 setShadowDy((Float) objValue, strValue);
+
+
+
+			}
+			break;
+			case "shadowColor": {
+				
+
+
+		 setShadowColor(objValue, strValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -968,6 +1028,30 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 			return attributeValue;
 		}
 		switch (key.getAttributeName()) {
+			case "drawablePadding": {
+return this.getDrawablePadding();				}
+			case "minLines": {
+return getMinLines();				}
+			case "maxLines": {
+return getMaxLines();				}
+			case "minWidth": {
+return getMinWidth();				}
+			case "minHeight": {
+return getMinHeight();				}
+			case "maxWidth": {
+return getMaxWidth();				}
+			case "maxHeight": {
+return getMaxHeight();				}
+			case "height": {
+return getHeight();				}
+			case "width": {
+return getWidth();				}
+			case "maxEms": {
+return getMaxEms();				}
+			case "minEms": {
+return getMinEms();				}
+			case "marqueeRepeatLimit": {
+return getMarqueeRepeatLimit();				}
 			case "checked": {
 return getChecked();				}
 			case "textOn": {
@@ -1008,30 +1092,6 @@ return getShadowDx();				}
 return getShadowDy();				}
 			case "shadowColor": {
 return getShadowColor();				}
-			case "drawablePadding": {
-return this.getDrawablePadding();				}
-			case "minLines": {
-return getMinLines();				}
-			case "maxLines": {
-return getMaxLines();				}
-			case "minWidth": {
-return getMinWidth();				}
-			case "minHeight": {
-return getMinHeight();				}
-			case "maxWidth": {
-return getMaxWidth();				}
-			case "maxHeight": {
-return getMaxHeight();				}
-			case "height": {
-return getHeight();				}
-			case "width": {
-return getWidth();				}
-			case "maxEms": {
-return getMaxEms();				}
-			case "minEms": {
-return getMinEms();				}
-			case "marqueeRepeatLimit": {
-return getMarqueeRepeatLimit();				}
 		}
 		
 		return null;
@@ -1039,7 +1099,7 @@ return getMarqueeRepeatLimit();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableCompoundButton;
+		return measurableView;
 	}
 
 	
@@ -1100,7 +1160,7 @@ return getMarqueeRepeatLimit();				}
 	]-*/;
 	
 	private void setVerticalAligmentCenter() {
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 		nativeSetVerticalAligmentCenter();
 	}
 
@@ -1119,12 +1179,12 @@ return getMarqueeRepeatLimit();				}
 
 
 	private void setVerticalAligmentBottom() {
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 		nativeSetVerticalAligmentBottom();
 	}
 
 	private void setVerticalAligmentTop() {
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 		nativeSetVerticalAligmentTop();
 	}
 
@@ -1152,34 +1212,34 @@ return getMarqueeRepeatLimit();				}
     
     //start - paddingcopy
 	public Object getPaddingLeft() {
-		return ViewImpl.getPaddingLeft(this, measurableCompoundButton);
+		return ViewImpl.getPaddingLeft(this, measurableView);
 	}
 
 	public void setPaddingLeft(Object paddingLeft) {
-		ViewImpl.setPaddingLeft(paddingLeft, measurableCompoundButton);
-		nativeSetPaddingLeft(measurableCompoundButton.getCompoundPaddingLeft());
+		ViewImpl.setPaddingLeft(paddingLeft, measurableView);
+		nativeSetPaddingLeft(measurableView.getCompoundPaddingLeft());
 	}
 
 	public Object getPaddingRight() {
-		return ViewImpl.getPaddingRight(this, measurableCompoundButton);
+		return ViewImpl.getPaddingRight(this, measurableView);
 	}
 
 	public void setPaddingRight(Object paddingRight) {
-		ViewImpl.setPaddingRight(paddingRight, measurableCompoundButton);
-		nativeSetPaddingRight(measurableCompoundButton.getCompoundPaddingRight());
+		ViewImpl.setPaddingRight(paddingRight, measurableView);
+		nativeSetPaddingRight(measurableView.getCompoundPaddingRight());
 	}
 
 	public Object getPaddingTop() {
-		return ViewImpl.getPaddingTop(this, measurableCompoundButton);
+		return ViewImpl.getPaddingTop(this, measurableView);
 	}
 
 	public void setPaddingTop(Object paddingTop) {
-		ViewImpl.setPaddingTop(paddingTop, measurableCompoundButton);
-		nativeSetPaddingTop(measurableCompoundButton.getCompoundPaddingTop());
+		ViewImpl.setPaddingTop(paddingTop, measurableView);
+		nativeSetPaddingTop(measurableView.getCompoundPaddingTop());
 	}
 
 	public Object getPaddingBottom() {
-		return ViewImpl.getPaddingBottom(this, measurableCompoundButton);
+		return ViewImpl.getPaddingBottom(this, measurableView);
 	}
 	
 	private Object getPaddingEnd() {
@@ -1191,8 +1251,8 @@ return getMarqueeRepeatLimit();				}
 	}	
 
 	public void setPaddingBottom(Object paddingBottom) {
-		ViewImpl.setPaddingBottom(paddingBottom, measurableCompoundButton);
-		nativeSetPaddingBottom(measurableCompoundButton.getCompoundPaddingBottom());
+		ViewImpl.setPaddingBottom(paddingBottom, measurableView);
+		nativeSetPaddingBottom(measurableView.getCompoundPaddingBottom());
 	}
 
 	private void setPaddingVertical(Object objValue) {
@@ -1219,10 +1279,10 @@ return getMarqueeRepeatLimit();				}
 	}
 
     public void updatePadding() {
-    	setPaddingLeft(measurableCompoundButton.getPaddingLeft());
-    	setPaddingRight(measurableCompoundButton.getPaddingRight());
-    	setPaddingTop(measurableCompoundButton.getPaddingTop());
-    	setPaddingBottom(measurableCompoundButton.getPaddingBottom());
+    	setPaddingLeft(measurableView.getPaddingLeft());
+    	setPaddingRight(measurableView.getPaddingRight());
+    	setPaddingTop(measurableView.getPaddingTop());
+    	setPaddingBottom(measurableView.getPaddingBottom());
     }
 	private native void nativeSetPaddingBottom(int value) /*-[
 		ASUIButton* label = ((ASUIButton*) self.uiView);
@@ -1402,7 +1462,7 @@ return getMarqueeRepeatLimit();				}
 		setChecked(toggleChecked());
 		
 		if (onCheckedChangeListener != null) {
-			onCheckedChangeListener.onCheckedChanged(measurableCompoundButton, (boolean) getChecked());
+			onCheckedChangeListener.onCheckedChanged(measurableView, (boolean) getChecked());
 		}
 	}
 	
@@ -1426,7 +1486,7 @@ return getMarqueeRepeatLimit();				}
 
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableCompoundButton.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -1449,11 +1509,11 @@ return getMarqueeRepeatLimit();				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableCompoundButton.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableCompoundButton.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableCompoundButton.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -1499,7 +1559,7 @@ return getMarqueeRepeatLimit();				}
     
 	
 	private Object getGravity() {
-		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableCompoundButton.getVerticalAligment();
+		com.ashera.view.BaseMeasurableView.VerticalAligment verticalAligment = measurableView.getVerticalAligment();
 		if (verticalAligment == null) {
 			verticalAligment = com.ashera.view.BaseMeasurableView.VerticalAligment.top;
 		}
@@ -1538,7 +1598,7 @@ return getMarqueeRepeatLimit();				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableCompoundButton.getRawTextAlignment() != 0 || measurableCompoundButton.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -1547,11 +1607,11 @@ return getMarqueeRepeatLimit();				}
 
 
     private Object getMinHeight() {
-        return measurableCompoundButton.getMinHeight();
+        return measurableView.getMinHeight();
     }
 
     private Object getMinWidth() {
-        return measurableCompoundButton.getMinWidth();
+        return measurableView.getMinWidth();
     }
     
     private void setEms(Object objValue) {
@@ -1561,27 +1621,27 @@ return getMarqueeRepeatLimit();				}
     
     
     public int getMaxEms() {
-        return measurableCompoundButton.getMaxEms();
+        return measurableView.getMaxEms();
     }
     public int getMinEms() {
-        return measurableCompoundButton.getMinEms();
+        return measurableView.getMinEms();
     }
 
     private void setMinEms(Object objValue) {
-    	measurableCompoundButton.setMinEms((int) objValue);
+    	measurableView.setMinEms((int) objValue);
         addMinMaxListener();
     }
     
     public int getMinLines() {
-        return measurableCompoundButton.getMinLines();
+        return measurableView.getMinLines();
     }
     
     public int getMaxLines() {
-        return measurableCompoundButton.getMaxLines();
+        return measurableView.getMaxLines();
     }
 
     private void setMaxEms(Object objValue) {
-    	measurableCompoundButton.setMaxEms((int) objValue);
+    	measurableView.setMaxEms((int) objValue);
         addMinMaxListener();
     }
 
@@ -1596,7 +1656,7 @@ return getMarqueeRepeatLimit();				}
     }
 
     private void setMaxLines(Object objValue) {
-    	measurableCompoundButton.setMaxLines((int) objValue);
+    	measurableView.setMaxLines((int) objValue);
         addMinMaxListener();
     }
 
@@ -1606,47 +1666,47 @@ return getMarqueeRepeatLimit();				}
     }
 
     private void setMinLines(Object objValue) {
-    	measurableCompoundButton.setMinLines((int) objValue);
+    	measurableView.setMinLines((int) objValue);
         addMinMaxListener();
     
     }
     
     private void setMaxHeight(Object objValue) {
-    	measurableCompoundButton.setMaxHeight((int) objValue);
+    	measurableView.setMaxHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMaxWidth(Object objValue) {
-    	measurableCompoundButton.setMaxWidth((int) objValue);
+    	measurableView.setMaxWidth((int) objValue);
         addMinMaxListener();
     }
 
     public int getMaxWidth() {
-        return measurableCompoundButton.getMaxWidth();
+        return measurableView.getMaxWidth();
     }
 
     public int getMaxHeight() {
-        return measurableCompoundButton.getMaxHeight();
+        return measurableView.getMaxHeight();
     }
     
     
     private void setMinHeight(Object objValue) {
-    	measurableCompoundButton.setMinHeight((int) objValue);
+    	measurableView.setMinHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMinWidth(Object objValue) {
-    	measurableCompoundButton.setMinWidth((int) objValue);
+    	measurableView.setMinWidth((int) objValue);
         addMinMaxListener();
     }
 
     
     private Object getWidth() {
-        return measurableCompoundButton.getWidth();
+        return measurableView.getWidth();
     }
 
     private int getHeight() {
-        return measurableCompoundButton.getHeight();
+        return measurableView.getHeight();
     }
 
     
@@ -1750,7 +1810,7 @@ return getMarqueeRepeatLimit();				}
         // in settings). At the moment, we don't.
         if (firstBaselineToTopHeight > Math.abs(fontMetricsTop)) {
             final int paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-           measurableCompoundButton.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
+            measurableView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
         }
 	}
 	
@@ -1781,7 +1841,7 @@ return getMarqueeRepeatLimit();				}
 
         if (lastBaselineToBottomHeight > Math.abs(fontMetricsBottom)) {
             final int paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-            measurableCompoundButton.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
+            measurableView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
         }		
 	}
 	
@@ -1919,10 +1979,10 @@ return getMarqueeRepeatLimit();				}
 	}
 	
 	private int getLabelWidth() {
-		if (measurableCompoundButton.isIgnoreDrawableHeight()) {
-			return measurableCompoundButton.getMeasuredWidth() - measurableCompoundButton.getPaddingLeft() - measurableCompoundButton.getPaddingRight(); 
+		if (measurableView.isIgnoreDrawableHeight()) {
+			return measurableView.getMeasuredWidth() - measurableView.getPaddingLeft() - measurableView.getPaddingRight(); 
 		}
-		return measurableCompoundButton.getMeasuredWidth() - measurableCompoundButton.getCompoundPaddingRight() - measurableCompoundButton.getCompoundPaddingLeft();
+		return measurableView.getMeasuredWidth() - measurableView.getCompoundPaddingRight() - measurableView.getCompoundPaddingLeft();
 	}
 
 	private boolean isLabelMeasured() {
@@ -1954,30 +2014,30 @@ return getMarqueeRepeatLimit();				}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableCompoundButton.setTextColor(colorStateList);
-			objValue = measurableCompoundButton.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		
 		setTextColor(uiView, ViewImpl.getColor(objValue));
 	}
 	
 	private Object getTextColorState() {
-		return measurableCompoundButton.getTextColors();
+		return measurableView.getTextColors();
 	}
 	
 
 
 	private void setDrawablePadding(Object objValue) {
-		measurableCompoundButton.setDrawablePadding((int) objValue);
+		measurableView.setDrawablePadding((int) objValue);
 		updatePadding();
 	}
 
 	private void setDrawableBottom(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableCompoundButton.setBottomDrawable(null);
+			measurableView.setBottomDrawable(null);
 			applyAttributeCommand("drawableBottom", "drawDrawableIcon", new String[] {}, false, "bottom");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableCompoundButton.setBottomDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setBottomDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("drawableBottom", "drawDrawableIcon", new String[] {}, true, "bottom");
 			updatePadding();
 		}
@@ -1985,10 +2045,10 @@ return getMarqueeRepeatLimit();				}
 
 	private void setDrawableTop(Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableCompoundButton.setTopDrawable(null);
+			measurableView.setTopDrawable(null);
 			applyAttributeCommand("drawableTop", "drawDrawableIcon", new String[] {}, false, "top");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableCompoundButton.setTopDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setTopDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand("drawableTop", "drawDrawableIcon", new String[] {}, true, "top");
 			updatePadding();
 		}
@@ -2004,10 +2064,10 @@ return getMarqueeRepeatLimit();				}
 
 	private void setDrawableRightInternal(String originalAttr, Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableCompoundButton.setRightDrawable(null);
+			measurableView.setRightDrawable(null);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, false, "right");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableCompoundButton.setRightDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setRightDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, true, "right");
 			updatePadding();
 		}		
@@ -2025,10 +2085,10 @@ return getMarqueeRepeatLimit();				}
 
 	private void setDrawableLeftInternal(String originalAttr, Object objValue) {
 		if ("@null".equals(objValue)) {
-			measurableCompoundButton.setLeftDrawable(null);
+			measurableView.setLeftDrawable(null);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, false, "left");
 		} else if (objValue != null && objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableCompoundButton.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
+			measurableView.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
 			applyAttributeCommand(originalAttr, "drawDrawableIcon", new String[] {}, true, "left");
 			updatePadding();
 		}
@@ -2053,23 +2113,23 @@ return getMarqueeRepeatLimit();				}
 	]-*/;
 
 	private Object getDrawablePadding() {
-		return measurableCompoundButton.getDrawablePadding();
+		return measurableView.getDrawablePadding();
 	}
 
 	private void setDrawableTintMode(Object value) {
-		if (measurableCompoundButton.getLeftDrawable() != null) {
+		if (measurableView.getLeftDrawable() != null) {
 			applyAttributeCommand("drawableStart", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 			applyAttributeCommand("drawableLeft", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
-		if (measurableCompoundButton.getRightDrawable() != null) {
+		if (measurableView.getRightDrawable() != null) {
 			applyAttributeCommand("drawableRight", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 			applyAttributeCommand("drawableEnd", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
 		
-		if (measurableCompoundButton.getTopDrawable() != null) {
+		if (measurableView.getTopDrawable() != null) {
 			applyAttributeCommand("drawableTop", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
-		if (measurableCompoundButton.getBottomDrawable() != null) {
+		if (measurableView.getBottomDrawable() != null) {
 			applyAttributeCommand("drawableBottom", "cgTintColor", new String[] {"drawableTintMode"}, true, "drawableTintMode", value);
 		}
 	}
@@ -2078,21 +2138,21 @@ return getMarqueeRepeatLimit();				}
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
 			this.drawableTint = colorStateList;
-			objValue = drawableTint.getColorForState(measurableCompoundButton.getDrawableState(), r.android.graphics.Color.RED);
+			objValue = drawableTint.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
 		}
 		
-		if (measurableCompoundButton.getLeftDrawable() != null) {
+		if (measurableView.getLeftDrawable() != null) {
 			applyAttributeCommand("drawableLeft", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 			applyAttributeCommand("drawableStart", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableCompoundButton.getRightDrawable() != null) {
+		if (measurableView.getRightDrawable() != null) {
 			applyAttributeCommand("drawableRight", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));			
 			applyAttributeCommand("drawableEnd", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableCompoundButton.getTopDrawable() != null) {
+		if (measurableView.getTopDrawable() != null) {
 			applyAttributeCommand("drawableTop", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
-		if (measurableCompoundButton.getBottomDrawable() != null) {
+		if (measurableView.getBottomDrawable() != null) {
 			applyAttributeCommand("drawableBottom", "cgTintColor", new String[] {"drawableTint"}, true, "drawableTint", ViewImpl.getColor(objValue));
 		}
 	}
@@ -2103,17 +2163,17 @@ return getMarqueeRepeatLimit();				}
 	@Override
 	public void drawableStateChanged() {
 		super.drawableStateChanged();
-		drawableStateChange("bottom", measurableCompoundButton.getBottomDrawable());
-		drawableStateChange("left", measurableCompoundButton.getLeftDrawable());
-		drawableStateChange("right", measurableCompoundButton.getRightDrawable());
-		drawableStateChange("top", measurableCompoundButton.getTopDrawable());
+		drawableStateChange("bottom", measurableView.getBottomDrawable());
+		drawableStateChange("left", measurableView.getLeftDrawable());
+		drawableStateChange("right", measurableView.getRightDrawable());
+		drawableStateChange("top", measurableView.getTopDrawable());
 		
-		if (measurableCompoundButton.getTextColors() != null && measurableCompoundButton.getTextColors().isStateful()) {
-			setTextColor(measurableCompoundButton.getCurrentTextColor());
+		if (measurableView.getTextColors() != null && measurableView.getTextColors().isStateful()) {
+			setTextColor(measurableView.getCurrentTextColor());
 		}
 		
-		if (measurableCompoundButton.getHintTextColors() != null && measurableCompoundButton.getHintTextColors().isStateful()) {
-			setHintColor(measurableCompoundButton.getCurrentHintTextColor());
+		if (measurableView.getHintTextColors() != null && measurableView.getHintTextColors().isStateful()) {
+			setHintColor(measurableView.getCurrentHintTextColor());
 			syncPlaceholderLabel();
 		}
 		
@@ -2122,13 +2182,13 @@ return getMarqueeRepeatLimit();				}
 			invalidate();
 		}
 		
-		if (measurableCompoundButton.getLinkTextColors() != null && measurableCompoundButton.getLinkTextColors().isStateful()) {
-			setTextColorLink(measurableCompoundButton.getLinkTextColors());
+		if (measurableView.getLinkTextColors() != null && measurableView.getLinkTextColors().isStateful()) {
+			setTextColorLink(measurableView.getLinkTextColors());
 		}
 	}
 
 	private void drawableStateChange(String type, r.android.graphics.drawable.Drawable dr) {
-		final int[] state = measurableCompoundButton.getDrawableState();
+		final int[] state = measurableView.getDrawableState();
 
 		if (dr != null && dr.isStateful() && dr.setState(state)) {
 			switch (type) {
@@ -2396,10 +2456,14 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableCompoundButton.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -2449,6 +2513,370 @@ public  class ToggleButtonCommandBuilder extends com.ashera.layout.ViewImpl.View
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
+public ToggleButtonCommandBuilder setDrawableLeft(String value) {
+	Map<String, Object> attrs = initCommand("drawableLeft");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setDrawableStart(String value) {
+	Map<String, Object> attrs = initCommand("drawableStart");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setDrawableRight(String value) {
+	Map<String, Object> attrs = initCommand("drawableRight");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setDrawableEnd(String value) {
+	Map<String, Object> attrs = initCommand("drawableEnd");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setDrawableTop(String value) {
+	Map<String, Object> attrs = initCommand("drawableTop");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setDrawableBottom(String value) {
+	Map<String, Object> attrs = initCommand("drawableBottom");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetDrawablePadding() {
+	Map<String, Object> attrs = initCommand("drawablePadding");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getDrawablePadding() {
+	Map<String, Object> attrs = initCommand("drawablePadding");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setDrawablePadding(String value) {
+	Map<String, Object> attrs = initCommand("drawablePadding");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setDrawableTint(String value) {
+	Map<String, Object> attrs = initCommand("drawableTint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setDrawableTintMode(String value) {
+	Map<String, Object> attrs = initCommand("drawableTintMode");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetMinLines() {
+	Map<String, Object> attrs = initCommand("minLines");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMinLines() {
+	Map<String, Object> attrs = initCommand("minLines");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setMinLines(int value) {
+	Map<String, Object> attrs = initCommand("minLines");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setLines(int value) {
+	Map<String, Object> attrs = initCommand("lines");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetMaxLines() {
+	Map<String, Object> attrs = initCommand("maxLines");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMaxLines() {
+	Map<String, Object> attrs = initCommand("maxLines");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setMaxLines(int value) {
+	Map<String, Object> attrs = initCommand("maxLines");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetMinWidth() {
+	Map<String, Object> attrs = initCommand("minWidth");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMinWidth() {
+	Map<String, Object> attrs = initCommand("minWidth");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setMinWidth(String value) {
+	Map<String, Object> attrs = initCommand("minWidth");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetMinHeight() {
+	Map<String, Object> attrs = initCommand("minHeight");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMinHeight() {
+	Map<String, Object> attrs = initCommand("minHeight");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setMinHeight(String value) {
+	Map<String, Object> attrs = initCommand("minHeight");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetMaxWidth() {
+	Map<String, Object> attrs = initCommand("maxWidth");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMaxWidth() {
+	Map<String, Object> attrs = initCommand("maxWidth");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setMaxWidth(String value) {
+	Map<String, Object> attrs = initCommand("maxWidth");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetMaxHeight() {
+	Map<String, Object> attrs = initCommand("maxHeight");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMaxHeight() {
+	Map<String, Object> attrs = initCommand("maxHeight");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setMaxHeight(String value) {
+	Map<String, Object> attrs = initCommand("maxHeight");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetHeight() {
+	Map<String, Object> attrs = initCommand("height");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getHeight() {
+	Map<String, Object> attrs = initCommand("height");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setHeight(String value) {
+	Map<String, Object> attrs = initCommand("height");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetWidth() {
+	Map<String, Object> attrs = initCommand("width");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getWidth() {
+	Map<String, Object> attrs = initCommand("width");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setWidth(String value) {
+	Map<String, Object> attrs = initCommand("width");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetMaxEms() {
+	Map<String, Object> attrs = initCommand("maxEms");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMaxEms() {
+	Map<String, Object> attrs = initCommand("maxEms");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setMaxEms(int value) {
+	Map<String, Object> attrs = initCommand("maxEms");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetMinEms() {
+	Map<String, Object> attrs = initCommand("minEms");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMinEms() {
+	Map<String, Object> attrs = initCommand("minEms");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setMinEms(int value) {
+	Map<String, Object> attrs = initCommand("minEms");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setEms(int value) {
+	Map<String, Object> attrs = initCommand("ems");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder tryGetMarqueeRepeatLimit() {
+	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getMarqueeRepeatLimit() {
+	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
+	return attrs.get("commandReturnValue");
+}
+public ToggleButtonCommandBuilder setMarqueeRepeatLimit(String value) {
+	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setEditable(boolean value) {
+	Map<String, Object> attrs = initCommand("editable");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setMaxLength(int value) {
+	Map<String, Object> attrs = initCommand("maxLength");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setTypeface(String value) {
+	Map<String, Object> attrs = initCommand("typeface");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setTextStyle(String value) {
+	Map<String, Object> attrs = initCommand("textStyle");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setFontFamily(String value) {
+	Map<String, Object> attrs = initCommand("fontFamily");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setTextFormat(String value) {
+	Map<String, Object> attrs = initCommand("textFormat");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ToggleButtonCommandBuilder setEnabled(boolean value) {
+	Map<String, Object> attrs = initCommand("enabled");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public ToggleButtonCommandBuilder setOnCheckedChange(String value) {
 	Map<String, Object> attrs = initCommand("onCheckedChange");
 	attrs.put("type", "attribute");
@@ -2885,375 +3313,163 @@ public ToggleButtonCommandBuilder setShadowColor(String value) {
 
 	attrs.put("value", value);
 return this;}
-public ToggleButtonCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setDrawableStart(String value) {
-	Map<String, Object> attrs = initCommand("drawableStart");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setDrawableEnd(String value) {
-	Map<String, Object> attrs = initCommand("drawableEnd");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setDrawableTop(String value) {
-	Map<String, Object> attrs = initCommand("drawableTop");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setDrawableBottom(String value) {
-	Map<String, Object> attrs = initCommand("drawableBottom");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetDrawablePadding() {
-	Map<String, Object> attrs = initCommand("drawablePadding");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getDrawablePadding() {
-	Map<String, Object> attrs = initCommand("drawablePadding");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setDrawablePadding(String value) {
-	Map<String, Object> attrs = initCommand("drawablePadding");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setDrawableTint(String value) {
-	Map<String, Object> attrs = initCommand("drawableTint");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setDrawableTintMode(String value) {
-	Map<String, Object> attrs = initCommand("drawableTintMode");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetMinLines() {
-	Map<String, Object> attrs = initCommand("minLines");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMinLines() {
-	Map<String, Object> attrs = initCommand("minLines");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setMinLines(int value) {
-	Map<String, Object> attrs = initCommand("minLines");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setLines(int value) {
-	Map<String, Object> attrs = initCommand("lines");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetMaxLines() {
-	Map<String, Object> attrs = initCommand("maxLines");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMaxLines() {
-	Map<String, Object> attrs = initCommand("maxLines");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setMaxLines(int value) {
-	Map<String, Object> attrs = initCommand("maxLines");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetMinWidth() {
-	Map<String, Object> attrs = initCommand("minWidth");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMinWidth() {
-	Map<String, Object> attrs = initCommand("minWidth");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setMinWidth(String value) {
-	Map<String, Object> attrs = initCommand("minWidth");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetMinHeight() {
-	Map<String, Object> attrs = initCommand("minHeight");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMinHeight() {
-	Map<String, Object> attrs = initCommand("minHeight");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setMinHeight(String value) {
-	Map<String, Object> attrs = initCommand("minHeight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetMaxWidth() {
-	Map<String, Object> attrs = initCommand("maxWidth");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMaxWidth() {
-	Map<String, Object> attrs = initCommand("maxWidth");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setMaxWidth(String value) {
-	Map<String, Object> attrs = initCommand("maxWidth");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetMaxHeight() {
-	Map<String, Object> attrs = initCommand("maxHeight");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMaxHeight() {
-	Map<String, Object> attrs = initCommand("maxHeight");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setMaxHeight(String value) {
-	Map<String, Object> attrs = initCommand("maxHeight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetHeight() {
-	Map<String, Object> attrs = initCommand("height");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getHeight() {
-	Map<String, Object> attrs = initCommand("height");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setHeight(String value) {
-	Map<String, Object> attrs = initCommand("height");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetWidth() {
-	Map<String, Object> attrs = initCommand("width");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getWidth() {
-	Map<String, Object> attrs = initCommand("width");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setWidth(String value) {
-	Map<String, Object> attrs = initCommand("width");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetMaxEms() {
-	Map<String, Object> attrs = initCommand("maxEms");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMaxEms() {
-	Map<String, Object> attrs = initCommand("maxEms");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setMaxEms(int value) {
-	Map<String, Object> attrs = initCommand("maxEms");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetMinEms() {
-	Map<String, Object> attrs = initCommand("minEms");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMinEms() {
-	Map<String, Object> attrs = initCommand("minEms");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setMinEms(int value) {
-	Map<String, Object> attrs = initCommand("minEms");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setEms(int value) {
-	Map<String, Object> attrs = initCommand("ems");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder tryGetMarqueeRepeatLimit() {
-	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getMarqueeRepeatLimit() {
-	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
-	return attrs.get("commandReturnValue");
-}
-public ToggleButtonCommandBuilder setMarqueeRepeatLimit(String value) {
-	Map<String, Object> attrs = initCommand("marqueeRepeatLimit");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setEditable(boolean value) {
-	Map<String, Object> attrs = initCommand("editable");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setMaxLength(int value) {
-	Map<String, Object> attrs = initCommand("maxLength");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setTypeface(String value) {
-	Map<String, Object> attrs = initCommand("typeface");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setTextStyle(String value) {
-	Map<String, Object> attrs = initCommand("textStyle");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setFontFamily(String value) {
-	Map<String, Object> attrs = initCommand("fontFamily");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setTextFormat(String value) {
-	Map<String, Object> attrs = initCommand("textFormat");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setEnabled(boolean value) {
-	Map<String, Object> attrs = initCommand("enabled");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 }
 public class ToggleButtonBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public ToggleButtonBean() {
 			super(ToggleButtonImpl.this);
 		}
+public void setDrawableLeft(String value) {
+	getBuilder().reset().setDrawableLeft(value).execute(true);
+}
+
+public void setDrawableStart(String value) {
+	getBuilder().reset().setDrawableStart(value).execute(true);
+}
+
+public void setDrawableRight(String value) {
+	getBuilder().reset().setDrawableRight(value).execute(true);
+}
+
+public void setDrawableEnd(String value) {
+	getBuilder().reset().setDrawableEnd(value).execute(true);
+}
+
+public void setDrawableTop(String value) {
+	getBuilder().reset().setDrawableTop(value).execute(true);
+}
+
+public void setDrawableBottom(String value) {
+	getBuilder().reset().setDrawableBottom(value).execute(true);
+}
+
+public Object getDrawablePadding() {
+	return getBuilder().reset().tryGetDrawablePadding().execute(false).getDrawablePadding(); 
+}
+public void setDrawablePadding(String value) {
+	getBuilder().reset().setDrawablePadding(value).execute(true);
+}
+
+public void setDrawableTint(String value) {
+	getBuilder().reset().setDrawableTint(value).execute(true);
+}
+
+public void setDrawableTintMode(String value) {
+	getBuilder().reset().setDrawableTintMode(value).execute(true);
+}
+
+public Object getMinLines() {
+	return getBuilder().reset().tryGetMinLines().execute(false).getMinLines(); 
+}
+public void setMinLines(int value) {
+	getBuilder().reset().setMinLines(value).execute(true);
+}
+
+public void setLines(int value) {
+	getBuilder().reset().setLines(value).execute(true);
+}
+
+public Object getMaxLines() {
+	return getBuilder().reset().tryGetMaxLines().execute(false).getMaxLines(); 
+}
+public void setMaxLines(int value) {
+	getBuilder().reset().setMaxLines(value).execute(true);
+}
+
+public Object getMinWidth() {
+	return getBuilder().reset().tryGetMinWidth().execute(false).getMinWidth(); 
+}
+public void setMinWidth(String value) {
+	getBuilder().reset().setMinWidth(value).execute(true);
+}
+
+public Object getMinHeight() {
+	return getBuilder().reset().tryGetMinHeight().execute(false).getMinHeight(); 
+}
+public void setMinHeight(String value) {
+	getBuilder().reset().setMinHeight(value).execute(true);
+}
+
+public Object getMaxWidth() {
+	return getBuilder().reset().tryGetMaxWidth().execute(false).getMaxWidth(); 
+}
+public void setMaxWidth(String value) {
+	getBuilder().reset().setMaxWidth(value).execute(true);
+}
+
+public Object getMaxHeight() {
+	return getBuilder().reset().tryGetMaxHeight().execute(false).getMaxHeight(); 
+}
+public void setMaxHeight(String value) {
+	getBuilder().reset().setMaxHeight(value).execute(true);
+}
+
+public Object getHeight() {
+	return getBuilder().reset().tryGetHeight().execute(false).getHeight(); 
+}
+public void setHeight(String value) {
+	getBuilder().reset().setHeight(value).execute(true);
+}
+
+public Object getWidth() {
+	return getBuilder().reset().tryGetWidth().execute(false).getWidth(); 
+}
+public void setWidth(String value) {
+	getBuilder().reset().setWidth(value).execute(true);
+}
+
+public Object getMaxEms() {
+	return getBuilder().reset().tryGetMaxEms().execute(false).getMaxEms(); 
+}
+public void setMaxEms(int value) {
+	getBuilder().reset().setMaxEms(value).execute(true);
+}
+
+public Object getMinEms() {
+	return getBuilder().reset().tryGetMinEms().execute(false).getMinEms(); 
+}
+public void setMinEms(int value) {
+	getBuilder().reset().setMinEms(value).execute(true);
+}
+
+public void setEms(int value) {
+	getBuilder().reset().setEms(value).execute(true);
+}
+
+public Object getMarqueeRepeatLimit() {
+	return getBuilder().reset().tryGetMarqueeRepeatLimit().execute(false).getMarqueeRepeatLimit(); 
+}
+public void setMarqueeRepeatLimit(String value) {
+	getBuilder().reset().setMarqueeRepeatLimit(value).execute(true);
+}
+
+public void setEditable(boolean value) {
+	getBuilder().reset().setEditable(value).execute(true);
+}
+
+public void setMaxLength(int value) {
+	getBuilder().reset().setMaxLength(value).execute(true);
+}
+
+public void setTypeface(String value) {
+	getBuilder().reset().setTypeface(value).execute(true);
+}
+
+public void setTextStyle(String value) {
+	getBuilder().reset().setTextStyle(value).execute(true);
+}
+
+public void setFontFamily(String value) {
+	getBuilder().reset().setFontFamily(value).execute(true);
+}
+
+public void setTextFormat(String value) {
+	getBuilder().reset().setTextFormat(value).execute(true);
+}
+
+public void setEnabled(boolean value) {
+	getBuilder().reset().setEnabled(value).execute(true);
+}
+
 public void setOnCheckedChange(String value) {
 	getBuilder().reset().setOnCheckedChange(value).execute(true);
 }
@@ -3420,158 +3636,6 @@ public Object getShadowColor() {
 }
 public void setShadowColor(String value) {
 	getBuilder().reset().setShadowColor(value).execute(true);
-}
-
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
-public void setDrawableStart(String value) {
-	getBuilder().reset().setDrawableStart(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
-}
-
-public void setDrawableEnd(String value) {
-	getBuilder().reset().setDrawableEnd(value).execute(true);
-}
-
-public void setDrawableTop(String value) {
-	getBuilder().reset().setDrawableTop(value).execute(true);
-}
-
-public void setDrawableBottom(String value) {
-	getBuilder().reset().setDrawableBottom(value).execute(true);
-}
-
-public Object getDrawablePadding() {
-	return getBuilder().reset().tryGetDrawablePadding().execute(false).getDrawablePadding(); 
-}
-public void setDrawablePadding(String value) {
-	getBuilder().reset().setDrawablePadding(value).execute(true);
-}
-
-public void setDrawableTint(String value) {
-	getBuilder().reset().setDrawableTint(value).execute(true);
-}
-
-public void setDrawableTintMode(String value) {
-	getBuilder().reset().setDrawableTintMode(value).execute(true);
-}
-
-public Object getMinLines() {
-	return getBuilder().reset().tryGetMinLines().execute(false).getMinLines(); 
-}
-public void setMinLines(int value) {
-	getBuilder().reset().setMinLines(value).execute(true);
-}
-
-public void setLines(int value) {
-	getBuilder().reset().setLines(value).execute(true);
-}
-
-public Object getMaxLines() {
-	return getBuilder().reset().tryGetMaxLines().execute(false).getMaxLines(); 
-}
-public void setMaxLines(int value) {
-	getBuilder().reset().setMaxLines(value).execute(true);
-}
-
-public Object getMinWidth() {
-	return getBuilder().reset().tryGetMinWidth().execute(false).getMinWidth(); 
-}
-public void setMinWidth(String value) {
-	getBuilder().reset().setMinWidth(value).execute(true);
-}
-
-public Object getMinHeight() {
-	return getBuilder().reset().tryGetMinHeight().execute(false).getMinHeight(); 
-}
-public void setMinHeight(String value) {
-	getBuilder().reset().setMinHeight(value).execute(true);
-}
-
-public Object getMaxWidth() {
-	return getBuilder().reset().tryGetMaxWidth().execute(false).getMaxWidth(); 
-}
-public void setMaxWidth(String value) {
-	getBuilder().reset().setMaxWidth(value).execute(true);
-}
-
-public Object getMaxHeight() {
-	return getBuilder().reset().tryGetMaxHeight().execute(false).getMaxHeight(); 
-}
-public void setMaxHeight(String value) {
-	getBuilder().reset().setMaxHeight(value).execute(true);
-}
-
-public Object getHeight() {
-	return getBuilder().reset().tryGetHeight().execute(false).getHeight(); 
-}
-public void setHeight(String value) {
-	getBuilder().reset().setHeight(value).execute(true);
-}
-
-public Object getWidth() {
-	return getBuilder().reset().tryGetWidth().execute(false).getWidth(); 
-}
-public void setWidth(String value) {
-	getBuilder().reset().setWidth(value).execute(true);
-}
-
-public Object getMaxEms() {
-	return getBuilder().reset().tryGetMaxEms().execute(false).getMaxEms(); 
-}
-public void setMaxEms(int value) {
-	getBuilder().reset().setMaxEms(value).execute(true);
-}
-
-public Object getMinEms() {
-	return getBuilder().reset().tryGetMinEms().execute(false).getMinEms(); 
-}
-public void setMinEms(int value) {
-	getBuilder().reset().setMinEms(value).execute(true);
-}
-
-public void setEms(int value) {
-	getBuilder().reset().setEms(value).execute(true);
-}
-
-public Object getMarqueeRepeatLimit() {
-	return getBuilder().reset().tryGetMarqueeRepeatLimit().execute(false).getMarqueeRepeatLimit(); 
-}
-public void setMarqueeRepeatLimit(String value) {
-	getBuilder().reset().setMarqueeRepeatLimit(value).execute(true);
-}
-
-public void setEditable(boolean value) {
-	getBuilder().reset().setEditable(value).execute(true);
-}
-
-public void setMaxLength(int value) {
-	getBuilder().reset().setMaxLength(value).execute(true);
-}
-
-public void setTypeface(String value) {
-	getBuilder().reset().setTypeface(value).execute(true);
-}
-
-public void setTextStyle(String value) {
-	getBuilder().reset().setTextStyle(value).execute(true);
-}
-
-public void setFontFamily(String value) {
-	getBuilder().reset().setFontFamily(value).execute(true);
-}
-
-public void setTextFormat(String value) {
-	getBuilder().reset().setTextFormat(value).execute(true);
-}
-
-public void setEnabled(boolean value) {
-	getBuilder().reset().setEnabled(value).execute(true);
 }
 
 }

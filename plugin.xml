@@ -195,10 +195,13 @@
     <framework src="layout/android/layout.gradle" custom="true" type="gradleReference" />
 
 	 <!-- start res -->
+     <source-file src="layout/android/res/layout/autocomplete_completion.xml" target-dir="res/layout"/>
+     <source-file src="layout/android/res/layout/autocomplete_entries.xml" target-dir="res/layout"/>
      <source-file src="layout/android/res/values/model_attrs.xml" target-dir="res/values"/>
      <!-- res end -->
 	 <!-- start src -->
      <source-file src="layout/android/src/com/ashera/layout/AndroidLayoutsCordovaPlugin.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/AutoCompleteTextViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ButtonImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/CheckBoxImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ChronometerImpl.java" target-dir="src/com/ashera/layout"/>
@@ -215,6 +218,8 @@
      <source-file src="layout/android/src/com/ashera/layout/ModelImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/MultiSelectionSpinner.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/MultiSelectionSpinnerImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/PopupWindow.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/PopupWindowImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ProgressBarImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/RadioButtonImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/RadioGroupImpl.java" target-dir="src/com/ashera/layout"/>
@@ -222,6 +227,7 @@
      <source-file src="layout/android/src/com/ashera/layout/RootImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ScrollViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/SpinnerImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/SwipeHelper.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/SwitchImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/TableLayoutImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/TableRowImpl.java" target-dir="src/com/ashera/layout"/>
@@ -235,6 +241,7 @@
      <!-- src end -->
      
      <!-- start tsc -->
+     <source-file src="layout/android/tsc/src/android/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ButtonImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/CheckBoxImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ChronometerImpl.ts" target-dir="tsc/src/android/widget"/>
@@ -248,6 +255,7 @@
      <source-file src="layout/android/tsc/src/android/widget/ListViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ModelImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/android/widget"/>
+     <source-file src="layout/android/tsc/src/android/widget/PopupWindowImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ProgressBarImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/RadioButtonImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/RadioGroupImpl.ts" target-dir="tsc/src/android/widget"/>
@@ -629,6 +637,8 @@
      <source-file src="core/ios/library/AndroidCore/src/AttributeSet.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/AudioManager.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/AudioManager.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/AutoCompleteTextView.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/AutoCompleteTextView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Base64.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Base64.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/BaseAdapter.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -653,6 +663,8 @@
      <source-file src="core/ios/library/AndroidCore/src/Button.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Canvas.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Canvas.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/CheckBox.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/CheckBox.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Chronometer.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Chronometer.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ClientCertRequest.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -707,6 +719,10 @@
      <source-file src="core/ios/library/AndroidCore/src/Environment.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/FastMath.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/FastMath.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/Filter.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/Filter.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/Filterable.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/Filterable.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/FrameLayout.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/FrameLayout.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/GeolocationPermissions.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -717,10 +733,20 @@
      <source-file src="core/ios/library/AndroidCore/src/Gravity.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/GrowingArrayUtils.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/GrowingArrayUtils.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/Handler.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/Handler.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/HandlerThread.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/HandlerThread.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/HorizontalScrollView.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/HorizontalScrollView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/HttpAuthHandler.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/HttpAuthHandler.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/IBinder.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/IBinder.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/ImageView.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/ImageView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/IMessenger.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/IMessenger.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/InputFilter.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/InputFilter.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Insets.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -751,6 +777,8 @@
      <source-file src="core/ios/library/AndroidCore/src/Linkify.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ListAdapter.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ListAdapter.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/ListPopupWindow.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/ListPopupWindow.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Lists.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Lists.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ListView.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -771,6 +799,12 @@
      <source-file src="core/ios/library/AndroidCore/src/Menu.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/MenuItem.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/MenuItem.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/Message.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/Message.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/MessageQueue.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/MessageQueue.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/Messenger.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/Messenger.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/MimeTypeMap.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/MimeTypeMap.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/NoCopySpan.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -797,12 +831,16 @@
      <source-file src="core/ios/library/AndroidCore/src/PermissionRequest.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Pools.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Pools.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/PopupWindow.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/PopupWindow.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Preconditions.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Preconditions.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ProgressBar.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ProgressBar.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/R.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/R.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/RadioButton.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/RadioButton.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/RadioGroup.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/RadioGroup.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Rect.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -811,6 +849,8 @@
      <source-file src="core/ios/library/AndroidCore/src/RectF.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/RelativeLayout.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/RelativeLayout.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/RemoteException.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/RemoteException.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/RenderNode.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/RenderNode.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Resources.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -833,6 +873,8 @@
      <source-file src="core/ios/library/AndroidCore/src/SparseBooleanArray.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/SparseIntArray.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/SparseIntArray.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/Spinner.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/Spinner.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/SpinnerAdapter.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/SpinnerAdapter.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/SslError.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -845,6 +887,8 @@
      <source-file src="core/ios/library/AndroidCore/src/StateSet.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/SuppressLint.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/SuppressLint.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/SwipeHelper.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/SwipeHelper.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Switch.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Switch.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/SystemClock.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -867,6 +911,8 @@
      <source-file src="core/ios/library/AndroidCore/src/TextView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/TextWatcher.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/TextWatcher.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/ToggleButton.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/ToggleButton.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Trace.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Trace.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/UnsupportedAppUsage.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -881,6 +927,8 @@
      <source-file src="core/ios/library/AndroidCore/src/ViewGroup.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ViewParent.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ViewParent.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/ViewTreeObserver.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/ViewTreeObserver.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/WebChromeClient.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/WebChromeClient.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/WebResourceResponse.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -918,6 +966,8 @@
      <source-file src="core/ios/library/AndroidXCore/src/MarginLayoutParamsCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/RestrictTo.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/RestrictTo.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/SimpleArrayMap.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/SimpleArrayMap.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/TraceCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/TraceCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/ViewCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
@@ -1107,6 +1157,7 @@
     </config-file>
 
 	<!-- start tsc -->
+     <source-file src="layout/ios/tsc/src/ios/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ButtonImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/CheckBoxImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ChronometerImpl.ts" target-dir="tsc/src/ios/widget"/>
@@ -1120,6 +1171,7 @@
      <source-file src="layout/ios/tsc/src/ios/widget/ListViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ModelImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <source-file src="layout/ios/tsc/src/ios/widget/PopupWindowImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ProgressBarImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/RadioButtonImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/RadioGroupImpl.ts" target-dir="tsc/src/ios/widget"/>
@@ -1144,6 +1196,8 @@
 	<!-- start ios -->
      <header-file src="layout/ios/ios/src/AndroidLayoutsCordovaPlugin.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/AndroidLayoutsCordovaPlugin.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="layout/ios/ios/src/AutoCompleteTextViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="layout/ios/ios/src/AutoCompleteTextViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ButtonImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/ButtonImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/CheckBoxImpl.h" target-dir="LayoutPlugin/ios/src"/>
@@ -1170,22 +1224,12 @@
      <source-file src="layout/ios/ios/src/LinkImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ListViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/ListViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
-     <header-file src="layout/ios/ios/src/MeasurableCompoundButton.h" target-dir="LayoutPlugin/ios/src"/>
-     <source-file src="layout/ios/ios/src/MeasurableCompoundButton.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
-     <header-file src="layout/ios/ios/src/MeasurableImageView.h" target-dir="LayoutPlugin/ios/src"/>
-     <source-file src="layout/ios/ios/src/MeasurableImageView.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
-     <header-file src="layout/ios/ios/src/MeasurableSwitch.h" target-dir="LayoutPlugin/ios/src"/>
-     <source-file src="layout/ios/ios/src/MeasurableSwitch.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
-     <header-file src="layout/ios/ios/src/MeasurableTextView.h" target-dir="LayoutPlugin/ios/src"/>
-     <source-file src="layout/ios/ios/src/MeasurableTextView.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
-     <header-file src="layout/ios/ios/src/MeasurableView.h" target-dir="LayoutPlugin/ios/src"/>
-     <source-file src="layout/ios/ios/src/MeasurableView.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
-     <header-file src="layout/ios/ios/src/MeasurableViewGroup.h" target-dir="LayoutPlugin/ios/src"/>
-     <source-file src="layout/ios/ios/src/MeasurableViewGroup.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ModelImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/ModelImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/MultiSelectionSpinnerImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/MultiSelectionSpinnerImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="layout/ios/ios/src/PopupWindowImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="layout/ios/ios/src/PopupWindowImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ProgressBarImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/ProgressBarImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/RadioButtonImpl.h" target-dir="LayoutPlugin/ios/src"/>
@@ -1242,6 +1286,8 @@
      <source-file src="layout/ios/ios_ext/src/ASUIProgressView.m" target-dir="LayoutPlugin/ios_ext/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios_ext/src/ASUIScrollView.h" target-dir="LayoutPlugin/ios_ext/src"/>
      <source-file src="layout/ios/ios_ext/src/ASUIScrollView.m" target-dir="LayoutPlugin/ios_ext/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="layout/ios/ios_ext/src/ASUISwipeGestureRecognizer.h" target-dir="LayoutPlugin/ios_ext/src"/>
+     <source-file src="layout/ios/ios_ext/src/ASUISwipeGestureRecognizer.m" target-dir="LayoutPlugin/ios_ext/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios_ext/src/ASUITableView.h" target-dir="LayoutPlugin/ios_ext/src"/>
      <source-file src="layout/ios/ios_ext/src/ASUITableView.m" target-dir="LayoutPlugin/ios_ext/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios_ext/src/ASUITapGestureRecognizer.h" target-dir="LayoutPlugin/ios_ext/src"/>

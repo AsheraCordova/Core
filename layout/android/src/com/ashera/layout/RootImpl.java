@@ -122,7 +122,7 @@ public class RootImpl extends BaseHasWidgets implements IRoot{
 
 	@Override
 	public IWidget newInstance() {
-		return new RootImpl();
+		return new RootImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -173,7 +173,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		relativeLayout.removeView((View) w.asWidget());
 		return remove;
@@ -520,11 +520,6 @@ return layoutParams.alignWithParent;			}
 		public RootExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -636,12 +631,11 @@ return layoutParams.alignWithParent;			}
         	ViewImpl.drawableStateChanged(RootImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((RootExt) relativeLayout).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return RootExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -1834,9 +1828,8 @@ return this;}
 		} else {
 			IWidget button = WidgetFactory.createWidget("TextView", "TextView", this, false);
 			button.setId("@+id/errorBanner");
-			button.setAttribute(WidgetFactory.getAttribute("TextView", "style"), "@style/error_banner", false);
-			button.setAttribute(WidgetFactory.getAttribute("TextView", "onClick"),
-					"onError(data = . from fatalErrors->view)", false);
+			button.setAttribute("style", "@style/error_banner", false);
+			button.setAttribute("onClick", "onError(data = . from fatalErrors->view)", false);
 		}}
 	//end - displayErrorIndicator
 }

@@ -210,6 +210,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ADLinearLayout)
 - (instancetype)initWithInt:(jint)width
                     withInt:(jint)height;
 
+- (instancetype)initWithInt:(jint)width
+                    withInt:(jint)height
+                  withFloat:(jfloat)weight;
+
 - (instancetype)initWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p;
 
 - (instancetype)initWithADLinearLayout_LayoutParams:(ADLinearLayout_LayoutParams *)source;
@@ -227,6 +231,12 @@ FOUNDATION_EXPORT void ADLinearLayout_LayoutParams_initWithInt_withInt_(ADLinear
 FOUNDATION_EXPORT ADLinearLayout_LayoutParams *new_ADLinearLayout_LayoutParams_initWithInt_withInt_(jint width, jint height) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADLinearLayout_LayoutParams *create_ADLinearLayout_LayoutParams_initWithInt_withInt_(jint width, jint height);
+
+FOUNDATION_EXPORT void ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(ADLinearLayout_LayoutParams *self, jint width, jint height, jfloat weight);
+
+FOUNDATION_EXPORT ADLinearLayout_LayoutParams *new_ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(jint width, jint height, jfloat weight) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ADLinearLayout_LayoutParams *create_ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(jint width, jint height, jfloat weight);
 
 FOUNDATION_EXPORT void ADLinearLayout_LayoutParams_initWithADViewGroup_LayoutParams_(ADLinearLayout_LayoutParams *self, ADViewGroup_LayoutParams *p);
 

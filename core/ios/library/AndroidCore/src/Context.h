@@ -76,6 +76,11 @@ inline IOSClass *ADContext_get_ACTIVITY_SERVICE(void);
 FOUNDATION_EXPORT IOSClass *ADContext_ACTIVITY_SERVICE;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADContext, ACTIVITY_SERVICE, IOSClass *)
 
+inline IOSClass *ADContext_get_WINDOW_SERVICE(void);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSClass *ADContext_WINDOW_SERVICE;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ADContext, WINDOW_SERVICE, IOSClass *)
+
 FOUNDATION_EXPORT void ADContext_init(ADContext *self);
 
 FOUNDATION_EXPORT ADContext *new_ADContext_init(void) NS_RETURNS_RETAINED;

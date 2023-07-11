@@ -25,6 +25,7 @@
 @class ASTableRowImpl_TableRowCommandParamsBuilder;
 @class ASTableRowImpl_TableRowParamsBean;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -70,6 +71,8 @@
 
 - (id)getPluginWithNSString:(NSString *)plugin;
 
+- (IOSClass *)getViewClass;
+
 - (void)invalidate;
 
 - (void)loadAttributesWithNSString:(NSString *)localName;
@@ -96,8 +99,7 @@
 
 - (void)setIdWithNSString:(NSString *)id_;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 @end
 
@@ -152,8 +154,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADRect;
+@class ADView;
 @class ASTableRowImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
@@ -171,11 +176,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
 
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
 
@@ -188,6 +199,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -195,6 +210,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -403,6 +421,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl_TableRowExt)
 
 - (ASTableRowImpl_TableRowCommandBuilder *)setMinWidthWithNSString:(NSString *)arg0;
 
+- (ASTableRowImpl_TableRowCommandBuilder *)setModelDescPathWithNSString:(NSString *)arg0;
+
 - (ASTableRowImpl_TableRowCommandBuilder *)setModelForWithNSString:(NSString *)arg0;
 
 - (ASTableRowImpl_TableRowCommandBuilder *)setModelIdPathWithNSString:(NSString *)arg0;
@@ -431,7 +451,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl_TableRowExt)
 
 - (ASTableRowImpl_TableRowCommandBuilder *)setOnLongClickWithNSString:(NSString *)arg0;
 
+- (ASTableRowImpl_TableRowCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASTableRowImpl_TableRowCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASTableRowImpl_TableRowCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASTableRowImpl_TableRowCommandBuilder *)setPaddingBottomWithNSString:(NSString *)arg0;
 
@@ -610,6 +634,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl_TableRowExt)
 - (ASTableRowImpl_TableRowCommandBuilder *)tryGetMinHeight;
 
 - (ASTableRowImpl_TableRowCommandBuilder *)tryGetMinWidth;
+
+- (ASTableRowImpl_TableRowCommandBuilder *)tryGetModelDescPath;
 
 - (ASTableRowImpl_TableRowCommandBuilder *)tryGetModelIdPath;
 

@@ -18,12 +18,13 @@
 
 @class IOSIntArray;
 @class IOSLongArray;
+@class IOSObjectArray;
 
 @interface ADContainerHelpers : NSObject
 
-#pragma mark Package-Private
+#pragma mark Public
 
-- (instancetype)initPackagePrivate;
+- (instancetype)init;
 
 + (jint)binarySearchWithIntArray:(IOSIntArray *)array
                          withInt:(jint)size
@@ -33,19 +34,47 @@
                           withInt:(jint)size
                          withLong:(jlong)value;
 
-// Disallowed inherited constructors, do not use.
++ (jboolean)equalWithId:(id)a
+                 withId:(id)b;
 
-- (instancetype)init NS_UNAVAILABLE;
++ (jint)idealByteArraySizeWithInt:(jint)need;
+
++ (jint)idealIntArraySizeWithInt:(jint)need;
+
++ (jint)idealLongArraySizeWithInt:(jint)need;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(ADContainerHelpers)
+J2OBJC_STATIC_INIT(ADContainerHelpers)
 
-FOUNDATION_EXPORT void ADContainerHelpers_initPackagePrivate(ADContainerHelpers *self);
+inline IOSIntArray *ADContainerHelpers_get_EMPTY_INTS(void);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSIntArray *ADContainerHelpers_EMPTY_INTS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ADContainerHelpers, EMPTY_INTS, IOSIntArray *)
 
-FOUNDATION_EXPORT ADContainerHelpers *new_ADContainerHelpers_initPackagePrivate(void) NS_RETURNS_RETAINED;
+inline IOSLongArray *ADContainerHelpers_get_EMPTY_LONGS(void);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSLongArray *ADContainerHelpers_EMPTY_LONGS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ADContainerHelpers, EMPTY_LONGS, IOSLongArray *)
 
-FOUNDATION_EXPORT ADContainerHelpers *create_ADContainerHelpers_initPackagePrivate(void);
+inline IOSObjectArray *ADContainerHelpers_get_EMPTY_OBJECTS(void);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *ADContainerHelpers_EMPTY_OBJECTS;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ADContainerHelpers, EMPTY_OBJECTS, IOSObjectArray *)
+
+FOUNDATION_EXPORT void ADContainerHelpers_init(ADContainerHelpers *self);
+
+FOUNDATION_EXPORT ADContainerHelpers *new_ADContainerHelpers_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ADContainerHelpers *create_ADContainerHelpers_init(void);
+
+FOUNDATION_EXPORT jint ADContainerHelpers_idealIntArraySizeWithInt_(jint need);
+
+FOUNDATION_EXPORT jint ADContainerHelpers_idealLongArraySizeWithInt_(jint need);
+
+FOUNDATION_EXPORT jint ADContainerHelpers_idealByteArraySizeWithInt_(jint need);
+
+FOUNDATION_EXPORT jboolean ADContainerHelpers_equalWithId_withId_(id a, id b);
 
 FOUNDATION_EXPORT jint ADContainerHelpers_binarySearchWithIntArray_withInt_withInt_(IOSIntArray *array, jint size, jint value);
 

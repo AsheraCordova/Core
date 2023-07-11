@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\LayoutPlugin.java
 //
 
+#include "AutoCompleteTextViewImpl.h"
 #include "ButtonImpl.h"
 #include "CheckBoxImpl.h"
 #include "ChronometerImpl.h"
@@ -19,6 +20,7 @@
 #include "ListViewImpl.h"
 #include "ModelImpl.h"
 #include "MultiSelectionSpinnerImpl.h"
+#include "PopupWindowImpl.h"
 #include "ProgressBarImpl.h"
 #include "RadioButtonImpl.h"
 #include "RadioGroupImpl.h"
@@ -114,6 +116,8 @@ void ASLayoutPlugin_initPlugin() {
   ASWidgetFactory_register__WithASIWidget_(new_ASWebViewImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASProgressBarImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASUIProgressViewImpl_init());
+  ASWidgetFactory_register__WithASIWidget_(new_ASPopupWindowImpl_init());
+  ASWidgetFactory_register__WithASIWidget_(new_ASAutoCompleteTextViewImpl_init());
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASViewGroupImpl_ClipPaddingMaskCommand_initWithNSString_(@"clipToPadding"));
 }
 

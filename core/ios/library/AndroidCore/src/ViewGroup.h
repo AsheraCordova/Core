@@ -30,6 +30,7 @@
 @class ADRect;
 @class ADViewGroup_LayoutParams;
 @class ADViewGroup_LayoutTransition;
+@class ADView_AttachInfo;
 @class IOSIntArray;
 @protocol ADViewGroup_OnHierarchyChangeListener;
 
@@ -102,6 +103,12 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 - (jboolean)isChangingLayout;
 
 - (void)layoutChangeWithADViewGroup:(ADViewGroup *)viewGroup;
+
+- (jint)measureHeightOfChildrenWithInt:(jint)widthMeasureSpec
+                               withInt:(jint)startPosition
+                               withInt:(jint)endPosition
+                               withInt:(jint)maxHeight
+                               withInt:(jint)disallowPartialChildPosition;
 
 - (void)offsetChildrenTopAndBottomWithInt:(jint)offset;
 
@@ -184,6 +191,9 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
        withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)layoutParams;
 
 #pragma mark Package-Private
+
+- (void)dispatchAttachedToWindowWithADView_AttachInfo:(ADView_AttachInfo *)info
+                                              withInt:(jint)visibility;
 
 - (void)dispatchViewAddedWithADView:(ADView *)child;
 

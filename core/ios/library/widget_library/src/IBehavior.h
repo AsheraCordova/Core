@@ -18,7 +18,7 @@
 
 @protocol ASIBehavior < JavaObject >
 
-- (id<ASIBehavior>)newInstance OBJC_METHOD_FAMILY_NONE;
+- (id)newInstance OBJC_METHOD_FAMILY_NONE;
 
 @end
 

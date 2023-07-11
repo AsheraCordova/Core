@@ -425,6 +425,7 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -835,6 +836,9 @@ export abstract class ViewImpl<T> {
 	@Type(() => CommandAttr)
 	@Expose({ name: "invalidateOnFrameChange" })
 	invalidateOnFrameChange!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onSwiped" })
+	onSwiped!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -986,6 +990,7 @@ export abstract class ViewImpl<T> {
 		this.customErrorMessageValues = undefined;
 		this.customErrorMessageKeys = undefined;
 		this.invalidateOnFrameChange = undefined;
+		this.onSwiped = undefined;
 		this.orderGet = 0;
 		this.orderSet = 0;
 		this.flush = false;
@@ -4425,6 +4430,20 @@ this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		retur
 		return this.thisPointer;
 	}
 		
+
+	public setOnSwiped(value : string) : T {
+		this.resetIfRequired();
+		if (this.onSwiped == null || this.onSwiped == undefined) {
+			this.onSwiped = new CommandAttr<string>();
+		}
+		
+		this.onSwiped.setSetter(true);
+		this.onSwiped.setValue(value);
+		this.orderSet++;
+		this.onSwiped.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
 	//end - body
 
 }
@@ -4541,6 +4560,11 @@ export interface OnTouchEvent extends Event{
 
         //event:MotionEvent;
         		eventInfo: MotionEvent;
+
+
+}
+export interface OnSwipedEvent extends Event{
+        //direction:String;
 
 
 }

@@ -20,15 +20,18 @@
 #define INCLUDE_ASBaseHasWidgets 1
 #include "BaseHasWidgets.h"
 
+@class ASListViewImpl_ListAdapter;
 @class ASListViewImpl_ListViewBean;
 @class ASListViewImpl_ListViewCommandBuilder;
 @class ASListViewImpl_ListViewCommandParamsBuilder;
 @class ASListViewImpl_ListViewParamsBean;
 @class ASLoopParam;
 @class ASWidgetAttribute;
+@class IOSClass;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
+@protocol JavaUtilList;
 @protocol JavaUtilMap;
 
 @interface ASListViewImpl : ASBaseHasWidgets
@@ -89,6 +92,8 @@
 - (id)getChildAttributeWithASIWidget:(id<ASIWidget>)w
                withASWidgetAttribute:(ASWidgetAttribute *)key;
 
+- (id<JavaUtilList>)getData;
+
 - (id)getDragInteractionEnabled;
 
 - (id)getEstimatedRowHeight;
@@ -110,6 +115,8 @@
 - (id)getIsEditing;
 
 - (id)getIsPrefetchingEnabled;
+
+- (ASListViewImpl_ListAdapter *)getListAdapter;
 
 - (id)getListSelector;
 
@@ -146,6 +153,8 @@
 - (id)getSelectionFollowsFocus;
 
 - (id)getSeparatorColor;
+
+- (IOSClass *)getViewClass;
 
 - (void)invalidate;
 
@@ -226,6 +235,8 @@
 - (void)setIsPrefetchingEnabledWithId:(id)nativeWidget
                                withId:(id)value;
 
+- (void)setOnItemClickWithId:(id)objValue;
+
 - (void)setRemembersLastFocusedIndexPathWithId:(id)nativeWidget
                                         withId:(id)value;
 
@@ -259,8 +270,7 @@
 - (void)setSeparatorColorWithId:(id)nativeWidget
                          withId:(id)value;
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height;
+- (void)setVisibleWithBoolean:(jboolean)b;
 
 - (void)updateModelToEventMapWithJavaUtilMap:(id<JavaUtilMap>)eventMap
                                 withNSString:(NSString *)eventType
@@ -443,8 +453,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 #define INCLUDE_ASIMaxDimension 1
 #include "IMaxDimension.h"
 
+@class ADRect;
+@class ADView;
 @class ASListViewImpl;
 @class ASWidgetAttribute;
+@class IOSIntArray;
 @class IOSObjectArray;
 @protocol ASIWidget;
 @protocol JavaUtilList;
@@ -462,13 +475,25 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 
 - (id)getAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
+
 - (jint)getMaxHeight;
 
 - (jint)getMaxWidth;
 
 - (id<JavaUtilList>)getMethods;
 
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
 - (void)initialized OBJC_METHOD_FAMILY_NONE;
+
+- (jint)measureHeightOfChildrenWithInt:(jint)widthMeasureSpec
+                               withInt:(jint)startPosition
+                               withInt:(jint)endPosition
+                               withInt:(jint)maxHeight
+                               withInt:(jint)disallowPartialChildPosition;
 
 - (id<ASILifeCycleDecorator>)newInstanceWithASIWidget:(id<ASIWidget>)widget OBJC_METHOD_FAMILY_NONE;
 
@@ -479,6 +504,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 - (void)onMeasureWithInt:(jint)widthMeasureSpec
                  withInt:(jint)heightMeasureSpec;
 
+- (void)remeasure;
+
+- (void)removeFromParent;
+
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute
                              withNSString:(NSString *)strValue
                                    withId:(id)objValue;
@@ -486,6 +515,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 - (void)setMaxHeightWithInt:(jint)height;
 
 - (void)setMaxWidthWithInt:(jint)width;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setVisibilityWithInt:(jint)visibility;
 
@@ -525,17 +557,26 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListViewExt)
 #define INCLUDE_ADBaseAdapter 1
 #include "BaseAdapter.h"
 
+#define RESTRICT_Filterable 1
+#define INCLUDE_ADFilterable 1
+#include "Filterable.h"
+
+@class ADFilter;
 @class ADView;
 @class ADViewGroup;
 @class ASListViewImpl;
 
-@interface ASListViewImpl_ListAdapter : ADBaseAdapter
+@interface ASListViewImpl_ListAdapter : ADBaseAdapter < ADFilterable >
 
 #pragma mark Public
 
 - (instancetype)initWithASListViewImpl:(ASListViewImpl *)outer$;
 
+- (void)dofilterSyncWithNSString:(NSString *)text;
+
 - (jint)getCount;
+
+- (ADFilter *)getFilter;
 
 - (id)getItemWithInt:(jint)position;
 
@@ -891,6 +932,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
 - (ASListViewImpl_ListViewCommandBuilder *)setMinWidthWithNSString:(NSString *)arg0;
 
+- (ASListViewImpl_ListViewCommandBuilder *)setModelDescPathWithNSString:(NSString *)arg0;
+
 - (ASListViewImpl_ListViewCommandBuilder *)setModelForWithNSString:(NSString *)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setModelIdPathWithNSString:(NSString *)arg0;
@@ -925,7 +968,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
 - (ASListViewImpl_ListViewCommandBuilder *)setOnScrollChangeWithNSString:(NSString *)value;
 
+- (ASListViewImpl_ListViewCommandBuilder *)setOnSwipedWithNSString:(NSString *)arg0;
+
 - (ASListViewImpl_ListViewCommandBuilder *)setOnTouchWithNSString:(NSString *)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setPaddingBottomWithNSString:(NSString *)arg0;
 
@@ -1174,6 +1221,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetMinHeight;
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetMinWidth;
+
+- (ASListViewImpl_ListViewCommandBuilder *)tryGetModelDescPath;
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetModelIdPath;
 

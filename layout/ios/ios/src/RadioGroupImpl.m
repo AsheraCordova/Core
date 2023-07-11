@@ -13,6 +13,7 @@
 #include "EventCommandFactory.h"
 #include "EventExpressionParser.h"
 #include "FormElement.h"
+#include "HasWidgets.h"
 #include "IActivity.h"
 #include "IAttributable.h"
 #include "IFragment.h"
@@ -20,6 +21,7 @@
 #include "IListener.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
+#include "IOSPrimitiveArray.h"
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
 #include "IdGenerator.h"
@@ -31,6 +33,7 @@
 #include "PluginInvoker.h"
 #include "RadioGroup.h"
 #include "RadioGroupImpl.h"
+#include "Rect.h"
 #include "View.h"
 #include "ViewGroup.h"
 #include "ViewGroupImpl.h"
@@ -174,15 +177,18 @@ J2OBJC_FIELD_SETTER(ASRadioGroupImpl_Divider, mapping_, id<JavaUtilMap>)
   ASOnLayoutEvent *onLayoutEvent_;
   jint mMaxWidth_;
   jint mMaxHeight_;
+  id<JavaUtilMap> templates_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(ASRadioGroupImpl_RadioGroupExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASRadioGroupImpl_RadioGroupExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASRadioGroupImpl_RadioGroupExt, templates_, id<JavaUtilMap>)
 
-@interface ASRadioGroupImpl_LLCanvas : NSObject < ADCanvas > {
+@interface ASRadioGroupImpl_CanvasImpl : NSObject < ADCanvas > {
  @public
+  jboolean canvasReset_;
   id<JavaUtilList> imageViews_;
   __unsafe_unretained id<ASIWidget> widget_;
 }
@@ -197,17 +203,17 @@ J2OBJC_FIELD_SETTER(ASRadioGroupImpl_RadioGroupExt, onLayoutEvent_, ASOnLayoutEv
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(ASRadioGroupImpl_LLCanvas)
+J2OBJC_EMPTY_STATIC_INIT(ASRadioGroupImpl_CanvasImpl)
 
-J2OBJC_FIELD_SETTER(ASRadioGroupImpl_LLCanvas, imageViews_, id<JavaUtilList>)
+J2OBJC_FIELD_SETTER(ASRadioGroupImpl_CanvasImpl, imageViews_, id<JavaUtilList>)
 
-__attribute__((unused)) static void ASRadioGroupImpl_LLCanvas_initWithASIWidget_(ASRadioGroupImpl_LLCanvas *self, id<ASIWidget> widget);
+__attribute__((unused)) static void ASRadioGroupImpl_CanvasImpl_initWithASIWidget_(ASRadioGroupImpl_CanvasImpl *self, id<ASIWidget> widget);
 
-__attribute__((unused)) static ASRadioGroupImpl_LLCanvas *new_ASRadioGroupImpl_LLCanvas_initWithASIWidget_(id<ASIWidget> widget) NS_RETURNS_RETAINED;
+__attribute__((unused)) static ASRadioGroupImpl_CanvasImpl *new_ASRadioGroupImpl_CanvasImpl_initWithASIWidget_(id<ASIWidget> widget) NS_RETURNS_RETAINED;
 
-__attribute__((unused)) static ASRadioGroupImpl_LLCanvas *create_ASRadioGroupImpl_LLCanvas_initWithASIWidget_(id<ASIWidget> widget);
+__attribute__((unused)) static ASRadioGroupImpl_CanvasImpl *create_ASRadioGroupImpl_CanvasImpl_initWithASIWidget_(id<ASIWidget> widget);
 
-J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_LLCanvas)
+J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_CanvasImpl)
 
 @interface ASRadioGroupImpl_OnHierarchyChangeListener : NSObject < ADViewGroup_OnHierarchyChangeListener, ASIListener > {
  @public
@@ -400,7 +406,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id<ASIWidget>)newInstance {
-  return new_ASRadioGroupImpl_init();
+  return new_ASRadioGroupImpl_initWithNSString_withNSString_(groupName_, localName_);
 }
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
@@ -517,9 +523,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
-  [((ASRadioGroupImpl_RadioGroupExt *) nil_chk(((ASRadioGroupImpl_RadioGroupExt *) cast_chk(radioGroup_, [ASRadioGroupImpl_RadioGroupExt class])))) updateMeasuredDimensionWithInt:width withInt:height];
+- (IOSClass *)getViewClass {
+  return ASRadioGroupImpl_RadioGroupExt_class_();
 }
 
 - (void)setAttributeWithASWidgetAttribute:(ASWidgetAttribute *)key
@@ -783,6 +788,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
+- (void)setVisibleWithBoolean:(jboolean)b {
+  [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
+}
+
 - (id)getPluginWithNSString:(NSString *)plugin {
   return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
 }
@@ -856,35 +865,36 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LADLinearLayout_LayoutParams;", 0x2, 13, 12, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 18, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 20, 21, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 24, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 25, 26, -1, 27, -1, -1 },
+    { NULL, "Z", 0x101, 22, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 23, 24, -1, 25, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 29, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 30, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 26, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 28, 27, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 31, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 29, 27, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 32, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 34, 29, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 35, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 30, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 32, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 33, 31, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 36, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 37, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 34, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 35, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 36, 37, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 38, 1, -1, -1, -1, -1 },
     { NULL, "LASRadioGroupImpl_RadioGroupBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRadioGroupImpl_RadioGroupCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRadioGroupImpl_RadioGroupParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRadioGroupImpl_RadioGroupCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 40, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 39, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 40, 27, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -908,7 +918,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[12].selector = @selector(getLayoutParamsWithADView:);
   methods[13].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
   methods[14].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
-  methods[15].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
+  methods[15].selector = @selector(getViewClass);
   methods[16].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
   methods[17].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
   methods[18].selector = @selector(asNativeWidget);
@@ -930,17 +940,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[34].selector = @selector(resetError);
   methods[35].selector = @selector(showErrorWithNSString:);
   methods[36].selector = @selector(setIdWithNSString:);
-  methods[37].selector = @selector(getPluginWithNSString:);
-  methods[38].selector = @selector(getBean);
-  methods[39].selector = @selector(getBuilder);
-  methods[40].selector = @selector(getParamsBean);
-  methods[41].selector = @selector(getParamsBuilder);
-  methods[42].selector = @selector(setupRadioGroupToggleWithASIsRadioButton:);
-  methods[43].selector = @selector(setErrorWithId:);
-  methods[44].selector = @selector(getTextEntered);
-  methods[45].selector = @selector(isViewVisible);
-  methods[46].selector = @selector(focus);
-  methods[47].selector = @selector(setOnHierarchyChangeListenerWithADRadioGroup:withId:);
+  methods[37].selector = @selector(setVisibleWithBoolean:);
+  methods[38].selector = @selector(getPluginWithNSString:);
+  methods[39].selector = @selector(getBean);
+  methods[40].selector = @selector(getBuilder);
+  methods[41].selector = @selector(getParamsBean);
+  methods[42].selector = @selector(getParamsBuilder);
+  methods[43].selector = @selector(setupRadioGroupToggleWithASIsRadioButton:);
+  methods[44].selector = @selector(setErrorWithId:);
+  methods[45].selector = @selector(getTextEntered);
+  methods[46].selector = @selector(isViewVisible);
+  methods[47].selector = @selector(focus);
+  methods[48].selector = @selector(setOnHierarchyChangeListenerWithADRadioGroup:withId:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -955,8 +966,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "paramsBuilder_", "LASRadioGroupImpl_RadioGroupCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "paramsBean_", "LASRadioGroupImpl_RadioGroupParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "updateMeasuredDimension", "II", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setDividerPadding", "LNSObject;", "setShowDividers", "setChecked", "toggleSelection", "LASIsRadioButton;", "setOnCheckedChange", "handleRadioButtonChange", "showError", "setId", "getPlugin", "setupRadioGroupToggle", "setError", "setOnHierarchyChangeListener", "LADRadioGroup;LNSObject;", &ASRadioGroupImpl_LOCAL_NAME, &ASRadioGroupImpl_GROUP_NAME, "LASRadioGroupImpl_Orientation;LASRadioGroupImpl_Divider;LASRadioGroupImpl_RadioGroupExt;LASRadioGroupImpl_LLCanvas;LASRadioGroupImpl_OnHierarchyChangeListener;LASRadioGroupImpl_OnCheckedChangeListener;LASRadioGroupImpl_RadioGroupCommandBuilder;LASRadioGroupImpl_RadioGroupBean;LASRadioGroupImpl_RadioGroupParamsBean;LASRadioGroupImpl_RadioGroupCommandParamsBuilder;LASRadioGroupImpl_RadioGroupSelectionListener;" };
-  static const J2ObjcClassInfo _ASRadioGroupImpl = { "RadioGroupImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 48, 11, -1, 45, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setDividerPadding", "LNSObject;", "setShowDividers", "setChecked", "toggleSelection", "LASIsRadioButton;", "setOnCheckedChange", "handleRadioButtonChange", "showError", "setId", "setVisible", "Z", "getPlugin", "setupRadioGroupToggle", "setError", "setOnHierarchyChangeListener", "LADRadioGroup;LNSObject;", &ASRadioGroupImpl_LOCAL_NAME, &ASRadioGroupImpl_GROUP_NAME, "LASRadioGroupImpl_Orientation;LASRadioGroupImpl_Divider;LASRadioGroupImpl_RadioGroupExt;LASRadioGroupImpl_CanvasImpl;LASRadioGroupImpl_OnHierarchyChangeListener;LASRadioGroupImpl_OnCheckedChangeListener;LASRadioGroupImpl_RadioGroupCommandBuilder;LASRadioGroupImpl_RadioGroupBean;LASRadioGroupImpl_RadioGroupParamsBean;LASRadioGroupImpl_RadioGroupCommandParamsBuilder;LASRadioGroupImpl_RadioGroupSelectionListener;" };
+  static const J2ObjcClassInfo _ASRadioGroupImpl = { "RadioGroupImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 49, 11, -1, 45, -1, -1, -1 };
   return &_ASRadioGroupImpl;
 }
 
@@ -1020,7 +1031,7 @@ ADLinearLayout_LayoutParams *ASRadioGroupImpl_getLayoutParamsWithADView_(ASRadio
 }
 
 void ASRadioGroupImpl_createCanvas(ASRadioGroupImpl *self) {
-  self->canvas_ = new_ASRadioGroupImpl_LLCanvas_initWithASIWidget_(self);
+  self->canvas_ = new_ASRadioGroupImpl_CanvasImpl_initWithASIWidget_(self);
 }
 
 void ASRadioGroupImpl_setDividerPaddingWithId_(ASRadioGroupImpl *self, id objValue) {
@@ -1346,6 +1357,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
   ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
 }
 
+- (ADView *)inflateViewWithNSString:(NSString *)layout {
+  if (templates_ == nil) {
+    templates_ = new_JavaUtilHashMap_init();
+  }
+  id<ASIWidget> template_ = [templates_ getWithId:layout];
+  if (template_ == nil) {
+    template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
+    (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
+  }
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+}
+
+- (void)remeasure {
+  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+}
+
+- (void)removeFromParent {
+  [((id<ASHasWidgets>) nil_chk([this$0_ getParent])) removeWithASIWidget:this$0_];
+}
+
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation {
+  *IOSIntArray_GetRef(nil_chk(appScreenLocation), 0) = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  *IOSIntArray_GetRef(appScreenLocation, 1) = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+}
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame {
+  ((ADRect *) nil_chk(displayFrame))->left_ = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->top_ = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->right_ = displayFrame->left_ + [self getWidth];
+  displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
+}
+
 - (void)offsetTopAndBottomWithInt:(jint)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
@@ -1354,6 +1398,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
 - (void)offsetLeftAndRightWithInt:(jint)offset {
   [super offsetLeftAndRightWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
+}
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value {
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
 }
 
 - (void)setVisibilityWithInt:(jint)visibility {
@@ -1383,9 +1432,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 1, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 25, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 28, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1405,9 +1460,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
   methods[12].selector = @selector(initialized);
   methods[13].selector = @selector(getAttributeWithASWidgetAttribute:);
   methods[14].selector = @selector(drawableStateChanged);
-  methods[15].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[16].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[17].selector = @selector(setVisibilityWithInt:);
+  methods[15].selector = @selector(inflateViewWithNSString:);
+  methods[16].selector = @selector(remeasure);
+  methods[17].selector = @selector(removeFromParent);
+  methods[18].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[19].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[20].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[21].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[22].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[23].selector = @selector(setVisibilityWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASRadioGroupImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -1415,9 +1476,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_Divider)
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 29, -1 },
   };
-  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASRadioGroupImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "offsetTopAndBottom", "offsetLeftAndRight", "setVisibility" };
-  static const J2ObjcClassInfo _ASRadioGroupImpl_RadioGroupExt = { "RadioGroupExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 18, 5, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASRadioGroupImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASRadioGroupImpl_RadioGroupExt = { "RadioGroupExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 24, 6, 3, -1, -1, -1, -1 };
   return &_ASRadioGroupImpl_RadioGroupExt;
 }
 
@@ -1442,14 +1504,19 @@ ASRadioGroupImpl_RadioGroupExt *create_ASRadioGroupImpl_RadioGroupExt_initWithAS
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_RadioGroupExt)
 
-@implementation ASRadioGroupImpl_LLCanvas
+@implementation ASRadioGroupImpl_CanvasImpl
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget {
-  ASRadioGroupImpl_LLCanvas_initWithASIWidget_(self, widget);
+  ASRadioGroupImpl_CanvasImpl_initWithASIWidget_(self, widget);
   return self;
 }
 
 - (void)drawWithADDrawable:(ADDrawable *)mDivider {
+  for (id __strong divider in nil_chk(imageViews_)) {
+    if (ASViewImpl_getXWithId_(divider) == [((ADDrawable *) nil_chk(mDivider)) getLeft] && ASViewImpl_getYWithId_(divider) == [mDivider getTop]) {
+      return;
+    }
+  }
   if ([((ADDrawable *) nil_chk(mDivider)) getDrawable] != nil) {
     id imageView = [self nativeCreateImageViewWithId:[mDivider getDrawable]];
     ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(imageView, [mDivider getLeft], [mDivider getTop], [mDivider getRight], [mDivider getBottom]);
@@ -1459,10 +1526,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_RadioGroupExt)
 }
 
 - (void)reset {
-  for (id __strong imageView in nil_chk(imageViews_)) {
-    ASViewGroupImpl_removeViewWithId_(imageView);
+  if (canvasReset_) {
+    for (id __strong imageView in nil_chk(imageViews_)) {
+      ASViewGroupImpl_removeViewWithId_(imageView);
+    }
+    [imageViews_ clear];
   }
-  [imageViews_ clear];
 }
 
 - (id)nativeCreateImageViewWithId:(id)image {
@@ -1482,7 +1551,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_RadioGroupExt)
   ADCanvas_translateWithInt_withInt_(self, arg0, arg1);
 }
 
-- (void)__javaClone:(ASRadioGroupImpl_LLCanvas *)original {
+- (void)__javaClone:(ASRadioGroupImpl_CanvasImpl *)original {
   [super __javaClone:original];
   JreRelease(widget_);
 }
@@ -1503,31 +1572,33 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_RadioGroupExt)
   methods[3].selector = @selector(nativeCreateImageViewWithId:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
+    { "canvasReset_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "imageViews_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 5, -1 },
     { "widget_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "LASIWidget;", "draw", "LADDrawable;", "nativeCreateImageView", "LNSObject;", "Ljava/util/List<Ljava/lang/Object;>;", "LASRadioGroupImpl;" };
-  static const J2ObjcClassInfo _ASRadioGroupImpl_LLCanvas = { "LLCanvas", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1a, 4, 2, 6, -1, -1, -1, -1 };
-  return &_ASRadioGroupImpl_LLCanvas;
+  static const J2ObjcClassInfo _ASRadioGroupImpl_CanvasImpl = { "CanvasImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1a, 4, 3, 6, -1, -1, -1, -1 };
+  return &_ASRadioGroupImpl_CanvasImpl;
 }
 
 @end
 
-void ASRadioGroupImpl_LLCanvas_initWithASIWidget_(ASRadioGroupImpl_LLCanvas *self, id<ASIWidget> widget) {
+void ASRadioGroupImpl_CanvasImpl_initWithASIWidget_(ASRadioGroupImpl_CanvasImpl *self, id<ASIWidget> widget) {
   NSObject_init(self);
+  self->canvasReset_ = true;
   self->imageViews_ = new_JavaUtilArrayList_init();
   self->widget_ = widget;
 }
 
-ASRadioGroupImpl_LLCanvas *new_ASRadioGroupImpl_LLCanvas_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_NEW_IMPL(ASRadioGroupImpl_LLCanvas, initWithASIWidget_, widget)
+ASRadioGroupImpl_CanvasImpl *new_ASRadioGroupImpl_CanvasImpl_initWithASIWidget_(id<ASIWidget> widget) {
+  J2OBJC_NEW_IMPL(ASRadioGroupImpl_CanvasImpl, initWithASIWidget_, widget)
 }
 
-ASRadioGroupImpl_LLCanvas *create_ASRadioGroupImpl_LLCanvas_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_CREATE_IMPL(ASRadioGroupImpl_LLCanvas, initWithASIWidget_, widget)
+ASRadioGroupImpl_CanvasImpl *create_ASRadioGroupImpl_CanvasImpl_initWithASIWidget_(id<ASIWidget> widget) {
+  J2OBJC_CREATE_IMPL(ASRadioGroupImpl_CanvasImpl, initWithASIWidget_, widget)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_LLCanvas)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_CanvasImpl)
 
 @implementation ASRadioGroupImpl_OnHierarchyChangeListener
 

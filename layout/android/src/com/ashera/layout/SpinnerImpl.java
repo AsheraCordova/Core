@@ -123,19 +123,6 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		ViewGroupModelImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("dropDownHorizontalOffset").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("dropDownVerticalOffset").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("dropDownWidth").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("prompt").withType("resourcestring"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("int"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onItemSelected").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionTextPath").withType("string").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionValuePath").withType("string").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("listitem").withType("template"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("values").withType("array").withArrayType("resourcestring").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectedValue").withType("object"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hintTextFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawablePadding").withType("dimension").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
@@ -158,11 +145,30 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("Spinner.drawableTintMode").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hint").withType("resourcestring").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHint").withType("colorstate").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("dropDownHorizontalOffset").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("dropDownVerticalOffset").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("dropDownWidth").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("prompt").withType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onItemSelected").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionTextPath").withType("string").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionValuePath").withType("string").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("listitem").withType("template"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("values").withType("array").withArrayType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectedValue").withType("object"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hintTextFormat").withType("resourcestring").withOrder(-1));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("spinnerMode").withType("spinnerMode"));
 	}
 	
 	public SpinnerImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
+	}
+	public  SpinnerImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  SpinnerImpl(String groupName, String localname) {
+		super(groupName, localname);
 	}
 
 		
@@ -197,11 +203,6 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
 	    }
 		public SpinnerExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 			public SpinnerExt(Context context, int mode) {
@@ -316,14 +317,14 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(SpinnerImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((SpinnerExt) appCompatSpinner).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return SpinnerExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new SpinnerImpl();
+		return new SpinnerImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -367,136 +368,6 @@ Context context = (Context) fragment.getRootActivity();
 		ViewGroupModelImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "dropDownHorizontalOffset": {
-				
-
-
-	appCompatSpinner.setDropDownHorizontalOffset((int)objValue);
-
-
-
-			}
-			break;
-			case "dropDownVerticalOffset": {
-				
-
-
-	appCompatSpinner.setDropDownVerticalOffset((int)objValue);
-
-
-
-			}
-			break;
-			case "dropDownWidth": {
-				
-
-
-	appCompatSpinner.setDropDownWidth((int)objValue);
-
-
-
-			}
-			break;
-			case "prompt": {
-				
-
-
-	appCompatSpinner.setPrompt((CharSequence)objValue);
-
-
-
-			}
-			break;
-			case "selection": {
-				
-
-
-	appCompatSpinner.setSelection((int)objValue);
-
-
-
-			}
-			break;
-			case "entries": {
-				
-
-
-		setEntries(objValue);
-
-
-
-			}
-			break;
-			case "onItemSelected": {
-				
-
-
-		if (objValue instanceof String) {appCompatSpinner.setOnItemSelectedListener(new OnItemSelectedListener(this, strValue, "onItemSelected"));} else {appCompatSpinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) objValue);}
-
-
-
-			}
-			break;
-			case "modelOptionTextPath": {
-				
-
-
-		setModelOptionTextPath(objValue);
-
-
-
-			}
-			break;
-			case "modelOptionValuePath": {
-				
-
-
-		setModelOptionValuePath(objValue);
-
-
-
-			}
-			break;
-			case "listitem": {
-				
-
-
-		 addTemplate(objValue);
-
-
-
-			}
-			break;
-			case "values": {
-				
-
-
-		setValues(objValue);
-
-
-
-			}
-			break;
-			case "selectedValue": {
-				
-
-
-		setSelectedValue(objValue);
-
-
-
-			}
-			break;
-			case "hintTextFormat": {
-				
-
-
-		setHintTextFormat(objValue);
-
-
-
-			}
-			break;
 			case "drawablePadding": {
 				
 
@@ -687,6 +558,136 @@ Context context = (Context) fragment.getRootActivity();
 
 			}
 			break;
+			case "dropDownHorizontalOffset": {
+				
+
+
+	appCompatSpinner.setDropDownHorizontalOffset((int)objValue);
+
+
+
+			}
+			break;
+			case "dropDownVerticalOffset": {
+				
+
+
+	appCompatSpinner.setDropDownVerticalOffset((int)objValue);
+
+
+
+			}
+			break;
+			case "dropDownWidth": {
+				
+
+
+	appCompatSpinner.setDropDownWidth((int)objValue);
+
+
+
+			}
+			break;
+			case "prompt": {
+				
+
+
+	appCompatSpinner.setPrompt((CharSequence)objValue);
+
+
+
+			}
+			break;
+			case "selection": {
+				
+
+
+	appCompatSpinner.setSelection((int)objValue);
+
+
+
+			}
+			break;
+			case "entries": {
+				
+
+
+		setEntries(objValue);
+
+
+
+			}
+			break;
+			case "onItemSelected": {
+				
+
+
+		if (objValue instanceof String) {appCompatSpinner.setOnItemSelectedListener(new OnItemSelectedListener(this, strValue, "onItemSelected"));} else {appCompatSpinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) objValue);}
+
+
+
+			}
+			break;
+			case "modelOptionTextPath": {
+				
+
+
+		setModelOptionTextPath(objValue);
+
+
+
+			}
+			break;
+			case "modelOptionValuePath": {
+				
+
+
+		setModelOptionValuePath(objValue);
+
+
+
+			}
+			break;
+			case "listitem": {
+				
+
+
+		 addTemplate(objValue);
+
+
+
+			}
+			break;
+			case "values": {
+				
+
+
+		setValues(objValue);
+
+
+
+			}
+			break;
+			case "selectedValue": {
+				
+
+
+		setSelectedValue(objValue);
+
+
+
+			}
+			break;
+			case "hintTextFormat": {
+				
+
+
+		setHintTextFormat(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -702,14 +703,6 @@ Context context = (Context) fragment.getRootActivity();
 			return attributeValue;
 		}
 		switch (key.getAttributeName()) {
-			case "dropDownHorizontalOffset": {
-return appCompatSpinner.getDropDownHorizontalOffset();				}
-			case "dropDownVerticalOffset": {
-return appCompatSpinner.getDropDownVerticalOffset();				}
-			case "dropDownWidth": {
-return appCompatSpinner.getDropDownWidth();				}
-			case "selectedValue": {
-return getSelectedValue();				}
 			case "drawablePadding": {
 if (appCompatTextView == null) return null; return appCompatTextView.getCompoundDrawablePadding();				}
 			case "gravity": {
@@ -720,6 +713,14 @@ if (appCompatTextView == null) return null; return appCompatTextView.getTextColo
 if (appCompatTextView == null) return null; return appCompatTextView.getTextSize();				}
 			case "hint": {
 if (appCompatTextView == null) return null; return appCompatTextView.getHint();				}
+			case "dropDownHorizontalOffset": {
+return appCompatSpinner.getDropDownHorizontalOffset();				}
+			case "dropDownVerticalOffset": {
+return appCompatSpinner.getDropDownVerticalOffset();				}
+			case "dropDownWidth": {
+return appCompatSpinner.getDropDownWidth();				}
+			case "selectedValue": {
+return getSelectedValue();				}
 		}
 		
 		return null;
@@ -1175,154 +1176,6 @@ public  class SpinnerCommandBuilder extends com.ashera.layout.ViewImpl.ViewComma
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public SpinnerCommandBuilder tryGetDropDownHorizontalOffset() {
-	Map<String, Object> attrs = initCommand("dropDownHorizontalOffset");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getDropDownHorizontalOffset() {
-	Map<String, Object> attrs = initCommand("dropDownHorizontalOffset");
-	return attrs.get("commandReturnValue");
-}
-public SpinnerCommandBuilder setDropDownHorizontalOffset(String value) {
-	Map<String, Object> attrs = initCommand("dropDownHorizontalOffset");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder tryGetDropDownVerticalOffset() {
-	Map<String, Object> attrs = initCommand("dropDownVerticalOffset");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getDropDownVerticalOffset() {
-	Map<String, Object> attrs = initCommand("dropDownVerticalOffset");
-	return attrs.get("commandReturnValue");
-}
-public SpinnerCommandBuilder setDropDownVerticalOffset(String value) {
-	Map<String, Object> attrs = initCommand("dropDownVerticalOffset");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder tryGetDropDownWidth() {
-	Map<String, Object> attrs = initCommand("dropDownWidth");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getDropDownWidth() {
-	Map<String, Object> attrs = initCommand("dropDownWidth");
-	return attrs.get("commandReturnValue");
-}
-public SpinnerCommandBuilder setDropDownWidth(String value) {
-	Map<String, Object> attrs = initCommand("dropDownWidth");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setPrompt(String value) {
-	Map<String, Object> attrs = initCommand("prompt");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setSelection(int value) {
-	Map<String, Object> attrs = initCommand("selection");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setEntries(String value) {
-	Map<String, Object> attrs = initCommand("entries");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setOnItemSelected(String value) {
-	Map<String, Object> attrs = initCommand("onItemSelected");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setModelOptionTextPath(String value) {
-	Map<String, Object> attrs = initCommand("modelOptionTextPath");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setModelOptionValuePath(String value) {
-	Map<String, Object> attrs = initCommand("modelOptionValuePath");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setListitem(String value) {
-	Map<String, Object> attrs = initCommand("listitem");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setValues(String value) {
-	Map<String, Object> attrs = initCommand("values");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder tryGetSelectedValue() {
-	Map<String, Object> attrs = initCommand("selectedValue");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getSelectedValue() {
-	Map<String, Object> attrs = initCommand("selectedValue");
-	return attrs.get("commandReturnValue");
-}
-public SpinnerCommandBuilder setSelectedValue(Object value) {
-	Map<String, Object> attrs = initCommand("selectedValue");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setHintTextFormat(String value) {
-	Map<String, Object> attrs = initCommand("hintTextFormat");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public SpinnerCommandBuilder tryGetDrawablePadding() {
 	Map<String, Object> attrs = initCommand("drawablePadding");
 	attrs.put("type", "attribute");
@@ -1530,75 +1383,159 @@ public SpinnerCommandBuilder setTextColorHint(String value) {
 
 	attrs.put("value", value);
 return this;}
+public SpinnerCommandBuilder tryGetDropDownHorizontalOffset() {
+	Map<String, Object> attrs = initCommand("dropDownHorizontalOffset");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getDropDownHorizontalOffset() {
+	Map<String, Object> attrs = initCommand("dropDownHorizontalOffset");
+	return attrs.get("commandReturnValue");
+}
+public SpinnerCommandBuilder setDropDownHorizontalOffset(String value) {
+	Map<String, Object> attrs = initCommand("dropDownHorizontalOffset");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder tryGetDropDownVerticalOffset() {
+	Map<String, Object> attrs = initCommand("dropDownVerticalOffset");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getDropDownVerticalOffset() {
+	Map<String, Object> attrs = initCommand("dropDownVerticalOffset");
+	return attrs.get("commandReturnValue");
+}
+public SpinnerCommandBuilder setDropDownVerticalOffset(String value) {
+	Map<String, Object> attrs = initCommand("dropDownVerticalOffset");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder tryGetDropDownWidth() {
+	Map<String, Object> attrs = initCommand("dropDownWidth");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getDropDownWidth() {
+	Map<String, Object> attrs = initCommand("dropDownWidth");
+	return attrs.get("commandReturnValue");
+}
+public SpinnerCommandBuilder setDropDownWidth(String value) {
+	Map<String, Object> attrs = initCommand("dropDownWidth");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setPrompt(String value) {
+	Map<String, Object> attrs = initCommand("prompt");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setSelection(int value) {
+	Map<String, Object> attrs = initCommand("selection");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setEntries(String value) {
+	Map<String, Object> attrs = initCommand("entries");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setOnItemSelected(String value) {
+	Map<String, Object> attrs = initCommand("onItemSelected");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setModelOptionTextPath(String value) {
+	Map<String, Object> attrs = initCommand("modelOptionTextPath");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setModelOptionValuePath(String value) {
+	Map<String, Object> attrs = initCommand("modelOptionValuePath");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setListitem(String value) {
+	Map<String, Object> attrs = initCommand("listitem");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setValues(String value) {
+	Map<String, Object> attrs = initCommand("values");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder tryGetSelectedValue() {
+	Map<String, Object> attrs = initCommand("selectedValue");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getSelectedValue() {
+	Map<String, Object> attrs = initCommand("selectedValue");
+	return attrs.get("commandReturnValue");
+}
+public SpinnerCommandBuilder setSelectedValue(Object value) {
+	Map<String, Object> attrs = initCommand("selectedValue");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setHintTextFormat(String value) {
+	Map<String, Object> attrs = initCommand("hintTextFormat");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class SpinnerBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public SpinnerBean() {
 			super(SpinnerImpl.this);
 		}
-public Object getDropDownHorizontalOffset() {
-	return getBuilder().reset().tryGetDropDownHorizontalOffset().execute(false).getDropDownHorizontalOffset(); 
-}
-public void setDropDownHorizontalOffset(String value) {
-	getBuilder().reset().setDropDownHorizontalOffset(value).execute(true);
-}
-
-public Object getDropDownVerticalOffset() {
-	return getBuilder().reset().tryGetDropDownVerticalOffset().execute(false).getDropDownVerticalOffset(); 
-}
-public void setDropDownVerticalOffset(String value) {
-	getBuilder().reset().setDropDownVerticalOffset(value).execute(true);
-}
-
-public Object getDropDownWidth() {
-	return getBuilder().reset().tryGetDropDownWidth().execute(false).getDropDownWidth(); 
-}
-public void setDropDownWidth(String value) {
-	getBuilder().reset().setDropDownWidth(value).execute(true);
-}
-
-public void setPrompt(String value) {
-	getBuilder().reset().setPrompt(value).execute(true);
-}
-
-public void setSelection(int value) {
-	getBuilder().reset().setSelection(value).execute(true);
-}
-
-public void setEntries(String value) {
-	getBuilder().reset().setEntries(value).execute(true);
-}
-
-public void setOnItemSelected(String value) {
-	getBuilder().reset().setOnItemSelected(value).execute(true);
-}
-
-public void setModelOptionTextPath(String value) {
-	getBuilder().reset().setModelOptionTextPath(value).execute(true);
-}
-
-public void setModelOptionValuePath(String value) {
-	getBuilder().reset().setModelOptionValuePath(value).execute(true);
-}
-
-public void setListitem(String value) {
-	getBuilder().reset().setListitem(value).execute(true);
-}
-
-public void setValues(String value) {
-	getBuilder().reset().setValues(value).execute(true);
-}
-
-public Object getSelectedValue() {
-	return getBuilder().reset().tryGetSelectedValue().execute(false).getSelectedValue(); 
-}
-public void setSelectedValue(Object value) {
-	getBuilder().reset().setSelectedValue(value).execute(true);
-}
-
-public void setHintTextFormat(String value) {
-	getBuilder().reset().setHintTextFormat(value).execute(true);
-}
-
 public Object getDrawablePadding() {
 	return getBuilder().reset().tryGetDrawablePadding().execute(false).getDrawablePadding(); 
 }
@@ -1688,6 +1625,70 @@ public void setHint(String value) {
 
 public void setTextColorHint(String value) {
 	getBuilder().reset().setTextColorHint(value).execute(true);
+}
+
+public Object getDropDownHorizontalOffset() {
+	return getBuilder().reset().tryGetDropDownHorizontalOffset().execute(false).getDropDownHorizontalOffset(); 
+}
+public void setDropDownHorizontalOffset(String value) {
+	getBuilder().reset().setDropDownHorizontalOffset(value).execute(true);
+}
+
+public Object getDropDownVerticalOffset() {
+	return getBuilder().reset().tryGetDropDownVerticalOffset().execute(false).getDropDownVerticalOffset(); 
+}
+public void setDropDownVerticalOffset(String value) {
+	getBuilder().reset().setDropDownVerticalOffset(value).execute(true);
+}
+
+public Object getDropDownWidth() {
+	return getBuilder().reset().tryGetDropDownWidth().execute(false).getDropDownWidth(); 
+}
+public void setDropDownWidth(String value) {
+	getBuilder().reset().setDropDownWidth(value).execute(true);
+}
+
+public void setPrompt(String value) {
+	getBuilder().reset().setPrompt(value).execute(true);
+}
+
+public void setSelection(int value) {
+	getBuilder().reset().setSelection(value).execute(true);
+}
+
+public void setEntries(String value) {
+	getBuilder().reset().setEntries(value).execute(true);
+}
+
+public void setOnItemSelected(String value) {
+	getBuilder().reset().setOnItemSelected(value).execute(true);
+}
+
+public void setModelOptionTextPath(String value) {
+	getBuilder().reset().setModelOptionTextPath(value).execute(true);
+}
+
+public void setModelOptionValuePath(String value) {
+	getBuilder().reset().setModelOptionValuePath(value).execute(true);
+}
+
+public void setListitem(String value) {
+	getBuilder().reset().setListitem(value).execute(true);
+}
+
+public void setValues(String value) {
+	getBuilder().reset().setValues(value).execute(true);
+}
+
+public Object getSelectedValue() {
+	return getBuilder().reset().tryGetSelectedValue().execute(false).getSelectedValue(); 
+}
+public void setSelectedValue(Object value) {
+	getBuilder().reset().setSelectedValue(value).execute(true);
+}
+
+public void setHintTextFormat(String value) {
+	getBuilder().reset().setHintTextFormat(value).execute(true);
 }
 
 }

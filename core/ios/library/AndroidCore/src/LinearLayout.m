@@ -1312,6 +1312,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLinearLayout)
   return self;
 }
 
+- (instancetype)initWithInt:(jint)width
+                    withInt:(jint)height
+                  withFloat:(jfloat)weight {
+  ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(self, width, height, weight);
+  return self;
+}
+
 - (instancetype)initWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
   ADLinearLayout_LayoutParams_initWithADViewGroup_LayoutParams_(self, p);
   return self;
@@ -1327,20 +1334,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLinearLayout)
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithInt:withInt:);
-  methods[1].selector = @selector(initWithADViewGroup_LayoutParams:);
-  methods[2].selector = @selector(initWithADLinearLayout_LayoutParams:);
+  methods[1].selector = @selector(initWithInt:withInt:withFloat:);
+  methods[2].selector = @selector(initWithADViewGroup_LayoutParams:);
+  methods[3].selector = @selector(initWithADLinearLayout_LayoutParams:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "weight_", "F", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
     { "gravity_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "II", "LADViewGroup_LayoutParams;", "LADLinearLayout_LayoutParams;", "LADLinearLayout;" };
-  static const J2ObjcClassInfo _ADLinearLayout_LayoutParams = { "LayoutParams", "r.android.widget", ptrTable, methods, fields, 7, 0x9, 3, 2, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "II", "IIF", "LADViewGroup_LayoutParams;", "LADLinearLayout_LayoutParams;", "LADLinearLayout;" };
+  static const J2ObjcClassInfo _ADLinearLayout_LayoutParams = { "LayoutParams", "r.android.widget", ptrTable, methods, fields, 7, 0x9, 4, 2, 4, -1, -1, -1, -1 };
   return &_ADLinearLayout_LayoutParams;
 }
 
@@ -1358,6 +1367,20 @@ ADLinearLayout_LayoutParams *new_ADLinearLayout_LayoutParams_initWithInt_withInt
 
 ADLinearLayout_LayoutParams *create_ADLinearLayout_LayoutParams_initWithInt_withInt_(jint width, jint height) {
   J2OBJC_CREATE_IMPL(ADLinearLayout_LayoutParams, initWithInt_withInt_, width, height)
+}
+
+void ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(ADLinearLayout_LayoutParams *self, jint width, jint height, jfloat weight) {
+  ADViewGroup_MarginLayoutParams_initWithInt_withInt_(self, width, height);
+  self->gravity_ = -1;
+  self->weight_ = weight;
+}
+
+ADLinearLayout_LayoutParams *new_ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(jint width, jint height, jfloat weight) {
+  J2OBJC_NEW_IMPL(ADLinearLayout_LayoutParams, initWithInt_withInt_withFloat_, width, height, weight)
+}
+
+ADLinearLayout_LayoutParams *create_ADLinearLayout_LayoutParams_initWithInt_withInt_withFloat_(jint width, jint height, jfloat weight) {
+  J2OBJC_CREATE_IMPL(ADLinearLayout_LayoutParams, initWithInt_withInt_withFloat_, width, height, weight)
 }
 
 void ADLinearLayout_LayoutParams_initWithADViewGroup_LayoutParams_(ADLinearLayout_LayoutParams *self, ADViewGroup_LayoutParams *p) {

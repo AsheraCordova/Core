@@ -122,14 +122,6 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 		ViewGroupModelImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("array").withArrayType("int"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onItemSelected").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionTextPath").withType("string").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionValuePath").withType("string").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("values").withType("array").withArrayType("resourcestring").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectedValues").withType("object"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hintTextFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawablePadding").withType("dimension").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
@@ -152,10 +144,24 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("com.ashera.layout.MultiSelectionSpinner.drawableTintMode").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hint").withType("resourcestring").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHint").withType("colorstate").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selection").withType("array").withArrayType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onItemSelected").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionTextPath").withType("string").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelOptionValuePath").withType("string").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("values").withType("array").withArrayType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectedValues").withType("object"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hintTextFormat").withType("resourcestring").withOrder(-1));
 	}
 	
 	public MultiSelectionSpinnerImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
+	}
+	public  MultiSelectionSpinnerImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  MultiSelectionSpinnerImpl(String groupName, String localname) {
+		super(groupName, localname);
 	}
 
 		
@@ -190,11 +196,6 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 	    }
 		public MultiSelectionSpinnerExt(Context context) {
 			super(context, MultiSelectionSpinnerImpl.this);
-			
-			
-			
-			
-			
 			
 		}
 			public MultiSelectionSpinnerExt(Context context, int mode) {
@@ -309,14 +310,14 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(MultiSelectionSpinnerImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((MultiSelectionSpinnerExt) multiSelectionSpinner).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return MultiSelectionSpinnerExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new MultiSelectionSpinnerImpl();
+		return new MultiSelectionSpinnerImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -360,86 +361,6 @@ Context context = (Context) fragment.getRootActivity();
 		ViewGroupModelImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "entries": {
-				
-
-
-		setEntries(objValue);
-
-
-
-			}
-			break;
-			case "selection": {
-				
-
-
-		setSelection(objValue);
-
-
-
-			}
-			break;
-			case "onItemSelected": {
-				
-
-
-		if (objValue instanceof String) {multiSelectionSpinner.setOnMultiItemSelectedListener(new OnMultiItemSelectedListener(this, strValue, "onItemSelected"));} else {multiSelectionSpinner.setOnMultiItemSelectedListener((MultiSelectionSpinner.OnMultiItemSelectedListener) objValue);}
-
-
-
-			}
-			break;
-			case "modelOptionTextPath": {
-				
-
-
-		setModelOptionTextPath(objValue);
-
-
-
-			}
-			break;
-			case "modelOptionValuePath": {
-				
-
-
-		setModelOptionValuePath(objValue);
-
-
-
-			}
-			break;
-			case "values": {
-				
-
-
-		setValues(objValue);
-
-
-
-			}
-			break;
-			case "selectedValues": {
-				
-
-
-		setSelectedValues(objValue);
-
-
-
-			}
-			break;
-			case "hintTextFormat": {
-				
-
-
-		setHintTextFormat(objValue);
-
-
-
-			}
-			break;
 			case "drawablePadding": {
 				
 
@@ -630,6 +551,86 @@ Context context = (Context) fragment.getRootActivity();
 
 			}
 			break;
+			case "entries": {
+				
+
+
+		setEntries(objValue);
+
+
+
+			}
+			break;
+			case "selection": {
+				
+
+
+		setSelection(objValue);
+
+
+
+			}
+			break;
+			case "onItemSelected": {
+				
+
+
+		if (objValue instanceof String) {multiSelectionSpinner.setOnMultiItemSelectedListener(new OnMultiItemSelectedListener(this, strValue, "onItemSelected"));} else {multiSelectionSpinner.setOnMultiItemSelectedListener((MultiSelectionSpinner.OnMultiItemSelectedListener) objValue);}
+
+
+
+			}
+			break;
+			case "modelOptionTextPath": {
+				
+
+
+		setModelOptionTextPath(objValue);
+
+
+
+			}
+			break;
+			case "modelOptionValuePath": {
+				
+
+
+		setModelOptionValuePath(objValue);
+
+
+
+			}
+			break;
+			case "values": {
+				
+
+
+		setValues(objValue);
+
+
+
+			}
+			break;
+			case "selectedValues": {
+				
+
+
+		setSelectedValues(objValue);
+
+
+
+			}
+			break;
+			case "hintTextFormat": {
+				
+
+
+		setHintTextFormat(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -645,8 +646,6 @@ Context context = (Context) fragment.getRootActivity();
 			return attributeValue;
 		}
 		switch (key.getAttributeName()) {
-			case "selectedValues": {
-return getSelectedValues();				}
 			case "drawablePadding": {
 if (appCompatTextView == null) return null; return appCompatTextView.getCompoundDrawablePadding();				}
 			case "gravity": {
@@ -657,6 +656,8 @@ if (appCompatTextView == null) return null; return appCompatTextView.getTextColo
 if (appCompatTextView == null) return null; return appCompatTextView.getTextSize();				}
 			case "hint": {
 return getHint();				}
+			case "selectedValues": {
+return getSelectedValues();				}
 		}
 		
 		return null;
@@ -1085,81 +1086,6 @@ public  class MultiSelectionSpinnerCommandBuilder extends com.ashera.layout.View
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public MultiSelectionSpinnerCommandBuilder setEntries(String value) {
-	Map<String, Object> attrs = initCommand("entries");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setSelection(String value) {
-	Map<String, Object> attrs = initCommand("selection");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setOnItemSelected(String value) {
-	Map<String, Object> attrs = initCommand("onItemSelected");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setModelOptionTextPath(String value) {
-	Map<String, Object> attrs = initCommand("modelOptionTextPath");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setModelOptionValuePath(String value) {
-	Map<String, Object> attrs = initCommand("modelOptionValuePath");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setValues(String value) {
-	Map<String, Object> attrs = initCommand("values");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder tryGetSelectedValues() {
-	Map<String, Object> attrs = initCommand("selectedValues");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getSelectedValues() {
-	Map<String, Object> attrs = initCommand("selectedValues");
-	return attrs.get("commandReturnValue");
-}
-public MultiSelectionSpinnerCommandBuilder setSelectedValues(Object value) {
-	Map<String, Object> attrs = initCommand("selectedValues");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setHintTextFormat(String value) {
-	Map<String, Object> attrs = initCommand("hintTextFormat");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public MultiSelectionSpinnerCommandBuilder tryGetDrawablePadding() {
 	Map<String, Object> attrs = initCommand("drawablePadding");
 	attrs.put("type", "attribute");
@@ -1367,46 +1293,86 @@ public MultiSelectionSpinnerCommandBuilder setTextColorHint(String value) {
 
 	attrs.put("value", value);
 return this;}
+public MultiSelectionSpinnerCommandBuilder setEntries(String value) {
+	Map<String, Object> attrs = initCommand("entries");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setSelection(String value) {
+	Map<String, Object> attrs = initCommand("selection");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setOnItemSelected(String value) {
+	Map<String, Object> attrs = initCommand("onItemSelected");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setModelOptionTextPath(String value) {
+	Map<String, Object> attrs = initCommand("modelOptionTextPath");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setModelOptionValuePath(String value) {
+	Map<String, Object> attrs = initCommand("modelOptionValuePath");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setValues(String value) {
+	Map<String, Object> attrs = initCommand("values");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder tryGetSelectedValues() {
+	Map<String, Object> attrs = initCommand("selectedValues");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getSelectedValues() {
+	Map<String, Object> attrs = initCommand("selectedValues");
+	return attrs.get("commandReturnValue");
+}
+public MultiSelectionSpinnerCommandBuilder setSelectedValues(Object value) {
+	Map<String, Object> attrs = initCommand("selectedValues");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setHintTextFormat(String value) {
+	Map<String, Object> attrs = initCommand("hintTextFormat");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class MultiSelectionSpinnerBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public MultiSelectionSpinnerBean() {
 			super(MultiSelectionSpinnerImpl.this);
 		}
-public void setEntries(String value) {
-	getBuilder().reset().setEntries(value).execute(true);
-}
-
-public void setSelection(String value) {
-	getBuilder().reset().setSelection(value).execute(true);
-}
-
-public void setOnItemSelected(String value) {
-	getBuilder().reset().setOnItemSelected(value).execute(true);
-}
-
-public void setModelOptionTextPath(String value) {
-	getBuilder().reset().setModelOptionTextPath(value).execute(true);
-}
-
-public void setModelOptionValuePath(String value) {
-	getBuilder().reset().setModelOptionValuePath(value).execute(true);
-}
-
-public void setValues(String value) {
-	getBuilder().reset().setValues(value).execute(true);
-}
-
-public Object getSelectedValues() {
-	return getBuilder().reset().tryGetSelectedValues().execute(false).getSelectedValues(); 
-}
-public void setSelectedValues(Object value) {
-	getBuilder().reset().setSelectedValues(value).execute(true);
-}
-
-public void setHintTextFormat(String value) {
-	getBuilder().reset().setHintTextFormat(value).execute(true);
-}
-
 public Object getDrawablePadding() {
 	return getBuilder().reset().tryGetDrawablePadding().execute(false).getDrawablePadding(); 
 }
@@ -1496,6 +1462,41 @@ public void setHint(String value) {
 
 public void setTextColorHint(String value) {
 	getBuilder().reset().setTextColorHint(value).execute(true);
+}
+
+public void setEntries(String value) {
+	getBuilder().reset().setEntries(value).execute(true);
+}
+
+public void setSelection(String value) {
+	getBuilder().reset().setSelection(value).execute(true);
+}
+
+public void setOnItemSelected(String value) {
+	getBuilder().reset().setOnItemSelected(value).execute(true);
+}
+
+public void setModelOptionTextPath(String value) {
+	getBuilder().reset().setModelOptionTextPath(value).execute(true);
+}
+
+public void setModelOptionValuePath(String value) {
+	getBuilder().reset().setModelOptionValuePath(value).execute(true);
+}
+
+public void setValues(String value) {
+	getBuilder().reset().setValues(value).execute(true);
+}
+
+public Object getSelectedValues() {
+	return getBuilder().reset().tryGetSelectedValues().execute(false).getSelectedValues(); 
+}
+public void setSelectedValues(Object value) {
+	getBuilder().reset().setSelectedValues(value).execute(true);
+}
+
+public void setHintTextFormat(String value) {
+	getBuilder().reset().setHintTextFormat(value).execute(true);
 }
 
 }

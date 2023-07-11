@@ -559,7 +559,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("zIndex").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxWidth").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("style").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("style").withType("string").withStylePriority(0));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("errorStyle").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validateForm").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validation").withType("array").withArrayType("string"));
@@ -576,6 +576,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageValues").withType("array").withArrayType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageKeys").withType("array").withArrayType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("invalidateOnFrameChange").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onSwiped").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("systemStyle").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("systemAndroidAttrStyle").withType("string"));
@@ -591,7 +592,11 @@ public class ViewImpl {
 
 	@SuppressLint("NewApi")
 	public static void setAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-		setAttribute(w, w.asNativeWidget(), key, strValue, objValue, decorator);
+		Object nativeWidget = w.invokeMethod("nativeWidgetFor", key.getAttributeName());
+		if (nativeWidget == null) {
+			nativeWidget = w.asNativeWidget();
+		}
+		setAttribute(w, nativeWidget, key, strValue, objValue, decorator);
 	}
 	@SuppressLint("NewApi")
 	public static void setAttribute(IWidget w, SimpleWrapableView wrapperView, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -1850,6 +1855,15 @@ if (objValue instanceof java.util.List) {
 
 
 		setInvalidateOnFrameChange(w, objValue);
+
+
+
+			}
+			break;
+		case "onSwiped": {
+
+
+		if (objValue instanceof String) {setOnSwipeListener(w, new SwipeListener(w, strValue, "onSwiped"));} else {setOnSwipeListener(w, (SwipeHelper.SwipeListener) objValue);}
 
 
 
@@ -3255,6 +3269,84 @@ public java.util.Map<String, Object> getOnTouchEventObj(View v,MotionEvent event
     
     // update model data into map
     w.updateModelToEventMap(obj, "onTouch", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}
+}
+
+	@SuppressLint("NewApi")
+private static class SwipeListener implements SwipeHelper.SwipeListener, com.ashera.widget.IListener{
+private IWidget w; private View view; private String strValue; private String action;
+public String getAction() {return action;}
+public SwipeListener(IWidget w, String strValue)  {
+this.w = w; this.strValue = strValue;
+}
+public SwipeListener(IWidget w, String strValue, String action)  {
+this.w = w; this.strValue = strValue;this.action=action;
+}
+public boolean onSwiped(String direction){
+    boolean result = true;
+    
+	if (action == null || action.equals("onSwiped")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onSwiped");
+	    java.util.Map<String, Object> obj = getOnSwipedEventObj(direction);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		case ":":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, direction);
+		    	 if (commandResult != null) {
+		    		 result = (boolean) commandResult;
+		    	 }
+		    }
+		    if (commandType.equals(":")) {
+		    	return result;
+		    }
+			
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty()) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return result;
+}//#####
+
+public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "swiped");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+        PluginInvoker.putJSONSafeObjectIntoMap(obj, "direction", direction);
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onSwiped", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
     return obj;
 }
 }
@@ -5315,6 +5407,14 @@ public T setInvalidateOnFrameChange(boolean value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T setOnSwiped(String value) {
+	Map<String, Object> attrs = initCommand("onSwiped");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 }
 static class ViewCommandBuilderInternal extends ViewCommandBuilder<ViewCommandBuilderInternal> {
 	private IWidget widget;
@@ -6131,6 +6231,10 @@ public void setInvalidateOnFrameChange(boolean value) {
 	getBuilder().reset().setInvalidateOnFrameChange(value).execute(true);
 }
 
+public void setOnSwiped(String value) {
+	getBuilder().reset().setOnSwiped(value).execute(true);
+}
+
 }
 
 
@@ -6896,4 +7000,34 @@ public void setInvalidateOnFrameChange(boolean value) {
 	
 	private static void setNativeId(IWidget w, String strValue) {
 	}
+
+	//start - swipe
+	private static void setOnSwipeListener(IWidget w, com.ashera.layout.SwipeHelper.SwipeListener swipeListener) {
+		SwipeHelper helper = new SwipeHelper((int) w.quickConvert("30dp", "dimension"));
+		helper.setListener(swipeListener);
+		addSwipeListener(w, helper);		
+	}
+	//end - swipe
+
+	public static void addSwipeListener(IWidget w, SwipeHelper helper) {
+		((View) w.asWidget()).setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View view, MotionEvent event) {
+				boolean isEventConsumed = true;
+				 switch (event.getAction()) {
+			      case MotionEvent.ACTION_DOWN: // user started touching the screen
+			    	  helper.onActionDown(event.getX(), event.getY());
+			        break;
+			      case MotionEvent.ACTION_UP:   // user stopped touching the screen
+			        isEventConsumed = helper.onActionUp(event.getX(), event.getY());
+			        break;
+			      default:
+			        break;
+			    }
+				return isEventConsumed;
+			}
+			
+		});
+	}
+
 }

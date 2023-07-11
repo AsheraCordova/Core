@@ -15,7 +15,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
-    { NULL, "LASIBehavior;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"

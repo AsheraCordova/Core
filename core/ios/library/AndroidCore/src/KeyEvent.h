@@ -26,6 +26,10 @@
 
 - (jint)getKeyCode;
 
+- (jboolean)hasNoModifiers;
+
++ (jboolean)isConfirmKeyWithInt:(jint)keyCode2;
+
 - (void)setActionWithInt:(jint)action;
 
 - (void)setKeyCodeWithInt:(jint)keyCode;
@@ -34,39 +38,2203 @@
 
 J2OBJC_EMPTY_STATIC_INIT(ADKeyEvent)
 
-inline jint ADKeyEvent_get_KEYCODE_BACK(void);
-#define ADKeyEvent_KEYCODE_BACK 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BACK, jint)
-
-inline jint ADKeyEvent_get_KEYCODE_VOLUME_UP(void);
-#define ADKeyEvent_KEYCODE_VOLUME_UP 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_VOLUME_UP, jint)
-
-inline jint ADKeyEvent_get_KEYCODE_VOLUME_DOWN(void);
-#define ADKeyEvent_KEYCODE_VOLUME_DOWN 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_VOLUME_DOWN, jint)
-
-inline jint ADKeyEvent_get_KEYCODE_MENU(void);
-#define ADKeyEvent_KEYCODE_MENU 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MENU, jint)
-
 inline jint ADKeyEvent_get_ACTION_DOWN(void);
-#define ADKeyEvent_ACTION_DOWN 1
+#define ADKeyEvent_ACTION_DOWN 0
 J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, ACTION_DOWN, jint)
 
 inline jint ADKeyEvent_get_ACTION_UP(void);
-#define ADKeyEvent_ACTION_UP 0
+#define ADKeyEvent_ACTION_UP 1
 J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, ACTION_UP, jint)
 
+/*!
+ @brief Key code constant: Unknown key code.
+ */
+inline jint ADKeyEvent_get_KEYCODE_UNKNOWN(void);
+#define ADKeyEvent_KEYCODE_UNKNOWN 0
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_UNKNOWN, jint)
+
+/*!
+ @brief Key code constant: Soft Left key.
+ Usually situated below the display on phones and used as a multi-function
+  feature key for selecting a software defined function shown on the bottom left
+  of the display.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SOFT_LEFT(void);
+#define ADKeyEvent_KEYCODE_SOFT_LEFT 1
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SOFT_LEFT, jint)
+
+/*!
+ @brief Key code constant: Soft Right key.
+ Usually situated below the display on phones and used as a multi-function
+  feature key for selecting a software defined function shown on the bottom right
+  of the display.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SOFT_RIGHT(void);
+#define ADKeyEvent_KEYCODE_SOFT_RIGHT 2
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SOFT_RIGHT, jint)
+
+/*!
+ @brief Key code constant: Home key.
+ This key is handled by the framework and is never delivered to applications.
+ */
+inline jint ADKeyEvent_get_KEYCODE_HOME(void);
+#define ADKeyEvent_KEYCODE_HOME 3
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_HOME, jint)
+
+/*!
+ @brief Key code constant: Back key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BACK(void);
+#define ADKeyEvent_KEYCODE_BACK 4
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BACK, jint)
+
+/*!
+ @brief Key code constant: Call key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CALL(void);
+#define ADKeyEvent_KEYCODE_CALL 5
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CALL, jint)
+
+/*!
+ @brief Key code constant: End Call key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_ENDCALL(void);
+#define ADKeyEvent_KEYCODE_ENDCALL 6
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ENDCALL, jint)
+
+/*!
+ @brief Key code constant: '0' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_0(void);
+#define ADKeyEvent_KEYCODE_0 7
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_0, jint)
+
+/*!
+ @brief Key code constant: '1' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_1(void);
+#define ADKeyEvent_KEYCODE_1 8
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_1, jint)
+
+/*!
+ @brief Key code constant: '2' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_2(void);
+#define ADKeyEvent_KEYCODE_2 9
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_2, jint)
+
+/*!
+ @brief Key code constant: '3' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_3(void);
+#define ADKeyEvent_KEYCODE_3 10
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_3, jint)
+
+/*!
+ @brief Key code constant: '4' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_4(void);
+#define ADKeyEvent_KEYCODE_4 11
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_4, jint)
+
+/*!
+ @brief Key code constant: '5' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_5(void);
+#define ADKeyEvent_KEYCODE_5 12
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_5, jint)
+
+/*!
+ @brief Key code constant: '6' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_6(void);
+#define ADKeyEvent_KEYCODE_6 13
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_6, jint)
+
+/*!
+ @brief Key code constant: '7' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_7(void);
+#define ADKeyEvent_KEYCODE_7 14
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_7, jint)
+
+/*!
+ @brief Key code constant: '8' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_8(void);
+#define ADKeyEvent_KEYCODE_8 15
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_8, jint)
+
+/*!
+ @brief Key code constant: '9' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_9(void);
+#define ADKeyEvent_KEYCODE_9 16
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_9, jint)
+
+/*!
+ @brief Key code constant: '*' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_STAR(void);
+#define ADKeyEvent_KEYCODE_STAR 17
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_STAR, jint)
+
+/*!
+ @brief Key code constant: '#' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_POUND(void);
+#define ADKeyEvent_KEYCODE_POUND 18
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_POUND, jint)
+
+/*!
+ @brief Key code constant: Directional Pad Up key.
+ May also be synthesized from trackball motions.
+ */
+inline jint ADKeyEvent_get_KEYCODE_DPAD_UP(void);
+#define ADKeyEvent_KEYCODE_DPAD_UP 19
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DPAD_UP, jint)
+
+/*!
+ @brief Key code constant: Directional Pad Down key.
+ May also be synthesized from trackball motions.
+ */
+inline jint ADKeyEvent_get_KEYCODE_DPAD_DOWN(void);
+#define ADKeyEvent_KEYCODE_DPAD_DOWN 20
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DPAD_DOWN, jint)
+
+/*!
+ @brief Key code constant: Directional Pad Left key.
+ May also be synthesized from trackball motions.
+ */
+inline jint ADKeyEvent_get_KEYCODE_DPAD_LEFT(void);
+#define ADKeyEvent_KEYCODE_DPAD_LEFT 21
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DPAD_LEFT, jint)
+
+/*!
+ @brief Key code constant: Directional Pad Right key.
+ May also be synthesized from trackball motions.
+ */
+inline jint ADKeyEvent_get_KEYCODE_DPAD_RIGHT(void);
+#define ADKeyEvent_KEYCODE_DPAD_RIGHT 22
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DPAD_RIGHT, jint)
+
+/*!
+ @brief Key code constant: Directional Pad Center key.
+ May also be synthesized from trackball motions.
+ */
+inline jint ADKeyEvent_get_KEYCODE_DPAD_CENTER(void);
+#define ADKeyEvent_KEYCODE_DPAD_CENTER 23
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DPAD_CENTER, jint)
+
+/*!
+ @brief Key code constant: Volume Up key.
+ Adjusts the speaker volume up.
+ */
+inline jint ADKeyEvent_get_KEYCODE_VOLUME_UP(void);
+#define ADKeyEvent_KEYCODE_VOLUME_UP 24
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_VOLUME_UP, jint)
+
+/*!
+ @brief Key code constant: Volume Down key.
+ Adjusts the speaker volume down.
+ */
+inline jint ADKeyEvent_get_KEYCODE_VOLUME_DOWN(void);
+#define ADKeyEvent_KEYCODE_VOLUME_DOWN 25
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_VOLUME_DOWN, jint)
+
+/*!
+ @brief Key code constant: Power key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_POWER(void);
+#define ADKeyEvent_KEYCODE_POWER 26
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_POWER, jint)
+
+/*!
+ @brief Key code constant: Camera key.
+ Used to launch a camera application or take pictures.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CAMERA(void);
+#define ADKeyEvent_KEYCODE_CAMERA 27
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CAMERA, jint)
+
+/*!
+ @brief Key code constant: Clear key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CLEAR(void);
+#define ADKeyEvent_KEYCODE_CLEAR 28
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CLEAR, jint)
+
+/*!
+ @brief Key code constant: 'A' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_A(void);
+#define ADKeyEvent_KEYCODE_A 29
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_A, jint)
+
+/*!
+ @brief Key code constant: 'B' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_B(void);
+#define ADKeyEvent_KEYCODE_B 30
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_B, jint)
+
+/*!
+ @brief Key code constant: 'C' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_C(void);
+#define ADKeyEvent_KEYCODE_C 31
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_C, jint)
+
+/*!
+ @brief Key code constant: 'D' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_D(void);
+#define ADKeyEvent_KEYCODE_D 32
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_D, jint)
+
+/*!
+ @brief Key code constant: 'E' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_E(void);
+#define ADKeyEvent_KEYCODE_E 33
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_E, jint)
+
+/*!
+ @brief Key code constant: 'F' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F(void);
+#define ADKeyEvent_KEYCODE_F 34
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F, jint)
+
+/*!
+ @brief Key code constant: 'G' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_G(void);
+#define ADKeyEvent_KEYCODE_G 35
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_G, jint)
+
+/*!
+ @brief Key code constant: 'H' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_H(void);
+#define ADKeyEvent_KEYCODE_H 36
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_H, jint)
+
+/*!
+ @brief Key code constant: 'I' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_I(void);
+#define ADKeyEvent_KEYCODE_I 37
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_I, jint)
+
+/*!
+ @brief Key code constant: 'J' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_J(void);
+#define ADKeyEvent_KEYCODE_J 38
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_J, jint)
+
+/*!
+ @brief Key code constant: 'K' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_K(void);
+#define ADKeyEvent_KEYCODE_K 39
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_K, jint)
+
+/*!
+ @brief Key code constant: 'L' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_L(void);
+#define ADKeyEvent_KEYCODE_L 40
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_L, jint)
+
+/*!
+ @brief Key code constant: 'M' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_M(void);
+#define ADKeyEvent_KEYCODE_M 41
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_M, jint)
+
+/*!
+ @brief Key code constant: 'N' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_N(void);
+#define ADKeyEvent_KEYCODE_N 42
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_N, jint)
+
+/*!
+ @brief Key code constant: 'O' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_O(void);
+#define ADKeyEvent_KEYCODE_O 43
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_O, jint)
+
+/*!
+ @brief Key code constant: 'P' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_P(void);
+#define ADKeyEvent_KEYCODE_P 44
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_P, jint)
+
+/*!
+ @brief Key code constant: 'Q' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_Q(void);
+#define ADKeyEvent_KEYCODE_Q 45
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_Q, jint)
+
+/*!
+ @brief Key code constant: 'R' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_R(void);
+#define ADKeyEvent_KEYCODE_R 46
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_R, jint)
+
+/*!
+ @brief Key code constant: 'S' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_S(void);
+#define ADKeyEvent_KEYCODE_S 47
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_S, jint)
+
+/*!
+ @brief Key code constant: 'T' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_T(void);
+#define ADKeyEvent_KEYCODE_T 48
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_T, jint)
+
+/*!
+ @brief Key code constant: 'U' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_U(void);
+#define ADKeyEvent_KEYCODE_U 49
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_U, jint)
+
+/*!
+ @brief Key code constant: 'V' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_V(void);
+#define ADKeyEvent_KEYCODE_V 50
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_V, jint)
+
+/*!
+ @brief Key code constant: 'W' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_W(void);
+#define ADKeyEvent_KEYCODE_W 51
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_W, jint)
+
+/*!
+ @brief Key code constant: 'X' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_X(void);
+#define ADKeyEvent_KEYCODE_X 52
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_X, jint)
+
+/*!
+ @brief Key code constant: 'Y' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_Y(void);
+#define ADKeyEvent_KEYCODE_Y 53
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_Y, jint)
+
+/*!
+ @brief Key code constant: 'Z' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_Z(void);
+#define ADKeyEvent_KEYCODE_Z 54
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_Z, jint)
+
+/*!
+ @brief Key code constant: ',' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_COMMA(void);
+#define ADKeyEvent_KEYCODE_COMMA 55
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_COMMA, jint)
+
+/*!
+ @brief Key code constant: '.' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PERIOD(void);
+#define ADKeyEvent_KEYCODE_PERIOD 56
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PERIOD, jint)
+
+/*!
+ @brief Key code constant: Left Alt modifier key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_ALT_LEFT(void);
+#define ADKeyEvent_KEYCODE_ALT_LEFT 57
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ALT_LEFT, jint)
+
+/*!
+ @brief Key code constant: Right Alt modifier key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_ALT_RIGHT(void);
+#define ADKeyEvent_KEYCODE_ALT_RIGHT 58
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ALT_RIGHT, jint)
+
+/*!
+ @brief Key code constant: Left Shift modifier key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SHIFT_LEFT(void);
+#define ADKeyEvent_KEYCODE_SHIFT_LEFT 59
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SHIFT_LEFT, jint)
+
+/*!
+ @brief Key code constant: Right Shift modifier key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SHIFT_RIGHT(void);
+#define ADKeyEvent_KEYCODE_SHIFT_RIGHT 60
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SHIFT_RIGHT, jint)
+
+/*!
+ @brief Key code constant: Tab key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TAB(void);
+#define ADKeyEvent_KEYCODE_TAB 61
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TAB, jint)
+
+/*!
+ @brief Key code constant: Space key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SPACE(void);
+#define ADKeyEvent_KEYCODE_SPACE 62
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SPACE, jint)
+
+/*!
+ @brief Key code constant: Symbol modifier key.
+ Used to enter alternate symbols.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SYM(void);
+#define ADKeyEvent_KEYCODE_SYM 63
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SYM, jint)
+
+/*!
+ @brief Key code constant: Explorer special function key.
+ Used to launch a browser application.
+ */
+inline jint ADKeyEvent_get_KEYCODE_EXPLORER(void);
+#define ADKeyEvent_KEYCODE_EXPLORER 64
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_EXPLORER, jint)
+
+/*!
+ @brief Key code constant: Envelope special function key.
+ Used to launch a mail application.
+ */
+inline jint ADKeyEvent_get_KEYCODE_ENVELOPE(void);
+#define ADKeyEvent_KEYCODE_ENVELOPE 65
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ENVELOPE, jint)
+
+/*!
+ @brief Key code constant: Enter key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_ENTER(void);
+#define ADKeyEvent_KEYCODE_ENTER 66
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ENTER, jint)
+
+/*!
+ @brief Key code constant: Backspace key.
+ Deletes characters before the insertion point, unlike <code>KEYCODE_FORWARD_DEL</code>.
+ */
+inline jint ADKeyEvent_get_KEYCODE_DEL(void);
+#define ADKeyEvent_KEYCODE_DEL 67
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DEL, jint)
+
+/*!
+ @brief Key code constant: '`' (backtick) key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_GRAVE(void);
+#define ADKeyEvent_KEYCODE_GRAVE 68
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_GRAVE, jint)
+
+/*!
+ @brief Key code constant: '-'.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MINUS(void);
+#define ADKeyEvent_KEYCODE_MINUS 69
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MINUS, jint)
+
+/*!
+ @brief Key code constant: '=' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_EQUALS(void);
+#define ADKeyEvent_KEYCODE_EQUALS 70
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_EQUALS, jint)
+
+/*!
+ @brief Key code constant: '[' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_LEFT_BRACKET(void);
+#define ADKeyEvent_KEYCODE_LEFT_BRACKET 71
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_LEFT_BRACKET, jint)
+
+/*!
+ @brief Key code constant: ']' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_RIGHT_BRACKET(void);
+#define ADKeyEvent_KEYCODE_RIGHT_BRACKET 72
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_RIGHT_BRACKET, jint)
+
+/*!
+ @brief Key code constant: '\' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BACKSLASH(void);
+#define ADKeyEvent_KEYCODE_BACKSLASH 73
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BACKSLASH, jint)
+
+/*!
+ @brief Key code constant: ';' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SEMICOLON(void);
+#define ADKeyEvent_KEYCODE_SEMICOLON 74
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SEMICOLON, jint)
+
+/*!
+ @brief Key code constant: ''' (apostrophe) key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_APOSTROPHE(void);
+#define ADKeyEvent_KEYCODE_APOSTROPHE 75
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_APOSTROPHE, jint)
+
+/*!
+ @brief Key code constant: '/' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SLASH(void);
+#define ADKeyEvent_KEYCODE_SLASH 76
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SLASH, jint)
+
+/*!
+ @brief Key code constant: '@@' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_AT(void);
+#define ADKeyEvent_KEYCODE_AT 77
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_AT, jint)
+
+/*!
+ @brief Key code constant: Number modifier key.
+ Used to enter numeric symbols.
+  This key is not Num Lock; it is more like <code>KEYCODE_ALT_LEFT</code> and is
+  interpreted as an ALT key by <code>android.text.method.MetaKeyKeyListener</code>.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUM(void);
+#define ADKeyEvent_KEYCODE_NUM 78
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUM, jint)
+
+/*!
+ @brief Key code constant: Headset Hook key.
+ Used to hang up calls and stop media.
+ */
+inline jint ADKeyEvent_get_KEYCODE_HEADSETHOOK(void);
+#define ADKeyEvent_KEYCODE_HEADSETHOOK 79
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_HEADSETHOOK, jint)
+
+/*!
+ @brief Key code constant: Camera Focus key.
+ Used to focus the camera.
+ */
+inline jint ADKeyEvent_get_KEYCODE_FOCUS(void);
+#define ADKeyEvent_KEYCODE_FOCUS 80
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_FOCUS, jint)
+
+/*!
+ @brief Key code constant: '+' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PLUS(void);
+#define ADKeyEvent_KEYCODE_PLUS 81
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PLUS, jint)
+
+/*!
+ @brief Key code constant: Menu key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MENU(void);
+#define ADKeyEvent_KEYCODE_MENU 82
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MENU, jint)
+
+/*!
+ @brief Key code constant: Notification key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NOTIFICATION(void);
+#define ADKeyEvent_KEYCODE_NOTIFICATION 83
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NOTIFICATION, jint)
+
+/*!
+ @brief Key code constant: Search key.
+ */
 inline jint ADKeyEvent_get_KEYCODE_SEARCH(void);
-#define ADKeyEvent_KEYCODE_SEARCH 4
+#define ADKeyEvent_KEYCODE_SEARCH 84
 J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SEARCH, jint)
+
+/*!
+ @brief Key code constant: Play/Pause media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_PLAY_PAUSE(void);
+#define ADKeyEvent_KEYCODE_MEDIA_PLAY_PAUSE 85
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_PLAY_PAUSE, jint)
+
+/*!
+ @brief Key code constant: Stop media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_STOP(void);
+#define ADKeyEvent_KEYCODE_MEDIA_STOP 86
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_STOP, jint)
+
+/*!
+ @brief Key code constant: Play Next media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_NEXT(void);
+#define ADKeyEvent_KEYCODE_MEDIA_NEXT 87
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_NEXT, jint)
+
+/*!
+ @brief Key code constant: Play Previous media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_PREVIOUS(void);
+#define ADKeyEvent_KEYCODE_MEDIA_PREVIOUS 88
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_PREVIOUS, jint)
+
+/*!
+ @brief Key code constant: Rewind media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_REWIND(void);
+#define ADKeyEvent_KEYCODE_MEDIA_REWIND 89
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_REWIND, jint)
+
+/*!
+ @brief Key code constant: Fast Forward media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_FAST_FORWARD(void);
+#define ADKeyEvent_KEYCODE_MEDIA_FAST_FORWARD 90
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_FAST_FORWARD, jint)
+
+/*!
+ @brief Key code constant: Mute key.
+ Mutes the microphone, unlike <code>KEYCODE_VOLUME_MUTE</code>.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MUTE(void);
+#define ADKeyEvent_KEYCODE_MUTE 91
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MUTE, jint)
+
+/*!
+ @brief Key code constant: Page Up key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PAGE_UP(void);
+#define ADKeyEvent_KEYCODE_PAGE_UP 92
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PAGE_UP, jint)
+
+/*!
+ @brief Key code constant: Page Down key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PAGE_DOWN(void);
+#define ADKeyEvent_KEYCODE_PAGE_DOWN 93
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PAGE_DOWN, jint)
+
+/*!
+ @brief Key code constant: Picture Symbols modifier key.
+ Used to switch symbol sets (Emoji, Kao-moji).
+ */
+inline jint ADKeyEvent_get_KEYCODE_PICTSYMBOLS(void);
+#define ADKeyEvent_KEYCODE_PICTSYMBOLS 94
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PICTSYMBOLS, jint)
+
+/*!
+ @brief Key code constant: Switch Charset modifier key.
+ Used to switch character sets (Kanji, Katakana).
+ */
+inline jint ADKeyEvent_get_KEYCODE_SWITCH_CHARSET(void);
+#define ADKeyEvent_KEYCODE_SWITCH_CHARSET 95
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SWITCH_CHARSET, jint)
+
+/*!
+ @brief Key code constant: A Button key.
+ On a game controller, the A button should be either the button labeled A
+  or the first button on the bottom row of controller buttons.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_A(void);
+#define ADKeyEvent_KEYCODE_BUTTON_A 96
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_A, jint)
+
+/*!
+ @brief Key code constant: B Button key.
+ On a game controller, the B button should be either the button labeled B
+  or the second button on the bottom row of controller buttons.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_B(void);
+#define ADKeyEvent_KEYCODE_BUTTON_B 97
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_B, jint)
+
+/*!
+ @brief Key code constant: C Button key.
+ On a game controller, the C button should be either the button labeled C
+  or the third button on the bottom row of controller buttons.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_C(void);
+#define ADKeyEvent_KEYCODE_BUTTON_C 98
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_C, jint)
+
+/*!
+ @brief Key code constant: X Button key.
+ On a game controller, the X button should be either the button labeled X
+  or the first button on the upper row of controller buttons.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_X(void);
+#define ADKeyEvent_KEYCODE_BUTTON_X 99
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_X, jint)
+
+/*!
+ @brief Key code constant: Y Button key.
+ On a game controller, the Y button should be either the button labeled Y
+  or the second button on the upper row of controller buttons.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_Y(void);
+#define ADKeyEvent_KEYCODE_BUTTON_Y 100
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_Y, jint)
+
+/*!
+ @brief Key code constant: Z Button key.
+ On a game controller, the Z button should be either the button labeled Z
+  or the third button on the upper row of controller buttons.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_Z(void);
+#define ADKeyEvent_KEYCODE_BUTTON_Z 101
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_Z, jint)
+
+/*!
+ @brief Key code constant: L1 Button key.
+ On a game controller, the L1 button should be either the button labeled L1 (or L)
+  or the top left trigger button.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_L1(void);
+#define ADKeyEvent_KEYCODE_BUTTON_L1 102
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_L1, jint)
+
+/*!
+ @brief Key code constant: R1 Button key.
+ On a game controller, the R1 button should be either the button labeled R1 (or R)
+  or the top right trigger button.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_R1(void);
+#define ADKeyEvent_KEYCODE_BUTTON_R1 103
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_R1, jint)
+
+/*!
+ @brief Key code constant: L2 Button key.
+ On a game controller, the L2 button should be either the button labeled L2
+  or the bottom left trigger button.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_L2(void);
+#define ADKeyEvent_KEYCODE_BUTTON_L2 104
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_L2, jint)
+
+/*!
+ @brief Key code constant: R2 Button key.
+ On a game controller, the R2 button should be either the button labeled R2
+  or the bottom right trigger button.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_R2(void);
+#define ADKeyEvent_KEYCODE_BUTTON_R2 105
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_R2, jint)
+
+/*!
+ @brief Key code constant: Left Thumb Button key.
+ On a game controller, the left thumb button indicates that the left (or only)
+  joystick is pressed.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_THUMBL(void);
+#define ADKeyEvent_KEYCODE_BUTTON_THUMBL 106
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_THUMBL, jint)
+
+/*!
+ @brief Key code constant: Right Thumb Button key.
+ On a game controller, the right thumb button indicates that the right
+  joystick is pressed.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_THUMBR(void);
+#define ADKeyEvent_KEYCODE_BUTTON_THUMBR 107
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_THUMBR, jint)
+
+/*!
+ @brief Key code constant: Start Button key.
+ On a game controller, the button labeled Start.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_START(void);
+#define ADKeyEvent_KEYCODE_BUTTON_START 108
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_START, jint)
+
+/*!
+ @brief Key code constant: Select Button key.
+ On a game controller, the button labeled Select.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_SELECT(void);
+#define ADKeyEvent_KEYCODE_BUTTON_SELECT 109
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_SELECT, jint)
+
+/*!
+ @brief Key code constant: Mode Button key.
+ On a game controller, the button labeled Mode.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_MODE(void);
+#define ADKeyEvent_KEYCODE_BUTTON_MODE 110
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_MODE, jint)
+
+/*!
+ @brief Key code constant: Escape key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_ESCAPE(void);
+#define ADKeyEvent_KEYCODE_ESCAPE 111
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ESCAPE, jint)
+
+/*!
+ @brief Key code constant: Forward Delete key.
+ Deletes characters ahead of the insertion point, unlike <code>KEYCODE_DEL</code>.
+ */
+inline jint ADKeyEvent_get_KEYCODE_FORWARD_DEL(void);
+#define ADKeyEvent_KEYCODE_FORWARD_DEL 112
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_FORWARD_DEL, jint)
+
+/*!
+ @brief Key code constant: Left Control modifier key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CTRL_LEFT(void);
+#define ADKeyEvent_KEYCODE_CTRL_LEFT 113
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CTRL_LEFT, jint)
+
+/*!
+ @brief Key code constant: Right Control modifier key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CTRL_RIGHT(void);
+#define ADKeyEvent_KEYCODE_CTRL_RIGHT 114
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CTRL_RIGHT, jint)
+
+/*!
+ @brief Key code constant: Caps Lock key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CAPS_LOCK(void);
+#define ADKeyEvent_KEYCODE_CAPS_LOCK 115
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CAPS_LOCK, jint)
+
+/*!
+ @brief Key code constant: Scroll Lock key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SCROLL_LOCK(void);
+#define ADKeyEvent_KEYCODE_SCROLL_LOCK 116
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SCROLL_LOCK, jint)
+
+/*!
+ @brief Key code constant: Left Meta modifier key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_META_LEFT(void);
+#define ADKeyEvent_KEYCODE_META_LEFT 117
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_META_LEFT, jint)
+
+/*!
+ @brief Key code constant: Right Meta modifier key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_META_RIGHT(void);
+#define ADKeyEvent_KEYCODE_META_RIGHT 118
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_META_RIGHT, jint)
+
+/*!
+ @brief Key code constant: Function modifier key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_FUNCTION(void);
+#define ADKeyEvent_KEYCODE_FUNCTION 119
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_FUNCTION, jint)
+
+/*!
+ @brief Key code constant: System Request / Print Screen key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SYSRQ(void);
+#define ADKeyEvent_KEYCODE_SYSRQ 120
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SYSRQ, jint)
+
+/*!
+ @brief Key code constant: Break / Pause key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BREAK(void);
+#define ADKeyEvent_KEYCODE_BREAK 121
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BREAK, jint)
+
+/*!
+ @brief Key code constant: Home Movement key.
+ Used for scrolling or moving the cursor around to the start of a line
+  or to the top of a list.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MOVE_HOME(void);
+#define ADKeyEvent_KEYCODE_MOVE_HOME 122
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MOVE_HOME, jint)
+
+/*!
+ @brief Key code constant: End Movement key.
+ Used for scrolling or moving the cursor around to the end of a line
+  or to the bottom of a list.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MOVE_END(void);
+#define ADKeyEvent_KEYCODE_MOVE_END 123
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MOVE_END, jint)
+
+/*!
+ @brief Key code constant: Insert key.
+ Toggles insert / overwrite edit mode.
+ */
+inline jint ADKeyEvent_get_KEYCODE_INSERT(void);
+#define ADKeyEvent_KEYCODE_INSERT 124
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_INSERT, jint)
+
+/*!
+ @brief Key code constant: Forward key.
+ Navigates forward in the history stack.  Complement of <code>KEYCODE_BACK</code>.
+ */
+inline jint ADKeyEvent_get_KEYCODE_FORWARD(void);
+#define ADKeyEvent_KEYCODE_FORWARD 125
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_FORWARD, jint)
+
+/*!
+ @brief Key code constant: Play media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_PLAY(void);
+#define ADKeyEvent_KEYCODE_MEDIA_PLAY 126
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_PLAY, jint)
+
+/*!
+ @brief Key code constant: Pause media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_PAUSE(void);
+#define ADKeyEvent_KEYCODE_MEDIA_PAUSE 127
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_PAUSE, jint)
+
+/*!
+ @brief Key code constant: Close media key.
+ May be used to close a CD tray, for example.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_CLOSE(void);
+#define ADKeyEvent_KEYCODE_MEDIA_CLOSE 128
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_CLOSE, jint)
+
+/*!
+ @brief Key code constant: Eject media key.
+ May be used to eject a CD tray, for example.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_EJECT(void);
+#define ADKeyEvent_KEYCODE_MEDIA_EJECT 129
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_EJECT, jint)
+
+/*!
+ @brief Key code constant: Record media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_RECORD(void);
+#define ADKeyEvent_KEYCODE_MEDIA_RECORD 130
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_RECORD, jint)
+
+/*!
+ @brief Key code constant: F1 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F1(void);
+#define ADKeyEvent_KEYCODE_F1 131
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F1, jint)
+
+/*!
+ @brief Key code constant: F2 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F2(void);
+#define ADKeyEvent_KEYCODE_F2 132
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F2, jint)
+
+/*!
+ @brief Key code constant: F3 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F3(void);
+#define ADKeyEvent_KEYCODE_F3 133
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F3, jint)
+
+/*!
+ @brief Key code constant: F4 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F4(void);
+#define ADKeyEvent_KEYCODE_F4 134
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F4, jint)
+
+/*!
+ @brief Key code constant: F5 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F5(void);
+#define ADKeyEvent_KEYCODE_F5 135
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F5, jint)
+
+/*!
+ @brief Key code constant: F6 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F6(void);
+#define ADKeyEvent_KEYCODE_F6 136
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F6, jint)
+
+/*!
+ @brief Key code constant: F7 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F7(void);
+#define ADKeyEvent_KEYCODE_F7 137
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F7, jint)
+
+/*!
+ @brief Key code constant: F8 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F8(void);
+#define ADKeyEvent_KEYCODE_F8 138
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F8, jint)
+
+/*!
+ @brief Key code constant: F9 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F9(void);
+#define ADKeyEvent_KEYCODE_F9 139
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F9, jint)
+
+/*!
+ @brief Key code constant: F10 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F10(void);
+#define ADKeyEvent_KEYCODE_F10 140
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F10, jint)
+
+/*!
+ @brief Key code constant: F11 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F11(void);
+#define ADKeyEvent_KEYCODE_F11 141
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F11, jint)
+
+/*!
+ @brief Key code constant: F12 key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_F12(void);
+#define ADKeyEvent_KEYCODE_F12 142
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_F12, jint)
+
+/*!
+ @brief Key code constant: Num Lock key.
+ This is the Num Lock key; it is different from <code>KEYCODE_NUM</code>.
+  This key alters the behavior of other keys on the numeric keypad.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUM_LOCK(void);
+#define ADKeyEvent_KEYCODE_NUM_LOCK 143
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUM_LOCK, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '0' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_0(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_0 144
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_0, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '1' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_1(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_1 145
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_1, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '2' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_2(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_2 146
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_2, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '3' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_3(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_3 147
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_3, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '4' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_4(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_4 148
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_4, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '5' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_5(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_5 149
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_5, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '6' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_6(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_6 150
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_6, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '7' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_7(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_7 151
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_7, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '8' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_8(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_8 152
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_8, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '9' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_9(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_9 153
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_9, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '/' key (for division).
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_DIVIDE(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_DIVIDE 154
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_DIVIDE, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '*' key (for multiplication).
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_MULTIPLY(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_MULTIPLY 155
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_MULTIPLY, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '-' key (for subtraction).
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_SUBTRACT(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_SUBTRACT 156
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_SUBTRACT, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '+' key (for addition).
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_ADD(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_ADD 157
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_ADD, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '.' key (for decimals or digit grouping).
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_DOT(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_DOT 158
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_DOT, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad ',' key (for decimals or digit grouping).
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_COMMA(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_COMMA 159
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_COMMA, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad Enter key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_ENTER(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_ENTER 160
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_ENTER, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '=' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_EQUALS(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_EQUALS 161
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_EQUALS, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad '(' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_LEFT_PAREN(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_LEFT_PAREN 162
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_LEFT_PAREN, jint)
+
+/*!
+ @brief Key code constant: Numeric keypad ')' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NUMPAD_RIGHT_PAREN(void);
+#define ADKeyEvent_KEYCODE_NUMPAD_RIGHT_PAREN 163
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NUMPAD_RIGHT_PAREN, jint)
+
+/*!
+ @brief Key code constant: Volume Mute key.
+ Mutes the speaker, unlike <code>KEYCODE_MUTE</code>.
+  This key should normally be implemented as a toggle such that the first press
+  mutes the speaker and the second press restores the original volume.
+ */
+inline jint ADKeyEvent_get_KEYCODE_VOLUME_MUTE(void);
+#define ADKeyEvent_KEYCODE_VOLUME_MUTE 164
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_VOLUME_MUTE, jint)
+
+/*!
+ @brief Key code constant: Info key.
+ Common on TV remotes to show additional information related to what is
+  currently being viewed.
+ */
+inline jint ADKeyEvent_get_KEYCODE_INFO(void);
+#define ADKeyEvent_KEYCODE_INFO 165
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_INFO, jint)
+
+/*!
+ @brief Key code constant: Channel up key.
+ On TV remotes, increments the television channel.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CHANNEL_UP(void);
+#define ADKeyEvent_KEYCODE_CHANNEL_UP 166
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CHANNEL_UP, jint)
+
+/*!
+ @brief Key code constant: Channel down key.
+ On TV remotes, decrements the television channel.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CHANNEL_DOWN(void);
+#define ADKeyEvent_KEYCODE_CHANNEL_DOWN 167
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CHANNEL_DOWN, jint)
+
+/*!
+ @brief Key code constant: Zoom in key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_ZOOM_IN(void);
+#define ADKeyEvent_KEYCODE_ZOOM_IN 168
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ZOOM_IN, jint)
+
+/*!
+ @brief Key code constant: Zoom out key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_ZOOM_OUT(void);
+#define ADKeyEvent_KEYCODE_ZOOM_OUT 169
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ZOOM_OUT, jint)
+
+/*!
+ @brief Key code constant: TV key.
+ On TV remotes, switches to viewing live TV.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV(void);
+#define ADKeyEvent_KEYCODE_TV 170
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV, jint)
+
+/*!
+ @brief Key code constant: Window key.
+ On TV remotes, toggles picture-in-picture mode or other windowing functions.
+  On Android Wear devices, triggers a display offset.
+ */
+inline jint ADKeyEvent_get_KEYCODE_WINDOW(void);
+#define ADKeyEvent_KEYCODE_WINDOW 171
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_WINDOW, jint)
+
+/*!
+ @brief Key code constant: Guide key.
+ On TV remotes, shows a programming guide.
+ */
+inline jint ADKeyEvent_get_KEYCODE_GUIDE(void);
+#define ADKeyEvent_KEYCODE_GUIDE 172
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_GUIDE, jint)
+
+/*!
+ @brief Key code constant: DVR key.
+ On some TV remotes, switches to a DVR mode for recorded shows.
+ */
+inline jint ADKeyEvent_get_KEYCODE_DVR(void);
+#define ADKeyEvent_KEYCODE_DVR 173
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DVR, jint)
+
+/*!
+ @brief Key code constant: Bookmark key.
+ On some TV remotes, bookmarks content or web pages.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BOOKMARK(void);
+#define ADKeyEvent_KEYCODE_BOOKMARK 174
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BOOKMARK, jint)
+
+/*!
+ @brief Key code constant: Toggle captions key.
+ Switches the mode for closed-captioning text, for example during television shows.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CAPTIONS(void);
+#define ADKeyEvent_KEYCODE_CAPTIONS 175
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CAPTIONS, jint)
+
+/*!
+ @brief Key code constant: Settings key.
+ Starts the system settings activity.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SETTINGS(void);
+#define ADKeyEvent_KEYCODE_SETTINGS 176
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SETTINGS, jint)
+
+/*!
+ @brief Key code constant: TV power key.
+ On TV remotes, toggles the power on a television screen.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_POWER(void);
+#define ADKeyEvent_KEYCODE_TV_POWER 177
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_POWER, jint)
+
+/*!
+ @brief Key code constant: TV input key.
+ On TV remotes, switches the input on a television screen.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_INPUT(void);
+#define ADKeyEvent_KEYCODE_TV_INPUT 178
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_INPUT, jint)
+
+/*!
+ @brief Key code constant: Set-top-box power key.
+ On TV remotes, toggles the power on an external Set-top-box.
+ */
+inline jint ADKeyEvent_get_KEYCODE_STB_POWER(void);
+#define ADKeyEvent_KEYCODE_STB_POWER 179
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_STB_POWER, jint)
+
+/*!
+ @brief Key code constant: Set-top-box input key.
+ On TV remotes, switches the input mode on an external Set-top-box.
+ */
+inline jint ADKeyEvent_get_KEYCODE_STB_INPUT(void);
+#define ADKeyEvent_KEYCODE_STB_INPUT 180
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_STB_INPUT, jint)
+
+/*!
+ @brief Key code constant: A/V Receiver power key.
+ On TV remotes, toggles the power on an external A/V Receiver.
+ */
+inline jint ADKeyEvent_get_KEYCODE_AVR_POWER(void);
+#define ADKeyEvent_KEYCODE_AVR_POWER 181
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_AVR_POWER, jint)
+
+/*!
+ @brief Key code constant: A/V Receiver input key.
+ On TV remotes, switches the input mode on an external A/V Receiver.
+ */
+inline jint ADKeyEvent_get_KEYCODE_AVR_INPUT(void);
+#define ADKeyEvent_KEYCODE_AVR_INPUT 182
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_AVR_INPUT, jint)
+
+/*!
+ @brief Key code constant: Red "programmable" key.
+ On TV remotes, acts as a contextual/programmable key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PROG_RED(void);
+#define ADKeyEvent_KEYCODE_PROG_RED 183
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PROG_RED, jint)
+
+/*!
+ @brief Key code constant: Green "programmable" key.
+ On TV remotes, actsas a contextual/programmable key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PROG_GREEN(void);
+#define ADKeyEvent_KEYCODE_PROG_GREEN 184
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PROG_GREEN, jint)
+
+/*!
+ @brief Key code constant: Yellow "programmable" key.
+ On TV remotes, acts as a contextual/programmable key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PROG_YELLOW(void);
+#define ADKeyEvent_KEYCODE_PROG_YELLOW 185
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PROG_YELLOW, jint)
+
+/*!
+ @brief Key code constant: Blue "programmable" key.
+ On TV remotes, acts as a contextual/programmable key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PROG_BLUE(void);
+#define ADKeyEvent_KEYCODE_PROG_BLUE 186
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PROG_BLUE, jint)
+
+/*!
+ @brief Key code constant: App switch key.
+ Should bring up the application switcher dialog.
+ */
+inline jint ADKeyEvent_get_KEYCODE_APP_SWITCH(void);
+#define ADKeyEvent_KEYCODE_APP_SWITCH 187
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_APP_SWITCH, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #1.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_1(void);
+#define ADKeyEvent_KEYCODE_BUTTON_1 188
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_1, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #2.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_2(void);
+#define ADKeyEvent_KEYCODE_BUTTON_2 189
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_2, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #3.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_3(void);
+#define ADKeyEvent_KEYCODE_BUTTON_3 190
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_3, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #4.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_4(void);
+#define ADKeyEvent_KEYCODE_BUTTON_4 191
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_4, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #5.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_5(void);
+#define ADKeyEvent_KEYCODE_BUTTON_5 192
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_5, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #6.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_6(void);
+#define ADKeyEvent_KEYCODE_BUTTON_6 193
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_6, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #7.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_7(void);
+#define ADKeyEvent_KEYCODE_BUTTON_7 194
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_7, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #8.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_8(void);
+#define ADKeyEvent_KEYCODE_BUTTON_8 195
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_8, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #9.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_9(void);
+#define ADKeyEvent_KEYCODE_BUTTON_9 196
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_9, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #10.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_10(void);
+#define ADKeyEvent_KEYCODE_BUTTON_10 197
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_10, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #11.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_11(void);
+#define ADKeyEvent_KEYCODE_BUTTON_11 198
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_11, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #12.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_12(void);
+#define ADKeyEvent_KEYCODE_BUTTON_12 199
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_12, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #13.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_13(void);
+#define ADKeyEvent_KEYCODE_BUTTON_13 200
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_13, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #14.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_14(void);
+#define ADKeyEvent_KEYCODE_BUTTON_14 201
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_14, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #15.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_15(void);
+#define ADKeyEvent_KEYCODE_BUTTON_15 202
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_15, jint)
+
+/*!
+ @brief Key code constant: Generic Game Pad Button #16.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BUTTON_16(void);
+#define ADKeyEvent_KEYCODE_BUTTON_16 203
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BUTTON_16, jint)
+
+/*!
+ @brief Key code constant: Language Switch key.
+ Toggles the current input language such as switching between English and Japanese on
+  a QWERTY keyboard.  On some devices, the same function may be performed by
+  pressing Shift+Spacebar.
+ */
+inline jint ADKeyEvent_get_KEYCODE_LANGUAGE_SWITCH(void);
+#define ADKeyEvent_KEYCODE_LANGUAGE_SWITCH 204
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_LANGUAGE_SWITCH, jint)
+
+/*!
+ @brief Key code constant: Manner Mode key.
+ Toggles silent or vibrate mode on and off to make the device behave more politely
+  in certain settings such as on a crowded train.  On some devices, the key may only
+  operate when long-pressed.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MANNER_MODE(void);
+#define ADKeyEvent_KEYCODE_MANNER_MODE 205
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MANNER_MODE, jint)
+
+/*!
+ @brief Key code constant: 3D Mode key.
+ Toggles the display between 2D and 3D mode.
+ */
+inline jint ADKeyEvent_get_KEYCODE_3D_MODE(void);
+#define ADKeyEvent_KEYCODE_3D_MODE 206
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_3D_MODE, jint)
+
+/*!
+ @brief Key code constant: Contacts special function key.
+ Used to launch an address book application.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CONTACTS(void);
+#define ADKeyEvent_KEYCODE_CONTACTS 207
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CONTACTS, jint)
+
+/*!
+ @brief Key code constant: Calendar special function key.
+ Used to launch a calendar application.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CALENDAR(void);
+#define ADKeyEvent_KEYCODE_CALENDAR 208
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CALENDAR, jint)
+
+/*!
+ @brief Key code constant: Music special function key.
+ Used to launch a music player application.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MUSIC(void);
+#define ADKeyEvent_KEYCODE_MUSIC 209
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MUSIC, jint)
+
+/*!
+ @brief Key code constant: Calculator special function key.
+ Used to launch a calculator application.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CALCULATOR(void);
+#define ADKeyEvent_KEYCODE_CALCULATOR 210
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CALCULATOR, jint)
+
+/*!
+ @brief Key code constant: Japanese full-width / half-width key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_ZENKAKU_HANKAKU(void);
+#define ADKeyEvent_KEYCODE_ZENKAKU_HANKAKU 211
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ZENKAKU_HANKAKU, jint)
+
+/*!
+ @brief Key code constant: Japanese alphanumeric key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_EISU(void);
+#define ADKeyEvent_KEYCODE_EISU 212
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_EISU, jint)
+
+/*!
+ @brief Key code constant: Japanese non-conversion key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MUHENKAN(void);
+#define ADKeyEvent_KEYCODE_MUHENKAN 213
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MUHENKAN, jint)
+
+/*!
+ @brief Key code constant: Japanese conversion key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_HENKAN(void);
+#define ADKeyEvent_KEYCODE_HENKAN 214
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_HENKAN, jint)
+
+/*!
+ @brief Key code constant: Japanese katakana / hiragana key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_KATAKANA_HIRAGANA(void);
+#define ADKeyEvent_KEYCODE_KATAKANA_HIRAGANA 215
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_KATAKANA_HIRAGANA, jint)
+
+/*!
+ @brief Key code constant: Japanese Yen key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_YEN(void);
+#define ADKeyEvent_KEYCODE_YEN 216
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_YEN, jint)
+
+/*!
+ @brief Key code constant: Japanese Ro key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_RO(void);
+#define ADKeyEvent_KEYCODE_RO 217
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_RO, jint)
+
+/*!
+ @brief Key code constant: Japanese kana key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_KANA(void);
+#define ADKeyEvent_KEYCODE_KANA 218
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_KANA, jint)
+
+/*!
+ @brief Key code constant: Assist key.
+ Launches the global assist activity.  Not delivered to applications.
+ */
+inline jint ADKeyEvent_get_KEYCODE_ASSIST(void);
+#define ADKeyEvent_KEYCODE_ASSIST 219
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ASSIST, jint)
+
+/*!
+ @brief Key code constant: Brightness Down key.
+ Adjusts the screen brightness down.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BRIGHTNESS_DOWN(void);
+#define ADKeyEvent_KEYCODE_BRIGHTNESS_DOWN 220
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BRIGHTNESS_DOWN, jint)
+
+/*!
+ @brief Key code constant: Brightness Up key.
+ Adjusts the screen brightness up.
+ */
+inline jint ADKeyEvent_get_KEYCODE_BRIGHTNESS_UP(void);
+#define ADKeyEvent_KEYCODE_BRIGHTNESS_UP 221
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_BRIGHTNESS_UP, jint)
+
+/*!
+ @brief Key code constant: Audio Track key.
+ Switches the audio tracks.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_AUDIO_TRACK(void);
+#define ADKeyEvent_KEYCODE_MEDIA_AUDIO_TRACK 222
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_AUDIO_TRACK, jint)
+
+/*!
+ @brief Key code constant: Sleep key.
+ Puts the device to sleep.  Behaves somewhat like <code>KEYCODE_POWER</code> but it
+  has no effect if the device is already asleep.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SLEEP(void);
+#define ADKeyEvent_KEYCODE_SLEEP 223
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SLEEP, jint)
+
+/*!
+ @brief Key code constant: Wakeup key.
+ Wakes up the device.  Behaves somewhat like <code>KEYCODE_POWER</code> but it
+  has no effect if the device is already awake.
+ */
+inline jint ADKeyEvent_get_KEYCODE_WAKEUP(void);
+#define ADKeyEvent_KEYCODE_WAKEUP 224
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_WAKEUP, jint)
+
+/*!
+ @brief Key code constant: Pairing key.
+ Initiates peripheral pairing mode. Useful for pairing remote control
+  devices or game controllers, especially if no other input mode is
+  available.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PAIRING(void);
+#define ADKeyEvent_KEYCODE_PAIRING 225
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PAIRING, jint)
+
+/*!
+ @brief Key code constant: Media Top Menu key.
+ Goes to the top of media menu.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_TOP_MENU(void);
+#define ADKeyEvent_KEYCODE_MEDIA_TOP_MENU 226
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_TOP_MENU, jint)
+
+/*!
+ @brief Key code constant: '11' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_11(void);
+#define ADKeyEvent_KEYCODE_11 227
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_11, jint)
+
+/*!
+ @brief Key code constant: '12' key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_12(void);
+#define ADKeyEvent_KEYCODE_12 228
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_12, jint)
+
+/*!
+ @brief Key code constant: Last Channel key.
+ Goes to the last viewed channel.
+ */
+inline jint ADKeyEvent_get_KEYCODE_LAST_CHANNEL(void);
+#define ADKeyEvent_KEYCODE_LAST_CHANNEL 229
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_LAST_CHANNEL, jint)
+
+/*!
+ @brief Key code constant: TV data service key.
+ Displays data services like weather, sports.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_DATA_SERVICE(void);
+#define ADKeyEvent_KEYCODE_TV_DATA_SERVICE 230
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_DATA_SERVICE, jint)
+
+/*!
+ @brief Key code constant: Voice Assist key.
+ Launches the global voice assist activity. Not delivered to applications.
+ */
+inline jint ADKeyEvent_get_KEYCODE_VOICE_ASSIST(void);
+#define ADKeyEvent_KEYCODE_VOICE_ASSIST 231
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_VOICE_ASSIST, jint)
+
+/*!
+ @brief Key code constant: Radio key.
+ Toggles TV service / Radio service.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_RADIO_SERVICE(void);
+#define ADKeyEvent_KEYCODE_TV_RADIO_SERVICE 232
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_RADIO_SERVICE, jint)
+
+/*!
+ @brief Key code constant: Teletext key.
+ Displays Teletext service.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_TELETEXT(void);
+#define ADKeyEvent_KEYCODE_TV_TELETEXT 233
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_TELETEXT, jint)
+
+/*!
+ @brief Key code constant: Number entry key.
+ Initiates to enter multi-digit channel nubmber when each digit key is assigned
+  for selecting separate channel. Corresponds to Number Entry Mode (0x1D) of CEC
+  User Control Code.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_NUMBER_ENTRY(void);
+#define ADKeyEvent_KEYCODE_TV_NUMBER_ENTRY 234
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_NUMBER_ENTRY, jint)
+
+/*!
+ @brief Key code constant: Analog Terrestrial key.
+ Switches to analog terrestrial broadcast service.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_TERRESTRIAL_ANALOG(void);
+#define ADKeyEvent_KEYCODE_TV_TERRESTRIAL_ANALOG 235
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_TERRESTRIAL_ANALOG, jint)
+
+/*!
+ @brief Key code constant: Digital Terrestrial key.
+ Switches to digital terrestrial broadcast service.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_TERRESTRIAL_DIGITAL(void);
+#define ADKeyEvent_KEYCODE_TV_TERRESTRIAL_DIGITAL 236
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_TERRESTRIAL_DIGITAL, jint)
+
+/*!
+ @brief Key code constant: Satellite key.
+ Switches to digital satellite broadcast service.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_SATELLITE(void);
+#define ADKeyEvent_KEYCODE_TV_SATELLITE 237
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_SATELLITE, jint)
+
+/*!
+ @brief Key code constant: BS key.
+ Switches to BS digital satellite broadcasting service available in Japan.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_SATELLITE_BS(void);
+#define ADKeyEvent_KEYCODE_TV_SATELLITE_BS 238
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_SATELLITE_BS, jint)
+
+/*!
+ @brief Key code constant: CS key.
+ Switches to CS digital satellite broadcasting service available in Japan.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_SATELLITE_CS(void);
+#define ADKeyEvent_KEYCODE_TV_SATELLITE_CS 239
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_SATELLITE_CS, jint)
+
+/*!
+ @brief Key code constant: BS/CS key.
+ Toggles between BS and CS digital satellite services.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_SATELLITE_SERVICE(void);
+#define ADKeyEvent_KEYCODE_TV_SATELLITE_SERVICE 240
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_SATELLITE_SERVICE, jint)
+
+/*!
+ @brief Key code constant: Toggle Network key.
+ Toggles selecting broacast services.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_NETWORK(void);
+#define ADKeyEvent_KEYCODE_TV_NETWORK 241
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_NETWORK, jint)
+
+/*!
+ @brief Key code constant: Antenna/Cable key.
+ Toggles broadcast input source between antenna and cable.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_ANTENNA_CABLE(void);
+#define ADKeyEvent_KEYCODE_TV_ANTENNA_CABLE 242
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_ANTENNA_CABLE, jint)
+
+/*!
+ @brief Key code constant: HDMI #1 key.
+ Switches to HDMI input #1.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_INPUT_HDMI_1(void);
+#define ADKeyEvent_KEYCODE_TV_INPUT_HDMI_1 243
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_INPUT_HDMI_1, jint)
+
+/*!
+ @brief Key code constant: HDMI #2 key.
+ Switches to HDMI input #2.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_INPUT_HDMI_2(void);
+#define ADKeyEvent_KEYCODE_TV_INPUT_HDMI_2 244
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_INPUT_HDMI_2, jint)
+
+/*!
+ @brief Key code constant: HDMI #3 key.
+ Switches to HDMI input #3.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_INPUT_HDMI_3(void);
+#define ADKeyEvent_KEYCODE_TV_INPUT_HDMI_3 245
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_INPUT_HDMI_3, jint)
+
+/*!
+ @brief Key code constant: HDMI #4 key.
+ Switches to HDMI input #4.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_INPUT_HDMI_4(void);
+#define ADKeyEvent_KEYCODE_TV_INPUT_HDMI_4 246
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_INPUT_HDMI_4, jint)
+
+/*!
+ @brief Key code constant: Composite #1 key.
+ Switches to composite video input #1.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_INPUT_COMPOSITE_1(void);
+#define ADKeyEvent_KEYCODE_TV_INPUT_COMPOSITE_1 247
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_INPUT_COMPOSITE_1, jint)
+
+/*!
+ @brief Key code constant: Composite #2 key.
+ Switches to composite video input #2.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_INPUT_COMPOSITE_2(void);
+#define ADKeyEvent_KEYCODE_TV_INPUT_COMPOSITE_2 248
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_INPUT_COMPOSITE_2, jint)
+
+/*!
+ @brief Key code constant: Component #1 key.
+ Switches to component video input #1.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_INPUT_COMPONENT_1(void);
+#define ADKeyEvent_KEYCODE_TV_INPUT_COMPONENT_1 249
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_INPUT_COMPONENT_1, jint)
+
+/*!
+ @brief Key code constant: Component #2 key.
+ Switches to component video input #2.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_INPUT_COMPONENT_2(void);
+#define ADKeyEvent_KEYCODE_TV_INPUT_COMPONENT_2 250
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_INPUT_COMPONENT_2, jint)
+
+/*!
+ @brief Key code constant: VGA #1 key.
+ Switches to VGA (analog RGB) input #1.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_INPUT_VGA_1(void);
+#define ADKeyEvent_KEYCODE_TV_INPUT_VGA_1 251
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_INPUT_VGA_1, jint)
+
+/*!
+ @brief Key code constant: Audio description key.
+ Toggles audio description off / on.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_AUDIO_DESCRIPTION(void);
+#define ADKeyEvent_KEYCODE_TV_AUDIO_DESCRIPTION 252
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_AUDIO_DESCRIPTION, jint)
+
+/*!
+ @brief Key code constant: Audio description mixing volume up key.
+ Louden audio description volume as compared with normal audio volume.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_AUDIO_DESCRIPTION_MIX_UP(void);
+#define ADKeyEvent_KEYCODE_TV_AUDIO_DESCRIPTION_MIX_UP 253
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_AUDIO_DESCRIPTION_MIX_UP, jint)
+
+/*!
+ @brief Key code constant: Audio description mixing volume down key.
+ Lessen audio description volume as compared with normal audio volume.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_AUDIO_DESCRIPTION_MIX_DOWN(void);
+#define ADKeyEvent_KEYCODE_TV_AUDIO_DESCRIPTION_MIX_DOWN 254
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_AUDIO_DESCRIPTION_MIX_DOWN, jint)
+
+/*!
+ @brief Key code constant: Zoom mode key.
+ Changes Zoom mode (Normal, Full, Zoom, Wide-zoom, etc.)
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_ZOOM_MODE(void);
+#define ADKeyEvent_KEYCODE_TV_ZOOM_MODE 255
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_ZOOM_MODE, jint)
+
+/*!
+ @brief Key code constant: Contents menu key.
+ Goes to the title list. Corresponds to Contents Menu (0x0B) of CEC User Control
+  Code
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_CONTENTS_MENU(void);
+#define ADKeyEvent_KEYCODE_TV_CONTENTS_MENU 256
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_CONTENTS_MENU, jint)
+
+/*!
+ @brief Key code constant: Media context menu key.
+ Goes to the context menu of media contents. Corresponds to Media Context-sensitive
+  Menu (0x11) of CEC User Control Code.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_MEDIA_CONTEXT_MENU(void);
+#define ADKeyEvent_KEYCODE_TV_MEDIA_CONTEXT_MENU 257
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_MEDIA_CONTEXT_MENU, jint)
+
+/*!
+ @brief Key code constant: Timer programming key.
+ Goes to the timer recording menu. Corresponds to Timer Programming (0x54) of
+  CEC User Control Code.
+ */
+inline jint ADKeyEvent_get_KEYCODE_TV_TIMER_PROGRAMMING(void);
+#define ADKeyEvent_KEYCODE_TV_TIMER_PROGRAMMING 258
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_TV_TIMER_PROGRAMMING, jint)
+
+/*!
+ @brief Key code constant: Help key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_HELP(void);
+#define ADKeyEvent_KEYCODE_HELP 259
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_HELP, jint)
+
+/*!
+ @brief Key code constant: Navigate to previous key.
+ Goes backward by one item in an ordered collection of items.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NAVIGATE_PREVIOUS(void);
+#define ADKeyEvent_KEYCODE_NAVIGATE_PREVIOUS 260
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NAVIGATE_PREVIOUS, jint)
+
+/*!
+ @brief Key code constant: Navigate to next key.
+ Advances to the next item in an ordered collection of items.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NAVIGATE_NEXT(void);
+#define ADKeyEvent_KEYCODE_NAVIGATE_NEXT 261
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NAVIGATE_NEXT, jint)
+
+/*!
+ @brief Key code constant: Navigate in key.
+ Activates the item that currently has focus or expands to the next level of a navigation
+  hierarchy.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NAVIGATE_IN(void);
+#define ADKeyEvent_KEYCODE_NAVIGATE_IN 262
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NAVIGATE_IN, jint)
+
+/*!
+ @brief Key code constant: Navigate out key.
+ Backs out one level of a navigation hierarchy or collapses the item that currently has
+  focus.
+ */
+inline jint ADKeyEvent_get_KEYCODE_NAVIGATE_OUT(void);
+#define ADKeyEvent_KEYCODE_NAVIGATE_OUT 263
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_NAVIGATE_OUT, jint)
+
+/*!
+ @brief Key code constant: Primary stem key for Wear
+  Main power/reset button on watch.
+ */
+inline jint ADKeyEvent_get_KEYCODE_STEM_PRIMARY(void);
+#define ADKeyEvent_KEYCODE_STEM_PRIMARY 264
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_STEM_PRIMARY, jint)
+
+/*!
+ @brief Key code constant: Generic stem key 1 for Wear
+ */
+inline jint ADKeyEvent_get_KEYCODE_STEM_1(void);
+#define ADKeyEvent_KEYCODE_STEM_1 265
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_STEM_1, jint)
+
+/*!
+ @brief Key code constant: Generic stem key 2 for Wear
+ */
+inline jint ADKeyEvent_get_KEYCODE_STEM_2(void);
+#define ADKeyEvent_KEYCODE_STEM_2 266
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_STEM_2, jint)
+
+/*!
+ @brief Key code constant: Generic stem key 3 for Wear
+ */
+inline jint ADKeyEvent_get_KEYCODE_STEM_3(void);
+#define ADKeyEvent_KEYCODE_STEM_3 267
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_STEM_3, jint)
+
+/*!
+ @brief Key code constant: Directional Pad Up-Left
+ */
+inline jint ADKeyEvent_get_KEYCODE_DPAD_UP_LEFT(void);
+#define ADKeyEvent_KEYCODE_DPAD_UP_LEFT 268
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DPAD_UP_LEFT, jint)
+
+/*!
+ @brief Key code constant: Directional Pad Down-Left
+ */
+inline jint ADKeyEvent_get_KEYCODE_DPAD_DOWN_LEFT(void);
+#define ADKeyEvent_KEYCODE_DPAD_DOWN_LEFT 269
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DPAD_DOWN_LEFT, jint)
+
+/*!
+ @brief Key code constant: Directional Pad Up-Right
+ */
+inline jint ADKeyEvent_get_KEYCODE_DPAD_UP_RIGHT(void);
+#define ADKeyEvent_KEYCODE_DPAD_UP_RIGHT 270
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DPAD_UP_RIGHT, jint)
+
+/*!
+ @brief Key code constant: Directional Pad Down-Right
+ */
+inline jint ADKeyEvent_get_KEYCODE_DPAD_DOWN_RIGHT(void);
+#define ADKeyEvent_KEYCODE_DPAD_DOWN_RIGHT 271
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_DPAD_DOWN_RIGHT, jint)
+
+/*!
+ @brief Key code constant: Skip forward media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_SKIP_FORWARD(void);
+#define ADKeyEvent_KEYCODE_MEDIA_SKIP_FORWARD 272
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_SKIP_FORWARD, jint)
+
+/*!
+ @brief Key code constant: Skip backward media key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_SKIP_BACKWARD(void);
+#define ADKeyEvent_KEYCODE_MEDIA_SKIP_BACKWARD 273
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_SKIP_BACKWARD, jint)
+
+/*!
+ @brief Key code constant: Step forward media key.
+ Steps media forward, one frame at a time.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_STEP_FORWARD(void);
+#define ADKeyEvent_KEYCODE_MEDIA_STEP_FORWARD 274
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_STEP_FORWARD, jint)
+
+/*!
+ @brief Key code constant: Step backward media key.
+ Steps media backward, one frame at a time.
+ */
+inline jint ADKeyEvent_get_KEYCODE_MEDIA_STEP_BACKWARD(void);
+#define ADKeyEvent_KEYCODE_MEDIA_STEP_BACKWARD 275
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_MEDIA_STEP_BACKWARD, jint)
+
+/*!
+ @brief Key code constant: put device to sleep unless a wakelock is held.
+ */
+inline jint ADKeyEvent_get_KEYCODE_SOFT_SLEEP(void);
+#define ADKeyEvent_KEYCODE_SOFT_SLEEP 276
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SOFT_SLEEP, jint)
+
+/*!
+ @brief Key code constant: Cut key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_CUT(void);
+#define ADKeyEvent_KEYCODE_CUT 277
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_CUT, jint)
+
+/*!
+ @brief Key code constant: Copy key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_COPY(void);
+#define ADKeyEvent_KEYCODE_COPY 278
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_COPY, jint)
+
+/*!
+ @brief Key code constant: Paste key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PASTE(void);
+#define ADKeyEvent_KEYCODE_PASTE 279
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PASTE, jint)
+
+/*!
+ @brief Key code constant: Consumed by the system for navigation up
+ */
+inline jint ADKeyEvent_get_KEYCODE_SYSTEM_NAVIGATION_UP(void);
+#define ADKeyEvent_KEYCODE_SYSTEM_NAVIGATION_UP 280
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SYSTEM_NAVIGATION_UP, jint)
+
+/*!
+ @brief Key code constant: Consumed by the system for navigation down
+ */
+inline jint ADKeyEvent_get_KEYCODE_SYSTEM_NAVIGATION_DOWN(void);
+#define ADKeyEvent_KEYCODE_SYSTEM_NAVIGATION_DOWN 281
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SYSTEM_NAVIGATION_DOWN, jint)
+
+/*!
+ @brief Key code constant: Consumed by the system for navigation left
+ */
+inline jint ADKeyEvent_get_KEYCODE_SYSTEM_NAVIGATION_LEFT(void);
+#define ADKeyEvent_KEYCODE_SYSTEM_NAVIGATION_LEFT 282
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SYSTEM_NAVIGATION_LEFT, jint)
+
+/*!
+ @brief Key code constant: Consumed by the system for navigation right
+ */
+inline jint ADKeyEvent_get_KEYCODE_SYSTEM_NAVIGATION_RIGHT(void);
+#define ADKeyEvent_KEYCODE_SYSTEM_NAVIGATION_RIGHT 283
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_SYSTEM_NAVIGATION_RIGHT, jint)
+
+/*!
+ @brief Key code constant: Show all apps
+ */
+inline jint ADKeyEvent_get_KEYCODE_ALL_APPS(void);
+#define ADKeyEvent_KEYCODE_ALL_APPS 284
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_ALL_APPS, jint)
+
+/*!
+ @brief Key code constant: Refresh key.
+ */
+inline jint ADKeyEvent_get_KEYCODE_REFRESH(void);
+#define ADKeyEvent_KEYCODE_REFRESH 285
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_REFRESH, jint)
+
+/*!
+ @brief Key code constant: Thumbs up key.Apps can use this to let user upvote content.
+ */
+inline jint ADKeyEvent_get_KEYCODE_THUMBS_UP(void);
+#define ADKeyEvent_KEYCODE_THUMBS_UP 286
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_THUMBS_UP, jint)
+
+/*!
+ @brief Key code constant: Thumbs down key.Apps can use this to let user downvote content.
+ */
+inline jint ADKeyEvent_get_KEYCODE_THUMBS_DOWN(void);
+#define ADKeyEvent_KEYCODE_THUMBS_DOWN 287
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_THUMBS_DOWN, jint)
+
+/*!
+ @brief Key code constant: Used to switch current <code>android.accounts.Account</code> that is
+  consuming content.May be consumed by system to set account globally.
+ */
+inline jint ADKeyEvent_get_KEYCODE_PROFILE_SWITCH(void);
+#define ADKeyEvent_KEYCODE_PROFILE_SWITCH 288
+J2OBJC_STATIC_FIELD_CONSTANT(ADKeyEvent, KEYCODE_PROFILE_SWITCH, jint)
 
 FOUNDATION_EXPORT void ADKeyEvent_init(ADKeyEvent *self);
 
 FOUNDATION_EXPORT ADKeyEvent *new_ADKeyEvent_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADKeyEvent *create_ADKeyEvent_init(void);
+
+FOUNDATION_EXPORT jboolean ADKeyEvent_isConfirmKeyWithInt_(jint keyCode2);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADKeyEvent)
 

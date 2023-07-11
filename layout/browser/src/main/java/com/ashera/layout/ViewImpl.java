@@ -26,6 +26,44 @@ public class ViewImpl {
 	}
 	
 		@SuppressLint("NewApi")
+		final static class Vtype extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("email",  0x1);
+				mapping.put("time",  0x2);
+				mapping.put("date",  0x3);
+				mapping.put("url",  0x4);
+				mapping.put("tel",  0x5);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
+		final static class ValidationErrorDisplay  extends AbstractBitFlagConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("popup", 0x1);
+				mapping.put("label", 0x2);
+				mapping.put("style", 0x4);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
 		final static class Visibility extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
 				{
@@ -124,48 +162,28 @@ public class ViewImpl {
 				return 0;
 				}
 				}
-		@SuppressLint("NewApi")
-		final static class Vtype extends AbstractEnumToIntConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("email",  0x1);
-				mapping.put("time",  0x2);
-				mapping.put("date",  0x3);
-				mapping.put("url",  0x4);
-				mapping.put("tel",  0x5);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
-		@SuppressLint("NewApi")
-		final static class ValidationErrorDisplay  extends AbstractBitFlagConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("popup", 0x1);
-				mapping.put("label", 0x2);
-				mapping.put("style", 0x4);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
 	
 	@SuppressLint("NewApi")
 	public static void register(String localName) {
 
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selected").withType("boolean").withOrder(10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("style").withType("string").withStylePriority(0));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("errorStyle").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validateForm").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validation").withType("array").withArrayType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_required").withType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_minlength").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_maxlength").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_min").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_max").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_pattern").withType("resourcestring"));
+		ConverterFactory.register("View.vtype", new Vtype());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_type").withType("View.vtype"));
+		ConverterFactory.register("View.validationErrorDisplay", new ValidationErrorDisplay());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validationErrorDisplayType").withType("View.validationErrorDisplay"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageValues").withType("array").withArrayType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageKeys").withType("array").withArrayType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("invalidateOnFrameChange").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("id").withType("id"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("alpha").withType("float"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelSyncEvents").withType("string"));
@@ -218,24 +236,8 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("rotationY").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleX").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleY").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selected").withType("boolean").withOrder(10));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("style").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("errorStyle").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validateForm").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validation").withType("array").withArrayType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_required").withType("resourcestring"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_minlength").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_maxlength").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_min").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_max").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_pattern").withType("resourcestring"));
-		ConverterFactory.register("View.vtype", new Vtype());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_type").withType("View.vtype"));
-		ConverterFactory.register("View.validationErrorDisplay", new ValidationErrorDisplay());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validationErrorDisplayType").withType("View.validationErrorDisplay"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageValues").withType("array").withArrayType("resourcestring").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageKeys").withType("array").withArrayType("resourcestring").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("invalidateOnFrameChange").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outsideTouchable").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onSwiped").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("enableFeatures").withType("string"));
 		
@@ -249,7 +251,11 @@ public class ViewImpl {
 
 	@SuppressLint("NewApi")
 	public static void setAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-		setAttribute(w, w.asNativeWidget(), key, strValue, objValue, decorator);
+		Object nativeWidget = w.invokeMethod("nativeWidgetFor", key.getAttributeName());
+		if (nativeWidget == null) {
+			nativeWidget = w.asNativeWidget();
+		}
+		setAttribute(w, nativeWidget, key, strValue, objValue, decorator);
 	}
 	@SuppressLint("NewApi")
 	public static void setAttribute(IWidget w, SimpleWrapableView wrapperView, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -274,6 +280,150 @@ public class ViewImpl {
 		View view = (View) w.asWidget();
 		org.teavm.jso.dom.html.HTMLElement hTMLElement = (org.teavm.jso.dom.html.HTMLElement) nativeWidget;
 		switch (key.getAttributeName()) {
+		case "selected": {
+
+
+		setSelected(objValue, view);
+
+
+
+			}
+			break;
+		case "style": {
+
+
+		setStyle(w, view, objValue);
+
+
+
+			}
+			break;
+		case "errorStyle": {
+
+
+		setErrorStyle(w, view, objValue);
+
+
+
+			}
+			break;
+		case "validateForm": {
+
+
+		validateForm(w, objValue);
+
+
+
+			}
+			break;
+		case "validation": {
+
+
+		setValidation(w, objValue);
+
+
+
+			}
+			break;
+		case "v_required": {
+
+
+		setRequired(w, objValue);
+
+
+
+			}
+			break;
+		case "v_minlength": {
+
+
+		setMinlength(w, objValue);
+
+
+
+			}
+			break;
+		case "v_maxlength": {
+
+
+		setMaxlength(w, objValue);
+
+
+
+			}
+			break;
+		case "v_min": {
+
+
+		setMin(w, objValue);
+
+
+
+			}
+			break;
+		case "v_max": {
+
+
+		setMax(w, objValue);
+
+
+
+			}
+			break;
+		case "v_pattern": {
+
+
+		setPattern(w, objValue);
+
+
+
+			}
+			break;
+		case "v_type": {
+
+
+		setType(w, strValue, objValue);
+
+
+
+			}
+			break;
+		case "validationErrorDisplayType": {
+
+
+		setValidationErrorDisplay(w, strValue, objValue);
+
+
+
+			}
+			break;
+		case "customErrorMessageValues": {
+
+
+		setCustomErrorMessageValues(w, objValue);
+
+
+
+			}
+			break;
+		case "customErrorMessageKeys": {
+
+
+		setCustomErrorMessageKeys(w, objValue);
+
+
+
+			}
+			break;
+		case "invalidateOnFrameChange": {
+
+
+		setInvalidateOnFrameChange(w, objValue);
+
+
+
+			}
+			break;
 		case "id": {
 
 
@@ -714,145 +864,19 @@ if (objValue instanceof java.util.List) {
 
 			}
 			break;
-		case "selected": {
+		case "outsideTouchable": {
 
 
-		setSelected(objValue, view);
-
-
-
-			}
-			break;
-		case "style": {
-
-
-		setStyle(w, view, objValue);
+		setOutsideTouchable(w, strValue, objValue, view);
 
 
 
 			}
 			break;
-		case "errorStyle": {
+		case "onSwiped": {
 
 
-		setErrorStyle(w, view, objValue);
-
-
-
-			}
-			break;
-		case "validateForm": {
-
-
-		validateForm(w, objValue);
-
-
-
-			}
-			break;
-		case "validation": {
-
-
-		setValidation(w, objValue);
-
-
-
-			}
-			break;
-		case "v_required": {
-
-
-		setRequired(w, objValue);
-
-
-
-			}
-			break;
-		case "v_minlength": {
-
-
-		setMinlength(w, objValue);
-
-
-
-			}
-			break;
-		case "v_maxlength": {
-
-
-		setMaxlength(w, objValue);
-
-
-
-			}
-			break;
-		case "v_min": {
-
-
-		setMin(w, objValue);
-
-
-
-			}
-			break;
-		case "v_max": {
-
-
-		setMax(w, objValue);
-
-
-
-			}
-			break;
-		case "v_pattern": {
-
-
-		setPattern(w, objValue);
-
-
-
-			}
-			break;
-		case "v_type": {
-
-
-		setType(w, strValue, objValue);
-
-
-
-			}
-			break;
-		case "validationErrorDisplayType": {
-
-
-		setValidationErrorDisplay(w, strValue, objValue);
-
-
-
-			}
-			break;
-		case "customErrorMessageValues": {
-
-
-		setCustomErrorMessageValues(w, objValue);
-
-
-
-			}
-			break;
-		case "customErrorMessageKeys": {
-
-
-		setCustomErrorMessageKeys(w, objValue);
-
-
-
-			}
-			break;
-		case "invalidateOnFrameChange": {
-
-
-		setInvalidateOnFrameChange(w, objValue);
+		if (objValue instanceof String) {setOnSwipeListener(w, new SwipeListener(w, strValue, "onSwiped"));} else {setOnSwipeListener(w, (SwipeHelper.SwipeListener) objValue);}
 
 
 
@@ -879,6 +903,10 @@ if (objValue instanceof java.util.List) {
 		View view = (View) w.asWidget();
 		org.teavm.jso.dom.html.HTMLElement hTMLElement = (org.teavm.jso.dom.html.HTMLElement) nativeWidget;
 		switch (key.getAttributeName()) {
+			case "selected": {
+return getSelected(w, view);			}
+			case "validateForm": {
+return getValidateFormResult(w);			}
 			case "id": {
 return view.getId();			}
 			case "alpha": {
@@ -933,10 +961,6 @@ return getRotationY(w, nativeWidget);			}
 return getScaleX(w, nativeWidget);			}
 			case "scaleY": {
 return getScaleY(w, nativeWidget);			}
-			case "selected": {
-return getSelected(w, view);			}
-			case "validateForm": {
-return getValidateFormResult(w);			}
 		}
 		
 		java.util.List<IAttributable> attributables = WidgetFactory.getAttributables("View", w.getLocalName());
@@ -1138,6 +1162,32 @@ return getValidateFormResult(w);			}
 		public void addListener(Object listener);
 		public void removeListener(Object listener);
 	}
+	
+
+	public static r.android.graphics.drawable.Drawable getDrawable(
+			r.android.content.res.ColorStateList colorStateList) {
+		int[][] states = colorStateList.getStates();
+		int[] colors = colorStateList.getColors();
+		r.android.graphics.drawable.StateListDrawable stateListDrawable = new r.android.graphics.drawable.StateListDrawable();
+		for (int i = 0; i < states.length; i++) {
+			int[] state = states[i];
+			r.android.graphics.drawable.Drawable drawable = new r.android.graphics.drawable.ColorDrawable();
+		   	drawable.setDrawable(ViewImpl.getColor(colors[i]));
+			stateListDrawable.addState(state, drawable);
+		}
+		return stateListDrawable;
+	}
+	
+	public static interface PanCallBack {
+		void handlePanStart(IWidget widget, Object eventWidget, int x, int y);
+		void handlePanDrag(IWidget widget, Object eventWidget, int x, int y);
+		void handlePanEnd(IWidget widget, Object eventWidget, int x, int y);
+	}
+
+	public static interface AnimationCallBack {
+		public void animating(int x, int y);
+	}
+
 	
 
 
@@ -1355,6 +1405,14 @@ return getValidateFormResult(w);			}
 		w.setInvalidateOnFrameChange((boolean) objValue);
 	}
 
+	
+
+
+	private static void setOnSwipeListener(IWidget w, com.ashera.layout.SwipeHelper.SwipeListener swipeListener) {
+		SwipeHelper helper = new SwipeHelper((int) w.quickConvert("30dp", "dimension"));
+		helper.setListener(swipeListener);
+		addSwipeListener(w, helper);		
+	}
 	
 
 
@@ -2097,6 +2155,84 @@ public java.util.Map<String, Object> getOnDragEventObj(View v,DragEvent event) {
 }
 }
 
+	@SuppressLint("NewApi")
+private static class SwipeListener implements SwipeHelper.SwipeListener, com.ashera.widget.IListener{
+private IWidget w; private View view; private String strValue; private String action;
+public String getAction() {return action;}
+public SwipeListener(IWidget w, String strValue)  {
+this.w = w; this.strValue = strValue;
+}
+public SwipeListener(IWidget w, String strValue, String action)  {
+this.w = w; this.strValue = strValue;this.action=action;
+}
+public boolean onSwiped(String direction){
+    boolean result = true;
+    
+	if (action == null || action.equals("onSwiped")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onSwiped");
+	    java.util.Map<String, Object> obj = getOnSwipedEventObj(direction);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		case ":":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, direction);
+		    	 if (commandResult != null) {
+		    		 result = (boolean) commandResult;
+		    	 }
+		    }
+		    if (commandType.equals(":")) {
+		    	return result;
+		    }
+			
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty()) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return result;
+}//#####
+
+public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "swiped");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+        PluginInvoker.putJSONSafeObjectIntoMap(obj, "direction", direction);
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onSwiped", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}
+}
+
 
 	
 
@@ -2127,6 +2263,156 @@ return (T) this;    }
 	}
 	
 
+public T tryGetSelected() {
+	Map<String, Object> attrs = initCommand("selected");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object isSelected() {
+	Map<String, Object> attrs = initCommand("selected");
+	return attrs.get("commandReturnValue");
+}
+public T setSelected(boolean value) {
+	Map<String, Object> attrs = initCommand("selected");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setStyle(String value) {
+	Map<String, Object> attrs = initCommand("style");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setErrorStyle(String value) {
+	Map<String, Object> attrs = initCommand("errorStyle");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetValidateForm() {
+	Map<String, Object> attrs = initCommand("validateForm_");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getValidateForm() {
+	Map<String, Object> attrs = initCommand("validateForm_");
+	return attrs.get("commandReturnValue");
+}
+public T validateForm(String value) {
+	Map<String, Object> attrs = initCommand("validateForm");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setValidation(String value) {
+	Map<String, Object> attrs = initCommand("validation");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_required(String value) {
+	Map<String, Object> attrs = initCommand("v_required");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_minlength(String value) {
+	Map<String, Object> attrs = initCommand("v_minlength");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_maxlength(String value) {
+	Map<String, Object> attrs = initCommand("v_maxlength");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_min(String value) {
+	Map<String, Object> attrs = initCommand("v_min");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_max(String value) {
+	Map<String, Object> attrs = initCommand("v_max");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_pattern(String value) {
+	Map<String, Object> attrs = initCommand("v_pattern");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_type(String value) {
+	Map<String, Object> attrs = initCommand("v_type");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setValidationErrorDisplayType(String value) {
+	Map<String, Object> attrs = initCommand("validationErrorDisplayType");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setCustomErrorMessageValues(String value) {
+	Map<String, Object> attrs = initCommand("customErrorMessageValues");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setCustomErrorMessageKeys(String value) {
+	Map<String, Object> attrs = initCommand("customErrorMessageKeys");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setInvalidateOnFrameChange(boolean value) {
+	Map<String, Object> attrs = initCommand("invalidateOnFrameChange");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 public T tryGetId() {
 	Map<String, Object> attrs = initCommand("id");
 	attrs.put("type", "attribute");
@@ -2804,150 +3090,16 @@ public T setScaleY(float value) {
 
 	attrs.put("value", value);
 return (T) this;}
-public T tryGetSelected() {
-	Map<String, Object> attrs = initCommand("selected");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return (T) this;}
-
-public Object isSelected() {
-	Map<String, Object> attrs = initCommand("selected");
-	return attrs.get("commandReturnValue");
-}
-public T setSelected(boolean value) {
-	Map<String, Object> attrs = initCommand("selected");
+public T setOutsideTouchable(boolean value) {
+	Map<String, Object> attrs = initCommand("outsideTouchable");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
 
 	attrs.put("value", value);
 return (T) this;}
-public T setStyle(String value) {
-	Map<String, Object> attrs = initCommand("style");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setErrorStyle(String value) {
-	Map<String, Object> attrs = initCommand("errorStyle");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T tryGetValidateForm() {
-	Map<String, Object> attrs = initCommand("validateForm_");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return (T) this;}
-
-public Object getValidateForm() {
-	Map<String, Object> attrs = initCommand("validateForm_");
-	return attrs.get("commandReturnValue");
-}
-public T validateForm(String value) {
-	Map<String, Object> attrs = initCommand("validateForm");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setValidation(String value) {
-	Map<String, Object> attrs = initCommand("validation");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_required(String value) {
-	Map<String, Object> attrs = initCommand("v_required");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_minlength(String value) {
-	Map<String, Object> attrs = initCommand("v_minlength");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_maxlength(String value) {
-	Map<String, Object> attrs = initCommand("v_maxlength");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_min(String value) {
-	Map<String, Object> attrs = initCommand("v_min");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_max(String value) {
-	Map<String, Object> attrs = initCommand("v_max");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_pattern(String value) {
-	Map<String, Object> attrs = initCommand("v_pattern");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_type(String value) {
-	Map<String, Object> attrs = initCommand("v_type");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setValidationErrorDisplayType(String value) {
-	Map<String, Object> attrs = initCommand("validationErrorDisplayType");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setCustomErrorMessageValues(String value) {
-	Map<String, Object> attrs = initCommand("customErrorMessageValues");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setCustomErrorMessageKeys(String value) {
-	Map<String, Object> attrs = initCommand("customErrorMessageKeys");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setInvalidateOnFrameChange(boolean value) {
-	Map<String, Object> attrs = initCommand("invalidateOnFrameChange");
+public T setOnSwiped(String value) {
+	Map<String, Object> attrs = initCommand("onSwiped");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -2979,6 +3131,76 @@ public static class ViewBean {
 	private ViewCommandBuilderInternal getBuilder() {
 		return commandBuilder;
 	}
+public Object isSelected() {
+	return getBuilder().reset().tryGetSelected().execute(false).isSelected(); 
+}
+public void setSelected(boolean value) {
+	getBuilder().reset().setSelected(value).execute(true);
+}
+
+public void setStyle(String value) {
+	getBuilder().reset().setStyle(value).execute(true);
+}
+
+public void setErrorStyle(String value) {
+	getBuilder().reset().setErrorStyle(value).execute(true);
+}
+
+public Object getValidateForm() {
+	return getBuilder().reset().tryGetValidateForm().execute(false).getValidateForm(); 
+}
+public void validateForm(String value) {
+	getBuilder().reset().validateForm(value).execute(true);
+}
+
+public void setValidation(String value) {
+	getBuilder().reset().setValidation(value).execute(true);
+}
+
+public void setV_required(String value) {
+	getBuilder().reset().setV_required(value).execute(true);
+}
+
+public void setV_minlength(String value) {
+	getBuilder().reset().setV_minlength(value).execute(true);
+}
+
+public void setV_maxlength(String value) {
+	getBuilder().reset().setV_maxlength(value).execute(true);
+}
+
+public void setV_min(String value) {
+	getBuilder().reset().setV_min(value).execute(true);
+}
+
+public void setV_max(String value) {
+	getBuilder().reset().setV_max(value).execute(true);
+}
+
+public void setV_pattern(String value) {
+	getBuilder().reset().setV_pattern(value).execute(true);
+}
+
+public void setV_type(String value) {
+	getBuilder().reset().setV_type(value).execute(true);
+}
+
+public void setValidationErrorDisplayType(String value) {
+	getBuilder().reset().setValidationErrorDisplayType(value).execute(true);
+}
+
+public void setCustomErrorMessageValues(String value) {
+	getBuilder().reset().setCustomErrorMessageValues(value).execute(true);
+}
+
+public void setCustomErrorMessageKeys(String value) {
+	getBuilder().reset().setCustomErrorMessageKeys(value).execute(true);
+}
+
+public void setInvalidateOnFrameChange(boolean value) {
+	getBuilder().reset().setInvalidateOnFrameChange(value).execute(true);
+}
+
 public Object getAlpha() {
 	return getBuilder().reset().tryGetAlpha().execute(false).getAlpha(); 
 }
@@ -3243,80 +3465,23 @@ public void setScaleY(float value) {
 	getBuilder().reset().setScaleY(value).execute(true);
 }
 
-public Object isSelected() {
-	return getBuilder().reset().tryGetSelected().execute(false).isSelected(); 
-}
-public void setSelected(boolean value) {
-	getBuilder().reset().setSelected(value).execute(true);
+public void setOutsideTouchable(boolean value) {
+	getBuilder().reset().setOutsideTouchable(value).execute(true);
 }
 
-public void setStyle(String value) {
-	getBuilder().reset().setStyle(value).execute(true);
-}
-
-public void setErrorStyle(String value) {
-	getBuilder().reset().setErrorStyle(value).execute(true);
-}
-
-public Object getValidateForm() {
-	return getBuilder().reset().tryGetValidateForm().execute(false).getValidateForm(); 
-}
-public void validateForm(String value) {
-	getBuilder().reset().validateForm(value).execute(true);
-}
-
-public void setValidation(String value) {
-	getBuilder().reset().setValidation(value).execute(true);
-}
-
-public void setV_required(String value) {
-	getBuilder().reset().setV_required(value).execute(true);
-}
-
-public void setV_minlength(String value) {
-	getBuilder().reset().setV_minlength(value).execute(true);
-}
-
-public void setV_maxlength(String value) {
-	getBuilder().reset().setV_maxlength(value).execute(true);
-}
-
-public void setV_min(String value) {
-	getBuilder().reset().setV_min(value).execute(true);
-}
-
-public void setV_max(String value) {
-	getBuilder().reset().setV_max(value).execute(true);
-}
-
-public void setV_pattern(String value) {
-	getBuilder().reset().setV_pattern(value).execute(true);
-}
-
-public void setV_type(String value) {
-	getBuilder().reset().setV_type(value).execute(true);
-}
-
-public void setValidationErrorDisplayType(String value) {
-	getBuilder().reset().setValidationErrorDisplayType(value).execute(true);
-}
-
-public void setCustomErrorMessageValues(String value) {
-	getBuilder().reset().setCustomErrorMessageValues(value).execute(true);
-}
-
-public void setCustomErrorMessageKeys(String value) {
-	getBuilder().reset().setCustomErrorMessageKeys(value).execute(true);
-}
-
-public void setInvalidateOnFrameChange(boolean value) {
-	getBuilder().reset().setInvalidateOnFrameChange(value).execute(true);
+public void setOnSwiped(String value) {
+	getBuilder().reset().setOnSwiped(value).execute(true);
 }
 
 }
 
 
 	// end - body
+
+	public static int getX(Object nativeWidget) {
+		HTMLElement htmlElement = (org.teavm.jso.dom.html.HTMLElement) nativeWidget;
+		return getPropertyValueAsInt(htmlElement, "left");
+	}
 
 	public static void updateBounds(Object uiView, int x, int y, int width, int height) {
 		nativeMakeFrame(uiView, x, y, x + width, y + height);		
@@ -3329,6 +3494,12 @@ public void setInvalidateOnFrameChange(boolean value) {
 		htmlElement.getStyle().setProperty("left", l + "px");
 		htmlElement.getStyle().setProperty("top", t +"px");
 	}
+	
+	public static void updateBoundsX(Object nativeWidget, int currentX) {
+		HTMLElement htmlElement = (org.teavm.jso.dom.html.HTMLElement) nativeWidget;
+		htmlElement.getStyle().setProperty("left", currentX + "px");
+	}
+
 
 	public static int getPropertyValueAsInt(HTMLElement htmlElement, String property) {
 		String propertyValue = htmlElement.getStyle().getPropertyValue(property);
@@ -3577,10 +3748,20 @@ public void setInvalidateOnFrameChange(boolean value) {
 		}
 		View view = (View) w.asWidget();
 		view.setOnKeyListener(onKeyListener);
-		org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.KeyboardEvent> listener = (event) -> view.invokeKeyListenerUp(event.getKeyCode());
+		org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.KeyboardEvent> listener = (event) -> {
+			if (w.getFromTempCache("onKeypreventDefault" + event.getKeyCode()) != null) {
+				event.preventDefault();
+			}
+			view.invokeKeyListenerUp(event.getKeyCode());
+		};
 		setOnListener(w, nativeWidget, listener, "keyup", "keyup");
 		
-		org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.KeyboardEvent> downlistener = (event) -> view.invokeKeyListenerDown(event.getKeyCode());
+		org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.KeyboardEvent> downlistener = (event) -> {
+			if (w.getFromTempCache("onKeypreventDefault" + event.getKeyCode()) != null) {
+				event.preventDefault();
+			}
+			view.invokeKeyListenerDown(event.getKeyCode());
+		};
 		setOnListener(w, nativeWidget, downlistener, "keydown", "keydown");
 	}
 
@@ -4077,4 +4258,127 @@ public void setInvalidateOnFrameChange(boolean value) {
 	private static void setNativeId(IWidget w, String strValue) {
 		((HTMLElement) w.asNativeWidget()).setAttribute("id", strValue.replace("@+id/", ""));
 	}
+	private static void setOutsideTouchable(IWidget w, String strValue, Object objValue, View view) {
+		ViewImpl.setOnClick(w, w.asNativeWidget(), new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if ((boolean) objValue) {
+					 w.getFragment().getEventBus().notifyObservers(com.ashera.widget.bus.Event.StandardEvents.outsideClicked.toString(), null);
+				}
+			}
+		});
+	}
+	
+	
+	private static void addSwipeListener(IWidget w, SwipeHelper swipeHelper) {
+        setOnListener(w, w.asNativeWidget(), (event) -> swipeHelper.onActionDown(((org.teavm.jso.dom.events.MouseEvent) event).getClientX(), ((org.teavm.jso.dom.events.MouseEvent) event).getClientY()), "mousedownSwipe", "mousedown");
+        setOnListener(w, w.asNativeWidget(), (event) -> swipeHelper.onActionUp(((org.teavm.jso.dom.events.MouseEvent) event).getClientX(), ((org.teavm.jso.dom.events.MouseEvent) event).getClientY()), "mouseupSwipe", "mouseup");
+	}
+
+	public static void addPanListener(IWidget widget, Object uiView, PanCallBack callback) {
+		PanListener listener = new PanListener(widget, callback);
+		
+		((HTMLElement) uiView).addEventListener("dragend", listener, false);
+		((HTMLElement) uiView).addEventListener("mousedown", listener, false);
+		
+		((HTMLElement) uiView).addEventListener("mousemove", listener, false);
+		
+	}
+	
+	
+	public interface HtmlMouseEvent extends org.teavm.jso.dom.events.Event {
+	    @org.teavm.jso.JSProperty
+	    int getClientX();
+	    
+	    @org.teavm.jso.JSProperty
+	    int getClientY();
+	}
+
+	private static class PanListener implements org.teavm.jso.dom.events.EventListener<HtmlMouseEvent> {
+		private IWidget widget;
+		private PanCallBack callback;
+		public PanListener(IWidget widget, PanCallBack callback) {
+			this.callback = callback;
+			this.widget = widget;
+		}
+
+		@Override
+		public void handleEvent(HtmlMouseEvent event) {
+
+			int eventX = event.getClientX();
+			int eventY = event.getClientY();
+			switch (event.getType()) {
+			case "mousedown":
+				org.teavm.jso.browser.Window.current().addEventListener("mouseup", this, false);
+				callback.handlePanStart(widget, event.getTarget(),  eventX, eventY);
+				break;
+			case "mousemove":
+				callback.handlePanDrag(widget, event.getTarget(),  eventX, eventY);
+				break;
+			case "dragend":
+			case "mouseup":				
+				org.teavm.jso.browser.Window.current().removeEventListener("mouseup", this, false);
+				callback.handlePanEnd(widget, event.getTarget(),  eventX, eventY);
+				break;
+
+			default:
+				break;
+			}
+
+		}
+	}
+
+
+	public static void translateWithAnimation(Object pane, int x, int y, int animationDurationInMs, AnimationCallBack callBack) {
+		new AnimationUtils(pane, x, y, animationDurationInMs, callBack).start();
+	}
+
+	private static class AnimationUtils {
+		private int y;
+		private int x;
+		private int xAtStartOfAnim;
+		private Object animatingWidget;
+		private double start = -1;
+		private double speed;
+		private int animationDurationInMs;
+		private int direction = -1;
+		private AnimationCallBack callBack;
+		public AnimationUtils(Object animatingWidget, int x, int y, int animationDurationInMs, AnimationCallBack callBack) {
+			this.animatingWidget = animatingWidget;
+			int currentX = ViewImpl.getX(animatingWidget);
+			xAtStartOfAnim = currentX;
+			this.speed = Math.abs(Math.abs(currentX) - Math.abs(x)) / (animationDurationInMs * 1f);
+			this.y = y;
+			this.x = x;
+			this.animationDurationInMs = animationDurationInMs;
+			start = -1;
+			this.callBack = callBack;
+			direction = x > xAtStartOfAnim ? 1 : -1;
+		}
+		
+		public void start() {
+			org.teavm.jso.browser.Window.requestAnimationFrame(this::onAnimationFrame);
+		}
+		
+		private void onAnimationFrame(double timestamp) {
+			if (start == -1) {
+				start = timestamp;
+			}
+			double progress = timestamp - start;
+			
+			HTMLElement drawer = (HTMLElement) animatingWidget;
+			int newX = (int)Math.floor(xAtStartOfAnim + (progress * speed * direction));
+			
+			 if (progress <= animationDurationInMs) {
+				 org.teavm.jso.browser.Window.requestAnimationFrame(this::onAnimationFrame);
+			 } else {
+				 newX = x;
+			 }
+			 drawer.getStyle().setProperty("left", newX + "px");
+			 drawer.getStyle().setProperty("top", y + "px");
+			 callBack.animating(newX, y);
+		}
+
+	}
+
 }

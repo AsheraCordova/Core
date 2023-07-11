@@ -73,6 +73,9 @@ import { ScopedObject } from '../../app/ScopedObject';
 
 
 
+
+
+
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -183,8 +186,6 @@ export class AutoLinkTransformer implements ITranform {
 
 
 
-
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class SwitchImpl<T> extends ViewImpl<T>{
@@ -193,6 +194,15 @@ export abstract class SwitchImpl<T> extends ViewImpl<T>{
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
 		TransformerFactory.getInstance().register("autoLink", new AutoLinkTransformer());
     }	
+	@Type(() => CommandAttr)
+	@Expose({ name: "checked" })
+	checked!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "switchPadding" })
+	switchPadding!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "switchMinWidth" })
+	switchMinWidth!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "onCheckedChange" })
 	onCheckedChange!:CommandAttr<string>| undefined;
@@ -383,20 +393,17 @@ export abstract class SwitchImpl<T> extends ViewImpl<T>{
 	@Expose({ name: "textFormat" })
 	textFormat!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
-	@Expose({ name: "checked" })
-	checked!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "switchPadding" })
-	switchPadding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "switchMinWidth" })
-	switchMinWidth!:CommandAttr<string>| undefined;
+	@Expose({ name: "textAppearance" })
+	textAppearance!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
+		this.checked = undefined;
+		this.switchPadding = undefined;
+		this.switchMinWidth = undefined;
 		this.onCheckedChange = undefined;
 		this.text = undefined;
 		this.textColor = undefined;
@@ -460,9 +467,7 @@ export abstract class SwitchImpl<T> extends ViewImpl<T>{
 		this.autoLink = undefined;
 		this.textColorLink = undefined;
 		this.textFormat = undefined;
-		this.checked = undefined;
-		this.switchPadding = undefined;
-		this.switchMinWidth = undefined;
+		this.textAppearance = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -470,6 +475,102 @@ export abstract class SwitchImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
+
+	public tryGetChecked() : T {
+		this.resetIfRequired();
+		if (this.checked == null || this.checked == undefined) {
+			this.checked = new CommandAttr<boolean>()
+		}
+		
+		this.checked.setGetter(true);
+		this.orderGet++;
+		this.checked.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public isChecked() : boolean {
+		if (this.checked == null || this.checked == undefined) {
+			this.checked = new CommandAttr<boolean>();
+		}
+		return this.checked.getCommandReturnValue();
+	}
+	public setChecked(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.checked == null || this.checked == undefined) {
+			this.checked = new CommandAttr<boolean>();
+		}
+		
+		this.checked.setSetter(true);
+		this.checked.setValue(value);
+		this.orderSet++;
+		this.checked.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetSwitchPadding() : T {
+		this.resetIfRequired();
+		if (this.switchPadding == null || this.switchPadding == undefined) {
+			this.switchPadding = new CommandAttr<string>()
+		}
+		
+		this.switchPadding.setGetter(true);
+		this.orderGet++;
+		this.switchPadding.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getSwitchPadding() : string {
+		if (this.switchPadding == null || this.switchPadding == undefined) {
+			this.switchPadding = new CommandAttr<string>();
+		}
+		return this.switchPadding.getCommandReturnValue();
+	}
+	public setSwitchPadding(value : string) : T {
+		this.resetIfRequired();
+		if (this.switchPadding == null || this.switchPadding == undefined) {
+			this.switchPadding = new CommandAttr<string>();
+		}
+		
+		this.switchPadding.setSetter(true);
+		this.switchPadding.setValue(value);
+		this.orderSet++;
+		this.switchPadding.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetSwitchMinWidth() : T {
+		this.resetIfRequired();
+		if (this.switchMinWidth == null || this.switchMinWidth == undefined) {
+			this.switchMinWidth = new CommandAttr<string>()
+		}
+		
+		this.switchMinWidth.setGetter(true);
+		this.orderGet++;
+		this.switchMinWidth.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getSwitchMinWidth() : string {
+		if (this.switchMinWidth == null || this.switchMinWidth == undefined) {
+			this.switchMinWidth = new CommandAttr<string>();
+		}
+		return this.switchMinWidth.getCommandReturnValue();
+	}
+	public setSwitchMinWidth(value : string) : T {
+		this.resetIfRequired();
+		if (this.switchMinWidth == null || this.switchMinWidth == undefined) {
+			this.switchMinWidth = new CommandAttr<string>();
+		}
+		
+		this.switchMinWidth.setSetter(true);
+		this.switchMinWidth.setValue(value);
+		this.orderSet++;
+		this.switchMinWidth.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
 
 	public setOnCheckedChange(value : string) : T {
 		this.resetIfRequired();
@@ -2019,98 +2120,16 @@ this.autoLink.setTransformer('autoLink');		return this.thisPointer;
 	}
 		
 
-	public tryGetChecked() : T {
+	public setTextAppearance(value : string) : T {
 		this.resetIfRequired();
-		if (this.checked == null || this.checked == undefined) {
-			this.checked = new CommandAttr<boolean>()
+		if (this.textAppearance == null || this.textAppearance == undefined) {
+			this.textAppearance = new CommandAttr<string>();
 		}
 		
-		this.checked.setGetter(true);
-		this.orderGet++;
-		this.checked.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public isChecked() : boolean {
-		if (this.checked == null || this.checked == undefined) {
-			this.checked = new CommandAttr<boolean>();
-		}
-		return this.checked.getCommandReturnValue();
-	}
-	public setChecked(value : boolean) : T {
-		this.resetIfRequired();
-		if (this.checked == null || this.checked == undefined) {
-			this.checked = new CommandAttr<boolean>();
-		}
-		
-		this.checked.setSetter(true);
-		this.checked.setValue(value);
+		this.textAppearance.setSetter(true);
+		this.textAppearance.setValue(value);
 		this.orderSet++;
-		this.checked.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetSwitchPadding() : T {
-		this.resetIfRequired();
-		if (this.switchPadding == null || this.switchPadding == undefined) {
-			this.switchPadding = new CommandAttr<string>()
-		}
-		
-		this.switchPadding.setGetter(true);
-		this.orderGet++;
-		this.switchPadding.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getSwitchPadding() : string {
-		if (this.switchPadding == null || this.switchPadding == undefined) {
-			this.switchPadding = new CommandAttr<string>();
-		}
-		return this.switchPadding.getCommandReturnValue();
-	}
-	public setSwitchPadding(value : string) : T {
-		this.resetIfRequired();
-		if (this.switchPadding == null || this.switchPadding == undefined) {
-			this.switchPadding = new CommandAttr<string>();
-		}
-		
-		this.switchPadding.setSetter(true);
-		this.switchPadding.setValue(value);
-		this.orderSet++;
-		this.switchPadding.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetSwitchMinWidth() : T {
-		this.resetIfRequired();
-		if (this.switchMinWidth == null || this.switchMinWidth == undefined) {
-			this.switchMinWidth = new CommandAttr<string>()
-		}
-		
-		this.switchMinWidth.setGetter(true);
-		this.orderGet++;
-		this.switchMinWidth.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getSwitchMinWidth() : string {
-		if (this.switchMinWidth == null || this.switchMinWidth == undefined) {
-			this.switchMinWidth = new CommandAttr<string>();
-		}
-		return this.switchMinWidth.getCommandReturnValue();
-	}
-	public setSwitchMinWidth(value : string) : T {
-		this.resetIfRequired();
-		if (this.switchMinWidth == null || this.switchMinWidth == undefined) {
-			this.switchMinWidth = new CommandAttr<string>();
-		}
-		
-		this.switchMinWidth.setSetter(true);
-		this.switchMinWidth.setValue(value);
-		this.orderSet++;
-		this.switchMinWidth.setOrderSet(this.orderSet);
+		this.textAppearance.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

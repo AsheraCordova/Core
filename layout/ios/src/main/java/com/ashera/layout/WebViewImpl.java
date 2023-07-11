@@ -51,7 +51,7 @@ public class WebViewImpl extends BaseWidget {
 	public final static String GROUP_NAME = "WebView";
 
 	protected @Property Object uiView;
-	protected MeasurableViewGroup measurableViewGroup;		
+	protected r.android.webkit.WebView measurableView;		
 	
 	
 	@Override
@@ -59,18 +59,24 @@ public class WebViewImpl extends BaseWidget {
 		ViewImpl.register(attributeName);
 
 
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("loadUrl").withType("resourcestring"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onPageStarted").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onPageFinished").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onReceivedError").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("loadUrl").withType("resourcestring"));
 	}
 	
 	public WebViewImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  WebViewImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  WebViewImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 @com.google.j2objc.annotations.WeakOuter		
-	public class WebViewExt extends MeasurableViewGroup implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
+	public class WebViewExt extends r.android.webkit.WebView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 		private int mMaxWidth = -1;
@@ -93,12 +99,7 @@ public class WebViewImpl extends BaseWidget {
 		}
 
 		public WebViewExt() {
-			
-			
-			
-			super(WebViewImpl.this);
-			
-			
+			super();
 			
 		}
 		
@@ -186,7 +187,44 @@ public class WebViewImpl extends BaseWidget {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(WebViewImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(WebViewImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	WebViewImpl.this.getParent().remove(WebViewImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -196,27 +234,31 @@ public class WebViewImpl extends BaseWidget {
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			WebViewImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ViewImpl.nativeSetVisibility(asNativeWidget(), visibility != View.VISIBLE);
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((WebViewExt) measurableViewGroup).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return WebViewExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new WebViewImpl();
+		return new WebViewImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableViewGroup = new WebViewExt();
+		measurableView = new WebViewExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 		setWidgetOnNativeClass();
@@ -232,16 +274,6 @@ public class WebViewImpl extends BaseWidget {
 		ViewImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
-			case "loadUrl": {
-				
-
-
-		loadUrl(objValue);
-
-
-
-			}
-			break;
 			case "onPageStarted": {
 				
 
@@ -272,6 +304,16 @@ public class WebViewImpl extends BaseWidget {
 
 			}
 			break;
+			case "loadUrl": {
+				
+
+
+		loadUrl(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -294,7 +336,7 @@ public class WebViewImpl extends BaseWidget {
 	
 	@Override
 	public Object asWidget() {
-		return measurableViewGroup;
+		return measurableView;
 	}
 
 	
@@ -585,10 +627,14 @@ public java.util.Map<String, Object> getOnReceivedErrorEventObj(View view,String
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableViewGroup.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -638,14 +684,6 @@ public  class WebViewCommandBuilder extends com.ashera.layout.ViewImpl.ViewComma
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
-public WebViewCommandBuilder loadUrl(String value) {
-	Map<String, Object> attrs = initCommand("loadUrl");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public WebViewCommandBuilder setOnPageStarted(String value) {
 	Map<String, Object> attrs = initCommand("onPageStarted");
 	attrs.put("type", "attribute");
@@ -670,15 +708,19 @@ public WebViewCommandBuilder setOnReceivedError(String value) {
 
 	attrs.put("value", value);
 return this;}
+public WebViewCommandBuilder loadUrl(String value) {
+	Map<String, Object> attrs = initCommand("loadUrl");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class WebViewBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public WebViewBean() {
 			super(WebViewImpl.this);
 		}
-public void loadUrl(String value) {
-	getBuilder().reset().loadUrl(value).execute(true);
-}
-
 public void setOnPageStarted(String value) {
 	getBuilder().reset().setOnPageStarted(value).execute(true);
 }
@@ -691,6 +733,10 @@ public void setOnReceivedError(String value) {
 	getBuilder().reset().setOnReceivedError(value).execute(true);
 }
 
+public void loadUrl(String value) {
+	getBuilder().reset().loadUrl(value).execute(true);
+}
+
 }
 
 
@@ -700,7 +746,7 @@ public void setOnReceivedError(String value) {
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
   signal_catch_init();
   signal_try(1) {
-  	[self onPageFinishedWithADView: measurableViewGroup_];
+  	[self onPageFinishedWithADView: measurableView_];
   }
   signal_catch(1) {
   	// do nothing
@@ -709,11 +755,11 @@ public void setOnReceivedError(String value) {
 }
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
-    [self onReceivedErrorWithADView:measurableViewGroup_ withNSString:[error localizedDescription]];
-  	[self onPageFinishedWithADView: measurableViewGroup_];
+    [self onReceivedErrorWithADView:measurableView_ withNSString:[error localizedDescription]];
+  	[self onPageFinishedWithADView: measurableView_];
 }
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    [self onPageStartedWithADView: measurableViewGroup_];
+    [self onPageStartedWithADView: measurableView_];
 }
 
 ]-*/

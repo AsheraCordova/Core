@@ -355,7 +355,8 @@ public class RadioButtonImpl extends BaseWidget implements com.ashera.validation
 		ConverterFactory.register("RadioButton.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("RadioButton.textStyle"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("systemTextAppearance").withType("style"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("password").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
@@ -379,6 +380,12 @@ public class RadioButtonImpl extends BaseWidget implements com.ashera.validation
 	public RadioButtonImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  RadioButtonImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  RadioButtonImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
 	public class RadioButtonExt extends androidx.appcompat.widget.AppCompatRadioButton implements ILifeCycleDecorator{
@@ -391,11 +398,6 @@ public class RadioButtonImpl extends BaseWidget implements com.ashera.validation
 
 		public RadioButtonExt(Context context) {
 			super(context);
-			
-			
-			
-			
-			
 			
 		}
 		
@@ -500,14 +502,14 @@ public class RadioButtonImpl extends BaseWidget implements com.ashera.validation
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(RadioButtonImpl.this);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-	    ((RadioButtonExt) appCompatRadioButton).updateMeasuredDimension(width, height);
+	}	@Override
+	public Class getViewClass() {
+		return RadioButtonExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new RadioButtonImpl();
+		return new RadioButtonImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -1170,11 +1172,21 @@ if (Build.VERSION.SDK_INT >= 21) {
 
 			}
 			break;
-			case "textAppearance": {
+			case "systemTextAppearance": {
 				
 
 
 		TextViewCompat.setTextAppearance(appCompatRadioButton, (int)objValue);
+
+
+
+			}
+			break;
+			case "textAppearance": {
+				
+
+
+		ViewImpl.setStyle(this, objValue);
 
 
 
@@ -3247,6 +3259,14 @@ public RadioButtonCommandBuilder setFontFamily(String value) {
 
 	attrs.put("value", value);
 return this;}
+public RadioButtonCommandBuilder setSystemTextAppearance(String value) {
+	Map<String, Object> attrs = initCommand("systemTextAppearance");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public RadioButtonCommandBuilder setTextAppearance(String value) {
 	Map<String, Object> attrs = initCommand("textAppearance");
 	attrs.put("type", "attribute");
@@ -3829,6 +3849,10 @@ public void setTextStyle(String value) {
 
 public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
+}
+
+public void setSystemTextAppearance(String value) {
+	getBuilder().reset().setSystemTextAppearance(value).execute(true);
 }
 
 public void setTextAppearance(String value) {

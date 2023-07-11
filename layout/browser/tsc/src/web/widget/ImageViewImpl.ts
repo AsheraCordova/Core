@@ -52,9 +52,6 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 	static initialize() {
     }	
 	@Type(() => CommandAttr)
-	@Expose({ name: "scaleType" })
-	scaleType!:CommandAttr<ScaleType>| undefined;
-	@Type(() => CommandAttr)
 	@Expose({ name: "src" })
 	src!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
@@ -111,13 +108,15 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "paddingVertical" })
 	paddingVertical!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "scaleType" })
+	scaleType!:CommandAttr<ScaleType>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
 		super.reset();
-		this.scaleType = undefined;
 		this.src = undefined;
 		this.adjustViewBounds = undefined;
 		this.maxHeight = undefined;
@@ -137,6 +136,7 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 		this.paddingEnd = undefined;
 		this.paddingHorizontal = undefined;
 		this.paddingVertical = undefined;
+		this.scaleType = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -144,38 +144,6 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 		this.thisPointer = this.getThisPointer();
 	}
 	
-
-	public tryGetScaleType() : T {
-		this.resetIfRequired();
-		if (this.scaleType == null || this.scaleType == undefined) {
-			this.scaleType = new CommandAttr<ScaleType>()
-		}
-		
-		this.scaleType.setGetter(true);
-		this.orderGet++;
-		this.scaleType.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getScaleType() : ScaleType {
-		if (this.scaleType == null || this.scaleType == undefined) {
-			this.scaleType = new CommandAttr<ScaleType>();
-		}
-		return this.scaleType.getCommandReturnValue();
-	}
-	public setScaleType(value : ScaleType) : T {
-		this.resetIfRequired();
-		if (this.scaleType == null || this.scaleType == undefined) {
-			this.scaleType = new CommandAttr<ScaleType>();
-		}
-		
-		this.scaleType.setSetter(true);
-		this.scaleType.setValue(value);
-		this.orderSet++;
-		this.scaleType.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
 
 	public tryGetSrc() : T {
 		this.resetIfRequired();
@@ -673,6 +641,38 @@ export abstract class ImageViewImpl<T> extends ViewImpl<T>{
 		this.paddingVertical.setValue(value);
 		this.orderSet++;
 		this.paddingVertical.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetScaleType() : T {
+		this.resetIfRequired();
+		if (this.scaleType == null || this.scaleType == undefined) {
+			this.scaleType = new CommandAttr<ScaleType>()
+		}
+		
+		this.scaleType.setGetter(true);
+		this.orderGet++;
+		this.scaleType.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getScaleType() : ScaleType {
+		if (this.scaleType == null || this.scaleType == undefined) {
+			this.scaleType = new CommandAttr<ScaleType>();
+		}
+		return this.scaleType.getCommandReturnValue();
+	}
+	public setScaleType(value : ScaleType) : T {
+		this.resetIfRequired();
+		if (this.scaleType == null || this.scaleType == undefined) {
+			this.scaleType = new CommandAttr<ScaleType>();
+		}
+		
+		this.scaleType.setSetter(true);
+		this.scaleType.setValue(value);
+		this.orderSet++;
+		this.scaleType.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

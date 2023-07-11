@@ -37,6 +37,8 @@ public class LayoutPlugin  {
         WidgetFactory.register(new com.ashera.layout.WebViewImpl());
         WidgetFactory.register(new com.ashera.layout.ProgressBarImpl());
         WidgetFactory.register(new com.ashera.layout.UIProgressViewImpl());
+        WidgetFactory.register(new com.ashera.layout.PopupWindowImpl());
+        WidgetFactory.register(new com.ashera.layout.AutoCompleteTextViewImpl());
         //end - widgets
 		ConverterFactory.registerCommandConverter(new ClipPaddingMaskCommand("clipToPadding"));
 

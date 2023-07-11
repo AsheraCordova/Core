@@ -215,6 +215,7 @@ export class TextStyleTransformer implements ITranform {
 
 
 
+
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class RadioButtonImpl<T> extends ViewImpl<T>{
@@ -410,6 +411,9 @@ export abstract class RadioButtonImpl<T> extends ViewImpl<T>{
 	@Expose({ name: "fontFamily" })
 	fontFamily!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
+	@Expose({ name: "systemTextAppearance" })
+	systemTextAppearance!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
 	@Expose({ name: "textAppearance" })
 	textAppearance!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
@@ -528,6 +532,7 @@ export abstract class RadioButtonImpl<T> extends ViewImpl<T>{
 		this.typeface = undefined;
 		this.textStyle = undefined;
 		this.fontFamily = undefined;
+		this.systemTextAppearance = undefined;
 		this.textAppearance = undefined;
 		this.password = undefined;
 		this.enabled = undefined;
@@ -2191,6 +2196,20 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.fontFamily.setValue(value);
 		this.orderSet++;
 		this.fontFamily.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSystemTextAppearance(value : string) : T {
+		this.resetIfRequired();
+		if (this.systemTextAppearance == null || this.systemTextAppearance == undefined) {
+			this.systemTextAppearance = new CommandAttr<string>();
+		}
+		
+		this.systemTextAppearance.setSetter(true);
+		this.systemTextAppearance.setValue(value);
+		this.orderSet++;
+		this.systemTextAppearance.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

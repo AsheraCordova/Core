@@ -32,4 +32,5 @@ interface ICore {
 	int getMaxMemory(Object context);
 	Object decodeBitmapStream(InputStream stream, Object options);
 	void runOnMainThread(Runnable runnable);
+	void enqueueTaskForEventLoop(Runnable runnable, long delay);
 }

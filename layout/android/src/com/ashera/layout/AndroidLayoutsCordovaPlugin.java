@@ -38,6 +38,8 @@ public class AndroidLayoutsCordovaPlugin extends CordovaPlugin {
         WidgetFactory.register(new com.ashera.layout.MultiSelectionSpinnerImpl());
         WidgetFactory.register(new com.ashera.layout.WebViewImpl());
         WidgetFactory.register(new com.ashera.layout.ProgressBarImpl());
+        WidgetFactory.register(new com.ashera.layout.PopupWindowImpl());
+        WidgetFactory.register(new com.ashera.layout.AutoCompleteTextViewImpl());
         //end - widgets
 
 

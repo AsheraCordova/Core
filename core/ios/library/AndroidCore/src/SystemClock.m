@@ -21,9 +21,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADSystemClock_elapsedRealtime();
 }
 
++ (jlong)uptimeMillis {
+  return ADSystemClock_uptimeMillis();
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "J", 0x9, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -31,8 +36,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(elapsedRealtime);
+  methods[2].selector = @selector(uptimeMillis);
   #pragma clang diagnostic pop
-  static const J2ObjcClassInfo _ADSystemClock = { "SystemClock", "r.android.os", NULL, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADSystemClock = { "SystemClock", "r.android.os", NULL, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_ADSystemClock;
 }
 
@@ -51,6 +57,11 @@ ADSystemClock *create_ADSystemClock_init() {
 }
 
 jlong ADSystemClock_elapsedRealtime() {
+  ADSystemClock_initialize();
+  return JavaLangSystem_currentTimeMillis();
+}
+
+jlong ADSystemClock_uptimeMillis() {
   ADSystemClock_initialize();
   return JavaLangSystem_currentTimeMillis();
 }

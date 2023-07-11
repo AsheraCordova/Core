@@ -57,7 +57,7 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 	public final static String GROUP_NAME = "ProgressBar";
 
 	protected @Property Object uiView;
-	protected MeasurableView measurableView;		
+	protected r.android.widget.ProgressBar measurableView;		
 	
 	
 	@Override
@@ -67,7 +67,6 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosHidesWhenStopped").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosColor").withType("color"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressTint").withType("colorstate"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("padding").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingBottom").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingRight").withType("dimension"));
@@ -77,15 +76,22 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressTint").withType("colorstate"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("iosStyle").withType("string"));
 	}
 	
 	public ProgressBarImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  ProgressBarImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  ProgressBarImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 @com.google.j2objc.annotations.WeakOuter		
-	public class ProgressBarExt extends MeasurableView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
+	public class ProgressBarExt extends r.android.widget.ProgressBar implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 		private int mMaxWidth = -1;
@@ -108,12 +114,7 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 		}
 
 		public ProgressBarExt() {
-			
-			
-			
 			super(ProgressBarImpl.this);
-			
-			
 			
 		}
 		
@@ -202,7 +203,44 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ProgressBarImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(ProgressBarImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	ProgressBarImpl.this.getParent().remove(ProgressBarImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -212,20 +250,33 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			ProgressBarImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ViewImpl.nativeSetVisibility(asNativeWidget(), visibility != View.VISIBLE);
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((ProgressBarExt) measurableView).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+	}	@Override
+	public Class getViewClass() {
+		return ProgressBarExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new ProgressBarImpl();
+		return new ProgressBarImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -264,16 +315,6 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 
 
 		setColor(nativeWidget, objValue);
-
-
-
-			}
-			break;
-			case "progressTint": {
-				
-
-
-		setProgressTint(objValue);
 
 
 
@@ -369,6 +410,16 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 
 			}
 			break;
+			case "progressTint": {
+				
+
+
+		setProgressTint(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -388,8 +439,6 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 return getHidesWhenStopped();				}
 			case "iosColor": {
 return getColor();				}
-			case "progressTint": {
-return getProgressTint();				}
 			case "paddingBottom": {
 return getPaddingBottom();				}
 			case "paddingRight": {
@@ -402,6 +451,8 @@ return getPaddingStart();				}
 return getPaddingEnd();				}
 			case "paddingTop": {
 return getPaddingTop();				}
+			case "progressTint": {
+return getProgressTint();				}
 		}
 		
 		return null;
@@ -505,6 +556,10 @@ return ((ASUIActivityIndicatorView*) uiView_).color;
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -591,25 +646,6 @@ public Object getIosColor() {
 }
 public ProgressBarCommandBuilder setIosColor(String value) {
 	Map<String, Object> attrs = initCommand("iosColor");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ProgressBarCommandBuilder tryGetProgressTint() {
-	Map<String, Object> attrs = initCommand("progressTint");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getProgressTint() {
-	Map<String, Object> attrs = initCommand("progressTint");
-	return attrs.get("commandReturnValue");
-}
-public ProgressBarCommandBuilder setProgressTint(String value) {
-	Map<String, Object> attrs = initCommand("progressTint");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -754,6 +790,25 @@ public ProgressBarCommandBuilder setPaddingVertical(String value) {
 
 	attrs.put("value", value);
 return this;}
+public ProgressBarCommandBuilder tryGetProgressTint() {
+	Map<String, Object> attrs = initCommand("progressTint");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getProgressTint() {
+	Map<String, Object> attrs = initCommand("progressTint");
+	return attrs.get("commandReturnValue");
+}
+public ProgressBarCommandBuilder setProgressTint(String value) {
+	Map<String, Object> attrs = initCommand("progressTint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class ProgressBarBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public ProgressBarBean() {
@@ -771,13 +826,6 @@ public Object getIosColor() {
 }
 public void setIosColor(String value) {
 	getBuilder().reset().setIosColor(value).execute(true);
-}
-
-public Object getProgressTint() {
-	return getBuilder().reset().tryGetProgressTint().execute(false).getProgressTint(); 
-}
-public void setProgressTint(String value) {
-	getBuilder().reset().setProgressTint(value).execute(true);
 }
 
 public void setPadding(String value) {
@@ -832,6 +880,13 @@ public void setPaddingHorizontal(String value) {
 
 public void setPaddingVertical(String value) {
 	getBuilder().reset().setPaddingVertical(value).execute(true);
+}
+
+public Object getProgressTint() {
+	return getBuilder().reset().tryGetProgressTint().execute(false).getProgressTint(); 
+}
+public void setProgressTint(String value) {
+	getBuilder().reset().setProgressTint(value).execute(true);
 }
 
 }

@@ -27,6 +27,7 @@
 #include "java/lang/Character.h"
 #include "java/lang/Enum.h"
 #include "java/lang/Exception.h"
+#include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
@@ -75,7 +76,6 @@
   ASWidgetAttribute *widgetAttribute_;
   id handler_;
   id<JavaLangRunnable> mTickRunnable_;
-  NSString *text_;
 }
 
 - (jboolean)setupAutoSizeUniformPresetSizesConfiguration;
@@ -106,6 +106,8 @@
 
 - (void)invalidateDrawableWithADDrawable:(ADDrawable *)dr;
 
+- (void)setTextSizeWithFloat:(jfloat)f;
+
 @end
 
 J2OBJC_FIELD_SETTER(ADTextView, mTextColor_, ADColorStateList *)
@@ -121,7 +123,6 @@ J2OBJC_FIELD_SETTER(ADTextView, mText_, NSString *)
 J2OBJC_FIELD_SETTER(ADTextView, widgetAttribute_, ASWidgetAttribute *)
 J2OBJC_FIELD_SETTER(ADTextView, handler_, id)
 J2OBJC_FIELD_SETTER(ADTextView, mTickRunnable_, id<JavaLangRunnable>)
-J2OBJC_FIELD_SETTER(ADTextView, text_, NSString *)
 
 inline jint ADTextView_get_LINES(void);
 #define ADTextView_LINES 1
@@ -180,6 +181,8 @@ __attribute__((unused)) static jint ADTextView_getExtendedPaddingBottom(ADTextVi
 __attribute__((unused)) static jint ADTextView_getExtendedPaddingTop(ADTextView *self);
 
 __attribute__((unused)) static void ADTextView_invalidateDrawableWithADDrawable_(ADTextView *self, ADDrawable *dr);
+
+__attribute__((unused)) static void ADTextView_setTextSizeWithFloat_(ADTextView *self, jfloat f);
 
 @interface ADTextView_OnEditorActionListener : NSObject
 
@@ -550,11 +553,6 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   }
 }
 
-- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)mAutoSizeTextSizeInPx
-                                withADRectF:(ADRectF *)availableSpace {
-  return false;
-}
-
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget {
   ADTextView_initWithASIWidget_(self, widget);
   return self;
@@ -574,15 +572,6 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
                      withInt:(jint)unknownBoring2
                      withInt:(jint)j
                  withBoolean:(jboolean)b {
-}
-
-- (void)setTextSizeInternalWithInt:(jint)unit
-                         withFloat:(jfloat)optimalTextSize
-                       withBoolean:(jboolean)b {
-}
-
-- (jfloat)getTextSize {
-  return 0;
 }
 
 - (void)setUpAutoSizeTextTypeUniformWithInt:(jint)autoSizeMin
@@ -607,10 +596,6 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   ADTextView_autoSizeText(self);
 }
 
-- (void)setWidgetInfoWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute {
-  JreStrongAssign(&self->widgetAttribute_, widgetAttribute);
-}
-
 - (void)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
                                 withInt:(jint)delay {
   JreStrongAssign(&self->mTickRunnable_, mTickRunnable);
@@ -622,28 +607,15 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   }
 }
 
-- (void)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable {
+- (jboolean)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable {
   if (self->mTickRunnable_ != nil && handler_ != nil) {
     ASPluginInvoker_removeCallbacksWithId_withJavaLangRunnable_(handler_, mTickRunnable);
   }
+  return true;
 }
 
 - (jboolean)isShown {
   return true;
-}
-
-- (void)setTextWithNSString:(NSString *)text {
-  JreStrongAssign(&self->text_, text);
-  @try {
-    [((id<ASIWidget>) nil_chk([self getWidget])) setAttributeWithASWidgetAttribute:widgetAttribute_ withNSString:text withId:text withASILifeCycleDecorator:nil];
-  }
-  @catch (JavaLangException *e) {
-    [e printStackTrace];
-  }
-}
-
-- (NSString *)getText {
-  return self->text_;
 }
 
 - (jint)measureWidthWithInt:(jint)widthMode
@@ -740,6 +712,48 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   ADTextView_invalidateDrawableWithADDrawable_(self, dr);
 }
 
+- (void)setTextSizeInternalWithInt:(jint)unit
+                         withFloat:(jfloat)optimalTextSize
+                       withBoolean:(jboolean)b {
+}
+
+- (jboolean)suggestedSizeFitsInSpaceWithInt:(jint)mAutoSizeTextSizeInPx
+                                withADRectF:(ADRectF *)availableSpace {
+  jfloat width = [((ADRectF *) nil_chk(availableSpace)) width];
+  jfloat height = [availableSpace height];
+  ADTextView_setTextSizeWithFloat_(self, mAutoSizeTextSizeInPx * 1.0f);
+  jint y = [self computeSizeWithFloat:width];
+  if (y > height) {
+    return false;
+  }
+  return true;
+}
+
+- (jfloat)getTextSize {
+  return 0;
+}
+
+- (void)setTextWithNSString:(NSString *)text {
+  JreStrongAssign(&mText_, text);
+  [self setMyAttributeWithNSString:@"text" withId:text];
+}
+
+- (NSString *)getText {
+  // can't call an abstract method
+  [self doesNotRecognizeSelector:_cmd];
+  return 0;
+}
+
+- (jint)computeSizeWithFloat:(jfloat)width {
+  // can't call an abstract method
+  [self doesNotRecognizeSelector:_cmd];
+  return 0;
+}
+
+- (void)setTextSizeWithFloat:(jfloat)f {
+  ADTextView_setTextSizeWithFloat_(self, f);
+}
+
 - (void)dealloc {
   RELEASE_(mTextColor_);
   RELEASE_(mHintTextColor_);
@@ -755,7 +769,6 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   RELEASE_(widgetAttribute_);
   RELEASE_(handler_);
   RELEASE_(mTickRunnable_);
-  RELEASE_(text_);
   [super dealloc];
 }
 
@@ -815,25 +828,19 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADTextDirectionHeuristic;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 28, 29, -1, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, 30, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 28, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 31, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 33, 34, -1, -1, -1, -1 },
-    { NULL, "F", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 35, 36, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 37, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 29, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 31, 32, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 33, 7, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 38, 39, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 41, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 42, 43, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 34, 35, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 36, 37, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 44, 45, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 46, 36, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 47, 36, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 38, 32, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 39, 32, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -842,9 +849,16 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LJavaUtilLocale;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "[LNSString;", 0x1, 48, 49, -1, -1, -1, -1 },
+    { NULL, "[LNSString;", 0x1, 40, 41, -1, -1, -1, -1 },
     { NULL, "LADColorStateList;", 0x11, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 50, 51, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 42, 43, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 44, 45, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 46, 47, -1, -1, -1, -1 },
+    { NULL, "F", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 48, 49, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, 50, 51, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 52, 51, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -903,42 +917,43 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
   methods[51].selector = @selector(isAutoSizeEnabled);
   methods[52].selector = @selector(supportsAutoSizeText);
   methods[53].selector = @selector(getTextDirectionHeuristic);
-  methods[54].selector = @selector(suggestedSizeFitsInSpaceWithInt:withADRectF:);
-  methods[55].selector = @selector(initWithASIWidget:);
-  methods[56].selector = @selector(getExtendedPaddingBottom);
-  methods[57].selector = @selector(getExtendedPaddingTop);
-  methods[58].selector = @selector(makeNewLayoutWithInt:withInt:withInt:withInt:withInt:withBoolean:);
-  methods[59].selector = @selector(setTextSizeInternalWithInt:withFloat:withBoolean:);
-  methods[60].selector = @selector(getTextSize);
-  methods[61].selector = @selector(setUpAutoSizeTextTypeUniformWithInt:withInt:withInt:);
-  methods[62].selector = @selector(isAutoSizeTextTypeUniformWithInt:);
-  methods[63].selector = @selector(clearAutoSizeTypeConfiguration);
-  methods[64].selector = @selector(autoResizeText);
-  methods[65].selector = @selector(setWidgetInfoWithASWidgetAttribute:);
-  methods[66].selector = @selector(postDelayedWithJavaLangRunnable:withInt:);
-  methods[67].selector = @selector(removeCallbacksWithJavaLangRunnable:);
-  methods[68].selector = @selector(isShown);
-  methods[69].selector = @selector(setTextWithNSString:);
-  methods[70].selector = @selector(getText);
-  methods[71].selector = @selector(measureWidthWithInt:withInt:withInt:);
-  methods[72].selector = @selector(measureHeightWithInt:withInt:withInt:);
-  methods[73].selector = @selector(getLineHeightPadding);
-  methods[74].selector = @selector(getBorderPadding);
-  methods[75].selector = @selector(getLineHeight);
-  methods[76].selector = @selector(getBorderWidth);
-  methods[77].selector = @selector(getAlignmentOfLayout);
-  methods[78].selector = @selector(hasPasswordTransformationMethod);
-  methods[79].selector = @selector(getTextLocale);
-  methods[80].selector = @selector(isTypePhone);
-  methods[81].selector = @selector(getDigitStringsWithJavaTextDecimalFormatSymbols:);
-  methods[82].selector = @selector(getTextColors);
-  methods[83].selector = @selector(invalidateDrawableWithADDrawable:);
+  methods[54].selector = @selector(initWithASIWidget:);
+  methods[55].selector = @selector(getExtendedPaddingBottom);
+  methods[56].selector = @selector(getExtendedPaddingTop);
+  methods[57].selector = @selector(makeNewLayoutWithInt:withInt:withInt:withInt:withInt:withBoolean:);
+  methods[58].selector = @selector(setUpAutoSizeTextTypeUniformWithInt:withInt:withInt:);
+  methods[59].selector = @selector(isAutoSizeTextTypeUniformWithInt:);
+  methods[60].selector = @selector(clearAutoSizeTypeConfiguration);
+  methods[61].selector = @selector(autoResizeText);
+  methods[62].selector = @selector(postDelayedWithJavaLangRunnable:withInt:);
+  methods[63].selector = @selector(removeCallbacksWithJavaLangRunnable:);
+  methods[64].selector = @selector(isShown);
+  methods[65].selector = @selector(measureWidthWithInt:withInt:withInt:);
+  methods[66].selector = @selector(measureHeightWithInt:withInt:withInt:);
+  methods[67].selector = @selector(getLineHeightPadding);
+  methods[68].selector = @selector(getBorderPadding);
+  methods[69].selector = @selector(getLineHeight);
+  methods[70].selector = @selector(getBorderWidth);
+  methods[71].selector = @selector(getAlignmentOfLayout);
+  methods[72].selector = @selector(hasPasswordTransformationMethod);
+  methods[73].selector = @selector(getTextLocale);
+  methods[74].selector = @selector(isTypePhone);
+  methods[75].selector = @selector(getDigitStringsWithJavaTextDecimalFormatSymbols:);
+  methods[76].selector = @selector(getTextColors);
+  methods[77].selector = @selector(invalidateDrawableWithADDrawable:);
+  methods[78].selector = @selector(setTextSizeInternalWithInt:withFloat:withBoolean:);
+  methods[79].selector = @selector(suggestedSizeFitsInSpaceWithInt:withADRectF:);
+  methods[80].selector = @selector(getTextSize);
+  methods[81].selector = @selector(setTextWithNSString:);
+  methods[82].selector = @selector(getText);
+  methods[83].selector = @selector(computeSizeWithFloat:);
+  methods[84].selector = @selector(setTextSizeWithFloat:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "LINES", "I", .constantValue.asInt = ADTextView_LINES, 0x1a, -1, -1, -1, -1 },
     { "EMS", "I", .constantValue.asInt = ADTextView_EMS, 0x1a, -1, -1, -1, -1 },
     { "PIXELS", "I", .constantValue.asInt = ADTextView_PIXELS, 0x1a, -1, -1, -1, -1 },
-    { "TEMP_RECTF", "LADRectF;", .constantValue.asLong = 0, 0x1a, -1, 52, -1, -1 },
+    { "TEMP_RECTF", "LADRectF;", .constantValue.asLong = 0, 0x1a, -1, 53, -1, -1 },
     { "mTextColor_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mHintTextColor_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mLinkTextColor_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -946,7 +961,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
     { "mCurHintTextColor_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mDrawables_", "LADTextView_Drawables;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mHintLayout_", "LADLayout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mListeners_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 53, -1 },
+    { "mListeners_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 54, -1 },
     { "mTextPaint_", "LADTextView_TextPaint;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
     { "mLayout_", "LADLayout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mGravity_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -956,7 +971,7 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
     { "mMinMode_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidthMode_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mMinWidth_TextView_", "I", .constantValue.asLong = 0, 0x2, 54, -1, -1, -1 },
+    { "mMinWidth_TextView_", "I", .constantValue.asLong = 0, 0x2, 55, -1, -1, -1 },
     { "mMinWidthMode_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mEditor_", "LADTextView_Editor;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "AUTO_SIZE_TEXT_TYPE_NONE", "I", .constantValue.asInt = ADTextView_AUTO_SIZE_TEXT_TYPE_NONE, 0x19, -1, -1, -1, -1 },
@@ -977,10 +992,9 @@ J2OBJC_INITIALIZED_DEFN(ADTextView)
     { "widgetAttribute_", "LASWidgetAttribute;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "handler_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mTickRunnable_", "LJavaLangRunnable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "text_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setAutoSizeTextTypeUniformWithPresetSizes", "[II", "validateAndSetAutoSizeTextTypeUniformConfiguration", "FFF", "cleanupAutoSizePresetSizes", "[I", "setTextColor", "I", "LADColorStateList;", "setHintTextColor", "setLinkTextColor", "setGravity", "setMinLines", "setMinHeight", "setMaxLines", "setMaxHeight", "setLines", "setMinEms", "setMinWidth", "setMaxEms", "setMaxWidth", "setEms", "setWidth", "findLargestTextSizeWhichFits", "LADRectF;", "addTextChangedListener", "LADTextWatcher;", "removeTextChangedListener", "suggestedSizeFitsInSpace", "ILADRectF;", "LASIWidget;", "makeNewLayout", "IIIIIZ", "setTextSizeInternal", "IFZ", "setUpAutoSizeTextTypeUniform", "III", "isAutoSizeTextTypeUniform", "setWidgetInfo", "LASWidgetAttribute;", "postDelayed", "LJavaLangRunnable;I", "removeCallbacks", "LJavaLangRunnable;", "setText", "LNSString;", "measureWidth", "measureHeight", "getDigitStrings", "LJavaTextDecimalFormatSymbols;", "invalidateDrawable", "LADDrawable;", &ADTextView_TEMP_RECTF, "Ljava/util/ArrayList<Lr/android/text/TextWatcher;>;", "mMinWidth", "LADTextView_OnEditorActionListener;LADTextView_BufferType;LADTextView_TypedValue;LADTextView_Editor;LADTextView_TextPaint;LADTextView_Drawables;" };
-  static const J2ObjcClassInfo _ADTextView = { "TextView", "r.android.widget", ptrTable, methods, fields, 7, 0x401, 84, 43, -1, 55, -1, -1, -1 };
+  static const void *ptrTable[] = { "setAutoSizeTextTypeUniformWithPresetSizes", "[II", "validateAndSetAutoSizeTextTypeUniformConfiguration", "FFF", "cleanupAutoSizePresetSizes", "[I", "setTextColor", "I", "LADColorStateList;", "setHintTextColor", "setLinkTextColor", "setGravity", "setMinLines", "setMinHeight", "setMaxLines", "setMaxHeight", "setLines", "setMinEms", "setMinWidth", "setMaxEms", "setMaxWidth", "setEms", "setWidth", "findLargestTextSizeWhichFits", "LADRectF;", "addTextChangedListener", "LADTextWatcher;", "removeTextChangedListener", "LASIWidget;", "makeNewLayout", "IIIIIZ", "setUpAutoSizeTextTypeUniform", "III", "isAutoSizeTextTypeUniform", "postDelayed", "LJavaLangRunnable;I", "removeCallbacks", "LJavaLangRunnable;", "measureWidth", "measureHeight", "getDigitStrings", "LJavaTextDecimalFormatSymbols;", "invalidateDrawable", "LADDrawable;", "setTextSizeInternal", "IFZ", "suggestedSizeFitsInSpace", "ILADRectF;", "setText", "LNSString;", "computeSize", "F", "setTextSize", &ADTextView_TEMP_RECTF, "Ljava/util/ArrayList<Lr/android/text/TextWatcher;>;", "mMinWidth", "LADTextView_OnEditorActionListener;LADTextView_BufferType;LADTextView_TypedValue;LADTextView_Editor;LADTextView_TextPaint;LADTextView_Drawables;" };
+  static const J2ObjcClassInfo _ADTextView = { "TextView", "r.android.widget", ptrTable, methods, fields, 7, 0x401, 85, 42, -1, 56, -1, -1, -1 };
   return &_ADTextView;
 }
 
@@ -1231,6 +1245,10 @@ jint ADTextView_getExtendedPaddingTop(ADTextView *self) {
 }
 
 void ADTextView_invalidateDrawableWithADDrawable_(ADTextView *self, ADDrawable *dr) {
+}
+
+void ADTextView_setTextSizeWithFloat_(ADTextView *self, jfloat f) {
+  [self setMyAttributeWithNSString:@"textSize" withId:JavaLangFloat_valueOfWithFloat_(f)];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextView)

@@ -108,7 +108,7 @@ public class RadioGroupImpl extends BaseHasWidgets implements com.ashera.validat
 
 	@Override
 	public IWidget newInstance() {
-		return new RadioGroupImpl();
+		return new RadioGroupImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -130,7 +130,7 @@ public class RadioGroupImpl extends BaseHasWidgets implements com.ashera.validat
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		radioGroup.removeView((View) w.asWidget());
          ViewGroupImpl.nativeRemoveView(w);            
@@ -267,12 +267,7 @@ return layoutParams.weight;			}
 		}
 
 		public RadioGroupExt() {
-			
-			
-			
-			
 			super();
-			
 			
 		}
 		
@@ -362,7 +357,46 @@ return layoutParams.weight;			}
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(RadioGroupImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(RadioGroupImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	RadioGroupImpl.this.getParent().remove(RadioGroupImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	org.eclipse.swt.widgets.Control control = (org.eclipse.swt.widgets.Control) asNativeWidget();
+			appScreenLocation[0] = control.toDisplay(0, 0).x;
+        	appScreenLocation[1] = control.toDisplay(0, 0).y;
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	org.eclipse.swt.widgets.Shell shell = ((org.eclipse.swt.widgets.Control)asNativeWidget()).getShell();
+        	displayFrame.left = shell.toDisplay(0, 0).x ;
+			displayFrame.top = shell.getShell().toDisplay(0, 0).y ;
+        	displayFrame.bottom = displayFrame.top + shell.getClientArea().height;
+        	displayFrame.right = displayFrame.left + shell.getBounds().width;
+        	
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -372,6 +406,10 @@ return layoutParams.weight;			}
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			RadioGroupImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
@@ -379,12 +417,11 @@ return layoutParams.weight;			}
             
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((RadioGroupExt) radioGroup).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return RadioGroupExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -582,42 +619,59 @@ return getDividerPadding();			}
     
 	
 
-	private void createCanvas() {
-	    canvas = new r.android.graphics.Canvas() {
-	    	List<org.eclipse.swt.widgets.Label> dividers = new java.util.ArrayList<>();
-			@Override
-			public void draw(r.android.graphics.drawable.Drawable mDivider) {
-				org.eclipse.swt.widgets.Label myLabel = new org.eclipse.swt.widgets.Label( (org.eclipse.swt.widgets.Composite) asNativeWidget(), org.eclipse.swt.SWT.NONE );
-				dividers.add(myLabel);
-				myLabel.setBounds(mDivider.getLeft(), mDivider.getTop(), mDivider.getRight() - mDivider.getLeft(), mDivider.getBottom() - mDivider.getTop());
 	
-				Object drawable = mDivider.getDrawable();
-				if (drawable instanceof org.eclipse.swt.graphics.Image) {
-					org.eclipse.swt.graphics.Rectangle bounds = myLabel.getBounds();
-					org.eclipse.swt.graphics.Image image = (org.eclipse.swt.graphics.Image) drawable;
-					if (bounds.width != 0 && bounds.height != 0) {
-						org.eclipse.swt.graphics.Image resize = com.ashera.common.ImageUtils.resize(image, bounds.width, bounds.height, 
-								new com.ashera.common.ImageUtils.ResizeOptions.Builder().initFromAttr(RadioGroupImpl.this, "divider").build());
-						myLabel.setImage(resize);				
-						getFragment().addDisposable(resize);
-					}
-					myLabel.setBackground(null);
-					getFragment().addDisposable(myLabel);
-				} else if (drawable instanceof org.eclipse.swt.graphics.Color){
-					myLabel.setBackground((org.eclipse.swt.graphics.Color) drawable);
-					myLabel.setImage(null);
+	private final static class CanvasImpl implements r.android.graphics.Canvas {
+		private List<org.eclipse.swt.widgets.Label> dividers = new java.util.ArrayList<>();
+		private boolean canvasReset = true;
+		private IWidget widget;
+		public CanvasImpl(IWidget widget) {
+			this.widget = widget;
+		}
+		@Override
+		public void draw(r.android.graphics.drawable.Drawable mDivider) {
+			for (org.eclipse.swt.widgets.Label divider : dividers) {
+				if (divider.getBounds().contains(mDivider.getLeft(), mDivider.getTop())) {
+					return;
 				}
 			}
+			
+			org.eclipse.swt.widgets.Label myLabel = new org.eclipse.swt.widgets.Label( (org.eclipse.swt.widgets.Composite) widget.asNativeWidget(), org.eclipse.swt.SWT.NONE );
+			dividers.add(myLabel);
+			myLabel.setBounds(mDivider.getLeft(), mDivider.getTop(), mDivider.getRight() - mDivider.getLeft(), mDivider.getBottom() - mDivider.getTop());
+			
+			Object drawable = mDivider.getDrawable();
+			if (drawable instanceof org.eclipse.swt.graphics.Image) {
+				org.eclipse.swt.graphics.Rectangle bounds = myLabel.getBounds();
+				org.eclipse.swt.graphics.Image image = (org.eclipse.swt.graphics.Image) drawable;
+				if (bounds.width != 0 && bounds.height != 0) {
+					org.eclipse.swt.graphics.Image resize = com.ashera.common.ImageUtils.resize(image, bounds.width, bounds.height, 
+							new com.ashera.common.ImageUtils.ResizeOptions.Builder().initFromAttr(widget, "divider").build());
+					myLabel.setImage(resize);				
+					widget.getFragment().addDisposable(resize);
+				}
+				myLabel.setBackground(null);
+				widget.getFragment().addDisposable(myLabel);
+			} else if (drawable instanceof org.eclipse.swt.graphics.Color){
+				myLabel.setBackground((org.eclipse.swt.graphics.Color) drawable);
+				myLabel.setImage(null);
+			}
+		}
 	
-			@Override
-			public void reset() {
+		@Override
+		public void reset() {
+			if (canvasReset) {
 				for (org.eclipse.swt.widgets.Label divider : dividers) {
 					divider.dispose();
 				}
 				dividers.clear();
 			}
-		};
+		}
 	}
+
+	private void createCanvas() {
+	    canvas = new CanvasImpl(this);
+	}
+
 	
 
 

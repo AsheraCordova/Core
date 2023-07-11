@@ -25,6 +25,7 @@
 @class ADRenderNode;
 @class ADResources;
 @class ADViewGroup_LayoutParams;
+@class ADViewTreeObserver;
 @class ADView_AccessibilityNodeProvider;
 @class ADView_AttachInfo;
 @class ADView_ListenerInfo;
@@ -32,8 +33,12 @@
 @class ADView_ViewRootImpl;
 @class IOSIntArray;
 @protocol ADCanvas;
+@protocol ADIBinder;
 @protocol ADViewParent;
+@protocol ADView_OnAttachStateChangeListener;
 @protocol ADView_OnKeyListener;
+@protocol ADView_OnLayoutChangeListener;
+@protocol JavaLangRunnable;
 
 @interface ADView : NSObject {
  @public
@@ -86,6 +91,10 @@
 
 - (instancetype)init;
 
+- (void)addOnAttachStateChangeListenerWithADView_OnAttachStateChangeListener:(id<ADView_OnAttachStateChangeListener>)listener;
+
+- (void)addOnLayoutChangeListenerWithADView_OnLayoutChangeListener:(id<ADView_OnLayoutChangeListener>)listener;
+
 - (void)applyBackgroundTint;
 
 - (void)applyForegroundTint;
@@ -109,11 +118,6 @@
 + (jint)combineMeasuredStatesWithInt:(jint)curState
                              withInt:(jint)newState;
 
-- (void)dispatchAttachedToWindowWithADView_AttachInfo:(ADView_AttachInfo *)mAttachInfo2
-                                              withInt:(jint)i;
-
-- (void)dispatchDetachedFromWindow;
-
 - (void)dispatchFinishTemporaryDetach;
 
 - (jboolean)dispatchKeyEventWithADKeyEvent:(ADKeyEvent *)event;
@@ -133,9 +137,13 @@
 
 - (ADView_AccessibilityNodeProvider *)getAccessibilityNodeProvider;
 
+- (jint)getAccessibilityViewId;
+
 - (jfloat)getAlpha;
 
 - (id)getAnimation;
+
+- (id<ADIBinder>)getApplicationWindowToken;
 
 - (ADDrawable *)getBackground;
 
@@ -176,6 +184,8 @@
 - (ADViewGroup_LayoutParams *)getLayoutParams;
 
 - (jint)getLeft;
+
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
 - (jint)getMeasuredHeight;
 
@@ -233,6 +243,10 @@
 
 - (jfloat)getScaleY;
 
+- (jint)getScrollX;
+
+- (jint)getScrollY;
+
 - (id)getTag;
 
 - (id)getTagWithInt:(jint)key;
@@ -251,13 +265,19 @@
 
 - (jint)getVerticalScrollbarWidth;
 
+- (ADViewTreeObserver *)getViewTreeObserver;
+
 - (jint)getVisibility;
 
 - (jint)getWidth;
 
-- (id)getWindowToken;
+- (void)getWindowDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (id<ADIBinder>)getWindowToken;
 
 - (jint)getWindowVisibility;
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
 
 - (jint)getZ;
 
@@ -272,6 +292,10 @@
 - (jboolean)hasUnhandledKeyListener;
 
 - (jboolean)hasWindowFocus;
+
+- (ADView *)inflateViewWithNSString:(NSString *)layout;
+
+- (void)initAttachInfo OBJC_METHOD_FAMILY_NONE;
 
 - (void)invalidate;
 
@@ -350,6 +374,8 @@
 - (void)measureWithInt:(jint)widthMeasureSpec
                withInt:(jint)heightMeasureSpec;
 
+- (void)needGlobalAttributesUpdateWithBoolean:(jboolean)b;
+
 - (void)notifySubtreeAccessibilityStateChangedIfNeeded;
 
 - (void)notifyViewAccessibilityStateChangedIfNeededWithInt:(jint)changeType;
@@ -374,7 +400,23 @@
 
 - (void)onStartTemporaryDetach;
 
+- (void)onVisibilityAggregatedWithBoolean:(jboolean)isVisible;
+
+- (jboolean)postWithJavaLangRunnable:(id<JavaLangRunnable>)action;
+
 - (void)refreshDrawableState;
+
+- (void)registerPendingFrameMetricsObservers;
+
+- (void)remeasure;
+
+- (jboolean)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)action;
+
+- (void)removeFromParent;
+
+- (void)removeOnAttachStateChangeListenerWithADView_OnAttachStateChangeListener:(id<ADView_OnAttachStateChangeListener>)listener;
+
+- (void)removeOnLayoutChangeListenerWithADView_OnLayoutChangeListener:(id<ADView_OnLayoutChangeListener>)listener;
 
 - (void)requestAccessibilityFocus;
 
@@ -383,6 +425,9 @@
 - (void)requestFocusFromTouch;
 
 - (void)requestLayout;
+
+- (jboolean)requestRectangleOnScreenWithADRect:(ADRect *)r
+                                   withBoolean:(jboolean)b;
 
 - (void)resetResolvedLayoutDirection;
 
@@ -472,6 +517,9 @@
 - (void)setMinimumHeightWithInt:(jint)minHeight;
 
 - (void)setMinimumWidthWithInt:(jint)minWidth;
+
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value;
 
 - (void)setOnKeyListenerWithADView_OnKeyListener:(id<ADView_OnKeyListener>)l;
 
@@ -578,6 +626,10 @@
 
 - (IOSIntArray *)onCreateDrawableStateWithInt:(jint)extraSpace;
 
+- (void)onDetachedFromWindow;
+
+- (void)onDetachedFromWindowInternal;
+
 - (void)onDrawWithADCanvas:(id<ADCanvas>)canvas;
 
 - (void)onLayoutWithBoolean:(jboolean)changed
@@ -593,6 +645,11 @@
                      withInt:(jint)h
                      withInt:(jint)oldw
                      withInt:(jint)oldh;
+
+- (void)onVisibilityChangedWithADView:(ADView *)changedView
+                              withInt:(jint)visibility;
+
+- (void)onWindowVisibilityChangedWithInt:(jint)visibility;
 
 - (void)resetResolvedDrawables;
 
@@ -618,11 +675,19 @@
 
 - (void)clearParentsWantFocus;
 
+- (jint)combineVisibilityWithInt:(jint)vis1
+                         withInt:(jint)vis2;
+
 - (ADInsets *)computeOpticalInsets;
 
 - (void)damageInParent;
 
 - (void)damageShadowReceiver;
+
+- (void)dispatchAttachedToWindowWithADView_AttachInfo:(ADView_AttachInfo *)info
+                                              withInt:(jint)visibility;
+
+- (void)dispatchDetachedFromWindow;
 
 - (ADView_ListenerInfo *)getListenerInfo;
 
@@ -1765,6 +1830,31 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_OnScrollChangeListener)
 
 #endif
 
+#if !defined (ADView_OnLayoutChangeListener_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_OnLayoutChangeListener))
+#define ADView_OnLayoutChangeListener_
+
+@class ADView;
+
+@protocol ADView_OnLayoutChangeListener < JavaObject >
+
+- (void)onLayoutChangeWithADView:(ADView *)v
+                         withInt:(jint)left
+                         withInt:(jint)top
+                         withInt:(jint)right
+                         withInt:(jint)bottom
+                         withInt:(jint)oldLeft
+                         withInt:(jint)oldTop
+                         withInt:(jint)oldRight
+                         withInt:(jint)oldBottom;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ADView_OnLayoutChangeListener)
+
+J2OBJC_TYPE_LITERAL_HEADER(ADView_OnLayoutChangeListener)
+
+#endif
+
 #if !defined (ADView_MeasureSpec_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_MeasureSpec))
 #define ADView_MeasureSpec_
 
@@ -1975,6 +2065,25 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_OnContextClickListener)
 
 #endif
 
+#if !defined (ADView_OnAttachStateChangeListener_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_OnAttachStateChangeListener))
+#define ADView_OnAttachStateChangeListener_
+
+@class ADView;
+
+@protocol ADView_OnAttachStateChangeListener < JavaObject >
+
+- (void)onViewAttachedToWindowWithADView:(ADView *)v;
+
+- (void)onViewDetachedFromWindowWithADView:(ADView *)v;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ADView_OnAttachStateChangeListener)
+
+J2OBJC_TYPE_LITERAL_HEADER(ADView_OnAttachStateChangeListener)
+
+#endif
+
 #if !defined (ADView_ThreadedRenderer_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_ThreadedRenderer))
 #define ADView_ThreadedRenderer_
 
@@ -2007,11 +2116,17 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ThreadedRenderer)
 #if !defined (ADView_AttachInfo_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_AttachInfo))
 #define ADView_AttachInfo_
 
+@class ADHandler;
 @class ADRect;
 @class ADView;
+@class ADViewTreeObserver;
+@protocol JavaUtilList;
 
 @interface ADView_AttachInfo : NSObject {
  @public
+  ADHandler *mHandler_;
+  id<JavaUtilList> mScrollContainers_;
+  ADViewTreeObserver *mTreeObserver_;
   ADView *mRootView_;
   jboolean mHardwareAccelerationRequested_;
   jint mWindowVisibility_;
@@ -2020,27 +2135,26 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ThreadedRenderer)
   jboolean mKeepScreenOn_;
 }
 
-#pragma mark Package-Private
+#pragma mark Public
 
-- (instancetype)initWithADView:(ADView *)outer$;
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_AttachInfo)
 
+J2OBJC_FIELD_SETTER(ADView_AttachInfo, mHandler_, ADHandler *)
+J2OBJC_FIELD_SETTER(ADView_AttachInfo, mScrollContainers_, id<JavaUtilList>)
+J2OBJC_FIELD_SETTER(ADView_AttachInfo, mTreeObserver_, ADViewTreeObserver *)
 J2OBJC_FIELD_SETTER(ADView_AttachInfo, mRootView_, ADView *)
 J2OBJC_FIELD_SETTER(ADView_AttachInfo, mTmpInvalRect_, ADRect *)
 J2OBJC_FIELD_SETTER(ADView_AttachInfo, mViewRequestingLayout_, id)
 
-FOUNDATION_EXPORT void ADView_AttachInfo_initWithADView_(ADView_AttachInfo *self, ADView *outer$);
+FOUNDATION_EXPORT void ADView_AttachInfo_init(ADView_AttachInfo *self);
 
-FOUNDATION_EXPORT ADView_AttachInfo *new_ADView_AttachInfo_initWithADView_(ADView *outer$) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADView_AttachInfo *new_ADView_AttachInfo_init(void) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADView_AttachInfo *create_ADView_AttachInfo_initWithADView_(ADView *outer$);
+FOUNDATION_EXPORT ADView_AttachInfo *create_ADView_AttachInfo_init(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_AttachInfo)
 
@@ -2152,10 +2266,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ViewRootImpl)
 
 @class ADView;
 @class JavaUtilArrayList;
+@class JavaUtilConcurrentCopyOnWriteArrayList;
 @protocol ADView_OnKeyListener;
 
 @interface ADView_ListenerInfo : NSObject {
  @public
+  JavaUtilConcurrentCopyOnWriteArrayList *mOnAttachStateChangeListeners_;
   JavaUtilArrayList *mOnLayoutChangeListeners_;
   id<ADView_OnKeyListener> mOnKeyListener_;
 }
@@ -2176,6 +2292,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ViewRootImpl)
 
 J2OBJC_EMPTY_STATIC_INIT(ADView_ListenerInfo)
 
+J2OBJC_FIELD_SETTER(ADView_ListenerInfo, mOnAttachStateChangeListeners_, JavaUtilConcurrentCopyOnWriteArrayList *)
 J2OBJC_FIELD_SETTER(ADView_ListenerInfo, mOnLayoutChangeListeners_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(ADView_ListenerInfo, mOnKeyListener_, id<ADView_OnKeyListener>)
 
@@ -2186,47 +2303,6 @@ FOUNDATION_EXPORT ADView_ListenerInfo *new_ADView_ListenerInfo_initWithADView_(A
 FOUNDATION_EXPORT ADView_ListenerInfo *create_ADView_ListenerInfo_initWithADView_(ADView *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_ListenerInfo)
-
-#endif
-
-#if !defined (ADView_OnLayoutChangeListener_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_OnLayoutChangeListener))
-#define ADView_OnLayoutChangeListener_
-
-@class ADView;
-
-@interface ADView_OnLayoutChangeListener : NSObject
-
-#pragma mark Public
-
-- (void)onLayoutChangeWithADView:(ADView *)v
-                         withInt:(jint)l
-                         withInt:(jint)t
-                         withInt:(jint)r
-                         withInt:(jint)b
-                         withInt:(jint)oldL
-                         withInt:(jint)oldT
-                         withInt:(jint)oldR
-                         withInt:(jint)oldB;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithADView:(ADView *)outer$;
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)init NS_UNAVAILABLE;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ADView_OnLayoutChangeListener)
-
-FOUNDATION_EXPORT void ADView_OnLayoutChangeListener_initWithADView_(ADView_OnLayoutChangeListener *self, ADView *outer$);
-
-FOUNDATION_EXPORT ADView_OnLayoutChangeListener *new_ADView_OnLayoutChangeListener_initWithADView_(ADView *outer$) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ADView_OnLayoutChangeListener *create_ADView_OnLayoutChangeListener_initWithADView_(ADView *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(ADView_OnLayoutChangeListener)
 
 #endif
 

@@ -3,50 +3,44 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\stub\r\android\view\WindowManager.java
 //
 
+#include "IBinder.h"
 #include "J2ObjC_source.h"
+#include "RelativeLayout.h"
+#include "View.h"
 #include "WindowManager.h"
 
 
-@implementation ADWindowManager
+@interface ADWindowManager : NSObject
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  ADWindowManager_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
+@end
+
+@implementation ADWindowManager
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(init);
+  methods[0].selector = @selector(addViewWithADView:withADWindowManager_LayoutParams:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LADWindowManager_LayoutParams;" };
-  static const J2ObjcClassInfo _ADWindowManager = { "WindowManager", "r.android.view", ptrTable, methods, NULL, 7, 0x1, 1, 0, -1, 0, -1, -1, -1 };
+  static const void *ptrTable[] = { "addView", "LADView;LADWindowManager_LayoutParams;", "LADWindowManager_LayoutParams;" };
+  static const J2ObjcClassInfo _ADWindowManager = { "WindowManager", "r.android.view", ptrTable, methods, NULL, 7, 0x609, 1, 0, -1, 2, -1, -1, -1 };
   return &_ADWindowManager;
 }
 
 @end
 
-void ADWindowManager_init(ADWindowManager *self) {
-  NSObject_init(self);
-}
-
-ADWindowManager *new_ADWindowManager_init() {
-  J2OBJC_NEW_IMPL(ADWindowManager, init)
-}
-
-ADWindowManager *create_ADWindowManager_init() {
-  J2OBJC_CREATE_IMPL(ADWindowManager, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADWindowManager)
+J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADWindowManager)
 
 @implementation ADWindowManager_LayoutParams
+
+- (instancetype)initWithInt:(jint)w
+                    withInt:(jint)h {
+  ADWindowManager_LayoutParams_initWithInt_withInt_(self, w, h);
+  return self;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -55,28 +49,76 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (void)setSurfaceInsetsWithADView:(ADView *)mBackgroundView
+                       withBoolean:(jboolean)b
+                       withBoolean:(jboolean)c {
+}
+
+- (void)setTitleWithNSString:(NSString *)string {
+}
+
+- (void)dealloc {
+  RELEASE_(accessibilityIdOfAnchor_);
+  RELEASE_(accessibilityTitle_);
+  RELEASE_(packageName_);
+  RELEASE_(token_);
+  [super dealloc];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(init);
+  methods[0].selector = @selector(initWithInt:withInt:);
+  methods[1].selector = @selector(init);
+  methods[2].selector = @selector(setSurfaceInsetsWithADView:withBoolean:withBoolean:);
+  methods[3].selector = @selector(setTitleWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
+    { "PRIVATE_FLAG_WILL_NOT_REPLACE_ON_RELAUNCH", "I", .constantValue.asInt = ADWindowManager_LayoutParams_PRIVATE_FLAG_WILL_NOT_REPLACE_ON_RELAUNCH, 0x19, -1, -1, -1, -1 },
+    { "PRIVATE_FLAG_LAYOUT_CHILD_WINDOW_IN_PARENT_FRAME", "I", .constantValue.asInt = ADWindowManager_LayoutParams_PRIVATE_FLAG_LAYOUT_CHILD_WINDOW_IN_PARENT_FRAME, 0x19, -1, -1, -1, -1 },
+    { "accessibilityIdOfAnchor_", "LNSObject;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "accessibilityTitle_", "LNSString;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "packageName_", "LNSString;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "flags_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "type_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "token_", "LADIBinder;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "format_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "windowAnimations_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "softInputMode_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "privateFlags_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
     { "FLAG_FULLSCREEN", "I", .constantValue.asInt = ADWindowManager_LayoutParams_FLAG_FULLSCREEN, 0x19, -1, -1, -1, -1 },
     { "FLAG_FORCE_NOT_FULLSCREEN", "I", .constantValue.asInt = ADWindowManager_LayoutParams_FLAG_FORCE_NOT_FULLSCREEN, 0x19, -1, -1, -1, -1 },
+    { "SOFT_INPUT_STATE_UNCHANGED", "I", .constantValue.asInt = ADWindowManager_LayoutParams_SOFT_INPUT_STATE_UNCHANGED, 0x19, -1, -1, -1, -1 },
+    { "TYPE_APPLICATION_PANEL", "I", .constantValue.asInt = ADWindowManager_LayoutParams_TYPE_APPLICATION_PANEL, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LADWindowManager;" };
-  static const J2ObjcClassInfo _ADWindowManager_LayoutParams = { "LayoutParams", "r.android.view", ptrTable, methods, fields, 7, 0x9, 1, 2, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "II", "setSurfaceInsets", "LADView;ZZ", "setTitle", "LNSString;", "LADWindowManager;" };
+  static const J2ObjcClassInfo _ADWindowManager_LayoutParams = { "LayoutParams", "r.android.view", ptrTable, methods, fields, 7, 0x9, 4, 16, 5, -1, -1, -1, -1 };
   return &_ADWindowManager_LayoutParams;
 }
 
 @end
 
+void ADWindowManager_LayoutParams_initWithInt_withInt_(ADWindowManager_LayoutParams *self, jint w, jint h) {
+  ADRelativeLayout_LayoutParams_initWithInt_withInt_(self, w, h);
+}
+
+ADWindowManager_LayoutParams *new_ADWindowManager_LayoutParams_initWithInt_withInt_(jint w, jint h) {
+  J2OBJC_NEW_IMPL(ADWindowManager_LayoutParams, initWithInt_withInt_, w, h)
+}
+
+ADWindowManager_LayoutParams *create_ADWindowManager_LayoutParams_initWithInt_withInt_(jint w, jint h) {
+  J2OBJC_CREATE_IMPL(ADWindowManager_LayoutParams, initWithInt_withInt_, w, h)
+}
+
 void ADWindowManager_LayoutParams_init(ADWindowManager_LayoutParams *self) {
-  NSObject_init(self);
+  ADRelativeLayout_LayoutParams_initWithInt_withInt_(self, 0, 0);
 }
 
 ADWindowManager_LayoutParams *new_ADWindowManager_LayoutParams_init() {

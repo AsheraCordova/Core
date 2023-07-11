@@ -110,7 +110,7 @@ public class RadioGroupImpl extends BaseHasWidgets implements com.ashera.validat
 
 	@Override
 	public IWidget newInstance() {
-		return new RadioGroupImpl();
+		return new RadioGroupImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -133,7 +133,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {
+	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		radioGroup.removeView((View) w.asWidget());
 		return remove;
@@ -270,11 +270,6 @@ return layoutParams.weight;			}
 		public RadioGroupExt(Context context) {
 			super(context);
 			
-			
-			
-			
-			
-			
 		}
 		
 		@Override
@@ -386,12 +381,11 @@ return layoutParams.weight;			}
         	ViewImpl.drawableStateChanged(RadioGroupImpl.this);
         }
 	}
-	
-	public void updateMeasuredDimension(int width, int height) {
-		((RadioGroupExt) radioGroup).updateMeasuredDimension(width, height);
+	@Override
+	public Class getViewClass() {
+		return RadioGroupExt.class;
 	}
 	
-
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {

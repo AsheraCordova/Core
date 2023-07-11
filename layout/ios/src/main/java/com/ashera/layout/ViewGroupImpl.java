@@ -74,6 +74,12 @@ public class ViewGroupImpl {
 	public static void setAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
 		ViewGroup viewGroup = ((ViewGroup) w.asWidget());
 		ViewGroupModelImpl.setAttribute(w, key, strValue, objValue, decorator);
+		setMyAttribute(w, key, strValue, objValue, decorator);
+	}
+	
+	private static void setMyAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
+		ViewGroup viewGroup = ((ViewGroup) w.asWidget());
+
 		switch (key.getAttributeName()) {
 			case "listitem": {
 

@@ -21,6 +21,7 @@ import static com.ashera.widget.IWidget.*;
 //end - imports
 /*-[
 #include "ASUITapGestureRecognizer.h"
+#include "ASUISwipeGestureRecognizer.h"
 #include "ASUILongTapGestureRecognizer.h"
 ]-*/
 import r.android.view.View.MotionEvent;
@@ -55,6 +56,44 @@ public class ViewImpl {
 				mapping.put("uiaccessibilitytraitsummaryelement",  LayoutNativeVars.UIAccessibilityTraitSummaryElement);
 				mapping.put("uiaccessibilitytraittabbar",  LayoutNativeVars.UIAccessibilityTraitTabBar);
 				mapping.put("uiaccessibilitytraitupdatesfrequently",  LayoutNativeVars.UIAccessibilityTraitUpdatesFrequently);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
+		final static class Vtype extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("email",  0x1);
+				mapping.put("time",  0x2);
+				mapping.put("date",  0x3);
+				mapping.put("url",  0x4);
+				mapping.put("tel",  0x5);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
+		final static class ValidationErrorDisplay  extends AbstractBitFlagConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("popup", 0x1);
+				mapping.put("label", 0x2);
+				mapping.put("style", 0x4);
 				}
 		@Override
 		public Map<String, Integer> getMapping() {
@@ -224,44 +263,6 @@ public class ViewImpl {
 				return 0;
 				}
 				}
-		@SuppressLint("NewApi")
-		final static class Vtype extends AbstractEnumToIntConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("email",  0x1);
-				mapping.put("time",  0x2);
-				mapping.put("date",  0x3);
-				mapping.put("url",  0x4);
-				mapping.put("tel",  0x5);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
-		@SuppressLint("NewApi")
-		final static class ValidationErrorDisplay  extends AbstractBitFlagConverter{
-		private Map<String, Integer> mapping = new HashMap<>();
-				{
-				mapping.put("popup", 0x1);
-				mapping.put("label", 0x2);
-				mapping.put("style", 0x4);
-				}
-		@Override
-		public Map<String, Integer> getMapping() {
-				return mapping;
-				}
-
-		@Override
-		public Integer getDefault() {
-				return 0;
-				}
-				}
 	
 	@SuppressLint("NewApi")
 	public static void register(String localName) {
@@ -297,6 +298,24 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosAccessibilityValue").withType("resourcestring"));
 		ConverterFactory.register("View.iosAccessibilityTraits", new IosAccessibilityTraits());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosAccessibilityTraits").withType("View.iosAccessibilityTraits"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selected").withType("boolean").withOrder(10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("style").withType("string").withStylePriority(0));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("errorStyle").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validateForm").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validation").withType("array").withArrayType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_required").withType("resourcestring"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_minlength").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_maxlength").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_min").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_max").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_pattern").withType("resourcestring"));
+		ConverterFactory.register("View.vtype", new Vtype());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_type").withType("View.vtype"));
+		ConverterFactory.register("View.validationErrorDisplay", new ValidationErrorDisplay());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validationErrorDisplayType").withType("View.validationErrorDisplay"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageValues").withType("array").withArrayType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageKeys").withType("array").withArrayType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("invalidateOnFrameChange").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("id").withType("id"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelSyncEvents").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelParam").withType("string"));
@@ -362,24 +381,8 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("zIndex").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxWidth").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selected").withType("boolean").withOrder(10));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("style").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("errorStyle").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validateForm").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validation").withType("array").withArrayType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_required").withType("resourcestring"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_minlength").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_maxlength").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_min").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_max").withType("string"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_pattern").withType("resourcestring"));
-		ConverterFactory.register("View.vtype", new Vtype());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("v_type").withType("View.vtype"));
-		ConverterFactory.register("View.validationErrorDisplay", new ValidationErrorDisplay());
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("validationErrorDisplayType").withType("View.validationErrorDisplay"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageValues").withType("array").withArrayType("resourcestring").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageKeys").withType("array").withArrayType("resourcestring").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("invalidateOnFrameChange").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onSwiped").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outsideTouchable").withType("boolean"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("enableFeatures").withType("string"));
 		
@@ -393,7 +396,11 @@ public class ViewImpl {
 
 	@SuppressLint("NewApi")
 	public static void setAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-		setAttribute(w, w.asNativeWidget(), key, strValue, objValue, decorator);
+		Object nativeWidget = w.invokeMethod("nativeWidgetFor", key.getAttributeName());
+		if (nativeWidget == null) {
+			nativeWidget = w.asNativeWidget();
+		}
+		setAttribute(w, nativeWidget, key, strValue, objValue, decorator);
 	}
 	@SuppressLint("NewApi")
 	public static void setAttribute(IWidget w, SimpleWrapableView wrapperView, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
@@ -658,6 +665,150 @@ if (checkIosVersion("13.0")) {
 
 
 		setAccessibilityTraits(nativeWidget, objValue);
+
+
+
+			}
+			break;
+		case "selected": {
+
+
+		setSelected(objValue, view);
+
+
+
+			}
+			break;
+		case "style": {
+
+
+		setStyle(w, view, objValue);
+
+
+
+			}
+			break;
+		case "errorStyle": {
+
+
+		setErrorStyle(w, view, objValue);
+
+
+
+			}
+			break;
+		case "validateForm": {
+
+
+		validateForm(w, objValue);
+
+
+
+			}
+			break;
+		case "validation": {
+
+
+		setValidation(w, objValue);
+
+
+
+			}
+			break;
+		case "v_required": {
+
+
+		setRequired(w, objValue);
+
+
+
+			}
+			break;
+		case "v_minlength": {
+
+
+		setMinlength(w, objValue);
+
+
+
+			}
+			break;
+		case "v_maxlength": {
+
+
+		setMaxlength(w, objValue);
+
+
+
+			}
+			break;
+		case "v_min": {
+
+
+		setMin(w, objValue);
+
+
+
+			}
+			break;
+		case "v_max": {
+
+
+		setMax(w, objValue);
+
+
+
+			}
+			break;
+		case "v_pattern": {
+
+
+		setPattern(w, objValue);
+
+
+
+			}
+			break;
+		case "v_type": {
+
+
+		setType(w, strValue, objValue);
+
+
+
+			}
+			break;
+		case "validationErrorDisplayType": {
+
+
+		setValidationErrorDisplay(w, strValue, objValue);
+
+
+
+			}
+			break;
+		case "customErrorMessageValues": {
+
+
+		setCustomErrorMessageValues(w, objValue);
+
+
+
+			}
+			break;
+		case "customErrorMessageKeys": {
+
+
+		setCustomErrorMessageKeys(w, objValue);
+
+
+
+			}
+			break;
+		case "invalidateOnFrameChange": {
+
+
+		setInvalidateOnFrameChange(w, objValue);
 
 
 
@@ -1193,145 +1344,19 @@ if (objValue instanceof java.util.List) {
 
 			}
 			break;
-		case "selected": {
+		case "onSwiped": {
 
 
-		setSelected(objValue, view);
-
-
-
-			}
-			break;
-		case "style": {
-
-
-		setStyle(w, view, objValue);
+		if (objValue instanceof String) {setOnSwipeListener(w, new SwipeListener(w, strValue, "onSwiped"));} else {setOnSwipeListener(w, (SwipeHelper.SwipeListener) objValue);}
 
 
 
 			}
 			break;
-		case "errorStyle": {
+		case "outsideTouchable": {
 
 
-		setErrorStyle(w, view, objValue);
-
-
-
-			}
-			break;
-		case "validateForm": {
-
-
-		validateForm(w, objValue);
-
-
-
-			}
-			break;
-		case "validation": {
-
-
-		setValidation(w, objValue);
-
-
-
-			}
-			break;
-		case "v_required": {
-
-
-		setRequired(w, objValue);
-
-
-
-			}
-			break;
-		case "v_minlength": {
-
-
-		setMinlength(w, objValue);
-
-
-
-			}
-			break;
-		case "v_maxlength": {
-
-
-		setMaxlength(w, objValue);
-
-
-
-			}
-			break;
-		case "v_min": {
-
-
-		setMin(w, objValue);
-
-
-
-			}
-			break;
-		case "v_max": {
-
-
-		setMax(w, objValue);
-
-
-
-			}
-			break;
-		case "v_pattern": {
-
-
-		setPattern(w, objValue);
-
-
-
-			}
-			break;
-		case "v_type": {
-
-
-		setType(w, strValue, objValue);
-
-
-
-			}
-			break;
-		case "validationErrorDisplayType": {
-
-
-		setValidationErrorDisplay(w, strValue, objValue);
-
-
-
-			}
-			break;
-		case "customErrorMessageValues": {
-
-
-		setCustomErrorMessageValues(w, objValue);
-
-
-
-			}
-			break;
-		case "customErrorMessageKeys": {
-
-
-		setCustomErrorMessageKeys(w, objValue);
-
-
-
-			}
-			break;
-		case "invalidateOnFrameChange": {
-
-
-		setInvalidateOnFrameChange(w, objValue);
+		setOutsideTouchable(w, strValue, objValue, view);
 
 
 
@@ -1427,6 +1452,10 @@ return getAccessibilityHint(nativeWidget);			}
 return getAccessibilityValue(nativeWidget);			}
 			case "iosAccessibilityTraits": {
 return getAccessibilityTraits(nativeWidget);			}
+			case "selected": {
+return getSelected(w, view);			}
+			case "validateForm": {
+return getValidateFormResult(w);			}
 			case "id": {
 return view.getId();			}
 			case "modelSyncEvents": {
@@ -1499,10 +1528,6 @@ return view.getForegroundGravity();			}
 return getMaxWidth(w);			}
 			case "maxHeight": {
 return getMaxHeight(w);			}
-			case "selected": {
-return getSelected(w, view);			}
-			case "validateForm": {
-return getValidateFormResult(w);			}
 		}
 		
 		java.util.List<IAttributable> attributables = WidgetFactory.getAttributables("View", w.getLocalName());
@@ -2133,6 +2158,107 @@ return getValidateFormResult(w);			}
 	}
 	
 
+
+    private static void setMinHeight(IWidget w, Object objValue) {
+        ((View) w.asWidget()).setMinimumHeight((int) objValue);
+        
+    }
+
+    private static void setMinWidth(IWidget w, Object objValue) {
+        ((View) w.asWidget()).setMinimumWidth((int) objValue);
+    }
+
+    private static Object getMinHeight(IWidget w) {
+        View view = (View) w.asWidget();
+        return view.getMinimumHeight();
+    }
+
+    private static Object getMinWidth(IWidget w) {
+        View view = (View) w.asWidget();
+        return view.getMinimumWidth();
+    }
+
+    private static Object getVisibility(IWidget w) {
+        View view = (View) w.asWidget();
+        return view.getVisibility();
+    }
+    
+	
+	private static void setLongClickable(IWidget w, Object objValue) {
+        View view = (View) w.asWidget();
+        view.setLongClickable((boolean) objValue); 
+	}
+
+
+	private static Object getLongClickable(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.isLongClickable();
+	}
+	
+	private static void setDuplicateParentState(IWidget w, Object objValue) {
+		View view = (View)w.asWidget();
+		view.setDuplicateParentStateEnabled((boolean)objValue);
+	}
+	
+	private static Object getDuplicateParentState(IWidget w) {
+		View view = (View)w.asWidget();
+		return view.isDuplicateParentStateEnabled();
+	}	
+
+	private static Object getClickable(IWidget w) {
+		View view = (View)w.asWidget();
+		return view.isClickable();
+	}
+	
+	public static void requestLayout(IWidget w) {
+		if (w.isInitialised()) {
+			w.requestLayout();
+		}
+	}
+	
+	
+	private static void invalidate(IWidget w) {
+		if (w.isInitialised()) {
+			w.invalidate();
+		}
+	}
+
+	private static Object getClipData(DragEvent event) {
+		return event.getClipData();
+	}
+	
+	interface AddRemoveCallBack {
+		public void addListener(Object listener);
+		public void removeListener(Object listener);
+	}
+	
+
+	public static r.android.graphics.drawable.Drawable getDrawable(
+			r.android.content.res.ColorStateList colorStateList) {
+		int[][] states = colorStateList.getStates();
+		int[] colors = colorStateList.getColors();
+		r.android.graphics.drawable.StateListDrawable stateListDrawable = new r.android.graphics.drawable.StateListDrawable();
+		for (int i = 0; i < states.length; i++) {
+			int[] state = states[i];
+			r.android.graphics.drawable.Drawable drawable = new r.android.graphics.drawable.ColorDrawable();
+		   	drawable.setDrawable(ViewImpl.getColor(colors[i]));
+			stateListDrawable.addState(state, drawable);
+		}
+		return stateListDrawable;
+	}
+	
+	public static interface PanCallBack {
+		void handlePanStart(IWidget widget, Object eventWidget, int x, int y);
+		void handlePanDrag(IWidget widget, Object eventWidget, int x, int y);
+		void handlePanEnd(IWidget widget, Object eventWidget, int x, int y);
+	}
+
+	public static interface AnimationCallBack {
+		public void animating(int x, int y);
+	}
+
+	
+
 	public static native void setBackgroundColor(Object nativeWidget, Object value) /*-[
 ((UIView*) nativeWidget).backgroundColor = (UIColor*) value;
 ]-*/;
@@ -2683,6 +2809,84 @@ public java.util.Map<String, Object> getOnKeyEventObj(View v,int keyCode,KeyEven
     
     // update model data into map
     w.updateModelToEventMap(obj, "onKey", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}
+}
+
+	@SuppressLint("NewApi")
+private static class SwipeListener implements SwipeHelper.SwipeListener, com.ashera.widget.IListener{
+private IWidget w; private View view; private String strValue; private String action;
+public String getAction() {return action;}
+public SwipeListener(IWidget w, String strValue)  {
+this.w = w; this.strValue = strValue;
+}
+public SwipeListener(IWidget w, String strValue, String action)  {
+this.w = w; this.strValue = strValue;this.action=action;
+}
+public boolean onSwiped(String direction){
+    boolean result = true;
+    
+	if (action == null || action.equals("onSwiped")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onSwiped");
+	    java.util.Map<String, Object> obj = getOnSwipedEventObj(direction);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		case ":":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, direction);
+		    	 if (commandResult != null) {
+		    		 result = (boolean) commandResult;
+		    	 }
+		    }
+		    if (commandType.equals(":")) {
+		    	return result;
+		    }
+			
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty()) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return result;
+}//#####
+
+public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "swiped");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+        PluginInvoker.putJSONSafeObjectIntoMap(obj, "direction", direction);
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onSwiped", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
     return obj;
 }
 }
@@ -3274,6 +3478,156 @@ public Object getIosAccessibilityTraits() {
 }
 public T setIosAccessibilityTraits(String value) {
 	Map<String, Object> attrs = initCommand("iosAccessibilityTraits");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetSelected() {
+	Map<String, Object> attrs = initCommand("selected");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object isSelected() {
+	Map<String, Object> attrs = initCommand("selected");
+	return attrs.get("commandReturnValue");
+}
+public T setSelected(boolean value) {
+	Map<String, Object> attrs = initCommand("selected");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setStyle(String value) {
+	Map<String, Object> attrs = initCommand("style");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setErrorStyle(String value) {
+	Map<String, Object> attrs = initCommand("errorStyle");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetValidateForm() {
+	Map<String, Object> attrs = initCommand("validateForm_");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getValidateForm() {
+	Map<String, Object> attrs = initCommand("validateForm_");
+	return attrs.get("commandReturnValue");
+}
+public T validateForm(String value) {
+	Map<String, Object> attrs = initCommand("validateForm");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setValidation(String value) {
+	Map<String, Object> attrs = initCommand("validation");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_required(String value) {
+	Map<String, Object> attrs = initCommand("v_required");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_minlength(String value) {
+	Map<String, Object> attrs = initCommand("v_minlength");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_maxlength(String value) {
+	Map<String, Object> attrs = initCommand("v_maxlength");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_min(String value) {
+	Map<String, Object> attrs = initCommand("v_min");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_max(String value) {
+	Map<String, Object> attrs = initCommand("v_max");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_pattern(String value) {
+	Map<String, Object> attrs = initCommand("v_pattern");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setV_type(String value) {
+	Map<String, Object> attrs = initCommand("v_type");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setValidationErrorDisplayType(String value) {
+	Map<String, Object> attrs = initCommand("validationErrorDisplayType");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setCustomErrorMessageValues(String value) {
+	Map<String, Object> attrs = initCommand("customErrorMessageValues");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setCustomErrorMessageKeys(String value) {
+	Map<String, Object> attrs = initCommand("customErrorMessageKeys");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setInvalidateOnFrameChange(boolean value) {
+	Map<String, Object> attrs = initCommand("invalidateOnFrameChange");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -4136,150 +4490,16 @@ public T setMaxHeight(String value) {
 
 	attrs.put("value", value);
 return (T) this;}
-public T tryGetSelected() {
-	Map<String, Object> attrs = initCommand("selected");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return (T) this;}
-
-public Object isSelected() {
-	Map<String, Object> attrs = initCommand("selected");
-	return attrs.get("commandReturnValue");
-}
-public T setSelected(boolean value) {
-	Map<String, Object> attrs = initCommand("selected");
+public T setOnSwiped(String value) {
+	Map<String, Object> attrs = initCommand("onSwiped");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
 
 	attrs.put("value", value);
 return (T) this;}
-public T setStyle(String value) {
-	Map<String, Object> attrs = initCommand("style");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setErrorStyle(String value) {
-	Map<String, Object> attrs = initCommand("errorStyle");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T tryGetValidateForm() {
-	Map<String, Object> attrs = initCommand("validateForm_");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return (T) this;}
-
-public Object getValidateForm() {
-	Map<String, Object> attrs = initCommand("validateForm_");
-	return attrs.get("commandReturnValue");
-}
-public T validateForm(String value) {
-	Map<String, Object> attrs = initCommand("validateForm");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setValidation(String value) {
-	Map<String, Object> attrs = initCommand("validation");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_required(String value) {
-	Map<String, Object> attrs = initCommand("v_required");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_minlength(String value) {
-	Map<String, Object> attrs = initCommand("v_minlength");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_maxlength(String value) {
-	Map<String, Object> attrs = initCommand("v_maxlength");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_min(String value) {
-	Map<String, Object> attrs = initCommand("v_min");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_max(String value) {
-	Map<String, Object> attrs = initCommand("v_max");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_pattern(String value) {
-	Map<String, Object> attrs = initCommand("v_pattern");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setV_type(String value) {
-	Map<String, Object> attrs = initCommand("v_type");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setValidationErrorDisplayType(String value) {
-	Map<String, Object> attrs = initCommand("validationErrorDisplayType");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setCustomErrorMessageValues(String value) {
-	Map<String, Object> attrs = initCommand("customErrorMessageValues");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setCustomErrorMessageKeys(String value) {
-	Map<String, Object> attrs = initCommand("customErrorMessageKeys");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setInvalidateOnFrameChange(boolean value) {
-	Map<String, Object> attrs = initCommand("invalidateOnFrameChange");
+public T setOutsideTouchable(boolean value) {
+	Map<String, Object> attrs = initCommand("outsideTouchable");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -4515,6 +4735,76 @@ public Object getIosAccessibilityTraits() {
 }
 public void setIosAccessibilityTraits(String value) {
 	getBuilder().reset().setIosAccessibilityTraits(value).execute(true);
+}
+
+public Object isSelected() {
+	return getBuilder().reset().tryGetSelected().execute(false).isSelected(); 
+}
+public void setSelected(boolean value) {
+	getBuilder().reset().setSelected(value).execute(true);
+}
+
+public void setStyle(String value) {
+	getBuilder().reset().setStyle(value).execute(true);
+}
+
+public void setErrorStyle(String value) {
+	getBuilder().reset().setErrorStyle(value).execute(true);
+}
+
+public Object getValidateForm() {
+	return getBuilder().reset().tryGetValidateForm().execute(false).getValidateForm(); 
+}
+public void validateForm(String value) {
+	getBuilder().reset().validateForm(value).execute(true);
+}
+
+public void setValidation(String value) {
+	getBuilder().reset().setValidation(value).execute(true);
+}
+
+public void setV_required(String value) {
+	getBuilder().reset().setV_required(value).execute(true);
+}
+
+public void setV_minlength(String value) {
+	getBuilder().reset().setV_minlength(value).execute(true);
+}
+
+public void setV_maxlength(String value) {
+	getBuilder().reset().setV_maxlength(value).execute(true);
+}
+
+public void setV_min(String value) {
+	getBuilder().reset().setV_min(value).execute(true);
+}
+
+public void setV_max(String value) {
+	getBuilder().reset().setV_max(value).execute(true);
+}
+
+public void setV_pattern(String value) {
+	getBuilder().reset().setV_pattern(value).execute(true);
+}
+
+public void setV_type(String value) {
+	getBuilder().reset().setV_type(value).execute(true);
+}
+
+public void setValidationErrorDisplayType(String value) {
+	getBuilder().reset().setValidationErrorDisplayType(value).execute(true);
+}
+
+public void setCustomErrorMessageValues(String value) {
+	getBuilder().reset().setCustomErrorMessageValues(value).execute(true);
+}
+
+public void setCustomErrorMessageKeys(String value) {
+	getBuilder().reset().setCustomErrorMessageKeys(value).execute(true);
+}
+
+public void setInvalidateOnFrameChange(boolean value) {
+	getBuilder().reset().setInvalidateOnFrameChange(value).execute(true);
 }
 
 public Object getModelSyncEvents() {
@@ -4848,74 +5138,12 @@ public void setMaxHeight(String value) {
 	getBuilder().reset().setMaxHeight(value).execute(true);
 }
 
-public Object isSelected() {
-	return getBuilder().reset().tryGetSelected().execute(false).isSelected(); 
-}
-public void setSelected(boolean value) {
-	getBuilder().reset().setSelected(value).execute(true);
+public void setOnSwiped(String value) {
+	getBuilder().reset().setOnSwiped(value).execute(true);
 }
 
-public void setStyle(String value) {
-	getBuilder().reset().setStyle(value).execute(true);
-}
-
-public void setErrorStyle(String value) {
-	getBuilder().reset().setErrorStyle(value).execute(true);
-}
-
-public Object getValidateForm() {
-	return getBuilder().reset().tryGetValidateForm().execute(false).getValidateForm(); 
-}
-public void validateForm(String value) {
-	getBuilder().reset().validateForm(value).execute(true);
-}
-
-public void setValidation(String value) {
-	getBuilder().reset().setValidation(value).execute(true);
-}
-
-public void setV_required(String value) {
-	getBuilder().reset().setV_required(value).execute(true);
-}
-
-public void setV_minlength(String value) {
-	getBuilder().reset().setV_minlength(value).execute(true);
-}
-
-public void setV_maxlength(String value) {
-	getBuilder().reset().setV_maxlength(value).execute(true);
-}
-
-public void setV_min(String value) {
-	getBuilder().reset().setV_min(value).execute(true);
-}
-
-public void setV_max(String value) {
-	getBuilder().reset().setV_max(value).execute(true);
-}
-
-public void setV_pattern(String value) {
-	getBuilder().reset().setV_pattern(value).execute(true);
-}
-
-public void setV_type(String value) {
-	getBuilder().reset().setV_type(value).execute(true);
-}
-
-public void setValidationErrorDisplayType(String value) {
-	getBuilder().reset().setValidationErrorDisplayType(value).execute(true);
-}
-
-public void setCustomErrorMessageValues(String value) {
-	getBuilder().reset().setCustomErrorMessageValues(value).execute(true);
-}
-
-public void setCustomErrorMessageKeys(String value) {
-	getBuilder().reset().setCustomErrorMessageKeys(value).execute(true);
-}
-
-public void setInvalidateOnFrameChange(boolean value) {
-	getBuilder().reset().setInvalidateOnFrameChange(value).execute(true);
+public void setOutsideTouchable(boolean value) {
+	getBuilder().reset().setOutsideTouchable(value).execute(true);
 }
 
 }
@@ -5234,27 +5462,6 @@ public void setInvalidateOnFrameChange(boolean value) {
 		]-*/
 	}
 	
-    private static void setMinHeight(IWidget w, Object objValue) {
-        ((View) w.asWidget()).setMinimumHeight((int) objValue);
-        
-    }
-
-
-    private static void setMinWidth(IWidget w, Object objValue) {
-        ((View) w.asWidget()).setMinimumWidth((int) objValue);
-        
-    }
-
-    private static Object getMinHeight(IWidget w) {
-        View view = (View) w.asWidget();
-        return view.getMinimumHeight();
-    }
-
-    private static Object getMinWidth(IWidget w) {
-        View view = (View) w.asWidget();
-        return view.getMinimumWidth();
-    }
-	
     public static void registerCommandConveter(IWidget widget) {
 		widget.registerForAttributeCommandChainWithPhase("predraw", "background");
 		widget.registerForAttributeCommandChainWithPhase("postdraw", "foreground");
@@ -5271,7 +5478,7 @@ public void setInvalidateOnFrameChange(boolean value) {
 	}
 	
     public static Object getParent(IWidget widget) {        
-    	Object parent = widget.getParent().getCompositeLeaf().asNativeWidget();
+    	Object parent = widget.getParent().getCompositeLeaf(widget).asNativeWidget();
         return parent;
     }
     
@@ -5329,23 +5536,6 @@ public void setInvalidateOnFrameChange(boolean value) {
 	public static native void nativeSetVisibility(Object view, boolean hidden) /*-[
 		[((UIView *) view) setHidden:  hidden];
 	]-*/;
-
-
-	private static Object getVisibility(IWidget w) {
-		View view = (View) w.asWidget();
-        return view.getVisibility();
-	}
-	
-	private static void setLongClickable(IWidget w, Object objValue) {
-        View view = (View) w.asWidget();
-        view.setLongClickable((boolean) objValue); 
-	}
-
-
-	private static Object getLongClickable(IWidget w) {
-		View view = (View) w.asWidget();
-		return view.isLongClickable();
-	}
 
 
 	private static Object getClickable(Object nativeWidget) {
@@ -5482,18 +5672,6 @@ public void setInvalidateOnFrameChange(boolean value) {
 
 	private static Object getBackgroundTint(IWidget w) {
 		return ((View) w.asWidget()).getBackgroundTintList();
-	}
-	
-	public static void requestLayout(IWidget w) {
-		if (w.isInitialised()) {
-			w.requestLayout();
-		}
-	}
-	
-	private static void invalidate(IWidget w) {
-		if (w.isInitialised()) {
-			w.invalidate();
-		}
 	}
 	
 	public static void requestLayout(IWidget w, Object nativeView) {
@@ -5708,10 +5886,6 @@ public void setInvalidateOnFrameChange(boolean value) {
     	dragDropInteractionDelegate.nativeAddDragInteraction(nativeWidget);
 	}
 	
-	private static Object getClipData(DragEvent event) {
-		return event.getClipData();
-	}
-
     private static Object getForeground(IWidget w) {
 		Object value = null;
 		View view = (View)w.asWidget();
@@ -5813,4 +5987,195 @@ public void setInvalidateOnFrameChange(boolean value) {
 	private static void setNativeId(IWidget w, String strValue) {
 	}
 
+	public static native int getLocationXOnScreen(Object nativeWidget) /*-[
+		UIView* view = ((UIView*)nativeWidget);
+    	CGPoint point = [view.superview convertPoint:view.frame.origin toView:nil];
+		return point.x;
+	]-*/;
+	
+	public static native int getLocationYOnScreen(Object nativeWidget) /*-[
+	UIView* view = ((UIView*)nativeWidget);
+	CGPoint point = [view.superview convertPoint:view.frame.origin toView:nil];
+	return point.y;
+]-*/;
+
+	
+	private static void setOutsideTouchable(IWidget w, String strValue, Object objValue, View view) {
+		if ((boolean) objValue) {
+			 w.storeInTempCache("outsideTouchable", "true");
+		} else {
+			w.storeInTempCache("outsideTouchable", "false");
+		}
+	}
+	
+	public static native int nativeMeasureWidth(Object uiView)/*-[
+		CGSize maximumLabelSize = CGSizeMake(CGFLOAT_MAX,CGFLOAT_MAX);
+		CGSize requiredSize = [((UIView*)uiView) sizeThatFits:maximumLabelSize];
+		return ceil(requiredSize.width);
+	]-*/;
+	
+		public static native int nativeMeasureHeight(Object uiView, int width)/*-[
+	    CGSize maximumLabelSize = CGSizeMake(width,CGFLOAT_MAX);
+	    CGSize requiredSize = [((UIView*)uiView) sizeThatFits:maximumLabelSize];
+	    return ceil(requiredSize.height);
+	]-*/;
+
+		
+	private static void setOnSwipeListener(IWidget w, SwipeHelper.SwipeListener swipeListener) {
+		UISwipeGestureRecognizerDelegate delegate = new UISwipeGestureRecognizerDelegate(w, swipeListener);
+		delegate.nativeAddSwipeListener("default", w.asNativeWidget());
+	}
+	
+	static class UISwipeGestureRecognizerDelegate {
+		@com.google.j2objc.annotations.Weak private IWidget  widget;
+		private SwipeHelper.SwipeListener listener;
+		public UISwipeGestureRecognizerDelegate(IWidget widget, SwipeHelper.SwipeListener listener) {
+			// to avoid gc in objective c
+			widget.getFragment().addListener(widget, this);
+			this.widget = widget;
+			this.listener = listener;
+		}
+		public native void nativeAddSwipeListener(String id, Object nativeWidget)/*-[
+			UIView* view = ((UIView*)nativeWidget);
+			view.userInteractionEnabled = YES;		
+
+			ASUISwipeGestureRecognizer *leftSwipeGestureRecognizer = [[ASUISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipedLeft:)];
+			leftSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+			leftSwipeGestureRecognizer.id = id_;
+			
+			ASUISwipeGestureRecognizer *rightSwipeGestureRecognizer = [[ASUISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipedRight:)];
+			rightSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+			rightSwipeGestureRecognizer.id = id_;
+			
+			ASUISwipeGestureRecognizer *topSwipeGestureRecognizer = [[ASUISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipedTop:)];
+			topSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+			topSwipeGestureRecognizer.id = id_;
+			
+			ASUISwipeGestureRecognizer *bottomSwipeGestureRecognizer = [[ASUISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipedLeft:)];
+			bottomSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
+			bottomSwipeGestureRecognizer.id = id_;
+			
+			for (UIGestureRecognizer* interaction in view.gestureRecognizers) {
+		        if ([interaction isKindOfClass:[ASUISwipeGestureRecognizer class]] && [id_ isEqualToString:((ASUISwipeGestureRecognizer*)interaction).id]) {
+		            [view removeGestureRecognizer:interaction];
+		        }
+		    }
+			[view addGestureRecognizer:leftSwipeGestureRecognizer];
+			[view addGestureRecognizer:rightSwipeGestureRecognizer];
+			[view addGestureRecognizer:topSwipeGestureRecognizer];
+			[view addGestureRecognizer:bottomSwipeGestureRecognizer];
+		]-*/;
+		
+		
+		public void swipe(String direction) {
+			listener.onSwiped(direction);
+		}
+		/*-[
+	 	- (void)swipedLeft:(ASUISwipeGestureRecognizer *)tapRecognizer {
+  				[self swipeWithNSString: @"left"];
+		}
+		- (void)swipedRight:(ASUISwipeGestureRecognizer *)tapRecognizer {
+  				[self swipeWithNSString: @"right"];
+		}
+		- (void)swipedTop:(ASUISwipeGestureRecognizer *)tapRecognizer {
+  				[self swipeWithNSString: @"top"];
+		}
+		- (void)swipedBottom:(ASUISwipeGestureRecognizer *)tapRecognizer {
+  				[self swipeWithNSString: @"bottom"];
+		}
+		]-*/
+	}
+
+	public static void addPanListener(IWidget widget, Object uiView, PanCallBack callback) {
+		new PanGestureRecognizer(widget, uiView, callback).addUIPanGestureRecognizer();
+	}
+	
+	static class PanGestureRecognizer {
+		@com.google.j2objc.annotations.Weak private IWidget widget; 
+		private Object uiView;
+		private PanCallBack callback;
+		public PanGestureRecognizer(IWidget widget, Object uiView, PanCallBack callback) {
+			widget.getFragment().addListener(widget, this);
+			this.widget = widget;
+			this.uiView = uiView;
+			this.callback = callback;
+		}
+		private native void addUIPanGestureRecognizer()/*-[
+			UIView* uiview = ((UIView*) self->uiView_);
+			uiview.userInteractionEnabled = YES;
+			UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(move:)];
+			[panRecognizer setMinimumNumberOfTouches:1];
+			[panRecognizer setMaximumNumberOfTouches:1];
+			[uiview addGestureRecognizer:panRecognizer];
+		]-*/;
+		
+		/*-[
+			-(void)move:(UIPanGestureRecognizer*)tapRecognizer {
+				int x = [tapRecognizer locationInView:self->uiView_].x;
+				int y = [tapRecognizer locationInView:self->uiView_].y;
+				if (tapRecognizer.state == UIGestureRecognizerStateBegan) {
+		  			[self->callback_ handlePanStartWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y];
+				} else if (tapRecognizer.state == UIGestureRecognizerStateEnded || tapRecognizer.state == UIGestureRecognizerStateCancelled) {
+		  			[self->callback_ handlePanEndWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y];
+				} else {
+					[self->callback_ handlePanDragWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y];
+				}
+		}
+		]-*/
+	}
+
+	public native static int getX(Object objview) /*-[
+		UIView* uiview = ((UIView*) objview);
+		return uiview.frame.origin.x;
+	]-*/;
+	
+	public native static int getY(Object objview) /*-[
+		UIView* uiview = ((UIView*) objview);
+		return uiview.frame.origin.y;
+	]-*/;
+
+	public native static void updateBoundsX(Object objview, int x) /*-[
+		UIView* uiview = ((UIView*) objview);
+	    CGRect frame = uiview.frame;
+	    frame.origin.x = x;
+	    uiview.frame = frame;
+	]-*/;
+
+	public static void translateWithAnimation(Object objview, int x, int y, int animationDurationInMs,
+			AnimationCallBack callBack) {
+		new AnimationUtils(objview, callBack).nativeAnimate(x, y, animationDurationInMs);
+	}
+	
+	static class AnimationUtils {  
+		private Object objview;
+		private AnimationCallBack callBack;
+		public AnimationUtils(Object objview,  AnimationCallBack callBack) {
+			this.objview = objview;
+			this.callBack = callBack;
+		}
+		private native void nativeAnimate(int x, int y, int animationDurationInMs) /*-[
+			UIView* uiview = ((UIView*) self->objview_);
+			CADisplayLink *displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(animationDidUpdate)];
+			displayLink.frameInterval = 1;
+			[displayLink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+		
+			[UIView animateWithDuration:(animationDurationInMs/(float)1000) animations:^{
+				CGRect frame = uiview.frame;
+				frame.origin.x = x;
+				frame.origin.y = y;
+				uiview.frame = frame;
+			}completion:^(BOOL finished) {
+		    	[displayLink invalidate];
+			}];
+		]-*/;
+		
+		/*-[
+		-(void)animationDidUpdate {
+			UIView* uiview = (UIView*)self->objview_;
+			CALayer* calayer =  ((CALayer*)uiview.layer.presentationLayer);
+			[self->callBack_ animatingWithInt: calayer.frame.origin.x withInt: calayer.frame.origin.y];
+		}
+		]-*/
+
+	}
 }

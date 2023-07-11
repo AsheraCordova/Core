@@ -49,6 +49,9 @@
 - (id)decodeBitmapStreamWithJavaIoInputStream:(JavaIoInputStream *)stream
                                        withId:(id)options;
 
+- (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
+                                           withLong:(jlong)when;
+
 + (NSString *)executeSimpleCommandWithId:(id)commands
                          withASIFragment:(id<ASIFragment>)fragment;
 

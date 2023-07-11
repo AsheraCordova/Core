@@ -56,7 +56,7 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
 	public final static String GROUP_NAME = "ProgressBar";
 
 	protected @Property Object uiView;
-	protected MeasurableView measurableView;		
+	protected r.android.widget.ProgressBar measurableView;		
 	
 	
 	@Override
@@ -68,12 +68,6 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosProgressImage").withType("image"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosTrackTintColor").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosTrackImage").withType("image"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("max").withType("int"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("min").withType("int"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progress").withType("int").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("incrementProgressBy").withType("int").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressTint").withType("colorstate"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressBackgroundTint").withType("colorstate"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("padding").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingBottom").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingRight").withType("dimension"));
@@ -83,15 +77,27 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("max").withType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("min").withType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progress").withType("int").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("incrementProgressBy").withType("int").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressTint").withType("colorstate"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("progressBackgroundTint").withType("colorstate"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("indeterminate").withType("boolean"));
 	}
 	
 	public UIProgressViewImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  UIProgressViewImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  UIProgressViewImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 @com.google.j2objc.annotations.WeakOuter		
-	public class UIProgressViewExt extends MeasurableView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
+	public class UIProgressViewExt extends r.android.widget.ProgressBar implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 		private int mMaxWidth = -1;
@@ -114,12 +120,7 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
 		}
 
 		public UIProgressViewExt() {
-			
-			
-			
 			super(UIProgressViewImpl.this);
-			
-			
 			
 		}
 		
@@ -208,7 +209,44 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(UIProgressViewImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(UIProgressViewImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	UIProgressViewImpl.this.getParent().remove(UIProgressViewImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	appScreenLocation[1] = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	displayFrame.left = ViewImpl.getLocationXOnScreen(asNativeWidget());
+        	displayFrame.top = ViewImpl.getLocationYOnScreen(asNativeWidget());
+        	displayFrame.right = displayFrame.left + getWidth();
+        	displayFrame.bottom = displayFrame.top + getHeight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -218,20 +256,33 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			UIProgressViewImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ViewImpl.nativeSetVisibility(asNativeWidget(), visibility != View.VISIBLE);
             
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
-		((UIProgressViewExt) measurableView).updateMeasuredDimension(width, height);
+        @Override
+        public int nativeMeasureWidth(java.lang.Object uiView) {
+        	return ViewImpl.nativeMeasureWidth(uiView);
+        }
+        
+        @Override
+        public int nativeMeasureHeight(java.lang.Object uiView, int width) {
+        	return ViewImpl.nativeMeasureHeight(uiView, width);
+        }
+	}	@Override
+	public Class getViewClass() {
+		return UIProgressViewExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new UIProgressViewImpl();
+		return new UIProgressViewImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
@@ -290,66 +341,6 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
 
 
 		setTrackImage(nativeWidget, objValue);
-
-
-
-			}
-			break;
-			case "max": {
-				
-
-
-		setMax(objValue);
-
-
-
-			}
-			break;
-			case "min": {
-				
-
-
-		setMin(objValue);
-
-
-
-			}
-			break;
-			case "progress": {
-				
-
-
-		setProgress(objValue);
-
-
-
-			}
-			break;
-			case "incrementProgressBy": {
-				
-
-
-		incrementProgressBy(objValue);
-
-
-
-			}
-			break;
-			case "progressTint": {
-				
-
-
-		setProgressTint(objValue);
-
-
-
-			}
-			break;
-			case "progressBackgroundTint": {
-				
-
-
-		setProgressBackgroundTint(objValue);
 
 
 
@@ -445,6 +436,66 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
 
 			}
 			break;
+			case "max": {
+				
+
+
+		setMax(objValue);
+
+
+
+			}
+			break;
+			case "min": {
+				
+
+
+		setMin(objValue);
+
+
+
+			}
+			break;
+			case "progress": {
+				
+
+
+		setProgress(objValue);
+
+
+
+			}
+			break;
+			case "incrementProgressBy": {
+				
+
+
+		incrementProgressBy(objValue);
+
+
+
+			}
+			break;
+			case "progressTint": {
+				
+
+
+		setProgressTint(objValue);
+
+
+
+			}
+			break;
+			case "progressBackgroundTint": {
+				
+
+
+		setProgressBackgroundTint(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -468,10 +519,6 @@ return getProgressImage();				}
 return getTrackTintColor();				}
 			case "iosTrackImage": {
 return getTrackImage();				}
-			case "progressTint": {
-return getProgressTint();				}
-			case "progressBackgroundTint": {
-return getProgressBackgroundTint();				}
 			case "paddingBottom": {
 return getPaddingBottom();				}
 			case "paddingRight": {
@@ -484,6 +531,10 @@ return getPaddingStart();				}
 return getPaddingEnd();				}
 			case "paddingTop": {
 return getPaddingTop();				}
+			case "progressTint": {
+return getProgressTint();				}
+			case "progressBackgroundTint": {
+return getProgressBackgroundTint();				}
 		}
 		
 		return null;
@@ -621,6 +672,10 @@ return ((ASUIProgressView*) uiView_).trackImage;
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -745,76 +800,6 @@ public Object getIosTrackImage() {
 }
 public UIProgressViewCommandBuilder setIosTrackImage(String value) {
 	Map<String, Object> attrs = initCommand("iosTrackImage");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public UIProgressViewCommandBuilder setMax(int value) {
-	Map<String, Object> attrs = initCommand("max");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public UIProgressViewCommandBuilder setMin(int value) {
-	Map<String, Object> attrs = initCommand("min");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public UIProgressViewCommandBuilder setProgress(int value) {
-	Map<String, Object> attrs = initCommand("progress");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public UIProgressViewCommandBuilder incrementProgressBy(int value) {
-	Map<String, Object> attrs = initCommand("incrementProgressBy");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public UIProgressViewCommandBuilder tryGetProgressTint() {
-	Map<String, Object> attrs = initCommand("progressTint");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getProgressTint() {
-	Map<String, Object> attrs = initCommand("progressTint");
-	return attrs.get("commandReturnValue");
-}
-public UIProgressViewCommandBuilder setProgressTint(String value) {
-	Map<String, Object> attrs = initCommand("progressTint");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public UIProgressViewCommandBuilder tryGetProgressBackgroundTint() {
-	Map<String, Object> attrs = initCommand("progressBackgroundTint");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getProgressBackgroundTint() {
-	Map<String, Object> attrs = initCommand("progressBackgroundTint");
-	return attrs.get("commandReturnValue");
-}
-public UIProgressViewCommandBuilder setProgressBackgroundTint(String value) {
-	Map<String, Object> attrs = initCommand("progressBackgroundTint");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -959,6 +944,76 @@ public UIProgressViewCommandBuilder setPaddingVertical(String value) {
 
 	attrs.put("value", value);
 return this;}
+public UIProgressViewCommandBuilder setMax(int value) {
+	Map<String, Object> attrs = initCommand("max");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public UIProgressViewCommandBuilder setMin(int value) {
+	Map<String, Object> attrs = initCommand("min");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public UIProgressViewCommandBuilder setProgress(int value) {
+	Map<String, Object> attrs = initCommand("progress");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public UIProgressViewCommandBuilder incrementProgressBy(int value) {
+	Map<String, Object> attrs = initCommand("incrementProgressBy");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public UIProgressViewCommandBuilder tryGetProgressTint() {
+	Map<String, Object> attrs = initCommand("progressTint");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getProgressTint() {
+	Map<String, Object> attrs = initCommand("progressTint");
+	return attrs.get("commandReturnValue");
+}
+public UIProgressViewCommandBuilder setProgressTint(String value) {
+	Map<String, Object> attrs = initCommand("progressTint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public UIProgressViewCommandBuilder tryGetProgressBackgroundTint() {
+	Map<String, Object> attrs = initCommand("progressBackgroundTint");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getProgressBackgroundTint() {
+	Map<String, Object> attrs = initCommand("progressBackgroundTint");
+	return attrs.get("commandReturnValue");
+}
+public UIProgressViewCommandBuilder setProgressBackgroundTint(String value) {
+	Map<String, Object> attrs = initCommand("progressBackgroundTint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class UIProgressViewBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public UIProgressViewBean() {
@@ -990,36 +1045,6 @@ public Object getIosTrackImage() {
 }
 public void setIosTrackImage(String value) {
 	getBuilder().reset().setIosTrackImage(value).execute(true);
-}
-
-public void setMax(int value) {
-	getBuilder().reset().setMax(value).execute(true);
-}
-
-public void setMin(int value) {
-	getBuilder().reset().setMin(value).execute(true);
-}
-
-public void setProgress(int value) {
-	getBuilder().reset().setProgress(value).execute(true);
-}
-
-public void incrementProgressBy(int value) {
-	getBuilder().reset().incrementProgressBy(value).execute(true);
-}
-
-public Object getProgressTint() {
-	return getBuilder().reset().tryGetProgressTint().execute(false).getProgressTint(); 
-}
-public void setProgressTint(String value) {
-	getBuilder().reset().setProgressTint(value).execute(true);
-}
-
-public Object getProgressBackgroundTint() {
-	return getBuilder().reset().tryGetProgressBackgroundTint().execute(false).getProgressBackgroundTint(); 
-}
-public void setProgressBackgroundTint(String value) {
-	getBuilder().reset().setProgressBackgroundTint(value).execute(true);
 }
 
 public void setPadding(String value) {
@@ -1074,6 +1099,36 @@ public void setPaddingHorizontal(String value) {
 
 public void setPaddingVertical(String value) {
 	getBuilder().reset().setPaddingVertical(value).execute(true);
+}
+
+public void setMax(int value) {
+	getBuilder().reset().setMax(value).execute(true);
+}
+
+public void setMin(int value) {
+	getBuilder().reset().setMin(value).execute(true);
+}
+
+public void setProgress(int value) {
+	getBuilder().reset().setProgress(value).execute(true);
+}
+
+public void incrementProgressBy(int value) {
+	getBuilder().reset().incrementProgressBy(value).execute(true);
+}
+
+public Object getProgressTint() {
+	return getBuilder().reset().tryGetProgressTint().execute(false).getProgressTint(); 
+}
+public void setProgressTint(String value) {
+	getBuilder().reset().setProgressTint(value).execute(true);
+}
+
+public Object getProgressBackgroundTint() {
+	return getBuilder().reset().tryGetProgressBackgroundTint().execute(false).getProgressBackgroundTint(); 
+}
+public void setProgressBackgroundTint(String value) {
+	getBuilder().reset().setProgressBackgroundTint(value).execute(true);
 }
 
 }

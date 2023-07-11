@@ -130,6 +130,7 @@ public abstract class BaseApplication  {
                 System.exit(0);
             }
         });
+		
 		return shell;
 	}
 

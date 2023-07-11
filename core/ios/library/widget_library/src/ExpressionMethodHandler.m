@@ -282,6 +282,9 @@ id ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(NSString
       case 0:
       {
         val = ASPluginInvoker_getStringWithId_(obj);
+        if (val == nil && obj != nil) {
+          val = [obj description];
+        }
         break;
       }
       case 1:

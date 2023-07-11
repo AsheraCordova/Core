@@ -40,7 +40,7 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 	public final static String GROUP_NAME = "RadioButton";
 
 	protected org.teavm.jso.dom.html.HTMLElement hTMLElement;
-	protected MeasurableCompoundButton measurableCompoundButton;	
+	protected r.android.widget.RadioButton measurableView;	
 	private r.android.graphics.Canvas canvas;
 	
 		@SuppressLint("NewApi")
@@ -189,6 +189,7 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 		ViewImpl.register(attributeName);
 
 
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("checked").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onCheckedChange").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("buttonSize").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("buttonPadding").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -260,7 +261,7 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("autoLink").withType("RadioButton.autoLink").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorLink").withType("colorstate").withOrder(-100));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("checked").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("html").withType("boolean"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("webEnableTintFilter").withType("boolean"));
 	}
@@ -268,20 +269,21 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 	public RadioButtonImpl() {
 		super(GROUP_NAME, LOCAL_NAME);
 	}
+	public  RadioButtonImpl(String localname) {
+		super(GROUP_NAME, localname);
+	}
+	public  RadioButtonImpl(String groupName, String localname) {
+		super(groupName, localname);
+	}
 
 		
-	public class RadioButtonExt extends MeasurableCompoundButton implements ILifeCycleDecorator{
+	public class RadioButtonExt extends r.android.widget.RadioButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
 
 		public RadioButtonExt() {
-			
-			
-			
-			
-			
-			
 			super(RadioButtonImpl.this);
+			
 		}
 		
 		@Override
@@ -364,7 +366,45 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(RadioButtonImpl.this);
         }
-		@Override
+        private Map<String, IWidget> templates;
+    	@Override
+    	public r.android.view.View inflateView(java.lang.String layout) {
+    		if (templates == null) {
+    			templates = new java.util.HashMap<String, IWidget>();
+    		}
+    		IWidget template = templates.get(layout);
+    		if (template == null) {
+    			template = (IWidget) quickConvert(layout, "template");
+    			templates.put(layout, template);
+    		}
+    		IWidget widget = template.loadLazyWidgets(RadioButtonImpl.this.getParent());
+    		return (View) widget.asWidget();
+    	}        
+        
+    	@Override
+		public void remeasure() {
+			getFragment().remeasure();
+		}
+    	
+        @Override
+		public void removeFromParent() {
+        	RadioButtonImpl.this.getParent().remove(RadioButtonImpl.this);
+		}
+        @Override
+        public void getLocationOnScreen(int[] appScreenLocation) {
+        	appScreenLocation[0] = hTMLElement.getBoundingClientRect().getLeft();
+        	appScreenLocation[1] = hTMLElement.getBoundingClientRect().getTop();
+        }
+        @Override
+        public void getWindowVisibleDisplayFrame(r.android.graphics.Rect displayFrame){
+        	
+        	org.teavm.jso.dom.html.TextRectangle boundingClientRect = hTMLElement.getBoundingClientRect();
+			displayFrame.top = boundingClientRect.getTop();
+        	displayFrame.left = boundingClientRect.getLeft();
+        	displayFrame.bottom = boundingClientRect.getBottom();
+        	displayFrame.right = boundingClientRect.getRight();
+        }
+        @Override
 		public void offsetTopAndBottom(int offset) {
 			super.offsetTopAndBottom(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
@@ -374,20 +414,15 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 			super.offsetLeftAndRight(offset);
 			ViewImpl.nativeMakeFrame(asNativeWidget(), getLeft(), getTop(), getRight(), getBottom());
 		}
+		@Override
+		public void setMyAttribute(String name, Object value) {
+			RadioButtonImpl.this.setAttribute(name, value, true);
+		}
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
             ((HTMLElement)asNativeWidget()).getStyle().setProperty("display", visibility != View.VISIBLE ? "none" : "block");
             
-        }
-	 	@Override
-        public boolean suggestedSizeFitsInSpace(int mAutoSizeTextSizeInPx, r.android.graphics.RectF availableSpace) {
-        	return RadioButtonImpl.this.suggestedSizeFitsInSpace(mAutoSizeTextSizeInPx, availableSpace.width(), availableSpace.height());
-        }
-        
-        @Override
-        protected void setTextSizeInternal(int unit, float optimalTextSize, boolean b) {
-        	RadioButtonImpl.this.setMyTextSize(optimalTextSize);
         }
 		  public int getBorderPadding(){
 		    return RadioButtonImpl.this.getBorderPadding();
@@ -416,20 +451,30 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
         public int nativeMeasureHeight(java.lang.Object uiView, int width) {
         	return RadioButtonImpl.this.nativeMeasureHeight(uiView, width);
         }
-	}	
-	public void updateMeasuredDimension(int width, int height) {
+        @Override
+        public int computeSize(float width) {
+        	return nativeMeasureHeight(hTMLElement, (int) width);
+    	}
+		@Override
+		public java.lang.String getText() {
+			return (String) getMyText();
+		}
+
+	}	@Override
+	public Class getViewClass() {
+		return RadioButtonExt.class;
 	}
 
 	@Override
 	public IWidget newInstance() {
-		return new RadioButtonImpl();
+		return new RadioButtonImpl(groupName, localName);
 	}
 	
 	@SuppressLint("NewApi")
 	@Override
 	public void create(IFragment fragment, Map<String, Object> params) {
 		super.create(fragment, params);
-		measurableCompoundButton = new RadioButtonExt();
+		measurableView = new RadioButtonExt();
 		nativeCreate(params);	
 		ViewImpl.registerCommandConveter(this);
 	}
@@ -441,6 +486,16 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 		ViewImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		
 		switch (key.getAttributeName()) {
+			case "checked": {
+				
+
+
+		setChecked(objValue);
+
+
+
+			}
+			break;
 			case "onCheckedChange": {
 				
 
@@ -1081,11 +1136,11 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 
 			}
 			break;
-			case "checked": {
+			case "textAppearance": {
 				
 
 
-		setChecked(objValue);
+		ViewImpl.setStyle(this, objValue);
 
 
 
@@ -1106,6 +1161,8 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 			return attributeValue;
 		}
 		switch (key.getAttributeName()) {
+			case "checked": {
+return getChecked();				}
 			case "text": {
 return getMyText();				}
 			case "textColor": {
@@ -1180,8 +1237,6 @@ return getLineSpacingMultiplier();				}
 return getTextColorHighlight();				}
 			case "autoLink": {
 return getAutoLink();				}
-			case "checked": {
-return getChecked();				}
 		}
 		
 		return null;
@@ -1189,7 +1244,7 @@ return getChecked();				}
 	
 	@Override
 	public Object asWidget() {
-		return measurableCompoundButton;
+		return measurableView;
 	}
 
 	
@@ -1237,7 +1292,7 @@ return getChecked();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableCompoundButton.setBottomDrawable(drawable);
+			measurableView.setBottomDrawable(drawable);
 			updateImageSrc(drawable, drawableBottom);
 		}
 	}
@@ -1254,7 +1309,7 @@ return getChecked();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableCompoundButton.setTopDrawable(drawable);
+			measurableView.setTopDrawable(drawable);
 			updateImageSrc(drawable, drawableTop);
 		}
 	}
@@ -1295,7 +1350,7 @@ return getChecked();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableCompoundButton.setRightDrawable(drawable);
+			measurableView.setRightDrawable(drawable);
 			updateImageSrc(drawable, drawableRight);
 		}
 	}
@@ -1313,7 +1368,7 @@ return getChecked();				}
 
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableCompoundButton.setLeftDrawable(drawable);
+			measurableView.setLeftDrawable(drawable);
 			updateImageSrc(drawable, drawableLeft);
 		}
 	}
@@ -1328,31 +1383,31 @@ return getChecked();				}
 
 	
 	private void setDrawablePadding(Object objValue) {
-		measurableCompoundButton.setDrawablePadding((int) objValue);
+		measurableView.setDrawablePadding((int) objValue);
 	}
 	
 	private Object getDrawablePadding() {
-		return measurableCompoundButton.getDrawablePadding();
+		return measurableView.getDrawablePadding();
 	}
 	
 	private void updateDrawableBounds(int l, int t, int r, int b) {
 		if (drawableBottom != null) {
-			com.ashera.model.RectM bounds = measurableCompoundButton.getBottomDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getBottomDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableBottomWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}	
 		
 		if (drawableTop != null) {
-			com.ashera.model.RectM bounds = measurableCompoundButton.getTopDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getTopDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableTopWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}
 		
 		if (drawableLeft != null) {
-			com.ashera.model.RectM bounds = measurableCompoundButton.getLeftDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getLeftDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableLeftWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}
 		
 		if (drawableRight != null) {
-			com.ashera.model.RectM bounds = measurableCompoundButton.getRightDrawableBounds(l, t, r - l, b - t);
+			com.ashera.model.RectM bounds = measurableView.getRightDrawableBounds(l, t, r - l, b - t);
 			ViewImpl.updateBounds(drawableRightWrapper, bounds.x, bounds.y, bounds.width, bounds.height);
 		}
 	}
@@ -1399,7 +1454,7 @@ return getChecked();				}
 	private void setDrawableTint(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			objValue = colorStateList.getColorForState(measurableCompoundButton.getDrawableState(), r.android.graphics.Color.RED);
+			objValue = colorStateList.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
 			this.drawableTint = colorStateList;
 		}
 		
@@ -1428,21 +1483,21 @@ return getChecked();				}
     @Override
 	public void drawableStateChanged() {
     	super.drawableStateChanged();
-		drawableStateChange(drawableBottom, measurableCompoundButton.getBottomDrawable(), () -> {
-			setDrawableBottom(measurableCompoundButton.getBottomDrawable());
+		drawableStateChange(drawableBottom, measurableView.getBottomDrawable(), () -> {
+			setDrawableBottom(measurableView.getBottomDrawable());
 		});
-		drawableStateChange(drawableLeft, measurableCompoundButton.getLeftDrawable(), () -> {
-			setDrawableLeft(measurableCompoundButton.getLeftDrawable());
+		drawableStateChange(drawableLeft, measurableView.getLeftDrawable(), () -> {
+			setDrawableLeft(measurableView.getLeftDrawable());
 		});
-		drawableStateChange(drawableRight, measurableCompoundButton.getRightDrawable(), () -> {
-			setDrawableRight(measurableCompoundButton.getRightDrawable());
+		drawableStateChange(drawableRight, measurableView.getRightDrawable(), () -> {
+			setDrawableRight(measurableView.getRightDrawable());
 		});
-		drawableStateChange(drawableTop, measurableCompoundButton.getTopDrawable(), () -> {
-			setDrawableTop(measurableCompoundButton.getTopDrawable());
+		drawableStateChange(drawableTop, measurableView.getTopDrawable(), () -> {
+			setDrawableTop(measurableView.getTopDrawable());
 		});
 		
-		if (measurableCompoundButton.getTextColors() != null) {
-			setTextColor(measurableCompoundButton.getCurrentTextColor());
+		if (measurableView.getTextColors() != null) {
+			setTextColor(measurableView.getCurrentTextColor());
 		}
 		
 		if (drawableTint != null && drawableTint.isStateful()) {
@@ -1453,7 +1508,7 @@ return getChecked();				}
     
 	private void drawableStateChange(HTMLElement mydrawable, r.android.graphics.drawable.Drawable dr, Runnable run) {
 		if (mydrawable != null) {
-			final int[] state = measurableCompoundButton.getDrawableState();
+			final int[] state = measurableView.getDrawableState();
 			
 			if (dr != null && dr.isStateful() && dr.setState(state)) {
 				run.run();
@@ -1473,41 +1528,41 @@ return getChecked();				}
 	private void setPaddingLeft(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-left", value  + "px");
-		ViewImpl.setPaddingLeft(objValue, measurableCompoundButton);
+		ViewImpl.setPaddingLeft(objValue, measurableView);
 	}
 	
 	private void setPaddingRight(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-right", value + "px");
-		ViewImpl.setPaddingRight(objValue, measurableCompoundButton);
+		ViewImpl.setPaddingRight(objValue, measurableView);
 	}
 
 	private void setPaddingTop(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-top", value + "px");
-		ViewImpl.setPaddingTop(objValue, measurableCompoundButton);
+		ViewImpl.setPaddingTop(objValue, measurableView);
 	}
 
 	private void setPaddingBottom(Object objValue) {
 		int value = (int) objValue;
 		hTMLElement.getStyle().setProperty("padding-bottom", value + "px");
-		ViewImpl.setPaddingBottom(objValue, measurableCompoundButton);
+		ViewImpl.setPaddingBottom(objValue, measurableView);
 	}
 
 	private Object getPaddingTop() {
-		return measurableCompoundButton.getPaddingTop();
+		return measurableView.getPaddingTop();
 	}
 
 	private Object getPaddingBottom() {
-		return measurableCompoundButton.getPaddingBottom();
+		return measurableView.getPaddingBottom();
 	}
 
 	private Object getPaddingLeft() {
-		return measurableCompoundButton.getPaddingStart();
+		return measurableView.getPaddingStart();
 	}
 
 	private Object getPaddingRight() {
-		return measurableCompoundButton.getPaddingEnd();
+		return measurableView.getPaddingEnd();
 	}
 
 	private void setPaddingHorizontal(Object objValue) {
@@ -1522,13 +1577,13 @@ return getChecked();				}
 	//end - paddingcopy
 	//start - textcolor
 	private Object getTextColor() {
-		return measurableCompoundButton.getTextColors();
+		return measurableView.getTextColors();
 	}
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableCompoundButton.setTextColor(colorStateList);
-			objValue = measurableCompoundButton.getCurrentTextColor();
+			measurableView.setTextColor(colorStateList);
+			objValue = measurableView.getCurrentTextColor();
 		}
 		hTMLElement.getStyle().setProperty("color", (String) ViewImpl.getColor(objValue));
 	}
@@ -1660,17 +1715,17 @@ return getChecked();				}
 	//start - valign
 	private void setVerticalAligmentCenter() {
 		hTMLElement.getStyle().setProperty("vertical-align", "middle");
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.middle);
 	}
 
 	private void setVerticalAligmentBottom() {
 		hTMLElement.getStyle().setProperty("vertical-align", "bottom");		
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.bottom);
 	}
 
 	private void setVerticalAligmentTop() {
 		hTMLElement.getStyle().setProperty("vertical-align", "top");		
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 	}
 	
 	private static final int TEXT_ALIGN_CENTER = 0;
@@ -1801,7 +1856,7 @@ return getChecked();				}
 
 
 	public void nativeMakeFrameForChildWidget(int l, int t, int r, int b) {
-		com.ashera.model.RectM widgetBounds = measurableCompoundButton.getWidgetBounds(r - l, b - t, label);
+		com.ashera.model.RectM widgetBounds = measurableView.getWidgetBounds(r - l, b - t, label);
 		ViewImpl.updateBounds(labelWrapper, widgetBounds.x, widgetBounds.y, widgetBounds.width, widgetBounds.height);
 		label.getStyle().setProperty("max-width", widgetBounds.width + "px");
 		label.getStyle().setProperty("width", widgetBounds.width + "px");
@@ -1859,7 +1914,7 @@ return getChecked();				}
 	}
 
 	private void setScrollHorizontally(Object objValue) {
-		//measurableCompoundButton.setHorizontallyScrolling(objValue != null && (Boolean) objValue);
+		//measurableView.setHorizontallyScrolling(objValue != null && (Boolean) objValue);
 		setSingleLine(objValue);
 		if ((boolean) objValue) {
 			label.getStyle().setProperty("overflow-x", "visible");
@@ -1993,7 +2048,7 @@ return getChecked();				}
 	private void nativeCreate(Map<String, Object> params) {
 		nativeCreateLabel(params);
 		createCanvas();
-		measurableCompoundButton.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
+		measurableView.setVerticalAligment(com.ashera.view.BaseMeasurableView.VerticalAligment.top);
 		button = org.teavm.jso.dom.html.HTMLDocument.current().createElement("input");
 		button.setAttribute("type", getType());
 		button.getStyle().setProperty("margin", "0px");
@@ -2004,13 +2059,13 @@ return getChecked();				}
 	private int defaultPadding = 0;
 	private int buttonSize = 20;
 	private void measureButtonDrawable() {
-		r.android.graphics.drawable.Drawable buttonDrawable = measurableCompoundButton.getButtonDrawable();
+		r.android.graphics.drawable.Drawable buttonDrawable = measurableView.getButtonDrawable();
 		if (buttonDrawable == null) {
 			buttonDrawable = new r.android.graphics.drawable.Drawable();
 		}
 		buttonDrawable.setMinimumWidth(buttonSize + defaultPadding);
 		buttonDrawable.setMinimumHeight(buttonSize);
-		measurableCompoundButton.setButtonDrawable(buttonDrawable);
+		measurableView.setButtonDrawable(buttonDrawable);
 	}
 	
 	//start - postSetAttribute
@@ -2018,7 +2073,7 @@ return getChecked();				}
 			ILifeCycleDecorator decorator) {
 		switch (key.getAttributeName()) {
 		case "editable":
-			measurableCompoundButton.setEnabled((boolean) objValue);
+			measurableView.setEnabled((boolean) objValue);
 		case "enabled":
 			if ((boolean) objValue) {
 				button.removeAttribute("disabled");
@@ -2051,13 +2106,13 @@ return getChecked();				}
 	
 	private void setChecked(Object objValue) {
 		setButtonChecked(button, (boolean) objValue);
-		measurableCompoundButton.setChecked((boolean)objValue);
+		measurableView.setChecked((boolean)objValue);
 	}
 	
 	private void setOnChecked(Object objValue) {
 		ViewImpl.setOnListener(this, button, (e) -> {
-			if (measurableCompoundButton.isEnabled()) {
-				measurableCompoundButton.toggle();
+			if (measurableView.isEnabled()) {
+				measurableView.toggle();
 			}
 		}, "change", "change");
 		CompoundButton.OnCheckedChangeListener onCheckedChangeListener; 
@@ -2067,7 +2122,7 @@ return getChecked();				}
 		} else {
 			onCheckedChangeListener = (CompoundButton.OnCheckedChangeListener) objValue;
 		}
-		measurableCompoundButton.setOnCheckedChangeListener(onCheckedChangeListener);
+		measurableView.setOnCheckedChangeListener(onCheckedChangeListener);
 	}
 	
 	private Object getChecked() {
@@ -2085,7 +2140,7 @@ return getChecked();				}
 		for (HTMLElement htmlElement : elements) {
 			if (htmlElement != null) {
 				ViewImpl.setOnListener(this, htmlElement, (event) -> {
-					if (measurableCompoundButton.isEnabled()) {
+					if (measurableView.isEnabled()) {
 						boolean isChecked = (boolean)getChecked();
 						if (!isChecked || (isChecked && allowUnCheck())) {
 							setButtonChecked(button, !isChecked);
@@ -2178,7 +2233,7 @@ return getChecked();				}
 		autoSizeGranular = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableCompoundButton));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 
@@ -2186,7 +2241,7 @@ return getChecked();				}
 		autoSizeMin = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableCompoundButton));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 
@@ -2194,7 +2249,7 @@ return getChecked();				}
 		autoSizeMax = (int) objValue;
 		
 		if (isInitialised()) {
-			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableCompoundButton));
+			setAutoSizeTextTypeInternal( getAutoSizeTextType(measurableView));
 		}
 	}
 	
@@ -2217,7 +2272,7 @@ return getChecked();				}
 	}
 
 	private Object getAutoSizeTextType() {
-		return getAutoSizeTextType(measurableCompoundButton);
+		return getAutoSizeTextType(measurableView);
 	}
 	
 
@@ -2284,8 +2339,8 @@ return getChecked();				}
 	private void setTextColorLink(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
-			measurableCompoundButton.setLinkTextColor(colorStateList);
-			objValue = measurableCompoundButton.getPaint().linkColor;
+			measurableView.setLinkTextColor(colorStateList);
+			objValue = measurableView.getPaint().linkColor;
 		}
 		if (html) {
 			htmlConfig.put("textColorLink", ViewImpl.getColor(objValue));
@@ -2297,8 +2352,8 @@ return getChecked();				}
 	}
 	
 	private void drawableStateChangedForTextLinkColor() {
-		if (measurableCompoundButton.getLinkTextColors() != null && measurableCompoundButton.getLinkTextColors().isStateful()) {
-			setTextColorLink(measurableCompoundButton.getLinkTextColors());
+		if (measurableView.getLinkTextColors() != null && measurableView.getLinkTextColors().isStateful()) {
+			setTextColorLink(measurableView.getLinkTextColors());
 		}
 	}	
 
@@ -2307,7 +2362,7 @@ return getChecked();				}
 
     private void setGravity(Object objValue) {
         int value = (int) objValue;
-        measurableCompoundButton.setGravity(value);
+        measurableView.setGravity(value);
         int major = value & GravityConverter.VERTICAL_GRAVITY_MASK;
         updateTextAlignment();
 
@@ -2330,11 +2385,11 @@ return getChecked();				}
     }
 
 	private void updateTextAlignment() {
-		r.android.text.Layout.Alignment minor = measurableCompoundButton.getAlignmentOfLayout();
+		r.android.text.Layout.Alignment minor = measurableView.getAlignmentOfLayout();
 		boolean isRtl = false;
-		boolean hasTextDirection = measurableCompoundButton.getRawTextDirection() != 0;
+		boolean hasTextDirection = measurableView.getRawTextDirection() != 0;
 		if (hasTextDirection ) {
-			r.android.text.TextDirectionHeuristic heuristic =  measurableCompoundButton.getTextDirectionHeuristic();
+			r.android.text.TextDirectionHeuristic heuristic =  measurableView.getTextDirectionHeuristic();
 			String text = (String) getMyText();
 			isRtl = heuristic.isRtl(text, 0, text.length());
 		}
@@ -2419,7 +2474,7 @@ return getChecked();				}
 	}
 	
 	public void onRtlPropertiesChanged(int layoutDirection) {
-		if (measurableCompoundButton.getRawTextAlignment() != 0 || measurableCompoundButton.getRawLayoutDirection() != 0) {
+		if (measurableView.getRawTextAlignment() != 0 || measurableView.getRawLayoutDirection() != 0) {
 			updateTextAlignment();
 		}
 	}
@@ -2428,11 +2483,11 @@ return getChecked();				}
 
 
     private Object getMinHeight() {
-        return measurableCompoundButton.getMinHeight();
+        return measurableView.getMinHeight();
     }
 
     private Object getMinWidth() {
-        return measurableCompoundButton.getMinWidth();
+        return measurableView.getMinWidth();
     }
     
     private void setEms(Object objValue) {
@@ -2442,27 +2497,27 @@ return getChecked();				}
     
     
     public int getMaxEms() {
-        return measurableCompoundButton.getMaxEms();
+        return measurableView.getMaxEms();
     }
     public int getMinEms() {
-        return measurableCompoundButton.getMinEms();
+        return measurableView.getMinEms();
     }
 
     private void setMinEms(Object objValue) {
-    	measurableCompoundButton.setMinEms((int) objValue);
+    	measurableView.setMinEms((int) objValue);
         addMinMaxListener();
     }
     
     public int getMinLines() {
-        return measurableCompoundButton.getMinLines();
+        return measurableView.getMinLines();
     }
     
     public int getMaxLines() {
-        return measurableCompoundButton.getMaxLines();
+        return measurableView.getMaxLines();
     }
 
     private void setMaxEms(Object objValue) {
-    	measurableCompoundButton.setMaxEms((int) objValue);
+    	measurableView.setMaxEms((int) objValue);
         addMinMaxListener();
     }
 
@@ -2477,7 +2532,7 @@ return getChecked();				}
     }
 
     private void setMaxLines(Object objValue) {
-    	measurableCompoundButton.setMaxLines((int) objValue);
+    	measurableView.setMaxLines((int) objValue);
         addMinMaxListener();
     }
 
@@ -2487,82 +2542,70 @@ return getChecked();				}
     }
 
     private void setMinLines(Object objValue) {
-    	measurableCompoundButton.setMinLines((int) objValue);
+    	measurableView.setMinLines((int) objValue);
         addMinMaxListener();
     
     }
     
     private void setMaxHeight(Object objValue) {
-    	measurableCompoundButton.setMaxHeight((int) objValue);
+    	measurableView.setMaxHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMaxWidth(Object objValue) {
-    	measurableCompoundButton.setMaxWidth((int) objValue);
+    	measurableView.setMaxWidth((int) objValue);
         addMinMaxListener();
     }
 
     public int getMaxWidth() {
-        return measurableCompoundButton.getMaxWidth();
+        return measurableView.getMaxWidth();
     }
 
     public int getMaxHeight() {
-        return measurableCompoundButton.getMaxHeight();
+        return measurableView.getMaxHeight();
     }
     
     
     private void setMinHeight(Object objValue) {
-    	measurableCompoundButton.setMinHeight((int) objValue);
+    	measurableView.setMinHeight((int) objValue);
         addMinMaxListener();
     }
 
     private void setMinWidth(Object objValue) {
-    	measurableCompoundButton.setMinWidth((int) objValue);
+    	measurableView.setMinWidth((int) objValue);
         addMinMaxListener();
     }
 
     
     private Object getWidth() {
-        return measurableCompoundButton.getWidth();
+        return measurableView.getWidth();
     }
 
     private int getHeight() {
-        return measurableCompoundButton.getHeight();
+        return measurableView.getHeight();
     }
 
     
     
 
 
-	private int getAutoSizeTextType(MeasurableCompoundButton measurableCompoundButton) {
-		return measurableCompoundButton.getAutoSizeTextType();
+	private int getAutoSizeTextType(r.android.widget.TextView measurableView) {
+		return measurableView.getAutoSizeTextType();
 	}
 
 	private void setAutoSizeTextTypeInternal(int autoTextType) {
 		removeResizeListener();
         
-		if (measurableCompoundButton.isAutoSizeTextTypeUniform(autoTextType)) {
-			measurableCompoundButton.setUpAutoSizeTextTypeUniform(autoSizeMin, autoSizeMax, autoSizeGranular);
+		if (measurableView.isAutoSizeTextTypeUniform(autoTextType)) {
+			measurableView.setUpAutoSizeTextTypeUniform(autoSizeMin, autoSizeMax, autoSizeGranular);
             addAutoResizeListener();
         } else {
-        	measurableCompoundButton.clearAutoSizeTypeConfiguration();
+        	measurableView.clearAutoSizeTypeConfiguration();
         }
 	}
 	
-	
-	private boolean suggestedSizeFitsInSpace(int suggestedSizeInPx, float width, float height) {
-        setMyTextSize(suggestedSizeInPx * 1f);        
-        int y = computeSize(width);
-
-        // Height overflow.
-		if (y > height) {
-            return false;
-        }
-        return true;
-    }
-	
 	private void setAutoSizePresetSizes(Object objValue) {
-		measurableCompoundButton.setAutoSizeTextTypeUniformWithPresetSizes((int[]) objValue, 0);
+		measurableView.setAutoSizeTextTypeUniformWithPresetSizes((int[]) objValue, 0);
 		
 	}
 
@@ -2575,8 +2618,8 @@ return getChecked();				}
 
 		@Override
 		protected void doPerform(Object payload) {
-			if (!onlyOnce || measurableCompoundButton.isLayoutRequested()) {
-				measurableCompoundButton.autoResizeText();
+			if (!onlyOnce || measurableView.isLayoutRequested()) {
+				measurableView.autoResizeText();
 				onlyOnce = true;
 			}
 		}
@@ -2596,10 +2639,6 @@ return getChecked();				}
 			fragment.getEventBus().off(postMeasureHandler);
 			postMeasureHandler = null;
 		}
-	}
-
-	private int computeSize(float width) {
-		return measurableCompoundButton.nativeMeasureHeight(hTMLElement, (int) width);
 	}
     
     
@@ -2769,10 +2808,10 @@ return getChecked();				}
 	}
 	
 	private int getLabelWidth() {
-		if (measurableCompoundButton.isIgnoreDrawableHeight()) {
-			return measurableCompoundButton.getMeasuredWidth() - measurableCompoundButton.getPaddingLeft() - measurableCompoundButton.getPaddingRight(); 
+		if (measurableView.isIgnoreDrawableHeight()) {
+			return measurableView.getMeasuredWidth() - measurableView.getPaddingLeft() - measurableView.getPaddingRight(); 
 		}
-		return measurableCompoundButton.getMeasuredWidth() - measurableCompoundButton.getCompoundPaddingRight() - measurableCompoundButton.getCompoundPaddingLeft();
+		return measurableView.getMeasuredWidth() - measurableView.getCompoundPaddingRight() - measurableView.getCompoundPaddingLeft();
 	}
 
 	private boolean isLabelMeasured() {
@@ -2806,7 +2845,7 @@ return getChecked();				}
         // in settings). At the moment, we don't.
         if (firstBaselineToTopHeight > Math.abs(fontMetricsTop)) {
             final int paddingTop = firstBaselineToTopHeight - (-fontMetricsTop);
-           measurableCompoundButton.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
+            measurableView.setPadding((int) getPaddingLeft(), paddingTop, (int) getPaddingRight(), (int) getPaddingBottom());
         }
 	}
 	
@@ -2837,7 +2876,7 @@ return getChecked();				}
 
         if (lastBaselineToBottomHeight > Math.abs(fontMetricsBottom)) {
             final int paddingBottom = lastBaselineToBottomHeight - fontMetricsBottom;
-            measurableCompoundButton.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
+            measurableView.setPadding((int) getPaddingLeft(), (int) getPaddingTop(), (int) getPaddingRight(), paddingBottom);
         }		
 	}
 	
@@ -2927,10 +2966,14 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableCompoundButton.setId(IdGenerator.getId(id));
+			measurableView.setId(IdGenerator.getId(id));
 		}
 	}
 	
+    @Override
+    public void setVisible(boolean b) {
+        ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
+    }
  
     @Override
     public void requestLayout() {
@@ -2981,6 +3024,25 @@ public  class RadioButtonCommandBuilder extends com.ashera.layout.ViewImpl.ViewC
 		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
 return this;	}
 
+public RadioButtonCommandBuilder tryGetChecked() {
+	Map<String, Object> attrs = initCommand("checked");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object isChecked() {
+	Map<String, Object> attrs = initCommand("checked");
+	return attrs.get("commandReturnValue");
+}
+public RadioButtonCommandBuilder setChecked(boolean value) {
+	Map<String, Object> attrs = initCommand("checked");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public RadioButtonCommandBuilder setOnCheckedChange(String value) {
 	Map<String, Object> attrs = initCommand("onCheckedChange");
 	attrs.put("type", "attribute");
@@ -3900,19 +3962,8 @@ public RadioButtonCommandBuilder setTextFormat(String value) {
 
 	attrs.put("value", value);
 return this;}
-public RadioButtonCommandBuilder tryGetChecked() {
-	Map<String, Object> attrs = initCommand("checked");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object isChecked() {
-	Map<String, Object> attrs = initCommand("checked");
-	return attrs.get("commandReturnValue");
-}
-public RadioButtonCommandBuilder setChecked(boolean value) {
-	Map<String, Object> attrs = initCommand("checked");
+public RadioButtonCommandBuilder setTextAppearance(String value) {
+	Map<String, Object> attrs = initCommand("textAppearance");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -3924,6 +3975,13 @@ public class RadioButtonBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public RadioButtonBean() {
 			super(RadioButtonImpl.this);
 		}
+public Object isChecked() {
+	return getBuilder().reset().tryGetChecked().execute(false).isChecked(); 
+}
+public void setChecked(boolean value) {
+	getBuilder().reset().setChecked(value).execute(true);
+}
+
 public void setOnCheckedChange(String value) {
 	getBuilder().reset().setOnCheckedChange(value).execute(true);
 }
@@ -4291,11 +4349,8 @@ public void setTextFormat(String value) {
 	getBuilder().reset().setTextFormat(value).execute(true);
 }
 
-public Object isChecked() {
-	return getBuilder().reset().tryGetChecked().execute(false).isChecked(); 
-}
-public void setChecked(boolean value) {
-	getBuilder().reset().setChecked(value).execute(true);
+public void setTextAppearance(String value) {
+	getBuilder().reset().setTextAppearance(value).execute(true);
 }
 
 }
@@ -4329,7 +4384,7 @@ public void setChecked(boolean value) {
 
 	@Override
 	public int measureWidth() {
-		return windowNativeMeasureWidth(label) + measurableCompoundButton.getButtonDrawable().getMinimumWidth();
+		return windowNativeMeasureWidth(label) + measurableView.getButtonDrawable().getMinimumWidth();
 	}
 
 	@Override
@@ -4339,7 +4394,7 @@ public void setChecked(boolean value) {
 
 	@Override
 	public boolean isViewVisible() {
-		return measurableCompoundButton.getVisibility() == View.VISIBLE;
+		return measurableView.getVisibility() == View.VISIBLE;
 	}
 
 	@Override

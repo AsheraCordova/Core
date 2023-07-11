@@ -24,6 +24,8 @@
 
 + (jlong)elapsedRealtime;
 
++ (jlong)uptimeMillis;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADSystemClock)
@@ -35,6 +37,8 @@ FOUNDATION_EXPORT ADSystemClock *new_ADSystemClock_init(void) NS_RETURNS_RETAINE
 FOUNDATION_EXPORT ADSystemClock *create_ADSystemClock_init(void);
 
 FOUNDATION_EXPORT jlong ADSystemClock_elapsedRealtime(void);
+
+FOUNDATION_EXPORT jlong ADSystemClock_uptimeMillis(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADSystemClock)
 

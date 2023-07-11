@@ -38,7 +38,6 @@
 @class ADLayout_Alignment;
 @class ADRectF;
 @class ADTextView_TextPaint;
-@class ASWidgetAttribute;
 @class IOSIntArray;
 @class IOSObjectArray;
 @class JavaTextDecimalFormatSymbols;
@@ -63,6 +62,8 @@
 - (void)autoResizeText;
 
 - (void)clearAutoSizeTypeConfiguration;
+
+- (jint)computeSizeWithFloat:(jfloat)width;
 
 - (ADLayout_Alignment *)getAlignmentOfLayout;
 
@@ -143,7 +144,7 @@
 - (void)postDelayedWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable
                                 withInt:(jint)delay;
 
-- (void)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable;
+- (jboolean)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable;
 
 - (void)removeTextChangedListenerWithADTextWatcher:(id<ADTextWatcher>)watcher;
 
@@ -189,8 +190,6 @@
 - (void)setUpAutoSizeTextTypeUniformWithInt:(jint)autoSizeMin
                                     withInt:(jint)autoSizeMax
                                     withInt:(jint)autoSizeGranular;
-
-- (void)setWidgetInfoWithASWidgetAttribute:(ASWidgetAttribute *)widgetAttribute;
 
 - (void)setWidthWithInt:(jint)pixels;
 

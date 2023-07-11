@@ -6,18 +6,21 @@
 #include "BaseWidget.h"
 #include "Color.h"
 #include "ColorStateList.h"
+#include "HasWidgets.h"
 #include "IAttributable.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
+#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
 #include "IdGenerator.h"
 #include "J2ObjC_source.h"
-#include "MeasurableView.h"
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
+#include "ProgressBar.h"
+#include "Rect.h"
 #include "SimpleWrapableView.h"
 #include "UIProgressViewImpl.h"
 #include "View.h"
@@ -28,6 +31,7 @@
 #include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/lang/UnsupportedOperationException.h"
+#include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 
@@ -227,12 +231,14 @@ __attribute__((unused)) static id ASUIProgressViewImpl_getProgressBackgroundTint
   ASOnLayoutEvent *onLayoutEvent_;
   jint mMaxWidth_;
   jint mMaxHeight_;
+  id<JavaUtilMap> templates_;
 }
 
 @end
 
 J2OBJC_FIELD_SETTER(ASUIProgressViewImpl_UIProgressViewExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASUIProgressViewImpl_UIProgressViewExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASUIProgressViewImpl_UIProgressViewExt, templates_, id<JavaUtilMap>)
 
 @interface ASUIProgressViewImpl_UIProgressViewCommandBuilder () {
  @public
@@ -261,12 +267,6 @@ NSString *ASUIProgressViewImpl_GROUP_NAME = @"ProgressBar";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosProgressImage"])) withTypeWithNSString:@"image"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosTrackTintColor"])) withTypeWithNSString:@"color"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"iosTrackImage"])) withTypeWithNSString:@"image"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"max"])) withTypeWithNSString:@"int"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"min"])) withTypeWithNSString:@"int"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"progress"])) withTypeWithNSString:@"int"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"incrementProgressBy"])) withTypeWithNSString:@"int"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"progressTint"])) withTypeWithNSString:@"colorstate"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"progressBackgroundTint"])) withTypeWithNSString:@"colorstate"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"padding"])) withTypeWithNSString:@"dimension"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingBottom"])) withTypeWithNSString:@"dimension"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingRight"])) withTypeWithNSString:@"dimension"]);
@@ -276,6 +276,12 @@ NSString *ASUIProgressViewImpl_GROUP_NAME = @"ProgressBar";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingTop"])) withTypeWithNSString:@"dimension"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingHorizontal"])) withTypeWithNSString:@"dimension"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingVertical"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"max"])) withTypeWithNSString:@"int"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"min"])) withTypeWithNSString:@"int"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"progress"])) withTypeWithNSString:@"int"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"incrementProgressBy"])) withTypeWithNSString:@"int"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"progressTint"])) withTypeWithNSString:@"colorstate"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"progressBackgroundTint"])) withTypeWithNSString:@"colorstate"]);
   ASWidgetFactory_registerConstructorAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"indeterminate"])) withTypeWithNSString:@"boolean"]);
 }
 
@@ -286,13 +292,23 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)updateMeasuredDimensionWithInt:(jint)width
-                               withInt:(jint)height {
-  [((ASUIProgressViewImpl_UIProgressViewExt *) nil_chk(((ASUIProgressViewImpl_UIProgressViewExt *) cast_chk(measurableView_, [ASUIProgressViewImpl_UIProgressViewExt class])))) updateMeasuredDimensionWithInt:width withInt:height];
+- (instancetype)initWithNSString:(NSString *)localname {
+  ASUIProgressViewImpl_initWithNSString_(self, localname);
+  return self;
+}
+
+- (instancetype)initWithNSString:(NSString *)groupName
+                    withNSString:(NSString *)localname {
+  ASUIProgressViewImpl_initWithNSString_withNSString_(self, groupName, localname);
+  return self;
+}
+
+- (IOSClass *)getViewClass {
+  return ASUIProgressViewImpl_UIProgressViewExt_class_();
 }
 
 - (id<ASIWidget>)newInstance {
-  return new_ASUIProgressViewImpl_init();
+  return new_ASUIProgressViewImpl_initWithNSString_withNSString_(groupName_, localName_);
 }
 
 - (void)createWithASIFragment:(id<ASIFragment>)fragment
@@ -315,7 +331,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [((ASSimpleWrapableView *) nil_chk(simpleWrapableView_)) getWrappedView];
   ASViewImpl_setAttributeWithASIWidget_withASSimpleWrapableView_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, simpleWrapableView_, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosProgressTintColor", @"iosProgressImage", @"iosTrackTintColor", @"iosTrackImage", @"max", @"min", @"progress", @"incrementProgressBy", @"progressTint", @"progressBackgroundTint", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical" }, 19)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosProgressTintColor", @"iosProgressImage", @"iosTrackTintColor", @"iosTrackImage", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"max", @"min", @"progress", @"incrementProgressBy", @"progressTint", @"progressBackgroundTint" }, 19)) {
     case 0:
     {
       [self setProgressTintColorWithId:nativeWidget withId:objValue];
@@ -338,77 +354,77 @@ J2OBJC_IGNORE_DESIGNATED_END
     break;
     case 4:
     {
-      ASUIProgressViewImpl_setMaxWithId_(self, objValue);
+      ASUIProgressViewImpl_setPaddingWithId_(self, objValue);
     }
     break;
     case 5:
     {
-      ASUIProgressViewImpl_setMinWithId_(self, objValue);
+      ASUIProgressViewImpl_setPaddingBottomWithId_(self, objValue);
     }
     break;
     case 6:
     {
-      ASUIProgressViewImpl_setProgressWithId_(self, objValue);
+      ASUIProgressViewImpl_setPaddingRightWithId_(self, objValue);
     }
     break;
     case 7:
     {
-      ASUIProgressViewImpl_incrementProgressByWithId_(self, objValue);
+      ASUIProgressViewImpl_setPaddingLeftWithId_(self, objValue);
     }
     break;
     case 8:
     {
-      ASUIProgressViewImpl_setProgressTintWithId_(self, objValue);
+      ASUIProgressViewImpl_setPaddingStartWithId_(self, objValue);
     }
     break;
     case 9:
     {
-      ASUIProgressViewImpl_setProgressBackgroundTintWithId_(self, objValue);
+      ASUIProgressViewImpl_setPaddingEndWithId_(self, objValue);
     }
     break;
     case 10:
     {
-      ASUIProgressViewImpl_setPaddingWithId_(self, objValue);
+      ASUIProgressViewImpl_setPaddingTopWithId_(self, objValue);
     }
     break;
     case 11:
     {
-      ASUIProgressViewImpl_setPaddingBottomWithId_(self, objValue);
+      ASUIProgressViewImpl_setPaddingHorizontalWithId_(self, objValue);
     }
     break;
     case 12:
     {
-      ASUIProgressViewImpl_setPaddingRightWithId_(self, objValue);
+      ASUIProgressViewImpl_setPaddingVerticalWithId_(self, objValue);
     }
     break;
     case 13:
     {
-      ASUIProgressViewImpl_setPaddingLeftWithId_(self, objValue);
+      ASUIProgressViewImpl_setMaxWithId_(self, objValue);
     }
     break;
     case 14:
     {
-      ASUIProgressViewImpl_setPaddingStartWithId_(self, objValue);
+      ASUIProgressViewImpl_setMinWithId_(self, objValue);
     }
     break;
     case 15:
     {
-      ASUIProgressViewImpl_setPaddingEndWithId_(self, objValue);
+      ASUIProgressViewImpl_setProgressWithId_(self, objValue);
     }
     break;
     case 16:
     {
-      ASUIProgressViewImpl_setPaddingTopWithId_(self, objValue);
+      ASUIProgressViewImpl_incrementProgressByWithId_(self, objValue);
     }
     break;
     case 17:
     {
-      ASUIProgressViewImpl_setPaddingHorizontalWithId_(self, objValue);
+      ASUIProgressViewImpl_setProgressTintWithId_(self, objValue);
     }
     break;
     case 18:
     {
-      ASUIProgressViewImpl_setPaddingVerticalWithId_(self, objValue);
+      ASUIProgressViewImpl_setProgressBackgroundTintWithId_(self, objValue);
     }
     break;
     default:
@@ -423,7 +439,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (attributeValue != nil) {
     return attributeValue;
   }
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosProgressTintColor", @"iosProgressImage", @"iosTrackTintColor", @"iosTrackImage", @"progressTint", @"progressBackgroundTint", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop" }, 12)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosProgressTintColor", @"iosProgressImage", @"iosTrackTintColor", @"iosTrackImage", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"progressTint", @"progressBackgroundTint" }, 12)) {
     case 0:
     {
       return [self getProgressTintColor];
@@ -442,35 +458,35 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     case 4:
     {
-      return ASUIProgressViewImpl_getProgressTint(self);
+      return ASUIProgressViewImpl_getPaddingBottom(self);
     }
     case 5:
     {
-      return ASUIProgressViewImpl_getProgressBackgroundTint(self);
+      return ASUIProgressViewImpl_getPaddingRight(self);
     }
     case 6:
     {
-      return ASUIProgressViewImpl_getPaddingBottom(self);
+      return ASUIProgressViewImpl_getPaddingLeft(self);
     }
     case 7:
     {
-      return ASUIProgressViewImpl_getPaddingRight(self);
+      return ASUIProgressViewImpl_getPaddingStart(self);
     }
     case 8:
     {
-      return ASUIProgressViewImpl_getPaddingLeft(self);
+      return ASUIProgressViewImpl_getPaddingEnd(self);
     }
     case 9:
     {
-      return ASUIProgressViewImpl_getPaddingStart(self);
+      return ASUIProgressViewImpl_getPaddingTop(self);
     }
     case 10:
     {
-      return ASUIProgressViewImpl_getPaddingEnd(self);
+      return ASUIProgressViewImpl_getProgressTint(self);
     }
     case 11:
     {
-      return ASUIProgressViewImpl_getPaddingTop(self);
+      return ASUIProgressViewImpl_getProgressBackgroundTint(self);
     }
   }
   return nil;
@@ -548,12 +564,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)measureWidth {
-  jint width = [((ASMeasurableView *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
+  jint width = [((ADProgressBar *) nil_chk(measurableView_)) nativeMeasureWidthWithId:uiView_];
   return width;
 }
 
 - (jint)measureHeightWithInt:(jint)width {
-  jint height = [((ASMeasurableView *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
+  jint height = [((ADProgressBar *) nil_chk(measurableView_)) nativeMeasureHeightWithId:uiView_ withInt:width];
   return height;
 }
 
@@ -600,8 +616,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
-    [((ASMeasurableView *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
+    [((ADProgressBar *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
   }
+}
+
+- (void)setVisibleWithBoolean:(jboolean)b {
+  [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
 - (void)requestLayout {
@@ -784,12 +804,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 2, -1, -1, -1, -1 },
+    { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 5, -1, 6, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, 5, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 8, 9, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
@@ -797,31 +819,32 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 11, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 13, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 14, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 15, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 16, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 17, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 18, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 19, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 20, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 21, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 12, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 13, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 14, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 15, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 16, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 17, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 18, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 19, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 20, 21, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 23, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 25, 26, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 24, 25, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 27, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 26, 25, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 28, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 27, 25, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 29, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 28, 25, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 30, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 31, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 29, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 30, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 31, 32, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 32, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 33, 1, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
@@ -829,24 +852,24 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 33, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 34, 21, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 34, 35, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 36, 24, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, 37, 38, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, 39, 24, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 35, 36, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 37, 23, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, 38, 39, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, 40, 23, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 40, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 41, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 42, 43, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 44, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 45, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 46, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 47, 48, -1, 49, -1, -1 },
-    { NULL, "V", 0x2, 50, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 41, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 42, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 43, 44, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 45, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 46, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 47, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 48, 49, -1, 50, -1, -1 },
+    { NULL, "V", 0x2, 51, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 51, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 52, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -854,79 +877,82 @@ J2OBJC_IGNORE_DESIGNATED_END
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(loadAttributesWithNSString:);
   methods[1].selector = @selector(init);
-  methods[2].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
-  methods[3].selector = @selector(newInstance);
-  methods[4].selector = @selector(createWithASIFragment:withJavaUtilMap:);
-  methods[5].selector = @selector(setWidgetOnNativeClass);
-  methods[6].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[7].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[8].selector = @selector(asWidget);
-  methods[9].selector = @selector(getPaddingBottom);
-  methods[10].selector = @selector(getPaddingTop);
-  methods[11].selector = @selector(getPaddingRight);
-  methods[12].selector = @selector(getPaddingLeft);
-  methods[13].selector = @selector(getPaddingEnd);
-  methods[14].selector = @selector(getPaddingStart);
-  methods[15].selector = @selector(setPaddingVerticalWithId:);
-  methods[16].selector = @selector(setPaddingHorizontalWithId:);
-  methods[17].selector = @selector(setPaddingTopWithId:);
-  methods[18].selector = @selector(setPaddingEndWithId:);
-  methods[19].selector = @selector(setPaddingStartWithId:);
-  methods[20].selector = @selector(setPaddingLeftWithId:);
-  methods[21].selector = @selector(setPaddingRightWithId:);
-  methods[22].selector = @selector(setPaddingBottomWithId:);
-  methods[23].selector = @selector(setPaddingWithId:);
-  methods[24].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
-  methods[25].selector = @selector(measureWidth);
-  methods[26].selector = @selector(measureHeightWithInt:);
-  methods[27].selector = @selector(setProgressTintColorWithId:withId:);
-  methods[28].selector = @selector(getProgressTintColor);
-  methods[29].selector = @selector(setProgressImageWithId:withId:);
-  methods[30].selector = @selector(getProgressImage);
-  methods[31].selector = @selector(setTrackTintColorWithId:withId:);
-  methods[32].selector = @selector(getTrackTintColor);
-  methods[33].selector = @selector(setTrackImageWithId:withId:);
-  methods[34].selector = @selector(getTrackImage);
-  methods[35].selector = @selector(checkIosVersionWithNSString:);
-  methods[36].selector = @selector(setIdWithNSString:);
-  methods[37].selector = @selector(requestLayout);
-  methods[38].selector = @selector(invalidate);
-  methods[39].selector = @selector(getPluginWithNSString:);
-  methods[40].selector = @selector(getBean);
-  methods[41].selector = @selector(getBuilder);
-  methods[42].selector = @selector(createSimpleWrapableView);
-  methods[43].selector = @selector(hasScrollView);
-  methods[44].selector = @selector(isViewWrapped);
-  methods[45].selector = @selector(addForegroundIfNeeded);
-  methods[46].selector = @selector(getForeground);
-  methods[47].selector = @selector(setForegroundFrameWithInt:withInt:withInt:withInt:);
-  methods[48].selector = @selector(asNativeWidget);
-  methods[49].selector = @selector(invalidateWrapViewHolder);
-  methods[50].selector = @selector(createWrapperViewWithId:withInt:);
-  methods[51].selector = @selector(createWrapperViewHolderWithInt:);
-  methods[52].selector = @selector(nativeAddForeGroundWithASIWidget:);
-  methods[53].selector = @selector(createWrapperViewHolderNativeWithInt:);
-  methods[54].selector = @selector(getScrollView);
-  methods[55].selector = @selector(incrementProgressByWithId:);
-  methods[56].selector = @selector(setProgressWithId:);
-  methods[57].selector = @selector(nativeSetProgressWithFloat:);
-  methods[58].selector = @selector(nativeCreateViewWithInt:);
-  methods[59].selector = @selector(setMinWithId:);
-  methods[60].selector = @selector(setMaxWithId:);
-  methods[61].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[62].selector = @selector(setProgressTintWithId:);
-  methods[63].selector = @selector(getProgressTint);
-  methods[64].selector = @selector(setProgressBackgroundTintWithId:);
-  methods[65].selector = @selector(getProgressBackgroundTint);
+  methods[2].selector = @selector(initWithNSString:);
+  methods[3].selector = @selector(initWithNSString:withNSString:);
+  methods[4].selector = @selector(getViewClass);
+  methods[5].selector = @selector(newInstance);
+  methods[6].selector = @selector(createWithASIFragment:withJavaUtilMap:);
+  methods[7].selector = @selector(setWidgetOnNativeClass);
+  methods[8].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[9].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[10].selector = @selector(asWidget);
+  methods[11].selector = @selector(getPaddingBottom);
+  methods[12].selector = @selector(getPaddingTop);
+  methods[13].selector = @selector(getPaddingRight);
+  methods[14].selector = @selector(getPaddingLeft);
+  methods[15].selector = @selector(getPaddingEnd);
+  methods[16].selector = @selector(getPaddingStart);
+  methods[17].selector = @selector(setPaddingVerticalWithId:);
+  methods[18].selector = @selector(setPaddingHorizontalWithId:);
+  methods[19].selector = @selector(setPaddingTopWithId:);
+  methods[20].selector = @selector(setPaddingEndWithId:);
+  methods[21].selector = @selector(setPaddingStartWithId:);
+  methods[22].selector = @selector(setPaddingLeftWithId:);
+  methods[23].selector = @selector(setPaddingRightWithId:);
+  methods[24].selector = @selector(setPaddingBottomWithId:);
+  methods[25].selector = @selector(setPaddingWithId:);
+  methods[26].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[27].selector = @selector(measureWidth);
+  methods[28].selector = @selector(measureHeightWithInt:);
+  methods[29].selector = @selector(setProgressTintColorWithId:withId:);
+  methods[30].selector = @selector(getProgressTintColor);
+  methods[31].selector = @selector(setProgressImageWithId:withId:);
+  methods[32].selector = @selector(getProgressImage);
+  methods[33].selector = @selector(setTrackTintColorWithId:withId:);
+  methods[34].selector = @selector(getTrackTintColor);
+  methods[35].selector = @selector(setTrackImageWithId:withId:);
+  methods[36].selector = @selector(getTrackImage);
+  methods[37].selector = @selector(checkIosVersionWithNSString:);
+  methods[38].selector = @selector(setIdWithNSString:);
+  methods[39].selector = @selector(setVisibleWithBoolean:);
+  methods[40].selector = @selector(requestLayout);
+  methods[41].selector = @selector(invalidate);
+  methods[42].selector = @selector(getPluginWithNSString:);
+  methods[43].selector = @selector(getBean);
+  methods[44].selector = @selector(getBuilder);
+  methods[45].selector = @selector(createSimpleWrapableView);
+  methods[46].selector = @selector(hasScrollView);
+  methods[47].selector = @selector(isViewWrapped);
+  methods[48].selector = @selector(addForegroundIfNeeded);
+  methods[49].selector = @selector(getForeground);
+  methods[50].selector = @selector(setForegroundFrameWithInt:withInt:withInt:withInt:);
+  methods[51].selector = @selector(asNativeWidget);
+  methods[52].selector = @selector(invalidateWrapViewHolder);
+  methods[53].selector = @selector(createWrapperViewWithId:withInt:);
+  methods[54].selector = @selector(createWrapperViewHolderWithInt:);
+  methods[55].selector = @selector(nativeAddForeGroundWithASIWidget:);
+  methods[56].selector = @selector(createWrapperViewHolderNativeWithInt:);
+  methods[57].selector = @selector(getScrollView);
+  methods[58].selector = @selector(incrementProgressByWithId:);
+  methods[59].selector = @selector(setProgressWithId:);
+  methods[60].selector = @selector(nativeSetProgressWithFloat:);
+  methods[61].selector = @selector(nativeCreateViewWithInt:);
+  methods[62].selector = @selector(setMinWithId:);
+  methods[63].selector = @selector(setMaxWithId:);
+  methods[64].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[65].selector = @selector(setProgressTintWithId:);
+  methods[66].selector = @selector(getProgressTint);
+  methods[67].selector = @selector(setProgressBackgroundTintWithId:);
+  methods[68].selector = @selector(getProgressBackgroundTint);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "FOREGROUND_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 52, -1, -1 },
-    { "VIEW_HOLDER_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 53, -1, -1 },
-    { "WIDGET_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 54, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 55, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 56, -1, -1 },
+    { "FOREGROUND_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 53, -1, -1 },
+    { "VIEW_HOLDER_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 54, -1, -1 },
+    { "WIDGET_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 55, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 56, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 57, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "measurableView_", "LASMeasurableView;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
+    { "measurableView_", "LADProgressBar;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "builder_", "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bean_", "LASUIProgressViewImpl_UIProgressViewBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "simpleWrapableView_", "LASSimpleWrapableView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -936,8 +962,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "progressTint_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "progressTintBackground_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "updateMeasuredDimension", "II", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setPaddingVertical", "LNSObject;", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "nativeMakeFrameForChildWidget", "IIII", "measureHeight", "I", "setProgressTintColor", "LNSObject;LNSObject;", "setProgressImage", "setTrackTintColor", "setTrackImage", "checkIosVersion", "setId", "getPlugin", "setForegroundFrame", "createWrapperView", "LNSObject;I", "createWrapperViewHolder", "nativeAddForeGround", "LASIWidget;", "createWrapperViewHolderNative", "incrementProgressBy", "setProgress", "nativeSetProgress", "F", "nativeCreateView", "setMin", "setMax", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setProgressTint", "setProgressBackgroundTint", &ASUIProgressViewImpl_FOREGROUND_REGEX, &ASUIProgressViewImpl_VIEW_HOLDER_REGEX, &ASUIProgressViewImpl_WIDGET_REGEX, &ASUIProgressViewImpl_LOCAL_NAME, &ASUIProgressViewImpl_GROUP_NAME, "LASUIProgressViewImpl_UIProgressViewExt;LASUIProgressViewImpl_UIProgressViewCommandBuilder;LASUIProgressViewImpl_UIProgressViewBean;" };
-  static const J2ObjcClassInfo _ASUIProgressViewImpl = { "UIProgressViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 66, 15, -1, 57, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setPaddingVertical", "LNSObject;", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "nativeMakeFrameForChildWidget", "IIII", "measureHeight", "I", "setProgressTintColor", "LNSObject;LNSObject;", "setProgressImage", "setTrackTintColor", "setTrackImage", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "setForegroundFrame", "createWrapperView", "LNSObject;I", "createWrapperViewHolder", "nativeAddForeGround", "LASIWidget;", "createWrapperViewHolderNative", "incrementProgressBy", "setProgress", "nativeSetProgress", "F", "nativeCreateView", "setMin", "setMax", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setProgressTint", "setProgressBackgroundTint", &ASUIProgressViewImpl_FOREGROUND_REGEX, &ASUIProgressViewImpl_VIEW_HOLDER_REGEX, &ASUIProgressViewImpl_WIDGET_REGEX, &ASUIProgressViewImpl_LOCAL_NAME, &ASUIProgressViewImpl_GROUP_NAME, "LASUIProgressViewImpl_UIProgressViewExt;LASUIProgressViewImpl_UIProgressViewCommandBuilder;LASUIProgressViewImpl_UIProgressViewBean;" };
+  static const J2ObjcClassInfo _ASUIProgressViewImpl = { "UIProgressViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 69, 15, -1, 58, -1, -1, -1 };
   return &_ASUIProgressViewImpl;
 }
 
@@ -957,24 +983,52 @@ ASUIProgressViewImpl *create_ASUIProgressViewImpl_init() {
   J2OBJC_CREATE_IMPL(ASUIProgressViewImpl, init)
 }
 
+void ASUIProgressViewImpl_initWithNSString_(ASUIProgressViewImpl *self, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, ASUIProgressViewImpl_GROUP_NAME, localname);
+  self->max_ = 100;
+  self->min_ = 0;
+}
+
+ASUIProgressViewImpl *new_ASUIProgressViewImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_NEW_IMPL(ASUIProgressViewImpl, initWithNSString_, localname)
+}
+
+ASUIProgressViewImpl *create_ASUIProgressViewImpl_initWithNSString_(NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASUIProgressViewImpl, initWithNSString_, localname)
+}
+
+void ASUIProgressViewImpl_initWithNSString_withNSString_(ASUIProgressViewImpl *self, NSString *groupName, NSString *localname) {
+  ASBaseWidget_initWithNSString_withNSString_(self, groupName, localname);
+  self->max_ = 100;
+  self->min_ = 0;
+}
+
+ASUIProgressViewImpl *new_ASUIProgressViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_NEW_IMPL(ASUIProgressViewImpl, initWithNSString_withNSString_, groupName, localname)
+}
+
+ASUIProgressViewImpl *create_ASUIProgressViewImpl_initWithNSString_withNSString_(NSString *groupName, NSString *localname) {
+  J2OBJC_CREATE_IMPL(ASUIProgressViewImpl, initWithNSString_withNSString_, groupName, localname)
+}
+
 void ASUIProgressViewImpl_setWidgetOnNativeClass(ASUIProgressViewImpl *self) {
   ((ASUIProgressView*) self.uiView).widget = self;
 }
 
 id ASUIProgressViewImpl_getPaddingBottom(ASUIProgressViewImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableView *) nil_chk(self->measurableView_)) getPaddingBottom]);
+  return JavaLangInteger_valueOfWithInt_([((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingBottom]);
 }
 
 id ASUIProgressViewImpl_getPaddingTop(ASUIProgressViewImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableView *) nil_chk(self->measurableView_)) getPaddingTop]);
+  return JavaLangInteger_valueOfWithInt_([((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingTop]);
 }
 
 id ASUIProgressViewImpl_getPaddingRight(ASUIProgressViewImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableView *) nil_chk(self->measurableView_)) getPaddingRight]);
+  return JavaLangInteger_valueOfWithInt_([((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingRight]);
 }
 
 id ASUIProgressViewImpl_getPaddingLeft(ASUIProgressViewImpl *self) {
-  return JavaLangInteger_valueOfWithInt_([((ASMeasurableView *) nil_chk(self->measurableView_)) getPaddingLeft]);
+  return JavaLangInteger_valueOfWithInt_([((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingLeft]);
 }
 
 id ASUIProgressViewImpl_getPaddingEnd(ASUIProgressViewImpl *self) {
@@ -1029,7 +1083,7 @@ void ASUIProgressViewImpl_setPaddingWithId_(ASUIProgressViewImpl *self, id objVa
 void ASUIProgressViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(ASUIProgressViewImpl *self, jint l, jint t, jint r, jint b) {
   if (ASUIProgressViewImpl_isViewWrapped(self)) {
     id progressView = [((ASSimpleWrapableView *) nil_chk(self->simpleWrapableView_)) getWrappedView];
-    ASViewImpl_updateBoundsWithId_withInt_withInt_withInt_withInt_(progressView, [((ASMeasurableView *) nil_chk(self->measurableView_)) getPaddingStart], [((ASMeasurableView *) nil_chk(self->measurableView_)) getPaddingTop], r - l - [((ASMeasurableView *) nil_chk(self->measurableView_)) getPaddingStart] - [((ASMeasurableView *) nil_chk(self->measurableView_)) getPaddingEnd], b - t - [((ASMeasurableView *) nil_chk(self->measurableView_)) getPaddingTop] - [((ASMeasurableView *) nil_chk(self->measurableView_)) getPaddingBottom]);
+    ASViewImpl_updateBoundsWithId_withInt_withInt_withInt_withInt_(progressView, [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingStart], [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingTop], r - l - [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingStart] - [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingEnd], b - t - [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingTop] - [((ADProgressBar *) nil_chk(self->measurableView_)) getPaddingBottom]);
   }
 }
 
@@ -1108,7 +1162,7 @@ void ASUIProgressViewImpl_setProgressTintWithId_(ASUIProgressViewImpl *self, id 
   self->progressTint_ = objValue;
   if ([objValue isKindOfClass:[ADColorStateList class]]) {
     ADColorStateList *colorStateList = (ADColorStateList *) objValue;
-    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(colorStateList)) getColorForStateWithIntArray:[((ASMeasurableView *) nil_chk(self->measurableView_)) getDrawableState] withInt:ADColor_RED]);
+    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(colorStateList)) getColorForStateWithIntArray:[((ADProgressBar *) nil_chk(self->measurableView_)) getDrawableState] withInt:ADColor_RED]);
   }
   id color = ASViewImpl_getColorWithId_(objValue);
   [self setProgressTintColorWithId:[self asNativeWidget] withId:color];
@@ -1122,7 +1176,7 @@ void ASUIProgressViewImpl_setProgressBackgroundTintWithId_(ASUIProgressViewImpl 
   self->progressTintBackground_ = objValue;
   if ([objValue isKindOfClass:[ADColorStateList class]]) {
     ADColorStateList *colorStateList = (ADColorStateList *) objValue;
-    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(colorStateList)) getColorForStateWithIntArray:[((ASMeasurableView *) nil_chk(self->measurableView_)) getDrawableState] withInt:ADColor_RED]);
+    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(colorStateList)) getColorForStateWithIntArray:[((ADProgressBar *) nil_chk(self->measurableView_)) getDrawableState] withInt:ADColor_RED]);
   }
   id color = ASViewImpl_getColorWithId_(objValue);
   [self setTrackTintColorWithId:[self asNativeWidget] withId:color];
@@ -1235,6 +1289,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
   ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
 }
 
+- (ADView *)inflateViewWithNSString:(NSString *)layout {
+  if (templates_ == nil) {
+    templates_ = new_JavaUtilHashMap_init();
+  }
+  id<ASIWidget> template_ = [templates_ getWithId:layout];
+  if (template_ == nil) {
+    template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
+    (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
+  }
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
+}
+
+- (void)remeasure {
+  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+}
+
+- (void)removeFromParent {
+  [((id<ASHasWidgets>) nil_chk([this$0_ getParent])) removeWithASIWidget:this$0_];
+}
+
+- (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation {
+  *IOSIntArray_GetRef(nil_chk(appScreenLocation), 0) = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  *IOSIntArray_GetRef(appScreenLocation, 1) = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+}
+
+- (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame {
+  ((ADRect *) nil_chk(displayFrame))->left_ = ASViewImpl_getLocationXOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->top_ = ASViewImpl_getLocationYOnScreenWithId_([this$0_ asNativeWidget]);
+  displayFrame->right_ = displayFrame->left_ + [self getWidth];
+  displayFrame->bottom_ = displayFrame->top_ + [self getHeight];
+}
+
 - (void)offsetTopAndBottomWithInt:(jint)offset {
   [super offsetTopAndBottomWithInt:offset];
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
@@ -1245,9 +1332,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
   ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], [self getLeft], [self getTop], [self getRight], [self getBottom]);
 }
 
+- (void)setMyAttributeWithNSString:(NSString *)name
+                            withId:(id)value {
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
+}
+
 - (void)setVisibilityWithInt:(jint)visibility {
   [super setVisibilityWithInt:visibility];
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
+}
+
+- (jint)nativeMeasureWidthWithId:(id)uiView {
+  return ASViewImpl_nativeMeasureWidthWithId_(uiView);
+}
+
+- (jint)nativeMeasureHeightWithId:(id)uiView
+                          withInt:(jint)width {
+  return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
 - (void)__javaClone:(ASUIProgressViewImpl_UIProgressViewExt *)original {
@@ -1272,9 +1373,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 1, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 25, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 28, 1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 29, 30, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 31, 32, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1294,9 +1403,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
   methods[12].selector = @selector(initialized);
   methods[13].selector = @selector(getAttributeWithASWidgetAttribute:);
   methods[14].selector = @selector(drawableStateChanged);
-  methods[15].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[16].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[17].selector = @selector(setVisibilityWithInt:);
+  methods[15].selector = @selector(inflateViewWithNSString:);
+  methods[16].selector = @selector(remeasure);
+  methods[17].selector = @selector(removeFromParent);
+  methods[18].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[19].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[20].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[21].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[22].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[23].selector = @selector(setVisibilityWithInt:);
+  methods[24].selector = @selector(nativeMeasureWidthWithId:);
+  methods[25].selector = @selector(nativeMeasureHeightWithId:withInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASUIProgressViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -1304,9 +1421,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
   };
-  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASUIProgressViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "offsetTopAndBottom", "offsetLeftAndRight", "setVisibility" };
-  static const J2ObjcClassInfo _ASUIProgressViewImpl_UIProgressViewExt = { "UIProgressViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 18, 5, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASUIProgressViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASUIProgressViewImpl_UIProgressViewExt = { "UIProgressViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 26, 6, 3, -1, -1, -1, -1 };
   return &_ASUIProgressViewImpl_UIProgressViewExt;
 }
 
@@ -1314,7 +1432,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl)
 
 void ASUIProgressViewImpl_UIProgressViewExt_initWithASUIProgressViewImpl_(ASUIProgressViewImpl_UIProgressViewExt *self, ASUIProgressViewImpl *outer$) {
   self->this$0_ = outer$;
-  ASMeasurableView_initWithASIWidget_(self, outer$);
+  ADProgressBar_initWithASIWidget_(self, outer$);
   self->measureFinished_ = new_ASMeasureEvent_init();
   self->onLayoutEvent_ = new_ASOnLayoutEvent_init();
   self->mMaxWidth_ = -1;
@@ -1428,86 +1546,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl_UIProgressViewExt)
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setIosTrackImageWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosTrackImage"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setMaxWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"max"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setMinWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"min"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setProgressWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progress"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)incrementProgressByWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"incrementProgressBy"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetProgressTint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressTint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getProgressTint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressTint"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setProgressTintWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressTint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetProgressBackgroundTint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressBackgroundTint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getProgressBackgroundTint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressBackgroundTint"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setProgressBackgroundTintWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressBackgroundTint"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -1674,6 +1712,86 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl_UIProgressViewExt)
   return self;
 }
 
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setMaxWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"max"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setMinWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"min"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setProgressWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progress"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)incrementProgressByWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"incrementProgressBy"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetProgressTint {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressTint"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getProgressTint {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressTint"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setProgressTintWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressTint"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetProgressBackgroundTint {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressBackgroundTint"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getProgressBackgroundTint {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressBackgroundTint"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setProgressBackgroundTintWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"progressBackgroundTint"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
@@ -1690,10 +1808,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl_UIProgressViewExt)
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 7, 4, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 8, 9, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 10, 9, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 11, 9, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 12, 9, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 8, 4, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 9, 4, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 10, 4, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 11, 4, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 12, 4, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 13, 4, -1, -1, -1, -1 },
@@ -1701,25 +1828,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl_UIProgressViewExt)
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 14, 4, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 15, 4, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 16, 4, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 19, 18, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 20, 18, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 21, 18, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 17, 4, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 18, 4, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 19, 4, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 20, 4, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 21, 4, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 22, 4, -1, -1, -1, -1 },
+    { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASUIProgressViewImpl_UIProgressViewCommandBuilder;", 0x1, 23, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -1739,42 +1857,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl_UIProgressViewExt)
   methods[11].selector = @selector(tryGetIosTrackImage);
   methods[12].selector = @selector(getIosTrackImage);
   methods[13].selector = @selector(setIosTrackImageWithNSString:);
-  methods[14].selector = @selector(setMaxWithInt:);
-  methods[15].selector = @selector(setMinWithInt:);
-  methods[16].selector = @selector(setProgressWithInt:);
-  methods[17].selector = @selector(incrementProgressByWithInt:);
-  methods[18].selector = @selector(tryGetProgressTint);
-  methods[19].selector = @selector(getProgressTint);
-  methods[20].selector = @selector(setProgressTintWithNSString:);
-  methods[21].selector = @selector(tryGetProgressBackgroundTint);
-  methods[22].selector = @selector(getProgressBackgroundTint);
-  methods[23].selector = @selector(setProgressBackgroundTintWithNSString:);
-  methods[24].selector = @selector(setPaddingWithNSString:);
-  methods[25].selector = @selector(tryGetPaddingBottom);
-  methods[26].selector = @selector(getPaddingBottom);
-  methods[27].selector = @selector(setPaddingBottomWithNSString:);
-  methods[28].selector = @selector(tryGetPaddingRight);
-  methods[29].selector = @selector(getPaddingRight);
-  methods[30].selector = @selector(setPaddingRightWithNSString:);
-  methods[31].selector = @selector(tryGetPaddingLeft);
-  methods[32].selector = @selector(getPaddingLeft);
-  methods[33].selector = @selector(setPaddingLeftWithNSString:);
-  methods[34].selector = @selector(tryGetPaddingStart);
-  methods[35].selector = @selector(getPaddingStart);
-  methods[36].selector = @selector(setPaddingStartWithNSString:);
-  methods[37].selector = @selector(tryGetPaddingEnd);
-  methods[38].selector = @selector(getPaddingEnd);
-  methods[39].selector = @selector(setPaddingEndWithNSString:);
-  methods[40].selector = @selector(tryGetPaddingTop);
-  methods[41].selector = @selector(getPaddingTop);
-  methods[42].selector = @selector(setPaddingTopWithNSString:);
-  methods[43].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[44].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[14].selector = @selector(setPaddingWithNSString:);
+  methods[15].selector = @selector(tryGetPaddingBottom);
+  methods[16].selector = @selector(getPaddingBottom);
+  methods[17].selector = @selector(setPaddingBottomWithNSString:);
+  methods[18].selector = @selector(tryGetPaddingRight);
+  methods[19].selector = @selector(getPaddingRight);
+  methods[20].selector = @selector(setPaddingRightWithNSString:);
+  methods[21].selector = @selector(tryGetPaddingLeft);
+  methods[22].selector = @selector(getPaddingLeft);
+  methods[23].selector = @selector(setPaddingLeftWithNSString:);
+  methods[24].selector = @selector(tryGetPaddingStart);
+  methods[25].selector = @selector(getPaddingStart);
+  methods[26].selector = @selector(setPaddingStartWithNSString:);
+  methods[27].selector = @selector(tryGetPaddingEnd);
+  methods[28].selector = @selector(getPaddingEnd);
+  methods[29].selector = @selector(setPaddingEndWithNSString:);
+  methods[30].selector = @selector(tryGetPaddingTop);
+  methods[31].selector = @selector(getPaddingTop);
+  methods[32].selector = @selector(setPaddingTopWithNSString:);
+  methods[33].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[34].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[35].selector = @selector(setMaxWithInt:);
+  methods[36].selector = @selector(setMinWithInt:);
+  methods[37].selector = @selector(setProgressWithInt:);
+  methods[38].selector = @selector(incrementProgressByWithInt:);
+  methods[39].selector = @selector(tryGetProgressTint);
+  methods[40].selector = @selector(getProgressTint);
+  methods[41].selector = @selector(setProgressTintWithNSString:);
+  methods[42].selector = @selector(tryGetProgressBackgroundTint);
+  methods[43].selector = @selector(getProgressBackgroundTint);
+  methods[44].selector = @selector(setProgressBackgroundTintWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASUIProgressViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASUIProgressViewImpl;", "execute", "Z", "setIosProgressTintColor", "LNSString;", "setIosProgressImage", "setIosTrackTintColor", "setIosTrackImage", "setMax", "I", "setMin", "setProgress", "incrementProgressBy", "setProgressTint", "setProgressBackgroundTint", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/UIProgressViewImpl$UIProgressViewCommandBuilder;>;" };
+  static const void *ptrTable[] = { "LASUIProgressViewImpl;", "execute", "Z", "setIosProgressTintColor", "LNSString;", "setIosProgressImage", "setIosTrackTintColor", "setIosTrackImage", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMax", "I", "setMin", "setProgress", "incrementProgressBy", "setProgressTint", "setProgressBackgroundTint", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/UIProgressViewImpl$UIProgressViewCommandBuilder;>;" };
   static const J2ObjcClassInfo _ASUIProgressViewImpl_UIProgressViewCommandBuilder = { "UIProgressViewCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 45, 1, 0, -1, -1, 24, -1 };
   return &_ASUIProgressViewImpl_UIProgressViewCommandBuilder;
 }
@@ -1833,38 +1951,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl_UIProgressViewCommandBuild
 
 - (void)setIosTrackImageWithNSString:(NSString *)value {
   (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosTrackImageWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setMaxWithInt:(jint)value {
-  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setMinWithInt:(jint)value {
-  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setProgressWithInt:(jint)value {
-  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setProgressWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)incrementProgressByWithInt:(jint)value {
-  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) incrementProgressByWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getProgressTint {
-  return [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetProgressTint])) executeWithBoolean:false])) getProgressTint];
-}
-
-- (void)setProgressTintWithNSString:(NSString *)value {
-  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setProgressTintWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getProgressBackgroundTint {
-  return [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetProgressBackgroundTint])) executeWithBoolean:false])) getProgressBackgroundTint];
-}
-
-- (void)setProgressBackgroundTintWithNSString:(NSString *)value {
-  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setProgressBackgroundTintWithNSString:value])) executeWithBoolean:true];
 }
 
 - (void)setPaddingWithNSString:(NSString *)value {
@@ -1927,6 +2013,38 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl_UIProgressViewCommandBuild
   (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingVerticalWithNSString:value])) executeWithBoolean:true];
 }
 
+- (void)setMaxWithInt:(jint)value {
+  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxWithInt:value])) executeWithBoolean:true];
+}
+
+- (void)setMinWithInt:(jint)value {
+  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinWithInt:value])) executeWithBoolean:true];
+}
+
+- (void)setProgressWithInt:(jint)value {
+  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setProgressWithInt:value])) executeWithBoolean:true];
+}
+
+- (void)incrementProgressByWithInt:(jint)value {
+  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) incrementProgressByWithInt:value])) executeWithBoolean:true];
+}
+
+- (id)getProgressTint {
+  return [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetProgressTint])) executeWithBoolean:false])) getProgressTint];
+}
+
+- (void)setProgressTintWithNSString:(NSString *)value {
+  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setProgressTintWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getProgressBackgroundTint {
+  return [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetProgressBackgroundTint])) executeWithBoolean:false])) getProgressBackgroundTint];
+}
+
+- (void)setProgressBackgroundTintWithNSString:(NSString *)value {
+  (void) [((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([((ASUIProgressViewImpl_UIProgressViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setProgressBackgroundTintWithNSString:value])) executeWithBoolean:true];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
@@ -1938,28 +2056,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl_UIProgressViewCommandBuild
     { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 11, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 12, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 13, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 14, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 20, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 21, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -1974,34 +2092,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUIProgressViewImpl_UIProgressViewCommandBuild
   methods[6].selector = @selector(setIosTrackTintColorWithNSString:);
   methods[7].selector = @selector(getIosTrackImage);
   methods[8].selector = @selector(setIosTrackImageWithNSString:);
-  methods[9].selector = @selector(setMaxWithInt:);
-  methods[10].selector = @selector(setMinWithInt:);
-  methods[11].selector = @selector(setProgressWithInt:);
-  methods[12].selector = @selector(incrementProgressByWithInt:);
-  methods[13].selector = @selector(getProgressTint);
-  methods[14].selector = @selector(setProgressTintWithNSString:);
-  methods[15].selector = @selector(getProgressBackgroundTint);
-  methods[16].selector = @selector(setProgressBackgroundTintWithNSString:);
-  methods[17].selector = @selector(setPaddingWithNSString:);
-  methods[18].selector = @selector(getPaddingBottom);
-  methods[19].selector = @selector(setPaddingBottomWithNSString:);
-  methods[20].selector = @selector(getPaddingRight);
-  methods[21].selector = @selector(setPaddingRightWithNSString:);
-  methods[22].selector = @selector(getPaddingLeft);
-  methods[23].selector = @selector(setPaddingLeftWithNSString:);
-  methods[24].selector = @selector(getPaddingStart);
-  methods[25].selector = @selector(setPaddingStartWithNSString:);
-  methods[26].selector = @selector(getPaddingEnd);
-  methods[27].selector = @selector(setPaddingEndWithNSString:);
-  methods[28].selector = @selector(getPaddingTop);
-  methods[29].selector = @selector(setPaddingTopWithNSString:);
-  methods[30].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[31].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[9].selector = @selector(setPaddingWithNSString:);
+  methods[10].selector = @selector(getPaddingBottom);
+  methods[11].selector = @selector(setPaddingBottomWithNSString:);
+  methods[12].selector = @selector(getPaddingRight);
+  methods[13].selector = @selector(setPaddingRightWithNSString:);
+  methods[14].selector = @selector(getPaddingLeft);
+  methods[15].selector = @selector(setPaddingLeftWithNSString:);
+  methods[16].selector = @selector(getPaddingStart);
+  methods[17].selector = @selector(setPaddingStartWithNSString:);
+  methods[18].selector = @selector(getPaddingEnd);
+  methods[19].selector = @selector(setPaddingEndWithNSString:);
+  methods[20].selector = @selector(getPaddingTop);
+  methods[21].selector = @selector(setPaddingTopWithNSString:);
+  methods[22].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[23].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[24].selector = @selector(setMaxWithInt:);
+  methods[25].selector = @selector(setMinWithInt:);
+  methods[26].selector = @selector(setProgressWithInt:);
+  methods[27].selector = @selector(incrementProgressByWithInt:);
+  methods[28].selector = @selector(getProgressTint);
+  methods[29].selector = @selector(setProgressTintWithNSString:);
+  methods[30].selector = @selector(getProgressBackgroundTint);
+  methods[31].selector = @selector(setProgressBackgroundTintWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASUIProgressViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASUIProgressViewImpl;", "setIosProgressTintColor", "LNSString;", "setIosProgressImage", "setIosTrackTintColor", "setIosTrackImage", "setMax", "I", "setMin", "setProgress", "incrementProgressBy", "setProgressTint", "setProgressBackgroundTint", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical" };
+  static const void *ptrTable[] = { "LASUIProgressViewImpl;", "setIosProgressTintColor", "LNSString;", "setIosProgressImage", "setIosTrackTintColor", "setIosTrackImage", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMax", "I", "setMin", "setProgress", "incrementProgressBy", "setProgressTint", "setProgressBackgroundTint" };
   static const J2ObjcClassInfo _ASUIProgressViewImpl_UIProgressViewBean = { "UIProgressViewBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 32, 1, 0, -1, -1, -1, -1 };
   return &_ASUIProgressViewImpl_UIProgressViewBean;
 }
