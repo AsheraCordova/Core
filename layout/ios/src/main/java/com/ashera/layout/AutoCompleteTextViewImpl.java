@@ -1625,6 +1625,8 @@ return getInputType();				}
 return getImeOptions();				}
 			case "textColor": {
 return getTextColorState();				}
+			case "onTextChange": {
+return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeName());				}
 		}
 		
 		return null;
@@ -2063,32 +2065,39 @@ return getTextColorState();				}
 		this.after = after;
 		this.str = s;
 		if (onBeforeTextChange != null) {
-			final TextWatcher textChangedListener = getTextChangedListener(onBeforeTextChange);
+			final TextWatcher textChangedListener = getTextChangedListener(onBeforeTextChange, "onbeforeTextChange");
 			textChangedListener.beforeTextChanged((String) getText(), start, count, after);
 		}
 	}
 	
-	public TextWatcher getTextChangedListener(Object objValue) {
+	private Map<String, Object> textWatchers;
+
+	private TextWatcher getTextChangedListener(Object objValue, String name) {
 		TextWatcher textWatcher = null;
 		if (objValue instanceof String) {
 			textWatcher = new TextChangedListener(this, (String) objValue);
 		} else {
 			textWatcher = (TextWatcher) objValue;
 		}
+		
+		if (textWatchers == null) {
+			textWatchers = new HashMap<>();
+		}
+		this.textWatchers.put(name, textWatcher);
+
 		return textWatcher;
 	}
 	
 	private void handleOnAfterTextChange() {
 		if (onAfterTextChange != null) {
-			final TextWatcher textChangedListener = getTextChangedListener(onAfterTextChange);
+			final TextWatcher textChangedListener = getTextChangedListener(onAfterTextChange, "onafterTextChange");
 			textChangedListener.afterTextChanged(null);
 		}
 	}
 	
 	private void handleOnTextChange() {
 		if (onTextChange != null) {
-			final TextWatcher textChangedListener = getTextChangedListener(onTextChange);
-			textChangedListener.onTextChanged((String) getText(), this.start, this.after - str.length(), str.length());
+			this.textChangedListener.onTextChanged((String) getText(), this.start, this.after - str.length(), str.length());
 		}
 	}
 	private void setOnAfterTextChange(Object objValue) {
@@ -2101,10 +2110,10 @@ return getTextColorState();				}
 	private void setBeforeOnTextChange(Object objValue) {
 		this.onBeforeTextChange = objValue;
 	}
-
+	private TextWatcher textChangedListener;
 	private void setOnTextChange(Object objValue) {
 		this.onTextChange = objValue;
-		
+		textChangedListener = getTextChangedListener(onTextChange, "onTextChange");
 		if (this.onTextChange != null) {
 			nativeAddTextFieldDidChange();
 		}
@@ -5416,6 +5425,17 @@ public AutoCompleteTextViewCommandBuilder setTextColor(String value) {
 
 	attrs.put("value", value);
 return this;}
+public AutoCompleteTextViewCommandBuilder tryGetOnTextChange() {
+	Map<String, Object> attrs = initCommand("onTextChange");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getOnTextChange() {
+	Map<String, Object> attrs = initCommand("onTextChange");
+	return attrs.get("commandReturnValue");
+}
 public AutoCompleteTextViewCommandBuilder setOnTextChange(String value) {
 	Map<String, Object> attrs = initCommand("onTextChange");
 	attrs.put("type", "attribute");
@@ -5956,6 +5976,9 @@ public void setTextColor(String value) {
 	getBuilder().reset().setTextColor(value).execute(true);
 }
 
+public Object getOnTextChange() {
+	return getBuilder().reset().tryGetOnTextChange().execute(false).getOnTextChange(); 
+}
 public void setOnTextChange(String value) {
 	getBuilder().reset().setOnTextChange(value).execute(true);
 }

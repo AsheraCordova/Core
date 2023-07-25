@@ -1268,6 +1268,8 @@ return getHint();				}
 return getGravity();				}
 			case "drawablePadding": {
 return this.getDrawablePadding();				}
+			case "onTextChange": {
+return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeName());				}
 		}
 		
 		return null;
@@ -1776,7 +1778,7 @@ return this.getDrawablePadding();				}
 	}
 
 	private void setOnAfterTextChange(Object objValue) {
-		final TextWatcher textChangedListener = getTextChangedListener(objValue);
+		final TextWatcher textChangedListener = getTextChangedListener(objValue, "onafterTextChange");
 		ViewImpl.setOnListener(this, org.eclipse.swt.SWT.Modify, "onAfterTextChange", new Listener() {
 			@Override
 			public void handleEvent(org.eclipse.swt.widgets.Event e) {
@@ -1784,19 +1786,26 @@ return this.getDrawablePadding();				}
 			}
 		});
 	}
+	private Map<String, Object> textWatchers;
 
-	public TextWatcher getTextChangedListener(Object objValue) {
+	private TextWatcher getTextChangedListener(Object objValue, String name) {
 		TextWatcher textWatcher = null;
 		if (objValue instanceof String) {
 			textWatcher = new TextChangedListener(this, (String) objValue);
 		} else {
 			textWatcher = (TextWatcher) objValue;
 		}
+		
+		if (textWatchers == null) {
+			textWatchers = new HashMap<>();
+		}
+		this.textWatchers.put(name, textWatcher);
+
 		return textWatcher;
 	}
 
 	private void setBeforeOnTextChange(Object objValue) {
-		final TextWatcher textChangedListener = getTextChangedListener(objValue);
+		final TextWatcher textChangedListener = getTextChangedListener(objValue, "onbeforeTextChange");
 		ViewImpl.setOnListener(this, org.eclipse.swt.SWT.Verify, "beforeOnTextChange", new Listener() {
 			@Override
 			public void handleEvent(org.eclipse.swt.widgets.Event e) {
@@ -1825,9 +1834,9 @@ return this.getDrawablePadding();				}
 			
 		}
 	}
-	private void setOnTextChange(Object objValue) {
 
-		final TextWatcher textChangedListener = getTextChangedListener(objValue);
+	private void setOnTextChange(Object objValue) {
+		final TextWatcher textChangedListener = getTextChangedListener(objValue, "onTextChange");
 		TextChangeListener listener = new TextChangeListener(textChangedListener);
 		ViewImpl.setOnListener(this, org.eclipse.swt.SWT.Verify, "onTextChangeVerify", listener);
 		ViewImpl.setOnListener(this, org.eclipse.swt.SWT.Modify, "onTextChangeModify", listener);
@@ -4015,6 +4024,17 @@ public AutoCompleteTextViewCommandBuilder setScrollHorizontally(boolean value) {
 
 	attrs.put("value", value);
 return this;}
+public AutoCompleteTextViewCommandBuilder tryGetOnTextChange() {
+	Map<String, Object> attrs = initCommand("onTextChange");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getOnTextChange() {
+	Map<String, Object> attrs = initCommand("onTextChange");
+	return attrs.get("commandReturnValue");
+}
 public AutoCompleteTextViewCommandBuilder setOnTextChange(String value) {
 	Map<String, Object> attrs = initCommand("onTextChange");
 	attrs.put("type", "attribute");
@@ -4464,6 +4484,9 @@ public void setScrollHorizontally(boolean value) {
 	getBuilder().reset().setScrollHorizontally(value).execute(true);
 }
 
+public Object getOnTextChange() {
+	return getBuilder().reset().tryGetOnTextChange().execute(false).getOnTextChange(); 
+}
 public void setOnTextChange(String value) {
 	getBuilder().reset().setOnTextChange(value).execute(true);
 }

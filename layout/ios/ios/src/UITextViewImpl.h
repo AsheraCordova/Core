@@ -37,7 +37,6 @@
 @class ASUITextViewImpl_UITextViewCommandBuilder;
 @class ASWidgetAttribute;
 @class IOSClass;
-@protocol ADTextWatcher;
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
@@ -126,8 +125,6 @@
 - (id)getPluginWithNSString:(NSString *)plugin;
 
 - (id)getText;
-
-- (id<ADTextWatcher>)getTextChangedListenerWithId:(id)objValue;
 
 - (id)getTextColor;
 
@@ -703,6 +700,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 
 - (id)getMinWidth;
 
+- (id)getOnTextChange;
+
 - (id)getPaddingBottom;
 
 - (id)getPaddingEnd;
@@ -1237,6 +1236,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetModelUiToPojo;
 
+- (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetOnTextChange;
+
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetPaddingBottom;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetPaddingEnd;
@@ -1369,6 +1370,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewCommandBuilder)
 - (id)getMinLines;
 
 - (id)getMinWidth;
+
+- (id)getOnTextChange;
 
 - (id)getPaddingBottom;
 

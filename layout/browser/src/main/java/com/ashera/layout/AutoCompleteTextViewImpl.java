@@ -1407,6 +1407,8 @@ return getDropDownWidth();				}
 return getDropDownAnchor();				}
 			case "inputType": {
 return getInputType();				}
+			case "onTextChange": {
+return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeName());				}
 		}
 		
 		return null;
@@ -1506,14 +1508,14 @@ return getInputType();				}
 
 	private void triggerBeforeChange(String str) {
 		if (this.onbeforeTextChange != null) {
-			final TextWatcher textChangedListener = getTextChangeListener(this.onbeforeTextChange);
+			final TextWatcher textChangedListener = getTextChangeListener(this.onbeforeTextChange, "onbeforeTextChange");
 			textChangedListener.beforeTextChanged(str, 0, 0, str.length());
 		}
 	}
 
 	private void triggetOnTextChange(String str) {
 		if (this.onTextChange != null) {
-			final TextWatcher textChangedListener = getTextChangeListener(this.onTextChange);
+			final TextWatcher textChangedListener = getTextChangeListener(this.onTextChange, "onTextChange");
 			textChangedListener.onTextChanged(str, 0, 0, str.length());
 		}
 	}
@@ -1724,7 +1726,7 @@ return getInputType();				}
 
 	private void triggerOnAfterChange() {
 		if (this.onAfterTextChange != null) {
-			final TextWatcher textChangedListener = getTextChangeListener(this.onAfterTextChange);
+			final TextWatcher textChangedListener = getTextChangeListener(this.onAfterTextChange, "onAfterTextChange");
 			textChangedListener.afterTextChanged(null);
 		}
 	}
@@ -1746,7 +1748,7 @@ return getInputType();				}
 			if (value.equals(oldValue)) {
 				return;
 			}
-			final TextWatcher textChangedListener = getTextChangeListener(objValue);
+			final TextWatcher textChangedListener = getTextChangeListener(objValue, "onBeforeTextChange");
 			int after = 0;
 			if (key.equals("Backspace")) {
 				if (selectionLength == 0 && selectionStart > 0) {
@@ -1773,7 +1775,7 @@ return getInputType();				}
 			if (value.equals(oldValue)) {
 				return;
 			}
-			final TextWatcher textChangedListener = getTextChangeListener(objValue);
+			final TextWatcher textChangedListener = getTextChangeListener(objValue, "onBeforeTextChange");
 			textChangedListener.beforeTextChanged(oldValue, selectionStart, selectionLength, getClipboardData(e).length());
 		}, "pasteBeforeTextChange", "paste");
 		
@@ -1786,7 +1788,7 @@ return getInputType();				}
 			if (value.equals(oldValue)) {
 				return;
 			}
-			final TextWatcher textChangedListener = getTextChangeListener(objValue);
+			final TextWatcher textChangedListener = getTextChangeListener(objValue, "onBeforeTextChange");
 			textChangedListener.beforeTextChanged(oldValue, selectionStart, selectionLength, getClipboardData(e).length());
 		}, "cutBeforeTextChange", "cut");
 	}
@@ -1816,7 +1818,8 @@ return getInputType();				}
 	private int count;
 	private void setOnTextChange(Object objValue) {
 		this.onTextChange = objValue;
-		
+		final TextWatcher textChangedListener = getTextChangeListener(objValue, "onTextChange");
+
 		ViewImpl.setOnListener(this, input, (e) -> {
 			String key = getKey(e);
 			if (isCtrlKeyPressed(e)) {
@@ -1863,23 +1866,27 @@ return getInputType();				}
 			this.count = getClipboardData(e).length();
 		}, "cut", "cut");
 		ViewImpl.setOnListener(this, input, (e) -> {
-			final TextWatcher textChangedListener = getTextChangeListener(objValue);
-
 			textChangedListener.onTextChanged(getEventValue(e), this.start, this.before, this.count);
 		}, "inputTextChange", "input");
 	}
 
-	public TextWatcher getTextChangeListener(Object objValue) {
-		final TextWatcher textChangedListener; 
-		
-		if (objValue instanceof String) {
-			textChangedListener = new TextChangedListener(this, (String) objValue);
-		} else {
-			textChangedListener = (TextWatcher) objValue;
-		}
-		return textChangedListener;
-	}
+	private Map<String, Object> textWatchers;
 
+	private TextWatcher getTextChangeListener(Object objValue, String name) {
+		TextWatcher textWatcher = null;
+		if (objValue instanceof String) {
+			textWatcher = new TextChangedListener(this, (String) objValue);
+		} else {
+			textWatcher = (TextWatcher) objValue;
+		}
+		
+		if (textWatchers == null) {
+			textWatchers = new HashMap<>();
+		}
+		this.textWatchers.put(name, textWatcher);
+
+		return textWatcher;
+	}
 	
 	
 	private void setOnFocus(Object objValue) {
@@ -4854,6 +4861,17 @@ public AutoCompleteTextViewCommandBuilder setOnFocusChange(String value) {
 
 	attrs.put("value", value);
 return this;}
+public AutoCompleteTextViewCommandBuilder tryGetOnTextChange() {
+	Map<String, Object> attrs = initCommand("onTextChange");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getOnTextChange() {
+	Map<String, Object> attrs = initCommand("onTextChange");
+	return attrs.get("commandReturnValue");
+}
 public AutoCompleteTextViewCommandBuilder setOnTextChange(String value) {
 	Map<String, Object> attrs = initCommand("onTextChange");
 	attrs.put("type", "attribute");
@@ -5326,6 +5344,9 @@ public void setOnFocusChange(String value) {
 	getBuilder().reset().setOnFocusChange(value).execute(true);
 }
 
+public Object getOnTextChange() {
+	return getBuilder().reset().tryGetOnTextChange().execute(false).getOnTextChange(); 
+}
 public void setOnTextChange(String value) {
 	getBuilder().reset().setOnTextChange(value).execute(true);
 }

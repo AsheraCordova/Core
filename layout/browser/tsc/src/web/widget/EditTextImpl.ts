@@ -2006,6 +2006,24 @@ this.numeric.setTransformer('numeric');		return this.thisPointer;
 	}
 		
 
+	public tryGetOnTextChange() : T {
+		this.resetIfRequired();
+		if (this.onTextChange == null || this.onTextChange == undefined) {
+			this.onTextChange = new CommandAttr<string>()
+		}
+		
+		this.onTextChange.setGetter(true);
+		this.orderGet++;
+		this.onTextChange.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getOnTextChange() : string {
+		if (this.onTextChange == null || this.onTextChange == undefined) {
+			this.onTextChange = new CommandAttr<string>();
+		}
+		return this.onTextChange.getCommandReturnValue();
+	}
 	public setOnTextChange(value : string) : T {
 		this.resetIfRequired();
 		if (this.onTextChange == null || this.onTextChange == undefined) {

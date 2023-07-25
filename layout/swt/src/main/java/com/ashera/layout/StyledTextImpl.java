@@ -2020,7 +2020,7 @@ return this.getDrawablePadding();				}
 	}
 
 	private void setOnAfterTextChange(Object objValue) {
-		final TextWatcher textChangedListener = getTextChangedListener(objValue);
+		final TextWatcher textChangedListener = getTextChangedListener(objValue, "onafterTextChange");
 		ViewImpl.setOnListener(this, org.eclipse.swt.SWT.Modify, "onAfterTextChange", new Listener() {
 			@Override
 			public void handleEvent(org.eclipse.swt.widgets.Event e) {
@@ -2028,19 +2028,26 @@ return this.getDrawablePadding();				}
 			}
 		});
 	}
+	private Map<String, Object> textWatchers;
 
-	public TextWatcher getTextChangedListener(Object objValue) {
+	private TextWatcher getTextChangedListener(Object objValue, String name) {
 		TextWatcher textWatcher = null;
 		if (objValue instanceof String) {
 			textWatcher = new TextChangedListener(this, (String) objValue);
 		} else {
 			textWatcher = (TextWatcher) objValue;
 		}
+		
+		if (textWatchers == null) {
+			textWatchers = new HashMap<>();
+		}
+		this.textWatchers.put(name, textWatcher);
+
 		return textWatcher;
 	}
 
 	private void setBeforeOnTextChange(Object objValue) {
-		final TextWatcher textChangedListener = getTextChangedListener(objValue);
+		final TextWatcher textChangedListener = getTextChangedListener(objValue, "onbeforeTextChange");
 		ViewImpl.setOnListener(this, org.eclipse.swt.SWT.Verify, "beforeOnTextChange", new Listener() {
 			@Override
 			public void handleEvent(org.eclipse.swt.widgets.Event e) {
@@ -2069,9 +2076,9 @@ return this.getDrawablePadding();				}
 			
 		}
 	}
-	private void setOnTextChange(Object objValue) {
 
-		final TextWatcher textChangedListener = getTextChangedListener(objValue);
+	private void setOnTextChange(Object objValue) {
+		final TextWatcher textChangedListener = getTextChangedListener(objValue, "onTextChange");
 		TextChangeListener listener = new TextChangeListener(textChangedListener);
 		ViewImpl.setOnListener(this, org.eclipse.swt.SWT.Verify, "onTextChangeVerify", listener);
 		ViewImpl.setOnListener(this, org.eclipse.swt.SWT.Modify, "onTextChangeModify", listener);
