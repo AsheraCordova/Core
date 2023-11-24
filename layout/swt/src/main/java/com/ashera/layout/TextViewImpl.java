@@ -400,6 +400,31 @@ public class TextViewImpl extends BaseWidget implements IDrawable, IHasMultiNati
 			return (String) getMyText();
 		}
 
+        
+        	public void state0() {
+        		ViewImpl.state(TextViewImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(TextViewImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(TextViewImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(TextViewImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(TextViewImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(TextViewImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(TextViewImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return TextViewExt.class;
@@ -1146,7 +1171,7 @@ return getLastBaselineToBottomHeight();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

@@ -38,6 +38,7 @@ typedef NS_ENUM(NSUInteger, ASModelScope_Enum) {
   ASModelScope_Enum_sqlllite = 6,
   ASModelScope_Enum_strings = 7,
   ASModelScope_Enum_component = 8,
+  ASModelScope_Enum_constants = 9,
 };
 
 @interface ASModelScope : JavaLangEnum
@@ -85,6 +86,9 @@ J2OBJC_ENUM_CONSTANT(ASModelScope, strings)
 
 inline ASModelScope *ASModelScope_get_component(void);
 J2OBJC_ENUM_CONSTANT(ASModelScope, component)
+
+inline ASModelScope *ASModelScope_get_constants(void);
+J2OBJC_ENUM_CONSTANT(ASModelScope, constants)
 
 FOUNDATION_EXPORT IOSObjectArray *ASModelScope_values(void);
 

@@ -353,6 +353,31 @@ return layoutParams.gravity;			}
             ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
             
         }
+        
+        	public void state0() {
+        		ViewImpl.state(FrameLayoutImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(FrameLayoutImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(FrameLayoutImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(FrameLayoutImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(FrameLayoutImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(FrameLayoutImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(FrameLayoutImpl.this);
+        }
 	}
 	@Override
 	public Class getViewClass() {
@@ -437,7 +462,7 @@ break;			}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			frameLayout.setId(IdGenerator.getId(id));
+			frameLayout.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

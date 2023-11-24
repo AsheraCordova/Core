@@ -153,6 +153,7 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -323,6 +324,9 @@ export abstract class ViewImpl<T> {
 	@Expose({ name: "webOverflow" })
 	webOverflow!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
+	@Expose({ name: "webGlobalAttributes" })
+	webGlobalAttributes!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
 	@Expose({ name: "translationX" })
 	translationX!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
@@ -424,6 +428,7 @@ export abstract class ViewImpl<T> {
 		this.maxHeight = undefined;
 		this.webTabIndex = undefined;
 		this.webOverflow = undefined;
+		this.webGlobalAttributes = undefined;
 		this.translationX = undefined;
 		this.translationY = undefined;
 		this.translationZ = undefined;
@@ -1590,6 +1595,20 @@ payload : any) : T {
 		this.webOverflow.setValue(value);
 		this.orderSet++;
 		this.webOverflow.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setWebGlobalAttributes(value : string) : T {
+		this.resetIfRequired();
+		if (this.webGlobalAttributes == null || this.webGlobalAttributes == undefined) {
+			this.webGlobalAttributes = new CommandAttr<string>();
+		}
+		
+		this.webGlobalAttributes.setSetter(true);
+		this.webGlobalAttributes.setValue(value);
+		this.orderSet++;
+		this.webGlobalAttributes.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

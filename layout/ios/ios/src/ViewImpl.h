@@ -23,9 +23,9 @@
 @class ADColorStateList;
 @class ADDrawable;
 @class ADKeyEvent;
+@class ADMotionEvent;
 @class ADView;
 @class ADView_DragEvent;
-@class ADView_MotionEvent;
 @class ASSimpleWrapableView;
 @class ASWidgetAttribute;
 @class IOSObjectArray;
@@ -58,7 +58,12 @@
                      withADMenuItem:(id<ADMenuItem>)item;
 
 + (void)addEventInfoWithJavaUtilMap:(id<JavaUtilMap>)obj
-             withADView_MotionEvent:(ADView_MotionEvent *)event;
+                  withADMotionEvent:(ADMotionEvent *)event;
+
++ (void)addPanListenerWithASIWidget:(id<ASIWidget>)widget
+                             withId:(id)uiView
+                             withId:(id)uiLocationView
+         withASViewImpl_PanCallBack:(id<ASViewImpl_PanCallBack>)callback;
 
 + (void)addPanListenerWithASIWidget:(id<ASIWidget>)widget
                              withId:(id)uiView
@@ -410,6 +415,13 @@
 + (void)startDragWithASIWidget:(id<ASIWidget>)w
                   withNSString:(NSString *)eventData;
 
++ (void)stateWithASIWidget:(id<ASIWidget>)w
+                   withInt:(jint)i;
+
++ (void)stateNoWithASIWidget:(id<ASIWidget>)w;
+
++ (void)stateYesWithASIWidget:(id<ASIWidget>)w;
+
 + (void)translateWithAnimationWithId:(id)objview
                              withInt:(jint)x
                              withInt:(jint)y
@@ -477,7 +489,7 @@ FOUNDATION_EXPORT id ASViewImpl_getMaxWidthWithASIWidget_(id<ASIWidget> w);
 
 FOUNDATION_EXPORT id ASViewImpl_getMaxHeightWithASIWidget_(id<ASIWidget> w);
 
-FOUNDATION_EXPORT void ASViewImpl_addEventInfoWithJavaUtilMap_withADView_MotionEvent_(id<JavaUtilMap> obj, ADView_MotionEvent *event);
+FOUNDATION_EXPORT void ASViewImpl_addEventInfoWithJavaUtilMap_withADMotionEvent_(id<JavaUtilMap> obj, ADMotionEvent *event);
 
 FOUNDATION_EXPORT void ASViewImpl_addEventInfoWithJavaUtilMap_withADKeyEvent_(id<JavaUtilMap> obj, ADKeyEvent *event);
 
@@ -492,6 +504,12 @@ FOUNDATION_EXPORT void ASViewImpl_addValidatorWithASIWidget_withNSString_withNSS
 FOUNDATION_EXPORT void ASViewImpl_setStyleWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
 FOUNDATION_EXPORT void ASViewImpl_setMessageOnLabelWithASIWidget_withNSString_(id<ASIWidget> w, NSString *message);
+
+FOUNDATION_EXPORT void ASViewImpl_stateWithASIWidget_withInt_(id<ASIWidget> w, jint i);
+
+FOUNDATION_EXPORT void ASViewImpl_stateYesWithASIWidget_(id<ASIWidget> w);
+
+FOUNDATION_EXPORT void ASViewImpl_stateNoWithASIWidget_(id<ASIWidget> w);
 
 FOUNDATION_EXPORT void ASViewImpl_setLayoutDirectionWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
@@ -684,6 +702,8 @@ FOUNDATION_EXPORT jint ASViewImpl_nativeMeasureWidthWithId_(id uiView);
 FOUNDATION_EXPORT jint ASViewImpl_nativeMeasureHeightWithId_withInt_(id uiView, jint width);
 
 FOUNDATION_EXPORT void ASViewImpl_addPanListenerWithASIWidget_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id<ASViewImpl_PanCallBack> callback);
+
+FOUNDATION_EXPORT void ASViewImpl_addPanListenerWithASIWidget_withId_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, id<ASViewImpl_PanCallBack> callback);
 
 FOUNDATION_EXPORT jint ASViewImpl_getXWithId_(id objview);
 
@@ -2709,6 +2729,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UISwipeGestureRecognizerDelegate)
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget
                            withId:(id)uiView
+                           withId:(id)uiLocationView
        withASViewImpl_PanCallBack:(id<ASViewImpl_PanCallBack>)callback;
 
 #pragma mark Package-Private
@@ -2721,11 +2742,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_UISwipeGestureRecognizerDelegate)
 
 J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_PanGestureRecognizer)
 
-FOUNDATION_EXPORT void ASViewImpl_PanGestureRecognizer_initWithASIWidget_withId_withASViewImpl_PanCallBack_(ASViewImpl_PanGestureRecognizer *self, id<ASIWidget> widget, id uiView, id<ASViewImpl_PanCallBack> callback);
+FOUNDATION_EXPORT void ASViewImpl_PanGestureRecognizer_initWithASIWidget_withId_withId_withASViewImpl_PanCallBack_(ASViewImpl_PanGestureRecognizer *self, id<ASIWidget> widget, id uiView, id uiLocationView, id<ASViewImpl_PanCallBack> callback);
 
-FOUNDATION_EXPORT ASViewImpl_PanGestureRecognizer *new_ASViewImpl_PanGestureRecognizer_initWithASIWidget_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id<ASViewImpl_PanCallBack> callback) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASViewImpl_PanGestureRecognizer *new_ASViewImpl_PanGestureRecognizer_initWithASIWidget_withId_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, id<ASViewImpl_PanCallBack> callback) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASViewImpl_PanGestureRecognizer *create_ASViewImpl_PanGestureRecognizer_initWithASIWidget_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id<ASViewImpl_PanCallBack> callback);
+FOUNDATION_EXPORT ASViewImpl_PanGestureRecognizer *create_ASViewImpl_PanGestureRecognizer_initWithASIWidget_withId_withId_withASViewImpl_PanCallBack_(id<ASIWidget> widget, id uiView, id uiLocationView, id<ASViewImpl_PanCallBack> callback);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_PanGestureRecognizer)
 

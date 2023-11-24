@@ -497,6 +497,31 @@ public class CheckBoxImpl extends BaseWidget implements com.ashera.validations.F
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(CheckBoxImpl.this);
         }
+        
+        	public void state0() {
+        		ViewImpl.state(CheckBoxImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(CheckBoxImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(CheckBoxImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(CheckBoxImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(CheckBoxImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(CheckBoxImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(CheckBoxImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return CheckBoxExt.class;
@@ -1915,14 +1940,10 @@ public void afterTextChanged (Editable s){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, s);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -1935,7 +1956,7 @@ public void afterTextChanged (Editable s){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -1957,14 +1978,10 @@ public void beforeTextChanged (CharSequence s,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, s,start,count,after);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -1977,7 +1994,7 @@ public void beforeTextChanged (CharSequence s,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -1999,14 +2016,10 @@ public void onTextChanged (CharSequence s,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, s,start,before,count);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2019,7 +2032,7 @@ public void onTextChanged (CharSequence s,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2125,14 +2138,10 @@ public void onCheckedChanged (CompoundButton buttonView,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, buttonView,isChecked);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2145,7 +2154,7 @@ public void onCheckedChanged (CompoundButton buttonView,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2182,7 +2191,7 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			appCompatCheckBox.setId(IdGenerator.getId(id));
+			appCompatCheckBox.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

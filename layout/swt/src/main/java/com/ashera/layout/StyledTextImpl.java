@@ -389,6 +389,31 @@ public class StyledTextImpl extends BaseWidget implements IDrawable, IHasMultiNa
 			return (String) getMyText();
 		}
 
+        
+        	public void state0() {
+        		ViewImpl.state(StyledTextImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(StyledTextImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(StyledTextImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(StyledTextImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(StyledTextImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(StyledTextImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(StyledTextImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return StyledTextExt.class;
@@ -2864,14 +2889,10 @@ public void afterTextChanged (Editable s){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, s);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2884,7 +2905,7 @@ public void afterTextChanged (Editable s){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2906,14 +2927,10 @@ public void beforeTextChanged (CharSequence s,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, s,start,count,after);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2926,7 +2943,7 @@ public void beforeTextChanged (CharSequence s,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2948,14 +2965,10 @@ public void onTextChanged (CharSequence s,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, s,start,before,count);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2968,7 +2981,7 @@ public void onTextChanged (CharSequence s,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -3056,7 +3069,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

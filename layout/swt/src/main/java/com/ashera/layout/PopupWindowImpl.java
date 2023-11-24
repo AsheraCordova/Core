@@ -277,14 +277,10 @@ public void onDismiss(){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -297,7 +293,7 @@ public void onDismiss(){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}

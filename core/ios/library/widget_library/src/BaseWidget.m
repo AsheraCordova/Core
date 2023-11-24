@@ -21,7 +21,6 @@
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
-#include "IdGenerator.h"
 #include "J2ObjC_source.h"
 #include "LoopParam.h"
 #include "ModelDataType.h"
@@ -494,7 +493,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
 }
 
 - (jint)getIdAsInt {
-  return ASIdGenerator_getIdWithNSString_(id__);
+  return [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self quickConvertWithId:id__ withNSString:@"id"], [JavaLangInteger class]))) intValue];
 }
 
 - (void)setIdWithNSString:(NSString *)id_ {

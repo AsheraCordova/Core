@@ -5,6 +5,7 @@
 
 #include "Bundle.h"
 #include "J2ObjC_source.h"
+#include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/util/HashMap.h"
 
@@ -94,6 +95,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
+- (void)putFloatWithNSString:(NSString *)name
+                   withFloat:(jfloat)value {
+  [self putObjectWithNSString:name withId:JavaLangFloat_valueOfWithFloat_(value)];
+}
+
+- (jfloat)getFloatWithNSString:(NSString *)key {
+  id object = JreRetainedLocalValue([self getWithNSString:key]);
+  return object == nil ? 0 : [(JavaLangFloat *) cast_chk(object, [JavaLangFloat class]) floatValue];
+}
+
 - (void)dealloc {
   RELEASE_(mExtras_);
   [super dealloc];
@@ -115,6 +126,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x1, 14, 5, -1, -1, -1, -1 },
     { NULL, "I", 0x1, 15, 5, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 16, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "F", 0x1, 19, 5, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -133,12 +146,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[11].selector = @selector(getSerializableWithNSString:);
   methods[12].selector = @selector(getIntWithNSString:);
   methods[13].selector = @selector(java_clone);
+  methods[14].selector = @selector(putFloatWithNSString:withFloat:);
+  methods[15].selector = @selector(getFloatWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "mExtras_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 17, -1 },
+    { "mExtras_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 20, -1 },
   };
-  static const void *ptrTable[] = { "LADBundle;", "putSerializable", "LNSString;LNSObject;", "putObject", "get", "LNSString;", "getBundle", "putInt", "LNSString;I", "putString", "LNSString;LNSString;", "putBundle", "getString", "LNSString;LADBundle;", "getSerializable", "getInt", "clone", "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Object;>;" };
-  static const J2ObjcClassInfo _ADBundle = { "Bundle", "r.android.os", ptrTable, methods, fields, 7, 0x1, 14, 1, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LADBundle;", "putSerializable", "LNSString;LNSObject;", "putObject", "get", "LNSString;", "getBundle", "putInt", "LNSString;I", "putString", "LNSString;LNSString;", "putBundle", "getString", "LNSString;LADBundle;", "getSerializable", "getInt", "clone", "putFloat", "LNSString;F", "getFloat", "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _ADBundle = { "Bundle", "r.android.os", ptrTable, methods, fields, 7, 0x1, 16, 1, -1, -1, -1, -1, -1 };
   return &_ADBundle;
 }
 

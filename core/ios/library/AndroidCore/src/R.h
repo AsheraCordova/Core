@@ -55,6 +55,13 @@ inline jint ADR_id_get_content(void);
 #define ADR_id_content 0
 J2OBJC_STATIC_FIELD_CONSTANT(ADR_id, content, jint)
 
+inline jint ADR_id_get_view_transition(void);
+inline jint ADR_id_set_view_transition(jint value);
+inline jint *ADR_id_getRef_view_transition(void);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jint ADR_id_view_transition;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADR_id, view_transition, jint)
+
 FOUNDATION_EXPORT void ADR_id_init(ADR_id *self);
 
 FOUNDATION_EXPORT ADR_id *new_ADR_id_init(void) NS_RETURNS_RETAINED;

@@ -232,6 +232,31 @@ public class WebViewImpl extends BaseWidget {
             ((HTMLElement)asNativeWidget()).getStyle().setProperty("display", visibility != View.VISIBLE ? "none" : "block");
             
         }
+        
+        	public void state0() {
+        		ViewImpl.state(WebViewImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(WebViewImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(WebViewImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(WebViewImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(WebViewImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(WebViewImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(WebViewImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return WebViewExt.class;
@@ -401,14 +426,10 @@ public void onPageStarted(View view){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, view);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -421,7 +442,7 @@ public void onPageStarted(View view){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -474,14 +495,10 @@ public void onPageFinished(View view){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, view);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -494,7 +511,7 @@ public void onPageFinished(View view){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -547,14 +564,10 @@ public void onReceivedError(View view, String error){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, view,error);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -567,7 +580,7 @@ public void onReceivedError(View view, String error){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -608,7 +621,7 @@ public java.util.Map<String, Object> getOnReceivedErrorEventObj(View view,String
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

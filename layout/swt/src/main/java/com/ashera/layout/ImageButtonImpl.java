@@ -253,6 +253,31 @@ public class ImageButtonImpl extends BaseWidget implements com.ashera.widget.IsI
             ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
             
         }
+        
+        	public void state0() {
+        		ViewImpl.state(ImageButtonImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(ImageButtonImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(ImageButtonImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(ImageButtonImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(ImageButtonImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(ImageButtonImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(ImageButtonImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return ImageButtonExt.class;
@@ -908,7 +933,7 @@ return getBaselineAlignBottom();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

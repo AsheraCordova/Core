@@ -653,6 +653,31 @@ return layoutParams.alignWithParent;			}
             ViewImpl.nativeSetVisibility(asNativeWidget(), visibility != View.VISIBLE);
             
         }
+        
+        	public void state0() {
+        		ViewImpl.state(RelativeLayoutImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(RelativeLayoutImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(RelativeLayoutImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(RelativeLayoutImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(RelativeLayoutImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(RelativeLayoutImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(RelativeLayoutImpl.this);
+        }
 	}
 	@Override
 	public Class getViewClass() {
@@ -864,7 +889,7 @@ return relativeLayout.getGravity();			}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			relativeLayout.setId(IdGenerator.getId(id));
+			relativeLayout.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

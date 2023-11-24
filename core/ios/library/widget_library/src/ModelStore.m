@@ -168,6 +168,8 @@ id ASModelStore_getModelFromScopeWithNSString_withASModelScope_withASIFragment_w
     break;
     case ASModelScope_Enum_strings:
     return ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", JreStrcat("$$", @"@string/", varName), fragment);
+    case ASModelScope_Enum_constants:
+    return varName;
     default:
     @throw create_JavaLangRuntimeException_initWithNSString_(JreStrcat("$@", @"unsupported scope ", varScope));
   }

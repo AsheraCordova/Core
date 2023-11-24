@@ -415,6 +415,31 @@ return layoutParams.weight;			}
             ((HTMLElement)asNativeWidget()).getStyle().setProperty("display", visibility != View.VISIBLE ? "none" : "block");
             
         }
+        
+        	public void state0() {
+        		ViewImpl.state(RadioGroupImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(RadioGroupImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(RadioGroupImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(RadioGroupImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(RadioGroupImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(RadioGroupImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(RadioGroupImpl.this);
+        }
 	}
 	@Override
 	public Class getViewClass() {
@@ -705,7 +730,7 @@ return getDividerPadding();			}
 			for (IWidget widget : getWidgets()) {
 				String id = widget.getId();
 				if (id != null) {
-					int idInt =  IdGenerator.getId(id);
+					int idInt =  (int) quickConvert(id, "id");
 					if (widget instanceof IsRadioButton) {
 					    ((IsRadioButton)widget).setChecked(idInt == this.checked);
 					}
@@ -841,14 +866,10 @@ public void onChildViewAdded (View parent,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, parent,child);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -861,7 +882,7 @@ public void onChildViewAdded (View parent,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -881,14 +902,10 @@ public void onChildViewRemoved (View parent,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, parent,child);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -901,7 +918,7 @@ public void onChildViewRemoved (View parent,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -977,14 +994,10 @@ public void onCheckedChanged (RadioGroup group,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, group,checkedId);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -997,7 +1010,7 @@ public void onCheckedChanged (RadioGroup group,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -1034,7 +1047,7 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(RadioGroup group
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			radioGroup.setId(IdGenerator.getId(id));
+			radioGroup.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

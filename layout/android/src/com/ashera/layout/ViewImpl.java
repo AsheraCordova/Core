@@ -2211,17 +2211,13 @@ public WindowInsets onApplyWindowInsets (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,insets);
 		    	 if (commandResult != null) {
 		    		 result = (WindowInsets) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2234,7 +2230,7 @@ public WindowInsets onApplyWindowInsets (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2289,17 +2285,13 @@ public boolean onCapturedPointer (View view,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, view,event);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2312,7 +2304,7 @@ public boolean onCapturedPointer (View view,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2366,14 +2358,10 @@ public void onClick (View v){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2386,7 +2374,7 @@ public void onClick (View v){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2440,17 +2428,13 @@ public boolean onContextClick (View v){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2463,7 +2447,7 @@ public boolean onContextClick (View v){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2518,14 +2502,10 @@ public void onCreateContextMenu (ContextMenu menu,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, menu,v,menuInfo);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2538,7 +2518,7 @@ public void onCreateContextMenu (ContextMenu menu,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2593,17 +2573,13 @@ public boolean onDrag (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,event);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2616,7 +2592,7 @@ public boolean onDrag (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2671,14 +2647,10 @@ public void onFocusChange (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,hasFocus);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2691,7 +2663,7 @@ public void onFocusChange (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2747,17 +2719,13 @@ public boolean onGenericMotion (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,event);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2770,7 +2738,7 @@ public boolean onGenericMotion (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2826,17 +2794,13 @@ public boolean onHover (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,event);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2849,7 +2813,7 @@ public boolean onHover (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2906,17 +2870,13 @@ public boolean onKey (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,keyCode,event);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2929,7 +2889,7 @@ public boolean onKey (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2985,17 +2945,13 @@ public boolean onLongClick (View v){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -3008,7 +2964,7 @@ public boolean onLongClick (View v){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -3065,14 +3021,10 @@ public void onScrollChange (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,scrollX,scrollY,oldScrollX,oldScrollY);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -3085,7 +3037,7 @@ public void onScrollChange (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -3142,14 +3094,10 @@ public void onSystemUiVisibilityChange (int visibility){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, visibility);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -3162,7 +3110,7 @@ public void onSystemUiVisibilityChange (int visibility){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -3218,17 +3166,13 @@ public boolean onTouch (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,event);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -3241,7 +3185,7 @@ public boolean onTouch (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -3296,17 +3240,13 @@ public boolean onSwiped(String direction){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, direction);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -3319,7 +3259,7 @@ public boolean onSwiped(String direction){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -7030,4 +6970,39 @@ public void setOnSwiped(String value) {
 		});
 	}
 
+	//start - state
+	public static void state(IWidget w, int i) {
+     	String attributeName = (String) w.getUserData("state" + i);
+     	Object val = w.getUserData("val" + i);
+     	w.setAttribute(attributeName, val, false);
+     }
+             
+     public static void stateYes(IWidget w) {
+     	String attributeName = (String) w.getUserData("stateYes");
+     	
+     	switch (attributeName) {
+			case "show":
+				w.setAttribute("visibility", "visible", false);
+				break;
+
+			default:
+				w.setAttribute(attributeName, true, true);
+				break;
+			}
+     	
+     }
+     
+     public static void stateNo(IWidget w) {
+     	String attributeName = (String) w.getUserData("stateNo");
+     	switch (attributeName) {
+			case "hide":
+				w.setAttribute("visibility", "gone", false);
+				break;
+
+			default:
+				w.setAttribute(attributeName, false, true);
+				break;
+			}
+     }
+	//end - state
 }

@@ -39,8 +39,8 @@ public class TransformCommandConverter extends com.ashera.widget.BaseAttributeCo
 			Float anchorX = null;
 			Float anchorY = null;
 			if (transformPivotX != null || transformPivotY != null) {
-				anchorX =  (transformPivotX == null) ? 0.5f : view.getMeasuredWidth()/transformPivotX;
-				anchorY =  (transformPivotY == null) ? 0.5f : view.getMeasuredHeight()/transformPivotY;
+				anchorX =  (transformPivotX == null || transformPivotX.floatValue() == 0) ? 0.5f : view.getMeasuredWidth()/transformPivotX;
+				anchorY =  (transformPivotY == null || transformPivotY.floatValue() == 0) ? 0.5f : view.getMeasuredHeight()/transformPivotY;
 			}
 			updateTranform(widget.asNativeWidget(), translationX, translationY, translationZ, rotation, rotationX, rotationY, scaleX, scaleY, anchorX, anchorY);
 			break;

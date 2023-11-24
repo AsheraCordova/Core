@@ -400,6 +400,31 @@ public class CLabelImpl extends BaseWidget implements IDrawable, IHasMultiNative
 			return (String) getMyText();
 		}
 
+        
+        	public void state0() {
+        		ViewImpl.state(CLabelImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(CLabelImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(CLabelImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(CLabelImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(CLabelImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(CLabelImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(CLabelImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return CLabelExt.class;
@@ -2264,7 +2289,7 @@ return getLastBaselineToBottomHeight();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

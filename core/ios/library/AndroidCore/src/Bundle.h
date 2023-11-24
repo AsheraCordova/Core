@@ -30,6 +30,8 @@
 
 - (ADBundle *)getBundleWithNSString:(NSString *)name;
 
+- (jfloat)getFloatWithNSString:(NSString *)key;
+
 - (jint)getIntWithNSString:(NSString *)key;
 
 - (id)getSerializableWithNSString:(NSString *)key;
@@ -41,6 +43,9 @@
 
 - (void)putBundleWithNSString:(NSString *)name
                  withNSString:(NSString *)value;
+
+- (void)putFloatWithNSString:(NSString *)name
+                   withFloat:(jfloat)value;
 
 - (void)putIntWithNSString:(NSString *)name
                    withInt:(jint)value;

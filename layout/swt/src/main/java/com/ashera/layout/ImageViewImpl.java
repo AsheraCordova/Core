@@ -254,6 +254,31 @@ public class ImageViewImpl extends BaseWidget implements IsImage, IHasMultiNativ
             ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
             
         }
+        
+        	public void state0() {
+        		ViewImpl.state(ImageViewImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(ImageViewImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(ImageViewImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(ImageViewImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(ImageViewImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(ImageViewImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(ImageViewImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return ImageViewExt.class;
@@ -621,7 +646,7 @@ return getCropToPadding();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

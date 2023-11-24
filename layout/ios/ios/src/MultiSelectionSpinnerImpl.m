@@ -30,7 +30,6 @@
 #include "IOSPrimitiveArray.h"
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
-#include "IdGenerator.h"
 #include "J2ObjC_source.h"
 #include "Layout.h"
 #include "LayoutNativeVars.h"
@@ -1522,7 +1521,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
-    [((ADSpinner *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
+    [((ADSpinner *) nil_chk(measurableView_)) setIdWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self quickConvertWithId:id_ withNSString:@"id"], [JavaLangInteger class]))) intValue]];
   }
 }
 
@@ -3099,6 +3098,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
 }
 
+- (void)state0 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 0);
+}
+
+- (void)state1 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 1);
+}
+
+- (void)state2 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 2);
+}
+
+- (void)state3 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 3);
+}
+
+- (void)state4 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 4);
+}
+
+- (void)stateYes {
+  ASViewImpl_stateYesWithASIWidget_(this$0_);
+}
+
+- (void)stateNo {
+  ASViewImpl_stateNoWithASIWidget_(this$0_);
+}
+
 - (void)__javaClone:(ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -3132,6 +3159,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
     { NULL, "V", 0x1, 28, 1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, 29, 30, -1, -1, -1, -1 },
     { NULL, "I", 0x1, 31, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -3162,6 +3196,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
   methods[23].selector = @selector(setVisibilityWithInt:);
   methods[24].selector = @selector(nativeMeasureWidthWithId:);
   methods[25].selector = @selector(nativeMeasureHeightWithId:withInt:);
+  methods[26].selector = @selector(state0);
+  methods[27].selector = @selector(state1);
+  methods[28].selector = @selector(state2);
+  methods[29].selector = @selector(state3);
+  methods[30].selector = @selector(state4);
+  methods[31].selector = @selector(stateYes);
+  methods[32].selector = @selector(stateNo);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASMultiSelectionSpinnerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -3172,7 +3213,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
     { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 34, -1 },
   };
   static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASMultiSelectionSpinnerImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "mMaxWidth", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt = { "MultiSelectionSpinnerExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 26, 6, 3, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt = { "MultiSelectionSpinnerExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 33, 6, 3, -1, -1, -1, -1 };
   return &_ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt;
 }
 
@@ -3284,14 +3325,10 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_MultiSelectionS
     id<JavaUtilMap> obj = [self getOnItemSelectedEventObjWithADView:view withJavaUtilList:positions];
     NSString *commandName = (NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(obj)) getWithId:ASEventExpressionParser_KEY_COMMAND_NAME], [NSString class]);
     NSString *commandType = (NSString *) cast_chk([obj getWithId:ASEventExpressionParser_KEY_COMMAND_TYPE], [NSString class]);
-    switch (JreIndexOfStr(commandType, (id[]){ @"+", @":" }, 2)) {
+    switch (JreIndexOfStr(commandType, (id[]){ @"+" }, 1)) {
       case 0:
-      case 1:
       if (ASEventCommandFactory_hasCommandWithNSString_(commandName)) {
         (void) [((id<ASEventCommand>) nil_chk(ASEventCommandFactory_getCommandWithNSString_(commandName))) executeCommandWithASIWidget:w_ withJavaUtilMap:obj withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ view, positions } count:2 type:NSObject_class_()]];
-      }
-      if ([((NSString *) nil_chk(commandType)) isEqual:@":"]) {
-        return;
       }
       break;
       default:
@@ -3304,7 +3341,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_MultiSelectionS
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty]) {
+    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
     }
@@ -3340,14 +3377,10 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_MultiSelectionS
     id<JavaUtilMap> obj = [self getOnNothingSelectedEventObjWithADView:view withJavaUtilList:positions];
     NSString *commandName = (NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(obj)) getWithId:ASEventExpressionParser_KEY_COMMAND_NAME], [NSString class]);
     NSString *commandType = (NSString *) cast_chk([obj getWithId:ASEventExpressionParser_KEY_COMMAND_TYPE], [NSString class]);
-    switch (JreIndexOfStr(commandType, (id[]){ @"+", @":" }, 2)) {
+    switch (JreIndexOfStr(commandType, (id[]){ @"+" }, 1)) {
       case 0:
-      case 1:
       if (ASEventCommandFactory_hasCommandWithNSString_(commandName)) {
         (void) [((id<ASEventCommand>) nil_chk(ASEventCommandFactory_getCommandWithNSString_(commandName))) executeCommandWithASIWidget:w_ withJavaUtilMap:obj withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ view, positions } count:2 type:NSObject_class_()]];
-      }
-      if ([((NSString *) nil_chk(commandType)) isEqual:@":"]) {
-        return;
       }
       break;
       default:
@@ -3360,7 +3393,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_MultiSelectionS
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty]) {
+    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
     }

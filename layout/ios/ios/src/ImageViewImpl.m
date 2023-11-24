@@ -19,7 +19,6 @@
 #include "IOSPrimitiveArray.h"
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
-#include "IdGenerator.h"
 #include "ImageDownloaderFactory.h"
 #include "ImageView.h"
 #include "ImageViewImpl.h"
@@ -737,7 +736,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
-    [((ADImageView *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
+    [((ADImageView *) nil_chk(measurableView_)) setIdWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self quickConvertWithId:id_ withNSString:@"id"], [JavaLangInteger class]))) intValue]];
   }
 }
 
@@ -1776,6 +1775,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
   ASViewImpl_nativeSetVisibilityWithId_withBoolean_([this$0_ asNativeWidget], visibility != ADView_VISIBLE);
 }
 
+- (void)state0 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 0);
+}
+
+- (void)state1 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 1);
+}
+
+- (void)state2 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 2);
+}
+
+- (void)state3 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 3);
+}
+
+- (void)state4 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 4);
+}
+
+- (void)stateYes {
+  ASViewImpl_stateYesWithASIWidget_(this$0_);
+}
+
+- (void)stateNo {
+  ASViewImpl_stateNoWithASIWidget_(this$0_);
+}
+
 - (void)__javaClone:(ASImageViewImpl_ImageViewExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -1803,6 +1830,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
     { NULL, "V", 0x1, 23, 22, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 26, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1827,6 +1861,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
   methods[17].selector = @selector(offsetLeftAndRightWithInt:);
   methods[18].selector = @selector(setMyAttributeWithNSString:withId:);
   methods[19].selector = @selector(setVisibilityWithInt:);
+  methods[20].selector = @selector(state0);
+  methods[21].selector = @selector(state1);
+  methods[22].selector = @selector(state2);
+  methods[23].selector = @selector(state3);
+  methods[24].selector = @selector(state4);
+  methods[25].selector = @selector(stateYes);
+  methods[26].selector = @selector(stateNo);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASImageViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -1835,7 +1876,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
     { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 27, -1 },
   };
   static const void *ptrTable[] = { "LASImageViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASImageViewImpl_ImageViewExt = { "ImageViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 20, 4, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASImageViewImpl_ImageViewExt = { "ImageViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 27, 4, 0, -1, -1, -1, -1 };
   return &_ASImageViewImpl_ImageViewExt;
 }
 

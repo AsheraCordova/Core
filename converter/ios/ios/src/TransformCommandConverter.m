@@ -80,8 +80,8 @@ __attribute__((unused)) static void ASTransformCommandConverter_updateTranformWi
       anchorX = nil;
       anchorY = nil;
       if (transformPivotX_ != nil || transformPivotY_ != nil) {
-        anchorX = JavaLangFloat_valueOfWithFloat_((transformPivotX_ == nil) ? 0.5f : [((ADView *) nil_chk(view)) getMeasuredWidth] / [((JavaLangFloat *) nil_chk(transformPivotX_)) floatValue]);
-        anchorY = JavaLangFloat_valueOfWithFloat_((transformPivotY_ == nil) ? 0.5f : [((ADView *) nil_chk(view)) getMeasuredHeight] / [((JavaLangFloat *) nil_chk(transformPivotY_)) floatValue]);
+        anchorX = JavaLangFloat_valueOfWithFloat_((transformPivotX_ == nil || [transformPivotX_ floatValue] == 0) ? 0.5f : [((ADView *) nil_chk(view)) getMeasuredWidth] / [((JavaLangFloat *) nil_chk(transformPivotX_)) floatValue]);
+        anchorY = JavaLangFloat_valueOfWithFloat_((transformPivotY_ == nil || [transformPivotY_ floatValue] == 0) ? 0.5f : [((ADView *) nil_chk(view)) getMeasuredHeight] / [((JavaLangFloat *) nil_chk(transformPivotY_)) floatValue]);
       }
       ASTransformCommandConverter_updateTranformWithId_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withFloat_withJavaLangFloat_withJavaLangFloat_(self, [widget asNativeWidget], translationX_, translationY_, translationZ_, rotation_, rotationX_, rotationY_, scaleX_, scaleY_, anchorX, anchorY);
       break;

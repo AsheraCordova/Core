@@ -75,6 +75,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self->left_ < self->right_ && self->top_ < self->bottom_ && left_ <= ((ADRect *) nil_chk(r))->left_ && top_ <= r->top_ && right_ >= r->right_ && bottom_ >= r->bottom_;
 }
 
+- (jboolean)containsWithInt:(jint)x
+                    withInt:(jint)y {
+  return left_ < right_ && top_ < bottom_ && x >= left_ && x < right_ && y >= top_ && y < bottom_;
+}
+
 - (NSString *)toShortString {
   return [self toShortStringWithJavaLangStringBuilder:create_JavaLangStringBuilder_initWithInt_(32)];
 }
@@ -106,6 +111,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x11, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, 5, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 5, 4, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, 6, 7, -1, -1, -1, -1 },
   };
@@ -123,8 +129,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[8].selector = @selector(isEmpty);
   methods[9].selector = @selector(offsetWithInt:withInt:);
   methods[10].selector = @selector(containsWithADRect:);
-  methods[11].selector = @selector(toShortString);
-  methods[12].selector = @selector(toShortStringWithJavaLangStringBuilder:);
+  methods[11].selector = @selector(containsWithInt:withInt:);
+  methods[12].selector = @selector(toShortString);
+  methods[13].selector = @selector(toShortStringWithJavaLangStringBuilder:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "left_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
@@ -133,7 +140,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "bottom_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "IIII", "LADRect;", "set", "offset", "II", "contains", "toShortString", "LJavaLangStringBuilder;" };
-  static const J2ObjcClassInfo _ADRect = { "Rect", "r.android.graphics", ptrTable, methods, fields, 7, 0x11, 13, 4, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADRect = { "Rect", "r.android.graphics", ptrTable, methods, fields, 7, 0x11, 14, 4, -1, -1, -1, -1, -1 };
   return &_ADRect;
 }
 

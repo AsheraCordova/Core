@@ -173,6 +173,8 @@
 
 - (jint)getHeight;
 
+- (void)getHitRectWithADRect:(ADRect *)outRect;
+
 - (jint)getHorizontalScrollbarHeight;
 
 - (jint)getId;
@@ -278,6 +280,10 @@
 - (jint)getWindowVisibility;
 
 - (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
+
+- (jint)getX;
+
+- (jint)getY;
 
 - (jint)getZ;
 
@@ -577,6 +583,20 @@
 - (void)setWillNotDrawWithBoolean:(jboolean)willNotDraw;
 
 - (jboolean)shouldDrawRoundScrollbar;
+
+- (void)state0;
+
+- (void)state1;
+
+- (void)state2;
+
+- (void)state3;
+
+- (void)state4;
+
+- (void)stateNo;
+
+- (void)stateYes;
 
 - (void)unFocusWithId:(id)obj;
 
@@ -1942,13 +1962,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_OnKeyListener)
 #if !defined (ADView_OnTouchListener_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_OnTouchListener))
 #define ADView_OnTouchListener_
 
+@class ADMotionEvent;
 @class ADView;
-@class ADView_MotionEvent;
 
 @protocol ADView_OnTouchListener < JavaObject >
 
 - (jboolean)onTouchWithADView:(ADView *)v
-       withADView_MotionEvent:(ADView_MotionEvent *)event;
+            withADMotionEvent:(ADMotionEvent *)event;
 
 @end
 
@@ -1961,13 +1981,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_OnTouchListener)
 #if !defined (ADView_OnHoverListener_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_OnHoverListener))
 #define ADView_OnHoverListener_
 
+@class ADMotionEvent;
 @class ADView;
-@class ADView_MotionEvent;
 
 @protocol ADView_OnHoverListener < JavaObject >
 
 - (jboolean)onHoverWithADView:(ADView *)v
-       withADView_MotionEvent:(ADView_MotionEvent *)event;
+            withADMotionEvent:(ADMotionEvent *)event;
 
 @end
 
@@ -2399,81 +2419,6 @@ FOUNDATION_EXPORT ADView_RoundScrollbarRenderer *new_ADView_RoundScrollbarRender
 FOUNDATION_EXPORT ADView_RoundScrollbarRenderer *create_ADView_RoundScrollbarRenderer_initWithADView_withADView_(ADView *outer$, ADView *view);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADView_RoundScrollbarRenderer)
-
-#endif
-
-#if !defined (ADView_MotionEvent_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_MotionEvent))
-#define ADView_MotionEvent_
-
-@interface ADView_MotionEvent : NSObject
-
-#pragma mark Public
-
-- (instancetype)init;
-
-- (jint)getAction;
-
-- (jint)getRawX;
-
-- (jint)getRawY;
-
-- (jint)getX;
-
-- (jint)getY;
-
-- (void)setActionWithInt:(jint)action;
-
-- (void)setRawXWithInt:(jint)rawX;
-
-- (void)setRawYWithInt:(jint)rawY;
-
-- (void)setXWithInt:(jint)x;
-
-- (void)setYWithInt:(jint)y;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ADView_MotionEvent)
-
-inline jint ADView_MotionEvent_get_ACTION_DOWN(void);
-#define ADView_MotionEvent_ACTION_DOWN 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MotionEvent, ACTION_DOWN, jint)
-
-inline jint ADView_MotionEvent_get_ACTION_UP(void);
-#define ADView_MotionEvent_ACTION_UP 1
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MotionEvent, ACTION_UP, jint)
-
-inline jint ADView_MotionEvent_get_ACTION_MOVE(void);
-#define ADView_MotionEvent_ACTION_MOVE 2
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MotionEvent, ACTION_MOVE, jint)
-
-inline jint ADView_MotionEvent_get_ACTION_CANCEL(void);
-#define ADView_MotionEvent_ACTION_CANCEL 3
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MotionEvent, ACTION_CANCEL, jint)
-
-inline jint ADView_MotionEvent_get_ACTION_OUTSIDE(void);
-#define ADView_MotionEvent_ACTION_OUTSIDE 4
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MotionEvent, ACTION_OUTSIDE, jint)
-
-inline jint ADView_MotionEvent_get_ACTION_SCROLL(void);
-#define ADView_MotionEvent_ACTION_SCROLL 8
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MotionEvent, ACTION_SCROLL, jint)
-
-inline jint ADView_MotionEvent_get_ACTION_BUTTON_PRESS(void);
-#define ADView_MotionEvent_ACTION_BUTTON_PRESS 11
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MotionEvent, ACTION_BUTTON_PRESS, jint)
-
-inline jint ADView_MotionEvent_get_ACTION_BUTTON_RELEASE(void);
-#define ADView_MotionEvent_ACTION_BUTTON_RELEASE 12
-J2OBJC_STATIC_FIELD_CONSTANT(ADView_MotionEvent, ACTION_BUTTON_RELEASE, jint)
-
-FOUNDATION_EXPORT void ADView_MotionEvent_init(ADView_MotionEvent *self);
-
-FOUNDATION_EXPORT ADView_MotionEvent *new_ADView_MotionEvent_init(void) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ADView_MotionEvent *create_ADView_MotionEvent_init(void);
-
-J2OBJC_TYPE_LITERAL_HEADER(ADView_MotionEvent)
 
 #endif
 

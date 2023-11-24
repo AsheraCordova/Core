@@ -305,6 +305,31 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
         public int nativeMeasureHeight(java.lang.Object uiView, int width) {
         	return ViewImpl.nativeMeasureHeight(uiView, width);
         }
+        
+        	public void state0() {
+        		ViewImpl.state(SpinnerImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(SpinnerImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(SpinnerImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(SpinnerImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(SpinnerImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(SpinnerImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(SpinnerImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return SpinnerExt.class;
@@ -1003,14 +1028,10 @@ public void onItemSelected(AdapterView<?> parent, View view, int position, long 
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, parent,view,position,id);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -1023,7 +1044,7 @@ public void onItemSelected(AdapterView<?> parent, View view, int position, long 
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -1064,14 +1085,10 @@ public java.util.Map<String, Object> getOnItemSelectedEventObj(AdapterView<?> pa
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, parent);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -1084,7 +1101,7 @@ public java.util.Map<String, Object> getOnItemSelectedEventObj(AdapterView<?> pa
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -1124,7 +1141,7 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(AdapterView<?>
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

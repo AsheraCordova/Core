@@ -275,6 +275,31 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
         public int nativeMeasureHeight(java.lang.Object uiView, int width) {
         	return ViewImpl.nativeMeasureHeight(uiView, width);
         }
+        
+        	public void state0() {
+        		ViewImpl.state(UIProgressViewImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(UIProgressViewImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(UIProgressViewImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(UIProgressViewImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(UIProgressViewImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(UIProgressViewImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(UIProgressViewImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return UIProgressViewExt.class;
@@ -668,7 +693,7 @@ return ((ASUIProgressView*) uiView_).trackImage;
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

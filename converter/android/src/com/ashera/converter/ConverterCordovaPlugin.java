@@ -25,6 +25,7 @@ public class ConverterCordovaPlugin extends CordovaPlugin {
 		ConverterFactory.register("style", new StyleConverter());
 		ConverterFactory.register("xmlresource", new XmlResourceConverter());
 		ConverterFactory.register("divider", new Divider());
+		ConverterFactory.register("id", new AndroidIdConverter());
 		
 		ConverterFactory.registerCommandConverter(new ImageRepeatCommandConverter("imageRepeat"));
 	}

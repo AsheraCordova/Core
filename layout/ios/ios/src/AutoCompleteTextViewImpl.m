@@ -2325,7 +2325,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     }
     case 45:
     {
-      return [((id<JavaUtilMap>) nil_chk(self->textWatchers_)) getWithId:[key getAttributeName]];
+      return self->textWatchers_ == nil ? nil : [self->textWatchers_ getWithId:[key getAttributeName]];
     }
   }
   return nil;
@@ -3567,7 +3567,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
-    [((ADAutoCompleteTextView *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
+    [((ADAutoCompleteTextView *) nil_chk(measurableView_)) setIdWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self quickConvertWithId:id_ withNSString:@"id"], [JavaLangInteger class]))) intValue]];
   }
 }
 
@@ -6739,6 +6739,34 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
   [((ADAutoCompleteTextView *) nil_chk(this$0_->measurableView_)) postWithJavaLangRunnable:new_ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_$Lambda$1_initWithASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_(self)];
 }
 
+- (void)state0 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 0);
+}
+
+- (void)state1 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 1);
+}
+
+- (void)state2 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 2);
+}
+
+- (void)state3 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 3);
+}
+
+- (void)state4 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 4);
+}
+
+- (void)stateYes {
+  ASViewImpl_stateYesWithASIWidget_(this$0_);
+}
+
+- (void)stateNo {
+  ASViewImpl_stateNoWithASIWidget_(this$0_);
+}
+
 - (void)__javaClone:(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -6775,6 +6803,13 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
     { NULL, "I", 0x1, 31, 32, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -6808,6 +6843,13 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
   methods[26].selector = @selector(computeSizeWithFloat:);
   methods[27].selector = @selector(getText);
   methods[28].selector = @selector(dismissDropDown);
+  methods[29].selector = @selector(state0);
+  methods[30].selector = @selector(state1);
+  methods[31].selector = @selector(state2);
+  methods[32].selector = @selector(state3);
+  methods[33].selector = @selector(state4);
+  methods[34].selector = @selector(stateYes);
+  methods[35].selector = @selector(stateNo);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASAutoCompleteTextViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -6816,7 +6858,7 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
     { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
   };
   static const void *ptrTable[] = { "LASAutoCompleteTextViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "computeSize", "F", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt = { "AutoCompleteTextViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 29, 4, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt = { "AutoCompleteTextViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 36, 4, 0, -1, -1, -1, -1 };
   return &_ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt;
 }
 
@@ -7093,14 +7135,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OutsideEventListener
     id<JavaUtilMap> obj = [self getOnDismissEventObj];
     NSString *commandName = (NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(obj)) getWithId:ASEventExpressionParser_KEY_COMMAND_NAME], [NSString class]);
     NSString *commandType = (NSString *) cast_chk([obj getWithId:ASEventExpressionParser_KEY_COMMAND_TYPE], [NSString class]);
-    switch (JreIndexOfStr(commandType, (id[]){ @"+", @":" }, 2)) {
+    switch (JreIndexOfStr(commandType, (id[]){ @"+" }, 1)) {
       case 0:
-      case 1:
       if (ASEventCommandFactory_hasCommandWithNSString_(commandName)) {
         (void) [((id<ASEventCommand>) nil_chk(ASEventCommandFactory_getCommandWithNSString_(commandName))) executeCommandWithASIWidget:w_ withJavaUtilMap:obj withNSObjectArray:[IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]];
-      }
-      if ([((NSString *) nil_chk(commandType)) isEqual:@":"]) {
-        return;
       }
       break;
       default:
@@ -7113,7 +7151,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OutsideEventListener
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty]) {
+    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
     }
@@ -7225,17 +7263,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnDismissListener)
     id<JavaUtilMap> obj = [self getOnEditorActionEventObjWithADTextView:v withInt:actionId withADKeyEvent:event];
     NSString *commandName = (NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(obj)) getWithId:ASEventExpressionParser_KEY_COMMAND_NAME], [NSString class]);
     NSString *commandType = (NSString *) cast_chk([obj getWithId:ASEventExpressionParser_KEY_COMMAND_TYPE], [NSString class]);
-    switch (JreIndexOfStr(commandType, (id[]){ @"+", @":" }, 2)) {
+    switch (JreIndexOfStr(commandType, (id[]){ @"+" }, 1)) {
       case 0:
-      case 1:
       if (ASEventCommandFactory_hasCommandWithNSString_(commandName)) {
         id commandResult = [((id<ASEventCommand>) nil_chk(ASEventCommandFactory_getCommandWithNSString_(commandName))) executeCommandWithASIWidget:w_ withJavaUtilMap:obj withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ v, JavaLangInteger_valueOfWithInt_(actionId), event } count:3 type:NSObject_class_()]];
         if (commandResult != nil) {
           result = [(JavaLangBoolean *) cast_chk(commandResult, [JavaLangBoolean class]) booleanValue];
         }
-      }
-      if ([((NSString *) nil_chk(commandType)) isEqual:@":"]) {
-        return result;
       }
       break;
       default:
@@ -7248,7 +7282,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnDismissListener)
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty]) {
+    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
     }
@@ -7362,14 +7396,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnEditorActionListen
     id<JavaUtilMap> obj = [self getOnFocusChangeEventObjWithADView:v withBoolean:hasFocus];
     NSString *commandName = (NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(obj)) getWithId:ASEventExpressionParser_KEY_COMMAND_NAME], [NSString class]);
     NSString *commandType = (NSString *) cast_chk([obj getWithId:ASEventExpressionParser_KEY_COMMAND_TYPE], [NSString class]);
-    switch (JreIndexOfStr(commandType, (id[]){ @"+", @":" }, 2)) {
+    switch (JreIndexOfStr(commandType, (id[]){ @"+" }, 1)) {
       case 0:
-      case 1:
       if (ASEventCommandFactory_hasCommandWithNSString_(commandName)) {
         (void) [((id<ASEventCommand>) nil_chk(ASEventCommandFactory_getCommandWithNSString_(commandName))) executeCommandWithASIWidget:w_ withJavaUtilMap:obj withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ v, JavaLangBoolean_valueOfWithBoolean_(hasFocus) } count:2 type:NSObject_class_()]];
-      }
-      if ([((NSString *) nil_chk(commandType)) isEqual:@":"]) {
-        return;
       }
       break;
       default:
@@ -7382,7 +7412,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnEditorActionListen
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty]) {
+    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
     }
@@ -7493,14 +7523,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
     id<JavaUtilMap> obj = [self getOnafterTextChangeEventObjWithADEditable:s];
     NSString *commandName = (NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(obj)) getWithId:ASEventExpressionParser_KEY_COMMAND_NAME], [NSString class]);
     NSString *commandType = (NSString *) cast_chk([obj getWithId:ASEventExpressionParser_KEY_COMMAND_TYPE], [NSString class]);
-    switch (JreIndexOfStr(commandType, (id[]){ @"+", @":" }, 2)) {
+    switch (JreIndexOfStr(commandType, (id[]){ @"+" }, 1)) {
       case 0:
-      case 1:
       if (ASEventCommandFactory_hasCommandWithNSString_(commandName)) {
         (void) [((id<ASEventCommand>) nil_chk(ASEventCommandFactory_getCommandWithNSString_(commandName))) executeCommandWithASIWidget:w_ withJavaUtilMap:obj withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ s } count:1 type:NSObject_class_()]];
-      }
-      if ([((NSString *) nil_chk(commandType)) isEqual:@":"]) {
-        return;
       }
       break;
       default:
@@ -7513,7 +7539,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty]) {
+    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
     }
@@ -7530,14 +7556,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
     id<JavaUtilMap> obj = [self getOnbeforeTextChangeEventObjWithJavaLangCharSequence:s withInt:start withInt:count withInt:after];
     NSString *commandName = (NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(obj)) getWithId:ASEventExpressionParser_KEY_COMMAND_NAME], [NSString class]);
     NSString *commandType = (NSString *) cast_chk([obj getWithId:ASEventExpressionParser_KEY_COMMAND_TYPE], [NSString class]);
-    switch (JreIndexOfStr(commandType, (id[]){ @"+", @":" }, 2)) {
+    switch (JreIndexOfStr(commandType, (id[]){ @"+" }, 1)) {
       case 0:
-      case 1:
       if (ASEventCommandFactory_hasCommandWithNSString_(commandName)) {
         (void) [((id<ASEventCommand>) nil_chk(ASEventCommandFactory_getCommandWithNSString_(commandName))) executeCommandWithASIWidget:w_ withJavaUtilMap:obj withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ s, JavaLangInteger_valueOfWithInt_(start), JavaLangInteger_valueOfWithInt_(count), JavaLangInteger_valueOfWithInt_(after) } count:4 type:NSObject_class_()]];
-      }
-      if ([((NSString *) nil_chk(commandType)) isEqual:@":"]) {
-        return;
       }
       break;
       default:
@@ -7550,7 +7572,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty]) {
+    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
     }
@@ -7567,14 +7589,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
     id<JavaUtilMap> obj = [self getOnTextChangeEventObjWithJavaLangCharSequence:s withInt:start withInt:before withInt:count];
     NSString *commandName = (NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(obj)) getWithId:ASEventExpressionParser_KEY_COMMAND_NAME], [NSString class]);
     NSString *commandType = (NSString *) cast_chk([obj getWithId:ASEventExpressionParser_KEY_COMMAND_TYPE], [NSString class]);
-    switch (JreIndexOfStr(commandType, (id[]){ @"+", @":" }, 2)) {
+    switch (JreIndexOfStr(commandType, (id[]){ @"+" }, 1)) {
       case 0:
-      case 1:
       if (ASEventCommandFactory_hasCommandWithNSString_(commandName)) {
         (void) [((id<ASEventCommand>) nil_chk(ASEventCommandFactory_getCommandWithNSString_(commandName))) executeCommandWithASIWidget:w_ withJavaUtilMap:obj withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ s, JavaLangInteger_valueOfWithInt_(start), JavaLangInteger_valueOfWithInt_(before), JavaLangInteger_valueOfWithInt_(count) } count:4 type:NSObject_class_()]];
-      }
-      if ([((NSString *) nil_chk(commandType)) isEqual:@":"]) {
-        return;
       }
       break;
       default:
@@ -7587,7 +7605,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASAutoCompleteTextViewImpl_OnFocusChangeListene
     if ([((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds] != nil) {
       ASViewImpl_refreshUiFromModelWithASIWidget_withId_withBoolean_(w_, [((id<ASIWidget>) nil_chk(w_)) getModelUiToPojoEventIds], true);
     }
-    if (strValue_ != nil && ![strValue_ java_isEmpty]) {
+    if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
       [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
     }

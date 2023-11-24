@@ -484,6 +484,31 @@ public class UITextViewLabelImpl extends BaseWidget implements com.ashera.valida
 			return (String) getMyText();
 		}
 
+        
+        	public void state0() {
+        		ViewImpl.state(UITextViewLabelImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(UITextViewLabelImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(UITextViewLabelImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(UITextViewLabelImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(UITextViewLabelImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(UITextViewLabelImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(UITextViewLabelImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return UITextViewLabelExt.class;
@@ -2461,7 +2486,7 @@ return [JavaLangBoolean valueOfWithBoolean :((ASUITextViewLabel*) uiView_).selec
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

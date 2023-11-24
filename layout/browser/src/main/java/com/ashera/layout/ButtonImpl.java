@@ -420,6 +420,31 @@ public class ButtonImpl extends BaseWidget {
 			return (String) getMyText();
 		}
 
+        
+        	public void state0() {
+        		ViewImpl.state(ButtonImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(ButtonImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(ButtonImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(ButtonImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(ButtonImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(ButtonImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(ButtonImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return ButtonExt.class;
@@ -2616,7 +2641,7 @@ return getTextColorHighlight();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

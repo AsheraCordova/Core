@@ -277,6 +277,31 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ImageViewImpl.this);
         }
+        
+        	public void state0() {
+        		ViewImpl.state(ImageViewImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(ImageViewImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(ImageViewImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(ImageViewImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(ImageViewImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(ImageViewImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(ImageViewImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return ImageViewExt.class;
@@ -630,7 +655,7 @@ return null;				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			imageView.setId(IdGenerator.getId(id));
+			imageView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

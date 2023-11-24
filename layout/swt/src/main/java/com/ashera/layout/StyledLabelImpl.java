@@ -475,6 +475,31 @@ public class StyledLabelImpl extends BaseWidget implements IDrawable, IHasMultiN
 			return (String) getMyText();
 		}
 
+        
+        	public void state0() {
+        		ViewImpl.state(StyledLabelImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(StyledLabelImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(StyledLabelImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(StyledLabelImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(StyledLabelImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(StyledLabelImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(StyledLabelImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return StyledLabelExt.class;
@@ -2657,7 +2682,7 @@ return getLastBaselineToBottomHeight();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

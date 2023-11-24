@@ -407,6 +407,31 @@ return layoutParams.weight;			}
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(LinearLayoutImpl.this);
         }
+        
+        	public void state0() {
+        		ViewImpl.state(LinearLayoutImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(LinearLayoutImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(LinearLayoutImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(LinearLayoutImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(LinearLayoutImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(LinearLayoutImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(LinearLayoutImpl.this);
+        }
 	}
 	@Override
 	public Class getViewClass() {
@@ -574,7 +599,7 @@ return getDividerPadding();			}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			linearLayout.setId(IdGenerator.getId(id));
+			linearLayout.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

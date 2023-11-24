@@ -253,6 +253,31 @@ public class ProgressBarImpl extends BaseWidget {
         public int nativeMeasureHeight(java.lang.Object uiView, int width) {
         	return ProgressBarImpl.this.nativeMeasureHeight(uiView, width);
         }
+        
+        	public void state0() {
+        		ViewImpl.state(ProgressBarImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(ProgressBarImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(ProgressBarImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(ProgressBarImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(ProgressBarImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(ProgressBarImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(ProgressBarImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return ProgressBarExt.class;
@@ -556,7 +581,7 @@ return getProgressBackgroundTint();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

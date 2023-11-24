@@ -380,6 +380,31 @@ public class CheckBoxStyledLabelImpl extends BaseWidget implements IDrawable, IC
 			return (String) getMyText();
 		}
 
+        
+        	public void state0() {
+        		ViewImpl.state(CheckBoxStyledLabelImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(CheckBoxStyledLabelImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(CheckBoxStyledLabelImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(CheckBoxStyledLabelImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(CheckBoxStyledLabelImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(CheckBoxStyledLabelImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(CheckBoxStyledLabelImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return CheckBoxStyledLabelExt.class;
@@ -2618,14 +2643,10 @@ public void onCheckedChanged (CompoundButton buttonView,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, buttonView,isChecked);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2638,7 +2659,7 @@ public void onCheckedChanged (CompoundButton buttonView,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2675,7 +2696,7 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

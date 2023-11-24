@@ -207,6 +207,31 @@ public class ViewOnlyImpl extends BaseWidget {
         	super.drawableStateChanged();
         	ViewImpl.drawableStateChanged(ViewOnlyImpl.this);
         }
+        
+        	public void state0() {
+        		ViewImpl.state(ViewOnlyImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(ViewOnlyImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(ViewOnlyImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(ViewOnlyImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(ViewOnlyImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(ViewOnlyImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(ViewOnlyImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return ViewOnlyExt.class;
@@ -306,7 +331,7 @@ Context context = (Context) fragment.getRootActivity();
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			frameLayout.setId(IdGenerator.getId(id));
+			frameLayout.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

@@ -371,6 +371,31 @@ public class TextViewButtonImpl extends BaseWidget  implements IDrawable, IHasMu
 			return (String) getMyText();
 		}
 
+        
+        	public void state0() {
+        		ViewImpl.state(TextViewButtonImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(TextViewButtonImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(TextViewButtonImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(TextViewButtonImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(TextViewButtonImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(TextViewButtonImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(TextViewButtonImpl.this);
+        }
 	}	@Override
 	public Class getViewClass() {
 		return TextViewButtonExt.class;
@@ -2167,7 +2192,7 @@ return getLastBaselineToBottomHeight();				}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			measurableView.setId(IdGenerator.getId(id));
+			measurableView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

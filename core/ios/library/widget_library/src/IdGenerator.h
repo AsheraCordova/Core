@@ -31,6 +31,9 @@
 
 + (NSString *)getNameWithInt:(jint)id_;
 
++ (void)setIdWithNSString:(NSString *)name
+                  withInt:(jint)id_;
+
 @end
 
 J2OBJC_STATIC_INIT(ASIdGenerator)
@@ -42,6 +45,8 @@ FOUNDATION_EXPORT ASIdGenerator *new_ASIdGenerator_init(void) NS_RETURNS_RETAINE
 FOUNDATION_EXPORT ASIdGenerator *create_ASIdGenerator_init(void);
 
 FOUNDATION_EXPORT NSString *ASIdGenerator_getNameWithInt_(jint id_);
+
+FOUNDATION_EXPORT void ASIdGenerator_setIdWithNSString_withInt_(NSString *name, jint id_);
 
 FOUNDATION_EXPORT jint ASIdGenerator_getIdWithNSString_(NSString *id_);
 

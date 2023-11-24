@@ -23,7 +23,7 @@ module.exports = (context) => {
 		//27E45212286452BC00FEBE6F /* color */ = {isa = PBXFileReference; lastKnownFileType = folder; name = color; path = resources/color; sourceTree = "<group>"; };
 		myProj.parse(function (err) {
 			
-			var baseNames = ['drawable-ios', 'color', 'xml', 'menu', 'drawable', 'values', 'font'];
+			var baseNames = ['drawable-ios', 'color', 'xml', 'menu', 'drawable', 'values', 'font', 'res_xml'];
 			var group = 'Resources';
 			for (var i = 0; i < baseNames.length; i++) {
 				var baseName = baseNames[i];
@@ -36,10 +36,10 @@ module.exports = (context) => {
 					path = "../../../android/app/src/main/res-ios/" + baseName;
 				}
 	
-				if (baseName == 'font') {
+				if (baseName == 'font' || baseName == 'res_xml') {
 					path = "../../" + baseName;
-				}			
-			    
+				}	
+				
 			    var found = false;
 			    for (j in myProj.pbxFileReferenceSection()) {
 			        if (myProj.pbxFileReferenceSection()[j].path == path) {

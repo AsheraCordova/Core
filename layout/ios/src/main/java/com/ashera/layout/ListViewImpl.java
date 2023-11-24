@@ -452,6 +452,31 @@ public class ListViewImpl extends BaseHasWidgets {
 			}
         	return height;
         }
+        
+        	public void state0() {
+        		ViewImpl.state(ListViewImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(ListViewImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(ListViewImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(ListViewImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(ListViewImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(ListViewImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(ListViewImpl.this);
+        }
 	}
 	@Override
 	public Class getViewClass() {
@@ -1137,7 +1162,7 @@ return getDividerHeight();			}
         
         @Override
         public long getItemId(int position) {
-            return IdGenerator.getId(ids.get(position));
+            return (int) quickConvert(ids.get(position), "id");
         }
         
         @Override
@@ -1499,14 +1524,10 @@ public void onItemClick (AdapterView<?> parent,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, parent,view,position,id);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -1519,7 +1540,7 @@ public void onItemClick (AdapterView<?> parent,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -1577,17 +1598,13 @@ public boolean onItemLongClick (AdapterView<?> parent,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, parent,view,position,id);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -1600,7 +1617,7 @@ public boolean onItemLongClick (AdapterView<?> parent,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -1657,14 +1674,10 @@ public void onScroll (AbsListView view,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, view,firstVisibleItem,visibleItemCount,totalItemCount);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -1677,7 +1690,7 @@ public void onScroll (AbsListView view,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -1697,14 +1710,10 @@ public void onScrollStateChanged (AbsListView view,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, view,scrollState);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -1717,7 +1726,7 @@ public void onScrollStateChanged (AbsListView view,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -1779,7 +1788,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			listView.setId(IdGenerator.getId(id));
+			listView.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

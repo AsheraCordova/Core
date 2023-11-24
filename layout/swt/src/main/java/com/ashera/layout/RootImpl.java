@@ -633,6 +633,31 @@ return layoutParams.alignWithParent;			}
             ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
             
         }
+        
+        	public void state0() {
+        		ViewImpl.state(RootImpl.this, 0);
+        	}
+        	public void state1() {
+        		ViewImpl.state(RootImpl.this, 1);
+        	}
+        	public void state2() {
+        		ViewImpl.state(RootImpl.this, 2);
+        	}
+        	public void state3() {
+        		ViewImpl.state(RootImpl.this, 3);
+        	}
+        	public void state4() {
+        		ViewImpl.state(RootImpl.this, 4);
+        	}
+                        
+        public void stateYes() {
+        	ViewImpl.stateYes(RootImpl.this);
+        	
+        }
+        
+        public void stateNo() {
+        	ViewImpl.stateNo(RootImpl.this);
+        }
 	}
 	@Override
 	public Class getViewClass() {
@@ -850,7 +875,7 @@ return relativeLayout.getGravity();			}
 	public void setId(String id){
 		if (id != null && !id.equals("")){
 			super.setId(id);
-			relativeLayout.setId(IdGenerator.getId(id));
+			relativeLayout.setId((int) quickConvert(id, "id"));
 		}
 	}
 	

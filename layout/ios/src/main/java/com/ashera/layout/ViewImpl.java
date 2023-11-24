@@ -24,7 +24,7 @@ import static com.ashera.widget.IWidget.*;
 #include "ASUISwipeGestureRecognizer.h"
 #include "ASUILongTapGestureRecognizer.h"
 ]-*/
-import r.android.view.View.MotionEvent;
+import r.android.view.MotionEvent;
 import r.android.view.View.DragEvent;
 import r.android.view.KeyEvent;
 import r.android.view.MenuItem;
@@ -2046,6 +2046,42 @@ return getMaxHeight(w);			}
 	
 
 
+	public static void state(IWidget w, int i) {
+     	String attributeName = (String) w.getUserData("state" + i);
+     	Object val = w.getUserData("val" + i);
+     	w.setAttribute(attributeName, val, false);
+     }
+             
+     public static void stateYes(IWidget w) {
+     	String attributeName = (String) w.getUserData("stateYes");
+     	
+     	switch (attributeName) {
+			case "show":
+				w.setAttribute("visibility", "visible", false);
+				break;
+
+			default:
+				w.setAttribute(attributeName, true, true);
+				break;
+			}
+     	
+     }
+     
+     public static void stateNo(IWidget w) {
+     	String attributeName = (String) w.getUserData("stateNo");
+     	switch (attributeName) {
+			case "hide":
+				w.setAttribute("visibility", "gone", false);
+				break;
+
+			default:
+				w.setAttribute(attributeName, false, true);
+				break;
+			}
+     }
+	
+
+
 	public static void setLayoutDirection(IWidget w, Object objValue) {
 		View view = (View) w.asWidget();
 		int value = (int) objValue;
@@ -2446,14 +2482,10 @@ public void onClick (View v){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v);
 		    }
-		    if (commandType.equals(":")) {
-		    	return;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2466,7 +2498,7 @@ public void onClick (View v){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2521,17 +2553,13 @@ public boolean onTouch (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,event);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2544,7 +2572,7 @@ public boolean onTouch (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2599,17 +2627,13 @@ public boolean onLongClick (View v){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2622,7 +2646,7 @@ public boolean onLongClick (View v){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2677,17 +2701,13 @@ public boolean onDrag (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,event);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2700,7 +2720,7 @@ public boolean onDrag (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2757,17 +2777,13 @@ public boolean onKey (View v,
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, v,keyCode,event);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2780,7 +2796,7 @@ public boolean onKey (View v,
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -2836,17 +2852,13 @@ public boolean onSwiped(String direction){
 	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
 		switch (commandType) {
 		case "+":
-		case ":":
 		    if (EventCommandFactory.hasCommand(commandName)) {
 		    	 Object commandResult = EventCommandFactory.getCommand(commandName).executeCommand(w, obj, direction);
 		    	 if (commandResult != null) {
 		    		 result = (boolean) commandResult;
 		    	 }
 		    }
-		    if (commandType.equals(":")) {
-		    	return result;
-		    }
-			
+
 			break;
 		default:
 			break;
@@ -2859,7 +2871,7 @@ public boolean onSwiped(String direction){
 		if (w.getModelUiToPojoEventIds() != null) {
 			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
 		}
-		if (strValue != null && !strValue.isEmpty()) {
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
 		    activity.sendEventMessage(obj);
 		}
@@ -5326,7 +5338,7 @@ public void setOutsideTouchable(boolean value) {
 		}
 		
 		public void sendEvent(int x, int y, int rawX, int rawY, int action) {
-			r.android.view.View.MotionEvent motionEvent = new r.android.view.View.MotionEvent();
+			r.android.view.MotionEvent motionEvent = new r.android.view.MotionEvent();
 			motionEvent.setAction(action);
 			motionEvent.setX(x);
 			motionEvent.setY(y);
@@ -6087,17 +6099,23 @@ public void setOutsideTouchable(boolean value) {
 	}
 
 	public static void addPanListener(IWidget widget, Object uiView, PanCallBack callback) {
-		new PanGestureRecognizer(widget, uiView, callback).addUIPanGestureRecognizer();
+		new PanGestureRecognizer(widget, uiView, uiView, callback).addUIPanGestureRecognizer();
+	}
+	
+	public static void addPanListener(IWidget widget, Object uiView, Object uiLocationView, PanCallBack callback) {
+		new PanGestureRecognizer(widget, uiView, uiLocationView, callback).addUIPanGestureRecognizer();
 	}
 	
 	static class PanGestureRecognizer {
 		@com.google.j2objc.annotations.Weak private IWidget widget; 
 		private Object uiView;
+		private Object uiLocationView;
 		private PanCallBack callback;
-		public PanGestureRecognizer(IWidget widget, Object uiView, PanCallBack callback) {
+		public PanGestureRecognizer(IWidget widget, Object uiView, Object uiLocationView, PanCallBack callback) {
 			widget.getFragment().addListener(widget, this);
 			this.widget = widget;
 			this.uiView = uiView;
+			this.uiLocationView = uiLocationView;
 			this.callback = callback;
 		}
 		private native void addUIPanGestureRecognizer()/*-[
@@ -6111,8 +6129,8 @@ public void setOutsideTouchable(boolean value) {
 		
 		/*-[
 			-(void)move:(UIPanGestureRecognizer*)tapRecognizer {
-				int x = [tapRecognizer locationInView:self->uiView_].x;
-				int y = [tapRecognizer locationInView:self->uiView_].y;
+				int x = [tapRecognizer locationInView:self->uiLocationView_].x;
+				int y = [tapRecognizer locationInView:self->uiLocationView_].y;
 				if (tapRecognizer.state == UIGestureRecognizerStateBegan) {
 		  			[self->callback_ handlePanStartWithASIWidget:self->widget_ withId: self->uiView_ withInt: x withInt: y];
 				} else if (tapRecognizer.state == UIGestureRecognizerStateEnded || tapRecognizer.state == UIGestureRecognizerStateCancelled) {

@@ -157,6 +157,7 @@
 
     <framework src="converter/android/converter.gradle" custom="true" type="gradleReference" />
     <!-- start src -->
+     <source-file src="converter/android/src/com/ashera/converter/AndroidIdConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/ColorConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/ColorImageConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/ColorStateConverter.java" target-dir="src/com/ashera/converter"/>
@@ -605,12 +606,18 @@
      <!-- start AndroidCore -->
      <header-file src="core/ios/library/AndroidCore/src/AbsListView.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/AbsListView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/AccelerateDecelerateInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/AccelerateDecelerateInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/AccelerateInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/AccelerateInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/AccessibilityEvent.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/AccessibilityEvent.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/AccessibilityManager.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/AccessibilityManager.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Activity.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Activity.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/ActivityInfo.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/ActivityInfo.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ActivityManager.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ActivityManager.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ActivityNotFoundException.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -621,6 +628,10 @@
      <source-file src="core/ios/library/AndroidCore/src/AdapterView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/AlertDialog.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/AlertDialog.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/AnimationUtils.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/AnimationUtils.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/AnticipateInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/AnticipateInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ApplicationInfo.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ApplicationInfo.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ArrayMap.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -643,6 +654,8 @@
      <source-file src="core/ios/library/AndroidCore/src/Base64.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/BaseAdapter.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/BaseAdapter.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/BaseInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/BaseInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/BaseMeasurableImageView.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/BaseMeasurableImageView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/BaseMeasurableView.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -653,6 +666,8 @@
      <source-file src="core/ios/library/AndroidCore/src/Bitmap.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/BitmapFactory.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/BitmapFactory.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/BounceInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/BounceInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/BroadcastReceiver.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/BroadcastReceiver.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Build.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -701,6 +716,8 @@
      <source-file src="core/ios/library/AndroidCore/src/DateUtils.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Debug.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Debug.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/DecelerateInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/DecelerateInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/DialogInterface.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/DialogInterface.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/DisplayMetrics.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -757,6 +774,8 @@
      <source-file src="core/ios/library/AndroidCore/src/Intent.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/IntentFilter.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/IntentFilter.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/Interpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/Interpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/JavascriptInterface.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/JavascriptInterface.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/JsPromptResult.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -771,6 +790,8 @@
      <source-file src="core/ios/library/AndroidCore/src/LayoutDirection.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/LayoutInflater.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/LayoutInflater.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/LinearInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/LinearInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/LinearLayout.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/LinearLayout.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Linkify.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -807,6 +828,8 @@
      <source-file src="core/ios/library/AndroidCore/src/Messenger.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/MimeTypeMap.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/MimeTypeMap.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/MotionEvent.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/MotionEvent.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/NoCopySpan.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/NoCopySpan.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/NonNull.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -817,6 +840,8 @@
      <source-file src="core/ios/library/AndroidCore/src/Objects.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Observable.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Observable.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/OvershootInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/OvershootInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/PackageManager.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/PackageManager.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Pair.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -911,6 +936,8 @@
      <source-file src="core/ios/library/AndroidCore/src/TextView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/TextWatcher.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/TextWatcher.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/TimeInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/TimeInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ToggleButton.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ToggleButton.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Trace.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -964,6 +991,8 @@
      <source-file src="core/ios/library/AndroidXCore/src/MainThread.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/MarginLayoutParamsCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/MarginLayoutParamsCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/NestedScrollView.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/NestedScrollView.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/RestrictTo.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/RestrictTo.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/SimpleArrayMap.h" target-dir="CorePlugin/AndroidXCore/src"/>

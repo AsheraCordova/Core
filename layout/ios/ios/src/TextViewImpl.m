@@ -32,7 +32,6 @@
 #include "IOSPrimitiveArray.h"
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
-#include "IdGenerator.h"
 #include "J2ObjC_source.h"
 #include "Layout.h"
 #include "LayoutNativeVars.h"
@@ -1932,7 +1931,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setIdWithNSString:(NSString *)id_ {
   if (id_ != nil && ![id_ isEqual:@""]) {
     [super setIdWithNSString:id_];
-    [((ADTextView *) nil_chk(measurableView_)) setIdWithInt:ASIdGenerator_getIdWithNSString_(id_)];
+    [((ADTextView *) nil_chk(measurableView_)) setIdWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([self quickConvertWithId:id_ withNSString:@"id"], [JavaLangInteger class]))) intValue]];
   }
 }
 
@@ -4458,6 +4457,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_DrawableTintMode)
   return (NSString *) cast_chk(ASTextViewImpl_getMyText(this$0_), [NSString class]);
 }
 
+- (void)state0 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 0);
+}
+
+- (void)state1 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 1);
+}
+
+- (void)state2 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 2);
+}
+
+- (void)state3 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 3);
+}
+
+- (void)state4 {
+  ASViewImpl_stateWithASIWidget_withInt_(this$0_, 4);
+}
+
+- (void)stateYes {
+  ASViewImpl_stateYesWithASIWidget_(this$0_);
+}
+
+- (void)stateNo {
+  ASViewImpl_stateNoWithASIWidget_(this$0_);
+}
+
 - (void)__javaClone:(ASTextViewImpl_TextViewExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -4494,6 +4521,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_DrawableTintMode)
     { NULL, "I", 0x1, 30, 31, -1, -1, -1, -1 },
     { NULL, "I", 0x1, 32, 33, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -4527,6 +4561,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_DrawableTintMode)
   methods[26].selector = @selector(nativeMeasureHeightWithId:withInt:);
   methods[27].selector = @selector(computeSizeWithFloat:);
   methods[28].selector = @selector(getText);
+  methods[29].selector = @selector(state0);
+  methods[30].selector = @selector(state1);
+  methods[31].selector = @selector(state2);
+  methods[32].selector = @selector(state3);
+  methods[33].selector = @selector(state4);
+  methods[34].selector = @selector(stateYes);
+  methods[35].selector = @selector(stateNo);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASTextViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -4535,7 +4576,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTextViewImpl_DrawableTintMode)
     { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 34, -1 },
   };
   static const void *ptrTable[] = { "LASTextViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "onRtlPropertiesChanged", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "computeSize", "F", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASTextViewImpl_TextViewExt = { "TextViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 29, 4, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASTextViewImpl_TextViewExt = { "TextViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 36, 4, 0, -1, -1, -1, -1 };
   return &_ASTextViewImpl_TextViewExt;
 }
 

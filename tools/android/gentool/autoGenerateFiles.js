@@ -80,10 +80,11 @@ function syncIosRes() {
 	let iosPath = "../../../../../ios/";
 
 	if (fs.existsSync(iosPath)) {
-		// res - layout,font
+		// res - layout,font, xml
 		cpx.copySync("../res/layout/*.xml", iosPath + "/www/layout");
 		cpx.copySync("../res/font/*.*", iosPath + "/font");
 		cpx.copySync("../resources/font/*.*", iosPath + "/font");
+		cpx.copySync("../res/xml/*.*", iosPath + "/res_xml");
 
 		// css and language.properties and index.js
 		cpx.copySync("../assets/www/css/*.*", iosPath + "/www/css");
