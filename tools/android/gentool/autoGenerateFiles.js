@@ -45,7 +45,7 @@ watch('../res', { recursive: true }, function (evt, name) {
 
 function syncPlatformRes() {
 	// android file
-	cpx.copy("../res/layout/*.xml", "../assets/www/layout");
+	cpx.copySync("../res/layout/*.xml", "../assets/www/layout");
 
 	syncSwtRes();
 	updateDrawableSize();	
@@ -62,6 +62,12 @@ function syncSwtRes() {
 		console.log("swt sync");
 		syncRes(swtResPath, swtAssetPath);
 		cpx.copySync(swtAssetPath + "../../../../../res/xml/config.xml", swtResPath + "/res/xml/");
+  		
+  		fs.readdirSync("../res/xml").forEach(file => {
+			if (file != "config.xml") {
+				cpx.copySync("../res/xml/" + file, swtResPath + "/res/xml");
+			}
+  		});
 	}
 }
 
@@ -84,7 +90,12 @@ function syncIosRes() {
 		cpx.copySync("../res/layout/*.xml", iosPath + "/www/layout");
 		cpx.copySync("../res/font/*.*", iosPath + "/font");
 		cpx.copySync("../resources/font/*.*", iosPath + "/font");
-		cpx.copySync("../res/xml/*.*", iosPath + "/res_xml");
+		
+		fs.readdirSync("../res/xml").forEach(file => {
+			if (file != "config.xml") {
+				cpx.copySync("../res/xml/" + file, iosPath + "/res_xml");
+			}
+  		});
 
 		// css and language.properties and index.js
 		cpx.copySync("../assets/www/css/*.*", iosPath + "/www/css");
@@ -125,6 +136,12 @@ function syncWebRes() {
 		syncRes(webPath, webAssetPath);	
 		cpx.copySync(webAssetPath + "../../../../../config.xml", webAssetPath + "/www/");
 		cpx.copySync(webAssetPath + "../../../../../config.xml", webPath + "/res/xml/");
+		
+		fs.readdirSync("../res/xml").forEach(file => {
+			if (file != "config.xml") {
+				cpx.copySync("../res/xml/" + file, webPath + "/res/xml");
+			}
+  		});
 	}
 }
 
@@ -132,19 +149,19 @@ function syncBundleJs() {
 	let swtPath = "../../../../../swt/app/src/main/assets";
 	if (fs.existsSync(swtPath)) {
 		console.log("bundle swt sync");
-		cpx.copy("../assets/www/js/index.js", swtPath + "/www/js");
+		cpx.copySync("../assets/www/js/index.js", swtPath + "/www/js");
 	}
 	
 	let webPath = "../../../../../browser/app/src/main/assets";
 	if (fs.existsSync(webPath)) {
 		console.log("bundle web sync");
-		cpx.copy("../assets/www/js/index.js", webPath + "/www/js");
+		cpx.copySync("../assets/www/js/index.js", webPath + "/www/js");
 	}
 	
 	let iosPath = "../../../../../ios/app/src/main/assets";
 	if (fs.existsSync(iosPath)) {
 		console.log("bundle ios sync");
-		cpx.copy("../assets/www/js/index.js", iosPath + "/www/js");
+		cpx.copySync("../assets/www/js/index.js", iosPath + "/www/js");
 	}
 	
 	let projectBasePath = "../../../../../../";
@@ -250,7 +267,7 @@ function generateFile(name) {
 
 	if (name.startsWith(respath + 'layout')) {
 		console.log("copy triggered" + name);
-		cpx.copy("../res/layout/*.xml", "../assets/www/layout");
+		cpx.copySync("../res/layout/*.xml", "../assets/www/layout");
 
 		let outFileName = fileName.replace('.xml', ".ts");
 		let finalOutputFile = getCamelCaseFileName(outFileName);
