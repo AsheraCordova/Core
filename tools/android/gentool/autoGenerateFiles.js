@@ -121,10 +121,12 @@ function syncRes(baseResPath, baseAssetPath) {
 
 	// drawable
 	cpx.copySync("../res-swt/drawable/*.png", baseAssetPath + "/www/res-swt/drawable");
+	cpx.copySync("../res-swt/drawable/*.jpg", baseAssetPath + "/www/res-swt/drawable");
 
 	//splash screen assets
 	if (fs.existsSync("../res/drawable-port-hdpi")) {
 		cpx.copySync("../res/drawable-port-hdpi/*.png", baseAssetPath + "/www/res-swt/drawable");
+		cpx.copySync("../res/drawable-port-hdpi/*.jpg", baseAssetPath + "/www/res-swt/drawable");
 	}
 }
 
