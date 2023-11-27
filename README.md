@@ -173,6 +173,10 @@ Scope where an object is stored can be one of the following:
 * view - It is stored on the fragment which is the root for all views. When a fragment is destroyed, the object is also removed along with the fragment.
 * session - It is stored on the application object. As long as the application is alive, the object is available.
 * loopvar - Whenever we loop on object, a loopvar is created and stored on the widget on which we are looping.
+* local - It is stored on the widget on which the modelParam is declared.
+* component - It is stored at the component level. The include tag serves as component in Ashera.
+* strings - Readonly scope to retrieve data from strings.xml.
+* constants - Readonly scope to retrieve data directly from the constant used in the expression.
 
 ### Type
 Objects can be stored in scope as:
