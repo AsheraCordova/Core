@@ -163,6 +163,9 @@ public class ImageButtonImpl extends BaseWidget implements com.ashera.image.ITar
 	public class ImageButtonExt extends android.widget.ImageButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ImageButtonImpl.this;
+		}
 
 		public ImageButtonExt(Context context, android.util.AttributeSet attrs, int defStyleAttr) {
 	        super(context, attrs, defStyleAttr);

@@ -391,6 +391,9 @@ public class RadioButtonImpl extends BaseWidget implements com.ashera.validation
 	public class RadioButtonExt extends androidx.appcompat.widget.AppCompatRadioButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return RadioButtonImpl.this;
+		}
 
 		public RadioButtonExt(Context context, android.util.AttributeSet attrs, int defStyleAttr) {
 	        super(context, attrs, defStyleAttr);

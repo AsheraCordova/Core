@@ -224,6 +224,9 @@ public class SwitchStyledLabelImpl extends BaseWidget implements IDrawable, IHas
 	public class SwitchStyledLabelExt extends r.android.widget.Switch implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return SwitchStyledLabelImpl.this;
+		}
 
 		public SwitchStyledLabelExt() {
 			super(SwitchStyledLabelImpl.this);

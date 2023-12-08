@@ -272,6 +272,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_Divider)
 
 - (id<JavaUtilList>)getMethods;
 
+- (id<ASIWidget>)getWidget;
+
 - (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout;

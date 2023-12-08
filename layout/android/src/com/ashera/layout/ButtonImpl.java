@@ -276,6 +276,9 @@ public class ButtonImpl extends BaseWidget {
 	public class ButtonExt extends androidx.appcompat.widget.AppCompatButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ButtonImpl.this;
+		}
 
 		public ButtonExt(Context context, android.util.AttributeSet attrs, int defStyleAttr) {
 	        super(context, attrs, defStyleAttr);

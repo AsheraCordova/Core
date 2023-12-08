@@ -22,6 +22,7 @@
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x401, 7, 8, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x401, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -33,9 +34,10 @@
   methods[4].selector = @selector(initialized);
   methods[5].selector = @selector(getAttributeWithASWidgetAttribute:);
   methods[6].selector = @selector(drawableStateChanged);
+  methods[7].selector = @selector(getWidget);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "execute", "LNSString;[LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "getAttribute", "LASWidgetAttribute;" };
-  static const J2ObjcClassInfo _ASILifeCycleDecorator = { "ILifeCycleDecorator", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x609, 7, 0, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASILifeCycleDecorator = { "ILifeCycleDecorator", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x609, 8, 0, -1, -1, -1, -1, -1 };
   return &_ASILifeCycleDecorator;
 }
 

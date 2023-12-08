@@ -155,6 +155,9 @@ public class ChronometerImpl extends BaseWidget implements IDrawable, IHasMultiN
 	public class ChronometerExt extends r.android.widget.Chronometer implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ChronometerImpl.this;
+		}
 
 		public ChronometerExt() {
 			super(ChronometerImpl.this);

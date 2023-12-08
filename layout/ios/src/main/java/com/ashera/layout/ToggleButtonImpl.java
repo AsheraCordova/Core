@@ -251,6 +251,9 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 	public class ToggleButtonExt extends r.android.widget.ToggleButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ToggleButtonImpl.this;
+		}
 
 		public ToggleButtonExt() {
 			super(ToggleButtonImpl.this);

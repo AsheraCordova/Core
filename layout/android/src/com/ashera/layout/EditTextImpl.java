@@ -347,6 +347,9 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
 	public class EditTextExt extends androidx.appcompat.widget.AppCompatEditText implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return EditTextImpl.this;
+		}
 
 		public EditTextExt(Context context, android.util.AttributeSet attrs, int defStyleAttr) {
 	        super(context, attrs, defStyleAttr);

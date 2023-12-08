@@ -204,6 +204,9 @@ public class CheckBoxStyledLabelImpl extends BaseWidget implements IDrawable, IC
 	public class CheckBoxStyledLabelExt extends r.android.widget.CheckBox implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return CheckBoxStyledLabelImpl.this;
+		}
 
 		public CheckBoxStyledLabelExt() {
 			super(CheckBoxStyledLabelImpl.this);

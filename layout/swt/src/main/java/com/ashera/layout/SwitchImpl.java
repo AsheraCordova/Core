@@ -223,6 +223,9 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
 	public class SwitchExt extends r.android.widget.Switch implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return SwitchImpl.this;
+		}
 
 		public SwitchExt() {
 			super(SwitchImpl.this);

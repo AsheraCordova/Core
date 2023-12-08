@@ -631,6 +631,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputView)
 
 - (NSString *)getText;
 
+- (id<ASIWidget>)getWidget;
+
 - (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout;

@@ -201,6 +201,9 @@ public class CheckBoxImpl extends BaseWidget implements IDrawable, ICustomMeasur
 	public class CheckBoxExt extends r.android.widget.CheckBox implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return CheckBoxImpl.this;
+		}
 
 		public CheckBoxExt() {
 			super(CheckBoxImpl.this);

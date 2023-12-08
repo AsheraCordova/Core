@@ -221,6 +221,9 @@ public class LinkImpl extends BaseWidget implements IDrawable, IHasMultiNativeWi
 	public class LinkExt extends r.android.widget.TextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return LinkImpl.this;
+		}
 
 		public LinkExt() {
 			super(LinkImpl.this);

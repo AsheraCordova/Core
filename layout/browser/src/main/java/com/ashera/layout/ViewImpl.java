@@ -238,6 +238,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleX").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("scaleY").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("outsideTouchable").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("elevation").withType("dimensionfloat"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onSwiped").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("enableFeatures").withType("string"));
@@ -883,6 +884,15 @@ if (objValue instanceof java.util.List) {
 
 			}
 			break;
+		case "elevation": {
+
+
+		 setElevation(w, objValue);
+
+
+
+			}
+			break;
 		case "onSwiped": {
 
 
@@ -1196,6 +1206,11 @@ return getScaleY(w, nativeWidget);			}
 
 	public static interface AnimationCallBack {
 		public void animating(int x, int y);
+	}
+	
+	private static void setElevation(IWidget w, Object objValue) {
+		setZIndex(w, ((Float) objValue).intValue());
+		
 	}
 
 	
@@ -3124,6 +3139,14 @@ public T setOutsideTouchable(boolean value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T setElevation(String value) {
+	Map<String, Object> attrs = initCommand("elevation");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 public T setOnSwiped(String value) {
 	Map<String, Object> attrs = initCommand("onSwiped");
 	attrs.put("type", "attribute");
@@ -3497,6 +3520,10 @@ public void setScaleY(float value) {
 
 public void setOutsideTouchable(boolean value) {
 	getBuilder().reset().setOutsideTouchable(value).execute(true);
+}
+
+public void setElevation(String value) {
+	getBuilder().reset().setElevation(value).execute(true);
 }
 
 public void setOnSwiped(String value) {

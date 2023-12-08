@@ -105,6 +105,9 @@ public class ImageButtonImpl extends BaseWidget implements IsImage{
 	public class ImageButtonExt extends r.android.widget.ImageView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ImageButtonImpl.this;
+		}
 
 		public ImageButtonExt() {
 			super(ImageButtonImpl.this);

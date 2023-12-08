@@ -215,6 +215,9 @@ public class StyledTextImpl extends BaseWidget implements IDrawable, IHasMultiNa
 	public class StyledTextExt extends r.android.widget.EditText implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return StyledTextImpl.this;
+		}
 
 		public StyledTextExt() {
 			super(StyledTextImpl.this);

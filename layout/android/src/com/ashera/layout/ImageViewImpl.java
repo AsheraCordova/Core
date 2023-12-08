@@ -163,6 +163,9 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
 	public class ImageViewExt extends android.widget.ImageView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ImageViewImpl.this;
+		}
 
 		public ImageViewExt(Context context, android.util.AttributeSet attrs, int defStyleAttr) {
 	        super(context, attrs, defStyleAttr);

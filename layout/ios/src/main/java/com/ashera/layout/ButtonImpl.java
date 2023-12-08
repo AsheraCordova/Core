@@ -246,6 +246,9 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 	public class ButtonExt extends r.android.widget.Button implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ButtonImpl.this;
+		}
 
 		public ButtonExt() {
 			super(ButtonImpl.this);

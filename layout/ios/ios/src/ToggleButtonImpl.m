@@ -4012,6 +4012,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
 
 @implementation ASToggleButtonImpl_ToggleButtonExt
 
+- (id<ASIWidget>)getWidget {
+  return this$0_;
+}
+
 - (instancetype)initWithASToggleButtonImpl:(ASToggleButtonImpl *)outer$ {
   ASToggleButtonImpl_ToggleButtonExt_initWithASToggleButtonImpl_(self, outer$);
   return self;
@@ -4209,6 +4213,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
+    { NULL, "LASIWidget;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x4, 3, 4, -1, -1, -1, -1 },
@@ -4248,41 +4253,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASToggleButtonImpl:);
-  methods[1].selector = @selector(onMeasureWithInt:withInt:);
-  methods[2].selector = @selector(onLayoutWithBoolean:withInt:withInt:withInt:withInt:);
-  methods[3].selector = @selector(executeWithNSString:withNSObjectArray:);
-  methods[4].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
-  methods[5].selector = @selector(newInstanceWithASIWidget:);
-  methods[6].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:);
-  methods[7].selector = @selector(getMethods);
-  methods[8].selector = @selector(initialized);
-  methods[9].selector = @selector(getAttributeWithASWidgetAttribute:);
-  methods[10].selector = @selector(drawableStateChanged);
-  methods[11].selector = @selector(inflateViewWithNSString:);
-  methods[12].selector = @selector(remeasure);
-  methods[13].selector = @selector(removeFromParent);
-  methods[14].selector = @selector(getLocationOnScreenWithIntArray:);
-  methods[15].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
-  methods[16].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[17].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[18].selector = @selector(setMyAttributeWithNSString:withId:);
-  methods[19].selector = @selector(setVisibilityWithInt:);
-  methods[20].selector = @selector(getBorderPadding);
-  methods[21].selector = @selector(getLineHeight);
-  methods[22].selector = @selector(getBorderWidth);
-  methods[23].selector = @selector(getLineHeightPadding);
-  methods[24].selector = @selector(nativeMeasureWidthWithId:);
-  methods[25].selector = @selector(nativeMeasureHeightWithId:withInt:);
-  methods[26].selector = @selector(computeSizeWithFloat:);
-  methods[27].selector = @selector(getText);
-  methods[28].selector = @selector(state0);
-  methods[29].selector = @selector(state1);
-  methods[30].selector = @selector(state2);
-  methods[31].selector = @selector(state3);
-  methods[32].selector = @selector(state4);
-  methods[33].selector = @selector(stateYes);
-  methods[34].selector = @selector(stateNo);
+  methods[0].selector = @selector(getWidget);
+  methods[1].selector = @selector(initWithASToggleButtonImpl:);
+  methods[2].selector = @selector(onMeasureWithInt:withInt:);
+  methods[3].selector = @selector(onLayoutWithBoolean:withInt:withInt:withInt:withInt:);
+  methods[4].selector = @selector(executeWithNSString:withNSObjectArray:);
+  methods[5].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
+  methods[6].selector = @selector(newInstanceWithASIWidget:);
+  methods[7].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:);
+  methods[8].selector = @selector(getMethods);
+  methods[9].selector = @selector(initialized);
+  methods[10].selector = @selector(getAttributeWithASWidgetAttribute:);
+  methods[11].selector = @selector(drawableStateChanged);
+  methods[12].selector = @selector(inflateViewWithNSString:);
+  methods[13].selector = @selector(remeasure);
+  methods[14].selector = @selector(removeFromParent);
+  methods[15].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[16].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[17].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[18].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[19].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[20].selector = @selector(setVisibilityWithInt:);
+  methods[21].selector = @selector(getBorderPadding);
+  methods[22].selector = @selector(getLineHeight);
+  methods[23].selector = @selector(getBorderWidth);
+  methods[24].selector = @selector(getLineHeightPadding);
+  methods[25].selector = @selector(nativeMeasureWidthWithId:);
+  methods[26].selector = @selector(nativeMeasureHeightWithId:withInt:);
+  methods[27].selector = @selector(computeSizeWithFloat:);
+  methods[28].selector = @selector(getText);
+  methods[29].selector = @selector(state0);
+  methods[30].selector = @selector(state1);
+  methods[31].selector = @selector(state2);
+  methods[32].selector = @selector(state3);
+  methods[33].selector = @selector(state4);
+  methods[34].selector = @selector(stateYes);
+  methods[35].selector = @selector(stateNo);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASToggleButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -4291,7 +4297,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
     { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
   };
   static const void *ptrTable[] = { "LASToggleButtonImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "computeSize", "F", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASToggleButtonImpl_ToggleButtonExt = { "ToggleButtonExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 35, 4, 0, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASToggleButtonImpl_ToggleButtonExt = { "ToggleButtonExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 36, 4, 0, -1, -1, -1, -1 };
   return &_ASToggleButtonImpl_ToggleButtonExt;
 }
 

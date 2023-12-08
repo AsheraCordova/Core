@@ -363,6 +363,9 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements com.ashe
 	public class AutoCompleteTextViewExt extends androidx.appcompat.widget.AppCompatAutoCompleteTextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return AutoCompleteTextViewImpl.this;
+		}
 
 		public AutoCompleteTextViewExt(Context context, android.util.AttributeSet attrs, int defStyleAttr) {
 	        super(context, attrs, defStyleAttr);

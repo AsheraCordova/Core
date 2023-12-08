@@ -386,6 +386,9 @@ public class CheckBoxImpl extends BaseWidget implements com.ashera.validations.F
 	public class CheckBoxExt extends androidx.appcompat.widget.AppCompatCheckBox implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return CheckBoxImpl.this;
+		}
 
 		public CheckBoxExt(Context context, android.util.AttributeSet attrs, int defStyleAttr) {
 	        super(context, attrs, defStyleAttr);

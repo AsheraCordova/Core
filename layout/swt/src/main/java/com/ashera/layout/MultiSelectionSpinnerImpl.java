@@ -136,6 +136,9 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements IDrawab
 	public class MultiSelectionSpinnerExt extends r.android.widget.Spinner implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return MultiSelectionSpinnerImpl.this;
+		}
 		private int mMaxWidth = -1;
 		private int mMaxHeight = -1;
 		@Override

@@ -202,6 +202,9 @@ public class RadioButtonImpl extends BaseWidget implements IDrawable, ICustomMea
 	public class RadioButtonExt extends r.android.widget.RadioButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return RadioButtonImpl.this;
+		}
 
 		public RadioButtonExt() {
 			super(RadioButtonImpl.this);

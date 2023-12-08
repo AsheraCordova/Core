@@ -347,6 +347,9 @@ public class LinkImpl extends BaseWidget {
 	public class LinkExt extends androidx.appcompat.widget.AppCompatTextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return LinkImpl.this;
+		}
 
 		public LinkExt(Context context, android.util.AttributeSet attrs, int defStyleAttr) {
 	        super(context, attrs, defStyleAttr);

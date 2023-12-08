@@ -380,6 +380,9 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
 	public class EditTextExt extends r.android.widget.EditText implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return EditTextImpl.this;
+		}
 
 		public EditTextExt() {
 			super(EditTextImpl.this);

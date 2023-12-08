@@ -107,6 +107,9 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 	public class ImageViewExt extends r.android.widget.ImageView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ImageViewImpl.this;
+		}
 
 		public ImageViewExt() {
 			super(ImageViewImpl.this);

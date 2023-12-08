@@ -110,6 +110,9 @@ public class ImageViewImpl extends BaseWidget implements IsImage, IHasMultiNativ
 	public class ImageViewExt extends r.android.widget.ImageView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ImageViewImpl.this;
+		}
 
 		public ImageViewExt() {
 			super(ImageViewImpl.this);
@@ -1351,10 +1354,14 @@ public void setCropToPadding(boolean value) {
 	}
 	private ImageResizeListener imageResizeListener;
 
-   private void setImage(Object objValue) {
-	   measurableView.setImageDrawable((r.android.graphics.drawable.Drawable) objValue);
-	   setImageNative(((r.android.graphics.drawable.Drawable) objValue).getDrawable());
-       
+   private void setImage(Object objValue) {	  
+	   if ("@null".equals(objValue)) {
+		   measurableView.setImageDrawable(null);
+		   setImageNative(null);
+	   } else {
+		   measurableView.setImageDrawable((r.android.graphics.drawable.Drawable) objValue);
+		   setImageNative(((r.android.graphics.drawable.Drawable) objValue).getDrawable());
+	   }
    }
    
 	private Object getSrc() {

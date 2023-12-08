@@ -532,6 +532,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 
 - (NSString *)getText;
 
+- (id<ASIWidget>)getWidget;
+
 - (void)getWindowVisibleDisplayFrameWithADRect:(ADRect *)displayFrame;
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout;

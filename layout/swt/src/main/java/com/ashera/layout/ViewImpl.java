@@ -210,6 +210,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelPojoToUiParams").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("refreshUiFromModel").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelUiToPojoEventIds").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("elevation").withType("dimensionfloat"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("updateModelData").withType("object"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("notifyDataSetChanged").withType("boolean"));
 		ConverterFactory.register("View.visibility", new Visibility());
@@ -622,6 +623,15 @@ public class ViewImpl {
 
 
 		setModelUiToPojoEventIds(w, objValue);
+
+
+
+			}
+			break;
+		case "elevation": {
+
+
+		 setElevation(w, objValue);
 
 
 
@@ -2784,6 +2794,14 @@ public T setModelUiToPojoEventIds(String value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T setElevation(String value) {
+	Map<String, Object> attrs = initCommand("elevation");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 public T updateModelData(String expression,
 Object payload) {
 	Map<String, Object> attrs = initCommand("updateModelData");
@@ -3427,6 +3445,10 @@ public void setModelUiToPojoEventIds(String value) {
 	getBuilder().reset().setModelUiToPojoEventIds(value).execute(true);
 }
 
+public void setElevation(String value) {
+	getBuilder().reset().setElevation(value).execute(true);
+}
+
 public void updateModelData(String expression,
 Object payload) {
 	getBuilder().reset().updateModelData(expression,
@@ -3921,6 +3943,11 @@ public void setOnSwiped(String value) {
 
 	public static interface AnimationCallBack {
 		public void animating(int x, int y);
+	}
+	
+	private static void setElevation(IWidget w, Object objValue) {
+		setZIndex(w, ((Float) objValue).intValue());
+		
 	}
 
 	//end - viewcode
@@ -4519,7 +4546,9 @@ public void setOnSwiped(String value) {
 	private static void nativeBringToFront(java.util.List<IWidget> widgets) {
 		for (IWidget child : widgets) {
 			Control control = (Control) child.asNativeWidget();
-			control.moveAbove(null);
+			if (control.isVisible()) {
+				control.moveAbove(null);
+			}
 		}
 	}
 

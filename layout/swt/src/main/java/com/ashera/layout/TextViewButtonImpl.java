@@ -197,6 +197,9 @@ public class TextViewButtonImpl extends BaseWidget  implements IDrawable, IHasMu
 	public class TextViewButtonExt extends r.android.widget.TextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return TextViewButtonImpl.this;
+		}
 
 		public TextViewButtonExt() {
 			super(TextViewButtonImpl.this);

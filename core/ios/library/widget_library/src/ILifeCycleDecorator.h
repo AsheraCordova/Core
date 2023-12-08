@@ -40,6 +40,8 @@
 
 - (void)drawableStateChanged;
 
+- (id<ASIWidget>)getWidget;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASILifeCycleDecorator)

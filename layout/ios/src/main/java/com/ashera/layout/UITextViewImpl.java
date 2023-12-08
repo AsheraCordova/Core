@@ -357,6 +357,9 @@ public class UITextViewImpl extends BaseWidget implements ICustomMeasureHeight, 
 	public class UITextViewExt extends r.android.widget.TextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return UITextViewImpl.this;
+		}
 
 		public UITextViewExt() {
 			super(UITextViewImpl.this);

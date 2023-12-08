@@ -395,6 +395,9 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
 	public class AutoCompleteTextViewExt extends r.android.widget.AutoCompleteTextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return AutoCompleteTextViewImpl.this;
+		}
 
 		public AutoCompleteTextViewExt() {
 			super(AutoCompleteTextViewImpl.this);

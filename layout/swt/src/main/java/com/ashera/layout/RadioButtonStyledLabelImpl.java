@@ -203,6 +203,9 @@ public class RadioButtonStyledLabelImpl extends BaseWidget implements IDrawable,
 	public class RadioButtonStyledLabelExt extends r.android.widget.RadioButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return RadioButtonStyledLabelImpl.this;
+		}
 
 		public RadioButtonStyledLabelExt() {
 			super(RadioButtonStyledLabelImpl.this);

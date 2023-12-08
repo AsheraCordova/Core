@@ -160,6 +160,7 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -275,6 +276,9 @@ export abstract class ViewImpl<T> {
 	@Type(() => CommandAttr)
 	@Expose({ name: "modelUiToPojoEventIds" })
 	modelUiToPojoEventIds!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "elevation" })
+	elevation!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "updateModelData" })
 	updateModelData_!:CommandAttr<ScopedObject|ScopedObject[]>| undefined;
@@ -431,6 +435,7 @@ export abstract class ViewImpl<T> {
 		this.modelPojoToUiParams = undefined;
 		this.refreshUiFromModel_ = undefined;
 		this.modelUiToPojoEventIds = undefined;
+		this.elevation = undefined;
 		this.updateModelData_ = undefined;
 		this.notifyDataSetChanged_ = undefined;
 		this.visibility = undefined;
@@ -1313,6 +1318,20 @@ this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		retur
 		this.modelUiToPojoEventIds.setValue(value);
 		this.orderSet++;
 		this.modelUiToPojoEventIds.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setElevation(value : string) : T {
+		this.resetIfRequired();
+		if (this.elevation == null || this.elevation == undefined) {
+			this.elevation = new CommandAttr<string>();
+		}
+		
+		this.elevation.setSetter(true);
+		this.elevation.setValue(value);
+		this.orderSet++;
+		this.elevation.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

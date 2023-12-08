@@ -351,6 +351,9 @@ public class ToggleButtonImpl extends BaseWidget {
 	public class ToggleButtonExt extends android.widget.ToggleButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ToggleButtonImpl.this;
+		}
 
 		public ToggleButtonExt(Context context, android.util.AttributeSet attrs, int defStyleAttr) {
 	        super(context, attrs, defStyleAttr);

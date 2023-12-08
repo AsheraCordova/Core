@@ -211,6 +211,9 @@ public class ChronometerImpl extends BaseWidget {
 	public class ChronometerExt extends android.widget.Chronometer implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return ChronometerImpl.this;
+		}
 
 		public ChronometerExt(Context context, android.util.AttributeSet attrs, int defStyleAttr) {
 	        super(context, attrs, defStyleAttr);

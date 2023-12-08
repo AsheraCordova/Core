@@ -379,6 +379,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosLayerCornerRadius").withType("dimensionfloat").withSimpleWrapableViewStrategy(APPLY_TO_VIEW_HOLDER));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("iosLayerMasksToBounds").withType("boolean").withSimpleWrapableViewStrategy(APPLY_TO_VIEW_HOLDER));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("zIndex").withType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("elevation").withType("dimensionfloat"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxWidth").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onSwiped").withType("string"));
@@ -1321,6 +1322,15 @@ if (objValue instanceof java.util.List) {
 
 
 		 setZIndex(w, objValue);
+
+
+
+			}
+			break;
+		case "elevation": {
+
+
+		 setElevation(w, objValue);
 
 
 
@@ -2291,6 +2301,11 @@ return getMaxHeight(w);			}
 
 	public static interface AnimationCallBack {
 		public void animating(int x, int y);
+	}
+	
+	private static void setElevation(IWidget w, Object objValue) {
+		setZIndex(w, ((Float) objValue).intValue());
+		
 	}
 
 	
@@ -4464,6 +4479,14 @@ public T setZIndex(int value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T setElevation(String value) {
+	Map<String, Object> attrs = initCommand("elevation");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 public T tryGetMaxWidth() {
 	Map<String, Object> attrs = initCommand("maxWidth");
 	attrs.put("type", "attribute");
@@ -5134,6 +5157,10 @@ public void setIosLayerMasksToBounds(boolean value) {
 
 public void setZIndex(int value) {
 	getBuilder().reset().setZIndex(value).execute(true);
+}
+
+public void setElevation(String value) {
+	getBuilder().reset().setElevation(value).execute(true);
 }
 
 public Object getMaxWidth() {

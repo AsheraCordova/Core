@@ -231,6 +231,7 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -533,6 +534,9 @@ export abstract class ViewImpl<T> {
 	@Expose({ name: "zIndex" })
 	zIndex!:CommandAttr<number>| undefined;
 	@Type(() => CommandAttr)
+	@Expose({ name: "elevation" })
+	elevation!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
 	@Expose({ name: "maxWidth" })
 	maxWidth!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
@@ -660,6 +664,7 @@ export abstract class ViewImpl<T> {
 		this.iosLayerCornerRadius = undefined;
 		this.iosLayerMasksToBounds = undefined;
 		this.zIndex = undefined;
+		this.elevation = undefined;
 		this.maxWidth = undefined;
 		this.maxHeight = undefined;
 		this.onSwiped = undefined;
@@ -3263,6 +3268,20 @@ this.foregroundGravity.setTransformer('gravity');		return this.thisPointer;
 		this.zIndex.setValue(value);
 		this.orderSet++;
 		this.zIndex.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setElevation(value : string) : T {
+		this.resetIfRequired();
+		if (this.elevation == null || this.elevation == undefined) {
+			this.elevation = new CommandAttr<string>();
+		}
+		
+		this.elevation.setSetter(true);
+		this.elevation.setValue(value);
+		this.orderSet++;
+		this.elevation.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

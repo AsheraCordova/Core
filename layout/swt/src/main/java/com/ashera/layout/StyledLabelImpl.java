@@ -297,6 +297,9 @@ public class StyledLabelImpl extends BaseWidget implements IDrawable, IHasMultiN
 	public class StyledLabelExt extends r.android.widget.TextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return StyledLabelImpl.this;
+		}
 
 		public StyledLabelExt() {
 			super(StyledLabelImpl.this);

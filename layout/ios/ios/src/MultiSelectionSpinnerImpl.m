@@ -2938,6 +2938,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
 
 @implementation ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt
 
+- (id<ASIWidget>)getWidget {
+  return this$0_;
+}
+
 - (void)setMaxWidthWithInt:(jint)width {
   mMaxWidth_MultiSelectionSpinnerExt_ = width;
 }
@@ -3133,6 +3137,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
+    { NULL, "LASIWidget;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 2, 1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -3170,39 +3175,40 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(setMaxWidthWithInt:);
-  methods[1].selector = @selector(setMaxHeightWithInt:);
-  methods[2].selector = @selector(getMaxWidth);
-  methods[3].selector = @selector(getMaxHeight);
-  methods[4].selector = @selector(initWithASMultiSelectionSpinnerImpl:);
-  methods[5].selector = @selector(onMeasureWithInt:withInt:);
-  methods[6].selector = @selector(onLayoutWithBoolean:withInt:withInt:withInt:withInt:);
-  methods[7].selector = @selector(executeWithNSString:withNSObjectArray:);
-  methods[8].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
-  methods[9].selector = @selector(newInstanceWithASIWidget:);
-  methods[10].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:);
-  methods[11].selector = @selector(getMethods);
-  methods[12].selector = @selector(initialized);
-  methods[13].selector = @selector(getAttributeWithASWidgetAttribute:);
-  methods[14].selector = @selector(drawableStateChanged);
-  methods[15].selector = @selector(inflateViewWithNSString:);
-  methods[16].selector = @selector(remeasure);
-  methods[17].selector = @selector(removeFromParent);
-  methods[18].selector = @selector(getLocationOnScreenWithIntArray:);
-  methods[19].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
-  methods[20].selector = @selector(offsetTopAndBottomWithInt:);
-  methods[21].selector = @selector(offsetLeftAndRightWithInt:);
-  methods[22].selector = @selector(setMyAttributeWithNSString:withId:);
-  methods[23].selector = @selector(setVisibilityWithInt:);
-  methods[24].selector = @selector(nativeMeasureWidthWithId:);
-  methods[25].selector = @selector(nativeMeasureHeightWithId:withInt:);
-  methods[26].selector = @selector(state0);
-  methods[27].selector = @selector(state1);
-  methods[28].selector = @selector(state2);
-  methods[29].selector = @selector(state3);
-  methods[30].selector = @selector(state4);
-  methods[31].selector = @selector(stateYes);
-  methods[32].selector = @selector(stateNo);
+  methods[0].selector = @selector(getWidget);
+  methods[1].selector = @selector(setMaxWidthWithInt:);
+  methods[2].selector = @selector(setMaxHeightWithInt:);
+  methods[3].selector = @selector(getMaxWidth);
+  methods[4].selector = @selector(getMaxHeight);
+  methods[5].selector = @selector(initWithASMultiSelectionSpinnerImpl:);
+  methods[6].selector = @selector(onMeasureWithInt:withInt:);
+  methods[7].selector = @selector(onLayoutWithBoolean:withInt:withInt:withInt:withInt:);
+  methods[8].selector = @selector(executeWithNSString:withNSObjectArray:);
+  methods[9].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
+  methods[10].selector = @selector(newInstanceWithASIWidget:);
+  methods[11].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:);
+  methods[12].selector = @selector(getMethods);
+  methods[13].selector = @selector(initialized);
+  methods[14].selector = @selector(getAttributeWithASWidgetAttribute:);
+  methods[15].selector = @selector(drawableStateChanged);
+  methods[16].selector = @selector(inflateViewWithNSString:);
+  methods[17].selector = @selector(remeasure);
+  methods[18].selector = @selector(removeFromParent);
+  methods[19].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[20].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[21].selector = @selector(offsetTopAndBottomWithInt:);
+  methods[22].selector = @selector(offsetLeftAndRightWithInt:);
+  methods[23].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[24].selector = @selector(setVisibilityWithInt:);
+  methods[25].selector = @selector(nativeMeasureWidthWithId:);
+  methods[26].selector = @selector(nativeMeasureHeightWithId:withInt:);
+  methods[27].selector = @selector(state0);
+  methods[28].selector = @selector(state1);
+  methods[29].selector = @selector(state2);
+  methods[30].selector = @selector(state3);
+  methods[31].selector = @selector(state4);
+  methods[32].selector = @selector(stateYes);
+  methods[33].selector = @selector(stateNo);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASMultiSelectionSpinnerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -3213,7 +3219,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
     { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 34, -1 },
   };
   static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASMultiSelectionSpinnerImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "mMaxWidth", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt = { "MultiSelectionSpinnerExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 33, 6, 3, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt = { "MultiSelectionSpinnerExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 34, 6, 3, -1, -1, -1, -1 };
   return &_ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt;
 }
 

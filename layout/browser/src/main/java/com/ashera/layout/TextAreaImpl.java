@@ -230,6 +230,9 @@ public class TextAreaImpl extends BaseWidget implements com.ashera.validations.F
 	public class TextAreaExt extends r.android.widget.TextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return TextAreaImpl.this;
+		}
 
 		public TextAreaExt() {
 			super(TextAreaImpl.this);

@@ -1366,6 +1366,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (id)setDuplicateParentStateWithBoolean:(jboolean)value;
 
+- (id)setElevationWithNSString:(NSString *)value;
+
 - (id)setEnabledWithBoolean:(jboolean)value;
 
 - (id)setErrorStyleWithNSString:(NSString *)value;
@@ -1739,6 +1741,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 - (ASViewImpl_ViewCommandBuilderInternal *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -2251,6 +2255,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 - (void)setCustomErrorMessageValuesWithNSString:(NSString *)value;
 
 - (void)setDuplicateParentStateWithBoolean:(jboolean)value;
+
+- (void)setElevationWithNSString:(NSString *)value;
 
 - (void)setEnabledWithBoolean:(jboolean)value;
 

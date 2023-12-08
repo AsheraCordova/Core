@@ -222,6 +222,9 @@ public class CLabelImpl extends BaseWidget implements IDrawable, IHasMultiNative
 	public class CLabelExt extends r.android.widget.TextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		public IWidget getWidget() {
+			return CLabelImpl.this;
+		}
 
 		public CLabelExt() {
 			super(CLabelImpl.this);

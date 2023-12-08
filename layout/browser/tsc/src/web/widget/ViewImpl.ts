@@ -154,6 +154,7 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -354,6 +355,9 @@ export abstract class ViewImpl<T> {
 	@Expose({ name: "outsideTouchable" })
 	outsideTouchable!:CommandAttr<boolean>| undefined;
 	@Type(() => CommandAttr)
+	@Expose({ name: "elevation" })
+	elevation!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
 	@Expose({ name: "onSwiped" })
 	onSwiped!:CommandAttr<string>| undefined;
 
@@ -438,6 +442,7 @@ export abstract class ViewImpl<T> {
 		this.scaleX = undefined;
 		this.scaleY = undefined;
 		this.outsideTouchable = undefined;
+		this.elevation = undefined;
 		this.onSwiped = undefined;
 		this.orderGet = 0;
 		this.orderSet = 0;
@@ -1879,6 +1884,20 @@ payload : any) : T {
 		this.outsideTouchable.setValue(value);
 		this.orderSet++;
 		this.outsideTouchable.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setElevation(value : string) : T {
+		this.resetIfRequired();
+		if (this.elevation == null || this.elevation == undefined) {
+			this.elevation = new CommandAttr<string>();
+		}
+		
+		this.elevation.setSetter(true);
+		this.elevation.setValue(value);
+		this.orderSet++;
+		this.elevation.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

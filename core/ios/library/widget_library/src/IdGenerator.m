@@ -113,7 +113,7 @@ void ASIdGenerator_setIdWithNSString_withInt_(NSString *name, jint id_) {
 
 jint ASIdGenerator_getIdWithNSString_(NSString *id_) {
   ASIdGenerator_initialize();
-  if ([((NSString *) nil_chk(id_)) java_hasPrefix:@"@id/"]) {
+  if (id_ != nil && [id_ java_hasPrefix:@"@id/"]) {
     id_ = JreStrcat("$$", @"@+id/", [id_ java_substring:4]);
   }
   if ([((id<JavaUtilMap>) nil_chk(ASIdGenerator_idMap)) containsKeyWithId:id_]) {
