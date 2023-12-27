@@ -565,6 +565,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_DrawableTintMode)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -662,6 +672,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 #pragma mark Public
 
 - (instancetype)initWithASSwitchImpl:(ASSwitchImpl *)outer$;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)endAnimator;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -826,6 +840,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 - (ASSwitchImpl_SwitchCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setEllipsizeWithNSString:(NSString *)value;
 
@@ -997,6 +1013,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASSwitchImpl_SwitchCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASSwitchImpl_SwitchCommandBuilder *)setOnCheckedChangeWithNSString:(NSString *)value;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
@@ -1120,6 +1144,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 - (ASSwitchImpl_SwitchCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)startAnimator;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetAlpha;
 

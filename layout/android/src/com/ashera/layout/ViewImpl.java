@@ -18,6 +18,7 @@ import android.content.res.*;
 
 import static com.ashera.widget.IWidget.*;
 //end - imports
+import android.animation.Animator;
 public class ViewImpl {
 	// start - body
 	private ViewImpl() {
@@ -577,6 +578,13 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageKeys").withType("array").withArrayType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("invalidateOnFrameChange").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onSwiped").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("animatorXml").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("startAnimator").withType("nil"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("endAnimator").withType("nil"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationStart").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationEnd").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationCancel").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationRepeat").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("systemStyle").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("systemAndroidAttrStyle").withType("string"));
@@ -1864,6 +1872,69 @@ if (objValue instanceof java.util.List) {
 
 
 		if (objValue instanceof String) {setOnSwipeListener(w, new SwipeListener(w, strValue, "onSwiped"));} else {setOnSwipeListener(w, (SwipeHelper.SwipeListener) objValue);}
+
+
+
+			}
+			break;
+		case "animatorXml": {
+
+
+		setAnimatorXml(w, objValue);
+
+
+
+			}
+			break;
+		case "startAnimator": {
+
+
+		startAnimator(w, objValue);
+
+
+
+			}
+			break;
+		case "endAnimator": {
+
+
+		endAnimator(w, objValue);
+
+
+
+			}
+			break;
+		case "onAnimationStart": {
+
+
+		if (objValue instanceof String) {setAnimatorListener(w, new AnimatorListener(w, strValue, "onAnimationStart"));} else {setAnimatorListener(w, (Animator.AnimatorListener) objValue);}
+
+
+
+			}
+			break;
+		case "onAnimationEnd": {
+
+
+		if (objValue instanceof String) {setAnimatorListener(w, new AnimatorListener(w, strValue, "onAnimationEnd"));} else {setAnimatorListener(w, (Animator.AnimatorListener) objValue);}
+
+
+
+			}
+			break;
+		case "onAnimationCancel": {
+
+
+		if (objValue instanceof String) {setAnimatorListener(w, new AnimatorListener(w, strValue, "onAnimationCancel"));} else {setAnimatorListener(w, (Animator.AnimatorListener) objValue);}
+
+
+
+			}
+			break;
+		case "onAnimationRepeat": {
+
+
+		if (objValue instanceof String) {setAnimatorListener(w, new AnimatorListener(w, strValue, "onAnimationRepeat"));} else {setAnimatorListener(w, (Animator.AnimatorListener) objValue);}
 
 
 
@@ -3287,6 +3358,243 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
     
     // update model data into map
     w.updateModelToEventMap(obj, "onSwiped", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}
+}
+
+	@SuppressLint("NewApi")
+private static class AnimatorListener implements Animator.AnimatorListener, com.ashera.widget.IListener{
+private IWidget w; private View view; private String strValue; private String action;
+public String getAction() {return action;}
+public AnimatorListener(IWidget w, String strValue)  {
+this.w = w; this.strValue = strValue;
+}
+public AnimatorListener(IWidget w, String strValue, String action)  {
+this.w = w; this.strValue = strValue;this.action=action;
+}
+public void onAnimationStart(android.animation.Animator animation){
+    
+	if (action == null || action.equals("onAnimationStart")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onAnimationStart");
+	    java.util.Map<String, Object> obj = getOnAnimationStartEventObj(animation);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, animation);
+		    }
+
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return;
+}//#####
+
+public java.util.Map<String, Object> getOnAnimationStartEventObj(android.animation.Animator animation) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "animationstart");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onAnimationStart", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}public void onAnimationEnd(android.animation.Animator animation){
+    
+	if (action == null || action.equals("onAnimationEnd")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onAnimationEnd");
+	    java.util.Map<String, Object> obj = getOnAnimationEndEventObj(animation);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, animation);
+		    }
+
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return;
+}//#####
+
+public java.util.Map<String, Object> getOnAnimationEndEventObj(android.animation.Animator animation) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "animationend");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onAnimationEnd", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}public void onAnimationCancel(android.animation.Animator animation){
+    
+	if (action == null || action.equals("onAnimationCancel")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onAnimationCancel");
+	    java.util.Map<String, Object> obj = getOnAnimationCancelEventObj(animation);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, animation);
+		    }
+
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return;
+}//#####
+
+public java.util.Map<String, Object> getOnAnimationCancelEventObj(android.animation.Animator animation) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "animationcancel");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onAnimationCancel", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}public void onAnimationRepeat(android.animation.Animator animation){
+    
+	if (action == null || action.equals("onAnimationRepeat")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onAnimationRepeat");
+	    java.util.Map<String, Object> obj = getOnAnimationRepeatEventObj(animation);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, animation);
+		    }
+
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return;
+}//#####
+
+public java.util.Map<String, Object> getOnAnimationRepeatEventObj(android.animation.Animator animation) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "animationrepeat");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onAnimationRepeat", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
     return obj;
 }
 }
@@ -5355,6 +5663,62 @@ public T setOnSwiped(String value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T animatorXml(String value) {
+	Map<String, Object> attrs = initCommand("animatorXml");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T startAnimator() {
+	Map<String, Object> attrs = initCommand("startAnimator");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	
+return (T) this;}
+public T endAnimator() {
+	Map<String, Object> attrs = initCommand("endAnimator");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	
+return (T) this;}
+public T setOnAnimationStart(String value) {
+	Map<String, Object> attrs = initCommand("onAnimationStart");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setOnAnimationEnd(String value) {
+	Map<String, Object> attrs = initCommand("onAnimationEnd");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setOnAnimationCancel(String value) {
+	Map<String, Object> attrs = initCommand("onAnimationCancel");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setOnAnimationRepeat(String value) {
+	Map<String, Object> attrs = initCommand("onAnimationRepeat");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 }
 static class ViewCommandBuilderInternal extends ViewCommandBuilder<ViewCommandBuilderInternal> {
 	private IWidget widget;
@@ -6175,6 +6539,34 @@ public void setOnSwiped(String value) {
 	getBuilder().reset().setOnSwiped(value).execute(true);
 }
 
+public void animatorXml(String value) {
+	getBuilder().reset().animatorXml(value).execute(true);
+}
+
+public void startAnimator() {
+	getBuilder().reset().startAnimator().execute(true);
+}
+
+public void endAnimator() {
+	getBuilder().reset().endAnimator().execute(true);
+}
+
+public void setOnAnimationStart(String value) {
+	getBuilder().reset().setOnAnimationStart(value).execute(true);
+}
+
+public void setOnAnimationEnd(String value) {
+	getBuilder().reset().setOnAnimationEnd(value).execute(true);
+}
+
+public void setOnAnimationCancel(String value) {
+	getBuilder().reset().setOnAnimationCancel(value).execute(true);
+}
+
+public void setOnAnimationRepeat(String value) {
+	getBuilder().reset().setOnAnimationRepeat(value).execute(true);
+}
+
 }
 
 
@@ -6976,6 +7368,20 @@ public void setOnSwiped(String value) {
      	Object val = w.getUserData("val" + i);
      	w.setAttribute(attributeName, val, false);
      }
+	
+
+	public static void setState(IWidget w, int i, Object value) {
+		String attributeName = (String) w.getUserData("state" + i);
+     	String attributeConverter = (String) w.getUserData("stateConverter" + i);
+		String stringFormatter = (String) w.getUserData("stateStringFormat" + i);
+
+     	if (attributeConverter != null && stringFormatter != null) {
+     		value = String.format(stringFormatter, value.toString());
+     		value = w.quickConvert(value, attributeConverter);
+     	}
+
+     	w.setAttribute(attributeName, value, true);
+	}
              
      public static void stateYes(IWidget w) {
      	String attributeName = (String) w.getUserData("stateYes");
@@ -7005,4 +7411,53 @@ public void setOnSwiped(String value) {
 			}
      }
 	//end - state
+     
+    //start - animator
+ 	private static void setAnimatorListener(IWidget w, Animator.AnimatorListener animatorListener) {
+ 		Animator animator = (Animator) w.getAnimator();
+		if (animator != null) {
+			animator.addListener(animatorListener);
+		}
+ 	}
+
+ 	private static void endAnimator(IWidget w, Object objValue) {
+ 		Animator animator = (Animator) w.getAnimator();
+		if (animator != null) {
+			animator.end();
+		}
+ 	
+ 		
+ 	}
+ 	
+ 	private static void startAnimator(IWidget w, Object objValue) {
+ 		Animator animator = (Animator) w.getAnimator();
+		if (animator != null) {
+			if (animator.isRunning()) {
+				endAnimator(w, objValue);
+			}
+			View view = (View) w.asWidget();
+			view.post(() -> animator.start());
+		}
+ 	}
+ 	//end - animator
+
+ 	private static void setAnimatorXml(IWidget w, Object objValue) {
+ 		String value = (String) objValue;
+ 		if (value.startsWith("@animator/")) {
+	 		String key1 = value.replaceFirst("@animator/", "");
+			Context context = (Context) w.getFragment().getRootActivity();
+			int identifier = context.getResources().getIdentifier(key1, "animator", context.getPackageName());
+			android.animation.Animator animator = android.animation.AnimatorInflater.loadAnimator(context, identifier);
+			animator.setTarget((View) w.asWidget());
+			w.setAnimator(animator);
+ 		}
+ 		
+ 		if (value.startsWith("@anim/")) {
+	 		String key1 = value.replaceFirst("@anim/", "");
+			Context context = (Context) w.getFragment().getRootActivity();
+			int identifier = context.getResources().getIdentifier(key1, "anim", context.getPackageName());
+			android.view.animation.Animation animation = android.view.animation.AnimationUtils.loadAnimation(context, identifier);
+			((View) w.asWidget()).startAnimation(animation);
+ 		}
+ 	}
 }

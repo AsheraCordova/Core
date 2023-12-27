@@ -230,6 +230,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -297,6 +307,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)addModelWithId:(id)arg0;
 
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)endAnimator;
+
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getScrollY;
@@ -350,6 +364,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -475,6 +491,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setOnChildViewRemovedWithNSString:(NSString *)arg0;
@@ -564,6 +588,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)startAnimator;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetAddStatesFromChildren;
 

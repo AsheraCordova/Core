@@ -290,6 +290,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RemoveRule)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -357,6 +367,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)addModelWithId:(id)arg0;
 
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)endAnimator;
+
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getGravity;
@@ -406,6 +420,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -529,6 +545,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setOnChildViewRemovedWithNSString:(NSString *)arg0;
@@ -614,6 +638,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)startAnimator;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetAddStatesFromChildren;
 

@@ -282,6 +282,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)addModelWithId:(id)arg0;
 
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)endAnimator;
+
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)invalidate;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)notifyDataSetChangedWithBoolean:(jboolean)arg0;
@@ -327,6 +331,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -446,6 +452,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setOnChildViewAddedWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setOnChildViewRemovedWithNSString:(NSString *)arg0;
@@ -531,6 +545,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setZIndexWithInt:(jint)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)startAnimator;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetAddStatesFromChildren;
 

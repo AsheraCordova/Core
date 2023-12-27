@@ -564,6 +564,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_DrawableTintMode)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -661,6 +671,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 #pragma mark Public
 
 - (instancetype)initWithASLinkImpl:(ASLinkImpl *)outer$;
+
+- (ASLinkImpl_LinkCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASLinkImpl_LinkCommandBuilder *)endAnimator;
 
 - (ASLinkImpl_LinkCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -817,6 +831,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 - (ASLinkImpl_LinkCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASLinkImpl_LinkCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASLinkImpl_LinkCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASLinkImpl_LinkCommandBuilder *)setEllipsizeWithNSString:(NSString *)value;
 
@@ -976,6 +992,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 
 - (ASLinkImpl_LinkCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASLinkImpl_LinkCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASLinkImpl_LinkCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASLinkImpl_LinkCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASLinkImpl_LinkCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASLinkImpl_LinkCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASLinkImpl_LinkCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -1089,6 +1113,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 - (ASLinkImpl_LinkCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASLinkImpl_LinkCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASLinkImpl_LinkCommandBuilder *)startAnimator;
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetAlpha;
 

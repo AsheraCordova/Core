@@ -478,6 +478,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_JustificationMode)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -537,6 +547,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 #pragma mark Public
 
 - (instancetype)initWithASButtonImpl:(ASButtonImpl *)outer$;
+
+- (ASButtonImpl_ButtonCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASButtonImpl_ButtonCommandBuilder *)endAnimator;
 
 - (ASButtonImpl_ButtonCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -651,6 +665,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 - (ASButtonImpl_ButtonCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASButtonImpl_ButtonCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setEllipsizeWithNSString:(NSString *)value;
 
@@ -790,6 +806,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 
 - (ASButtonImpl_ButtonCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASButtonImpl_ButtonCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASButtonImpl_ButtonCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASButtonImpl_ButtonCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASButtonImpl_ButtonCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASButtonImpl_ButtonCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -897,6 +921,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 - (ASButtonImpl_ButtonCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASButtonImpl_ButtonCommandBuilder *)startAnimator;
 
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetAlpha;
 

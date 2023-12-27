@@ -593,6 +593,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_DrawableTintMode)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -690,6 +700,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 #pragma mark Public
 
 - (instancetype)initWithASRadioButtonImpl:(ASRadioButtonImpl *)outer$;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)endAnimator;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -844,6 +858,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setEllipsizeWithNSString:(NSString *)value;
 
@@ -1005,6 +1021,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setOnCheckedChangeWithNSString:(NSString *)value;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
@@ -1118,6 +1142,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)startAnimator;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetAlpha;
 

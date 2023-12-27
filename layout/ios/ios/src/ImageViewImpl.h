@@ -277,6 +277,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ScaleType)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -336,6 +346,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 #pragma mark Public
 
 - (instancetype)initWithASImageViewImpl:(ASImageViewImpl *)outer$;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)endAnimator;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -410,6 +424,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 - (ASImageViewImpl_ImageViewCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -525,6 +541,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASImageViewImpl_ImageViewCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASImageViewImpl_ImageViewCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -612,6 +636,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 - (ASImageViewImpl_ImageViewCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)startAnimator;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetAdjustViewBounds;
 

@@ -23,6 +23,7 @@
 #include "FloatConverter.h"
 #include "GravityConverter.h"
 #include "IdConverter.h"
+#include "ImageStateCommandConverter.h"
 #include "InRange.h"
 #include "IntConverter.h"
 #include "IsEmail.h"
@@ -40,6 +41,7 @@
 #include "MaxValue.h"
 #include "MinLength.h"
 #include "MinValue.h"
+#include "NilConverter.h"
 #include "NotEmpty.h"
 #include "ObjectToMapConverter.h"
 #include "PasswordCommandConveter.h"
@@ -84,6 +86,7 @@ NSString *ASCommonConverters_dimensionsppx = @"dimensionsppx";
 NSString *ASCommonConverters_dimensiondppx = @"dimensiondppx";
 NSString *ASCommonConverters_object = @"object";
 NSString *ASCommonConverters_array = @"array";
+NSString *ASCommonConverters_nil = @"nil";
 NSString *ASCommonConverters_listtointarray = @"listtointarray";
 NSString *ASCommonConverters_command_generic = @"command_generic";
 NSString *ASCommonConverters_command_password = @"command_password";
@@ -92,6 +95,7 @@ NSString *ASCommonConverters_command_maxlength = @"command_maxlength";
 NSString *ASCommonConverters_command_marquee = @"command_marquee";
 NSString *ASCommonConverters_command_escapehtml = @"command_escapehtml";
 NSString *ASCommonConverters_command_textformatter = @"command_textformatter";
+NSString *ASCommonConverters_command_imagestate = @"command_imagestate";
 
 @implementation ASCommonConverters
 
@@ -144,17 +148,19 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "dimensiondppx", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 24, -1, -1 },
     { "object", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 25, -1, -1 },
     { "array", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 26, -1, -1 },
-    { "listtointarray", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 27, -1, -1 },
-    { "command_generic", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 28, -1, -1 },
-    { "command_password", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 29, -1, -1 },
-    { "command_uppercase", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 30, -1, -1 },
-    { "command_maxlength", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
-    { "command_marquee", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 32, -1, -1 },
-    { "command_escapehtml", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 33, -1, -1 },
-    { "command_textformatter", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 34, -1, -1 },
+    { "nil", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 27, -1, -1 },
+    { "listtointarray", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 28, -1, -1 },
+    { "command_generic", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 29, -1, -1 },
+    { "command_password", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 30, -1, -1 },
+    { "command_uppercase", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
+    { "command_maxlength", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 32, -1, -1 },
+    { "command_marquee", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 33, -1, -1 },
+    { "command_escapehtml", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 34, -1, -1 },
+    { "command_textformatter", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 35, -1, -1 },
+    { "command_imagestate", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 36, -1, -1 },
   };
-  static const void *ptrTable[] = { "init", &ASCommonConverters_dimensionfloat, &ASCommonConverters_dimensionsp, &ASCommonConverters_dimension, &ASCommonConverters_font, &ASCommonConverters_fontweight, &ASCommonConverters_fontstyle, &ASCommonConverters_actionItem, &ASCommonConverters_intconverter, &ASCommonConverters_floatconverter, &ASCommonConverters_doubleconverter, &ASCommonConverters_behaviorconverter, &ASCommonConverters_validationconverter, &ASCommonConverters_timeconverter, &ASCommonConverters_dimensionspint, &ASCommonConverters_dimensionsppxint, &ASCommonConverters_resourcestring, &ASCommonConverters_gravity, &ASCommonConverters_boolean_conv, &ASCommonConverters_percent, &ASCommonConverters_id, &ASCommonConverters_template, &ASCommonConverters_dimensionpx, &ASCommonConverters_dimensionsppx, &ASCommonConverters_dimensiondppx, &ASCommonConverters_object, &ASCommonConverters_array, &ASCommonConverters_listtointarray, &ASCommonConverters_command_generic, &ASCommonConverters_command_password, &ASCommonConverters_command_uppercase, &ASCommonConverters_command_maxlength, &ASCommonConverters_command_marquee, &ASCommonConverters_command_escapehtml, &ASCommonConverters_command_textformatter };
-  static const J2ObjcClassInfo _ASCommonConverters = { "CommonConverters", "com.ashera.converter", ptrTable, methods, fields, 7, 0x1, 2, 34, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "init", &ASCommonConverters_dimensionfloat, &ASCommonConverters_dimensionsp, &ASCommonConverters_dimension, &ASCommonConverters_font, &ASCommonConverters_fontweight, &ASCommonConverters_fontstyle, &ASCommonConverters_actionItem, &ASCommonConverters_intconverter, &ASCommonConverters_floatconverter, &ASCommonConverters_doubleconverter, &ASCommonConverters_behaviorconverter, &ASCommonConverters_validationconverter, &ASCommonConverters_timeconverter, &ASCommonConverters_dimensionspint, &ASCommonConverters_dimensionsppxint, &ASCommonConverters_resourcestring, &ASCommonConverters_gravity, &ASCommonConverters_boolean_conv, &ASCommonConverters_percent, &ASCommonConverters_id, &ASCommonConverters_template, &ASCommonConverters_dimensionpx, &ASCommonConverters_dimensionsppx, &ASCommonConverters_dimensiondppx, &ASCommonConverters_object, &ASCommonConverters_array, &ASCommonConverters_nil, &ASCommonConverters_listtointarray, &ASCommonConverters_command_generic, &ASCommonConverters_command_password, &ASCommonConverters_command_uppercase, &ASCommonConverters_command_maxlength, &ASCommonConverters_command_marquee, &ASCommonConverters_command_escapehtml, &ASCommonConverters_command_textformatter, &ASCommonConverters_command_imagestate };
+  static const J2ObjcClassInfo _ASCommonConverters = { "CommonConverters", "com.ashera.converter", ptrTable, methods, fields, 7, 0x1, 2, 36, -1, -1, -1, -1, -1 };
   return &_ASCommonConverters;
 }
 
@@ -182,12 +188,14 @@ J2OBJC_IGNORE_DESIGNATED_END
       ASConverterFactory_register__WithNSString_withASIConverter_(ASCommonConverters_object, create_ASObjectToMapConverter_init());
       ASConverterFactory_register__WithNSString_withASIConverter_(ASCommonConverters_array, create_ASArrayConverter_init());
       ASConverterFactory_register__WithNSString_withASIConverter_(ASCommonConverters_listtointarray, create_ASListToIntArrayConverter_init());
+      ASConverterFactory_register__WithNSString_withASIConverter_(ASCommonConverters_nil, create_ASNilConverter_init());
       ASConverterFactory_registerCommandConverterWithASAttributeCommand_(create_ASPasswordCommandConveter_initWithNSString_(ASCommonConverters_command_password));
       ASConverterFactory_registerCommandConverterWithASAttributeCommand_(create_ASUpperCaseCommandConveter_initWithNSString_(ASCommonConverters_command_uppercase));
       ASConverterFactory_registerCommandConverterWithASAttributeCommand_(create_ASMaxLengthCommandConveter_initWithNSString_(ASCommonConverters_command_maxlength));
       ASConverterFactory_registerCommandConverterWithASAttributeCommand_(create_ASMarqueeCommandConverter_initWithNSString_(ASCommonConverters_command_marquee));
       ASConverterFactory_registerCommandConverterWithASAttributeCommand_(create_ASEscapeHtmlCommandConverter_initWithNSString_(ASCommonConverters_command_escapehtml));
       ASConverterFactory_registerCommandConverterWithASAttributeCommand_(create_ASTextFormatCommandConverter_initWithNSString_(ASCommonConverters_command_textformatter));
+      ASConverterFactory_registerCommandConverterWithASAttributeCommand_(create_ASImageStateCommandConverter_initWithNSString_(ASCommonConverters_command_imagestate));
       ASValidatorFactory_register__WithNSString_withASValidation_(@"alphabet", create_ASAlphabet_init());
       ASValidatorFactory_register__WithNSString_withASValidation_(@"alphanumeric", create_ASAlphaNumeric_init());
       ASValidatorFactory_register__WithNSString_withASValidation_(@"date", create_ASDate_init());

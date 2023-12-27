@@ -289,6 +289,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_Divider)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -357,6 +367,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
                                                                   withId:(id)arg1;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)addModelWithId:(id)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)endAnimator;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -431,6 +445,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setDividerPaddingWithNSString:(NSString *)value;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -554,6 +570,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setOnChildViewRemovedWithNSString:(NSString *)arg0;
@@ -645,6 +669,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setWeightSumWithFloat:(jfloat)value;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)startAnimator;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetAddStatesFromChildren;
 

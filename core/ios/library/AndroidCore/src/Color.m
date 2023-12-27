@@ -91,6 +91,9 @@ jint ADColor_alphaWithInt_(jint i) {
 jint ADColor_parseColorWithNSString_(NSString *colorString) {
   ADColor_initialize();
   if ([((NSString *) nil_chk(colorString)) charAtWithInt:0] == '#') {
+    if ([colorString java_length] == 4) {
+      colorString = JreStrcat("CCCCCCC", '#', [colorString charAtWithInt:1], [colorString charAtWithInt:1], [colorString charAtWithInt:2], [colorString charAtWithInt:2], [colorString charAtWithInt:3], [colorString charAtWithInt:3]);
+    }
     jlong color = JavaLangLong_parseLongWithNSString_withInt_([colorString java_substring:1], 16);
     if ([colorString java_length] == 7) {
       color |= (jint) 0x00000000ff000000;

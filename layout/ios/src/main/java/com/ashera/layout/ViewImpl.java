@@ -28,6 +28,7 @@ import r.android.view.MotionEvent;
 import r.android.view.View.DragEvent;
 import r.android.view.KeyEvent;
 import r.android.view.MenuItem;
+import r.android.animation.Animator;
 
 public class ViewImpl {
 	// start - body
@@ -316,6 +317,13 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageValues").withType("array").withArrayType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("customErrorMessageKeys").withType("array").withArrayType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("invalidateOnFrameChange").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("animatorXml").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("startAnimator").withType("nil"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("endAnimator").withType("nil"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationStart").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationEnd").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationCancel").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationRepeat").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("id").withType("id"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelSyncEvents").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelParam").withType("string"));
@@ -810,6 +818,69 @@ if (checkIosVersion("13.0")) {
 
 
 		setInvalidateOnFrameChange(w, objValue);
+
+
+
+			}
+			break;
+		case "animatorXml": {
+
+
+		setAnimatorXml(w, objValue);
+
+
+
+			}
+			break;
+		case "startAnimator": {
+
+
+		startAnimator(w, objValue);
+
+
+
+			}
+			break;
+		case "endAnimator": {
+
+
+		endAnimator(w, objValue);
+
+
+
+			}
+			break;
+		case "onAnimationStart": {
+
+
+		if (objValue instanceof String) {setAnimatorListener(w, new AnimatorListener(w, strValue, "onAnimationStart"));} else {setAnimatorListener(w, (Animator.AnimatorListener) objValue);}
+
+
+
+			}
+			break;
+		case "onAnimationEnd": {
+
+
+		if (objValue instanceof String) {setAnimatorListener(w, new AnimatorListener(w, strValue, "onAnimationEnd"));} else {setAnimatorListener(w, (Animator.AnimatorListener) objValue);}
+
+
+
+			}
+			break;
+		case "onAnimationCancel": {
+
+
+		if (objValue instanceof String) {setAnimatorListener(w, new AnimatorListener(w, strValue, "onAnimationCancel"));} else {setAnimatorListener(w, (Animator.AnimatorListener) objValue);}
+
+
+
+			}
+			break;
+		case "onAnimationRepeat": {
+
+
+		if (objValue instanceof String) {setAnimatorListener(w, new AnimatorListener(w, strValue, "onAnimationRepeat"));} else {setAnimatorListener(w, (Animator.AnimatorListener) objValue);}
 
 
 
@@ -2061,6 +2132,20 @@ return getMaxHeight(w);			}
      	Object val = w.getUserData("val" + i);
      	w.setAttribute(attributeName, val, false);
      }
+	
+
+	public static void setState(IWidget w, int i, Object value) {
+		String attributeName = (String) w.getUserData("state" + i);
+     	String attributeConverter = (String) w.getUserData("stateConverter" + i);
+		String stringFormatter = (String) w.getUserData("stateStringFormat" + i);
+
+     	if (attributeConverter != null && stringFormatter != null) {
+     		value = String.format(stringFormatter, value.toString());
+     		value = w.quickConvert(value, attributeConverter);
+     	}
+
+     	w.setAttribute(attributeName, value, true);
+	}
              
      public static void stateYes(IWidget w) {
      	String attributeName = (String) w.getUserData("stateYes");
@@ -2090,6 +2175,35 @@ return getMaxHeight(w);			}
 			}
      }
 	
+
+
+ 	private static void setAnimatorListener(IWidget w, Animator.AnimatorListener animatorListener) {
+ 		Animator animator = (Animator) w.getAnimator();
+		if (animator != null) {
+			animator.addListener(animatorListener);
+		}
+ 	}
+
+ 	private static void endAnimator(IWidget w, Object objValue) {
+ 		Animator animator = (Animator) w.getAnimator();
+		if (animator != null) {
+			animator.end();
+		}
+ 	
+ 		
+ 	}
+ 	
+ 	private static void startAnimator(IWidget w, Object objValue) {
+ 		Animator animator = (Animator) w.getAnimator();
+		if (animator != null) {
+			if (animator.isRunning()) {
+				endAnimator(w, objValue);
+			}
+			View view = (View) w.asWidget();
+			view.post(() -> animator.start());
+		}
+ 	}
+ 	
 
 
 	public static void setLayoutDirection(IWidget w, Object objValue) {
@@ -2308,6 +2422,646 @@ return getMaxHeight(w);			}
 		
 	}
 
+	public static String getValue(String key, org.xml.sax.Attributes attributes) {
+		String os = PluginInvoker.getOS().toLowerCase();
+		if (attributes.getValue(key + "-" + os) != null) {
+			return attributes.getValue(key + "-" + os);
+		}
+		
+		return attributes.getValue(key);
+	}
+	
+
+
+	private static void setAnimatorXml(IWidget w, Object objValue) {
+ 		String value = (String) objValue;
+ 		if (value.startsWith("@animator/")) {
+ 			String html = w.getFragment().getInlineResource(value);
+ 			if (html == null) {
+ 				html = PluginInvoker.getFileAsset("" + (value).substring(1) + ".xml", w.getFragment());
+ 			}
+ 			AnimationContentHandler handler = new AnimationContentHandler(w);
+			com.ashera.parser.html.HtmlParser.parse(handler, html);
+ 			r.android.animation.Animator animator = handler.getAnimatorSet();
+ 			animator.setTarget((View) w.asWidget());
+			w.getFragment().addDisposable(animator); 				
+ 			w.setAnimator(animator); 			
+ 		}
+	}
+
+	
+	private static class AnimationContentHandler extends com.ashera.parser.html.ContentHandlerAdapter {
+	    private static final int VALUE_TYPE_FLOAT       = 0;
+	    private static final int VALUE_TYPE_INT         = 1;
+	    private static final int VALUE_TYPE_PATH        = 2;
+	    private static final int VALUE_TYPE_COLOR       = 3;
+	    private static final int VALUE_TYPE_UNDEFINED   = 4;
+		private int valueType = VALUE_TYPE_UNDEFINED;
+		
+		private static final int TOGETHER = 0;
+	    private static final int SEQUENTIALLY = 1;
+	    private String valueTo;
+	    private String valueFrom;
+	    private java.util.Stack<Integer> sequenceOrderings = new java.util.Stack<>();
+	    private int sequenceOrdering;
+		private final IWidget w;
+		private java.util.Stack<ArrayList<r.android.animation.Animator>> childAnimators = new java.util.Stack<>();
+		private java.util.Stack<r.android.animation.AnimatorSet> animatorSets = new java.util.Stack<>();
+		private r.android.animation.AnimatorSet animatorSet;
+		private float arg0;
+		private float arg1;
+		private float extraTension;
+		private float cycles;
+		private r.android.animation.TimeInterpolator timeInterpolator;
+		private String pathData;
+		private String propertyYName;
+		private String propertyXName;
+
+
+		private void setFactor(IWidget w, String value) {
+			this.arg0 = (float) w.quickConvert(value, "float");
+		}
+
+		private void setTension(IWidget w, String value) {
+			this.arg0 = (float) w.quickConvert(value, "float");
+		}
+
+		private void setExtraTension(IWidget w, String value) {
+			this.arg1 = (float) w.quickConvert(value, "float");
+		}
+
+		private void setCycles(IWidget w, String value) {
+			this.arg0 = (float) w.quickConvert(value, "float");
+		}
+
+		public r.android.animation.AnimatorSet getAnimatorSet() {
+			return animatorSet;
+		}
+
+		private AnimationContentHandler(IWidget w) {
+			this.w = w;
+		}
+
+		@Override
+		public void startElement(String uri, String localName, String qName, org.xml.sax.Attributes atts) throws org.xml.sax.SAXException {
+			switch (localName) {
+				case "set": {
+					r.android.animation.AnimatorSet animatorSet = new r.android.animation.AnimatorSet();
+					if (this.animatorSet == null) {
+						this.animatorSet = animatorSet;
+					}
+					parseAnimatorSet(w, animatorSet, atts);
+					animatorSets.push(animatorSet);
+					childAnimators.push(new ArrayList<>());
+					sequenceOrderings.push(this.sequenceOrdering);
+				}
+				break;
+				
+				case "objectAnimator": {
+					
+					ArrayList<r.android.animation.Animator> childAnims = childAnimators.peek();
+					r.android.animation.ObjectAnimator objectAnimator = new r.android.animation.ObjectAnimator();
+					parseAnimator(w, objectAnimator, atts);
+
+					if (valueType == VALUE_TYPE_UNDEFINED) {
+			            valueType = inferValueTypeFromValues(w, valueFrom, valueTo);
+			        }
+			        r.android.animation.PropertyValuesHolder pvh = getPVH(w, valueType, valueFrom, valueTo, "");
+			        if (pvh != null) {
+			        	objectAnimator.setValues(pvh);
+			        }
+			        
+					parsePropertyAnimator(w, objectAnimator, atts);
+					
+
+			        // Path can be involved in an ObjectAnimator in the following 3 ways:
+			        // 1) Path morphing: the property to be animated is pathData, and valueFrom and valueTo
+			        //    are both of pathType. valueType = pathType needs to be explicitly defined.
+			        // 2) A property in X or Y dimension can be animated along a path: the property needs to be
+			        //    defined in propertyXName or propertyYName attribute, the path will be defined in the
+			        //    pathData attribute. valueFrom and valueTo will not be necessary for this animation.
+			        // 3) PathInterpolator can also define a path (in pathData) for its interpolation curve.
+			        // Here we are dealing with case 2:
+			        if (pathData != null) {
+			            setUpPath(objectAnimator);
+			        }
+			        
+					childAnims.add(objectAnimator);
+				}
+				break;
+				
+				case "accelerateInterpolator": {
+					parseAccelerateInterpolator(w, atts);
+					timeInterpolator = new r.android.view.animation.AccelerateInterpolator(arg0);
+				}
+				break;
+				case "decelerateInterpolator": {
+					parseDecelerateInterpolator(w, atts);
+					timeInterpolator = new r.android.view.animation.DecelerateInterpolator(arg0);
+				}
+				break;
+				case "cycleInterpolator": {
+					parseCycleInterpolator(w, atts);
+					timeInterpolator = new r.android.view.animation.CycleInterpolator(arg0);
+				}
+				break;
+				case "anticipateInterpolator": {
+					parseAnticipateInterpolator(w, atts);
+					timeInterpolator = new r.android.view.animation.AnticipateInterpolator(arg0);
+				}
+				break;
+				case "overshootInterpolator": {
+					parseOvershootInterpolator(w, atts);
+					timeInterpolator = new r.android.view.animation.OvershootInterpolator(arg0);
+				}
+				break;
+				case "anticipateOvershootInterpolator": {
+					parseAnticipateOvershootInterpolator(w, atts);
+					if (arg1 != 0) {
+						timeInterpolator = new r.android.view.animation.AnticipateOvershootInterpolator(arg0 * arg1);
+					} else {
+						timeInterpolator = new r.android.view.animation.AnticipateOvershootInterpolator(arg0);
+					}
+				}
+				break;
+			}
+			
+		}
+
+		private void setUpPath(r.android.animation.ObjectAnimator objectAnimator) {
+			if (valueType == VALUE_TYPE_PATH || valueType == VALUE_TYPE_UNDEFINED) {
+			    // When pathData is defined, we are in case #2 mentioned above. ValueType can only
+			    // be float type, or int type. Otherwise we fallback to default type.
+			    valueType = VALUE_TYPE_FLOAT;
+			}
+			if (propertyXName == null && propertyYName == null) {
+			    throw new RuntimeException(" propertyXName or propertyYName is needed for PathData");
+			} else {
+				int pixelSize = 1;
+			    r.android.graphics.Path path = r.android.graphics.Path.createPathFromPathData(pathData);
+			    float error = 0.5f * pixelSize; // max half a pixel error
+			    r.android.animation.PathKeyframes keyframeSet = r.android.animation.KeyframeSet.ofPath(path, error);
+			    r.android.animation.Keyframes xKeyframes;
+			    r.android.animation.Keyframes yKeyframes;
+			    if (valueType == VALUE_TYPE_FLOAT) {
+			        xKeyframes = keyframeSet.createXFloatKeyframes();
+			        yKeyframes = keyframeSet.createYFloatKeyframes();
+			    } else {
+			        xKeyframes = keyframeSet.createXIntKeyframes();
+			        yKeyframes = keyframeSet.createYIntKeyframes();
+			    }
+			    r.android.animation.PropertyValuesHolder x = null;
+			    r.android.animation.PropertyValuesHolder y = null;
+			    if (propertyXName != null) {
+			        x = r.android.animation.PropertyValuesHolder.ofKeyframes(propertyXName, xKeyframes);
+			    }
+			    if (propertyYName != null) {
+			        y = r.android.animation.PropertyValuesHolder.ofKeyframes(propertyYName, yKeyframes);
+			    }
+			    if (x == null) {
+			    	objectAnimator.setValues(y);
+			    } else if (y == null) {
+			    	objectAnimator.setValues(x);
+			    } else {
+			    	objectAnimator.setValues(x, y);
+			    }
+			}
+		}
+
+		@Override
+		public void endElement(String uri, String localName, String qName) throws org.xml.sax.SAXException {
+			switch (localName) {
+				case "set": {
+					ArrayList<r.android.animation.Animator> childAnims = childAnimators.pop();
+					r.android.animation.AnimatorSet animatorSet = animatorSets.pop();
+					int sequenceOrdering = sequenceOrderings.pop();
+					if (animatorSet != null && childAnims != null) {
+				        r.android.animation.Animator[] animsArray = new r.android.animation.Animator[childAnims.size()];
+				        int index = 0;
+				        for (r.android.animation.Animator a : childAnims) {
+				            animsArray[index++] = a;
+				        }
+				        if (sequenceOrdering == TOGETHER) {
+				        	animatorSet.playTogether(animsArray);
+				        } else {
+				        	animatorSet.playSequentially(animsArray);
+				        }
+				    }
+				}
+				break;
+				case "anticipateOvershootInterpolator":
+				case "overshootInterpolator":
+				case "anticipateInterpolator":
+				case "cycleInterpolator":
+				case "decelerateInterpolator":
+				case "accelerateInterpolator": {
+					arg0 = 0;
+					arg1 = 0;
+				}
+				break;
+			}
+		}
+
+		@Override
+		public void characters(char[] ch, int start, int length) throws org.xml.sax.SAXException {
+		}
+
+		private void setStartOffset(IWidget w, r.android.animation.ValueAnimator animator, String value) {
+			animator.setStartDelay((int) w.quickConvert(value, "int"));
+		}
+
+		private void setValueType(IWidget w, r.android.animation.ValueAnimator animator, String value) {
+			this.valueType = getValueType(value);
+
+		}
+
+		private void setValueTo(IWidget w, r.android.animation.ValueAnimator animator, String value) {
+			this.valueTo = value;
+
+		}
+
+		private void setValueFrom(IWidget w, r.android.animation.ValueAnimator animator, String value) {
+			this.valueFrom = value;
+
+		}
+
+		private void setInterpolator(IWidget w, r.android.animation.ValueAnimator animator, String value) {
+ 			String html = w.getFragment().getInlineResource(value);
+ 			if (html == null) {
+ 				html = PluginInvoker.getFileAsset("" + (value).substring(1) + ".xml", w.getFragment());
+ 			}
+ 			timeInterpolator = null;
+			com.ashera.parser.html.HtmlParser.parse(this, html);
+			animator.setInterpolator(timeInterpolator);
+		}
+
+		private void setPathData(IWidget w, r.android.animation.ObjectAnimator animator, String value) {
+			this.pathData = value;
+		}
+
+		private void setPropertyYName(IWidget w, r.android.animation.ObjectAnimator animator, String value) {
+			this.propertyYName = value;
+		}
+
+		private void setPropertyXName(IWidget w, r.android.animation.ObjectAnimator animator, String value) {
+			this.propertyXName = value;
+		}
+
+		private void setOrdering(IWidget w, r.android.animation.AnimatorSet animatorSet, String value) {
+			sequenceOrdering = getOrdering(value);
+		}
+
+		private static int inferValueTypeFromValues(IWidget w, String valueFromId, String valueToId) {
+			boolean hasFrom = (valueFromId != null);
+			boolean hasTo = (valueToId != null);
+
+			int valueType;
+			// Check whether it's color type. If not, fall back to default type (i.e. float
+			// type)
+			if ((hasFrom && isColor(valueFromId)) || (hasTo && isColor(valueToId))) {
+				valueType = VALUE_TYPE_COLOR;
+			} else {
+				valueType = VALUE_TYPE_FLOAT;
+			}
+			return valueType;
+		}
+
+		private static r.android.animation.PropertyValuesHolder getPVH(IWidget w, int valueType, String valueFromId,
+				String valueToId, String propertyName) {
+
+			boolean hasFrom = (valueFromId != null);
+			boolean hasTo = (valueToId != null);
+
+			if (valueType == VALUE_TYPE_UNDEFINED) {
+				// Check whether it's color type. If not, fall back to default type (i.e. float
+				// type)
+				if ((hasFrom && isColor(valueFromId)) || (hasTo && isColor(valueToId))) {
+					valueType = VALUE_TYPE_COLOR;
+				} else {
+					valueType = VALUE_TYPE_FLOAT;
+				}
+			}
+
+			boolean getFloats = (valueType == VALUE_TYPE_FLOAT);
+
+			r.android.animation.PropertyValuesHolder returnValue = null;
+
+			if (valueType == VALUE_TYPE_PATH) {
+
+			} else {
+				r.android.animation.TypeEvaluator evaluator = null;
+				// Integer and float value types are handled here.
+				if (valueType == VALUE_TYPE_COLOR) {
+					// special case for colors: ignore valueType and get ints
+					evaluator = r.android.animation.ArgbEvaluator.getInstance();
+				}
+				if (getFloats) {
+					float valueFrom;
+					float valueTo;
+					if (hasFrom) {
+						if (isDimen(valueFromId)) {
+							valueFrom = (float) w.quickConvert(valueFromId, "dimensionfloat");
+						} else {
+							valueFrom = (float) w.quickConvert(valueFromId, "float");
+						}
+						if (hasTo) {
+							if (isDimen(valueToId)) {
+								valueTo = (float) w.quickConvert(valueToId, "dimensionfloat");
+							} else {
+								valueTo = (float) w.quickConvert(valueToId, "float");
+							}
+							returnValue = r.android.animation.PropertyValuesHolder.ofFloat(propertyName, valueFrom,
+									valueTo);
+						} else {
+							returnValue = r.android.animation.PropertyValuesHolder.ofFloat(propertyName, valueFrom);
+						}
+					} else {
+						if (isDimen(valueToId)) {
+							valueTo = (float) w.quickConvert(valueToId, "dimensionfloat");
+						} else {
+							valueTo = (float) w.quickConvert(valueToId, "float");
+						}
+						returnValue = r.android.animation.PropertyValuesHolder.ofFloat(propertyName, valueTo);
+					}
+				} else {
+					int valueFrom;
+					int valueTo;
+					if (hasFrom) {
+						if (isDimen(valueFromId)) {
+							valueFrom = (int) w.quickConvert(valueFromId, "dimension");
+						} else if (isColor(valueFromId)) {
+							valueFrom = r.android.graphics.Color.parseColor(valueFromId);
+						} else {
+							valueFrom = (int) w.quickConvert(valueFromId, "int");
+						}
+						if (hasTo) {
+							if (isDimen(valueToId)) {
+								valueTo = (int) w.quickConvert(valueToId, "dimension");
+							} else if (isColor(valueToId)) {
+								valueTo = r.android.graphics.Color.parseColor(valueToId);
+							} else {
+								valueTo = (int) w.quickConvert(valueToId, "int");
+							}
+							returnValue = r.android.animation.PropertyValuesHolder.ofInt(propertyName, valueFrom,
+									valueTo);
+						} else {
+							returnValue = r.android.animation.PropertyValuesHolder.ofInt(propertyName, valueFrom);
+						}
+					} else {
+						if (hasTo) {
+							if (isDimen(valueToId)) {
+								valueTo = (int) w.quickConvert(valueToId, "dimension");
+							} else if (isColor(valueToId)) {
+								valueTo = r.android.graphics.Color.parseColor(valueToId);
+							} else {
+								valueTo = (int) w.quickConvert(valueToId, "int");
+							}
+							returnValue = r.android.animation.PropertyValuesHolder.ofInt(propertyName, valueTo);
+						}
+					}
+				}
+				if (returnValue != null && evaluator != null) {
+					returnValue.setEvaluator(evaluator);
+				}
+			}
+
+			return returnValue;
+		}
+
+		private static boolean isColor(String val) {
+			return val.startsWith("#") || val.startsWith("@color/");
+		}
+
+		private static boolean isDimen(String val) {
+			return val.endsWith("dp") || val.endsWith("sp");
+		}
+
+//start - Animator
+private void parseAnimator(IWidget w,  r.android.animation.ValueAnimator animator,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "interpolator":
+setInterpolator(w, animator, value);
+break;
+case "duration":
+setDuration(w, animator, value);
+break;
+case "startOffset":
+setStartOffset(w, animator, value);
+break;
+case "repeatCount":
+setRepeatCount(w, animator, value);
+break;
+case "repeatMode":
+setRepeatMode(w, animator, value);
+break;
+case "valueFrom":
+setValueFrom(w, animator, value);
+break;
+case "valueTo":
+setValueTo(w, animator, value);
+break;
+case "valueType":
+setValueType(w, animator, value);
+break;}
+}
+}
+
+private void setDuration(IWidget w,  r.android.animation.ValueAnimator animator, String strValue) {
+animator.setDuration((int) w.quickConvert(strValue, "int"));
+}
+
+private int getRepeatCount(String value, IWidget w) {
+	switch (value) {
+case "infinite":
+		return -1;
+default:
+		break;
+}
+	return (int) w.quickConvert(value, "int");
+}
+
+private void setRepeatCount(IWidget w,  r.android.animation.ValueAnimator animator, String strValue) {
+animator.setRepeatCount(getRepeatCount(strValue, w));
+}
+
+private int getRepeatMode(String value) {
+	switch (value) {
+case "restart":
+		return 1;
+case "reverse":
+		return 2;
+default:
+		break;
+}
+	return 0;
+}
+
+private void setRepeatMode(IWidget w,  r.android.animation.ValueAnimator animator, String strValue) {
+animator.setRepeatMode(getRepeatMode(strValue));
+}
+
+private int getValueType(String value) {
+	switch (value) {
+case "floatType":
+		return 0;
+case "intType":
+		return 1;
+case "pathType":
+		return 2;
+case "colorType":
+		return 3;
+default:
+		break;
+}
+	return 0;
+}
+
+//end - Animator	
+	
+//start - PropertyAnimator
+private void parsePropertyAnimator(IWidget w,  r.android.animation.ObjectAnimator animator,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "propertyName":
+setPropertyName(w, animator, value);
+break;
+case "propertyXName":
+setPropertyXName(w, animator, value);
+break;
+case "propertyYName":
+setPropertyYName(w, animator, value);
+break;
+case "pathData":
+setPathData(w, animator, value);
+break;}
+}
+}
+
+private void setPropertyName(IWidget w,  r.android.animation.ObjectAnimator animator, String strValue) {
+animator.setPropertyName((String) w.quickConvert(strValue, "resourcestring"));
+}
+
+//end - PropertyAnimator
+
+
+	//start - AnimatorSet
+private void parseAnimatorSet(IWidget w,  r.android.animation.AnimatorSet animatorSet,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "ordering":
+setOrdering(w, animatorSet, value);
+break;}
+}
+}
+
+private int getOrdering(String value) {
+	switch (value) {
+case "together":
+		return 0;
+case "sequentially":
+		return 1;
+default:
+		break;
+}
+	return 0;
+}
+
+//end - AnimatorSet
+//start - AccelerateInterpolator
+private void parseAccelerateInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "factor":
+setFactor(w, value);
+break;}
+}
+}
+
+//end - AccelerateInterpolator
+//start - DecelerateInterpolator
+private void parseDecelerateInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "factor":
+setFactor(w, value);
+break;}
+}
+}
+
+//end - DecelerateInterpolator
+
+//start - CycleInterpolator
+private void parseCycleInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "cycles":
+setCycles(w, value);
+break;}
+}
+}
+
+//end - CycleInterpolator
+
+//start - AnticipateInterpolator
+private void parseAnticipateInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "tension":
+setTension(w, value);
+break;}
+}
+}
+
+//end - AnticipateInterpolator
+
+//start - OvershootInterpolator
+private void parseOvershootInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "tension":
+setTension(w, value);
+break;}
+}
+}
+
+//end - OvershootInterpolator
+
+
+//start - AnticipateOvershootInterpolator
+private void parseAnticipateOvershootInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "tension":
+setTension(w, value);
+break;
+case "extraTension":
+setExtraTension(w, value);
+break;}
+}
+}
+
+//end - AnticipateOvershootInterpolator
+
+	}
 	
 
 	public static native void setBackgroundColor(Object nativeWidget, Object value) /*-[
@@ -2475,6 +3229,243 @@ return ((UIView*) uiView).accessibilityValue;
 	public static native Object getAccessibilityTraits(Object uiView) /*-[
 return [JavaLangInteger valueOfWithInt :((UIView*) uiView).accessibilityTraits];
   ]-*/;
+	@SuppressLint("NewApi")
+private static class AnimatorListener implements Animator.AnimatorListener, com.ashera.widget.IListener{
+private IWidget w; private View view; private String strValue; private String action;
+public String getAction() {return action;}
+public AnimatorListener(IWidget w, String strValue)  {
+this.w = w; this.strValue = strValue;
+}
+public AnimatorListener(IWidget w, String strValue, String action)  {
+this.w = w; this.strValue = strValue;this.action=action;
+}
+public void onAnimationStart(r.android.animation.Animator animation){
+    
+	if (action == null || action.equals("onAnimationStart")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onAnimationStart");
+	    java.util.Map<String, Object> obj = getOnAnimationStartEventObj(animation);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, animation);
+		    }
+
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return;
+}//#####
+
+public java.util.Map<String, Object> getOnAnimationStartEventObj(r.android.animation.Animator animation) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "animationstart");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onAnimationStart", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}public void onAnimationEnd(r.android.animation.Animator animation){
+    
+	if (action == null || action.equals("onAnimationEnd")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onAnimationEnd");
+	    java.util.Map<String, Object> obj = getOnAnimationEndEventObj(animation);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, animation);
+		    }
+
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return;
+}//#####
+
+public java.util.Map<String, Object> getOnAnimationEndEventObj(r.android.animation.Animator animation) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "animationend");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onAnimationEnd", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}public void onAnimationCancel(r.android.animation.Animator animation){
+    
+	if (action == null || action.equals("onAnimationCancel")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onAnimationCancel");
+	    java.util.Map<String, Object> obj = getOnAnimationCancelEventObj(animation);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, animation);
+		    }
+
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return;
+}//#####
+
+public java.util.Map<String, Object> getOnAnimationCancelEventObj(r.android.animation.Animator animation) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "animationcancel");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onAnimationCancel", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}public void onAnimationRepeat(r.android.animation.Animator animation){
+    
+	if (action == null || action.equals("onAnimationRepeat")) {
+		// populate the data from ui to pojo
+		w.syncModelFromUiToPojo("onAnimationRepeat");
+	    java.util.Map<String, Object> obj = getOnAnimationRepeatEventObj(animation);
+	    String commandName =  (String) obj.get(EventExpressionParser.KEY_COMMAND_NAME);
+	    
+	    // execute command based on command type
+	    String commandType = (String)obj.get(EventExpressionParser.KEY_COMMAND_TYPE);
+		switch (commandType) {
+		case "+":
+		    if (EventCommandFactory.hasCommand(commandName)) {
+		    	 EventCommandFactory.getCommand(commandName).executeCommand(w, obj, animation);
+		    }
+
+			break;
+		default:
+			break;
+		}
+		
+		if (obj.containsKey("refreshUiFromModel")) {
+			Object widgets = obj.remove("refreshUiFromModel");
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, widgets, true);
+		}
+		if (w.getModelUiToPojoEventIds() != null) {
+			com.ashera.layout.ViewImpl.refreshUiFromModel(w, w.getModelUiToPojoEventIds(), true);
+		}
+		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
+		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
+		    activity.sendEventMessage(obj);
+		}
+	}
+    return;
+}//#####
+
+public java.util.Map<String, Object> getOnAnimationRepeatEventObj(r.android.animation.Animator animation) {
+	java.util.Map<String, Object> obj = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+    obj.put("action", "action");
+    obj.put("eventType", "animationrepeat");
+    obj.put("fragmentId", w.getFragment().getFragmentId());
+    obj.put("actionUrl", w.getFragment().getActionUrl());
+    
+    if (w.getComponentId() != null) {
+    	obj.put("componentId", w.getComponentId());
+    }
+    
+    PluginInvoker.putJSONSafeObjectIntoMap(obj, "id", w.getId());
+     
+    
+    // parse event info into the map
+    EventExpressionParser.parseEventExpression(strValue, obj);
+    
+    // update model data into map
+    w.updateModelToEventMap(obj, "onAnimationRepeat", (String)obj.get(EventExpressionParser.KEY_EVENT_ARGS));
+    return obj;
+}
+}
+
 	@SuppressLint("NewApi")
 private static class OnClickListener implements View.OnClickListener, com.ashera.widget.IListener{
 private IWidget w; private View view; private String strValue; private String action;
@@ -3655,6 +4646,62 @@ public T setCustomErrorMessageKeys(String value) {
 return (T) this;}
 public T setInvalidateOnFrameChange(boolean value) {
 	Map<String, Object> attrs = initCommand("invalidateOnFrameChange");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T animatorXml(String value) {
+	Map<String, Object> attrs = initCommand("animatorXml");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T startAnimator() {
+	Map<String, Object> attrs = initCommand("startAnimator");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	
+return (T) this;}
+public T endAnimator() {
+	Map<String, Object> attrs = initCommand("endAnimator");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	
+return (T) this;}
+public T setOnAnimationStart(String value) {
+	Map<String, Object> attrs = initCommand("onAnimationStart");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setOnAnimationEnd(String value) {
+	Map<String, Object> attrs = initCommand("onAnimationEnd");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setOnAnimationCancel(String value) {
+	Map<String, Object> attrs = initCommand("onAnimationCancel");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setOnAnimationRepeat(String value) {
+	Map<String, Object> attrs = initCommand("onAnimationRepeat");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -4842,6 +5889,34 @@ public void setInvalidateOnFrameChange(boolean value) {
 	getBuilder().reset().setInvalidateOnFrameChange(value).execute(true);
 }
 
+public void animatorXml(String value) {
+	getBuilder().reset().animatorXml(value).execute(true);
+}
+
+public void startAnimator() {
+	getBuilder().reset().startAnimator().execute(true);
+}
+
+public void endAnimator() {
+	getBuilder().reset().endAnimator().execute(true);
+}
+
+public void setOnAnimationStart(String value) {
+	getBuilder().reset().setOnAnimationStart(value).execute(true);
+}
+
+public void setOnAnimationEnd(String value) {
+	getBuilder().reset().setOnAnimationEnd(value).execute(true);
+}
+
+public void setOnAnimationCancel(String value) {
+	getBuilder().reset().setOnAnimationCancel(value).execute(true);
+}
+
+public void setOnAnimationRepeat(String value) {
+	getBuilder().reset().setOnAnimationRepeat(value).execute(true);
+}
+
 public Object getModelSyncEvents() {
 	return getBuilder().reset().tryGetModelSyncEvents().execute(false).getModelSyncEvents(); 
 }
@@ -5226,7 +6301,10 @@ public void setOutsideTouchable(boolean value) {
 	]-*/;
 
 	private static void setBgOnControl(IWidget w, Object uiview, Object objValue) {
-		if (isColor(objValue)) {
+		if (isColor(objValue) || objValue instanceof Integer) {
+			if (objValue instanceof Integer) {
+				objValue = ViewImpl.getColor(objValue);
+			}
 			nativeSetBgColor(uiview, objValue);
 		} else {
 			clearBgColor(uiview, objValue);
@@ -5505,10 +6583,11 @@ public void setOutsideTouchable(boolean value) {
 		widget.registerForAttributeCommandChainWithPhase("predraw", "background");
 		widget.registerForAttributeCommandChainWithPhase("postdraw", "foreground");
 		
-		widget.registerForAttributeCommandChainWithPhase("preframe", "translationX", "translationY", "translationZ", "scaleX", "scaleY",
-				"rotation", "rotationX", "rotationY", "transformPivotX", "transformPivotY");
-		widget.registerForAttributeCommandChainWithPhase("postframe", "translationX", "translationY", "translationZ", "scaleX", "scaleY",
-				"rotation", "rotationX", "rotationY", "transformPivotX", "transformPivotY");
+		String[] tranformAttrs = new String[] { "translationX", "translationY", "translationZ", "scaleX", "scaleY",
+				"rotation", "rotationX", "rotationY", "transformPivotX", "transformPivotY"
+		};
+		widget.registerForAttributeCommandChainWithPhase("preframe", tranformAttrs);
+		widget.registerForAttributeCommandChainWithPhase("postframe", tranformAttrs);
 
 	}
     
@@ -5617,42 +6696,58 @@ public void setOutsideTouchable(boolean value) {
 	
 	private static void setTranslationX(IWidget w, Object objValue) {
 		w.applyAttributeCommand("translationX", "transform", new String[] {}, true, "translationX", objValue);
+		relayout(w);
+	}
+
+	private static void relayout(IWidget w) {
+		if (w.isInitialised()) {			
+			((View) w.asWidget()).relayout();
+		}
 	}
 
 	private static void setTranslationY(IWidget w, Object objValue) {
 		w.applyAttributeCommand("translationY", "transform", new String[] {}, true, "translationY", objValue);
+		relayout(w);
 	}
 
 	private static void setTranslationZ(IWidget w, Object objValue) {
 		w.applyAttributeCommand("translationZ", "transform", new String[] {}, true, "translationZ", objValue);
+		relayout(w);
 	}
 
 	private static void setTransformPivotY(IWidget w, Object objValue) {
 		w.applyAttributeCommand("transformPivotY", "transform", new String[] {}, true, "transformPivotY", objValue);
+		relayout(w);
 	}
 
 	private static void setTransformPivotX(IWidget w, Object objValue) {
 		w.applyAttributeCommand("transformPivotX", "transform", new String[] {}, true, "transformPivotX", objValue);
+		relayout(w);
 	}
 
 	private static void setScaleY(IWidget w, Object objValue) {
 		w.applyAttributeCommand("scaleY", "transform", new String[] {}, true, "scaleY", objValue);
+		relayout(w);
 	}
 
 	private static void setScaleX(IWidget w, Object objValue) {
 		w.applyAttributeCommand("scaleX", "transform", new String[] {}, true, "scaleX", objValue);
+		relayout(w);
 	}
 
 	private static void setRotationY(IWidget w, Object objValue) {
-		w.applyAttributeCommand("rotationY", "transform", new String[] {}, true, "rotationY", objValue);		
+		w.applyAttributeCommand("rotationY", "transform", new String[] {}, true, "rotationY", objValue);	
+		relayout(w);
 	}
 
 	private static void setRotationX(IWidget w, Object objValue) {
-		w.applyAttributeCommand("rotationX", "transform", new String[] {}, true, "rotationX", objValue);		
+		w.applyAttributeCommand("rotationX", "transform", new String[] {}, true, "rotationX", objValue);	
+		relayout(w);
 	}
 
 	private static void setRotation(IWidget w, Object objValue) {
 		w.applyAttributeCommand("rotation", "transform", new String[] {}, true, "rotation", objValue);
+		relayout(w);
 	}
 	
 	

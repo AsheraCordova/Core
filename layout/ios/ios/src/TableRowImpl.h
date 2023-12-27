@@ -216,6 +216,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -283,6 +293,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl_TableRowExt)
 
 - (ASTableRowImpl_TableRowCommandBuilder *)addModelWithId:(id)arg0;
 
+- (ASTableRowImpl_TableRowCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASTableRowImpl_TableRowCommandBuilder *)endAnimator;
+
 - (ASTableRowImpl_TableRowCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getGravity;
@@ -334,6 +348,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl_TableRowExt)
 - (ASTableRowImpl_TableRowCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASTableRowImpl_TableRowCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASTableRowImpl_TableRowCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASTableRowImpl_TableRowCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -455,6 +471,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl_TableRowExt)
 
 - (ASTableRowImpl_TableRowCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASTableRowImpl_TableRowCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASTableRowImpl_TableRowCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASTableRowImpl_TableRowCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASTableRowImpl_TableRowCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASTableRowImpl_TableRowCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
 
 - (ASTableRowImpl_TableRowCommandBuilder *)setOnChildViewRemovedWithNSString:(NSString *)arg0;
@@ -542,6 +566,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl_TableRowExt)
 - (ASTableRowImpl_TableRowCommandBuilder *)setWeightSumWithFloat:(jfloat)value;
 
 - (ASTableRowImpl_TableRowCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASTableRowImpl_TableRowCommandBuilder *)startAnimator;
 
 - (ASTableRowImpl_TableRowCommandBuilder *)tryGetAddStatesFromChildren;
 

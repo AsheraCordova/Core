@@ -23,7 +23,7 @@ public class ConverterPlugin extends BaseConverterPlugin  {
 
 	@Override
 	public float convertDpToPixel(String dimen) {
-		int dp = Integer.parseInt(dimen.replace("dp", ""));
+		float dp = Float.parseFloat(dimen.replace("dp", ""));
         int dpi = Display.getDefault().getDPI().x;
         float px = (dp * dpi) / 160f;
 

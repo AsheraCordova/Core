@@ -7,6 +7,7 @@
 #include "Context.h"
 #include "Interpolator.h"
 #include "J2ObjC_source.h"
+#include "java/lang/System.h"
 
 
 @implementation ADAnimationUtils
@@ -23,19 +24,25 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADAnimationUtils_loadInterpolatorWithADContext_withInt_(context, mDefaultInterpolatorID);
 }
 
++ (jlong)currentAnimationTimeMillis {
+  return ADAnimationUtils_currentAnimationTimeMillis();
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADInterpolator;", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(loadInterpolatorWithADContext:withInt:);
+  methods[2].selector = @selector(currentAnimationTimeMillis);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "loadInterpolator", "LADContext;I" };
-  static const J2ObjcClassInfo _ADAnimationUtils = { "AnimationUtils", "r.android.view.animation", ptrTable, methods, NULL, 7, 0x1, 2, 0, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADAnimationUtils = { "AnimationUtils", "r.android.view.animation", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
   return &_ADAnimationUtils;
 }
 
@@ -56,6 +63,11 @@ ADAnimationUtils *create_ADAnimationUtils_init() {
 id<ADInterpolator> ADAnimationUtils_loadInterpolatorWithADContext_withInt_(ADContext *context, jint mDefaultInterpolatorID) {
   ADAnimationUtils_initialize();
   return nil;
+}
+
+jlong ADAnimationUtils_currentAnimationTimeMillis() {
+  ADAnimationUtils_initialize();
+  return JavaLangSystem_currentTimeMillis();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADAnimationUtils)

@@ -65,6 +65,29 @@ J2OBJC_TYPE_LITERAL_HEADER(ADResources)
 
 #endif
 
+#if !defined (ADResources_Theme_) && (INCLUDE_ALL_Resources || defined(INCLUDE_ADResources_Theme))
+#define ADResources_Theme_
+
+@interface ADResources_Theme : NSObject
+
+#pragma mark Public
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ADResources_Theme)
+
+FOUNDATION_EXPORT void ADResources_Theme_init(ADResources_Theme *self);
+
+FOUNDATION_EXPORT ADResources_Theme *new_ADResources_Theme_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ADResources_Theme *create_ADResources_Theme_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ADResources_Theme)
+
+#endif
+
 #if !defined (ADResources_NotFoundException_) && (INCLUDE_ALL_Resources || defined(INCLUDE_ADResources_NotFoundException))
 #define ADResources_NotFoundException_
 

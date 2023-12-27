@@ -268,6 +268,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ScaleType)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -327,6 +337,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 #pragma mark Public
 
 - (instancetype)initWithASImageButtonImpl:(ASImageButtonImpl *)outer$;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)endAnimator;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -397,6 +411,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -512,6 +528,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -599,6 +623,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)startAnimator;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetAdjustViewBounds;
 

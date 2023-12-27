@@ -161,6 +161,15 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
+
+
+
+
+
+
+
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -252,6 +261,27 @@ export abstract class ViewImpl<T> {
 	@Type(() => CommandAttr)
 	@Expose({ name: "invalidateOnFrameChange" })
 	invalidateOnFrameChange!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "animatorXml" })
+	animatorXml_!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "startAnimator" })
+	startAnimator_!:CommandAttr<void>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "endAnimator" })
+	endAnimator_!:CommandAttr<void>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onAnimationStart" })
+	onAnimationStart!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onAnimationEnd" })
+	onAnimationEnd!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onAnimationCancel" })
+	onAnimationCancel!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onAnimationRepeat" })
+	onAnimationRepeat!:CommandAttr<string>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "modelSyncEvents" })
 	modelSyncEvents!:CommandAttr<string>| undefined;
@@ -381,6 +411,12 @@ export abstract class ViewImpl<T> {
 	@Type(() => CommandAttr)
 	@Expose({ name: "onSwiped" })
 	onSwiped!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "translationX" })
+	translationX!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "translationY" })
+	translationY!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -427,6 +463,13 @@ export abstract class ViewImpl<T> {
 		this.customErrorMessageValues = undefined;
 		this.customErrorMessageKeys = undefined;
 		this.invalidateOnFrameChange = undefined;
+		this.animatorXml_ = undefined;
+		this.startAnimator_ = undefined;
+		this.endAnimator_ = undefined;
+		this.onAnimationStart = undefined;
+		this.onAnimationEnd = undefined;
+		this.onAnimationCancel = undefined;
+		this.onAnimationRepeat = undefined;
 		this.modelSyncEvents = undefined;
 		this.outsideTouchable = undefined;
 		this.modelParam = undefined;
@@ -470,6 +513,8 @@ export abstract class ViewImpl<T> {
 		this.maxHeight = undefined;
 		this.swtResizeOptions = undefined;
 		this.onSwiped = undefined;
+		this.translationX = undefined;
+		this.translationY = undefined;
 		this.orderGet = 0;
 		this.orderSet = 0;
 		this.flush = false;
@@ -1134,6 +1179,104 @@ this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		retur
 		this.invalidateOnFrameChange.setValue(value);
 		this.orderSet++;
 		this.invalidateOnFrameChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public animatorXml(value : string) : T {
+		this.resetIfRequired();
+		if (this.animatorXml_ == null || this.animatorXml_ == undefined) {
+			this.animatorXml_ = new CommandAttr<string>();
+		}
+		
+		this.animatorXml_.setSetter(true);
+		this.animatorXml_.setValue(value);
+		this.orderSet++;
+		this.animatorXml_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public startAnimator() : T {
+		this.resetIfRequired();
+		if (this.startAnimator_ == null || this.startAnimator_ == undefined) {
+			this.startAnimator_ = new CommandAttr<void>();
+		}
+		
+		this.startAnimator_.setSetter(true);
+		
+		this.orderSet++;
+		this.startAnimator_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public endAnimator() : T {
+		this.resetIfRequired();
+		if (this.endAnimator_ == null || this.endAnimator_ == undefined) {
+			this.endAnimator_ = new CommandAttr<void>();
+		}
+		
+		this.endAnimator_.setSetter(true);
+		
+		this.orderSet++;
+		this.endAnimator_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnAnimationStart(value : string) : T {
+		this.resetIfRequired();
+		if (this.onAnimationStart == null || this.onAnimationStart == undefined) {
+			this.onAnimationStart = new CommandAttr<string>();
+		}
+		
+		this.onAnimationStart.setSetter(true);
+		this.onAnimationStart.setValue(value);
+		this.orderSet++;
+		this.onAnimationStart.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnAnimationEnd(value : string) : T {
+		this.resetIfRequired();
+		if (this.onAnimationEnd == null || this.onAnimationEnd == undefined) {
+			this.onAnimationEnd = new CommandAttr<string>();
+		}
+		
+		this.onAnimationEnd.setSetter(true);
+		this.onAnimationEnd.setValue(value);
+		this.orderSet++;
+		this.onAnimationEnd.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnAnimationCancel(value : string) : T {
+		this.resetIfRequired();
+		if (this.onAnimationCancel == null || this.onAnimationCancel == undefined) {
+			this.onAnimationCancel = new CommandAttr<string>();
+		}
+		
+		this.onAnimationCancel.setSetter(true);
+		this.onAnimationCancel.setValue(value);
+		this.orderSet++;
+		this.onAnimationCancel.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnAnimationRepeat(value : string) : T {
+		this.resetIfRequired();
+		if (this.onAnimationRepeat == null || this.onAnimationRepeat == undefined) {
+			this.onAnimationRepeat = new CommandAttr<string>();
+		}
+		
+		this.onAnimationRepeat.setSetter(true);
+		this.onAnimationRepeat.setValue(value);
+		this.orderSet++;
+		this.onAnimationRepeat.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -2061,6 +2204,70 @@ payload : any) : T {
 		return this.thisPointer;
 	}
 		
+
+	public tryGetTranslationX() : T {
+		this.resetIfRequired();
+		if (this.translationX == null || this.translationX == undefined) {
+			this.translationX = new CommandAttr<string>()
+		}
+		
+		this.translationX.setGetter(true);
+		this.orderGet++;
+		this.translationX.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getTranslationX() : string {
+		if (this.translationX == null || this.translationX == undefined) {
+			this.translationX = new CommandAttr<string>();
+		}
+		return this.translationX.getCommandReturnValue();
+	}
+	public setTranslationX(value : string) : T {
+		this.resetIfRequired();
+		if (this.translationX == null || this.translationX == undefined) {
+			this.translationX = new CommandAttr<string>();
+		}
+		
+		this.translationX.setSetter(true);
+		this.translationX.setValue(value);
+		this.orderSet++;
+		this.translationX.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetTranslationY() : T {
+		this.resetIfRequired();
+		if (this.translationY == null || this.translationY == undefined) {
+			this.translationY = new CommandAttr<string>()
+		}
+		
+		this.translationY.setGetter(true);
+		this.orderGet++;
+		this.translationY.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getTranslationY() : string {
+		if (this.translationY == null || this.translationY == undefined) {
+			this.translationY = new CommandAttr<string>();
+		}
+		return this.translationY.getCommandReturnValue();
+	}
+	public setTranslationY(value : string) : T {
+		this.resetIfRequired();
+		if (this.translationY == null || this.translationY == undefined) {
+			this.translationY = new CommandAttr<string>();
+		}
+		
+		this.translationY.setSetter(true);
+		this.translationY.setValue(value);
+		this.orderSet++;
+		this.translationY.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
 	//end - body
 
 }
@@ -2081,6 +2288,86 @@ export class View extends ViewImpl<View> implements IWidget{
 }
 
 ViewImpl.initialize();
+export interface OnAnimationStartEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationEndEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationCancelEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationRepeatEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationStartEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationEndEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationCancelEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationRepeatEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationStartEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationEndEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationCancelEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationRepeatEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationStartEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationEndEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationCancelEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationRepeatEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
 export interface OnSwipedEvent extends Event{
         //direction:String;
 

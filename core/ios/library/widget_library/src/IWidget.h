@@ -239,6 +239,10 @@
 - (id)invokeMethodWithNSString:(NSString *)methodName
              withNSObjectArray:(IOSObjectArray *)args;
 
+- (id)getAnimator;
+
+- (void)setAnimatorWithId:(id)animator;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASIWidget)

@@ -32,6 +32,10 @@
 
 - (void)writeListWithJavaUtilList:(id<JavaUtilList>)mFullSpanItems;
 
+- (jint)readInt;
+
+- (void)writeIntWithInt:(jint)x;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADParcel)

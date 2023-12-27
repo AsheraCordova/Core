@@ -521,6 +521,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_IosCellSelectionStyle)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -645,6 +655,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
                                                           withId:(id)arg1;
 
 - (ASListViewImpl_ListViewCommandBuilder *)addModelWithId:(id)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)endAnimator;
 
 - (ASListViewImpl_ListViewCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -773,6 +787,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 - (ASListViewImpl_ListViewCommandBuilder *)setDividerHeightWithNSString:(NSString *)value;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -966,6 +982,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
 - (ASListViewImpl_ListViewCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASListViewImpl_ListViewCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASListViewImpl_ListViewCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setOnChildViewRemovedWithNSString:(NSString *)arg0;
@@ -1063,6 +1087,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 - (ASListViewImpl_ListViewCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)startAnimator;
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetAddStatesFromChildren;
 

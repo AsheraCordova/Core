@@ -99,6 +99,8 @@
      <source-file src="library/Plugin_Converter/src/GravityConverter.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_Converter/src/IdConverter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
      <source-file src="library/Plugin_Converter/src/IdConverter.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/Plugin_Converter/src/ImageStateCommandConverter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
+     <source-file src="library/Plugin_Converter/src/ImageStateCommandConverter.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_Converter/src/InRange.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
      <source-file src="library/Plugin_Converter/src/InRange.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_Converter/src/IntConverter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
@@ -131,6 +133,8 @@
      <source-file src="library/Plugin_Converter/src/MinLength.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_Converter/src/MinValue.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
      <source-file src="library/Plugin_Converter/src/MinValue.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/Plugin_Converter/src/NilConverter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
+     <source-file src="library/Plugin_Converter/src/NilConverter.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_Converter/src/NotEmpty.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
      <source-file src="library/Plugin_Converter/src/NotEmpty.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_Converter/src/ObjectToMapConverter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>

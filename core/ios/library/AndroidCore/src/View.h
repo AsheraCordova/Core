@@ -414,6 +414,8 @@
 
 - (void)registerPendingFrameMetricsObservers;
 
+- (void)relayout;
+
 - (void)remeasure;
 
 - (jboolean)removeCallbacksWithJavaLangRunnable:(id<JavaLangRunnable>)action;

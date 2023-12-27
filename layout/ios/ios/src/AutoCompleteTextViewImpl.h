@@ -695,6 +695,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_InputView)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -754,6 +764,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 #pragma mark Public
 
 - (instancetype)initWithASAutoCompleteTextViewImpl:(ASAutoCompleteTextViewImpl *)outer$;
+
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)endAnimator;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -933,6 +947,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setEditableWithBoolean:(jboolean)value;
 
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
+
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setEmsWithInt:(jint)value;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setEnabledWithBoolean:(jboolean)value;
@@ -1107,6 +1123,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setOnafterTextChangeWithNSString:(NSString *)value;
 
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setOnbeforeTextChangeWithNSString:(NSString *)value;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
@@ -1228,6 +1252,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setZIndexWithInt:(jint)arg0;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)showDropDownWithBoolean:(jboolean)value;
+
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)startAnimator;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetAlpha;
 

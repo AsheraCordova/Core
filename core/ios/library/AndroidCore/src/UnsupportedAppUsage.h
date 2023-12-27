@@ -24,19 +24,24 @@
 
 @protocol ADUnsupportedAppUsage < JavaLangAnnotationAnnotation >
 
+@property (readonly) jint maxTargetSdk;
+
 - (jboolean)isEqual:(id)obj;
 
 - (NSUInteger)hash;
 
 @end
 
-@interface ADUnsupportedAppUsage : NSObject < ADUnsupportedAppUsage >
+@interface ADUnsupportedAppUsage : NSObject < ADUnsupportedAppUsage > {
+ @public
+  jint maxTargetSdk_;
+}
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADUnsupportedAppUsage)
 
-FOUNDATION_EXPORT id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(void);
+FOUNDATION_EXPORT id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(jint maxTargetSdk);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADUnsupportedAppUsage)
 

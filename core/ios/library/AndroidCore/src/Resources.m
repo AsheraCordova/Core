@@ -91,8 +91,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcFieldInfo fields[] = {
     { "displayMetric", "LADDisplayMetrics;", .constantValue.asLong = 0, 0x8, -1, 8, -1, -1 },
   };
-  static const void *ptrTable[] = { "getIdentifier", "LNSString;LNSString;LNSString;", "getResourceName", "I", "LADResources_NotFoundException;", "getString", "ILNSString;", "getResourceEntryName", &ADResources_displayMetric };
-  static const J2ObjcClassInfo _ADResources = { "Resources", "r.android.content.res", ptrTable, methods, fields, 7, 0x1, 8, 1, -1, 4, -1, -1, -1 };
+  static const void *ptrTable[] = { "getIdentifier", "LNSString;LNSString;LNSString;", "getResourceName", "I", "LADResources_NotFoundException;", "getString", "ILNSString;", "getResourceEntryName", &ADResources_displayMetric, "LADResources_Theme;LADResources_NotFoundException;" };
+  static const J2ObjcClassInfo _ADResources = { "Resources", "r.android.content.res", ptrTable, methods, fields, 7, 0x1, 8, 1, -1, 9, -1, -1, -1 };
   return &_ADResources;
 }
 
@@ -118,6 +118,45 @@ ADResources *create_ADResources_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADResources)
+
+@implementation ADResources_Theme
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ADResources_Theme_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LADResources;" };
+  static const J2ObjcClassInfo _ADResources_Theme = { "Theme", "r.android.content.res", ptrTable, methods, NULL, 7, 0x9, 1, 0, 0, -1, -1, -1, -1 };
+  return &_ADResources_Theme;
+}
+
+@end
+
+void ADResources_Theme_init(ADResources_Theme *self) {
+  NSObject_init(self);
+}
+
+ADResources_Theme *new_ADResources_Theme_init() {
+  J2OBJC_NEW_IMPL(ADResources_Theme, init)
+}
+
+ADResources_Theme *create_ADResources_Theme_init() {
+  J2OBJC_CREATE_IMPL(ADResources_Theme, init)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADResources_Theme)
 
 @implementation ADResources_NotFoundException
 

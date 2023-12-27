@@ -203,6 +203,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -263,6 +273,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl_ViewOnlyExt)
 
 - (instancetype)initWithASViewOnlyImpl:(ASViewOnlyImpl *)outer$;
 
+- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)endAnimator;
+
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)invalidate;
@@ -298,6 +312,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl_ViewOnlyExt)
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -407,6 +423,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl_ViewOnlyExt)
 
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -470,6 +494,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOnlyImpl_ViewOnlyExt)
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)startAnimator;
 
 - (ASViewOnlyImpl_ViewOnlyCommandBuilder *)tryGetAlpha;
 

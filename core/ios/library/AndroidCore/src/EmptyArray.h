@@ -17,6 +17,7 @@
 #define ADEmptyArray_
 
 @class IOSIntArray;
+@class IOSLongArray;
 @class IOSObjectArray;
 
 @interface ADEmptyArray : NSObject
@@ -33,6 +34,11 @@ inline IOSIntArray *ADEmptyArray_get_INT(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT IOSIntArray *ADEmptyArray_INT;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ADEmptyArray, INT, IOSIntArray *)
+
+inline IOSLongArray *ADEmptyArray_get_LONG(void);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSLongArray *ADEmptyArray_LONG;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ADEmptyArray, LONG, IOSLongArray *)
 
 inline IOSObjectArray *ADEmptyArray_get_STRING(void);
 inline IOSObjectArray *ADEmptyArray_set_STRING(IOSObjectArray *value);

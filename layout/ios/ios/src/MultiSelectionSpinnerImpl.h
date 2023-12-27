@@ -434,6 +434,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_TextStyle)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -561,6 +571,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 
 - (instancetype)initWithASMultiSelectionSpinnerImpl:(ASMultiSelectionSpinnerImpl *)outer$;
 
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)endAnimator;
+
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getDrawablePadding;
@@ -662,6 +676,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setEnabledWithBoolean:(jboolean)value;
 
@@ -805,6 +821,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -904,6 +928,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)startAnimator;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetAlpha;
 

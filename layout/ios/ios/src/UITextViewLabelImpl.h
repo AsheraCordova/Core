@@ -587,6 +587,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_DrawableTintMode)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -684,6 +694,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 #pragma mark Public
 
 - (instancetype)initWithASUITextViewLabelImpl:(ASUITextViewLabelImpl *)outer$;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)endAnimator;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -834,6 +848,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setEllipsizeWithNSString:(NSString *)value;
 
@@ -989,6 +1005,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -1100,6 +1124,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)startAnimator;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetAlpha;
 

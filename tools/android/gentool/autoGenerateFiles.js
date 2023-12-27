@@ -68,6 +68,9 @@ function syncSwtRes() {
 				cpx.copySync("../res/xml/" + file, swtResPath + "/res/xml");
 			}
   		});
+  		
+  		cpx.copySync("../res/anim/*.*", swtResPath + "/res/anim");
+  		cpx.copySync("../res/animator/*.*", swtResPath + "/res/animator");
 	}
 }
 
@@ -144,6 +147,9 @@ function syncWebRes() {
 				cpx.copySync("../res/xml/" + file, webPath + "/res/xml");
 			}
   		});
+  		
+  		cpx.copySync("../res/anim/*.*", webPath + "/res/anim");
+  		cpx.copySync("../res/animator/*.*", webPath + "/res/animator");
 	}
 }
 
@@ -177,7 +183,9 @@ function createFolders() {
 		"../resources/xml",
 		"../resources/color",
 		"../resources/menu",
-		"../tsc/src/R"
+		"../tsc/src/R",
+		"../res/anim",
+		"../res/animator",
 	];
 
 	for (let res in resMandatory) {

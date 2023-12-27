@@ -27,11 +27,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADArrayUtils_newUnpaddedIntArrayWithInt_(initialCapacity);
 }
 
++ (IOSLongArray *)newUnpaddedLongArrayWithInt:(jint)initialCapacity {
+  return ADArrayUtils_newUnpaddedLongArrayWithInt_(initialCapacity);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 0, 1, -1, -1, -1, -1 },
     { NULL, "[I", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "[J", 0x9, 4, 3, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -39,9 +44,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(checkBoundsWithInt:withInt:);
   methods[2].selector = @selector(newUnpaddedIntArrayWithInt:);
+  methods[3].selector = @selector(newUnpaddedLongArrayWithInt:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "checkBounds", "II", "newUnpaddedIntArray", "I" };
-  static const J2ObjcClassInfo _ADArrayUtils = { "ArrayUtils", "r.com.android.internal.util", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "checkBounds", "II", "newUnpaddedIntArray", "I", "newUnpaddedLongArray" };
+  static const J2ObjcClassInfo _ADArrayUtils = { "ArrayUtils", "r.com.android.internal.util", ptrTable, methods, NULL, 7, 0x1, 4, 0, -1, -1, -1, -1, -1 };
   return &_ADArrayUtils;
 }
 
@@ -69,6 +75,11 @@ void ADArrayUtils_checkBoundsWithInt_withInt_(jint len, jint index) {
 IOSIntArray *ADArrayUtils_newUnpaddedIntArrayWithInt_(jint initialCapacity) {
   ADArrayUtils_initialize();
   return [IOSIntArray arrayWithLength:initialCapacity];
+}
+
+IOSLongArray *ADArrayUtils_newUnpaddedLongArrayWithInt_(jint initialCapacity) {
+  ADArrayUtils_initialize();
+  return [IOSLongArray arrayWithLength:initialCapacity];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADArrayUtils)

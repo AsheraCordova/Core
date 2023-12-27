@@ -25,6 +25,8 @@
 
 - (instancetype)init;
 
++ (jlong)currentAnimationTimeMillis;
+
 + (id<ADInterpolator>)loadInterpolatorWithADContext:(ADContext *)context
                                             withInt:(jint)mDefaultInterpolatorID;
 
@@ -39,6 +41,8 @@ FOUNDATION_EXPORT ADAnimationUtils *new_ADAnimationUtils_init(void) NS_RETURNS_R
 FOUNDATION_EXPORT ADAnimationUtils *create_ADAnimationUtils_init(void);
 
 FOUNDATION_EXPORT id<ADInterpolator> ADAnimationUtils_loadInterpolatorWithADContext_withInt_(ADContext *context, jint mDefaultInterpolatorID);
+
+FOUNDATION_EXPORT jlong ADAnimationUtils_currentAnimationTimeMillis(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADAnimationUtils)
 

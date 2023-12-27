@@ -7,7 +7,6 @@
 #include "J2ObjC_source.h"
 #include "Parcel.h"
 #include "Parcelable.h"
-#include "RectF.h"
 
 
 @interface ADParcelable : NSObject
@@ -45,7 +44,7 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (ADRectF *)createFromParcelWithADParcel:(id<ADParcel>)inArg {
+- (id)createFromParcelWithADParcel:(id<ADParcel>)inArg {
   return nil;
 }
 
@@ -56,8 +55,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADRectF;", 0x1, 0, 1, -1, -1, -1, -1 },
-    { NULL, "[LADRectF;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 0, 1, -1, 2, -1, -1 },
+    { NULL, "[LNSObject;", 0x1, 3, 4, -1, 5, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -66,8 +65,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[1].selector = @selector(createFromParcelWithADParcel:);
   methods[2].selector = @selector(newArrayWithInt:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "createFromParcel", "LADParcel;", "newArray", "I", "LADParcelable;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
-  static const J2ObjcClassInfo _ADParcelable_Creator = { "Creator", "r.android.os", ptrTable, methods, NULL, 7, 0x9, 3, 0, 4, -1, -1, 5, -1 };
+  static const void *ptrTable[] = { "createFromParcel", "LADParcel;", "(Lr/android/os/Parcel;)TT;", "newArray", "I", "(I)[TT;", "LADParcelable;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _ADParcelable_Creator = { "Creator", "r.android.os", ptrTable, methods, NULL, 7, 0x9, 3, 0, 6, -1, -1, 7, -1 };
   return &_ADParcelable_Creator;
 }
 

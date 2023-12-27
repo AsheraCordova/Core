@@ -17,6 +17,7 @@
 #define ADArrayUtils_
 
 @class IOSIntArray;
+@class IOSLongArray;
 
 @interface ADArrayUtils : NSObject
 
@@ -35,6 +36,8 @@
 
 + (IOSIntArray *)newUnpaddedIntArrayWithInt:(jint)initialCapacity OBJC_METHOD_FAMILY_NONE;
 
++ (IOSLongArray *)newUnpaddedLongArrayWithInt:(jint)initialCapacity OBJC_METHOD_FAMILY_NONE;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADArrayUtils)
@@ -48,6 +51,8 @@ FOUNDATION_EXPORT ADArrayUtils *create_ADArrayUtils_init(void);
 FOUNDATION_EXPORT void ADArrayUtils_checkBoundsWithInt_withInt_(jint len, jint index);
 
 FOUNDATION_EXPORT IOSIntArray *ADArrayUtils_newUnpaddedIntArrayWithInt_(jint initialCapacity);
+
+FOUNDATION_EXPORT IOSLongArray *ADArrayUtils_newUnpaddedLongArrayWithInt_(jint initialCapacity);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADArrayUtils)
 

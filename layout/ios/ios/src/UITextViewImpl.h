@@ -614,6 +614,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_InputView)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -673,6 +683,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 #pragma mark Public
 
 - (instancetype)initWithASUITextViewImpl:(ASUITextViewImpl *)outer$;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)endAnimator;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -819,6 +833,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setEmsWithInt:(jint)value;
 
@@ -986,6 +1002,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setOnafterTextChangeWithNSString:(NSString *)value;
 
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setOnbeforeTextChangeWithNSString:(NSString *)value;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
@@ -1101,6 +1125,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)startAnimator;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetAlpha;
 

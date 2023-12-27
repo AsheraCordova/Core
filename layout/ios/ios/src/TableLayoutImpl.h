@@ -221,6 +221,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -288,6 +298,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)addModelWithId:(id)arg0;
 
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)endAnimator;
+
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getGravity;
@@ -341,6 +355,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -462,6 +478,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setOnChildViewRemovedWithNSString:(NSString *)arg0;
@@ -553,6 +577,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setWeightSumWithFloat:(jfloat)value;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)startAnimator;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetAddStatesFromChildren;
 

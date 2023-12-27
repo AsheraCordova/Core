@@ -158,6 +158,11 @@ inline NSString *ASCommonConverters_get_array(void);
 FOUNDATION_EXPORT NSString *ASCommonConverters_array;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ASCommonConverters, array, NSString *)
 
+inline NSString *ASCommonConverters_get_nil(void);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *ASCommonConverters_nil;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ASCommonConverters, nil, NSString *)
+
 inline NSString *ASCommonConverters_get_listtointarray(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *ASCommonConverters_listtointarray;
@@ -197,6 +202,11 @@ inline NSString *ASCommonConverters_get_command_textformatter(void);
 /*! INTERNAL ONLY - Use accessor function from above. */
 FOUNDATION_EXPORT NSString *ASCommonConverters_command_textformatter;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ASCommonConverters, command_textformatter, NSString *)
+
+inline NSString *ASCommonConverters_get_command_imagestate(void);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT NSString *ASCommonConverters_command_imagestate;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ASCommonConverters, command_imagestate, NSString *)
 
 FOUNDATION_EXPORT void ASCommonConverters_init(ASCommonConverters *self);
 

@@ -207,6 +207,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -345,6 +355,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 
 - (instancetype)initWithASWebViewImpl:(ASWebViewImpl *)outer$;
 
+- (ASWebViewImpl_WebViewCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASWebViewImpl_WebViewCommandBuilder *)endAnimator;
+
 - (ASWebViewImpl_WebViewCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)invalidate;
@@ -382,6 +396,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 - (ASWebViewImpl_WebViewCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASWebViewImpl_WebViewCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -491,6 +507,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASWebViewImpl_WebViewCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASWebViewImpl_WebViewCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASWebViewImpl_WebViewCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASWebViewImpl_WebViewCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASWebViewImpl_WebViewCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -560,6 +584,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 - (ASWebViewImpl_WebViewCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASWebViewImpl_WebViewCommandBuilder *)startAnimator;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetAlpha;
 

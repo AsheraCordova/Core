@@ -13,6 +13,7 @@
 J2OBJC_INITIALIZED_DEFN(ADEmptyArray)
 
 IOSIntArray *ADEmptyArray_INT;
+IOSLongArray *ADEmptyArray_LONG;
 IOSObjectArray *ADEmptyArray_STRING;
 
 @implementation ADEmptyArray
@@ -35,16 +36,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "INT", "[I", .constantValue.asLong = 0, 0x19, -1, 0, -1, -1 },
-    { "STRING", "[LNSString;", .constantValue.asLong = 0, 0x9, -1, 1, -1, -1 },
+    { "LONG", "[J", .constantValue.asLong = 0, 0x19, -1, 1, -1, -1 },
+    { "STRING", "[LNSString;", .constantValue.asLong = 0, 0x9, -1, 2, -1, -1 },
   };
-  static const void *ptrTable[] = { &ADEmptyArray_INT, &ADEmptyArray_STRING };
-  static const J2ObjcClassInfo _ADEmptyArray = { "EmptyArray", "r.libcore.util", ptrTable, methods, fields, 7, 0x1, 1, 2, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { &ADEmptyArray_INT, &ADEmptyArray_LONG, &ADEmptyArray_STRING };
+  static const J2ObjcClassInfo _ADEmptyArray = { "EmptyArray", "r.libcore.util", ptrTable, methods, fields, 7, 0x1, 1, 3, -1, -1, -1, -1, -1 };
   return &_ADEmptyArray;
 }
 
 + (void)initialize {
   if (self == [ADEmptyArray class]) {
     JreStrongAssignAndConsume(&ADEmptyArray_INT, [IOSIntArray newArrayWithLength:0]);
+    JreStrongAssignAndConsume(&ADEmptyArray_LONG, [IOSLongArray newArrayWithLength:0]);
     JreStrongAssignAndConsume(&ADEmptyArray_STRING, [IOSObjectArray newArrayWithLength:0 type:NSString_class_()]);
     J2OBJC_SET_INITIALIZED(ADEmptyArray)
   }

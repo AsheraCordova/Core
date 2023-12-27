@@ -1153,6 +1153,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASProgressBarImpl)
 
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value {
+  if ([((NSString *) nil_chk(name)) isEqual:@"state0"]) {
+    [self setState0WithId:value];
+    return;
+  }
+  if ([name isEqual:@"state1"]) {
+    [self setState1WithId:value];
+    return;
+  }
+  if ([name isEqual:@"state2"]) {
+    [self setState2WithId:value];
+    return;
+  }
+  if ([name isEqual:@"state3"]) {
+    [self setState3WithId:value];
+    return;
+  }
+  if ([name isEqual:@"state4"]) {
+    [self setState4WithId:value];
+    return;
+  }
   [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
 }
 
@@ -1168,6 +1188,26 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASProgressBarImpl)
 - (jint)nativeMeasureHeightWithId:(id)uiView
                           withInt:(jint)width {
   return ASViewImpl_nativeMeasureHeightWithId_withInt_(uiView, width);
+}
+
+- (void)setState0WithId:(id)value {
+  ASViewImpl_setStateWithASIWidget_withInt_withId_(this$0_, 0, value);
+}
+
+- (void)setState1WithId:(id)value {
+  ASViewImpl_setStateWithASIWidget_withInt_withId_(this$0_, 1, value);
+}
+
+- (void)setState2WithId:(id)value {
+  ASViewImpl_setStateWithASIWidget_withInt_withId_(this$0_, 2, value);
+}
+
+- (void)setState3WithId:(id)value {
+  ASViewImpl_setStateWithASIWidget_withInt_withId_(this$0_, 3, value);
+}
+
+- (void)setState4WithId:(id)value {
+  ASViewImpl_setStateWithASIWidget_withInt_withId_(this$0_, 4, value);
 }
 
 - (void)state0 {
@@ -1232,6 +1272,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASProgressBarImpl)
     { NULL, "V", 0x1, 28, 1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, 29, 30, -1, -1, -1, -1 },
     { NULL, "I", 0x1, 31, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 33, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 34, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 35, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 36, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 37, 30, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -1270,13 +1315,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASProgressBarImpl)
   methods[24].selector = @selector(setVisibilityWithInt:);
   methods[25].selector = @selector(nativeMeasureWidthWithId:);
   methods[26].selector = @selector(nativeMeasureHeightWithId:withInt:);
-  methods[27].selector = @selector(state0);
-  methods[28].selector = @selector(state1);
-  methods[29].selector = @selector(state2);
-  methods[30].selector = @selector(state3);
-  methods[31].selector = @selector(state4);
-  methods[32].selector = @selector(stateYes);
-  methods[33].selector = @selector(stateNo);
+  methods[27].selector = @selector(setState0WithId:);
+  methods[28].selector = @selector(setState1WithId:);
+  methods[29].selector = @selector(setState2WithId:);
+  methods[30].selector = @selector(setState3WithId:);
+  methods[31].selector = @selector(setState4WithId:);
+  methods[32].selector = @selector(state0);
+  methods[33].selector = @selector(state1);
+  methods[34].selector = @selector(state2);
+  methods[35].selector = @selector(state3);
+  methods[36].selector = @selector(state4);
+  methods[37].selector = @selector(stateYes);
+  methods[38].selector = @selector(stateNo);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASProgressBarImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -1284,10 +1334,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASProgressBarImpl)
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 38, -1 },
   };
-  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASProgressBarImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASProgressBarImpl_ProgressBarExt = { "ProgressBarExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 34, 6, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASProgressBarImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "setState0", "setState1", "setState2", "setState3", "setState4", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASProgressBarImpl_ProgressBarExt = { "ProgressBarExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 39, 6, 3, -1, -1, -1, -1 };
   return &_ASProgressBarImpl_ProgressBarExt;
 }
 

@@ -10,12 +10,18 @@
 
 @implementation ADUnsupportedAppUsage
 
+@synthesize maxTargetSdk = maxTargetSdk_;
+
++ (jint)maxTargetSdkDefault {
+  return 0;
+}
+
 - (IOSClass *)annotationType {
   return ADUnsupportedAppUsage_class_();
 }
 
 - (NSString *)description {
-  return @"@r.android.compat.annotation.UnsupportedAppUsage()";
+  return [NSString stringWithFormat:@"@r.android.compat.annotation.UnsupportedAppUsage(maxTargetSdk=%d)", maxTargetSdk_];
 }
 
 - (jboolean)isEqual:(id)obj {
@@ -27,14 +33,26 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcClassInfo _ADUnsupportedAppUsage = { "UnsupportedAppUsage", "r.android.compat.annotation", NULL, NULL, NULL, 7, 0x2609, 0, 0, -1, -1, -1, -1, -1 };
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(maxTargetSdk);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "maxTargetSdk_", "I", .constantValue.asLong = 0, 0x1000, -1, -1, -1, -1 },
+  };
+  static const J2ObjcClassInfo _ADUnsupportedAppUsage = { "UnsupportedAppUsage", "r.android.compat.annotation", NULL, methods, fields, 7, 0x2609, 1, 1, -1, -1, -1, -1, -1 };
   return &_ADUnsupportedAppUsage;
 }
 
 @end
 
-id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage() {
+id<ADUnsupportedAppUsage> create_ADUnsupportedAppUsage(jint maxTargetSdk) {
   ADUnsupportedAppUsage *self = AUTORELEASE([[ADUnsupportedAppUsage alloc] init]);
+  self->maxTargetSdk_ = maxTargetSdk;
   return self;
 }
 

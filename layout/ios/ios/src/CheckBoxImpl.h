@@ -582,6 +582,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_DrawableTintMode)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -679,6 +689,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 #pragma mark Public
 
 - (instancetype)initWithASCheckBoxImpl:(ASCheckBoxImpl *)outer$;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)endAnimator;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -833,6 +847,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setEllipsizeWithNSString:(NSString *)value;
 
@@ -994,6 +1010,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setOnCheckedChangeWithNSString:(NSString *)value;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
@@ -1107,6 +1131,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)startAnimator;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetAlpha;
 

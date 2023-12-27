@@ -22,6 +22,14 @@
 
 - (instancetype)init;
 
++ (void)asyncTraceBeginWithInt:(jint)traceTagView
+                  withNSString:(NSString *)nameForTrace
+                       withInt:(jint)identityHashCode;
+
++ (void)asyncTraceEndWithInt:(jint)traceTagView
+                withNSString:(NSString *)nameForTrace
+                     withInt:(jint)identityHashCode;
+
 + (jboolean)isTagEnabledWithLong:(jlong)traceTag;
 
 + (void)traceBeginWithInt:(jint)traceTagView
@@ -29,6 +37,10 @@
 
 + (void)traceBeginWithLong:(jlong)traceTag
               withNSString:(NSString *)traceName;
+
++ (void)traceCounterWithInt:(jint)traceTagView
+               withNSString:(NSString *)string
+                    withInt:(jint)i;
 
 + (void)traceEndWithInt:(jint)traceTagView;
 
@@ -57,6 +69,12 @@ FOUNDATION_EXPORT jboolean ADTrace_isTagEnabledWithLong_(jlong traceTag);
 FOUNDATION_EXPORT void ADTrace_traceBeginWithLong_withNSString_(jlong traceTag, NSString *traceName);
 
 FOUNDATION_EXPORT void ADTrace_traceEndWithLong_(jlong traceTag);
+
+FOUNDATION_EXPORT void ADTrace_asyncTraceEndWithInt_withNSString_withInt_(jint traceTagView, NSString *nameForTrace, jint identityHashCode);
+
+FOUNDATION_EXPORT void ADTrace_asyncTraceBeginWithInt_withNSString_withInt_(jint traceTagView, NSString *nameForTrace, jint identityHashCode);
+
+FOUNDATION_EXPORT void ADTrace_traceCounterWithInt_withNSString_withInt_(jint traceTagView, NSString *string, jint i);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTrace)
 

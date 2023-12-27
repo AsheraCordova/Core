@@ -126,7 +126,10 @@ public abstract class BaseApplication  {
 		shell.addListener(SWT.Close, new Listener() {
             @Override
             public void handleEvent(Event event) {
-                display.dispose();
+                try {
+					display.dispose();
+				} catch (Exception e) {
+				}
                 System.exit(0);
             }
         });

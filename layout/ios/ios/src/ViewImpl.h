@@ -39,6 +39,7 @@
 @protocol ASViewImpl_PanCallBack;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
+@protocol OrgXmlSaxAttributes;
 
 @interface ASViewImpl : NSObject
 
@@ -177,6 +178,9 @@
 + (id)getTintColorWithId:(id)uiView;
 
 + (id)getTranslatesAutoresizingMaskIntoConstraintsWithId:(id)uiView;
+
++ (NSString *)getValueWithNSString:(NSString *)key
+           withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)attributes;
 
 + (jint)getXWithId:(id)objview;
 
@@ -396,6 +400,10 @@
 + (void)setShowsLargeContentViewerWithId:(id)nativeWidget
                                   withId:(id)value;
 
++ (void)setStateWithASIWidget:(id<ASIWidget>)w
+                      withInt:(jint)i
+                       withId:(id)value;
+
 + (void)setStyleWithASIWidget:(id<ASIWidget>)w
                        withId:(id)objValue;
 
@@ -507,6 +515,8 @@ FOUNDATION_EXPORT void ASViewImpl_setMessageOnLabelWithASIWidget_withNSString_(i
 
 FOUNDATION_EXPORT void ASViewImpl_stateWithASIWidget_withInt_(id<ASIWidget> w, jint i);
 
+FOUNDATION_EXPORT void ASViewImpl_setStateWithASIWidget_withInt_withId_(id<ASIWidget> w, jint i, id value);
+
 FOUNDATION_EXPORT void ASViewImpl_stateYesWithASIWidget_(id<ASIWidget> w);
 
 FOUNDATION_EXPORT void ASViewImpl_stateNoWithASIWidget_(id<ASIWidget> w);
@@ -526,6 +536,8 @@ FOUNDATION_EXPORT void ASViewImpl_redrawDrawablesWithASIWidget_(id<ASIWidget> w)
 FOUNDATION_EXPORT void ASViewImpl_requestLayoutWithASIWidget_(id<ASIWidget> w);
 
 FOUNDATION_EXPORT ADDrawable *ASViewImpl_getDrawableWithADColorStateList_(ADColorStateList *colorStateList);
+
+FOUNDATION_EXPORT NSString *ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(NSString *key, id<OrgXmlSaxAttributes> attributes);
 
 FOUNDATION_EXPORT void ASViewImpl_setBackgroundColorWithId_withId_(id nativeWidget, id value);
 
@@ -1194,6 +1206,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (instancetype)init;
 
+- (id)animatorXmlWithNSString:(NSString *)value;
+
+- (id)endAnimator;
+
 - (id)getAlpha;
 
 - (id)getBackground;
@@ -1476,6 +1492,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (id)setModelUiToPojoEventIdsWithNSString:(NSString *)value;
 
+- (id)setOnAnimationCancelWithNSString:(NSString *)value;
+
+- (id)setOnAnimationEndWithNSString:(NSString *)value;
+
+- (id)setOnAnimationRepeatWithNSString:(NSString *)value;
+
+- (id)setOnAnimationStartWithNSString:(NSString *)value;
+
 - (id)setOnClickWithNSString:(NSString *)value;
 
 - (id)setOnDragWithNSString:(NSString *)value;
@@ -1539,6 +1563,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 - (id)setVisibilityWithNSString:(NSString *)value;
 
 - (id)setZIndexWithInt:(jint)value;
+
+- (id)startAnimator;
 
 - (id)tryGetAlpha;
 
@@ -1708,6 +1734,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
 
+- (ASViewImpl_ViewCommandBuilderInternal *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)endAnimator;
+
 - (ASViewImpl_ViewCommandBuilderInternal *)invalidate;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)notifyDataSetChangedWithBoolean:(jboolean)arg0;
@@ -1852,6 +1882,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASViewImpl_ViewCommandBuilderInternal *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASViewImpl_ViewCommandBuilderInternal *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setOnDragWithNSString:(NSString *)arg0;
@@ -1915,6 +1953,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 - (ASViewImpl_ViewCommandBuilderInternal *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setZIndexWithInt:(jint)arg0;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)startAnimator;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetAlpha;
 
@@ -2089,6 +2129,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 #pragma mark Public
 
 - (instancetype)initWithASIWidget:(id<ASIWidget>)widget;
+
+- (void)animatorXmlWithNSString:(NSString *)value;
+
+- (void)endAnimator;
 
 - (id)getAlpha;
 
@@ -2364,6 +2408,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 
 - (void)setModelUiToPojoEventIdsWithNSString:(NSString *)value;
 
+- (void)setOnAnimationCancelWithNSString:(NSString *)value;
+
+- (void)setOnAnimationEndWithNSString:(NSString *)value;
+
+- (void)setOnAnimationRepeatWithNSString:(NSString *)value;
+
+- (void)setOnAnimationStartWithNSString:(NSString *)value;
+
 - (void)setOnClickWithNSString:(NSString *)value;
 
 - (void)setOnDragWithNSString:(NSString *)value;
@@ -2427,6 +2479,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 - (void)setVisibilityWithNSString:(NSString *)value;
 
 - (void)setZIndexWithInt:(jint)value;
+
+- (void)startAnimator;
 
 - (void)updateModelDataWithNSString:(NSString *)expression
                              withId:(id)payload;

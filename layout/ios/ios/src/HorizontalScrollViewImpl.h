@@ -230,6 +230,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -339,6 +349,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)addModelWithId:(id)arg0;
 
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)endAnimator;
+
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getScrollX;
@@ -392,6 +406,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -517,6 +533,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOnChildViewRemovedWithNSString:(NSString *)arg0;
@@ -606,6 +630,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)startAnimator;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetAddStatesFromChildren;
 

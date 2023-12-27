@@ -18,7 +18,7 @@ public class ConverterPlugin extends BaseConverterPlugin  {
 	public float convertDpToPixel(String dimen) {
 		Resources resources = Resources.getSystem();
 		DisplayMetrics metrics = resources.getDisplayMetrics();
-		float px = Integer.parseInt(dimen.replace("dp", "")) * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+		float px = Float.parseFloat(dimen.replace("dp", "")) * ((float)metrics.densityDpi / DisplayMetrics.DENSITY_DEFAULT);
 		return px;
 	}
 	

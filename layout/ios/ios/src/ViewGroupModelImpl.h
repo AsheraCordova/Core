@@ -147,6 +147,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)addModelWithId:(id)arg0;
 
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)endAnimator;
+
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)invalidate;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)notifyDataSetChangedWithBoolean:(jboolean)arg0;
@@ -184,6 +188,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -299,6 +305,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOnDragWithNSString:(NSString *)arg0;
@@ -362,6 +376,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setZIndexWithInt:(jint)arg0;
+
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)startAnimator;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetAlpha;
 

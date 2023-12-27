@@ -664,6 +664,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_InputView)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -727,6 +737,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 #pragma mark Public
 
 - (instancetype)initWithASEditTextImpl:(ASEditTextImpl *)outer$;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)endAnimator;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -875,6 +889,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 - (ASEditTextImpl_EditTextCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setEmsWithInt:(jint)value;
 
@@ -1046,6 +1062,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setOnafterTextChangeWithNSString:(NSString *)value;
 
+- (ASEditTextImpl_EditTextCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASEditTextImpl_EditTextCommandBuilder *)setOnbeforeTextChangeWithNSString:(NSString *)value;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
@@ -1163,6 +1187,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 - (ASEditTextImpl_EditTextCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)startAnimator;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetAlpha;
 

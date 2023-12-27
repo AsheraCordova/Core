@@ -426,6 +426,13 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
+
+
+
+
+
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -839,6 +846,27 @@ export abstract class ViewImpl<T> {
 	@Type(() => CommandAttr)
 	@Expose({ name: "onSwiped" })
 	onSwiped!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "animatorXml" })
+	animatorXml_!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "startAnimator" })
+	startAnimator_!:CommandAttr<void>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "endAnimator" })
+	endAnimator_!:CommandAttr<void>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onAnimationStart" })
+	onAnimationStart!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onAnimationEnd" })
+	onAnimationEnd!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onAnimationCancel" })
+	onAnimationCancel!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "onAnimationRepeat" })
+	onAnimationRepeat!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -991,6 +1019,13 @@ export abstract class ViewImpl<T> {
 		this.customErrorMessageKeys = undefined;
 		this.invalidateOnFrameChange = undefined;
 		this.onSwiped = undefined;
+		this.animatorXml_ = undefined;
+		this.startAnimator_ = undefined;
+		this.endAnimator_ = undefined;
+		this.onAnimationStart = undefined;
+		this.onAnimationEnd = undefined;
+		this.onAnimationCancel = undefined;
+		this.onAnimationRepeat = undefined;
 		this.orderGet = 0;
 		this.orderSet = 0;
 		this.flush = false;
@@ -4444,6 +4479,104 @@ this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		retur
 		return this.thisPointer;
 	}
 		
+
+	public animatorXml(value : string) : T {
+		this.resetIfRequired();
+		if (this.animatorXml_ == null || this.animatorXml_ == undefined) {
+			this.animatorXml_ = new CommandAttr<string>();
+		}
+		
+		this.animatorXml_.setSetter(true);
+		this.animatorXml_.setValue(value);
+		this.orderSet++;
+		this.animatorXml_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public startAnimator() : T {
+		this.resetIfRequired();
+		if (this.startAnimator_ == null || this.startAnimator_ == undefined) {
+			this.startAnimator_ = new CommandAttr<void>();
+		}
+		
+		this.startAnimator_.setSetter(true);
+		
+		this.orderSet++;
+		this.startAnimator_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public endAnimator() : T {
+		this.resetIfRequired();
+		if (this.endAnimator_ == null || this.endAnimator_ == undefined) {
+			this.endAnimator_ = new CommandAttr<void>();
+		}
+		
+		this.endAnimator_.setSetter(true);
+		
+		this.orderSet++;
+		this.endAnimator_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnAnimationStart(value : string) : T {
+		this.resetIfRequired();
+		if (this.onAnimationStart == null || this.onAnimationStart == undefined) {
+			this.onAnimationStart = new CommandAttr<string>();
+		}
+		
+		this.onAnimationStart.setSetter(true);
+		this.onAnimationStart.setValue(value);
+		this.orderSet++;
+		this.onAnimationStart.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnAnimationEnd(value : string) : T {
+		this.resetIfRequired();
+		if (this.onAnimationEnd == null || this.onAnimationEnd == undefined) {
+			this.onAnimationEnd = new CommandAttr<string>();
+		}
+		
+		this.onAnimationEnd.setSetter(true);
+		this.onAnimationEnd.setValue(value);
+		this.orderSet++;
+		this.onAnimationEnd.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnAnimationCancel(value : string) : T {
+		this.resetIfRequired();
+		if (this.onAnimationCancel == null || this.onAnimationCancel == undefined) {
+			this.onAnimationCancel = new CommandAttr<string>();
+		}
+		
+		this.onAnimationCancel.setSetter(true);
+		this.onAnimationCancel.setValue(value);
+		this.orderSet++;
+		this.onAnimationCancel.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOnAnimationRepeat(value : string) : T {
+		this.resetIfRequired();
+		if (this.onAnimationRepeat == null || this.onAnimationRepeat == undefined) {
+			this.onAnimationRepeat = new CommandAttr<string>();
+		}
+		
+		this.onAnimationRepeat.setSetter(true);
+		this.onAnimationRepeat.setValue(value);
+		this.orderSet++;
+		this.onAnimationRepeat.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
 	//end - body
 
 }
@@ -4565,6 +4698,86 @@ export interface OnTouchEvent extends Event{
 }
 export interface OnSwipedEvent extends Event{
         //direction:String;
+
+
+}
+export interface OnAnimationStartEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationEndEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationCancelEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationRepeatEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationStartEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationEndEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationCancelEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationRepeatEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationStartEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationEndEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationCancelEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationRepeatEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationStartEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationEndEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationCancelEvent extends Event{
+        //animation:android.animation.Animator;
+
+
+}
+export interface OnAnimationRepeatEvent extends Event{
+        //animation:android.animation.Animator;
 
 
 }

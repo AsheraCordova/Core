@@ -242,6 +242,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -304,6 +314,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 
 - (instancetype)initWithASProgressBarImpl:(ASProgressBarImpl *)outer$;
 
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)endAnimator;
+
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getIosColor;
@@ -357,6 +371,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -470,6 +486,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -553,6 +577,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)startAnimator;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetAlpha;
 

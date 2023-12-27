@@ -303,6 +303,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RemoveRule)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -370,6 +380,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RootExt)
 
 - (ASRootImpl_RootCommandBuilder *)addModelWithId:(id)arg0;
 
+- (ASRootImpl_RootCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASRootImpl_RootCommandBuilder *)endAnimator;
+
 - (ASRootImpl_RootCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getGravity;
@@ -419,6 +433,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RootExt)
 - (ASRootImpl_RootCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASRootImpl_RootCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASRootImpl_RootCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASRootImpl_RootCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -542,6 +558,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RootExt)
 
 - (ASRootImpl_RootCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASRootImpl_RootCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASRootImpl_RootCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASRootImpl_RootCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASRootImpl_RootCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASRootImpl_RootCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
 
 - (ASRootImpl_RootCommandBuilder *)setOnChildViewRemovedWithNSString:(NSString *)arg0;
@@ -627,6 +651,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRootImpl_RootExt)
 - (ASRootImpl_RootCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASRootImpl_RootCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASRootImpl_RootCommandBuilder *)startAnimator;
 
 - (ASRootImpl_RootCommandBuilder *)tryGetAddStatesFromChildren;
 

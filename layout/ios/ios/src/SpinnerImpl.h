@@ -433,6 +433,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_TextStyle)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -537,6 +547,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 
 - (instancetype)initWithASSpinnerImpl:(ASSpinnerImpl *)outer$;
 
+- (ASSpinnerImpl_SpinnerCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASSpinnerImpl_SpinnerCommandBuilder *)endAnimator;
+
 - (ASSpinnerImpl_SpinnerCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getDrawablePadding;
@@ -638,6 +652,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setEnabledWithBoolean:(jboolean)value;
 
@@ -781,6 +797,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -880,6 +904,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASSpinnerImpl_SpinnerCommandBuilder *)startAnimator;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetAlpha;
 

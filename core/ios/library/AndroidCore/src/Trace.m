@@ -38,6 +38,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADTrace_traceEndWithLong_(traceTag);
 }
 
++ (void)asyncTraceEndWithInt:(jint)traceTagView
+                withNSString:(NSString *)nameForTrace
+                     withInt:(jint)identityHashCode {
+  ADTrace_asyncTraceEndWithInt_withNSString_withInt_(traceTagView, nameForTrace, identityHashCode);
+}
+
++ (void)asyncTraceBeginWithInt:(jint)traceTagView
+                  withNSString:(NSString *)nameForTrace
+                       withInt:(jint)identityHashCode {
+  ADTrace_asyncTraceBeginWithInt_withNSString_withInt_(traceTagView, nameForTrace, identityHashCode);
+}
+
++ (void)traceCounterWithInt:(jint)traceTagView
+               withNSString:(NSString *)string
+                    withInt:(jint)i {
+  ADTrace_traceCounterWithInt_withNSString_withInt_(traceTagView, string, i);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -46,6 +64,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x9, 4, 5, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 0, 6, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 2, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 9, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 10, 8, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -56,12 +77,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[3].selector = @selector(isTagEnabledWithLong:);
   methods[4].selector = @selector(traceBeginWithLong:withNSString:);
   methods[5].selector = @selector(traceEndWithLong:);
+  methods[6].selector = @selector(asyncTraceEndWithInt:withNSString:withInt:);
+  methods[7].selector = @selector(asyncTraceBeginWithInt:withNSString:withInt:);
+  methods[8].selector = @selector(traceCounterWithInt:withNSString:withInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "TRACE_TAG_VIEW", "I", .constantValue.asInt = ADTrace_TRACE_TAG_VIEW, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "traceBegin", "ILNSString;", "traceEnd", "I", "isTagEnabled", "J", "JLNSString;" };
-  static const J2ObjcClassInfo _ADTrace = { "Trace", "r.android.os", ptrTable, methods, fields, 7, 0x1, 6, 1, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "traceBegin", "ILNSString;", "traceEnd", "I", "isTagEnabled", "J", "JLNSString;", "asyncTraceEnd", "ILNSString;I", "asyncTraceBegin", "traceCounter" };
+  static const J2ObjcClassInfo _ADTrace = { "Trace", "r.android.os", ptrTable, methods, fields, 7, 0x1, 9, 1, -1, -1, -1, -1, -1 };
   return &_ADTrace;
 }
 
@@ -97,6 +121,18 @@ void ADTrace_traceBeginWithLong_withNSString_(jlong traceTag, NSString *traceNam
 }
 
 void ADTrace_traceEndWithLong_(jlong traceTag) {
+  ADTrace_initialize();
+}
+
+void ADTrace_asyncTraceEndWithInt_withNSString_withInt_(jint traceTagView, NSString *nameForTrace, jint identityHashCode) {
+  ADTrace_initialize();
+}
+
+void ADTrace_asyncTraceBeginWithInt_withNSString_withInt_(jint traceTagView, NSString *nameForTrace, jint identityHashCode) {
+  ADTrace_initialize();
+}
+
+void ADTrace_traceCounterWithInt_withNSString_withInt_(jint traceTagView, NSString *string, jint i) {
   ADTrace_initialize();
 }
 

@@ -255,6 +255,26 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
 		}
 		@Override
 		public void setMyAttribute(String name, Object value) {
+			if (name.equals("state0")) {
+				setState0(value);
+				return;
+			}
+			if (name.equals("state1")) {
+				setState1(value);
+				return;
+			}
+			if (name.equals("state2")) {
+				setState2(value);
+				return;
+			}
+			if (name.equals("state3")) {
+				setState3(value);
+				return;
+			}
+			if (name.equals("state4")) {
+				setState4(value);
+				return;
+			}
 			ImageButtonImpl.this.setAttribute(name, value, true);
 		}
         @Override
@@ -264,6 +284,21 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
             
         }
         
+    	public void setState0(Object value) {
+    		ViewImpl.setState(ImageButtonImpl.this, 0, value);
+    	}
+    	public void setState1(Object value) {
+    		ViewImpl.setState(ImageButtonImpl.this, 1, value);
+    	}
+    	public void setState2(Object value) {
+    		ViewImpl.setState(ImageButtonImpl.this, 2, value);
+    	}
+    	public void setState3(Object value) {
+    		ViewImpl.setState(ImageButtonImpl.this, 3, value);
+    	}
+    	public void setState4(Object value) {
+    		ViewImpl.setState(ImageButtonImpl.this, 4, value);
+    	}
         	public void state0() {
         		ViewImpl.state(ImageButtonImpl.this, 0);
         	}

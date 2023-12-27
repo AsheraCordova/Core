@@ -304,6 +304,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_Divider)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -370,6 +380,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
                                                               withId:(id)arg1;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)addModelWithId:(id)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)endAnimator;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -448,6 +462,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setDividerPaddingWithNSString:(NSString *)value;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -571,6 +587,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOnCheckedChangeWithNSString:(NSString *)value;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)value;
@@ -664,6 +688,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setWeightSumWithFloat:(jfloat)value;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)startAnimator;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetAddStatesFromChildren;
 

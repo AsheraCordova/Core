@@ -117,6 +117,8 @@
 
 - (id<ASIWidget>)findWidgetByIdWithNSString:(NSString *)id_;
 
+- (id)getAnimator;
+
 - (ASWidgetAttribute *)getAttributeWithASHasWidgets:(id<ASHasWidgets>)parent
                                        withNSString:(NSString *)localName
                                        withNSString:(NSString *)key;
@@ -293,6 +295,8 @@
                       withNSString:(NSString *)phase
                       withNSString:(NSString *)commandFilterRegex
                  withNSObjectArray:(IOSObjectArray *)args;
+
+- (void)setAnimatorWithId:(id)animator;
 
 - (void)setAttributeWithNSString:(NSString *)key
                           withId:(id)objValue

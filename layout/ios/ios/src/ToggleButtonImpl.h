@@ -478,6 +478,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_JustificationMode)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -537,6 +547,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 #pragma mark Public
 
 - (instancetype)initWithASToggleButtonImpl:(ASToggleButtonImpl *)outer$;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)endAnimator;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -659,6 +673,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setEditableWithBoolean:(jboolean)value;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setEllipsizeWithNSString:(NSString *)value;
 
@@ -798,6 +814,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setOnCheckedChangeWithNSString:(NSString *)value;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
@@ -911,6 +935,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)startAnimator;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetAlpha;
 

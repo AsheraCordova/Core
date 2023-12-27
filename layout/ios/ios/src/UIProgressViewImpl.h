@@ -252,6 +252,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -314,6 +324,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 
 - (instancetype)initWithASUIProgressViewImpl:(ASUIProgressViewImpl *)outer$;
 
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)endAnimator;
+
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (id)getIosProgressImage;
@@ -375,6 +389,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -496,6 +512,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -583,6 +607,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)startAnimator;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetAlpha;
 

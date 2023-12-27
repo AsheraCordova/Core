@@ -568,6 +568,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_DrawableTintMode)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -665,6 +675,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 #pragma mark Public
 
 - (instancetype)initWithASTextViewImpl:(ASTextViewImpl *)outer$;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)endAnimator;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -826,6 +840,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setEditableWithBoolean:(jboolean)value;
 
+- (ASTextViewImpl_TextViewCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
+
 - (ASTextViewImpl_TextViewCommandBuilder *)setEllipsizeWithNSString:(NSString *)value;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setEmsWithInt:(jint)value;
@@ -986,6 +1002,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASTextViewImpl_TextViewCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASTextViewImpl_TextViewCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setOnDragWithNSString:(NSString *)arg0;
@@ -1101,6 +1125,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 - (ASTextViewImpl_TextViewCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)startAnimator;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetAlpha;
 

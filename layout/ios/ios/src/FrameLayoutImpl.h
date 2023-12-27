@@ -216,6 +216,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -283,6 +293,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)addModelWithId:(id)arg0;
 
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)endAnimator;
+
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)invalidate;
@@ -332,6 +346,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setCustomErrorMessageValuesWithNSString:(NSString *)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
@@ -453,6 +469,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setOnChildViewAddedWithNSString:(NSString *)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setOnChildViewRemovedWithNSString:(NSString *)arg0;
@@ -538,6 +562,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setVisibilityWithNSString:(NSString *)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)startAnimator;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetAddStatesFromChildren;
 

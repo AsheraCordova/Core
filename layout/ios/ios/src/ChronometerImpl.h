@@ -454,6 +454,16 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_DrawableTintMode)
 - (void)setMyAttributeWithNSString:(NSString *)name
                             withId:(id)value;
 
+- (void)setState0WithId:(id)value;
+
+- (void)setState1WithId:(id)value;
+
+- (void)setState2WithId:(id)value;
+
+- (void)setState3WithId:(id)value;
+
+- (void)setState4WithId:(id)value;
+
 - (void)setVisibilityWithInt:(jint)visibility;
 
 - (void)state0;
@@ -551,6 +561,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 #pragma mark Public
 
 - (instancetype)initWithASChronometerImpl:(ASChronometerImpl *)outer$;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)animatorXmlWithNSString:(NSString *)arg0;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)endAnimator;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
@@ -689,6 +703,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 - (ASChronometerImpl_ChronometerCommandBuilder *)setDrawableTopWithNSString:(NSString *)value;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setDuplicateParentStateWithBoolean:(jboolean)arg0;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)setElevationWithNSString:(NSString *)arg0;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setEmsWithInt:(jint)value;
 
@@ -844,6 +860,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setModelUiToPojoWithNSString:(NSString *)arg0;
 
+- (ASChronometerImpl_ChronometerCommandBuilder *)setOnAnimationCancelWithNSString:(NSString *)arg0;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)setOnAnimationEndWithNSString:(NSString *)arg0;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)setOnAnimationRepeatWithNSString:(NSString *)arg0;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)setOnAnimationStartWithNSString:(NSString *)arg0;
+
 - (ASChronometerImpl_ChronometerCommandBuilder *)setOnChronometerTickWithNSString:(NSString *)value;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setOnClickWithNSString:(NSString *)arg0;
@@ -959,6 +983,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 - (ASChronometerImpl_ChronometerCommandBuilder *)setWidthWithNSString:(NSString *)value;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setZIndexWithInt:(jint)arg0;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)startAnimator;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetAlpha;
 

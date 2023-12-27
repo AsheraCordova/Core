@@ -38,7 +38,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ADParcelable)
 #if !defined (ADParcelable_Creator_) && (INCLUDE_ALL_Parcelable || defined(INCLUDE_ADParcelable_Creator))
 #define ADParcelable_Creator_
 
-@class ADRectF;
 @class IOSObjectArray;
 @protocol ADParcel;
 
@@ -48,7 +47,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADParcelable)
 
 - (instancetype)init;
 
-- (ADRectF *)createFromParcelWithADParcel:(id<ADParcel>)inArg;
+- (id)createFromParcelWithADParcel:(id<ADParcel>)inArg;
 
 - (IOSObjectArray *)newArrayWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
 
