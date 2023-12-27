@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\CorePlugin.java
 //
 
+#include "Animator.h"
 #include "AttributedString.h"
 #include "AttributedStringImpl.h"
 #include "Bitmap.h"
@@ -349,7 +350,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADBundle *) nil_chk(((ADBundle *) cast_chk(bundle, [ADBundle class])))) putSerializableWithNSString:key withId:data];
 }
 
-- (void)releaseNativeResourcesWithJavaUtilList:(id<JavaUtilList>)object {
+- (void)releaseNativeResourcesWithJavaUtilList:(id<JavaUtilList>)objects {
+  for (id __strong object in nil_chk(objects)) {
+    if ([object isKindOfClass:[ADAnimator class]]) {
+      [((ADAnimator *) nil_chk(((ADAnimator *) object))) end];
+    }
+  }
 }
 
 - (ASFontMetricsDescriptor *)getFontMetricsWithId:(id)font {

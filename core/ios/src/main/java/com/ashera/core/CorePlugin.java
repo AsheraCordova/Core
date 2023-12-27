@@ -12,8 +12,6 @@ import com.ashera.plugin.IPlugin;
 import com.ashera.plugin.PluginManager;
 import com.ashera.widget.PluginInvoker;
 
-import androidx.fragment.app.Fragment;
-
 /*-[
 #import <sys/utsname.h>
 ]-*/
@@ -410,7 +408,12 @@ public class CorePlugin implements IPlugin, ICore {
 	}
 
 	@Override
-	public void releaseNativeResources(List<Object> object) {
+	public void releaseNativeResources(List<Object> objects) {
+		for (Object object : objects) {
+        	if (object instanceof r.android.animation.Animator) {
+        		((r.android.animation.Animator) object).end();
+        	}
+        }
 	}
 
 	@Override

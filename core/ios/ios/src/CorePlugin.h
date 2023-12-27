@@ -136,7 +136,7 @@
                    withNSString:(NSString *)key
                          withId:(id)data;
 
-- (void)releaseNativeResourcesWithJavaUtilList:(id<JavaUtilList>)object;
+- (void)releaseNativeResourcesWithJavaUtilList:(id<JavaUtilList>)objects;
 
 - (void)removeCallbacksWithId:(id)handler
          withJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable;
