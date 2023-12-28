@@ -5204,30 +5204,7 @@ public void setOnSwiped(String value) {
 
 	private static void updateTranform(HTMLElement htmlElement) {
 		String transform = "";
-		String scaleY = htmlElement.getAttribute("scaleY");
-		if (scaleY != null) {
-			transform += " scaleY(" + scaleY  +") ";
-		}
-		String scaleX = htmlElement.getAttribute("scaleX");
-		if (scaleX != null) {
-			transform += " scaleX(" + scaleX  +") ";
-		}
-		
-		String rotate = htmlElement.getAttribute("rotate");
-		if (rotate != null) {
-			transform += " rotate(" + rotate  +"deg) ";
-		}
-		
-		String rotateX = htmlElement.getAttribute("rotateX");
-		if (rotateX != null) {
-			transform += " rotateX(" + rotateX  +"deg) ";
-		}
-		
-		String rotateY = htmlElement.getAttribute("rotateY");
-		if (rotateY != null) {
-			transform += " rotateY(" + rotateY  +"deg) ";
-		}
-		
+
 		String translateX = htmlElement.getAttribute("translateX");
 		if (translateX != null) {
 			transform += " translateX(" + translateX  +"px) ";
@@ -5241,6 +5218,30 @@ public void setOnSwiped(String value) {
 		String translateZ = htmlElement.getAttribute("translateZ");
 		if (translateZ != null) {
 			transform += " translateZ(" + translateZ  +"px) ";
+		}
+		
+		String rotate = htmlElement.getAttribute("rotate");
+		if (rotate != null) {
+			transform += " rotate(" + rotate  +"deg) ";
+		}
+		
+		String scaleY = htmlElement.getAttribute("scaleY");
+		if (scaleY != null) {
+			transform += " scaleY(" + scaleY  +") ";
+		}
+		String scaleX = htmlElement.getAttribute("scaleX");
+		if (scaleX != null) {
+			transform += " scaleX(" + scaleX  +") ";
+		}
+		
+		String rotateX = htmlElement.getAttribute("rotateX");
+		if (rotateX != null) {
+			transform += " rotateX(" + rotateX  +"deg) ";
+		}
+		
+		String rotateY = htmlElement.getAttribute("rotateY");
+		if (rotateY != null) {
+			transform += " rotateY(" + rotateY  +"deg) ";
 		}
 		
 		htmlElement.getStyle().setProperty("transform", transform);
