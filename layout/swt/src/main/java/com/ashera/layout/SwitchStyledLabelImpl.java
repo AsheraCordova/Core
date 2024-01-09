@@ -462,6 +462,7 @@ public class SwitchStyledLabelImpl extends BaseWidget implements IDrawable, IHas
         public void stateNo() {
         	ViewImpl.stateNo(SwitchStyledLabelImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return SwitchStyledLabelExt.class;
@@ -3012,7 +3013,9 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return switchButton.isDisposed();
+	}
 	
 private SwitchStyledLabelCommandBuilder builder;
 private SwitchStyledLabelBean bean;
@@ -4641,7 +4644,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 }

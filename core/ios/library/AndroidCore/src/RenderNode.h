@@ -28,10 +28,18 @@
 
 - (void)offsetTopAndBottomWithInt:(jint)offset;
 
+- (void)setBottomWithInt:(jint)mBottom;
+
+- (void)setLeftWithInt:(jint)left;
+
 - (void)setLeftTopRightBottomWithInt:(jint)mLeft
                              withInt:(jint)mTop
                              withInt:(jint)mRight
                              withInt:(jint)mBottom;
+
+- (void)setRightWithInt:(jint)mRight;
+
+- (void)setTopWithInt:(jint)mTop;
 
 @end
 

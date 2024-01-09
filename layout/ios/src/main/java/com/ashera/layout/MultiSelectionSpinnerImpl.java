@@ -420,6 +420,7 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements ICustom
         public void stateNo() {
         	ViewImpl.stateNo(MultiSelectionSpinnerImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return MultiSelectionSpinnerExt.class;
@@ -2064,7 +2065,6 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(View view,List
 
     	}
     }
-    
 	
 private MultiSelectionSpinnerCommandBuilder builder;
 private MultiSelectionSpinnerBean bean;
@@ -2980,7 +2980,7 @@ public void setTextColorHint(String value) {
 }
 
 
-    
+	
 	//end - body
 
 

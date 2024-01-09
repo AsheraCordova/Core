@@ -455,6 +455,7 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
         public void stateNo() {
         	ViewImpl.stateNo(SpinnerImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return SpinnerExt.class;
@@ -1273,7 +1274,6 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(AdapterView<?>
 
     	}
     }
-    
 	
 private SpinnerCommandBuilder builder;
 private SpinnerBean bean;
@@ -1824,7 +1824,7 @@ public void setHintTextFormat(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	private void setEntries(Object objValue) {

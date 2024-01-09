@@ -259,6 +259,10 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onSwiped").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("translationX").withType("dimensionfloat").withUiFlag(UPDATE_UI_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("translationY").withType("dimensionfloat").withUiFlag(UPDATE_UI_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("left").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("right").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("top").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("bottom").withType("dimension"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("swtStyle").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("enableFeatures").withType("string"));
@@ -1050,6 +1054,42 @@ if (objValue instanceof java.util.List) {
 
 			}
 			break;
+		case "left": {
+
+
+		 setLeft(w, objValue);
+
+
+
+			}
+			break;
+		case "right": {
+
+
+		 setRight(w, objValue);
+
+
+
+			}
+			break;
+		case "top": {
+
+
+		 setTop(w, objValue);
+
+
+
+			}
+			break;
+		case "bottom": {
+
+
+		 setBottom(w, objValue);
+
+
+
+			}
+			break;
 		default:
 			java.util.List<IAttributable> attributables = WidgetFactory.getAttributables("View", w.getLocalName());
 			if (attributables != null) {
@@ -1136,6 +1176,14 @@ return getMaxHeight(w);			}
 return getTranslationX(w);			}
 			case "translationY": {
 return getTranslationY(w);			}
+			case "left": {
+return getLeft(w);			}
+			case "right": {
+return getRight(w);			}
+			case "top": {
+return getTop(w);			}
+			case "bottom": {
+return getBottom(w);			}
 		}
 		
 		java.util.List<IAttributable> attributables = WidgetFactory.getAttributables("View", w.getLocalName());
@@ -3689,6 +3737,82 @@ public T setTranslationY(String value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T tryGetLeft() {
+	Map<String, Object> attrs = initCommand("left");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getLeft() {
+	Map<String, Object> attrs = initCommand("left");
+	return attrs.get("commandReturnValue");
+}
+public T setLeft(String value) {
+	Map<String, Object> attrs = initCommand("left");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetRight() {
+	Map<String, Object> attrs = initCommand("right");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getRight() {
+	Map<String, Object> attrs = initCommand("right");
+	return attrs.get("commandReturnValue");
+}
+public T setRight(String value) {
+	Map<String, Object> attrs = initCommand("right");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetTop() {
+	Map<String, Object> attrs = initCommand("top");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getTop() {
+	Map<String, Object> attrs = initCommand("top");
+	return attrs.get("commandReturnValue");
+}
+public T setTop(String value) {
+	Map<String, Object> attrs = initCommand("top");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetBottom() {
+	Map<String, Object> attrs = initCommand("bottom");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getBottom() {
+	Map<String, Object> attrs = initCommand("bottom");
+	return attrs.get("commandReturnValue");
+}
+public T setBottom(String value) {
+	Map<String, Object> attrs = initCommand("bottom");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 }
 static class ViewCommandBuilderInternal extends ViewCommandBuilder<ViewCommandBuilderInternal> {
 	private IWidget widget;
@@ -4136,6 +4260,34 @@ public void setTranslationY(String value) {
 	getBuilder().reset().setTranslationY(value).execute(true);
 }
 
+public Object getLeft() {
+	return getBuilder().reset().tryGetLeft().execute(false).getLeft(); 
+}
+public void setLeft(String value) {
+	getBuilder().reset().setLeft(value).execute(true);
+}
+
+public Object getRight() {
+	return getBuilder().reset().tryGetRight().execute(false).getRight(); 
+}
+public void setRight(String value) {
+	getBuilder().reset().setRight(value).execute(true);
+}
+
+public Object getTop() {
+	return getBuilder().reset().tryGetTop().execute(false).getTop(); 
+}
+public void setTop(String value) {
+	getBuilder().reset().setTop(value).execute(true);
+}
+
+public Object getBottom() {
+	return getBuilder().reset().tryGetBottom().execute(false).getBottom(); 
+}
+public void setBottom(String value) {
+	getBuilder().reset().setBottom(value).execute(true);
+}
+
 }
 
 
@@ -4145,11 +4297,11 @@ public void setTranslationY(String value) {
 		nativeMakeFrame(uiView, x, y, x + width, y + height);		
 	}
 	public static int getX(Object uiView) {
-		org.eclipse.swt.widgets.Composite root = (org.eclipse.swt.widgets.Composite)uiView;
+		Control root = (Control)uiView;
 		return root.getBounds().x;
 	}
 	public static int getY(Object uiView) {
-		org.eclipse.swt.widgets.Composite root = (org.eclipse.swt.widgets.Composite)uiView;
+		Control root = (Control) uiView;
 		return root.getBounds().y;
 	}
 	public static void updateBoundsX(Object uiView, int x) {
@@ -4470,6 +4622,67 @@ public void setTranslationY(String value) {
 		}
 		
 		return attributes.getValue(key);
+	}
+	
+	private static void setBottom(IWidget w, Object objValue) {
+		Object uiView = w.asNativeWidget();
+		View view = (View) w.asWidget();
+		int value = (int) objValue;
+		view.setBottom(value);
+
+		int top = value - view.getMeasuredHeight();
+		int x = getX(uiView);
+		nativeMakeFrame(uiView, x, top, x + view.getMeasuredWidth(), value);
+	}
+
+	private static void setTop(IWidget w, Object objValue) {
+		Object uiView = w.asNativeWidget();
+		View view = (View) w.asWidget();
+		int value = (int) objValue;
+		view.setTop(value);
+		int x = getX(uiView);
+		nativeMakeFrame(uiView, x, value, x + view.getMeasuredWidth(), value + view.getMeasuredHeight());
+
+		
+	}
+
+	private static void setRight(IWidget w, Object objValue) {
+		Object uiView = w.asNativeWidget();
+		View view = (View) w.asWidget();
+		int value = (int) objValue;
+		view.setRight(value);
+		int y = getY(uiView);
+		nativeMakeFrame(uiView, value - view.getMeasuredWidth(), y, value, y + view.getMeasuredHeight());
+	}
+
+	private static void setLeft(IWidget w, Object objValue) {
+		Object uiView = w.asNativeWidget();
+		View view = (View) w.asWidget();
+		int value = (int) objValue;
+		view.setLeft(value);
+		
+		int y = getY(uiView);
+		nativeMakeFrame(uiView, value, y, value + view.getMeasuredWidth(), y + view.getMeasuredHeight());
+	}
+	
+	private static Object getBottom(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getBottom();
+	}
+
+	private static Object getTop(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getTop();
+	}
+
+	private static Object getRight(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getRight();
+	}
+
+	private static Object getLeft(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getLeft();
 	}
 	//end - viewcode
     
@@ -5798,6 +6011,7 @@ break;}
 
 	}
 	//end - animator
+
 	private static void setTranslationX(IWidget w, Object objValue) {
 		Control control = (Control) w.asNativeWidget();
 		View view = (View) w.asWidget();
@@ -5825,4 +6039,5 @@ break;}
 		int data = view.getTop();
 		return control.getBounds().y - data;
 	}
+		
 }

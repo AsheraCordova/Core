@@ -415,6 +415,7 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
         public void stateNo() {
         	ViewImpl.stateNo(ImageViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ImageViewExt.class;
@@ -788,7 +789,6 @@ return null;				}
 
     	}
     }
-    
 	
 private ImageViewCommandBuilder builder;
 private ImageViewBean bean;
@@ -1317,7 +1317,7 @@ public void setPaddingVertical(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	//start - codecopyimageview

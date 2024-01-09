@@ -1,5 +1,12 @@
 // start - imports
 
+export const enum LayoutTransition {
+change_appearing = "change_appearing",
+change_disappearing = "change_disappearing",
+appearing = "appearing",
+disappearing = "disappearing",
+changing = "changing",
+}
 export const enum LayoutMode {
 clipBounds = "clipBounds",
 opticalBounds = "opticalBounds",
@@ -17,6 +24,42 @@ import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
 
+
+
+
+
+export class LayoutTransitionTransformer implements ITranform {
+    transform(value: any, obj: any, type: number) : any{
+        if (type == 1) {
+            return value.toString().replace(",", "|");
+        } else {
+            let strArray:Array<string> = value.toString().split("|");
+            
+            let valueArr:Array<LayoutTransition> = new Array<LayoutTransition>();
+            for (let i =0; i < strArray.length; i++) {
+                switch(strArray[i]) {
+					case "change_appearing":
+						valueArr.push(LayoutTransition.change_appearing);
+                       	break;	
+					case "change_disappearing":
+						valueArr.push(LayoutTransition.change_disappearing);
+                       	break;	
+					case "appearing":
+						valueArr.push(LayoutTransition.appearing);
+                       	break;	
+					case "disappearing":
+						valueArr.push(LayoutTransition.disappearing);
+                       	break;	
+					case "changing":
+						valueArr.push(LayoutTransition.changing);
+                       	break;	
+                }
+                
+            }
+            return valueArr;
+        }
+    }
+}
 
 
 
@@ -50,6 +93,7 @@ import {ViewGroupModelImpl} from './ViewGroupModelImpl';
 export abstract class ViewGroupImpl<T> extends ViewGroupModelImpl<T>{
 	//start - body
 	static initialize() {
+		TransformerFactory.getInstance().register("layoutTransition", new LayoutTransitionTransformer());
     }	
 	@Type(() => CommandAttr)
 	@Expose({ name: "swtBackgroundMode" })
@@ -57,6 +101,18 @@ export abstract class ViewGroupImpl<T> extends ViewGroupModelImpl<T>{
 	@Type(() => CommandAttr)
 	@Expose({ name: "swtLayoutDeferred" })
 	swtLayoutDeferred!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "animateLayoutChanges" })
+	animateLayoutChanges!:CommandAttr<boolean>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "layoutTransition" })
+	layoutTransition!:CommandAttr<LayoutTransition[]>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "layoutTransitionDuration" })
+	layoutTransitionDuration!:CommandAttr<number>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "animateParentHierarchy" })
+	animateParentHierarchy!:CommandAttr<boolean>| undefined;
 	@Type(() => CommandAttr)
 	@Expose({ name: "listitem" })
 	listitem!:CommandAttr<string>| undefined;
@@ -110,6 +166,10 @@ export abstract class ViewGroupImpl<T> extends ViewGroupModelImpl<T>{
 		super.reset();
 		this.swtBackgroundMode = undefined;
 		this.swtLayoutDeferred = undefined;
+		this.animateLayoutChanges = undefined;
+		this.layoutTransition = undefined;
+		this.layoutTransitionDuration = undefined;
+		this.animateParentHierarchy = undefined;
 		this.listitem = undefined;
 		this.padding = undefined;
 		this.paddingBottom = undefined;
@@ -193,6 +253,62 @@ export abstract class ViewGroupImpl<T> extends ViewGroupModelImpl<T>{
 		this.swtLayoutDeferred.setValue(value);
 		this.orderSet++;
 		this.swtLayoutDeferred.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setAnimateLayoutChanges(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.animateLayoutChanges == null || this.animateLayoutChanges == undefined) {
+			this.animateLayoutChanges = new CommandAttr<boolean>();
+		}
+		
+		this.animateLayoutChanges.setSetter(true);
+		this.animateLayoutChanges.setValue(value);
+		this.orderSet++;
+		this.animateLayoutChanges.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setLayoutTransition(...value : LayoutTransition[]) : T {
+		this.resetIfRequired();
+		if (this.layoutTransition == null || this.layoutTransition == undefined) {
+			this.layoutTransition = new CommandAttr<LayoutTransition[]>();
+		}
+		
+		this.layoutTransition.setSetter(true);
+		this.layoutTransition.setValue(value);
+		this.orderSet++;
+		this.layoutTransition.setOrderSet(this.orderSet);
+this.layoutTransition.setTransformer('layoutTransition');		return this.thisPointer;
+	}
+		
+
+	public setLayoutTransitionDuration(value : number) : T {
+		this.resetIfRequired();
+		if (this.layoutTransitionDuration == null || this.layoutTransitionDuration == undefined) {
+			this.layoutTransitionDuration = new CommandAttr<number>();
+		}
+		
+		this.layoutTransitionDuration.setSetter(true);
+		this.layoutTransitionDuration.setValue(value);
+		this.orderSet++;
+		this.layoutTransitionDuration.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setAnimateParentHierarchy(value : boolean) : T {
+		this.resetIfRequired();
+		if (this.animateParentHierarchy == null || this.animateParentHierarchy == undefined) {
+			this.animateParentHierarchy = new CommandAttr<boolean>();
+		}
+		
+		this.animateParentHierarchy.setSetter(true);
+		this.animateParentHierarchy.setValue(value);
+		this.orderSet++;
+		this.animateParentHierarchy.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

@@ -73,6 +73,26 @@ public class ViewGroupImpl {
 				return 0;
 				}
 				}
+		@SuppressLint("NewApi")
+		final static class LayoutTransition  extends AbstractBitFlagConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("change_appearing", 0x01);
+				mapping.put("change_disappearing", 0x02);
+				mapping.put("appearing", 0x04);
+				mapping.put("disappearing", 0x08);
+				mapping.put("changing", 0x10);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
 	public static void register(String localName) {
 		ViewGroupModelImpl.register(localName);
 
@@ -90,6 +110,10 @@ public class ViewGroupImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onChildViewAdded").withType("String"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onChildViewRemoved").withType("String"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("animateLayoutChanges").withType("boolean"));
+		ConverterFactory.register("ViewGroup.layoutTransition", new LayoutTransition());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("layoutTransition").withType("ViewGroup.layoutTransition"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("layoutTransitionDuration").withType("int").withOrder(3));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("animateParentHierarchy").withType("boolean").withOrder(3));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("listitem").withType("template"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("addStatesFromChildren").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("childXml").withType("resourcestring"));
@@ -212,6 +236,33 @@ if (Build.VERSION.SDK_INT >= 11) {
 
 
 		animateLayoutChanges(objValue, viewGroup);
+
+
+
+			}
+			break;
+			case "layoutTransition": {
+
+
+		setLayoutTransition(objValue, viewGroup);
+
+
+
+			}
+			break;
+			case "layoutTransitionDuration": {
+
+
+		setLayoutTransitionDuration(objValue, viewGroup);
+
+
+
+			}
+			break;
+			case "animateParentHierarchy": {
+
+
+		setAnimateParentHierarchy(objValue, viewGroup);
 
 
 
@@ -537,6 +588,15 @@ public java.util.Map<String, Object> getOnChildViewAddedEventObj(View parent,Vie
 			case "animateLayoutChanges": {
 				return true;
 			}
+			case "layoutTransition": {
+				return true;
+			}
+			case "layoutTransitionDuration": {
+				return true;
+			}
+			case "animateParentHierarchy": {
+				return true;
+			}
 			case "listitem": {
 				return true;
 			}
@@ -736,6 +796,30 @@ public T setAnimateLayoutChanges(boolean value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T setLayoutTransition(String value) {
+	Map<String, Object> attrs = initCommand("layoutTransition");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setLayoutTransitionDuration(int value) {
+	Map<String, Object> attrs = initCommand("layoutTransitionDuration");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setAnimateParentHierarchy(boolean value) {
+	Map<String, Object> attrs = initCommand("animateParentHierarchy");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 public T setListitem(String value) {
 	Map<String, Object> attrs = initCommand("listitem");
 	attrs.put("type", "attribute");
@@ -863,6 +947,18 @@ public void setOnChildViewRemoved(String value) {
 
 public void setAnimateLayoutChanges(boolean value) {
 	getBuilder().reset().setAnimateLayoutChanges(value).execute(true);
+}
+
+public void setLayoutTransition(String value) {
+	getBuilder().reset().setLayoutTransition(value).execute(true);
+}
+
+public void setLayoutTransitionDuration(int value) {
+	getBuilder().reset().setLayoutTransitionDuration(value).execute(true);
+}
+
+public void setAnimateParentHierarchy(boolean value) {
+	getBuilder().reset().setAnimateParentHierarchy(value).execute(true);
 }
 
 public void setListitem(String value) {
@@ -1307,13 +1403,13 @@ return (T) this;}
 		}
 	}
 
-	//end - viewcode
 
 	@SuppressLint("NewApi")
 	private static void animateLayoutChanges(Object objValue, ViewGroup view) {
 		if (Build.VERSION.SDK_INT >= 11) {
 			if (objValue != null && (boolean) objValue) {
 				android.animation.LayoutTransition lt = new android.animation.LayoutTransition();
+				lt.setAnimateParentHierarchy(false);
 				view.setLayoutTransition(lt);
 			} else {
 				view.setLayoutTransition(null);
@@ -1321,6 +1417,52 @@ return (T) this;}
 		}
 		
 	}
+	
+	private static void setAnimateParentHierarchy(Object objValue, ViewGroup viewGroup) {
+		android.animation.LayoutTransition layoutTransition = viewGroup.getLayoutTransition();
+		if (layoutTransition != null) {
+			layoutTransition.setAnimateParentHierarchy((boolean) objValue);
+		}
+	}
+
+	private static void setLayoutTransitionDuration(Object objValue, ViewGroup viewGroup) {
+		android.animation.LayoutTransition layoutTransition = viewGroup.getLayoutTransition();
+		if (layoutTransition != null) {
+			layoutTransition.setDuration((int) objValue);
+		}
+		
+	}
+
+	private static void setLayoutTransition(Object objValue, ViewGroup viewGroup) {
+		android.animation.LayoutTransition lt = new android.animation.LayoutTransition();
+		lt.setAnimateParentHierarchy(false);
+		lt.disableTransitionType(android.animation.LayoutTransition.CHANGE_APPEARING);
+		lt.disableTransitionType(android.animation.LayoutTransition.CHANGE_DISAPPEARING);
+		lt.disableTransitionType(android.animation.LayoutTransition.APPEARING);
+		lt.disableTransitionType(android.animation.LayoutTransition.DISAPPEARING);
+		lt.disableTransitionType(android.animation.LayoutTransition.CHANGING);
+		
+		int flag = (int) objValue;
+
+		if ((flag & 0x1) != 0) {
+			lt.enableTransitionType(android.animation.LayoutTransition.CHANGE_APPEARING);
+		}
+		if ((flag & 0x02) != 0) {
+			lt.enableTransitionType(android.animation.LayoutTransition.CHANGE_DISAPPEARING);
+		}
+		if ((flag & 0x04) != 0) {
+			lt.enableTransitionType(android.animation.LayoutTransition.APPEARING);
+		}
+		if ((flag & 0x08) != 0) {
+			lt.enableTransitionType(android.animation.LayoutTransition.DISAPPEARING);
+		}
+		if ((flag & 0x10) != 0) {
+			lt.enableTransitionType(android.animation.LayoutTransition.CHANGING);
+		}
+		viewGroup.setLayoutTransition(lt);		
+	}
+	//end - viewcode
+
 	
 	public static void registerCommandConveter(IWidget widget) {
 		ViewImpl.registerCommandConveter(widget);
@@ -1333,6 +1475,8 @@ return (T) this;}
 	public static void nativeRemoveView(IWidget w) {
 		
 	}
+
+	
 
 	
 }

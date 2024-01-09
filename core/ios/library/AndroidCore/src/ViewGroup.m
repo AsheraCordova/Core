@@ -7,11 +7,13 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
+#include "LayoutTransition.h"
 #include "Rect.h"
 #include "RenderNode.h"
 #include "View.h"
 #include "ViewGroup.h"
 #include "ViewParent.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/IndexOutOfBoundsException.h"
@@ -41,11 +43,14 @@
   jint mLayoutMode_;
   jint mChildrenCount_;
   jboolean mLayoutCalledWhileSuppressed_;
+  ADLayoutTransition *mTransition_;
   JavaUtilArrayList *mTransitioningViews_;
+  JavaUtilArrayList *mVisibilityChangingChildren_;
   jint mChildCountWithTransientState_;
   jint mNestedScrollAxes_;
   id<JavaUtilList> mTransientIndices_;
   id<JavaUtilList> mTransientViews_;
+  id<ADLayoutTransition_TransitionListener> mLayoutTransitionListener_;
   IOSObjectArray *mChildren_;
 }
 
@@ -75,6 +80,8 @@
 - (void)setLayoutModeWithInt:(jint)layoutMode
                  withBoolean:(jboolean)explicitly;
 
+- (void)addDisappearingViewWithADView:(ADView *)v;
+
 - (void)requestChildFocusWithADView:(ADView *)child
                              withId:(id)findFocus;
 
@@ -86,8 +93,6 @@
 - (jboolean)rootViewRequestFocus;
 
 - (void)clearChildFocusWithADView:(ADView *)view;
-
-- (void)addDisappearingViewWithADView:(ADView *)view;
 
 - (void)cancelHoverTargetWithADView:(ADView *)view;
 
@@ -113,9 +118,12 @@ J2OBJC_FIELD_SETTER(ADViewGroup, mFocused_, ADView *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mDefaultFocus_, ADView *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mCurrentDragStartEvent_, ADViewGroup_DragEvent *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mChildrenInterestedInDrag_, JavaUtilHashSet *)
+J2OBJC_FIELD_SETTER(ADViewGroup, mTransition_, ADLayoutTransition *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mTransitioningViews_, JavaUtilArrayList *)
+J2OBJC_FIELD_SETTER(ADViewGroup, mVisibilityChangingChildren_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mTransientIndices_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ADViewGroup, mTransientViews_, id<JavaUtilList>)
+J2OBJC_FIELD_SETTER(ADViewGroup, mLayoutTransitionListener_, id<ADLayoutTransition_TransitionListener>)
 J2OBJC_FIELD_SETTER(ADViewGroup, mChildren_, IOSObjectArray *)
 
 inline jboolean ADViewGroup_get_DBG(void);
@@ -224,6 +232,8 @@ __attribute__((unused)) static void ADViewGroup_setBooleanFlagWithInt_withBoolea
 
 __attribute__((unused)) static void ADViewGroup_setLayoutModeWithInt_withBoolean_(ADViewGroup *self, jint layoutMode, jboolean explicitly);
 
+__attribute__((unused)) static void ADViewGroup_addDisappearingViewWithADView_(ADViewGroup *self, ADView *v);
+
 __attribute__((unused)) static void ADViewGroup_requestChildFocusWithADView_withId_(ADViewGroup *self, ADView *child, id findFocus);
 
 __attribute__((unused)) static void ADViewGroup_childHasTransientStateChangedWithADView_withBoolean_(ADViewGroup *self, ADView *child, jboolean b);
@@ -233,8 +243,6 @@ __attribute__((unused)) static void ADViewGroup_notifyGlobalFocusClearedWithId_(
 __attribute__((unused)) static jboolean ADViewGroup_rootViewRequestFocus(ADViewGroup *self);
 
 __attribute__((unused)) static void ADViewGroup_clearChildFocusWithADView_(ADViewGroup *self, ADView *view);
-
-__attribute__((unused)) static void ADViewGroup_addDisappearingViewWithADView_(ADViewGroup *self, ADView *view);
 
 __attribute__((unused)) static void ADViewGroup_cancelHoverTargetWithADView_(ADViewGroup *self, ADView *view);
 
@@ -257,6 +265,33 @@ __attribute__((unused)) static void ADViewGroup_clearDefaultFocusWithADView_(ADV
 @interface ADViewGroup_OnHierarchyChangeListener : NSObject
 
 @end
+
+@interface ADViewGroup_1 : NSObject < ADLayoutTransition_TransitionListener > {
+ @public
+  ADViewGroup *this$0_;
+}
+
+- (instancetype)initWithADViewGroup:(ADViewGroup *)outer$;
+
+- (void)startTransitionWithADLayoutTransition:(ADLayoutTransition *)transition
+                              withADViewGroup:(ADViewGroup *)container
+                                   withADView:(ADView *)view
+                                      withInt:(jint)transitionType;
+
+- (void)endTransitionWithADLayoutTransition:(ADLayoutTransition *)transition
+                            withADViewGroup:(ADViewGroup *)container
+                                 withADView:(ADView *)view
+                                    withInt:(jint)transitionType;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ADViewGroup_1)
+
+__attribute__((unused)) static void ADViewGroup_1_initWithADViewGroup_(ADViewGroup_1 *self, ADViewGroup *outer$);
+
+__attribute__((unused)) static ADViewGroup_1 *new_ADViewGroup_1_initWithADViewGroup_(ADViewGroup *outer$) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ADViewGroup_1 *create_ADViewGroup_1_initWithADViewGroup_(ADViewGroup *outer$);
 
 @interface ADViewGroup_MarginLayoutParams () {
  @public
@@ -308,6 +343,31 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
+
+- (void)onChildVisibilityChangedWithADView:(ADView *)child
+                                   withInt:(jint)oldVisibility
+                                   withInt:(jint)newVisibility {
+  if (mTransition_ != nil) {
+    if (newVisibility == ADView_VISIBLE) {
+      [mTransition_ showChildWithADViewGroup:self withADView:child withInt:oldVisibility];
+    }
+    else {
+      [mTransition_ hideChildWithADViewGroup:self withADView:child withInt:newVisibility];
+      if (mTransitioningViews_ != nil && [mTransitioningViews_ containsWithId:child]) {
+        if (mVisibilityChangingChildren_ == nil) {
+          JreStrongAssignAndConsume(&mVisibilityChangingChildren_, new_JavaUtilArrayList_init());
+        }
+        [mVisibilityChangingChildren_ addWithId:child];
+        ADViewGroup_addDisappearingViewWithADView_(self, child);
+      }
+    }
+  }
+  if (newVisibility == ADView_VISIBLE && mCurrentDragStartEvent_ != nil) {
+    if (![((JavaUtilHashSet *) nil_chk(mChildrenInterestedInDrag_)) containsWithId:child]) {
+      ADViewGroup_notifyChildOfDragStartWithADView_(self, child);
+    }
+  }
+}
 
 - (void)dispatchAttachedToWindowWithADView_AttachInfo:(ADView_AttachInfo *)info
                                               withInt:(jint)visibility {
@@ -509,6 +569,22 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   ADViewGroup_removeViewInternalWithInt_withADView_(self, index, view);
 }
 
+- (void)setLayoutTransitionWithADLayoutTransition:(ADLayoutTransition *)transition {
+  if (mTransition_ != nil) {
+    ADLayoutTransition *previousTransition = JreRetainedLocalValue(mTransition_);
+    [previousTransition cancel];
+    [previousTransition removeTransitionListenerWithADLayoutTransition_TransitionListener:mLayoutTransitionListener_];
+  }
+  JreStrongAssign(&mTransition_, transition);
+  if (mTransition_ != nil) {
+    [mTransition_ addTransitionListenerWithADLayoutTransition_TransitionListener:mLayoutTransitionListener_];
+  }
+}
+
+- (ADLayoutTransition *)getLayoutTransition {
+  return mTransition_;
+}
+
 - (void)removeAllViews {
   [self removeAllViewsInLayout];
   [self requestLayout];
@@ -538,7 +614,10 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
     [((ADView *) nil_chk(view)) clearAccessibilityFocus];
     ADViewGroup_cancelTouchTargetWithADView_(self, view);
     ADViewGroup_cancelHoverTargetWithADView_(self, view);
-    if (detach) {
+    if ([view getAnimation] != nil || (mTransitioningViews_ != nil && [mTransitioningViews_ containsWithId:view])) {
+      ADViewGroup_addDisappearingViewWithADView_(self, view);
+    }
+    else if (detach) {
       [view dispatchDetachedFromWindow];
     }
     if ([view hasTransientState]) {
@@ -729,6 +808,41 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   return ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(spec, padding, childDimension);
 }
 
+- (void)addDisappearingViewWithADView:(ADView *)v {
+  ADViewGroup_addDisappearingViewWithADView_(self, v);
+}
+
+- (void)startViewTransitionWithADView:(ADView *)view {
+  if (((ADView *) nil_chk(view))->mParent_ == self) {
+    if (mTransitioningViews_ == nil) {
+      JreStrongAssignAndConsume(&mTransitioningViews_, new_JavaUtilArrayList_init());
+    }
+    [mTransitioningViews_ addWithId:view];
+  }
+}
+
+- (void)endViewTransitionWithADView:(ADView *)view {
+  if (mTransitioningViews_ != nil) {
+    [mTransitioningViews_ removeWithId:view];
+    JavaUtilArrayList *disappearingChildren = mDisappearingChildren_;
+    if (disappearingChildren != nil && [disappearingChildren containsWithId:view]) {
+      [disappearingChildren removeWithId:view];
+      if (mVisibilityChangingChildren_ != nil && [mVisibilityChangingChildren_ containsWithId:view]) {
+        [mVisibilityChangingChildren_ removeWithId:view];
+      }
+      else {
+        if (((ADView *) nil_chk(view))->mAttachInfo_ != nil) {
+          [view dispatchDetachedFromWindow];
+        }
+        if (view->mParent_ != nil) {
+          view->mParent_ = nil;
+        }
+      }
+      [self invalidate];
+    }
+  }
+}
+
 - (void)drawableStateChanged {
   [super drawableStateChanged];
   if ((mGroupFlags_ & ADViewGroup_FLAG_NOTIFY_CHILDREN_ON_DRAWABLE_STATE_CHANGE) != 0) {
@@ -788,6 +902,13 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   }
 }
 
+- (void)requestTransitionStartWithADLayoutTransition:(ADLayoutTransition *)transition {
+  ADView_ViewRootImpl *viewAncestor = JreRetainedLocalValue([self getViewRootImpl]);
+  if (viewAncestor != nil) {
+    [viewAncestor requestTransitionStartWithADLayoutTransition:transition];
+  }
+}
+
 - (void)onSetLayoutParamsWithADView:(ADView *)child
        withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)layoutParams {
   [self requestLayout];
@@ -826,22 +947,6 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 - (void)focusableViewAvailableWithADView:(ADView *)v {
 }
 
-- (void)cancelWithNSString:(NSString *)disappearing2 {
-}
-
-- (void)cancel {
-}
-
-- (jboolean)isChangingLayout {
-  return false;
-}
-
-- (void)cancelWithInt:(jint)disappearing2 {
-}
-
-- (void)layoutChangeWithADViewGroup:(ADViewGroup *)viewGroup {
-}
-
 - (ADViewGroup_LayoutParams *)generateLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)p {
   return p;
 }
@@ -866,10 +971,6 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
 
 - (void)clearChildFocusWithADView:(ADView *)view {
   ADViewGroup_clearChildFocusWithADView_(self, view);
-}
-
-- (void)addDisappearingViewWithADView:(ADView *)view {
-  ADViewGroup_addDisappearingViewWithADView_(self, view);
 }
 
 - (void)cancelHoverTargetWithADView:(ADView *)view {
@@ -926,209 +1027,224 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   return height;
 }
 
+- (void)setRedrawWithBoolean:(jboolean)flag {
+  for (jint i = 0; i < [self getChildCount]; i++) {
+    ADView *child = [self getChildAtWithInt:i];
+    [((ADView *) nil_chk(child)) setMyAttributeWithNSString:@"swtRedraw" withId:JavaLangBoolean_valueOfWithBoolean_(flag)];
+  }
+}
+
 - (void)dealloc {
+  RELEASE_(mDisappearingChildren_);
   RELEASE_(mOnHierarchyChangeListener_);
   RELEASE_(mFocused_);
   RELEASE_(mDefaultFocus_);
   RELEASE_(mFocusedInCluster_);
   RELEASE_(mCurrentDragStartEvent_);
   RELEASE_(mChildrenInterestedInDrag_);
+  RELEASE_(mTransition_);
   RELEASE_(mTransitioningViews_);
+  RELEASE_(mVisibilityChangingChildren_);
   RELEASE_(mTransientIndices_);
   RELEASE_(mTransientViews_);
+  RELEASE_(mLayoutTransitionListener_);
   RELEASE_(mChildren_);
-  RELEASE_(mTransition_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 2, 3, -1, -1, -1, -1 },
     { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 4, 3, -1, -1, -1, -1 },
-    { NULL, "LADView;", 0x4, 5, 6, -1, 7, -1, -1 },
-    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 13, -1, -1, -1, -1 },
-    { NULL, "Z", 0x4, 14, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 18, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 20, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 9, -1, -1, -1, -1 },
-    { NULL, "Z", 0x4, 22, 13, -1, -1, -1, -1 },
-    { NULL, "Z", 0x4, 22, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 24, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 25, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 26, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 27, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 27, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 29, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 30, 6, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, 31, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 31, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 6, 5, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x4, 7, 8, -1, 9, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 14, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 19, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 21, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 23, 14, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 23, 24, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 25, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 26, 24, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 27, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 28, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 28, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 30, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 31, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 32, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 32, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 34, 35, -1, -1, -1, -1 },
+    { NULL, "LADLayoutTransition;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 33, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 34, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 34, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 35, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 36, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 37, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 37, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 38, 29, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 36, 6, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, 37, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 38, 39, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 40, 39, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 41, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 39, 8, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 40, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 41, 42, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 43, 42, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 44, 8, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 43, 8, -1, -1, -1, -1 },
     { NULL, "LADViewGroup_LayoutParams;", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 42, 9, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 45, 11, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADView;", 0x1, 43, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 44, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 45, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 46, 47, -1, -1, -1, -1 },
-    { NULL, "I", 0x9, 48, 49, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 46, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 47, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 48, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 49, 50, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 51, 52, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 53, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 54, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 55, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "[I", 0x4, 50, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 51, 3, -1, -1, -1, -1 },
+    { NULL, "[I", 0x4, 56, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 57, 5, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 52, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 53, 12, -1, -1, -1, -1 },
-    { NULL, "Z", 0x0, 54, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 58, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 59, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 60, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, 61, 11, -1, -1, -1, -1 },
     { NULL, "LADRect;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 55, 56, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 57, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 58, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 59, 60, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 59, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 61, 62, -1, -1, -1, -1 },
-    { NULL, "LADViewGroup_LayoutParams;", 0x4, 63, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 64, 65, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 66, 67, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 68, 69, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 62, 63, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 64, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 65, 11, -1, -1, -1, -1 },
+    { NULL, "LADViewGroup_LayoutParams;", 0x4, 66, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 67, 68, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 69, 70, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 71, 72, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 70, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 71, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 72, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 73, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 74, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 75, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 76, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 77, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 78, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 73, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 74, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 75, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 76, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 77, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 78, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 79, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 80, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 79, 9, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 80, 81, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 81, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 82, 83, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 84, 5, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
-  methods[1].selector = @selector(dispatchAttachedToWindowWithADView_AttachInfo:withInt:);
-  methods[2].selector = @selector(isLayoutModeOptical);
-  methods[3].selector = @selector(setClipToPaddingWithBoolean:);
-  methods[4].selector = @selector(getClipToPadding);
-  methods[5].selector = @selector(dispatchSetPressedWithBoolean:);
-  methods[6].selector = @selector(findViewTraversalWithInt:);
-  methods[7].selector = @selector(addViewWithADView:);
-  methods[8].selector = @selector(addViewWithADView:withInt:);
-  methods[9].selector = @selector(addViewWithADView:withInt:withInt:);
-  methods[10].selector = @selector(addViewWithADView:withADViewGroup_LayoutParams:);
-  methods[11].selector = @selector(addViewWithADView:withInt:withADViewGroup_LayoutParams:);
-  methods[12].selector = @selector(checkLayoutParamsWithADViewGroup_LayoutParams:);
-  methods[13].selector = @selector(setOnHierarchyChangeListenerWithADViewGroup_OnHierarchyChangeListener:);
-  methods[14].selector = @selector(dispatchViewAddedWithADView:);
-  methods[15].selector = @selector(onViewAddedWithADView:);
-  methods[16].selector = @selector(dispatchViewRemovedWithADView:);
-  methods[17].selector = @selector(onViewRemovedWithADView:);
-  methods[18].selector = @selector(addViewInLayoutWithADView:withInt:withADViewGroup_LayoutParams:);
-  methods[19].selector = @selector(addViewInLayoutWithADView:withInt:withADViewGroup_LayoutParams:withBoolean:);
-  methods[20].selector = @selector(cleanupLayoutStateWithADView:);
-  methods[21].selector = @selector(addViewInnerWithADView:withInt:withADViewGroup_LayoutParams:withBoolean:);
-  methods[22].selector = @selector(addInArrayWithADView:withInt:);
-  methods[23].selector = @selector(removeFromArrayWithInt:);
-  methods[24].selector = @selector(removeFromArrayWithInt:withInt:);
-  methods[25].selector = @selector(removeViewWithADView:);
-  methods[26].selector = @selector(removeViewAtWithInt:);
-  methods[27].selector = @selector(removeViewInternalWithADView:);
-  methods[28].selector = @selector(removeViewInternalWithInt:withADView:);
-  methods[29].selector = @selector(removeAllViews);
-  methods[30].selector = @selector(removeAllViewsInLayout);
-  methods[31].selector = @selector(attachViewToParentWithADView:withInt:withADViewGroup_LayoutParams:);
-  methods[32].selector = @selector(detachViewFromParentWithADView:);
-  methods[33].selector = @selector(detachViewFromParentWithInt:);
-  methods[34].selector = @selector(detachViewsFromParentWithInt:withInt:);
-  methods[35].selector = @selector(detachAllViewsFromParent);
-  methods[36].selector = @selector(offsetChildrenTopAndBottomWithInt:);
-  methods[37].selector = @selector(hasBooleanFlagWithInt:);
-  methods[38].selector = @selector(setBooleanFlagWithInt:withBoolean:);
-  methods[39].selector = @selector(setLayoutModeWithInt:withBoolean:);
-  methods[40].selector = @selector(invalidateInheritedLayoutModeWithInt:);
-  methods[41].selector = @selector(getLayoutMode);
-  methods[42].selector = @selector(setLayoutModeWithInt:);
-  methods[43].selector = @selector(generateDefaultLayoutParams);
-  methods[44].selector = @selector(indexOfChildWithADView:);
-  methods[45].selector = @selector(getChildCount);
-  methods[46].selector = @selector(getChildAtWithInt:);
-  methods[47].selector = @selector(measureChildrenWithInt:withInt:);
-  methods[48].selector = @selector(measureChildWithADView:withInt:withInt:);
-  methods[49].selector = @selector(measureChildWithMarginsWithADView:withInt:withInt:withInt:withInt:);
-  methods[50].selector = @selector(getChildMeasureSpecWithInt:withInt:withInt:);
-  methods[51].selector = @selector(drawableStateChanged);
-  methods[52].selector = @selector(onCreateDrawableStateWithInt:);
-  methods[53].selector = @selector(setAddStatesFromChildrenWithBoolean:);
-  methods[54].selector = @selector(addStatesFromChildren);
-  methods[55].selector = @selector(childDrawableStateChangedWithADView:);
-  methods[56].selector = @selector(onSetLayoutParamsWithADView:withADViewGroup_LayoutParams:);
-  methods[57].selector = @selector(isViewTransitioningWithADView:);
-  methods[58].selector = @selector(getPaddingMaskBounds);
-  methods[59].selector = @selector(bringToFront);
-  methods[60].selector = @selector(incrementChildUnhandledKeyListeners);
-  methods[61].selector = @selector(invalidateChildWithADView:withADRect:);
-  methods[62].selector = @selector(recomputeViewAttributesWithADView:);
-  methods[63].selector = @selector(focusableViewAvailableWithADView:);
-  methods[64].selector = @selector(cancelWithNSString:);
-  methods[65].selector = @selector(cancel);
-  methods[66].selector = @selector(isChangingLayout);
-  methods[67].selector = @selector(cancelWithInt:);
-  methods[68].selector = @selector(layoutChangeWithADViewGroup:);
-  methods[69].selector = @selector(generateLayoutParamsWithADViewGroup_LayoutParams:);
-  methods[70].selector = @selector(requestChildFocusWithADView:withId:);
-  methods[71].selector = @selector(childHasTransientStateChangedWithADView:withBoolean:);
-  methods[72].selector = @selector(notifyGlobalFocusClearedWithId:);
-  methods[73].selector = @selector(rootViewRequestFocus);
-  methods[74].selector = @selector(clearChildFocusWithADView:);
-  methods[75].selector = @selector(addDisappearingViewWithADView:);
-  methods[76].selector = @selector(cancelHoverTargetWithADView:);
-  methods[77].selector = @selector(cancelTouchTargetWithADView:);
-  methods[78].selector = @selector(touchAccessibilityNodeProviderIfNeededWithADView:);
-  methods[79].selector = @selector(setDefaultFocusWithADView:);
-  methods[80].selector = @selector(notifyChildOfDragStartWithADView:);
-  methods[81].selector = @selector(dispatchVisibilityAggregatedWithBoolean:);
-  methods[82].selector = @selector(clearFocusedInClusterWithADView:);
-  methods[83].selector = @selector(decrementChildUnhandledKeyListeners);
-  methods[84].selector = @selector(clearDefaultFocusWithADView:);
-  methods[85].selector = @selector(measureHeightOfChildrenWithInt:withInt:withInt:withInt:withInt:);
+  methods[1].selector = @selector(onChildVisibilityChangedWithADView:withInt:withInt:);
+  methods[2].selector = @selector(dispatchAttachedToWindowWithADView_AttachInfo:withInt:);
+  methods[3].selector = @selector(isLayoutModeOptical);
+  methods[4].selector = @selector(setClipToPaddingWithBoolean:);
+  methods[5].selector = @selector(getClipToPadding);
+  methods[6].selector = @selector(dispatchSetPressedWithBoolean:);
+  methods[7].selector = @selector(findViewTraversalWithInt:);
+  methods[8].selector = @selector(addViewWithADView:);
+  methods[9].selector = @selector(addViewWithADView:withInt:);
+  methods[10].selector = @selector(addViewWithADView:withInt:withInt:);
+  methods[11].selector = @selector(addViewWithADView:withADViewGroup_LayoutParams:);
+  methods[12].selector = @selector(addViewWithADView:withInt:withADViewGroup_LayoutParams:);
+  methods[13].selector = @selector(checkLayoutParamsWithADViewGroup_LayoutParams:);
+  methods[14].selector = @selector(setOnHierarchyChangeListenerWithADViewGroup_OnHierarchyChangeListener:);
+  methods[15].selector = @selector(dispatchViewAddedWithADView:);
+  methods[16].selector = @selector(onViewAddedWithADView:);
+  methods[17].selector = @selector(dispatchViewRemovedWithADView:);
+  methods[18].selector = @selector(onViewRemovedWithADView:);
+  methods[19].selector = @selector(addViewInLayoutWithADView:withInt:withADViewGroup_LayoutParams:);
+  methods[20].selector = @selector(addViewInLayoutWithADView:withInt:withADViewGroup_LayoutParams:withBoolean:);
+  methods[21].selector = @selector(cleanupLayoutStateWithADView:);
+  methods[22].selector = @selector(addViewInnerWithADView:withInt:withADViewGroup_LayoutParams:withBoolean:);
+  methods[23].selector = @selector(addInArrayWithADView:withInt:);
+  methods[24].selector = @selector(removeFromArrayWithInt:);
+  methods[25].selector = @selector(removeFromArrayWithInt:withInt:);
+  methods[26].selector = @selector(removeViewWithADView:);
+  methods[27].selector = @selector(removeViewAtWithInt:);
+  methods[28].selector = @selector(removeViewInternalWithADView:);
+  methods[29].selector = @selector(removeViewInternalWithInt:withADView:);
+  methods[30].selector = @selector(setLayoutTransitionWithADLayoutTransition:);
+  methods[31].selector = @selector(getLayoutTransition);
+  methods[32].selector = @selector(removeAllViews);
+  methods[33].selector = @selector(removeAllViewsInLayout);
+  methods[34].selector = @selector(attachViewToParentWithADView:withInt:withADViewGroup_LayoutParams:);
+  methods[35].selector = @selector(detachViewFromParentWithADView:);
+  methods[36].selector = @selector(detachViewFromParentWithInt:);
+  methods[37].selector = @selector(detachViewsFromParentWithInt:withInt:);
+  methods[38].selector = @selector(detachAllViewsFromParent);
+  methods[39].selector = @selector(offsetChildrenTopAndBottomWithInt:);
+  methods[40].selector = @selector(hasBooleanFlagWithInt:);
+  methods[41].selector = @selector(setBooleanFlagWithInt:withBoolean:);
+  methods[42].selector = @selector(setLayoutModeWithInt:withBoolean:);
+  methods[43].selector = @selector(invalidateInheritedLayoutModeWithInt:);
+  methods[44].selector = @selector(getLayoutMode);
+  methods[45].selector = @selector(setLayoutModeWithInt:);
+  methods[46].selector = @selector(generateDefaultLayoutParams);
+  methods[47].selector = @selector(indexOfChildWithADView:);
+  methods[48].selector = @selector(getChildCount);
+  methods[49].selector = @selector(getChildAtWithInt:);
+  methods[50].selector = @selector(measureChildrenWithInt:withInt:);
+  methods[51].selector = @selector(measureChildWithADView:withInt:withInt:);
+  methods[52].selector = @selector(measureChildWithMarginsWithADView:withInt:withInt:withInt:withInt:);
+  methods[53].selector = @selector(getChildMeasureSpecWithInt:withInt:withInt:);
+  methods[54].selector = @selector(addDisappearingViewWithADView:);
+  methods[55].selector = @selector(startViewTransitionWithADView:);
+  methods[56].selector = @selector(endViewTransitionWithADView:);
+  methods[57].selector = @selector(drawableStateChanged);
+  methods[58].selector = @selector(onCreateDrawableStateWithInt:);
+  methods[59].selector = @selector(setAddStatesFromChildrenWithBoolean:);
+  methods[60].selector = @selector(addStatesFromChildren);
+  methods[61].selector = @selector(childDrawableStateChangedWithADView:);
+  methods[62].selector = @selector(requestTransitionStartWithADLayoutTransition:);
+  methods[63].selector = @selector(onSetLayoutParamsWithADView:withADViewGroup_LayoutParams:);
+  methods[64].selector = @selector(isViewTransitioningWithADView:);
+  methods[65].selector = @selector(getPaddingMaskBounds);
+  methods[66].selector = @selector(bringToFront);
+  methods[67].selector = @selector(incrementChildUnhandledKeyListeners);
+  methods[68].selector = @selector(invalidateChildWithADView:withADRect:);
+  methods[69].selector = @selector(recomputeViewAttributesWithADView:);
+  methods[70].selector = @selector(focusableViewAvailableWithADView:);
+  methods[71].selector = @selector(generateLayoutParamsWithADViewGroup_LayoutParams:);
+  methods[72].selector = @selector(requestChildFocusWithADView:withId:);
+  methods[73].selector = @selector(childHasTransientStateChangedWithADView:withBoolean:);
+  methods[74].selector = @selector(notifyGlobalFocusClearedWithId:);
+  methods[75].selector = @selector(rootViewRequestFocus);
+  methods[76].selector = @selector(clearChildFocusWithADView:);
+  methods[77].selector = @selector(cancelHoverTargetWithADView:);
+  methods[78].selector = @selector(cancelTouchTargetWithADView:);
+  methods[79].selector = @selector(touchAccessibilityNodeProviderIfNeededWithADView:);
+  methods[80].selector = @selector(setDefaultFocusWithADView:);
+  methods[81].selector = @selector(notifyChildOfDragStartWithADView:);
+  methods[82].selector = @selector(dispatchVisibilityAggregatedWithBoolean:);
+  methods[83].selector = @selector(clearFocusedInClusterWithADView:);
+  methods[84].selector = @selector(decrementChildUnhandledKeyListeners);
+  methods[85].selector = @selector(clearDefaultFocusWithADView:);
+  methods[86].selector = @selector(measureHeightOfChildrenWithInt:withInt:withInt:withInt:withInt:);
+  methods[87].selector = @selector(setRedrawWithBoolean:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "DBG", "Z", .constantValue.asBOOL = ADViewGroup_DBG, 0x1a, -1, -1, -1, -1 },
+    { "mDisappearingChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x4, -1, -1, 85, -1 },
     { "mOnHierarchyChangeListener_", "LADViewGroup_OnHierarchyChangeListener;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "mFocused_", "LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mDefaultFocus_", "LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mFocusedInCluster_", "LADView;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mCurrentDragStartEvent_", "LADViewGroup_DragEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mIsInterestedInDrag_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mChildrenInterestedInDrag_", "LJavaUtilHashSet;", .constantValue.asLong = 0, 0x2, -1, -1, 82, -1 },
+    { "mChildrenInterestedInDrag_", "LJavaUtilHashSet;", .constantValue.asLong = 0, 0x2, -1, -1, 86, -1 },
     { "mLastTouchDownTime_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mLastTouchDownIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mHoveredSelf_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -1173,7 +1289,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
     { "LAYOUT_MODE_UNDEFINED", "I", .constantValue.asInt = ADViewGroup_LAYOUT_MODE_UNDEFINED, 0x1a, -1, -1, -1, -1 },
     { "LAYOUT_MODE_CLIP_BOUNDS", "I", .constantValue.asInt = ADViewGroup_LAYOUT_MODE_CLIP_BOUNDS, 0x19, -1, -1, -1, -1 },
     { "LAYOUT_MODE_OPTICAL_BOUNDS", "I", .constantValue.asInt = ADViewGroup_LAYOUT_MODE_OPTICAL_BOUNDS, 0x19, -1, -1, -1, -1 },
-    { "LAYOUT_MODE_DEFAULT", "I", .constantValue.asLong = 0, 0x9, -1, 83, -1, -1 },
+    { "LAYOUT_MODE_DEFAULT", "I", .constantValue.asLong = 0, 0x9, -1, 87, -1, -1 },
     { "CLIP_TO_PADDING_MASK", "I", .constantValue.asInt = ADViewGroup_CLIP_TO_PADDING_MASK, 0x1c, -1, -1, -1, -1 },
     { "CHILD_LEFT_INDEX", "I", .constantValue.asInt = ADViewGroup_CHILD_LEFT_INDEX, 0x1a, -1, -1, -1, -1 },
     { "CHILD_TOP_INDEX", "I", .constantValue.asInt = ADViewGroup_CHILD_TOP_INDEX, 0x1a, -1, -1, -1, -1 },
@@ -1182,17 +1298,19 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
     { "mLayoutCalledWhileSuppressed_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "ARRAY_INITIAL_CAPACITY", "I", .constantValue.asInt = ADViewGroup_ARRAY_INITIAL_CAPACITY, 0x1a, -1, -1, -1, -1 },
     { "ARRAY_CAPACITY_INCREMENT", "I", .constantValue.asInt = ADViewGroup_ARRAY_CAPACITY_INCREMENT, 0x1a, -1, -1, -1, -1 },
-    { "mTransitioningViews_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 84, -1 },
+    { "mTransition_", "LADLayoutTransition;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "mTransitioningViews_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 85, -1 },
+    { "mVisibilityChangingChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 85, -1 },
     { "mChildCountWithTransientState_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mNestedScrollAxes_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mTransientIndices_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 85, -1 },
-    { "mTransientViews_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 86, -1 },
+    { "mTransientIndices_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 88, -1 },
+    { "mTransientViews_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 89, -1 },
     { "mChildUnhandledKeyListeners_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "mLayoutTransitionListener_", "LADLayoutTransition_TransitionListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChildren_", "[LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mTransition_", "LADViewGroup_LayoutTransition;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "dispatchAttachedToWindow", "LADView_AttachInfo;I", "setClipToPadding", "Z", "dispatchSetPressed", "findViewTraversal", "I", "<T:Lr/android/view/View;>(I)TT;", "addView", "LADView;", "LADView;I", "LADView;II", "LADView;LADViewGroup_LayoutParams;", "LADView;ILADViewGroup_LayoutParams;", "checkLayoutParams", "LADViewGroup_LayoutParams;", "setOnHierarchyChangeListener", "LADViewGroup_OnHierarchyChangeListener;", "dispatchViewAdded", "onViewAdded", "dispatchViewRemoved", "onViewRemoved", "addViewInLayout", "LADView;ILADViewGroup_LayoutParams;Z", "cleanupLayoutState", "addViewInner", "addInArray", "removeFromArray", "II", "removeView", "removeViewAt", "removeViewInternal", "ILADView;", "attachViewToParent", "detachViewFromParent", "detachViewsFromParent", "offsetChildrenTopAndBottom", "hasBooleanFlag", "setBooleanFlag", "IZ", "setLayoutMode", "invalidateInheritedLayoutMode", "indexOfChild", "getChildAt", "measureChildren", "measureChild", "measureChildWithMargins", "LADView;IIII", "getChildMeasureSpec", "III", "onCreateDrawableState", "setAddStatesFromChildren", "childDrawableStateChanged", "onSetLayoutParams", "isViewTransitioning", "invalidateChild", "LADView;LADRect;", "recomputeViewAttributes", "focusableViewAvailable", "cancel", "LNSString;", "layoutChange", "LADViewGroup;", "generateLayoutParams", "requestChildFocus", "LADView;LNSObject;", "childHasTransientStateChanged", "LADView;Z", "notifyGlobalFocusCleared", "LNSObject;", "clearChildFocus", "addDisappearingView", "cancelHoverTarget", "cancelTouchTarget", "touchAccessibilityNodeProviderIfNeeded", "setDefaultFocus", "notifyChildOfDragStart", "dispatchVisibilityAggregated", "clearFocusedInCluster", "clearDefaultFocus", "measureHeightOfChildren", "IIIII", "Ljava/util/HashSet<Lr/android/view/View;>;", &ADViewGroup_LAYOUT_MODE_DEFAULT, "Ljava/util/ArrayList<Lr/android/view/View;>;", "Ljava/util/List<Ljava/lang/Integer;>;", "Ljava/util/List<Lr/android/view/View;>;", "LADViewGroup_OnHierarchyChangeListener;LADViewGroup_LayoutParams;LADViewGroup_MarginLayoutParams;LADViewGroup_DragEvent;LADViewGroup_LayoutTransition;" };
-  static const J2ObjcClassInfo _ADViewGroup = { "ViewGroup", "r.android.view", ptrTable, methods, fields, 7, 0x401, 86, 69, -1, 87, -1, -1, -1 };
+  static const void *ptrTable[] = { "onChildVisibilityChanged", "LADView;II", "dispatchAttachedToWindow", "LADView_AttachInfo;I", "setClipToPadding", "Z", "dispatchSetPressed", "findViewTraversal", "I", "<T:Lr/android/view/View;>(I)TT;", "addView", "LADView;", "LADView;I", "LADView;LADViewGroup_LayoutParams;", "LADView;ILADViewGroup_LayoutParams;", "checkLayoutParams", "LADViewGroup_LayoutParams;", "setOnHierarchyChangeListener", "LADViewGroup_OnHierarchyChangeListener;", "dispatchViewAdded", "onViewAdded", "dispatchViewRemoved", "onViewRemoved", "addViewInLayout", "LADView;ILADViewGroup_LayoutParams;Z", "cleanupLayoutState", "addViewInner", "addInArray", "removeFromArray", "II", "removeView", "removeViewAt", "removeViewInternal", "ILADView;", "setLayoutTransition", "LADLayoutTransition;", "attachViewToParent", "detachViewFromParent", "detachViewsFromParent", "offsetChildrenTopAndBottom", "hasBooleanFlag", "setBooleanFlag", "IZ", "setLayoutMode", "invalidateInheritedLayoutMode", "indexOfChild", "getChildAt", "measureChildren", "measureChild", "measureChildWithMargins", "LADView;IIII", "getChildMeasureSpec", "III", "addDisappearingView", "startViewTransition", "endViewTransition", "onCreateDrawableState", "setAddStatesFromChildren", "childDrawableStateChanged", "requestTransitionStart", "onSetLayoutParams", "isViewTransitioning", "invalidateChild", "LADView;LADRect;", "recomputeViewAttributes", "focusableViewAvailable", "generateLayoutParams", "requestChildFocus", "LADView;LNSObject;", "childHasTransientStateChanged", "LADView;Z", "notifyGlobalFocusCleared", "LNSObject;", "clearChildFocus", "cancelHoverTarget", "cancelTouchTarget", "touchAccessibilityNodeProviderIfNeeded", "setDefaultFocus", "notifyChildOfDragStart", "dispatchVisibilityAggregated", "clearFocusedInCluster", "clearDefaultFocus", "measureHeightOfChildren", "IIIII", "setRedraw", "Ljava/util/ArrayList<Lr/android/view/View;>;", "Ljava/util/HashSet<Lr/android/view/View;>;", &ADViewGroup_LAYOUT_MODE_DEFAULT, "Ljava/util/List<Ljava/lang/Integer;>;", "Ljava/util/List<Lr/android/view/View;>;", "LADViewGroup_OnHierarchyChangeListener;LADViewGroup_LayoutParams;LADViewGroup_MarginLayoutParams;LADViewGroup_DragEvent;" };
+  static const J2ObjcClassInfo _ADViewGroup = { "ViewGroup", "r.android.view", ptrTable, methods, fields, 7, 0x401, 88, 72, -1, 90, -1, -1, -1 };
   return &_ADViewGroup;
 }
 
@@ -1208,12 +1326,13 @@ void ADViewGroup_init(ADViewGroup *self) {
   JreStrongAssign(&self->mTransientIndices_, nil);
   JreStrongAssign(&self->mTransientViews_, nil);
   self->mChildUnhandledKeyListeners_ = 0;
+  JreStrongAssignAndConsume(&self->mLayoutTransitionListener_, new_ADViewGroup_1_initWithADViewGroup_(self));
   JreStrongAssignAndConsume(&self->mChildren_, [IOSObjectArray newArrayWithLength:ADViewGroup_ARRAY_INITIAL_CAPACITY type:ADView_class_()]);
 }
 
 void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_withBoolean_(ADViewGroup *self, ADView *child, jint index, ADViewGroup_LayoutParams *params, jboolean preventRequestLayout) {
   if (self->mTransition_ != nil) {
-    [self->mTransition_ cancelWithInt:ADViewGroup_LayoutTransition_DISAPPEARING];
+    [self->mTransition_ cancelWithInt:ADLayoutTransition_DISAPPEARING];
   }
   if ([((ADView *) nil_chk(child)) getParent] != nil) {
     if ([child getParent] == self) {
@@ -1399,7 +1518,10 @@ void ADViewGroup_removeViewInternalWithInt_withADView_(ADViewGroup *self, jint i
   [((ADView *) nil_chk(view)) clearAccessibilityFocus];
   ADViewGroup_cancelTouchTargetWithADView_(self, view);
   ADViewGroup_cancelHoverTargetWithADView_(self, view);
-  if (view->mAttachInfo_ != nil) {
+  if ([view getAnimation] != nil || (self->mTransitioningViews_ != nil && [self->mTransitioningViews_ containsWithId:view])) {
+    ADViewGroup_addDisappearingViewWithADView_(self, view);
+  }
+  else if (view->mAttachInfo_ != nil) {
     [view dispatchDetachedFromWindow];
   }
   if ([view hasTransientState]) {
@@ -1507,6 +1629,14 @@ jint ADViewGroup_getChildMeasureSpecWithInt_withInt_withInt_(jint spec, jint pad
   return ADView_MeasureSpec_makeMeasureSpecWithInt_withInt_(resultSize, resultMode);
 }
 
+void ADViewGroup_addDisappearingViewWithADView_(ADViewGroup *self, ADView *v) {
+  JavaUtilArrayList *disappearingChildren = JreRetainedLocalValue(self->mDisappearingChildren_);
+  if (disappearingChildren == nil) {
+    disappearingChildren = JreStrongAssignAndConsume(&self->mDisappearingChildren_, new_JavaUtilArrayList_init());
+  }
+  [disappearingChildren addWithId:v];
+}
+
 void ADViewGroup_requestChildFocusWithADView_withId_(ADViewGroup *self, ADView *child, id findFocus) {
 }
 
@@ -1521,9 +1651,6 @@ jboolean ADViewGroup_rootViewRequestFocus(ADViewGroup *self) {
 }
 
 void ADViewGroup_clearChildFocusWithADView_(ADViewGroup *self, ADView *view) {
-}
-
-void ADViewGroup_addDisappearingViewWithADView_(ADViewGroup *self, ADView *view) {
 }
 
 void ADViewGroup_cancelHoverTargetWithADView_(ADViewGroup *self, ADView *view) {
@@ -1576,6 +1703,76 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup)
 @end
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADViewGroup_OnHierarchyChangeListener)
+
+@implementation ADViewGroup_1
+
+- (instancetype)initWithADViewGroup:(ADViewGroup *)outer$ {
+  ADViewGroup_1_initWithADViewGroup_(self, outer$);
+  return self;
+}
+
+- (void)startTransitionWithADLayoutTransition:(ADLayoutTransition *)transition
+                              withADViewGroup:(ADViewGroup *)container
+                                   withADView:(ADView *)view
+                                      withInt:(jint)transitionType {
+  if (transitionType == ADLayoutTransition_DISAPPEARING) {
+    [this$0_ startViewTransitionWithADView:view];
+  }
+}
+
+- (void)endTransitionWithADLayoutTransition:(ADLayoutTransition *)transition
+                            withADViewGroup:(ADViewGroup *)container
+                                 withADView:(ADView *)view
+                                    withInt:(jint)transitionType {
+  if (this$0_->mLayoutCalledWhileSuppressed_ && ![((ADLayoutTransition *) nil_chk(transition)) isChangingLayout]) {
+    [this$0_ requestLayout];
+    this$0_->mLayoutCalledWhileSuppressed_ = false;
+  }
+  if (transitionType == ADLayoutTransition_DISAPPEARING && this$0_->mTransitioningViews_ != nil) {
+    [this$0_ endViewTransitionWithADView:view];
+  }
+}
+
+- (void)dealloc {
+  RELEASE_(this$0_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithADViewGroup:);
+  methods[1].selector = @selector(startTransitionWithADLayoutTransition:withADViewGroup:withADView:withInt:);
+  methods[2].selector = @selector(endTransitionWithADLayoutTransition:withADViewGroup:withADView:withInt:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "this$0_", "LADViewGroup;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LADViewGroup;", "startTransition", "LADLayoutTransition;LADViewGroup;LADView;I", "endTransition" };
+  static const J2ObjcClassInfo _ADViewGroup_1 = { "", "r.android.view", ptrTable, methods, fields, 7, 0x8010, 3, 1, 0, -1, -1, -1, -1 };
+  return &_ADViewGroup_1;
+}
+
+@end
+
+void ADViewGroup_1_initWithADViewGroup_(ADViewGroup_1 *self, ADViewGroup *outer$) {
+  JreStrongAssign(&self->this$0_, outer$);
+  NSObject_init(self);
+}
+
+ADViewGroup_1 *new_ADViewGroup_1_initWithADViewGroup_(ADViewGroup *outer$) {
+  J2OBJC_NEW_IMPL(ADViewGroup_1, initWithADViewGroup_, outer$)
+}
+
+ADViewGroup_1 *create_ADViewGroup_1_initWithADViewGroup_(ADViewGroup *outer$) {
+  J2OBJC_CREATE_IMPL(ADViewGroup_1, initWithADViewGroup_, outer$)
+}
 
 @implementation ADViewGroup_LayoutParams
 
@@ -2004,67 +2201,3 @@ ADViewGroup_DragEvent *create_ADViewGroup_DragEvent_initWithADViewGroup_(ADViewG
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_DragEvent)
-
-@implementation ADViewGroup_LayoutTransition
-
-- (instancetype)initWithADViewGroup:(ADViewGroup *)outer$ {
-  ADViewGroup_LayoutTransition_initWithADViewGroup_(self, outer$);
-  return self;
-}
-
-- (void)showChildWithADViewGroup:(ADViewGroup *)viewGroup
-                      withADView:(ADView *)child
-                         withInt:(jint)oldVisibility {
-}
-
-- (void)addChildWithADViewGroup:(ADViewGroup *)viewGroup
-                     withADView:(ADView *)child {
-}
-
-- (void)cancelWithInt:(jint)disappearing2 {
-}
-
-- (void)removeChildWithADViewGroup:(ADViewGroup *)viewGroup
-                        withADView:(ADView *)view {
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithADViewGroup:);
-  methods[1].selector = @selector(showChildWithADViewGroup:withADView:withInt:);
-  methods[2].selector = @selector(addChildWithADViewGroup:withADView:);
-  methods[3].selector = @selector(cancelWithInt:);
-  methods[4].selector = @selector(removeChildWithADViewGroup:withADView:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "DISAPPEARING", "I", .constantValue.asInt = ADViewGroup_LayoutTransition_DISAPPEARING, 0x19, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LADViewGroup;", "showChild", "LADViewGroup;LADView;I", "addChild", "LADViewGroup;LADView;", "cancel", "I", "removeChild" };
-  static const J2ObjcClassInfo _ADViewGroup_LayoutTransition = { "LayoutTransition", "r.android.view", ptrTable, methods, fields, 7, 0x1, 5, 1, 0, -1, -1, -1, -1 };
-  return &_ADViewGroup_LayoutTransition;
-}
-
-@end
-
-void ADViewGroup_LayoutTransition_initWithADViewGroup_(ADViewGroup_LayoutTransition *self, ADViewGroup *outer$) {
-  NSObject_init(self);
-}
-
-ADViewGroup_LayoutTransition *new_ADViewGroup_LayoutTransition_initWithADViewGroup_(ADViewGroup *outer$) {
-  J2OBJC_NEW_IMPL(ADViewGroup_LayoutTransition, initWithADViewGroup_, outer$)
-}
-
-ADViewGroup_LayoutTransition *create_ADViewGroup_LayoutTransition_initWithADViewGroup_(ADViewGroup *outer$) {
-  J2OBJC_CREATE_IMPL(ADViewGroup_LayoutTransition, initWithADViewGroup_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewGroup_LayoutTransition)

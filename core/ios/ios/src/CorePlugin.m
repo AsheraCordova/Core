@@ -351,9 +351,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)releaseNativeResourcesWithJavaUtilList:(id<JavaUtilList>)objects {
-  for (id __strong object in nil_chk(objects)) {
-    if ([object isKindOfClass:[ADAnimator class]]) {
-      [((ADAnimator *) nil_chk(((ADAnimator *) object))) end];
+  if (objects != nil) {
+    for (id __strong object in objects) {
+      if ([object isKindOfClass:[ADAnimator class]]) {
+        [((ADAnimator *) nil_chk(((ADAnimator *) object))) end];
+      }
     }
   }
 }

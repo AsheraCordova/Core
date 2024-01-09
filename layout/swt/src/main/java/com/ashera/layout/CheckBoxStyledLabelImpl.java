@@ -443,6 +443,7 @@ public class CheckBoxStyledLabelImpl extends BaseWidget implements IDrawable, IC
         public void stateNo() {
         	ViewImpl.stateNo(CheckBoxStyledLabelImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return CheckBoxStyledLabelExt.class;
@@ -2777,7 +2778,9 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return button.isDisposed();
+	}
 	
 private CheckBoxStyledLabelCommandBuilder builder;
 private CheckBoxStyledLabelBean bean;
@@ -3834,7 +3837,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 }

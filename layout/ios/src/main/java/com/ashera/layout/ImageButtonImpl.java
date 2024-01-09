@@ -323,6 +323,7 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
         public void stateNo() {
         	ViewImpl.stateNo(ImageButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ImageButtonExt.class;
@@ -927,7 +928,6 @@ return getTintColor();				}
 
     	}
     }
-    
 	
 private ImageButtonCommandBuilder builder;
 private ImageButtonBean bean;
@@ -1404,7 +1404,7 @@ public void setTint(String value) {
 }
 
 
-    
+	
 	//end - body
 	private void nativeCreate(Map<String, Object> params) {
 		createButton();

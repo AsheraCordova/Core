@@ -32,6 +32,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   return false;
 }
 
+- (void)setTopWithInt:(jint)mTop {
+}
+
+- (void)setBottomWithInt:(jint)mBottom {
+}
+
+- (void)setLeftWithInt:(jint)left {
+}
+
+- (void)setRightWithInt:(jint)mRight {
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -39,6 +51,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 4, 3, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 6, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 7, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 3, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -48,9 +64,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[2].selector = @selector(offsetTopAndBottomWithInt:);
   methods[3].selector = @selector(offsetLeftAndRightWithInt:);
   methods[4].selector = @selector(isValid);
+  methods[5].selector = @selector(setTopWithInt:);
+  methods[6].selector = @selector(setBottomWithInt:);
+  methods[7].selector = @selector(setLeftWithInt:);
+  methods[8].selector = @selector(setRightWithInt:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "setLeftTopRightBottom", "IIII", "offsetTopAndBottom", "I", "offsetLeftAndRight" };
-  static const J2ObjcClassInfo _ADRenderNode = { "RenderNode", "r.android.view", ptrTable, methods, NULL, 7, 0x1, 5, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setLeftTopRightBottom", "IIII", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setTop", "setBottom", "setLeft", "setRight" };
+  static const J2ObjcClassInfo _ADRenderNode = { "RenderNode", "r.android.view", ptrTable, methods, NULL, 7, 0x1, 9, 0, -1, -1, -1, -1, -1 };
   return &_ADRenderNode;
 }
 

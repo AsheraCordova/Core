@@ -7,9 +7,11 @@
 #include "FloatArrayEvaluator.h"
 #include "FloatEvaluator.h"
 #include "FloatProperty.h"
+#include "ILifeCycleDecorator.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
+#include "IWidget.h"
 #include "IntArrayEvaluator.h"
 #include "IntEvaluator.h"
 #include "IntProperty.h"
@@ -1379,6 +1381,11 @@ id ADPropertyValuesHolder_convertBackWithId_(ADPropertyValuesHolder *self, id va
 }
 
 void ADPropertyValuesHolder_setupValueWithId_withADKeyframe_(ADPropertyValuesHolder *self, id target, ADKeyframe *kf) {
+  if ([ASILifeCycleDecorator_class_() isInstance:target]) {
+    id value = JreRetainedLocalValue([((id<ASIWidget>) nil_chk([((id<ASILifeCycleDecorator>) nil_chk(((id<ASILifeCycleDecorator>) cast_check(target, ASILifeCycleDecorator_class_())))) getWidget])) getAttributeWithNSString:self->mPropertyName_ withBoolean:true]);
+    [((ADKeyframe *) nil_chk(kf)) setValueWithId:value];
+    return;
+  }
   if (self->mProperty_ != nil) {
     id value = ADPropertyValuesHolder_convertBackWithId_(self, [self->mProperty_ getWithId:target]);
     [((ADKeyframe *) nil_chk(kf)) setValueWithId:value];
@@ -1441,6 +1448,9 @@ NSString *ADPropertyValuesHolder_nGetMultipleFloatMethodWithIOSClass_withNSStrin
 void ADPropertyValuesHolder_nCallIntMethodWithId_withNSString_withInt_(id target, NSString *methodID, jint arg) {
   ADPropertyValuesHolder_initialize();
   if ([target isKindOfClass:[ADView class]]) {
+    if ([((NSString *) nil_chk(methodID)) java_hasPrefix:@"scroll"]) {
+      return;
+    }
     [((ADView *) nil_chk(((ADView *) target))) setMyAttributeWithNSString:methodID withId:JavaLangInteger_valueOfWithInt_(arg)];
   }
 }

@@ -482,6 +482,7 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
         public void stateNo() {
         	ViewImpl.stateNo(ButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ButtonExt.class;
@@ -2038,7 +2039,6 @@ return getShadowColor();				}
 
     	}
     }
-    
 	
 private ButtonCommandBuilder builder;
 private ButtonBean bean;
@@ -3109,7 +3109,7 @@ public void setShadowColor(String value) {
 }
 
 
-    
+	
 	//end - body
 	private void nativeCreate(Map<String, Object> params) {
 		createNativeWidget(params);

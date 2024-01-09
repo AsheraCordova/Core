@@ -319,6 +319,7 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
         public void stateNo() {
         	ViewImpl.stateNo(ProgressBarImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ProgressBarExt.class;
@@ -628,7 +629,9 @@ return getPaddingTop();				}
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return composite.isDisposed();
+	}
 	
 private ProgressBarCommandBuilder builder;
 private ProgressBarBean bean;
@@ -909,7 +912,7 @@ public void incrementProgressBy(int value) {
 }
 
 
-    
+	
 	//end - body
 	private ProgressBar progressBar;
 	private void nativeCreate(Map<String, Object> params) {

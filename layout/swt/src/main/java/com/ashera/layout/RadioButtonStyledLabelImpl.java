@@ -442,6 +442,7 @@ public class RadioButtonStyledLabelImpl extends BaseWidget implements IDrawable,
         public void stateNo() {
         	ViewImpl.stateNo(RadioButtonStyledLabelImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return RadioButtonStyledLabelExt.class;
@@ -2793,7 +2794,9 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return button.isDisposed();
+	}
 	
 private RadioButtonStyledLabelCommandBuilder builder;
 private RadioButtonStyledLabelBean bean;
@@ -3850,7 +3853,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 

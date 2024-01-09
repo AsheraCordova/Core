@@ -525,6 +525,7 @@ public class TextViewImpl extends BaseWidget implements com.ashera.validations.V
         public void stateNo() {
         	ViewImpl.stateNo(TextViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return TextViewExt.class;
@@ -2134,7 +2135,6 @@ return [JavaLangBoolean valueOfWithBoolean :((ASUILabel*) uiView_).userInteracti
 
     	}
     }
-    
 	
 private TextViewCommandBuilder builder;
 private TextViewBean bean;
@@ -3709,7 +3709,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 

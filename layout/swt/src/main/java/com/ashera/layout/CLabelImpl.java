@@ -463,6 +463,7 @@ public class CLabelImpl extends BaseWidget implements IDrawable, IHasMultiNative
         public void stateNo() {
         	ViewImpl.stateNo(CLabelImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return CLabelExt.class;
@@ -2370,7 +2371,9 @@ return getLastBaselineToBottomHeight();				}
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return cLabel.isDisposed();
+	}
 	
 private CLabelCommandBuilder builder;
 private CLabelBean bean;
@@ -3517,7 +3520,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 

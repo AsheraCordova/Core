@@ -15,6 +15,7 @@
 @interface ADViewTreeObserver () {
  @public
   ADViewTreeObserver_CopyOnWriteArray *mOnScrollChangedListeners_;
+  ADViewTreeObserver_CopyOnWriteArray *mOnPreDrawListeners_;
   jboolean mAlive_;
 }
 
@@ -25,10 +26,15 @@
 @end
 
 J2OBJC_FIELD_SETTER(ADViewTreeObserver, mOnScrollChangedListeners_, ADViewTreeObserver_CopyOnWriteArray *)
+J2OBJC_FIELD_SETTER(ADViewTreeObserver, mOnPreDrawListeners_, ADViewTreeObserver_CopyOnWriteArray *)
 
 __attribute__((unused)) static void ADViewTreeObserver_checkIsAlive(ADViewTreeObserver *self);
 
 __attribute__((unused)) static void ADViewTreeObserver_kill(ADViewTreeObserver *self);
+
+@interface ADViewTreeObserver_OnPreDrawListener : NSObject
+
+@end
 
 @interface ADViewTreeObserver_OnScrollChangedListener : NSObject
 
@@ -64,6 +70,22 @@ J2OBJC_FIELD_SETTER(ADViewTreeObserver_Access, mData_, JavaUtilArrayList *)
 
 @implementation ADViewTreeObserver
 
+- (void)addOnPreDrawListenerWithADViewTreeObserver_OnPreDrawListener:(id<ADViewTreeObserver_OnPreDrawListener>)listener {
+  ADViewTreeObserver_checkIsAlive(self);
+  if (mOnPreDrawListeners_ == nil) {
+    JreStrongAssignAndConsume(&mOnPreDrawListeners_, new_ADViewTreeObserver_CopyOnWriteArray_init());
+  }
+  [mOnPreDrawListeners_ addWithId:listener];
+}
+
+- (void)removeOnPreDrawListenerWithADViewTreeObserver_OnPreDrawListener:(id<ADViewTreeObserver_OnPreDrawListener>)victim {
+  ADViewTreeObserver_checkIsAlive(self);
+  if (mOnPreDrawListeners_ == nil) {
+    return;
+  }
+  [mOnPreDrawListeners_ removeWithId:victim];
+}
+
 - (void)addOnScrollChangedListenerWithADViewTreeObserver_OnScrollChangedListener:(id<ADViewTreeObserver_OnScrollChangedListener>)listener {
   ADViewTreeObserver_checkIsAlive(self);
   if (mOnScrollChangedListeners_ == nil) {
@@ -82,6 +104,10 @@ J2OBJC_FIELD_SETTER(ADViewTreeObserver_Access, mData_, JavaUtilArrayList *)
 
 - (void)checkIsAlive {
   ADViewTreeObserver_checkIsAlive(self);
+}
+
+- (jboolean)isAlive {
+  return mAlive_;
 }
 
 - (void)kill {
@@ -122,6 +148,7 @@ J2OBJC_FIELD_SETTER(ADViewTreeObserver_Access, mData_, JavaUtilArrayList *)
 
 - (void)dealloc {
   RELEASE_(mOnScrollChangedListeners_);
+  RELEASE_(mOnPreDrawListeners_);
   [super dealloc];
 }
 
@@ -129,29 +156,36 @@ J2OBJC_FIELD_SETTER(ADViewTreeObserver_Access, mData_, JavaUtilArrayList *)
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 4, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 4, 5, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 7, 8, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(addOnScrollChangedListenerWithADViewTreeObserver_OnScrollChangedListener:);
-  methods[1].selector = @selector(removeOnScrollChangedListenerWithADViewTreeObserver_OnScrollChangedListener:);
-  methods[2].selector = @selector(checkIsAlive);
-  methods[3].selector = @selector(kill);
-  methods[4].selector = @selector(dispatchOnScrollChanged);
-  methods[5].selector = @selector(initWithADContext:);
-  methods[6].selector = @selector(mergeWithADViewTreeObserver:);
+  methods[0].selector = @selector(addOnPreDrawListenerWithADViewTreeObserver_OnPreDrawListener:);
+  methods[1].selector = @selector(removeOnPreDrawListenerWithADViewTreeObserver_OnPreDrawListener:);
+  methods[2].selector = @selector(addOnScrollChangedListenerWithADViewTreeObserver_OnScrollChangedListener:);
+  methods[3].selector = @selector(removeOnScrollChangedListenerWithADViewTreeObserver_OnScrollChangedListener:);
+  methods[4].selector = @selector(checkIsAlive);
+  methods[5].selector = @selector(isAlive);
+  methods[6].selector = @selector(kill);
+  methods[7].selector = @selector(dispatchOnScrollChanged);
+  methods[8].selector = @selector(initWithADContext:);
+  methods[9].selector = @selector(mergeWithADViewTreeObserver:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "mOnScrollChangedListeners_", "LADViewTreeObserver_CopyOnWriteArray;", .constantValue.asLong = 0, 0x2, -1, -1, 6, -1 },
+    { "mOnScrollChangedListeners_", "LADViewTreeObserver_CopyOnWriteArray;", .constantValue.asLong = 0, 0x2, -1, -1, 9, -1 },
+    { "mOnPreDrawListeners_", "LADViewTreeObserver_CopyOnWriteArray;", .constantValue.asLong = 0, 0x2, -1, -1, 10, -1 },
     { "mAlive_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "addOnScrollChangedListener", "LADViewTreeObserver_OnScrollChangedListener;", "removeOnScrollChangedListener", "LADContext;", "merge", "LADViewTreeObserver;", "Lr/android/view/ViewTreeObserver$CopyOnWriteArray<Lr/android/view/ViewTreeObserver$OnScrollChangedListener;>;", "LADViewTreeObserver_OnScrollChangedListener;LADViewTreeObserver_CopyOnWriteArray;LADViewTreeObserver_Access;" };
-  static const J2ObjcClassInfo _ADViewTreeObserver = { "ViewTreeObserver", "r.android.view", ptrTable, methods, fields, 7, 0x11, 7, 2, -1, 7, -1, -1, -1 };
+  static const void *ptrTable[] = { "addOnPreDrawListener", "LADViewTreeObserver_OnPreDrawListener;", "removeOnPreDrawListener", "addOnScrollChangedListener", "LADViewTreeObserver_OnScrollChangedListener;", "removeOnScrollChangedListener", "LADContext;", "merge", "LADViewTreeObserver;", "Lr/android/view/ViewTreeObserver$CopyOnWriteArray<Lr/android/view/ViewTreeObserver$OnScrollChangedListener;>;", "Lr/android/view/ViewTreeObserver$CopyOnWriteArray<Lr/android/view/ViewTreeObserver$OnPreDrawListener;>;", "LADViewTreeObserver_OnPreDrawListener;LADViewTreeObserver_OnScrollChangedListener;LADViewTreeObserver_CopyOnWriteArray;LADViewTreeObserver_Access;" };
+  static const J2ObjcClassInfo _ADViewTreeObserver = { "ViewTreeObserver", "r.android.view", ptrTable, methods, fields, 7, 0x11, 10, 3, -1, 11, -1, -1, -1 };
   return &_ADViewTreeObserver;
 }
 
@@ -181,6 +215,26 @@ ADViewTreeObserver *create_ADViewTreeObserver_initWithADContext_(ADContext *mCon
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADViewTreeObserver)
+
+@implementation ADViewTreeObserver_OnPreDrawListener
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(onPreDraw);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LADViewTreeObserver;" };
+  static const J2ObjcClassInfo _ADViewTreeObserver_OnPreDrawListener = { "OnPreDrawListener", "r.android.view", ptrTable, methods, NULL, 7, 0x609, 1, 0, 0, -1, -1, -1, -1 };
+  return &_ADViewTreeObserver_OnPreDrawListener;
+}
+
+@end
+
+J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADViewTreeObserver_OnPreDrawListener)
 
 @implementation ADViewTreeObserver_OnScrollChangedListener
 

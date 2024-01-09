@@ -467,6 +467,7 @@ public class TextAreaImpl extends BaseWidget implements com.ashera.validations.F
         public void stateNo() {
         	ViewImpl.stateNo(TextAreaImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return TextAreaExt.class;
@@ -3096,7 +3097,6 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 
     	}
     }
-    
 	
 private TextAreaCommandBuilder builder;
 private TextAreaBean bean;
@@ -4431,7 +4431,7 @@ public void setHintTextFormat(String value) {
 }
 
 
-    
+	
 	//end - body
 
 

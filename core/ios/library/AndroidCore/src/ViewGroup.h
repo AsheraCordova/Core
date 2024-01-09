@@ -27,22 +27,23 @@
 #define INCLUDE_ADViewParent 1
 #include "ViewParent.h"
 
+@class ADLayoutTransition;
 @class ADRect;
 @class ADViewGroup_LayoutParams;
-@class ADViewGroup_LayoutTransition;
 @class ADView_AttachInfo;
 @class IOSIntArray;
+@class JavaUtilArrayList;
 @protocol ADViewGroup_OnHierarchyChangeListener;
 
 @interface ADViewGroup : ADView < ADViewParent > {
  @public
+  JavaUtilArrayList *mDisappearingChildren_;
   id<ADViewGroup_OnHierarchyChangeListener> mOnHierarchyChangeListener_;
   ADView *mFocusedInCluster_;
   jint mGroupFlags_;
   jint mPersistentDrawingCache_;
   jboolean mSuppressLayout_;
   jint mChildUnhandledKeyListeners_;
-  ADViewGroup_LayoutTransition *mTransition_;
 }
 
 #pragma mark Public
@@ -69,13 +70,9 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 - (void)bringToFront;
 
-- (void)cancel;
-
-- (void)cancelWithInt:(jint)disappearing2;
-
-- (void)cancelWithNSString:(NSString *)disappearing2;
-
 - (void)childDrawableStateChangedWithADView:(ADView *)child;
+
+- (void)endViewTransitionWithADView:(ADView *)view;
 
 - (void)focusableViewAvailableWithADView:(ADView *)v;
 
@@ -91,6 +88,8 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 - (jint)getLayoutMode;
 
+- (ADLayoutTransition *)getLayoutTransition;
+
 - (ADRect *)getPaddingMaskBounds;
 
 - (void)incrementChildUnhandledKeyListeners;
@@ -99,10 +98,6 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 - (void)invalidateChildWithADView:(ADView *)child
                        withADRect:(ADRect *)r;
-
-- (jboolean)isChangingLayout;
-
-- (void)layoutChangeWithADViewGroup:(ADViewGroup *)viewGroup;
 
 - (jint)measureHeightOfChildrenWithInt:(jint)widthMeasureSpec
                                withInt:(jint)startPosition
@@ -126,13 +121,21 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 - (void)removeViewAtWithInt:(jint)index;
 
+- (void)requestTransitionStartWithADLayoutTransition:(ADLayoutTransition *)transition;
+
 - (void)setAddStatesFromChildrenWithBoolean:(jboolean)addsStates;
 
 - (void)setClipToPaddingWithBoolean:(jboolean)clipToPadding;
 
 - (void)setLayoutModeWithInt:(jint)layoutMode;
 
+- (void)setLayoutTransitionWithADLayoutTransition:(ADLayoutTransition *)transition;
+
 - (void)setOnHierarchyChangeListenerWithADViewGroup_OnHierarchyChangeListener:(id<ADViewGroup_OnHierarchyChangeListener>)listener;
+
+- (void)setRedrawWithBoolean:(jboolean)flag;
+
+- (void)startViewTransitionWithADView:(ADView *)view;
 
 #pragma mark Protected
 
@@ -185,6 +188,10 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
                                   withInt:(jint)parentHeightMeasureSpec
                                   withInt:(jint)heightUsed;
 
+- (void)onChildVisibilityChangedWithADView:(ADView *)child
+                                   withInt:(jint)oldVisibility
+                                   withInt:(jint)newVisibility;
+
 - (IOSIntArray *)onCreateDrawableStateWithInt:(jint)extraSpace;
 
 - (void)onSetLayoutParamsWithADView:(ADView *)child
@@ -209,9 +216,9 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 J2OBJC_EMPTY_STATIC_INIT(ADViewGroup)
 
+J2OBJC_FIELD_SETTER(ADViewGroup, mDisappearingChildren_, JavaUtilArrayList *)
 J2OBJC_FIELD_SETTER(ADViewGroup, mOnHierarchyChangeListener_, id<ADViewGroup_OnHierarchyChangeListener>)
 J2OBJC_FIELD_SETTER(ADViewGroup, mFocusedInCluster_, ADView *)
-J2OBJC_FIELD_SETTER(ADViewGroup, mTransition_, ADViewGroup_LayoutTransition *)
 
 inline jint ADViewGroup_get_FLAG_CLIP_CHILDREN(void);
 #define ADViewGroup_FLAG_CLIP_CHILDREN 1
@@ -514,52 +521,6 @@ FOUNDATION_EXPORT ADViewGroup_DragEvent *new_ADViewGroup_DragEvent_initWithADVie
 FOUNDATION_EXPORT ADViewGroup_DragEvent *create_ADViewGroup_DragEvent_initWithADViewGroup_(ADViewGroup *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADViewGroup_DragEvent)
-
-#endif
-
-#if !defined (ADViewGroup_LayoutTransition_) && (INCLUDE_ALL_ViewGroup || defined(INCLUDE_ADViewGroup_LayoutTransition))
-#define ADViewGroup_LayoutTransition_
-
-@class ADView;
-@class ADViewGroup;
-
-@interface ADViewGroup_LayoutTransition : NSObject
-
-#pragma mark Public
-
-- (instancetype)initWithADViewGroup:(ADViewGroup *)outer$;
-
-- (void)addChildWithADViewGroup:(ADViewGroup *)viewGroup
-                     withADView:(ADView *)child;
-
-- (void)cancelWithInt:(jint)disappearing2;
-
-- (void)removeChildWithADViewGroup:(ADViewGroup *)viewGroup
-                        withADView:(ADView *)view;
-
-- (void)showChildWithADViewGroup:(ADViewGroup *)viewGroup
-                      withADView:(ADView *)child
-                         withInt:(jint)oldVisibility;
-
-// Disallowed inherited constructors, do not use.
-
-- (instancetype)init NS_UNAVAILABLE;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(ADViewGroup_LayoutTransition)
-
-inline jint ADViewGroup_LayoutTransition_get_DISAPPEARING(void);
-#define ADViewGroup_LayoutTransition_DISAPPEARING 0
-J2OBJC_STATIC_FIELD_CONSTANT(ADViewGroup_LayoutTransition, DISAPPEARING, jint)
-
-FOUNDATION_EXPORT void ADViewGroup_LayoutTransition_initWithADViewGroup_(ADViewGroup_LayoutTransition *self, ADViewGroup *outer$);
-
-FOUNDATION_EXPORT ADViewGroup_LayoutTransition *new_ADViewGroup_LayoutTransition_initWithADViewGroup_(ADViewGroup *outer$) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT ADViewGroup_LayoutTransition *create_ADViewGroup_LayoutTransition_initWithADViewGroup_(ADViewGroup *outer$);
-
-J2OBJC_TYPE_LITERAL_HEADER(ADViewGroup_LayoutTransition)
 
 #endif
 

@@ -316,6 +316,7 @@ public class ProgressBarImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ProgressBarImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ProgressBarExt.class;
@@ -643,7 +644,6 @@ return getProgressBackgroundTint();				}
 
     	}
     }
-    
 	
 private ProgressBarCommandBuilder builder;
 private ProgressBarBean bean;
@@ -976,7 +976,7 @@ public void setProgressBackgroundTint(String value) {
 }
 
 
-    
+	
 	//end - body
 	private HTMLElement progressBar;
 	private int min;

@@ -547,6 +547,7 @@ public class UITextViewLabelImpl extends BaseWidget implements com.ashera.valida
         public void stateNo() {
         	ViewImpl.stateNo(UITextViewLabelImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return UITextViewLabelExt.class;
@@ -2548,7 +2549,6 @@ return [JavaLangBoolean valueOfWithBoolean :((ASUITextViewLabel*) uiView_).selec
 
     	}
     }
-    
 	
 private UITextViewLabelCommandBuilder builder;
 private UITextViewLabelBean bean;
@@ -3979,7 +3979,7 @@ public void setTextFormat(String value) {
 }
 
 
-    
+	
 	//end - body
 	private void nativeCreate(Map<String, Object> params) {
 		initHtml(params);

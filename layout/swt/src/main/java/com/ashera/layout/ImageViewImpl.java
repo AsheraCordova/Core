@@ -317,6 +317,7 @@ public class ImageViewImpl extends BaseWidget implements IsImage, IHasMultiNativ
         public void stateNo() {
         	ViewImpl.stateNo(ImageViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ImageViewExt.class;
@@ -734,7 +735,9 @@ return getCropToPadding();				}
 			nativeInvalidate();
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return label.isDisposed();
+	}
 	
 private ImageViewCommandBuilder builder;
 private ImageViewBean bean;
@@ -1237,7 +1240,7 @@ public void setCropToPadding(boolean value) {
 }
 
 
-    
+	
     private SimpleWrapableView simpleWrapableView;
     
     private void createSimpleWrapableView() {

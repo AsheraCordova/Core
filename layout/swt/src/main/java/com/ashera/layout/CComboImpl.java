@@ -370,6 +370,7 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
         public void stateNo() {
         	ViewImpl.stateNo(CComboImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return CComboExt.class;
@@ -1489,7 +1490,9 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(AdapterView<?>
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return cCombo.isDisposed();
+	}
 	
 private CComboCommandBuilder builder;
 private CComboBean bean;
@@ -1996,7 +1999,7 @@ public void setSelection(int value) {
 }
 
 
-    
+	
 	//end - body
 
 	private void nativeCreate(Map<String, Object> params) {

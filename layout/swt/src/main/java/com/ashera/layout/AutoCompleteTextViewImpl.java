@@ -448,6 +448,7 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements IDrawabl
         public void stateNo() {
         	ViewImpl.stateNo(AutoCompleteTextViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return AutoCompleteTextViewExt.class;
@@ -3050,7 +3051,9 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return text.isDisposed();
+	}
 	
 private AutoCompleteTextViewCommandBuilder builder;
 private AutoCompleteTextViewBean bean;
@@ -4557,7 +4560,7 @@ public void setSetFocus(boolean value) {
 }
 
 
-    
+	
 	//end - body
 	private void movePopUpContainerToTop() {
 		((Control) popupContainer.asNativeWidget()).moveAbove(null);

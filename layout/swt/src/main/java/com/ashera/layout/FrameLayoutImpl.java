@@ -81,7 +81,7 @@ public class FrameLayoutImpl extends BaseHasWidgets {
 	public boolean remove(IWidget w) {		
 		boolean remove = super.remove(w);
 		frameLayout.removeView((View) w.asWidget());
-         ViewGroupImpl.nativeRemoveView(w);            
+		 nativeRemoveView(w);            
 		return remove;
 	}
 	
@@ -92,10 +92,22 @@ public class FrameLayoutImpl extends BaseHasWidgets {
 
         if (index + 1 <= frameLayout.getChildCount()) {
             frameLayout.removeViewAt(index);
-            ViewGroupImpl.nativeRemoveView(widget);            
+            nativeRemoveView(widget);
         }    
         return remove;
     }
+	
+	private void nativeRemoveView(IWidget widget) {
+		r.android.animation.LayoutTransition layoutTransition = frameLayout.getLayoutTransition();
+		if (layoutTransition != null && (
+				layoutTransition.isTransitionTypeEnabled(r.android.animation.LayoutTransition.CHANGE_DISAPPEARING) ||
+				layoutTransition.isTransitionTypeEnabled(r.android.animation.LayoutTransition.DISAPPEARING)
+				)) {
+			addToBufferedRunnables(() -> ViewGroupImpl.nativeRemoveView(widget));          
+		} else {
+			ViewGroupImpl.nativeRemoveView(widget);
+		}
+	}
 	
 	@Override
 	public void add(IWidget w, int index) {
@@ -416,6 +428,12 @@ return layoutParams.gravity;			}
         public void stateNo() {
         	ViewImpl.stateNo(FrameLayoutImpl.this);
         }
+     
+		@Override
+		public void endViewTransition(r.android.view.View view) {
+			super.endViewTransition(view);
+			runBufferedRunnables();
+		}
 	}
 	@Override
 	public Class getViewClass() {
@@ -479,6 +497,9 @@ break;			}
         pane = new org.eclipse.swt.widgets.Composite((org.eclipse.swt.widgets.Composite)ViewImpl.getParent(this), getStyle(params, fragment));
         ((org.eclipse.swt.widgets.Composite)pane).setLayout(new org.eclipse.nebula.widgets.layout.AbsoluteLayout());
     }
+    public boolean isWidgetDisposed() {
+		return ((org.eclipse.swt.widgets.Control) pane).isDisposed();
+	}
     
     @Override
     public void requestLayout() {

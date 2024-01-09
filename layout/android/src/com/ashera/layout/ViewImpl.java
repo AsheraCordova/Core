@@ -585,6 +585,10 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationEnd").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationCancel").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationRepeat").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("left").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("right").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("top").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("bottom").withType("dimension"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("systemStyle").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("systemAndroidAttrStyle").withType("string"));
@@ -1940,6 +1944,42 @@ if (objValue instanceof java.util.List) {
 
 			}
 			break;
+		case "left": {
+
+
+		 setLeft(w, objValue);
+
+
+
+			}
+			break;
+		case "right": {
+
+
+		 setRight(w, objValue);
+
+
+
+			}
+			break;
+		case "top": {
+
+
+		 setTop(w, objValue);
+
+
+
+			}
+			break;
+		case "bottom": {
+
+
+		 setBottom(w, objValue);
+
+
+
+			}
+			break;
 		default:
 			java.util.List<IAttributable> attributables = WidgetFactory.getAttributables("View", w.getLocalName());
 			if (attributables != null) {
@@ -2243,6 +2283,14 @@ return getMaxWidth(w);			}
 return getMaxHeight(w);			}
 			case "validateForm": {
 return getValidateFormResult(w);			}
+			case "left": {
+return getLeft(w);			}
+			case "right": {
+return getRight(w);			}
+			case "top": {
+return getTop(w);			}
+			case "bottom": {
+return getBottom(w);			}
 		}
 		
 		java.util.List<IAttributable> attributables = WidgetFactory.getAttributables("View", w.getLocalName());
@@ -5719,6 +5767,82 @@ public T setOnAnimationRepeat(String value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T tryGetLeft() {
+	Map<String, Object> attrs = initCommand("left");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getLeft() {
+	Map<String, Object> attrs = initCommand("left");
+	return attrs.get("commandReturnValue");
+}
+public T setLeft(String value) {
+	Map<String, Object> attrs = initCommand("left");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetRight() {
+	Map<String, Object> attrs = initCommand("right");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getRight() {
+	Map<String, Object> attrs = initCommand("right");
+	return attrs.get("commandReturnValue");
+}
+public T setRight(String value) {
+	Map<String, Object> attrs = initCommand("right");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetTop() {
+	Map<String, Object> attrs = initCommand("top");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getTop() {
+	Map<String, Object> attrs = initCommand("top");
+	return attrs.get("commandReturnValue");
+}
+public T setTop(String value) {
+	Map<String, Object> attrs = initCommand("top");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetBottom() {
+	Map<String, Object> attrs = initCommand("bottom");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getBottom() {
+	Map<String, Object> attrs = initCommand("bottom");
+	return attrs.get("commandReturnValue");
+}
+public T setBottom(String value) {
+	Map<String, Object> attrs = initCommand("bottom");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 }
 static class ViewCommandBuilderInternal extends ViewCommandBuilder<ViewCommandBuilderInternal> {
 	private IWidget widget;
@@ -6565,6 +6689,34 @@ public void setOnAnimationCancel(String value) {
 
 public void setOnAnimationRepeat(String value) {
 	getBuilder().reset().setOnAnimationRepeat(value).execute(true);
+}
+
+public Object getLeft() {
+	return getBuilder().reset().tryGetLeft().execute(false).getLeft(); 
+}
+public void setLeft(String value) {
+	getBuilder().reset().setLeft(value).execute(true);
+}
+
+public Object getRight() {
+	return getBuilder().reset().tryGetRight().execute(false).getRight(); 
+}
+public void setRight(String value) {
+	getBuilder().reset().setRight(value).execute(true);
+}
+
+public Object getTop() {
+	return getBuilder().reset().tryGetTop().execute(false).getTop(); 
+}
+public void setTop(String value) {
+	getBuilder().reset().setTop(value).execute(true);
+}
+
+public Object getBottom() {
+	return getBuilder().reset().tryGetBottom().execute(false).getBottom(); 
+}
+public void setBottom(String value) {
+	getBuilder().reset().setBottom(value).execute(true);
 }
 
 }
@@ -7460,4 +7612,46 @@ public void setOnAnimationRepeat(String value) {
 			((View) w.asWidget()).startAnimation(animation);
  		}
  	}
+ 	
+	
+	private static void setBottom(IWidget w, Object objValue) {
+		View view = (View) w.asWidget();
+		view.setLeft((int) objValue);
+	}
+
+	private static void setTop(IWidget w, Object objValue) {
+		View view = (View) w.asWidget();
+		view.setTop((int) objValue);
+	}
+
+	private static void setRight(IWidget w, Object objValue) {
+		View view = (View) w.asWidget();
+		view.setRight((int) objValue);
+	}
+
+	private static void setLeft(IWidget w, Object objValue) {
+		View view = (View) w.asWidget();
+		view.setLeft((int) objValue);
+	}
+	
+	
+	private static Object getBottom(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getBottom();
+	}
+
+	private static Object getTop(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getTop();
+	}
+
+	private static Object getRight(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getRight();
+	}
+
+	private static Object getLeft(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getLeft();
+	}
 }

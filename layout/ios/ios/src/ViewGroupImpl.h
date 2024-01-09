@@ -131,6 +131,42 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl)
 
 #endif
 
+#if !defined (ASViewGroupImpl_LayoutTransition_) && (INCLUDE_ALL_ViewGroupImpl || defined(INCLUDE_ASViewGroupImpl_LayoutTransition))
+#define ASViewGroupImpl_LayoutTransition_
+
+#define RESTRICT_AbstractBitFlagConverter 1
+#define INCLUDE_ASAbstractBitFlagConverter 1
+#include "AbstractBitFlagConverter.h"
+
+@class JavaLangInteger;
+@protocol JavaUtilMap;
+
+@interface ASViewGroupImpl_LayoutTransition : ASAbstractBitFlagConverter
+
+#pragma mark Public
+
+- (JavaLangInteger *)getDefault;
+
+- (id<JavaUtilMap>)getMapping;
+
+#pragma mark Package-Private
+
+- (instancetype)init;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewGroupImpl_LayoutTransition)
+
+FOUNDATION_EXPORT void ASViewGroupImpl_LayoutTransition_init(ASViewGroupImpl_LayoutTransition *self);
+
+FOUNDATION_EXPORT ASViewGroupImpl_LayoutTransition *new_ASViewGroupImpl_LayoutTransition_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASViewGroupImpl_LayoutTransition *create_ASViewGroupImpl_LayoutTransition_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_LayoutTransition)
+
+#endif
+
 #if !defined (ASViewGroupImpl_LayoutMode_) && (INCLUDE_ALL_ViewGroupImpl || defined(INCLUDE_ASViewGroupImpl_LayoutMode))
 #define ASViewGroupImpl_LayoutMode_
 
@@ -202,6 +238,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_LayoutMode)
 
 - (id)setAddStatesFromChildrenWithBoolean:(jboolean)value;
 
+- (id)setAnimateLayoutChangesWithBoolean:(jboolean)value;
+
+- (id)setAnimateParentHierarchyWithBoolean:(jboolean)value;
+
 - (id)setChildXmlWithNSString:(NSString *)value;
 
 - (id)setClipChildrenWithBoolean:(jboolean)value;
@@ -209,6 +249,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_LayoutMode)
 - (id)setClipToPaddingWithBoolean:(jboolean)value;
 
 - (id)setLayoutModeWithNSString:(NSString *)value;
+
+- (id)setLayoutTransitionWithNSString:(NSString *)value;
+
+- (id)setLayoutTransitionDurationWithInt:(jint)value;
 
 - (id)setListitemWithNSString:(NSString *)value;
 
@@ -304,6 +348,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -315,6 +363,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setBackgroundTintWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setBackgroundWithNSString:(NSString *)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setChildXmlWithNSString:(NSString *)arg0;
 
@@ -422,6 +472,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setListitemWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -496,6 +552,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setRightWithNSString:(NSString *)arg0;
+
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setRotationXWithFloat:(jfloat)arg0;
@@ -513,6 +571,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setTopWithNSString:(NSString *)arg0;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -557,6 +617,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetBackgroundTint;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetBackgroundTintMode;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetBottom;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetClickable;
 
@@ -644,6 +706,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetLayoutMode;
 
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetLeft;
+
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetLongClickable;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetMaxHeight;
@@ -678,6 +742,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetPaddingTop;
 
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetRight;
+
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetRotation;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetRotationX;
@@ -693,6 +759,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilder)
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetTextAlignment;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetTextDirection;
+
+- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetTop;
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)tryGetTransformPivotX;
 
@@ -772,6 +840,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilderInternal)
 
 - (void)setAddStatesFromChildrenWithBoolean:(jboolean)value;
 
+- (void)setAnimateLayoutChangesWithBoolean:(jboolean)value;
+
+- (void)setAnimateParentHierarchyWithBoolean:(jboolean)value;
+
 - (void)setChildXmlWithNSString:(NSString *)value;
 
 - (void)setClipChildrenWithBoolean:(jboolean)value;
@@ -779,6 +851,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_ViewGroupCommandBuilderInternal)
 - (void)setClipToPaddingWithBoolean:(jboolean)value;
 
 - (void)setLayoutModeWithNSString:(NSString *)value;
+
+- (void)setLayoutTransitionWithNSString:(NSString *)value;
+
+- (void)setLayoutTransitionDurationWithInt:(jint)value;
 
 - (void)setListitemWithNSString:(NSString *)value;
 

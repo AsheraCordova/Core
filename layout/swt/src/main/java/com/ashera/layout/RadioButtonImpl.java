@@ -441,6 +441,7 @@ public class RadioButtonImpl extends BaseWidget implements IDrawable, ICustomMea
         public void stateNo() {
         	ViewImpl.stateNo(RadioButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return RadioButtonExt.class;
@@ -2566,7 +2567,9 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return button.isDisposed();
+	}
 	
 private RadioButtonCommandBuilder builder;
 private RadioButtonBean bean;
@@ -3623,7 +3626,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 	//start - radiobutton
 	private int getType() {

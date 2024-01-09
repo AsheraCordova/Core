@@ -311,6 +311,7 @@ public class ImageButtonImpl extends BaseWidget implements IsImage{
         public void stateNo() {
         	ViewImpl.stateNo(ImageButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ImageButtonExt.class;
@@ -878,7 +879,6 @@ return getScaleType();				}
 
     	}
     }
-    
 	
 private ImageButtonCommandBuilder builder;
 private ImageButtonBean bean;
@@ -1329,7 +1329,7 @@ public void setScaleType(String value) {
 }
 
 
-    
+	
 	//end - body
 	private HTMLElement image;
 

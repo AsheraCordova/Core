@@ -461,6 +461,7 @@ public class SwitchImpl extends BaseWidget implements IDrawable, IHasMultiNative
         public void stateNo() {
         	ViewImpl.stateNo(SwitchImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return SwitchExt.class;
@@ -2639,7 +2640,9 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return switchButton.isDisposed();
+	}
 	
 private SwitchCommandBuilder builder;
 private SwitchBean bean;
@@ -4268,7 +4271,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 	//start - switch
 	protected org.eclipse.swt.widgets.Label label;

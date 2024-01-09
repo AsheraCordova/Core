@@ -510,6 +510,7 @@ public class SwitchImpl extends BaseWidget implements ICustomMeasureWidth{
         public void stateNo() {
         	ViewImpl.stateNo(SwitchImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return SwitchExt.class;
@@ -2929,7 +2930,6 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
 	
 private SwitchCommandBuilder builder;
 private SwitchBean bean;
@@ -4648,7 +4648,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 	@Property private Object switchButton;
 

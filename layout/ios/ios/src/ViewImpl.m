@@ -289,6 +289,26 @@
 + (void)setElevationWithASIWidget:(id<ASIWidget>)w
                            withId:(id)objValue;
 
++ (void)setBottomWithASIWidget:(id<ASIWidget>)w
+                        withId:(id)objValue;
+
++ (void)setTopWithASIWidget:(id<ASIWidget>)w
+                     withId:(id)objValue;
+
++ (void)setRightWithASIWidget:(id<ASIWidget>)w
+                       withId:(id)objValue;
+
++ (void)setLeftWithASIWidget:(id<ASIWidget>)w
+                      withId:(id)objValue;
+
++ (id)getBottomWithASIWidget:(id<ASIWidget>)w;
+
++ (id)getTopWithASIWidget:(id<ASIWidget>)w;
+
++ (id)getRightWithASIWidget:(id<ASIWidget>)w;
+
++ (id)getLeftWithASIWidget:(id<ASIWidget>)w;
+
 + (void)setAnimatorXmlWithASIWidget:(id<ASIWidget>)w
                              withId:(id)objValue;
 
@@ -591,6 +611,22 @@ __attribute__((unused)) static void ASViewImpl_invalidateWithASIWidget_(id<ASIWi
 __attribute__((unused)) static id ASViewImpl_getClipDataWithADView_DragEvent_(ADView_DragEvent *event);
 
 __attribute__((unused)) static void ASViewImpl_setElevationWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+
+__attribute__((unused)) static void ASViewImpl_setBottomWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+
+__attribute__((unused)) static void ASViewImpl_setTopWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+
+__attribute__((unused)) static void ASViewImpl_setRightWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+
+__attribute__((unused)) static void ASViewImpl_setLeftWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+
+__attribute__((unused)) static id ASViewImpl_getBottomWithASIWidget_(id<ASIWidget> w);
+
+__attribute__((unused)) static id ASViewImpl_getTopWithASIWidget_(id<ASIWidget> w);
+
+__attribute__((unused)) static id ASViewImpl_getRightWithASIWidget_(id<ASIWidget> w);
+
+__attribute__((unused)) static id ASViewImpl_getLeftWithASIWidget_(id<ASIWidget> w);
 
 __attribute__((unused)) static void ASViewImpl_setAnimatorXmlWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
@@ -2121,6 +2157,42 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(key, attributes);
 }
 
++ (void)setBottomWithASIWidget:(id<ASIWidget>)w
+                        withId:(id)objValue {
+  ASViewImpl_setBottomWithASIWidget_withId_(w, objValue);
+}
+
++ (void)setTopWithASIWidget:(id<ASIWidget>)w
+                     withId:(id)objValue {
+  ASViewImpl_setTopWithASIWidget_withId_(w, objValue);
+}
+
++ (void)setRightWithASIWidget:(id<ASIWidget>)w
+                       withId:(id)objValue {
+  ASViewImpl_setRightWithASIWidget_withId_(w, objValue);
+}
+
++ (void)setLeftWithASIWidget:(id<ASIWidget>)w
+                      withId:(id)objValue {
+  ASViewImpl_setLeftWithASIWidget_withId_(w, objValue);
+}
+
++ (id)getBottomWithASIWidget:(id<ASIWidget>)w {
+  return ASViewImpl_getBottomWithASIWidget_(w);
+}
+
++ (id)getTopWithASIWidget:(id<ASIWidget>)w {
+  return ASViewImpl_getTopWithASIWidget_(w);
+}
+
++ (id)getRightWithASIWidget:(id<ASIWidget>)w {
+  return ASViewImpl_getRightWithASIWidget_(w);
+}
+
++ (id)getLeftWithASIWidget:(id<ASIWidget>)w {
+  return ASViewImpl_getLeftWithASIWidget_(w);
+}
+
 + (void)setAnimatorXmlWithASIWidget:(id<ASIWidget>)w
                              withId:(id)objValue {
   ASViewImpl_setAnimatorXmlWithASIWidget_withId_(w, objValue);
@@ -2983,162 +3055,170 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0xa, 123, 32, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x9, 124, 125, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 126, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 127, 128, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 129, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 130, 128, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 131, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 132, 128, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 133, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 134, 128, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 135, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 136, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 127, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 128, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 129, 32, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 130, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 131, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 132, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 133, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 134, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 135, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 137, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 138, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 138, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 139, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 140, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 140, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 141, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 142, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 142, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 143, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 144, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 144, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 145, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 146, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 146, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 147, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 148, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 148, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 149, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 150, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 150, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 151, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 152, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 152, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 153, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 154, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 154, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 155, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 156, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 156, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 157, 103, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 158, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 159, 128, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 160, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 161, 128, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 162, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 163, 128, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 164, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 165, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 158, 136, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 159, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 160, 136, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 161, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 162, 136, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 163, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 164, 136, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 165, 103, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 166, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 167, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 167, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 168, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 169, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 169, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 170, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 171, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 171, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 172, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 173, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 173, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 174, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 175, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 175, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 176, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 177, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 177, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 178, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 179, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 179, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 180, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 181, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 181, 136, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x109, 182, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 183, 184, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 185, 186, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 187, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 188, 184, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 183, 186, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 189, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 183, 136, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 184, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 185, 136, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 186, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 187, 136, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 188, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 189, 136, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 190, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 191, 192, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 193, 194, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 195, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 196, 192, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 191, 194, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 197, 26, -1, -1, -1, -1 },
     { NULL, "Z", 0x109, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 190, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 191, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 191, 192, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 193, 194, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 195, 196, -1, -1, -1, -1 },
-    { NULL, "Z", 0x109, 197, 103, -1, -1, -1, -1 },
-    { NULL, "Z", 0xa, 198, 103, -1, -1, -1, -1 },
-    { NULL, "Z", 0x109, 199, 103, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 200, 103, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 201, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 202, 128, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 203, 128, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 204, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 204, 205, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 206, 26, -1, -1, -1, -1 },
-    { NULL, "Z", 0xa, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x9, 207, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 208, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 209, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 210, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 211, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 198, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 199, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 199, 200, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 201, 202, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 203, 204, -1, -1, -1, -1 },
+    { NULL, "Z", 0x109, 205, 103, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 206, 103, -1, -1, -1, -1 },
+    { NULL, "Z", 0x109, 207, 103, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 208, 103, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 209, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 210, 136, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 211, 136, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 212, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 213, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 214, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 215, 216, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 116, 103, -1, -1, -1, -1 },
-    { NULL, "Z", 0x10a, 217, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 218, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 219, 216, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 212, 213, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 214, 26, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 215, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 216, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 217, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 218, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 219, 32, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 220, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 220, 221, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 222, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 223, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 224, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 225, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 226, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 227, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 228, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 229, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 221, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 222, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 223, 224, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 116, 103, -1, -1, -1, -1 },
+    { NULL, "Z", 0x10a, 225, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 226, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 227, 224, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 228, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 228, 229, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 230, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 231, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 231, 26, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 232, 32, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 233, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 234, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 235, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 236, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 237, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 238, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 239, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 240, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 233, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 234, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 235, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 236, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 237, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 238, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 239, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 240, 32, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 241, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 242, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 243, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 244, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 245, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 246, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 247, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 248, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 249, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 250, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 251, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 252, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 253, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 254, 26, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 117, 32, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 118, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 247, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 248, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 249, 128, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 250, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 255, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 256, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 257, 136, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 258, 103, -1, -1, -1, -1 },
     { NULL, "Z", 0xa, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 251, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 252, 83, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 253, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 254, 34, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 255, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 256, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 257, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 258, 128, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 259, 260, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 261, 128, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 262, 128, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 263, 128, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 264, 260, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 265, 128, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 266, 216, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 267, 268, -1, 269, -1, -1 },
-    { NULL, "V", 0x109, 267, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 52, 270, -1, 271, -1, -1 },
-    { NULL, "V", 0xa, 272, 83, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 273, 103, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 274, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 275, 24, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 276, 103, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 277, 278, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 279, 280, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 281, 282, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 281, 283, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 259, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 260, 83, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 261, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 262, 34, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 263, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 264, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 265, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 266, 136, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 267, 268, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 269, 136, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 270, 136, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 271, 136, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 272, 268, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 273, 136, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 274, 224, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 275, 276, -1, 277, -1, -1 },
+    { NULL, "V", 0x109, 275, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 52, 278, -1, 279, -1, -1 },
+    { NULL, "V", 0xa, 280, 83, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 281, 103, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 282, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 283, 24, -1, -1, -1, -1 },
     { NULL, "I", 0x109, 284, 103, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 285, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 286, 278, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 287, 288, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 285, 286, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 287, 288, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 289, 290, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 289, 291, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 292, 103, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 293, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 294, 286, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 295, 296, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -3244,166 +3324,174 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[98].selector = @selector(getDrawableWithADColorStateList:);
   methods[99].selector = @selector(setElevationWithASIWidget:withId:);
   methods[100].selector = @selector(getValueWithNSString:withOrgXmlSaxAttributes:);
-  methods[101].selector = @selector(setAnimatorXmlWithASIWidget:withId:);
-  methods[102].selector = @selector(setBackgroundColorWithId:withId:);
-  methods[103].selector = @selector(getBackgroundColorWithId:);
-  methods[104].selector = @selector(setIsHiddenWithId:withId:);
-  methods[105].selector = @selector(getIsHiddenWithId:);
-  methods[106].selector = @selector(setAlphaWithId:withId:);
-  methods[107].selector = @selector(getAlphaWithId:);
-  methods[108].selector = @selector(setIsOpaqueWithId:withId:);
-  methods[109].selector = @selector(getIsOpaqueWithId:);
-  methods[110].selector = @selector(setTintColorWithId:withId:);
-  methods[111].selector = @selector(getTintColorWithId:);
-  methods[112].selector = @selector(setClipsToBoundsWithId:withId:);
-  methods[113].selector = @selector(getClipsToBoundsWithId:);
-  methods[114].selector = @selector(setClearsContextBeforeDrawingWithId:withId:);
-  methods[115].selector = @selector(getClearsContextBeforeDrawingWithId:);
-  methods[116].selector = @selector(setIsUserInteractionEnabledWithId:withId:);
-  methods[117].selector = @selector(getIsUserInteractionEnabledWithId:);
-  methods[118].selector = @selector(setIsMultipleTouchEnabledWithId:withId:);
-  methods[119].selector = @selector(getIsMultipleTouchEnabledWithId:);
-  methods[120].selector = @selector(setIsExclusiveTouchWithId:withId:);
-  methods[121].selector = @selector(getIsExclusiveTouchWithId:);
-  methods[122].selector = @selector(setPreservesSuperviewLayoutMarginsWithId:withId:);
-  methods[123].selector = @selector(getPreservesSuperviewLayoutMarginsWithId:);
-  methods[124].selector = @selector(setInsetsLayoutMarginsFromSafeAreaWithId:withId:);
-  methods[125].selector = @selector(getInsetsLayoutMarginsFromSafeAreaWithId:);
-  methods[126].selector = @selector(setAutoresizesSubviewsWithId:withId:);
-  methods[127].selector = @selector(getAutoresizesSubviewsWithId:);
-  methods[128].selector = @selector(setTranslatesAutoresizingMaskIntoConstraintsWithId:withId:);
-  methods[129].selector = @selector(getTranslatesAutoresizingMaskIntoConstraintsWithId:);
-  methods[130].selector = @selector(setContentScaleFactorWithId:withId:);
-  methods[131].selector = @selector(getContentScaleFactorWithId:);
-  methods[132].selector = @selector(getIsFocusedWithId:);
-  methods[133].selector = @selector(setRestorationIdentifierWithId:withId:);
-  methods[134].selector = @selector(getRestorationIdentifierWithId:);
-  methods[135].selector = @selector(setTagWithId:withId:);
-  methods[136].selector = @selector(getTagWithId:);
-  methods[137].selector = @selector(setAccessibilityIgnoresInvertColorsWithId:withId:);
-  methods[138].selector = @selector(getAccessibilityIgnoresInvertColorsWithId:);
-  methods[139].selector = @selector(setLargeContentImageWithId:withId:);
-  methods[140].selector = @selector(getLargeContentImageWithId:);
-  methods[141].selector = @selector(setLargeContentTitleWithId:withId:);
-  methods[142].selector = @selector(getLargeContentTitleWithId:);
-  methods[143].selector = @selector(setScalesLargeContentImageWithId:withId:);
-  methods[144].selector = @selector(getScalesLargeContentImageWithId:);
-  methods[145].selector = @selector(setShowsLargeContentViewerWithId:withId:);
-  methods[146].selector = @selector(getShowsLargeContentViewerWithId:);
-  methods[147].selector = @selector(setIsAccessibilityElementWithId:withId:);
-  methods[148].selector = @selector(getIsAccessibilityElementWithId:);
-  methods[149].selector = @selector(setAccessibilityLabelWithId:withId:);
-  methods[150].selector = @selector(getAccessibilityLabelWithId:);
-  methods[151].selector = @selector(setAccessibilityHintWithId:withId:);
-  methods[152].selector = @selector(getAccessibilityHintWithId:);
-  methods[153].selector = @selector(setAccessibilityValueWithId:withId:);
-  methods[154].selector = @selector(getAccessibilityValueWithId:);
-  methods[155].selector = @selector(setAccessibilityTraitsWithId:withId:);
-  methods[156].selector = @selector(getAccessibilityTraitsWithId:);
-  methods[157].selector = @selector(nativeMakeFrameWithId:withInt:withInt:withInt:withInt:withInt:);
-  methods[158].selector = @selector(updateBoundsWithId:withInt:withInt:withInt:withInt:);
-  methods[159].selector = @selector(getFirstChildOrSelfWithId:);
-  methods[160].selector = @selector(nativeMakeFrameForHorizontalScrollViewWithId:withInt:withInt:withInt:withInt:withInt:);
-  methods[161].selector = @selector(nativeMakeFrameWithId:withInt:withInt:withInt:withInt:);
-  methods[162].selector = @selector(isRTLLayoutWithASIWidget:);
-  methods[163].selector = @selector(isRTLLayout);
-  methods[164].selector = @selector(setBgOnControlWithASIWidget:withId:withId:);
-  methods[165].selector = @selector(setBackgroundWithASIWidget:withId:withId:);
-  methods[166].selector = @selector(setBackgroundWithASIWidget:withId:withId:withBoolean:);
-  methods[167].selector = @selector(updateWidthAndHeightWithASIWidget:withADStateListDrawable:withId:withNSString:withNSString:);
-  methods[168].selector = @selector(setBgDrawabeOnViewWithInt:withInt:withADView:);
-  methods[169].selector = @selector(isColorWithId:);
-  methods[170].selector = @selector(isResizableImageWithId:);
-  methods[171].selector = @selector(isImageWithId:);
-  methods[172].selector = @selector(getImageWidthWithId:);
-  methods[173].selector = @selector(getImageHeightWithId:);
-  methods[174].selector = @selector(clearBgColorWithId:withId:);
-  methods[175].selector = @selector(nativeSetBgColorWithId:withId:);
-  methods[176].selector = @selector(setOnClickWithASIWidget:withId:withId:);
-  methods[177].selector = @selector(setOnClickWithASIWidget:withNSString:withId:withADView_OnClickListener:);
-  methods[178].selector = @selector(registerCommandConveterWithASIWidget:);
-  methods[179].selector = @selector(isNativeRtlSupported);
-  methods[180].selector = @selector(getParentWithASIWidget:);
-  methods[181].selector = @selector(setBackgroundTintModeWithASIWidget:withId:);
-  methods[182].selector = @selector(setBackgroundTintWithASIWidget:withId:);
-  methods[183].selector = @selector(setForegroundTintModeWithASIWidget:withId:);
-  methods[184].selector = @selector(setForegroundTintWithASIWidget:withId:);
-  methods[185].selector = @selector(setForegroundWithASIWidget:withId:withId:);
-  methods[186].selector = @selector(setFgOnControlWithASIWidget:withId:withId:);
-  methods[187].selector = @selector(setVisibilityWithASIWidget:withId:withId:);
-  methods[188].selector = @selector(nativeSetVisibilityWithId:withBoolean:);
-  methods[189].selector = @selector(getClickableWithId:);
-  methods[190].selector = @selector(nativeGetClickableWithId:);
-  methods[191].selector = @selector(setClickableWithASIWidget:withId:withId:);
-  methods[192].selector = @selector(nativeSetClickableWithId:withBoolean:);
-  methods[193].selector = @selector(setOnLongClickWithASIWidget:withId:withId:);
-  methods[194].selector = @selector(setOnLongClickWithASIWidget:withId:withADView_OnLongClickListener:);
-  methods[195].selector = @selector(setTranslationXWithASIWidget:withId:);
-  methods[196].selector = @selector(relayoutWithASIWidget:);
-  methods[197].selector = @selector(setTranslationYWithASIWidget:withId:);
-  methods[198].selector = @selector(setTranslationZWithASIWidget:withId:);
-  methods[199].selector = @selector(setTransformPivotYWithASIWidget:withId:);
-  methods[200].selector = @selector(setTransformPivotXWithASIWidget:withId:);
-  methods[201].selector = @selector(setScaleYWithASIWidget:withId:);
-  methods[202].selector = @selector(setScaleXWithASIWidget:withId:);
-  methods[203].selector = @selector(setRotationYWithASIWidget:withId:);
-  methods[204].selector = @selector(setRotationXWithASIWidget:withId:);
-  methods[205].selector = @selector(setRotationWithASIWidget:withId:);
-  methods[206].selector = @selector(getTranslationXWithASIWidget:);
-  methods[207].selector = @selector(getTransformPivotYWithASIWidget:);
-  methods[208].selector = @selector(getTransformPivotXWithASIWidget:);
-  methods[209].selector = @selector(getScaleYWithASIWidget:);
-  methods[210].selector = @selector(getScaleXWithASIWidget:);
-  methods[211].selector = @selector(getRotationYWithASIWidget:);
-  methods[212].selector = @selector(getRotationXWithASIWidget:);
-  methods[213].selector = @selector(getRotationWithASIWidget:);
-  methods[214].selector = @selector(getTranslationZWithASIWidget:);
-  methods[215].selector = @selector(getTranslationYWithASIWidget:);
-  methods[216].selector = @selector(getForegroundTintWithASIWidget:);
-  methods[217].selector = @selector(getForegroundTintModeWithASIWidget:);
-  methods[218].selector = @selector(getBackgroundTintModeWithASIWidget:);
-  methods[219].selector = @selector(getBackgroundTintWithASIWidget:);
-  methods[220].selector = @selector(requestLayoutWithASIWidget:withId:);
-  methods[221].selector = @selector(invalidateWithASIWidget:withId:);
-  methods[222].selector = @selector(nativeRequestLayoutWithId:);
-  methods[223].selector = @selector(nativeInvalidateWithId:);
-  methods[224].selector = @selector(setKeepScreenOnWithId:withId:);
-  methods[225].selector = @selector(getKeepScreenOnWithId:);
-  methods[226].selector = @selector(isMirrorSupported);
-  methods[227].selector = @selector(setOnTouchWithASIWidget:withId:withId:);
-  methods[228].selector = @selector(startDragWithASIWidget:withNSString:);
-  methods[229].selector = @selector(setOnDragWithASIWidget:withId:withId:);
-  methods[230].selector = @selector(setAsDragSourceWithASIWidget:withId:withId:);
-  methods[231].selector = @selector(getForegroundWithASIWidget:);
-  methods[232].selector = @selector(getBackgroundWithASIWidget:);
-  methods[233].selector = @selector(setOnKeyWithASIWidget:withId:);
-  methods[234].selector = @selector(setLayerCornerRadiusWithId:withId:);
-  methods[235].selector = @selector(nativeSetLayerCornerRadiusWithId:withFloat:);
-  methods[236].selector = @selector(setLayerBorderColorWithId:withId:);
-  methods[237].selector = @selector(nativeLayerBorderColorWithId:withId:);
-  methods[238].selector = @selector(setLayerBorderWidthWithId:withId:);
-  methods[239].selector = @selector(nativeLayerBorderWidthWithId:withFloat:);
-  methods[240].selector = @selector(setLayerMasksToBoundsWithId:withId:);
-  methods[241].selector = @selector(nativeLayerBMasksToBoundsWithId:withBoolean:);
-  methods[242].selector = @selector(nativeBringToFrontWithJavaUtilList:);
-  methods[243].selector = @selector(nativeBringToFrontWithId:);
-  methods[244].selector = @selector(addEventInfoWithJavaUtilMap:withADMenuItem:);
-  methods[245].selector = @selector(setNativeIdWithASIWidget:withNSString:);
-  methods[246].selector = @selector(getLocationXOnScreenWithId:);
-  methods[247].selector = @selector(getLocationYOnScreenWithId:);
-  methods[248].selector = @selector(setOutsideTouchableWithASIWidget:withNSString:withId:withADView:);
-  methods[249].selector = @selector(nativeMeasureWidthWithId:);
-  methods[250].selector = @selector(nativeMeasureHeightWithId:withInt:);
-  methods[251].selector = @selector(setOnSwipeListenerWithASIWidget:withASSwipeHelper_SwipeListener:);
-  methods[252].selector = @selector(addPanListenerWithASIWidget:withId:withASViewImpl_PanCallBack:);
-  methods[253].selector = @selector(addPanListenerWithASIWidget:withId:withId:withASViewImpl_PanCallBack:);
-  methods[254].selector = @selector(getXWithId:);
-  methods[255].selector = @selector(getYWithId:);
-  methods[256].selector = @selector(updateBoundsXWithId:withInt:);
-  methods[257].selector = @selector(translateWithAnimationWithId:withInt:withInt:withInt:withASViewImpl_AnimationCallBack:);
+  methods[101].selector = @selector(setBottomWithASIWidget:withId:);
+  methods[102].selector = @selector(setTopWithASIWidget:withId:);
+  methods[103].selector = @selector(setRightWithASIWidget:withId:);
+  methods[104].selector = @selector(setLeftWithASIWidget:withId:);
+  methods[105].selector = @selector(getBottomWithASIWidget:);
+  methods[106].selector = @selector(getTopWithASIWidget:);
+  methods[107].selector = @selector(getRightWithASIWidget:);
+  methods[108].selector = @selector(getLeftWithASIWidget:);
+  methods[109].selector = @selector(setAnimatorXmlWithASIWidget:withId:);
+  methods[110].selector = @selector(setBackgroundColorWithId:withId:);
+  methods[111].selector = @selector(getBackgroundColorWithId:);
+  methods[112].selector = @selector(setIsHiddenWithId:withId:);
+  methods[113].selector = @selector(getIsHiddenWithId:);
+  methods[114].selector = @selector(setAlphaWithId:withId:);
+  methods[115].selector = @selector(getAlphaWithId:);
+  methods[116].selector = @selector(setIsOpaqueWithId:withId:);
+  methods[117].selector = @selector(getIsOpaqueWithId:);
+  methods[118].selector = @selector(setTintColorWithId:withId:);
+  methods[119].selector = @selector(getTintColorWithId:);
+  methods[120].selector = @selector(setClipsToBoundsWithId:withId:);
+  methods[121].selector = @selector(getClipsToBoundsWithId:);
+  methods[122].selector = @selector(setClearsContextBeforeDrawingWithId:withId:);
+  methods[123].selector = @selector(getClearsContextBeforeDrawingWithId:);
+  methods[124].selector = @selector(setIsUserInteractionEnabledWithId:withId:);
+  methods[125].selector = @selector(getIsUserInteractionEnabledWithId:);
+  methods[126].selector = @selector(setIsMultipleTouchEnabledWithId:withId:);
+  methods[127].selector = @selector(getIsMultipleTouchEnabledWithId:);
+  methods[128].selector = @selector(setIsExclusiveTouchWithId:withId:);
+  methods[129].selector = @selector(getIsExclusiveTouchWithId:);
+  methods[130].selector = @selector(setPreservesSuperviewLayoutMarginsWithId:withId:);
+  methods[131].selector = @selector(getPreservesSuperviewLayoutMarginsWithId:);
+  methods[132].selector = @selector(setInsetsLayoutMarginsFromSafeAreaWithId:withId:);
+  methods[133].selector = @selector(getInsetsLayoutMarginsFromSafeAreaWithId:);
+  methods[134].selector = @selector(setAutoresizesSubviewsWithId:withId:);
+  methods[135].selector = @selector(getAutoresizesSubviewsWithId:);
+  methods[136].selector = @selector(setTranslatesAutoresizingMaskIntoConstraintsWithId:withId:);
+  methods[137].selector = @selector(getTranslatesAutoresizingMaskIntoConstraintsWithId:);
+  methods[138].selector = @selector(setContentScaleFactorWithId:withId:);
+  methods[139].selector = @selector(getContentScaleFactorWithId:);
+  methods[140].selector = @selector(getIsFocusedWithId:);
+  methods[141].selector = @selector(setRestorationIdentifierWithId:withId:);
+  methods[142].selector = @selector(getRestorationIdentifierWithId:);
+  methods[143].selector = @selector(setTagWithId:withId:);
+  methods[144].selector = @selector(getTagWithId:);
+  methods[145].selector = @selector(setAccessibilityIgnoresInvertColorsWithId:withId:);
+  methods[146].selector = @selector(getAccessibilityIgnoresInvertColorsWithId:);
+  methods[147].selector = @selector(setLargeContentImageWithId:withId:);
+  methods[148].selector = @selector(getLargeContentImageWithId:);
+  methods[149].selector = @selector(setLargeContentTitleWithId:withId:);
+  methods[150].selector = @selector(getLargeContentTitleWithId:);
+  methods[151].selector = @selector(setScalesLargeContentImageWithId:withId:);
+  methods[152].selector = @selector(getScalesLargeContentImageWithId:);
+  methods[153].selector = @selector(setShowsLargeContentViewerWithId:withId:);
+  methods[154].selector = @selector(getShowsLargeContentViewerWithId:);
+  methods[155].selector = @selector(setIsAccessibilityElementWithId:withId:);
+  methods[156].selector = @selector(getIsAccessibilityElementWithId:);
+  methods[157].selector = @selector(setAccessibilityLabelWithId:withId:);
+  methods[158].selector = @selector(getAccessibilityLabelWithId:);
+  methods[159].selector = @selector(setAccessibilityHintWithId:withId:);
+  methods[160].selector = @selector(getAccessibilityHintWithId:);
+  methods[161].selector = @selector(setAccessibilityValueWithId:withId:);
+  methods[162].selector = @selector(getAccessibilityValueWithId:);
+  methods[163].selector = @selector(setAccessibilityTraitsWithId:withId:);
+  methods[164].selector = @selector(getAccessibilityTraitsWithId:);
+  methods[165].selector = @selector(nativeMakeFrameWithId:withInt:withInt:withInt:withInt:withInt:);
+  methods[166].selector = @selector(updateBoundsWithId:withInt:withInt:withInt:withInt:);
+  methods[167].selector = @selector(getFirstChildOrSelfWithId:);
+  methods[168].selector = @selector(nativeMakeFrameForHorizontalScrollViewWithId:withInt:withInt:withInt:withInt:withInt:);
+  methods[169].selector = @selector(nativeMakeFrameWithId:withInt:withInt:withInt:withInt:);
+  methods[170].selector = @selector(isRTLLayoutWithASIWidget:);
+  methods[171].selector = @selector(isRTLLayout);
+  methods[172].selector = @selector(setBgOnControlWithASIWidget:withId:withId:);
+  methods[173].selector = @selector(setBackgroundWithASIWidget:withId:withId:);
+  methods[174].selector = @selector(setBackgroundWithASIWidget:withId:withId:withBoolean:);
+  methods[175].selector = @selector(updateWidthAndHeightWithASIWidget:withADStateListDrawable:withId:withNSString:withNSString:);
+  methods[176].selector = @selector(setBgDrawabeOnViewWithInt:withInt:withADView:);
+  methods[177].selector = @selector(isColorWithId:);
+  methods[178].selector = @selector(isResizableImageWithId:);
+  methods[179].selector = @selector(isImageWithId:);
+  methods[180].selector = @selector(getImageWidthWithId:);
+  methods[181].selector = @selector(getImageHeightWithId:);
+  methods[182].selector = @selector(clearBgColorWithId:withId:);
+  methods[183].selector = @selector(nativeSetBgColorWithId:withId:);
+  methods[184].selector = @selector(setOnClickWithASIWidget:withId:withId:);
+  methods[185].selector = @selector(setOnClickWithASIWidget:withNSString:withId:withADView_OnClickListener:);
+  methods[186].selector = @selector(registerCommandConveterWithASIWidget:);
+  methods[187].selector = @selector(isNativeRtlSupported);
+  methods[188].selector = @selector(getParentWithASIWidget:);
+  methods[189].selector = @selector(setBackgroundTintModeWithASIWidget:withId:);
+  methods[190].selector = @selector(setBackgroundTintWithASIWidget:withId:);
+  methods[191].selector = @selector(setForegroundTintModeWithASIWidget:withId:);
+  methods[192].selector = @selector(setForegroundTintWithASIWidget:withId:);
+  methods[193].selector = @selector(setForegroundWithASIWidget:withId:withId:);
+  methods[194].selector = @selector(setFgOnControlWithASIWidget:withId:withId:);
+  methods[195].selector = @selector(setVisibilityWithASIWidget:withId:withId:);
+  methods[196].selector = @selector(nativeSetVisibilityWithId:withBoolean:);
+  methods[197].selector = @selector(getClickableWithId:);
+  methods[198].selector = @selector(nativeGetClickableWithId:);
+  methods[199].selector = @selector(setClickableWithASIWidget:withId:withId:);
+  methods[200].selector = @selector(nativeSetClickableWithId:withBoolean:);
+  methods[201].selector = @selector(setOnLongClickWithASIWidget:withId:withId:);
+  methods[202].selector = @selector(setOnLongClickWithASIWidget:withId:withADView_OnLongClickListener:);
+  methods[203].selector = @selector(setTranslationXWithASIWidget:withId:);
+  methods[204].selector = @selector(relayoutWithASIWidget:);
+  methods[205].selector = @selector(setTranslationYWithASIWidget:withId:);
+  methods[206].selector = @selector(setTranslationZWithASIWidget:withId:);
+  methods[207].selector = @selector(setTransformPivotYWithASIWidget:withId:);
+  methods[208].selector = @selector(setTransformPivotXWithASIWidget:withId:);
+  methods[209].selector = @selector(setScaleYWithASIWidget:withId:);
+  methods[210].selector = @selector(setScaleXWithASIWidget:withId:);
+  methods[211].selector = @selector(setRotationYWithASIWidget:withId:);
+  methods[212].selector = @selector(setRotationXWithASIWidget:withId:);
+  methods[213].selector = @selector(setRotationWithASIWidget:withId:);
+  methods[214].selector = @selector(getTranslationXWithASIWidget:);
+  methods[215].selector = @selector(getTransformPivotYWithASIWidget:);
+  methods[216].selector = @selector(getTransformPivotXWithASIWidget:);
+  methods[217].selector = @selector(getScaleYWithASIWidget:);
+  methods[218].selector = @selector(getScaleXWithASIWidget:);
+  methods[219].selector = @selector(getRotationYWithASIWidget:);
+  methods[220].selector = @selector(getRotationXWithASIWidget:);
+  methods[221].selector = @selector(getRotationWithASIWidget:);
+  methods[222].selector = @selector(getTranslationZWithASIWidget:);
+  methods[223].selector = @selector(getTranslationYWithASIWidget:);
+  methods[224].selector = @selector(getForegroundTintWithASIWidget:);
+  methods[225].selector = @selector(getForegroundTintModeWithASIWidget:);
+  methods[226].selector = @selector(getBackgroundTintModeWithASIWidget:);
+  methods[227].selector = @selector(getBackgroundTintWithASIWidget:);
+  methods[228].selector = @selector(requestLayoutWithASIWidget:withId:);
+  methods[229].selector = @selector(invalidateWithASIWidget:withId:);
+  methods[230].selector = @selector(nativeRequestLayoutWithId:);
+  methods[231].selector = @selector(nativeInvalidateWithId:);
+  methods[232].selector = @selector(setKeepScreenOnWithId:withId:);
+  methods[233].selector = @selector(getKeepScreenOnWithId:);
+  methods[234].selector = @selector(isMirrorSupported);
+  methods[235].selector = @selector(setOnTouchWithASIWidget:withId:withId:);
+  methods[236].selector = @selector(startDragWithASIWidget:withNSString:);
+  methods[237].selector = @selector(setOnDragWithASIWidget:withId:withId:);
+  methods[238].selector = @selector(setAsDragSourceWithASIWidget:withId:withId:);
+  methods[239].selector = @selector(getForegroundWithASIWidget:);
+  methods[240].selector = @selector(getBackgroundWithASIWidget:);
+  methods[241].selector = @selector(setOnKeyWithASIWidget:withId:);
+  methods[242].selector = @selector(setLayerCornerRadiusWithId:withId:);
+  methods[243].selector = @selector(nativeSetLayerCornerRadiusWithId:withFloat:);
+  methods[244].selector = @selector(setLayerBorderColorWithId:withId:);
+  methods[245].selector = @selector(nativeLayerBorderColorWithId:withId:);
+  methods[246].selector = @selector(setLayerBorderWidthWithId:withId:);
+  methods[247].selector = @selector(nativeLayerBorderWidthWithId:withFloat:);
+  methods[248].selector = @selector(setLayerMasksToBoundsWithId:withId:);
+  methods[249].selector = @selector(nativeLayerBMasksToBoundsWithId:withBoolean:);
+  methods[250].selector = @selector(nativeBringToFrontWithJavaUtilList:);
+  methods[251].selector = @selector(nativeBringToFrontWithId:);
+  methods[252].selector = @selector(addEventInfoWithJavaUtilMap:withADMenuItem:);
+  methods[253].selector = @selector(setNativeIdWithASIWidget:withNSString:);
+  methods[254].selector = @selector(getLocationXOnScreenWithId:);
+  methods[255].selector = @selector(getLocationYOnScreenWithId:);
+  methods[256].selector = @selector(setOutsideTouchableWithASIWidget:withNSString:withId:withADView:);
+  methods[257].selector = @selector(nativeMeasureWidthWithId:);
+  methods[258].selector = @selector(nativeMeasureHeightWithId:withInt:);
+  methods[259].selector = @selector(setOnSwipeListenerWithASIWidget:withASSwipeHelper_SwipeListener:);
+  methods[260].selector = @selector(addPanListenerWithASIWidget:withId:withASViewImpl_PanCallBack:);
+  methods[261].selector = @selector(addPanListenerWithASIWidget:withId:withId:withASViewImpl_PanCallBack:);
+  methods[262].selector = @selector(getXWithId:);
+  methods[263].selector = @selector(getYWithId:);
+  methods[264].selector = @selector(updateBoundsXWithId:withInt:);
+  methods[265].selector = @selector(translateWithAnimationWithId:withInt:withInt:withInt:withASViewImpl_AnimationCallBack:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LASSimpleWrapableView;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setPadding", "LNSObject;LADView;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "getPaddingTop", "LASIWidget;LADView;", "getPaddingBottom", "getPaddingLeft", "getPaddingRight", "setPaddingHorizontal", "setPaddingVertical", "setId", "LASIWidget;LNSString;LNSObject;LADView;", "getModelSyncEvents", "LASIWidget;", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "notifyDataSetChanged", "LASIWidget;LNSObject;", "updateModelData", "LASIWidget;LNSObject;LNSObject;", "getModelUiToPojo", "getModelPojoToUi", "getModelParam", "setModelPojoToUiParams", "refreshUiFromModel", "LASIWidget;LNSObject;Z", "setModelUiToPojoEventIds", "setZIndex", "setMaxHeight", "setMaxWidth", "getMaxWidth", "getMaxHeight", "setSelected", "getSelected", "setInvalidateOnFrameChange", "setBackgroundRepeat", "setForegroundRepeat", "addEventInfo", "LJavaUtilMap;LADMotionEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MotionEvent;)V", "LJavaUtilMap;LADKeyEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/KeyEvent;)V", "LJavaUtilMap;LADView_DragEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/View$DragEvent;)V", "LJavaUtilMap;LADChronometer;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/Chronometer;Lcom/ashera/core/IFragment;)V", "validateForm", "getValidateFormResult", "setValidation", "getForms", "(Lcom/ashera/widget/IWidget;)Ljava/util/List<Lcom/ashera/validations/Form;>;", "setType", "LASIWidget;LNSString;LNSObject;", "setPattern", "setMax", "setMin", "setMaxlength", "setMinlength", "setRequired", "addValidator", "LASIWidget;LNSString;[LNSString;", "setCustomErrorMessageKeys", "setCustomErrorMessageValues", "setValidationErrorDisplay", "setErrorStyle", "LASIWidget;LADView;LNSObject;", "setStyle", "setMessageOnLabel", "LASIWidget;LNSString;", "state", "LASIWidget;I", "setState", "LASIWidget;ILNSObject;", "stateYes", "stateNo", "setAnimatorListener", "LASIWidget;LADAnimator_AnimatorListener;", "endAnimator", "startAnimator", "setLayoutDirection", "getLayoutDirection", "setTextAlignment", "setTextDirection", "getTextAlignment", "getTextDirection", "isRTLLayoutDirection", "drawableStateChanged", "getColor", "LNSObject;", "setDrawableBounds", "LASIWidget;IIII", "redrawDrawables", "setMinHeight", "setMinWidth", "getMinHeight", "getMinWidth", "getVisibility", "setLongClickable", "getLongClickable", "setDuplicateParentState", "getDuplicateParentState", "getClickable", "requestLayout", "invalidate", "getClipData", "LADView_DragEvent;", "getDrawable", "LADColorStateList;", "setElevation", "getValue", "LNSString;LOrgXmlSaxAttributes;", "setAnimatorXml", "setBackgroundColor", "LNSObject;LNSObject;", "getBackgroundColor", "setIsHidden", "getIsHidden", "setAlpha", "getAlpha", "setIsOpaque", "getIsOpaque", "setTintColor", "getTintColor", "setClipsToBounds", "getClipsToBounds", "setClearsContextBeforeDrawing", "getClearsContextBeforeDrawing", "setIsUserInteractionEnabled", "getIsUserInteractionEnabled", "setIsMultipleTouchEnabled", "getIsMultipleTouchEnabled", "setIsExclusiveTouch", "getIsExclusiveTouch", "setPreservesSuperviewLayoutMargins", "getPreservesSuperviewLayoutMargins", "setInsetsLayoutMarginsFromSafeArea", "getInsetsLayoutMarginsFromSafeArea", "setAutoresizesSubviews", "getAutoresizesSubviews", "setTranslatesAutoresizingMaskIntoConstraints", "getTranslatesAutoresizingMaskIntoConstraints", "setContentScaleFactor", "getContentScaleFactor", "getIsFocused", "setRestorationIdentifier", "getRestorationIdentifier", "setTag", "getTag", "setAccessibilityIgnoresInvertColors", "getAccessibilityIgnoresInvertColors", "setLargeContentImage", "getLargeContentImage", "setLargeContentTitle", "getLargeContentTitle", "setScalesLargeContentImage", "getScalesLargeContentImage", "setShowsLargeContentViewer", "getShowsLargeContentViewer", "setIsAccessibilityElement", "getIsAccessibilityElement", "setAccessibilityLabel", "getAccessibilityLabel", "setAccessibilityHint", "getAccessibilityHint", "setAccessibilityValue", "getAccessibilityValue", "setAccessibilityTraits", "getAccessibilityTraits", "nativeMakeFrame", "LNSObject;IIIII", "updateBounds", "LNSObject;IIII", "getFirstChildOrSelf", "nativeMakeFrameForHorizontalScrollView", "isRTLLayout", "setBgOnControl", "setBackground", "LASIWidget;LNSObject;LNSObject;Z", "updateWidthAndHeight", "LASIWidget;LADStateListDrawable;LNSObject;LNSString;LNSString;", "setBgDrawabeOnView", "IILADView;", "isColor", "isResizableImage", "isImage", "getImageWidth", "getImageHeight", "clearBgColor", "nativeSetBgColor", "setOnClick", "LASIWidget;LNSString;LNSObject;LADView_OnClickListener;", "registerCommandConveter", "getParent", "setBackgroundTintMode", "setBackgroundTint", "setForegroundTintMode", "setForegroundTint", "setForeground", "setFgOnControl", "setVisibility", "nativeSetVisibility", "LNSObject;Z", "nativeGetClickable", "setClickable", "nativeSetClickable", "setOnLongClick", "LASIWidget;LNSObject;LADView_OnLongClickListener;", "setTranslationX", "relayout", "setTranslationY", "setTranslationZ", "setTransformPivotY", "setTransformPivotX", "setScaleY", "setScaleX", "setRotationY", "setRotationX", "setRotation", "getTranslationX", "getTransformPivotY", "getTransformPivotX", "getScaleY", "getScaleX", "getRotationY", "getRotationX", "getRotation", "getTranslationZ", "getTranslationY", "getForegroundTint", "getForegroundTintMode", "getBackgroundTintMode", "getBackgroundTint", "nativeRequestLayout", "nativeInvalidate", "setKeepScreenOn", "getKeepScreenOn", "setOnTouch", "startDrag", "setOnDrag", "setAsDragSource", "getForeground", "getBackground", "setOnKey", "setLayerCornerRadius", "nativeSetLayerCornerRadius", "LNSObject;F", "setLayerBorderColor", "nativeLayerBorderColor", "setLayerBorderWidth", "nativeLayerBorderWidth", "setLayerMasksToBounds", "nativeLayerBMasksToBounds", "nativeBringToFront", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/widget/IWidget;>;)V", "LJavaUtilMap;LADMenuItem;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MenuItem;)V", "setNativeId", "getLocationXOnScreen", "getLocationYOnScreen", "setOutsideTouchable", "nativeMeasureWidth", "nativeMeasureHeight", "LNSObject;I", "setOnSwipeListener", "LASIWidget;LASSwipeHelper_SwipeListener;", "addPanListener", "LASIWidget;LNSObject;LASViewImpl_PanCallBack;", "LASIWidget;LNSObject;LNSObject;LASViewImpl_PanCallBack;", "getX", "getY", "updateBoundsX", "translateWithAnimation", "LNSObject;IIILASViewImpl_AnimationCallBack;", "LASViewImpl_IosAccessibilityTraits;LASViewImpl_Vtype;LASViewImpl_ValidationErrorDisplay;LASViewImpl_BackgroundRepeat;LASViewImpl_BackgroundTintMode;LASViewImpl_ForegroundRepeat;LASViewImpl_ForegroundTintMode;LASViewImpl_Visibility;LASViewImpl_LayoutDirection;LASViewImpl_TextDirection;LASViewImpl_TextAlignment;LASViewImpl_AddRemoveCallBack;LASViewImpl_PanCallBack;LASViewImpl_AnimationCallBack;LASViewImpl_AnimationContentHandler;LASViewImpl_AnimatorListener;LASViewImpl_OnClickListener;LASViewImpl_OnTouchListener;LASViewImpl_OnLongClickListener;LASViewImpl_OnDragListener;LASViewImpl_OnKeyListener;LASViewImpl_SwipeListener;LASViewImpl_ViewCommandBuilder;LASViewImpl_ViewCommandBuilderInternal;LASViewImpl_ViewBean;LASViewImpl_UIControlEventTouchDelegate;LASViewImpl_UILongTapGestureRecognizerDelegate;LASViewImpl_UITapGestureRecognizerDelegate;LASViewImpl_UIDragInteractionDelegate;LASViewImpl_UIDropInteractionDelegate;LASViewImpl_UISwipeGestureRecognizerDelegate;LASViewImpl_PanGestureRecognizer;LASViewImpl_AnimationUtils;" };
-  static const J2ObjcClassInfo _ASViewImpl = { "ViewImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 258, 0, -1, 289, -1, -1, -1 };
+  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LASSimpleWrapableView;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setPadding", "LNSObject;LADView;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "getPaddingTop", "LASIWidget;LADView;", "getPaddingBottom", "getPaddingLeft", "getPaddingRight", "setPaddingHorizontal", "setPaddingVertical", "setId", "LASIWidget;LNSString;LNSObject;LADView;", "getModelSyncEvents", "LASIWidget;", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "notifyDataSetChanged", "LASIWidget;LNSObject;", "updateModelData", "LASIWidget;LNSObject;LNSObject;", "getModelUiToPojo", "getModelPojoToUi", "getModelParam", "setModelPojoToUiParams", "refreshUiFromModel", "LASIWidget;LNSObject;Z", "setModelUiToPojoEventIds", "setZIndex", "setMaxHeight", "setMaxWidth", "getMaxWidth", "getMaxHeight", "setSelected", "getSelected", "setInvalidateOnFrameChange", "setBackgroundRepeat", "setForegroundRepeat", "addEventInfo", "LJavaUtilMap;LADMotionEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MotionEvent;)V", "LJavaUtilMap;LADKeyEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/KeyEvent;)V", "LJavaUtilMap;LADView_DragEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/View$DragEvent;)V", "LJavaUtilMap;LADChronometer;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/Chronometer;Lcom/ashera/core/IFragment;)V", "validateForm", "getValidateFormResult", "setValidation", "getForms", "(Lcom/ashera/widget/IWidget;)Ljava/util/List<Lcom/ashera/validations/Form;>;", "setType", "LASIWidget;LNSString;LNSObject;", "setPattern", "setMax", "setMin", "setMaxlength", "setMinlength", "setRequired", "addValidator", "LASIWidget;LNSString;[LNSString;", "setCustomErrorMessageKeys", "setCustomErrorMessageValues", "setValidationErrorDisplay", "setErrorStyle", "LASIWidget;LADView;LNSObject;", "setStyle", "setMessageOnLabel", "LASIWidget;LNSString;", "state", "LASIWidget;I", "setState", "LASIWidget;ILNSObject;", "stateYes", "stateNo", "setAnimatorListener", "LASIWidget;LADAnimator_AnimatorListener;", "endAnimator", "startAnimator", "setLayoutDirection", "getLayoutDirection", "setTextAlignment", "setTextDirection", "getTextAlignment", "getTextDirection", "isRTLLayoutDirection", "drawableStateChanged", "getColor", "LNSObject;", "setDrawableBounds", "LASIWidget;IIII", "redrawDrawables", "setMinHeight", "setMinWidth", "getMinHeight", "getMinWidth", "getVisibility", "setLongClickable", "getLongClickable", "setDuplicateParentState", "getDuplicateParentState", "getClickable", "requestLayout", "invalidate", "getClipData", "LADView_DragEvent;", "getDrawable", "LADColorStateList;", "setElevation", "getValue", "LNSString;LOrgXmlSaxAttributes;", "setBottom", "setTop", "setRight", "setLeft", "getBottom", "getTop", "getRight", "getLeft", "setAnimatorXml", "setBackgroundColor", "LNSObject;LNSObject;", "getBackgroundColor", "setIsHidden", "getIsHidden", "setAlpha", "getAlpha", "setIsOpaque", "getIsOpaque", "setTintColor", "getTintColor", "setClipsToBounds", "getClipsToBounds", "setClearsContextBeforeDrawing", "getClearsContextBeforeDrawing", "setIsUserInteractionEnabled", "getIsUserInteractionEnabled", "setIsMultipleTouchEnabled", "getIsMultipleTouchEnabled", "setIsExclusiveTouch", "getIsExclusiveTouch", "setPreservesSuperviewLayoutMargins", "getPreservesSuperviewLayoutMargins", "setInsetsLayoutMarginsFromSafeArea", "getInsetsLayoutMarginsFromSafeArea", "setAutoresizesSubviews", "getAutoresizesSubviews", "setTranslatesAutoresizingMaskIntoConstraints", "getTranslatesAutoresizingMaskIntoConstraints", "setContentScaleFactor", "getContentScaleFactor", "getIsFocused", "setRestorationIdentifier", "getRestorationIdentifier", "setTag", "getTag", "setAccessibilityIgnoresInvertColors", "getAccessibilityIgnoresInvertColors", "setLargeContentImage", "getLargeContentImage", "setLargeContentTitle", "getLargeContentTitle", "setScalesLargeContentImage", "getScalesLargeContentImage", "setShowsLargeContentViewer", "getShowsLargeContentViewer", "setIsAccessibilityElement", "getIsAccessibilityElement", "setAccessibilityLabel", "getAccessibilityLabel", "setAccessibilityHint", "getAccessibilityHint", "setAccessibilityValue", "getAccessibilityValue", "setAccessibilityTraits", "getAccessibilityTraits", "nativeMakeFrame", "LNSObject;IIIII", "updateBounds", "LNSObject;IIII", "getFirstChildOrSelf", "nativeMakeFrameForHorizontalScrollView", "isRTLLayout", "setBgOnControl", "setBackground", "LASIWidget;LNSObject;LNSObject;Z", "updateWidthAndHeight", "LASIWidget;LADStateListDrawable;LNSObject;LNSString;LNSString;", "setBgDrawabeOnView", "IILADView;", "isColor", "isResizableImage", "isImage", "getImageWidth", "getImageHeight", "clearBgColor", "nativeSetBgColor", "setOnClick", "LASIWidget;LNSString;LNSObject;LADView_OnClickListener;", "registerCommandConveter", "getParent", "setBackgroundTintMode", "setBackgroundTint", "setForegroundTintMode", "setForegroundTint", "setForeground", "setFgOnControl", "setVisibility", "nativeSetVisibility", "LNSObject;Z", "nativeGetClickable", "setClickable", "nativeSetClickable", "setOnLongClick", "LASIWidget;LNSObject;LADView_OnLongClickListener;", "setTranslationX", "relayout", "setTranslationY", "setTranslationZ", "setTransformPivotY", "setTransformPivotX", "setScaleY", "setScaleX", "setRotationY", "setRotationX", "setRotation", "getTranslationX", "getTransformPivotY", "getTransformPivotX", "getScaleY", "getScaleX", "getRotationY", "getRotationX", "getRotation", "getTranslationZ", "getTranslationY", "getForegroundTint", "getForegroundTintMode", "getBackgroundTintMode", "getBackgroundTint", "nativeRequestLayout", "nativeInvalidate", "setKeepScreenOn", "getKeepScreenOn", "setOnTouch", "startDrag", "setOnDrag", "setAsDragSource", "getForeground", "getBackground", "setOnKey", "setLayerCornerRadius", "nativeSetLayerCornerRadius", "LNSObject;F", "setLayerBorderColor", "nativeLayerBorderColor", "setLayerBorderWidth", "nativeLayerBorderWidth", "setLayerMasksToBounds", "nativeLayerBMasksToBounds", "nativeBringToFront", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/widget/IWidget;>;)V", "LJavaUtilMap;LADMenuItem;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MenuItem;)V", "setNativeId", "getLocationXOnScreen", "getLocationYOnScreen", "setOutsideTouchable", "nativeMeasureWidth", "nativeMeasureHeight", "LNSObject;I", "setOnSwipeListener", "LASIWidget;LASSwipeHelper_SwipeListener;", "addPanListener", "LASIWidget;LNSObject;LASViewImpl_PanCallBack;", "LASIWidget;LNSObject;LNSObject;LASViewImpl_PanCallBack;", "getX", "getY", "updateBoundsX", "translateWithAnimation", "LNSObject;IIILASViewImpl_AnimationCallBack;", "LASViewImpl_IosAccessibilityTraits;LASViewImpl_Vtype;LASViewImpl_ValidationErrorDisplay;LASViewImpl_BackgroundRepeat;LASViewImpl_BackgroundTintMode;LASViewImpl_ForegroundRepeat;LASViewImpl_ForegroundTintMode;LASViewImpl_Visibility;LASViewImpl_LayoutDirection;LASViewImpl_TextDirection;LASViewImpl_TextAlignment;LASViewImpl_AddRemoveCallBack;LASViewImpl_PanCallBack;LASViewImpl_AnimationCallBack;LASViewImpl_AnimationContentHandler;LASViewImpl_AnimatorListener;LASViewImpl_OnClickListener;LASViewImpl_OnTouchListener;LASViewImpl_OnLongClickListener;LASViewImpl_OnDragListener;LASViewImpl_OnKeyListener;LASViewImpl_SwipeListener;LASViewImpl_ViewCommandBuilder;LASViewImpl_ViewCommandBuilderInternal;LASViewImpl_ViewBean;LASViewImpl_UIControlEventTouchDelegate;LASViewImpl_UILongTapGestureRecognizerDelegate;LASViewImpl_UITapGestureRecognizerDelegate;LASViewImpl_UIDragInteractionDelegate;LASViewImpl_UIDropInteractionDelegate;LASViewImpl_UISwipeGestureRecognizerDelegate;LASViewImpl_PanGestureRecognizer;LASViewImpl_AnimationUtils;" };
+  static const J2ObjcClassInfo _ASViewImpl = { "ViewImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 266, 0, -1, 297, -1, -1, -1 };
   return &_ASViewImpl;
 }
 
@@ -3479,6 +3567,10 @@ void ASViewImpl_register__WithNSString_(NSString *localName) {
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onAnimationEnd"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onAnimationCancel"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"onAnimationRepeat"])) withTypeWithNSString:@"string"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"left"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"right"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"top"])) withTypeWithNSString:@"dimension"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"bottom"])) withTypeWithNSString:@"dimension"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"id"])) withTypeWithNSString:@"id"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"modelSyncEvents"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"modelParam"])) withTypeWithNSString:@"string"]);
@@ -3589,7 +3681,7 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
   {
     id<JavaUtilList> attributables;
-    switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosBackgroundColor", @"iosIsHidden", @"iosAlpha", @"iosIsOpaque", @"iosTintColor", @"iosClipsToBounds", @"iosClearsContextBeforeDrawing", @"iosIsUserInteractionEnabled", @"iosIsMultipleTouchEnabled", @"iosIsExclusiveTouch", @"iosPreservesSuperviewLayoutMargins", @"iosInsetsLayoutMarginsFromSafeArea", @"iosAutoresizesSubviews", @"iosTranslatesAutoresizingMaskIntoConstraints", @"iosContentScaleFactor", @"iosRestorationIdentifier", @"iosTag", @"iosAccessibilityIgnoresInvertColors", @"iosLargeContentImage", @"iosLargeContentTitle", @"iosScalesLargeContentImage", @"iosShowsLargeContentViewer", @"focusable", @"iosIsAccessibilityElement", @"iosAccessibilityLabel", @"contentDescription", @"iosAccessibilityHint", @"iosAccessibilityValue", @"iosAccessibilityTraits", @"selected", @"style", @"errorStyle", @"validateForm", @"validation", @"v_required", @"v_minlength", @"v_maxlength", @"v_min", @"v_max", @"v_pattern", @"v_type", @"validationErrorDisplayType", @"customErrorMessageValues", @"customErrorMessageKeys", @"invalidateOnFrameChange", @"animatorXml", @"startAnimator", @"endAnimator", @"onAnimationStart", @"onAnimationEnd", @"onAnimationCancel", @"onAnimationRepeat", @"id", @"modelSyncEvents", @"modelParam", @"modelPojoToUi", @"modelUiToPojo", @"modelPojoToUiParams", @"refreshUiFromModel", @"modelUiToPojoEventIds", @"updateModelData", @"notifyDataSetChanged", @"background", @"backgroundRepeat", @"onClick", @"onTouch", @"minWidth", @"minHeight", @"attributeUnderTest", @"backgroundTint", @"backgroundTintMode", @"foreground", @"foregroundRepeat", @"foregroundTint", @"foregroundTintMode", @"visibility", @"alpha", @"onLongClick", @"longClickable", @"clickable", @"translationX", @"translationY", @"translationZ", @"rotation", @"rotationX", @"rotationY", @"scaleX", @"scaleY", @"transformPivotX", @"transformPivotY", @"invalidate", @"requestLayout", @"keepScreenOn", @"layoutDirection", @"textDirection", @"textAlignment", @"onDrag", @"asDragSource", @"enabled", @"duplicateParentState", @"foregroundGravity", @"onKey", @"iosLayerBorderWidth", @"iosLayerBorderColor", @"iosLayerCornerRadius", @"iosLayerMasksToBounds", @"zIndex", @"elevation", @"maxWidth", @"maxHeight", @"onSwiped", @"outsideTouchable" }, 112)) {
+    switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosBackgroundColor", @"iosIsHidden", @"iosAlpha", @"iosIsOpaque", @"iosTintColor", @"iosClipsToBounds", @"iosClearsContextBeforeDrawing", @"iosIsUserInteractionEnabled", @"iosIsMultipleTouchEnabled", @"iosIsExclusiveTouch", @"iosPreservesSuperviewLayoutMargins", @"iosInsetsLayoutMarginsFromSafeArea", @"iosAutoresizesSubviews", @"iosTranslatesAutoresizingMaskIntoConstraints", @"iosContentScaleFactor", @"iosRestorationIdentifier", @"iosTag", @"iosAccessibilityIgnoresInvertColors", @"iosLargeContentImage", @"iosLargeContentTitle", @"iosScalesLargeContentImage", @"iosShowsLargeContentViewer", @"focusable", @"iosIsAccessibilityElement", @"iosAccessibilityLabel", @"contentDescription", @"iosAccessibilityHint", @"iosAccessibilityValue", @"iosAccessibilityTraits", @"selected", @"style", @"errorStyle", @"validateForm", @"validation", @"v_required", @"v_minlength", @"v_maxlength", @"v_min", @"v_max", @"v_pattern", @"v_type", @"validationErrorDisplayType", @"customErrorMessageValues", @"customErrorMessageKeys", @"invalidateOnFrameChange", @"animatorXml", @"startAnimator", @"endAnimator", @"onAnimationStart", @"onAnimationEnd", @"onAnimationCancel", @"onAnimationRepeat", @"left", @"right", @"top", @"bottom", @"id", @"modelSyncEvents", @"modelParam", @"modelPojoToUi", @"modelUiToPojo", @"modelPojoToUiParams", @"refreshUiFromModel", @"modelUiToPojoEventIds", @"updateModelData", @"notifyDataSetChanged", @"background", @"backgroundRepeat", @"onClick", @"onTouch", @"minWidth", @"minHeight", @"attributeUnderTest", @"backgroundTint", @"backgroundTintMode", @"foreground", @"foregroundRepeat", @"foregroundTint", @"foregroundTintMode", @"visibility", @"alpha", @"onLongClick", @"longClickable", @"clickable", @"translationX", @"translationY", @"translationZ", @"rotation", @"rotationX", @"rotationY", @"scaleX", @"scaleY", @"transformPivotX", @"transformPivotY", @"invalidate", @"requestLayout", @"keepScreenOn", @"layoutDirection", @"textDirection", @"textAlignment", @"onDrag", @"asDragSource", @"enabled", @"duplicateParentState", @"foregroundGravity", @"onKey", @"iosLayerBorderWidth", @"iosLayerBorderColor", @"iosLayerCornerRadius", @"iosLayerMasksToBounds", @"zIndex", @"elevation", @"maxWidth", @"maxHeight", @"onSwiped", @"outsideTouchable" }, 116)) {
       case 0:
       {
         ASViewImpl_setBackgroundColorWithId_withId_(nativeWidget, objValue);
@@ -3872,45 +3964,65 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
       break;
       case 52:
       {
-        ASViewImpl_setIdWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
+        ASViewImpl_setLeftWithASIWidget_withId_(w, objValue);
       }
       break;
       case 53:
       {
-        ASViewImpl_setModelSyncEventsWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
+        ASViewImpl_setRightWithASIWidget_withId_(w, objValue);
       }
       break;
       case 54:
       {
-        ASViewImpl_setModelParamWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
+        ASViewImpl_setTopWithASIWidget_withId_(w, objValue);
       }
       break;
       case 55:
       {
-        ASViewImpl_setModelPojoToUiWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
+        ASViewImpl_setBottomWithASIWidget_withId_(w, objValue);
       }
       break;
       case 56:
       {
-        ASViewImpl_setModelUiToPojoWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
+        ASViewImpl_setIdWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
       case 57:
       {
-        ASViewImpl_setModelPojoToUiParamsWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setModelSyncEventsWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
       case 58:
       {
-        ASViewImpl_refreshUiFromModelWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setModelParamWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
       case 59:
       {
-        ASViewImpl_setModelUiToPojoEventIdsWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setModelPojoToUiWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
       case 60:
+      {
+        ASViewImpl_setModelUiToPojoWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
+      }
+      break;
+      case 61:
+      {
+        ASViewImpl_setModelPojoToUiParamsWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 62:
+      {
+        ASViewImpl_refreshUiFromModelWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 63:
+      {
+        ASViewImpl_setModelUiToPojoEventIdsWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 64:
       {
         if ([JavaUtilMap_class_() isInstance:objValue]) {
           id<JavaUtilMap> data = ((id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_()));
@@ -3929,251 +4041,251 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
         }
       }
       break;
-      case 61:
+      case 65:
       {
         ASViewImpl_notifyDataSetChangedWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 62:
+      case 66:
       {
         ASViewImpl_setBackgroundWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
-      case 63:
+      case 67:
       {
         ASViewImpl_setBackgroundRepeatWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
-      case 64:
+      case 68:
       {
         ASViewImpl_setOnClickWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
-      case 65:
+      case 69:
       {
         ASViewImpl_setOnTouchWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
-      case 66:
+      case 70:
       {
         ASViewImpl_setMinWidthWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 67:
+      case 71:
       {
         ASViewImpl_setMinHeightWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 68:
-      {
-      }
-      break;
-      case 69:
-      {
-        ASViewImpl_setBackgroundTintWithASIWidget_withId_(w, objValue);
-      }
-      break;
-      case 70:
-      {
-        ASViewImpl_setBackgroundTintModeWithASIWidget_withId_(w, objValue);
-      }
-      break;
-      case 71:
-      {
-        ASViewImpl_setForegroundWithASIWidget_withId_withId_(w, nativeWidget, objValue);
-      }
-      break;
       case 72:
       {
-        ASViewImpl_setForegroundRepeatWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
       case 73:
       {
-        ASViewImpl_setForegroundTintWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setBackgroundTintWithASIWidget_withId_(w, objValue);
       }
       break;
       case 74:
       {
-        ASViewImpl_setForegroundTintModeWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setBackgroundTintModeWithASIWidget_withId_(w, objValue);
       }
       break;
       case 75:
       {
-        ASViewImpl_setVisibilityWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+        ASViewImpl_setForegroundWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 76:
       {
-        ASViewImpl_setAlphaWithId_withId_(nativeWidget, objValue);
+        ASViewImpl_setForegroundRepeatWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
       case 77:
       {
-        ASViewImpl_setOnLongClickWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+        ASViewImpl_setForegroundTintWithASIWidget_withId_(w, objValue);
       }
       break;
       case 78:
       {
-        ASViewImpl_setLongClickableWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setForegroundTintModeWithASIWidget_withId_(w, objValue);
       }
       break;
       case 79:
       {
-        ASViewImpl_setClickableWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+        ASViewImpl_setVisibilityWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 80:
       {
-        ASViewImpl_setTranslationXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setAlphaWithId_withId_(nativeWidget, objValue);
       }
       break;
       case 81:
       {
-        ASViewImpl_setTranslationYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setOnLongClickWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 82:
       {
-        ASViewImpl_setTranslationZWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setLongClickableWithASIWidget_withId_(w, objValue);
       }
       break;
       case 83:
       {
-        ASViewImpl_setRotationWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setClickableWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 84:
       {
-        ASViewImpl_setRotationXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTranslationXWithASIWidget_withId_(w, objValue);
       }
       break;
       case 85:
       {
-        ASViewImpl_setRotationYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTranslationYWithASIWidget_withId_(w, objValue);
       }
       break;
       case 86:
       {
-        ASViewImpl_setScaleXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTranslationZWithASIWidget_withId_(w, objValue);
       }
       break;
       case 87:
       {
-        ASViewImpl_setScaleYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setRotationWithASIWidget_withId_(w, objValue);
       }
       break;
       case 88:
       {
-        ASViewImpl_setTransformPivotXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setRotationXWithASIWidget_withId_(w, objValue);
       }
       break;
       case 89:
       {
-        ASViewImpl_setTransformPivotYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setRotationYWithASIWidget_withId_(w, objValue);
       }
       break;
       case 90:
       {
-        ASViewImpl_invalidateWithASIWidget_(w);
+        ASViewImpl_setScaleXWithASIWidget_withId_(w, objValue);
       }
       break;
       case 91:
       {
-        ASViewImpl_requestLayoutWithASIWidget_(w);
+        ASViewImpl_setScaleYWithASIWidget_withId_(w, objValue);
       }
       break;
       case 92:
       {
-        ASViewImpl_setKeepScreenOnWithId_withId_(w, objValue);
+        ASViewImpl_setTransformPivotXWithASIWidget_withId_(w, objValue);
       }
       break;
       case 93:
       {
-        ASViewImpl_setLayoutDirectionWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTransformPivotYWithASIWidget_withId_(w, objValue);
       }
       break;
       case 94:
       {
-        ASViewImpl_setTextDirectionWithASIWidget_withId_(w, objValue);
+        ASViewImpl_invalidateWithASIWidget_(w);
       }
       break;
       case 95:
       {
-        ASViewImpl_setTextAlignmentWithASIWidget_withId_(w, objValue);
+        ASViewImpl_requestLayoutWithASIWidget_(w);
       }
       break;
       case 96:
       {
-        ASViewImpl_setOnDragWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+        ASViewImpl_setKeepScreenOnWithId_withId_(w, objValue);
       }
       break;
       case 97:
       {
-        ASViewImpl_setAsDragSourceWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+        ASViewImpl_setLayoutDirectionWithASIWidget_withId_(w, objValue);
       }
       break;
       case 98:
       {
-        [((ADView *) nil_chk(view)) setEnabledWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+        ASViewImpl_setTextDirectionWithASIWidget_withId_(w, objValue);
       }
       break;
       case 99:
       {
-        [((ADView *) nil_chk(view)) setDuplicateParentStateEnabledWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+        ASViewImpl_setTextAlignmentWithASIWidget_withId_(w, objValue);
       }
       break;
       case 100:
       {
-        [((ADView *) nil_chk(view)) setForegroundGravityWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+        ASViewImpl_setOnDragWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 101:
       {
-        ASViewImpl_setOnKeyWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setAsDragSourceWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 102:
       {
-        ASViewImpl_setLayerBorderWidthWithId_withId_(nativeWidget, objValue);
+        [((ADView *) nil_chk(view)) setEnabledWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
       }
       break;
       case 103:
       {
-        ASViewImpl_setLayerBorderColorWithId_withId_(nativeWidget, objValue);
+        [((ADView *) nil_chk(view)) setDuplicateParentStateEnabledWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
       }
       break;
       case 104:
       {
-        ASViewImpl_setLayerCornerRadiusWithId_withId_(nativeWidget, objValue);
+        [((ADView *) nil_chk(view)) setForegroundGravityWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
       }
       break;
       case 105:
       {
-        ASViewImpl_setLayerMasksToBoundsWithId_withId_(nativeWidget, objValue);
+        ASViewImpl_setOnKeyWithASIWidget_withId_(w, objValue);
       }
       break;
       case 106:
       {
-        ASViewImpl_setZIndexWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setLayerBorderWidthWithId_withId_(nativeWidget, objValue);
       }
       break;
       case 107:
       {
-        ASViewImpl_setElevationWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setLayerBorderColorWithId_withId_(nativeWidget, objValue);
       }
       break;
       case 108:
       {
-        ASViewImpl_setMaxWidthWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setLayerCornerRadiusWithId_withId_(nativeWidget, objValue);
       }
       break;
       case 109:
       {
-        ASViewImpl_setMaxHeightWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setLayerMasksToBoundsWithId_withId_(nativeWidget, objValue);
       }
       break;
       case 110:
+      {
+        ASViewImpl_setZIndexWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 111:
+      {
+        ASViewImpl_setElevationWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 112:
+      {
+        ASViewImpl_setMaxWidthWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 113:
+      {
+        ASViewImpl_setMaxHeightWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 114:
       {
         if ([objValue isKindOfClass:[NSString class]]) {
           ASViewImpl_setOnSwipeListenerWithASIWidget_withASSwipeHelper_SwipeListener_(w, new_ASViewImpl_SwipeListener_initWithASIWidget_withNSString_withNSString_(w, strValue, @"onSwiped"));
@@ -4183,7 +4295,7 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
         }
       }
       break;
-      case 111:
+      case 115:
       {
         ASViewImpl_setOutsideTouchableWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
@@ -4208,7 +4320,7 @@ id ASViewImpl_getAttributeWithASIWidget_withASWidgetAttribute_withASILifeCycleDe
 id ASViewImpl_getAttributeWithASIWidget_withId_withASWidgetAttribute_withASILifeCycleDecorator_(id<ASIWidget> w, id nativeWidget, ASWidgetAttribute *key, id<ASILifeCycleDecorator> decorator) {
   ASViewImpl_initialize();
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosBackgroundColor", @"iosIsHidden", @"iosAlpha", @"iosIsOpaque", @"iosTintColor", @"iosClipsToBounds", @"iosClearsContextBeforeDrawing", @"iosIsUserInteractionEnabled", @"iosIsMultipleTouchEnabled", @"iosIsExclusiveTouch", @"iosPreservesSuperviewLayoutMargins", @"iosInsetsLayoutMarginsFromSafeArea", @"iosAutoresizesSubviews", @"iosTranslatesAutoresizingMaskIntoConstraints", @"iosContentScaleFactor", @"iosIsFocused", @"iosRestorationIdentifier", @"iosTag", @"iosAccessibilityIgnoresInvertColors", @"iosLargeContentImage", @"iosLargeContentTitle", @"iosScalesLargeContentImage", @"iosShowsLargeContentViewer", @"focusable", @"iosIsAccessibilityElement", @"iosAccessibilityLabel", @"contentDescription", @"iosAccessibilityHint", @"iosAccessibilityValue", @"iosAccessibilityTraits", @"selected", @"validateForm", @"id", @"modelSyncEvents", @"modelParam", @"modelPojoToUi", @"modelUiToPojo", @"background", @"minWidth", @"minHeight", @"backgroundTint", @"backgroundTintMode", @"foreground", @"foregroundTint", @"foregroundTintMode", @"visibility", @"alpha", @"longClickable", @"clickable", @"translationX", @"translationY", @"translationZ", @"rotation", @"rotationX", @"rotationY", @"scaleX", @"scaleY", @"transformPivotX", @"transformPivotY", @"keepScreenOn", @"layoutDirection", @"textDirection", @"textAlignment", @"enabled", @"duplicateParentState", @"foregroundGravity", @"maxWidth", @"maxHeight" }, 68)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosBackgroundColor", @"iosIsHidden", @"iosAlpha", @"iosIsOpaque", @"iosTintColor", @"iosClipsToBounds", @"iosClearsContextBeforeDrawing", @"iosIsUserInteractionEnabled", @"iosIsMultipleTouchEnabled", @"iosIsExclusiveTouch", @"iosPreservesSuperviewLayoutMargins", @"iosInsetsLayoutMarginsFromSafeArea", @"iosAutoresizesSubviews", @"iosTranslatesAutoresizingMaskIntoConstraints", @"iosContentScaleFactor", @"iosIsFocused", @"iosRestorationIdentifier", @"iosTag", @"iosAccessibilityIgnoresInvertColors", @"iosLargeContentImage", @"iosLargeContentTitle", @"iosScalesLargeContentImage", @"iosShowsLargeContentViewer", @"focusable", @"iosIsAccessibilityElement", @"iosAccessibilityLabel", @"contentDescription", @"iosAccessibilityHint", @"iosAccessibilityValue", @"iosAccessibilityTraits", @"selected", @"validateForm", @"left", @"right", @"top", @"bottom", @"id", @"modelSyncEvents", @"modelParam", @"modelPojoToUi", @"modelUiToPojo", @"background", @"minWidth", @"minHeight", @"backgroundTint", @"backgroundTintMode", @"foreground", @"foregroundTint", @"foregroundTintMode", @"visibility", @"alpha", @"longClickable", @"clickable", @"translationX", @"translationY", @"translationZ", @"rotation", @"rotationX", @"rotationY", @"scaleX", @"scaleY", @"transformPivotX", @"transformPivotY", @"keepScreenOn", @"layoutDirection", @"textDirection", @"textAlignment", @"enabled", @"duplicateParentState", @"foregroundGravity", @"maxWidth", @"maxHeight" }, 72)) {
     case 0:
     {
       return ASViewImpl_getBackgroundColorWithId_(nativeWidget);
@@ -4345,145 +4457,161 @@ id ASViewImpl_getAttributeWithASIWidget_withId_withASWidgetAttribute_withASILife
     }
     case 32:
     {
-      return JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(view)) getId]);
+      return ASViewImpl_getLeftWithASIWidget_(w);
     }
     case 33:
     {
-      return ASViewImpl_getModelSyncEventsWithASIWidget_(w);
+      return ASViewImpl_getRightWithASIWidget_(w);
     }
     case 34:
     {
-      return ASViewImpl_getModelParamWithASIWidget_(w);
+      return ASViewImpl_getTopWithASIWidget_(w);
     }
     case 35:
     {
-      return ASViewImpl_getModelPojoToUiWithASIWidget_(w);
+      return ASViewImpl_getBottomWithASIWidget_(w);
     }
     case 36:
     {
-      return ASViewImpl_getModelUiToPojoWithASIWidget_(w);
+      return JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(view)) getId]);
     }
     case 37:
     {
-      return ASViewImpl_getBackgroundWithASIWidget_(w);
+      return ASViewImpl_getModelSyncEventsWithASIWidget_(w);
     }
     case 38:
     {
-      return ASViewImpl_getMinWidthWithASIWidget_(w);
+      return ASViewImpl_getModelParamWithASIWidget_(w);
     }
     case 39:
     {
-      return ASViewImpl_getMinHeightWithASIWidget_(w);
+      return ASViewImpl_getModelPojoToUiWithASIWidget_(w);
     }
     case 40:
     {
-      return ASViewImpl_getBackgroundTintWithASIWidget_(w);
+      return ASViewImpl_getModelUiToPojoWithASIWidget_(w);
     }
     case 41:
     {
-      return ASViewImpl_getBackgroundTintModeWithASIWidget_(w);
+      return ASViewImpl_getBackgroundWithASIWidget_(w);
     }
     case 42:
     {
-      return ASViewImpl_getForegroundWithASIWidget_(w);
+      return ASViewImpl_getMinWidthWithASIWidget_(w);
     }
     case 43:
     {
-      return ASViewImpl_getForegroundTintWithASIWidget_(w);
+      return ASViewImpl_getMinHeightWithASIWidget_(w);
     }
     case 44:
     {
-      return ASViewImpl_getForegroundTintModeWithASIWidget_(w);
+      return ASViewImpl_getBackgroundTintWithASIWidget_(w);
     }
     case 45:
     {
-      return ASViewImpl_getVisibilityWithASIWidget_(w);
+      return ASViewImpl_getBackgroundTintModeWithASIWidget_(w);
     }
     case 46:
     {
-      return ASViewImpl_getAlphaWithId_(nativeWidget);
+      return ASViewImpl_getForegroundWithASIWidget_(w);
     }
     case 47:
     {
-      return ASViewImpl_getLongClickableWithASIWidget_(w);
+      return ASViewImpl_getForegroundTintWithASIWidget_(w);
     }
     case 48:
     {
-      return ASViewImpl_getClickableWithId_(nativeWidget);
+      return ASViewImpl_getForegroundTintModeWithASIWidget_(w);
     }
     case 49:
     {
-      return ASViewImpl_getTranslationXWithASIWidget_(w);
+      return ASViewImpl_getVisibilityWithASIWidget_(w);
     }
     case 50:
     {
-      return ASViewImpl_getTranslationYWithASIWidget_(w);
+      return ASViewImpl_getAlphaWithId_(nativeWidget);
     }
     case 51:
     {
-      return ASViewImpl_getTranslationZWithASIWidget_(w);
+      return ASViewImpl_getLongClickableWithASIWidget_(w);
     }
     case 52:
     {
-      return ASViewImpl_getRotationWithASIWidget_(w);
+      return ASViewImpl_getClickableWithId_(nativeWidget);
     }
     case 53:
     {
-      return ASViewImpl_getRotationXWithASIWidget_(w);
+      return ASViewImpl_getTranslationXWithASIWidget_(w);
     }
     case 54:
     {
-      return ASViewImpl_getRotationYWithASIWidget_(w);
+      return ASViewImpl_getTranslationYWithASIWidget_(w);
     }
     case 55:
     {
-      return ASViewImpl_getScaleXWithASIWidget_(w);
+      return ASViewImpl_getTranslationZWithASIWidget_(w);
     }
     case 56:
     {
-      return ASViewImpl_getScaleYWithASIWidget_(w);
+      return ASViewImpl_getRotationWithASIWidget_(w);
     }
     case 57:
     {
-      return ASViewImpl_getTransformPivotXWithASIWidget_(w);
+      return ASViewImpl_getRotationXWithASIWidget_(w);
     }
     case 58:
     {
-      return ASViewImpl_getTransformPivotYWithASIWidget_(w);
+      return ASViewImpl_getRotationYWithASIWidget_(w);
     }
     case 59:
     {
-      return ASViewImpl_getKeepScreenOnWithId_(w);
+      return ASViewImpl_getScaleXWithASIWidget_(w);
     }
     case 60:
     {
-      return ASViewImpl_getLayoutDirectionWithASIWidget_(w);
+      return ASViewImpl_getScaleYWithASIWidget_(w);
     }
     case 61:
     {
-      return ASViewImpl_getTextDirectionWithASIWidget_(w);
+      return ASViewImpl_getTransformPivotXWithASIWidget_(w);
     }
     case 62:
     {
-      return ASViewImpl_getTextAlignmentWithASIWidget_(w);
+      return ASViewImpl_getTransformPivotYWithASIWidget_(w);
     }
     case 63:
     {
-      return JavaLangBoolean_valueOfWithBoolean_([((ADView *) nil_chk(view)) isEnabled]);
+      return ASViewImpl_getKeepScreenOnWithId_(w);
     }
     case 64:
     {
-      return JavaLangBoolean_valueOfWithBoolean_([((ADView *) nil_chk(view)) isDuplicateParentStateEnabled]);
+      return ASViewImpl_getLayoutDirectionWithASIWidget_(w);
     }
     case 65:
     {
-      return JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(view)) getForegroundGravity]);
+      return ASViewImpl_getTextDirectionWithASIWidget_(w);
     }
     case 66:
     {
-      return ASViewImpl_getMaxWidthWithASIWidget_(w);
+      return ASViewImpl_getTextAlignmentWithASIWidget_(w);
     }
     case 67:
+    {
+      return JavaLangBoolean_valueOfWithBoolean_([((ADView *) nil_chk(view)) isEnabled]);
+    }
+    case 68:
+    {
+      return JavaLangBoolean_valueOfWithBoolean_([((ADView *) nil_chk(view)) isDuplicateParentStateEnabled]);
+    }
+    case 69:
+    {
+      return JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(view)) getForegroundGravity]);
+    }
+    case 70:
+    {
+      return ASViewImpl_getMaxWidthWithASIWidget_(w);
+    }
+    case 71:
     {
       return ASViewImpl_getMaxHeightWithASIWidget_(w);
     }
@@ -5302,6 +5430,71 @@ NSString *ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(NSString *key
     return [attributes getValueWithNSString:JreStrcat("$C$", key, '-', os)];
   }
   return [attributes getValueWithNSString:key];
+}
+
+void ASViewImpl_setBottomWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+  ASViewImpl_initialize();
+  id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
+  ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
+  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  [((ADView *) nil_chk(view)) setBottomWithInt:value];
+  jint top = value - [view getMeasuredHeight];
+  jint x = ASViewImpl_getXWithId_(uiView);
+  ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, x, top, x + [view getMeasuredWidth], value);
+}
+
+void ASViewImpl_setTopWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+  ASViewImpl_initialize();
+  id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
+  ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
+  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  [((ADView *) nil_chk(view)) setTopWithInt:value];
+  jint x = ASViewImpl_getXWithId_(uiView);
+  ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, x, value, x + [view getMeasuredWidth], value + [view getMeasuredHeight]);
+}
+
+void ASViewImpl_setRightWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+  ASViewImpl_initialize();
+  id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
+  ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
+  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  [((ADView *) nil_chk(view)) setRightWithInt:value];
+  jint y = ASViewImpl_getYWithId_(uiView);
+  ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, value - [view getMeasuredWidth], y, value, y + [view getMeasuredHeight]);
+}
+
+void ASViewImpl_setLeftWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+  ASViewImpl_initialize();
+  id uiView = [((id<ASIWidget>) nil_chk(w)) asNativeWidget];
+  ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
+  jint value = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  [((ADView *) nil_chk(view)) setLeftWithInt:value];
+  jint y = ASViewImpl_getYWithId_(uiView);
+  ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_(uiView, value, y, value + [view getMeasuredWidth], y + [view getMeasuredHeight]);
+}
+
+id ASViewImpl_getBottomWithASIWidget_(id<ASIWidget> w) {
+  ASViewImpl_initialize();
+  ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
+  return JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(view)) getBottom]);
+}
+
+id ASViewImpl_getTopWithASIWidget_(id<ASIWidget> w) {
+  ASViewImpl_initialize();
+  ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
+  return JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(view)) getTop]);
+}
+
+id ASViewImpl_getRightWithASIWidget_(id<ASIWidget> w) {
+  ASViewImpl_initialize();
+  ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
+  return JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(view)) getRight]);
+}
+
+id ASViewImpl_getLeftWithASIWidget_(id<ASIWidget> w) {
+  ASViewImpl_initialize();
+  ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
+  return JavaLangInteger_valueOfWithInt_([((ADView *) nil_chk(view)) getLeft]);
 }
 
 void ASViewImpl_setAnimatorXmlWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
@@ -9989,6 +10182,94 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self;
 }
 
+- (id)tryGetLeft {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"left"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getLeft {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"left"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (id)setLeftWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"left"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (id)tryGetRight {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"right"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getRight {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"right"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (id)setRightWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"right"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (id)tryGetTop {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"top"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getTop {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"top"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (id)setTopWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"top"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (id)tryGetBottom {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"bottom"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
+  return self;
+}
+
+- (id)getBottom {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"bottom"];
+  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
+}
+
+- (id)setBottomWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"bottom"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
 - (id)tryGetId {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"id"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
@@ -11136,26 +11417,28 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 66, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 67, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 68, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 69, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 70, 71, -1, 72, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 73, 1, -1, 2, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 74, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 75, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 76, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 77, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 67, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 68, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 69, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 70, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 71, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 72, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 73, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 74, 75, -1, 76, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 77, 1, -1, 2, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 78, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 79, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, 80, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 81, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -11173,86 +11456,96 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 87, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 88, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 88, 11, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, 89, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 90, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 90, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 91, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 91, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 92, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 92, 11, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, 93, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 94, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 94, 1, -1, 2, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 95, 11, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 95, 1, -1, 2, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 96, 11, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 96, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 97, 11, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 97, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 98, 11, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 98, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 99, 11, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 100, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 100, 11, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 101, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 101, 11, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 102, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 102, 11, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 103, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 103, 11, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 104, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 105, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 106, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 106, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 107, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 108, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 108, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 109, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 109, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, 110, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, 111, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 112, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 113, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 112, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 113, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 114, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 115, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 116, 27, -1, 28, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 115, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 116, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, 117, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 118, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 119, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 120, 27, -1, 28, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 121, 5, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 119, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 120, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 121, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 122, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 123, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 124, 5, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 125, 1, -1, 2, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -11377,146 +11670,158 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[117].selector = @selector(setOnAnimationEndWithNSString:);
   methods[118].selector = @selector(setOnAnimationCancelWithNSString:);
   methods[119].selector = @selector(setOnAnimationRepeatWithNSString:);
-  methods[120].selector = @selector(tryGetId);
-  methods[121].selector = @selector(getId);
-  methods[122].selector = @selector(setIdWithNSString:);
-  methods[123].selector = @selector(tryGetModelSyncEvents);
-  methods[124].selector = @selector(getModelSyncEvents);
-  methods[125].selector = @selector(setModelSyncEventsWithNSString:);
-  methods[126].selector = @selector(tryGetModelParam);
-  methods[127].selector = @selector(getModelParam);
-  methods[128].selector = @selector(setModelParamWithNSString:);
-  methods[129].selector = @selector(tryGetModelPojoToUi);
-  methods[130].selector = @selector(getModelPojoToUi);
-  methods[131].selector = @selector(setModelPojoToUiWithNSString:);
-  methods[132].selector = @selector(tryGetModelUiToPojo);
-  methods[133].selector = @selector(getModelUiToPojo);
-  methods[134].selector = @selector(setModelUiToPojoWithNSString:);
-  methods[135].selector = @selector(setModelPojoToUiParamsWithNSString:);
-  methods[136].selector = @selector(refreshUiFromModelWithNSString:);
-  methods[137].selector = @selector(setModelUiToPojoEventIdsWithNSString:);
-  methods[138].selector = @selector(updateModelDataWithNSString:withId:);
-  methods[139].selector = @selector(notifyDataSetChangedWithBoolean:);
-  methods[140].selector = @selector(tryGetBackground);
-  methods[141].selector = @selector(getBackground);
-  methods[142].selector = @selector(setBackgroundWithNSString:);
-  methods[143].selector = @selector(setBackgroundRepeatWithNSString:);
-  methods[144].selector = @selector(setOnClickWithNSString:);
-  methods[145].selector = @selector(setOnTouchWithNSString:);
-  methods[146].selector = @selector(tryGetMinWidth);
-  methods[147].selector = @selector(getMinWidth);
-  methods[148].selector = @selector(setMinWidthWithNSString:);
-  methods[149].selector = @selector(tryGetMinHeight);
-  methods[150].selector = @selector(getMinHeight);
-  methods[151].selector = @selector(setMinHeightWithNSString:);
-  methods[152].selector = @selector(setAttributeUnderTestWithNSString:);
-  methods[153].selector = @selector(tryGetBackgroundTint);
-  methods[154].selector = @selector(getBackgroundTint);
-  methods[155].selector = @selector(setBackgroundTintWithNSString:);
-  methods[156].selector = @selector(tryGetBackgroundTintMode);
-  methods[157].selector = @selector(getBackgroundTintMode);
-  methods[158].selector = @selector(setBackgroundTintModeWithNSString:);
-  methods[159].selector = @selector(tryGetForeground);
-  methods[160].selector = @selector(getForeground);
-  methods[161].selector = @selector(setForegroundWithNSString:);
-  methods[162].selector = @selector(setForegroundRepeatWithNSString:);
-  methods[163].selector = @selector(tryGetForegroundTint);
-  methods[164].selector = @selector(getForegroundTint);
-  methods[165].selector = @selector(setForegroundTintWithNSString:);
-  methods[166].selector = @selector(tryGetForegroundTintMode);
-  methods[167].selector = @selector(getForegroundTintMode);
-  methods[168].selector = @selector(setForegroundTintModeWithNSString:);
-  methods[169].selector = @selector(tryGetVisibility);
-  methods[170].selector = @selector(getVisibility);
-  methods[171].selector = @selector(setVisibilityWithNSString:);
-  methods[172].selector = @selector(tryGetAlpha);
-  methods[173].selector = @selector(getAlpha);
-  methods[174].selector = @selector(setAlphaWithFloat:);
-  methods[175].selector = @selector(setOnLongClickWithNSString:);
-  methods[176].selector = @selector(tryGetLongClickable);
-  methods[177].selector = @selector(isLongClickable);
-  methods[178].selector = @selector(setLongClickableWithBoolean:);
-  methods[179].selector = @selector(tryGetClickable);
-  methods[180].selector = @selector(isClickable);
-  methods[181].selector = @selector(setClickableWithBoolean:);
-  methods[182].selector = @selector(tryGetTranslationX);
-  methods[183].selector = @selector(getTranslationX);
-  methods[184].selector = @selector(setTranslationXWithNSString:);
-  methods[185].selector = @selector(tryGetTranslationY);
-  methods[186].selector = @selector(getTranslationY);
-  methods[187].selector = @selector(setTranslationYWithNSString:);
-  methods[188].selector = @selector(tryGetTranslationZ);
-  methods[189].selector = @selector(getTranslationZ);
-  methods[190].selector = @selector(setTranslationZWithNSString:);
-  methods[191].selector = @selector(tryGetRotation);
-  methods[192].selector = @selector(getRotation);
-  methods[193].selector = @selector(setRotationWithFloat:);
-  methods[194].selector = @selector(tryGetRotationX);
-  methods[195].selector = @selector(getRotationX);
-  methods[196].selector = @selector(setRotationXWithFloat:);
-  methods[197].selector = @selector(tryGetRotationY);
-  methods[198].selector = @selector(getRotationY);
-  methods[199].selector = @selector(setRotationYWithFloat:);
-  methods[200].selector = @selector(tryGetScaleX);
-  methods[201].selector = @selector(getScaleX);
-  methods[202].selector = @selector(setScaleXWithFloat:);
-  methods[203].selector = @selector(tryGetScaleY);
-  methods[204].selector = @selector(getScaleY);
-  methods[205].selector = @selector(setScaleYWithFloat:);
-  methods[206].selector = @selector(tryGetTransformPivotX);
-  methods[207].selector = @selector(getTransformPivotX);
-  methods[208].selector = @selector(setTransformPivotXWithNSString:);
-  methods[209].selector = @selector(tryGetTransformPivotY);
-  methods[210].selector = @selector(getTransformPivotY);
-  methods[211].selector = @selector(setTransformPivotYWithNSString:);
-  methods[212].selector = @selector(invalidate);
-  methods[213].selector = @selector(requestLayout);
-  methods[214].selector = @selector(tryGetKeepScreenOn);
-  methods[215].selector = @selector(isKeepScreenOn);
-  methods[216].selector = @selector(setKeepScreenOnWithBoolean:);
-  methods[217].selector = @selector(tryGetLayoutDirection);
-  methods[218].selector = @selector(getLayoutDirection);
-  methods[219].selector = @selector(setLayoutDirectionWithNSString:);
-  methods[220].selector = @selector(tryGetTextDirection);
-  methods[221].selector = @selector(getTextDirection);
-  methods[222].selector = @selector(setTextDirectionWithNSString:);
-  methods[223].selector = @selector(tryGetTextAlignment);
-  methods[224].selector = @selector(getTextAlignment);
-  methods[225].selector = @selector(setTextAlignmentWithNSString:);
-  methods[226].selector = @selector(setOnDragWithNSString:);
-  methods[227].selector = @selector(setAsDragSourceWithNSString:);
-  methods[228].selector = @selector(tryGetEnabled);
-  methods[229].selector = @selector(isEnabled);
-  methods[230].selector = @selector(setEnabledWithBoolean:);
-  methods[231].selector = @selector(tryGetDuplicateParentState);
-  methods[232].selector = @selector(isDuplicateParentState);
-  methods[233].selector = @selector(setDuplicateParentStateWithBoolean:);
-  methods[234].selector = @selector(tryGetForegroundGravity);
-  methods[235].selector = @selector(getForegroundGravity);
-  methods[236].selector = @selector(setForegroundGravityWithNSString:);
-  methods[237].selector = @selector(setOnKeyWithNSString:);
-  methods[238].selector = @selector(setIosLayerBorderWidthWithNSString:);
-  methods[239].selector = @selector(setIosLayerBorderColorWithNSString:);
-  methods[240].selector = @selector(setIosLayerCornerRadiusWithNSString:);
-  methods[241].selector = @selector(setIosLayerMasksToBoundsWithBoolean:);
-  methods[242].selector = @selector(setZIndexWithInt:);
-  methods[243].selector = @selector(setElevationWithNSString:);
-  methods[244].selector = @selector(tryGetMaxWidth);
-  methods[245].selector = @selector(getMaxWidth);
-  methods[246].selector = @selector(setMaxWidthWithNSString:);
-  methods[247].selector = @selector(tryGetMaxHeight);
-  methods[248].selector = @selector(getMaxHeight);
-  methods[249].selector = @selector(setMaxHeightWithNSString:);
-  methods[250].selector = @selector(setOnSwipedWithNSString:);
-  methods[251].selector = @selector(setOutsideTouchableWithBoolean:);
+  methods[120].selector = @selector(tryGetLeft);
+  methods[121].selector = @selector(getLeft);
+  methods[122].selector = @selector(setLeftWithNSString:);
+  methods[123].selector = @selector(tryGetRight);
+  methods[124].selector = @selector(getRight);
+  methods[125].selector = @selector(setRightWithNSString:);
+  methods[126].selector = @selector(tryGetTop);
+  methods[127].selector = @selector(getTop);
+  methods[128].selector = @selector(setTopWithNSString:);
+  methods[129].selector = @selector(tryGetBottom);
+  methods[130].selector = @selector(getBottom);
+  methods[131].selector = @selector(setBottomWithNSString:);
+  methods[132].selector = @selector(tryGetId);
+  methods[133].selector = @selector(getId);
+  methods[134].selector = @selector(setIdWithNSString:);
+  methods[135].selector = @selector(tryGetModelSyncEvents);
+  methods[136].selector = @selector(getModelSyncEvents);
+  methods[137].selector = @selector(setModelSyncEventsWithNSString:);
+  methods[138].selector = @selector(tryGetModelParam);
+  methods[139].selector = @selector(getModelParam);
+  methods[140].selector = @selector(setModelParamWithNSString:);
+  methods[141].selector = @selector(tryGetModelPojoToUi);
+  methods[142].selector = @selector(getModelPojoToUi);
+  methods[143].selector = @selector(setModelPojoToUiWithNSString:);
+  methods[144].selector = @selector(tryGetModelUiToPojo);
+  methods[145].selector = @selector(getModelUiToPojo);
+  methods[146].selector = @selector(setModelUiToPojoWithNSString:);
+  methods[147].selector = @selector(setModelPojoToUiParamsWithNSString:);
+  methods[148].selector = @selector(refreshUiFromModelWithNSString:);
+  methods[149].selector = @selector(setModelUiToPojoEventIdsWithNSString:);
+  methods[150].selector = @selector(updateModelDataWithNSString:withId:);
+  methods[151].selector = @selector(notifyDataSetChangedWithBoolean:);
+  methods[152].selector = @selector(tryGetBackground);
+  methods[153].selector = @selector(getBackground);
+  methods[154].selector = @selector(setBackgroundWithNSString:);
+  methods[155].selector = @selector(setBackgroundRepeatWithNSString:);
+  methods[156].selector = @selector(setOnClickWithNSString:);
+  methods[157].selector = @selector(setOnTouchWithNSString:);
+  methods[158].selector = @selector(tryGetMinWidth);
+  methods[159].selector = @selector(getMinWidth);
+  methods[160].selector = @selector(setMinWidthWithNSString:);
+  methods[161].selector = @selector(tryGetMinHeight);
+  methods[162].selector = @selector(getMinHeight);
+  methods[163].selector = @selector(setMinHeightWithNSString:);
+  methods[164].selector = @selector(setAttributeUnderTestWithNSString:);
+  methods[165].selector = @selector(tryGetBackgroundTint);
+  methods[166].selector = @selector(getBackgroundTint);
+  methods[167].selector = @selector(setBackgroundTintWithNSString:);
+  methods[168].selector = @selector(tryGetBackgroundTintMode);
+  methods[169].selector = @selector(getBackgroundTintMode);
+  methods[170].selector = @selector(setBackgroundTintModeWithNSString:);
+  methods[171].selector = @selector(tryGetForeground);
+  methods[172].selector = @selector(getForeground);
+  methods[173].selector = @selector(setForegroundWithNSString:);
+  methods[174].selector = @selector(setForegroundRepeatWithNSString:);
+  methods[175].selector = @selector(tryGetForegroundTint);
+  methods[176].selector = @selector(getForegroundTint);
+  methods[177].selector = @selector(setForegroundTintWithNSString:);
+  methods[178].selector = @selector(tryGetForegroundTintMode);
+  methods[179].selector = @selector(getForegroundTintMode);
+  methods[180].selector = @selector(setForegroundTintModeWithNSString:);
+  methods[181].selector = @selector(tryGetVisibility);
+  methods[182].selector = @selector(getVisibility);
+  methods[183].selector = @selector(setVisibilityWithNSString:);
+  methods[184].selector = @selector(tryGetAlpha);
+  methods[185].selector = @selector(getAlpha);
+  methods[186].selector = @selector(setAlphaWithFloat:);
+  methods[187].selector = @selector(setOnLongClickWithNSString:);
+  methods[188].selector = @selector(tryGetLongClickable);
+  methods[189].selector = @selector(isLongClickable);
+  methods[190].selector = @selector(setLongClickableWithBoolean:);
+  methods[191].selector = @selector(tryGetClickable);
+  methods[192].selector = @selector(isClickable);
+  methods[193].selector = @selector(setClickableWithBoolean:);
+  methods[194].selector = @selector(tryGetTranslationX);
+  methods[195].selector = @selector(getTranslationX);
+  methods[196].selector = @selector(setTranslationXWithNSString:);
+  methods[197].selector = @selector(tryGetTranslationY);
+  methods[198].selector = @selector(getTranslationY);
+  methods[199].selector = @selector(setTranslationYWithNSString:);
+  methods[200].selector = @selector(tryGetTranslationZ);
+  methods[201].selector = @selector(getTranslationZ);
+  methods[202].selector = @selector(setTranslationZWithNSString:);
+  methods[203].selector = @selector(tryGetRotation);
+  methods[204].selector = @selector(getRotation);
+  methods[205].selector = @selector(setRotationWithFloat:);
+  methods[206].selector = @selector(tryGetRotationX);
+  methods[207].selector = @selector(getRotationX);
+  methods[208].selector = @selector(setRotationXWithFloat:);
+  methods[209].selector = @selector(tryGetRotationY);
+  methods[210].selector = @selector(getRotationY);
+  methods[211].selector = @selector(setRotationYWithFloat:);
+  methods[212].selector = @selector(tryGetScaleX);
+  methods[213].selector = @selector(getScaleX);
+  methods[214].selector = @selector(setScaleXWithFloat:);
+  methods[215].selector = @selector(tryGetScaleY);
+  methods[216].selector = @selector(getScaleY);
+  methods[217].selector = @selector(setScaleYWithFloat:);
+  methods[218].selector = @selector(tryGetTransformPivotX);
+  methods[219].selector = @selector(getTransformPivotX);
+  methods[220].selector = @selector(setTransformPivotXWithNSString:);
+  methods[221].selector = @selector(tryGetTransformPivotY);
+  methods[222].selector = @selector(getTransformPivotY);
+  methods[223].selector = @selector(setTransformPivotYWithNSString:);
+  methods[224].selector = @selector(invalidate);
+  methods[225].selector = @selector(requestLayout);
+  methods[226].selector = @selector(tryGetKeepScreenOn);
+  methods[227].selector = @selector(isKeepScreenOn);
+  methods[228].selector = @selector(setKeepScreenOnWithBoolean:);
+  methods[229].selector = @selector(tryGetLayoutDirection);
+  methods[230].selector = @selector(getLayoutDirection);
+  methods[231].selector = @selector(setLayoutDirectionWithNSString:);
+  methods[232].selector = @selector(tryGetTextDirection);
+  methods[233].selector = @selector(getTextDirection);
+  methods[234].selector = @selector(setTextDirectionWithNSString:);
+  methods[235].selector = @selector(tryGetTextAlignment);
+  methods[236].selector = @selector(getTextAlignment);
+  methods[237].selector = @selector(setTextAlignmentWithNSString:);
+  methods[238].selector = @selector(setOnDragWithNSString:);
+  methods[239].selector = @selector(setAsDragSourceWithNSString:);
+  methods[240].selector = @selector(tryGetEnabled);
+  methods[241].selector = @selector(isEnabled);
+  methods[242].selector = @selector(setEnabledWithBoolean:);
+  methods[243].selector = @selector(tryGetDuplicateParentState);
+  methods[244].selector = @selector(isDuplicateParentState);
+  methods[245].selector = @selector(setDuplicateParentStateWithBoolean:);
+  methods[246].selector = @selector(tryGetForegroundGravity);
+  methods[247].selector = @selector(getForegroundGravity);
+  methods[248].selector = @selector(setForegroundGravityWithNSString:);
+  methods[249].selector = @selector(setOnKeyWithNSString:);
+  methods[250].selector = @selector(setIosLayerBorderWidthWithNSString:);
+  methods[251].selector = @selector(setIosLayerBorderColorWithNSString:);
+  methods[252].selector = @selector(setIosLayerCornerRadiusWithNSString:);
+  methods[253].selector = @selector(setIosLayerMasksToBoundsWithBoolean:);
+  methods[254].selector = @selector(setZIndexWithInt:);
+  methods[255].selector = @selector(setElevationWithNSString:);
+  methods[256].selector = @selector(tryGetMaxWidth);
+  methods[257].selector = @selector(getMaxWidth);
+  methods[258].selector = @selector(setMaxWidthWithNSString:);
+  methods[259].selector = @selector(tryGetMaxHeight);
+  methods[260].selector = @selector(getMaxHeight);
+  methods[261].selector = @selector(setMaxHeightWithNSString:);
+  methods[262].selector = @selector(setOnSwipedWithNSString:);
+  methods[263].selector = @selector(setOutsideTouchableWithBoolean:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "command_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 122, -1 },
+    { "command_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 126, -1 },
     { "orderGet_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "orderSet_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "execute", "Z", "(Z)TT;", "()TT;", "initCommand", "LNSString;", "(Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setIosBackgroundColor", "(Ljava/lang/String;)TT;", "setIosIsHidden", "setIosAlpha", "F", "(F)TT;", "setIosIsOpaque", "setIosTintColor", "setIosClipsToBounds", "setIosClearsContextBeforeDrawing", "setIosIsUserInteractionEnabled", "setIosIsMultipleTouchEnabled", "setIosIsExclusiveTouch", "setIosPreservesSuperviewLayoutMargins", "setIosInsetsLayoutMarginsFromSafeArea", "setIosAutoresizesSubviews", "setIosTranslatesAutoresizingMaskIntoConstraints", "setIosContentScaleFactor", "setIosRestorationIdentifier", "setIosTag", "I", "(I)TT;", "setIosAccessibilityIgnoresInvertColors", "setIosLargeContentImage", "setIosLargeContentTitle", "setIosScalesLargeContentImage", "setIosShowsLargeContentViewer", "setIosIsAccessibilityElement", "setFocusable", "setIosAccessibilityLabel", "setIosAccessibilityHint", "setContentDescription", "setIosAccessibilityValue", "setIosAccessibilityTraits", "setSelected", "setStyle", "setErrorStyle", "validateForm", "setValidation", "setV_required", "setV_minlength", "setV_maxlength", "setV_min", "setV_max", "setV_pattern", "setV_type", "setValidationErrorDisplayType", "setCustomErrorMessageValues", "setCustomErrorMessageKeys", "setInvalidateOnFrameChange", "animatorXml", "setOnAnimationStart", "setOnAnimationEnd", "setOnAnimationCancel", "setOnAnimationRepeat", "setId", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "setModelPojoToUiParams", "refreshUiFromModel", "setModelUiToPojoEventIds", "updateModelData", "LNSString;LNSObject;", "(Ljava/lang/String;Ljava/lang/Object;)TT;", "notifyDataSetChanged", "setBackground", "setBackgroundRepeat", "setOnClick", "setOnTouch", "setMinWidth", "setMinHeight", "setAttributeUnderTest", "setBackgroundTint", "setBackgroundTintMode", "setForeground", "setForegroundRepeat", "setForegroundTint", "setForegroundTintMode", "setVisibility", "setAlpha", "setOnLongClick", "setLongClickable", "setClickable", "setTranslationX", "setTranslationY", "setTranslationZ", "setRotation", "setRotationX", "setRotationY", "setScaleX", "setScaleY", "setTransformPivotX", "setTransformPivotY", "setKeepScreenOn", "setLayoutDirection", "setTextDirection", "setTextAlignment", "setOnDrag", "setAsDragSource", "setEnabled", "setDuplicateParentState", "setForegroundGravity", "setOnKey", "setIosLayerBorderWidth", "setIosLayerBorderColor", "setIosLayerCornerRadius", "setIosLayerMasksToBounds", "setZIndex", "setElevation", "setMaxWidth", "setMaxHeight", "setOnSwiped", "setOutsideTouchable", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "LASViewImpl;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
-  static const J2ObjcClassInfo _ASViewImpl_ViewCommandBuilder = { "ViewCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x409, 252, 3, 123, -1, -1, 124, -1 };
+  static const void *ptrTable[] = { "execute", "Z", "(Z)TT;", "()TT;", "initCommand", "LNSString;", "(Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setIosBackgroundColor", "(Ljava/lang/String;)TT;", "setIosIsHidden", "setIosAlpha", "F", "(F)TT;", "setIosIsOpaque", "setIosTintColor", "setIosClipsToBounds", "setIosClearsContextBeforeDrawing", "setIosIsUserInteractionEnabled", "setIosIsMultipleTouchEnabled", "setIosIsExclusiveTouch", "setIosPreservesSuperviewLayoutMargins", "setIosInsetsLayoutMarginsFromSafeArea", "setIosAutoresizesSubviews", "setIosTranslatesAutoresizingMaskIntoConstraints", "setIosContentScaleFactor", "setIosRestorationIdentifier", "setIosTag", "I", "(I)TT;", "setIosAccessibilityIgnoresInvertColors", "setIosLargeContentImage", "setIosLargeContentTitle", "setIosScalesLargeContentImage", "setIosShowsLargeContentViewer", "setIosIsAccessibilityElement", "setFocusable", "setIosAccessibilityLabel", "setIosAccessibilityHint", "setContentDescription", "setIosAccessibilityValue", "setIosAccessibilityTraits", "setSelected", "setStyle", "setErrorStyle", "validateForm", "setValidation", "setV_required", "setV_minlength", "setV_maxlength", "setV_min", "setV_max", "setV_pattern", "setV_type", "setValidationErrorDisplayType", "setCustomErrorMessageValues", "setCustomErrorMessageKeys", "setInvalidateOnFrameChange", "animatorXml", "setOnAnimationStart", "setOnAnimationEnd", "setOnAnimationCancel", "setOnAnimationRepeat", "setLeft", "setRight", "setTop", "setBottom", "setId", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "setModelPojoToUiParams", "refreshUiFromModel", "setModelUiToPojoEventIds", "updateModelData", "LNSString;LNSObject;", "(Ljava/lang/String;Ljava/lang/Object;)TT;", "notifyDataSetChanged", "setBackground", "setBackgroundRepeat", "setOnClick", "setOnTouch", "setMinWidth", "setMinHeight", "setAttributeUnderTest", "setBackgroundTint", "setBackgroundTintMode", "setForeground", "setForegroundRepeat", "setForegroundTint", "setForegroundTintMode", "setVisibility", "setAlpha", "setOnLongClick", "setLongClickable", "setClickable", "setTranslationX", "setTranslationY", "setTranslationZ", "setRotation", "setRotationX", "setRotationY", "setScaleX", "setScaleY", "setTransformPivotX", "setTransformPivotY", "setKeepScreenOn", "setLayoutDirection", "setTextDirection", "setTextAlignment", "setOnDrag", "setAsDragSource", "setEnabled", "setDuplicateParentState", "setForegroundGravity", "setOnKey", "setIosLayerBorderWidth", "setIosLayerBorderColor", "setIosLayerCornerRadius", "setIosLayerMasksToBounds", "setZIndex", "setElevation", "setMaxWidth", "setMaxHeight", "setOnSwiped", "setOutsideTouchable", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "LASViewImpl;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _ASViewImpl_ViewCommandBuilder = { "ViewCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x409, 264, 3, 127, -1, -1, 128, -1 };
   return &_ASViewImpl_ViewCommandBuilder;
 }
 
@@ -11926,6 +12231,38 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_ViewCommandBuilderInternal)
 
 - (void)setOnAnimationRepeatWithNSString:(NSString *)value {
   (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnAnimationRepeatWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getLeft {
+  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetLeft])) executeWithBoolean:false])) getLeft];
+}
+
+- (void)setLeftWithNSString:(NSString *)value {
+  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setLeftWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getRight {
+  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetRight])) executeWithBoolean:false])) getRight];
+}
+
+- (void)setRightWithNSString:(NSString *)value {
+  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setRightWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getTop {
+  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetTop])) executeWithBoolean:false])) getTop];
+}
+
+- (void)setTopWithNSString:(NSString *)value {
+  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setTopWithNSString:value])) executeWithBoolean:true];
+}
+
+- (id)getBottom {
+  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetBottom])) executeWithBoolean:false])) getBottom];
+}
+
+- (void)setBottomWithNSString:(NSString *)value {
+  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setBottomWithNSString:value])) executeWithBoolean:true];
 }
 
 - (id)getModelSyncEvents {
@@ -12401,22 +12738,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_ViewCommandBuilderInternal)
     { NULL, "V", 0x1, 57, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 58, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 59, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 60, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 61, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 62, 63, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 64, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 59, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 60, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 61, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 62, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 63, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 64, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 65, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 66, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 67, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 68, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 66, 67, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 68, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 69, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 70, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 71, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 72, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 73, 2, -1, -1, -1, -1 },
@@ -12429,64 +12767,71 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_ViewCommandBuilderInternal)
     { NULL, "V", 0x1, 77, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 78, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 79, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 79, 6, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 80, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 81, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 81, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 82, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 82, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 83, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 83, 6, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 84, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 85, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 85, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 86, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 86, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 87, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 87, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 88, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 88, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 89, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 89, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 90, 6, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 91, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 91, 6, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 92, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 92, 6, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 93, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 93, 6, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 94, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 94, 6, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 95, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 96, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 97, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 97, 4, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 98, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 99, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 99, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 100, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 100, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 101, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 102, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 103, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 104, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 103, 4, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 104, 4, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 105, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 106, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 107, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 106, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 107, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 108, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 109, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 110, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 111, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 112, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 110, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 111, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 112, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 113, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 114, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 115, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 116, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -12577,106 +12922,114 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_ViewCommandBuilderInternal)
   methods[83].selector = @selector(setOnAnimationEndWithNSString:);
   methods[84].selector = @selector(setOnAnimationCancelWithNSString:);
   methods[85].selector = @selector(setOnAnimationRepeatWithNSString:);
-  methods[86].selector = @selector(getModelSyncEvents);
-  methods[87].selector = @selector(setModelSyncEventsWithNSString:);
-  methods[88].selector = @selector(getModelParam);
-  methods[89].selector = @selector(setModelParamWithNSString:);
-  methods[90].selector = @selector(getModelPojoToUi);
-  methods[91].selector = @selector(setModelPojoToUiWithNSString:);
-  methods[92].selector = @selector(getModelUiToPojo);
-  methods[93].selector = @selector(setModelUiToPojoWithNSString:);
-  methods[94].selector = @selector(setModelPojoToUiParamsWithNSString:);
-  methods[95].selector = @selector(refreshUiFromModelWithNSString:);
-  methods[96].selector = @selector(setModelUiToPojoEventIdsWithNSString:);
-  methods[97].selector = @selector(updateModelDataWithNSString:withId:);
-  methods[98].selector = @selector(notifyDataSetChangedWithBoolean:);
-  methods[99].selector = @selector(getBackground);
-  methods[100].selector = @selector(setBackgroundWithNSString:);
-  methods[101].selector = @selector(setBackgroundRepeatWithNSString:);
-  methods[102].selector = @selector(setOnClickWithNSString:);
-  methods[103].selector = @selector(setOnTouchWithNSString:);
-  methods[104].selector = @selector(getMinWidth);
-  methods[105].selector = @selector(setMinWidthWithNSString:);
-  methods[106].selector = @selector(getMinHeight);
-  methods[107].selector = @selector(setMinHeightWithNSString:);
-  methods[108].selector = @selector(setAttributeUnderTestWithNSString:);
-  methods[109].selector = @selector(getBackgroundTint);
-  methods[110].selector = @selector(setBackgroundTintWithNSString:);
-  methods[111].selector = @selector(getBackgroundTintMode);
-  methods[112].selector = @selector(setBackgroundTintModeWithNSString:);
-  methods[113].selector = @selector(getForeground);
-  methods[114].selector = @selector(setForegroundWithNSString:);
-  methods[115].selector = @selector(setForegroundRepeatWithNSString:);
-  methods[116].selector = @selector(getForegroundTint);
-  methods[117].selector = @selector(setForegroundTintWithNSString:);
-  methods[118].selector = @selector(getForegroundTintMode);
-  methods[119].selector = @selector(setForegroundTintModeWithNSString:);
-  methods[120].selector = @selector(getVisibility);
-  methods[121].selector = @selector(setVisibilityWithNSString:);
-  methods[122].selector = @selector(getAlpha);
-  methods[123].selector = @selector(setAlphaWithFloat:);
-  methods[124].selector = @selector(setOnLongClickWithNSString:);
-  methods[125].selector = @selector(isLongClickable);
-  methods[126].selector = @selector(setLongClickableWithBoolean:);
-  methods[127].selector = @selector(isClickable);
-  methods[128].selector = @selector(setClickableWithBoolean:);
-  methods[129].selector = @selector(getTranslationX);
-  methods[130].selector = @selector(setTranslationXWithNSString:);
-  methods[131].selector = @selector(getTranslationY);
-  methods[132].selector = @selector(setTranslationYWithNSString:);
-  methods[133].selector = @selector(getTranslationZ);
-  methods[134].selector = @selector(setTranslationZWithNSString:);
-  methods[135].selector = @selector(getRotation);
-  methods[136].selector = @selector(setRotationWithFloat:);
-  methods[137].selector = @selector(getRotationX);
-  methods[138].selector = @selector(setRotationXWithFloat:);
-  methods[139].selector = @selector(getRotationY);
-  methods[140].selector = @selector(setRotationYWithFloat:);
-  methods[141].selector = @selector(getScaleX);
-  methods[142].selector = @selector(setScaleXWithFloat:);
-  methods[143].selector = @selector(getScaleY);
-  methods[144].selector = @selector(setScaleYWithFloat:);
-  methods[145].selector = @selector(getTransformPivotX);
-  methods[146].selector = @selector(setTransformPivotXWithNSString:);
-  methods[147].selector = @selector(getTransformPivotY);
-  methods[148].selector = @selector(setTransformPivotYWithNSString:);
-  methods[149].selector = @selector(invalidate);
-  methods[150].selector = @selector(requestLayout);
-  methods[151].selector = @selector(isKeepScreenOn);
-  methods[152].selector = @selector(setKeepScreenOnWithBoolean:);
-  methods[153].selector = @selector(getLayoutDirection);
-  methods[154].selector = @selector(setLayoutDirectionWithNSString:);
-  methods[155].selector = @selector(getTextDirection);
-  methods[156].selector = @selector(setTextDirectionWithNSString:);
-  methods[157].selector = @selector(getTextAlignment);
-  methods[158].selector = @selector(setTextAlignmentWithNSString:);
-  methods[159].selector = @selector(setOnDragWithNSString:);
-  methods[160].selector = @selector(setAsDragSourceWithNSString:);
-  methods[161].selector = @selector(isEnabled);
-  methods[162].selector = @selector(setEnabledWithBoolean:);
-  methods[163].selector = @selector(isDuplicateParentState);
-  methods[164].selector = @selector(setDuplicateParentStateWithBoolean:);
-  methods[165].selector = @selector(getForegroundGravity);
-  methods[166].selector = @selector(setForegroundGravityWithNSString:);
-  methods[167].selector = @selector(setOnKeyWithNSString:);
-  methods[168].selector = @selector(setIosLayerBorderWidthWithNSString:);
-  methods[169].selector = @selector(setIosLayerBorderColorWithNSString:);
-  methods[170].selector = @selector(setIosLayerCornerRadiusWithNSString:);
-  methods[171].selector = @selector(setIosLayerMasksToBoundsWithBoolean:);
-  methods[172].selector = @selector(setZIndexWithInt:);
-  methods[173].selector = @selector(setElevationWithNSString:);
-  methods[174].selector = @selector(getMaxWidth);
-  methods[175].selector = @selector(setMaxWidthWithNSString:);
-  methods[176].selector = @selector(getMaxHeight);
-  methods[177].selector = @selector(setMaxHeightWithNSString:);
-  methods[178].selector = @selector(setOnSwipedWithNSString:);
-  methods[179].selector = @selector(setOutsideTouchableWithBoolean:);
+  methods[86].selector = @selector(getLeft);
+  methods[87].selector = @selector(setLeftWithNSString:);
+  methods[88].selector = @selector(getRight);
+  methods[89].selector = @selector(setRightWithNSString:);
+  methods[90].selector = @selector(getTop);
+  methods[91].selector = @selector(setTopWithNSString:);
+  methods[92].selector = @selector(getBottom);
+  methods[93].selector = @selector(setBottomWithNSString:);
+  methods[94].selector = @selector(getModelSyncEvents);
+  methods[95].selector = @selector(setModelSyncEventsWithNSString:);
+  methods[96].selector = @selector(getModelParam);
+  methods[97].selector = @selector(setModelParamWithNSString:);
+  methods[98].selector = @selector(getModelPojoToUi);
+  methods[99].selector = @selector(setModelPojoToUiWithNSString:);
+  methods[100].selector = @selector(getModelUiToPojo);
+  methods[101].selector = @selector(setModelUiToPojoWithNSString:);
+  methods[102].selector = @selector(setModelPojoToUiParamsWithNSString:);
+  methods[103].selector = @selector(refreshUiFromModelWithNSString:);
+  methods[104].selector = @selector(setModelUiToPojoEventIdsWithNSString:);
+  methods[105].selector = @selector(updateModelDataWithNSString:withId:);
+  methods[106].selector = @selector(notifyDataSetChangedWithBoolean:);
+  methods[107].selector = @selector(getBackground);
+  methods[108].selector = @selector(setBackgroundWithNSString:);
+  methods[109].selector = @selector(setBackgroundRepeatWithNSString:);
+  methods[110].selector = @selector(setOnClickWithNSString:);
+  methods[111].selector = @selector(setOnTouchWithNSString:);
+  methods[112].selector = @selector(getMinWidth);
+  methods[113].selector = @selector(setMinWidthWithNSString:);
+  methods[114].selector = @selector(getMinHeight);
+  methods[115].selector = @selector(setMinHeightWithNSString:);
+  methods[116].selector = @selector(setAttributeUnderTestWithNSString:);
+  methods[117].selector = @selector(getBackgroundTint);
+  methods[118].selector = @selector(setBackgroundTintWithNSString:);
+  methods[119].selector = @selector(getBackgroundTintMode);
+  methods[120].selector = @selector(setBackgroundTintModeWithNSString:);
+  methods[121].selector = @selector(getForeground);
+  methods[122].selector = @selector(setForegroundWithNSString:);
+  methods[123].selector = @selector(setForegroundRepeatWithNSString:);
+  methods[124].selector = @selector(getForegroundTint);
+  methods[125].selector = @selector(setForegroundTintWithNSString:);
+  methods[126].selector = @selector(getForegroundTintMode);
+  methods[127].selector = @selector(setForegroundTintModeWithNSString:);
+  methods[128].selector = @selector(getVisibility);
+  methods[129].selector = @selector(setVisibilityWithNSString:);
+  methods[130].selector = @selector(getAlpha);
+  methods[131].selector = @selector(setAlphaWithFloat:);
+  methods[132].selector = @selector(setOnLongClickWithNSString:);
+  methods[133].selector = @selector(isLongClickable);
+  methods[134].selector = @selector(setLongClickableWithBoolean:);
+  methods[135].selector = @selector(isClickable);
+  methods[136].selector = @selector(setClickableWithBoolean:);
+  methods[137].selector = @selector(getTranslationX);
+  methods[138].selector = @selector(setTranslationXWithNSString:);
+  methods[139].selector = @selector(getTranslationY);
+  methods[140].selector = @selector(setTranslationYWithNSString:);
+  methods[141].selector = @selector(getTranslationZ);
+  methods[142].selector = @selector(setTranslationZWithNSString:);
+  methods[143].selector = @selector(getRotation);
+  methods[144].selector = @selector(setRotationWithFloat:);
+  methods[145].selector = @selector(getRotationX);
+  methods[146].selector = @selector(setRotationXWithFloat:);
+  methods[147].selector = @selector(getRotationY);
+  methods[148].selector = @selector(setRotationYWithFloat:);
+  methods[149].selector = @selector(getScaleX);
+  methods[150].selector = @selector(setScaleXWithFloat:);
+  methods[151].selector = @selector(getScaleY);
+  methods[152].selector = @selector(setScaleYWithFloat:);
+  methods[153].selector = @selector(getTransformPivotX);
+  methods[154].selector = @selector(setTransformPivotXWithNSString:);
+  methods[155].selector = @selector(getTransformPivotY);
+  methods[156].selector = @selector(setTransformPivotYWithNSString:);
+  methods[157].selector = @selector(invalidate);
+  methods[158].selector = @selector(requestLayout);
+  methods[159].selector = @selector(isKeepScreenOn);
+  methods[160].selector = @selector(setKeepScreenOnWithBoolean:);
+  methods[161].selector = @selector(getLayoutDirection);
+  methods[162].selector = @selector(setLayoutDirectionWithNSString:);
+  methods[163].selector = @selector(getTextDirection);
+  methods[164].selector = @selector(setTextDirectionWithNSString:);
+  methods[165].selector = @selector(getTextAlignment);
+  methods[166].selector = @selector(setTextAlignmentWithNSString:);
+  methods[167].selector = @selector(setOnDragWithNSString:);
+  methods[168].selector = @selector(setAsDragSourceWithNSString:);
+  methods[169].selector = @selector(isEnabled);
+  methods[170].selector = @selector(setEnabledWithBoolean:);
+  methods[171].selector = @selector(isDuplicateParentState);
+  methods[172].selector = @selector(setDuplicateParentStateWithBoolean:);
+  methods[173].selector = @selector(getForegroundGravity);
+  methods[174].selector = @selector(setForegroundGravityWithNSString:);
+  methods[175].selector = @selector(setOnKeyWithNSString:);
+  methods[176].selector = @selector(setIosLayerBorderWidthWithNSString:);
+  methods[177].selector = @selector(setIosLayerBorderColorWithNSString:);
+  methods[178].selector = @selector(setIosLayerCornerRadiusWithNSString:);
+  methods[179].selector = @selector(setIosLayerMasksToBoundsWithBoolean:);
+  methods[180].selector = @selector(setZIndexWithInt:);
+  methods[181].selector = @selector(setElevationWithNSString:);
+  methods[182].selector = @selector(getMaxWidth);
+  methods[183].selector = @selector(setMaxWidthWithNSString:);
+  methods[184].selector = @selector(getMaxHeight);
+  methods[185].selector = @selector(setMaxHeightWithNSString:);
+  methods[186].selector = @selector(setOnSwipedWithNSString:);
+  methods[187].selector = @selector(setOutsideTouchableWithBoolean:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "commandBuilder_", "LASViewImpl_ViewCommandBuilderInternal;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASIWidget;", "setIosBackgroundColor", "LNSString;", "setIosIsHidden", "Z", "setIosAlpha", "F", "setIosIsOpaque", "setIosTintColor", "setIosClipsToBounds", "setIosClearsContextBeforeDrawing", "setIosIsUserInteractionEnabled", "setIosIsMultipleTouchEnabled", "setIosIsExclusiveTouch", "setIosPreservesSuperviewLayoutMargins", "setIosInsetsLayoutMarginsFromSafeArea", "setIosAutoresizesSubviews", "setIosTranslatesAutoresizingMaskIntoConstraints", "setIosContentScaleFactor", "setIosRestorationIdentifier", "setIosTag", "I", "setIosAccessibilityIgnoresInvertColors", "setIosLargeContentImage", "setIosLargeContentTitle", "setIosScalesLargeContentImage", "setIosShowsLargeContentViewer", "setIosIsAccessibilityElement", "setFocusable", "setIosAccessibilityLabel", "setIosAccessibilityHint", "setContentDescription", "setIosAccessibilityValue", "setIosAccessibilityTraits", "setSelected", "setStyle", "setErrorStyle", "validateForm", "setValidation", "setV_required", "setV_minlength", "setV_maxlength", "setV_min", "setV_max", "setV_pattern", "setV_type", "setValidationErrorDisplayType", "setCustomErrorMessageValues", "setCustomErrorMessageKeys", "setInvalidateOnFrameChange", "animatorXml", "setOnAnimationStart", "setOnAnimationEnd", "setOnAnimationCancel", "setOnAnimationRepeat", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "setModelPojoToUiParams", "refreshUiFromModel", "setModelUiToPojoEventIds", "updateModelData", "LNSString;LNSObject;", "notifyDataSetChanged", "setBackground", "setBackgroundRepeat", "setOnClick", "setOnTouch", "setMinWidth", "setMinHeight", "setAttributeUnderTest", "setBackgroundTint", "setBackgroundTintMode", "setForeground", "setForegroundRepeat", "setForegroundTint", "setForegroundTintMode", "setVisibility", "setAlpha", "setOnLongClick", "setLongClickable", "setClickable", "setTranslationX", "setTranslationY", "setTranslationZ", "setRotation", "setRotationX", "setRotationY", "setScaleX", "setScaleY", "setTransformPivotX", "setTransformPivotY", "setKeepScreenOn", "setLayoutDirection", "setTextDirection", "setTextAlignment", "setOnDrag", "setAsDragSource", "setEnabled", "setDuplicateParentState", "setForegroundGravity", "setOnKey", "setIosLayerBorderWidth", "setIosLayerBorderColor", "setIosLayerCornerRadius", "setIosLayerMasksToBounds", "setZIndex", "setElevation", "setMaxWidth", "setMaxHeight", "setOnSwiped", "setOutsideTouchable", "LASViewImpl;" };
-  static const J2ObjcClassInfo _ASViewImpl_ViewBean = { "ViewBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x9, 180, 1, 113, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASIWidget;", "setIosBackgroundColor", "LNSString;", "setIosIsHidden", "Z", "setIosAlpha", "F", "setIosIsOpaque", "setIosTintColor", "setIosClipsToBounds", "setIosClearsContextBeforeDrawing", "setIosIsUserInteractionEnabled", "setIosIsMultipleTouchEnabled", "setIosIsExclusiveTouch", "setIosPreservesSuperviewLayoutMargins", "setIosInsetsLayoutMarginsFromSafeArea", "setIosAutoresizesSubviews", "setIosTranslatesAutoresizingMaskIntoConstraints", "setIosContentScaleFactor", "setIosRestorationIdentifier", "setIosTag", "I", "setIosAccessibilityIgnoresInvertColors", "setIosLargeContentImage", "setIosLargeContentTitle", "setIosScalesLargeContentImage", "setIosShowsLargeContentViewer", "setIosIsAccessibilityElement", "setFocusable", "setIosAccessibilityLabel", "setIosAccessibilityHint", "setContentDescription", "setIosAccessibilityValue", "setIosAccessibilityTraits", "setSelected", "setStyle", "setErrorStyle", "validateForm", "setValidation", "setV_required", "setV_minlength", "setV_maxlength", "setV_min", "setV_max", "setV_pattern", "setV_type", "setValidationErrorDisplayType", "setCustomErrorMessageValues", "setCustomErrorMessageKeys", "setInvalidateOnFrameChange", "animatorXml", "setOnAnimationStart", "setOnAnimationEnd", "setOnAnimationCancel", "setOnAnimationRepeat", "setLeft", "setRight", "setTop", "setBottom", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "setModelPojoToUiParams", "refreshUiFromModel", "setModelUiToPojoEventIds", "updateModelData", "LNSString;LNSObject;", "notifyDataSetChanged", "setBackground", "setBackgroundRepeat", "setOnClick", "setOnTouch", "setMinWidth", "setMinHeight", "setAttributeUnderTest", "setBackgroundTint", "setBackgroundTintMode", "setForeground", "setForegroundRepeat", "setForegroundTint", "setForegroundTintMode", "setVisibility", "setAlpha", "setOnLongClick", "setLongClickable", "setClickable", "setTranslationX", "setTranslationY", "setTranslationZ", "setRotation", "setRotationX", "setRotationY", "setScaleX", "setScaleY", "setTransformPivotX", "setTransformPivotY", "setKeepScreenOn", "setLayoutDirection", "setTextDirection", "setTextAlignment", "setOnDrag", "setAsDragSource", "setEnabled", "setDuplicateParentState", "setForegroundGravity", "setOnKey", "setIosLayerBorderWidth", "setIosLayerBorderColor", "setIosLayerCornerRadius", "setIosLayerMasksToBounds", "setZIndex", "setElevation", "setMaxWidth", "setMaxHeight", "setOnSwiped", "setOutsideTouchable", "LASViewImpl;" };
+  static const J2ObjcClassInfo _ASViewImpl_ViewBean = { "ViewBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x9, 188, 1, 117, -1, -1, -1, -1 };
   return &_ASViewImpl_ViewBean;
 }
 

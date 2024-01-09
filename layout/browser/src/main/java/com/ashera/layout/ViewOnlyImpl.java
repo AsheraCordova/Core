@@ -292,6 +292,7 @@ public class ViewOnlyImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ViewOnlyImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ViewOnlyExt.class;
@@ -387,7 +388,6 @@ public class ViewOnlyImpl extends BaseWidget {
 
     	}
     }
-    
 	
 private ViewOnlyCommandBuilder builder;
 private ViewOnlyBean bean;
@@ -440,7 +440,7 @@ public void setAttributeUnderTest(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	private void nativeCreate(Map<String, Object> params) {

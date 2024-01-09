@@ -415,6 +415,7 @@ public class ImageButtonImpl extends BaseWidget implements com.ashera.image.ITar
         public void stateNo() {
         	ViewImpl.stateNo(ImageButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ImageButtonExt.class;
@@ -836,7 +837,6 @@ return null;				}
 
     	}
     }
-    
 	
 private ImageButtonCommandBuilder builder;
 private ImageButtonBean bean;
@@ -1365,7 +1365,7 @@ public void setPaddingVertical(String value) {
 }
 
 
-    
+	
 	//end - body
 
 }

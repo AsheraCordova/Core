@@ -316,6 +316,7 @@ public class ImageButtonImpl extends BaseWidget implements com.ashera.widget.IsI
         public void stateNo() {
         	ViewImpl.stateNo(ImageButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ImageButtonExt.class;
@@ -1019,7 +1020,9 @@ return getBaselineAlignBottom();				}
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return button.isDisposed();
+	}
 	
 private ImageButtonCommandBuilder builder;
 private ImageButtonBean bean;
@@ -1522,7 +1525,7 @@ public void setBaselineAlignBottom(boolean value) {
 }
 
 
-    
+	
 	//end - body
 
 	private void nativeCreate(Map<String, Object> params) {

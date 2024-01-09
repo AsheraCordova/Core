@@ -596,6 +596,7 @@ public class LinkImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(LinkImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return LinkExt.class;
@@ -2280,7 +2281,6 @@ public java.util.Map<String, Object> getOnEditorActionEventObj(TextView v,int ac
 
     	}
     }
-    
 	
 private LinkCommandBuilder builder;
 private LinkBean bean;
@@ -3955,7 +3955,7 @@ public void setTextFormat(String value) {
 }
 
 
-    
+	
 	//end - body
 	@Override
 	public void initialized() {

@@ -70,9 +70,15 @@ void ASCommandHelper_executeCommandWithASIActivity_withId_withNSString_withASCom
   id payLoad = ASPluginInvoker_unmarshalWithNSString_withIOSClass_(strpayLoad, JavaUtilList_class_());
   if (payLoad != nil) {
     id<JavaUtilList> commandDataArr = ASPluginInvoker_getListWithId_(payLoad);
-    [((id<ASIWidget>) nil_chk(w)) executeCommandWithASIWidget:w withJavaUtilList:commandDataArr withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
+    @try {
+      [fragment disableRemeasure];
+      [((id<ASIWidget>) nil_chk(w)) executeCommandWithASIWidget:w withJavaUtilList:commandDataArr withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
+    }
+    @finally {
+      [fragment enableRemeasure];
+    }
     [fragment remeasure];
-    [w executeCommandWithASIWidget:w withJavaUtilList:commandDataArr withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
+    [((id<ASIWidget>) nil_chk(w)) executeCommandWithASIWidget:w withJavaUtilList:commandDataArr withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
   }
   [((id<ASCommandHelper_SucessCallBack>) nil_chk(successCallBack)) successWithId:command withNSString:ASPluginInvoker_marshalWithId_(payLoad)];
 }

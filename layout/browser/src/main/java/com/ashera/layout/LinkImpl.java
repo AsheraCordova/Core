@@ -509,6 +509,7 @@ public class LinkImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(LinkImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return LinkExt.class;
@@ -2761,7 +2762,6 @@ return getLineSpacingMultiplier();				}
 
     	}
     }
-    
 	
 private LinkCommandBuilder builder;
 private LinkBean bean;
@@ -4140,7 +4140,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	private void nativeCreate(Map<String, Object> params) {

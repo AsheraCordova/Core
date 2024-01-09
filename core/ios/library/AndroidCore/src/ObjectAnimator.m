@@ -20,6 +20,8 @@
 #include "TypeConverter.h"
 #include "TypeEvaluator.h"
 #include "ValueAnimator.h"
+#include "View.h"
+#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/lang/SafeVarargs.h"
 #include "java/lang/annotation/Annotation.h"
@@ -447,9 +449,19 @@ J2OBJC_IGNORE_DESIGNATED_END
     return;
   }
   [super animateValueWithFloat:fraction];
-  jint numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
-  for (jint i = 0; i < numValues; ++i) {
-    [((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(nil_chk(mValues_), i))) setAnimatedValueWithId:target];
+  @try {
+    if ([target isKindOfClass:[ADView class]]) {
+      [((ADView *) nil_chk(((ADView *) target))) setMyAttributeWithNSString:@"swtRedraw" withId:JavaLangBoolean_valueOfWithBoolean_(false)];
+    }
+    jint numValues = ((IOSObjectArray *) nil_chk(mValues_))->size_;
+    for (jint i = 0; i < numValues; ++i) {
+      [((ADPropertyValuesHolder *) nil_chk(IOSObjectArray_Get(nil_chk(mValues_), i))) setAnimatedValueWithId:target];
+    }
+  }
+  @finally {
+    if ([target isKindOfClass:[ADView class]]) {
+      [((ADView *) nil_chk(((ADView *) target))) setMyAttributeWithNSString:@"swtRedraw" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+    }
   }
 }
 

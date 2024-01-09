@@ -442,6 +442,7 @@ public class ImageRadioButtonImpl extends BaseWidget implements IDrawable, ICust
         public void stateNo() {
         	ViewImpl.stateNo(ImageRadioButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ImageRadioButtonExt.class;
@@ -2504,7 +2505,9 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return label.isDisposed();
+	}
 	
 private ImageRadioButtonCommandBuilder builder;
 private ImageRadioButtonBean bean;
@@ -3587,7 +3590,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 	private void drawableStateChangedAdditional() {
 		r.android.graphics.drawable.Drawable dr = measurableView.getButtonDrawable();

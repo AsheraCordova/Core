@@ -538,6 +538,7 @@ public class StyledLabelImpl extends BaseWidget implements IDrawable, IHasMultiN
         public void stateNo() {
         	ViewImpl.stateNo(StyledLabelImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return StyledLabelExt.class;
@@ -2763,7 +2764,9 @@ return getLastBaselineToBottomHeight();				}
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return styledText.isDisposed();
+	}
 	
 private StyledLabelCommandBuilder builder;
 private StyledLabelBean bean;
@@ -4662,7 +4665,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
     //start - styledlabel

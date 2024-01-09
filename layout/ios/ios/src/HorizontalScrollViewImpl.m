@@ -22,6 +22,7 @@
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
 #include "J2ObjC_source.h"
+#include "LayoutTransition.h"
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
 #include "PluginInvoker.h"
@@ -36,6 +37,7 @@
 #include "java/lang/Boolean.h"
 #include "java/lang/Double.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Runnable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
@@ -50,6 +52,7 @@
 @protocol JavaUtilMap;
 
 
+#pragma clang diagnostic ignored "-Wprotocol"
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASHorizontalScrollViewImpl () {
@@ -63,6 +66,8 @@
 }
 
 - (void)setWidgetOnNativeClass;
+
+- (void)nativeRemoveViewWithASIWidget:(id<ASIWidget>)widget;
 
 - (void)createLayoutParamsWithADView:(ADView *)view;
 
@@ -90,6 +95,8 @@ J2OBJC_FIELD_SETTER(ASHorizontalScrollViewImpl, paramsBuilder_, ASHorizontalScro
 J2OBJC_FIELD_SETTER(ASHorizontalScrollViewImpl, paramsBean_, ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean *)
 
 __attribute__((unused)) static void ASHorizontalScrollViewImpl_setWidgetOnNativeClass(ASHorizontalScrollViewImpl *self);
+
+__attribute__((unused)) static void ASHorizontalScrollViewImpl_nativeRemoveViewWithASIWidget_(ASHorizontalScrollViewImpl *self, id<ASIWidget> widget);
 
 __attribute__((unused)) static void ASHorizontalScrollViewImpl_createLayoutParamsWithADView_(ASHorizontalScrollViewImpl *self, ADView *view);
 
@@ -206,6 +213,23 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_OnScrollChangeListener)
 
 @end
 
+@interface ASHorizontalScrollViewImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
+ @public
+  id<ASIWidget> val$widget_;
+}
+
+- (void)run;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASHorizontalScrollViewImpl_$Lambda$1)
+
+__attribute__((unused)) static void ASHorizontalScrollViewImpl_$Lambda$1_initWithASIWidget_(ASHorizontalScrollViewImpl_$Lambda$1 *self, id<ASIWidget> capture$0);
+
+__attribute__((unused)) static ASHorizontalScrollViewImpl_$Lambda$1 *new_ASHorizontalScrollViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASHorizontalScrollViewImpl_$Lambda$1 *create_ASHorizontalScrollViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
+
 NSString *ASHorizontalScrollViewImpl_LOCAL_NAME = @"HorizontalScrollView";
 NSString *ASHorizontalScrollViewImpl_GROUP_NAME = @"HorizontalScrollView";
 
@@ -266,7 +290,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
   jboolean remove = [super removeWithASIWidget:w];
   [((ADHorizontalScrollView *) nil_chk(horizontalScrollView_)) removeViewWithADView:(ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])];
-  ASViewGroupImpl_nativeRemoveViewWithASIWidget_(w);
+  ASHorizontalScrollViewImpl_nativeRemoveViewWithASIWidget_(self, w);
   return remove;
 }
 
@@ -275,9 +299,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   jboolean remove = [super removeWithInt:index];
   if (index + 1 <= [((ADHorizontalScrollView *) nil_chk(horizontalScrollView_)) getChildCount]) {
     [((ADHorizontalScrollView *) nil_chk(horizontalScrollView_)) removeViewAtWithInt:index];
-    ASViewGroupImpl_nativeRemoveViewWithASIWidget_(widget);
+    ASHorizontalScrollViewImpl_nativeRemoveViewWithASIWidget_(self, widget);
   }
   return remove;
+}
+
+- (void)nativeRemoveViewWithASIWidget:(id<ASIWidget>)widget {
+  ASHorizontalScrollViewImpl_nativeRemoveViewWithASIWidget_(self, widget);
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
@@ -556,37 +584,38 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, 6, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 11, 12, -1, -1, -1, -1 },
-    { NULL, "LADFrameLayout_LayoutParams;", 0x2, 13, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 9, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LADFrameLayout_LayoutParams;", 0x2, 14, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 17, 18, -1, -1, -1, -1 },
     { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 19, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 21, 22, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 22, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 23, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 23, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 25, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 27, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 28, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 26, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 28, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 29, 27, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "D", 0x101, 29, 24, -1, -1, -1, -1 },
+    { NULL, "D", 0x101, 30, 25, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "D", 0x101, 30, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 31, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 32, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 33, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 35, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 36, 34, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 37, 1, -1, -1, -1, -1 },
+    { NULL, "D", 0x101, 31, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 32, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 33, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 34, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 36, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 37, 35, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 38, 1, -1, -1, -1, -1 },
     { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 38, 39, -1, 40, -1, -1 },
+    { NULL, "V", 0x2, 39, 40, -1, 41, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -602,51 +631,52 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[7].selector = @selector(asWidget);
   methods[8].selector = @selector(removeWithASIWidget:);
   methods[9].selector = @selector(removeWithInt:);
-  methods[10].selector = @selector(addWithASIWidget:withInt:);
-  methods[11].selector = @selector(createLayoutParamsWithADView:);
-  methods[12].selector = @selector(getLayoutParamsWithADView:);
-  methods[13].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
-  methods[14].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
-  methods[15].selector = @selector(getViewClass);
-  methods[16].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[17].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[18].selector = @selector(asNativeWidget);
-  methods[19].selector = @selector(checkIosVersionWithNSString:);
-  methods[20].selector = @selector(requestLayout);
-  methods[21].selector = @selector(invalidate);
-  methods[22].selector = @selector(setScrollXWithId:);
-  methods[23].selector = @selector(nativeSetScrollXWithId:withInt:);
-  methods[24].selector = @selector(setScrollYWithId:);
-  methods[25].selector = @selector(nativeSetScrollYWithId:withInt:);
-  methods[26].selector = @selector(getScrollX);
-  methods[27].selector = @selector(nativeGetScrollXWithId:);
-  methods[28].selector = @selector(getScrollY);
-  methods[29].selector = @selector(nativeGetScrollYWithId:);
-  methods[30].selector = @selector(setOnScrollWithId:);
-  methods[31].selector = @selector(setPreventAutoScrollWithId:);
-  methods[32].selector = @selector(nativeSetPreventAutoScrollWithBoolean:);
-  methods[33].selector = @selector(setIdWithNSString:);
-  methods[34].selector = @selector(setVisibleWithBoolean:);
-  methods[35].selector = @selector(getPluginWithNSString:);
-  methods[36].selector = @selector(getBean);
-  methods[37].selector = @selector(getBuilder);
-  methods[38].selector = @selector(getParamsBean);
-  methods[39].selector = @selector(getParamsBuilder);
-  methods[40].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[41].selector = @selector(nativeHscrollViewCreate);
+  methods[10].selector = @selector(nativeRemoveViewWithASIWidget:);
+  methods[11].selector = @selector(addWithASIWidget:withInt:);
+  methods[12].selector = @selector(createLayoutParamsWithADView:);
+  methods[13].selector = @selector(getLayoutParamsWithADView:);
+  methods[14].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
+  methods[15].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
+  methods[16].selector = @selector(getViewClass);
+  methods[17].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[18].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[19].selector = @selector(asNativeWidget);
+  methods[20].selector = @selector(checkIosVersionWithNSString:);
+  methods[21].selector = @selector(requestLayout);
+  methods[22].selector = @selector(invalidate);
+  methods[23].selector = @selector(setScrollXWithId:);
+  methods[24].selector = @selector(nativeSetScrollXWithId:withInt:);
+  methods[25].selector = @selector(setScrollYWithId:);
+  methods[26].selector = @selector(nativeSetScrollYWithId:withInt:);
+  methods[27].selector = @selector(getScrollX);
+  methods[28].selector = @selector(nativeGetScrollXWithId:);
+  methods[29].selector = @selector(getScrollY);
+  methods[30].selector = @selector(nativeGetScrollYWithId:);
+  methods[31].selector = @selector(setOnScrollWithId:);
+  methods[32].selector = @selector(setPreventAutoScrollWithId:);
+  methods[33].selector = @selector(nativeSetPreventAutoScrollWithBoolean:);
+  methods[34].selector = @selector(setIdWithNSString:);
+  methods[35].selector = @selector(setVisibleWithBoolean:);
+  methods[36].selector = @selector(getPluginWithNSString:);
+  methods[37].selector = @selector(getBean);
+  methods[38].selector = @selector(getBuilder);
+  methods[39].selector = @selector(getParamsBean);
+  methods[40].selector = @selector(getParamsBuilder);
+  methods[41].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[42].selector = @selector(nativeHscrollViewCreate);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 41, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 42, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 42, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 43, -1, -1 },
     { "horizontalScrollView_", "LADHorizontalScrollView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "builder_", "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bean_", "LASHorizontalScrollViewImpl_HorizontalScrollViewBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "paramsBuilder_", "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "paramsBean_", "LASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setScrollX", "LNSObject;", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setOnScroll", "setPreventAutoScroll", "nativeSetPreventAutoScroll", "Z", "setId", "setVisible", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", &ASHorizontalScrollViewImpl_LOCAL_NAME, &ASHorizontalScrollViewImpl_GROUP_NAME, "LASHorizontalScrollViewImpl_HorizontalScrollViewExt;LASHorizontalScrollViewImpl_MyUIScrollViewDelegate;LASHorizontalScrollViewImpl_OnScrollChangeListener;LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;LASHorizontalScrollViewImpl_HorizontalScrollViewBean;LASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean;LASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;" };
-  static const J2ObjcClassInfo _ASHorizontalScrollViewImpl = { "HorizontalScrollViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 42, 8, -1, 43, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setScrollX", "LNSObject;", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setOnScroll", "setPreventAutoScroll", "nativeSetPreventAutoScroll", "Z", "setId", "setVisible", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", &ASHorizontalScrollViewImpl_LOCAL_NAME, &ASHorizontalScrollViewImpl_GROUP_NAME, "LASHorizontalScrollViewImpl_HorizontalScrollViewExt;LASHorizontalScrollViewImpl_MyUIScrollViewDelegate;LASHorizontalScrollViewImpl_OnScrollChangeListener;LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;LASHorizontalScrollViewImpl_HorizontalScrollViewBean;LASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean;LASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;" };
+  static const J2ObjcClassInfo _ASHorizontalScrollViewImpl = { "HorizontalScrollViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 43, 8, -1, 44, -1, -1, -1 };
   return &_ASHorizontalScrollViewImpl;
 }
 
@@ -690,6 +720,16 @@ ASHorizontalScrollViewImpl *create_ASHorizontalScrollViewImpl_initWithNSString_w
 
 void ASHorizontalScrollViewImpl_setWidgetOnNativeClass(ASHorizontalScrollViewImpl *self) {
   ((ASUIScrollView*) [self asNativeWidget]).widget = self;
+}
+
+void ASHorizontalScrollViewImpl_nativeRemoveViewWithASIWidget_(ASHorizontalScrollViewImpl *self, id<ASIWidget> widget) {
+  ADLayoutTransition *layoutTransition = [((ADHorizontalScrollView *) nil_chk(self->horizontalScrollView_)) getLayoutTransition];
+  if (layoutTransition != nil && ([layoutTransition isTransitionTypeEnabledWithInt:ADLayoutTransition_CHANGE_DISAPPEARING] || [layoutTransition isTransitionTypeEnabledWithInt:ADLayoutTransition_DISAPPEARING])) {
+    [self addToBufferedRunnablesWithJavaLangRunnable:new_ASHorizontalScrollViewImpl_$Lambda$1_initWithASIWidget_(widget)];
+  }
+  else {
+    ASViewGroupImpl_nativeRemoveViewWithASIWidget_(widget);
+  }
 }
 
 void ASHorizontalScrollViewImpl_createLayoutParamsWithADView_(ASHorizontalScrollViewImpl *self, ADView *view) {
@@ -969,6 +1009,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHorizontalScrollViewImpl)
   ASViewImpl_stateNoWithASIWidget_(this$0_);
 }
 
+- (void)endViewTransitionWithADView:(ADView *)view {
+  [super endViewTransitionWithADView:view];
+  [this$0_ runBufferedRunnables];
+}
+
 - (void)__javaClone:(ASHorizontalScrollViewImpl_HorizontalScrollViewExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -1013,6 +1058,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHorizontalScrollViewImpl)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 35, 36, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1054,6 +1100,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHorizontalScrollViewImpl)
   methods[34].selector = @selector(state4);
   methods[35].selector = @selector(stateYes);
   methods[36].selector = @selector(stateNo);
+  methods[37].selector = @selector(endViewTransitionWithADView:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASHorizontalScrollViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -1061,10 +1108,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHorizontalScrollViewImpl)
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 35, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 37, -1 },
   };
-  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASHorizontalScrollViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASHorizontalScrollViewImpl_HorizontalScrollViewExt = { "HorizontalScrollViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 37, 6, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASHorizontalScrollViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "endViewTransition", "LADView;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASHorizontalScrollViewImpl_HorizontalScrollViewExt = { "HorizontalScrollViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 38, 6, 3, -1, -1, -1, -1 };
   return &_ASHorizontalScrollViewImpl_HorizontalScrollViewExt;
 }
 
@@ -1690,3 +1737,24 @@ ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *create_ASHo
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder)
+
+@implementation ASHorizontalScrollViewImpl_$Lambda$1
+
+- (void)run {
+  ASViewGroupImpl_nativeRemoveViewWithASIWidget_(val$widget_);
+}
+
+@end
+
+void ASHorizontalScrollViewImpl_$Lambda$1_initWithASIWidget_(ASHorizontalScrollViewImpl_$Lambda$1 *self, id<ASIWidget> capture$0) {
+  self->val$widget_ = capture$0;
+  NSObject_init(self);
+}
+
+ASHorizontalScrollViewImpl_$Lambda$1 *new_ASHorizontalScrollViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) {
+  J2OBJC_NEW_IMPL(ASHorizontalScrollViewImpl_$Lambda$1, initWithASIWidget_, capture$0)
+}
+
+ASHorizontalScrollViewImpl_$Lambda$1 *create_ASHorizontalScrollViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) {
+  J2OBJC_CREATE_IMPL(ASHorizontalScrollViewImpl_$Lambda$1, initWithASIWidget_, capture$0)
+}

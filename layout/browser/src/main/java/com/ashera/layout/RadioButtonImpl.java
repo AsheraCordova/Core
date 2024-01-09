@@ -523,6 +523,7 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
         public void stateNo() {
         	ViewImpl.stateNo(RadioButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return RadioButtonExt.class;
@@ -3050,7 +3051,6 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
 	
 private RadioButtonCommandBuilder builder;
 private RadioButtonBean bean;
@@ -4415,7 +4415,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 	private boolean allowUnCheck() {
 		return false;

@@ -32,6 +32,7 @@
 @class ASWidgetViewHolder;
 @protocol ASIWidget;
 @protocol ASIWidget_CommandCallBack;
+@protocol JavaLangRunnable;
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
 
@@ -153,6 +154,8 @@
                          withInt:(jint)index
                     withNSString:(NSString *)currentLoopVar;
 
+- (void)addToBufferedRunnablesWithJavaLangRunnable:(id<JavaLangRunnable>)run;
+
 - (void)clearModel;
 
 /*!
@@ -163,6 +166,8 @@
 - (void)invalidateChildIfRequiredWithASIWidget:(id<ASIWidget>)childWidget;
 
 - (void)onChildAddedWithASIWidget:(id<ASIWidget>)widget;
+
+- (void)runBufferedRunnables;
 
 - (void)updateModelRecurseWithASIWidget:(id<ASIWidget>)widget
                         withASLoopParam:(ASLoopParam *)childModel;

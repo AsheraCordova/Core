@@ -541,6 +541,7 @@ public class TextViewImpl extends BaseWidget implements com.ashera.validations.V
         public void stateNo() {
         	ViewImpl.stateNo(TextViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return TextViewExt.class;
@@ -2070,7 +2071,6 @@ return getLinksClickable();				}
 
     	}
     }
-    
 	
 private TextViewCommandBuilder builder;
 private TextViewBean bean;
@@ -3539,7 +3539,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 	//start - textview
 	@Override

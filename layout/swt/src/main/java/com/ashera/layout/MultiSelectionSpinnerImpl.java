@@ -375,6 +375,7 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements IDrawab
         public void stateNo() {
         	ViewImpl.stateNo(MultiSelectionSpinnerImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return MultiSelectionSpinnerExt.class;
@@ -1645,7 +1646,9 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(View view,List
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return list.isDisposed();
+	}
 	
 private MultiSelectionSpinnerCommandBuilder builder;
 private MultiSelectionSpinnerBean bean;
@@ -2212,7 +2215,7 @@ public void setModelOptionValuePath(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	private Composite wrapperComposite;

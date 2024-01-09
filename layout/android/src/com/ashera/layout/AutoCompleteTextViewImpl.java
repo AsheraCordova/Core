@@ -612,6 +612,7 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements com.ashe
         public void stateNo() {
         	ViewImpl.stateNo(AutoCompleteTextViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return AutoCompleteTextViewExt.class;
@@ -2849,7 +2850,6 @@ public java.util.Map<String, Object> getOnDismissEventObj( ) {
 
     	}
     }
-    
 	
 private AutoCompleteTextViewCommandBuilder builder;
 private AutoCompleteTextViewBean bean;
@@ -4762,7 +4762,7 @@ public void setPaddingVertical(String value) {
 }
 
 
-    
+	
 	//end - body
 	private MyCustomAdapter myCustomAdapter;
 	@Override

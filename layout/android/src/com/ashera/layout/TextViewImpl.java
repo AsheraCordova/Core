@@ -625,6 +625,7 @@ public class TextViewImpl extends BaseWidget implements com.ashera.validations.V
         public void stateNo() {
         	ViewImpl.stateNo(TextViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return TextViewExt.class;
@@ -1864,7 +1865,6 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 
     	}
     }
-    
 	
 private TextViewCommandBuilder builder;
 private TextViewBean bean;
@@ -3563,7 +3563,7 @@ public void setTextFormat(String value) {
 }
 
 
-    
+	
 	//end - body
 	
 	//start - codecopytextview

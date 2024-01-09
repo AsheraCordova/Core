@@ -452,6 +452,7 @@ public class StyledTextImpl extends BaseWidget implements IDrawable, IHasMultiNa
         public void stateNo() {
         	ViewImpl.stateNo(StyledTextImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return StyledTextExt.class;
@@ -3150,7 +3151,9 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return styledText.isDisposed();
+	}
 	
 private StyledTextCommandBuilder builder;
 private StyledTextBean bean;
@@ -5027,7 +5030,7 @@ public void setSetFocus(boolean value) {
 }
 
 
-    
+	
 	//end - body
 
 

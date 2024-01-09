@@ -313,6 +313,7 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
         public void stateNo() {
         	ViewImpl.stateNo(ImageViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ImageViewExt.class;
@@ -751,7 +752,6 @@ return getScaleType();				}
 			}			
     	}
     }
-    
 	
 private ImageViewCommandBuilder builder;
 private ImageViewBean bean;
@@ -1228,7 +1228,7 @@ public void setScaleType(String value) {
 }
 
 
-    
+	
     private SimpleWrapableView simpleWrapableView;
     
     private void createSimpleWrapableView() {

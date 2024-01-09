@@ -396,6 +396,7 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
         public void stateNo() {
         	ViewImpl.stateNo(MultiSelectionSpinnerImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return MultiSelectionSpinnerExt.class;
@@ -1799,7 +1800,6 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(View view,List
 
     	}
     }
-    
 	
 private MultiSelectionSpinnerCommandBuilder builder;
 private MultiSelectionSpinnerBean bean;
@@ -2390,7 +2390,7 @@ public void setValues(String value) {
 }
 
 
-    
+	
 	//end - body
 private HTMLElement select;
 	private void nativeCreate(Map<String, Object> params) {

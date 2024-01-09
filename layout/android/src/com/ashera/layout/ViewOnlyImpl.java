@@ -345,6 +345,7 @@ public class ViewOnlyImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ViewOnlyImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ViewOnlyExt.class;
@@ -464,7 +465,6 @@ Context context = (Context) fragment.getRootActivity();
 
     	}
     }
-    
 	
 private ViewOnlyCommandBuilder builder;
 private ViewOnlyBean bean;
@@ -517,7 +517,7 @@ public void setAttributeUnderTest(String value) {
 }
 
 
-    
+	
 	//end - body
 
 }

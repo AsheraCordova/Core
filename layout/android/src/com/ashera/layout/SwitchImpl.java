@@ -679,6 +679,7 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
         public void stateNo() {
         	ViewImpl.stateNo(SwitchImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return SwitchExt.class;
@@ -2528,7 +2529,6 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
 	
 private SwitchCommandBuilder builder;
 private SwitchBean bean;
@@ -4427,7 +4427,7 @@ public void setTextFormat(String value) {
 }
 
 
-    
+	
 	//end - body
     private void setChecked(Object objValue) {
         switchCompat.setChecked(PluginInvoker.getBoolean(objValue));

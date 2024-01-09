@@ -418,6 +418,7 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
         public void stateNo() {
         	ViewImpl.stateNo(SpinnerImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return SpinnerExt.class;
@@ -2004,7 +2005,6 @@ public java.util.Map<String, Object> getOnNothingSelectedEventObj(AdapterView<?>
 
     	}
     }
-    
 	
 private SpinnerCommandBuilder builder;
 private SpinnerBean bean;
@@ -2920,7 +2920,7 @@ public void setTextColorHint(String value) {
 }
 
 
-    
+	
 	//end - body
 	private List<String> entries;
 	private AdapterView.OnItemSelectedListener onItemSelectedListener;

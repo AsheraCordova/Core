@@ -332,6 +332,7 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
         public void stateNo() {
         	ViewImpl.stateNo(ProgressBarImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ProgressBarExt.class;
@@ -644,7 +645,6 @@ return ((ASUIActivityIndicatorView*) uiView_).color;
 			}			
     	}
     }
-    
 	
 private ProgressBarCommandBuilder builder;
 private ProgressBarBean bean;
@@ -955,7 +955,7 @@ public void setProgressTint(String value) {
 }
 
 
-    
+	
     private SimpleWrapableView simpleWrapableView;
     
     private void createSimpleWrapableView() {

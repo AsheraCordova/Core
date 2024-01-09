@@ -489,6 +489,7 @@ public class ToggleButtonImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ToggleButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ToggleButtonExt.class;
@@ -2916,7 +2917,6 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
 	
 private ToggleButtonCommandBuilder builder;
 private ToggleButtonBean bean;
@@ -4283,7 +4283,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 	
 	private void nativeCreate(Map<String, Object> params) {

@@ -1218,6 +1218,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (id)getBackgroundTintMode;
 
+- (id)getBottom;
+
 - (id)getContentDescription;
 
 - (id)getFocusable;
@@ -1258,6 +1260,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (id)getLayoutDirection;
 
+- (id)getLeft;
+
 - (id)getMaxHeight;
 
 - (id)getMaxWidth;
@@ -1274,6 +1278,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (id)getModelUiToPojo;
 
+- (id)getRight;
+
 - (id)getRotation;
 
 - (id)getRotationX;
@@ -1287,6 +1293,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 - (id)getTextAlignment;
 
 - (id)getTextDirection;
+
+- (id)getTop;
 
 - (id)getTransformPivotX;
 
@@ -1371,6 +1379,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 - (id)setBackgroundTintWithNSString:(NSString *)value;
 
 - (id)setBackgroundTintModeWithNSString:(NSString *)value;
+
+- (id)setBottomWithNSString:(NSString *)value;
 
 - (id)setClickableWithBoolean:(jboolean)value;
 
@@ -1470,6 +1480,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (id)setLayoutDirectionWithNSString:(NSString *)value;
 
+- (id)setLeftWithNSString:(NSString *)value;
+
 - (id)setLongClickableWithBoolean:(jboolean)value;
 
 - (id)setMaxHeightWithNSString:(NSString *)value;
@@ -1514,6 +1526,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (id)setOutsideTouchableWithBoolean:(jboolean)value;
 
+- (id)setRightWithNSString:(NSString *)value;
+
 - (id)setRotationWithFloat:(jfloat)value;
 
 - (id)setRotationXWithFloat:(jfloat)value;
@@ -1531,6 +1545,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 - (id)setTextAlignmentWithNSString:(NSString *)value;
 
 - (id)setTextDirectionWithNSString:(NSString *)value;
+
+- (id)setTopWithNSString:(NSString *)value;
 
 - (id)setTransformPivotXWithNSString:(NSString *)value;
 
@@ -1573,6 +1589,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 - (id)tryGetBackgroundTint;
 
 - (id)tryGetBackgroundTintMode;
+
+- (id)tryGetBottom;
 
 - (id)tryGetClickable;
 
@@ -1654,6 +1672,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (id)tryGetLayoutDirection;
 
+- (id)tryGetLeft;
+
 - (id)tryGetLongClickable;
 
 - (id)tryGetMaxHeight;
@@ -1672,6 +1692,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 
 - (id)tryGetModelUiToPojo;
 
+- (id)tryGetRight;
+
 - (id)tryGetRotation;
 
 - (id)tryGetRotationX;
@@ -1687,6 +1709,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationCallBack)
 - (id)tryGetTextAlignment;
 
 - (id)tryGetTextDirection;
+
+- (id)tryGetTop;
 
 - (id)tryGetTransformPivotX;
 
@@ -1761,6 +1785,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 - (ASViewImpl_ViewCommandBuilderInternal *)setBackgroundTintWithNSString:(NSString *)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setBackgroundWithNSString:(NSString *)arg0;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setClickableWithBoolean:(jboolean)arg0;
 
@@ -1860,6 +1886,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASViewImpl_ViewCommandBuilderInternal *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASViewImpl_ViewCommandBuilderInternal *)setLongClickableWithBoolean:(jboolean)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setMaxHeightWithNSString:(NSString *)arg0;
@@ -1904,6 +1932,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
+- (ASViewImpl_ViewCommandBuilderInternal *)setRightWithNSString:(NSString *)arg0;
+
 - (ASViewImpl_ViewCommandBuilderInternal *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setRotationXWithFloat:(jfloat)arg0;
@@ -1921,6 +1951,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 - (ASViewImpl_ViewCommandBuilderInternal *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)setTopWithNSString:(NSString *)arg0;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -1963,6 +1995,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetBackgroundTint;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetBackgroundTintMode;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)tryGetBottom;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetClickable;
 
@@ -2044,6 +2078,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetLayoutDirection;
 
+- (ASViewImpl_ViewCommandBuilderInternal *)tryGetLeft;
+
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetLongClickable;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetMaxHeight;
@@ -2062,6 +2098,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetModelUiToPojo;
 
+- (ASViewImpl_ViewCommandBuilderInternal *)tryGetRight;
+
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetRotation;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetRotationX;
@@ -2077,6 +2115,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilder)
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetTextAlignment;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetTextDirection;
+
+- (ASViewImpl_ViewCommandBuilderInternal *)tryGetTop;
 
 - (ASViewImpl_ViewCommandBuilderInternal *)tryGetTransformPivotX;
 
@@ -2142,6 +2182,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 
 - (id)getBackgroundTintMode;
 
+- (id)getBottom;
+
 - (id)getContentDescription;
 
 - (id)getFocusable;
@@ -2180,6 +2222,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 
 - (id)getLayoutDirection;
 
+- (id)getLeft;
+
 - (id)getMaxHeight;
 
 - (id)getMaxWidth;
@@ -2196,6 +2240,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 
 - (id)getModelUiToPojo;
 
+- (id)getRight;
+
 - (id)getRotation;
 
 - (id)getRotationX;
@@ -2209,6 +2255,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 - (id)getTextAlignment;
 
 - (id)getTextDirection;
+
+- (id)getTop;
 
 - (id)getTransformPivotX;
 
@@ -2289,6 +2337,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 - (void)setBackgroundTintWithNSString:(NSString *)value;
 
 - (void)setBackgroundTintModeWithNSString:(NSString *)value;
+
+- (void)setBottomWithNSString:(NSString *)value;
 
 - (void)setClickableWithBoolean:(jboolean)value;
 
@@ -2386,6 +2436,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 
 - (void)setLayoutDirectionWithNSString:(NSString *)value;
 
+- (void)setLeftWithNSString:(NSString *)value;
+
 - (void)setLongClickableWithBoolean:(jboolean)value;
 
 - (void)setMaxHeightWithNSString:(NSString *)value;
@@ -2430,6 +2482,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 
 - (void)setOutsideTouchableWithBoolean:(jboolean)value;
 
+- (void)setRightWithNSString:(NSString *)value;
+
 - (void)setRotationWithFloat:(jfloat)value;
 
 - (void)setRotationXWithFloat:(jfloat)value;
@@ -2447,6 +2501,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_ViewCommandBuilderInternal)
 - (void)setTextAlignmentWithNSString:(NSString *)value;
 
 - (void)setTextDirectionWithNSString:(NSString *)value;
+
+- (void)setTopWithNSString:(NSString *)value;
 
 - (void)setTransformPivotXWithNSString:(NSString *)value;
 

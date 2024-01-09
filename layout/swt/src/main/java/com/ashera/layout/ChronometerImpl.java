@@ -396,6 +396,7 @@ public class ChronometerImpl extends BaseWidget implements IDrawable, IHasMultiN
         public void stateNo() {
         	ViewImpl.stateNo(ChronometerImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ChronometerExt.class;
@@ -2315,7 +2316,9 @@ public java.util.Map<String, Object> getOnChronometerTickEventObj(Chronometer ch
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return label.isDisposed();
+	}
 	
 private ChronometerCommandBuilder builder;
 private ChronometerBean bean;
@@ -3294,7 +3297,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	//start - chronometer

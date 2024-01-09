@@ -17,6 +17,7 @@
 #define ADViewTreeObserver_
 
 @class ADContext;
+@protocol ADViewTreeObserver_OnPreDrawListener;
 @protocol ADViewTreeObserver_OnScrollChangedListener;
 
 @interface ADViewTreeObserver : NSObject
@@ -25,9 +26,15 @@
 
 - (instancetype)initWithADContext:(ADContext *)mContext;
 
+- (void)addOnPreDrawListenerWithADViewTreeObserver_OnPreDrawListener:(id<ADViewTreeObserver_OnPreDrawListener>)listener;
+
 - (void)addOnScrollChangedListenerWithADViewTreeObserver_OnScrollChangedListener:(id<ADViewTreeObserver_OnScrollChangedListener>)listener;
 
 - (void)dispatchOnScrollChanged;
+
+- (jboolean)isAlive;
+
+- (void)removeOnPreDrawListenerWithADViewTreeObserver_OnPreDrawListener:(id<ADViewTreeObserver_OnPreDrawListener>)victim;
 
 - (void)removeOnScrollChangedListenerWithADViewTreeObserver_OnScrollChangedListener:(id<ADViewTreeObserver_OnScrollChangedListener>)victim;
 
@@ -52,6 +59,21 @@ FOUNDATION_EXPORT ADViewTreeObserver *create_ADViewTreeObserver_initWithADContex
 J2OBJC_TYPE_LITERAL_HEADER(ADViewTreeObserver)
 
 @compatibility_alias RAndroidViewViewTreeObserver ADViewTreeObserver;
+
+#endif
+
+#if !defined (ADViewTreeObserver_OnPreDrawListener_) && (INCLUDE_ALL_ViewTreeObserver || defined(INCLUDE_ADViewTreeObserver_OnPreDrawListener))
+#define ADViewTreeObserver_OnPreDrawListener_
+
+@protocol ADViewTreeObserver_OnPreDrawListener < JavaObject >
+
+- (jboolean)onPreDraw;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ADViewTreeObserver_OnPreDrawListener)
+
+J2OBJC_TYPE_LITERAL_HEADER(ADViewTreeObserver_OnPreDrawListener)
 
 #endif
 

@@ -324,6 +324,10 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationEnd").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationCancel").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onAnimationRepeat").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("left").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("right").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("top").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("bottom").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("id").withType("id"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelSyncEvents").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelParam").withType("string"));
@@ -881,6 +885,42 @@ if (checkIosVersion("13.0")) {
 
 
 		if (objValue instanceof String) {setAnimatorListener(w, new AnimatorListener(w, strValue, "onAnimationRepeat"));} else {setAnimatorListener(w, (Animator.AnimatorListener) objValue);}
+
+
+
+			}
+			break;
+		case "left": {
+
+
+		 setLeft(w, objValue);
+
+
+
+			}
+			break;
+		case "right": {
+
+
+		 setRight(w, objValue);
+
+
+
+			}
+			break;
+		case "top": {
+
+
+		 setTop(w, objValue);
+
+
+
+			}
+			break;
+		case "bottom": {
+
+
+		 setBottom(w, objValue);
 
 
 
@@ -1537,6 +1577,14 @@ return getAccessibilityTraits(nativeWidget);			}
 return getSelected(w, view);			}
 			case "validateForm": {
 return getValidateFormResult(w);			}
+			case "left": {
+return getLeft(w);			}
+			case "right": {
+return getRight(w);			}
+			case "top": {
+return getTop(w);			}
+			case "bottom": {
+return getBottom(w);			}
 			case "id": {
 return view.getId();			}
 			case "modelSyncEvents": {
@@ -2429,6 +2477,67 @@ return getMaxHeight(w);			}
 		}
 		
 		return attributes.getValue(key);
+	}
+	
+	private static void setBottom(IWidget w, Object objValue) {
+		Object uiView = w.asNativeWidget();
+		View view = (View) w.asWidget();
+		int value = (int) objValue;
+		view.setBottom(value);
+
+		int top = value - view.getMeasuredHeight();
+		int x = getX(uiView);
+		nativeMakeFrame(uiView, x, top, x + view.getMeasuredWidth(), value);
+	}
+
+	private static void setTop(IWidget w, Object objValue) {
+		Object uiView = w.asNativeWidget();
+		View view = (View) w.asWidget();
+		int value = (int) objValue;
+		view.setTop(value);
+		int x = getX(uiView);
+		nativeMakeFrame(uiView, x, value, x + view.getMeasuredWidth(), value + view.getMeasuredHeight());
+
+		
+	}
+
+	private static void setRight(IWidget w, Object objValue) {
+		Object uiView = w.asNativeWidget();
+		View view = (View) w.asWidget();
+		int value = (int) objValue;
+		view.setRight(value);
+		int y = getY(uiView);
+		nativeMakeFrame(uiView, value - view.getMeasuredWidth(), y, value, y + view.getMeasuredHeight());
+	}
+
+	private static void setLeft(IWidget w, Object objValue) {
+		Object uiView = w.asNativeWidget();
+		View view = (View) w.asWidget();
+		int value = (int) objValue;
+		view.setLeft(value);
+		
+		int y = getY(uiView);
+		nativeMakeFrame(uiView, value, y, value + view.getMeasuredWidth(), y + view.getMeasuredHeight());
+	}
+	
+	private static Object getBottom(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getBottom();
+	}
+
+	private static Object getTop(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getTop();
+	}
+
+	private static Object getRight(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getRight();
+	}
+
+	private static Object getLeft(IWidget w) {
+		View view = (View) w.asWidget();
+		return view.getLeft();
 	}
 	
 
@@ -4708,6 +4817,82 @@ public T setOnAnimationRepeat(String value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T tryGetLeft() {
+	Map<String, Object> attrs = initCommand("left");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getLeft() {
+	Map<String, Object> attrs = initCommand("left");
+	return attrs.get("commandReturnValue");
+}
+public T setLeft(String value) {
+	Map<String, Object> attrs = initCommand("left");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetRight() {
+	Map<String, Object> attrs = initCommand("right");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getRight() {
+	Map<String, Object> attrs = initCommand("right");
+	return attrs.get("commandReturnValue");
+}
+public T setRight(String value) {
+	Map<String, Object> attrs = initCommand("right");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetTop() {
+	Map<String, Object> attrs = initCommand("top");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getTop() {
+	Map<String, Object> attrs = initCommand("top");
+	return attrs.get("commandReturnValue");
+}
+public T setTop(String value) {
+	Map<String, Object> attrs = initCommand("top");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T tryGetBottom() {
+	Map<String, Object> attrs = initCommand("bottom");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getBottom() {
+	Map<String, Object> attrs = initCommand("bottom");
+	return attrs.get("commandReturnValue");
+}
+public T setBottom(String value) {
+	Map<String, Object> attrs = initCommand("bottom");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 public T tryGetId() {
 	Map<String, Object> attrs = initCommand("id");
 	attrs.put("type", "attribute");
@@ -5915,6 +6100,34 @@ public void setOnAnimationCancel(String value) {
 
 public void setOnAnimationRepeat(String value) {
 	getBuilder().reset().setOnAnimationRepeat(value).execute(true);
+}
+
+public Object getLeft() {
+	return getBuilder().reset().tryGetLeft().execute(false).getLeft(); 
+}
+public void setLeft(String value) {
+	getBuilder().reset().setLeft(value).execute(true);
+}
+
+public Object getRight() {
+	return getBuilder().reset().tryGetRight().execute(false).getRight(); 
+}
+public void setRight(String value) {
+	getBuilder().reset().setRight(value).execute(true);
+}
+
+public Object getTop() {
+	return getBuilder().reset().tryGetTop().execute(false).getTop(); 
+}
+public void setTop(String value) {
+	getBuilder().reset().setTop(value).execute(true);
+}
+
+public Object getBottom() {
+	return getBuilder().reset().tryGetBottom().execute(false).getBottom(); 
+}
+public void setBottom(String value) {
+	getBuilder().reset().setBottom(value).execute(true);
 }
 
 public Object getModelSyncEvents() {

@@ -434,6 +434,7 @@ public class TextViewButtonImpl extends BaseWidget  implements IDrawable, IHasMu
         public void stateNo() {
         	ViewImpl.stateNo(TextViewButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return TextViewButtonExt.class;
@@ -2273,7 +2274,9 @@ return getLastBaselineToBottomHeight();				}
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return label.isDisposed();
+	}
 	
 private TextViewButtonCommandBuilder builder;
 private TextViewButtonBean bean;
@@ -3292,7 +3295,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	private void nativeCreate(Map<String, Object> params) {

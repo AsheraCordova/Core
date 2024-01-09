@@ -593,6 +593,7 @@ public class UITextViewImpl extends BaseWidget implements ICustomMeasureHeight, 
         public void stateNo() {
         	ViewImpl.stateNo(UITextViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return UITextViewExt.class;
@@ -3524,7 +3525,6 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 			}			
     	}
     }
-    
 	
 private UITextViewCommandBuilder builder;
 private UITextViewBean bean;
@@ -5023,7 +5023,7 @@ public void setHintTextFormat(String value) {
 }
 
 
-    
+	
     private SimpleWrapableView simpleWrapableView;
     
     private void createSimpleWrapableView() {

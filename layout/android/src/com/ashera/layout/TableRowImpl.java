@@ -103,6 +103,18 @@ Context context = (Context) fragment.getRootActivity();
         return remove;
     }
 	
+	private void nativeRemoveView(IWidget widget) {
+		r.android.animation.LayoutTransition layoutTransition = tableRow.getLayoutTransition();
+		if (layoutTransition != null && (
+				layoutTransition.isTransitionTypeEnabled(r.android.animation.LayoutTransition.CHANGE_DISAPPEARING) ||
+				layoutTransition.isTransitionTypeEnabled(r.android.animation.LayoutTransition.DISAPPEARING)
+				)) {
+			addToBufferedRunnables(() -> ViewGroupImpl.nativeRemoveView(widget));          
+		} else {
+			ViewGroupImpl.nativeRemoveView(widget);
+		}
+	}
+	
 	@Override
 	public void add(IWidget w, int index) {
 		if (index != -2) {
@@ -489,6 +501,7 @@ return layoutParams.span;			}
         public void stateNo() {
         	ViewImpl.stateNo(TableRowImpl.this);
         }
+     
 	}
 	@Override
 	public Class getViewClass() {

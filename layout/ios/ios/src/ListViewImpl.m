@@ -32,6 +32,7 @@
 #include "IdGenerator.h"
 #include "J2ObjC_source.h"
 #include "LayoutNativeVars.h"
+#include "LayoutTransition.h"
 #include "ListView.h"
 #include "ListViewImpl.h"
 #include "LoopParam.h"
@@ -51,6 +52,7 @@
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
+#include "java/lang/Runnable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/HashMap.h"
@@ -72,6 +74,7 @@
 @protocol JavaUtilMap;
 
 
+#pragma clang diagnostic ignored "-Wprotocol"
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASListViewImpl () {
@@ -104,6 +107,8 @@
 }
 
 - (void)setWidgetOnNativeClass;
+
+- (void)nativeRemoveViewWithASIWidget:(id<ASIWidget>)widget;
 
 - (void)createLayoutParamsWithADView:(ADView *)view;
 
@@ -281,6 +286,8 @@ J2OBJC_FIELD_SETTER(ASListViewImpl, onScrollChangeListener_, id<ADAbsListView_On
 J2OBJC_FIELD_SETTER(ASListViewImpl, divider_, ADDrawable *)
 
 __attribute__((unused)) static void ASListViewImpl_setWidgetOnNativeClass(ASListViewImpl *self);
+
+__attribute__((unused)) static void ASListViewImpl_nativeRemoveViewWithASIWidget_(ASListViewImpl *self, id<ASIWidget> widget);
 
 __attribute__((unused)) static void ASListViewImpl_createLayoutParamsWithADView_(ASListViewImpl *self, ADView *view);
 
@@ -676,6 +683,23 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_OnScrollListener)
 
 @end
 
+@interface ASListViewImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
+ @public
+  id<ASIWidget> val$widget_;
+}
+
+- (void)run;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASListViewImpl_$Lambda$1)
+
+__attribute__((unused)) static void ASListViewImpl_$Lambda$1_initWithASIWidget_(ASListViewImpl_$Lambda$1 *self, id<ASIWidget> capture$0);
+
+__attribute__((unused)) static ASListViewImpl_$Lambda$1 *new_ASListViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASListViewImpl_$Lambda$1 *create_ASListViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
+
 NSString *ASListViewImpl_LOCAL_NAME = @"ListView";
 NSString *ASListViewImpl_GROUP_NAME = @"ListView";
 NSString *ASListViewImpl_simpleTableIdentifier = @"SimpleTableItem";
@@ -778,6 +802,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)asWidget {
   return listView_;
+}
+
+- (void)nativeRemoveViewWithASIWidget:(id<ASIWidget>)widget {
+  ASListViewImpl_nativeRemoveViewWithASIWidget_(self, widget);
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
@@ -2085,167 +2113,168 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 3, 4, -1, 5, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 8, 9, -1, -1, -1, -1 },
-    { NULL, "LADFrameLayout_LayoutParams;", 0x2, 10, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LADFrameLayout_LayoutParams;", 0x2, 12, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 14, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 15, 16, -1, -1, -1, -1 },
     { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 18, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 19, 20, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 19, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 21, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 21, -1, 22, -1, -1 },
-    { NULL, "V", 0x4, 23, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 25, 26, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 27, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, 24, -1, -1 },
+    { NULL, "V", 0x4, 25, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 27, 28, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 29, 30, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASListViewImpl_ListAdapter;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 29, 30, -1, 31, -1, -1 },
-    { NULL, "V", 0x2, 32, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 33, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 35, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 36, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 31, 32, -1, 33, -1, -1 },
+    { NULL, "V", 0x2, 34, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 35, 36, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 37, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 38, 36, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "D", 0x101, 37, 26, -1, -1, -1, -1 },
+    { NULL, "D", 0x101, 39, 28, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "D", 0x101, 38, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 26, -1, -1, -1, -1 },
+    { NULL, "D", 0x101, 40, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 41, 28, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 40, 41, -1, 42, -1, -1 },
-    { NULL, "V", 0x101, 43, 44, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 42, 43, -1, 44, -1, -1 },
+    { NULL, "V", 0x101, 45, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 45, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 47, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 46, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 48, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 47, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 49, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 48, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 50, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 49, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 51, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 50, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 52, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 51, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 53, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 52, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 54, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 53, 44, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 54, 44, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 55, 44, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 56, 44, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 57, 44, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 58, 44, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 59, 44, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 60, 44, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 61, 44, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 62, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 55, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 56, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 63, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 57, 46, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 58, 46, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 59, 46, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 60, 46, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 61, 46, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 62, 46, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 63, 46, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 64, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 64, 44, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 65, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 65, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 66, 44, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 67, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 66, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 68, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 67, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 69, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 68, 46, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 70, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 71, 72, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 73, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 69, 46, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 70, 46, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 71, 46, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 72, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 73, 74, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 75, 1, -1, -1, -1, -1 },
     { NULL, "LASListViewImpl_ListViewBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASListViewImpl_ListViewParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASListViewImpl_ListViewCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 74, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 75, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 76, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 76, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 77, 28, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 78, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 79, 80, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 81, 34, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 82, 28, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 83, 28, -1, -1, -1, -1 },
-    { NULL, "LADView;", 0x2, 84, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 85, 86, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 87, 88, -1, 89, -1, -1 },
+    { NULL, "V", 0x1, 78, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 79, 30, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 80, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 81, 82, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 83, 36, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 84, 30, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 85, 30, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x2, 86, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 87, 88, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 89, 90, -1, 91, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 90, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 91, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 92, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 93, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 92, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 93, 44, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x102, 94, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 95, 1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 96, 97, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 98, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 99, 44, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 94, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 95, 46, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x102, 96, 28, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 97, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 98, 99, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 100, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 101, 46, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 100, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 101, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 102, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 103, 30, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 102, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 104, 28, -1, -1, -1, -1 },
     { NULL, "Z", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 103, 72, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 105, 74, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 104, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 105, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 106, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 107, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 108, 109, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 110, 44, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 111, 97, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 112, 72, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 106, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 107, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 108, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 109, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 110, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 112, 46, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 113, 99, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 114, 74, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 113, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 115, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 114, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 115, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 116, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 117, 16, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 118, 18, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 119, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 116, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 117, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 118, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 119, 18, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 120, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 121, 28, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 120, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 121, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 122, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 123, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 124, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 125, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 126, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 127, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 122, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 123, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 124, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 125, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 126, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 127, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 128, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 129, 30, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 128, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 130, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -2258,172 +2287,173 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[5].selector = @selector(createWithASIFragment:withJavaUtilMap:);
   methods[6].selector = @selector(setWidgetOnNativeClass);
   methods[7].selector = @selector(asWidget);
-  methods[8].selector = @selector(addWithASIWidget:withInt:);
-  methods[9].selector = @selector(createLayoutParamsWithADView:);
-  methods[10].selector = @selector(getLayoutParamsWithADView:);
-  methods[11].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
-  methods[12].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
-  methods[13].selector = @selector(getViewClass);
-  methods[14].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[15].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[16].selector = @selector(asNativeWidget);
-  methods[17].selector = @selector(checkIosVersionWithNSString:);
-  methods[18].selector = @selector(requestLayout);
-  methods[19].selector = @selector(invalidate);
-  methods[20].selector = @selector(updateModelToEventMapWithJavaUtilMap:withNSString:withNSString:);
-  methods[21].selector = @selector(addObjectWithASLoopParam:withNSString:withInt:withNSString:);
-  methods[22].selector = @selector(addAllModelWithId:);
-  methods[23].selector = @selector(removeWithInt:);
-  methods[24].selector = @selector(areWidgetItemsRecycled);
-  methods[25].selector = @selector(clear);
-  methods[26].selector = @selector(clearModel);
-  methods[27].selector = @selector(notifyDataSetChanged);
-  methods[28].selector = @selector(getListAdapter);
-  methods[29].selector = @selector(addCheckItemInfoWithJavaUtilMap:withADAdapterView:);
-  methods[30].selector = @selector(setScrollXWithId:);
-  methods[31].selector = @selector(nativeSetScrollXWithId:withInt:);
-  methods[32].selector = @selector(setScrollYWithId:);
-  methods[33].selector = @selector(nativeSetScrollYWithId:withInt:);
-  methods[34].selector = @selector(getScrollX);
-  methods[35].selector = @selector(nativeGetScrollXWithId:);
-  methods[36].selector = @selector(getScrollY);
-  methods[37].selector = @selector(nativeGetScrollYWithId:);
-  methods[38].selector = @selector(setChoiceModeWithId:);
-  methods[39].selector = @selector(getChoiceMode);
-  methods[40].selector = @selector(initListAdapter);
-  methods[41].selector = @selector(updatePositionWithJavaUtilMap:withInt:);
-  methods[42].selector = @selector(setRowHeightWithId:withId:);
-  methods[43].selector = @selector(getRowHeight);
-  methods[44].selector = @selector(setEstimatedRowHeightWithId:withId:);
-  methods[45].selector = @selector(getEstimatedRowHeight);
-  methods[46].selector = @selector(setCellLayoutMarginsFollowReadableWidthWithId:withId:);
-  methods[47].selector = @selector(getCellLayoutMarginsFollowReadableWidth);
-  methods[48].selector = @selector(setInsetsContentViewsToSafeAreaWithId:withId:);
-  methods[49].selector = @selector(getInsetsContentViewsToSafeArea);
-  methods[50].selector = @selector(setSectionHeaderHeightWithId:withId:);
-  methods[51].selector = @selector(getSectionHeaderHeight);
-  methods[52].selector = @selector(setSectionFooterHeightWithId:withId:);
-  methods[53].selector = @selector(getSectionFooterHeight);
-  methods[54].selector = @selector(setEstimatedSectionHeaderHeightWithId:withId:);
-  methods[55].selector = @selector(getEstimatedSectionHeaderHeight);
-  methods[56].selector = @selector(setEstimatedSectionFooterHeightWithId:withId:);
-  methods[57].selector = @selector(getEstimatedSectionFooterHeight);
-  methods[58].selector = @selector(setSectionHeaderTopPaddingWithId:withId:);
-  methods[59].selector = @selector(getSectionHeaderTopPadding);
-  methods[60].selector = @selector(setSeparatorColorWithId:withId:);
-  methods[61].selector = @selector(getSeparatorColor);
-  methods[62].selector = @selector(getNumberOfSections);
-  methods[63].selector = @selector(setAllowsSelectionWithId:withId:);
-  methods[64].selector = @selector(getAllowsSelection);
-  methods[65].selector = @selector(setAllowsMultipleSelectionWithId:withId:);
-  methods[66].selector = @selector(getAllowsMultipleSelection);
-  methods[67].selector = @selector(setAllowsSelectionDuringEditingWithId:withId:);
-  methods[68].selector = @selector(getAllowsSelectionDuringEditing);
-  methods[69].selector = @selector(setAllowsMultipleSelectionDuringEditingWithId:withId:);
-  methods[70].selector = @selector(getAllowsMultipleSelectionDuringEditing);
-  methods[71].selector = @selector(setSelectionFollowsFocusWithId:withId:);
-  methods[72].selector = @selector(getSelectionFollowsFocus);
-  methods[73].selector = @selector(setSectionIndexMinimumDisplayRowCountWithId:withId:);
-  methods[74].selector = @selector(getSectionIndexMinimumDisplayRowCount);
-  methods[75].selector = @selector(setSectionIndexColorWithId:withId:);
-  methods[76].selector = @selector(getSectionIndexColor);
-  methods[77].selector = @selector(setSectionIndexBackgroundColorWithId:withId:);
-  methods[78].selector = @selector(getSectionIndexBackgroundColor);
-  methods[79].selector = @selector(setSectionIndexTrackingBackgroundColorWithId:withId:);
-  methods[80].selector = @selector(getSectionIndexTrackingBackgroundColor);
-  methods[81].selector = @selector(getHasUncommittedUpdates);
-  methods[82].selector = @selector(getHasActiveDrag);
-  methods[83].selector = @selector(setDragInteractionEnabledWithId:withId:);
-  methods[84].selector = @selector(getDragInteractionEnabled);
-  methods[85].selector = @selector(getHasActiveDrop);
-  methods[86].selector = @selector(setIsEditingWithId:withId:);
-  methods[87].selector = @selector(getIsEditing);
-  methods[88].selector = @selector(setRemembersLastFocusedIndexPathWithId:withId:);
-  methods[89].selector = @selector(getRemembersLastFocusedIndexPath);
-  methods[90].selector = @selector(setAllowsFocusWithId:withId:);
-  methods[91].selector = @selector(getAllowsFocus);
-  methods[92].selector = @selector(setAllowsFocusDuringEditingWithId:withId:);
-  methods[93].selector = @selector(getAllowsFocusDuringEditing);
-  methods[94].selector = @selector(setFillerRowHeightWithId:withId:);
-  methods[95].selector = @selector(getFillerRowHeight);
-  methods[96].selector = @selector(setIsPrefetchingEnabledWithId:withId:);
-  methods[97].selector = @selector(getIsPrefetchingEnabled);
-  methods[98].selector = @selector(setIdWithNSString:);
-  methods[99].selector = @selector(setVisibleWithBoolean:);
-  methods[100].selector = @selector(getPluginWithNSString:);
-  methods[101].selector = @selector(getBean);
-  methods[102].selector = @selector(getBuilder);
-  methods[103].selector = @selector(getParamsBean);
-  methods[104].selector = @selector(getParamsBuilder);
-  methods[105].selector = @selector(addFooterTemplateWithId:);
-  methods[106].selector = @selector(addHeaderTemplateWithId:);
-  methods[107].selector = @selector(setOnItemClickWithId:);
-  methods[108].selector = @selector(handleItemClickWithInt:);
-  methods[109].selector = @selector(getCellWithInt:);
-  methods[110].selector = @selector(setCellDividerInsetsWithInt:withId:);
-  methods[111].selector = @selector(nativeSetSeparatorCellInsetRightWithId:withInt:);
-  methods[112].selector = @selector(createCellWithInt:);
-  methods[113].selector = @selector(calculateHeightOfRowWithInt:);
-  methods[114].selector = @selector(updateLayoutWithASIWidget:withInt:);
-  methods[115].selector = @selector(setCustomDividerAttributesWithASIWidget:withBoolean:);
-  methods[116].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[117].selector = @selector(createTableView);
-  methods[118].selector = @selector(addHeaderWidgetWithId:);
-  methods[119].selector = @selector(addFooterWidgetWithId:);
-  methods[120].selector = @selector(updateTableSelection);
-  methods[121].selector = @selector(nativeGetWidth);
-  methods[122].selector = @selector(getCellContentViewWithId:);
-  methods[123].selector = @selector(setDataWithId:withId:);
-  methods[124].selector = @selector(getDataWithId:);
-  methods[125].selector = @selector(getReusableCellWithNSString:);
-  methods[126].selector = @selector(newCellWithNSString:withId:);
-  methods[127].selector = @selector(setSelectionStyleOnCellWithId:);
-  methods[128].selector = @selector(addSubViewWithId:withId:);
-  methods[129].selector = @selector(updateTable);
-  methods[130].selector = @selector(reloadTable);
-  methods[131].selector = @selector(setSeparatorStyleWithId:);
-  methods[132].selector = @selector(nativeSetSeparatorStyleWithInt:);
-  methods[133].selector = @selector(getStackFromBottom);
-  methods[134].selector = @selector(isStackFromBottom);
-  methods[135].selector = @selector(setStackFromBottomWithId:);
-  methods[136].selector = @selector(nativeGetStackFromBottom);
-  methods[137].selector = @selector(nativeSetStackFromBottomWithBoolean:);
-  methods[138].selector = @selector(nativesetStackFromBottom);
-  methods[139].selector = @selector(nativesetStackFromTop);
-  methods[140].selector = @selector(setOnItemLongClickWithId:);
-  methods[141].selector = @selector(longPressWithInt:);
-  methods[142].selector = @selector(nativeAddLongClickListenerWithId:);
-  methods[143].selector = @selector(setSelectedBackgroundViewWithId:);
-  methods[144].selector = @selector(setDrawableBoundsWithId:withADDrawable:);
-  methods[145].selector = @selector(nativeSelectedBackgroundViewWithId:withId:);
-  methods[146].selector = @selector(setListSelectorWithNSString:withId:);
-  methods[147].selector = @selector(nativesetTrackSelectedCellWithBoolean:);
-  methods[148].selector = @selector(getListSelector);
-  methods[149].selector = @selector(setSelectionStyleWithId:);
-  methods[150].selector = @selector(drawableStateChanged);
-  methods[151].selector = @selector(getCurrentSelectedCell);
-  methods[152].selector = @selector(setOnScrollWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[153].selector = @selector(setHeaderDividersEnabledWithId:);
-  methods[154].selector = @selector(setFooterDividersEnabledWithId:);
-  methods[155].selector = @selector(setDividerWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[156].selector = @selector(getDividerWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[157].selector = @selector(setDividerHeightWithId:);
-  methods[158].selector = @selector(getDividerHeight);
-  methods[159].selector = @selector(setSeparatorInsetRightWithId:);
-  methods[160].selector = @selector(nativeSetSeparatorInsetRightWithInt:);
-  methods[161].selector = @selector(setSeparatorInsetLeftWithId:);
-  methods[162].selector = @selector(nativeSetSeparatorInsetLeftWithInt:);
-  methods[163].selector = @selector(setSeparatorInsetBottomWithId:);
-  methods[164].selector = @selector(nativeSetSeparatorInsetBottomWithInt:);
-  methods[165].selector = @selector(setSeparatorInsetTopWithId:);
-  methods[166].selector = @selector(nativeSetSeparatorInsetTopWithInt:);
-  methods[167].selector = @selector(nativeRequestLayout);
-  methods[168].selector = @selector(getData);
+  methods[8].selector = @selector(nativeRemoveViewWithASIWidget:);
+  methods[9].selector = @selector(addWithASIWidget:withInt:);
+  methods[10].selector = @selector(createLayoutParamsWithADView:);
+  methods[11].selector = @selector(getLayoutParamsWithADView:);
+  methods[12].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
+  methods[13].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
+  methods[14].selector = @selector(getViewClass);
+  methods[15].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[16].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[17].selector = @selector(asNativeWidget);
+  methods[18].selector = @selector(checkIosVersionWithNSString:);
+  methods[19].selector = @selector(requestLayout);
+  methods[20].selector = @selector(invalidate);
+  methods[21].selector = @selector(updateModelToEventMapWithJavaUtilMap:withNSString:withNSString:);
+  methods[22].selector = @selector(addObjectWithASLoopParam:withNSString:withInt:withNSString:);
+  methods[23].selector = @selector(addAllModelWithId:);
+  methods[24].selector = @selector(removeWithInt:);
+  methods[25].selector = @selector(areWidgetItemsRecycled);
+  methods[26].selector = @selector(clear);
+  methods[27].selector = @selector(clearModel);
+  methods[28].selector = @selector(notifyDataSetChanged);
+  methods[29].selector = @selector(getListAdapter);
+  methods[30].selector = @selector(addCheckItemInfoWithJavaUtilMap:withADAdapterView:);
+  methods[31].selector = @selector(setScrollXWithId:);
+  methods[32].selector = @selector(nativeSetScrollXWithId:withInt:);
+  methods[33].selector = @selector(setScrollYWithId:);
+  methods[34].selector = @selector(nativeSetScrollYWithId:withInt:);
+  methods[35].selector = @selector(getScrollX);
+  methods[36].selector = @selector(nativeGetScrollXWithId:);
+  methods[37].selector = @selector(getScrollY);
+  methods[38].selector = @selector(nativeGetScrollYWithId:);
+  methods[39].selector = @selector(setChoiceModeWithId:);
+  methods[40].selector = @selector(getChoiceMode);
+  methods[41].selector = @selector(initListAdapter);
+  methods[42].selector = @selector(updatePositionWithJavaUtilMap:withInt:);
+  methods[43].selector = @selector(setRowHeightWithId:withId:);
+  methods[44].selector = @selector(getRowHeight);
+  methods[45].selector = @selector(setEstimatedRowHeightWithId:withId:);
+  methods[46].selector = @selector(getEstimatedRowHeight);
+  methods[47].selector = @selector(setCellLayoutMarginsFollowReadableWidthWithId:withId:);
+  methods[48].selector = @selector(getCellLayoutMarginsFollowReadableWidth);
+  methods[49].selector = @selector(setInsetsContentViewsToSafeAreaWithId:withId:);
+  methods[50].selector = @selector(getInsetsContentViewsToSafeArea);
+  methods[51].selector = @selector(setSectionHeaderHeightWithId:withId:);
+  methods[52].selector = @selector(getSectionHeaderHeight);
+  methods[53].selector = @selector(setSectionFooterHeightWithId:withId:);
+  methods[54].selector = @selector(getSectionFooterHeight);
+  methods[55].selector = @selector(setEstimatedSectionHeaderHeightWithId:withId:);
+  methods[56].selector = @selector(getEstimatedSectionHeaderHeight);
+  methods[57].selector = @selector(setEstimatedSectionFooterHeightWithId:withId:);
+  methods[58].selector = @selector(getEstimatedSectionFooterHeight);
+  methods[59].selector = @selector(setSectionHeaderTopPaddingWithId:withId:);
+  methods[60].selector = @selector(getSectionHeaderTopPadding);
+  methods[61].selector = @selector(setSeparatorColorWithId:withId:);
+  methods[62].selector = @selector(getSeparatorColor);
+  methods[63].selector = @selector(getNumberOfSections);
+  methods[64].selector = @selector(setAllowsSelectionWithId:withId:);
+  methods[65].selector = @selector(getAllowsSelection);
+  methods[66].selector = @selector(setAllowsMultipleSelectionWithId:withId:);
+  methods[67].selector = @selector(getAllowsMultipleSelection);
+  methods[68].selector = @selector(setAllowsSelectionDuringEditingWithId:withId:);
+  methods[69].selector = @selector(getAllowsSelectionDuringEditing);
+  methods[70].selector = @selector(setAllowsMultipleSelectionDuringEditingWithId:withId:);
+  methods[71].selector = @selector(getAllowsMultipleSelectionDuringEditing);
+  methods[72].selector = @selector(setSelectionFollowsFocusWithId:withId:);
+  methods[73].selector = @selector(getSelectionFollowsFocus);
+  methods[74].selector = @selector(setSectionIndexMinimumDisplayRowCountWithId:withId:);
+  methods[75].selector = @selector(getSectionIndexMinimumDisplayRowCount);
+  methods[76].selector = @selector(setSectionIndexColorWithId:withId:);
+  methods[77].selector = @selector(getSectionIndexColor);
+  methods[78].selector = @selector(setSectionIndexBackgroundColorWithId:withId:);
+  methods[79].selector = @selector(getSectionIndexBackgroundColor);
+  methods[80].selector = @selector(setSectionIndexTrackingBackgroundColorWithId:withId:);
+  methods[81].selector = @selector(getSectionIndexTrackingBackgroundColor);
+  methods[82].selector = @selector(getHasUncommittedUpdates);
+  methods[83].selector = @selector(getHasActiveDrag);
+  methods[84].selector = @selector(setDragInteractionEnabledWithId:withId:);
+  methods[85].selector = @selector(getDragInteractionEnabled);
+  methods[86].selector = @selector(getHasActiveDrop);
+  methods[87].selector = @selector(setIsEditingWithId:withId:);
+  methods[88].selector = @selector(getIsEditing);
+  methods[89].selector = @selector(setRemembersLastFocusedIndexPathWithId:withId:);
+  methods[90].selector = @selector(getRemembersLastFocusedIndexPath);
+  methods[91].selector = @selector(setAllowsFocusWithId:withId:);
+  methods[92].selector = @selector(getAllowsFocus);
+  methods[93].selector = @selector(setAllowsFocusDuringEditingWithId:withId:);
+  methods[94].selector = @selector(getAllowsFocusDuringEditing);
+  methods[95].selector = @selector(setFillerRowHeightWithId:withId:);
+  methods[96].selector = @selector(getFillerRowHeight);
+  methods[97].selector = @selector(setIsPrefetchingEnabledWithId:withId:);
+  methods[98].selector = @selector(getIsPrefetchingEnabled);
+  methods[99].selector = @selector(setIdWithNSString:);
+  methods[100].selector = @selector(setVisibleWithBoolean:);
+  methods[101].selector = @selector(getPluginWithNSString:);
+  methods[102].selector = @selector(getBean);
+  methods[103].selector = @selector(getBuilder);
+  methods[104].selector = @selector(getParamsBean);
+  methods[105].selector = @selector(getParamsBuilder);
+  methods[106].selector = @selector(addFooterTemplateWithId:);
+  methods[107].selector = @selector(addHeaderTemplateWithId:);
+  methods[108].selector = @selector(setOnItemClickWithId:);
+  methods[109].selector = @selector(handleItemClickWithInt:);
+  methods[110].selector = @selector(getCellWithInt:);
+  methods[111].selector = @selector(setCellDividerInsetsWithInt:withId:);
+  methods[112].selector = @selector(nativeSetSeparatorCellInsetRightWithId:withInt:);
+  methods[113].selector = @selector(createCellWithInt:);
+  methods[114].selector = @selector(calculateHeightOfRowWithInt:);
+  methods[115].selector = @selector(updateLayoutWithASIWidget:withInt:);
+  methods[116].selector = @selector(setCustomDividerAttributesWithASIWidget:withBoolean:);
+  methods[117].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[118].selector = @selector(createTableView);
+  methods[119].selector = @selector(addHeaderWidgetWithId:);
+  methods[120].selector = @selector(addFooterWidgetWithId:);
+  methods[121].selector = @selector(updateTableSelection);
+  methods[122].selector = @selector(nativeGetWidth);
+  methods[123].selector = @selector(getCellContentViewWithId:);
+  methods[124].selector = @selector(setDataWithId:withId:);
+  methods[125].selector = @selector(getDataWithId:);
+  methods[126].selector = @selector(getReusableCellWithNSString:);
+  methods[127].selector = @selector(newCellWithNSString:withId:);
+  methods[128].selector = @selector(setSelectionStyleOnCellWithId:);
+  methods[129].selector = @selector(addSubViewWithId:withId:);
+  methods[130].selector = @selector(updateTable);
+  methods[131].selector = @selector(reloadTable);
+  methods[132].selector = @selector(setSeparatorStyleWithId:);
+  methods[133].selector = @selector(nativeSetSeparatorStyleWithInt:);
+  methods[134].selector = @selector(getStackFromBottom);
+  methods[135].selector = @selector(isStackFromBottom);
+  methods[136].selector = @selector(setStackFromBottomWithId:);
+  methods[137].selector = @selector(nativeGetStackFromBottom);
+  methods[138].selector = @selector(nativeSetStackFromBottomWithBoolean:);
+  methods[139].selector = @selector(nativesetStackFromBottom);
+  methods[140].selector = @selector(nativesetStackFromTop);
+  methods[141].selector = @selector(setOnItemLongClickWithId:);
+  methods[142].selector = @selector(longPressWithInt:);
+  methods[143].selector = @selector(nativeAddLongClickListenerWithId:);
+  methods[144].selector = @selector(setSelectedBackgroundViewWithId:);
+  methods[145].selector = @selector(setDrawableBoundsWithId:withADDrawable:);
+  methods[146].selector = @selector(nativeSelectedBackgroundViewWithId:withId:);
+  methods[147].selector = @selector(setListSelectorWithNSString:withId:);
+  methods[148].selector = @selector(nativesetTrackSelectedCellWithBoolean:);
+  methods[149].selector = @selector(getListSelector);
+  methods[150].selector = @selector(setSelectionStyleWithId:);
+  methods[151].selector = @selector(drawableStateChanged);
+  methods[152].selector = @selector(getCurrentSelectedCell);
+  methods[153].selector = @selector(setOnScrollWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[154].selector = @selector(setHeaderDividersEnabledWithId:);
+  methods[155].selector = @selector(setFooterDividersEnabledWithId:);
+  methods[156].selector = @selector(setDividerWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[157].selector = @selector(getDividerWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[158].selector = @selector(setDividerHeightWithId:);
+  methods[159].selector = @selector(getDividerHeight);
+  methods[160].selector = @selector(setSeparatorInsetRightWithId:);
+  methods[161].selector = @selector(nativeSetSeparatorInsetRightWithInt:);
+  methods[162].selector = @selector(setSeparatorInsetLeftWithId:);
+  methods[163].selector = @selector(nativeSetSeparatorInsetLeftWithInt:);
+  methods[164].selector = @selector(setSeparatorInsetBottomWithId:);
+  methods[165].selector = @selector(nativeSetSeparatorInsetBottomWithInt:);
+  methods[166].selector = @selector(setSeparatorInsetTopWithId:);
+  methods[167].selector = @selector(nativeSetSeparatorInsetTopWithInt:);
+  methods[168].selector = @selector(nativeRequestLayout);
+  methods[169].selector = @selector(getData);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 129, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 130, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 131, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 132, -1, -1 },
     { "listView_", "LADListView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "disableUpdate_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "listAdapter_", "LASListViewImpl_ListAdapter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2435,10 +2465,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "footerTemplate_", "LASHasWidgets;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "autoLayout_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "onItemClick_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "heightCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 131, -1 },
+    { "heightCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 133, -1 },
     { "header_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "footer_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "simpleTableIdentifier", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 132, -1, -1 },
+    { "simpleTableIdentifier", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 134, -1, -1 },
     { "onItemLongClickListener_", "LADAdapterView_OnItemLongClickListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "listSelector_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "cellSelectionStyle_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2450,8 +2480,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "separatorInsetRight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "reloadTableAfterPostMeasure_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "updateModelToEventMap", "LJavaUtilMap;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;)V", "addObject", "LASLoopParam;LNSString;ILNSString;", "addAllModel", "LNSObject;", "remove", "I", "addCheckItemInfo", "LJavaUtilMap;LADAdapterView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/AdapterView<*>;)V", "setScrollX", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setChoiceMode", "updatePosition", "LJavaUtilMap;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;I)I", "setRowHeight", "LNSObject;LNSObject;", "setEstimatedRowHeight", "setCellLayoutMarginsFollowReadableWidth", "setInsetsContentViewsToSafeArea", "setSectionHeaderHeight", "setSectionFooterHeight", "setEstimatedSectionHeaderHeight", "setEstimatedSectionFooterHeight", "setSectionHeaderTopPadding", "setSeparatorColor", "setAllowsSelection", "setAllowsMultipleSelection", "setAllowsSelectionDuringEditing", "setAllowsMultipleSelectionDuringEditing", "setSelectionFollowsFocus", "setSectionIndexMinimumDisplayRowCount", "setSectionIndexColor", "setSectionIndexBackgroundColor", "setSectionIndexTrackingBackgroundColor", "setDragInteractionEnabled", "setIsEditing", "setRemembersLastFocusedIndexPath", "setAllowsFocus", "setAllowsFocusDuringEditing", "setFillerRowHeight", "setIsPrefetchingEnabled", "setId", "setVisible", "Z", "getPlugin", "addFooterTemplate", "addHeaderTemplate", "setOnItemClick", "handleItemClick", "getCell", "setCellDividerInsets", "ILNSObject;", "nativeSetSeparatorCellInsetRight", "createCell", "calculateHeightOfRow", "updateLayout", "setCustomDividerAttributes", "LASIWidget;Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addHeaderWidget", "addFooterWidget", "getCellContentView", "setData", "getData", "getReusableCell", "newCell", "LNSString;LNSObject;", "setSelectionStyleOnCell", "addSubView", "setSeparatorStyle", "nativeSetSeparatorStyle", "setStackFromBottom", "nativeSetStackFromBottom", "setOnItemLongClick", "longPress", "nativeAddLongClickListener", "setSelectedBackgroundView", "setDrawableBounds", "LNSObject;LADDrawable;", "nativeSelectedBackgroundView", "setListSelector", "nativesetTrackSelectedCell", "setSelectionStyle", "setOnScroll", "setHeaderDividersEnabled", "setFooterDividersEnabled", "setDivider", "getDivider", "setDividerHeight", "setSeparatorInsetRight", "nativeSetSeparatorInsetRight", "setSeparatorInsetLeft", "nativeSetSeparatorInsetLeft", "setSeparatorInsetBottom", "nativeSetSeparatorInsetBottom", "setSeparatorInsetTop", "nativeSetSeparatorInsetTop", "()Ljava/util/List<Lcom/ashera/model/LoopParam;>;", &ASListViewImpl_LOCAL_NAME, &ASListViewImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;", &ASListViewImpl_simpleTableIdentifier, "LASListViewImpl_ChoiceMode;LASListViewImpl_IosSeparatorStyle;LASListViewImpl_IosCellSelectionStyle;LASListViewImpl_ListViewExt;LASListViewImpl_ListAdapter;LASListViewImpl_OnItemClickListener;LASListViewImpl_OnItemLongClickListener;LASListViewImpl_OnScrollListener;LASListViewImpl_ListViewCommandBuilder;LASListViewImpl_ListViewBean;LASListViewImpl_ListViewParamsBean;LASListViewImpl_ListViewCommandParamsBuilder;LASListViewImpl_PostMeasureEventHandler;" };
-  static const J2ObjcClassInfo _ASListViewImpl = { "ListViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 169, 28, -1, 133, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "nativeRemoveView", "LASIWidget;", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "updateModelToEventMap", "LJavaUtilMap;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;)V", "addObject", "LASLoopParam;LNSString;ILNSString;", "addAllModel", "LNSObject;", "remove", "I", "addCheckItemInfo", "LJavaUtilMap;LADAdapterView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/AdapterView<*>;)V", "setScrollX", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setChoiceMode", "updatePosition", "LJavaUtilMap;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;I)I", "setRowHeight", "LNSObject;LNSObject;", "setEstimatedRowHeight", "setCellLayoutMarginsFollowReadableWidth", "setInsetsContentViewsToSafeArea", "setSectionHeaderHeight", "setSectionFooterHeight", "setEstimatedSectionHeaderHeight", "setEstimatedSectionFooterHeight", "setSectionHeaderTopPadding", "setSeparatorColor", "setAllowsSelection", "setAllowsMultipleSelection", "setAllowsSelectionDuringEditing", "setAllowsMultipleSelectionDuringEditing", "setSelectionFollowsFocus", "setSectionIndexMinimumDisplayRowCount", "setSectionIndexColor", "setSectionIndexBackgroundColor", "setSectionIndexTrackingBackgroundColor", "setDragInteractionEnabled", "setIsEditing", "setRemembersLastFocusedIndexPath", "setAllowsFocus", "setAllowsFocusDuringEditing", "setFillerRowHeight", "setIsPrefetchingEnabled", "setId", "setVisible", "Z", "getPlugin", "addFooterTemplate", "addHeaderTemplate", "setOnItemClick", "handleItemClick", "getCell", "setCellDividerInsets", "ILNSObject;", "nativeSetSeparatorCellInsetRight", "createCell", "calculateHeightOfRow", "updateLayout", "setCustomDividerAttributes", "LASIWidget;Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addHeaderWidget", "addFooterWidget", "getCellContentView", "setData", "getData", "getReusableCell", "newCell", "LNSString;LNSObject;", "setSelectionStyleOnCell", "addSubView", "setSeparatorStyle", "nativeSetSeparatorStyle", "setStackFromBottom", "nativeSetStackFromBottom", "setOnItemLongClick", "longPress", "nativeAddLongClickListener", "setSelectedBackgroundView", "setDrawableBounds", "LNSObject;LADDrawable;", "nativeSelectedBackgroundView", "setListSelector", "nativesetTrackSelectedCell", "setSelectionStyle", "setOnScroll", "setHeaderDividersEnabled", "setFooterDividersEnabled", "setDivider", "getDivider", "setDividerHeight", "setSeparatorInsetRight", "nativeSetSeparatorInsetRight", "setSeparatorInsetLeft", "nativeSetSeparatorInsetLeft", "setSeparatorInsetBottom", "nativeSetSeparatorInsetBottom", "setSeparatorInsetTop", "nativeSetSeparatorInsetTop", "()Ljava/util/List<Lcom/ashera/model/LoopParam;>;", &ASListViewImpl_LOCAL_NAME, &ASListViewImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;", &ASListViewImpl_simpleTableIdentifier, "LASListViewImpl_ChoiceMode;LASListViewImpl_IosSeparatorStyle;LASListViewImpl_IosCellSelectionStyle;LASListViewImpl_ListViewExt;LASListViewImpl_ListAdapter;LASListViewImpl_OnItemClickListener;LASListViewImpl_OnItemLongClickListener;LASListViewImpl_OnScrollListener;LASListViewImpl_ListViewCommandBuilder;LASListViewImpl_ListViewBean;LASListViewImpl_ListViewParamsBean;LASListViewImpl_ListViewCommandParamsBuilder;LASListViewImpl_PostMeasureEventHandler;" };
+  static const J2ObjcClassInfo _ASListViewImpl = { "ListViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 170, 28, -1, 135, -1, -1, -1 };
   return &_ASListViewImpl;
 }
 
@@ -2516,6 +2546,16 @@ ASListViewImpl *create_ASListViewImpl_initWithNSString_withNSString_(NSString *g
 
 void ASListViewImpl_setWidgetOnNativeClass(ASListViewImpl *self) {
   ((ASUITableView*) [self asNativeWidget]).widget = self;
+}
+
+void ASListViewImpl_nativeRemoveViewWithASIWidget_(ASListViewImpl *self, id<ASIWidget> widget) {
+  ADLayoutTransition *layoutTransition = [((ADListView *) nil_chk(self->listView_)) getLayoutTransition];
+  if (layoutTransition != nil && ([layoutTransition isTransitionTypeEnabledWithInt:ADLayoutTransition_CHANGE_DISAPPEARING] || [layoutTransition isTransitionTypeEnabledWithInt:ADLayoutTransition_DISAPPEARING])) {
+    [self addToBufferedRunnablesWithJavaLangRunnable:new_ASListViewImpl_$Lambda$1_initWithASIWidget_(widget)];
+  }
+  else {
+    ASViewGroupImpl_nativeRemoveViewWithASIWidget_(widget);
+  }
 }
 
 void ASListViewImpl_createLayoutParamsWithADView_(ASListViewImpl *self, ADView *view) {
@@ -3395,6 +3435,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_IosCellSelectionStyle)
   ASViewImpl_stateNoWithASIWidget_(this$0_);
 }
 
+- (void)endViewTransitionWithADView:(ADView *)view {
+  [super endViewTransitionWithADView:view];
+  [this$0_ runBufferedRunnables];
+}
+
 - (void)__javaClone:(ASListViewImpl_ListViewExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -3440,6 +3485,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_IosCellSelectionStyle)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 37, 38, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -3482,6 +3528,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_IosCellSelectionStyle)
   methods[35].selector = @selector(state4);
   methods[36].selector = @selector(stateYes);
   methods[37].selector = @selector(stateNo);
+  methods[38].selector = @selector(endViewTransitionWithADView:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASListViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -3489,10 +3536,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_IosCellSelectionStyle)
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 37, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 39, -1 },
   };
-  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASListViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "measureHeightOfChildren", "IIIII", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASListViewImpl_ListViewExt = { "ListViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 38, 6, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASListViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "measureHeightOfChildren", "IIIII", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "endViewTransition", "LADView;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASListViewImpl_ListViewExt = { "ListViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 39, 6, 3, -1, -1, -1, -1 };
   return &_ASListViewImpl_ListViewExt;
 }
 
@@ -6039,3 +6086,24 @@ ASListViewImpl_PostMeasureEventHandler *create_ASListViewImpl_PostMeasureEventHa
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_PostMeasureEventHandler)
+
+@implementation ASListViewImpl_$Lambda$1
+
+- (void)run {
+  ASViewGroupImpl_nativeRemoveViewWithASIWidget_(val$widget_);
+}
+
+@end
+
+void ASListViewImpl_$Lambda$1_initWithASIWidget_(ASListViewImpl_$Lambda$1 *self, id<ASIWidget> capture$0) {
+  self->val$widget_ = capture$0;
+  NSObject_init(self);
+}
+
+ASListViewImpl_$Lambda$1 *new_ASListViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) {
+  J2OBJC_NEW_IMPL(ASListViewImpl_$Lambda$1, initWithASIWidget_, capture$0)
+}
+
+ASListViewImpl_$Lambda$1 *create_ASListViewImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) {
+  J2OBJC_CREATE_IMPL(ASListViewImpl_$Lambda$1, initWithASIWidget_, capture$0)
+}

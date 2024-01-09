@@ -616,6 +616,7 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
         public void stateNo() {
         	ViewImpl.stateNo(EditTextImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return EditTextExt.class;
@@ -2909,7 +2910,6 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 			}			
     	}
     }
-    
 	
 private EditTextCommandBuilder builder;
 private EditTextBean bean;
@@ -4459,7 +4459,7 @@ public void setSetFocus(boolean value) {
 }
 
 
-    
+	
     private SimpleWrapableView simpleWrapableView;
     
     private void createSimpleWrapableView() {

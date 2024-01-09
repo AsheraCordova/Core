@@ -338,6 +338,7 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
         public void stateNo() {
         	ViewImpl.stateNo(UIProgressViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return UIProgressViewExt.class;
@@ -760,7 +761,6 @@ return ((ASUIProgressView*) uiView_).trackImage;
 			}			
     	}
     }
-    
 	
 private UIProgressViewCommandBuilder builder;
 private UIProgressViewBean bean;
@@ -1197,7 +1197,7 @@ public void setProgressBackgroundTint(String value) {
 }
 
 
-    
+	
     private SimpleWrapableView simpleWrapableView;
     
     private void createSimpleWrapableView() {

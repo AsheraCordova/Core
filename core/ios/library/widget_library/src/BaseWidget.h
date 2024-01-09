@@ -243,6 +243,8 @@
 
 - (jboolean)isInvalidateOnFrameChange;
 
+- (jboolean)isWidgetDisposed;
+
 - (id<ASIWidget>)loadLazyWidgetsWithASHasWidgets:(id<ASHasWidgets>)parent;
 
 - (id<ASIWidget>)loadLazyWidgetsWithASHasWidgets:(id<ASHasWidgets>)parent

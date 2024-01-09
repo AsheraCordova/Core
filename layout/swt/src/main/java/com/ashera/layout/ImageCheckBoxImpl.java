@@ -442,6 +442,7 @@ public class ImageCheckBoxImpl extends BaseWidget implements IDrawable, ICustomM
         public void stateNo() {
         	ViewImpl.stateNo(ImageCheckBoxImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ImageCheckBoxExt.class;
@@ -2386,7 +2387,9 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return label.isDisposed();
+	}
 	
 private ImageCheckBoxCommandBuilder builder;
 private ImageCheckBoxBean bean;
@@ -3469,7 +3472,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	//start - checked

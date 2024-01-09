@@ -516,6 +516,7 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
         public void stateNo() {
         	ViewImpl.stateNo(EditTextImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return EditTextExt.class;
@@ -2662,7 +2663,6 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 
     	}
     }
-    
 	
 private EditTextCommandBuilder builder;
 private EditTextBean bean;
@@ -4023,7 +4023,7 @@ public void setSetFocus(boolean value) {
 }
 
 
-    
+	
 	//end - body
 	//start - other
 	private void nativeCreate(Map<String, Object> params) {

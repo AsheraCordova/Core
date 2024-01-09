@@ -20,6 +20,7 @@
 #include "IWidget.h"
 #include "IWidgetLifeCycleListener.h"
 #include "J2ObjC_source.h"
+#include "LayoutTransition.h"
 #include "MeasureEvent.h"
 #include "OnLayoutEvent.h"
 #include "Rect.h"
@@ -33,6 +34,7 @@
 #include "WidgetFactory.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
+#include "java/lang/Runnable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/Collection.h"
 #include "java/util/HashMap.h"
@@ -48,6 +50,7 @@
 @protocol JavaUtilMap;
 
 
+#pragma clang diagnostic ignored "-Wprotocol"
 #pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASRelativeLayoutImpl () {
@@ -64,6 +67,8 @@
 - (void)addDellocHandler;
 
 - (void)setWidgetOnNativeClass;
+
+- (void)nativeRemoveViewWithASIWidget:(id<ASIWidget>)widget;
 
 - (void)createLayoutParamsWithADView:(ADView *)view;
 
@@ -112,6 +117,8 @@ J2OBJC_STATIC_FIELD_OBJ_FINAL(ASRelativeLayoutImpl, DELLOC_EVENT, NSString *)
 __attribute__((unused)) static void ASRelativeLayoutImpl_addDellocHandler(ASRelativeLayoutImpl *self);
 
 __attribute__((unused)) static void ASRelativeLayoutImpl_setWidgetOnNativeClass(ASRelativeLayoutImpl *self);
+
+__attribute__((unused)) static void ASRelativeLayoutImpl_nativeRemoveViewWithASIWidget_(ASRelativeLayoutImpl *self, id<ASIWidget> widget);
 
 __attribute__((unused)) static void ASRelativeLayoutImpl_createLayoutParamsWithADView_(ASRelativeLayoutImpl *self, ADView *view);
 
@@ -187,6 +194,23 @@ J2OBJC_FIELD_SETTER(ASRelativeLayoutImpl_RelativeLayoutExt, templates_, id<JavaU
 }
 
 @end
+
+@interface ASRelativeLayoutImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
+ @public
+  id<ASIWidget> val$widget_;
+}
+
+- (void)run;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASRelativeLayoutImpl_$Lambda$1)
+
+__attribute__((unused)) static void ASRelativeLayoutImpl_$Lambda$1_initWithASIWidget_(ASRelativeLayoutImpl_$Lambda$1 *self, id<ASIWidget> capture$0);
+
+__attribute__((unused)) static ASRelativeLayoutImpl_$Lambda$1 *new_ASRelativeLayoutImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASRelativeLayoutImpl_$Lambda$1 *create_ASRelativeLayoutImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0);
 
 J2OBJC_INITIALIZED_DEFN(ASRelativeLayoutImpl)
 
@@ -276,7 +300,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (jboolean)removeWithASIWidget:(id<ASIWidget>)w {
   jboolean remove = [super removeWithASIWidget:w];
   [((ADRelativeLayout *) nil_chk(relativeLayout_)) removeViewWithADView:(ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])];
-  ASViewGroupImpl_nativeRemoveViewWithASIWidget_(w);
+  ASRelativeLayoutImpl_nativeRemoveViewWithASIWidget_(self, w);
   return remove;
 }
 
@@ -285,9 +309,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   jboolean remove = [super removeWithInt:index];
   if (index + 1 <= [((ADRelativeLayout *) nil_chk(relativeLayout_)) getChildCount]) {
     [((ADRelativeLayout *) nil_chk(relativeLayout_)) removeViewAtWithInt:index];
-    ASViewGroupImpl_nativeRemoveViewWithASIWidget_(widget);
+    ASRelativeLayoutImpl_nativeRemoveViewWithASIWidget_(self, widget);
   }
   return remove;
+}
+
+- (void)nativeRemoveViewWithASIWidget:(id<ASIWidget>)widget {
+  ASRelativeLayoutImpl_nativeRemoveViewWithASIWidget_(self, widget);
 }
 
 - (void)addWithASIWidget:(id<ASIWidget>)w
@@ -736,31 +764,32 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, 6, 7, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, 6, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 11, 12, -1, -1, -1, -1 },
-    { NULL, "LADRelativeLayout_LayoutParams;", 0x2, 13, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 9, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LADRelativeLayout_LayoutParams;", 0x2, 14, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 17, 18, -1, -1, -1, -1 },
     { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 19, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 20, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 21, 22, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 22, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 23, 24, -1, 25, -1, -1 },
+    { NULL, "Z", 0x101, 23, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 24, 25, -1, 26, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 26, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 29, 30, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 31, 30, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 32, 30, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 33, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 34, 35, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x2, 36, 24, -1, 37, -1, -1 },
-    { NULL, "V", 0x2, 29, 38, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 39, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 41, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 42, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 27, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 29, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 30, 31, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 32, 31, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 33, 31, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 34, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 35, 36, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x2, 37, 25, -1, 38, -1, -1 },
+    { NULL, "V", 0x2, 30, 39, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 40, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 41, 42, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 43, 1, -1, -1, -1, -1 },
     { NULL, "LASRelativeLayoutImpl_RelativeLayoutBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRelativeLayoutImpl_RelativeLayoutCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRelativeLayoutImpl_RelativeLayoutParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -780,50 +809,51 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[8].selector = @selector(asWidget);
   methods[9].selector = @selector(removeWithASIWidget:);
   methods[10].selector = @selector(removeWithInt:);
-  methods[11].selector = @selector(addWithASIWidget:withInt:);
-  methods[12].selector = @selector(createLayoutParamsWithADView:);
-  methods[13].selector = @selector(getLayoutParamsWithADView:);
-  methods[14].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
-  methods[15].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
-  methods[16].selector = @selector(getViewClass);
-  methods[17].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[18].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[19].selector = @selector(asNativeWidget);
-  methods[20].selector = @selector(checkIosVersionWithNSString:);
-  methods[21].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[22].selector = @selector(requestLayout);
-  methods[23].selector = @selector(invalidate);
-  methods[24].selector = @selector(addRuleWithADRelativeLayout_LayoutParams:withInt:withId:);
-  methods[25].selector = @selector(addRemoveRuleWithADRelativeLayout_LayoutParams:withInt:withId:);
-  methods[26].selector = @selector(removeRuleWithADRelativeLayout_LayoutParams:withInt:);
-  methods[27].selector = @selector(getRuleWithADRelativeLayout_LayoutParams:withInt:);
-  methods[28].selector = @selector(getBoolRuleWithADRelativeLayout_LayoutParams:withInt:);
-  methods[29].selector = @selector(getInferredRuleWithInt:);
-  methods[30].selector = @selector(removeAllRulesWithADRelativeLayout_LayoutParams:);
-  methods[31].selector = @selector(invertMapWithJavaUtilMap:);
-  methods[32].selector = @selector(removeRuleWithADRelativeLayout_LayoutParams:withId:);
-  methods[33].selector = @selector(setIdWithNSString:);
-  methods[34].selector = @selector(setVisibleWithBoolean:);
-  methods[35].selector = @selector(getPluginWithNSString:);
-  methods[36].selector = @selector(getBean);
-  methods[37].selector = @selector(getBuilder);
-  methods[38].selector = @selector(getParamsBean);
-  methods[39].selector = @selector(getParamsBuilder);
+  methods[11].selector = @selector(nativeRemoveViewWithASIWidget:);
+  methods[12].selector = @selector(addWithASIWidget:withInt:);
+  methods[13].selector = @selector(createLayoutParamsWithADView:);
+  methods[14].selector = @selector(getLayoutParamsWithADView:);
+  methods[15].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:);
+  methods[16].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
+  methods[17].selector = @selector(getViewClass);
+  methods[18].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[19].selector = @selector(getAttributeWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[20].selector = @selector(asNativeWidget);
+  methods[21].selector = @selector(checkIosVersionWithNSString:);
+  methods[22].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[23].selector = @selector(requestLayout);
+  methods[24].selector = @selector(invalidate);
+  methods[25].selector = @selector(addRuleWithADRelativeLayout_LayoutParams:withInt:withId:);
+  methods[26].selector = @selector(addRemoveRuleWithADRelativeLayout_LayoutParams:withInt:withId:);
+  methods[27].selector = @selector(removeRuleWithADRelativeLayout_LayoutParams:withInt:);
+  methods[28].selector = @selector(getRuleWithADRelativeLayout_LayoutParams:withInt:);
+  methods[29].selector = @selector(getBoolRuleWithADRelativeLayout_LayoutParams:withInt:);
+  methods[30].selector = @selector(getInferredRuleWithInt:);
+  methods[31].selector = @selector(removeAllRulesWithADRelativeLayout_LayoutParams:);
+  methods[32].selector = @selector(invertMapWithJavaUtilMap:);
+  methods[33].selector = @selector(removeRuleWithADRelativeLayout_LayoutParams:withId:);
+  methods[34].selector = @selector(setIdWithNSString:);
+  methods[35].selector = @selector(setVisibleWithBoolean:);
+  methods[36].selector = @selector(getPluginWithNSString:);
+  methods[37].selector = @selector(getBean);
+  methods[38].selector = @selector(getBuilder);
+  methods[39].selector = @selector(getParamsBean);
+  methods[40].selector = @selector(getParamsBuilder);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 43, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 44, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 44, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 45, -1, -1 },
     { "relativeLayout_", "LADRelativeLayout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "DELLOC_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 45, -1, -1 },
-    { "ruleMapper_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 46, -1 },
+    { "DELLOC_EVENT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 46, -1, -1 },
+    { "ruleMapper_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 47, -1 },
     { "builder_", "LASRelativeLayoutImpl_RelativeLayoutCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bean_", "LASRelativeLayoutImpl_RelativeLayoutBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "paramsBuilder_", "LASRelativeLayoutImpl_RelativeLayoutCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "paramsBean_", "LASRelativeLayoutImpl_RelativeLayoutParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addRule", "LADRelativeLayout_LayoutParams;ILNSObject;", "addRemoveRule", "removeRule", "LADRelativeLayout_LayoutParams;I", "getRule", "getBoolRule", "getInferredRule", "removeAllRules", "LADRelativeLayout_LayoutParams;", "invertMap", "<A:Ljava/lang/Object;B:Ljava/lang/Object;>(Ljava/util/Map<TA;TB;>;)Ljava/util/Map<TB;TA;>;", "LADRelativeLayout_LayoutParams;LNSObject;", "setId", "setVisible", "Z", "getPlugin", &ASRelativeLayoutImpl_LOCAL_NAME, &ASRelativeLayoutImpl_GROUP_NAME, &ASRelativeLayoutImpl_DELLOC_EVENT, "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Integer;>;", "LASRelativeLayoutImpl_DallocHandler;LASRelativeLayoutImpl_RemoveRule;LASRelativeLayoutImpl_RelativeLayoutExt;LASRelativeLayoutImpl_RelativeLayoutCommandBuilder;LASRelativeLayoutImpl_RelativeLayoutBean;LASRelativeLayoutImpl_RelativeLayoutParamsBean;LASRelativeLayoutImpl_RelativeLayoutCommandParamsBuilder;" };
-  static const J2ObjcClassInfo _ASRelativeLayoutImpl = { "RelativeLayoutImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 40, 10, -1, 47, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addRule", "LADRelativeLayout_LayoutParams;ILNSObject;", "addRemoveRule", "removeRule", "LADRelativeLayout_LayoutParams;I", "getRule", "getBoolRule", "getInferredRule", "removeAllRules", "LADRelativeLayout_LayoutParams;", "invertMap", "<A:Ljava/lang/Object;B:Ljava/lang/Object;>(Ljava/util/Map<TA;TB;>;)Ljava/util/Map<TB;TA;>;", "LADRelativeLayout_LayoutParams;LNSObject;", "setId", "setVisible", "Z", "getPlugin", &ASRelativeLayoutImpl_LOCAL_NAME, &ASRelativeLayoutImpl_GROUP_NAME, &ASRelativeLayoutImpl_DELLOC_EVENT, "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Integer;>;", "LASRelativeLayoutImpl_DallocHandler;LASRelativeLayoutImpl_RemoveRule;LASRelativeLayoutImpl_RelativeLayoutExt;LASRelativeLayoutImpl_RelativeLayoutCommandBuilder;LASRelativeLayoutImpl_RelativeLayoutBean;LASRelativeLayoutImpl_RelativeLayoutParamsBean;LASRelativeLayoutImpl_RelativeLayoutCommandParamsBuilder;" };
+  static const J2ObjcClassInfo _ASRelativeLayoutImpl = { "RelativeLayoutImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 41, 10, -1, 48, -1, -1, -1 };
   return &_ASRelativeLayoutImpl;
 }
 
@@ -953,6 +983,16 @@ ASRelativeLayoutImpl *create_ASRelativeLayoutImpl_initWithNSString_withNSString_
 
 void ASRelativeLayoutImpl_setWidgetOnNativeClass(ASRelativeLayoutImpl *self) {
   ((ASUIView*) [self asNativeWidget]).widget = self;
+}
+
+void ASRelativeLayoutImpl_nativeRemoveViewWithASIWidget_(ASRelativeLayoutImpl *self, id<ASIWidget> widget) {
+  ADLayoutTransition *layoutTransition = [((ADRelativeLayout *) nil_chk(self->relativeLayout_)) getLayoutTransition];
+  if (layoutTransition != nil && ([layoutTransition isTransitionTypeEnabledWithInt:ADLayoutTransition_CHANGE_DISAPPEARING] || [layoutTransition isTransitionTypeEnabledWithInt:ADLayoutTransition_DISAPPEARING])) {
+    [self addToBufferedRunnablesWithJavaLangRunnable:new_ASRelativeLayoutImpl_$Lambda$1_initWithASIWidget_(widget)];
+  }
+  else {
+    ASViewGroupImpl_nativeRemoveViewWithASIWidget_(widget);
+  }
 }
 
 void ASRelativeLayoutImpl_createLayoutParamsWithADView_(ASRelativeLayoutImpl *self, ADView *view) {
@@ -1423,6 +1463,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RemoveRule)
   ASViewImpl_stateNoWithASIWidget_(this$0_);
 }
 
+- (void)endViewTransitionWithADView:(ADView *)view {
+  [super endViewTransitionWithADView:view];
+  [this$0_ runBufferedRunnables];
+}
+
 - (void)__javaClone:(ASRelativeLayoutImpl_RelativeLayoutExt *)original {
   [super __javaClone:original];
   JreRelease(this$0_);
@@ -1467,6 +1512,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RemoveRule)
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 35, 36, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1508,6 +1554,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RemoveRule)
   methods[34].selector = @selector(state4);
   methods[35].selector = @selector(stateYes);
   methods[36].selector = @selector(stateNo);
+  methods[37].selector = @selector(endViewTransitionWithADView:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASRelativeLayoutImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
@@ -1515,10 +1562,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RemoveRule)
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mMaxHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 35, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 37, -1 },
   };
-  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASRelativeLayoutImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASRelativeLayoutImpl_RelativeLayoutExt = { "RelativeLayoutExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 37, 6, 3, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxWidth", "I", "setMaxHeight", "LASRelativeLayoutImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "endViewTransition", "LADView;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASRelativeLayoutImpl_RelativeLayoutExt = { "RelativeLayoutExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 38, 6, 3, -1, -1, -1, -1 };
   return &_ASRelativeLayoutImpl_RelativeLayoutExt;
 }
 
@@ -2916,3 +2963,24 @@ ASRelativeLayoutImpl_RelativeLayoutCommandParamsBuilder *create_ASRelativeLayout
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRelativeLayoutImpl_RelativeLayoutCommandParamsBuilder)
+
+@implementation ASRelativeLayoutImpl_$Lambda$1
+
+- (void)run {
+  ASViewGroupImpl_nativeRemoveViewWithASIWidget_(val$widget_);
+}
+
+@end
+
+void ASRelativeLayoutImpl_$Lambda$1_initWithASIWidget_(ASRelativeLayoutImpl_$Lambda$1 *self, id<ASIWidget> capture$0) {
+  self->val$widget_ = capture$0;
+  NSObject_init(self);
+}
+
+ASRelativeLayoutImpl_$Lambda$1 *new_ASRelativeLayoutImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) {
+  J2OBJC_NEW_IMPL(ASRelativeLayoutImpl_$Lambda$1, initWithASIWidget_, capture$0)
+}
+
+ASRelativeLayoutImpl_$Lambda$1 *create_ASRelativeLayoutImpl_$Lambda$1_initWithASIWidget_(id<ASIWidget> capture$0) {
+  J2OBJC_CREATE_IMPL(ASRelativeLayoutImpl_$Lambda$1, initWithASIWidget_, capture$0)
+}

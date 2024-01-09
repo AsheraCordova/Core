@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\ios_widget_library\src\main\java\com\ashera\layout\ViewGroupImpl.java
 //
 
+#include "AbstractBitFlagConverter.h"
 #include "AbstractEnumToIntConverter.h"
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
@@ -19,6 +20,7 @@
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
+#include "LayoutTransition.h"
 #include "PluginInvoker.h"
 #include "Rect.h"
 #include "View.h"
@@ -69,6 +71,18 @@
 
 + (void)setChildWithASIWidget:(id<ASIWidget>)w
                        withId:(id)xml;
+
++ (void)animateLayoutChangesWithId:(id)objValue
+                   withADViewGroup:(ADViewGroup *)view;
+
++ (void)setAnimateParentHierarchyWithId:(id)objValue
+                        withADViewGroup:(ADViewGroup *)viewGroup;
+
++ (void)setLayoutTransitionDurationWithId:(id)objValue
+                          withADViewGroup:(ADViewGroup *)viewGroup;
+
++ (void)setLayoutTransitionWithId:(id)objValue
+                  withADViewGroup:(ADViewGroup *)viewGroup;
 
 + (void)setPaddingVerticalWithASIWidget:(id<ASIWidget>)w
                                  withId:(id)objValue;
@@ -142,6 +156,14 @@ __attribute__((unused)) static void ASViewGroupImpl_addTemplateWithASIWidget_wit
 
 __attribute__((unused)) static void ASViewGroupImpl_setChildWithASIWidget_withId_(id<ASIWidget> w, id xml);
 
+__attribute__((unused)) static void ASViewGroupImpl_animateLayoutChangesWithId_withADViewGroup_(id objValue, ADViewGroup *view);
+
+__attribute__((unused)) static void ASViewGroupImpl_setAnimateParentHierarchyWithId_withADViewGroup_(id objValue, ADViewGroup *viewGroup);
+
+__attribute__((unused)) static void ASViewGroupImpl_setLayoutTransitionDurationWithId_withADViewGroup_(id objValue, ADViewGroup *viewGroup);
+
+__attribute__((unused)) static void ASViewGroupImpl_setLayoutTransitionWithId_withADViewGroup_(id objValue, ADViewGroup *viewGroup);
+
 __attribute__((unused)) static void ASViewGroupImpl_setPaddingVerticalWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
 __attribute__((unused)) static void ASViewGroupImpl_setPaddingHorizontalWithASIWidget_withId_(id<ASIWidget> w, id objValue);
@@ -173,6 +195,15 @@ __attribute__((unused)) static void ASViewGroupImpl_setOnChildViewRemovedWithADV
 __attribute__((unused)) static void ASViewGroupImpl_setOnChildViewAddedWithADViewGroup_withASIWidget_withId_(ADViewGroup *viewGroup, id<ASIWidget> w, id objValue);
 
 __attribute__((unused)) static void ASViewGroupImpl_applyClipToPaddingCommandWithASIWidget_withBoolean_(id<ASIWidget> w, jboolean add);
+
+@interface ASViewGroupImpl_LayoutTransition () {
+ @public
+  id<JavaUtilMap> mapping_;
+}
+
+@end
+
+J2OBJC_FIELD_SETTER(ASViewGroupImpl_LayoutTransition, mapping_, id<JavaUtilMap>)
 
 @interface ASViewGroupImpl_LayoutMode () {
  @public
@@ -411,6 +442,26 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASViewGroupImpl_setChildWithASIWidget_withId_(w, xml);
 }
 
++ (void)animateLayoutChangesWithId:(id)objValue
+                   withADViewGroup:(ADViewGroup *)view {
+  ASViewGroupImpl_animateLayoutChangesWithId_withADViewGroup_(objValue, view);
+}
+
++ (void)setAnimateParentHierarchyWithId:(id)objValue
+                        withADViewGroup:(ADViewGroup *)viewGroup {
+  ASViewGroupImpl_setAnimateParentHierarchyWithId_withADViewGroup_(objValue, viewGroup);
+}
+
++ (void)setLayoutTransitionDurationWithId:(id)objValue
+                          withADViewGroup:(ADViewGroup *)viewGroup {
+  ASViewGroupImpl_setLayoutTransitionDurationWithId_withADViewGroup_(objValue, viewGroup);
+}
+
++ (void)setLayoutTransitionWithId:(id)objValue
+                  withADViewGroup:(ADViewGroup *)viewGroup {
+  ASViewGroupImpl_setLayoutTransitionWithId_withADViewGroup_(objValue, viewGroup);
+}
+
 + (void)setPaddingVerticalWithASIWidget:(id<ASIWidget>)w
                                  withId:(id)objValue {
   ASViewGroupImpl_setPaddingVerticalWithASIWidget_withId_(w, objValue);
@@ -534,27 +585,31 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0xa, 26, 23, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 27, 28, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 29, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 30, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 31, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 32, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 33, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 34, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 30, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 32, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 33, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 34, 31, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 35, 28, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 36, 28, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 37, 28, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 38, 28, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 39, 40, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 41, 40, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 42, 40, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 43, 40, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 44, 45, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 46, 45, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 47, 48, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 49, 40, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 50, 51, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 52, 40, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 53, 54, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 55, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 39, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 40, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 41, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 42, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 43, 28, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 44, 45, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 46, 45, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 47, 45, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 48, 45, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 49, 50, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 51, 50, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 52, 53, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 54, 45, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 55, 56, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 57, 45, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 58, 59, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 60, 14, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -581,30 +636,34 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[19].selector = @selector(getBottomMarginWithADView:);
   methods[20].selector = @selector(addTemplateWithASIWidget:withId:);
   methods[21].selector = @selector(setChildWithASIWidget:withId:);
-  methods[22].selector = @selector(setPaddingVerticalWithASIWidget:withId:);
-  methods[23].selector = @selector(setPaddingHorizontalWithASIWidget:withId:);
-  methods[24].selector = @selector(setPaddingTopWithASIWidget:withId:);
-  methods[25].selector = @selector(setPaddingEndWithASIWidget:withId:);
-  methods[26].selector = @selector(setPaddingStartWithASIWidget:withId:);
-  methods[27].selector = @selector(setPaddingLeftWithASIWidget:withId:);
-  methods[28].selector = @selector(setPaddingRightWithASIWidget:withId:);
-  methods[29].selector = @selector(setPaddingBottomWithASIWidget:withId:);
-  methods[30].selector = @selector(setPaddingWithASIWidget:withId:);
-  methods[31].selector = @selector(getPaddingTopWithASIWidget:);
-  methods[32].selector = @selector(getPaddingLeftWithASIWidget:);
-  methods[33].selector = @selector(getPaddingRightWithASIWidget:);
-  methods[34].selector = @selector(getPaddingBottomWithASIWidget:);
-  methods[35].selector = @selector(setOnChildViewRemovedWithADViewGroup:withASIWidget:withId:);
-  methods[36].selector = @selector(setOnChildViewAddedWithADViewGroup:withASIWidget:withId:);
-  methods[37].selector = @selector(isAttributeSupportedWithASWidgetAttribute:);
-  methods[38].selector = @selector(registerCommandConveterWithASIWidget:);
-  methods[39].selector = @selector(applyClipToPaddingCommandWithASIWidget:withBoolean:);
-  methods[40].selector = @selector(nativeRemoveViewWithASIWidget:);
-  methods[41].selector = @selector(removeViewWithId:);
-  methods[42].selector = @selector(nativeAddViewWithId:withId:);
+  methods[22].selector = @selector(animateLayoutChangesWithId:withADViewGroup:);
+  methods[23].selector = @selector(setAnimateParentHierarchyWithId:withADViewGroup:);
+  methods[24].selector = @selector(setLayoutTransitionDurationWithId:withADViewGroup:);
+  methods[25].selector = @selector(setLayoutTransitionWithId:withADViewGroup:);
+  methods[26].selector = @selector(setPaddingVerticalWithASIWidget:withId:);
+  methods[27].selector = @selector(setPaddingHorizontalWithASIWidget:withId:);
+  methods[28].selector = @selector(setPaddingTopWithASIWidget:withId:);
+  methods[29].selector = @selector(setPaddingEndWithASIWidget:withId:);
+  methods[30].selector = @selector(setPaddingStartWithASIWidget:withId:);
+  methods[31].selector = @selector(setPaddingLeftWithASIWidget:withId:);
+  methods[32].selector = @selector(setPaddingRightWithASIWidget:withId:);
+  methods[33].selector = @selector(setPaddingBottomWithASIWidget:withId:);
+  methods[34].selector = @selector(setPaddingWithASIWidget:withId:);
+  methods[35].selector = @selector(getPaddingTopWithASIWidget:);
+  methods[36].selector = @selector(getPaddingLeftWithASIWidget:);
+  methods[37].selector = @selector(getPaddingRightWithASIWidget:);
+  methods[38].selector = @selector(getPaddingBottomWithASIWidget:);
+  methods[39].selector = @selector(setOnChildViewRemovedWithADViewGroup:withASIWidget:withId:);
+  methods[40].selector = @selector(setOnChildViewAddedWithADViewGroup:withASIWidget:withId:);
+  methods[41].selector = @selector(isAttributeSupportedWithASWidgetAttribute:);
+  methods[42].selector = @selector(registerCommandConveterWithASIWidget:);
+  methods[43].selector = @selector(applyClipToPaddingCommandWithASIWidget:withBoolean:);
+  methods[44].selector = @selector(nativeRemoveViewWithASIWidget:);
+  methods[45].selector = @selector(removeViewWithId:);
+  methods[46].selector = @selector(nativeAddViewWithId:withId:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "setMyAttribute", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSObject;LNSObject;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setMargin", "LNSObject;LNSObject;LASIWidget;", "setBottomMargin", "LNSObject;LNSObject;", "setTopMargin", "setVerticalMargin", "setLeftMargin", "setRightMargin", "setHorizontalMargin", "setEndMargin", "setStartMargin", "getRightMargin", "LADView;", "getLeftMargin", "getTopMargin", "getBottomMargin", "addTemplate", "LASIWidget;LNSObject;", "setChild", "setPaddingVertical", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "getPaddingTop", "LASIWidget;", "getPaddingLeft", "getPaddingRight", "getPaddingBottom", "setOnChildViewRemoved", "LADViewGroup;LASIWidget;LNSObject;", "setOnChildViewAdded", "isAttributeSupported", "LASWidgetAttribute;", "registerCommandConveter", "applyClipToPaddingCommand", "LASIWidget;Z", "nativeRemoveView", "removeView", "LNSObject;", "nativeAddView", "LASViewGroupImpl_LayoutMode;LASViewGroupImpl_OnHierarchyChangeListener;LASViewGroupImpl_ViewGroupCommandBuilder;LASViewGroupImpl_ViewGroupCommandBuilderInternal;LASViewGroupImpl_ViewGroupBean;LASViewGroupImpl_ViewGroupParamsBean;LASViewGroupImpl_ViewGroupCommandParamsBuilderInternal;LASViewGroupImpl_ViewGroupCommandParamsBuilder;LASViewGroupImpl_ClipPaddingMaskCommand;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl = { "ViewGroupImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 43, 0, -1, 56, -1, -1, -1 };
+  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "setMyAttribute", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSObject;LNSObject;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setMargin", "LNSObject;LNSObject;LASIWidget;", "setBottomMargin", "LNSObject;LNSObject;", "setTopMargin", "setVerticalMargin", "setLeftMargin", "setRightMargin", "setHorizontalMargin", "setEndMargin", "setStartMargin", "getRightMargin", "LADView;", "getLeftMargin", "getTopMargin", "getBottomMargin", "addTemplate", "LASIWidget;LNSObject;", "setChild", "animateLayoutChanges", "LNSObject;LADViewGroup;", "setAnimateParentHierarchy", "setLayoutTransitionDuration", "setLayoutTransition", "setPaddingVertical", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "getPaddingTop", "LASIWidget;", "getPaddingLeft", "getPaddingRight", "getPaddingBottom", "setOnChildViewRemoved", "LADViewGroup;LASIWidget;LNSObject;", "setOnChildViewAdded", "isAttributeSupported", "LASWidgetAttribute;", "registerCommandConveter", "applyClipToPaddingCommand", "LASIWidget;Z", "nativeRemoveView", "removeView", "LNSObject;", "nativeAddView", "LASViewGroupImpl_LayoutTransition;LASViewGroupImpl_LayoutMode;LASViewGroupImpl_OnHierarchyChangeListener;LASViewGroupImpl_ViewGroupCommandBuilder;LASViewGroupImpl_ViewGroupCommandBuilderInternal;LASViewGroupImpl_ViewGroupBean;LASViewGroupImpl_ViewGroupParamsBean;LASViewGroupImpl_ViewGroupCommandParamsBuilderInternal;LASViewGroupImpl_ViewGroupCommandParamsBuilder;LASViewGroupImpl_ClipPaddingMaskCommand;" };
+  static const J2ObjcClassInfo _ASViewGroupImpl = { "ViewGroupImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 47, 0, -1, 61, -1, -1, -1 };
   return &_ASViewGroupImpl;
 }
 
@@ -625,6 +684,11 @@ ASViewGroupImpl *create_ASViewGroupImpl_init() {
 void ASViewGroupImpl_register__WithNSString_(NSString *localName) {
   ASViewGroupImpl_initialize();
   ASViewGroupModelImpl_register__WithNSString_(localName);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"animateLayoutChanges"])) withTypeWithNSString:@"boolean"]);
+  ASConverterFactory_register__WithNSString_withASIConverter_(@"ViewGroup.layoutTransition", new_ASViewGroupImpl_LayoutTransition_init());
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"layoutTransition"])) withTypeWithNSString:@"ViewGroup.layoutTransition"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"layoutTransitionDuration"])) withTypeWithNSString:@"int"])) withOrderWithInt:3]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"animateParentHierarchy"])) withTypeWithNSString:@"boolean"])) withOrderWithInt:3]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"listitem"])) withTypeWithNSString:@"template"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"padding"])) withTypeWithNSString:@"dimension"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingBottom"])) withTypeWithNSString:@"dimension"]);
@@ -666,89 +730,109 @@ void ASViewGroupImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSStrin
 void ASViewGroupImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator) {
   ASViewGroupImpl_initialize();
   ADViewGroup *viewGroup = ((ADViewGroup *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADViewGroup class]));
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"listitem", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"addStatesFromChildren", @"onChildViewAdded", @"clipChildren", @"clipToPadding", @"layoutMode", @"onChildViewRemoved", @"childXml" }, 17)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"animateLayoutChanges", @"layoutTransition", @"layoutTransitionDuration", @"animateParentHierarchy", @"listitem", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"addStatesFromChildren", @"onChildViewAdded", @"clipChildren", @"clipToPadding", @"layoutMode", @"onChildViewRemoved", @"childXml" }, 21)) {
     case 0:
     {
-      ASViewGroupImpl_addTemplateWithASIWidget_withId_(w, objValue);
+      ASViewGroupImpl_animateLayoutChangesWithId_withADViewGroup_(objValue, viewGroup);
     }
     break;
     case 1:
     {
-      ASViewGroupImpl_setPaddingWithASIWidget_withId_(w, objValue);
+      ASViewGroupImpl_setLayoutTransitionWithId_withADViewGroup_(objValue, viewGroup);
     }
     break;
     case 2:
     {
-      ASViewGroupImpl_setPaddingBottomWithASIWidget_withId_(w, objValue);
+      ASViewGroupImpl_setLayoutTransitionDurationWithId_withADViewGroup_(objValue, viewGroup);
     }
     break;
     case 3:
     {
-      ASViewGroupImpl_setPaddingRightWithASIWidget_withId_(w, objValue);
+      ASViewGroupImpl_setAnimateParentHierarchyWithId_withADViewGroup_(objValue, viewGroup);
     }
     break;
     case 4:
     {
-      ASViewGroupImpl_setPaddingLeftWithASIWidget_withId_(w, objValue);
+      ASViewGroupImpl_addTemplateWithASIWidget_withId_(w, objValue);
     }
     break;
     case 5:
     {
-      ASViewGroupImpl_setPaddingStartWithASIWidget_withId_(w, objValue);
+      ASViewGroupImpl_setPaddingWithASIWidget_withId_(w, objValue);
     }
     break;
     case 6:
     {
-      ASViewGroupImpl_setPaddingEndWithASIWidget_withId_(w, objValue);
+      ASViewGroupImpl_setPaddingBottomWithASIWidget_withId_(w, objValue);
     }
     break;
     case 7:
     {
-      ASViewGroupImpl_setPaddingTopWithASIWidget_withId_(w, objValue);
+      ASViewGroupImpl_setPaddingRightWithASIWidget_withId_(w, objValue);
     }
     break;
     case 8:
     {
-      ASViewGroupImpl_setPaddingHorizontalWithASIWidget_withId_(w, objValue);
+      ASViewGroupImpl_setPaddingLeftWithASIWidget_withId_(w, objValue);
     }
     break;
     case 9:
     {
-      ASViewGroupImpl_setPaddingVerticalWithASIWidget_withId_(w, objValue);
+      ASViewGroupImpl_setPaddingStartWithASIWidget_withId_(w, objValue);
     }
     break;
     case 10:
     {
-      [((ADViewGroup *) nil_chk(viewGroup)) setAddStatesFromChildrenWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+      ASViewGroupImpl_setPaddingEndWithASIWidget_withId_(w, objValue);
     }
     break;
     case 11:
     {
-      ASViewGroupImpl_setOnChildViewAddedWithADViewGroup_withASIWidget_withId_(viewGroup, w, objValue);
+      ASViewGroupImpl_setPaddingTopWithASIWidget_withId_(w, objValue);
     }
     break;
     case 12:
     {
-      ASViewImpl_setClipsToBoundsWithId_withId_([w asNativeWidget], objValue);
+      ASViewGroupImpl_setPaddingHorizontalWithASIWidget_withId_(w, objValue);
     }
     break;
     case 13:
+    {
+      ASViewGroupImpl_setPaddingVerticalWithASIWidget_withId_(w, objValue);
+    }
+    break;
+    case 14:
+    {
+      [((ADViewGroup *) nil_chk(viewGroup)) setAddStatesFromChildrenWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+    }
+    break;
+    case 15:
+    {
+      ASViewGroupImpl_setOnChildViewAddedWithADViewGroup_withASIWidget_withId_(viewGroup, w, objValue);
+    }
+    break;
+    case 16:
+    {
+      ASViewImpl_setClipsToBoundsWithId_withId_([w asNativeWidget], objValue);
+    }
+    break;
+    case 17:
     {
       [((ADViewGroup *) nil_chk(viewGroup)) setClipToPaddingWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
       ASViewGroupImpl_applyClipToPaddingCommandWithASIWidget_withBoolean_(w, [((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]);
     }
     break;
-    case 14:
+    case 18:
     {
       [((ADViewGroup *) nil_chk(viewGroup)) setLayoutModeWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
     }
     break;
-    case 15:
+    case 19:
     {
       ASViewGroupImpl_setOnChildViewRemovedWithADViewGroup_withASIWidget_withId_(viewGroup, w, objValue);
     }
     break;
-    case 16:
+    case 20:
     {
       ASViewGroupImpl_setChildWithASIWidget_withId_(w, objValue);
     }
@@ -1016,6 +1100,64 @@ void ASViewGroupImpl_setChildWithASIWidget_withId_(id<ASIWidget> w, id xml) {
   }
 }
 
+void ASViewGroupImpl_animateLayoutChangesWithId_withADViewGroup_(id objValue, ADViewGroup *view) {
+  ASViewGroupImpl_initialize();
+  {
+    if (objValue != nil && [(JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]) booleanValue]) {
+      ADLayoutTransition *lt = new_ADLayoutTransition_init();
+      [lt setAnimateParentHierarchyWithBoolean:false];
+      [((ADViewGroup *) nil_chk(view)) setLayoutTransitionWithADLayoutTransition:lt];
+    }
+    else {
+      [((ADViewGroup *) nil_chk(view)) setLayoutTransitionWithADLayoutTransition:nil];
+    }
+  }
+}
+
+void ASViewGroupImpl_setAnimateParentHierarchyWithId_withADViewGroup_(id objValue, ADViewGroup *viewGroup) {
+  ASViewGroupImpl_initialize();
+  ADLayoutTransition *layoutTransition = [((ADViewGroup *) nil_chk(viewGroup)) getLayoutTransition];
+  if (layoutTransition != nil) {
+    [layoutTransition setAnimateParentHierarchyWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+  }
+}
+
+void ASViewGroupImpl_setLayoutTransitionDurationWithId_withADViewGroup_(id objValue, ADViewGroup *viewGroup) {
+  ASViewGroupImpl_initialize();
+  ADLayoutTransition *layoutTransition = [((ADViewGroup *) nil_chk(viewGroup)) getLayoutTransition];
+  if (layoutTransition != nil) {
+    [layoutTransition setDurationWithLong:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+  }
+}
+
+void ASViewGroupImpl_setLayoutTransitionWithId_withADViewGroup_(id objValue, ADViewGroup *viewGroup) {
+  ASViewGroupImpl_initialize();
+  ADLayoutTransition *lt = new_ADLayoutTransition_init();
+  [lt setAnimateParentHierarchyWithBoolean:false];
+  [lt disableTransitionTypeWithInt:ADLayoutTransition_CHANGE_APPEARING];
+  [lt disableTransitionTypeWithInt:ADLayoutTransition_CHANGE_DISAPPEARING];
+  [lt disableTransitionTypeWithInt:ADLayoutTransition_APPEARING];
+  [lt disableTransitionTypeWithInt:ADLayoutTransition_DISAPPEARING];
+  [lt disableTransitionTypeWithInt:ADLayoutTransition_CHANGING];
+  jint flag = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  if ((flag & (jint) 0x1) != 0) {
+    [lt enableTransitionTypeWithInt:ADLayoutTransition_CHANGE_APPEARING];
+  }
+  if ((flag & (jint) 0x02) != 0) {
+    [lt enableTransitionTypeWithInt:ADLayoutTransition_CHANGE_DISAPPEARING];
+  }
+  if ((flag & (jint) 0x04) != 0) {
+    [lt enableTransitionTypeWithInt:ADLayoutTransition_APPEARING];
+  }
+  if ((flag & (jint) 0x08) != 0) {
+    [lt enableTransitionTypeWithInt:ADLayoutTransition_DISAPPEARING];
+  }
+  if ((flag & (jint) 0x10) != 0) {
+    [lt enableTransitionTypeWithInt:ADLayoutTransition_CHANGING];
+  }
+  [((ADViewGroup *) nil_chk(viewGroup)) setLayoutTransitionWithADLayoutTransition:lt];
+}
+
 void ASViewGroupImpl_setPaddingVerticalWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
   ASViewGroupImpl_initialize();
   ASViewImpl_setPaddingVerticalWithId_withADView_(objValue, (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]));
@@ -1107,7 +1249,7 @@ void ASViewGroupImpl_setOnChildViewAddedWithADViewGroup_withASIWidget_withId_(AD
 
 jboolean ASViewGroupImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttribute *key) {
   ASViewGroupImpl_initialize();
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"listitem", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"addStatesFromChildren", @"onChildViewAdded", @"clipChildren", @"clipToPadding", @"layoutMode", @"onChildViewRemoved", @"childXml" }, 17)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"animateLayoutChanges", @"layoutTransition", @"layoutTransitionDuration", @"animateParentHierarchy", @"listitem", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"addStatesFromChildren", @"onChildViewAdded", @"clipChildren", @"clipToPadding", @"layoutMode", @"onChildViewRemoved", @"childXml" }, 21)) {
     case 0:
     {
       return true;
@@ -1176,6 +1318,22 @@ jboolean ASViewGroupImpl_isAttributeSupportedWithASWidgetAttribute_(ASWidgetAttr
     {
       return true;
     }
+    case 17:
+    {
+      return true;
+    }
+    case 18:
+    {
+      return true;
+    }
+    case 19:
+    {
+      return true;
+    }
+    case 20:
+    {
+      return true;
+    }
     default:
     break;
   }
@@ -1209,6 +1367,68 @@ void ASViewGroupImpl_nativeAddViewWithId_withId_(id uiView, id w) {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl)
+
+@implementation ASViewGroupImpl_LayoutTransition
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ASViewGroupImpl_LayoutTransition_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<JavaUtilMap>)getMapping {
+  return mapping_;
+}
+
+- (JavaLangInteger *)getDefault {
+  return JavaLangInteger_valueOfWithInt_(0);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 0, -1, -1 },
+    { NULL, "LJavaLangInteger;", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getMapping);
+  methods[2].selector = @selector(getDefault);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "mapping_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 1, -1 },
+  };
+  static const void *ptrTable[] = { "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASViewGroupImpl;" };
+  static const J2ObjcClassInfo _ASViewGroupImpl_LayoutTransition = { "LayoutTransition", "com.ashera.layout", ptrTable, methods, fields, 7, 0x18, 3, 1, 2, -1, -1, -1, -1 };
+  return &_ASViewGroupImpl_LayoutTransition;
+}
+
+@end
+
+void ASViewGroupImpl_LayoutTransition_init(ASViewGroupImpl_LayoutTransition *self) {
+  ASAbstractBitFlagConverter_init(self);
+  self->mapping_ = new_JavaUtilHashMap_init();
+  {
+    (void) [self->mapping_ putWithId:@"change_appearing" withId:JavaLangInteger_valueOfWithInt_((jint) 0x01)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"change_disappearing" withId:JavaLangInteger_valueOfWithInt_((jint) 0x02)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"appearing" withId:JavaLangInteger_valueOfWithInt_((jint) 0x04)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"disappearing" withId:JavaLangInteger_valueOfWithInt_((jint) 0x08)];
+    (void) [((id<JavaUtilMap>) nil_chk(self->mapping_)) putWithId:@"changing" withId:JavaLangInteger_valueOfWithInt_((jint) 0x10)];
+  }
+}
+
+ASViewGroupImpl_LayoutTransition *new_ASViewGroupImpl_LayoutTransition_init() {
+  J2OBJC_NEW_IMPL(ASViewGroupImpl_LayoutTransition, init)
+}
+
+ASViewGroupImpl_LayoutTransition *create_ASViewGroupImpl_LayoutTransition_init() {
+  J2OBJC_CREATE_IMPL(ASViewGroupImpl_LayoutTransition, init)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_LayoutTransition)
 
 @implementation ASViewGroupImpl_LayoutMode
 
@@ -1455,6 +1675,42 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
+
+- (id)setAnimateLayoutChangesWithBoolean:(jboolean)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"animateLayoutChanges"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
+  return self;
+}
+
+- (id)setLayoutTransitionWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layoutTransition"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (id)setLayoutTransitionDurationWithInt:(jint)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layoutTransitionDuration"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
+  return self;
+}
+
+- (id)setAnimateParentHierarchyWithBoolean:(jboolean)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"animateParentHierarchy"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
+  return self;
+}
 
 - (id)setListitemWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"listitem"];
@@ -1743,87 +1999,95 @@ J2OBJC_IGNORE_DESIGNATED_END
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 0, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 3, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 4, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 5, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 4, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 6, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 4, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 7, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 4, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 8, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 4, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 3, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 6, 7, -1, 8, -1, -1 },
     { NULL, "LNSObject;", 0x1, 9, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 10, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 11, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 10, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 11, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 12, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 13, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 13, 14, -1, 15, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 16, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 14, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 17, 14, -1, 15, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 15, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 18, 14, -1, 15, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 4, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 16, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 19, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 20, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 17, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 18, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 19, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 20, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 21, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 22, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 23, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 24, 1, -1, 2, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 25, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 26, 4, -1, 5, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 27, 4, -1, 5, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
-  methods[1].selector = @selector(setListitemWithNSString:);
-  methods[2].selector = @selector(setPaddingWithNSString:);
-  methods[3].selector = @selector(tryGetPaddingBottom);
-  methods[4].selector = @selector(getPaddingBottom);
-  methods[5].selector = @selector(setPaddingBottomWithNSString:);
-  methods[6].selector = @selector(tryGetPaddingRight);
-  methods[7].selector = @selector(getPaddingRight);
-  methods[8].selector = @selector(setPaddingRightWithNSString:);
-  methods[9].selector = @selector(tryGetPaddingLeft);
-  methods[10].selector = @selector(getPaddingLeft);
-  methods[11].selector = @selector(setPaddingLeftWithNSString:);
-  methods[12].selector = @selector(tryGetPaddingStart);
-  methods[13].selector = @selector(getPaddingStart);
-  methods[14].selector = @selector(setPaddingStartWithNSString:);
-  methods[15].selector = @selector(tryGetPaddingEnd);
-  methods[16].selector = @selector(getPaddingEnd);
-  methods[17].selector = @selector(setPaddingEndWithNSString:);
-  methods[18].selector = @selector(tryGetPaddingTop);
-  methods[19].selector = @selector(getPaddingTop);
-  methods[20].selector = @selector(setPaddingTopWithNSString:);
-  methods[21].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[22].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[23].selector = @selector(tryGetAddStatesFromChildren);
-  methods[24].selector = @selector(isAddStatesFromChildren);
-  methods[25].selector = @selector(setAddStatesFromChildrenWithBoolean:);
-  methods[26].selector = @selector(setOnChildViewAddedWithNSString:);
-  methods[27].selector = @selector(tryGetClipChildren);
-  methods[28].selector = @selector(isClipChildren);
-  methods[29].selector = @selector(setClipChildrenWithBoolean:);
-  methods[30].selector = @selector(tryGetClipToPadding);
-  methods[31].selector = @selector(isClipToPadding);
-  methods[32].selector = @selector(setClipToPaddingWithBoolean:);
-  methods[33].selector = @selector(tryGetLayoutMode);
-  methods[34].selector = @selector(getLayoutMode);
-  methods[35].selector = @selector(setLayoutModeWithNSString:);
-  methods[36].selector = @selector(setOnChildViewRemovedWithNSString:);
-  methods[37].selector = @selector(setChildXmlWithNSString:);
+  methods[1].selector = @selector(setAnimateLayoutChangesWithBoolean:);
+  methods[2].selector = @selector(setLayoutTransitionWithNSString:);
+  methods[3].selector = @selector(setLayoutTransitionDurationWithInt:);
+  methods[4].selector = @selector(setAnimateParentHierarchyWithBoolean:);
+  methods[5].selector = @selector(setListitemWithNSString:);
+  methods[6].selector = @selector(setPaddingWithNSString:);
+  methods[7].selector = @selector(tryGetPaddingBottom);
+  methods[8].selector = @selector(getPaddingBottom);
+  methods[9].selector = @selector(setPaddingBottomWithNSString:);
+  methods[10].selector = @selector(tryGetPaddingRight);
+  methods[11].selector = @selector(getPaddingRight);
+  methods[12].selector = @selector(setPaddingRightWithNSString:);
+  methods[13].selector = @selector(tryGetPaddingLeft);
+  methods[14].selector = @selector(getPaddingLeft);
+  methods[15].selector = @selector(setPaddingLeftWithNSString:);
+  methods[16].selector = @selector(tryGetPaddingStart);
+  methods[17].selector = @selector(getPaddingStart);
+  methods[18].selector = @selector(setPaddingStartWithNSString:);
+  methods[19].selector = @selector(tryGetPaddingEnd);
+  methods[20].selector = @selector(getPaddingEnd);
+  methods[21].selector = @selector(setPaddingEndWithNSString:);
+  methods[22].selector = @selector(tryGetPaddingTop);
+  methods[23].selector = @selector(getPaddingTop);
+  methods[24].selector = @selector(setPaddingTopWithNSString:);
+  methods[25].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[26].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[27].selector = @selector(tryGetAddStatesFromChildren);
+  methods[28].selector = @selector(isAddStatesFromChildren);
+  methods[29].selector = @selector(setAddStatesFromChildrenWithBoolean:);
+  methods[30].selector = @selector(setOnChildViewAddedWithNSString:);
+  methods[31].selector = @selector(tryGetClipChildren);
+  methods[32].selector = @selector(isClipChildren);
+  methods[33].selector = @selector(setClipChildrenWithBoolean:);
+  methods[34].selector = @selector(tryGetClipToPadding);
+  methods[35].selector = @selector(isClipToPadding);
+  methods[36].selector = @selector(setClipToPaddingWithBoolean:);
+  methods[37].selector = @selector(tryGetLayoutMode);
+  methods[38].selector = @selector(getLayoutMode);
+  methods[39].selector = @selector(setLayoutModeWithNSString:);
+  methods[40].selector = @selector(setOnChildViewRemovedWithNSString:);
+  methods[41].selector = @selector(setChildXmlWithNSString:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "setListitem", "LNSString;", "(Ljava/lang/String;)TT;", "setPadding", "()TT;", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setAddStatesFromChildren", "Z", "(Z)TT;", "setOnChildViewAdded", "setClipChildren", "setClipToPadding", "setLayoutMode", "setOnChildViewRemoved", "setChildXml", "LASViewGroupImpl;", "<T:Ljava/lang/Object;>Lcom/ashera/layout/ViewGroupModelImpl$ViewGroupModelCommandBuilder<TT;>;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl_ViewGroupCommandBuilder = { "ViewGroupCommandBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x409, 38, 0, 22, -1, -1, 23, -1 };
+  static const void *ptrTable[] = { "setAnimateLayoutChanges", "Z", "(Z)TT;", "setLayoutTransition", "LNSString;", "(Ljava/lang/String;)TT;", "setLayoutTransitionDuration", "I", "(I)TT;", "setAnimateParentHierarchy", "setListitem", "setPadding", "()TT;", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setAddStatesFromChildren", "setOnChildViewAdded", "setClipChildren", "setClipToPadding", "setLayoutMode", "setOnChildViewRemoved", "setChildXml", "LASViewGroupImpl;", "<T:Ljava/lang/Object;>Lcom/ashera/layout/ViewGroupModelImpl$ViewGroupModelCommandBuilder<TT;>;" };
+  static const J2ObjcClassInfo _ASViewGroupImpl_ViewGroupCommandBuilder = { "ViewGroupCommandBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x409, 42, 0, 28, -1, -1, 29, -1 };
   return &_ASViewGroupImpl_ViewGroupCommandBuilder;
 }
 
@@ -1896,6 +2160,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_ViewGroupCommandBuilderInternal
 
 - (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)getBuilder {
   return ASViewGroupImpl_ViewGroupBean_getBuilder(self);
+}
+
+- (void)setAnimateLayoutChangesWithBoolean:(jboolean)value {
+  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setAnimateLayoutChangesWithBoolean:value])) executeWithBoolean:true];
+}
+
+- (void)setLayoutTransitionWithNSString:(NSString *)value {
+  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setLayoutTransitionWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setLayoutTransitionDurationWithInt:(jint)value {
+  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setLayoutTransitionDurationWithInt:value])) executeWithBoolean:true];
+}
+
+- (void)setAnimateParentHierarchyWithBoolean:(jboolean)value {
+  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setAnimateParentHierarchyWithBoolean:value])) executeWithBoolean:true];
 }
 
 - (void)setListitemWithNSString:(NSString *)value {
@@ -2011,71 +2291,79 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_ViewGroupCommandBuilderInternal
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, "LASViewGroupImpl_ViewGroupCommandBuilderInternal;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 4, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 4, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 18, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 19, 4, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithASIWidget:);
   methods[1].selector = @selector(getBuilder);
-  methods[2].selector = @selector(setListitemWithNSString:);
-  methods[3].selector = @selector(setPaddingWithNSString:);
-  methods[4].selector = @selector(getPaddingBottom);
-  methods[5].selector = @selector(setPaddingBottomWithNSString:);
-  methods[6].selector = @selector(getPaddingRight);
-  methods[7].selector = @selector(setPaddingRightWithNSString:);
-  methods[8].selector = @selector(getPaddingLeft);
-  methods[9].selector = @selector(setPaddingLeftWithNSString:);
-  methods[10].selector = @selector(getPaddingStart);
-  methods[11].selector = @selector(setPaddingStartWithNSString:);
-  methods[12].selector = @selector(getPaddingEnd);
-  methods[13].selector = @selector(setPaddingEndWithNSString:);
-  methods[14].selector = @selector(getPaddingTop);
-  methods[15].selector = @selector(setPaddingTopWithNSString:);
-  methods[16].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[17].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[18].selector = @selector(isAddStatesFromChildren);
-  methods[19].selector = @selector(setAddStatesFromChildrenWithBoolean:);
-  methods[20].selector = @selector(setOnChildViewAddedWithNSString:);
-  methods[21].selector = @selector(isClipChildren);
-  methods[22].selector = @selector(setClipChildrenWithBoolean:);
-  methods[23].selector = @selector(isClipToPadding);
-  methods[24].selector = @selector(setClipToPaddingWithBoolean:);
-  methods[25].selector = @selector(getLayoutMode);
-  methods[26].selector = @selector(setLayoutModeWithNSString:);
-  methods[27].selector = @selector(setOnChildViewRemovedWithNSString:);
-  methods[28].selector = @selector(setChildXmlWithNSString:);
+  methods[2].selector = @selector(setAnimateLayoutChangesWithBoolean:);
+  methods[3].selector = @selector(setLayoutTransitionWithNSString:);
+  methods[4].selector = @selector(setLayoutTransitionDurationWithInt:);
+  methods[5].selector = @selector(setAnimateParentHierarchyWithBoolean:);
+  methods[6].selector = @selector(setListitemWithNSString:);
+  methods[7].selector = @selector(setPaddingWithNSString:);
+  methods[8].selector = @selector(getPaddingBottom);
+  methods[9].selector = @selector(setPaddingBottomWithNSString:);
+  methods[10].selector = @selector(getPaddingRight);
+  methods[11].selector = @selector(setPaddingRightWithNSString:);
+  methods[12].selector = @selector(getPaddingLeft);
+  methods[13].selector = @selector(setPaddingLeftWithNSString:);
+  methods[14].selector = @selector(getPaddingStart);
+  methods[15].selector = @selector(setPaddingStartWithNSString:);
+  methods[16].selector = @selector(getPaddingEnd);
+  methods[17].selector = @selector(setPaddingEndWithNSString:);
+  methods[18].selector = @selector(getPaddingTop);
+  methods[19].selector = @selector(setPaddingTopWithNSString:);
+  methods[20].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[21].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[22].selector = @selector(isAddStatesFromChildren);
+  methods[23].selector = @selector(setAddStatesFromChildrenWithBoolean:);
+  methods[24].selector = @selector(setOnChildViewAddedWithNSString:);
+  methods[25].selector = @selector(isClipChildren);
+  methods[26].selector = @selector(setClipChildrenWithBoolean:);
+  methods[27].selector = @selector(isClipToPadding);
+  methods[28].selector = @selector(setClipToPaddingWithBoolean:);
+  methods[29].selector = @selector(getLayoutMode);
+  methods[30].selector = @selector(setLayoutModeWithNSString:);
+  methods[31].selector = @selector(setOnChildViewRemovedWithNSString:);
+  methods[32].selector = @selector(setChildXmlWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "commandBuilder_ViewGroupBean_", "LASViewGroupImpl_ViewGroupCommandBuilderInternal;", .constantValue.asLong = 0, 0x2, 20, -1, -1, -1 },
+    { "commandBuilder_ViewGroupBean_", "LASViewGroupImpl_ViewGroupCommandBuilderInternal;", .constantValue.asLong = 0, 0x2, 25, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASIWidget;", "setListitem", "LNSString;", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setAddStatesFromChildren", "Z", "setOnChildViewAdded", "setClipChildren", "setClipToPadding", "setLayoutMode", "setOnChildViewRemoved", "setChildXml", "commandBuilder", "LASViewGroupImpl;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl_ViewGroupBean = { "ViewGroupBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x9, 29, 1, 21, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASIWidget;", "setAnimateLayoutChanges", "Z", "setLayoutTransition", "LNSString;", "setLayoutTransitionDuration", "I", "setAnimateParentHierarchy", "setListitem", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setAddStatesFromChildren", "setOnChildViewAdded", "setClipChildren", "setClipToPadding", "setLayoutMode", "setOnChildViewRemoved", "setChildXml", "commandBuilder", "LASViewGroupImpl;" };
+  static const J2ObjcClassInfo _ASViewGroupImpl_ViewGroupBean = { "ViewGroupBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x9, 33, 1, 26, -1, -1, -1, -1 };
   return &_ASViewGroupImpl_ViewGroupBean;
 }
 

@@ -501,6 +501,7 @@ public class ProgressBarImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ProgressBarImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ProgressBarExt.class;
@@ -796,7 +797,6 @@ return progressBar.getSecondaryProgressTintMode();				}
 
     	}
     }
-    
 	
 private ProgressBarCommandBuilder builder;
 private ProgressBarBean bean;
@@ -1153,6 +1153,6 @@ public void incrementSecondaryProgressBy(int value) {
 }
 
 
-    
+	
 	//end - body
 }

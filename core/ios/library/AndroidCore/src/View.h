@@ -267,6 +267,8 @@
 
 - (jint)getVerticalScrollbarWidth;
 
+- (ADView_ViewRootImpl *)getViewRootImpl;
+
 - (ADViewTreeObserver *)getViewTreeObserver;
 
 - (jint)getVisibility;
@@ -480,6 +482,8 @@
 
 - (void)setBackgroundTintListWithADColorStateList:(ADColorStateList *)tint;
 
+- (void)setBottomWithInt:(jint)bottom;
+
 - (void)setClickableWithBoolean:(jboolean)clickable;
 
 - (void)setDragCanAcceptWithBoolean:(jboolean)hovered;
@@ -520,6 +524,8 @@
 
 - (void)setLayoutParamsWithADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
+- (void)setLeftWithInt:(jint)left;
+
 - (void)setLongClickableWithBoolean:(jboolean)longClickable;
 
 - (void)setMinimumHeightWithInt:(jint)minHeight;
@@ -549,6 +555,8 @@
 
 - (void)setPressedWithBoolean:(jboolean)pressed;
 
+- (void)setRightWithInt:(jint)right;
+
 - (void)setRotationWithFloat:(jfloat)rotation;
 
 - (void)setRotationXWithFloat:(jfloat)rotationX;
@@ -571,6 +579,8 @@
 - (void)setTextAlignmentWithInt:(jint)textAlignment;
 
 - (void)setTextDirectionWithInt:(jint)textDirection;
+
+- (void)setTopWithInt:(jint)top;
 
 - (void)setTranslationXWithFloat:(jfloat)translationX;
 
@@ -712,8 +722,6 @@
 - (void)dispatchDetachedFromWindow;
 
 - (ADView_ListenerInfo *)getListenerInfo;
-
-- (ADView_ViewRootImpl *)getViewRootImpl;
 
 - (jboolean)hasIdentityMatrix;
 
@@ -2142,6 +2150,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ThreadedRenderer)
 @class ADRect;
 @class ADView;
 @class ADViewTreeObserver;
+@class ADView_ViewRootImpl;
 @protocol JavaUtilList;
 
 @interface ADView_AttachInfo : NSObject {
@@ -2151,6 +2160,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_ThreadedRenderer)
   ADViewTreeObserver *mTreeObserver_;
   ADView *mRootView_;
   jboolean mHardwareAccelerationRequested_;
+  ADView_ViewRootImpl *mViewRootImpl_;
   jint mWindowVisibility_;
   ADRect *mTmpInvalRect_;
   id mViewRequestingLayout_;
@@ -2169,6 +2179,7 @@ J2OBJC_FIELD_SETTER(ADView_AttachInfo, mHandler_, ADHandler *)
 J2OBJC_FIELD_SETTER(ADView_AttachInfo, mScrollContainers_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ADView_AttachInfo, mTreeObserver_, ADViewTreeObserver *)
 J2OBJC_FIELD_SETTER(ADView_AttachInfo, mRootView_, ADView *)
+J2OBJC_FIELD_SETTER(ADView_AttachInfo, mViewRootImpl_, ADView_ViewRootImpl *)
 J2OBJC_FIELD_SETTER(ADView_AttachInfo, mTmpInvalRect_, ADRect *)
 J2OBJC_FIELD_SETTER(ADView_AttachInfo, mViewRequestingLayout_, id)
 
@@ -2253,9 +2264,14 @@ J2OBJC_TYPE_LITERAL_HEADER(ADView_TextUtils)
 #if !defined (ADView_ViewRootImpl_) && (INCLUDE_ALL_View || defined(INCLUDE_ADView_ViewRootImpl))
 #define ADView_ViewRootImpl_
 
+@class ADLayoutTransition;
 @class ADView;
 
 @interface ADView_ViewRootImpl : NSObject
+
+#pragma mark Public
+
+- (void)requestTransitionStartWithADLayoutTransition:(ADLayoutTransition *)transition;
 
 #pragma mark Package-Private
 

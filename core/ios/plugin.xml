@@ -591,6 +591,8 @@
      <source-file src="library/AndroidCore/src/LayoutDirection.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/LayoutInflater.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="library/AndroidCore/src/LayoutInflater.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidCore/src/LayoutTransition.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="library/AndroidCore/src/LayoutTransition.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/LinearInterpolator.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="library/AndroidCore/src/LinearInterpolator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/LinearLayout.h" target-dir="CorePlugin/AndroidCore/src"/>

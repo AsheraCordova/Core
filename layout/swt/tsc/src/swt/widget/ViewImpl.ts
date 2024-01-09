@@ -170,6 +170,10 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
+
+
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -417,6 +421,18 @@ export abstract class ViewImpl<T> {
 	@Type(() => CommandAttr)
 	@Expose({ name: "translationY" })
 	translationY!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "left" })
+	left!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "right" })
+	right!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "top" })
+	top!:CommandAttr<string>| undefined;
+	@Type(() => CommandAttr)
+	@Expose({ name: "bottom" })
+	bottom!:CommandAttr<string>| undefined;
 
 	@Exclude()
 	protected thisPointer: T;	
@@ -515,6 +531,10 @@ export abstract class ViewImpl<T> {
 		this.onSwiped = undefined;
 		this.translationX = undefined;
 		this.translationY = undefined;
+		this.left = undefined;
+		this.right = undefined;
+		this.top = undefined;
+		this.bottom = undefined;
 		this.orderGet = 0;
 		this.orderSet = 0;
 		this.flush = false;
@@ -2265,6 +2285,134 @@ payload : any) : T {
 		this.translationY.setValue(value);
 		this.orderSet++;
 		this.translationY.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetLeft() : T {
+		this.resetIfRequired();
+		if (this.left == null || this.left == undefined) {
+			this.left = new CommandAttr<string>()
+		}
+		
+		this.left.setGetter(true);
+		this.orderGet++;
+		this.left.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getLeft() : string {
+		if (this.left == null || this.left == undefined) {
+			this.left = new CommandAttr<string>();
+		}
+		return this.left.getCommandReturnValue();
+	}
+	public setLeft(value : string) : T {
+		this.resetIfRequired();
+		if (this.left == null || this.left == undefined) {
+			this.left = new CommandAttr<string>();
+		}
+		
+		this.left.setSetter(true);
+		this.left.setValue(value);
+		this.orderSet++;
+		this.left.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetRight() : T {
+		this.resetIfRequired();
+		if (this.right == null || this.right == undefined) {
+			this.right = new CommandAttr<string>()
+		}
+		
+		this.right.setGetter(true);
+		this.orderGet++;
+		this.right.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getRight() : string {
+		if (this.right == null || this.right == undefined) {
+			this.right = new CommandAttr<string>();
+		}
+		return this.right.getCommandReturnValue();
+	}
+	public setRight(value : string) : T {
+		this.resetIfRequired();
+		if (this.right == null || this.right == undefined) {
+			this.right = new CommandAttr<string>();
+		}
+		
+		this.right.setSetter(true);
+		this.right.setValue(value);
+		this.orderSet++;
+		this.right.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetTop() : T {
+		this.resetIfRequired();
+		if (this.top == null || this.top == undefined) {
+			this.top = new CommandAttr<string>()
+		}
+		
+		this.top.setGetter(true);
+		this.orderGet++;
+		this.top.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getTop() : string {
+		if (this.top == null || this.top == undefined) {
+			this.top = new CommandAttr<string>();
+		}
+		return this.top.getCommandReturnValue();
+	}
+	public setTop(value : string) : T {
+		this.resetIfRequired();
+		if (this.top == null || this.top == undefined) {
+			this.top = new CommandAttr<string>();
+		}
+		
+		this.top.setSetter(true);
+		this.top.setValue(value);
+		this.orderSet++;
+		this.top.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetBottom() : T {
+		this.resetIfRequired();
+		if (this.bottom == null || this.bottom == undefined) {
+			this.bottom = new CommandAttr<string>()
+		}
+		
+		this.bottom.setGetter(true);
+		this.orderGet++;
+		this.bottom.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getBottom() : string {
+		if (this.bottom == null || this.bottom == undefined) {
+			this.bottom = new CommandAttr<string>();
+		}
+		return this.bottom.getCommandReturnValue();
+	}
+	public setBottom(value : string) : T {
+		this.resetIfRequired();
+		if (this.bottom == null || this.bottom == undefined) {
+			this.bottom = new CommandAttr<string>();
+		}
+		
+		this.bottom.setSetter(true);
+		this.bottom.setValue(value);
+		this.orderSet++;
+		this.bottom.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

@@ -458,6 +458,7 @@ public class ChronometerImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ChronometerImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ChronometerExt.class;
@@ -2752,7 +2753,6 @@ public java.util.Map<String, Object> getOnChronometerTickEventObj(Chronometer ch
 
     	}
     }
-    
 	
 private ChronometerCommandBuilder builder;
 private ChronometerBean bean;
@@ -4145,7 +4145,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	private native void createChronoLabel(Map<String, Object> params, r.android.widget.TextView measurableView)/*-[

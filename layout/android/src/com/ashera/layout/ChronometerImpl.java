@@ -463,6 +463,7 @@ public class ChronometerImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ChronometerImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ChronometerExt.class;
@@ -2070,7 +2071,6 @@ public java.util.Map<String, Object> getOnChronometerTickEventObj(Chronometer ch
 
     	}
     }
-    
 	
 private ChronometerCommandBuilder builder;
 private ChronometerBean bean;
@@ -3487,7 +3487,7 @@ public void setPaddingVertical(String value) {
 }
 
 
-    
+	
 	//end - body
 	private void setOnChronometerTickListener(Chronometer chronometer, Object objValue) {
 		chronometer.setOnChronometerTickListener((Chronometer.OnChronometerTickListener) objValue);

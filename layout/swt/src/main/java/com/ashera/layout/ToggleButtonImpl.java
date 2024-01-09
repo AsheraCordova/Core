@@ -388,6 +388,7 @@ public class ToggleButtonImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ToggleButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ToggleButtonExt.class;
@@ -1738,7 +1739,9 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return button.isDisposed();
+	}
 	
 private ToggleButtonCommandBuilder builder;
 private ToggleButtonBean bean;
@@ -2685,7 +2688,7 @@ public void setGravity(String value) {
 }
 
 
-    
+	
 	//end - body
 	private int getType() {
 		return org.eclipse.swt.SWT.TOGGLE | org.eclipse.swt.SWT.MULTI | org.eclipse.swt.SWT.WRAP;

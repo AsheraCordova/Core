@@ -350,6 +350,7 @@ public class WebViewImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(WebViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return WebViewExt.class;
@@ -724,7 +725,6 @@ public java.util.Map<String, Object> getOnReceivedErrorEventObj(View view,String
 
     	}
     }
-    
 	
 private WebViewCommandBuilder builder;
 private WebViewBean bean;
@@ -837,7 +837,7 @@ public void setOnReceivedError(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	private void nativeCreate(Map<String, Object> params) {

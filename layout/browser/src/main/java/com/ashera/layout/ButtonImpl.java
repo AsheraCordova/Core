@@ -483,6 +483,7 @@ public class ButtonImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ButtonExt.class;
@@ -2703,7 +2704,6 @@ return getTextColorHighlight();				}
 
     	}
     }
-    
 	
 private ButtonCommandBuilder builder;
 private ButtonBean bean;
@@ -3980,7 +3980,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 	
 	private void nativeCreate(Map<String, Object> params) {

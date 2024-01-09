@@ -409,11 +409,13 @@ public class CorePlugin implements IPlugin, ICore {
 
 	@Override
 	public void releaseNativeResources(List<Object> objects) {
-		for (Object object : objects) {
-        	if (object instanceof r.android.animation.Animator) {
-        		((r.android.animation.Animator) object).end();
-        	}
-        }
+		if (objects != null) {
+			for (Object object : objects) {
+	        	if (object instanceof r.android.animation.Animator) {
+	        		((r.android.animation.Animator) object).end();
+	        	}
+	        }
+		}
 	}
 
 	@Override

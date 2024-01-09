@@ -440,6 +440,7 @@ public class CheckBoxImpl extends BaseWidget implements IDrawable, ICustomMeasur
         public void stateNo() {
         	ViewImpl.stateNo(CheckBoxImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return CheckBoxExt.class;
@@ -2406,7 +2407,9 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return button.isDisposed();
+	}
 	
 private CheckBoxCommandBuilder builder;
 private CheckBoxBean bean;
@@ -3463,7 +3466,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	//start - checked

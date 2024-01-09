@@ -381,6 +381,7 @@ public class ButtonImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ButtonExt.class;
@@ -1424,7 +1425,9 @@ return getGravity();				}
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return button.isDisposed();
+	}
 	
 private ButtonCommandBuilder builder;
 private ButtonBean bean;
@@ -2281,7 +2284,7 @@ public void setGravity(String value) {
 }
 
 
-    
+	
 	//end - body
 	//start - codecopy
 	@Override

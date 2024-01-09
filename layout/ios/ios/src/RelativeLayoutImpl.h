@@ -245,6 +245,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RemoveRule)
 
 - (void)drawableStateChanged;
 
+- (void)endViewTransitionWithADView:(ADView *)view;
+
 - (void)executeWithNSString:(NSString *)method
           withNSObjectArray:(IOSObjectArray *)canvas;
 

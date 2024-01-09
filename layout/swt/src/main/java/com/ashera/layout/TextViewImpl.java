@@ -463,6 +463,7 @@ public class TextViewImpl extends BaseWidget implements IDrawable, IHasMultiNati
         public void stateNo() {
         	ViewImpl.stateNo(TextViewImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return TextViewExt.class;
@@ -1253,7 +1254,9 @@ return getLastBaselineToBottomHeight();				}
 
     	}
     }
-    
+	public boolean isWidgetDisposed() {
+		return label.isDisposed();
+	}
 	
 private TextViewCommandBuilder builder;
 private TextViewBean bean;
@@ -2400,7 +2403,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 	//start - codecopy
 	private Composite wrapperComposite;

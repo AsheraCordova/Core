@@ -522,6 +522,7 @@ public class LinkImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(LinkImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return LinkExt.class;
@@ -2764,7 +2765,6 @@ return [JavaLangBoolean valueOfWithBoolean :((ASUILabel*) uiView_).userInteracti
 
     	}
     }
-    
 	
 private LinkCommandBuilder builder;
 private LinkBean bean;
@@ -4287,7 +4287,7 @@ public void setTextAppearance(String value) {
 }
 
 
-    
+	
 	//end - body
 
 	private native void createLabel(Map<String, Object> params, r.android.widget.TextView measurableView)/*-[

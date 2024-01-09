@@ -525,6 +525,7 @@ public class ButtonImpl extends BaseWidget {
         public void stateNo() {
         	ViewImpl.stateNo(ButtonImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return ButtonExt.class;
@@ -1943,7 +1944,6 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
 
     	}
     }
-    
 	
 private ButtonCommandBuilder builder;
 private ButtonBean bean;
@@ -3312,6 +3312,6 @@ public void setTextFormat(String value) {
 }
 
 
-    
+	
 	//end - body
 }

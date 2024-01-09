@@ -596,6 +596,7 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
         public void stateNo() {
         	ViewImpl.stateNo(EditTextImpl.this);
         }
+     
 	}	@Override
 	public Class getViewClass() {
 		return EditTextExt.class;
@@ -2299,7 +2300,6 @@ public java.util.Map<String, Object> getOnEditorActionEventObj(TextView v,int ac
 
     	}
     }
-    
 	
 private EditTextCommandBuilder builder;
 private EditTextBean bean;
@@ -3948,7 +3948,7 @@ public void setPaddingVertical(String value) {
 }
 
 
-    
+	
 	//end - body
 	//start - edittext
 	private static final int SIGNED = 2;
