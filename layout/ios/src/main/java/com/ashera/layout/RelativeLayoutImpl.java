@@ -186,7 +186,7 @@ public class RelativeLayoutImpl extends BaseHasWidgets {
         }    
         return remove;
     }
-	
+
 	private void nativeRemoveView(IWidget widget) {
 		r.android.animation.LayoutTransition layoutTransition = relativeLayout.getLayoutTransition();
 		if (layoutTransition != null && (

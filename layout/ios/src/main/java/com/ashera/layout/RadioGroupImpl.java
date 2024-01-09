@@ -160,7 +160,7 @@ public class RadioGroupImpl extends BaseHasWidgets implements com.ashera.validat
         }    
         return remove;
     }
-	
+
 	private void nativeRemoveView(IWidget widget) {
 		r.android.animation.LayoutTransition layoutTransition = radioGroup.getLayoutTransition();
 		if (layoutTransition != null && (

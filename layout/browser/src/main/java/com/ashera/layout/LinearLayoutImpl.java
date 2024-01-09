@@ -145,7 +145,7 @@ public class LinearLayoutImpl extends BaseHasWidgets {
         }    
         return remove;
     }
-	
+
 	private void nativeRemoveView(IWidget widget) {
 		r.android.animation.LayoutTransition layoutTransition = linearLayout.getLayoutTransition();
 		if (layoutTransition != null && (

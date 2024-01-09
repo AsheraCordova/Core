@@ -112,7 +112,7 @@ public class ScrollViewImpl extends BaseHasWidgets {
         }    
         return remove;
     }
-	
+
 	private void nativeRemoveView(IWidget widget) {
 		r.android.animation.LayoutTransition layoutTransition = scrollView.getLayoutTransition();
 		if (layoutTransition != null && (

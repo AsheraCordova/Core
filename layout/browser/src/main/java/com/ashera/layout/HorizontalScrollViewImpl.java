@@ -99,7 +99,7 @@ public class HorizontalScrollViewImpl extends BaseHasWidgets {
         }    
         return remove;
     }
-	
+
 	private void nativeRemoveView(IWidget widget) {
 		r.android.animation.LayoutTransition layoutTransition = horizontalScrollView.getLayoutTransition();
 		if (layoutTransition != null && (

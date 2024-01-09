@@ -164,7 +164,7 @@ public class RootImpl extends BaseHasWidgets implements com.ashera.widget.IRoot 
         }    
         return remove;
     }
-	
+
 	private void nativeRemoveView(IWidget widget) {
 		r.android.animation.LayoutTransition layoutTransition = relativeLayout.getLayoutTransition();
 		if (layoutTransition != null && (

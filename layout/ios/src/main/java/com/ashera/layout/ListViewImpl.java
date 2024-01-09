@@ -196,7 +196,7 @@ public class ListViewImpl extends BaseHasWidgets {
 		return listView;
 	}
 
-	
+
 	private void nativeRemoveView(IWidget widget) {
 		r.android.animation.LayoutTransition layoutTransition = listView.getLayoutTransition();
 		if (layoutTransition != null && (

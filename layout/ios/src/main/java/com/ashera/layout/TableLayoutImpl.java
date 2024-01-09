@@ -110,7 +110,7 @@ public class TableLayoutImpl extends BaseHasWidgets {
         }    
         return remove;
     }
-	
+
 	private void nativeRemoveView(IWidget widget) {
 		r.android.animation.LayoutTransition layoutTransition = tableLayout.getLayoutTransition();
 		if (layoutTransition != null && (
