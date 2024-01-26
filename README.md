@@ -466,6 +466,8 @@ swtResizeOptions 	| SWT image is resized to fit the view. SWT image can resized 
 Name                	| Description
 -------------       	| -------------
 childXml       		| XML from javascript can be set on the ViewGroup. The xml will be added as child of the viewgroup.
+layoutTransition 	| Pipe separated values which can accept the values : change_appearing, change_disappearing, appearing, disappearing, changing. e.g.  layoutTransition = "change_appearing|change_disappearing|appearing|disappearing"
+layoutTransitionDuration| Duration for which the transition animation needs to be applied
 
 ### Relativelayout
 Name                	| Description
@@ -557,12 +559,3 @@ onPageFinished		| Handler which is called when the webview has loaded the page.
 onPageStarted		| Handler which is called when the webview has is about to load the page.
 onReceivedError		| Handler which is called when the webview has failed to load the page.
 swtExpectedResponseText	| SWT webview requires a response text to be configured so that when the webview fails to load, it can compare the text and call the appropriate handler.
-
-## Animation
-Auto-animate layout updates on view group is supported by Ashera using LayoutTransition class of android. Android only provides animateLayoutChanges attribute which can be set in xml and other attributes have to be done programatically. Ashera add few more attributes as mentioned below to set modify the layout transition object.
-
-Name                	| Description
--------------       	| -------------
-animateParentHierarchy 	| https://developer.android.com/reference/android/animation/LayoutTransition#setAnimateParentHierarchy(boolean)
-layoutTransition 	| Pipe separated values which can accept the values : change_appearing, change_disappearing, appearing, disappearing, changing. e.g.  layoutTransition = "change_appearing|change_disappearing|appearing|disappearing"
-layoutTransitionDuration| Duration for which the transition animation needs to be applied
