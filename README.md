@@ -486,7 +486,7 @@ textFormat 		| Helps to format text. It uses String.format function. e.g. Rs %s.
 ### Checkbox
 Name                		| Description
 -------------       		| -------------
-butonSize       		| Set the minimum width and height for the button. Default is 20.
+buttonSize       		| Set the minimum width and height for the button. Default is 20.
 buttonPadding 			| Sets the padding and marginLeft for the button.
 swtCheckBoxHorizontalPadding 	| Sets the Horizontal padding for the button.
 
