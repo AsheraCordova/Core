@@ -330,7 +330,9 @@ return layoutParams.gravity;			}
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override
@@ -544,6 +546,29 @@ return getScrollY();			}
 	private void postOnMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		scrollView.adjustPaddingIfScrollBarPresent(widthMeasureSpec, heightMeasureSpec, thumbWidth);
 	}
+	
+
+
+	private View.OnScrollChangeListener onScrollChangeListener; 
+	private int oldScrollY = 0;
+
+	private void handleScroll(int selection, int detail) {
+		View view = (View) asWidget();
+		
+		if (onScrollChangeListener != null) {
+			onScrollChangeListener.onScrollChange(view, 0, selection, 0, oldScrollY);
+		}
+        oldScrollY = selection;
+        view.getViewTreeObserver().dispatchOnScrollChanged();
+	}
+	private void setOnScroll(Object objValue) {
+		if (objValue instanceof String) {
+			onScrollChangeListener = new OnScrollChangeListener(this, (String) objValue);
+		} else {
+			onScrollChangeListener = (View.OnScrollChangeListener) objValue;
+		}
+	}
+	
 	
 
 	@SuppressLint("NewApi")
@@ -844,42 +869,36 @@ return this;}
 
 	//end - body
 
-
+	//start - scrollview
 	@Override
 	public Object asNativeWidget() {
 		return htmlElement;
 	}
-	
+
+    
+    @org.teavm.jso.JSBody(params = {}, script = "return window.getScrollbarWidth();")
+    private static native int getScrollbarWidth();
+    @Override
+    public void initialized() {
+    	super.initialized();
+    	thumbWidth = getScrollbarWidth();
+    }
 	private void nativeCreate(Map<String, Object> params) {
 		htmlElement = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
 		htmlElement.getStyle().setProperty("overflow-y", "auto");
 		htmlElement.getStyle().setProperty("overflow-x", "hidden");
 		htmlElement.getStyle().setProperty("box-sizing", "border-box");
-	}
-	
-	
-	private void setOnScroll(Object objValue) {
-		View view = (View) asWidget();
-		View.OnScrollChangeListener onScrollChangeListener;
-		if (objValue instanceof String) {
-			onScrollChangeListener = new OnScrollChangeListener(this, (String) objValue);
-		} else {
-			onScrollChangeListener =(View.OnScrollChangeListener) objValue;
-		}
-
-    	ViewImpl.setOnListener(this, htmlElement, new org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.Event>() {
-    	    int oldScrollY = 0;
+		
+		ViewImpl.setOnListener(this, htmlElement, new org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.Event>() {
             @Override
             public void handleEvent(org.teavm.jso.dom.events.Event event) {
                 int selection = htmlElement.getScrollTop();
-                onScrollChangeListener.onScrollChange(view, 0, selection, 0, oldScrollY);
-                oldScrollY = selection;
-                view.getViewTreeObserver().dispatchOnScrollChanged();
+                handleScroll(selection, 1);
             }
     	    
     	}, "scroll", "scroll");
 	}
-
+	//end - scrollview
 	private void setScrollY(Object objValue) {
     	if (!isInitialised()) {
    		 org.teavm.jso.dom.html.HTMLDocument.current().addEventListener("DOMContentLoaded", new org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.Event>() {
@@ -897,13 +916,5 @@ return this;}
     private Object getScrollY() {
 		return htmlElement.getScrollTop();
 	}
-    
-    
-    @org.teavm.jso.JSBody(params = {}, script = "return window.getScrollbarWidth();")
-    private static native int getScrollbarWidth();
-    @Override
-    public void initialized() {
-    	super.initialized();
-    	thumbWidth = getScrollbarWidth();
-    }
+
 }

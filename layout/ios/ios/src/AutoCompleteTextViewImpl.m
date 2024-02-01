@@ -6667,7 +6667,9 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 }
 
 - (void)remeasure {
-  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+  if ([this$0_ getFragment] != nil) {
+    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+  }
 }
 
 - (void)removeFromParent {

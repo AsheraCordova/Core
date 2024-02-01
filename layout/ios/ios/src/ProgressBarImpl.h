@@ -362,6 +362,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -464,6 +466,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setMaxHeightWithNSString:(NSString *)arg0;
@@ -528,6 +532,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setProgressTintWithNSString:(NSString *)value;
 
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -545,6 +551,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -587,6 +595,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetBackgroundTint;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetBottom;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetClickable;
 
@@ -672,6 +682,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetLayoutDirection;
 
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetLeft;
+
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetLongClickable;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetMaxHeight;
@@ -704,6 +716,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetProgressTint;
 
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetRight;
+
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetRotation;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetRotationX;
@@ -719,6 +733,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASProgressBarImpl_ProgressBarExt)
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetTextAlignment;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetTextDirection;
+
+- (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetTop;
 
 - (ASProgressBarImpl_ProgressBarCommandBuilder *)tryGetTransformPivotX;
 

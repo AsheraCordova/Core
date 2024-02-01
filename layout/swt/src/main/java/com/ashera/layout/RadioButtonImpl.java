@@ -307,7 +307,9 @@ public class RadioButtonImpl extends BaseWidget implements IDrawable, ICustomMea
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

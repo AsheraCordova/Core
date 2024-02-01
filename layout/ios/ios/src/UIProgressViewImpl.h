@@ -380,6 +380,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -486,6 +488,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setMaxWithInt:(jint)value;
@@ -558,6 +562,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setProgressTintWithNSString:(NSString *)value;
 
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -575,6 +581,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -617,6 +625,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetBackgroundTint;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetBottom;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetClickable;
 
@@ -706,6 +716,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetLayoutDirection;
 
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetLeft;
+
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetLongClickable;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetMaxHeight;
@@ -740,6 +752,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetProgressTint;
 
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetRight;
+
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetRotation;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetRotationX;
@@ -755,6 +769,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUIProgressViewImpl_UIProgressViewExt)
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetTextAlignment;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetTextDirection;
+
+- (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetTop;
 
 - (ASUIProgressViewImpl_UIProgressViewCommandBuilder *)tryGetTransformPivotX;
 

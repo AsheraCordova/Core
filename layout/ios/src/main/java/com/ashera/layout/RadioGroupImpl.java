@@ -401,7 +401,9 @@ return layoutParams.weight;			}
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

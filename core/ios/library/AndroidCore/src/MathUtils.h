@@ -22,6 +22,22 @@
 
 - (instancetype)init;
 
++ (jdouble)clampWithDouble:(jdouble)value
+                withDouble:(jdouble)min
+                withDouble:(jdouble)max;
+
++ (jfloat)clampWithFloat:(jfloat)value
+               withFloat:(jfloat)min
+               withFloat:(jfloat)max;
+
++ (jint)clampWithInt:(jint)value
+             withInt:(jint)min
+             withInt:(jint)max;
+
++ (jlong)clampWithLong:(jlong)value
+              withLong:(jlong)min
+              withLong:(jlong)max;
+
 + (jfloat)constrainWithFloat:(jfloat)amount
                    withFloat:(jfloat)low
                    withFloat:(jfloat)high;
@@ -43,6 +59,14 @@ FOUNDATION_EXPORT ADMathUtils *create_ADMathUtils_init(void);
 FOUNDATION_EXPORT jint ADMathUtils_constrainWithInt_withInt_withInt_(jint amount, jint low, jint high);
 
 FOUNDATION_EXPORT jfloat ADMathUtils_constrainWithFloat_withFloat_withFloat_(jfloat amount, jfloat low, jfloat high);
+
+FOUNDATION_EXPORT jfloat ADMathUtils_clampWithFloat_withFloat_withFloat_(jfloat value, jfloat min, jfloat max);
+
+FOUNDATION_EXPORT jint ADMathUtils_clampWithInt_withInt_withInt_(jint value, jint min, jint max);
+
+FOUNDATION_EXPORT jdouble ADMathUtils_clampWithDouble_withDouble_withDouble_(jdouble value, jdouble min, jdouble max);
+
+FOUNDATION_EXPORT jlong ADMathUtils_clampWithLong_withLong_withLong_(jlong value, jlong min, jlong max);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADMathUtils)
 

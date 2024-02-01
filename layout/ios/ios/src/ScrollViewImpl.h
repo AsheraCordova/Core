@@ -339,6 +339,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -350,6 +354,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setBackgroundTintWithNSString:(NSString *)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
 
@@ -461,6 +467,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setListitemWithNSString:(NSString *)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -539,6 +551,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -558,6 +572,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -602,6 +618,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetBackgroundTint;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetBottom;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetClickable;
 
@@ -691,6 +709,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetLayoutMode;
 
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetLeft;
+
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetLongClickable;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetMaxHeight;
@@ -727,6 +747,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetPaddingTop;
 
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetRight;
+
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetRotation;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetRotationX;
@@ -744,6 +766,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewExt)
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetTextAlignment;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetTextDirection;
+
+- (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetTop;
 
 - (ASScrollViewImpl_ScrollViewCommandBuilder *)tryGetTransformPivotX;
 
@@ -948,7 +972,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewCommandParamsBuilder)
 #define ASScrollViewImpl_MyUIScrollViewDelegate_
 
 @class ASScrollViewImpl;
-@protocol ADView_OnScrollChangeListener;
 
 @interface ASScrollViewImpl_MyUIScrollViewDelegate : NSObject {
  @public
@@ -958,8 +981,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewCommandParamsBuilder)
 
 #pragma mark Public
 
-- (instancetype)initWithASScrollViewImpl:(ASScrollViewImpl *)outer$
-       withADView_OnScrollChangeListener:(id<ADView_OnScrollChangeListener>)listener;
+- (instancetype)initWithASScrollViewImpl:(ASScrollViewImpl *)outer$;
 
 - (void)nativeScrollChangeListenerWithId:(id)nativeWidget;
 
@@ -976,11 +998,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_ScrollViewCommandParamsBuilder)
 
 J2OBJC_EMPTY_STATIC_INIT(ASScrollViewImpl_MyUIScrollViewDelegate)
 
-FOUNDATION_EXPORT void ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_withADView_OnScrollChangeListener_(ASScrollViewImpl_MyUIScrollViewDelegate *self, ASScrollViewImpl *outer$, id<ADView_OnScrollChangeListener> listener);
+FOUNDATION_EXPORT void ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_(ASScrollViewImpl_MyUIScrollViewDelegate *self, ASScrollViewImpl *outer$);
 
-FOUNDATION_EXPORT ASScrollViewImpl_MyUIScrollViewDelegate *new_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_withADView_OnScrollChangeListener_(ASScrollViewImpl *outer$, id<ADView_OnScrollChangeListener> listener) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASScrollViewImpl_MyUIScrollViewDelegate *new_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_(ASScrollViewImpl *outer$) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASScrollViewImpl_MyUIScrollViewDelegate *create_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_withADView_OnScrollChangeListener_(ASScrollViewImpl *outer$, id<ADView_OnScrollChangeListener> listener);
+FOUNDATION_EXPORT ASScrollViewImpl_MyUIScrollViewDelegate *create_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_(ASScrollViewImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASScrollViewImpl_MyUIScrollViewDelegate)
 

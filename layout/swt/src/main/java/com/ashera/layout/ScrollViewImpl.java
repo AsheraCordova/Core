@@ -330,7 +330,9 @@ return layoutParams.gravity;			}
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override
@@ -856,7 +858,7 @@ return this;}
 }
 
 	//end - body
-	
+	//start - scrollview
 	@Override
 	public void initialized() {
 		super.initialized();
@@ -868,28 +870,35 @@ return this;}
 		scrollView.adjustPaddingIfScrollBarPresent(widthMeasureSpec, heightMeasureSpec, thumbWidth);
 	}
 	//end - adjustPaddingIfScrollBarPresent 
-
-	private void nativeCreate(Map<String, Object> params) {
-		org.eclipse.swt.custom.ScrolledComposite scrolledComposite = new org.eclipse.swt.custom.ScrolledComposite(ViewImpl.getParent(this), 
-		        getStyle(params, fragment) | org.eclipse.swt.SWT.V_SCROLL | org.eclipse.swt.SWT.DOUBLE_BUFFERED);		
-    	pane = scrolledComposite;
-    	scrolledComposite.setExpandVertical(false);
-	}
-
-	
 	
 	@Override
 	public Object asNativeWidget() {
 		return pane;
 	}
 	
+	private void nativeCreate(Map<String, Object> params) {
+		org.eclipse.swt.custom.ScrolledComposite scrolledComposite = new org.eclipse.swt.custom.ScrolledComposite(ViewImpl.getParent(this), 
+		        getStyle(params, fragment) | org.eclipse.swt.SWT.V_SCROLL | org.eclipse.swt.SWT.DOUBLE_BUFFERED);		
+    	pane = scrolledComposite;
+    	scrolledComposite.setExpandVertical(false);
+    	
+	    org.eclipse.swt.widgets.ScrollBar vBar = scrolledComposite.getVerticalBar();
+	    if (vBar != null) {
+	    	ViewImpl.setOnListener(vBar, org.eclipse.swt.SWT.Selection, org.eclipse.swt.SWT.Selection + "", new org.eclipse.swt.widgets.Listener() {
+                @Override
+                public void handleEvent(org.eclipse.swt.widgets.Event event) {
+                    int selection = vBar.getSelection();
+                    handleScroll(selection, event.detail);
+                }
+	    	});
+	    }
+	}
+	//end - scrollview
+
 	private void setScrollY(Object objValue) {
         Object nativeWidget = asNativeWidget();
         org.eclipse.swt.custom.ScrolledComposite scrollable = (org.eclipse.swt.custom.ScrolledComposite) nativeWidget;
-		System.out.println(objValue + "--" + scrollable.getOrigin().y);
-
         scrollable.setOrigin(scrollable.getOrigin().x, (int) objValue);
-
     }
 
 	private Object getScrollY() {
@@ -902,33 +911,28 @@ return this;}
 
 		return null;
 	}
-
 	
-	private void setOnScroll(Object objValue) {
-		Object nativeWidget = asNativeWidget();
+	
+	//start - viewcode
+	private View.OnScrollChangeListener onScrollChangeListener; 
+	private int oldScrollY = 0;
+
+	private void handleScroll(int selection, int detail) {
 		View view = (View) asWidget();
-		View.OnScrollChangeListener onScrollChangeListener; 
 		
+		if (onScrollChangeListener != null) {
+			onScrollChangeListener.onScrollChange(view, 0, selection, 0, oldScrollY);
+		}
+        oldScrollY = selection;
+        view.getViewTreeObserver().dispatchOnScrollChanged();
+	}
+	private void setOnScroll(Object objValue) {
 		if (objValue instanceof String) {
 			onScrollChangeListener = new OnScrollChangeListener(this, (String) objValue);
 		} else {
 			onScrollChangeListener = (View.OnScrollChangeListener) objValue;
 		}
-		
-		org.eclipse.swt.widgets.Scrollable scrollable = (org.eclipse.swt.widgets.Scrollable) nativeWidget;
-	    org.eclipse.swt.widgets.ScrollBar vBar = scrollable.getVerticalBar();
-	    if (vBar != null) {
-	    	ViewImpl.setOnListener(vBar, org.eclipse.swt.SWT.Selection, org.eclipse.swt.SWT.Selection + "", new org.eclipse.swt.widgets.Listener() {
-	    	    int oldScrollY = 0;
-                @Override
-                public void handleEvent(org.eclipse.swt.widgets.Event event) {
-                    int selection = vBar.getSelection();
-                    onScrollChangeListener.onScrollChange(view, 0, selection, 0, oldScrollY);
-                    oldScrollY = selection;
-                    view.getViewTreeObserver().dispatchOnScrollChanged();
-	    	    
-                }
-	    	});
-	    }
-	}	
+	}
+	
+	//end - viewcode
 }

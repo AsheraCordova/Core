@@ -674,6 +674,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setBaseElapsedTimeInMillisWithInt:(jint)value;
 
+- (ASChronometerImpl_ChronometerCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASChronometerImpl_ChronometerCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -828,6 +830,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASChronometerImpl_ChronometerCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASChronometerImpl_ChronometerCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -902,6 +906,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value;
 
+- (ASChronometerImpl_ChronometerCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASChronometerImpl_ChronometerCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -948,6 +954,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
 
+- (ASChronometerImpl_ChronometerCommandBuilder *)setTopWithNSString:(NSString *)arg0;
+
 - (ASChronometerImpl_ChronometerCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setTransformPivotYWithNSString:(NSString *)arg0;
@@ -993,6 +1001,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetBackgroundTint;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)tryGetBottom;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetClickable;
 
@@ -1106,6 +1116,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetLayoutDirection;
 
+- (ASChronometerImpl_ChronometerCommandBuilder *)tryGetLeft;
+
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetLongClickable;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetMaxEms;
@@ -1144,6 +1156,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetPaddingTop;
 
+- (ASChronometerImpl_ChronometerCommandBuilder *)tryGetRight;
+
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetRotation;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetRotationX;
@@ -1173,6 +1187,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetTextDirection;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetTextSize;
+
+- (ASChronometerImpl_ChronometerCommandBuilder *)tryGetTop;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)tryGetTransformPivotX;
 

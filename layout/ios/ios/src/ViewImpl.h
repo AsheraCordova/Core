@@ -29,6 +29,7 @@
 @class ASSimpleWrapableView;
 @class ASWidgetAttribute;
 @class IOSObjectArray;
+@protocol ADInterpolator;
 @protocol ADMenuItem;
 @protocol ADView_OnClickListener;
 @protocol ADView_OnLongClickListener;
@@ -122,6 +123,9 @@
 + (jint)getImageWidthWithId:(id)value;
 
 + (id)getInsetsLayoutMarginsFromSafeAreaWithId:(id)uiView;
+
++ (id<ADInterpolator>)getInterpolatorWithASIWidget:(id<ASIWidget>)w
+                                            withId:(id)objValue;
 
 + (id)getIsAccessibilityElementWithId:(id)uiView;
 
@@ -538,6 +542,8 @@ FOUNDATION_EXPORT void ASViewImpl_requestLayoutWithASIWidget_(id<ASIWidget> w);
 FOUNDATION_EXPORT ADDrawable *ASViewImpl_getDrawableWithADColorStateList_(ADColorStateList *colorStateList);
 
 FOUNDATION_EXPORT NSString *ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(NSString *key, id<OrgXmlSaxAttributes> attributes);
+
+FOUNDATION_EXPORT id<ADInterpolator> ASViewImpl_getInterpolatorWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
 FOUNDATION_EXPORT void ASViewImpl_setBackgroundColorWithId_withId_(id nativeWidget, id value);
 

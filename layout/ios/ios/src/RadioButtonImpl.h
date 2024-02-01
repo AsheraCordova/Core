@@ -821,6 +821,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setButtonWithNSString:(NSString *)value;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setButtonTintWithNSString:(NSString *)value;
@@ -985,6 +987,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -1063,6 +1067,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value;
 
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -1106,6 +1112,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -1152,6 +1160,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetBackgroundTint;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetBottom;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetButton;
 
@@ -1273,6 +1283,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetLayoutDirection;
 
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetLeft;
+
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetLongClickable;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetMarqueeRepeatLimit;
@@ -1313,6 +1325,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetPaddingTop;
 
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetRight;
+
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetRotation;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetRotationX;
@@ -1342,6 +1356,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetTextDirection;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetTextSize;
+
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetTop;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)tryGetTransformPivotX;
 

@@ -308,7 +308,9 @@ public class RadioButtonStyledLabelImpl extends BaseWidget implements IDrawable,
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

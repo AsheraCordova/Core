@@ -411,7 +411,9 @@ public class UITextViewLabelImpl extends BaseWidget implements com.ashera.valida
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

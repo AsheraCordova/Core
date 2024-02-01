@@ -819,6 +819,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -967,6 +969,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setLinksClickableWithBoolean:(jboolean)value;
@@ -1047,6 +1051,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setPasswordWithBoolean:(jboolean)value;
 
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -1088,6 +1094,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -1144,6 +1152,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetBackgroundTint;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetBottom;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetClickable;
 
@@ -1253,6 +1263,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetLayoutDirection;
 
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetLeft;
+
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetLinksClickable;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetLongClickable;
@@ -1295,6 +1307,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetPaddingTop;
 
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetRight;
+
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetRotation;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetRotationX;
@@ -1320,6 +1334,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewLabelImpl_PostMeasureHandler)
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetTextIsSelectable;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetTextSize;
+
+- (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetTop;
 
 - (ASUITextViewLabelImpl_UITextViewLabelCommandBuilder *)tryGetTransformPivotX;
 

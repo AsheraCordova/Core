@@ -291,7 +291,6 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_HorizontalScrollViewExt)
 #define ASHorizontalScrollViewImpl_MyUIScrollViewDelegate_
 
 @class ASHorizontalScrollViewImpl;
-@protocol ADView_OnScrollChangeListener;
 
 @interface ASHorizontalScrollViewImpl_MyUIScrollViewDelegate : NSObject {
  @public
@@ -301,8 +300,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_HorizontalScrollViewExt)
 
 #pragma mark Public
 
-- (instancetype)initWithASHorizontalScrollViewImpl:(ASHorizontalScrollViewImpl *)outer$
-                 withADView_OnScrollChangeListener:(id<ADView_OnScrollChangeListener>)listener;
+- (instancetype)initWithASHorizontalScrollViewImpl:(ASHorizontalScrollViewImpl *)outer$;
 
 - (void)nativeScrollChangeListenerWithId:(id)nativeWidget;
 
@@ -319,11 +317,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_HorizontalScrollViewExt)
 
 J2OBJC_EMPTY_STATIC_INIT(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
-FOUNDATION_EXPORT void ASHorizontalScrollViewImpl_MyUIScrollViewDelegate_initWithASHorizontalScrollViewImpl_withADView_OnScrollChangeListener_(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate *self, ASHorizontalScrollViewImpl *outer$, id<ADView_OnScrollChangeListener> listener);
+FOUNDATION_EXPORT void ASHorizontalScrollViewImpl_MyUIScrollViewDelegate_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate *self, ASHorizontalScrollViewImpl *outer$);
 
-FOUNDATION_EXPORT ASHorizontalScrollViewImpl_MyUIScrollViewDelegate *new_ASHorizontalScrollViewImpl_MyUIScrollViewDelegate_initWithASHorizontalScrollViewImpl_withADView_OnScrollChangeListener_(ASHorizontalScrollViewImpl *outer$, id<ADView_OnScrollChangeListener> listener) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ASHorizontalScrollViewImpl_MyUIScrollViewDelegate *new_ASHorizontalScrollViewImpl_MyUIScrollViewDelegate_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ASHorizontalScrollViewImpl_MyUIScrollViewDelegate *create_ASHorizontalScrollViewImpl_MyUIScrollViewDelegate_initWithASHorizontalScrollViewImpl_withADView_OnScrollChangeListener_(ASHorizontalScrollViewImpl *outer$, id<ADView_OnScrollChangeListener> listener);
+FOUNDATION_EXPORT ASHorizontalScrollViewImpl_MyUIScrollViewDelegate *create_ASHorizontalScrollViewImpl_MyUIScrollViewDelegate_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
@@ -381,6 +379,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -392,6 +394,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setBackgroundTintWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
 
@@ -503,6 +507,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setListitemWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -581,6 +591,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -600,6 +612,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -644,6 +658,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetBackgroundTint;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetBottom;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetClickable;
 
@@ -733,6 +749,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetLayoutMode;
 
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetLeft;
+
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetLongClickable;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetMaxHeight;
@@ -769,6 +787,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetPaddingTop;
 
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetRight;
+
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetRotation;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetRotationX;
@@ -786,6 +806,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_MyUIScrollViewDelegate)
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetTextAlignment;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetTextDirection;
+
+- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetTop;
 
 - (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetTransformPivotX;
 

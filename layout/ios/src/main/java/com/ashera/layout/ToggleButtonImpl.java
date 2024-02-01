@@ -354,7 +354,9 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

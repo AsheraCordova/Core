@@ -342,7 +342,9 @@ return layoutParams.gravity;			}
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override
@@ -609,8 +611,7 @@ return getScrollX();			}
 		int oldScrollY = 0;
 		int oldScrollX = 0;
 		private View.OnScrollChangeListener listener;
-		public MyUIScrollViewDelegate(View.OnScrollChangeListener listener) {
-			this.listener = listener;
+		public MyUIScrollViewDelegate() {
 			getFragment().addListener(HorizontalScrollViewImpl.this, this);
 		}
 		public native void nativeScrollChangeListener(Object nativeWidget)/*-[
@@ -620,7 +621,9 @@ return getScrollX();			}
 		
 		
 		public void onscroll(int scrollX, int scrollY) {
-			 listener.onScrollChange((View) asWidget(), scrollX, scrollY, oldScrollX, oldScrollY);
+			 if (listener != null) {
+				 listener.onScrollChange((View) asWidget(), scrollX, scrollY, oldScrollX, oldScrollY);
+			 }
 			 oldScrollX = scrollX;
 			 oldScrollY = scrollY;
 			 horizontalScrollView.getViewTreeObserver().dispatchOnScrollChanged();
@@ -632,17 +635,13 @@ return getScrollX();			}
 		}
 		]-*/
 	}
-	
+	private View.OnScrollChangeListener listener;
 	private void setOnScroll(Object objValue) {
-		View.OnScrollChangeListener listener;
-		
 		if (objValue instanceof String) {
 			listener = new OnScrollChangeListener(this, (String) objValue);
 		} else {
 			listener = (View.OnScrollChangeListener) objValue;
 		}
-		MyUIScrollViewDelegate myUIScrollViewDelegate = new MyUIScrollViewDelegate(listener);
-		myUIScrollViewDelegate.nativeScrollChangeListener(asNativeWidget());
 	}
 	
 	private void setPreventAutoScroll(Object objValue)  {
@@ -968,6 +967,8 @@ return this;}
 	
 	private void nativeCreate(Map<String, Object> params) {
 		uiView = nativeHscrollViewCreate();		
+		MyUIScrollViewDelegate myUIScrollViewDelegate = new MyUIScrollViewDelegate();
+		myUIScrollViewDelegate.nativeScrollChangeListener(asNativeWidget());
 	}
 	public native Object nativeHscrollViewCreate()/*-[
 		ASUIScrollView* uiView = [ASUIScrollView new];

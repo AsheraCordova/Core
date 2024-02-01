@@ -122,6 +122,24 @@
 
 - (jboolean)dispatchKeyEventWithADKeyEvent:(ADKeyEvent *)event;
 
+- (jboolean)dispatchNestedFlingWithFloat:(jfloat)velocityX
+                               withFloat:(jfloat)velocityY
+                             withBoolean:(jboolean)consumed;
+
+- (jboolean)dispatchNestedPreFlingWithFloat:(jfloat)velocityX
+                                  withFloat:(jfloat)velocityY;
+
+- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
+                                   withInt:(jint)dy
+                              withIntArray:(IOSIntArray *)consumed
+                              withIntArray:(IOSIntArray *)offsetInWindow;
+
+- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
+                                withInt:(jint)dyConsumed
+                                withInt:(jint)dxUnconsumed
+                                withInt:(jint)dyUnconsumed
+                           withIntArray:(IOSIntArray *)offsetInWindow;
+
 - (void)dispatchStartTemporaryDetach;
 
 - (void)drawableHotspotChangedWithFloat:(jfloat)x
@@ -186,6 +204,8 @@
 - (ADViewGroup_LayoutParams *)getLayoutParams;
 
 - (jint)getLeft;
+
+- (void)getLocationInWindowWithIntArray:(IOSIntArray *)appScreenLocation;
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation;
 
@@ -359,6 +379,8 @@
 - (jboolean)isLayoutRtl;
 
 - (jboolean)isLongClickable;
+
+- (jboolean)isNestedScrollingEnabled;
 
 - (jboolean)isOpaque;
 
@@ -609,6 +631,8 @@
 - (void)stateNo;
 
 - (void)stateYes;
+
+- (void)stopNestedScroll;
 
 - (void)unFocusWithId:(id)obj;
 

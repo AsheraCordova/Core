@@ -13,5 +13,50 @@
       </feature>
     </config-file>  
    	<framework src="layout.gradle" custom="true" type="gradleReference" />
+   	
+   	 <!-- start tsc -->
+     <source-file src="tsc/src/swt/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/CComboImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/CheckBoxImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/CheckBoxStyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ChronometerImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/CLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/EditTextImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/FrameLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/HorizontalScrollViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ImageButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ImageCheckBoxImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ImageRadioButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ImageViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/LinearLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/LinkImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ListViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ModelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/PopupWindowImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ProgressBarImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/RadioButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/RadioButtonStyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/RadioGroupImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/RootImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ScrollViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/SpinnerImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/StyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/StyledTextImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/SwitchImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/SwitchStyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/TableLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/TableRowImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/TextViewButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/TextViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ToggleButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ViewGroupImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ViewOnlyImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/WebViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <!-- tsc end -->
   </platform>
 </plugin>

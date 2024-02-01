@@ -350,7 +350,9 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

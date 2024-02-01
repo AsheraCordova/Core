@@ -854,6 +854,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASEditTextImpl_EditTextCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASEditTextImpl_EditTextCommandBuilder *)setCapitalizeWithNSString:(NSString *)value;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
@@ -1024,6 +1026,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASEditTextImpl_EditTextCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASEditTextImpl_EditTextCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -1114,6 +1118,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setPhoneNumberWithBoolean:(jboolean)value;
 
+- (ASEditTextImpl_EditTextCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASEditTextImpl_EditTextCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -1151,6 +1157,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 - (ASEditTextImpl_EditTextCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -1197,6 +1205,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetBackgroundTint;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)tryGetBottom;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetClickable;
 
@@ -1318,6 +1328,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetLayoutDirection;
 
+- (ASEditTextImpl_EditTextCommandBuilder *)tryGetLeft;
+
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetLongClickable;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetMaxEms;
@@ -1358,6 +1370,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetPaddingTop;
 
+- (ASEditTextImpl_EditTextCommandBuilder *)tryGetRight;
+
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetRotation;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetRotationX;
@@ -1381,6 +1395,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASEditTextImpl_EditTextExt)
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetTextDirection;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetTextSize;
+
+- (ASEditTextImpl_EditTextCommandBuilder *)tryGetTop;
 
 - (ASEditTextImpl_EditTextCommandBuilder *)tryGetTransformPivotX;
 

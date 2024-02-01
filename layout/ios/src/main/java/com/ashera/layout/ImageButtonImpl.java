@@ -223,7 +223,9 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

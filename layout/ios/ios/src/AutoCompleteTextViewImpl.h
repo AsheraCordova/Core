@@ -893,6 +893,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setCapitalizeWithNSString:(NSString *)value;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
@@ -1083,6 +1085,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setListitemWithNSString:(NSString *)value;
@@ -1177,6 +1181,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setPhoneNumberWithBoolean:(jboolean)value;
 
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -1214,6 +1220,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -1262,6 +1270,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetBackgroundTint;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetBottom;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetClickable;
 
@@ -1395,6 +1405,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetLayoutDirection;
 
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetLeft;
+
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetLongClickable;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetMaxEms;
@@ -1435,6 +1447,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetPaddingTop;
 
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetRight;
+
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetRotation;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetRotationX;
@@ -1458,6 +1472,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetTextDirection;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetTextSize;
+
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetTop;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)tryGetTransformPivotX;
 

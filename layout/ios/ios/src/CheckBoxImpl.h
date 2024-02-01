@@ -810,6 +810,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setButtonWithNSString:(NSString *)value;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setButtonTintWithNSString:(NSString *)value;
@@ -974,6 +976,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -1052,6 +1056,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value;
 
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -1095,6 +1101,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -1141,6 +1149,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetBackgroundTint;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetBottom;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetButton;
 
@@ -1262,6 +1272,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetLayoutDirection;
 
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetLeft;
+
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetLongClickable;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetMarqueeRepeatLimit;
@@ -1302,6 +1314,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetPaddingTop;
 
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetRight;
+
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetRotation;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetRotationX;
@@ -1331,6 +1345,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetTextDirection;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetTextSize;
+
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetTop;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)tryGetTransformPivotX;
 

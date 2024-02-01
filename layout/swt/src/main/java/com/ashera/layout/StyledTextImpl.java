@@ -318,7 +318,9 @@ public class StyledTextImpl extends BaseWidget implements IDrawable, IHasMultiNa
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

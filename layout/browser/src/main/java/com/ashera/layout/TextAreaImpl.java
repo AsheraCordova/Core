@@ -334,7 +334,9 @@ public class TextAreaImpl extends BaseWidget implements com.ashera.validations.F
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

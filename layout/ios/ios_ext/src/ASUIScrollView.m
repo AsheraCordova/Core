@@ -170,6 +170,10 @@
     [super setContentOffset:contentOffset];
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return self.shouldRecognizeSimultaneouslyWithGestureRecognizer;
+}
+
 -(void)setContentSize:(CGSize)contentSize {
     [super setContentSize:contentSize];
     

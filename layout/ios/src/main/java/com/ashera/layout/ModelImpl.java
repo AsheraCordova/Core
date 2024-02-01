@@ -63,7 +63,9 @@ public class ModelImpl extends BaseWidget {
 	public class ViewExt extends View{
 		@Override
 		public void remeasure() {
-			getFragment().remeasure();
+			if (getFragment() != null) {
+				getFragment().remeasure();
+			}
 		}
         private Map<String, IWidget> templates;
     	@Override

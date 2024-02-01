@@ -642,6 +642,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setCheckedWithBoolean:(jboolean)value;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
@@ -778,6 +780,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -856,6 +860,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value;
 
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -899,6 +905,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -945,6 +953,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetBackgroundTint;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetBottom;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetChecked;
 
@@ -1042,6 +1052,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetLayoutDirection;
 
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetLeft;
+
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetLongClickable;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetMarqueeRepeatLimit;
@@ -1082,6 +1094,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetPaddingTop;
 
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetRight;
+
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetRotation;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetRotationX;
@@ -1113,6 +1127,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetTextOn;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetTextSize;
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetTop;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)tryGetTransformPivotX;
 

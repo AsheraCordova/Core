@@ -89,6 +89,8 @@
   jint mTouchSlop_;
   jint mVerticalScrollbarPosition_;
   jboolean mSendingHoverAccessibilityEvents_;
+  id<ADViewParent> mNestedScrollingParent_;
+  IOSIntArray *mTempNestedScrollConsumed_;
   ADView_RoundScrollbarRenderer *mRoundScrollbarRenderer_;
   id mCurrentAnimation_;
   ADView *mGhostView_;
@@ -158,6 +160,8 @@ J2OBJC_FIELD_SETTER(ADView, mForegroundInfo_, ADView_ForegroundInfo *)
 J2OBJC_FIELD_SETTER(ADView, mDefaultFocusHighlight_, ADDrawable *)
 J2OBJC_FIELD_SETTER(ADView, mDrawableState_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(ADView, mFloatingTreeObserver_, ADViewTreeObserver *)
+J2OBJC_FIELD_SETTER(ADView, mNestedScrollingParent_, id<ADViewParent>)
+J2OBJC_FIELD_SETTER(ADView, mTempNestedScrollConsumed_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(ADView, mRoundScrollbarRenderer_, ADView_RoundScrollbarRenderer *)
 J2OBJC_FIELD_SETTER(ADView, mCurrentAnimation_, id)
 J2OBJC_FIELD_SETTER(ADView, mGhostView_, ADView *)
@@ -2246,6 +2250,101 @@ jboolean ADView_sHasFocusableExcludeAutoFocusable;
   [self requestLayout];
 }
 
+- (jboolean)isNestedScrollingEnabled {
+  return (mPrivateFlags3_ & ADView_PFLAG3_NESTED_SCROLLING_ENABLED) == ADView_PFLAG3_NESTED_SCROLLING_ENABLED;
+}
+
+- (void)stopNestedScroll {
+  if (mNestedScrollingParent_ != nil) {
+    [mNestedScrollingParent_ onStopNestedScrollWithADView:self];
+    JreStrongAssign(&mNestedScrollingParent_, nil);
+  }
+}
+
+- (jboolean)dispatchNestedScrollWithInt:(jint)dxConsumed
+                                withInt:(jint)dyConsumed
+                                withInt:(jint)dxUnconsumed
+                                withInt:(jint)dyUnconsumed
+                           withIntArray:(IOSIntArray *)offsetInWindow {
+  if ([self isNestedScrollingEnabled] && mNestedScrollingParent_ != nil) {
+    if (dxConsumed != 0 || dyConsumed != 0 || dxUnconsumed != 0 || dyUnconsumed != 0) {
+      jint startX = 0;
+      jint startY = 0;
+      if (offsetInWindow != nil) {
+        [self getLocationInWindowWithIntArray:offsetInWindow];
+        startX = IOSIntArray_Get(offsetInWindow, 0);
+        startY = IOSIntArray_Get(offsetInWindow, 1);
+      }
+      [((id<ADViewParent>) nil_chk(mNestedScrollingParent_)) onNestedScrollWithADView:self withInt:dxConsumed withInt:dyConsumed withInt:dxUnconsumed withInt:dyUnconsumed];
+      if (offsetInWindow != nil) {
+        [self getLocationInWindowWithIntArray:offsetInWindow];
+        *IOSIntArray_GetRef(offsetInWindow, 0) -= startX;
+        *IOSIntArray_GetRef(offsetInWindow, 1) -= startY;
+      }
+      return true;
+    }
+    else if (offsetInWindow != nil) {
+      *IOSIntArray_GetRef(offsetInWindow, 0) = 0;
+      *IOSIntArray_GetRef(offsetInWindow, 1) = 0;
+    }
+  }
+  return false;
+}
+
+- (jboolean)dispatchNestedPreScrollWithInt:(jint)dx
+                                   withInt:(jint)dy
+                              withIntArray:(IOSIntArray *)consumed
+                              withIntArray:(IOSIntArray *)offsetInWindow {
+  if ([self isNestedScrollingEnabled] && mNestedScrollingParent_ != nil) {
+    if (dx != 0 || dy != 0) {
+      jint startX = 0;
+      jint startY = 0;
+      if (offsetInWindow != nil) {
+        [self getLocationInWindowWithIntArray:offsetInWindow];
+        startX = IOSIntArray_Get(offsetInWindow, 0);
+        startY = IOSIntArray_Get(offsetInWindow, 1);
+      }
+      if (consumed == nil) {
+        if (mTempNestedScrollConsumed_ == nil) {
+          JreStrongAssignAndConsume(&mTempNestedScrollConsumed_, [IOSIntArray newArrayWithLength:2]);
+        }
+        consumed = mTempNestedScrollConsumed_;
+      }
+      *IOSIntArray_GetRef(consumed, 0) = 0;
+      *IOSIntArray_GetRef(consumed, 1) = 0;
+      [((id<ADViewParent>) nil_chk(mNestedScrollingParent_)) onNestedPreScrollWithADView:self withInt:dx withInt:dy withIntArray:consumed];
+      if (offsetInWindow != nil) {
+        [self getLocationInWindowWithIntArray:offsetInWindow];
+        *IOSIntArray_GetRef(offsetInWindow, 0) -= startX;
+        *IOSIntArray_GetRef(offsetInWindow, 1) -= startY;
+      }
+      return IOSIntArray_Get(consumed, 0) != 0 || IOSIntArray_Get(consumed, 1) != 0;
+    }
+    else if (offsetInWindow != nil) {
+      *IOSIntArray_GetRef(offsetInWindow, 0) = 0;
+      *IOSIntArray_GetRef(offsetInWindow, 1) = 0;
+    }
+  }
+  return false;
+}
+
+- (jboolean)dispatchNestedFlingWithFloat:(jfloat)velocityX
+                               withFloat:(jfloat)velocityY
+                             withBoolean:(jboolean)consumed {
+  if ([self isNestedScrollingEnabled] && mNestedScrollingParent_ != nil) {
+    return [mNestedScrollingParent_ onNestedFlingWithADView:self withFloat:velocityX withFloat:velocityY withBoolean:consumed];
+  }
+  return false;
+}
+
+- (jboolean)dispatchNestedPreFlingWithFloat:(jfloat)velocityX
+                                  withFloat:(jfloat)velocityY {
+  if ([self isNestedScrollingEnabled] && mNestedScrollingParent_ != nil) {
+    return [mNestedScrollingParent_ onNestedPreFlingWithADView:self withFloat:velocityX withFloat:velocityY];
+  }
+  return false;
+}
+
 - (jint)getRawTextDirection {
   return JreRShift32((mPrivateFlags2_ & ADView_PFLAG2_TEXT_DIRECTION_MASK), ADView_PFLAG2_TEXT_DIRECTION_MASK_SHIFT);
 }
@@ -2509,6 +2608,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)getLocationOnScreenWithIntArray:(IOSIntArray *)appScreenLocation {
+}
+
+- (void)getLocationInWindowWithIntArray:(IOSIntArray *)appScreenLocation {
+  [self getLocationOnScreenWithIntArray:appScreenLocation];
 }
 
 - (void)getHitRectWithADRect:(ADRect *)outRect {
@@ -3073,6 +3176,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   RELEASE_(mContext_);
   RELEASE_(mDrawableState_);
   RELEASE_(mFloatingTreeObserver_);
+  RELEASE_(mNestedScrollingParent_);
+  RELEASE_(mTempNestedScrollConsumed_);
   RELEASE_(mRoundScrollbarRenderer_);
   RELEASE_(mCurrentAnimation_);
   RELEASE_(mGhostView_);
@@ -3257,15 +3362,21 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 93, 9, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 94, 9, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 95, 96, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 97, 98, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 99, 100, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 101, 102, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 95, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 103, 9, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 96, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 104, 9, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -3280,14 +3391,15 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADIBinder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 97, 98, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 99, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 105, 106, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 107, 106, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 108, 35, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 100, 35, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 101, 35, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 102, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 104, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 109, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 110, 35, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 111, 112, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 113, 114, -1, -1, -1, -1 },
     { NULL, "LADResources;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -3302,36 +3414,36 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "F", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 106, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 108, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 109, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 110, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 111, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 112, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 113, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 114, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 115, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 116, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 117, 107, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 118, 107, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 115, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 117, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 118, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 119, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 120, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 121, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 122, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 123, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 124, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 125, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 126, 116, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 127, 116, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 119, 120, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 128, 129, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 121, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 130, 11, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 122, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 131, 9, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 123, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 124, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 132, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 133, 9, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 125, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 134, 9, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 126, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 135, 9, -1, -1, -1, -1 },
     { NULL, "F", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 127, 50, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 136, 50, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -3340,33 +3452,33 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 128, 25, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 129, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 137, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 138, 9, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 130, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 139, 9, -1, -1, -1, -1 },
     { NULL, "LADContext;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADView;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 131, 55, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 140, 55, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 132, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 133, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 134, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 135, 52, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 141, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 142, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 143, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 144, 52, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 136, 67, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 145, 67, -1, -1, -1, -1 },
     { NULL, "LADDrawable;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 137, 55, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 146, 55, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 138, 55, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 147, 55, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 139, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 148, 9, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADView_AccessibilityNodeProvider;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -3374,33 +3486,33 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADIBinder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 140, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 141, 142, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 143, 55, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 144, 145, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 146, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 147, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 148, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 149, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 150, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 151, 11, -1, -1, -1, -1 },
-    { NULL, "LADRect;", 0x1, 152, 50, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 150, 151, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 152, 55, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 153, 102, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 154, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 155, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 156, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 157, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 158, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 159, 11, -1, -1, -1, -1 },
+    { NULL, "LADRect;", 0x1, 160, 50, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADView_OnKeyListener;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 153, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 154, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 161, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 162, 9, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 155, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 156, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 163, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 164, 9, -1, -1, -1, -1 },
     { NULL, "LADHandler;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADView;", 0x1, 157, 158, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 159, 160, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 165, 166, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 167, 168, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -3584,178 +3696,185 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[169].selector = @selector(setMinimumHeightWithInt:);
   methods[170].selector = @selector(getMinimumWidth);
   methods[171].selector = @selector(setMinimumWidthWithInt:);
-  methods[172].selector = @selector(getRawTextDirection);
-  methods[173].selector = @selector(setTextDirectionWithInt:);
-  methods[174].selector = @selector(getTextDirection);
-  methods[175].selector = @selector(resolveTextDirection);
-  methods[176].selector = @selector(canResolveTextDirection);
-  methods[177].selector = @selector(resetResolvedTextDirection);
-  methods[178].selector = @selector(isTextDirectionResolved);
-  methods[179].selector = @selector(getRawTextAlignment);
-  methods[180].selector = @selector(setTextAlignmentWithInt:);
-  methods[181].selector = @selector(getTextAlignment);
-  methods[182].selector = @selector(resolveTextAlignment);
-  methods[183].selector = @selector(canResolveTextAlignment);
-  methods[184].selector = @selector(resetResolvedTextAlignment);
-  methods[185].selector = @selector(isTextAlignmentResolved);
-  methods[186].selector = @selector(init);
-  methods[187].selector = @selector(getX);
-  methods[188].selector = @selector(getY);
-  methods[189].selector = @selector(relayout);
-  methods[190].selector = @selector(remeasure);
-  methods[191].selector = @selector(removeFromParent);
-  methods[192].selector = @selector(initAttachInfo);
-  methods[193].selector = @selector(getApplicationWindowToken);
-  methods[194].selector = @selector(getAccessibilityViewId);
-  methods[195].selector = @selector(getLocationOnScreenWithIntArray:);
-  methods[196].selector = @selector(getHitRectWithADRect:);
-  methods[197].selector = @selector(getScrollX);
-  methods[198].selector = @selector(getScrollY);
-  methods[199].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
-  methods[200].selector = @selector(getWindowDisplayFrameWithADRect:);
-  methods[201].selector = @selector(requestRectangleOnScreenWithADRect:withBoolean:);
-  methods[202].selector = @selector(onDrawWithADCanvas:);
-  methods[203].selector = @selector(getResources);
-  methods[204].selector = @selector(isInEditMode);
-  methods[205].selector = @selector(getAlpha);
-  methods[206].selector = @selector(getRotation);
-  methods[207].selector = @selector(getRotationX);
-  methods[208].selector = @selector(getRotationY);
-  methods[209].selector = @selector(getScaleX);
-  methods[210].selector = @selector(getScaleY);
-  methods[211].selector = @selector(getPivotX);
-  methods[212].selector = @selector(getPivotY);
-  methods[213].selector = @selector(getTranslationX);
-  methods[214].selector = @selector(getTranslationY);
-  methods[215].selector = @selector(getTranslationZ);
-  methods[216].selector = @selector(getElevation);
-  methods[217].selector = @selector(setAlphaWithFloat:);
-  methods[218].selector = @selector(setRotationWithFloat:);
-  methods[219].selector = @selector(setRotationXWithFloat:);
-  methods[220].selector = @selector(setRotationYWithFloat:);
-  methods[221].selector = @selector(setScaleXWithFloat:);
-  methods[222].selector = @selector(setScaleYWithFloat:);
-  methods[223].selector = @selector(setPivotXWithFloat:);
-  methods[224].selector = @selector(setPivotYWithFloat:);
-  methods[225].selector = @selector(setTranslationXWithFloat:);
-  methods[226].selector = @selector(setTranslationYWithFloat:);
-  methods[227].selector = @selector(setTranslationZWithFloat:);
-  methods[228].selector = @selector(setElevationWithFloat:);
-  methods[229].selector = @selector(hasUnhandledKeyListener);
-  methods[230].selector = @selector(hasDefaultFocus);
-  methods[231].selector = @selector(clearFocusInternalWithADView:withBoolean:withBoolean:);
-  methods[232].selector = @selector(restoreDefaultFocus);
-  methods[233].selector = @selector(notifyEnterOrExitForAutoFillIfNeededWithBoolean:);
-  methods[234].selector = @selector(shouldDrawRoundScrollbar);
-  methods[235].selector = @selector(setBackgroundColorWithInt:);
-  methods[236].selector = @selector(requestFocusFromTouch);
-  methods[237].selector = @selector(requestFocus);
-  methods[238].selector = @selector(setSystemUiVisibilityWithInt:);
-  methods[239].selector = @selector(setOverScrollModeWithInt:);
-  methods[240].selector = @selector(cancelPendingInputEvents);
-  methods[241].selector = @selector(getVerticalScrollbarWidth);
-  methods[242].selector = @selector(setVerticalScrollbarWidthWithInt:);
-  methods[243].selector = @selector(getHorizontalScrollbarHeight);
-  methods[244].selector = @selector(setHorizontalScrollbarHeightWithInt:);
-  methods[245].selector = @selector(getFinalAlpha);
-  methods[246].selector = @selector(setFlagsWithInt:withInt:);
-  methods[247].selector = @selector(invalidateOutline);
-  methods[248].selector = @selector(isHardwareAccelerated);
-  methods[249].selector = @selector(getZ);
-  methods[250].selector = @selector(damageShadowReceiver);
-  methods[251].selector = @selector(damageInParent);
-  methods[252].selector = @selector(hasRtlSupport);
-  methods[253].selector = @selector(isRtlCompatibilityMode);
-  methods[254].selector = @selector(notifySubtreeAccessibilityStateChangedIfNeeded);
-  methods[255].selector = @selector(sizeChangeWithInt:withInt:withInt:withInt:);
-  methods[256].selector = @selector(onResolveDrawablesWithInt:);
-  methods[257].selector = @selector(getId);
-  methods[258].selector = @selector(setIdWithInt:);
-  methods[259].selector = @selector(getContext);
-  methods[260].selector = @selector(hasFocus);
-  methods[261].selector = @selector(findFocus);
-  methods[262].selector = @selector(unFocusWithId:);
-  methods[263].selector = @selector(registerPendingFrameMetricsObservers);
-  methods[264].selector = @selector(needGlobalAttributesUpdateWithBoolean:);
-  methods[265].selector = @selector(onWindowVisibilityChangedWithInt:);
-  methods[266].selector = @selector(onVisibilityAggregatedWithBoolean:);
-  methods[267].selector = @selector(performCollectViewAttributesWithADView_AttachInfo:withInt:);
-  methods[268].selector = @selector(hasTransientState);
-  methods[269].selector = @selector(clearAccessibilityFocus);
-  methods[270].selector = @selector(getAnimation);
-  methods[271].selector = @selector(onDetachedFromWindowInternal);
-  methods[272].selector = @selector(setBackgroundWithADDrawable:);
-  methods[273].selector = @selector(getBackground);
-  methods[274].selector = @selector(hasIdentityMatrix);
-  methods[275].selector = @selector(setAccessibilityDelegateWithId:);
-  methods[276].selector = @selector(getAccessibilityDelegate);
-  methods[277].selector = @selector(dispatchStartTemporaryDetach);
-  methods[278].selector = @selector(dispatchFinishTemporaryDetach);
-  methods[279].selector = @selector(setDrawingCacheBackgroundColorWithId:);
-  methods[280].selector = @selector(getImportantForAccessibility);
-  methods[281].selector = @selector(setImportantForAccessibilityWithInt:);
-  methods[282].selector = @selector(onStartTemporaryDetach);
-  methods[283].selector = @selector(clearFocus);
-  methods[284].selector = @selector(getAccessibilityNodeProvider);
-  methods[285].selector = @selector(requestAccessibilityFocus);
-  methods[286].selector = @selector(onFinishTemporaryDetach);
-  methods[287].selector = @selector(getWindowToken);
-  methods[288].selector = @selector(isDrawingCacheEnabled);
-  methods[289].selector = @selector(setDrawingCacheEnabledWithBoolean:);
-  methods[290].selector = @selector(jumpDrawablesToCurrentState);
-  methods[291].selector = @selector(dispatchKeyEventWithADKeyEvent:);
-  methods[292].selector = @selector(applyForegroundTint);
-  methods[293].selector = @selector(unscheduleDrawableWithId:);
-  methods[294].selector = @selector(drawableStateChanged);
-  methods[295].selector = @selector(drawableHotspotChangedWithFloat:withFloat:);
-  methods[296].selector = @selector(hasWindowFocus);
-  methods[297].selector = @selector(setFocusedWithBoolean:);
-  methods[298].selector = @selector(onFocusChangedWithBoolean:);
-  methods[299].selector = @selector(setDragHoveredWithBoolean:);
-  methods[300].selector = @selector(onDragHoveredWithBoolean:);
-  methods[301].selector = @selector(setDragCanAcceptWithBoolean:);
-  methods[302].selector = @selector(onDragCanAcceptWithBoolean:);
-  methods[303].selector = @selector(getForegroundBoundsWithInt:withInt:);
-  methods[304].selector = @selector(onAttachedToWindow);
-  methods[305].selector = @selector(applyBackgroundTint);
-  methods[306].selector = @selector(hasOnKeyListener);
-  methods[307].selector = @selector(getOnKeyListener);
-  methods[308].selector = @selector(invokeKeyListenerDownWithInt:);
-  methods[309].selector = @selector(invokeKeyListenerUpWithInt:);
-  methods[310].selector = @selector(resetPressedState);
-  methods[311].selector = @selector(sendAccessibilityEventWithInt:);
-  methods[312].selector = @selector(notifyViewAccessibilityStateChangedIfNeededWithInt:);
-  methods[313].selector = @selector(getRunQueue);
-  methods[314].selector = @selector(inflateViewWithNSString:);
-  methods[315].selector = @selector(setMyAttributeWithNSString:withId:);
-  methods[316].selector = @selector(state0);
-  methods[317].selector = @selector(state1);
-  methods[318].selector = @selector(state2);
-  methods[319].selector = @selector(state3);
-  methods[320].selector = @selector(state4);
-  methods[321].selector = @selector(stateYes);
-  methods[322].selector = @selector(stateNo);
+  methods[172].selector = @selector(isNestedScrollingEnabled);
+  methods[173].selector = @selector(stopNestedScroll);
+  methods[174].selector = @selector(dispatchNestedScrollWithInt:withInt:withInt:withInt:withIntArray:);
+  methods[175].selector = @selector(dispatchNestedPreScrollWithInt:withInt:withIntArray:withIntArray:);
+  methods[176].selector = @selector(dispatchNestedFlingWithFloat:withFloat:withBoolean:);
+  methods[177].selector = @selector(dispatchNestedPreFlingWithFloat:withFloat:);
+  methods[178].selector = @selector(getRawTextDirection);
+  methods[179].selector = @selector(setTextDirectionWithInt:);
+  methods[180].selector = @selector(getTextDirection);
+  methods[181].selector = @selector(resolveTextDirection);
+  methods[182].selector = @selector(canResolveTextDirection);
+  methods[183].selector = @selector(resetResolvedTextDirection);
+  methods[184].selector = @selector(isTextDirectionResolved);
+  methods[185].selector = @selector(getRawTextAlignment);
+  methods[186].selector = @selector(setTextAlignmentWithInt:);
+  methods[187].selector = @selector(getTextAlignment);
+  methods[188].selector = @selector(resolveTextAlignment);
+  methods[189].selector = @selector(canResolveTextAlignment);
+  methods[190].selector = @selector(resetResolvedTextAlignment);
+  methods[191].selector = @selector(isTextAlignmentResolved);
+  methods[192].selector = @selector(init);
+  methods[193].selector = @selector(getX);
+  methods[194].selector = @selector(getY);
+  methods[195].selector = @selector(relayout);
+  methods[196].selector = @selector(remeasure);
+  methods[197].selector = @selector(removeFromParent);
+  methods[198].selector = @selector(initAttachInfo);
+  methods[199].selector = @selector(getApplicationWindowToken);
+  methods[200].selector = @selector(getAccessibilityViewId);
+  methods[201].selector = @selector(getLocationOnScreenWithIntArray:);
+  methods[202].selector = @selector(getLocationInWindowWithIntArray:);
+  methods[203].selector = @selector(getHitRectWithADRect:);
+  methods[204].selector = @selector(getScrollX);
+  methods[205].selector = @selector(getScrollY);
+  methods[206].selector = @selector(getWindowVisibleDisplayFrameWithADRect:);
+  methods[207].selector = @selector(getWindowDisplayFrameWithADRect:);
+  methods[208].selector = @selector(requestRectangleOnScreenWithADRect:withBoolean:);
+  methods[209].selector = @selector(onDrawWithADCanvas:);
+  methods[210].selector = @selector(getResources);
+  methods[211].selector = @selector(isInEditMode);
+  methods[212].selector = @selector(getAlpha);
+  methods[213].selector = @selector(getRotation);
+  methods[214].selector = @selector(getRotationX);
+  methods[215].selector = @selector(getRotationY);
+  methods[216].selector = @selector(getScaleX);
+  methods[217].selector = @selector(getScaleY);
+  methods[218].selector = @selector(getPivotX);
+  methods[219].selector = @selector(getPivotY);
+  methods[220].selector = @selector(getTranslationX);
+  methods[221].selector = @selector(getTranslationY);
+  methods[222].selector = @selector(getTranslationZ);
+  methods[223].selector = @selector(getElevation);
+  methods[224].selector = @selector(setAlphaWithFloat:);
+  methods[225].selector = @selector(setRotationWithFloat:);
+  methods[226].selector = @selector(setRotationXWithFloat:);
+  methods[227].selector = @selector(setRotationYWithFloat:);
+  methods[228].selector = @selector(setScaleXWithFloat:);
+  methods[229].selector = @selector(setScaleYWithFloat:);
+  methods[230].selector = @selector(setPivotXWithFloat:);
+  methods[231].selector = @selector(setPivotYWithFloat:);
+  methods[232].selector = @selector(setTranslationXWithFloat:);
+  methods[233].selector = @selector(setTranslationYWithFloat:);
+  methods[234].selector = @selector(setTranslationZWithFloat:);
+  methods[235].selector = @selector(setElevationWithFloat:);
+  methods[236].selector = @selector(hasUnhandledKeyListener);
+  methods[237].selector = @selector(hasDefaultFocus);
+  methods[238].selector = @selector(clearFocusInternalWithADView:withBoolean:withBoolean:);
+  methods[239].selector = @selector(restoreDefaultFocus);
+  methods[240].selector = @selector(notifyEnterOrExitForAutoFillIfNeededWithBoolean:);
+  methods[241].selector = @selector(shouldDrawRoundScrollbar);
+  methods[242].selector = @selector(setBackgroundColorWithInt:);
+  methods[243].selector = @selector(requestFocusFromTouch);
+  methods[244].selector = @selector(requestFocus);
+  methods[245].selector = @selector(setSystemUiVisibilityWithInt:);
+  methods[246].selector = @selector(setOverScrollModeWithInt:);
+  methods[247].selector = @selector(cancelPendingInputEvents);
+  methods[248].selector = @selector(getVerticalScrollbarWidth);
+  methods[249].selector = @selector(setVerticalScrollbarWidthWithInt:);
+  methods[250].selector = @selector(getHorizontalScrollbarHeight);
+  methods[251].selector = @selector(setHorizontalScrollbarHeightWithInt:);
+  methods[252].selector = @selector(getFinalAlpha);
+  methods[253].selector = @selector(setFlagsWithInt:withInt:);
+  methods[254].selector = @selector(invalidateOutline);
+  methods[255].selector = @selector(isHardwareAccelerated);
+  methods[256].selector = @selector(getZ);
+  methods[257].selector = @selector(damageShadowReceiver);
+  methods[258].selector = @selector(damageInParent);
+  methods[259].selector = @selector(hasRtlSupport);
+  methods[260].selector = @selector(isRtlCompatibilityMode);
+  methods[261].selector = @selector(notifySubtreeAccessibilityStateChangedIfNeeded);
+  methods[262].selector = @selector(sizeChangeWithInt:withInt:withInt:withInt:);
+  methods[263].selector = @selector(onResolveDrawablesWithInt:);
+  methods[264].selector = @selector(getId);
+  methods[265].selector = @selector(setIdWithInt:);
+  methods[266].selector = @selector(getContext);
+  methods[267].selector = @selector(hasFocus);
+  methods[268].selector = @selector(findFocus);
+  methods[269].selector = @selector(unFocusWithId:);
+  methods[270].selector = @selector(registerPendingFrameMetricsObservers);
+  methods[271].selector = @selector(needGlobalAttributesUpdateWithBoolean:);
+  methods[272].selector = @selector(onWindowVisibilityChangedWithInt:);
+  methods[273].selector = @selector(onVisibilityAggregatedWithBoolean:);
+  methods[274].selector = @selector(performCollectViewAttributesWithADView_AttachInfo:withInt:);
+  methods[275].selector = @selector(hasTransientState);
+  methods[276].selector = @selector(clearAccessibilityFocus);
+  methods[277].selector = @selector(getAnimation);
+  methods[278].selector = @selector(onDetachedFromWindowInternal);
+  methods[279].selector = @selector(setBackgroundWithADDrawable:);
+  methods[280].selector = @selector(getBackground);
+  methods[281].selector = @selector(hasIdentityMatrix);
+  methods[282].selector = @selector(setAccessibilityDelegateWithId:);
+  methods[283].selector = @selector(getAccessibilityDelegate);
+  methods[284].selector = @selector(dispatchStartTemporaryDetach);
+  methods[285].selector = @selector(dispatchFinishTemporaryDetach);
+  methods[286].selector = @selector(setDrawingCacheBackgroundColorWithId:);
+  methods[287].selector = @selector(getImportantForAccessibility);
+  methods[288].selector = @selector(setImportantForAccessibilityWithInt:);
+  methods[289].selector = @selector(onStartTemporaryDetach);
+  methods[290].selector = @selector(clearFocus);
+  methods[291].selector = @selector(getAccessibilityNodeProvider);
+  methods[292].selector = @selector(requestAccessibilityFocus);
+  methods[293].selector = @selector(onFinishTemporaryDetach);
+  methods[294].selector = @selector(getWindowToken);
+  methods[295].selector = @selector(isDrawingCacheEnabled);
+  methods[296].selector = @selector(setDrawingCacheEnabledWithBoolean:);
+  methods[297].selector = @selector(jumpDrawablesToCurrentState);
+  methods[298].selector = @selector(dispatchKeyEventWithADKeyEvent:);
+  methods[299].selector = @selector(applyForegroundTint);
+  methods[300].selector = @selector(unscheduleDrawableWithId:);
+  methods[301].selector = @selector(drawableStateChanged);
+  methods[302].selector = @selector(drawableHotspotChangedWithFloat:withFloat:);
+  methods[303].selector = @selector(hasWindowFocus);
+  methods[304].selector = @selector(setFocusedWithBoolean:);
+  methods[305].selector = @selector(onFocusChangedWithBoolean:);
+  methods[306].selector = @selector(setDragHoveredWithBoolean:);
+  methods[307].selector = @selector(onDragHoveredWithBoolean:);
+  methods[308].selector = @selector(setDragCanAcceptWithBoolean:);
+  methods[309].selector = @selector(onDragCanAcceptWithBoolean:);
+  methods[310].selector = @selector(getForegroundBoundsWithInt:withInt:);
+  methods[311].selector = @selector(onAttachedToWindow);
+  methods[312].selector = @selector(applyBackgroundTint);
+  methods[313].selector = @selector(hasOnKeyListener);
+  methods[314].selector = @selector(getOnKeyListener);
+  methods[315].selector = @selector(invokeKeyListenerDownWithInt:);
+  methods[316].selector = @selector(invokeKeyListenerUpWithInt:);
+  methods[317].selector = @selector(resetPressedState);
+  methods[318].selector = @selector(sendAccessibilityEventWithInt:);
+  methods[319].selector = @selector(notifyViewAccessibilityStateChangedIfNeededWithInt:);
+  methods[320].selector = @selector(getRunQueue);
+  methods[321].selector = @selector(inflateViewWithNSString:);
+  methods[322].selector = @selector(setMyAttributeWithNSString:withId:);
+  methods[323].selector = @selector(state0);
+  methods[324].selector = @selector(state1);
+  methods[325].selector = @selector(state2);
+  methods[326].selector = @selector(state3);
+  methods[327].selector = @selector(state4);
+  methods[328].selector = @selector(stateYes);
+  methods[329].selector = @selector(stateNo);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "DBG", "Z", .constantValue.asBOOL = ADView_DBG, 0x1a, -1, -1, -1, -1 },
-    { "DEBUG_DRAW", "Z", .constantValue.asLong = 0, 0x9, -1, 161, -1, -1 },
-    { "VIEW_LOG_TAG", "LNSString;", .constantValue.asLong = 0, 0x1c, -1, 162, -1, -1 },
-    { "mDebugViewAttributes", "Z", .constantValue.asLong = 0, 0x9, -1, 163, -1, -1 },
+    { "DEBUG_DRAW", "Z", .constantValue.asLong = 0, 0x9, -1, 169, -1, -1 },
+    { "VIEW_LOG_TAG", "LNSString;", .constantValue.asLong = 0, 0x1c, -1, 170, -1, -1 },
+    { "mDebugViewAttributes", "Z", .constantValue.asLong = 0, 0x9, -1, 171, -1, -1 },
     { "NO_ID", "I", .constantValue.asInt = ADView_NO_ID, 0x19, -1, -1, -1, -1 },
     { "LAST_APP_AUTOFILL_ID", "I", .constantValue.asInt = ADView_LAST_APP_AUTOFILL_ID, 0x19, -1, -1, -1, -1 },
-    { "sCompatibilityDone", "Z", .constantValue.asLong = 0, 0xa, -1, 164, -1, -1 },
-    { "sUseBrokenMakeMeasureSpec", "Z", .constantValue.asLong = 0, 0xa, -1, 165, -1, -1 },
-    { "sUseZeroUnspecifiedMeasureSpec", "Z", .constantValue.asLong = 0, 0x8, -1, 166, -1, -1 },
-    { "sIgnoreMeasureCache", "Z", .constantValue.asLong = 0, 0xa, -1, 167, -1, -1 },
-    { "sAlwaysRemeasureExactly", "Z", .constantValue.asLong = 0, 0xa, -1, 168, -1, -1 },
-    { "sLayoutParamsAlwaysChanged", "Z", .constantValue.asLong = 0, 0xa, -1, 169, -1, -1 },
-    { "sTextureViewIgnoresDrawableSetters", "Z", .constantValue.asLong = 0, 0x8, -1, 170, -1, -1 },
-    { "sPreserveMarginParamsInLayoutParamConversion", "Z", .constantValue.asLong = 0, 0xc, -1, 171, -1, -1 },
-    { "sCascadedDragDrop", "Z", .constantValue.asLong = 0, 0x8, -1, 172, -1, -1 },
-    { "sHasFocusableExcludeAutoFocusable", "Z", .constantValue.asLong = 0, 0x8, -1, 173, -1, -1 },
-    { "sAutoFocusableOffUIThreadWontNotifyParents", "Z", .constantValue.asLong = 0, 0xa, -1, 174, -1, -1 },
-    { "sThrowOnInvalidFloatProperties", "Z", .constantValue.asLong = 0, 0xa, -1, 175, -1, -1 },
-    { "sAcceptZeroSizeDragShadow", "Z", .constantValue.asLong = 0, 0xa, -1, 176, -1, -1 },
+    { "sCompatibilityDone", "Z", .constantValue.asLong = 0, 0xa, -1, 172, -1, -1 },
+    { "sUseBrokenMakeMeasureSpec", "Z", .constantValue.asLong = 0, 0xa, -1, 173, -1, -1 },
+    { "sUseZeroUnspecifiedMeasureSpec", "Z", .constantValue.asLong = 0, 0x8, -1, 174, -1, -1 },
+    { "sIgnoreMeasureCache", "Z", .constantValue.asLong = 0, 0xa, -1, 175, -1, -1 },
+    { "sAlwaysRemeasureExactly", "Z", .constantValue.asLong = 0, 0xa, -1, 176, -1, -1 },
+    { "sLayoutParamsAlwaysChanged", "Z", .constantValue.asLong = 0, 0xa, -1, 177, -1, -1 },
+    { "sTextureViewIgnoresDrawableSetters", "Z", .constantValue.asLong = 0, 0x8, -1, 178, -1, -1 },
+    { "sPreserveMarginParamsInLayoutParamConversion", "Z", .constantValue.asLong = 0, 0xc, -1, 179, -1, -1 },
+    { "sCascadedDragDrop", "Z", .constantValue.asLong = 0, 0x8, -1, 180, -1, -1 },
+    { "sHasFocusableExcludeAutoFocusable", "Z", .constantValue.asLong = 0, 0x8, -1, 181, -1, -1 },
+    { "sAutoFocusableOffUIThreadWontNotifyParents", "Z", .constantValue.asLong = 0, 0xa, -1, 182, -1, -1 },
+    { "sThrowOnInvalidFloatProperties", "Z", .constantValue.asLong = 0, 0xa, -1, 183, -1, -1 },
+    { "sAcceptZeroSizeDragShadow", "Z", .constantValue.asLong = 0, 0xa, -1, 184, -1, -1 },
     { "NOT_FOCUSABLE", "I", .constantValue.asInt = ADView_NOT_FOCUSABLE, 0x19, -1, -1, -1, -1 },
     { "FOCUSABLE", "I", .constantValue.asInt = ADView_FOCUSABLE, 0x19, -1, -1, -1, -1 },
     { "FOCUSABLE_AUTO", "I", .constantValue.asInt = ADView_FOCUSABLE_AUTO, 0x19, -1, -1, -1, -1 },
@@ -3830,8 +3949,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "MEASURED_HEIGHT_STATE_SHIFT", "I", .constantValue.asInt = ADView_MEASURED_HEIGHT_STATE_SHIFT, 0x19, -1, -1, -1, -1 },
     { "MEASURED_STATE_TOO_SMALL", "I", .constantValue.asInt = ADView_MEASURED_STATE_TOO_SMALL, 0x19, -1, -1, -1, -1 },
     { "DEBUG_CORNERS_SIZE_DIP", "I", .constantValue.asInt = ADView_DEBUG_CORNERS_SIZE_DIP, 0x18, -1, -1, -1, -1 },
-    { "mKeyedTags_", "LADSparseArray;", .constantValue.asLong = 0, 0x2, -1, -1, 177, -1 },
-    { "sNextAccessibilityViewId", "I", .constantValue.asLong = 0, 0xa, -1, 178, -1, -1 },
+    { "mKeyedTags_", "LADSparseArray;", .constantValue.asLong = 0, 0x2, -1, -1, 185, -1 },
+    { "sNextAccessibilityViewId", "I", .constantValue.asLong = 0, 0xa, -1, 186, -1, -1 },
     { "mMeasuredWidth_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mMeasuredHeight_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mRecreateDisplayList_", "Z", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
@@ -4072,9 +4191,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "mBackgroundSizeChanged_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mDefaultFocusHighlight_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mDefaultFocusHighlightSizeChanged_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "sUseDefaultFocusHighlight", "Z", .constantValue.asLong = 0, 0xa, -1, 179, -1, -1 },
-    { "sCanFocusZeroSized", "Z", .constantValue.asLong = 0, 0xa, -1, 180, -1, -1 },
-    { "sAlwaysAssignFocus", "Z", .constantValue.asLong = 0, 0xa, -1, 181, -1, -1 },
+    { "sUseDefaultFocusHighlight", "Z", .constantValue.asLong = 0, 0xa, -1, 187, -1, -1 },
+    { "sCanFocusZeroSized", "Z", .constantValue.asLong = 0, 0xa, -1, 188, -1, -1 },
+    { "sAlwaysAssignFocus", "Z", .constantValue.asLong = 0, 0xa, -1, 189, -1, -1 },
     { "mContext_", "LADContext;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "mDrawableState_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mNextFocusLeftId_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -4108,6 +4227,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "mLayerType_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mCachingFailed_", "Z", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
     { "mSendingHoverAccessibilityEvents_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "mNestedScrollingParent_", "LADViewParent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "mTempNestedScrollConsumed_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mRoundScrollbarRenderer_", "LADView_RoundScrollbarRenderer;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "PROVIDER_BACKGROUND", "I", .constantValue.asInt = ADView_PROVIDER_BACKGROUND, 0x1a, -1, -1, -1, -1 },
     { "PROVIDER_NONE", "I", .constantValue.asInt = ADView_PROVIDER_NONE, 0x1a, -1, -1, -1, -1 },
@@ -4122,8 +4243,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "sThreadLocal_", "LADView_ThreadLocal;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mListenerInfo_", "LADView_ListenerInfo;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "addOnLayoutChangeListener", "LADView_OnLayoutChangeListener;", "removeOnLayoutChangeListener", "addOnAttachStateChangeListener", "LADView_OnAttachStateChangeListener;", "removeOnAttachStateChangeListener", "setOnKeyListener", "LADView_OnKeyListener;", "setVisibility", "I", "setEnabled", "Z", "setFocusable", "setLayoutDirection", "setWillNotDraw", "setClickable", "setLongClickable", "setPressed", "ZFF", "dispatchSetPressed", "onVisibilityChanged", "LADView;I", "setHovered", "onHoverChanged", "onSizeChanged", "IIII", "setTop", "setBottom", "setLeft", "setRight", "offsetTopAndBottom", "offsetLeftAndRight", "setLayoutParams", "LADViewGroup_LayoutParams;", "invalidate", "LADRect;", "invalidateInternal", "IIIIZZ", "invalidateViewProperty", "ZZ", "post", "LJavaLangRunnable;", "removeCallbacks", "canScrollHorizontally", "canScrollVertically", "assignParent", "LADViewParent;", "onRtlPropertiesChanged", "invalidateInheritedLayoutMode", "combineVisibility", "II", "dispatchAttachedToWindow", "LADView_AttachInfo;I", "setDuplicateParentStateEnabled", "isLayoutModeOptical", "LNSObject;", "setOpticalFrame", "layout", "onLayout", "ZIIII", "setFrame", "onCreateDrawableState", "mergeDrawableStates", "[I[I", "setBackgroundTintList", "LADColorStateList;", "setForeground", "LADDrawable;", "setForegroundGravity", "setForegroundTintList", "setPadding", "internalSetPadding", "setPaddingRelative", "setSelected", "dispatchSetSelected", "setActivated", "dispatchSetActivated", "findViewTraversal", "<T:Lr/android/view/View;>(I)TT;", "findViewById", "setTag", "getTag", "ILNSObject;", "setKeyedTag", "measure", "onMeasure", "setMeasuredDimension", "setMeasuredDimensionRaw", "combineMeasuredStates", "resolveSize", "resolveSizeAndState", "III", "getDefaultSize", "setMinimumHeight", "setMinimumWidth", "setTextDirection", "setTextAlignment", "getLocationOnScreen", "[I", "getHitRect", "getWindowVisibleDisplayFrame", "getWindowDisplayFrame", "requestRectangleOnScreen", "LADRect;Z", "onDraw", "LADCanvas;", "setAlpha", "F", "setRotation", "setRotationX", "setRotationY", "setScaleX", "setScaleY", "setPivotX", "setPivotY", "setTranslationX", "setTranslationY", "setTranslationZ", "setElevation", "clearFocusInternal", "LADView;ZZ", "notifyEnterOrExitForAutoFillIfNeeded", "setBackgroundColor", "setSystemUiVisibility", "setOverScrollMode", "setVerticalScrollbarWidth", "setHorizontalScrollbarHeight", "setFlags", "sizeChange", "onResolveDrawables", "setId", "unFocus", "needGlobalAttributesUpdate", "onWindowVisibilityChanged", "onVisibilityAggregated", "performCollectViewAttributes", "setBackground", "setAccessibilityDelegate", "setDrawingCacheBackgroundColor", "setImportantForAccessibility", "setDrawingCacheEnabled", "dispatchKeyEvent", "LADKeyEvent;", "unscheduleDrawable", "drawableHotspotChanged", "FF", "setFocused", "onFocusChanged", "setDragHovered", "onDragHovered", "setDragCanAccept", "onDragCanAccept", "getForegroundBounds", "invokeKeyListenerDown", "invokeKeyListenerUp", "sendAccessibilityEvent", "notifyViewAccessibilityStateChangedIfNeeded", "inflateView", "LNSString;", "setMyAttribute", "LNSString;LNSObject;", &ADView_DEBUG_DRAW, &ADView_VIEW_LOG_TAG, &ADView_mDebugViewAttributes, &ADView_sCompatibilityDone, &ADView_sUseBrokenMakeMeasureSpec, &ADView_sUseZeroUnspecifiedMeasureSpec, &ADView_sIgnoreMeasureCache, &ADView_sAlwaysRemeasureExactly, &ADView_sLayoutParamsAlwaysChanged, &ADView_sTextureViewIgnoresDrawableSetters, &ADView_sPreserveMarginParamsInLayoutParamConversion, &ADView_sCascadedDragDrop, &ADView_sHasFocusableExcludeAutoFocusable, &ADView_sAutoFocusableOffUIThreadWontNotifyParents, &ADView_sThrowOnInvalidFloatProperties, &ADView_sAcceptZeroSizeDragShadow, "Lr/android/util/SparseArray<Ljava/lang/Object;>;", &ADView_sNextAccessibilityViewId, &ADView_sUseDefaultFocusHighlight, &ADView_sCanFocusZeroSized, &ADView_sAlwaysAssignFocus, "LADView_ForegroundInfo;LADView_OnScrollChangeListener;LADView_OnLayoutChangeListener;LADView_MeasureSpec;LADView_OnKeyListener;LADView_OnTouchListener;LADView_OnHoverListener;LADView_OnLongClickListener;LADView_OnDragListener;LADView_OnFocusChangeListener;LADView_OnClickListener;LADView_OnContextClickListener;LADView_OnAttachStateChangeListener;LADView_ThreadedRenderer;LADView_AttachInfo;LADView_ThreadLocal;LADView_TextUtils;LADView_ViewRootImpl;LADView_ListenerInfo;LADView_AccessibilityNodeInfo;LADView_AccessibilityNodeProvider;LADView_RoundScrollbarRenderer;LADView_DragEvent;LADView_TintInfo;" };
-  static const J2ObjcClassInfo _ADView = { "View", "r.android.view", ptrTable, methods, fields, 7, 0x1, 323, 384, -1, 182, -1, -1, -1 };
+  static const void *ptrTable[] = { "addOnLayoutChangeListener", "LADView_OnLayoutChangeListener;", "removeOnLayoutChangeListener", "addOnAttachStateChangeListener", "LADView_OnAttachStateChangeListener;", "removeOnAttachStateChangeListener", "setOnKeyListener", "LADView_OnKeyListener;", "setVisibility", "I", "setEnabled", "Z", "setFocusable", "setLayoutDirection", "setWillNotDraw", "setClickable", "setLongClickable", "setPressed", "ZFF", "dispatchSetPressed", "onVisibilityChanged", "LADView;I", "setHovered", "onHoverChanged", "onSizeChanged", "IIII", "setTop", "setBottom", "setLeft", "setRight", "offsetTopAndBottom", "offsetLeftAndRight", "setLayoutParams", "LADViewGroup_LayoutParams;", "invalidate", "LADRect;", "invalidateInternal", "IIIIZZ", "invalidateViewProperty", "ZZ", "post", "LJavaLangRunnable;", "removeCallbacks", "canScrollHorizontally", "canScrollVertically", "assignParent", "LADViewParent;", "onRtlPropertiesChanged", "invalidateInheritedLayoutMode", "combineVisibility", "II", "dispatchAttachedToWindow", "LADView_AttachInfo;I", "setDuplicateParentStateEnabled", "isLayoutModeOptical", "LNSObject;", "setOpticalFrame", "layout", "onLayout", "ZIIII", "setFrame", "onCreateDrawableState", "mergeDrawableStates", "[I[I", "setBackgroundTintList", "LADColorStateList;", "setForeground", "LADDrawable;", "setForegroundGravity", "setForegroundTintList", "setPadding", "internalSetPadding", "setPaddingRelative", "setSelected", "dispatchSetSelected", "setActivated", "dispatchSetActivated", "findViewTraversal", "<T:Lr/android/view/View;>(I)TT;", "findViewById", "setTag", "getTag", "ILNSObject;", "setKeyedTag", "measure", "onMeasure", "setMeasuredDimension", "setMeasuredDimensionRaw", "combineMeasuredStates", "resolveSize", "resolveSizeAndState", "III", "getDefaultSize", "setMinimumHeight", "setMinimumWidth", "dispatchNestedScroll", "IIII[I", "dispatchNestedPreScroll", "II[I[I", "dispatchNestedFling", "FFZ", "dispatchNestedPreFling", "FF", "setTextDirection", "setTextAlignment", "getLocationOnScreen", "[I", "getLocationInWindow", "getHitRect", "getWindowVisibleDisplayFrame", "getWindowDisplayFrame", "requestRectangleOnScreen", "LADRect;Z", "onDraw", "LADCanvas;", "setAlpha", "F", "setRotation", "setRotationX", "setRotationY", "setScaleX", "setScaleY", "setPivotX", "setPivotY", "setTranslationX", "setTranslationY", "setTranslationZ", "setElevation", "clearFocusInternal", "LADView;ZZ", "notifyEnterOrExitForAutoFillIfNeeded", "setBackgroundColor", "setSystemUiVisibility", "setOverScrollMode", "setVerticalScrollbarWidth", "setHorizontalScrollbarHeight", "setFlags", "sizeChange", "onResolveDrawables", "setId", "unFocus", "needGlobalAttributesUpdate", "onWindowVisibilityChanged", "onVisibilityAggregated", "performCollectViewAttributes", "setBackground", "setAccessibilityDelegate", "setDrawingCacheBackgroundColor", "setImportantForAccessibility", "setDrawingCacheEnabled", "dispatchKeyEvent", "LADKeyEvent;", "unscheduleDrawable", "drawableHotspotChanged", "setFocused", "onFocusChanged", "setDragHovered", "onDragHovered", "setDragCanAccept", "onDragCanAccept", "getForegroundBounds", "invokeKeyListenerDown", "invokeKeyListenerUp", "sendAccessibilityEvent", "notifyViewAccessibilityStateChangedIfNeeded", "inflateView", "LNSString;", "setMyAttribute", "LNSString;LNSObject;", &ADView_DEBUG_DRAW, &ADView_VIEW_LOG_TAG, &ADView_mDebugViewAttributes, &ADView_sCompatibilityDone, &ADView_sUseBrokenMakeMeasureSpec, &ADView_sUseZeroUnspecifiedMeasureSpec, &ADView_sIgnoreMeasureCache, &ADView_sAlwaysRemeasureExactly, &ADView_sLayoutParamsAlwaysChanged, &ADView_sTextureViewIgnoresDrawableSetters, &ADView_sPreserveMarginParamsInLayoutParamConversion, &ADView_sCascadedDragDrop, &ADView_sHasFocusableExcludeAutoFocusable, &ADView_sAutoFocusableOffUIThreadWontNotifyParents, &ADView_sThrowOnInvalidFloatProperties, &ADView_sAcceptZeroSizeDragShadow, "Lr/android/util/SparseArray<Ljava/lang/Object;>;", &ADView_sNextAccessibilityViewId, &ADView_sUseDefaultFocusHighlight, &ADView_sCanFocusZeroSized, &ADView_sAlwaysAssignFocus, "LADView_ForegroundInfo;LADView_OnScrollChangeListener;LADView_OnLayoutChangeListener;LADView_MeasureSpec;LADView_OnKeyListener;LADView_OnTouchListener;LADView_OnHoverListener;LADView_OnLongClickListener;LADView_OnDragListener;LADView_OnFocusChangeListener;LADView_OnClickListener;LADView_OnContextClickListener;LADView_OnAttachStateChangeListener;LADView_ThreadedRenderer;LADView_AttachInfo;LADView_ThreadLocal;LADView_TextUtils;LADView_ViewRootImpl;LADView_ListenerInfo;LADView_AccessibilityNodeInfo;LADView_AccessibilityNodeProvider;LADView_RoundScrollbarRenderer;LADView_DragEvent;LADView_TintInfo;" };
+  static const J2ObjcClassInfo _ADView = { "View", "r.android.view", ptrTable, methods, fields, 7, 0x1, 330, 386, -1, 190, -1, -1, -1 };
   return &_ADView;
 }
 

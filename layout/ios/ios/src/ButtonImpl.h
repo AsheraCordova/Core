@@ -636,6 +636,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 
 - (ASButtonImpl_ButtonCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASButtonImpl_ButtonCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASButtonImpl_ButtonCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -770,6 +772,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 
 - (ASButtonImpl_ButtonCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASButtonImpl_ButtonCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASButtonImpl_ButtonCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -846,6 +850,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 
 - (ASButtonImpl_ButtonCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value;
 
+- (ASButtonImpl_ButtonCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASButtonImpl_ButtonCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -885,6 +891,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 - (ASButtonImpl_ButtonCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASButtonImpl_ButtonCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -931,6 +939,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetBackgroundTint;
 
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASButtonImpl_ButtonCommandBuilder *)tryGetBottom;
 
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetClickable;
 
@@ -1026,6 +1036,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetLayoutDirection;
 
+- (ASButtonImpl_ButtonCommandBuilder *)tryGetLeft;
+
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetLongClickable;
 
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetMarqueeRepeatLimit;
@@ -1066,6 +1078,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetPaddingTop;
 
+- (ASButtonImpl_ButtonCommandBuilder *)tryGetRight;
+
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetRotation;
 
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetRotationX;
@@ -1093,6 +1107,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetTextDirection;
 
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetTextSize;
+
+- (ASButtonImpl_ButtonCommandBuilder *)tryGetTop;
 
 - (ASButtonImpl_ButtonCommandBuilder *)tryGetTransformPivotX;
 

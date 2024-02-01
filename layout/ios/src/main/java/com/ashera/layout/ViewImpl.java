@@ -2557,6 +2557,17 @@ return getMaxHeight(w);			}
  			w.setAnimator(animator); 			
  		}
 	}
+	
+	public static r.android.view.animation.Interpolator getInterpolator(IWidget w, Object objValue) {
+		String value = (String) objValue;
+		String html = w.getFragment().getInlineResource(value);
+		if (html == null) {
+			html = PluginInvoker.getFileAsset("" + (value).substring(1) + ".xml", w.getFragment());
+		}
+		AnimationContentHandler handler = new AnimationContentHandler(w);
+		com.ashera.parser.html.HtmlParser.parse(handler, html);
+		return handler.timeInterpolator;
+	}
 
 	
 	private static class AnimationContentHandler extends com.ashera.parser.html.ContentHandlerAdapter {
@@ -2581,7 +2592,7 @@ return getMaxHeight(w);			}
 		private float arg1;
 		private float extraTension;
 		private float cycles;
-		private r.android.animation.TimeInterpolator timeInterpolator;
+		private r.android.view.animation.Interpolator timeInterpolator;
 		private String pathData;
 		private String propertyYName;
 		private String propertyXName;

@@ -308,7 +308,9 @@ public class ImageCheckBoxImpl extends BaseWidget implements IDrawable, ICustomM
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

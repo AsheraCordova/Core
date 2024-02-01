@@ -259,7 +259,9 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

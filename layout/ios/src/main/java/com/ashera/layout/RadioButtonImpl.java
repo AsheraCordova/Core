@@ -395,7 +395,9 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

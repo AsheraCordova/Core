@@ -18,6 +18,7 @@
 
 @class ADRect;
 @class ADView;
+@class IOSIntArray;
 
 @protocol ADViewParent < JavaObject >
 
@@ -53,6 +54,36 @@
 - (jboolean)isTextAlignmentResolved;
 
 - (jint)getTextAlignment;
+
+- (jboolean)onStartNestedScrollWithADView:(ADView *)child
+                               withADView:(ADView *)target
+                                  withInt:(jint)nestedScrollAxes;
+
+- (void)onNestedScrollAcceptedWithADView:(ADView *)child
+                              withADView:(ADView *)target
+                                 withInt:(jint)nestedScrollAxes;
+
+- (void)onStopNestedScrollWithADView:(ADView *)target;
+
+- (void)onNestedScrollWithADView:(ADView *)target
+                         withInt:(jint)dxConsumed
+                         withInt:(jint)dyConsumed
+                         withInt:(jint)dxUnconsumed
+                         withInt:(jint)dyUnconsumed;
+
+- (void)onNestedPreScrollWithADView:(ADView *)target
+                            withInt:(jint)dx
+                            withInt:(jint)dy
+                       withIntArray:(IOSIntArray *)consumed;
+
+- (jboolean)onNestedFlingWithADView:(ADView *)target
+                          withFloat:(jfloat)velocityX
+                          withFloat:(jfloat)velocityY
+                        withBoolean:(jboolean)consumed;
+
+- (jboolean)onNestedPreFlingWithADView:(ADView *)target
+                             withFloat:(jfloat)velocityX
+                             withFloat:(jfloat)velocityY;
 
 @end
 

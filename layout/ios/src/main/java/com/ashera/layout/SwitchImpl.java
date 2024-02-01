@@ -378,7 +378,9 @@ public class SwitchImpl extends BaseWidget implements ICustomMeasureWidth{
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

@@ -288,7 +288,9 @@ public class SpinnerImpl extends BaseHasWidgets implements com.ashera.validation
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

@@ -402,6 +402,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setBaselineAlignBottomWithBoolean:(jboolean)value;
 
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -506,6 +508,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setMaxHeightWithNSString:(NSString *)value;
@@ -568,6 +572,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value;
 
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -591,6 +597,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setTintWithNSString:(NSString *)value;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -639,6 +647,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetBaseline;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetBaselineAlignBottom;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetBottom;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetClickable;
 
@@ -720,6 +730,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetLayoutDirection;
 
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetLeft;
+
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetLongClickable;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetMaxHeight;
@@ -750,6 +762,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetPaddingTop;
 
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetRight;
+
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetRotation;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetRotationX;
@@ -771,6 +785,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageButtonImpl_ImageButtonExt)
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetTextDirection;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetTint;
+
+- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetTop;
 
 - (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetTransformPivotX;
 

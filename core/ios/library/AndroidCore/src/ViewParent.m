@@ -31,6 +31,13 @@
     { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 8, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 9, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 12, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, 14, 15, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, 16, 17, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -51,9 +58,16 @@
   methods[13].selector = @selector(canResolveTextAlignment);
   methods[14].selector = @selector(isTextAlignmentResolved);
   methods[15].selector = @selector(getTextAlignment);
+  methods[16].selector = @selector(onStartNestedScrollWithADView:withADView:withInt:);
+  methods[17].selector = @selector(onNestedScrollAcceptedWithADView:withADView:withInt:);
+  methods[18].selector = @selector(onStopNestedScrollWithADView:);
+  methods[19].selector = @selector(onNestedScrollWithADView:withInt:withInt:withInt:withInt:);
+  methods[20].selector = @selector(onNestedPreScrollWithADView:withInt:withInt:withIntArray:);
+  methods[21].selector = @selector(onNestedFlingWithADView:withFloat:withFloat:withBoolean:);
+  methods[22].selector = @selector(onNestedPreFlingWithADView:withFloat:withFloat:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "invalidateChild", "LADView;LADRect;", "recomputeViewAttributes", "LADView;", "focusableViewAvailable", "childDrawableStateChanged" };
-  static const J2ObjcClassInfo _ADViewParent = { "ViewParent", "r.android.view", ptrTable, methods, NULL, 7, 0x609, 16, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "invalidateChild", "LADView;LADRect;", "recomputeViewAttributes", "LADView;", "focusableViewAvailable", "childDrawableStateChanged", "onStartNestedScroll", "LADView;LADView;I", "onNestedScrollAccepted", "onStopNestedScroll", "onNestedScroll", "LADView;IIII", "onNestedPreScroll", "LADView;II[I", "onNestedFling", "LADView;FFZ", "onNestedPreFling", "LADView;FF" };
+  static const J2ObjcClassInfo _ADViewParent = { "ViewParent", "r.android.view", ptrTable, methods, NULL, 7, 0x609, 23, 0, -1, -1, -1, -1, -1 };
   return &_ADViewParent;
 }
 

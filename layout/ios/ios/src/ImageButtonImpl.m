@@ -1482,7 +1482,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
 }
 
 - (void)remeasure {
-  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+  if ([this$0_ getFragment] != nil) {
+    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+  }
 }
 
 - (void)removeFromParent {

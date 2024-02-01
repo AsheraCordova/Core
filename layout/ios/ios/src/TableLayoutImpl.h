@@ -328,6 +328,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -339,6 +343,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setBackgroundTintWithNSString:(NSString *)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
 
@@ -450,6 +456,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setListitemWithNSString:(NSString *)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -524,6 +536,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -545,6 +559,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -591,6 +607,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetBackgroundTint;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetBottom;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetClickable;
 
@@ -680,6 +698,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetLayoutMode;
 
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetLeft;
+
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetLongClickable;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetMaxHeight;
@@ -714,6 +734,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetPaddingTop;
 
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetRight;
+
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetRotation;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetRotationX;
@@ -729,6 +751,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTableLayoutImpl_TableLayoutExt)
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetTextAlignment;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetTextDirection;
+
+- (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetTop;
 
 - (ASTableLayoutImpl_TableLayoutCommandBuilder *)tryGetTransformPivotX;
 

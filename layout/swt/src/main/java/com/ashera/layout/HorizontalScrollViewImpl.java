@@ -330,7 +330,9 @@ return layoutParams.gravity;			}
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override
@@ -872,9 +874,19 @@ return this;}
 		org.eclipse.swt.custom.ScrolledComposite scrolledComposite = new org.eclipse.swt.custom.ScrolledComposite(ViewImpl.getParent(this), 
 				getStyle("swtStyle", org.eclipse.swt.SWT.H_SCROLL | org.eclipse.swt.SWT.DOUBLE_BUFFERED, params, fragment));		
     	pane = scrolledComposite;
+    	
+		org.eclipse.swt.widgets.ScrollBar hBar = scrolledComposite.getHorizontalBar();
+	    if (hBar != null) {
+	    	ViewImpl.setOnListener(hBar, org.eclipse.swt.SWT.Selection, org.eclipse.swt.SWT.Selection + "", new org.eclipse.swt.widgets.Listener() {
+                @Override
+                public void handleEvent(org.eclipse.swt.widgets.Event event) {
+                    int selection = hBar.getSelection();
+                    
+            		handleScroll(selection);
+                }
+	    	});
+	    }
 	}
-
-	
 	
 	@Override
 	public Object asNativeWidget() {
@@ -897,7 +909,6 @@ return this;}
     	}
     }
 
-
 	private Object getScrollX() {
         Object nativeWidget = asNativeWidget();
     	org.eclipse.swt.widgets.Scrollable scrollable = (org.eclipse.swt.widgets.Scrollable) nativeWidget;
@@ -909,30 +920,25 @@ return this;}
         return null;
     }
 	
+	//start - viewcode
+	private View.OnScrollChangeListener onScrollChangeListener; 	
+    private int oldScrollX = 0;
+
 	private void setOnScroll(Object objValue) {
-		Object nativeWidget = asNativeWidget();
-		View view = (View) asWidget();
-		View.OnScrollChangeListener onScrollChangeListener; 
-		
 		if (objValue instanceof String) {
 			onScrollChangeListener = new OnScrollChangeListener(this, (String) objValue);
 		} else {
 			onScrollChangeListener = (View.OnScrollChangeListener) objValue;
 		}
-		org.eclipse.swt.widgets.Scrollable scrollable = (org.eclipse.swt.widgets.Scrollable) nativeWidget;
-		org.eclipse.swt.widgets.ScrollBar hBar = scrollable.getHorizontalBar();
-	    if (hBar != null) {
-	    	ViewImpl.setOnListener(hBar, org.eclipse.swt.SWT.Selection, org.eclipse.swt.SWT.Selection + "", new org.eclipse.swt.widgets.Listener() {
-	    	    int oldScrollX = 0;
-                @Override
-                public void handleEvent(org.eclipse.swt.widgets.Event event) {
-                    int selection = hBar.getSelection();
-                    onScrollChangeListener.onScrollChange(view, selection, 0, 0, oldScrollX);
-                    oldScrollX = selection;
-                    view.getViewTreeObserver().dispatchOnScrollChanged();
-                }
-	    	    
-	    	});
-	    }
 	}
+	
+	private void handleScroll(int selection) {
+		View view = (View) asWidget();
+		if (onScrollChangeListener != null) {
+			onScrollChangeListener.onScrollChange(view, selection, 0, oldScrollX, 0);
+		}
+        oldScrollX = selection;
+        view.getViewTreeObserver().dispatchOnScrollChanged();
+	}
+	//end - viewcode
 }

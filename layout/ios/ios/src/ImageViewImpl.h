@@ -413,6 +413,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setBaselineAlignBottomWithBoolean:(jboolean)value;
 
+- (ASImageViewImpl_ImageViewCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASImageViewImpl_ImageViewCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -519,6 +521,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASImageViewImpl_ImageViewCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASImageViewImpl_ImageViewCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setMaxHeightWithNSString:(NSString *)value;
@@ -581,6 +585,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value;
 
+- (ASImageViewImpl_ImageViewCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASImageViewImpl_ImageViewCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -604,6 +610,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 - (ASImageViewImpl_ImageViewCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setTintWithNSString:(NSString *)value;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -652,6 +660,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetBaseline;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetBaselineAlignBottom;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)tryGetBottom;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetClickable;
 
@@ -735,6 +745,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetLayoutDirection;
 
+- (ASImageViewImpl_ImageViewCommandBuilder *)tryGetLeft;
+
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetLongClickable;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetMaxHeight;
@@ -765,6 +777,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetPaddingTop;
 
+- (ASImageViewImpl_ImageViewCommandBuilder *)tryGetRight;
+
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetRotation;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetRotationX;
@@ -786,6 +800,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASImageViewImpl_ImageViewExt)
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetTextDirection;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetTint;
+
+- (ASImageViewImpl_ImageViewCommandBuilder *)tryGetTop;
 
 - (ASImageViewImpl_ImageViewCommandBuilder *)tryGetTransformPivotX;
 

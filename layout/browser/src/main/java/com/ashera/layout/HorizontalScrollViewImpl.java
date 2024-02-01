@@ -330,7 +330,9 @@ return layoutParams.gravity;			}
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override
@@ -543,6 +545,28 @@ return getScrollX();			}
 	int thumbHeight = 0;
 	private void postOnMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		horizontalScrollView.adjustPaddingIfScrollBarPresent(widthMeasureSpec, heightMeasureSpec, thumbHeight);
+	}
+	
+
+
+	private View.OnScrollChangeListener onScrollChangeListener; 	
+    private int oldScrollX = 0;
+
+	private void setOnScroll(Object objValue) {
+		if (objValue instanceof String) {
+			onScrollChangeListener = new OnScrollChangeListener(this, (String) objValue);
+		} else {
+			onScrollChangeListener = (View.OnScrollChangeListener) objValue;
+		}
+	}
+	
+	private void handleScroll(int selection) {
+		View view = (View) asWidget();
+		if (onScrollChangeListener != null) {
+			onScrollChangeListener.onScrollChange(view, selection, 0, oldScrollX, 0);
+		}
+        oldScrollX = selection;
+        view.getViewTreeObserver().dispatchOnScrollChanged();
 	}
 	
 
@@ -853,26 +877,13 @@ return this;}
 		htmlElement.getStyle().setProperty("overflow-x", "auto");
 		htmlElement.getStyle().setProperty("overflow-y", "hidden");
 		htmlElement.getStyle().setProperty("box-sizing", "border-box");
-	}
-	
-	
-	private void setOnScroll(Object objValue) {
-		View view = (View) asWidget();
-		View.OnScrollChangeListener onScrollChangeListener; 
 		
-		if (objValue instanceof String) {
-			onScrollChangeListener = new OnScrollChangeListener(this, (String) objValue);
-		} else {
-			onScrollChangeListener = (View.OnScrollChangeListener) objValue;
-		}
     	ViewImpl.setOnListener(this, htmlElement, new org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.Event>() {
     	    int oldScrollX = 0;
             @Override
             public void handleEvent(org.teavm.jso.dom.events.Event event) {
                 int selection = htmlElement.getScrollLeft();
-                onScrollChangeListener.onScrollChange(view, selection, 0, oldScrollX, 0);
-                oldScrollX = selection;
-                view.getViewTreeObserver().dispatchOnScrollChanged();
+                handleScroll(selection);
             }
     	    
     	}, "scroll", "scroll");

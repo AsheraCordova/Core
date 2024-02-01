@@ -179,6 +179,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -277,6 +279,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setLongClickableWithBoolean:(jboolean)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setMaxHeightWithNSString:(NSString *)arg0;
@@ -327,6 +331,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setRightWithNSString:(NSString *)arg0;
+
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setRotationXWithFloat:(jfloat)arg0;
@@ -344,6 +350,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setTopWithNSString:(NSString *)arg0;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -386,6 +394,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetBackgroundTint;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetBackgroundTintMode;
+
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetBottom;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetClickable;
 
@@ -467,6 +477,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetLayoutDirection;
 
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetLeft;
+
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetLongClickable;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetMaxHeight;
@@ -489,6 +501,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetModelUiToPojo;
 
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetRight;
+
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetRotation;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetRotationX;
@@ -504,6 +518,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupModelImpl_ViewGroupModelCommandBuilder)
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetTextAlignment;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetTextDirection;
+
+- (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetTop;
 
 - (ASViewGroupModelImpl_ViewGroupModelCommandBuilderInternal *)tryGetTransformPivotX;
 

@@ -307,7 +307,9 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements IDrawabl
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

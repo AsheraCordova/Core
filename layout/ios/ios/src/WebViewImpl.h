@@ -387,6 +387,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASWebViewImpl_WebViewCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASWebViewImpl_WebViewCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -485,6 +487,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASWebViewImpl_WebViewCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASWebViewImpl_WebViewCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setMaxHeightWithNSString:(NSString *)arg0;
@@ -535,6 +539,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setOutsideTouchableWithBoolean:(jboolean)arg0;
 
+- (ASWebViewImpl_WebViewCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASWebViewImpl_WebViewCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -552,6 +558,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 - (ASWebViewImpl_WebViewCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASWebViewImpl_WebViewCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -594,6 +602,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetBackgroundTint;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASWebViewImpl_WebViewCommandBuilder *)tryGetBottom;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetClickable;
 
@@ -675,6 +685,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetLayoutDirection;
 
+- (ASWebViewImpl_WebViewCommandBuilder *)tryGetLeft;
+
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetLongClickable;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetMaxHeight;
@@ -693,6 +705,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetModelUiToPojo;
 
+- (ASWebViewImpl_WebViewCommandBuilder *)tryGetRight;
+
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetRotation;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetRotationX;
@@ -708,6 +722,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_Loader_WebViewErrorListener)
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetTextAlignment;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetTextDirection;
+
+- (ASWebViewImpl_WebViewCommandBuilder *)tryGetTop;
 
 - (ASWebViewImpl_WebViewCommandBuilder *)tryGetTransformPivotX;
 

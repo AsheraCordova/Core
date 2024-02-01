@@ -484,7 +484,9 @@ public class EditTextImpl extends BaseWidget implements ICustomMeasureHeight, IC
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

@@ -1087,18 +1087,44 @@
      <!-- AndroidCore end -->
      
       <!-- start AndroidXCore -->
+     <header-file src="core/ios/library/AndroidXCore/src/FastOutLinearInInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/FastOutLinearInInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/FastOutSlowInInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/FastOutSlowInInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/Fragment.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/Fragment.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/GravityCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/GravityCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/LayoutRes.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/LayoutRes.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/LinearOutSlowInInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/LinearOutSlowInInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/LookupTableInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/LookupTableInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/MarginLayoutParamsCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/MarginLayoutParamsCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/NestedScrollingChild.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/NestedScrollingChild.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/NestedScrollingChild2.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/NestedScrollingChild2.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/NestedScrollingChild3.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/NestedScrollingChild3.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/NestedScrollingChildHelper.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/NestedScrollingChildHelper.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/NestedScrollingParent.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/NestedScrollingParent.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/NestedScrollingParent2.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/NestedScrollingParent2.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/NestedScrollingParent3.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/NestedScrollingParent3.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/NestedScrollingParentHelper.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/NestedScrollingParentHelper.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/NestedScrollView.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/NestedScrollView.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/RestrictTo.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/RestrictTo.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/ScrollingView.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/ScrollingView.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/SimpleArrayMap.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/SimpleArrayMap.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/TraceCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
@@ -1107,8 +1133,12 @@
      <source-file src="core/ios/library/AndroidXCore/src/ViewCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/ViewGroupCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/ViewGroupCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/ViewParentCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/ViewParentCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/VisibleForTesting.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/VisibleForTesting.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/WindowInsetsCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/WindowInsetsCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <!-- AndroidXCore end -->
   
     <config-file target="config.xml" parent="/widget">
@@ -1497,6 +1527,42 @@
    	<js-module src="layout/browser/www/js/add_res.js" name="layoutAddRes">
     	 <runs/>
   	</js-module>
+  	
+  	<!-- start tsc -->
+     <source-file src="layout/browser/tsc/src/web/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ButtonImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/CheckBoxImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ChronometerImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/EditTextImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/FrameLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/HorizontalScrollViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ImageButtonImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ImageViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/LinearLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/LinkImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ListViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ModelImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/PopupWindowImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ProgressBarImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/RadioButtonImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/RadioGroupImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/RootImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ScrollViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/SpinnerImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/SwitchImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/TableLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/TableRowImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/TextAreaImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/TextViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ToggleButtonImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ViewGroupImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ViewOnlyImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/WebViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <!-- tsc end -->
   </platform>
   <platform name="swt">
     <config-file target="res/xml/config.xml" parent="/*">
@@ -1536,6 +1602,51 @@
       </feature>
     </config-file>  
    	<framework src="layout/swt/layout.gradle" custom="true" type="gradleReference" />
+   	
+   	 <!-- start tsc -->
+     <source-file src="layout/swt/tsc/src/swt/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/CComboImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/CheckBoxImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/CheckBoxStyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ChronometerImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/CLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/EditTextImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/FrameLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/HorizontalScrollViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ImageButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ImageCheckBoxImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ImageRadioButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ImageViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/LinearLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/LinkImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ListViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ModelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/PopupWindowImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ProgressBarImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/RadioButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/RadioButtonStyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/RadioGroupImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/RootImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ScrollViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/SpinnerImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/StyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/StyledTextImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/SwitchImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/SwitchStyledLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/TableLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/TableRowImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/TextViewButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/TextViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ToggleButtonImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ViewGroupImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ViewOnlyImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/WebViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <!-- tsc end -->
   </platform>
 
 

@@ -215,7 +215,9 @@ public class ImageViewImpl extends BaseWidget implements IsImage, IHasMultiNativ
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

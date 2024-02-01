@@ -809,6 +809,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASSwitchImpl_SwitchCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASSwitchImpl_SwitchCommandBuilder *)setCheckedWithBoolean:(jboolean)value;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
@@ -977,6 +979,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASSwitchImpl_SwitchCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASSwitchImpl_SwitchCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -1055,6 +1059,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value;
 
+- (ASSwitchImpl_SwitchCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASSwitchImpl_SwitchCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -1107,6 +1113,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setThumbTintWithNSString:(NSString *)value;
 
+- (ASSwitchImpl_SwitchCommandBuilder *)setTopWithNSString:(NSString *)arg0;
+
 - (ASSwitchImpl_SwitchCommandBuilder *)setTrackTintWithNSString:(NSString *)value;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
@@ -1154,6 +1162,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetBackgroundTint;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)tryGetBottom;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetChecked;
 
@@ -1283,6 +1293,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetLayoutDirection;
 
+- (ASSwitchImpl_SwitchCommandBuilder *)tryGetLeft;
+
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetLongClickable;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetMarqueeRepeatLimit;
@@ -1323,6 +1335,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetPaddingTop;
 
+- (ASSwitchImpl_SwitchCommandBuilder *)tryGetRight;
+
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetRotation;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetRotationX;
@@ -1358,6 +1372,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetTextSize;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetThumbTint;
+
+- (ASSwitchImpl_SwitchCommandBuilder *)tryGetTop;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)tryGetTrackTint;
 

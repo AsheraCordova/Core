@@ -802,6 +802,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 
 - (ASLinkImpl_LinkCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASLinkImpl_LinkCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASLinkImpl_LinkCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASLinkImpl_LinkCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -956,6 +958,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 
 - (ASLinkImpl_LinkCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASLinkImpl_LinkCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASLinkImpl_LinkCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASLinkImpl_LinkCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -1034,6 +1038,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 
 - (ASLinkImpl_LinkCommandBuilder *)setPasswordWithBoolean:(jboolean)value;
 
+- (ASLinkImpl_LinkCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASLinkImpl_LinkCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASLinkImpl_LinkCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -1077,6 +1083,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 - (ASLinkImpl_LinkCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASLinkImpl_LinkCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASLinkImpl_LinkCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASLinkImpl_LinkCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -1131,6 +1139,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 - (ASLinkImpl_LinkCommandBuilder *)tryGetBackgroundTint;
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASLinkImpl_LinkCommandBuilder *)tryGetBottom;
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetClickable;
 
@@ -1246,6 +1256,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetLayoutDirection;
 
+- (ASLinkImpl_LinkCommandBuilder *)tryGetLeft;
+
 - (ASLinkImpl_LinkCommandBuilder *)tryGetLongClickable;
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetMarqueeRepeatLimit;
@@ -1286,6 +1298,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetPaddingTop;
 
+- (ASLinkImpl_LinkCommandBuilder *)tryGetRight;
+
 - (ASLinkImpl_LinkCommandBuilder *)tryGetRotation;
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetRotationX;
@@ -1313,6 +1327,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 - (ASLinkImpl_LinkCommandBuilder *)tryGetTextDirection;
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetTextSize;
+
+- (ASLinkImpl_LinkCommandBuilder *)tryGetTop;
 
 - (ASLinkImpl_LinkCommandBuilder *)tryGetTransformPivotX;
 

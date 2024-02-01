@@ -4310,7 +4310,9 @@ public void setBottom(String value) {
 	}
 	public static void nativeMakeFrame(Object uiView, int l, int t, int r, int b) {
 		Control control = (Control) uiView;
-
+		if (control.isDisposed()) {
+			return;
+		}
 		if (!(control.getParent() instanceof org.eclipse.swt.custom.ScrolledComposite)) {
 		    control.setBounds(l, t, r-l, b-t);		
 		} else {
@@ -5396,6 +5398,17 @@ public void setBottom(String value) {
  			w.setAnimator(animator); 			
  		}
 	}
+	
+	public static r.android.view.animation.Interpolator getInterpolator(IWidget w, Object objValue) {
+		String value = (String) objValue;
+		String html = w.getFragment().getInlineResource(value);
+		if (html == null) {
+			html = PluginInvoker.getFileAsset("res/" + (value).substring(1) + ".xml", w.getFragment());
+		}
+		AnimationContentHandler handler = new AnimationContentHandler(w);
+		com.ashera.parser.html.HtmlParser.parse(handler, html);
+		return handler.timeInterpolator;
+	}
 
 	
 	private static class AnimationContentHandler extends com.ashera.parser.html.ContentHandlerAdapter {
@@ -5420,7 +5433,7 @@ public void setBottom(String value) {
 		private float arg1;
 		private float extraTension;
 		private float cycles;
-		private r.android.animation.TimeInterpolator timeInterpolator;
+		private r.android.view.animation.Interpolator timeInterpolator;
 		private String pathData;
 		private String propertyYName;
 		private String propertyXName;

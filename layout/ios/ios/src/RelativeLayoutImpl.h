@@ -395,6 +395,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -406,6 +410,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setBackgroundTintWithNSString:(NSString *)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
 
@@ -517,6 +523,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setListitemWithNSString:(NSString *)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -591,6 +603,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -608,6 +622,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -652,6 +668,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetBackgroundTint;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetBottom;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetClickable;
 
@@ -741,6 +759,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetLayoutMode;
 
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetLeft;
+
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetLongClickable;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetMaxHeight;
@@ -775,6 +795,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetPaddingTop;
 
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetRight;
+
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetRotation;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetRotationX;
@@ -790,6 +812,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRelativeLayoutImpl_RelativeLayoutExt)
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetTextAlignment;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetTextDirection;
+
+- (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetTop;
 
 - (ASRelativeLayoutImpl_RelativeLayoutCommandBuilder *)tryGetTransformPivotX;
 

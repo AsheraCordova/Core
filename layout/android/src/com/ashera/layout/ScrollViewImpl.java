@@ -896,13 +896,37 @@ return this;}
 
 	//end - body
 	private void setScrollY(Object objValue) {
+		scrollView.setScrollY((int) objValue);
 	}
 
 	private Object getScrollY() {
-		return null;
+		return scrollView.getScrollY();
 	}
 	
-	
+	android.view.ViewTreeObserver.OnScrollChangedListener onScrollChangedListener;
 	private void setOnScroll(Object objValue) {
+		View.OnScrollChangeListener onScrollChangeListener; 
+		
+		if (objValue instanceof String) {
+			onScrollChangeListener = new OnScrollChangeListener(this, (String) objValue);
+		} else {
+			onScrollChangeListener = (View.OnScrollChangeListener) objValue;
+		}
+		
+		if (this.onScrollChangedListener != null) {
+			scrollView.getViewTreeObserver().removeOnScrollChangedListener(this.onScrollChangedListener);	
+		}
+		
+		this.onScrollChangedListener = new android.view.ViewTreeObserver.OnScrollChangedListener() {
+			int oldScrollY;
+			@Override
+			public void onScrollChanged() {
+				int scrollY = scrollView.getScrollY();
+				onScrollChangeListener.onScrollChange(scrollView, 0, scrollY, 0, oldScrollY);
+				oldScrollY = scrollY;
+			}
+			
+		};
+		scrollView.getViewTreeObserver().addOnScrollChangedListener(onScrollChangedListener);
 	}
 }

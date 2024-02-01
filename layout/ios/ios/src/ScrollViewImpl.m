@@ -63,6 +63,7 @@
   ASScrollViewImpl_ScrollViewBean *bean_;
   ASScrollViewImpl_ScrollViewCommandParamsBuilder *paramsBuilder_;
   ASScrollViewImpl_ScrollViewParamsBean *paramsBean_;
+  id<ADView_OnScrollChangeListener> listener_ScrollViewImpl_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -93,6 +94,7 @@ J2OBJC_FIELD_SETTER(ASScrollViewImpl, builder_, ASScrollViewImpl_ScrollViewComma
 J2OBJC_FIELD_SETTER(ASScrollViewImpl, bean_, ASScrollViewImpl_ScrollViewBean *)
 J2OBJC_FIELD_SETTER(ASScrollViewImpl, paramsBuilder_, ASScrollViewImpl_ScrollViewCommandParamsBuilder *)
 J2OBJC_FIELD_SETTER(ASScrollViewImpl, paramsBean_, ASScrollViewImpl_ScrollViewParamsBean *)
+J2OBJC_FIELD_SETTER(ASScrollViewImpl, listener_ScrollViewImpl_, id<ADView_OnScrollChangeListener>)
 
 __attribute__((unused)) static void ASScrollViewImpl_setWidgetOnNativeClass(ASScrollViewImpl *self);
 
@@ -675,9 +677,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "bean_", "LASScrollViewImpl_ScrollViewBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "paramsBuilder_", "LASScrollViewImpl_ScrollViewCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "paramsBean_", "LASScrollViewImpl_ScrollViewParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "listener_ScrollViewImpl_", "LADView_OnScrollChangeListener;", .constantValue.asLong = 0, 0x2, 44, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setScrollX", "LNSObject;", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setOnScroll", "setPreventAutoScroll", "nativeSetPreventAutoScroll", &ASScrollViewImpl_LOCAL_NAME, &ASScrollViewImpl_GROUP_NAME, "LASScrollViewImpl_ScrollViewExt;LASScrollViewImpl_OnScrollChangeListener;LASScrollViewImpl_ScrollViewCommandBuilder;LASScrollViewImpl_ScrollViewBean;LASScrollViewImpl_ScrollViewParamsBean;LASScrollViewImpl_ScrollViewCommandParamsBuilder;LASScrollViewImpl_MyUIScrollViewDelegate;" };
-  static const J2ObjcClassInfo _ASScrollViewImpl = { "ScrollViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 43, 8, -1, 44, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setScrollX", "LNSObject;", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setOnScroll", "setPreventAutoScroll", "nativeSetPreventAutoScroll", &ASScrollViewImpl_LOCAL_NAME, &ASScrollViewImpl_GROUP_NAME, "listener", "LASScrollViewImpl_ScrollViewExt;LASScrollViewImpl_OnScrollChangeListener;LASScrollViewImpl_ScrollViewCommandBuilder;LASScrollViewImpl_ScrollViewBean;LASScrollViewImpl_ScrollViewParamsBean;LASScrollViewImpl_ScrollViewCommandParamsBuilder;LASScrollViewImpl_MyUIScrollViewDelegate;" };
+  static const J2ObjcClassInfo _ASScrollViewImpl = { "ScrollViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 43, 9, -1, 45, -1, -1, -1 };
   return &_ASScrollViewImpl;
 }
 
@@ -752,6 +755,8 @@ ADFrameLayout_LayoutParams *ASScrollViewImpl_getLayoutParamsWithADView_(ASScroll
 
 void ASScrollViewImpl_nativeCreateWithJavaUtilMap_(ASScrollViewImpl *self, id<JavaUtilMap> params) {
   self->uiView_ = [self nativescrollViewCreate];
+  ASScrollViewImpl_MyUIScrollViewDelegate *myUIScrollViewDelegate = new_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_(self);
+  [myUIScrollViewDelegate nativeScrollChangeListenerWithId:[self asNativeWidget]];
 }
 
 void ASScrollViewImpl_setScrollXWithId_(ASScrollViewImpl *self, id objValue) {
@@ -763,15 +768,12 @@ void ASScrollViewImpl_setScrollYWithId_(ASScrollViewImpl *self, id objValue) {
 }
 
 void ASScrollViewImpl_setOnScrollWithId_(ASScrollViewImpl *self, id objValue) {
-  id<ADView_OnScrollChangeListener> listener;
   if ([objValue isKindOfClass:[NSString class]]) {
-    listener = new_ASScrollViewImpl_OnScrollChangeListener_initWithASIWidget_withNSString_(self, (NSString *) objValue);
+    self->listener_ScrollViewImpl_ = new_ASScrollViewImpl_OnScrollChangeListener_initWithASIWidget_withNSString_(self, (NSString *) objValue);
   }
   else {
-    listener = (id<ADView_OnScrollChangeListener>) cast_check(objValue, ADView_OnScrollChangeListener_class_());
+    self->listener_ScrollViewImpl_ = (id<ADView_OnScrollChangeListener>) cast_check(objValue, ADView_OnScrollChangeListener_class_());
   }
-  ASScrollViewImpl_MyUIScrollViewDelegate *myUIScrollViewDelegate = new_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_withADView_OnScrollChangeListener_(self, listener);
-  [myUIScrollViewDelegate nativeScrollChangeListenerWithId:[self asNativeWidget]];
 }
 
 void ASScrollViewImpl_setPreventAutoScrollWithId_(ASScrollViewImpl *self, id objValue) {
@@ -903,7 +905,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl)
 }
 
 - (void)remeasure {
-  [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+  if ([this$0_ getFragment] != nil) {
+    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
+  }
 }
 
 - (void)removeFromParent {
@@ -1666,9 +1670,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_ScrollViewCommandParamsBuilder
 
 @implementation ASScrollViewImpl_MyUIScrollViewDelegate
 
-- (instancetype)initWithASScrollViewImpl:(ASScrollViewImpl *)outer$
-       withADView_OnScrollChangeListener:(id<ADView_OnScrollChangeListener>)listener {
-  ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_withADView_OnScrollChangeListener_(self, outer$, listener);
+- (instancetype)initWithASScrollViewImpl:(ASScrollViewImpl *)outer$ {
+  ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_(self, outer$);
   return self;
 }
 
@@ -1679,7 +1682,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_ScrollViewCommandParamsBuilder
 
 - (void)onscrollWithInt:(jint)scrollX
                 withInt:(jint)scrollY {
-  [((id<ADView_OnScrollChangeListener>) nil_chk(listener_)) onScrollChangeWithADView:(ADView *) cast_chk([this$0_ asWidget], [ADView class]) withInt:scrollX withInt:scrollY withInt:oldScrollX_ withInt:oldScrollY_];
+  if (listener_ != nil) {
+    [listener_ onScrollChangeWithADView:(ADView *) cast_chk([this$0_ asWidget], [ADView class]) withInt:scrollX withInt:scrollY withInt:oldScrollX_ withInt:oldScrollY_];
+  }
   oldScrollX_ = scrollX;
   oldScrollY_ = scrollY;
   [((ADViewTreeObserver *) nil_chk([((ADScrollView *) nil_chk(this$0_->scrollView_)) getViewTreeObserver])) dispatchOnScrollChanged];
@@ -1703,7 +1708,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_ScrollViewCommandParamsBuilder
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASScrollViewImpl:withADView_OnScrollChangeListener:);
+  methods[0].selector = @selector(initWithASScrollViewImpl:);
   methods[1].selector = @selector(nativeScrollChangeListenerWithId:);
   methods[2].selector = @selector(onscrollWithInt:withInt:);
   #pragma clang diagnostic pop
@@ -1713,28 +1718,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_ScrollViewCommandParamsBuilder
     { "oldScrollX_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "listener_", "LADView_OnScrollChangeListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASScrollViewImpl;LADView_OnScrollChangeListener;", "nativeScrollChangeListener", "LNSObject;", "onscroll", "II", "LASScrollViewImpl;" };
-  static const J2ObjcClassInfo _ASScrollViewImpl_MyUIScrollViewDelegate = { "MyUIScrollViewDelegate", "com.ashera.layout", ptrTable, methods, fields, 7, 0x0, 3, 4, 5, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASScrollViewImpl;", "nativeScrollChangeListener", "LNSObject;", "onscroll", "II" };
+  static const J2ObjcClassInfo _ASScrollViewImpl_MyUIScrollViewDelegate = { "MyUIScrollViewDelegate", "com.ashera.layout", ptrTable, methods, fields, 7, 0x0, 3, 4, 0, -1, -1, -1, -1 };
   return &_ASScrollViewImpl_MyUIScrollViewDelegate;
 }
 
 @end
 
-void ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_withADView_OnScrollChangeListener_(ASScrollViewImpl_MyUIScrollViewDelegate *self, ASScrollViewImpl *outer$, id<ADView_OnScrollChangeListener> listener) {
+void ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_(ASScrollViewImpl_MyUIScrollViewDelegate *self, ASScrollViewImpl *outer$) {
   self->this$0_ = outer$;
   NSObject_init(self);
   self->oldScrollY_ = 0;
   self->oldScrollX_ = 0;
-  self->listener_ = listener;
   [((id<ASIFragment>) nil_chk([outer$ getFragment])) addListenerWithASIWidget:outer$ withId:self];
 }
 
-ASScrollViewImpl_MyUIScrollViewDelegate *new_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_withADView_OnScrollChangeListener_(ASScrollViewImpl *outer$, id<ADView_OnScrollChangeListener> listener) {
-  J2OBJC_NEW_IMPL(ASScrollViewImpl_MyUIScrollViewDelegate, initWithASScrollViewImpl_withADView_OnScrollChangeListener_, outer$, listener)
+ASScrollViewImpl_MyUIScrollViewDelegate *new_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_(ASScrollViewImpl *outer$) {
+  J2OBJC_NEW_IMPL(ASScrollViewImpl_MyUIScrollViewDelegate, initWithASScrollViewImpl_, outer$)
 }
 
-ASScrollViewImpl_MyUIScrollViewDelegate *create_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_withADView_OnScrollChangeListener_(ASScrollViewImpl *outer$, id<ADView_OnScrollChangeListener> listener) {
-  J2OBJC_CREATE_IMPL(ASScrollViewImpl_MyUIScrollViewDelegate, initWithASScrollViewImpl_withADView_OnScrollChangeListener_, outer$, listener)
+ASScrollViewImpl_MyUIScrollViewDelegate *create_ASScrollViewImpl_MyUIScrollViewDelegate_initWithASScrollViewImpl_(ASScrollViewImpl *outer$) {
+  J2OBJC_CREATE_IMPL(ASScrollViewImpl_MyUIScrollViewDelegate, initWithASScrollViewImpl_, outer$)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASScrollViewImpl_MyUIScrollViewDelegate)

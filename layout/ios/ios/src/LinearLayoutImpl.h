@@ -412,6 +412,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -427,6 +431,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setBaselineAlignedWithBoolean:(jboolean)value;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setBaselineAlignedChildIndexWithInt:(jint)value;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
 
@@ -540,6 +546,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setListitemWithNSString:(NSString *)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -618,6 +630,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -637,6 +651,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -687,6 +703,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetBaselineAligned;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetBaselineAlignedChildIndex;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetBottom;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetClickable;
 
@@ -780,6 +798,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetLayoutMode;
 
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetLeft;
+
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetLongClickable;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetMaxHeight;
@@ -818,6 +838,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetPaddingTop;
 
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetRight;
+
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetRotation;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetRotationX;
@@ -835,6 +857,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinearLayoutImpl_LinearLayoutExt)
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetTextAlignment;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetTextDirection;
+
+- (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetTop;
 
 - (ASLinearLayoutImpl_LinearLayoutCommandBuilder *)tryGetTransformPivotX;
 

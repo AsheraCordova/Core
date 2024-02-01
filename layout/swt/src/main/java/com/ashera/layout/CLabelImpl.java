@@ -325,7 +325,9 @@ public class CLabelImpl extends BaseWidget implements IDrawable, IHasMultiNative
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

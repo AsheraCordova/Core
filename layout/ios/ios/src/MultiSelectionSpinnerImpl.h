@@ -647,6 +647,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -795,6 +797,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setMaxHeightWithNSString:(NSString *)arg0;
@@ -863,6 +867,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value;
 
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -892,6 +898,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -938,6 +946,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetBackgroundTint;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetBottom;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetClickable;
 
@@ -1047,6 +1057,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetLayoutDirection;
 
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetLeft;
+
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetLongClickable;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetMaxHeight;
@@ -1077,6 +1089,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetPaddingTop;
 
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetRight;
+
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetRotation;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetRotationX;
@@ -1098,6 +1112,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetTextDirection;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetTextSize;
+
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetTop;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)tryGetTransformPivotX;
 

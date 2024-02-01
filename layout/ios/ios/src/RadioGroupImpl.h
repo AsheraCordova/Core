@@ -427,6 +427,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -442,6 +446,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setBaselineAlignedWithBoolean:(jboolean)value;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setBaselineAlignedChildIndexWithInt:(jint)value;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setCheckedButtonWithNSString:(NSString *)value;
 
@@ -557,6 +563,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setListitemWithNSString:(NSString *)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -637,6 +649,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -656,6 +670,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -706,6 +722,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetBaselineAligned;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetBaselineAlignedChildIndex;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetBottom;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetCheckedButton;
 
@@ -801,6 +819,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetLayoutMode;
 
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetLeft;
+
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetLongClickable;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetMaxHeight;
@@ -839,6 +859,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetPaddingTop;
 
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetRight;
+
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetRotation;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetRotationX;
@@ -856,6 +878,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioGroupImpl_RadioGroupExt)
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetTextAlignment;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetTextDirection;
+
+- (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetTop;
 
 - (ASRadioGroupImpl_RadioGroupCommandBuilder *)tryGetTransformPivotX;
 

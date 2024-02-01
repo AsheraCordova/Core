@@ -389,7 +389,9 @@ public class TextViewImpl extends BaseWidget implements com.ashera.validations.V
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

@@ -798,6 +798,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setCapitalizeWithNSString:(NSString *)value;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
@@ -960,6 +962,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setLineSpacingExtraWithNSString:(NSString *)value;
@@ -1052,6 +1056,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setPhoneNumberWithBoolean:(jboolean)value;
 
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -1089,6 +1095,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -1135,6 +1143,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetBackgroundTint;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetBottom;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetClickable;
 
@@ -1248,6 +1258,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetLayoutDirection;
 
+- (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetLeft;
+
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetLineSpacingExtra;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetLineSpacingMultiplier;
@@ -1292,6 +1304,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetPaddingTop;
 
+- (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetRight;
+
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetRotation;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetRotationX;
@@ -1317,6 +1331,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetTextIsSelectable;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetTextSize;
+
+- (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetTop;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)tryGetTransformPivotX;
 

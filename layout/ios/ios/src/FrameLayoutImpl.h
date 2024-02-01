@@ -321,6 +321,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -332,6 +336,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setBackgroundTintWithNSString:(NSString *)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
 
@@ -439,6 +445,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setListitemWithNSString:(NSString *)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -515,6 +527,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -532,6 +546,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -576,6 +592,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetBackgroundTint;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetBottom;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetClickable;
 
@@ -663,6 +681,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetLayoutMode;
 
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetLeft;
+
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetLongClickable;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetMaxHeight;
@@ -699,6 +719,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetPaddingTop;
 
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetRight;
+
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetRotation;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetRotationX;
@@ -714,6 +736,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASFrameLayoutImpl_FrameLayoutExt)
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetTextAlignment;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetTextDirection;
+
+- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetTop;
 
 - (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetTransformPivotX;
 

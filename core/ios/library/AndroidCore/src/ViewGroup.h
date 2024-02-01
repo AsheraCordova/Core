@@ -107,6 +107,36 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 - (void)offsetChildrenTopAndBottomWithInt:(jint)offset;
 
+- (jboolean)onNestedFlingWithADView:(ADView *)target
+                          withFloat:(jfloat)velocityX
+                          withFloat:(jfloat)velocityY
+                        withBoolean:(jboolean)consumed;
+
+- (jboolean)onNestedPreFlingWithADView:(ADView *)target
+                             withFloat:(jfloat)velocityX
+                             withFloat:(jfloat)velocityY;
+
+- (void)onNestedPreScrollWithADView:(ADView *)target
+                            withInt:(jint)dx
+                            withInt:(jint)dy
+                       withIntArray:(IOSIntArray *)consumed;
+
+- (void)onNestedScrollWithADView:(ADView *)target
+                         withInt:(jint)dxConsumed
+                         withInt:(jint)dyConsumed
+                         withInt:(jint)dxUnconsumed
+                         withInt:(jint)dyUnconsumed;
+
+- (void)onNestedScrollAcceptedWithADView:(ADView *)child
+                              withADView:(ADView *)target
+                                 withInt:(jint)axes;
+
+- (jboolean)onStartNestedScrollWithADView:(ADView *)child
+                               withADView:(ADView *)target
+                                  withInt:(jint)nestedScrollAxes;
+
+- (void)onStopNestedScrollWithADView:(ADView *)child;
+
 - (void)onViewAddedWithADView:(ADView *)child;
 
 - (void)onViewRemovedWithADView:(ADView *)child;

@@ -328,7 +328,9 @@ public class SwitchStyledLabelImpl extends BaseWidget implements IDrawable, IHas
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

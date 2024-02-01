@@ -308,7 +308,9 @@ public class ImageRadioButtonImpl extends BaseWidget implements IDrawable, ICust
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

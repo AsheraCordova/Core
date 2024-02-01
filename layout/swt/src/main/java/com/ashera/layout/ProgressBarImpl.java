@@ -208,7 +208,9 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

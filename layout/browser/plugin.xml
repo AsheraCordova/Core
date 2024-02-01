@@ -18,5 +18,41 @@
    	<js-module src="www/js/add_res.js" name="layoutAddRes">
     	 <runs/>
   	</js-module>
+  	
+  	<!-- start tsc -->
+     <source-file src="tsc/src/web/widget/AutoCompleteTextViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ButtonImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/CheckBoxImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ChronometerImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/EditTextImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/FrameLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/HorizontalScrollViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ImageButtonImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ImageViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/LinearLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/LinkImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ListViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ModelImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/PopupWindowImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ProgressBarImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/RadioButtonImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/RadioGroupImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/RelativeLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/RootImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ScrollViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/SpinnerImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/SwitchImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/TableLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/TableRowImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/TextAreaImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/TextViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ToggleButtonImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ViewGroupImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/ViewOnlyImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/WebViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <!-- tsc end -->
   </platform>
 </plugin>

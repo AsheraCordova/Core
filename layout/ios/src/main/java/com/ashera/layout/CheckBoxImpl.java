@@ -395,7 +395,9 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

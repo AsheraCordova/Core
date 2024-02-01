@@ -104,6 +104,8 @@
 + (void)setYWithADView:(ADView *)child
                withInt:(jint)y;
 
++ (void)stopNestedScrollWithADView:(ADView *)view;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADXViewCompat)
@@ -139,6 +141,26 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXViewCompat, IMPORTANT_FOR_ACCESSIBILITY_AUTO, ji
 inline jint ADXViewCompat_get_IMPORTANT_FOR_ACCESSIBILITY_YES(void);
 #define ADXViewCompat_IMPORTANT_FOR_ACCESSIBILITY_YES 0
 J2OBJC_STATIC_FIELD_CONSTANT(ADXViewCompat, IMPORTANT_FOR_ACCESSIBILITY_YES, jint)
+
+inline jint ADXViewCompat_get_SCROLL_AXIS_NONE(void);
+#define ADXViewCompat_SCROLL_AXIS_NONE 0
+J2OBJC_STATIC_FIELD_CONSTANT(ADXViewCompat, SCROLL_AXIS_NONE, jint)
+
+inline jint ADXViewCompat_get_SCROLL_AXIS_HORIZONTAL(void);
+#define ADXViewCompat_SCROLL_AXIS_HORIZONTAL 1
+J2OBJC_STATIC_FIELD_CONSTANT(ADXViewCompat, SCROLL_AXIS_HORIZONTAL, jint)
+
+inline jint ADXViewCompat_get_SCROLL_AXIS_VERTICAL(void);
+#define ADXViewCompat_SCROLL_AXIS_VERTICAL 2
+J2OBJC_STATIC_FIELD_CONSTANT(ADXViewCompat, SCROLL_AXIS_VERTICAL, jint)
+
+inline jint ADXViewCompat_get_TYPE_TOUCH(void);
+#define ADXViewCompat_TYPE_TOUCH 0
+J2OBJC_STATIC_FIELD_CONSTANT(ADXViewCompat, TYPE_TOUCH, jint)
+
+inline jint ADXViewCompat_get_TYPE_NON_TOUCH(void);
+#define ADXViewCompat_TYPE_NON_TOUCH 1
+J2OBJC_STATIC_FIELD_CONSTANT(ADXViewCompat, TYPE_NON_TOUCH, jint)
 
 FOUNDATION_EXPORT void ADXViewCompat_init(ADXViewCompat *self);
 
@@ -209,6 +231,8 @@ FOUNDATION_EXPORT void ADXViewCompat_offsetTopAndBottomWithADView_withInt_(ADVie
 FOUNDATION_EXPORT jboolean ADXViewCompat_isLaidOutWithADView_(ADView *view);
 
 FOUNDATION_EXPORT jboolean ADXViewCompat_isPaddingRelativeWithADView_(ADView *view);
+
+FOUNDATION_EXPORT void ADXViewCompat_stopNestedScrollWithADView_(ADView *view);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXViewCompat)
 

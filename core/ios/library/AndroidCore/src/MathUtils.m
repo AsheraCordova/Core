@@ -28,11 +28,39 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADMathUtils_constrainWithFloat_withFloat_withFloat_(amount, low, high);
 }
 
++ (jfloat)clampWithFloat:(jfloat)value
+               withFloat:(jfloat)min
+               withFloat:(jfloat)max {
+  return ADMathUtils_clampWithFloat_withFloat_withFloat_(value, min, max);
+}
+
++ (jint)clampWithInt:(jint)value
+             withInt:(jint)min
+             withInt:(jint)max {
+  return ADMathUtils_clampWithInt_withInt_withInt_(value, min, max);
+}
+
++ (jdouble)clampWithDouble:(jdouble)value
+                withDouble:(jdouble)min
+                withDouble:(jdouble)max {
+  return ADMathUtils_clampWithDouble_withDouble_withDouble_(value, min, max);
+}
+
++ (jlong)clampWithLong:(jlong)value
+              withLong:(jlong)min
+              withLong:(jlong)max {
+  return ADMathUtils_clampWithLong_withLong_withLong_(value, min, max);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x9, 0, 1, -1, -1, -1, -1 },
     { NULL, "F", 0x9, 0, 2, -1, -1, -1, -1 },
+    { NULL, "F", 0x9, 3, 2, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 3, 1, -1, -1, -1, -1 },
+    { NULL, "D", 0x9, 3, 4, -1, -1, -1, -1 },
+    { NULL, "J", 0x9, 3, 5, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -40,9 +68,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(constrainWithInt:withInt:withInt:);
   methods[2].selector = @selector(constrainWithFloat:withFloat:withFloat:);
+  methods[3].selector = @selector(clampWithFloat:withFloat:withFloat:);
+  methods[4].selector = @selector(clampWithInt:withInt:withInt:);
+  methods[5].selector = @selector(clampWithDouble:withDouble:withDouble:);
+  methods[6].selector = @selector(clampWithLong:withLong:withLong:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "constrain", "III", "FFF" };
-  static const J2ObjcClassInfo _ADMathUtils = { "MathUtils", "r.android.util", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "constrain", "III", "FFF", "clamp", "DDD", "JJJ" };
+  static const J2ObjcClassInfo _ADMathUtils = { "MathUtils", "r.android.util", ptrTable, methods, NULL, 7, 0x1, 7, 0, -1, -1, -1, -1, -1 };
   return &_ADMathUtils;
 }
 
@@ -68,6 +100,50 @@ jint ADMathUtils_constrainWithInt_withInt_withInt_(jint amount, jint low, jint h
 jfloat ADMathUtils_constrainWithFloat_withFloat_withFloat_(jfloat amount, jfloat low, jfloat high) {
   ADMathUtils_initialize();
   return amount < low ? low : (amount > high ? high : amount);
+}
+
+jfloat ADMathUtils_clampWithFloat_withFloat_withFloat_(jfloat value, jfloat min, jfloat max) {
+  ADMathUtils_initialize();
+  if (value < min) {
+    return min;
+  }
+  else if (value > max) {
+    return max;
+  }
+  return value;
+}
+
+jint ADMathUtils_clampWithInt_withInt_withInt_(jint value, jint min, jint max) {
+  ADMathUtils_initialize();
+  if (value < min) {
+    return min;
+  }
+  else if (value > max) {
+    return max;
+  }
+  return value;
+}
+
+jdouble ADMathUtils_clampWithDouble_withDouble_withDouble_(jdouble value, jdouble min, jdouble max) {
+  ADMathUtils_initialize();
+  if (value < min) {
+    return min;
+  }
+  else if (value > max) {
+    return max;
+  }
+  return value;
+}
+
+jlong ADMathUtils_clampWithLong_withLong_withLong_(jlong value, jlong min, jlong max) {
+  ADMathUtils_initialize();
+  if (value < min) {
+    return min;
+  }
+  else if (value > max) {
+    return max;
+  }
+  return value;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADMathUtils)

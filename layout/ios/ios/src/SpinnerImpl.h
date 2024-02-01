@@ -623,6 +623,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -771,6 +773,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setMaxHeightWithNSString:(NSString *)arg0;
@@ -839,6 +843,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value;
 
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -868,6 +874,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -914,6 +922,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetBackgroundTint;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetBottom;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetClickable;
 
@@ -1023,6 +1033,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetLayoutDirection;
 
+- (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetLeft;
+
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetLongClickable;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetMaxHeight;
@@ -1053,6 +1065,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetPaddingTop;
 
+- (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetRight;
+
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetRotation;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetRotationX;
@@ -1074,6 +1088,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetTextDirection;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetTextSize;
+
+- (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetTop;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)tryGetTransformPivotX;
 

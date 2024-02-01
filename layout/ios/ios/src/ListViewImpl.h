@@ -756,6 +756,10 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
 - (ASListViewImpl_ListViewCommandBuilder *)setAlphaWithFloat:(jfloat)arg0;
 
+- (ASListViewImpl_ListViewCommandBuilder *)setAnimateLayoutChangesWithBoolean:(jboolean)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setAnimateParentHierarchyWithBoolean:(jboolean)arg0;
+
 - (ASListViewImpl_ListViewCommandBuilder *)setAsDragSourceWithNSString:(NSString *)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)arg0;
@@ -767,6 +771,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 - (ASListViewImpl_ListViewCommandBuilder *)setBackgroundTintWithNSString:(NSString *)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setChildXmlWithNSString:(NSString *)arg0;
 
@@ -948,6 +954,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
 - (ASListViewImpl_ListViewCommandBuilder *)setLayoutModeWithNSString:(NSString *)arg0;
 
+- (ASListViewImpl_ListViewCommandBuilder *)setLayoutTransitionDurationWithInt:(jint)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setLayoutTransitionWithNSString:(NSString *)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASListViewImpl_ListViewCommandBuilder *)setListfooterWithNSString:(NSString *)value;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setListheaderWithNSString:(NSString *)value;
@@ -1034,6 +1046,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
 - (ASListViewImpl_ListViewCommandBuilder *)setPaddingWithNSString:(NSString *)arg0;
 
+- (ASListViewImpl_ListViewCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASListViewImpl_ListViewCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -1057,6 +1071,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 - (ASListViewImpl_ListViewCommandBuilder *)setTextAlignmentWithNSString:(NSString *)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setTextDirectionWithNSString:(NSString *)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -1101,6 +1117,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetBackgroundTint;
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASListViewImpl_ListViewCommandBuilder *)tryGetBottom;
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetChoiceMode;
 
@@ -1254,6 +1272,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetLayoutMode;
 
+- (ASListViewImpl_ListViewCommandBuilder *)tryGetLeft;
+
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetListSelector;
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetLongClickable;
@@ -1290,6 +1310,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetPaddingTop;
 
+- (ASListViewImpl_ListViewCommandBuilder *)tryGetRight;
+
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetRotation;
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetRotationX;
@@ -1311,6 +1333,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetTextAlignment;
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetTextDirection;
+
+- (ASListViewImpl_ListViewCommandBuilder *)tryGetTop;
 
 - (ASListViewImpl_ListViewCommandBuilder *)tryGetTransformPivotX;
 

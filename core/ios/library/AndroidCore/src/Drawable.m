@@ -184,6 +184,9 @@ J2OBJC_IGNORE_DESIGNATED_END
                         withInt:(jint)bottom2 {
 }
 
+- (void)jumpToCurrentState {
+}
+
 - (void)dealloc {
   RELEASE_(mBounds_);
   RELEASE_(mStateSet_);
@@ -226,6 +229,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 21, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -263,6 +267,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[30].selector = @selector(getIntrinsicHeight);
   methods[31].selector = @selector(drawWithADCanvas:);
   methods[32].selector = @selector(setHotspotBoundsWithInt:withInt:withInt:withInt:);
+  methods[33].selector = @selector(jumpToCurrentState);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "ZERO_BOUNDS_RECT", "LADRect;", .constantValue.asLong = 0, 0x1c, -1, 22, -1, -1 },
@@ -275,7 +280,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "minimumHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "setRedraw", "Z", "setBounds", "LADRect;", "IIII", "onBoundsChange", "setDrawable", "LNSObject;", "setState", "[I", "setMinimumWidth", "I", "setMinimumHeight", "setLayoutDirection", "getPadding", "setVisible", "ZZ", "setCallback", "onStateChange", "draw", "LADCanvas;", "setHotspotBounds", &ADDrawable_ZERO_BOUNDS_RECT, &ADDrawable_WILD_CARD };
-  static const J2ObjcClassInfo _ADDrawable = { "Drawable", "r.android.graphics.drawable", ptrTable, methods, fields, 7, 0x1, 33, 8, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADDrawable = { "Drawable", "r.android.graphics.drawable", ptrTable, methods, fields, 7, 0x1, 34, 8, -1, -1, -1, -1, -1 };
   return &_ADDrawable;
 }
 

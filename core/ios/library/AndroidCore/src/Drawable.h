@@ -70,6 +70,8 @@
 
 - (jboolean)isStateful;
 
+- (void)jumpToCurrentState;
+
 /*!
  @brief Specify a bounding rectangle for the Drawable.This is where the drawable
   will draw when its draw() method is called.

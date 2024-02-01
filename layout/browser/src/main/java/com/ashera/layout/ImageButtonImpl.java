@@ -210,7 +210,9 @@ public class ImageButtonImpl extends BaseWidget implements IsImage{
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

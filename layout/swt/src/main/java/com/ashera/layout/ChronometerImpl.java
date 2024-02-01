@@ -258,7 +258,9 @@ public class ChronometerImpl extends BaseWidget implements IDrawable, IHasMultiN
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

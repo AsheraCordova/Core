@@ -324,7 +324,9 @@ public class LinkImpl extends BaseWidget implements IDrawable, IHasMultiNativeWi
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

@@ -229,7 +229,9 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

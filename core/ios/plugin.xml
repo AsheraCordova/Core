@@ -820,18 +820,44 @@
      <!-- AndroidCore end -->
      
       <!-- start AndroidXCore -->
+     <header-file src="library/AndroidXCore/src/FastOutLinearInInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/FastOutLinearInInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/FastOutSlowInInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/FastOutSlowInInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/Fragment.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/Fragment.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/GravityCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/GravityCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/LayoutRes.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/LayoutRes.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/LinearOutSlowInInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/LinearOutSlowInInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/LookupTableInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/LookupTableInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/MarginLayoutParamsCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/MarginLayoutParamsCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/NestedScrollingChild.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/NestedScrollingChild.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/NestedScrollingChild2.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/NestedScrollingChild2.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/NestedScrollingChild3.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/NestedScrollingChild3.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/NestedScrollingChildHelper.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/NestedScrollingChildHelper.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/NestedScrollingParent.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/NestedScrollingParent.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/NestedScrollingParent2.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/NestedScrollingParent2.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/NestedScrollingParent3.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/NestedScrollingParent3.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/NestedScrollingParentHelper.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/NestedScrollingParentHelper.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/NestedScrollView.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/NestedScrollView.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/RestrictTo.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/RestrictTo.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/ScrollingView.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/ScrollingView.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/SimpleArrayMap.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/SimpleArrayMap.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/TraceCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
@@ -840,8 +866,12 @@
      <source-file src="library/AndroidXCore/src/ViewCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/ViewGroupCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/ViewGroupCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/ViewParentCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/ViewParentCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/VisibleForTesting.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/VisibleForTesting.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/WindowInsetsCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/WindowInsetsCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <!-- AndroidXCore end -->
   </platform>
 </plugin>

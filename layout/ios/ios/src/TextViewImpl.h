@@ -810,6 +810,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setBackgroundWithNSString:(NSString *)arg0;
 
+- (ASTextViewImpl_TextViewCommandBuilder *)setBottomWithNSString:(NSString *)arg0;
+
 - (ASTextViewImpl_TextViewCommandBuilder *)setClickableWithBoolean:(jboolean)arg0;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setContentDescriptionWithNSString:(NSString *)arg0;
@@ -966,6 +968,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setLayoutDirectionWithNSString:(NSString *)arg0;
 
+- (ASTextViewImpl_TextViewCommandBuilder *)setLeftWithNSString:(NSString *)arg0;
+
 - (ASTextViewImpl_TextViewCommandBuilder *)setLinesWithInt:(jint)value;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setLongClickableWithBoolean:(jboolean)arg0;
@@ -1044,6 +1048,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setPasswordWithBoolean:(jboolean)value;
 
+- (ASTextViewImpl_TextViewCommandBuilder *)setRightWithNSString:(NSString *)arg0;
+
 - (ASTextViewImpl_TextViewCommandBuilder *)setRotationWithFloat:(jfloat)arg0;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setRotationXWithFloat:(jfloat)arg0;
@@ -1089,6 +1095,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 - (ASTextViewImpl_TextViewCommandBuilder *)setTextSizeWithNSString:(NSString *)value;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setTextStyleWithNSString:(NSString *)value;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)setTopWithNSString:(NSString *)arg0;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)setTransformPivotXWithNSString:(NSString *)arg0;
 
@@ -1143,6 +1151,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetBackgroundTint;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetBackgroundTintMode;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)tryGetBottom;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetClickable;
 
@@ -1260,6 +1270,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetLayoutDirection;
 
+- (ASTextViewImpl_TextViewCommandBuilder *)tryGetLeft;
+
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetLongClickable;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetMarqueeRepeatLimit;
@@ -1300,6 +1312,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetPaddingTop;
 
+- (ASTextViewImpl_TextViewCommandBuilder *)tryGetRight;
+
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetRotation;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetRotationX;
@@ -1329,6 +1343,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASTextViewImpl_PostMeasureHandler)
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetTextDirection;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetTextSize;
+
+- (ASTextViewImpl_TextViewCommandBuilder *)tryGetTop;
 
 - (ASTextViewImpl_TextViewCommandBuilder *)tryGetTransformPivotX;
 

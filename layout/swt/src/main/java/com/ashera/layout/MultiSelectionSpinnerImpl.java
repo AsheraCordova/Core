@@ -264,7 +264,9 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements IDrawab
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

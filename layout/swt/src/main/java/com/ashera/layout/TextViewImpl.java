@@ -325,7 +325,9 @@ public class TextViewImpl extends BaseWidget implements IDrawable, IHasMultiNati
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

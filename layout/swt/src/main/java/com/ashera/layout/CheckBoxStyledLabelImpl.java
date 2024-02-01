@@ -309,7 +309,9 @@ public class CheckBoxStyledLabelImpl extends BaseWidget implements IDrawable, IC
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override

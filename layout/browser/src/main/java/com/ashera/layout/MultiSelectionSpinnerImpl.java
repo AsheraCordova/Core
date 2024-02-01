@@ -286,7 +286,9 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
         
     	@Override
 		public void remeasure() {
-			getFragment().remeasure();
+    		if (getFragment() != null) {
+    			getFragment().remeasure();
+    		}
 		}
     	
         @Override
