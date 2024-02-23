@@ -517,6 +517,10 @@ public class CorePlugin implements IPlugin, ICore {
 		navigator.navigateWithPopBackStack(actionId, result, fragment);		
 	}
 	
+	public static String getOs() {
+		return PluginInvoker.getOS();
+	}
+	
 	public static void closeDialog() {
 		navigator.closeDialog();		
 	}

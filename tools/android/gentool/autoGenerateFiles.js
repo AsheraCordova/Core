@@ -246,6 +246,9 @@ function generateFile(name) {
 	if (name.startsWith(respath + 'values') && name.indexOf("strings.xml") != -1) {
 		console.log("xslt triggered" + name);
 		runXSLT(name, "strings.xsl", getStringFileName(dirName));
+		if (name == "strings.xml"){		
+			runXSLT(name, "constants.xsl", "../tsc/src/Constants.ts");
+		}
 	}
 
 	if (name.startsWith(respath + 'values') && name.indexOf("styles.xml") != -1) {

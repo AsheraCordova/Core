@@ -84,6 +84,8 @@
 
 - (NSString *)getOS;
 
++ (NSString *)getOs;
+
 + (id<JavaUtilList>)getScopedObjectArrayWithId:(id)scopedObjects;
 
 - (jint)getScreenHeight;
@@ -168,6 +170,8 @@ FOUNDATION_EXPORT id<JavaUtilList> ASCorePlugin_getScopedObjectArrayWithId_(id s
 FOUNDATION_EXPORT void ASCorePlugin_navigateWithPopBackStackToWithNSString_withNSString_withBoolean_withId_withASIFragment_(NSString *actionId, NSString *destinationId, jboolean inclusive, id scopedObjects, id<ASIFragment> fragment);
 
 FOUNDATION_EXPORT void ASCorePlugin_navigateWithPopBackStackWithNSString_withId_withASIFragment_(NSString *actionId, id scopedObjects, id<ASIFragment> fragment);
+
+FOUNDATION_EXPORT NSString *ASCorePlugin_getOs(void);
 
 FOUNDATION_EXPORT void ASCorePlugin_closeDialog(void);
 

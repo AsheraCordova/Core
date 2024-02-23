@@ -14,6 +14,7 @@
      <source-file src="gentool/androidbackup.js" target-dir="gentool"/>
      <source-file src="gentool/autoGenerateFiles.js" target-dir="gentool"/>
      <source-file src="gentool/colors.xsl" target-dir="gentool"/>
+     <source-file src="gentool/constants.xsl" target-dir="gentool"/>
      <source-file src="gentool/dimens.xsl" target-dir="gentool"/>
      <source-file src="gentool/fixIosSymLinks.js" target-dir="gentool"/>
      <source-file src="gentool/font.xsl" target-dir="gentool"/>

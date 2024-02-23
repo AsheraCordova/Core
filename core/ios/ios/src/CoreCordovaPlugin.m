@@ -67,6 +67,11 @@
     
 }
 
+- (void) getOs:(CDVInvokedUrlCommand*)context {
+	NSString* result = [ASCorePlugin getOs];
+	[self successWithId: context withNSString: result];}
+}
+
 - (void) executeSimpleCommand:(CDVInvokedUrlCommand*)context {
     NSArray* commands = [context arguments];
     id<ASIActivity> activity = ((id<ASIActivity>) self.viewController);

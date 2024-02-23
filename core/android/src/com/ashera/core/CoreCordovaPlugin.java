@@ -84,6 +84,9 @@ public class CoreCordovaPlugin extends CordovaPlugin {
 		} else if (action.equals("navigateCommand")) {
 			cordova.getActivity().runOnUiThread(() -> handleNavigateCommand(data, callbackContext)); 
         	return true;
+		} else if (action.equals("getOs")) {
+			callbackContext.success(PluginInvoker.getOS());
+			return true;
 		} else {
             return false;
         }

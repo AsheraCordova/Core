@@ -6,14 +6,14 @@
     <xsl:template match="/">
         <xsl:if test="count(//*[@fragment != '']) > 0">
 //start - import
-import { Fragment, Inject } from './app/Fragment';
-import { NavController, InjectController } from './navigation/NavController';
-import { ScopedObject } from './app/ScopedObject';
 <xsl:for-each select="//*[@autoInject != 'noimport']">
 <xsl:variable name="name"><xsl:call-template name="substring-after-last"><xsl:with-param name="input" select="name(.)"/><xsl:with-param name="substr" select="'.'"/></xsl:call-template></xsl:variable>
 import { <xsl:value-of select="$name" /> } from './android/widget/<xsl:value-of select="$name" />Impl';
 </xsl:for-each>
 //end - import
+import { Fragment, Inject } from './app/Fragment';
+import { NavController, InjectController } from './navigation/NavController';
+import { ScopedObject } from './app/ScopedObject';
 //start - className
 export default class <xsl:value-of select="//*[@fragment != '']/@fragment" /> extends Fragment
 //end - className

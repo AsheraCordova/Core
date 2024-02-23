@@ -101,6 +101,14 @@ export class Fragment {
             });
         });
     }
+
+ 	public async getOs(): Promise<string>  {
+		return new Promise<string>((resolve, reject) => {
+            coreManager.getOs((result:string) => {
+                resolve(result);
+            });
+        });
+    }
 }
 
 

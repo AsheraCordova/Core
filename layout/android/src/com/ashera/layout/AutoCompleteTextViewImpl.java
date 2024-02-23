@@ -4842,16 +4842,22 @@ public void setPaddingVertical(String value) {
 		switch (key.getAttributeName()) {
 		case "modelFor":
 		case "listitem":
-			Context context = (Context) fragment.getRootActivity();
-			myCustomAdapter = new MyCustomAdapter(context, android.R.layout.simple_dropdown_item_1line);
-			myCustomAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-			appCompatAutoCompleteTextView.setAdapter(myCustomAdapter);
+			if (isInitialised()) {
+				initAdapter();
+			}
 			break;
 
 		default:
 			break;
 		}
 		
+	}
+
+	private void initAdapter() {
+		Context context = (Context) fragment.getRootActivity();
+		myCustomAdapter = new MyCustomAdapter(context, android.R.layout.simple_dropdown_item_1line);
+		myCustomAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+		appCompatAutoCompleteTextView.setAdapter(myCustomAdapter);
 	}
 	
     private void reloadTable() {
@@ -4880,6 +4886,14 @@ public void setPaddingVertical(String value) {
 			appCompatAutoCompleteTextView.showDropDown();
 		} else {
 			appCompatAutoCompleteTextView.dismissDropDown();
+		}
+	}
+	
+	@Override
+	public void initialized() {
+		super.initialized();
+		if (myCustomAdapter == null) {
+			initAdapter();
 		}
 	}
 }

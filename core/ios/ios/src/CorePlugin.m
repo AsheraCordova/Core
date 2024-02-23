@@ -447,6 +447,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASCorePlugin_navigateWithPopBackStackWithNSString_withId_withASIFragment_(actionId, scopedObjects, fragment);
 }
 
++ (NSString *)getOs {
+  return ASCorePlugin_getOs();
+}
+
 + (void)closeDialog {
   ASCorePlugin_closeDialog();
 }
@@ -556,6 +560,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LJavaUtilList;", 0x9, 33, 15, -1, 34, -1, -1 },
     { NULL, "V", 0x9, 35, 36, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 37, 31, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 38, 3, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 38, 39, -1, -1, -1, -1 },
@@ -612,19 +617,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[36].selector = @selector(getScopedObjectArrayWithId:);
   methods[37].selector = @selector(navigateWithPopBackStackToWithNSString:withNSString:withBoolean:withId:withASIFragment:);
   methods[38].selector = @selector(navigateWithPopBackStackWithNSString:withId:withASIFragment:);
-  methods[39].selector = @selector(closeDialog);
-  methods[40].selector = @selector(popBackStackWithASIFragment:);
-  methods[41].selector = @selector(popBackStackWithASIFragment:withNSString:withBoolean:);
-  methods[42].selector = @selector(executeSimpleCommandWithId:withASIFragment:);
-  methods[43].selector = @selector(getScreenWidthDp);
-  methods[44].selector = @selector(getScreenHeightDp);
-  methods[45].selector = @selector(getExternalFilesDirWithId:);
-  methods[46].selector = @selector(nativeGetExternalFilesDir);
-  methods[47].selector = @selector(getMaxMemoryWithId:);
-  methods[48].selector = @selector(decodeBitmapStreamWithJavaIoInputStream:withId:);
-  methods[49].selector = @selector(runOnMainThreadWithJavaLangRunnable:);
-  methods[50].selector = @selector(nativeRunOnMainThreadWithJavaLangRunnable:);
-  methods[51].selector = @selector(enqueueTaskForEventLoopWithJavaLangRunnable:withLong:);
+  methods[39].selector = @selector(getOs);
+  methods[40].selector = @selector(closeDialog);
+  methods[41].selector = @selector(popBackStackWithASIFragment:);
+  methods[42].selector = @selector(popBackStackWithASIFragment:withNSString:withBoolean:);
+  methods[43].selector = @selector(executeSimpleCommandWithId:withASIFragment:);
+  methods[44].selector = @selector(getScreenWidthDp);
+  methods[45].selector = @selector(getScreenHeightDp);
+  methods[46].selector = @selector(getExternalFilesDirWithId:);
+  methods[47].selector = @selector(nativeGetExternalFilesDir);
+  methods[48].selector = @selector(getMaxMemoryWithId:);
+  methods[49].selector = @selector(decodeBitmapStreamWithJavaIoInputStream:withId:);
+  methods[50].selector = @selector(runOnMainThreadWithJavaLangRunnable:);
+  methods[51].selector = @selector(nativeRunOnMainThreadWithJavaLangRunnable:);
+  methods[52].selector = @selector(enqueueTaskForEventLoopWithJavaLangRunnable:withLong:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "PLUGIN_NAME_CORE", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 51, -1, -1 },
@@ -632,7 +638,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "navigator", "LASUINavigatorImpl;", .constantValue.asLong = 0, 0xa, -1, 53, -1, -1 },
   };
   static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "LNSString;", "postDelayed", "LJavaLangRunnable;I", "scheduledTimerWithTimeInterval", "LJavaLangRunnable;F", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "invalidateTimer", "LNSObject;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "getMaxAscent", "getAscent", "getDescent", "getMaxDescent", "getLeading", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "navigateAsTop", "LNSString;LNSObject;LASIFragment;", "navigate", "getScopedObjectArray", "(Ljava/lang/Object;)Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLNSObject;LASIFragment;", "navigateWithPopBackStack", "popBackStack", "LASIFragment;LNSString;Z", "executeSimpleCommand", "LNSObject;LASIFragment;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "nativeRunOnMainThread", "enqueueTaskForEventLoop", "LJavaLangRunnable;J", &ASCorePlugin_PLUGIN_NAME_CORE, &ASCorePlugin_density, &ASCorePlugin_navigator, "LASCorePlugin_MyBitmap;" };
-  static const J2ObjcClassInfo _ASCorePlugin = { "CorePlugin", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 52, 3, -1, 54, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASCorePlugin = { "CorePlugin", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 53, 3, -1, 54, -1, -1, -1 };
   return &_ASCorePlugin;
 }
 
@@ -754,6 +760,11 @@ void ASCorePlugin_navigateWithPopBackStackWithNSString_withId_withASIFragment_(N
   ASCorePlugin_initialize();
   id<JavaUtilList> result = ASCorePlugin_getScopedObjectArrayWithId_(scopedObjects);
   [((ASUINavigatorImpl *) nil_chk(ASCorePlugin_navigator)) navigateWithPopBackStackWithNSString:actionId withJavaUtilList:result withASIFragment:fragment];
+}
+
+NSString *ASCorePlugin_getOs() {
+  ASCorePlugin_initialize();
+  return ASPluginInvoker_getOS();
 }
 
 void ASCorePlugin_closeDialog() {

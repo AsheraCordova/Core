@@ -10,5 +10,8 @@ module.exports = {
     },
     executeSimpleCommand: function (commands, successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "com.ashera.core.ios", "executeSimpleCommand", commands);
-    } 
+    },
+    getOs: function (successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "com.ashera.core.ios", "getOs");
+    }
 };
