@@ -37,6 +37,10 @@
 
 @interface ASExpressionMethodHandler ()
 
++ (id)sumWithASIWidget:(id<ASIWidget>)widget
+                withId:(id)obj
+       withJavaUtilMap:(id<JavaUtilMap>)configMap;
+
 + (id)ternaryWithASIWidget:(id<ASIWidget>)widget
                     withId:(id)obj
            withJavaUtilMap:(id<JavaUtilMap>)configMap;
@@ -86,6 +90,8 @@
 
 @end
 
+__attribute__((unused)) static id ASExpressionMethodHandler_sumWithASIWidget_withId_withJavaUtilMap_(id<ASIWidget> widget, id obj, id<JavaUtilMap> configMap);
+
 __attribute__((unused)) static id ASExpressionMethodHandler_ternaryWithASIWidget_withId_withJavaUtilMap_(id<ASIWidget> widget, id obj, id<JavaUtilMap> configMap);
 
 __attribute__((unused)) static id ASExpressionMethodHandler_baseElapsedTimeInMillisWithASIWidget_withId_withJavaUtilMap_(id<ASIWidget> widget, id obj, id<JavaUtilMap> configMap);
@@ -127,6 +133,12 @@ J2OBJC_IGNORE_DESIGNATED_END
                     withId:(id)obj
              withASIWidget:(id<ASIWidget>)widget {
   return ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(methodName, obj, widget);
+}
+
++ (id)sumWithASIWidget:(id<ASIWidget>)widget
+                withId:(id)obj
+       withJavaUtilMap:(id<JavaUtilMap>)configMap {
+  return ASExpressionMethodHandler_sumWithASIWidget_withId_withJavaUtilMap_(widget, obj, configMap);
 }
 
 + (id)ternaryWithASIWidget:(id<ASIWidget>)widget
@@ -214,43 +226,45 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x9, 0, 1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 2, 3, -1, 4, -1, -1 },
     { NULL, "LNSObject;", 0xa, 5, 3, -1, 4, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 6, 7, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 9, 7, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 10, 7, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 11, 12, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 13, 7, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 14, 15, -1, 16, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 17, 12, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 18, 3, -1, 4, -1, -1 },
-    { NULL, "LNSString;", 0xa, 19, 20, -1, 21, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0xa, 22, 12, -1, 23, -1, -1 },
-    { NULL, "Z", 0x9, 24, 12, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 25, 3, -1, 4, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 26, 7, -1, 8, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 6, 3, -1, 4, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 7, 8, -1, 9, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 10, 8, -1, 9, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 11, 8, -1, 9, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 14, 8, -1, 9, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 15, 16, -1, 17, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 18, 13, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 19, 3, -1, 4, -1, -1 },
+    { NULL, "LNSString;", 0xa, 20, 21, -1, 22, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0xa, 23, 13, -1, 24, -1, -1 },
+    { NULL, "Z", 0x9, 25, 13, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 26, 3, -1, 4, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 27, 8, -1, 9, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(getValueWithNSString:withId:withASIWidget:);
-  methods[2].selector = @selector(ternaryWithASIWidget:withId:withJavaUtilMap:);
-  methods[3].selector = @selector(baseElapsedTimeInMillisWithASIWidget:withId:withJavaUtilMap:);
-  methods[4].selector = @selector(getDescFromResWithId:withASIWidget:withJavaUtilMap:);
-  methods[5].selector = @selector(formatStringWithId:withASIWidget:withJavaUtilMap:);
-  methods[6].selector = @selector(getDescFromModelWithId:withASIWidget:withJavaUtilMap:);
-  methods[7].selector = @selector(sizeWithId:);
-  methods[8].selector = @selector(concatWithId:withASIWidget:withJavaUtilMap:);
-  methods[9].selector = @selector(listToStringWithId:withJavaUtilMap:);
-  methods[10].selector = @selector(not__WithId:);
-  methods[11].selector = @selector(totalWithASIWidget:withId:withJavaUtilMap:);
-  methods[12].selector = @selector(getDelimiterWithJavaUtilMap:);
-  methods[13].selector = @selector(getMapWithId:);
-  methods[14].selector = @selector(isVisibleWithId:);
-  methods[15].selector = @selector(multiplyWithASIWidget:withId:withJavaUtilMap:);
-  methods[16].selector = @selector(getFileAssetWithId:withASIWidget:withJavaUtilMap:);
+  methods[2].selector = @selector(sumWithASIWidget:withId:withJavaUtilMap:);
+  methods[3].selector = @selector(ternaryWithASIWidget:withId:withJavaUtilMap:);
+  methods[4].selector = @selector(baseElapsedTimeInMillisWithASIWidget:withId:withJavaUtilMap:);
+  methods[5].selector = @selector(getDescFromResWithId:withASIWidget:withJavaUtilMap:);
+  methods[6].selector = @selector(formatStringWithId:withASIWidget:withJavaUtilMap:);
+  methods[7].selector = @selector(getDescFromModelWithId:withASIWidget:withJavaUtilMap:);
+  methods[8].selector = @selector(sizeWithId:);
+  methods[9].selector = @selector(concatWithId:withASIWidget:withJavaUtilMap:);
+  methods[10].selector = @selector(listToStringWithId:withJavaUtilMap:);
+  methods[11].selector = @selector(not__WithId:);
+  methods[12].selector = @selector(totalWithASIWidget:withId:withJavaUtilMap:);
+  methods[13].selector = @selector(getDelimiterWithJavaUtilMap:);
+  methods[14].selector = @selector(getMapWithId:);
+  methods[15].selector = @selector(isVisibleWithId:);
+  methods[16].selector = @selector(multiplyWithASIWidget:withId:withJavaUtilMap:);
+  methods[17].selector = @selector(getFileAssetWithId:withASIWidget:withJavaUtilMap:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "getValue", "LNSString;LNSObject;LASIWidget;", "ternary", "LASIWidget;LNSObject;LJavaUtilMap;", "(Lcom/ashera/widget/IWidget;Ljava/lang/Object;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "baseElapsedTimeInMillis", "getDescFromRes", "LNSObject;LASIWidget;LJavaUtilMap;", "(Ljava/lang/Object;Lcom/ashera/widget/IWidget;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "formatString", "getDescFromModel", "size", "LNSObject;", "concat", "listToString", "LNSObject;LJavaUtilMap;", "(Ljava/lang/Object;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "not", "total", "getDelimiter", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/String;", "getMap", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "isVisible", "multiply", "getFileAsset" };
-  static const J2ObjcClassInfo _ASExpressionMethodHandler = { "ExpressionMethodHandler", "com.ashera.model", ptrTable, methods, NULL, 7, 0x1, 17, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "getValue", "LNSString;LNSObject;LASIWidget;", "sum", "LASIWidget;LNSObject;LJavaUtilMap;", "(Lcom/ashera/widget/IWidget;Ljava/lang/Object;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "ternary", "baseElapsedTimeInMillis", "getDescFromRes", "LNSObject;LASIWidget;LJavaUtilMap;", "(Ljava/lang/Object;Lcom/ashera/widget/IWidget;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "formatString", "getDescFromModel", "size", "LNSObject;", "concat", "listToString", "LNSObject;LJavaUtilMap;", "(Ljava/lang/Object;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "not", "total", "getDelimiter", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/String;", "getMap", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "isVisible", "multiply", "getFileAsset" };
+  static const J2ObjcClassInfo _ASExpressionMethodHandler = { "ExpressionMethodHandler", "com.ashera.model", ptrTable, methods, NULL, 7, 0x1, 18, 0, -1, -1, -1, -1, -1 };
   return &_ASExpressionMethodHandler;
 }
 
@@ -278,7 +292,7 @@ id ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(NSString
   id val = nil;
   {
     id<JavaUtilList> handlers;
-    switch (JreIndexOfStr(methodName, (id[]){ @"toString", @"not", @"ternary", @"listToString", @"concat", @"size", @"visible", @"gone", @"getDescFromModel", @"formatString", @"getDescFromRes", @"multiply", @"total", @"baseElapsedTimeInMillis", @"getFileAsset" }, 15)) {
+    switch (JreIndexOfStr(methodName, (id[]){ @"toString", @"not", @"ternary", @"listToString", @"concat", @"size", @"visible", @"gone", @"getDescFromModel", @"formatString", @"getDescFromRes", @"multiply", @"sum", @"total", @"baseElapsedTimeInMillis", @"getFileAsset" }, 16)) {
       case 0:
       {
         val = ASPluginInvoker_getStringWithId_(obj);
@@ -344,15 +358,20 @@ id ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(NSString
       }
       case 12:
       {
-        val = ASExpressionMethodHandler_totalWithASIWidget_withId_withJavaUtilMap_(widget, obj, configMap);
+        val = ASExpressionMethodHandler_sumWithASIWidget_withId_withJavaUtilMap_(widget, obj, configMap);
         break;
       }
       case 13:
       {
-        val = ASExpressionMethodHandler_baseElapsedTimeInMillisWithASIWidget_withId_withJavaUtilMap_(widget, obj, configMap);
+        val = ASExpressionMethodHandler_totalWithASIWidget_withId_withJavaUtilMap_(widget, obj, configMap);
         break;
       }
       case 14:
+      {
+        val = ASExpressionMethodHandler_baseElapsedTimeInMillisWithASIWidget_withId_withJavaUtilMap_(widget, obj, configMap);
+        break;
+      }
+      case 15:
       {
         val = ASExpressionMethodHandler_getFileAssetWithId_withASIWidget_withJavaUtilMap_(obj, widget, configMap);
         break;
@@ -398,6 +417,22 @@ id ASExpressionMethodHandler_getValueWithNSString_withId_withASIWidget_(NSString
     }
   }
   return val;
+}
+
+id ASExpressionMethodHandler_sumWithASIWidget_withId_withJavaUtilMap_(id<ASIWidget> widget, id obj, id<JavaUtilMap> configMap) {
+  ASExpressionMethodHandler_initialize();
+  IOSObjectArray *fields = [((NSString *) nil_chk(((NSString *) cast_chk([((id<JavaUtilMap>) nil_chk(configMap)) getWithId:@"fields"], [NSString class])))) java_split:@","];
+  jfloat sum = 0;
+  {
+    IOSObjectArray *a__ = fields;
+    NSString * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
+    NSString * const *e__ = b__ + a__->size_;
+    while (b__ < e__) {
+      NSString *path = *b__++;
+      JrePlusAssignFloatF(&sum, [((JavaLangFloat *) nil_chk((ASPluginInvoker_getFloatWithId_([((id<ASIWidget>) nil_chk(widget)) getModelByPathWithNSString:path withId:obj])))) floatValue]);
+    }
+  }
+  return JavaLangFloat_valueOfWithFloat_(sum);
 }
 
 id ASExpressionMethodHandler_ternaryWithASIWidget_withId_withJavaUtilMap_(id<ASIWidget> widget, id obj, id<JavaUtilMap> configMap) {
