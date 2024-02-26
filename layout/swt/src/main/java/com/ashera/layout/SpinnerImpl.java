@@ -1044,6 +1044,7 @@ return hint;				}
 		if (tmpSelectedValue != null) {
 			setSelectedValue(tmpSelectedValue);
 		}
+		selectSpinnerIfRequired();
 	}
 	
 
@@ -1732,11 +1733,6 @@ public void setHint(String value) {
 			}
 		}
 		combo.setItems(list.toArray(new String[0]));
-		if (combo.getItems().length > 0) {
-			if (!isInitialised()) {
-				combo.select(0);
-			}
-		}
 	}
 	
 	@Override
@@ -1750,9 +1746,6 @@ public void setHint(String value) {
 				strVal = hint;
 			}
 			combo.add(strVal);
-			if (!isInitialised()) {
-				combo.select(0);
-			}
 		}
 	}
 
@@ -1775,7 +1768,7 @@ public void setHint(String value) {
 		this.listener = new SelectionListener(onItemSelectedListener);
 		
 		combo.addSelectionListener(listener);
-		if (!isInitialised() && combo.getItems().length > 0) {
+		if (!isInitialised() && combo.getItems().length > 0 && combo.getSelectionIndex() != -1) {
 			onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableView, combo.getSelectionIndex(), 0);
 		}
 	}
@@ -1800,6 +1793,13 @@ public void setHint(String value) {
 				combo.setItem(hintIndex, hint);
 			}
 		}
+	}
+	
+
+	private void selectSpinnerIfRequired() {
+		if (combo.getItems().length > 0 && combo.getSelectionIndex() == -1) {
+			combo.select(0);
+		}		
 	}
 	
 	//start - viewcode

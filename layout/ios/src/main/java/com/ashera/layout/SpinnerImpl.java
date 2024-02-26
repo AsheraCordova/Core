@@ -1660,10 +1660,11 @@ return getTextSize();				}
 	
 	@Override
 	public void initialized() {
-		super.initialized();addTriggerChangeOnLoadListener();
+		super.initialized();
 		if (tmpSelectedValue != null) {
 			setSelectedValue(tmpSelectedValue);
 		}
+		selectSpinnerIfRequired();
 	}
 	
 
@@ -3060,5 +3061,9 @@ public void setTextColorHint(String value) {
     		postMeasureHandler = new PostMeasureHandler(POST_MEASURE_EVENT);
 			fragment.getEventBus().on(POST_MEASURE_EVENT, postMeasureHandler);
     	}
+	}
+    
+    private void selectSpinnerIfRequired() {
+    	addTriggerChangeOnLoadListener();		
 	}
 }

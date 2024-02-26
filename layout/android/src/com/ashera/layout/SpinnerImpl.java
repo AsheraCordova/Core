@@ -2058,8 +2058,13 @@ public void setHintTextFormat(String value) {
 		if (tmpSelectedValue != null) {
 			setSelectedValue(tmpSelectedValue);
 		}
+		selectSpinnerIfRequired();
 	}
 	//end - values
+
+	private void selectSpinnerIfRequired() {
+		
+	}
 
 	private int getSelectedItemPosition() {
 		return appCompatSpinner.getSelectedItemPosition();

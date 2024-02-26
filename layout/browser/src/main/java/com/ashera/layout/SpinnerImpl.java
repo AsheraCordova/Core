@@ -1539,10 +1539,11 @@ return hint;				}
 	
 	@Override
 	public void initialized() {
-		super.initialized();triggerChangeOnLoad();
+		super.initialized();
 		if (tmpSelectedValue != null) {
 			setSelectedValue(tmpSelectedValue);
 		}
+		selectSpinnerIfRequired();
 	}
 	
 
@@ -2508,6 +2509,8 @@ public void setSelection(int value) {
     @org.teavm.jso.JSBody(params = { "element" }, script = "setTimeout(function() {var event = new Event('change');element.dispatchEvent(event);},0); ")
     private static native void triggerChange(org.teavm.jso.dom.html.HTMLElement element);
 
-
+    private void selectSpinnerIfRequired() {
+		triggerChangeOnLoad();
+	}
 
 }

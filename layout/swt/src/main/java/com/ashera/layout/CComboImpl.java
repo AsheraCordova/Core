@@ -1123,11 +1123,6 @@ return hint;				}
 			}
 		}
 		cCombo.setItems(list.toArray(new String[0]));
-		if (cCombo.getItems().length > 0) {
-			if (!isInitialised()) {
-				cCombo.select(0);
-			}
-		}
 	}
 	
 	@Override
@@ -1141,9 +1136,6 @@ return hint;				}
 				strVal = hint;
 			}
 			cCombo.add(strVal);
-			if (!isInitialised()) {
-				cCombo.select(0);
-			}
 		}
 	}
 
@@ -1166,7 +1158,7 @@ return hint;				}
 		this.listener = new SelectionListener(onItemSelectedListener);
 		
 		cCombo.addSelectionListener(listener);
-		if (!isInitialised() && cCombo.getItems().length > 0) {
+		if (!isInitialised() && cCombo.getItems().length > 0 && cCombo.getSelectionIndex() != -1) {
 			onItemSelectedListener.onItemSelected(new AdapterView<>(), measurableView, cCombo.getSelectionIndex(), 0);
 		}
 	}
@@ -1191,6 +1183,13 @@ return hint;				}
 				cCombo.setItem(hintIndex, hint);
 			}
 		}
+	}
+	
+
+	private void selectSpinnerIfRequired() {
+		if (cCombo.getItems().length > 0 && cCombo.getSelectionIndex() == -1) {
+			cCombo.select(0);
+		}		
 	}
 	
 	//start - viewcode
@@ -1311,6 +1310,7 @@ return hint;				}
 		if (tmpSelectedValue != null) {
 			setSelectedValue(tmpSelectedValue);
 		}
+		selectSpinnerIfRequired();
 	}
 	
 
