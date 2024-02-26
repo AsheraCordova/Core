@@ -7,10 +7,10 @@
     <xsl:template match="/">
     	export const LOCALE_MANAGER_KEYS: string[] = [
     	<xsl:for-each select="resources/string[@ts = 'true']">
-    		<xsl:text>"</xsl:text><xsl:value-of select="@name" /><xsl:text>",</xsl:text>
+    		<xsl:text>"@string/</xsl:text><xsl:value-of select="@name" /><xsl:text>",</xsl:text>
     	</xsl:for-each>
-        <xsl:for-each select="resources/array">
-        	<xsl:text>"</xsl:text><xsl:value-of select="@name" /><xsl:text>",</xsl:text>
+        <xsl:for-each select="resources/array[@ts = 'true']">
+        	<xsl:text>"@string/</xsl:text><xsl:value-of select="@name" /><xsl:text>",</xsl:text>
         </xsl:for-each>	    
     ];
 	</xsl:template>
