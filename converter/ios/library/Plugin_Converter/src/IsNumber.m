@@ -36,7 +36,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (text == nil || [text java_isEmpty]) {
     return true;
   }
-  return [text java_matches:@"[0-9]*"];
+  return [text java_matches:@"-?\\d*"];
 }
 
 + (const J2ObjcClassInfo *)__metadata {

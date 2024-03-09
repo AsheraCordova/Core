@@ -40,6 +40,7 @@ var filestoreplace = [
     <string name="alphabets_error_message">Please enter only Alphabets.</string>
     <string name="alphanumeric_error_message">Please enter only alphanumeric characters.</string>
     <string name="date_error_message">Invalid date format.</string>
+    <string name="time_error_message">Invalid time format.</string>
     <string name="inrange_error_message">Number must be between %d and %d.</string>
     <string name="email_error_message">Invalid email address.</string>
     <string name="mobile_error_message">Invalid Mobile number.</string>
