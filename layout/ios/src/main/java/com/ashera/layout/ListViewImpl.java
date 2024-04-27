@@ -157,6 +157,10 @@ public class ListViewImpl extends BaseHasWidgets {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("dividerHeight").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("footerDividersEnabled").withType("boolean").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("headerDividersEnabled").withType("boolean").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filter").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filterDelay").withType("int").withOrder(-10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filterId").withType("string").withOrder(-10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filterItemPath").withType("array").withOrder(-10));
 	
 	}
 	
@@ -544,7 +548,7 @@ public class ListViewImpl extends BaseHasWidgets {
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-		ViewGroupImpl.setAttribute(this, key, strValue, objValue, decorator);
+				ViewGroupImpl.setAttribute(this, key, strValue, objValue, decorator);
 		Object nativeWidget = asNativeWidget();
 		switch (key.getAttributeName()) {
 			case "iosRowHeight": {
@@ -961,6 +965,42 @@ if (checkIosVersion("15.0")) {
 
 			}
 			break;
+			case "filter": {
+
+
+		 filter(objValue);
+
+
+
+			}
+			break;
+			case "filterDelay": {
+
+
+		 setFilterDelay(objValue);
+
+
+
+			}
+			break;
+			case "filterId": {
+
+
+		 setFilterId(objValue);
+
+
+
+			}
+			break;
+			case "filterItemPath": {
+
+
+		 setFilterItemPath(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -1262,43 +1302,51 @@ return getDividerHeight();			}
                 final FilterResults results = new FilterResults();
 
                 if (prefix == null || prefix.length() == 0) {
-                    final ArrayList<com.ashera.model.LoopParam> list;
-                    synchronized (mLock) {
-                        list = new ArrayList<>(dataList);
-                    }
-                    results.values = list;
-                    results.count = list.size();
-                } else {
-                    final String prefixString = prefix.toString().toLowerCase();
+                	prefix = "";
+                }
+                
+                final String prefixString = prefix.toString();
 
-                    final ArrayList<com.ashera.model.LoopParam> values;
-                    synchronized (mLock) {
-                        values = new ArrayList<>(dataList);
-                    }
+                final ArrayList<com.ashera.model.LoopParam> values;
+                synchronized (mLock) {
+                    values = new ArrayList<>(dataList);
+                }
 
-                    final int count = values.size();
-                    final ArrayList<com.ashera.model.LoopParam> newValues = new ArrayList<>();
+                final int count = values.size();
+                final ArrayList<com.ashera.model.LoopParam> newValues = new ArrayList<>();
+    			IFilter filter = FilterFactory.get(filterId);
+    	        if (filter == null) {
+    	        	filter = FilterFactory.get(FilterFactory.DEFAULT_FILTER);
+    	        }
 
-                    for (int i = 0; i < count; i++) {
-                        final com.ashera.model.LoopParam value = values.get(i);
-                        final String valueText = value.toString().toLowerCase();
-
-                        // First match against the whole, non-splitted value
-                        if (valueText.startsWith(prefixString)) {
-                            newValues.add(value);
-                        } else {
-                            final String[] words = valueText.split(" ");
-                            for (String word : words) {
-                                if (word.startsWith(prefixString)) {
-                                    newValues.add(value);
-                                    break;
-                                }
-                            }
-                        }
+                for (int i = 0; i < count; i++) {
+                    final com.ashera.model.LoopParam value = values.get(i);
+                    
+                    if (filterItemPaths != null) {
+                    	for (String path : filterItemPaths) {
+                    		com.ashera.model.ModelExpressionParser.ModelLoopHolder modelLoopHolder = com.ashera.model.ModelExpressionParser.parseModelLoopExpression(getModelFor());
+            	            
+            	            String varName = modelLoopHolder.varName;
+                        	Object modelVal = getModelByPath(varName, value);
+                        	modelVal = getModelByPath(path, modelVal);
+                        	
+                			if (filter.filter(PluginInvoker.getString(modelVal), prefixString)) {
+                				newValues.add(value);
+                				break;
+                			}
+                		}	
+                    } else {
+            			if (value != null && filter.filter(value.toString(), prefixString)) {
+            				newValues.add(value);
+            			}
                     }
 
                     results.values = newValues;
                     results.count = newValues.size();
+                }
+                
+                if (results.values == null) {
+                	results.values = new java.util.ArrayList<>(0);
                 }
 
                 return results;
@@ -1332,6 +1380,47 @@ return getDividerHeight();			}
 			PluginInvoker.putJSONSafeObjectIntoMap(obj, "checkedItemIds", ids);
 	    }
 	}
+	
+
+	
+	private enum FilterStatus { None, Restore, Filtering, Done }
+	private FilterStatus filter = FilterStatus.None;
+	private String query;
+	private int filterDelay = 100;
+	private r.android.os.Handler handler;
+	private void filter(Object query) {
+		this.query = (String) query;
+
+		if (handler == null) {
+			handler = new r.android.os.Handler(); 
+		} else {
+			handler.removeCallbacks(null);
+		}
+		handler.postDelayed(() -> {
+			preFilter();
+			this.listAdapter.dofilterSync(this.query);
+			postFilter();	
+		}, filterDelay);
+	}
+	
+	
+	
+	private void setFilterDelay(Object objValue) {
+		this.filterDelay = (int) objValue;
+		
+	}
+	
+	private String filterId = FilterFactory.DEFAULT_FILTER;
+	private void setFilterId(Object objValue) {
+		filterId = (String) objValue;
+	}
+	
+	
+	private String[] filterItemPaths; 
+	private void setFilterItemPath(Object objValue) {
+		filterItemPaths = (String[]) objValue;		
+	}
+
 	
 
 
@@ -2667,6 +2756,38 @@ public ListViewCommandBuilder setHeaderDividersEnabled(boolean value) {
 
 	attrs.put("value", value);
 return this;}
+public ListViewCommandBuilder filter(String value) {
+	Map<String, Object> attrs = initCommand("filter");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ListViewCommandBuilder setFilterDelay(int value) {
+	Map<String, Object> attrs = initCommand("filterDelay");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ListViewCommandBuilder setFilterId(String value) {
+	Map<String, Object> attrs = initCommand("filterId");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ListViewCommandBuilder setFilterItemPath(String value) {
+	Map<String, Object> attrs = initCommand("filterItemPath");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class ListViewBean extends com.ashera.layout.ViewGroupImpl.ViewGroupBean{
 		public ListViewBean() {
@@ -2967,6 +3088,22 @@ public void setHeaderDividersEnabled(boolean value) {
 	getBuilder().reset().setHeaderDividersEnabled(value).execute(true);
 }
 
+public void filter(String value) {
+	getBuilder().reset().filter(value).execute(true);
+}
+
+public void setFilterDelay(int value) {
+	getBuilder().reset().setFilterDelay(value).execute(true);
+}
+
+public void setFilterId(String value) {
+	getBuilder().reset().setFilterId(value).execute(true);
+}
+
+public void setFilterItemPath(String value) {
+	getBuilder().reset().setFilterItemPath(value).execute(true);
+}
+
 }
 
 
@@ -3065,7 +3202,7 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
 	}
 
 	private void setCellDividerInsets(int index, Object cell) {
-		if (footerTemplate != null && index == dataList.size() - 1 && !footerDividersEnabled) {
+		if (footerTemplate != null && index == listAdapter.getCount() - 1 && !footerDividersEnabled) {
 			nativeSetSeparatorCellInsetRight(cell, 100000);
 		} else {
 			nativeSetSeparatorCellInsetRight(cell, separatorInsetRight);
@@ -3078,7 +3215,7 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
 	]-*/;
 
 	private Object createCell(int index) {
-		com.ashera.model.LoopParam model = dataList.get(index);
+		com.ashera.model.LoopParam model = (com.ashera.model.LoopParam) listAdapter.getItem(index);
 		
 		IWidget widget = null;
 		
@@ -3105,9 +3242,9 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
 	
 
 	private View updateLayout(final IWidget myWidget, int index) {
-		com.ashera.model.LoopParam model = dataList.get(index);
+		com.ashera.model.LoopParam model = (com.ashera.model.LoopParam) listAdapter.getItem(index);
 		updateModelRecurse(myWidget, model);
-		if (footerTemplate != null && index == dataList.size() - 1) {
+		if (footerTemplate != null && index == listAdapter.getCount() - 1) {
 			setCustomDividerAttributes(myWidget, footerDividersEnabled);
 		} else {
 			setCustomDividerAttributes(myWidget, true);
@@ -3223,7 +3360,7 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
 
 	- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 	{
-  		return [dataList_ size];
+  		return [listAdapter_ getCount];
 	}
 	- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 	{
@@ -3253,7 +3390,7 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
     		NSArray* indexPathsForVisibleRows = [tableView indexPathsForVisibleRows];
     	    NSIndexPath *firstVisibleItem = [indexPathsForVisibleRows objectAtIndex:0];
     	    int visibleItemCount = [indexPathsForVisibleRows count];
-    	    int totalItemCount = [dataList_ size];
+    	    int totalItemCount = [listAdapter_ getCount];
 
     		[onScrollChangeListener_ onScrollWithADAbsListView: listView_ 
     			withInt: firstVisibleItem.row
@@ -3537,4 +3674,13 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
 		return dataList;
 	}
 
+	
+	
+	private void postFilter() {
+		reloadTable();
+	}
+
+	private void preFilter() {
+		
+	}
 }

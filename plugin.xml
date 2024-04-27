@@ -450,6 +450,8 @@
      <source-file src="core/ios/library/widget_library/src/FieldValidationException.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/FileUtils.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/FileUtils.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/widget_library/src/FilterFactory.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="core/ios/library/widget_library/src/FilterFactory.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/FontDescriptor.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/FontDescriptor.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/FontMetricsDescriptor.h" target-dir="CorePlugin/widget_library/src"/>
@@ -488,6 +490,8 @@
      <source-file src="core/ios/library/widget_library/src/IdGenerator.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/IEventBus.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/IEventBus.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/widget_library/src/IFilter.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="core/ios/library/widget_library/src/IFilter.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/IFlatMap.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/IFlatMap.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/IFragment.h" target-dir="CorePlugin/widget_library/src"/>
@@ -540,6 +544,8 @@
      <source-file src="core/ios/library/widget_library/src/IWrapableWidget.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/LoopParam.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/LoopParam.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/widget_library/src/LowerCasePrefixFilter.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="core/ios/library/widget_library/src/LowerCasePrefixFilter.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/MeasureEvent.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/MeasureEvent.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/MethodHandler.h" target-dir="CorePlugin/widget_library/src"/>

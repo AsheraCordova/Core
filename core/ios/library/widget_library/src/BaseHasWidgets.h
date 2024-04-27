@@ -156,7 +156,13 @@
 
 - (void)addToBufferedRunnablesWithJavaLangRunnable:(id<JavaLangRunnable>)run;
 
+- (void)applyModelFor;
+
+- (void)clearIdsAndData;
+
 - (void)clearModel;
+
+- (jboolean)filterDataWithId:(id)model;
 
 /*!
  @brief Override this if the list contains a subview.

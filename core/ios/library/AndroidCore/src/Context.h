@@ -26,6 +26,7 @@
 @class ADResources;
 @class IOSClass;
 @class JavaIoFile;
+@protocol JavaLangCharSequence;
 
 @interface ADContext : NSObject
 
@@ -57,6 +58,8 @@
 - (ADResources *)getResources;
 
 - (id)getSystemServiceWithIOSClass:(IOSClass *)class1;
+
+- (id<JavaLangCharSequence>)getTextWithInt:(jint)hintId;
 
 - (void)registerReceiverWithADBroadcastReceiver:(ADBroadcastReceiver *)telephonyReceiver
                              withADIntentFilter:(ADIntentFilter *)intentFilter;

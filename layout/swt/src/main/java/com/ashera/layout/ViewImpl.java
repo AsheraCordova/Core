@@ -5288,10 +5288,14 @@ public void setBottom(String value) {
 		}
 	}
 
+	//start - eventInfo
 	public static void addEventInfo(Map<String, Object> obj, MenuItem item) {
 		obj.put("itemId", IdGenerator.getName(item.getItemId()));
+		if (item.getActionView() != null && item.getActionView().getTag() != null) {
+			obj.put("actionLayoutId", item.getActionView().getTag());
+		}
 	}
-	
+	//end - eventInfo
 	
 	private static void setSwtResizeOptions(IWidget w, Object objValue) {
 		w.storeInTempCache("swtResizeOptions", com.ashera.common.ImageUtils.getResizeOptionsAsMap(w, objValue));

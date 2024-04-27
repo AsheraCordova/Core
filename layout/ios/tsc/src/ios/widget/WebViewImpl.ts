@@ -13,6 +13,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -26,20 +27,20 @@ export abstract class WebViewImpl<T> extends ViewImpl<T>{
 	//start - body
 	static initialize() {
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "onPageStarted" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onPageStarted" }))
 	onPageStarted!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onPageFinished" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onPageFinished" }))
 	onPageFinished!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onReceivedError" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onReceivedError" }))
 	onReceivedError!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "loadUrl" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "loadUrl" }))
 	loadUrl_!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	

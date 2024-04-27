@@ -34,6 +34,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -134,59 +135,59 @@ export abstract class ViewGroupImpl<T> extends ViewGroupModelImpl<T>{
 		TransformerFactory.getInstance().register("persistentDrawingCache", new PersistentDrawingCacheTransformer());
 		TransformerFactory.getInstance().register("layoutTransition", new LayoutTransitionTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "alwaysDrawnWithCache" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "alwaysDrawnWithCache" }))
 	alwaysDrawnWithCache!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "animationCache" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "animationCache" }))
 	animationCache!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "clipChildren" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "clipChildren" }))
 	clipChildren!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "clipToPadding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "clipToPadding" }))
 	clipToPadding!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "descendantFocusability" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "descendantFocusability" }))
 	descendantFocusability!:CommandAttr<DescendantFocusability>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layoutMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layoutMode" }))
 	layoutMode!:CommandAttr<LayoutMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "persistentDrawingCache" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "persistentDrawingCache" }))
 	persistentDrawingCache!:CommandAttr<PersistentDrawingCache[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "splitMotionEvents" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "splitMotionEvents" }))
 	splitMotionEvents!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onChildViewAdded" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onChildViewAdded" }))
 	onChildViewAdded!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onChildViewRemoved" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onChildViewRemoved" }))
 	onChildViewRemoved!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "animateLayoutChanges" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "animateLayoutChanges" }))
 	animateLayoutChanges!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layoutTransition" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layoutTransition" }))
 	layoutTransition!:CommandAttr<LayoutTransition[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layoutTransitionDuration" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layoutTransitionDuration" }))
 	layoutTransitionDuration!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "animateParentHierarchy" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "animateParentHierarchy" }))
 	animateParentHierarchy!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "listitem" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "listitem" }))
 	listitem!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "addStatesFromChildren" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "addStatesFromChildren" }))
 	addStatesFromChildren!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "childXml" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "childXml" }))
 	childXml!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
@@ -620,39 +621,39 @@ this.layoutTransition.setTransformer('layoutTransition');		return this.thisPoint
 }
 //start - staticinit
 export abstract class ViewGroupImpl_LayoutParams<T>  {
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginBottom" }))
 	layout_marginBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginTop" }))
 	layout_marginTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginStart" }))
 	layout_marginStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginEnd" }))
 	layout_marginEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginLeft" }))
 	layout_marginLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginRight" }))
 	layout_marginRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_margin" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_margin" }))
 	layout_margin!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginHorizontal" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginHorizontal" }))
 	layout_marginHorizontal!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginVertical" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginVertical" }))
 	layout_marginVertical!:CommandAttr<string>| undefined;
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
-	@Exclude()
+	@decorate(Exclude())
 	protected orderGet: number = 0;
-	@Exclude()
+	@decorate(Exclude())
     protected orderSet: number = 0;
 	reset() : T {	
 		this.layout_marginBottom = undefined;

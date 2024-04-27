@@ -13,6 +13,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -35,44 +36,44 @@ export abstract class ProgressBarImpl<T> extends ViewImpl<T>{
 	//start - body
 	static initialize() {
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosHidesWhenStopped" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosHidesWhenStopped" }))
 	iosHidesWhenStopped!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosColor" }))
 	iosColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "padding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "padding" }))
 	padding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingBottom" }))
 	paddingBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingRight" }))
 	paddingRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingLeft" }))
 	paddingLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingStart" }))
 	paddingStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingEnd" }))
 	paddingEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingTop" }))
 	paddingTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingHorizontal" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingHorizontal" }))
 	paddingHorizontal!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingVertical" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingVertical" }))
 	paddingVertical!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "progressTint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "progressTint" }))
 	progressTint!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	

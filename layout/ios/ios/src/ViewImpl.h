@@ -545,6 +545,8 @@ FOUNDATION_EXPORT NSString *ASViewImpl_getValueWithNSString_withOrgXmlSaxAttribu
 
 FOUNDATION_EXPORT id<ADInterpolator> ASViewImpl_getInterpolatorWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 
+FOUNDATION_EXPORT void ASViewImpl_addEventInfoWithJavaUtilMap_withADMenuItem_(id<JavaUtilMap> obj, id<ADMenuItem> item);
+
 FOUNDATION_EXPORT void ASViewImpl_setBackgroundColorWithId_withId_(id nativeWidget, id value);
 
 FOUNDATION_EXPORT id ASViewImpl_getBackgroundColorWithId_(id uiView);
@@ -708,8 +710,6 @@ FOUNDATION_EXPORT id ASViewImpl_getKeepScreenOnWithId_(id uiView);
 FOUNDATION_EXPORT void ASViewImpl_startDragWithASIWidget_withNSString_(id<ASIWidget> w, NSString *eventData);
 
 FOUNDATION_EXPORT void ASViewImpl_nativeBringToFrontWithId_(id nativeWidget);
-
-FOUNDATION_EXPORT void ASViewImpl_addEventInfoWithJavaUtilMap_withADMenuItem_(id<JavaUtilMap> obj, id<ADMenuItem> item);
 
 FOUNDATION_EXPORT jint ASViewImpl_getLocationXOnScreenWithId_(id nativeWidget);
 

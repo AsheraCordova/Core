@@ -211,6 +211,11 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   }
 }
 
+- (void)clearIdsAndData {
+  [((id<JavaUtilList>) nil_chk(dataList_)) clear];
+  [((id<JavaUtilList>) nil_chk(ids_)) clear];
+}
+
 - (id<ASIWidget>)newLazyInstance {
   return create_ASBaseHasWidgets_LazyBaseWidget_initWithASBaseHasWidgets_(self);
 }
@@ -282,10 +287,13 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
     [self addItemToParentWithInt:index withNSString:id_ withASLoopParam:childModel];
   }
   else {
-    [((id<JavaUtilList>) nil_chk(dataList_)) setWithInt:[((id<JavaUtilList>) nil_chk(ids_)) indexOfWithId:id_] withId:childModel];
-    id<ASIWidget> widget;
-    widget = [((id<JavaUtilList>) nil_chk([self getChildWidgets])) getWithInt:[((id<JavaUtilList>) nil_chk(ids_)) indexOfWithId:id_]];
-    [self updateModelRecurseWithASIWidget:widget withASLoopParam:childModel];
+    jint idIndex = [((id<JavaUtilList>) nil_chk(ids_)) indexOfWithId:id_];
+    [((id<JavaUtilList>) nil_chk(dataList_)) setWithInt:idIndex withId:childModel];
+    id<JavaUtilList> childWidgets = JreRetainedLocalValue([self getChildWidgets]);
+    if ([((id<JavaUtilList>) nil_chk(childWidgets)) size] > idIndex) {
+      id<ASIWidget> widget = JreRetainedLocalValue([childWidgets getWithInt:idIndex]);
+      [self updateModelRecurseWithASIWidget:widget withASLoopParam:childModel];
+    }
   }
 }
 
@@ -357,19 +365,30 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
 - (void)applyModelToWidget {
   [super applyModelToWidget];
   @try {
-    if (modelFor_ != nil) {
-      ASModelExpressionParser_ModelLoopHolder *modelLoopHolder = ASModelExpressionParser_parseModelLoopExpressionWithNSString_(self->modelFor_);
-      NSString *varName = JreRetainedLocalValue(((ASModelExpressionParser_ModelLoopHolder *) nil_chk(modelLoopHolder))->varName_);
-      NSString *varPath = JreRetainedLocalValue(modelLoopHolder->varPath_);
-      NSString *key = JreRetainedLocalValue(modelLoopHolder->key_);
-      ASModelScope *varSource = JreRetainedLocalValue(modelLoopHolder->varSource_);
-      ASModelScope *varScope = JreRetainedLocalValue(modelLoopHolder->varScope_);
-      ASModelDataType *dataType = JreRetainedLocalValue(modelLoopHolder->dataType_);
-      id obj = JreRetainedLocalValue([self getModelFromScopeWithNSString:key withASModelScope:varSource]);
-      obj = [self getModelByPathWithNSString:varPath withId:obj];
-      if (obj != nil) {
-        for (id __strong model in nil_chk(ASPluginInvoker_getListWithId_(obj))) {
-          model = [self changeModelDataTypeWithASModelDataType:dataType withId:model];
+    [self applyModelFor];
+  }
+  @catch (JavaLangException *e) {
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:[e getMessage]];
+    [e printStackTrace];
+    [((id<ASIFragment>) nil_chk(fragment_)) addErrorWithASError:create_ASError_initWithJavaUtilMap_withASBaseWidget_withJavaLangException_(nil, self, e)];
+  }
+}
+
+- (void)applyModelFor {
+  if (modelFor_ != nil) {
+    ASModelExpressionParser_ModelLoopHolder *modelLoopHolder = ASModelExpressionParser_parseModelLoopExpressionWithNSString_(self->modelFor_);
+    NSString *varName = JreRetainedLocalValue(((ASModelExpressionParser_ModelLoopHolder *) nil_chk(modelLoopHolder))->varName_);
+    NSString *varPath = JreRetainedLocalValue(modelLoopHolder->varPath_);
+    NSString *key = JreRetainedLocalValue(modelLoopHolder->key_);
+    ASModelScope *varSource = JreRetainedLocalValue(modelLoopHolder->varSource_);
+    ASModelScope *varScope = JreRetainedLocalValue(modelLoopHolder->varScope_);
+    ASModelDataType *dataType = JreRetainedLocalValue(modelLoopHolder->dataType_);
+    id obj = JreRetainedLocalValue([self getModelFromScopeWithNSString:key withASModelScope:varSource]);
+    obj = [self getModelByPathWithNSString:varPath withId:obj];
+    if (obj != nil) {
+      for (id __strong model in nil_chk(ASPluginInvoker_getListWithId_(obj))) {
+        model = [self changeModelDataTypeWithASModelDataType:dataType withId:model];
+        if ([self filterDataWithId:model]) {
           ASLoopParam *loopParam = nil;
           if ([model isKindOfClass:[ASLoopParam class]]) {
             loopParam = (ASLoopParam *) model;
@@ -386,11 +405,10 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
       }
     }
   }
-  @catch (JavaLangException *e) {
-    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:[e getMessage]];
-    [e printStackTrace];
-    [((id<ASIFragment>) nil_chk(fragment_)) addErrorWithASError:create_ASError_initWithJavaUtilMap_withASBaseWidget_withJavaLangException_(nil, self, e)];
-  }
+}
+
+- (jboolean)filterDataWithId:(id)model {
+  return true;
 }
 
 - (ASLoopParam *)createLoopParam {
@@ -582,6 +600,7 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
     { NULL, "Z", 0x1, 12, 13, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, 14, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 15, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, 16, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 17, 1, -1, -1, -1, -1 },
@@ -604,21 +623,23 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
     { NULL, "LASHasWidgets;", 0x1, 36, 6, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 37, 19, -1, -1, -1, -1 },
     { NULL, "LASLoopParam;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 37, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 38, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 21, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 38, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 37, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x2, 40, 41, -1, 42, -1, -1 },
+    { NULL, "V", 0x1, 39, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 40, 38, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x2, 41, 42, -1, 43, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASWidgetViewHolder;", 0x1, 43, 44, -1, 45, -1, -1 },
-    { NULL, "V", 0x1, 46, 47, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 46, 48, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 46, 49, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 50, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 51, 52, -1, -1, -1, -1 },
+    { NULL, "LASWidgetViewHolder;", 0x1, 44, 45, -1, 46, -1, -1 },
+    { NULL, "V", 0x1, 47, 48, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 47, 49, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 47, 50, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 51, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 52, 53, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -638,57 +659,60 @@ __attribute__((unused)) static ASBaseHasWidgets_1 *create_ASBaseHasWidgets_1_ini
   methods[11].selector = @selector(removeWithInt:);
   methods[12].selector = @selector(removeWidgetWithInt:);
   methods[13].selector = @selector(removeIdsAndDataWithInt:);
-  methods[14].selector = @selector(newLazyInstance);
-  methods[15].selector = @selector(findWidgetByIdWithNSString:);
-  methods[16].selector = @selector(setModelForWithNSString:);
-  methods[17].selector = @selector(getModelFor);
-  methods[18].selector = @selector(addTemplateWithId:);
-  methods[19].selector = @selector(addAllModelWithId:);
-  methods[20].selector = @selector(addModelWithASLoopParam:withNSString:);
-  methods[21].selector = @selector(addModelWithASLoopParam:withInt:withNSString:);
-  methods[22].selector = @selector(addObjectWithASLoopParam:withNSString:withInt:withNSString:);
-  methods[23].selector = @selector(getChildWidgets);
-  methods[24].selector = @selector(addItemToParentWithInt:withNSString:withASLoopParam:);
-  methods[25].selector = @selector(onChildAddedWithASIWidget:);
-  methods[26].selector = @selector(updateModelRecurseWithASIWidget:withASLoopParam:withASIWidget_CommandCallBack:);
-  methods[27].selector = @selector(updateModelRecurseWithASIWidget:withASLoopParam:);
-  methods[28].selector = @selector(removeModelByIdWithNSString:);
-  methods[29].selector = @selector(getStableIds);
-  methods[30].selector = @selector(getWithInt:);
-  methods[31].selector = @selector(getWidgets);
-  methods[32].selector = @selector(getListItem);
-  methods[33].selector = @selector(getCompositeLeafWithASIWidget:);
-  methods[34].selector = @selector(areWidgetItemsRecycled);
-  methods[35].selector = @selector(applyModelToWidget);
-  methods[36].selector = @selector(createLoopParam);
-  methods[37].selector = @selector(addModelWithId:withInt:);
-  methods[38].selector = @selector(addModelWithId:);
-  methods[39].selector = @selector(removeModelAtIndexWithInt:);
-  methods[40].selector = @selector(addModelByIndexWithId:withInt:);
-  methods[41].selector = @selector(getListObjectInScopeWithASModelExpressionParser_ModelLoopHolder:);
-  methods[42].selector = @selector(notifyDataSetChanged);
-  methods[43].selector = @selector(clearModel);
-  methods[44].selector = @selector(initialized);
-  methods[45].selector = @selector(createWidgetViewHolderWithJavaUtilList:withASIWidget:);
-  methods[46].selector = @selector(setAttributeOnViewHolderWithASWidgetViewHolder:withInt:);
-  methods[47].selector = @selector(setAttributeOnViewHolderWithASWidgetViewHolder:withASLoopParam:);
-  methods[48].selector = @selector(setAttributeOnViewHolderWithASWidgetViewHolder:withASLoopParam:withBoolean:);
-  methods[49].selector = @selector(invalidateChildIfRequiredWithASIWidget:);
-  methods[50].selector = @selector(addToBufferedRunnablesWithJavaLangRunnable:);
-  methods[51].selector = @selector(runBufferedRunnables);
+  methods[14].selector = @selector(clearIdsAndData);
+  methods[15].selector = @selector(newLazyInstance);
+  methods[16].selector = @selector(findWidgetByIdWithNSString:);
+  methods[17].selector = @selector(setModelForWithNSString:);
+  methods[18].selector = @selector(getModelFor);
+  methods[19].selector = @selector(addTemplateWithId:);
+  methods[20].selector = @selector(addAllModelWithId:);
+  methods[21].selector = @selector(addModelWithASLoopParam:withNSString:);
+  methods[22].selector = @selector(addModelWithASLoopParam:withInt:withNSString:);
+  methods[23].selector = @selector(addObjectWithASLoopParam:withNSString:withInt:withNSString:);
+  methods[24].selector = @selector(getChildWidgets);
+  methods[25].selector = @selector(addItemToParentWithInt:withNSString:withASLoopParam:);
+  methods[26].selector = @selector(onChildAddedWithASIWidget:);
+  methods[27].selector = @selector(updateModelRecurseWithASIWidget:withASLoopParam:withASIWidget_CommandCallBack:);
+  methods[28].selector = @selector(updateModelRecurseWithASIWidget:withASLoopParam:);
+  methods[29].selector = @selector(removeModelByIdWithNSString:);
+  methods[30].selector = @selector(getStableIds);
+  methods[31].selector = @selector(getWithInt:);
+  methods[32].selector = @selector(getWidgets);
+  methods[33].selector = @selector(getListItem);
+  methods[34].selector = @selector(getCompositeLeafWithASIWidget:);
+  methods[35].selector = @selector(areWidgetItemsRecycled);
+  methods[36].selector = @selector(applyModelToWidget);
+  methods[37].selector = @selector(applyModelFor);
+  methods[38].selector = @selector(filterDataWithId:);
+  methods[39].selector = @selector(createLoopParam);
+  methods[40].selector = @selector(addModelWithId:withInt:);
+  methods[41].selector = @selector(addModelWithId:);
+  methods[42].selector = @selector(removeModelAtIndexWithInt:);
+  methods[43].selector = @selector(addModelByIndexWithId:withInt:);
+  methods[44].selector = @selector(getListObjectInScopeWithASModelExpressionParser_ModelLoopHolder:);
+  methods[45].selector = @selector(notifyDataSetChanged);
+  methods[46].selector = @selector(clearModel);
+  methods[47].selector = @selector(initialized);
+  methods[48].selector = @selector(createWidgetViewHolderWithJavaUtilList:withASIWidget:);
+  methods[49].selector = @selector(setAttributeOnViewHolderWithASWidgetViewHolder:withInt:);
+  methods[50].selector = @selector(setAttributeOnViewHolderWithASWidgetViewHolder:withASLoopParam:);
+  methods[51].selector = @selector(setAttributeOnViewHolderWithASWidgetViewHolder:withASLoopParam:withBoolean:);
+  methods[52].selector = @selector(invalidateChildIfRequiredWithASIWidget:);
+  methods[53].selector = @selector(addToBufferedRunnablesWithJavaLangRunnable:);
+  methods[54].selector = @selector(runBufferedRunnables);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "widgets_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 53, -1 },
-    { "afterInitWidgets_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 53, -1 },
-    { "bufferedRunnables_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 54, -1 },
+    { "widgets_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 54, -1 },
+    { "afterInitWidgets_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 54, -1 },
+    { "bufferedRunnables_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 55, -1 },
     { "listItem_", "LASIWidget;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "modelDescPath_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "dataList_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 55, -1 },
-    { "ids_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 56, -1 },
+    { "dataList_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 56, -1 },
+    { "ids_", "LJavaUtilList;", .constantValue.asLong = 0, 0x4, -1, -1, 57, -1 },
     { "modelFor_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setModelDescPath", "LNSString;", "LNSString;LNSString;", "add", "LASIWidget;I", "setChildAttributes", "LASIWidget;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;", "LASIWidget;LASWidgetAttribute;LNSObject;Z", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;", "remove", "I", "removeWidget", "removeIdsAndData", "findWidgetById", "setModelFor", "addTemplate", "LNSObject;", "addAllModel", "addModel", "LASLoopParam;LNSString;", "LASLoopParam;ILNSString;", "addObject", "LASLoopParam;LNSString;ILNSString;", "()Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "addItemToParent", "ILNSString;LASLoopParam;", "onChildAdded", "updateModelRecurse", "LASIWidget;LASLoopParam;LASIWidget_CommandCallBack;", "LASIWidget;LASLoopParam;", "removeModelById", "()Ljava/util/List<Ljava/lang/String;>;", "get", "getCompositeLeaf", "LNSObject;I", "removeModelAtIndex", "addModelByIndex", "getListObjectInScope", "LASModelExpressionParser_ModelLoopHolder;", "(Lcom/ashera/model/ModelExpressionParser$ModelLoopHolder;)Ljava/util/List<Ljava/lang/Object;>;", "createWidgetViewHolder", "LJavaUtilList;LASIWidget;", "(Ljava/util/List<Ljava/lang/String;>;Lcom/ashera/widget/IWidget;)Lcom/ashera/widget/WidgetViewHolder;", "setAttributeOnViewHolder", "LASWidgetViewHolder;I", "LASWidgetViewHolder;LASLoopParam;", "LASWidgetViewHolder;LASLoopParam;Z", "invalidateChildIfRequired", "addToBufferedRunnables", "LJavaLangRunnable;", "Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "Ljava/util/List<Ljava/lang/Runnable;>;", "Ljava/util/List<Lcom/ashera/model/LoopParam;>;", "Ljava/util/List<Ljava/lang/String;>;", "LASBaseHasWidgets_LazyBaseWidget;" };
-  static const J2ObjcClassInfo _ASBaseHasWidgets = { "BaseHasWidgets", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 52, 8, -1, 57, -1, -1, -1 };
+  static const void *ptrTable[] = { "setModelDescPath", "LNSString;", "LNSString;LNSString;", "add", "LASIWidget;I", "setChildAttributes", "LASIWidget;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;", "LASIWidget;LASWidgetAttribute;LNSObject;Z", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;", "remove", "I", "removeWidget", "removeIdsAndData", "findWidgetById", "setModelFor", "addTemplate", "LNSObject;", "addAllModel", "addModel", "LASLoopParam;LNSString;", "LASLoopParam;ILNSString;", "addObject", "LASLoopParam;LNSString;ILNSString;", "()Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "addItemToParent", "ILNSString;LASLoopParam;", "onChildAdded", "updateModelRecurse", "LASIWidget;LASLoopParam;LASIWidget_CommandCallBack;", "LASIWidget;LASLoopParam;", "removeModelById", "()Ljava/util/List<Ljava/lang/String;>;", "get", "getCompositeLeaf", "filterData", "LNSObject;I", "removeModelAtIndex", "addModelByIndex", "getListObjectInScope", "LASModelExpressionParser_ModelLoopHolder;", "(Lcom/ashera/model/ModelExpressionParser$ModelLoopHolder;)Ljava/util/List<Ljava/lang/Object;>;", "createWidgetViewHolder", "LJavaUtilList;LASIWidget;", "(Ljava/util/List<Ljava/lang/String;>;Lcom/ashera/widget/IWidget;)Lcom/ashera/widget/WidgetViewHolder;", "setAttributeOnViewHolder", "LASWidgetViewHolder;I", "LASWidgetViewHolder;LASLoopParam;", "LASWidgetViewHolder;LASLoopParam;Z", "invalidateChildIfRequired", "addToBufferedRunnables", "LJavaLangRunnable;", "Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "Ljava/util/List<Ljava/lang/Runnable;>;", "Ljava/util/List<Lcom/ashera/model/LoopParam;>;", "Ljava/util/List<Ljava/lang/String;>;", "LASBaseHasWidgets_LazyBaseWidget;" };
+  static const J2ObjcClassInfo _ASBaseHasWidgets = { "BaseHasWidgets", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 55, 8, -1, 58, -1, -1, -1 };
   return &_ASBaseHasWidgets;
 }
 
@@ -741,10 +765,12 @@ void ASBaseHasWidgets_addModelByIndexWithId_withInt_(ASBaseHasWidgets *self, id 
         [((id<JavaUtilList>) nil_chk(listObj)) addWithInt:index withId:model];
       }
     }
-    model = [self changeModelDataTypeWithASModelDataType:dataType withId:model];
-    ASLoopParam *loopParam = JreRetainedLocalValue([self createLoopParam]);
-    [self storeModelToScopeWithNSString:varName withASModelScope:varScope withId:model withASLoopParam:loopParam];
-    [self addModelWithASLoopParam:loopParam withInt:index withNSString:varName];
+    if ([self filterDataWithId:model]) {
+      model = [self changeModelDataTypeWithASModelDataType:dataType withId:model];
+      ASLoopParam *loopParam = JreRetainedLocalValue([self createLoopParam]);
+      [self storeModelToScopeWithNSString:varName withASModelScope:varScope withId:model withASLoopParam:loopParam];
+      [self addModelWithASLoopParam:loopParam withInt:index withNSString:varName];
+    }
   }
 }
 

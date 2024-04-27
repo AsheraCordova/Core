@@ -20,6 +20,7 @@
 @class ASModelExpressionParser_ModelLoopHolder;
 @class ASModelExpressionParser_ModelStoreVarHolder;
 @class ASModelExpressionParser_ModelUpdateToScopeHolder;
+@class ASModelExpressionParser_ModelVarScopeHolder;
 @class IOSObjectArray;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
@@ -44,6 +45,8 @@
 
 + (id<JavaUtilList>)parseModelVarExpressionWithNSString:(NSString *)expression;
 
++ (ASModelExpressionParser_ModelVarScopeHolder *)parseModelVarScopeWithNSString:(NSString *)expression;
+
 + (id<JavaUtilList>)parsePojoToUiExpressionWithNSString:(NSString *)expression;
 
 + (id<JavaUtilMap>)parseSimpleCssExpressionWithNSString:(NSString *)cssStr;
@@ -66,6 +69,8 @@ FOUNDATION_EXPORT ASModelExpressionParser *create_ASModelExpressionParser_init(v
 FOUNDATION_EXPORT id<JavaUtilList> ASModelExpressionParser_parseEventExpressionWithNSString_(NSString *expression);
 
 FOUNDATION_EXPORT ASModelExpressionParser_ModelFromScopeHolder *ASModelExpressionParser_parseModelFromScopeWithNSString_(NSString *expression);
+
+FOUNDATION_EXPORT ASModelExpressionParser_ModelVarScopeHolder *ASModelExpressionParser_parseModelVarScopeWithNSString_(NSString *expression);
 
 FOUNDATION_EXPORT id<JavaUtilList> ASModelExpressionParser_parsePojoToUiExpressionWithNSString_(NSString *expression);
 
@@ -170,6 +175,43 @@ FOUNDATION_EXPORT ASModelExpressionParser_ModelFromScopeHolder *new_ASModelExpre
 FOUNDATION_EXPORT ASModelExpressionParser_ModelFromScopeHolder *create_ASModelExpressionParser_ModelFromScopeHolder_initWithJavaUtilList_(id<JavaUtilList> data);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelFromScopeHolder)
+
+#endif
+
+#if !defined (ASModelExpressionParser_ModelVarScopeHolder_) && (INCLUDE_ALL_ModelExpressionParser || defined(INCLUDE_ASModelExpressionParser_ModelVarScopeHolder))
+#define ASModelExpressionParser_ModelVarScopeHolder_
+
+@class ASModelScope;
+@protocol JavaUtilList;
+
+@interface ASModelExpressionParser_ModelVarScopeHolder : NSObject {
+ @public
+  NSString *varName_;
+  ASModelScope *varScope_;
+}
+
+#pragma mark Public
+
+- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)data;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASModelExpressionParser_ModelVarScopeHolder)
+
+J2OBJC_FIELD_SETTER(ASModelExpressionParser_ModelVarScopeHolder, varName_, NSString *)
+J2OBJC_FIELD_SETTER(ASModelExpressionParser_ModelVarScopeHolder, varScope_, ASModelScope *)
+
+FOUNDATION_EXPORT void ASModelExpressionParser_ModelVarScopeHolder_initWithJavaUtilList_(ASModelExpressionParser_ModelVarScopeHolder *self, id<JavaUtilList> data);
+
+FOUNDATION_EXPORT ASModelExpressionParser_ModelVarScopeHolder *new_ASModelExpressionParser_ModelVarScopeHolder_initWithJavaUtilList_(id<JavaUtilList> data) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASModelExpressionParser_ModelVarScopeHolder *create_ASModelExpressionParser_ModelVarScopeHolder_initWithJavaUtilList_(id<JavaUtilList> data);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASModelExpressionParser_ModelVarScopeHolder)
 
 #endif
 

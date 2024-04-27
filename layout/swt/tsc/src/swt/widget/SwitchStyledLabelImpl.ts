@@ -33,6 +33,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -144,230 +145,230 @@ export abstract class SwitchStyledLabelImpl<T> extends ViewImpl<T>{
 	static initialize() {
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtText" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtText" }))
 	swtText!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtSelection" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtSelection" }))
 	swtSelection!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtTextForSelect" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtTextForSelect" }))
 	swtTextForSelect!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtTextForUnselect" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtTextForUnselect" }))
 	swtTextForUnselect!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtRound" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtRound" }))
 	swtRound!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtBorderColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtBorderColor" }))
 	swtBorderColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtFocusColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtFocusColor" }))
 	swtFocusColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtSelectedForegroundColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtSelectedForegroundColor" }))
 	swtSelectedForegroundColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtSelectedBackgroundColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtSelectedBackgroundColor" }))
 	swtSelectedBackgroundColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtUnselectedForegroundColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtUnselectedForegroundColor" }))
 	swtUnselectedForegroundColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtUnselectedBackgroundColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtUnselectedBackgroundColor" }))
 	swtUnselectedBackgroundColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtButtonBorderColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtButtonBorderColor" }))
 	swtButtonBorderColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtButtonBackgroundColor1" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtButtonBackgroundColor1" }))
 	swtButtonBackgroundColor1!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtButtonBackgroundColor2" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtButtonBackgroundColor2" }))
 	swtButtonBackgroundColor2!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtGap" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtGap" }))
 	swtGap!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtArc" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtArc" }))
 	swtArc!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onCheckedChange" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onCheckedChange" }))
 	onCheckedChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "checked" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "checked" }))
 	checked!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textOn" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textOn" }))
 	textOn!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textOff" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textOff" }))
 	textOff!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "switchPadding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "switchPadding" }))
 	switchPadding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "switchMinWidth" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "switchMinWidth" }))
 	switchMinWidth!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "trackTint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "trackTint" }))
 	trackTint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "thumbTint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "thumbTint" }))
 	thumbTint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtInsideMarginX" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtInsideMarginX" }))
 	swtInsideMarginX!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtInsideMarginY" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtInsideMarginY" }))
 	swtInsideMarginY!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "text" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "text" }))
 	text!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textColor" }))
 	textColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "gravity" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "gravity" }))
 	gravity!:CommandAttr<Gravity[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textSize" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textSize" }))
 	textSize!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "padding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "padding" }))
 	padding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingBottom" }))
 	paddingBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingRight" }))
 	paddingRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingLeft" }))
 	paddingLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingStart" }))
 	paddingStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingEnd" }))
 	paddingEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingTop" }))
 	paddingTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingHorizontal" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingHorizontal" }))
 	paddingHorizontal!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingVertical" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingVertical" }))
 	paddingVertical!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "minLines" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "minLines" }))
 	minLines!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "lines" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "lines" }))
 	lines!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "maxLines" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "maxLines" }))
 	maxLines!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "minWidth" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "minWidth" }))
 	minWidth!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "minHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "minHeight" }))
 	minHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "maxWidth" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "maxWidth" }))
 	maxWidth!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "maxHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "maxHeight" }))
 	maxHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "height" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "height" }))
 	height!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "width" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "width" }))
 	width!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "maxEms" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "maxEms" }))
 	maxEms!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "minEms" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "minEms" }))
 	minEms!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "ems" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "ems" }))
 	ems!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "typeface" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "typeface" }))
 	typeface!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textStyle" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textStyle" }))
 	textStyle!:CommandAttr<TextStyle[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "fontFamily" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "fontFamily" }))
 	fontFamily!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableLeft" }))
 	drawableLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableRight" }))
 	drawableRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableStart" }))
 	drawableStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableEnd" }))
 	drawableEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTop" }))
 	drawableTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableBottom" }))
 	drawableBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawablePadding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawablePadding" }))
 	drawablePadding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "maxLength" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "maxLength" }))
 	maxLength!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "enabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "enabled" }))
 	enabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "editable" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "editable" }))
 	editable!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "singleLine" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "singleLine" }))
 	singleLine!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textAllCaps" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textAllCaps" }))
 	textAllCaps!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "scrollHorizontally" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "scrollHorizontally" }))
 	scrollHorizontally!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "ellipsize" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "ellipsize" }))
 	ellipsize!:CommandAttr<Ellipsize>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "startOrStopMarquee" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "startOrStopMarquee" }))
 	startOrStopMarquee!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "marqueeRepeatLimit" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "marqueeRepeatLimit" }))
 	marqueeRepeatLimit!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "firstBaselineToTopHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "firstBaselineToTopHeight" }))
 	firstBaselineToTopHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "lastBaselineToBottomHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "lastBaselineToBottomHeight" }))
 	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textFormat" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textFormat" }))
 	textFormat!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textAppearance" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textAppearance" }))
 	textAppearance!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	

@@ -3184,6 +3184,15 @@ break;}
 	}
 	
 
+
+	public static void addEventInfo(Map<String, Object> obj, MenuItem item) {
+		obj.put("itemId", IdGenerator.getName(item.getItemId()));
+		if (item.getActionView() != null && item.getActionView().getTag() != null) {
+			obj.put("actionLayoutId", item.getActionView().getTag());
+		}
+	}
+	
+
 	public static native void setBackgroundColor(Object nativeWidget, Object value) /*-[
 ((UIView*) nativeWidget).backgroundColor = (UIColor*) value;
 ]-*/;
@@ -7337,10 +7346,6 @@ public void setOutsideTouchable(boolean value) {
 		UIView* view = ((UIView*)nativeWidget);
 		[view.superview bringSubviewToFront:view];
 	]-*/;
-
-	public static void addEventInfo(Map<String, Object> obj, MenuItem item) {
-		obj.put("itemId", IdGenerator.getName(item.getItemId()));
-	}
 
 	private static void setNativeId(IWidget w, String strValue) {
 	}

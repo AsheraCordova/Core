@@ -101,6 +101,10 @@ public class ListViewImpl extends BaseHasWidgets {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("listSelector").withType("drawable"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("listheader").withType("template"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("listfooter").withType("template"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filter").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filterDelay").withType("int").withOrder(-10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filterId").withType("string").withOrder(-10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filterItemPath").withType("array").withOrder(-10));
 	
 	}
 	
@@ -530,7 +534,7 @@ Context context = (Context) fragment.getRootActivity();
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-		ViewGroupImpl.setAttribute(this, key, strValue, objValue, decorator);
+				ViewGroupImpl.setAttribute(this, key, strValue, objValue, decorator);
 		Object nativeWidget = asNativeWidget();
 		switch (key.getAttributeName()) {
 			case "divider": {
@@ -708,6 +712,42 @@ Context context = (Context) fragment.getRootActivity();
 
 
 		 addFooterTemplate(objValue);
+
+
+
+			}
+			break;
+			case "filter": {
+
+
+		 filter(objValue);
+
+
+
+			}
+			break;
+			case "filterDelay": {
+
+
+		 setFilterDelay(objValue);
+
+
+
+			}
+			break;
+			case "filterId": {
+
+
+		 setFilterId(objValue);
+
+
+
+			}
+			break;
+			case "filterItemPath": {
+
+
+		 setFilterItemPath(objValue);
 
 
 
@@ -1383,6 +1423,38 @@ public ListViewCommandBuilder setListfooter(String value) {
 
 	attrs.put("value", value);
 return this;}
+public ListViewCommandBuilder filter(String value) {
+	Map<String, Object> attrs = initCommand("filter");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ListViewCommandBuilder setFilterDelay(int value) {
+	Map<String, Object> attrs = initCommand("filterDelay");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ListViewCommandBuilder setFilterId(String value) {
+	Map<String, Object> attrs = initCommand("filterId");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ListViewCommandBuilder setFilterItemPath(String value) {
+	Map<String, Object> attrs = initCommand("filterItemPath");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class ListViewBean extends com.ashera.layout.ViewGroupImpl.ViewGroupBean{
 		public ListViewBean() {
@@ -1501,6 +1573,22 @@ public void setListfooter(String value) {
 	getBuilder().reset().setListfooter(value).execute(true);
 }
 
+public void filter(String value) {
+	getBuilder().reset().filter(value).execute(true);
+}
+
+public void setFilterDelay(int value) {
+	getBuilder().reset().setFilterDelay(value).execute(true);
+}
+
+public void setFilterId(String value) {
+	getBuilder().reset().setFilterId(value).execute(true);
+}
+
+public void setFilterItemPath(String value) {
+	getBuilder().reset().setFilterItemPath(value).execute(true);
+}
+
 }
 
 
@@ -1608,43 +1696,51 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
                 final FilterResults results = new FilterResults();
 
                 if (prefix == null || prefix.length() == 0) {
-                    final ArrayList<com.ashera.model.LoopParam> list;
-                    synchronized (mLock) {
-                        list = new ArrayList<>(dataList);
-                    }
-                    results.values = list;
-                    results.count = list.size();
-                } else {
-                    final String prefixString = prefix.toString().toLowerCase();
+                	prefix = "";
+                }
+                
+                final String prefixString = prefix.toString();
 
-                    final ArrayList<com.ashera.model.LoopParam> values;
-                    synchronized (mLock) {
-                        values = new ArrayList<>(dataList);
-                    }
+                final ArrayList<com.ashera.model.LoopParam> values;
+                synchronized (mLock) {
+                    values = new ArrayList<>(dataList);
+                }
 
-                    final int count = values.size();
-                    final ArrayList<com.ashera.model.LoopParam> newValues = new ArrayList<>();
+                final int count = values.size();
+                final ArrayList<com.ashera.model.LoopParam> newValues = new ArrayList<>();
+    			IFilter filter = FilterFactory.get(filterId);
+    	        if (filter == null) {
+    	        	filter = FilterFactory.get(FilterFactory.DEFAULT_FILTER);
+    	        }
 
-                    for (int i = 0; i < count; i++) {
-                        final com.ashera.model.LoopParam value = values.get(i);
-                        final String valueText = value.toString().toLowerCase();
-
-                        // First match against the whole, non-splitted value
-                        if (valueText.startsWith(prefixString)) {
-                            newValues.add(value);
-                        } else {
-                            final String[] words = valueText.split(" ");
-                            for (String word : words) {
-                                if (word.startsWith(prefixString)) {
-                                    newValues.add(value);
-                                    break;
-                                }
-                            }
-                        }
+                for (int i = 0; i < count; i++) {
+                    final com.ashera.model.LoopParam value = values.get(i);
+                    
+                    if (filterItemPaths != null) {
+                    	for (String path : filterItemPaths) {
+                    		com.ashera.model.ModelExpressionParser.ModelLoopHolder modelLoopHolder = com.ashera.model.ModelExpressionParser.parseModelLoopExpression(getModelFor());
+            	            
+            	            String varName = modelLoopHolder.varName;
+                        	Object modelVal = getModelByPath(varName, value);
+                        	modelVal = getModelByPath(path, modelVal);
+                        	
+                			if (filter.filter(PluginInvoker.getString(modelVal), prefixString)) {
+                				newValues.add(value);
+                				break;
+                			}
+                		}	
+                    } else {
+            			if (value != null && filter.filter(value.toString(), prefixString)) {
+            				newValues.add(value);
+            			}
                     }
 
                     results.values = newValues;
                     results.count = newValues.size();
+                }
+                
+                if (results.values == null) {
+                	results.values = new java.util.ArrayList<>(0);
                 }
 
                 return results;
@@ -1843,4 +1939,54 @@ public class ListViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
 		listView.setOnItemClickListener((ListView.OnItemClickListener) objValue);
 		
 	}
+	
+	//start - filter	
+	private enum FilterStatus { None, Restore, Filtering, Done }
+	private FilterStatus filter = FilterStatus.None;
+	private String query;
+	private int filterDelay = 100;
+	private android.os.Handler handler;
+	private void filter(Object query) {
+		this.query = (String) query;
+
+		if (handler == null) {
+			handler = new android.os.Handler(); 
+		} else {
+			handler.removeCallbacks(null);
+		}
+		handler.postDelayed(() -> {
+			preFilter();
+			this.listAdapter.dofilterSync(this.query);
+			postFilter();	
+		}, filterDelay);
+	}
+	
+	
+	
+	private void setFilterDelay(Object objValue) {
+		this.filterDelay = (int) objValue;
+		
+	}
+	
+	private String filterId = FilterFactory.DEFAULT_FILTER;
+	private void setFilterId(Object objValue) {
+		filterId = (String) objValue;
+	}
+	
+	
+	private String[] filterItemPaths; 
+	private void setFilterItemPath(Object objValue) {
+		filterItemPaths = (String[]) objValue;		
+	}
+
+	//end - filter
+	private void preFilter() {
+		
+	}
+	
+	private void postFilter() {
+		
+	}
+
+
 }

@@ -44,6 +44,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -70,59 +71,59 @@ export abstract class ProgressBarImpl<T> extends ViewImpl<T>{
 	//start - body
 	static initialize() {
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "indeterminate" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "indeterminate" }))
 	indeterminate!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "indeterminateDrawable" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "indeterminateDrawable" }))
 	indeterminateDrawable!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "indeterminateTint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "indeterminateTint" }))
 	indeterminateTint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "indeterminateTintMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "indeterminateTintMode" }))
 	indeterminateTintMode!:CommandAttr<IndeterminateTintMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "max" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "max" }))
 	max!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "min" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "min" }))
 	min!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "progress" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "progress" }))
 	progress!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "progressBackgroundTint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "progressBackgroundTint" }))
 	progressBackgroundTint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "progressBackgroundTintMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "progressBackgroundTintMode" }))
 	progressBackgroundTintMode!:CommandAttr<BackgroundTintMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "progressDrawable" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "progressDrawable" }))
 	progressDrawable!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "progressTint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "progressTint" }))
 	progressTint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "progressTintMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "progressTintMode" }))
 	progressTintMode!:CommandAttr<ProgressTintMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "secondaryProgress" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "secondaryProgress" }))
 	secondaryProgress!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "secondaryProgressTint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "secondaryProgressTint" }))
 	secondaryProgressTint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "secondaryProgressTintMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "secondaryProgressTintMode" }))
 	secondaryProgressTintMode!:CommandAttr<SecondaryProgressTintMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "incrementProgressBy" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "incrementProgressBy" }))
 	incrementProgressBy_!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "incrementSecondaryProgressBy" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "incrementSecondaryProgressBy" }))
 	incrementSecondaryProgressBy_!:CommandAttr<number>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	

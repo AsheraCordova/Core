@@ -36,6 +36,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -156,14 +157,14 @@ export abstract class RelativeLayoutImpl<T> extends ViewGroupImpl<T>{
 	static initialize() {
 		TransformerFactory.getInstance().register("removeRule", new RemoveRuleTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "gravity" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "gravity" }))
 	gravity!:CommandAttr<Gravity[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "ignoreGravity" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "ignoreGravity" }))
 	ignoreGravity!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
@@ -229,82 +230,82 @@ this.gravity.setTransformer('gravity');		return this.thisPointer;
 	
 //start - staticinit
 export abstract class RelativeLayoutImpl_LayoutParams<T> extends ViewGroupImpl_LayoutParams<T> {
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_above" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_above" }))
 	layout_above!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignBaseline" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignBaseline" }))
 	layout_alignBaseline!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignBottom" }))
 	layout_alignBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignEnd" }))
 	layout_alignEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignLeft" }))
 	layout_alignLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignParentBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignParentBottom" }))
 	layout_alignParentBottom!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignParentEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignParentEnd" }))
 	layout_alignParentEnd!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignParentLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignParentLeft" }))
 	layout_alignParentLeft!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignParentRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignParentRight" }))
 	layout_alignParentRight!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignParentStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignParentStart" }))
 	layout_alignParentStart!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignParentTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignParentTop" }))
 	layout_alignParentTop!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignRight" }))
 	layout_alignRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignStart" }))
 	layout_alignStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignTop" }))
 	layout_alignTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_below" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_below" }))
 	layout_below!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_centerHorizontal" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_centerHorizontal" }))
 	layout_centerHorizontal!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_centerInParent" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_centerInParent" }))
 	layout_centerInParent!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_centerVertical" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_centerVertical" }))
 	layout_centerVertical!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_toEndOf" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_toEndOf" }))
 	layout_toEndOf!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_toLeftOf" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_toLeftOf" }))
 	layout_toLeftOf!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_toRightOf" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_toRightOf" }))
 	layout_toRightOf!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_toStartOf" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_toStartOf" }))
 	layout_toStartOf!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_alignWithParentIfMissing" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_alignWithParentIfMissing" }))
 	layout_alignWithParentIfMissing!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_removeRule" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_removeRule" }))
 	layout_removeRule!:CommandAttr<RemoveRule[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_removeAllRules" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_removeAllRules" }))
 	layout_removeAllRules!:CommandAttr<boolean>| undefined;
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	

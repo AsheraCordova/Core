@@ -31,6 +31,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -100,104 +101,104 @@ export abstract class SpinnerImpl<T> extends ViewImpl<T>{
 	static initialize() {
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawablePadding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawablePadding" }))
 	drawablePadding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "gravity" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "gravity" }))
 	gravity!:CommandAttr<Gravity[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textColor" }))
 	textColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textSize" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textSize" }))
 	textSize!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableLeft" }))
 	drawableLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableStart" }))
 	drawableStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableRight" }))
 	drawableRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableEnd" }))
 	drawableEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTop" }))
 	drawableTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableBottom" }))
 	drawableBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "typeface" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "typeface" }))
 	typeface!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textStyle" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textStyle" }))
 	textStyle!:CommandAttr<TextStyle[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "fontFamily" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "fontFamily" }))
 	fontFamily!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "enabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "enabled" }))
 	enabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "editable" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "editable" }))
 	editable!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableTint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTint" }))
 	drawableTint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableTintMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTintMode" }))
 	drawableTintMode!:CommandAttr<DrawableTintMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "hint" }))
 	hint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textColorHint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textColorHint" }))
 	textColorHint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "dropDownHorizontalOffset" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "dropDownHorizontalOffset" }))
 	dropDownHorizontalOffset!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "dropDownVerticalOffset" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "dropDownVerticalOffset" }))
 	dropDownVerticalOffset!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "dropDownWidth" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "dropDownWidth" }))
 	dropDownWidth!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "prompt" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "prompt" }))
 	prompt!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "selection" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "selection" }))
 	selection!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "entries" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "entries" }))
 	entries!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onItemSelected" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onItemSelected" }))
 	onItemSelected!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "modelOptionTextPath" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "modelOptionTextPath" }))
 	modelOptionTextPath!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "modelOptionValuePath" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "modelOptionValuePath" }))
 	modelOptionValuePath!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "listitem" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "listitem" }))
 	listitem!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "values" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "values" }))
 	values!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "selectedValue" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "selectedValue" }))
 	selectedValue!:CommandAttr<any>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hintTextFormat" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "hintTextFormat" }))
 	hintTextFormat!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	

@@ -17,6 +17,7 @@
 #define ADTextUtils_
 
 @class JavaUtilLocale;
+@protocol JavaLangCharSequence;
 
 @interface ADTextUtils : NSObject
 
@@ -24,7 +25,14 @@
 
 - (instancetype)init;
 
++ (jboolean)equalsWithJavaLangCharSequence:(id<JavaLangCharSequence>)a
+                  withJavaLangCharSequence:(id<JavaLangCharSequence>)b;
+
 + (jint)getLayoutDirectionFromLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale;
+
++ (jint)getTrimmedLengthWithJavaLangCharSequence:(id<JavaLangCharSequence>)s;
+
++ (jboolean)isEmptyWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
 + (jboolean)isEmptyWithNSString:(NSString *)text;
 
@@ -41,6 +49,12 @@ FOUNDATION_EXPORT ADTextUtils *create_ADTextUtils_init(void);
 FOUNDATION_EXPORT jint ADTextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(JavaUtilLocale *locale);
 
 FOUNDATION_EXPORT jboolean ADTextUtils_isEmptyWithNSString_(NSString *text);
+
+FOUNDATION_EXPORT jboolean ADTextUtils_isEmptyWithJavaLangCharSequence_(id<JavaLangCharSequence> text);
+
+FOUNDATION_EXPORT jint ADTextUtils_getTrimmedLengthWithJavaLangCharSequence_(id<JavaLangCharSequence> s);
+
+FOUNDATION_EXPORT jboolean ADTextUtils_equalsWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> a, id<JavaLangCharSequence> b);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADTextUtils)
 

@@ -23,6 +23,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -95,71 +96,71 @@ export abstract class ViewGroupImpl<T> extends ViewGroupModelImpl<T>{
 	static initialize() {
 		TransformerFactory.getInstance().register("layoutTransition", new LayoutTransitionTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtBackgroundMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtBackgroundMode" }))
 	swtBackgroundMode!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "swtLayoutDeferred" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtLayoutDeferred" }))
 	swtLayoutDeferred!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "animateLayoutChanges" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "animateLayoutChanges" }))
 	animateLayoutChanges!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layoutTransition" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layoutTransition" }))
 	layoutTransition!:CommandAttr<LayoutTransition[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layoutTransitionDuration" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layoutTransitionDuration" }))
 	layoutTransitionDuration!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "animateParentHierarchy" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "animateParentHierarchy" }))
 	animateParentHierarchy!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "listitem" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "listitem" }))
 	listitem!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "padding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "padding" }))
 	padding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingBottom" }))
 	paddingBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingRight" }))
 	paddingRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingLeft" }))
 	paddingLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingStart" }))
 	paddingStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingEnd" }))
 	paddingEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingTop" }))
 	paddingTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingHorizontal" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingHorizontal" }))
 	paddingHorizontal!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingVertical" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingVertical" }))
 	paddingVertical!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onChildViewAdded" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onChildViewAdded" }))
 	onChildViewAdded!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onChildViewRemoved" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onChildViewRemoved" }))
 	onChildViewRemoved!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "addStatesFromChildren" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "addStatesFromChildren" }))
 	addStatesFromChildren!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layoutMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layoutMode" }))
 	layoutMode!:CommandAttr<LayoutMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "childXml" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "childXml" }))
 	childXml!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
@@ -671,39 +672,39 @@ this.layoutTransition.setTransformer('layoutTransition');		return this.thisPoint
 }
 //start - staticinit
 export abstract class ViewGroupImpl_LayoutParams<T>  {
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginBottom" }))
 	layout_marginBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginTop" }))
 	layout_marginTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginStart" }))
 	layout_marginStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginEnd" }))
 	layout_marginEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginLeft" }))
 	layout_marginLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginRight" }))
 	layout_marginRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_margin" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_margin" }))
 	layout_margin!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginHorizontal" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginHorizontal" }))
 	layout_marginHorizontal!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "layout_marginVertical" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "layout_marginVertical" }))
 	layout_marginVertical!:CommandAttr<string>| undefined;
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
-	@Exclude()
+	@decorate(Exclude())
 	protected orderGet: number = 0;
-	@Exclude()
+	@decorate(Exclude())
     protected orderSet: number = 0;
 	reset() : T {	
 		this.layout_marginBottom = undefined;

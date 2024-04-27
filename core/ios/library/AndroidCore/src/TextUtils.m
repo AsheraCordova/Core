@@ -6,6 +6,7 @@
 #include "J2ObjC_source.h"
 #include "TextUtils.h"
 #include "View.h"
+#include "java/lang/CharSequence.h"
 #include "java/util/Locale.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
@@ -68,11 +69,27 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADTextUtils_isEmptyWithNSString_(text);
 }
 
++ (jboolean)isEmptyWithJavaLangCharSequence:(id<JavaLangCharSequence>)text {
+  return ADTextUtils_isEmptyWithJavaLangCharSequence_(text);
+}
+
++ (jint)getTrimmedLengthWithJavaLangCharSequence:(id<JavaLangCharSequence>)s {
+  return ADTextUtils_getTrimmedLengthWithJavaLangCharSequence_(s);
+}
+
++ (jboolean)equalsWithJavaLangCharSequence:(id<JavaLangCharSequence>)a
+                  withJavaLangCharSequence:(id<JavaLangCharSequence>)b {
+  return ADTextUtils_equalsWithJavaLangCharSequence_withJavaLangCharSequence_(a, b);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x9, 0, 1, -1, -1, -1, -1 },
     { NULL, "Z", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 2, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 5, 4, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 6, 7, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -80,12 +97,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(getLayoutDirectionFromLocaleWithJavaUtilLocale:);
   methods[2].selector = @selector(isEmptyWithNSString:);
+  methods[3].selector = @selector(isEmptyWithJavaLangCharSequence:);
+  methods[4].selector = @selector(getTrimmedLengthWithJavaLangCharSequence:);
+  methods[5].selector = @selector(equalsWithJavaLangCharSequence:withJavaLangCharSequence:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "RtlLocalesRe", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 4, -1, -1 },
+    { "RtlLocalesRe", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 8, -1, -1 },
   };
-  static const void *ptrTable[] = { "getLayoutDirectionFromLocale", "LJavaUtilLocale;", "isEmpty", "LNSString;", &ADTextUtils_RtlLocalesRe, "LADTextUtils_ULocale;" };
-  static const J2ObjcClassInfo _ADTextUtils = { "TextUtils", "r.android.text", ptrTable, methods, fields, 7, 0x1, 3, 1, -1, 5, -1, -1, -1 };
+  static const void *ptrTable[] = { "getLayoutDirectionFromLocale", "LJavaUtilLocale;", "isEmpty", "LNSString;", "LJavaLangCharSequence;", "getTrimmedLength", "equals", "LJavaLangCharSequence;LJavaLangCharSequence;", &ADTextUtils_RtlLocalesRe, "LADTextUtils_ULocale;" };
+  static const J2ObjcClassInfo _ADTextUtils = { "TextUtils", "r.android.text", ptrTable, methods, fields, 7, 0x1, 6, 1, -1, 9, -1, -1, -1 };
   return &_ADTextUtils;
 }
 
@@ -118,6 +138,43 @@ jint ADTextUtils_getLayoutDirectionFromLocaleWithJavaUtilLocale_(JavaUtilLocale 
 jboolean ADTextUtils_isEmptyWithNSString_(NSString *text) {
   ADTextUtils_initialize();
   return text == nil || [text java_isEmpty];
+}
+
+jboolean ADTextUtils_isEmptyWithJavaLangCharSequence_(id<JavaLangCharSequence> text) {
+  ADTextUtils_initialize();
+  return text == nil || [text java_length] == 0;
+}
+
+jint ADTextUtils_getTrimmedLengthWithJavaLangCharSequence_(id<JavaLangCharSequence> s) {
+  ADTextUtils_initialize();
+  jint len = [((id<JavaLangCharSequence>) nil_chk(s)) java_length];
+  jint start = 0;
+  while (start < len && [s charAtWithInt:start] <= ' ') {
+    start++;
+  }
+  jint end = len;
+  while (end > start && [s charAtWithInt:end - 1] <= ' ') {
+    end--;
+  }
+  return end - start;
+}
+
+jboolean ADTextUtils_equalsWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> a, id<JavaLangCharSequence> b) {
+  ADTextUtils_initialize();
+  if (a == b) return true;
+  jint length;
+  if (a != nil && b != nil && (length = [a java_length]) == [b java_length]) {
+    if ([a isKindOfClass:[NSString class]] && [b isKindOfClass:[NSString class]]) {
+      return [a isEqual:b];
+    }
+    else {
+      for (jint i = 0; i < length; i++) {
+        if ([a charAtWithInt:i] != [b charAtWithInt:i]) return false;
+      }
+      return true;
+    }
+  }
+  return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADTextUtils)

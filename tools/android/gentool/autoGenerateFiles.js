@@ -426,7 +426,8 @@ function replaceAllWithPadding(name, regex) {
 	for (let j = 0; j < strArr.length; j++) {
 		let myStr = strArr[j];
 		if (!isNaN(myStr)) {
-			myStr = myStr.lpad("0", 5)
+			while (myStr.length < 5)
+				myStr = "0" + myStr;
 		}
 
 		finalStr += myStr;

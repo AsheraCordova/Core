@@ -28,6 +28,11 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
+
+
+
+
 
 
 
@@ -87,158 +92,170 @@ export abstract class ListViewImpl<T> extends ViewGroupImpl<T>{
 	//start - body
 	static initialize() {
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosRowHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosRowHeight" }))
 	iosRowHeight!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosEstimatedRowHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosEstimatedRowHeight" }))
 	iosEstimatedRowHeight!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosCellLayoutMarginsFollowReadableWidth" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosCellLayoutMarginsFollowReadableWidth" }))
 	iosCellLayoutMarginsFollowReadableWidth!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosInsetsContentViewsToSafeArea" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosInsetsContentViewsToSafeArea" }))
 	iosInsetsContentViewsToSafeArea!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSectionHeaderHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSectionHeaderHeight" }))
 	iosSectionHeaderHeight!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSectionFooterHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSectionFooterHeight" }))
 	iosSectionFooterHeight!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosEstimatedSectionHeaderHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosEstimatedSectionHeaderHeight" }))
 	iosEstimatedSectionHeaderHeight!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosEstimatedSectionFooterHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosEstimatedSectionFooterHeight" }))
 	iosEstimatedSectionFooterHeight!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSectionHeaderTopPadding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSectionHeaderTopPadding" }))
 	iosSectionHeaderTopPadding!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSeparatorColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSeparatorColor" }))
 	iosSeparatorColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosNumberOfSections" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosNumberOfSections" }))
 	iosNumberOfSections!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosAllowsSelection" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosAllowsSelection" }))
 	iosAllowsSelection!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosAllowsMultipleSelection" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosAllowsMultipleSelection" }))
 	iosAllowsMultipleSelection!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosAllowsSelectionDuringEditing" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosAllowsSelectionDuringEditing" }))
 	iosAllowsSelectionDuringEditing!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosAllowsMultipleSelectionDuringEditing" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosAllowsMultipleSelectionDuringEditing" }))
 	iosAllowsMultipleSelectionDuringEditing!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSelectionFollowsFocus" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSelectionFollowsFocus" }))
 	iosSelectionFollowsFocus!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSectionIndexMinimumDisplayRowCount" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSectionIndexMinimumDisplayRowCount" }))
 	iosSectionIndexMinimumDisplayRowCount!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSectionIndexColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSectionIndexColor" }))
 	iosSectionIndexColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSectionIndexBackgroundColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSectionIndexBackgroundColor" }))
 	iosSectionIndexBackgroundColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSectionIndexTrackingBackgroundColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSectionIndexTrackingBackgroundColor" }))
 	iosSectionIndexTrackingBackgroundColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosHasUncommittedUpdates" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosHasUncommittedUpdates" }))
 	iosHasUncommittedUpdates!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosHasActiveDrag" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosHasActiveDrag" }))
 	iosHasActiveDrag!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosDragInteractionEnabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosDragInteractionEnabled" }))
 	iosDragInteractionEnabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosHasActiveDrop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosHasActiveDrop" }))
 	iosHasActiveDrop!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosIsEditing" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosIsEditing" }))
 	iosIsEditing!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosRemembersLastFocusedIndexPath" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosRemembersLastFocusedIndexPath" }))
 	iosRemembersLastFocusedIndexPath!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosAllowsFocus" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosAllowsFocus" }))
 	iosAllowsFocus!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosAllowsFocusDuringEditing" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosAllowsFocusDuringEditing" }))
 	iosAllowsFocusDuringEditing!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosFillerRowHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosFillerRowHeight" }))
 	iosFillerRowHeight!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosIsPrefetchingEnabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosIsPrefetchingEnabled" }))
 	iosIsPrefetchingEnabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onItemClick" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onItemClick" }))
 	onItemClick!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onItemLongClick" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onItemLongClick" }))
 	onItemLongClick!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onScrollChange" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onScrollChange" }))
 	onScrollChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "listheader" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "listheader" }))
 	listheader!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "listfooter" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "listfooter" }))
 	listfooter!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "scrollX" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "scrollX" }))
 	scrollX!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "scrollY" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "scrollY" }))
 	scrollY!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "choiceMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "choiceMode" }))
 	choiceMode!:CommandAttr<ChoiceMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "stackFromBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "stackFromBottom" }))
 	stackFromBottom!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "listSelector" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "listSelector" }))
 	listSelector!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSeparatorStyle" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSeparatorStyle" }))
 	iosSeparatorStyle!:CommandAttr<IosSeparatorStyle>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosCellSelectionStyle" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosCellSelectionStyle" }))
 	iosCellSelectionStyle!:CommandAttr<IosCellSelectionStyle>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSeparatorInsetTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSeparatorInsetTop" }))
 	iosSeparatorInsetTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSeparatorInsetBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSeparatorInsetBottom" }))
 	iosSeparatorInsetBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSeparatorInsetLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSeparatorInsetLeft" }))
 	iosSeparatorInsetLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosSeparatorInsetRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosSeparatorInsetRight" }))
 	iosSeparatorInsetRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "divider" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "divider" }))
 	divider!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "dividerHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "dividerHeight" }))
 	dividerHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "footerDividersEnabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "footerDividersEnabled" }))
 	footerDividersEnabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "headerDividersEnabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "headerDividersEnabled" }))
 	headerDividersEnabled!:CommandAttr<boolean>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "filter" }))
+	filter_!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "filterDelay" }))
+	filterDelay!:CommandAttr<number>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "filterId" }))
+	filterId!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "filterItemPath" }))
+	filterItemPath!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
@@ -293,6 +310,10 @@ export abstract class ListViewImpl<T> extends ViewGroupImpl<T>{
 		this.dividerHeight = undefined;
 		this.footerDividersEnabled = undefined;
 		this.headerDividersEnabled = undefined;
+		this.filter_ = undefined;
+		this.filterDelay = undefined;
+		this.filterId = undefined;
+		this.filterItemPath = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -1619,6 +1640,62 @@ export abstract class ListViewImpl<T> extends ViewGroupImpl<T>{
 		this.headerDividersEnabled.setValue(value);
 		this.orderSet++;
 		this.headerDividersEnabled.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public filter(value : string) : T {
+		this.resetIfRequired();
+		if (this.filter_ == null || this.filter_ == undefined) {
+			this.filter_ = new CommandAttr<string>();
+		}
+		
+		this.filter_.setSetter(true);
+		this.filter_.setValue(value);
+		this.orderSet++;
+		this.filter_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setFilterDelay(value : number) : T {
+		this.resetIfRequired();
+		if (this.filterDelay == null || this.filterDelay == undefined) {
+			this.filterDelay = new CommandAttr<number>();
+		}
+		
+		this.filterDelay.setSetter(true);
+		this.filterDelay.setValue(value);
+		this.orderSet++;
+		this.filterDelay.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setFilterId(value : string) : T {
+		this.resetIfRequired();
+		if (this.filterId == null || this.filterId == undefined) {
+			this.filterId = new CommandAttr<string>();
+		}
+		
+		this.filterId.setSetter(true);
+		this.filterId.setValue(value);
+		this.orderSet++;
+		this.filterId.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setFilterItemPath(value : string) : T {
+		this.resetIfRequired();
+		if (this.filterItemPath == null || this.filterItemPath == undefined) {
+			this.filterItemPath = new CommandAttr<string>();
+		}
+		
+		this.filterItemPath.setSetter(true);
+		this.filterItemPath.setValue(value);
+		this.orderSet++;
+		this.filterItemPath.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

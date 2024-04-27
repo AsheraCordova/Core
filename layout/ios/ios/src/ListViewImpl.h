@@ -13,6 +13,12 @@
 #endif
 #undef RESTRICT_ListViewImpl
 
+#if __has_feature(nullability)
+#pragma clang diagnostic push
+#pragma GCC diagnostic ignored "-Wnullability"
+#pragma GCC diagnostic ignored "-Wnullability-completeness"
+#endif
+
 #if !defined (ASListViewImpl_) && (INCLUDE_ALL_ListViewImpl || defined(INCLUDE_ASListViewImpl))
 #define ASListViewImpl_
 
@@ -664,6 +670,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 
 - (ASListViewImpl_ListViewCommandBuilder *)executeWithBoolean:(jboolean)setter;
 
+- (ASListViewImpl_ListViewCommandBuilder *)filterWithNSString:(NSString *)value;
+
 - (id)getChoiceMode;
 
 - (id)getDivider;
@@ -801,6 +809,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListAdapter)
 - (ASListViewImpl_ListViewCommandBuilder *)setEnabledWithBoolean:(jboolean)arg0;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setErrorStyleWithNSString:(NSString *)arg0;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setFilterDelayWithInt:(jint)value;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setFilterIdWithNSString:(NSString *)value;
+
+- (ASListViewImpl_ListViewCommandBuilder *)setFilterItemPathWithNSString:(NSString *)value;
 
 - (ASListViewImpl_ListViewCommandBuilder *)setFocusableWithBoolean:(jboolean)arg0;
 
@@ -1389,6 +1403,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListViewCommandBuilder)
 
 - (instancetype)initWithASListViewImpl:(ASListViewImpl *)outer$;
 
+- (void)filterWithNSString:(NSString *)value;
+
 - (id)getChoiceMode;
 
 - (id)getDivider;
@@ -1468,6 +1484,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_ListViewCommandBuilder)
 - (void)setDividerWithNSString:(NSString *)value;
 
 - (void)setDividerHeightWithNSString:(NSString *)value;
+
+- (void)setFilterDelayWithInt:(jint)value;
+
+- (void)setFilterIdWithNSString:(NSString *)value;
+
+- (void)setFilterItemPathWithNSString:(NSString *)value;
 
 - (void)setFooterDividersEnabledWithBoolean:(jboolean)value;
 
@@ -1709,4 +1731,8 @@ J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_PostMeasureEventHandler)
 
 #endif
 
+
+#if __has_feature(nullability)
+#pragma clang diagnostic pop
+#endif
 #pragma pop_macro("INCLUDE_ALL_ListViewImpl")

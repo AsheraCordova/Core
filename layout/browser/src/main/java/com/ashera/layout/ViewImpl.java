@@ -2047,6 +2047,15 @@ break;}
 	
 
 
+	public static void addEventInfo(Map<String, Object> obj, MenuItem item) {
+		obj.put("itemId", IdGenerator.getName(item.getItemId()));
+		if (item.getActionView() != null && item.getActionView().getTag() != null) {
+			obj.put("actionLayoutId", item.getActionView().getTag());
+		}
+	}
+	
+
+
 
 	public static void setPadding(Object objValue, View view) {
 		int value = (int) objValue;
@@ -5405,11 +5414,6 @@ public void setOnSwiped(String value) {
 		htmlElement.setAttribute("title", (String) objValue);
 	}
 
-	public static void addEventInfo(Map<String, Object> obj, MenuItem item) {
-		obj.put("itemId", IdGenerator.getName(item.getItemId()));
-	}
-	
-	
 	private static void setWebOverflow(IWidget w, Object nativeWidget, Object objValue) {
 		HTMLElement htmlElement = (HTMLElement) nativeWidget;
 		htmlElement.getStyle().setProperty("overflow", (String) objValue);

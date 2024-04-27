@@ -18,6 +18,7 @@
 
 @class ADColorStateList;
 @class ADDrawable;
+@class ADView;
 
 @protocol ADMenuItem < JavaObject >
 
@@ -32,6 +33,8 @@
 - (void)setShowAsActionWithInt:(jint)actionEnum;
 
 - (jint)getItemId;
+
+- (ADView *)getActionView;
 
 @end
 

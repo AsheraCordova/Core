@@ -69,7 +69,7 @@
 
 - (void) getOs:(CDVInvokedUrlCommand*)context {
 	NSString* result = [ASCorePlugin getOs];
-	[self successWithId: context withNSString: result];}
+	[self successWithId: context withNSString: result];
 }
 
 - (void) executeSimpleCommand:(CDVInvokedUrlCommand*)context {

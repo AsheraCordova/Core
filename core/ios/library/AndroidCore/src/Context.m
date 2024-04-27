@@ -18,6 +18,7 @@
 #include "Resources.h"
 #include "WindowManager.h"
 #include "java/io/File.h"
+#include "java/lang/CharSequence.h"
 #include "java/lang/RuntimeException.h"
 
 
@@ -94,6 +95,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return create_ADPackageManager_init();
 }
 
+- (id<JavaLangCharSequence>)getTextWithInt:(jint)hintId {
+  return nil;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -111,6 +116,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LJavaIoFile;", 0x1, 11, 12, -1, -1, -1, -1 },
     { NULL, "LJavaIoFile;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADPackageManager;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaLangCharSequence;", 0x1, 13, 7, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -130,14 +136,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[12].selector = @selector(getExternalFilesDirWithId:);
   methods[13].selector = @selector(getCacheDir);
   methods[14].selector = @selector(getPackageManager);
+  methods[15].selector = @selector(getTextWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "MODE_PRIVATE", "I", .constantValue.asInt = ADContext_MODE_PRIVATE, 0x19, -1, -1, -1, -1 },
-    { "ACTIVITY_SERVICE", "LIOSClass;", .constantValue.asLong = 0, 0x19, -1, 13, -1, -1 },
-    { "WINDOW_SERVICE", "LIOSClass;", .constantValue.asLong = 0, 0x19, -1, 14, -1, -1 },
+    { "ACTIVITY_SERVICE", "LIOSClass;", .constantValue.asLong = 0, 0x19, -1, 14, -1, -1 },
+    { "WINDOW_SERVICE", "LIOSClass;", .constantValue.asLong = 0, 0x19, -1, 15, -1, -1 },
   };
-  static const void *ptrTable[] = { "registerReceiver", "LADBroadcastReceiver;LADIntentFilter;", "unregisterReceiver", "LADBroadcastReceiver;", "getDir", "LNSString;I", "getDrawable", "I", "getSystemService", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)TT;", "getExternalFilesDir", "LNSObject;", &ADContext_ACTIVITY_SERVICE, &ADContext_WINDOW_SERVICE };
-  static const J2ObjcClassInfo _ADContext = { "Context", "r.android.content", ptrTable, methods, fields, 7, 0x1, 15, 3, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "registerReceiver", "LADBroadcastReceiver;LADIntentFilter;", "unregisterReceiver", "LADBroadcastReceiver;", "getDir", "LNSString;I", "getDrawable", "I", "getSystemService", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)TT;", "getExternalFilesDir", "LNSObject;", "getText", &ADContext_ACTIVITY_SERVICE, &ADContext_WINDOW_SERVICE };
+  static const J2ObjcClassInfo _ADContext = { "Context", "r.android.content", ptrTable, methods, fields, 7, 0x1, 16, 3, -1, -1, -1, -1, -1 };
   return &_ADContext;
 }
 

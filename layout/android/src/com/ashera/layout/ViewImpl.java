@@ -7180,6 +7180,10 @@ public void setBottom(String value) {
 		if (item.getItemId() != View.NO_ID) {
 			obj.put("itemId", "@+id/" + context.getResources().getResourceEntryName(item.getItemId()));
 		}
+		
+		if (item.getActionView() != null && item.getActionView().getTag() != null) {
+			obj.put("actionLayoutId", item.getActionView().getTag());
+		}
 	}
 	//start - validations
 	private static void validateForm(IWidget w, Object objValue) {

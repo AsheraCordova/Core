@@ -13,27 +13,28 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
 export class PopupWindowImpl_showAtLocation {
-@Expose({ name: "x" })
+@decorate(Expose({ name: "x" }))
 x!:string;
-@Expose({ name: "y" })
+@decorate(Expose({ name: "y" }))
 y!:string;
-@Expose({ name: "gravity" })
-@Transform(({value, obj, type}) => TransformerFactory.getInstance().transform(value, obj, type, "gravity"))
+@decorate(Expose({ name: "gravity" }))
+@decorate(Transform(({value, obj, type}) => TransformerFactory.getInstance().transform(value, obj, type, "gravity")))
 gravity!:Gravity[];
 }
 export class PopupWindowImpl_showAsDropDown {
-@Expose({ name: "anchor" })
+@decorate(Expose({ name: "anchor" }))
 anchor!:string;
-@Expose({ name: "xoff" })
+@decorate(Expose({ name: "xoff" }))
 xoff!:string;
-@Expose({ name: "yoff" })
+@decorate(Expose({ name: "yoff" }))
 yoff!:string;
-@Expose({ name: "gravity" })
-@Transform(({value, obj, type}) => TransformerFactory.getInstance().transform(value, obj, type, "gravity"))
+@decorate(Expose({ name: "gravity" }))
+@decorate(Transform(({value, obj, type}) => TransformerFactory.getInstance().transform(value, obj, type, "gravity")))
 gravity!:Gravity[];
 }
 
@@ -50,38 +51,38 @@ export abstract class PopupWindowImpl<T> extends ViewImpl<T>{
 	//start - body
 	static initialize() {
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "overlapAnchor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "overlapAnchor" }))
 	overlapAnchor!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "contentView" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "contentView" }))
 	contentView!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "showAtLocation" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "showAtLocation" }))
 	showAtLocation_!:CommandAttr<PopupWindowImpl_showAtLocation>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "showAsDropDown" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "showAsDropDown" }))
 	showAsDropDown_!:CommandAttr<PopupWindowImpl_showAsDropDown>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "dismiss" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "dismiss" }))
 	dismiss_!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onDismiss" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onDismiss" }))
 	onDismiss!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "attributeUnderTest" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "attributeUnderTest" }))
 	attributeUnderTest!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "height" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "height" }))
 	height!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "width" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "width" }))
 	width!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "outsideTouchable" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "outsideTouchable" }))
 	outsideTouchable!:CommandAttr<boolean>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	

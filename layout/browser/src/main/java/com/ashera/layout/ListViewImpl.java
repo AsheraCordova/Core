@@ -84,10 +84,15 @@ public class ListViewImpl extends ScrollViewImpl {
 		ConverterFactory.register("ListView.choiceMode", new ChoiceMode());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("choiceMode").withType("ListView.choiceMode"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("listSelector").withType("drawable"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filter").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filterDelay").withType("int").withOrder(-10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filterId").withType("string").withOrder(-10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("filterItemPath").withType("array").withOrder(-10));
     }
     @Override
     public void setAttribute(WidgetAttribute key, String strValue,
             Object objValue, ILifeCycleDecorator decorator) {
+    	objValue = preSetAttribute(key, strValue, objValue, decorator);
         super.setAttribute(key, strValue, objValue, decorator);
         Object nativeWidget = asNativeWidget();
         switch (key.getAttributeName()) {
@@ -163,6 +168,30 @@ public class ListViewImpl extends ScrollViewImpl {
                 
             }
             break;
+            case "filter": {
+                
+                             filter(objValue);
+                
+            }
+            break;
+            case "filterDelay": {
+                
+                             setFilterDelay(objValue);
+                
+            }
+            break;
+            case "filterId": {
+                
+                             setFilterId(objValue);
+                
+            }
+            break;
+            case "filterItemPath": {
+                
+                             setFilterItemPath(objValue);
+                
+            }
+            break;
         default:
             break;
         }
@@ -224,6 +253,47 @@ return getListSelector();			}
 			PluginInvoker.putJSONSafeObjectIntoMap(obj, "checkedItemIds", ids);
 	    }
 	}
+	
+
+	
+	private enum FilterStatus { None, Restore, Filtering, Done }
+	private FilterStatus filter = FilterStatus.None;
+	private String query;
+	private int filterDelay = 100;
+	private r.android.os.Handler handler;
+	private void filter(Object query) {
+		this.query = (String) query;
+
+		if (handler == null) {
+			handler = new r.android.os.Handler(); 
+		} else {
+			handler.removeCallbacks(null);
+		}
+		handler.postDelayed(() -> {
+			preFilter();
+			this.listAdapter.dofilterSync(this.query);
+			postFilter();	
+		}, filterDelay);
+	}
+	
+	
+	
+	private void setFilterDelay(Object objValue) {
+		this.filterDelay = (int) objValue;
+		
+	}
+	
+	private String filterId = FilterFactory.DEFAULT_FILTER;
+	private void setFilterId(Object objValue) {
+		filterId = (String) objValue;
+	}
+	
+	
+	private String[] filterItemPaths; 
+	private void setFilterItemPath(Object objValue) {
+		filterItemPaths = (String[]) objValue;		
+	}
+
 	
 
 
@@ -298,43 +368,51 @@ return getListSelector();			}
                 final FilterResults results = new FilterResults();
 
                 if (prefix == null || prefix.length() == 0) {
-                    final ArrayList<com.ashera.model.LoopParam> list;
-                    synchronized (mLock) {
-                        list = new ArrayList<>(dataList);
-                    }
-                    results.values = list;
-                    results.count = list.size();
-                } else {
-                    final String prefixString = prefix.toString().toLowerCase();
+                	prefix = "";
+                }
+                
+                final String prefixString = prefix.toString();
 
-                    final ArrayList<com.ashera.model.LoopParam> values;
-                    synchronized (mLock) {
-                        values = new ArrayList<>(dataList);
-                    }
+                final ArrayList<com.ashera.model.LoopParam> values;
+                synchronized (mLock) {
+                    values = new ArrayList<>(dataList);
+                }
 
-                    final int count = values.size();
-                    final ArrayList<com.ashera.model.LoopParam> newValues = new ArrayList<>();
+                final int count = values.size();
+                final ArrayList<com.ashera.model.LoopParam> newValues = new ArrayList<>();
+    			IFilter filter = FilterFactory.get(filterId);
+    	        if (filter == null) {
+    	        	filter = FilterFactory.get(FilterFactory.DEFAULT_FILTER);
+    	        }
 
-                    for (int i = 0; i < count; i++) {
-                        final com.ashera.model.LoopParam value = values.get(i);
-                        final String valueText = value.toString().toLowerCase();
-
-                        // First match against the whole, non-splitted value
-                        if (valueText.startsWith(prefixString)) {
-                            newValues.add(value);
-                        } else {
-                            final String[] words = valueText.split(" ");
-                            for (String word : words) {
-                                if (word.startsWith(prefixString)) {
-                                    newValues.add(value);
-                                    break;
-                                }
-                            }
-                        }
+                for (int i = 0; i < count; i++) {
+                    final com.ashera.model.LoopParam value = values.get(i);
+                    
+                    if (filterItemPaths != null) {
+                    	for (String path : filterItemPaths) {
+                    		com.ashera.model.ModelExpressionParser.ModelLoopHolder modelLoopHolder = com.ashera.model.ModelExpressionParser.parseModelLoopExpression(getModelFor());
+            	            
+            	            String varName = modelLoopHolder.varName;
+                        	Object modelVal = getModelByPath(varName, value);
+                        	modelVal = getModelByPath(path, modelVal);
+                        	
+                			if (filter.filter(PluginInvoker.getString(modelVal), prefixString)) {
+                				newValues.add(value);
+                				break;
+                			}
+                		}	
+                    } else {
+            			if (value != null && filter.filter(value.toString(), prefixString)) {
+            				newValues.add(value);
+            			}
                     }
 
                     results.values = newValues;
                     results.count = newValues.size();
+                }
+                
+                if (results.values == null) {
+                	results.values = new java.util.ArrayList<>(0);
                 }
 
                 return results;
@@ -382,6 +460,9 @@ return getListSelector();			}
     
     private void setAttributesOnComposite(WidgetAttribute key, String strValue, Object objValue,
 			ILifeCycleDecorator decorator) {
+    	if (!key.getAttributeName().equals("filter") && this.query != null && filter == FilterStatus.Done) {
+    		filter(this.query);
+    	}
 	}
 
     private void addFooterTemplate(Object objValue) {
@@ -469,8 +550,18 @@ return getListSelector();			}
     
     @Override
     protected void addItemToParent(int index, java.lang.String id, com.ashera.model.LoopParam childModel) {
-        IWidget widget = listItem.loadLazyWidgets(listLinearLayoutImpl, index, id, childModel);
-        onChildAdded(widget);
+    	if (filter == FilterStatus.None|| filter == FilterStatus.Filtering) {
+	        IWidget widget = listItem.loadLazyWidgets(listLinearLayoutImpl, index, id, childModel);
+	        onChildAdded(widget);
+    	}
+    }
+    
+    @Override
+    protected void updateModelRecurse(com.ashera.widget.IWidget widget, com.ashera.model.LoopParam childModel,
+    		com.ashera.widget.IWidget.CommandCallBack callBack) {
+    	if (filter == FilterStatus.None|| filter == FilterStatus.Filtering) {
+    		super.updateModelRecurse(widget, childModel, callBack);
+    	}
     }
     
 
@@ -670,6 +761,42 @@ return getListSelector();			}
 	public List<com.ashera.model.LoopParam> getData() {
 		return dataList;
 	}
+	
+	//start - filter
+	private Object preSetAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
+		if (!key.getAttributeName().equals("filter") && this.query != null && filter == FilterStatus.Done) {
+    		preFilter();
+    		filter = FilterStatus.Done;
+    	}		
+		
+		return objValue;
+	}
+
+
+	private void postFilter() {
+		clear();
+    	com.ashera.model.ModelExpressionParser.ModelLoopHolder modelLoopHolder = com.ashera.model.ModelExpressionParser.parseModelLoopExpression(getModelFor());
+        String varName = modelLoopHolder.varName;
+        clearIdsAndData();
+        for (int i = 0; i < this.listAdapter.getCount(); i++) {
+        	addModel((com.ashera.model.LoopParam) this.listAdapter.getItem(i), varName);	
+			
+		}
+    	if (!isWidgetDisposed()) {
+            requestLayout();
+            getFragment().remeasure();
+    	}
+    	
+    	filter = FilterStatus.Done;
+	}
+
+	private void preFilter() {
+		clearIdsAndData();
+        filter = FilterStatus.Restore;
+        applyModelFor();
+        filter = FilterStatus.Filtering;
+	}
+	//end - filter
 	
 
 

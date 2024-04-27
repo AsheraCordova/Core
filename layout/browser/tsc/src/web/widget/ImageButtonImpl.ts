@@ -22,6 +22,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -50,65 +51,65 @@ export abstract class ImageButtonImpl<T> extends ViewImpl<T>{
 	//start - body
 	static initialize() {
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "src" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "src" }))
 	src!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "adjustViewBounds" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "adjustViewBounds" }))
 	adjustViewBounds!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "maxHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "maxHeight" }))
 	maxHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "maxWidth" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "maxWidth" }))
 	maxWidth!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "imageFromUrl" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "imageFromUrl" }))
 	imageFromUrl!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "imageFromUrlPlaceHolder" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "imageFromUrlPlaceHolder" }))
 	imageFromUrlPlaceHolder!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "imageFromUrlError" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "imageFromUrlError" }))
 	imageFromUrlError!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "baseline" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "baseline" }))
 	baseline!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "baselineAlignBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "baselineAlignBottom" }))
 	baselineAlignBottom!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "padding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "padding" }))
 	padding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingTop" }))
 	paddingTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingBottom" }))
 	paddingBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingLeft" }))
 	paddingLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingRight" }))
 	paddingRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingStart" }))
 	paddingStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingEnd" }))
 	paddingEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingHorizontal" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingHorizontal" }))
 	paddingHorizontal!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingVertical" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingVertical" }))
 	paddingVertical!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "scaleType" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "scaleType" }))
 	scaleType!:CommandAttr<ScaleType>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	

@@ -54,6 +54,10 @@ inline JavaUtilRegexPattern *ASModelExpressionParser_get_MODEL_FROM_SCOPE_EXPRES
 static JavaUtilRegexPattern *ASModelExpressionParser_MODEL_FROM_SCOPE_EXPRESSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ASModelExpressionParser, MODEL_FROM_SCOPE_EXPRESSION, JavaUtilRegexPattern *)
 
+inline JavaUtilRegexPattern *ASModelExpressionParser_get_MODEL_VAR_SCOPE_EXPRESSION(void);
+static JavaUtilRegexPattern *ASModelExpressionParser_MODEL_VAR_SCOPE_EXPRESSION;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(ASModelExpressionParser, MODEL_VAR_SCOPE_EXPRESSION, JavaUtilRegexPattern *)
+
 inline JavaUtilRegexPattern *ASModelExpressionParser_get_MODEL_UPDATE_TO_SCOPE_EXPRESSION(void);
 static JavaUtilRegexPattern *ASModelExpressionParser_MODEL_UPDATE_TO_SCOPE_EXPRESSION;
 J2OBJC_STATIC_FIELD_OBJ_FINAL(ASModelExpressionParser, MODEL_UPDATE_TO_SCOPE_EXPRESSION, JavaUtilRegexPattern *)
@@ -81,6 +85,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (ASModelExpressionParser_ModelFromScopeHolder *)parseModelFromScopeWithNSString:(NSString *)expression {
   return ASModelExpressionParser_parseModelFromScopeWithNSString_(expression);
+}
+
++ (ASModelExpressionParser_ModelVarScopeHolder *)parseModelVarScopeWithNSString:(NSString *)expression {
+  return ASModelExpressionParser_parseModelVarScopeWithNSString_(expression);
 }
 
 + (id<JavaUtilList>)parsePojoToUiExpressionWithNSString:(NSString *)expression {
@@ -131,16 +139,17 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LJavaUtilList;", 0x9, 0, 1, -1, 2, -1, -1 },
     { NULL, "LASModelExpressionParser_ModelFromScopeHolder;", 0x9, 3, 1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x9, 4, 1, -1, 5, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x9, 6, 1, -1, 7, -1, -1 },
-    { NULL, "LASModelExpressionParser_ModelStoreVarHolder;", 0x9, 8, 1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x9, 9, 1, -1, 10, -1, -1 },
-    { NULL, "LASModelExpressionParser_ModelLoopHolder;", 0x9, 11, 1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0xa, 12, 13, -1, 14, -1, -1 },
-    { NULL, "LASModelExpressionParser_ModelUpdateToScopeHolder;", 0x9, 15, 1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x9, 16, 1, -1, 17, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x9, 16, 18, -1, 19, -1, -1 },
-    { NULL, "V", 0x9, 20, 21, -1, -1, -1, -1 },
+    { NULL, "LASModelExpressionParser_ModelVarScopeHolder;", 0x9, 4, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x9, 5, 1, -1, 6, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x9, 7, 1, -1, 8, -1, -1 },
+    { NULL, "LASModelExpressionParser_ModelStoreVarHolder;", 0x9, 9, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x9, 10, 1, -1, 11, -1, -1 },
+    { NULL, "LASModelExpressionParser_ModelLoopHolder;", 0x9, 12, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0xa, 13, 14, -1, 15, -1, -1 },
+    { NULL, "LASModelExpressionParser_ModelUpdateToScopeHolder;", 0x9, 16, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x9, 17, 1, -1, 18, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x9, 17, 19, -1, 20, -1, -1 },
+    { NULL, "V", 0x9, 21, 22, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -148,29 +157,31 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(parseEventExpressionWithNSString:);
   methods[2].selector = @selector(parseModelFromScopeWithNSString:);
-  methods[3].selector = @selector(parsePojoToUiExpressionWithNSString:);
-  methods[4].selector = @selector(parseUiToPojoExpressionWithNSString:);
-  methods[5].selector = @selector(parseModelStoreVarExpressionWithNSString:);
-  methods[6].selector = @selector(parseModelVarExpressionWithNSString:);
-  methods[7].selector = @selector(parseModelLoopExpressionWithNSString:);
-  methods[8].selector = @selector(evelRegExWithNSString:withJavaUtilRegexPattern:withNSString:);
-  methods[9].selector = @selector(parseModelUpdateToScopeWithNSString:);
-  methods[10].selector = @selector(parseSimpleCssExpressionWithNSString:);
-  methods[11].selector = @selector(parseSimpleCssExpressionWithNSString:withJavaUtilMap:);
-  methods[12].selector = @selector(mainWithNSStringArray:);
+  methods[3].selector = @selector(parseModelVarScopeWithNSString:);
+  methods[4].selector = @selector(parsePojoToUiExpressionWithNSString:);
+  methods[5].selector = @selector(parseUiToPojoExpressionWithNSString:);
+  methods[6].selector = @selector(parseModelStoreVarExpressionWithNSString:);
+  methods[7].selector = @selector(parseModelVarExpressionWithNSString:);
+  methods[8].selector = @selector(parseModelLoopExpressionWithNSString:);
+  methods[9].selector = @selector(evelRegExWithNSString:withJavaUtilRegexPattern:withNSString:);
+  methods[10].selector = @selector(parseModelUpdateToScopeWithNSString:);
+  methods[11].selector = @selector(parseSimpleCssExpressionWithNSString:);
+  methods[12].selector = @selector(parseSimpleCssExpressionWithNSString:withJavaUtilMap:);
+  methods[13].selector = @selector(mainWithNSStringArray:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "VAR_REGEX", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 22, -1, -1 },
-    { "LOOP_REGEX", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 23, -1, -1 },
-    { "UISET_FROMMODEL_REGEX", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 24, -1, -1 },
-    { "MODELSET_FROMUI_REGEX", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 25, -1, -1 },
-    { "EVENT_VAR_EXPRESSION", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 26, -1, -1 },
-    { "MODEL_FROM_SCOPE_EXPRESSION", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 27, -1, -1 },
-    { "MODEL_UPDATE_TO_SCOPE_EXPRESSION", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 28, -1, -1 },
-    { "VAR_SET_STORE_REGEX", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 29, -1, -1 },
+    { "VAR_REGEX", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 23, -1, -1 },
+    { "LOOP_REGEX", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 24, -1, -1 },
+    { "UISET_FROMMODEL_REGEX", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 25, -1, -1 },
+    { "MODELSET_FROMUI_REGEX", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 26, -1, -1 },
+    { "EVENT_VAR_EXPRESSION", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 27, -1, -1 },
+    { "MODEL_FROM_SCOPE_EXPRESSION", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 28, -1, -1 },
+    { "MODEL_VAR_SCOPE_EXPRESSION", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 29, -1, -1 },
+    { "MODEL_UPDATE_TO_SCOPE_EXPRESSION", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 30, -1, -1 },
+    { "VAR_SET_STORE_REGEX", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x1a, -1, 31, -1, -1 },
   };
-  static const void *ptrTable[] = { "parseEventExpression", "LNSString;", "(Ljava/lang/String;)Ljava/util/List<Lcom/ashera/model/ModelExpressionParser$ModelEventHolder;>;", "parseModelFromScope", "parsePojoToUiExpression", "(Ljava/lang/String;)Ljava/util/List<Lcom/ashera/model/ModelExpressionParser$ModelPojoToUiHolder;>;", "parseUiToPojoExpression", "(Ljava/lang/String;)Ljava/util/List<Lcom/ashera/model/ModelExpressionParser$ModelUiToPojoHolder;>;", "parseModelStoreVarExpression", "parseModelVarExpression", "(Ljava/lang/String;)Ljava/util/List<Lcom/ashera/model/ModelExpressionParser$ModelVarHolder;>;", "parseModelLoopExpression", "evelRegEx", "LNSString;LJavaUtilRegexPattern;LNSString;", "(Ljava/lang/String;Ljava/util/regex/Pattern;Ljava/lang/String;)Ljava/util/List<Ljava/lang/String;>;", "parseModelUpdateToScope", "parseSimpleCssExpression", "(Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "main", "[LNSString;", &ASModelExpressionParser_VAR_REGEX, &ASModelExpressionParser_LOOP_REGEX, &ASModelExpressionParser_UISET_FROMMODEL_REGEX, &ASModelExpressionParser_MODELSET_FROMUI_REGEX, &ASModelExpressionParser_EVENT_VAR_EXPRESSION, &ASModelExpressionParser_MODEL_FROM_SCOPE_EXPRESSION, &ASModelExpressionParser_MODEL_UPDATE_TO_SCOPE_EXPRESSION, &ASModelExpressionParser_VAR_SET_STORE_REGEX, "LASModelExpressionParser_ModelEventHolder;LASModelExpressionParser_ModelFromScopeHolder;LASModelExpressionParser_ModelPojoToUiHolder;LASModelExpressionParser_ModelUiToPojoHolder;LASModelExpressionParser_ModelStoreVarHolder;LASModelExpressionParser_ModelVarHolder;LASModelExpressionParser_ModelLoopHolder;LASModelExpressionParser_ModelUpdateToScopeHolder;" };
-  static const J2ObjcClassInfo _ASModelExpressionParser = { "ModelExpressionParser", "com.ashera.model", ptrTable, methods, fields, 7, 0x1, 13, 8, -1, 30, -1, -1, -1 };
+  static const void *ptrTable[] = { "parseEventExpression", "LNSString;", "(Ljava/lang/String;)Ljava/util/List<Lcom/ashera/model/ModelExpressionParser$ModelEventHolder;>;", "parseModelFromScope", "parseModelVarScope", "parsePojoToUiExpression", "(Ljava/lang/String;)Ljava/util/List<Lcom/ashera/model/ModelExpressionParser$ModelPojoToUiHolder;>;", "parseUiToPojoExpression", "(Ljava/lang/String;)Ljava/util/List<Lcom/ashera/model/ModelExpressionParser$ModelUiToPojoHolder;>;", "parseModelStoreVarExpression", "parseModelVarExpression", "(Ljava/lang/String;)Ljava/util/List<Lcom/ashera/model/ModelExpressionParser$ModelVarHolder;>;", "parseModelLoopExpression", "evelRegEx", "LNSString;LJavaUtilRegexPattern;LNSString;", "(Ljava/lang/String;Ljava/util/regex/Pattern;Ljava/lang/String;)Ljava/util/List<Ljava/lang/String;>;", "parseModelUpdateToScope", "parseSimpleCssExpression", "(Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "main", "[LNSString;", &ASModelExpressionParser_VAR_REGEX, &ASModelExpressionParser_LOOP_REGEX, &ASModelExpressionParser_UISET_FROMMODEL_REGEX, &ASModelExpressionParser_MODELSET_FROMUI_REGEX, &ASModelExpressionParser_EVENT_VAR_EXPRESSION, &ASModelExpressionParser_MODEL_FROM_SCOPE_EXPRESSION, &ASModelExpressionParser_MODEL_VAR_SCOPE_EXPRESSION, &ASModelExpressionParser_MODEL_UPDATE_TO_SCOPE_EXPRESSION, &ASModelExpressionParser_VAR_SET_STORE_REGEX, "LASModelExpressionParser_ModelEventHolder;LASModelExpressionParser_ModelFromScopeHolder;LASModelExpressionParser_ModelVarScopeHolder;LASModelExpressionParser_ModelPojoToUiHolder;LASModelExpressionParser_ModelUiToPojoHolder;LASModelExpressionParser_ModelStoreVarHolder;LASModelExpressionParser_ModelVarHolder;LASModelExpressionParser_ModelLoopHolder;LASModelExpressionParser_ModelUpdateToScopeHolder;" };
+  static const J2ObjcClassInfo _ASModelExpressionParser = { "ModelExpressionParser", "com.ashera.model", ptrTable, methods, fields, 7, 0x1, 14, 9, -1, 32, -1, -1, -1 };
   return &_ASModelExpressionParser;
 }
 
@@ -182,6 +193,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     JreStrongAssign(&ASModelExpressionParser_MODELSET_FROMUI_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w\\.]+)\\s*=\\s*([\\w\\.\\[\\]]+)\\s*into\\s*([\\w#]+)\\s*\\->(\\w+)\\s*(as\\s*(\\w+)\\s*)?"));
     JreStrongAssign(&ASModelExpressionParser_EVENT_VAR_EXPRESSION, JavaUtilRegexPattern_compileWithNSString_(@"\\s*(\\w+)\\s*=\\s*(\\w*\\{)?([\\w\\.\\[\\]]+)\\}?\\s*from\\s*([\\w#]+)\\s*\\->(\\w+)\\s*"));
     JreStrongAssign(&ASModelExpressionParser_MODEL_FROM_SCOPE_EXPRESSION, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w\\.\\[\\]]+)\\s*from\\s*([\\w#]+)\\s*\\->(\\w+)\\s*"));
+    JreStrongAssign(&ASModelExpressionParser_MODEL_VAR_SCOPE_EXPRESSION, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w#]+)\\s*\\->(\\w+)\\s*"));
     JreStrongAssign(&ASModelExpressionParser_MODEL_UPDATE_TO_SCOPE_EXPRESSION, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w\\.\\[\\]]+)\\s*into\\s*([\\w#]+)\\s*\\->(\\w+)\\s*(as\\s*(\\w+)\\s*)?"));
     JreStrongAssign(&ASModelExpressionParser_VAR_SET_STORE_REGEX, JavaUtilRegexPattern_compileWithNSString_(@"\\s*([\\w#]+)\\s*\\->(\\w+)\\s*as\\s*(\\w+)\\s*"));
     J2OBJC_SET_INITIALIZED(ASModelExpressionParser)
@@ -221,6 +233,11 @@ id<JavaUtilList> ASModelExpressionParser_parseEventExpressionWithNSString_(NSStr
 ASModelExpressionParser_ModelFromScopeHolder *ASModelExpressionParser_parseModelFromScopeWithNSString_(NSString *expression) {
   ASModelExpressionParser_initialize();
   return create_ASModelExpressionParser_ModelFromScopeHolder_initWithJavaUtilList_(ASModelExpressionParser_evelRegExWithNSString_withJavaUtilRegexPattern_withNSString_(expression, ASModelExpressionParser_MODEL_FROM_SCOPE_EXPRESSION, @"Invalid expression. e.g. z from z->view"));
+}
+
+ASModelExpressionParser_ModelVarScopeHolder *ASModelExpressionParser_parseModelVarScopeWithNSString_(NSString *expression) {
+  ASModelExpressionParser_initialize();
+  return create_ASModelExpressionParser_ModelVarScopeHolder_initWithJavaUtilList_(ASModelExpressionParser_evelRegExWithNSString_withJavaUtilRegexPattern_withNSString_(expression, ASModelExpressionParser_MODEL_VAR_SCOPE_EXPRESSION, @"Invalid expression. e.g. z from z->view"));
 }
 
 id<JavaUtilList> ASModelExpressionParser_parsePojoToUiExpressionWithNSString_(NSString *expression) {
@@ -450,6 +467,55 @@ ASModelExpressionParser_ModelFromScopeHolder *create_ASModelExpressionParser_Mod
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASModelExpressionParser_ModelFromScopeHolder)
+
+@implementation ASModelExpressionParser_ModelVarScopeHolder
+
+- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)data {
+  ASModelExpressionParser_ModelVarScopeHolder_initWithJavaUtilList_(self, data);
+  return self;
+}
+
+- (void)dealloc {
+  RELEASE_(varName_);
+  RELEASE_(varScope_);
+  [super dealloc];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithJavaUtilList:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "varName_", "LNSString;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+    { "varScope_", "LASModelScope;", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/String;>;)V", "LASModelExpressionParser;" };
+  static const J2ObjcClassInfo _ASModelExpressionParser_ModelVarScopeHolder = { "ModelVarScopeHolder", "com.ashera.model", ptrTable, methods, fields, 7, 0x9, 1, 2, 2, -1, -1, -1, -1 };
+  return &_ASModelExpressionParser_ModelVarScopeHolder;
+}
+
+@end
+
+void ASModelExpressionParser_ModelVarScopeHolder_initWithJavaUtilList_(ASModelExpressionParser_ModelVarScopeHolder *self, id<JavaUtilList> data) {
+  NSObject_init(self);
+  JreStrongAssign(&self->varName_, [((id<JavaUtilList>) nil_chk(data)) getWithInt:0]);
+  JreStrongAssign(&self->varScope_, ASModelScope_valueOfWithNSString_([data getWithInt:1]));
+}
+
+ASModelExpressionParser_ModelVarScopeHolder *new_ASModelExpressionParser_ModelVarScopeHolder_initWithJavaUtilList_(id<JavaUtilList> data) {
+  J2OBJC_NEW_IMPL(ASModelExpressionParser_ModelVarScopeHolder, initWithJavaUtilList_, data)
+}
+
+ASModelExpressionParser_ModelVarScopeHolder *create_ASModelExpressionParser_ModelVarScopeHolder_initWithJavaUtilList_(id<JavaUtilList> data) {
+  J2OBJC_CREATE_IMPL(ASModelExpressionParser_ModelVarScopeHolder, initWithJavaUtilList_, data)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASModelExpressionParser_ModelVarScopeHolder)
 
 @implementation ASModelExpressionParser_ModelPojoToUiHolder
 

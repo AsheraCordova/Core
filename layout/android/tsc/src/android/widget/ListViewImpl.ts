@@ -23,6 +23,11 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
+
+
+
+
 
 
 
@@ -53,68 +58,80 @@ export abstract class ListViewImpl<T> extends ViewGroupImpl<T> {
 	//start - body
 	static initialize() {
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "divider" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "divider" }))
 	divider!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "dividerHeight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "dividerHeight" }))
 	dividerHeight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "footerDividersEnabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "footerDividersEnabled" }))
 	footerDividersEnabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "headerDividersEnabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "headerDividersEnabled" }))
 	headerDividersEnabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "cacheColorHint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "cacheColorHint" }))
 	cacheColorHint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "choiceMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "choiceMode" }))
 	choiceMode!:CommandAttr<ChoiceMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawSelectorOnTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawSelectorOnTop" }))
 	drawSelectorOnTop!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "fastScrollEnabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "fastScrollEnabled" }))
 	fastScrollEnabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "scrollingCache" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "scrollingCache" }))
 	scrollingCache!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "smoothScrollbar" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "smoothScrollbar" }))
 	smoothScrollbar!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "stackFromBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "stackFromBottom" }))
 	stackFromBottom!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textFilterEnabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textFilterEnabled" }))
 	textFilterEnabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "transcriptMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "transcriptMode" }))
 	transcriptMode!:CommandAttr<TranscriptMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onScrollChange" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onScrollChange" }))
 	onScrollChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onScrollStateChange" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onScrollStateChange" }))
 	onScrollStateChange!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onItemClick" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onItemClick" }))
 	onItemClick!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onItemLongClick" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onItemLongClick" }))
 	onItemLongClick!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "listSelector" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "listSelector" }))
 	listSelector!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "listheader" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "listheader" }))
 	listheader!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "listfooter" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "listfooter" }))
 	listfooter!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "filter" }))
+	filter_!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "filterDelay" }))
+	filterDelay!:CommandAttr<number>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "filterId" }))
+	filterId!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "filterItemPath" }))
+	filterItemPath!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
@@ -139,6 +156,10 @@ export abstract class ListViewImpl<T> extends ViewGroupImpl<T> {
 		this.listSelector = undefined;
 		this.listheader = undefined;
 		this.listfooter = undefined;
+		this.filter_ = undefined;
+		this.filterDelay = undefined;
+		this.filterId = undefined;
+		this.filterItemPath = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -621,6 +642,62 @@ export abstract class ListViewImpl<T> extends ViewGroupImpl<T> {
 		this.listfooter.setValue(value);
 		this.orderSet++;
 		this.listfooter.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public filter(value : string) : T {
+		this.resetIfRequired();
+		if (this.filter_ == null || this.filter_ == undefined) {
+			this.filter_ = new CommandAttr<string>();
+		}
+		
+		this.filter_.setSetter(true);
+		this.filter_.setValue(value);
+		this.orderSet++;
+		this.filter_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setFilterDelay(value : number) : T {
+		this.resetIfRequired();
+		if (this.filterDelay == null || this.filterDelay == undefined) {
+			this.filterDelay = new CommandAttr<number>();
+		}
+		
+		this.filterDelay.setSetter(true);
+		this.filterDelay.setValue(value);
+		this.orderSet++;
+		this.filterDelay.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setFilterId(value : string) : T {
+		this.resetIfRequired();
+		if (this.filterId == null || this.filterId == undefined) {
+			this.filterId = new CommandAttr<string>();
+		}
+		
+		this.filterId.setSetter(true);
+		this.filterId.setValue(value);
+		this.orderSet++;
+		this.filterId.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setFilterItemPath(value : string) : T {
+		this.resetIfRequired();
+		if (this.filterItemPath == null || this.filterItemPath == undefined) {
+			this.filterItemPath = new CommandAttr<string>();
+		}
+		
+		this.filterItemPath.setSetter(true);
+		this.filterItemPath.setValue(value);
+		this.orderSet++;
+		this.filterItemPath.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

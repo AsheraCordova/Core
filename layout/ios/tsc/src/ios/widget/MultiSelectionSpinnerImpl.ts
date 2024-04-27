@@ -31,6 +31,7 @@ import {MotionEvent} from '../../app/MotionEvent';
 import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
+import { Mixin, decorate } from 'ts-mixer';
 
 
 
@@ -113,146 +114,146 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 	static initialize() {
 		TransformerFactory.getInstance().register("textStyle", new TextStyleTransformer());
     }	
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosText" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosText" }))
 	iosText!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosPlaceholder" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosPlaceholder" }))
 	iosPlaceholder!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosTextColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosTextColor" }))
 	iosTextColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosAdjustsFontSizeToFitWidth" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosAdjustsFontSizeToFitWidth" }))
 	iosAdjustsFontSizeToFitWidth!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosMinimumFontSize" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosMinimumFontSize" }))
 	iosMinimumFontSize!:CommandAttr<number>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosIsEditing" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosIsEditing" }))
 	iosIsEditing!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosClearsOnBeginEditing" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosClearsOnBeginEditing" }))
 	iosClearsOnBeginEditing!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosClearsOnInsertion" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosClearsOnInsertion" }))
 	iosClearsOnInsertion!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosAllowsEditingTextAttributes" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosAllowsEditingTextAttributes" }))
 	iosAllowsEditingTextAttributes!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosBackground" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosBackground" }))
 	iosBackground!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "iosDisabledBackground" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "iosDisabledBackground" }))
 	iosDisabledBackground!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "padding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "padding" }))
 	padding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingBottom" }))
 	paddingBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingRight" }))
 	paddingRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingLeft" }))
 	paddingLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingStart" }))
 	paddingStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingEnd" }))
 	paddingEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingTop" }))
 	paddingTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingHorizontal" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingHorizontal" }))
 	paddingHorizontal!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "paddingVertical" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "paddingVertical" }))
 	paddingVertical!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableLeft" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableLeft" }))
 	drawableLeft!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableStart" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableStart" }))
 	drawableStart!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableRight" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableRight" }))
 	drawableRight!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableEnd" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableEnd" }))
 	drawableEnd!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableTop" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTop" }))
 	drawableTop!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableBottom" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableBottom" }))
 	drawableBottom!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawablePadding" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawablePadding" }))
 	drawablePadding!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableTint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTint" }))
 	drawableTint!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "drawableTintMode" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTintMode" }))
 	drawableTintMode!:CommandAttr<DrawableTintMode>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "editable" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "editable" }))
 	editable!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "typeface" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "typeface" }))
 	typeface!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textStyle" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textStyle" }))
 	textStyle!:CommandAttr<TextStyle[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "fontFamily" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "fontFamily" }))
 	fontFamily!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textColor" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textColor" }))
 	textColor!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "enabled" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "enabled" }))
 	enabled!:CommandAttr<boolean>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "values" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "values" }))
 	values!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "selectedValues" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "selectedValues" }))
 	selectedValues!:CommandAttr<any>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "hintTextFormat" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "hintTextFormat" }))
 	hintTextFormat!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "entries" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "entries" }))
 	entries!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "selection" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "selection" }))
 	selection!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "modelOptionTextPath" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "modelOptionTextPath" }))
 	modelOptionTextPath!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "onItemSelected" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "onItemSelected" }))
 	onItemSelected!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "modelOptionValuePath" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "modelOptionValuePath" }))
 	modelOptionValuePath!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "gravity" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "gravity" }))
 	gravity!:CommandAttr<Gravity[]>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textSize" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textSize" }))
 	textSize!:CommandAttr<string>| undefined;
-	@Type(() => CommandAttr)
-	@Expose({ name: "textColorHint" })
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "textColorHint" }))
 	textColorHint!:CommandAttr<string>| undefined;
 
-	@Exclude()
+	@decorate(Exclude())
 	protected thisPointer: T;	
 	protected abstract getThisPointer(): T;
 	reset() : T {	
