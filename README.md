@@ -562,7 +562,7 @@ swtExpectedResponseText	| SWT webview requires a response text to be configured 
 ### ListView
 Name                	| Description
 -------------       	| -------------
-filter				  | Method to filter the data presented in recycler view.				
+filter				  | Method to filter the data presented in list view.				
 filterDelay 	 	  | Delay before which filter will not be triggered. Default is 100ms.  	 	 	 	 	 	 	 	 	 	 	 	 	 
 filterId 	 	 	  | The id of the filter. Custom filters can be created by using FilterFatory.register(LowerCasePrefixFilter.class.getName(), new LowerCasePrefixFilter());	 	 	 	 	 	 	 	 	 	 	 	 	 
 filterItemPath 	 	  |	Mandatory for filter to work. The path on the model object on which filter will be applied to the items.
