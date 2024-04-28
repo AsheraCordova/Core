@@ -33,7 +33,6 @@ Browser	      | Teavm
 * LinearLayout
 * RelativeLayout
 * ListView
-* ListView
 * HorizontalScrollView
 * ScrollView
 * TableLayout
@@ -559,3 +558,11 @@ onPageFinished		| Handler which is called when the webview has loaded the page.
 onPageStarted		| Handler which is called when the webview has is about to load the page.
 onReceivedError		| Handler which is called when the webview has failed to load the page.
 swtExpectedResponseText	| SWT webview requires a response text to be configured so that when the webview fails to load, it can compare the text and call the appropriate handler.
+
+### ListView
+Name                	| Description
+-------------       	| -------------
+filter				  | Method to filter the data presented in recycler view.				
+filterDelay 	 	  | Delay before which filter will not be triggered. Default is 100ms.  	 	 	 	 	 	 	 	 	 	 	 	 	 
+filterId 	 	 	  | The id of the filter. Custom filters can be created by using FilterFatory.register(LowerCasePrefixFilter.class.getName(), new LowerCasePrefixFilter());	 	 	 	 	 	 	 	 	 	 	 	 	 
+filterItemPath 	 	  |	Mandatory for filter to work. The path on the model object on which filter will be applied to the items.
