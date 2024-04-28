@@ -4897,10 +4897,10 @@ public void setPaddingVertical(String value) {
 		}
 	}
 	
-	public AutoCompleteTextViewImpl(androidx.appcompat.widget.AppCompatAutoCompleteTextView autoCompleteTextView, IFragment fragment) {
+	public AutoCompleteTextViewImpl(AutoCompleteTextView autoCompleteTextView, IFragment fragment) {
 		super(LOCAL_NAME, GROUP_NAME);
 		this.fragment = fragment;
-		this.appCompatAutoCompleteTextView = autoCompleteTextView;
+		this.appCompatAutoCompleteTextView = (androidx.appcompat.widget.AppCompatAutoCompleteTextView) autoCompleteTextView;
 		loadAttributes(LOCAL_NAME);
 		initialized();
 	}
