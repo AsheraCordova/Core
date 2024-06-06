@@ -70,12 +70,12 @@ public class UINavigatorImpl {
 		String[] destinationProps = actionId.split("#", -1);
 		String type = destinationProps[0];
 		String resId = destinationProps[1];
-		String fileName = destinationProps[2];
 
 		switch (type) {
-		case "dialog":
-			int width = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[3], null, fragment);
-			int height = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[4], null, fragment);
+		case "dialog": {
+			String fileName = getFileName(destinationProps, 2);
+			int width = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 2], null, fragment);
+			int height = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 1], null, fragment);
 			String style = destinationProps[5];
 			if (style != null) {
 				style = style.replace("@style/", "");
@@ -111,13 +111,28 @@ public class UINavigatorImpl {
 			dialogFragment.setArguments(GenericFragment.getInitialBundle(resId, fileName, scopedObjects));
 			navigateToDialog(dialogFragment, backdropColor, windowCloseOnTouchOutside, backgroundDimEnabled);
 			break;
-		default:
+		}
+		default: {
+			String fileName = getFileName(destinationProps, 0);
 			GenericFragment genericFragment = this.fragmentFactory.getFragment();
 			genericFragment.setArguments(GenericFragment.getInitialBundle(resId, fileName, scopedObjects));
 			navigateToController(genericFragment, finish, clear, popCount, this.remeasure);
 
 			break;
 		} 
+		}
+	}
+	
+	private String getFileName(String[] destinationProps, int noofProps) {
+		String fileName = "";
+		String separator = "";
+
+		for (int i = 2; i < destinationProps.length - noofProps; i++) {
+			String destinationProp = destinationProps[i];
+			fileName += separator +destinationProp;
+			separator = "#";
+		}
+		return fileName;
 	}
 	
 	private native void updateViewFrame(Object controller, Object obj) /*-[

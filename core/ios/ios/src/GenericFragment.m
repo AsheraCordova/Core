@@ -741,7 +741,7 @@ ADBundle *ASGenericFragment_getInitialBundleWithNSString_withNSString_withJavaUt
     jint scopedObjectCount = [scopedObjects size];
     [bundle putIntWithNSString:@"count" withInt:scopedObjectCount];
     for (jint i = 0; i < scopedObjectCount; i++) {
-      id<JavaUtilMap> map = ASPluginInvoker_getMapWithId_([scopedObjects getWithInt:i]);
+      id<JavaUtilMap> map = [scopedObjects getWithInt:i];
       [bundle putStringWithNSString:JreStrcat("$I", @"expression", i) withNSString:ASPluginInvoker_getStringWithId_([((id<JavaUtilMap>) nil_chk(map)) getWithId:@"expression"])];
       id payload = [map getWithId:@"payload"];
       if ([JavaIoSerializable_class_() isInstance:payload]) {
@@ -789,7 +789,7 @@ void ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_
   id<JavaUtilMap> dataMap = ASPluginInvoker_getJSONCompatMap();
   (void) [((id<JavaUtilMap>) nil_chk(dataMap)) putWithId:@"action" withId:@"nativeevent"];
   (void) [dataMap putWithId:@"event" withId:action];
-  (void) [dataMap putWithId:@"actionUrl" withId:fileName];
+  (void) [dataMap putWithId:@"actionUrl" withId:[((NSString *) nil_chk(fileName)) java_hasPrefix:@"layout"] ? fileName : [((ADBundle *) nil_chk([self getArguments])) getWithNSString:@"id"]];
   (void) [dataMap putWithId:@"fragmentId" withId:self->id__];
   JavaUtilArrayList *parentFragments = new_JavaUtilArrayList_init();
   id<ASIFragment> parentFragment = [self getParent];

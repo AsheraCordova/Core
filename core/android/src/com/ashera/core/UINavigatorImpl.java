@@ -33,14 +33,14 @@ public class UINavigatorImpl {
 		
 		String type = destinationProps[0];
 		String resId = destinationProps[1];
-		String fileName = destinationProps[2];
-
+		String fileName = getFileName(destinationProps, type.equals("dialog") ? 2 : 0);
+		
 		if (fileName != null && !fileName.equals("")) {
 			Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, scopedObjects);
 			
 			if (type.equals("dialog")) {
-				int width = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[3], null, fragment);
-				int height = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[4], null, fragment);
+				int width = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 2], null, fragment);
+				int height = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 1], null, fragment);
 				String style = destinationProps[5];
 				if (style != null) {
 					style = style.replace("@style/", "");
@@ -66,7 +66,7 @@ public class UINavigatorImpl {
 				
 				MyDialog.updatedBundle(bundle, width, height, backdropColor, windowCloseOnTouchOutside, style);
 			}
-
+	
 			FragmentActivity fragmentActivity = (FragmentActivity) activity;
 			int navigationId = fragmentActivity.getResources().getIdentifier(resId, "id",fragmentActivity.getPackageName());
 			NavController navController = NavHostFragment.findNavController(getNavhostFragment(fragment));			
@@ -129,5 +129,16 @@ public class UINavigatorImpl {
 		popBackStack(activeRootFragment, destinationId, inclusive);
 		callBack.done();
 	}
-	
+
+	private String getFileName(String[] destinationProps, int noofProps) {
+		String fileName = "";
+		String separator = "";
+
+		for (int i = 2; i < destinationProps.length - noofProps; i++) {
+			String destinationProp = destinationProps[i];
+			fileName += separator +destinationProp;
+			separator = "#";
+		}
+		return fileName;
+	}
 }

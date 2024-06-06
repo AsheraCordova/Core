@@ -371,7 +371,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		Map<String, Object> dataMap = com.ashera.widget.PluginInvoker.getJSONCompatMap();
 		dataMap.put("action", "nativeevent");
 		dataMap.put("event", action);
-		dataMap.put("actionUrl", fileName);
+		dataMap.put("actionUrl", fileName.startsWith("layout") ? fileName : getArguments().get("id"));
 		dataMap.put("fragmentId", id);
 		
 		ArrayList<String> parentFragments = new ArrayList<String>();

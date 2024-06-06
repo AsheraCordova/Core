@@ -39,6 +39,9 @@
   jboolean remeasure_;
 }
 
+- (NSString *)getFileNameWithNSStringArray:(IOSObjectArray *)destinationProps
+                                   withInt:(jint)noofProps;
+
 - (void)updateViewFrameWithId:(id)controller
                        withId:(id)obj;
 
@@ -69,6 +72,8 @@
 
 J2OBJC_FIELD_SETTER(ASUINavigatorImpl, navController_, id)
 J2OBJC_FIELD_SETTER(ASUINavigatorImpl, fragmentFactory_, ASUINavigatorImpl_FragmentFactory *)
+
+__attribute__((unused)) static NSString *ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(ASUINavigatorImpl *self, IOSObjectArray *destinationProps, jint noofProps);
 
 __attribute__((unused)) static void ASUINavigatorImpl_updateViewFrameWithId_withId_(ASUINavigatorImpl *self, id controller, id obj);
 
@@ -206,31 +211,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   IOSObjectArray *destinationProps = [((NSString *) nil_chk(actionId)) java_split:@"#" limit:-1];
   NSString *type = IOSObjectArray_Get(nil_chk(destinationProps), 0);
   NSString *resId = IOSObjectArray_Get(destinationProps, 1);
-  NSString *fileName = IOSObjectArray_Get(destinationProps, 2);
-  {
-    jint width;
-    jint height;
-    NSString *style;
-    NSString *attrStr;
-    id backdropColor;
-    JavaLangFloat *marginPercent;
-    NSString *windowCloseOnTouchOutside;
-    NSString *backgroundDimEnabled;
-    ASDialogFragment *dialogFragment;
-    ASGenericFragment *genericFragment;
-    switch (JreIndexOfStr(type, (id[]){ @"dialog" }, 1)) {
-      case 0:
-      width = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, 3) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
-      height = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, 4) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
-      style = IOSObjectArray_Get(destinationProps, 5);
+  switch (JreIndexOfStr(type, (id[]){ @"dialog" }, 1)) {
+    case 0:
+    {
+      NSString *fileName = ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(self, destinationProps, 2);
+      jint width = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, destinationProps->size_ - 2) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
+      jint height = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, destinationProps->size_ - 1) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
+      NSString *style = IOSObjectArray_Get(destinationProps, 5);
       if (style != nil) {
         style = [style java_replace:@"@style/" withSequence:@""];
       }
-      attrStr = ASResourceBundleUtils_getStringWithNSString_withNSString_withASIFragment_(@"values/theme", [((NSString *) nil_chk(style)) java_replace:@"@style/" withSequence:@""], fragment);
-      backdropColor = nil;
-      marginPercent = nil;
-      windowCloseOnTouchOutside = nil;
-      backgroundDimEnabled = nil;
+      NSString *attrStr = ASResourceBundleUtils_getStringWithNSString_withNSString_withASIFragment_(@"values/theme", [((NSString *) nil_chk(style)) java_replace:@"@style/" withSequence:@""], fragment);
+      id backdropColor = nil;
+      JavaLangFloat *marginPercent = nil;
+      NSString *windowCloseOnTouchOutside = nil;
+      NSString *backgroundDimEnabled = nil;
       if (attrStr != nil && ![attrStr java_isEmpty]) {
         IOSObjectArray *attrs = [attrStr java_split:@";"];
         {
@@ -257,17 +252,25 @@ J2OBJC_IGNORE_DESIGNATED_END
           }
         }
       }
-      dialogFragment = new_ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(self, nil, width, height, marginPercent);
+      ASDialogFragment *dialogFragment = new_ASUINavigatorImpl_IosDialogFragment_initWithASUINavigatorImpl_withId_withInt_withInt_withJavaLangFloat_(self, nil, width, height, marginPercent);
       [dialogFragment setArgumentsWithADBundle:ASGenericFragment_getInitialBundleWithNSString_withNSString_withJavaUtilList_(resId, fileName, scopedObjects)];
       ASUINavigatorImpl_navigateToDialogWithId_withId_withNSString_withNSString_(self, dialogFragment, backdropColor, windowCloseOnTouchOutside, backgroundDimEnabled);
       break;
-      default:
-      genericFragment = [((ASUINavigatorImpl_FragmentFactory *) nil_chk(self->fragmentFactory_)) getFragment];
+    }
+    default:
+    {
+      NSString *fileName = ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(self, destinationProps, 0);
+      ASGenericFragment *genericFragment = [((ASUINavigatorImpl_FragmentFactory *) nil_chk(self->fragmentFactory_)) getFragment];
       [((ASGenericFragment *) nil_chk(genericFragment)) setArgumentsWithADBundle:ASGenericFragment_getInitialBundleWithNSString_withNSString_withJavaUtilList_(resId, fileName, scopedObjects)];
       ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(self, genericFragment, finish, clear, popCount, self->remeasure_);
       break;
     }
   }
+}
+
+- (NSString *)getFileNameWithNSStringArray:(IOSObjectArray *)destinationProps
+                                   withInt:(jint)noofProps {
+  return ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(self, destinationProps, noofProps);
 }
 
 - (void)updateViewFrameWithId:(id)controller
@@ -375,20 +378,21 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 7, 4, -1, 5, -1, -1 },
     { NULL, "V", 0x1, 8, 9, -1, 10, -1, -1 },
     { NULL, "V", 0x1, 1, 11, -1, 12, -1, -1 },
-    { NULL, "V", 0x102, 13, 14, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x2, 13, 14, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 17, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 19, 20, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 19, 20, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 21, 20, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 21, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 23, 22, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 24, 25, -1, 26, -1, -1 },
-    { NULL, "V", 0x1, 22, 27, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 28, 29, 30, -1, -1, -1 },
-    { NULL, "LASIFragment;", 0x1, 31, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 26, 27, -1, 28, -1, -1 },
+    { NULL, "V", 0x1, 24, 29, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 30, 31, 32, -1, -1, -1 },
+    { NULL, "LASIFragment;", 0x1, 33, 25, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -401,28 +405,29 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[5].selector = @selector(navigateAsTopWithNSString:withJavaUtilList:withASIFragment:);
   methods[6].selector = @selector(navigateWithPopBackStackToWithNSString:withNSString:withBoolean:withJavaUtilList:withASIFragment:);
   methods[7].selector = @selector(navigateWithNSString:withJavaUtilList:withBoolean:withInt:withBoolean:withASIFragment:);
-  methods[8].selector = @selector(updateViewFrameWithId:withId:);
-  methods[9].selector = @selector(navigateToDialogWithId:withId:withNSString:withNSString:);
-  methods[10].selector = @selector(getNavController);
-  methods[11].selector = @selector(getRootNavController);
-  methods[12].selector = @selector(navigateToControllerWithId:withBoolean:withBoolean:withInt:withBoolean:);
-  methods[13].selector = @selector(closeDialog);
-  methods[14].selector = @selector(getFragmentWithId:);
-  methods[15].selector = @selector(closeDialogWithId:);
-  methods[16].selector = @selector(getTopPresentedController);
-  methods[17].selector = @selector(popBackStackWithASIFragment:);
-  methods[18].selector = @selector(getGenericFragmentsWithJavaUtilList:);
-  methods[19].selector = @selector(popBackStackWithASIFragment:withNSString:withBoolean:);
-  methods[20].selector = @selector(getPopCountWithNSString:withBoolean:);
-  methods[21].selector = @selector(getActiveFragmentWithASIFragment:);
+  methods[8].selector = @selector(getFileNameWithNSStringArray:withInt:);
+  methods[9].selector = @selector(updateViewFrameWithId:withId:);
+  methods[10].selector = @selector(navigateToDialogWithId:withId:withNSString:withNSString:);
+  methods[11].selector = @selector(getNavController);
+  methods[12].selector = @selector(getRootNavController);
+  methods[13].selector = @selector(navigateToControllerWithId:withBoolean:withBoolean:withInt:withBoolean:);
+  methods[14].selector = @selector(closeDialog);
+  methods[15].selector = @selector(getFragmentWithId:);
+  methods[16].selector = @selector(closeDialogWithId:);
+  methods[17].selector = @selector(getTopPresentedController);
+  methods[18].selector = @selector(popBackStackWithASIFragment:);
+  methods[19].selector = @selector(getGenericFragmentsWithJavaUtilList:);
+  methods[20].selector = @selector(popBackStackWithASIFragment:withNSString:withBoolean:);
+  methods[21].selector = @selector(getPopCountWithNSString:withBoolean:);
+  methods[22].selector = @selector(getActiveFragmentWithASIFragment:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "navController_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "fragmentFactory_", "LASUINavigatorImpl_FragmentFactory;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "remeasure_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASUINavigatorImpl_FragmentFactory;LNSObject;Z", "navigate", "LNSString;LNSString;ZZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "navigateWithPopBackStack", "navigateAsTop", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;ZIZLASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;ZIZLcom/ashera/core/IFragment;)V", "updateViewFrame", "LNSObject;LNSObject;", "navigateToDialog", "LNSObject;LNSObject;LNSString;LNSString;", "navigateToController", "LNSObject;ZZIZ", "getFragment", "LNSObject;", "closeDialog", "popBackStack", "LASIFragment;", "getGenericFragments", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/core/GenericFragment;>;)V", "LASIFragment;LNSString;Z", "getPopCount", "LNSString;Z", "LASUINavigatorImpl_DestinatinNotFoundException;", "getActiveFragment", "LASUINavigatorImpl_IosDialogFragment;LASUINavigatorImpl_DestinatinNotFoundException;LASUINavigatorImpl_FragmentFactory;" };
-  static const J2ObjcClassInfo _ASUINavigatorImpl = { "UINavigatorImpl", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 22, 3, -1, 32, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASUINavigatorImpl_FragmentFactory;LNSObject;Z", "navigate", "LNSString;LNSString;ZZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "navigateWithPopBackStack", "navigateAsTop", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;ZIZLASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;ZIZLcom/ashera/core/IFragment;)V", "getFileName", "[LNSString;I", "updateViewFrame", "LNSObject;LNSObject;", "navigateToDialog", "LNSObject;LNSObject;LNSString;LNSString;", "navigateToController", "LNSObject;ZZIZ", "getFragment", "LNSObject;", "closeDialog", "popBackStack", "LASIFragment;", "getGenericFragments", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/core/GenericFragment;>;)V", "LASIFragment;LNSString;Z", "getPopCount", "LNSString;Z", "LASUINavigatorImpl_DestinatinNotFoundException;", "getActiveFragment", "LASUINavigatorImpl_IosDialogFragment;LASUINavigatorImpl_DestinatinNotFoundException;LASUINavigatorImpl_FragmentFactory;" };
+  static const J2ObjcClassInfo _ASUINavigatorImpl = { "UINavigatorImpl", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 23, 3, -1, 34, -1, -1, -1 };
   return &_ASUINavigatorImpl;
 }
 
@@ -456,6 +461,17 @@ ASUINavigatorImpl *new_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFacto
 
 ASUINavigatorImpl *create_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure) {
   J2OBJC_CREATE_IMPL(ASUINavigatorImpl, initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_, fragmentFactory, navController, remeasure)
+}
+
+NSString *ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(ASUINavigatorImpl *self, IOSObjectArray *destinationProps, jint noofProps) {
+  NSString *fileName = @"";
+  NSString *separator = @"";
+  for (jint i = 2; i < ((IOSObjectArray *) nil_chk(destinationProps))->size_ - noofProps; i++) {
+    NSString *destinationProp = IOSObjectArray_Get(destinationProps, i);
+    (void) JreStrAppendStrong(&fileName, "$$", separator, destinationProp);
+    separator = @"#";
+  }
+  return fileName;
 }
 
 void ASUINavigatorImpl_updateViewFrameWithId_withId_(ASUINavigatorImpl *self, id controller, id obj) {
