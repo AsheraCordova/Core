@@ -4353,6 +4353,9 @@ public void setBottom(String value) {
 	}
 
     public static Composite getParent(IWidget widget) {        
+    	if (widget.getParent() == null) {
+    		System.out.println("sd");
+    	}
         org.eclipse.swt.widgets.Composite parent = (org.eclipse.swt.widgets.Composite)widget.getParent().getCompositeLeaf(widget).asNativeWidget();
         return parent;
     }

@@ -15,12 +15,34 @@
 - (id)init
 {
     self = [super init];
+    self.remeasure_ = YES;
     return self;
 }
 
+- (void)dellocateChildController: (UIViewController*) content {
+    for (UIViewController* childController in content.childViewControllers) {
+        [self dellocateChildController: childController];
+        if ([childController isKindOfClass:[ASGenericFragmentController class]]) {
+            [((ASGenericFragmentController*) childController) destroyRootFragment];
+        }
+        [childController willMoveToParentViewController:nil];
+        [childController.view removeFromSuperview];
+        [childController removeFromParentViewController];
+    }
+}
+
+
+- (void)destroyRootFragment {
+    if (self.rootFragment != nil) {
+        [self.rootFragment onDestroy];
+        [self.rootFragment onDetach];
+        self.rootFragment = nil;
+    }
+}
+
 - (void)dealloc {
-    [self.rootFragment onDestroy];
-    [self.rootFragment onDetach];
+    [self dellocateChildController: self];
+    [self destroyRootFragment];
 }
 
 #pragma mark View lifecycle
@@ -36,7 +58,9 @@
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-	[self remeasure];
+    if (self.remeasure_) {
+		[self remeasure];
+	}
 }
 
 - (void)remeasure {

@@ -31,7 +31,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)invokeWithNSString:(NSString *)name
        withNSObjectArray:(IOSObjectArray *)args {
-  switch (JreIndexOfStr(name, (id[]){ @"parse", @"parseWithParent", @"parseFile", @"parseInclude", @"getHandler", @"handlerStart", @"handlerEnd", @"addToCurrentParent" }, 8)) {
+  switch (JreIndexOfStr(name, (id[]){ @"parse", @"parseWithParent", @"parseFile", @"parseFragment", @"parseInclude", @"getHandler", @"handlerStart", @"handlerEnd", @"addToCurrentParent" }, 9)) {
     case 0:
     return [self parseWithNSString:(NSString *) cast_chk(IOSObjectArray_Get(nil_chk(args), 0), [NSString class]) withBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangBoolean class]))) booleanValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 2), ASIFragment_class_())];
     case 1:
@@ -39,16 +39,18 @@ J2OBJC_IGNORE_DESIGNATED_END
     case 2:
     return [self parseFileWithNSString:(NSString *) cast_chk(IOSObjectArray_Get(nil_chk(args), 0), [NSString class]) withBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangBoolean class]))) booleanValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 2), ASIFragment_class_())];
     case 3:
+    return [self parseFragmentWithNSString:(NSString *) cast_chk(IOSObjectArray_Get(nil_chk(args), 0), [NSString class]) withBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangBoolean class]))) booleanValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 2), ASIFragment_class_())];
+    case 4:
     [self parseIncludeWithASHasWidgets:(id<ASHasWidgets>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), ASHasWidgets_class_()) withNSString:(NSString *) cast_chk(IOSObjectArray_Get(args, 1), [NSString class]) withNSString:(NSString *) cast_chk(IOSObjectArray_Get(args, 2), [NSString class]) withBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(IOSObjectArray_Get(args, 3), [JavaLangBoolean class]))) booleanValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 4), ASIFragment_class_())];
     return nil;
-    case 4:
-    return [self getHandlerWithASHasWidgets:(id<ASHasWidgets>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), ASHasWidgets_class_()) withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangInteger class]))) intValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 2), ASIFragment_class_())];
     case 5:
-    return [self handlerStartWithId:IOSObjectArray_Get(nil_chk(args), 0) withASIWidget:(id<ASIWidget>) cast_check(IOSObjectArray_Get(args, 1), ASIWidget_class_()) withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(args, 2), [JavaLangInteger class]))) intValue]];
+    return [self getHandlerWithASHasWidgets:(id<ASHasWidgets>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), ASHasWidgets_class_()) withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangInteger class]))) intValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 2), ASIFragment_class_())];
     case 6:
+    return [self handlerStartWithId:IOSObjectArray_Get(nil_chk(args), 0) withASIWidget:(id<ASIWidget>) cast_check(IOSObjectArray_Get(args, 1), ASIWidget_class_()) withInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(IOSObjectArray_Get(args, 2), [JavaLangInteger class]))) intValue]];
+    case 7:
     [self handlerEndWithId:IOSObjectArray_Get(nil_chk(args), 0) withASIWidget:(id<ASIWidget>) cast_check(IOSObjectArray_Get(args, 1), ASIWidget_class_())];
     return nil;
-    case 7:
+    case 8:
     [self addToCurrentParentWithId:IOSObjectArray_Get(nil_chk(args), 0) withASIWidget:(id<ASIWidget>) cast_check(IOSObjectArray_Get(args, 1), ASIWidget_class_())];
     return nil;
     default:
@@ -83,6 +85,19 @@ J2OBJC_IGNORE_DESIGNATED_END
                            withBoolean:(jboolean)template_
                        withASIFragment:(id<ASIFragment>)fragment {
   NSString *html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", @"www/", fileName), fragment);
+  return [self parseWithNSString:html withBoolean:template_ withASIFragment:fragment];
+}
+
+- (id<ASIWidget>)parseFragmentWithNSString:(NSString *)fileNameOrHtml
+                               withBoolean:(jboolean)template_
+                           withASIFragment:(id<ASIFragment>)fragment {
+  NSString *html = JreRetainedLocalValue(fileNameOrHtml);
+  if ([((NSString *) nil_chk(fileNameOrHtml)) java_hasPrefix:@"layout"]) {
+    html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", @"www/", fileNameOrHtml), fragment);
+  }
+  if (![((NSString *) nil_chk([((NSString *) nil_chk(html)) java_trim])) java_hasSuffix:@"</layout>"]) {
+    html = JreStrcat("$$$", @"<layout>", html, @"</layout>");
+  }
   return [self parseWithNSString:html withBoolean:template_ withASIFragment:fragment];
 }
 
@@ -139,11 +154,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LASIWidget;", 0x1, 2, 3, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, 4, 5, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x1, 6, 3, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 7, 8, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x1, 9, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 15, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x1, 7, 3, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -154,14 +170,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[3].selector = @selector(parseWithNSString:withBoolean:withASIFragment:);
   methods[4].selector = @selector(parseWithParentWithNSString:withBoolean:withASHasWidgets:withASIFragment:);
   methods[5].selector = @selector(parseFileWithNSString:withBoolean:withASIFragment:);
-  methods[6].selector = @selector(getHandlerWithASHasWidgets:withInt:withASIFragment:);
-  methods[7].selector = @selector(handlerStartWithId:withASIWidget:withInt:);
-  methods[8].selector = @selector(handlerEndWithId:withASIWidget:);
-  methods[9].selector = @selector(addToCurrentParentWithId:withASIWidget:);
-  methods[10].selector = @selector(parseIncludeWithASHasWidgets:withNSString:withNSString:withBoolean:withASIFragment:);
+  methods[6].selector = @selector(parseFragmentWithNSString:withBoolean:withASIFragment:);
+  methods[7].selector = @selector(getHandlerWithASHasWidgets:withInt:withASIFragment:);
+  methods[8].selector = @selector(handlerStartWithId:withASIWidget:withInt:);
+  methods[9].selector = @selector(handlerEndWithId:withASIWidget:);
+  methods[10].selector = @selector(addToCurrentParentWithId:withASIWidget:);
+  methods[11].selector = @selector(parseIncludeWithASHasWidgets:withNSString:withNSString:withBoolean:withASIFragment:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;" };
-  static const J2ObjcClassInfo _ASHtmlParserPlugin = { "HtmlParserPlugin", "com.ashera.parser.html", ptrTable, methods, NULL, 7, 0x1, 11, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseFragment", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;" };
+  static const J2ObjcClassInfo _ASHtmlParserPlugin = { "HtmlParserPlugin", "com.ashera.parser.html", ptrTable, methods, NULL, 7, 0x1, 12, 0, -1, -1, -1, -1, -1 };
   return &_ASHtmlParserPlugin;
 }
 

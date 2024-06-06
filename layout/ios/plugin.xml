@@ -23,6 +23,7 @@
      <source-file src="tsc/src/ios/widget/CheckBoxImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/ChronometerImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/EditTextImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <source-file src="tsc/src/ios/widget/fragmentImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/FrameLayoutImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/HorizontalScrollViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/ImageButtonImpl.ts" target-dir="tsc/src/ios/widget"/>
@@ -67,6 +68,8 @@
      <source-file src="ios/src/ChronometerImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/EditTextImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/EditTextImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/src/fragmentImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="ios/src/fragmentImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/FrameLayoutImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/FrameLayoutImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/HorizontalScrollViewImpl.h" target-dir="LayoutPlugin/ios/src"/>

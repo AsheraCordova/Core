@@ -54,6 +54,8 @@
 
 - (void)clear;
 
+- (void)createChildFragments;
+
 - (void)disableRemeasure;
 
 - (void)enableRemeasure;
@@ -86,6 +88,8 @@
 - (id<JavaUtilList>)getListenerWithASIWidget:(id<ASIWidget>)widget
                                 withIOSClass:(IOSClass *)type;
 
+- (id<ASIFragment>)getParent;
+
 - (id)getParentForRootWidget;
 
 - (id<ASIActivity>)getRootActivity;
@@ -93,6 +97,8 @@
 - (id<ASIWidget>)getRootWidget;
 
 - (id<CSSStyleSheet>)getStyleSheet;
+
+- (NSString *)getUId;
 
 - (id)getUserDataWithNSString:(NSString *)key;
 

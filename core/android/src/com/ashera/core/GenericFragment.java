@@ -11,7 +11,6 @@ import java.util.Properties;
 import java.util.Stack;
 import java.util.UUID;
 import java.util.WeakHashMap;
-import java.util.stream.Collectors;
 
 import com.ashera.css.StyleSheet;
 import com.ashera.model.Errors;
@@ -28,13 +27,13 @@ import com.ashera.widget.PluginInvoker;
 import com.ashera.widget.bus.Event.StandardEvents;
 import com.ashera.widget.bus.EventBus;
 
-import androidx.fragment.app.Fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.fragment.app.Fragment;
 
 public class GenericFragment extends Fragment implements IFragment{
 	private IActivity activity;
@@ -197,6 +196,12 @@ public class GenericFragment extends Fragment implements IFragment{
 				ModelStore.storeModelToScope(varName, varScope, modelData, this, null, null);
 			}
 		}
+		
+		IFragment parent = getParent();
+		while (parent != null) {
+			parent.getEventBus().addEventBus(eventBus);
+			parent = parent.getParent();
+		}
 		sendLifeCycleEvent("onAttach", fileName, getEventData("onAttach"), null);
 
 	}
@@ -290,7 +295,8 @@ public class GenericFragment extends Fragment implements IFragment{
 	public Object onCreateView(boolean measure) {
 		if (view == null) {
 			try {
-				IWidget widget = PluginInvoker.parseFile(fileName, false, this);
+				IWidget widget = PluginInvoker.parseFragment(fileName, false, this);
+				createChildFragments();
 
 				if (measure) {
 					remeasure();
@@ -338,6 +344,12 @@ public class GenericFragment extends Fragment implements IFragment{
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		IFragment parent = getParent();
+		while (parent != null) {
+			parent.getEventBus().removeEventBus(eventBus);
+			parent = parent.getParent();
+		}
+		
 		sendLifeCycleEvent("onDestroy", fileName, getEventData("onDestroy"), null);
 		clear();
 	}
@@ -361,6 +373,20 @@ public class GenericFragment extends Fragment implements IFragment{
 		dataMap.put("event", action);
 		dataMap.put("actionUrl", fileName);
 		dataMap.put("fragmentId", id);
+		
+		ArrayList<String> parentFragments = new ArrayList<String>();
+		
+		
+		IFragment parentFragment = getParent();
+		
+		while (parentFragment != null) {
+			parentFragments.add(parentFragment.getUId());
+			parentFragment = parentFragment.getParent();
+		}
+		
+		if (parentFragments.size() > 0) {
+			dataMap.put("parentFragments", String.join(",", parentFragments));
+		}
 
 		if (javascript != null) {
 			dataMap.put("javascript", javascript);
@@ -566,4 +592,27 @@ public class GenericFragment extends Fragment implements IFragment{
 		}
 	}
 
+	@Override
+	public String getUId() {
+		return id;
+	}
+
+
+	@Override
+	public IFragment getParent() {
+
+		Fragment parentFragment = getParentFragment();
+		
+		while (parentFragment != null) {
+			if (parentFragment instanceof IFragment) {
+				return (IFragment) parentFragment;
+			}
+			
+			parentFragment = parentFragment.getParentFragment();
+		}		
+		return null;
+	}
+	
+	public void createChildFragments() {
+	}
 }

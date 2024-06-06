@@ -21,6 +21,8 @@
 @class ADLayoutInflater;
 @class ADView;
 @class ADViewGroup;
+@class ADXFragmentManager;
+@protocol ASIFragment;
 
 @interface ADXFragment : NSObject
 
@@ -28,7 +30,13 @@
 
 - (instancetype)init;
 
+- (void)executePendingTransactions;
+
 - (ADBundle *)getArguments;
+
+- (ADXFragmentManager *)getChildFragmentManager;
+
+- (ADXFragment *)getParentFragment;
 
 - (void)onActivityCreatedWithADBundle:(ADBundle *)savedInstanceState;
 
@@ -52,6 +60,11 @@
                    withADBundle:(ADBundle *)savedInstanceState;
 
 - (void)setArgumentsWithADBundle:(ADBundle *)bundle;
+
+- (void)setParentFragmentWithASIFragment:(id<ASIFragment>)parentFragment;
+
+- (void)setParentFragmentWithASIFragment:(id<ASIFragment>)parentFragment
+                             withBoolean:(jboolean)manageLifeCycle;
 
 @end
 

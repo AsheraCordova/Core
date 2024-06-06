@@ -29,12 +29,6 @@
 
 		<dependency>
 			<groupId>com.ashera</groupId>
-			<artifactId>WebLayouts</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.ashera</groupId>
 			<artifactId>htmlparser</artifactId>
 			<version>${project.version}</version>
 		</dependency>

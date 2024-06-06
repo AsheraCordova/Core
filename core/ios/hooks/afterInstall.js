@@ -23,7 +23,7 @@ module.exports = (context) => {
 		//27E45212286452BC00FEBE6F /* color */ = {isa = PBXFileReference; lastKnownFileType = folder; name = color; path = resources/color; sourceTree = "<group>"; };
 		myProj.parse(function (err) {
 			
-			var baseNames = ['drawable-ios', 'color', 'xml', 'menu', 'drawable', 'values', 'font', 'res_xml', 'anim', 'animator'];
+			var baseNames = ['drawable-ios', 'color', 'xml', 'menu', 'drawable', 'values', 'font', 'res_xml', 'anim', 'animator', 'navigation'];
 			var group = 'Resources';
 			for (var i = 0; i < baseNames.length; i++) {
 				var baseName = baseNames[i];

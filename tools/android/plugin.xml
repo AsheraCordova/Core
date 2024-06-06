@@ -23,6 +23,7 @@
      <source-file src="gentool/fragmentmapper.xsl" target-dir="gentool"/>
      <source-file src="gentool/id.xsl" target-dir="gentool"/>
      <source-file src="gentool/nav_graph.xsl" target-dir="gentool"/>
+     <source-file src="gentool/nav_graph_start.xsl" target-dir="gentool"/>
      <source-file src="gentool/package.json" target-dir="gentool"/>
      <source-file src="gentool/plist.js" target-dir="gentool"/>
      <source-file src="gentool/resize.js" target-dir="gentool"/>

@@ -32,7 +32,12 @@
 @protocol JavaUtilList;
 
 
-@interface ASUINavigatorImpl ()
+@interface ASUINavigatorImpl () {
+ @public
+  id navController_;
+  ASUINavigatorImpl_FragmentFactory *fragmentFactory_;
+  jboolean remeasure_;
+}
 
 - (void)updateViewFrameWithId:(id)controller
                        withId:(id)obj;
@@ -42,10 +47,15 @@
                   withNSString:(NSString *)windowCloseOnTouchOutside
                   withNSString:(NSString *)backgroundDimEnabled;
 
+- (id)getNavController;
+
+- (id)getRootNavController;
+
 - (void)navigateToControllerWithId:(id)rootFragment
                        withBoolean:(jboolean)finish
                        withBoolean:(jboolean)clear
-                           withInt:(jint)popCount;
+                           withInt:(jint)popCount
+                       withBoolean:(jboolean)remeasure;
 
 - (id)getFragmentWithId:(id)presentedController;
 
@@ -57,11 +67,18 @@
 
 @end
 
+J2OBJC_FIELD_SETTER(ASUINavigatorImpl, navController_, id)
+J2OBJC_FIELD_SETTER(ASUINavigatorImpl, fragmentFactory_, ASUINavigatorImpl_FragmentFactory *)
+
 __attribute__((unused)) static void ASUINavigatorImpl_updateViewFrameWithId_withId_(ASUINavigatorImpl *self, id controller, id obj);
 
 __attribute__((unused)) static void ASUINavigatorImpl_navigateToDialogWithId_withId_withNSString_withNSString_(ASUINavigatorImpl *self, id rootFragment, id backdropColor, NSString *windowCloseOnTouchOutside, NSString *backgroundDimEnabled);
 
-__attribute__((unused)) static void ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_(ASUINavigatorImpl *self, id rootFragment, jboolean finish, jboolean clear, jint popCount);
+__attribute__((unused)) static id ASUINavigatorImpl_getNavController(ASUINavigatorImpl *self);
+
+__attribute__((unused)) static id ASUINavigatorImpl_getRootNavController(ASUINavigatorImpl *self);
+
+__attribute__((unused)) static void ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(ASUINavigatorImpl *self, id rootFragment, jboolean finish, jboolean clear, jint popCount, jboolean remeasure);
 
 __attribute__((unused)) static id ASUINavigatorImpl_getFragmentWithId_(ASUINavigatorImpl *self, id presentedController);
 
@@ -96,6 +113,24 @@ __attribute__((unused)) static ASUINavigatorImpl_IosDialogFragment *create_ASUIN
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl_IosDialogFragment)
 
+@interface ASUINavigatorImpl_FragmentFactory_MyFragment : ASGenericFragment
+
+- (instancetype)init;
+
+- (void)createChildFragments;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASUINavigatorImpl_FragmentFactory_MyFragment)
+
+__attribute__((unused)) static void ASUINavigatorImpl_FragmentFactory_MyFragment_init(ASUINavigatorImpl_FragmentFactory_MyFragment *self);
+
+__attribute__((unused)) static ASUINavigatorImpl_FragmentFactory_MyFragment *new_ASUINavigatorImpl_FragmentFactory_MyFragment_init(void) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASUINavigatorImpl_FragmentFactory_MyFragment *create_ASUINavigatorImpl_FragmentFactory_MyFragment_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl_FragmentFactory_MyFragment)
+
 @implementation ASUINavigatorImpl
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -104,6 +139,31 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
+
+- (instancetype)initWithASUINavigatorImpl_FragmentFactory:(ASUINavigatorImpl_FragmentFactory *)fragmentFactory
+                                                   withId:(id)navController
+                                              withBoolean:(jboolean)remeasure {
+  ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(self, fragmentFactory, navController, remeasure);
+  return self;
+}
+
+- (void)navigateWithNSString:(NSString *)actionId
+                withNSString:(NSString *)destinationId
+                 withBoolean:(jboolean)inclusive
+                 withBoolean:(jboolean)finish
+            withJavaUtilList:(id<JavaUtilList>)scopedObjects
+             withASIFragment:(id<ASIFragment>)fragment {
+  @try {
+    jint popCount = 0;
+    if (destinationId != nil) {
+      popCount = [self getPopCountWithNSString:destinationId withBoolean:inclusive];
+    }
+    [self navigateWithNSString:actionId withJavaUtilList:scopedObjects withBoolean:finish withInt:popCount withBoolean:inclusive withASIFragment:fragment];
+  }
+  @catch (ASUINavigatorImpl_DestinatinNotFoundException *e) {
+    [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:[e getMessage]];
+  }
+}
 
 - (void)navigateWithNSString:(NSString *)actionId
             withJavaUtilList:(id<JavaUtilList>)scopedObjects
@@ -202,9 +262,9 @@ J2OBJC_IGNORE_DESIGNATED_END
       ASUINavigatorImpl_navigateToDialogWithId_withId_withNSString_withNSString_(self, dialogFragment, backdropColor, windowCloseOnTouchOutside, backgroundDimEnabled);
       break;
       default:
-      genericFragment = new_ASGenericFragment_init();
-      [genericFragment setArgumentsWithADBundle:ASGenericFragment_getInitialBundleWithNSString_withNSString_withJavaUtilList_(resId, fileName, scopedObjects)];
-      ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_(self, genericFragment, finish, clear, popCount);
+      genericFragment = [((ASUINavigatorImpl_FragmentFactory *) nil_chk(self->fragmentFactory_)) getFragment];
+      [((ASGenericFragment *) nil_chk(genericFragment)) setArgumentsWithADBundle:ASGenericFragment_getInitialBundleWithNSString_withNSString_withJavaUtilList_(resId, fileName, scopedObjects)];
+      ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(self, genericFragment, finish, clear, popCount, self->remeasure_);
       break;
     }
   }
@@ -222,11 +282,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASUINavigatorImpl_navigateToDialogWithId_withId_withNSString_withNSString_(self, rootFragment, backdropColor, windowCloseOnTouchOutside, backgroundDimEnabled);
 }
 
+- (id)getNavController {
+  return ASUINavigatorImpl_getNavController(self);
+}
+
+- (id)getRootNavController {
+  return ASUINavigatorImpl_getRootNavController(self);
+}
+
 - (void)navigateToControllerWithId:(id)rootFragment
                        withBoolean:(jboolean)finish
                        withBoolean:(jboolean)clear
-                           withInt:(jint)popCount {
-  ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_(self, rootFragment, finish, clear, popCount);
+                           withInt:(jint)popCount
+                       withBoolean:(jboolean)remeasure {
+  ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(self, rootFragment, finish, clear, popCount, remeasure);
 }
 
 - (void)closeDialog {
@@ -247,7 +316,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)popBackStackWithASIFragment:(id<ASIFragment>)fragment {
-  ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_(self, nil, true, false, 0);
+  ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(self, nil, true, false, 0, self->remeasure_);
 }
 
 - (void)getGenericFragmentsWithJavaUtilList:(id<JavaUtilList>)fragments {
@@ -259,7 +328,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                         withBoolean:(jboolean)inclusive {
   @try {
     jint popCount = [self getPopCountWithNSString:destinationId withBoolean:inclusive];
-    ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_(self, nil, false, false, popCount);
+    ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(self, nil, false, false, popCount, self->remeasure_);
   }
   @catch (ASUINavigatorImpl_DestinatinNotFoundException *e) {
     [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:[e getMessage]];
@@ -290,49 +359,70 @@ J2OBJC_IGNORE_DESIGNATED_END
   return popCount;
 }
 
+- (id<ASIFragment>)getActiveFragmentWithASIFragment:(id<ASIFragment>)fragment {
+  id<JavaUtilList> fragments = new_JavaUtilArrayList_init();
+  ASUINavigatorImpl_getGenericFragmentsWithJavaUtilList_(self, fragments);
+  return [fragments getWithInt:[fragments size] - 1];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 0, 1, -1, 2, -1, -1 },
-    { NULL, "V", 0x1, 3, 1, -1, 2, -1, -1 },
-    { NULL, "V", 0x1, 4, 1, -1, 2, -1, -1 },
-    { NULL, "V", 0x1, 5, 6, -1, 7, -1, -1 },
-    { NULL, "V", 0x1, 0, 8, -1, 9, -1, -1 },
-    { NULL, "V", 0x102, 10, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 12, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 14, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 16, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 18, 17, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, 3, -1, -1 },
+    { NULL, "V", 0x1, 1, 4, -1, 5, -1, -1 },
+    { NULL, "V", 0x1, 6, 4, -1, 5, -1, -1 },
+    { NULL, "V", 0x1, 7, 4, -1, 5, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, 10, -1, -1 },
+    { NULL, "V", 0x1, 1, 11, -1, 12, -1, -1 },
+    { NULL, "V", 0x102, 13, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 15, 16, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 21, 22, -1, 23, -1, -1 },
-    { NULL, "V", 0x1, 19, 24, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 25, 26, 27, -1, -1, -1 },
+    { NULL, "V", 0x102, 17, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 19, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 21, 20, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 24, 25, -1, 26, -1, -1 },
+    { NULL, "V", 0x1, 22, 27, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 28, 29, 30, -1, -1, -1 },
+    { NULL, "LASIFragment;", 0x1, 31, 23, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
-  methods[1].selector = @selector(navigateWithNSString:withJavaUtilList:withASIFragment:);
-  methods[2].selector = @selector(navigateWithPopBackStackWithNSString:withJavaUtilList:withASIFragment:);
-  methods[3].selector = @selector(navigateAsTopWithNSString:withJavaUtilList:withASIFragment:);
-  methods[4].selector = @selector(navigateWithPopBackStackToWithNSString:withNSString:withBoolean:withJavaUtilList:withASIFragment:);
-  methods[5].selector = @selector(navigateWithNSString:withJavaUtilList:withBoolean:withInt:withBoolean:withASIFragment:);
-  methods[6].selector = @selector(updateViewFrameWithId:withId:);
-  methods[7].selector = @selector(navigateToDialogWithId:withId:withNSString:withNSString:);
-  methods[8].selector = @selector(navigateToControllerWithId:withBoolean:withBoolean:withInt:);
-  methods[9].selector = @selector(closeDialog);
-  methods[10].selector = @selector(getFragmentWithId:);
-  methods[11].selector = @selector(closeDialogWithId:);
-  methods[12].selector = @selector(getTopPresentedController);
-  methods[13].selector = @selector(popBackStackWithASIFragment:);
-  methods[14].selector = @selector(getGenericFragmentsWithJavaUtilList:);
-  methods[15].selector = @selector(popBackStackWithASIFragment:withNSString:withBoolean:);
-  methods[16].selector = @selector(getPopCountWithNSString:withBoolean:);
+  methods[1].selector = @selector(initWithASUINavigatorImpl_FragmentFactory:withId:withBoolean:);
+  methods[2].selector = @selector(navigateWithNSString:withNSString:withBoolean:withBoolean:withJavaUtilList:withASIFragment:);
+  methods[3].selector = @selector(navigateWithNSString:withJavaUtilList:withASIFragment:);
+  methods[4].selector = @selector(navigateWithPopBackStackWithNSString:withJavaUtilList:withASIFragment:);
+  methods[5].selector = @selector(navigateAsTopWithNSString:withJavaUtilList:withASIFragment:);
+  methods[6].selector = @selector(navigateWithPopBackStackToWithNSString:withNSString:withBoolean:withJavaUtilList:withASIFragment:);
+  methods[7].selector = @selector(navigateWithNSString:withJavaUtilList:withBoolean:withInt:withBoolean:withASIFragment:);
+  methods[8].selector = @selector(updateViewFrameWithId:withId:);
+  methods[9].selector = @selector(navigateToDialogWithId:withId:withNSString:withNSString:);
+  methods[10].selector = @selector(getNavController);
+  methods[11].selector = @selector(getRootNavController);
+  methods[12].selector = @selector(navigateToControllerWithId:withBoolean:withBoolean:withInt:withBoolean:);
+  methods[13].selector = @selector(closeDialog);
+  methods[14].selector = @selector(getFragmentWithId:);
+  methods[15].selector = @selector(closeDialogWithId:);
+  methods[16].selector = @selector(getTopPresentedController);
+  methods[17].selector = @selector(popBackStackWithASIFragment:);
+  methods[18].selector = @selector(getGenericFragmentsWithJavaUtilList:);
+  methods[19].selector = @selector(popBackStackWithASIFragment:withNSString:withBoolean:);
+  methods[20].selector = @selector(getPopCountWithNSString:withBoolean:);
+  methods[21].selector = @selector(getActiveFragmentWithASIFragment:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "navigate", "LNSString;LJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "navigateWithPopBackStack", "navigateAsTop", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;ZIZLASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;ZIZLcom/ashera/core/IFragment;)V", "updateViewFrame", "LNSObject;LNSObject;", "navigateToDialog", "LNSObject;LNSObject;LNSString;LNSString;", "navigateToController", "LNSObject;ZZI", "getFragment", "LNSObject;", "closeDialog", "popBackStack", "LASIFragment;", "getGenericFragments", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/core/GenericFragment;>;)V", "LASIFragment;LNSString;Z", "getPopCount", "LNSString;Z", "LASUINavigatorImpl_DestinatinNotFoundException;", "LASUINavigatorImpl_IosDialogFragment;LASUINavigatorImpl_DestinatinNotFoundException;" };
-  static const J2ObjcClassInfo _ASUINavigatorImpl = { "UINavigatorImpl", "com.ashera.core", ptrTable, methods, NULL, 7, 0x1, 17, 0, -1, 28, -1, -1, -1 };
+  static const J2ObjcFieldInfo fields[] = {
+    { "navController_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "fragmentFactory_", "LASUINavigatorImpl_FragmentFactory;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "remeasure_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LASUINavigatorImpl_FragmentFactory;LNSObject;Z", "navigate", "LNSString;LNSString;ZZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "navigateWithPopBackStack", "navigateAsTop", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;ZIZLASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;ZIZLcom/ashera/core/IFragment;)V", "updateViewFrame", "LNSObject;LNSObject;", "navigateToDialog", "LNSObject;LNSObject;LNSString;LNSString;", "navigateToController", "LNSObject;ZZIZ", "getFragment", "LNSObject;", "closeDialog", "popBackStack", "LASIFragment;", "getGenericFragments", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/core/GenericFragment;>;)V", "LASIFragment;LNSString;Z", "getPopCount", "LNSString;Z", "LASUINavigatorImpl_DestinatinNotFoundException;", "getActiveFragment", "LASUINavigatorImpl_IosDialogFragment;LASUINavigatorImpl_DestinatinNotFoundException;LASUINavigatorImpl_FragmentFactory;" };
+  static const J2ObjcClassInfo _ASUINavigatorImpl = { "UINavigatorImpl", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 22, 3, -1, 32, -1, -1, -1 };
   return &_ASUINavigatorImpl;
 }
 
@@ -340,6 +430,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void ASUINavigatorImpl_init(ASUINavigatorImpl *self) {
   NSObject_init(self);
+  self->remeasure_ = true;
+  self->fragmentFactory_ = new_ASUINavigatorImpl_FragmentFactory_init();
 }
 
 ASUINavigatorImpl *new_ASUINavigatorImpl_init() {
@@ -348,6 +440,22 @@ ASUINavigatorImpl *new_ASUINavigatorImpl_init() {
 
 ASUINavigatorImpl *create_ASUINavigatorImpl_init() {
   J2OBJC_CREATE_IMPL(ASUINavigatorImpl, init)
+}
+
+void ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl *self, ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure) {
+  NSObject_init(self);
+  self->remeasure_ = true;
+  self->navController_ = navController;
+  self->fragmentFactory_ = fragmentFactory;
+  self->remeasure_ = remeasure;
+}
+
+ASUINavigatorImpl *new_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure) {
+  J2OBJC_NEW_IMPL(ASUINavigatorImpl, initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_, fragmentFactory, navController, remeasure)
+}
+
+ASUINavigatorImpl *create_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure) {
+  J2OBJC_CREATE_IMPL(ASUINavigatorImpl, initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_, fragmentFactory, navController, remeasure)
 }
 
 void ASUINavigatorImpl_updateViewFrameWithId_withId_(ASUINavigatorImpl *self, id controller, id obj) {
@@ -369,9 +477,24 @@ void ASUINavigatorImpl_navigateToDialogWithId_withId_withNSString_withNSString_(
   [presentedController presentViewController:v animated:YES completion:nil];
 }
 
-void ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_(ASUINavigatorImpl *self, id rootFragment, jboolean finish, jboolean clear, jint popCount) {
+id ASUINavigatorImpl_getNavController(ASUINavigatorImpl *self) {
+  if (self->navController_ != nil) {
+    return self->navController_;
+  }
+  else {
+    return ASUINavigatorImpl_getRootNavController(self);
+  }
+}
+
+id ASUINavigatorImpl_getRootNavController(ASUINavigatorImpl *self) {
   ASMainViewController* mainViewController = (ASMainViewController*) [UIApplication sharedApplication].delegate.window.rootViewController;
   UINavigationController* navController =  (UINavigationController*) mainViewController.navController;
+  return navController;
+}
+
+void ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(ASUINavigatorImpl *self, id rootFragment, jboolean finish, jboolean clear, jint popCount, jboolean remeasure) {
+  ASMainViewController* mainViewController = (ASMainViewController*) [UIApplication sharedApplication].delegate.window.rootViewController;
+  UINavigationController* navController =  (UINavigationController*) [self getNavController];
   NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[navController viewControllers]];
   
   if (finish) {
@@ -389,6 +512,7 @@ void ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withIn
   if (rootFragment != nil) {
     ASGenericFragmentController* v = [ASGenericFragmentController new];
     v.rootFragment = rootFragment;
+    v.remeasure_ = remeasure;
     v.cordovaActivity = mainViewController.cordovaActivity;
     [viewControllers addObject:v];
   }
@@ -425,8 +549,7 @@ id ASUINavigatorImpl_getTopPresentedController(ASUINavigatorImpl *self) {
 }
 
 void ASUINavigatorImpl_getGenericFragmentsWithJavaUtilList_(ASUINavigatorImpl *self, id<JavaUtilList> fragments) {
-  ASMainViewController* mainViewController = (ASMainViewController*) [UIApplication sharedApplication].delegate.window.rootViewController;
-  UINavigationController* navController =  (UINavigationController*) mainViewController.navController;
+  UINavigationController* navController =  (UINavigationController*) [self getNavController];
   NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[navController viewControllers]];
   
   for (UIViewController *vc in viewControllers) {
@@ -535,3 +658,93 @@ ASUINavigatorImpl_DestinatinNotFoundException *create_ASUINavigatorImpl_Destinat
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUINavigatorImpl_DestinatinNotFoundException)
+
+@implementation ASUINavigatorImpl_FragmentFactory
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ASUINavigatorImpl_FragmentFactory_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (ASGenericFragment *)getFragment {
+  return new_ASUINavigatorImpl_FragmentFactory_MyFragment_init();
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASGenericFragment;", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(getFragment);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LASUINavigatorImpl;", "LASUINavigatorImpl_FragmentFactory_MyFragment;" };
+  static const J2ObjcClassInfo _ASUINavigatorImpl_FragmentFactory = { "FragmentFactory", "com.ashera.core", ptrTable, methods, NULL, 7, 0x9, 2, 0, 0, 1, -1, -1, -1 };
+  return &_ASUINavigatorImpl_FragmentFactory;
+}
+
+@end
+
+void ASUINavigatorImpl_FragmentFactory_init(ASUINavigatorImpl_FragmentFactory *self) {
+  NSObject_init(self);
+}
+
+ASUINavigatorImpl_FragmentFactory *new_ASUINavigatorImpl_FragmentFactory_init() {
+  J2OBJC_NEW_IMPL(ASUINavigatorImpl_FragmentFactory, init)
+}
+
+ASUINavigatorImpl_FragmentFactory *create_ASUINavigatorImpl_FragmentFactory_init() {
+  J2OBJC_CREATE_IMPL(ASUINavigatorImpl_FragmentFactory, init)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUINavigatorImpl_FragmentFactory)
+
+@implementation ASUINavigatorImpl_FragmentFactory_MyFragment
+
+J2OBJC_IGNORE_DESIGNATED_BEGIN
+- (instancetype)init {
+  ASUINavigatorImpl_FragmentFactory_MyFragment_init(self);
+  return self;
+}
+J2OBJC_IGNORE_DESIGNATED_END
+
+- (void)createChildFragments {
+  [self executePendingTransactions];
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(init);
+  methods[1].selector = @selector(createChildFragments);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LASUINavigatorImpl_FragmentFactory;" };
+  static const J2ObjcClassInfo _ASUINavigatorImpl_FragmentFactory_MyFragment = { "MyFragment", "com.ashera.core", ptrTable, methods, NULL, 7, 0xa, 2, 0, 0, -1, -1, -1, -1 };
+  return &_ASUINavigatorImpl_FragmentFactory_MyFragment;
+}
+
+@end
+
+void ASUINavigatorImpl_FragmentFactory_MyFragment_init(ASUINavigatorImpl_FragmentFactory_MyFragment *self) {
+  ASGenericFragment_init(self);
+}
+
+ASUINavigatorImpl_FragmentFactory_MyFragment *new_ASUINavigatorImpl_FragmentFactory_MyFragment_init() {
+  J2OBJC_NEW_IMPL(ASUINavigatorImpl_FragmentFactory_MyFragment, init)
+}
+
+ASUINavigatorImpl_FragmentFactory_MyFragment *create_ASUINavigatorImpl_FragmentFactory_MyFragment_init() {
+  J2OBJC_CREATE_IMPL(ASUINavigatorImpl_FragmentFactory_MyFragment, init)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASUINavigatorImpl_FragmentFactory_MyFragment)

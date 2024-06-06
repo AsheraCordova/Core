@@ -62,6 +62,10 @@
                            withBoolean:(jboolean)template_
                        withASIFragment:(id<ASIFragment>)fragment;
 
+- (id<ASIWidget>)parseFragmentWithNSString:(NSString *)fileNameOrHtml
+                               withBoolean:(jboolean)template_
+                           withASIFragment:(id<ASIFragment>)fragment;
+
 - (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
                         withNSString:(NSString *)componentId

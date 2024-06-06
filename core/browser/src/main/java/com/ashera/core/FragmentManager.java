@@ -13,6 +13,7 @@ import org.teavm.jso.dom.xml.NodeList;
 
 import com.ashera.converter.CommonConverters;
 import com.ashera.converter.ConverterFactory;
+import com.ashera.core.FragmentManager.FragmentFactory;
 
 public class FragmentManager {
     public interface Detail extends org.teavm.jso.JSObject {
@@ -42,7 +43,6 @@ public class FragmentManager {
 		dialog.setAttribute("class", "web-dialog");
 		return dialog;
 	}
-	
 
 	public void closeDialog() {
 		HTMLElement shadowRoot = getShadowRoot();
@@ -95,12 +95,20 @@ public class FragmentManager {
 	}
 
 	private void disposeRoot(GenericFragment fragmentToBeDisposed) {
-		removeChildFromShadowRoot(getRoot(fragmentToBeDisposed));		
+		if (rootHTMLElement != null) {
+			rootHTMLElement.removeChild(getRoot(fragmentToBeDisposed));
+		} else {
+			removeChildFromShadowRoot(getRoot(fragmentToBeDisposed));
+		}
 	}	
 
 
 	private void addRootToView(GenericFragment genericFragment) {
-		appendChildToShadowRoot(getRoot(genericFragment));	
+		if (rootHTMLElement != null) {
+			rootHTMLElement.appendChild(getRoot(genericFragment));
+		} else {
+			appendChildToShadowRoot(getRoot(genericFragment));
+		}
 	}
 
 	private HTMLElement getRoot(GenericFragment fragment) {
@@ -116,8 +124,23 @@ public class FragmentManager {
         	this.historyUrlPrefix = "";
         }
         addHistoryChangeEvent();
+        this.fragmentFactory = new FragmentFactory();
     }
     
+    public FragmentManager(IActivity activity, HTMLElement rootHTMLElement, FragmentFactory fragmentFactory) {
+        this.activity = activity;
+        this.disableHistory = true;
+        this.historyUrlPrefix = activity.getPreference("webHistoryUrlPrefix");
+        
+        if (this.historyUrlPrefix == null) {
+        	this.historyUrlPrefix = "";
+        }
+        addHistoryChangeEvent();
+        this.fragmentFactory = fragmentFactory;
+        this.rootHTMLElement = rootHTMLElement;
+    }
+    
+    private HTMLElement rootHTMLElement;
     // history related methods - starts here
     private boolean disableHistory;
     private String historyUrlPrefix;
@@ -251,7 +274,8 @@ public class FragmentManager {
 	private List<GenericFragment> fragments = new ArrayList<>();
 	private Map<String, DialogFragment> dialogFragments = new LinkedHashMap<>();
 	private IActivity activity;
-
+	private FragmentFactory fragmentFactory;
+	private boolean remeasure = true;
 	
 	private void popBackStack(String destinationId, boolean inclusive, int indexFromEnd)
 			throws DestinatinNotFoundException {
@@ -309,7 +333,8 @@ public class FragmentManager {
 		navigate("fragment", resId, fileName, null, true);
 	}
 
-	private void navigate(String type, String resId, String fileName, List<Map<String, Object>> scopedObjects, boolean history) {
+	private void navigate(String type, String resId, String fileName,
+			List<Map<String, Object>> scopedObjects, boolean history) {
 		//onpause
 		onPause();
 		
@@ -319,14 +344,15 @@ public class FragmentManager {
 				storeInHistory(type, resId, fileName, scopedObjects);
 			}
 		}
+		
+		GenericFragment genericFragment = this.fragmentFactory.getFragment();
 
-		GenericFragment genericFragment = new GenericFragment();
 		
 		//oncreate
 		onCreate(resId, fileName, scopedObjects, genericFragment);
 		
 		//oncreateview
-		genericFragment.onCreateView(true);
+		genericFragment.onCreateView(this.remeasure);
 		
 		fragments.add(genericFragment);
 		addRootToView(genericFragment);
@@ -415,17 +441,7 @@ public class FragmentManager {
 
 		Object dialog = createDialog();
 
-		DialogFragment genericFragment = new DialogFragment(dialog, width, height, marginPercent) {
-			@Override
-			public void remeasure() {
-				super.remeasure();
-				if (!isMeasuring()) {
-					// update size of dialog
-					updateSizeIfRequired(this);
-				}
-				
-			}
-		};
+		DialogFragment genericFragment = fragmentFactory.getDialogFragment(this, dialog, width, height, marginPercent);
 		
 		if (genericFragment.isFullScreen()) {
 			onPause();
@@ -512,6 +528,32 @@ public class FragmentManager {
 			super(message);
 		}
 	}
+	
+	public static class FragmentFactory {
+		public GenericFragment getFragment() {
+			return new GenericFragment() {
+				@Override
+				public void createChildFragments() {
+					executePendingTransactions();
+				}
+			};
+		}
+		
+		public DialogFragment getDialogFragment(FragmentManager fragmentManager, Object dialog, int width, int height, Float marginPercent) {
+			return new DialogFragment(dialog, width, height, marginPercent) {
+				@Override
+				public void remeasure() {
+					super.remeasure();
+					if (!isMeasuring()) {
+						// update size of dialog
+						fragmentManager.updateSizeIfRequired(this);
+					}
+					
+				}
+			};
+		}
+	}
+
 	//end - navigator
 	
 

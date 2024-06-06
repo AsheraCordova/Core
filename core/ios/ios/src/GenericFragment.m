@@ -14,6 +14,7 @@
 #include "Fragment.h"
 #include "GenericFragment.h"
 #include "IActivity.h"
+#include "IFragment.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IRoot.h"
@@ -238,6 +239,11 @@ J2OBJC_IGNORE_DESIGNATED_END
       ASModelStore_storeModelToScopeWithNSString_withASModelScope_withId_withASIFragment_withASIWidget_withASLoopParam_(varName, varScope, modelData, self, nil, nil);
     }
   }
+  id<ASIFragment> parent = [self getParent];
+  while (parent != nil) {
+    [((ASEventBus *) nil_chk([parent getEventBus])) addEventBusWithASEventBus:eventBus_];
+    parent = [parent getParent];
+  }
   ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, @"onAttach", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onAttach"), nil);
 }
 
@@ -296,7 +302,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id)onCreateViewWithBoolean:(jboolean)measure {
   if (view_ == nil) {
     @try {
-      id<ASIWidget> widget = ASPluginInvoker_parseFileWithNSString_withBoolean_withASIFragment_(fileName_, false, self);
+      id<ASIWidget> widget = ASPluginInvoker_parseFragmentWithNSString_withBoolean_withASIFragment_(fileName_, false, self);
+      [self createChildFragments];
       if (measure) {
         [self remeasure];
       }
@@ -334,6 +341,11 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)onDestroy {
   [super onDestroy];
+  id<ASIFragment> parent = [self getParent];
+  while (parent != nil) {
+    [((ASEventBus *) nil_chk([parent getEventBus])) removeEventBusWithASEventBus:eventBus_];
+    parent = [parent getParent];
+  }
   ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_withNSString_(self, @"onDestroy", fileName_, ASGenericFragment_getEventDataWithNSString_(self, @"onDestroy"), nil);
   [self clear];
 }
@@ -521,6 +533,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
+- (NSString *)getUId {
+  return id__;
+}
+
+- (id<ASIFragment>)getParent {
+  ADXFragment *parentFragment = [self getParentFragment];
+  while (parentFragment != nil) {
+    if ([ASIFragment_class_() isInstance:parentFragment]) {
+      return (id<ASIFragment>) cast_check(parentFragment, ASIFragment_class_());
+    }
+    parentFragment = [parentFragment getParentFragment];
+  }
+  return nil;
+}
+
+- (void)createChildFragments {
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -577,6 +607,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LASErrors;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, 49, 23, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 50, 51, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASIFragment;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -635,6 +668,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[51].selector = @selector(getFatalErrors);
   methods[52].selector = @selector(getInlineResourceWithNSString:);
   methods[53].selector = @selector(setInlineResourceWithNSString:withNSString:withBoolean:);
+  methods[54].selector = @selector(getUId);
+  methods[55].selector = @selector(getParent);
+  methods[56].selector = @selector(createChildFragments);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "activity_", "LASIActivity;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -663,7 +699,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "remeasureOnResume_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "getInitialBundle", "LNSString;LNSString;LJavaUtilList;", "(Ljava/lang/String;Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;)Lr/android/os/Bundle;", "onAttach", "LADContext;", "LASIActivity;", "onCreate", "LADBundle;", "getFileAsProperties", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Properties;", "getEventData", "LNSString;", "onCreateView", "LADLayoutInflater;LADViewGroup;LADBundle;", "Z", "onViewCreated", "LADView;LADBundle;", "onActivityCreated", "sendLifeCycleEvent", "LNSString;LNSString;LNSString;LNSString;", "setRootWidget", "LASIWidget;", "getUserData", "storeUserData", "LNSString;LNSObject;", "hasDevData", "getDevData", "setStyleSheet", "LCSSStyleSheet;", "storeInTempCache", "getFromTempCache", "setFrame", "IIII", "resizeWindow", "II", "addError", "LASError;", "getInlineResource", "setInlineResource", "LNSString;LNSString;Z", "id", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", &ASGenericFragment_POSTMEASURE_EVENT, &ASGenericFragment_PREMEASURE_EVENT, "Ljava/util/WeakHashMap<Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;>;", "Ljava/util/List<Ljava/lang/Object;>;", "Ljava/util/Stack<Ljava/lang/Boolean;>;" };
-  static const J2ObjcClassInfo _ASGenericFragment = { "GenericFragment", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 54, 24, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASGenericFragment = { "GenericFragment", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 57, 24, -1, -1, -1, -1, -1 };
   return &_ASGenericFragment;
 }
 
@@ -705,7 +741,7 @@ ADBundle *ASGenericFragment_getInitialBundleWithNSString_withNSString_withJavaUt
     jint scopedObjectCount = [scopedObjects size];
     [bundle putIntWithNSString:@"count" withInt:scopedObjectCount];
     for (jint i = 0; i < scopedObjectCount; i++) {
-      id<JavaUtilMap> map = [scopedObjects getWithInt:i];
+      id<JavaUtilMap> map = ASPluginInvoker_getMapWithId_([scopedObjects getWithInt:i]);
       [bundle putStringWithNSString:JreStrcat("$I", @"expression", i) withNSString:ASPluginInvoker_getStringWithId_([((id<JavaUtilMap>) nil_chk(map)) getWithId:@"expression"])];
       id payload = [map getWithId:@"payload"];
       if ([JavaIoSerializable_class_() isInstance:payload]) {
@@ -755,6 +791,15 @@ void ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_
   (void) [dataMap putWithId:@"event" withId:action];
   (void) [dataMap putWithId:@"actionUrl" withId:fileName];
   (void) [dataMap putWithId:@"fragmentId" withId:self->id__];
+  JavaUtilArrayList *parentFragments = new_JavaUtilArrayList_init();
+  id<ASIFragment> parentFragment = [self getParent];
+  while (parentFragment != nil) {
+    [parentFragments addWithId:[parentFragment getUId]];
+    parentFragment = [parentFragment getParent];
+  }
+  if ([parentFragments size] > 0) {
+    (void) [dataMap putWithId:@"parentFragments" withId:NSString_java_joinWithJavaLangCharSequence_withJavaLangIterable_(@",", parentFragments)];
+  }
   if (javascript != nil) {
     (void) [dataMap putWithId:@"javascript" withId:javascript];
   }

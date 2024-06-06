@@ -30,6 +30,8 @@
 
 - (instancetype)init;
 
+- (void)addEventBusWithASEventBus:(ASEventBus *)eventBus;
+
 - (jboolean)handlesWithNSString:(NSString *)eventName;
 
 - (void)notifyObserversWithNSString:(NSString *)type
@@ -45,6 +47,8 @@
 
 - (void)onWithNSString:(NSString *)type
 withASEventBusHandlerArray:(IOSObjectArray *)handler;
+
+- (void)removeEventBusWithASEventBus:(ASEventBus *)eventBus;
 
 @end
 

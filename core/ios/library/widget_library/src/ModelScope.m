@@ -14,7 +14,7 @@ __attribute__((unused)) static void ASModelScope_initWithNSString_withInt_(ASMod
 
 J2OBJC_INITIALIZED_DEFN(ASModelScope)
 
-ASModelScope *ASModelScope_values_[10];
+ASModelScope *ASModelScope_values_[11];
 
 @implementation ASModelScope
 
@@ -44,27 +44,28 @@ ASModelScope *ASModelScope_values_[10];
   static const J2ObjcFieldInfo fields[] = {
     { "viewmodel", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
     { "view", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
-    { "session", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
-    { "local", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
-    { "loopvar", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 6, -1, -1 },
-    { "sharedpreference", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 7, -1, -1 },
-    { "sqlllite", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 8, -1, -1 },
-    { "strings", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 9, -1, -1 },
-    { "component", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 10, -1, -1 },
-    { "constants", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 11, -1, -1 },
+    { "parentview", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
+    { "session", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+    { "local", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 6, -1, -1 },
+    { "loopvar", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 7, -1, -1 },
+    { "sharedpreference", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 8, -1, -1 },
+    { "sqlllite", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 9, -1, -1 },
+    { "strings", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 10, -1, -1 },
+    { "component", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 11, -1, -1 },
+    { "constants", "LASModelScope;", .constantValue.asLong = 0, 0x4019, -1, 12, -1, -1 },
   };
-  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(ASModelScope, viewmodel), &JreEnum(ASModelScope, view), &JreEnum(ASModelScope, session), &JreEnum(ASModelScope, local), &JreEnum(ASModelScope, loopvar), &JreEnum(ASModelScope, sharedpreference), &JreEnum(ASModelScope, sqlllite), &JreEnum(ASModelScope, strings), &JreEnum(ASModelScope, component), &JreEnum(ASModelScope, constants), "Ljava/lang/Enum<Lcom/ashera/model/ModelScope;>;" };
-  static const J2ObjcClassInfo _ASModelScope = { "ModelScope", "com.ashera.model", ptrTable, methods, fields, 7, 0x4011, 2, 10, -1, -1, -1, 12, -1 };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(ASModelScope, viewmodel), &JreEnum(ASModelScope, view), &JreEnum(ASModelScope, parentview), &JreEnum(ASModelScope, session), &JreEnum(ASModelScope, local), &JreEnum(ASModelScope, loopvar), &JreEnum(ASModelScope, sharedpreference), &JreEnum(ASModelScope, sqlllite), &JreEnum(ASModelScope, strings), &JreEnum(ASModelScope, component), &JreEnum(ASModelScope, constants), "Ljava/lang/Enum<Lcom/ashera/model/ModelScope;>;" };
+  static const J2ObjcClassInfo _ASModelScope = { "ModelScope", "com.ashera.model", ptrTable, methods, fields, 7, 0x4011, 2, 11, -1, -1, -1, 13, -1 };
   return &_ASModelScope;
 }
 
 + (void)initialize {
   if (self == [ASModelScope class]) {
     size_t objSize = class_getInstanceSize(self);
-    size_t allocSize = 10 * objSize;
+    size_t allocSize = 11 * objSize;
     uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
     id e;
-    for (jint i = 0; i < 10; i++) {
+    for (jint i = 0; i < 11; i++) {
       ((void)(ASModelScope_values_[i] = e = objc_constructInstance(self, (void *)ptr)), ptr += objSize);
       ASModelScope_initWithNSString_withInt_(e, JreEnumConstantName(ASModelScope_class_(), i), i);
     }
@@ -80,12 +81,12 @@ void ASModelScope_initWithNSString_withInt_(ASModelScope *self, NSString *__name
 
 IOSObjectArray *ASModelScope_values() {
   ASModelScope_initialize();
-  return [IOSObjectArray arrayWithObjects:ASModelScope_values_ count:10 type:ASModelScope_class_()];
+  return [IOSObjectArray arrayWithObjects:ASModelScope_values_ count:11 type:ASModelScope_class_()];
 }
 
 ASModelScope *ASModelScope_valueOfWithNSString_(NSString *name) {
   ASModelScope_initialize();
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 11; i++) {
     ASModelScope *e = ASModelScope_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
@@ -97,7 +98,7 @@ ASModelScope *ASModelScope_valueOfWithNSString_(NSString *name) {
 
 ASModelScope *ASModelScope_fromOrdinal(NSUInteger ordinal) {
   ASModelScope_initialize();
-  if (ordinal >= 10) {
+  if (ordinal >= 11) {
     return nil;
   }
   return ASModelScope_values_[ordinal];

@@ -162,6 +162,10 @@
                            withBoolean:(jboolean)template_
                        withASIFragment:(id<ASIFragment>)fragment;
 
++ (id<ASIWidget>)parseFragmentWithNSString:(NSString *)fileName
+                               withBoolean:(jboolean)template_
+                           withASIFragment:(id<ASIFragment>)fragment;
+
 + (void)parseIncludeWithASHasWidgets:(id<ASHasWidgets>)parent
                         withNSString:(NSString *)fileName
                         withNSString:(NSString *)componentId
@@ -269,6 +273,8 @@ FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseWithNSString_withBoolean_wi
 FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseWithParentWithNSString_withBoolean_withASHasWidgets_withASIFragment_(NSString *html, jboolean template_, id<ASHasWidgets> parent, id<ASIFragment> fragment);
 
 FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseFileWithNSString_withBoolean_withASIFragment_(NSString *fileName, jboolean template_, id<ASIFragment> fragment);
+
+FOUNDATION_EXPORT id<ASIWidget> ASPluginInvoker_parseFragmentWithNSString_withBoolean_withASIFragment_(NSString *fileName, jboolean template_, id<ASIFragment> fragment);
 
 FOUNDATION_EXPORT void ASPluginInvoker_parseIncludeWithASHasWidgets_withNSString_withNSString_withBoolean_withASIFragment_(id<ASHasWidgets> parent, NSString *fileName, NSString *componentId, jboolean template_, id<ASIFragment> fragment);
 

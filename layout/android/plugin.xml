@@ -31,6 +31,7 @@
      <source-file src="src/com/ashera/layout/CheckBoxImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ChronometerImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/EditTextImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="src/com/ashera/layout/fragmentImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/FrameLayoutImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/HorizontalScrollViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ImageButtonImpl.java" target-dir="src/com/ashera/layout"/>
@@ -71,6 +72,7 @@
      <source-file src="tsc/src/android/widget/CheckBoxImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ChronometerImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/EditTextImpl.ts" target-dir="tsc/src/android/widget"/>
+     <source-file src="tsc/src/android/widget/fragmentImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/FrameLayoutImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/HorizontalScrollViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ImageButtonImpl.ts" target-dir="tsc/src/android/widget"/>

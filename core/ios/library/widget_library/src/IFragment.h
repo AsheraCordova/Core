@@ -117,6 +117,10 @@
                          withNSString:(NSString *)value
                           withBoolean:(jboolean)append;
 
+- (id<ASIFragment>)getParent;
+
+- (NSString *)getUId;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASIFragment)

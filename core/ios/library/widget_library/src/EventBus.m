@@ -10,20 +10,24 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "java/util/ArrayList.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 
+@protocol JavaUtilList;
 @protocol JavaUtilMap;
 
 
 @interface ASEventBus () {
  @public
+  id<JavaUtilList> childEventBusses_;
   id<JavaUtilMap> _listeners_;
 }
 
 @end
 
+J2OBJC_FIELD_SETTER(ASEventBus, childEventBusses_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASEventBus, _listeners_, id<JavaUtilMap>)
 
 @interface ASEventBus_1 : NSObject < ASEventBusCallback >
@@ -55,6 +59,21 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (void)addEventBusWithASEventBus:(ASEventBus *)eventBus {
+  if (childEventBusses_ == nil) {
+    JreStrongAssignAndConsume(&childEventBusses_, new_JavaUtilArrayList_init());
+  }
+  if (![childEventBusses_ containsWithId:eventBus]) {
+    [((id<JavaUtilList>) nil_chk(childEventBusses_)) addWithId:eventBus];
+  }
+}
+
+- (void)removeEventBusWithASEventBus:(ASEventBus *)eventBus {
+  if (childEventBusses_ != nil) {
+    [childEventBusses_ removeWithId:eventBus];
+  }
+}
+
 - (void)onWithNSString:(NSString *)type
 withASEventBusHandlerArray:(IOSObjectArray *)handler {
   if (![self handlesWithNSString:type]) {
@@ -75,6 +94,11 @@ withASEventBusHandlerArray:(IOSObjectArray *)handler {
                              withId:(id)data {
   if ([self handlesWithNSString:type]) {
     [((ASCompositeHandler *) nil_chk([((id<JavaUtilMap>) nil_chk(_listeners_)) getWithId:type])) performWithId:data];
+  }
+  if (childEventBusses_ != nil) {
+    for (ASEventBus * __strong eventBus in childEventBusses_) {
+      [((ASEventBus *) nil_chk(eventBus)) notifyObserversWithNSString:type withId:data];
+    }
   }
 }
 
@@ -101,6 +125,7 @@ withASEventBusHandlerArray:(IOSObjectArray *)handler {
 }
 
 - (void)dealloc {
+  RELEASE_(childEventBusses_);
   RELEASE_(_listeners_);
   [super dealloc];
 }
@@ -108,32 +133,37 @@ withASEventBusHandlerArray:(IOSObjectArray *)handler {
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x81, 0, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 4, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 2, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x81, 3, 4, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x81, 2, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 8, -1, 9, -1, -1 },
+    { NULL, "Z", 0x1, 7, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x81, 5, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 11, -1, 12, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
-  methods[1].selector = @selector(onWithNSString:withASEventBusHandlerArray:);
-  methods[2].selector = @selector(offWithNSString:);
-  methods[3].selector = @selector(handlesWithNSString:);
-  methods[4].selector = @selector(notifyObserversWithNSString:withId:);
-  methods[5].selector = @selector(offWithASEventBusHandlerArray:);
-  methods[6].selector = @selector(offWithJavaUtilList:);
-  methods[7].selector = @selector(offAll);
+  methods[1].selector = @selector(addEventBusWithASEventBus:);
+  methods[2].selector = @selector(removeEventBusWithASEventBus:);
+  methods[3].selector = @selector(onWithNSString:withASEventBusHandlerArray:);
+  methods[4].selector = @selector(offWithNSString:);
+  methods[5].selector = @selector(handlesWithNSString:);
+  methods[6].selector = @selector(notifyObserversWithNSString:withId:);
+  methods[7].selector = @selector(offWithASEventBusHandlerArray:);
+  methods[8].selector = @selector(offWithJavaUtilList:);
+  methods[9].selector = @selector(offAll);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "_DEFAULT", "LASEventBusCallback;", .constantValue.asLong = 0, 0x1c, -1, 10, -1, -1 },
-    { "_listeners_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 11, -1 },
+    { "childEventBusses_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 13, -1 },
+    { "_DEFAULT", "LASEventBusCallback;", .constantValue.asLong = 0, 0x1c, -1, 14, -1, -1 },
+    { "_listeners_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 15, -1 },
   };
-  static const void *ptrTable[] = { "on", "LNSString;[LASEventBusHandler;", "off", "LNSString;", "handles", "notifyObservers", "LNSString;LNSObject;", "[LASEventBusHandler;", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;)V", &ASEventBus__DEFAULT, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/bus/CompositeHandler;>;" };
-  static const J2ObjcClassInfo _ASEventBus = { "EventBus", "com.ashera.widget.bus", ptrTable, methods, fields, 7, 0x1, 8, 2, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "addEventBus", "LASEventBus;", "removeEventBus", "on", "LNSString;[LASEventBusHandler;", "off", "LNSString;", "handles", "notifyObservers", "LNSString;LNSObject;", "[LASEventBusHandler;", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;)V", "Ljava/util/List<Lcom/ashera/widget/bus/EventBus;>;", &ASEventBus__DEFAULT, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/bus/CompositeHandler;>;" };
+  static const J2ObjcClassInfo _ASEventBus = { "EventBus", "com.ashera.widget.bus", ptrTable, methods, fields, 7, 0x1, 10, 3, -1, -1, -1, -1, -1 };
   return &_ASEventBus;
 }
 

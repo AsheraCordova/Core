@@ -40,6 +40,7 @@
 #include "ViewOnlyImpl.h"
 #include "WebViewImpl.h"
 #include "WidgetFactory.h"
+#include "fragmentImpl.h"
 
 
 @implementation ASLayoutPlugin
@@ -111,6 +112,7 @@ void ASLayoutPlugin_initPlugin() {
   ASWidgetFactory_register__WithASIWidget_(new_ASCheckBoxImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASRadioButtonImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASToggleButtonImpl_init());
+  ASWidgetFactory_register__WithASIWidget_(new_ASfragmentImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASSpinnerImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASMultiSelectionSpinnerImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASWebViewImpl_init());

@@ -31,14 +31,15 @@
 typedef NS_ENUM(NSUInteger, ASModelScope_Enum) {
   ASModelScope_Enum_viewmodel = 0,
   ASModelScope_Enum_view = 1,
-  ASModelScope_Enum_session = 2,
-  ASModelScope_Enum_local = 3,
-  ASModelScope_Enum_loopvar = 4,
-  ASModelScope_Enum_sharedpreference = 5,
-  ASModelScope_Enum_sqlllite = 6,
-  ASModelScope_Enum_strings = 7,
-  ASModelScope_Enum_component = 8,
-  ASModelScope_Enum_constants = 9,
+  ASModelScope_Enum_parentview = 2,
+  ASModelScope_Enum_session = 3,
+  ASModelScope_Enum_local = 4,
+  ASModelScope_Enum_loopvar = 5,
+  ASModelScope_Enum_sharedpreference = 6,
+  ASModelScope_Enum_sqlllite = 7,
+  ASModelScope_Enum_strings = 8,
+  ASModelScope_Enum_component = 9,
+  ASModelScope_Enum_constants = 10,
 };
 
 @interface ASModelScope : JavaLangEnum
@@ -65,6 +66,9 @@ J2OBJC_ENUM_CONSTANT(ASModelScope, viewmodel)
 
 inline ASModelScope *ASModelScope_get_view(void);
 J2OBJC_ENUM_CONSTANT(ASModelScope, view)
+
+inline ASModelScope *ASModelScope_get_parentview(void);
+J2OBJC_ENUM_CONSTANT(ASModelScope, parentview)
 
 inline ASModelScope *ASModelScope_get_session(void);
 J2OBJC_ENUM_CONSTANT(ASModelScope, session)

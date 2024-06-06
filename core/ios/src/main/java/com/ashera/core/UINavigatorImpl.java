@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.ashera.converter.CommonConverters;
 import com.ashera.converter.ConverterFactory;
+import com.ashera.widget.IWidget;
 
 /*-[
 #include <UIKit/UIKit.h>
@@ -13,9 +14,34 @@ import com.ashera.converter.ConverterFactory;
 #include "ASMainViewController.h"
 ]-*/
 public class UINavigatorImpl {
+	private Object navController;
+	private FragmentFactory fragmentFactory;
+	private boolean remeasure = true;
+
 	public UINavigatorImpl() {
+		this.fragmentFactory = new FragmentFactory();
+	}
+	
+	public UINavigatorImpl(FragmentFactory fragmentFactory, Object navController, boolean remeasure) {
+		this.navController = navController;
+		this.fragmentFactory = fragmentFactory;
+		this.remeasure = remeasure;
 	}
 
+	public void navigate(String actionId, String destinationId, boolean inclusive,
+			boolean finish, List<Map<String, Object>> scopedObjects, IFragment fragment) {
+		try {
+			int popCount = 0;
+			if (destinationId != null) {
+				popCount = getPopCount(destinationId, inclusive);
+			}
+			navigate(actionId, scopedObjects, finish, popCount, inclusive, fragment);
+		} catch (DestinatinNotFoundException e) {
+			// nothing to do
+			System.out.println(e.getMessage());
+		}
+	}
+	
 	public void navigate(String actionId, List<Map<String, Object>> scopedObjects, IFragment fragment) {
 		navigate(actionId, scopedObjects, false, 0, false, fragment);
 	}
@@ -86,9 +112,9 @@ public class UINavigatorImpl {
 			navigateToDialog(dialogFragment, backdropColor, windowCloseOnTouchOutside, backgroundDimEnabled);
 			break;
 		default:
-			GenericFragment genericFragment = new GenericFragment();
+			GenericFragment genericFragment = this.fragmentFactory.getFragment();
 			genericFragment.setArguments(GenericFragment.getInitialBundle(resId, fileName, scopedObjects));
-			navigateToController(genericFragment, finish, clear, popCount);
+			navigateToController(genericFragment, finish, clear, popCount, this.remeasure);
 
 			break;
 		} 
@@ -111,10 +137,24 @@ public class UINavigatorImpl {
   		v.cordovaActivity = mainViewController.cordovaActivity;
     	[presentedController presentViewController:v animated:YES completion:nil];
 	]-*/;
+	
+	private Object getNavController() {
+		if (navController != null) {
+			return navController;
+		} else {
+			return getRootNavController();
+		}
+	}
 
-	private native void navigateToController(Object rootFragment, boolean finish, boolean clear, int popCount)/*-[
-    	ASMainViewController* mainViewController = (ASMainViewController*) [UIApplication sharedApplication].delegate.window.rootViewController;
+	private native Object getRootNavController()/*-[
+		ASMainViewController* mainViewController = (ASMainViewController*) [UIApplication sharedApplication].delegate.window.rootViewController;
     	UINavigationController* navController =  (UINavigationController*) mainViewController.navController;
+		return navController;
+	]-*/;
+
+	private native void navigateToController(Object rootFragment, boolean finish, boolean clear, int popCount, boolean remeasure)/*-[
+    	ASMainViewController* mainViewController = (ASMainViewController*) [UIApplication sharedApplication].delegate.window.rootViewController;
+    	UINavigationController* navController =  (UINavigationController*) [self getNavController];
   		NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[navController viewControllers]];
 	  
 	  	if (finish) {
@@ -132,6 +172,7 @@ public class UINavigatorImpl {
 	  	if (rootFragment != nil) {
 	    	ASGenericFragmentController* v = [ASGenericFragmentController new];
 	    	v.rootFragment = rootFragment;
+	    	v.remeasure_ = remeasure;
 	    	v.cordovaActivity = mainViewController.cordovaActivity;
 	    	[viewControllers addObject:v];
 	  	}
@@ -174,13 +215,12 @@ public class UINavigatorImpl {
 	]-*/;
 	
 	public void popBackStack(IFragment fragment) {
-		navigateToController(null, true, false, 0);		
+		navigateToController(null, true, false, 0, this.remeasure);		
 	}
 
 
 	private native void getGenericFragments(List<GenericFragment> fragments)/*-[
-		ASMainViewController* mainViewController = (ASMainViewController*) [UIApplication sharedApplication].delegate.window.rootViewController;
-		UINavigationController* navController =  (UINavigationController*) mainViewController.navController;
+		UINavigationController* navController =  (UINavigationController*) [self getNavController];
 		NSMutableArray *viewControllers = [NSMutableArray arrayWithArray:[navController viewControllers]];
 		
 		for (UIViewController *vc in viewControllers) {
@@ -193,7 +233,7 @@ public class UINavigatorImpl {
 	public void popBackStack(IFragment fragment, String destinationId, boolean inclusive) {
 		try {
 			int popCount = getPopCount(destinationId, inclusive);
-			navigateToController(null, false, false, popCount);
+			navigateToController(null, false, false, popCount, this.remeasure);
 		} catch (DestinatinNotFoundException e) {
 			// nothing to do
 			System.out.println(e.getMessage());
@@ -253,5 +293,24 @@ public class UINavigatorImpl {
 		}
 	}
 
+
+	public IFragment getActiveFragment(IFragment fragment) {
+		List<GenericFragment> fragments = new java.util.ArrayList<>();
+		getGenericFragments(fragments);
+		return fragments.get(fragments.size() - 1);
+	}
+
+	public static class FragmentFactory {
+		private static class MyFragment extends GenericFragment {
+			@Override
+			public void createChildFragments() {
+				executePendingTransactions();
+			}
+		}
+
+		public GenericFragment getFragment() {
+			return new MyFragment();
+		}
+	}
 
 }

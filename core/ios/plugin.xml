@@ -228,6 +228,8 @@
      <source-file src="library/widget_library/src/IFlatMap.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/IFragment.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="library/widget_library/src/IFragment.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/widget_library/src/IFragmentContainer.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="library/widget_library/src/IFragmentContainer.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/IHasMultiNativeWidgets.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="library/widget_library/src/IHasMultiNativeWidgets.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/IImageDownloader.h" target-dir="CorePlugin/widget_library/src"/>
@@ -832,6 +834,10 @@
      <source-file src="library/AndroidXCore/src/FastOutSlowInInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/Fragment.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/Fragment.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/FragmentManager.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/FragmentManager.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/FragmentTransaction.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/FragmentTransaction.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/GravityCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/GravityCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/LayoutRes.h" target-dir="CorePlugin/AndroidXCore/src"/>

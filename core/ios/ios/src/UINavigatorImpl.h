@@ -16,6 +16,7 @@
 #if !defined (ASUINavigatorImpl_) && (INCLUDE_ALL_UINavigatorImpl || defined(INCLUDE_ASUINavigatorImpl))
 #define ASUINavigatorImpl_
 
+@class ASUINavigatorImpl_FragmentFactory;
 @protocol ASIFragment;
 @protocol JavaUtilList;
 
@@ -25,7 +26,13 @@
 
 - (instancetype)init;
 
+- (instancetype)initWithASUINavigatorImpl_FragmentFactory:(ASUINavigatorImpl_FragmentFactory *)fragmentFactory
+                                                   withId:(id)navController
+                                              withBoolean:(jboolean)remeasure;
+
 - (void)closeDialog;
+
+- (id<ASIFragment>)getActiveFragmentWithASIFragment:(id<ASIFragment>)fragment;
 
 - (jint)getPopCountWithNSString:(NSString *)destinationId
                     withBoolean:(jboolean)inclusive;
@@ -38,6 +45,13 @@
              withASIFragment:(id<ASIFragment>)fragment;
 
 - (void)navigateWithNSString:(NSString *)actionId
+            withJavaUtilList:(id<JavaUtilList>)scopedObjects
+             withASIFragment:(id<ASIFragment>)fragment;
+
+- (void)navigateWithNSString:(NSString *)actionId
+                withNSString:(NSString *)destinationId
+                 withBoolean:(jboolean)inclusive
+                 withBoolean:(jboolean)finish
             withJavaUtilList:(id<JavaUtilList>)scopedObjects
              withASIFragment:(id<ASIFragment>)fragment;
 
@@ -70,6 +84,12 @@ FOUNDATION_EXPORT void ASUINavigatorImpl_init(ASUINavigatorImpl *self);
 FOUNDATION_EXPORT ASUINavigatorImpl *new_ASUINavigatorImpl_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASUINavigatorImpl *create_ASUINavigatorImpl_init(void);
+
+FOUNDATION_EXPORT void ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl *self, ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure);
+
+FOUNDATION_EXPORT ASUINavigatorImpl *new_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASUINavigatorImpl *create_ASUINavigatorImpl_initWithASUINavigatorImpl_FragmentFactory_withId_withBoolean_(ASUINavigatorImpl_FragmentFactory *fragmentFactory, id navController, jboolean remeasure);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl)
 
@@ -121,6 +141,33 @@ FOUNDATION_EXPORT ASUINavigatorImpl_DestinatinNotFoundException *new_ASUINavigat
 FOUNDATION_EXPORT ASUINavigatorImpl_DestinatinNotFoundException *create_ASUINavigatorImpl_DestinatinNotFoundException_initWithASUINavigatorImpl_withNSString_(ASUINavigatorImpl *outer$, NSString *message);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl_DestinatinNotFoundException)
+
+#endif
+
+#if !defined (ASUINavigatorImpl_FragmentFactory_) && (INCLUDE_ALL_UINavigatorImpl || defined(INCLUDE_ASUINavigatorImpl_FragmentFactory))
+#define ASUINavigatorImpl_FragmentFactory_
+
+@class ASGenericFragment;
+
+@interface ASUINavigatorImpl_FragmentFactory : NSObject
+
+#pragma mark Public
+
+- (instancetype)init;
+
+- (ASGenericFragment *)getFragment;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASUINavigatorImpl_FragmentFactory)
+
+FOUNDATION_EXPORT void ASUINavigatorImpl_FragmentFactory_init(ASUINavigatorImpl_FragmentFactory *self);
+
+FOUNDATION_EXPORT ASUINavigatorImpl_FragmentFactory *new_ASUINavigatorImpl_FragmentFactory_init(void) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT ASUINavigatorImpl_FragmentFactory *create_ASUINavigatorImpl_FragmentFactory_init(void);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASUINavigatorImpl_FragmentFactory)
 
 #endif
 

@@ -25,6 +25,7 @@
      <source-file src="tsc/src/web/widget/CheckBoxImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/ChronometerImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/EditTextImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/fragmentImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/FrameLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/HorizontalScrollViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/ImageButtonImpl.ts" target-dir="tsc/src/web/widget"/>

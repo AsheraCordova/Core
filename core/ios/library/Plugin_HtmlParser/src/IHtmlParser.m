@@ -18,11 +18,12 @@
     { NULL, "LASIWidget;", 0x401, 0, 1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x401, 2, 3, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x401, 4, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 5, 6, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x401, 7, 8, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x401, 9, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 11, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x401, 13, 12, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x401, 5, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x401, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x401, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 12, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 14, 13, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -30,14 +31,15 @@
   methods[0].selector = @selector(parseWithNSString:withBoolean:withASIFragment:);
   methods[1].selector = @selector(parseWithParentWithNSString:withBoolean:withASHasWidgets:withASIFragment:);
   methods[2].selector = @selector(parseFileWithNSString:withBoolean:withASIFragment:);
-  methods[3].selector = @selector(parseIncludeWithASHasWidgets:withNSString:withNSString:withBoolean:withASIFragment:);
-  methods[4].selector = @selector(getHandlerWithASHasWidgets:withInt:withASIFragment:);
-  methods[5].selector = @selector(handlerStartWithId:withASIWidget:withInt:);
-  methods[6].selector = @selector(handlerEndWithId:withASIWidget:);
-  methods[7].selector = @selector(addToCurrentParentWithId:withASIWidget:);
+  methods[3].selector = @selector(parseFragmentWithNSString:withBoolean:withASIFragment:);
+  methods[4].selector = @selector(parseIncludeWithASHasWidgets:withNSString:withNSString:withBoolean:withASIFragment:);
+  methods[5].selector = @selector(getHandlerWithASHasWidgets:withInt:withASIFragment:);
+  methods[6].selector = @selector(handlerStartWithId:withASIWidget:withInt:);
+  methods[7].selector = @selector(handlerEndWithId:withASIWidget:);
+  methods[8].selector = @selector(addToCurrentParentWithId:withASIWidget:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent" };
-  static const J2ObjcClassInfo _ASIHtmlParser = { "IHtmlParser", "com.ashera.parser.html", ptrTable, methods, NULL, 7, 0x609, 8, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseFragment", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent" };
+  static const J2ObjcClassInfo _ASIHtmlParser = { "IHtmlParser", "com.ashera.parser.html", ptrTable, methods, NULL, 7, 0x609, 9, 0, -1, -1, -1, -1, -1 };
   return &_ASIHtmlParser;
 }
 

@@ -183,6 +183,7 @@ function createFolders() {
 		"../resources/xml",
 		"../resources/color",
 		"../resources/menu",
+		"../resources/navigation",
 		"../tsc/src/R",
 		"../res/anim",
 		"../res/animator",
@@ -294,6 +295,9 @@ function generateFile(name) {
 		let outFileName = fileName.replace('.xml', ".ts");
 		let finalOutputFile = getCamelCaseFileName(outFileName);
 		runXSLT(name, "nav_graph.xsl", "../tsc/src/R/" + finalOutputFile);
+		
+		outFileName = fileName.replace('.xml', ".properties");
+		runXSLT(name, "nav_graph_start.xsl", '../resources/navigation/' + outFileName);
 	}
 
 	// fragment mapper

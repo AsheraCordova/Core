@@ -6,20 +6,38 @@
 #include "Bundle.h"
 #include "Context.h"
 #include "Fragment.h"
+#include "FragmentManager.h"
+#include "FragmentTransaction.h"
+#include "HasWidgets.h"
+#include "IFragment.h"
+#include "IFragmentContainer.h"
+#include "IOSClass.h"
+#include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "LayoutInflater.h"
 #include "View.h"
 #include "ViewGroup.h"
+#include "java/util/ArrayList.h"
+#include "java/util/List.h"
+
+@protocol JavaUtilList;
 
 
 @interface ADXFragment () {
  @public
+  ADXFragmentManager *childFragmentManager_;
   ADBundle *bundle_;
+  id<ASIFragment> parentFragment_;
+  id<JavaUtilList> childFragments_;
+  jboolean paused_;
 }
 
 @end
 
+J2OBJC_FIELD_SETTER(ADXFragment, childFragmentManager_, ADXFragmentManager *)
 J2OBJC_FIELD_SETTER(ADXFragment, bundle_, ADBundle *)
+J2OBJC_FIELD_SETTER(ADXFragment, parentFragment_, id<ASIFragment>)
+J2OBJC_FIELD_SETTER(ADXFragment, childFragments_, id<JavaUtilList>)
 
 @implementation ADXFragment
 
@@ -30,6 +48,21 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (void)setParentFragmentWithASIFragment:(id<ASIFragment>)parentFragment {
+  [self setParentFragmentWithASIFragment:parentFragment withBoolean:true];
+}
+
+- (void)setParentFragmentWithASIFragment:(id<ASIFragment>)parentFragment
+                             withBoolean:(jboolean)manageLifeCycle {
+  JreStrongAssign(&self->parentFragment_, parentFragment);
+  if (manageLifeCycle) {
+    if (((ADXFragment *) nil_chk(((ADXFragment *) cast_chk(parentFragment, [ADXFragment class]))))->childFragments_ == nil) {
+      JreStrongAssignAndConsume(&((ADXFragment *) nil_chk(((ADXFragment *) cast_chk(parentFragment, [ADXFragment class]))))->childFragments_, new_JavaUtilArrayList_init());
+    }
+    [((ADXFragment *) nil_chk(((ADXFragment *) cast_chk(parentFragment, [ADXFragment class]))))->childFragments_ addWithId:self];
+  }
+}
+
 - (void)onAttachWithADContext:(ADContext *)context {
 }
 
@@ -37,6 +70,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)onResume {
+  paused_ = false;
+  if (childFragments_ != nil) {
+    for (ADXFragment * __strong fragment in childFragments_) {
+      id<ASIWidget> rootWidget = JreRetainedLocalValue([((id<ASIFragment>) nil_chk(((id<ASIFragment>) cast_check(fragment, ASIFragment_class_())))) getRootWidget]);
+      id<ASIWidget> widget = JreRetainedLocalValue([((id<ASIFragmentContainer>) nil_chk(((id<ASIFragmentContainer>) cast_check([((id<ASIWidget>) nil_chk(rootWidget)) getParent], ASIFragmentContainer_class_())))) getActiveRootWidget]);
+      if (rootWidget == widget) {
+        [((ADXFragment *) nil_chk(fragment)) onResume];
+      }
+    }
+  }
 }
 
 - (ADView *)onCreateViewWithADLayoutInflater:(ADLayoutInflater *)inflater
@@ -46,6 +89,14 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)onPause {
+  paused_ = true;
+  if (childFragments_ != nil) {
+    for (ADXFragment * __strong fragment in childFragments_) {
+      if (!((ADXFragment *) nil_chk(fragment))->paused_) {
+        [fragment onPause];
+      }
+    }
+  }
 }
 
 - (void)onViewCreatedWithADView:(ADView *)view
@@ -53,9 +104,23 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)onDetach {
+  if (childFragments_ != nil) {
+    id<JavaUtilList> childFragmentsClone = create_JavaUtilArrayList_initWithJavaUtilCollection_(childFragments_);
+    for (ADXFragment * __strong fragment in childFragmentsClone) {
+      [((ADXFragment *) nil_chk(fragment)) onDetach];
+    }
+  }
+  if (parentFragment_ != nil && ((ADXFragment *) cast_chk(parentFragment_, [ADXFragment class]))->childFragments_ != nil) {
+    [((ADXFragment *) cast_chk(parentFragment_, [ADXFragment class]))->childFragments_ removeWithId:self];
+  }
 }
 
 - (void)onDestroy {
+  if (childFragments_ != nil) {
+    for (ADXFragment * __strong fragment in childFragments_) {
+      [((ADXFragment *) nil_chk(fragment)) onDestroy];
+    }
+  }
 }
 
 - (void)onActivityCreatedWithADBundle:(ADBundle *)savedInstanceState {
@@ -69,8 +134,41 @@ J2OBJC_IGNORE_DESIGNATED_END
   return self->bundle_;
 }
 
+- (ADXFragmentManager *)getChildFragmentManager {
+  if (childFragmentManager_ == nil) {
+    JreStrongAssignAndConsume(&childFragmentManager_, new_ADXFragmentManager_init());
+  }
+  return childFragmentManager_;
+}
+
+- (ADXFragment *)getParentFragment {
+  return (ADXFragment *) cast_chk(self->parentFragment_, [ADXFragment class]);
+}
+
+- (void)executePendingTransactions {
+  if (childFragmentManager_ != nil) {
+    id<JavaUtilList> transactions = JreRetainedLocalValue([childFragmentManager_ getTransactions]);
+    for (ADXFragmentTransaction * __strong fragmentTransaction in nil_chk(transactions)) {
+      for (ADXFragmentTransaction_Ops * __strong ops in nil_chk([((ADXFragmentTransaction *) nil_chk(fragmentTransaction)) getOperations])) {
+        switch (((ADXFragmentTransaction_Ops *) nil_chk(ops))->type_) {
+          case 0:
+          [((id<ASIFragmentContainer>) nil_chk(ops->fragmentContainer_)) addOrReplaceFragmentWithNSString:ops->name_ withBoolean:true withNSString:ops->layout_ withNSString:ops->navGraphId_ withNSString:ops->tag_];
+          break;
+          case 1:
+          [((id<ASIFragmentContainer>) nil_chk(ops->fragmentContainer_)) addOrReplaceFragmentWithNSString:ops->name_ withBoolean:false withNSString:ops->layout_ withNSString:ops->navGraphId_ withNSString:ops->tag_];
+          break;
+        }
+      }
+    }
+    [transactions clear];
+  }
+}
+
 - (void)dealloc {
+  RELEASE_(childFragmentManager_);
   RELEASE_(bundle_);
+  RELEASE_(parentFragment_);
+  RELEASE_(childFragments_);
   [super dealloc];
 }
 
@@ -78,38 +176,52 @@ J2OBJC_IGNORE_DESIGNATED_END
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 0, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADView;", 0x1, 4, 5, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 7, 8, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 6, -1, -1, -1, -1 },
     { NULL, "LADBundle;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LADXFragmentManager;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LADXFragment;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
-  methods[1].selector = @selector(onAttachWithADContext:);
-  methods[2].selector = @selector(onCreateWithADBundle:);
-  methods[3].selector = @selector(onResume);
-  methods[4].selector = @selector(onCreateViewWithADLayoutInflater:withADViewGroup:withADBundle:);
-  methods[5].selector = @selector(onPause);
-  methods[6].selector = @selector(onViewCreatedWithADView:withADBundle:);
-  methods[7].selector = @selector(onDetach);
-  methods[8].selector = @selector(onDestroy);
-  methods[9].selector = @selector(onActivityCreatedWithADBundle:);
-  methods[10].selector = @selector(setArgumentsWithADBundle:);
-  methods[11].selector = @selector(getArguments);
+  methods[1].selector = @selector(setParentFragmentWithASIFragment:);
+  methods[2].selector = @selector(setParentFragmentWithASIFragment:withBoolean:);
+  methods[3].selector = @selector(onAttachWithADContext:);
+  methods[4].selector = @selector(onCreateWithADBundle:);
+  methods[5].selector = @selector(onResume);
+  methods[6].selector = @selector(onCreateViewWithADLayoutInflater:withADViewGroup:withADBundle:);
+  methods[7].selector = @selector(onPause);
+  methods[8].selector = @selector(onViewCreatedWithADView:withADBundle:);
+  methods[9].selector = @selector(onDetach);
+  methods[10].selector = @selector(onDestroy);
+  methods[11].selector = @selector(onActivityCreatedWithADBundle:);
+  methods[12].selector = @selector(setArgumentsWithADBundle:);
+  methods[13].selector = @selector(getArguments);
+  methods[14].selector = @selector(getChildFragmentManager);
+  methods[15].selector = @selector(getParentFragment);
+  methods[16].selector = @selector(executePendingTransactions);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
+    { "childFragmentManager_", "LADXFragmentManager;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bundle_", "LADBundle;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "parentFragment_", "LASIFragment;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "childFragments_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 13, -1 },
+    { "paused_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "onAttach", "LADContext;", "onCreate", "LADBundle;", "onCreateView", "LADLayoutInflater;LADViewGroup;LADBundle;", "onViewCreated", "LADView;LADBundle;", "onActivityCreated", "setArguments" };
-  static const J2ObjcClassInfo _ADXFragment = { "Fragment", "androidx.fragment.app", ptrTable, methods, fields, 7, 0x1, 12, 1, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setParentFragment", "LASIFragment;", "LASIFragment;Z", "onAttach", "LADContext;", "onCreate", "LADBundle;", "onCreateView", "LADLayoutInflater;LADViewGroup;LADBundle;", "onViewCreated", "LADView;LADBundle;", "onActivityCreated", "setArguments", "Ljava/util/List<Landroidx/fragment/app/Fragment;>;" };
+  static const J2ObjcClassInfo _ADXFragment = { "Fragment", "androidx.fragment.app", ptrTable, methods, fields, 7, 0x1, 17, 5, -1, -1, -1, -1, -1 };
   return &_ADXFragment;
 }
 
@@ -117,6 +229,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void ADXFragment_init(ADXFragment *self) {
   NSObject_init(self);
+  self->paused_ = false;
 }
 
 ADXFragment *new_ADXFragment_init() {

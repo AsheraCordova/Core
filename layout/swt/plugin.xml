@@ -23,6 +23,7 @@
      <source-file src="tsc/src/swt/widget/ChronometerImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/CLabelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/EditTextImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/fragmentImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/FrameLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/HorizontalScrollViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/ImageButtonImpl.ts" target-dir="tsc/src/swt/widget"/>

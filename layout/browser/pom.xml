@@ -29,7 +29,11 @@
 			<artifactId>AndroidXJ</artifactId>
 			<groupId>com.ashera</groupId>
 		</dependency>
-
+		<dependency>
+			<artifactId>WebCorePlugin</artifactId>
+			<groupId>com.ashera</groupId>
+			<version>1.0.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.teavm</groupId>
 			<artifactId>teavm-jso-apis</artifactId>

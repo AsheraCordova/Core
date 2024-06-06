@@ -20,6 +20,12 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
 public class UINavigatorImpl {
+	private NavHostFragment navHostFragment;
+	public UINavigatorImpl(NavHostFragment navHostFragment) {
+		this.navHostFragment = navHostFragment;
+	}
+	public UINavigatorImpl() {
+	}
 	public void navigate(String actionId, String destinationId, boolean inclusive, boolean finish, List<Map<String, Object>> scopedObjects, IFragment fragment) {
 		IActivity activity = fragment.getRootActivity();
 
@@ -63,7 +69,7 @@ public class UINavigatorImpl {
 
 			FragmentActivity fragmentActivity = (FragmentActivity) activity;
 			int navigationId = fragmentActivity.getResources().getIdentifier(resId, "id",fragmentActivity.getPackageName());
-			NavController navController = NavHostFragment.findNavController((Fragment) fragment);			
+			NavController navController = NavHostFragment.findNavController(getNavhostFragment(fragment));			
 			NavOptions.Builder navOptions = new NavOptions.Builder();
 			
 			if (finish) {
@@ -83,6 +89,9 @@ public class UINavigatorImpl {
 			navController.navigate(navigationId, bundle, navOptions.build());
 		}
 	}
+	private Fragment getNavhostFragment(IFragment fragment) {
+		return this.navHostFragment != null ? this.navHostFragment : (Fragment) fragment;
+	}
 
 	private void hideKeyboard(Activity activity) {
 	    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
@@ -96,18 +105,18 @@ public class UINavigatorImpl {
 	}
 
 	public void closeDialog(IFragment fragment) {
-		NavHostFragment.findNavController((Fragment) fragment).navigateUp();
+		NavHostFragment.findNavController(getNavhostFragment(fragment)).navigateUp();
 	}
 
 	public void popBackStack(IFragment fragment) {
-		NavHostFragment.findNavController((Fragment) fragment).popBackStack();
+		NavHostFragment.findNavController(getNavhostFragment(fragment)).popBackStack();
 	}
 
 	public void popBackStack(IFragment fragment, String destinationId, boolean inclusive) {
 		IActivity activity = fragment.getRootActivity();
 		FragmentActivity fragmentActivity = (FragmentActivity) activity;
 		int navigationId = fragmentActivity.getResources().getIdentifier(destinationId, "id",fragmentActivity.getPackageName());		
-		NavHostFragment.findNavController((Fragment) fragment).popBackStack(navigationId, inclusive);
+		NavHostFragment.findNavController(getNavhostFragment(fragment)).popBackStack(navigationId, inclusive);
 	}
 
 	public void popBackStack(IFragment activeRootFragment, IAsyncCallBack callBack) {

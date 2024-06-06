@@ -34,6 +34,7 @@ public class AndroidLayoutsCordovaPlugin extends CordovaPlugin {
         WidgetFactory.register(new com.ashera.layout.RadioGroupImpl());
         WidgetFactory.register(new com.ashera.layout.ImageButtonImpl());
         WidgetFactory.register(new com.ashera.layout.ChronometerImpl());
+        WidgetFactory.register(new com.ashera.layout.fragmentImpl());
         WidgetFactory.register(new com.ashera.layout.SpinnerImpl());
         WidgetFactory.register(new com.ashera.layout.MultiSelectionSpinnerImpl());
         WidgetFactory.register(new com.ashera.layout.WebViewImpl());

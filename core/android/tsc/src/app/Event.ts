@@ -3,4 +3,5 @@ export interface Event {
 	action: string;
 	eventType: string;
 	event: string;
+	parentFragments: string;
 }

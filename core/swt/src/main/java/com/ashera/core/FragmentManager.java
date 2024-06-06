@@ -23,11 +23,19 @@ public class FragmentManager {
 	private StackLayout stackLayout;
 	private Composite rootComposite;
 	private java.util.Stack<Control> nativeWidgetStack = new java.util.Stack<>();
-
 	public FragmentManager(StackLayout stackLayout, Composite rootComposite, IActivity activity) {
 		this.rootComposite = rootComposite;
 		this.stackLayout = stackLayout;
 		this.activity = activity;
+		this.fragmentFactory = new FragmentFactory();
+	}
+	
+	public FragmentManager(StackLayout stackLayout, Composite rootComposite, IActivity activity, FragmentFactory fragmentFactory, boolean remeasure) {
+		this.rootComposite = rootComposite;
+		this.stackLayout = stackLayout;
+		this.activity = activity;
+		this.fragmentFactory = fragmentFactory;
+		this.remeasure = remeasure;
 	}
 
 	private void storeInHistory(String type, String resId, String fileName, List<Map<String, Object>> scopedObjects) {
@@ -135,7 +143,8 @@ public class FragmentManager {
 	private List<GenericFragment> fragments = new ArrayList<>();
 	private Map<String, DialogFragment> dialogFragments = new LinkedHashMap<>();
 	private IActivity activity;
-
+	private FragmentFactory fragmentFactory;
+	private boolean remeasure = true;
 	
 	private void popBackStack(String destinationId, boolean inclusive, int indexFromEnd)
 			throws DestinatinNotFoundException {
@@ -193,7 +202,8 @@ public class FragmentManager {
 		navigate("fragment", resId, fileName, null, true);
 	}
 
-	private void navigate(String type, String resId, String fileName, List<Map<String, Object>> scopedObjects, boolean history) {
+	private void navigate(String type, String resId, String fileName,
+			List<Map<String, Object>> scopedObjects, boolean history) {
 		//onpause
 		onPause();
 		
@@ -203,14 +213,15 @@ public class FragmentManager {
 				storeInHistory(type, resId, fileName, scopedObjects);
 			}
 		}
+		
+		GenericFragment genericFragment = this.fragmentFactory.getFragment();
 
-		GenericFragment genericFragment = new GenericFragment();
 		
 		//oncreate
 		onCreate(resId, fileName, scopedObjects, genericFragment);
 		
 		//oncreateview
-		genericFragment.onCreateView(true);
+		genericFragment.onCreateView(this.remeasure);
 		
 		fragments.add(genericFragment);
 		addRootToView(genericFragment);
@@ -299,17 +310,7 @@ public class FragmentManager {
 
 		Object dialog = createDialog();
 
-		DialogFragment genericFragment = new DialogFragment(dialog, width, height, marginPercent) {
-			@Override
-			public void remeasure() {
-				super.remeasure();
-				if (!isMeasuring()) {
-					// update size of dialog
-					updateSizeIfRequired(this);
-				}
-				
-			}
-		};
+		DialogFragment genericFragment = fragmentFactory.getDialogFragment(this, dialog, width, height, marginPercent);
 		
 		if (genericFragment.isFullScreen()) {
 			onPause();
@@ -396,6 +397,32 @@ public class FragmentManager {
 			super(message);
 		}
 	}
+	
+	public static class FragmentFactory {
+		public GenericFragment getFragment() {
+			return new GenericFragment() {
+				@Override
+				public void createChildFragments() {
+					executePendingTransactions();
+				}
+			};
+		}
+		
+		public DialogFragment getDialogFragment(FragmentManager fragmentManager, Object dialog, int width, int height, Float marginPercent) {
+			return new DialogFragment(dialog, width, height, marginPercent) {
+				@Override
+				public void remeasure() {
+					super.remeasure();
+					if (!isMeasuring()) {
+						// update size of dialog
+						fragmentManager.updateSizeIfRequired(this);
+					}
+					
+				}
+			};
+		}
+	}
+
 	//end - navigator
 
 
