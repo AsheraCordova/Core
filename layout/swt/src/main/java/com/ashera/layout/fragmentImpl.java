@@ -1090,7 +1090,7 @@ public class fragmentCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
 		if (this.name != null) {
 			switch (this.name) {
 			case "com.ashera.core.GenericFragment":
-				createOrReplaceFragment(add, layout, tag);
+				createOrReplaceFragment(add, layout);
 				break;
 				case "androidx.navigation.fragment.NavHostFragment":
 					if (navGraphId != null) {
@@ -1100,7 +1100,7 @@ public class fragmentCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
 						id = id.replace("@id/", "@+id/");
 						String mylayout = properties.getProperty(id);
 						id = id.replace("@+id/", "").replace("@id/", "");
-						createOrReplaceFragment(add, mylayout, id);
+						createOrReplaceFragment(add, mylayout);
 					}
 					break;
 			default:
@@ -1110,13 +1110,13 @@ public class fragmentCommandParamsBuilder extends com.ashera.layout.ViewGroupImp
 		}
 	}
 
-	private void createOrReplaceFragment(boolean add, String layout, String tag) {
+	private void createOrReplaceFragment(boolean add, String layout) {
 		if (layout != null) {
 			String mylayout = layout;
 			if (mylayout.startsWith("@layout")) {
 				mylayout = mylayout.substring(1) + ".xml";
 			}
-			navigator.navigate("fragment#" + tag + "#" + mylayout, null, false, add, null, getFragment());
+			navigator.navigate("fragment#" + getId() + "#" + mylayout, null, false, add, null, getFragment());
 			makeCurrentFragmentActive();
 		}
 	}
