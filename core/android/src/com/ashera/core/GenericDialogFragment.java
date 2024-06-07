@@ -196,13 +196,13 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 				ModelStore.storeModelToScope(varName, varScope, modelData, this, null, null);
 			}
 		}
-		
+
 		IFragment parent = getParent();
 		while (parent != null) {
 			parent.getEventBus().addEventBus(eventBus);
 			parent = parent.getParent();
 		}
-		sendLifeCycleEvent("onAttach", fileName, getEventData("onAttach"), null);
+		sendLifeCycleEvent("onAttach", getEventData("onAttach"), null);
 
 	}
 
@@ -218,7 +218,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	@Override
 	public void onCreate() {
 		readFileInDevMode();
-		sendLifeCycleEvent("onCreate", fileName, getEventData("onCreate"), null);
+		sendLifeCycleEvent("onCreate", getEventData("onCreate"), null);
 	}
 
 
@@ -271,7 +271,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 			remeasureOnResume = false;
 		}
 		isPaused = false;
-		sendLifeCycleEvent("onResume", fileName, getEventData("onResume"), null);
+		sendLifeCycleEvent("onResume", getEventData("onResume"), null);
 	}
 
 	private String getEventData(String key) {
@@ -305,7 +305,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 				view = widget.asNativeWidget();
 
 				String javascript = getInlineResource("javascript");
-				sendLifeCycleEvent("onCreateView", fileName, null, javascript);
+				sendLifeCycleEvent("onCreateView", null, javascript);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);
@@ -320,7 +320,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	public void onPause() {
 		super.onPause();
 		isPaused = true;
-		sendLifeCycleEvent("onPause", fileName, getEventData("onPause"), null);
+		sendLifeCycleEvent("onPause", getEventData("onPause"), null);
 	}
 
 	// This event is triggered soon after onCreateView().
@@ -336,7 +336,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		sendLifeCycleEvent("onDetach", fileName, getEventData("onDetach"), null);
+		sendLifeCycleEvent("onDetach", getEventData("onDetach"), null);
 		activity = null;
 
 	}
@@ -349,14 +349,14 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 			parent.getEventBus().removeEventBus(eventBus);
 			parent = parent.getParent();
 		}
-		
-		sendLifeCycleEvent("onDestroy", fileName, getEventData("onDestroy"), null);
+
+		sendLifeCycleEvent("onDestroy", getEventData("onDestroy"), null);
 		clear();
 	}
 
 	@Override
 	public void onCloseDialog() {
-		sendLifeCycleEvent("onCloseDialog", fileName, getEventData("onCloseDialog"), null);
+		sendLifeCycleEvent("onCloseDialog", getEventData("onCloseDialog"), null);
 	}
 
 	// This method is called after the parent Activity's onCreate() method has completed.
@@ -367,23 +367,23 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	private void sendLifeCycleEvent(String action, String fileName, String eventExpression, String javascript) {
+	private void sendLifeCycleEvent(String action, String eventExpression, String javascript) {
 		Map<String, Object> dataMap = com.ashera.widget.PluginInvoker.getJSONCompatMap();
 		dataMap.put("action", "nativeevent");
 		dataMap.put("event", action);
-		dataMap.put("actionUrl", fileName.startsWith("layout") ? fileName : getArguments().get("id"));
+		dataMap.put("actionUrl", getActionUrl());
 		dataMap.put("fragmentId", id);
-		
+
 		ArrayList<String> parentFragments = new ArrayList<String>();
-		
-		
+
+
 		IFragment parentFragment = getParent();
-		
+
 		while (parentFragment != null) {
 			parentFragments.add(parentFragment.getUId());
 			parentFragment = parentFragment.getParent();
 		}
-		
+
 		if (parentFragments.size() > 0) {
 			dataMap.put("parentFragments", String.join(",", parentFragments));
 		}
@@ -536,6 +536,9 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 
 	@Override
 	public String getActionUrl() {
+		if (!fileName.startsWith("layout")) {
+			return (String) getArguments().get("id");
+		}
 		return fileName;
 	}
 
@@ -602,17 +605,17 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	public IFragment getParent() {
 
 		Fragment parentFragment = getParentFragment();
-		
+
 		while (parentFragment != null) {
 			if (parentFragment instanceof IFragment) {
 				return (IFragment) parentFragment;
 			}
-			
+
 			parentFragment = parentFragment.getParentFragment();
-		}		
+		}
 		return null;
 	}
-	
+
 	public void createChildFragments() {
 	}
 }

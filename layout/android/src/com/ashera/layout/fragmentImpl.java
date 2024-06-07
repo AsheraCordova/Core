@@ -1134,6 +1134,7 @@ private com.ashera.core.UINavigatorImpl getNavigator() {
 private void makeCurrentFragmentActive() {
 	if (myfragment != null) {
 		PluginInvoker.postDelayed(() -> {
+			widgets.clear();
 			if (myfragment instanceof com.ashera.core.GenericFragment) {
 				IWidget rootWidget = ((IFragment) myfragment).getRootWidget();
 				widgets.add(rootWidget);
