@@ -21,6 +21,7 @@ import com.ashera.model.ModelScope;
 import com.ashera.model.ModelStore;
 import com.ashera.utils.FileUtils;
 import com.ashera.widget.EventExpressionParser;
+import com.ashera.widget.HasWidgets;
 import com.ashera.widget.IRoot;
 import com.ashera.widget.IWidget;
 import com.ashera.widget.PluginInvoker;
@@ -493,6 +494,19 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 
 	@Override
 	public void remeasure() {
+		HasWidgets parent = rootWidget.getParent();
+		
+		if (parent instanceof IFragmentContainer) {
+			IFragment fragment = null;
+			while (parent instanceof IFragmentContainer) {
+				fragment = parent.getFragment();
+				parent = fragment.getRootWidget().getParent();
+			}
+			
+			fragment.remeasure();
+			
+			return;
+		}
 		if (isMeasuring()) {
 			return;
 		}

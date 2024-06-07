@@ -1896,9 +1896,11 @@ return this;}
 	private final class ResizeListener implements org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.Event> {
 		@Override
 		public void handleEvent(org.teavm.jso.dom.events.Event evt) {
-			int width = org.teavm.jso.dom.html.HTMLDocument.current().getElementById("shadowhost").getClientWidth();
-			int height = org.teavm.jso.dom.html.HTMLDocument.current().getElementById("shadowhost").getClientHeight();
-			getFragment().resizeWindow(width, height);
+			if (!(getFragment().getRootWidget().getParent() instanceof com.ashera.core.IFragmentContainer)) { 
+				int width = org.teavm.jso.dom.html.HTMLDocument.current().getElementById("shadowhost").getClientWidth();
+				int height = org.teavm.jso.dom.html.HTMLDocument.current().getElementById("shadowhost").getClientHeight();
+				getFragment().resizeWindow(width, height);
+			}
 		}
 	}
 	private ResizeListener listener = new ResizeListener();

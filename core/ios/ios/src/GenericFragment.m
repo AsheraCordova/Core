@@ -13,8 +13,10 @@
 #include "FileUtils.h"
 #include "Fragment.h"
 #include "GenericFragment.h"
+#include "HasWidgets.h"
 #include "IActivity.h"
 #include "IFragment.h"
+#include "IFragmentContainer.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IRoot.h"
@@ -447,6 +449,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)remeasure {
+  id<ASHasWidgets> parent = [((id<ASIWidget>) nil_chk(rootWidget_)) getParent];
+  if ([ASIFragmentContainer_class_() isInstance:parent]) {
+    id<ASIFragment> fragment = nil;
+    while ([ASIFragmentContainer_class_() isInstance:parent]) {
+      fragment = [((id<ASHasWidgets>) nil_chk(parent)) getFragment];
+      parent = [((id<ASIWidget>) nil_chk([((id<ASIFragment>) nil_chk(fragment)) getRootWidget])) getParent];
+    }
+    [((id<ASIFragment>) nil_chk(fragment)) remeasure];
+    return;
+  }
   if ([self isMeasuring]) {
     return;
   }
