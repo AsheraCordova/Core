@@ -1775,6 +1775,9 @@ public void setHint(String value) {
 
 	private void setSelection(Object objValue) {
 		combo.select((int) objValue);
+		if (listener != null) {
+			listener.widgetSelected(null);
+		}
 	}
 	
 	private String hint;
@@ -1798,7 +1801,7 @@ public void setHint(String value) {
 
 	private void selectSpinnerIfRequired() {
 		if (combo.getItems().length > 0 && combo.getSelectionIndex() == -1) {
-			combo.select(0);
+			setSelection(0);
 		}		
 	}
 	

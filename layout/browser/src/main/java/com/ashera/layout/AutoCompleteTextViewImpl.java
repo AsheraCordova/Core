@@ -2039,7 +2039,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	private IWidget createPopup() {
 		r.android.widget.TextView promptView = null;
 		// create frame layout wrapper
-		IWidget parentWidget = WidgetFactory.createWidget(FrameLayoutImpl.LOCAL_NAME, FrameLayoutImpl.GROUP_NAME, (HasWidgets) fragment.getRootWidget(), false);
+		IWidget parentWidget = WidgetFactory.createWidget(FrameLayoutImpl.LOCAL_NAME, FrameLayoutImpl.GROUP_NAME, (HasWidgets) getRootFragment().getRootWidget(), false);
 		View parentView = (View) parentWidget.asWidget();
 		
 		// update params

@@ -155,6 +155,8 @@
 
 - (id<ASIFragment>)getFragment;
 
+- (id<ASIFragment>)getRootFragment;
+
 - (void)afterParentInit;
 
 - (jboolean)isAfterParentInitRequired;

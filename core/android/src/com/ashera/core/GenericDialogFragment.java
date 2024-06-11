@@ -497,13 +497,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 		HasWidgets parent = rootWidget.getParent();
 		
 		if (parent instanceof IFragmentContainer) {
-			IFragment fragment = null;
-			while (parent instanceof IFragmentContainer) {
-				fragment = parent.getFragment();
-				parent = fragment.getRootWidget().getParent();
-			}
-			
-			fragment.remeasure();
+			parent.getRootFragment().remeasure();
 			
 			return;
 		}

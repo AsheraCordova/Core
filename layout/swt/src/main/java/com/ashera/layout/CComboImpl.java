@@ -1165,6 +1165,9 @@ return hint;				}
 
 	private void setSelection(Object objValue) {
 		cCombo.select((int) objValue);
+		if (listener != null) {
+			listener.widgetSelected(null);
+		}
 	}
 	
 	private String hint;
@@ -1188,7 +1191,7 @@ return hint;				}
 
 	private void selectSpinnerIfRequired() {
 		if (cCombo.getItems().length > 0 && cCombo.getSelectionIndex() == -1) {
-			cCombo.select(0);
+			setSelection(0);
 		}		
 	}
 	

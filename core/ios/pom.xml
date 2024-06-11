@@ -15,10 +15,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ashera</groupId>
-			<artifactId>widgetlibrary</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.ashera</groupId>
 			<artifactId>AndroidJ</artifactId>
 		</dependency>
 		<dependency>
@@ -34,4 +30,41 @@
 			<artifactId>htmlparser</artifactId>
 		</dependency>
 	</dependencies>
+	
+		<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Github Repo</name>
+			<url>file:///D:/Java/github_ashera/mvn-ashera-ios-repo</url>
+		</repository>
+	</distributionManagement>
+
+
+	<repositories>
+		<repository>
+			<id>ashera-github-ios-repo</id>
+			<url>https://raw.githubusercontent.com/AsheraCordova/mvn-ashera-ios-repo/master/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>ashera-github-java-repo</id>
+			<url>https://raw.githubusercontent.com/AsheraCordova/mvn-ashera-java-repo/master/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 </project>

@@ -73,10 +73,10 @@ public class UINavigatorImpl {
 
 		switch (type) {
 		case "dialog": {
-			String fileName = getFileName(destinationProps, 2);
-			int width = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 2], null, fragment);
-			int height = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 1], null, fragment);
-			String style = destinationProps[5];
+			String fileName = getFileName(destinationProps, 3);
+			int width = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 3], null, fragment);
+			int height = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 2], null, fragment);
+			String style = destinationProps[destinationProps.length - 1];
 			if (style != null) {
 				style = style.replace("@style/", "");
 			}

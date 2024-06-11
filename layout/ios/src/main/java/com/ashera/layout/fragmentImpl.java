@@ -829,7 +829,7 @@ private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 			if (mylayout.startsWith("@layout")) {
 				mylayout = mylayout.substring(1) + ".xml";
 			}
-			navigator.navigate("fragment#" + getId() + "#" + mylayout, null, false, add, null, getFragment());
+			navigator.navigate("fragment#" + getId() + "#" + mylayout, null, false, !add, null, getFragment());
 			makeCurrentFragmentActive();
 		}
 	}

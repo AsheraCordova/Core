@@ -5014,7 +5014,7 @@ void ASAutoCompleteTextViewImpl_setEntriesWithId_(ASAutoCompleteTextViewImpl *se
 
 id<ASIWidget> ASAutoCompleteTextViewImpl_createPopup(ASAutoCompleteTextViewImpl *self) {
   ADTextView *promptView = nil;
-  id<ASIWidget> parentWidget = ASWidgetFactory_createWidgetWithNSString_withNSString_withASHasWidgets_withBoolean_(ASFrameLayoutImpl_LOCAL_NAME, ASFrameLayoutImpl_GROUP_NAME, (id<ASHasWidgets>) cast_check([((id<ASIFragment>) nil_chk(self->fragment_)) getRootWidget], ASHasWidgets_class_()), false);
+  id<ASIWidget> parentWidget = ASWidgetFactory_createWidgetWithNSString_withNSString_withASHasWidgets_withBoolean_(ASFrameLayoutImpl_LOCAL_NAME, ASFrameLayoutImpl_GROUP_NAME, (id<ASHasWidgets>) cast_check([((id<ASIFragment>) nil_chk([self getRootFragment])) getRootWidget], ASHasWidgets_class_()), false);
   ADView *parentView = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(parentWidget)) asWidget], [ADView class]);
   ADRelativeLayout_LayoutParams *playoutParams = (ADRelativeLayout_LayoutParams *) cast_chk([((ADView *) nil_chk(parentView)) getLayoutParams], [ADRelativeLayout_LayoutParams class]);
   ((ADRelativeLayout_LayoutParams *) nil_chk(playoutParams))->width_ = ADViewGroup_LayoutParams_MATCH_PARENT;

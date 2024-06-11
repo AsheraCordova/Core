@@ -33,15 +33,15 @@ public class UINavigatorImpl {
 		
 		String type = destinationProps[0];
 		String resId = destinationProps[1];
-		String fileName = getFileName(destinationProps, type.equals("dialog") ? 2 : 0);
+		String fileName = getFileName(destinationProps, type.equals("dialog") ? 3 : 0);
 		
 		if (fileName != null && !fileName.equals("")) {
 			Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, scopedObjects);
 			
 			if (type.equals("dialog")) {
-				int width = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 2], null, fragment);
-				int height = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 1], null, fragment);
-				String style = destinationProps[5];
+				int width = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 3], null, fragment);
+				int height = (int) ConverterFactory.get(CommonConverters.dimension).convertFrom(destinationProps[destinationProps.length - 2], null, fragment);
+				String style = destinationProps[destinationProps.length - 1];
 				if (style != null) {
 					style = style.replace("@style/", "");
 				}

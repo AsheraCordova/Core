@@ -1147,7 +1147,7 @@ void ASfragmentImpl_createOrReplaceFragmentWithBoolean_withNSString_(ASfragmentI
     if ([mylayout java_hasPrefix:@"@layout"]) {
       mylayout = JreStrcat("$$", [mylayout java_substring:1], @".xml");
     }
-    [((ASUINavigatorImpl *) nil_chk(self->navigator_)) navigateWithNSString:JreStrcat("$$C$", @"fragment#", [self getId], '#', mylayout) withNSString:nil withBoolean:false withBoolean:add withJavaUtilList:nil withASIFragment:[self getFragment]];
+    [((ASUINavigatorImpl *) nil_chk(self->navigator_)) navigateWithNSString:JreStrcat("$$C$", @"fragment#", [self getId], '#', mylayout) withNSString:nil withBoolean:false withBoolean:!add withJavaUtilList:nil withASIFragment:[self getFragment]];
     ASfragmentImpl_makeCurrentFragmentActive(self);
   }
 }

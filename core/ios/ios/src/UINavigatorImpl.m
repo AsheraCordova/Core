@@ -214,10 +214,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   switch (JreIndexOfStr(type, (id[]){ @"dialog" }, 1)) {
     case 0:
     {
-      NSString *fileName = ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(self, destinationProps, 2);
-      jint width = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, destinationProps->size_ - 2) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
-      jint height = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, destinationProps->size_ - 1) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
-      NSString *style = IOSObjectArray_Get(destinationProps, 5);
+      NSString *fileName = ASUINavigatorImpl_getFileNameWithNSStringArray_withInt_(self, destinationProps, 3);
+      jint width = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, destinationProps->size_ - 3) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
+      jint height = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk([((id<ASIConverter>) nil_chk(ASConverterFactory_getWithNSString_(ASCommonConverters_dimension))) convertFromWithId:IOSObjectArray_Get(destinationProps, destinationProps->size_ - 2) withJavaUtilMap:nil withASIFragment:fragment], [JavaLangInteger class]))) intValue];
+      NSString *style = IOSObjectArray_Get(destinationProps, destinationProps->size_ - 1);
       if (style != nil) {
         style = [style java_replace:@"@style/" withSequence:@""];
       }

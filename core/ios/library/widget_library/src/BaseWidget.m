@@ -16,6 +16,7 @@
 #include "IConverter.h"
 #include "IFlatMap.h"
 #include "IFragment.h"
+#include "IFragmentContainer.h"
 #include "ILifeCycleDecorator.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -544,7 +545,9 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
       if ([((ASWidgetAttributeMap *) nil_chk(attributes_)) getFilter] == nil || [((id<ASWidgetAttributeMapFilter>) nil_chk([((ASWidgetAttributeMap *) nil_chk(attributes_)) getFilter])) acceptWithNSString:[widgetAttribute getAttributeName] withNSString:[self getLocalName]]) {
         id objValue = JreRetainedLocalValue([self getAttributeValueWithNSString:[widgetAttribute getAttributeName]]);
         if (objValue != nil) {
-          [self applyStyleToWidgetWithASWidgetAttribute:widgetAttribute withId:objValue];
+          if ([self isInitialised] || ![widgetAttribute isApplyBeforeChildAdd]) {
+            [self applyStyleToWidgetWithASWidgetAttribute:widgetAttribute withId:objValue];
+          }
         }
       }
     }
@@ -1670,6 +1673,18 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return false;
 }
 
+- (id<ASIFragment>)getRootFragment {
+  id<ASHasWidgets> parent = JreRetainedLocalValue([((id<ASIWidget>) nil_chk([((id<ASIFragment>) nil_chk([self getFragment])) getRootWidget])) getParent]);
+  id<ASIFragment> myfragment = JreRetainedLocalValue([self getFragment]);
+  if ([ASIFragmentContainer_class_() isInstance:parent]) {
+    while ([ASIFragmentContainer_class_() isInstance:parent]) {
+      myfragment = [((id<ASHasWidgets>) nil_chk(parent)) getFragment];
+      parent = [((id<ASIWidget>) nil_chk([((id<ASIFragment>) nil_chk(myfragment)) getRootWidget])) getParent];
+    }
+  }
+  return myfragment;
+}
+
 - (void)__javaClone:(ASBaseWidget *)original {
   [super __javaClone:original];
   [parent_ release];
@@ -1878,6 +1893,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
     { NULL, "V", 0x1, 173, 21, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x81, 174, 137, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASIFragment;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -2044,6 +2060,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   methods[159].selector = @selector(setNormalStyleWithNSString:);
   methods[160].selector = @selector(invokeMethodWithNSString:withNSObjectArray:);
   methods[161].selector = @selector(isWidgetDisposed);
+  methods[162].selector = @selector(getRootFragment);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "parent_", "LASHasWidgets;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
@@ -2089,7 +2106,7 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
     { "customErrorMessageValues_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 186, -1 },
   };
   static const void *ptrTable[] = { "setAnimator", "LNSObject;", "setZIndex", "I", "registerForAttributeCommandChainWithPhase", "LNSString;[LNSString;", "registerForAttributeCommandChain", "[LNSString;", "applyAttributeCommand", "LNSString;LNSString;[LNSString;Z[LNSObject;", "reapplyAttributeCommand", "LNSString;LNSString;LNSString;[LNSObject;", "rerunCommandOnSource", "LNSString;LNSString;", "getAttributeCommandValue", "LNSString;LNSString;LNSString;", "getAttributeCommand", "LNSString;LNSString;[LNSObject;", "addAttributeCommandToChain", "LNSString;[LNSString;LASAttributeCommand;", "getAttributeCommandChain", "LNSString;", "removeAttributeCommandFromChain", "unwrap", "setId", "setBehaviorGroupId", "setComponentId", "quickConvert", "LNSObject;LNSString;", "LNSObject;LNSString;LNSString;LNSString;", "applyStyleToWidget", "LASWidgetAttribute;LNSObject;", "setAttribute", "LNSString;LNSObject;Z", "LASWidgetAttribute;LNSObject;Z", "LASWidgetAttribute;LASIWidget;LNSObject;LNSString;", "LASWidgetAttribute;LASIWidget;LNSObject;LNSString;Z", "applyStyleToWidgetWithoutBuffering", "handleArrayType", "LASWidgetAttribute;LNSString;LNSObject;", "LNSObject;LNSString;LNSString;", "getDependentAttributesMap", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getConvertedValue", "getDecorator", "LASWidgetAttribute;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "getUserData", "storeUserData", "LNSString;LNSObject;", "storeInTempCache", "getFromTempCache", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setParams", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttributeValue", "LNSString;LASWidgetAttributeMap;", "LASWidgetAttribute;LASWidgetAttributeMap;", "setParent", "LASHasWidgets;", "stripOS", "getAttribute", "LASHasWidgets;LNSString;LNSString;", "checkIfAttributeMatches", "LASWidgetAttributeValue;", "convertToIntFromDp", "updateWidgetMap", "LASWidgetAttributeMap;", "updateMeasuredDimension", "II", "LASWidgetAttribute;LJavaUtilList;", "(Lcom/ashera/widget/WidgetAttribute;Ljava/util/List<Lcom/ashera/widget/WidgetAttributeValue;>;)V", "LASWidgetAttribute;LASWidgetAttributeValue;", "executeCommand", "LASIWidget;LJavaUtilList;LASIWidget_CommandCallBack;I", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "handlePath", "LJavaUtilMap;LASIWidget;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget;I)V", "LJavaUtilMap;LASIWidget_CommandCallBack;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "LNSString;Z", "requestLayoutNInvalidateIfRequired", "compareByValue", "LJavaUtilMap;LNSString;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I", "getAttributeValueFromWidget", "LASWidgetAttribute;LASIWidget;Z", "setListener", "LASIWidgetLifeCycleListener;", "findWidgetById", "setInvalidateOnFrameChange", "Z", "setLoopParam", "LASLoopParam;", "setModelIdPath", "setModelUiToPojoEventIds", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelPojoToUiParams", "setModelUiToPojo", "removeObjectListeners", "LASIWidget;", "()Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;", "setVisible", "updateModelToEventMap", "LJavaUtilMap;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;)V", "LJavaUtilMap;LNSString;LASLoopParam;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Lcom/ashera/model/LoopParam;)V", "syncModelFromUiToPojo", "getModelByPath", "updateModelByPath", "LNSString;LNSObject;LNSObject;", "storeModelToScope", "LNSString;LASModelScope;LNSObject;", "LNSString;LASModelScope;LNSObject;LASLoopParam;", "getModelFromScope", "LNSString;LASModelScope;", "LNSString;LASModelScope;LASLoopParam;", "changeModelDataType", "LASModelDataType;LNSObject;", "updateModelData", "findNearestView", "getBoolean", "hasFeature", "runAttributeCommands", "LNSObject;LNSString;LNSString;[LNSObject;", "addDecorator", "LASILifeCycleDecorator;", "executeMethodListeners", "LNSString;[LNSObject;", "hasMethodListener", "LNSString;LJavaLangRunnable;[LNSObject;", "setOnMethodCalled", "setFieldUsingReflection", "LNSObject;LNSString;LNSObject;", "getFieldValueUsingReflection", "invokePrivateMethodUsingReflection", "LNSObject;LNSString;[LNSObject;", "createWrapperViewHolder", "createWrapperView", "LNSObject;I", "setDrawableBounds", "IIII", "setEventBubblers", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/Integer;>;)V", "()Ljava/util/Set<Ljava/lang/Integer;>;", "applyThemeConstructorArgsStyle", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "applyThemeStyle", "loadLazyWidgets", "LASHasWidgets;ILNSString;LASLoopParam;", "loadAndAddWidgets", "LJavaUtilIterator;LNSObject;LNSString;LASLoopParam;", "(Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;Ljava/lang/Object;Ljava/lang/String;Lcom/ashera/model/LoopParam;)V", "loadWidget", "LASIWidget;LNSObject;LNSString;LASLoopParam;I", "setValidationErrorDisplayType", "setCustomErrorMessageKeys", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/String;>;)V", "setCustomErrorMessageValues", "getCustomMessage", "setErrorStyle", "setNormalStyle", "invokeMethod", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/ILifeCycleDecorator;>;", "id", "Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/AttributeCommandChain;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Ljava/lang/String;>;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/AttributeCommand;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Ljava/lang/String;>;>;", "Ljava/util/List<Lcom/ashera/widget/BaseWidget$EventHolder;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Lcom/ashera/widget/ILifeCycleDecorator;>;>;", "Ljava/util/Set<Ljava/lang/Integer;>;", "Ljava/util/List<Ljava/lang/String;>;", "LASBaseWidget_LazyBaseWidget;LASBaseWidget_EventHolder;" };
-  static const J2ObjcClassInfo _ASBaseWidget = { "BaseWidget", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 162, 41, -1, 187, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASBaseWidget = { "BaseWidget", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 163, 41, -1, 187, -1, -1, -1 };
   return &_ASBaseWidget;
 }
 

@@ -213,6 +213,8 @@
 
 - (id<ASHasWidgets>)getParent;
 
+- (id<ASIFragment>)getRootFragment;
+
 - (id)getUserDataWithNSString:(NSString *)key;
 
 - (jint)getValidationErrorDisplayType;
