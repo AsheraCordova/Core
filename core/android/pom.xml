@@ -35,5 +35,72 @@
 			<groupId>com.ashera</groupId>
 			<artifactId>htmlparser</artifactId>
 		</dependency>
+		
+				<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>androidx.core</groupId>
+			<artifactId>core-jar</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- dependency>
+			<groupId>org.apache.cordova</groupId>
+			<artifactId>framework-jar</artifactId>
+			<scope>provided</scope>
+		</dependency> -->
+
+		<dependency>
+			<groupId>androidx.appcompat</groupId>
+			<artifactId>appcompat-jar</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>androidx.stubs</groupId>
+			<artifactId>androidx-stubs</artifactId>
+		</dependency>
 	</dependencies>
+	
+	
+	<distributionManagement>
+		<repository>
+			<id>internal.repo</id>
+			<name>Github Repo</name>
+			<url>file:///D:/Java/github_ashera/mvn-ashera-android-repo</url>
+		</repository>
+	</distributionManagement>
+
+
+	<repositories>
+		<repository>
+			<id>ashera-github-android-repo</id>
+			<url>https://raw.githubusercontent.com/AsheraCordova/mvn-ashera-android-repo/master/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+
+		<repository>
+			<id>ashera-github-java-repo</id>
+			<url>https://raw.githubusercontent.com/AsheraCordova/mvn-ashera-java-repo/master/</url>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
 </project>
