@@ -1,0 +1,15 @@
+<project default="create-androidx-stubs-jar">
+	<target name="create-androidx-stubs-jar">
+		<javac srcdir="stubs" includes="**/**/*.java"
+			destdir="classes_stubs" deprecation="true"
+			source="1.8" target="1.8"
+			includeantruntime="false">
+			 <classpath>
+        		<path path="D:\Java\git\core-android-widget\AndroidParent\android-29.jar"/>
+      		</classpath>
+		</javac>
+
+		<jar destfile="../AndroidParent/androidx-stubs.jar"
+			basedir="classes_stubs" includes="**/**/*.class" />
+	</target>
+</project>

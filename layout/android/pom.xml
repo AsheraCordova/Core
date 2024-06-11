@@ -102,17 +102,16 @@
 			<artifactId>framework-jar</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		
-		<dependency>
-			<groupId>androidx.navigation</groupId>
-			<artifactId>navigation-jar</artifactId>
-			<scope>provided</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>androidx.appcompat</groupId>
 			<artifactId>appcompat-jar</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>androidx.stubs</groupId>
+			<artifactId>androidx-stubs</artifactId>
 		</dependency>
 	</dependencies>
 

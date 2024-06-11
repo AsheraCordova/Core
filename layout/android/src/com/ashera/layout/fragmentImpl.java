@@ -24,6 +24,7 @@ import com.ashera.layout.*;
 import android.graphics.Canvas;
 import android.widget.*;
 import androidx.core.view.*;
+import androidx.fragment.app.Fragment;
 import android.view.*;
 
 import static com.ashera.widget.IWidget.*;
