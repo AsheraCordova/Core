@@ -163,10 +163,10 @@ id ASModelStore_getModelFromScopeWithNSString_withASModelScope_withASIFragment_w
       case ASModelScope_Enum_component:
       if ([((id<ASIWidget>) nil_chk(widget)) getComponentId] != nil) {
         if ([((NSString *) nil_chk(varName)) java_contains:@"#"]) {
-          obj = [((id<ASIFragment>) nil_chk(fragment)) getUserDataWithNSString:varName];
+          obj = [((id<ASIFragment>) nil_chk([widget getRootFragment])) getUserDataWithNSString:varName];
         }
         else {
-          obj = [((id<ASIFragment>) nil_chk(fragment)) getUserDataWithNSString:JreStrcat("$C$", [widget getComponentId], '#', varName)];
+          obj = [((id<ASIFragment>) nil_chk([widget getRootFragment])) getUserDataWithNSString:JreStrcat("$C$", [widget getComponentId], '#', varName)];
         }
       }
       break;
