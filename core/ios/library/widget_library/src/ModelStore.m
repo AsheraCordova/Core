@@ -117,11 +117,11 @@ void ASModelStore_storeModelToScopeWithNSString_withASModelScope_withId_withASIF
       break;
       case ASModelScope_Enum_component:
       if ([((NSString *) nil_chk(varName)) java_contains:@"#"]) {
-        [((id<ASIFragment>) nil_chk(fragment)) storeUserDataWithNSString:varName withId:objValue];
+        [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(widget)) getRootFragment])) storeUserDataWithNSString:varName withId:objValue];
       }
       else {
         if ([((id<ASIWidget>) nil_chk(widget)) getComponentId] != nil) {
-          [((id<ASIFragment>) nil_chk(fragment)) storeUserDataWithNSString:JreStrcat("$C$", [widget getComponentId], '#', varName) withId:objValue];
+          [((id<ASIFragment>) nil_chk([widget getRootFragment])) storeUserDataWithNSString:JreStrcat("$C$", [widget getComponentId], '#', varName) withId:objValue];
         }
       }
       break;
