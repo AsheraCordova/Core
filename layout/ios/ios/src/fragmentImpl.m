@@ -111,8 +111,9 @@ static void (*ASfragmentImpl_super$_addWithASIWidget_withInt_)(id, SEL, id, jint
 
 - (void)executePendingTransactions;
 
-- (void)createOrReplaceFragmentWithBoolean:(jboolean)add
-                              withNSString:(NSString *)layout;
+- (void)createOrReplaceFragmentWithNSString:(NSString *)id_
+                                withBoolean:(jboolean)add
+                               withNSString:(NSString *)layout;
 
 - (void)makeCurrentFragmentActive;
 
@@ -180,7 +181,7 @@ __attribute__((unused)) static void ASfragmentImpl_addOrReplaceFragmentWithBoole
 
 __attribute__((unused)) static void ASfragmentImpl_executePendingTransactions(ASfragmentImpl *self);
 
-__attribute__((unused)) static void ASfragmentImpl_createOrReplaceFragmentWithBoolean_withNSString_(ASfragmentImpl *self, jboolean add, NSString *layout);
+__attribute__((unused)) static void ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString_(ASfragmentImpl *self, NSString *id_, jboolean add, NSString *layout);
 
 __attribute__((unused)) static void ASfragmentImpl_makeCurrentFragmentActive(ASfragmentImpl *self);
 
@@ -713,7 +714,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (self->name_ != nil) {
     switch (JreIndexOfStr(self->name_, (id[]){ @"com.ashera.core.GenericFragment", @"androidx.navigation.fragment.NavHostFragment" }, 2)) {
       case 0:
-      ASfragmentImpl_createOrReplaceFragmentWithBoolean_withNSString_(self, add, layout);
+      ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString_(self, [self getId], add, layout);
       break;
       case 1:
       if (navGraphId != nil) {
@@ -723,7 +724,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         id_ = [((NSString *) nil_chk(id_)) java_replace:@"@id/" withSequence:@"@+id/"];
         NSString *mylayout = [properties getPropertyWithNSString:id_];
         id_ = [((NSString *) nil_chk([((NSString *) nil_chk(id_)) java_replace:@"@+id/" withSequence:@""])) java_replace:@"@id/" withSequence:@""];
-        ASfragmentImpl_createOrReplaceFragmentWithBoolean_withNSString_(self, add, mylayout);
+        ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString_(self, id_, add, mylayout);
       }
       break;
       default:
@@ -732,9 +733,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (void)createOrReplaceFragmentWithBoolean:(jboolean)add
-                              withNSString:(NSString *)layout {
-  ASfragmentImpl_createOrReplaceFragmentWithBoolean_withNSString_(self, add, layout);
+- (void)createOrReplaceFragmentWithNSString:(NSString *)id_
+                                withBoolean:(jboolean)add
+                               withNSString:(NSString *)layout {
+  ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString_(self, id_, add, layout);
 }
 
 - (void)makeCurrentFragmentActive {
@@ -936,7 +938,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[35].selector = @selector(addOrReplaceFragmentWithBoolean:);
   methods[36].selector = @selector(executePendingTransactions);
   methods[37].selector = @selector(addOrReplaceFragmentWithNSString:withBoolean:withNSString:withNSString:withNSString:);
-  methods[38].selector = @selector(createOrReplaceFragmentWithBoolean:withNSString:);
+  methods[38].selector = @selector(createOrReplaceFragmentWithNSString:withBoolean:withNSString:);
   methods[39].selector = @selector(makeCurrentFragmentActive);
   methods[40].selector = @selector(getNavigator);
   methods[41].selector = @selector(isValidFragment);
@@ -971,7 +973,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "paramsBean_", "LASfragmentImpl_fragmentParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "navController_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setTemplate", "LNSObject;", "setName", "setNavGraph", "replace", "setTag", "navigate", "LNSObject;LNSObject;", "popBackStackTo", "navigateWithPopBackStackTo", "LNSObject;LNSObject;LNSObject;LNSObject;", "navigateAsTop", "navigateWithPopBackStack", "addOrReplaceFragment", "Z", "LNSString;ZLNSString;LNSString;LNSString;", "createOrReplaceFragment", "ZLNSString;", "setId", "setVisible", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addChildViewController", "nativeMakeFrameForChildWidget", "IIII", "getView", &ASfragmentImpl_LOCAL_NAME, &ASfragmentImpl_GROUP_NAME, "LASfragmentImpl_fragmentExt;LASfragmentImpl_fragmentCommandBuilder;LASfragmentImpl_fragmentBean;LASfragmentImpl_fragmentParamsBean;LASfragmentImpl_fragmentCommandParamsBuilder;LASfragmentImpl_MyFragmentFactory;LASfragmentImpl_MyGenericFragment;" };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setTemplate", "LNSObject;", "setName", "setNavGraph", "replace", "setTag", "navigate", "LNSObject;LNSObject;", "popBackStackTo", "navigateWithPopBackStackTo", "LNSObject;LNSObject;LNSObject;LNSObject;", "navigateAsTop", "navigateWithPopBackStack", "addOrReplaceFragment", "Z", "LNSString;ZLNSString;LNSString;LNSString;", "createOrReplaceFragment", "LNSString;ZLNSString;", "setId", "setVisible", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addChildViewController", "nativeMakeFrameForChildWidget", "IIII", "getView", &ASfragmentImpl_LOCAL_NAME, &ASfragmentImpl_GROUP_NAME, "LASfragmentImpl_fragmentExt;LASfragmentImpl_fragmentCommandBuilder;LASfragmentImpl_fragmentBean;LASfragmentImpl_fragmentParamsBean;LASfragmentImpl_fragmentCommandParamsBuilder;LASfragmentImpl_MyFragmentFactory;LASfragmentImpl_MyGenericFragment;" };
   static const J2ObjcClassInfo _ASfragmentImpl = { "fragmentImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 56, 14, -1, 54, -1, -1, -1 };
   return &_ASfragmentImpl;
 }
@@ -1141,13 +1143,13 @@ void ASfragmentImpl_executePendingTransactions(ASfragmentImpl *self) {
   }
 }
 
-void ASfragmentImpl_createOrReplaceFragmentWithBoolean_withNSString_(ASfragmentImpl *self, jboolean add, NSString *layout) {
+void ASfragmentImpl_createOrReplaceFragmentWithNSString_withBoolean_withNSString_(ASfragmentImpl *self, NSString *id_, jboolean add, NSString *layout) {
   if (layout != nil) {
     NSString *mylayout = layout;
     if ([mylayout java_hasPrefix:@"@layout"]) {
       mylayout = JreStrcat("$$", [mylayout java_substring:1], @".xml");
     }
-    [((ASUINavigatorImpl *) nil_chk(self->navigator_)) navigateWithNSString:JreStrcat("$$C$", @"fragment#", [self getId], '#', mylayout) withNSString:nil withBoolean:false withBoolean:!add withJavaUtilList:nil withASIFragment:[self getFragment]];
+    [((ASUINavigatorImpl *) nil_chk(self->navigator_)) navigateWithNSString:JreStrcat("$$C$", @"fragment#", id_, '#', mylayout) withNSString:nil withBoolean:false withBoolean:!add withJavaUtilList:nil withASIFragment:[self getFragment]];
     ASfragmentImpl_makeCurrentFragmentActive(self);
   }
 }
