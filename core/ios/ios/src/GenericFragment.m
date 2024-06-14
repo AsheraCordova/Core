@@ -303,6 +303,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id)onCreateViewWithBoolean:(jboolean)measure {
   if (view_ == nil) {
     @try {
+      id<ASIFragment> rootFragment = [self getParent];
+      if (rootFragment != nil) {
+        NSString *html = [rootFragment getInlineResourceWithNSString:fileName_];
+        if (html != nil) {
+          fileName_ = html;
+        }
+      }
       id<ASIWidget> widget = ASPluginInvoker_parseFragmentWithNSString_withBoolean_withASIFragment_(fileName_, false, self);
       [self createChildFragments];
       if (measure) {

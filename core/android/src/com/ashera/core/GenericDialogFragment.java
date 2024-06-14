@@ -296,6 +296,14 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	public Object onCreateView(boolean measure) {
 		if (view == null) {
 			try {
+				IFragment rootFragment = getParent();
+
+				if (rootFragment != null) { 
+					String html = rootFragment.getInlineResource(fileName);
+					if (html != null) {
+						fileName = html;
+					}
+				}
 				IWidget widget = PluginInvoker.parseFragment(fileName, false, this);
 				createChildFragments();
 
@@ -316,6 +324,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 			return view;
 		}
 	}
+
 
 	@Override
 	public void onPause() {

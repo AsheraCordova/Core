@@ -14,6 +14,8 @@
 #include "java/io/FileReader.h"
 #include "java/io/IOException.h"
 #include "java/io/InputStream.h"
+#include "java/io/InputStreamReader.h"
+#include "java/io/Reader.h"
 #include "java/io/StringReader.h"
 #include "java/lang/ClassLoader.h"
 #include "java/lang/Exception.h"
@@ -35,6 +37,7 @@
 #include "java/util/Scanner.h"
 
 @class JavaIoInputStream;
+@class JavaIoReader;
 
 
 @interface ASFileUtils ()
@@ -42,9 +45,13 @@
 + (NSString *)convertInputStreamToStringWithNSString:(NSString *)fileName
                                withJavaIoInputStream:(JavaIoInputStream *)is;
 
++ (NSString *)readFileToStringWithJavaIoReader:(JavaIoReader *)input;
+
 @end
 
 __attribute__((unused)) static NSString *ASFileUtils_convertInputStreamToStringWithNSString_withJavaIoInputStream_(NSString *fileName, JavaIoInputStream *is);
+
+__attribute__((unused)) static NSString *ASFileUtils_readFileToStringWithJavaIoReader_(JavaIoReader *input);
 
 @implementation ASFileUtils
 
@@ -84,6 +91,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASFileUtils_readFileToStringWithJavaIoFile_(filePath);
 }
 
++ (NSString *)readFileToStringWithJavaIoReader:(JavaIoReader *)input {
+  return ASFileUtils_readFileToStringWithJavaIoReader_(input);
+}
+
 + (JavaUtilProperties *)loadPropertiesFromClassPathWithNSString:(NSString *)fileName {
   return ASFileUtils_loadPropertiesFromClassPathWithNSString_(fileName);
 }
@@ -110,10 +121,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSString;", 0xa, 5, 6, -1, -1, -1, -1 },
     { NULL, "LJavaUtilMap;", 0x9, 7, 8, -1, 9, -1, -1 },
     { NULL, "LNSString;", 0x9, 10, 11, 12, -1, -1, -1 },
-    { NULL, "LJavaUtilProperties;", 0x9, 13, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0xa, 10, 13, 12, -1, -1, -1 },
     { NULL, "LJavaUtilProperties;", 0x9, 14, 1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x9, 15, 1, -1, 16, -1, -1 },
-    { NULL, "[B", 0x9, 17, 18, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilProperties;", 0x9, 15, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x9, 16, 1, -1, 17, -1, -1 },
+    { NULL, "[B", 0x9, 18, 19, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -126,16 +138,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[5].selector = @selector(convertInputStreamToStringWithNSString:withJavaIoInputStream:);
   methods[6].selector = @selector(readFilesContentWithJavaUtilMap:);
   methods[7].selector = @selector(readFileToStringWithJavaIoFile:);
-  methods[8].selector = @selector(loadPropertiesFromClassPathWithNSString:);
-  methods[9].selector = @selector(getFileAsPropertiesWithNSString:);
-  methods[10].selector = @selector(getFilenamesForDirnameFromCPWithNSString:);
-  methods[11].selector = @selector(readAllBytesWithJavaIoInputStream:);
+  methods[8].selector = @selector(readFileToStringWithJavaIoReader:);
+  methods[9].selector = @selector(loadPropertiesFromClassPathWithNSString:);
+  methods[10].selector = @selector(getFileAsPropertiesWithNSString:);
+  methods[11].selector = @selector(getFilenamesForDirnameFromCPWithNSString:);
+  methods[12].selector = @selector(readAllBytesWithJavaIoInputStream:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "DEFAULT_BUFFER_SIZE", "I", .constantValue.asInt = ASFileUtils_DEFAULT_BUFFER_SIZE, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "readStringFromURL", "LNSString;", "getFileFromClassPath", "getInputStreamFromClassPath", "getFilePathFromClassPath", "convertInputStreamToString", "LNSString;LJavaIoInputStream;", "readFilesContent", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "readFileToString", "LJavaIoFile;", "LJavaIoIOException;", "loadPropertiesFromClassPath", "getFileAsProperties", "getFilenamesForDirnameFromCP", "(Ljava/lang/String;)Ljava/util/List<Ljava/io/File;>;", "readAllBytes", "LJavaIoInputStream;" };
-  static const J2ObjcClassInfo _ASFileUtils = { "FileUtils", "com.ashera.utils", ptrTable, methods, fields, 7, 0x1, 12, 1, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "readStringFromURL", "LNSString;", "getFileFromClassPath", "getInputStreamFromClassPath", "getFilePathFromClassPath", "convertInputStreamToString", "LNSString;LJavaIoInputStream;", "readFilesContent", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "readFileToString", "LJavaIoFile;", "LJavaIoIOException;", "LJavaIoReader;", "loadPropertiesFromClassPath", "getFileAsProperties", "getFilenamesForDirnameFromCP", "(Ljava/lang/String;)Ljava/util/List<Ljava/io/File;>;", "readAllBytes", "LJavaIoInputStream;" };
+  static const J2ObjcClassInfo _ASFileUtils = { "FileUtils", "com.ashera.utils", ptrTable, methods, fields, 7, 0x1, 13, 1, -1, -1, -1, -1, -1 };
   return &_ASFileUtils;
 }
 
@@ -232,8 +245,14 @@ id<JavaUtilMap> ASFileUtils_readFilesContentWithJavaUtilMap_(id<JavaUtilMap> url
 
 NSString *ASFileUtils_readFileToStringWithJavaIoFile_(JavaIoFile *filePath) {
   ASFileUtils_initialize();
+  JavaIoReader *input = create_JavaIoFileReader_initWithJavaIoFile_(filePath);
+  return ASFileUtils_readFileToStringWithJavaIoReader_(input);
+}
+
+NSString *ASFileUtils_readFileToStringWithJavaIoReader_(JavaIoReader *input) {
+  ASFileUtils_initialize();
+  JavaIoBufferedReader *reader = create_JavaIoBufferedReader_initWithJavaIoReader_(input);
   JavaLangStringBuilder *fileData = create_JavaLangStringBuilder_initWithInt_(1000);
-  JavaIoBufferedReader *reader = create_JavaIoBufferedReader_initWithJavaIoReader_(create_JavaIoFileReader_initWithJavaIoFile_(filePath));
   IOSCharArray *buf = [IOSCharArray arrayWithLength:10];
   jint numRead = 0;
   while ((numRead = [reader readWithCharArray:buf]) != -1) {
@@ -248,11 +267,19 @@ NSString *ASFileUtils_readFileToStringWithJavaIoFile_(JavaIoFile *filePath) {
 JavaUtilProperties *ASFileUtils_loadPropertiesFromClassPathWithNSString_(NSString *fileName) {
   ASFileUtils_initialize();
   JavaUtilProperties *properties = create_JavaUtilProperties_init();
+  JavaIoStringReader *stringReader = nil;
   @try {
-    [properties load__WithJavaIoInputStream:ASFileUtils_getInputStreamFromClassPathWithNSString_(fileName)];
+    NSString *fileContent = ASFileUtils_readFileToStringWithJavaIoReader_(create_JavaIoInputStreamReader_initWithJavaIoInputStream_(ASFileUtils_getInputStreamFromClassPathWithNSString_(fileName)));
+    stringReader = create_JavaIoStringReader_initWithNSString_(fileContent);
+    [properties load__WithJavaIoReader:stringReader];
   }
   @catch (JavaIoIOException *e) {
     @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
+  }
+  @finally {
+    if (stringReader != nil) {
+      [stringReader close];
+    }
   }
   return properties;
 }
