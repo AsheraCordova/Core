@@ -56,6 +56,8 @@ Browser	      | Teavm
 * com.ashera.Model
 * com.ashera.layout.MultiSelectionSpinner
 * android.webkit.WebView
+* ListView
+* fragment
 
 Important Links:
 
@@ -566,3 +568,13 @@ filter				  | Method to filter the data presented in list view.
 filterDelay 	 	  | Delay before which filter will not be triggered. Default is 100ms.  	 	 	 	 	 	 	 	 	 	 	 	 	 
 filterId 	 	 	  | The id of the filter. Custom filters can be created by using FilterFatory.register(LowerCasePrefixFilter.class.getName(), new LowerCasePrefixFilter());	 	 	 	 	 	 	 	 	 	 	 	 	 
 filterItemPath 	 	  |	Mandatory for filter to work. The path on the model object on which filter will be applied to the items.
+
+### fragment
+Name                	| Description
+-------------       	| -------------
+navigateTo(actionId:string, ...scopedObjects:ScopedObject[])	| Navigate to page with actionId (a constant defined in NavGraph.ts) with initial model objects passed into scopedObjects params.
+popBackStack()	| Remove the top view from stack. Equivalent of hitting back button.
+popBackStackTo(destinationId: string, inclusive: boolean)	| Pop all screens until the destinationId<Id of fragment defined in xml> based on inclusive flag.
+navigateWithPopBackStackTo(actionId:string, destinationId: string, inclusive: boolean, ...scopedObjects:ScopedObject[])	| Navigate to page with actionId (a constant defined in NavGraph.ts) and pop all screens until the destinationId<Id of fragment defined in xml> based on inclusive flag.
+navigateAsTop(actionId:string, ...scopedObjects:ScopedObject[])	| Remove all screens in stack and make this the top most screen.
+closeDialog()	| Use this method to close dialogs instead of popBackStack().
