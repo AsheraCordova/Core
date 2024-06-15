@@ -552,7 +552,7 @@ modelOptionTextPath	| When a dynamic list populated from model, modelOptionTextP
 modelOptionValuePath	| When a dynamic list populated from model, modelOptionValuePath sets the path of the value in the model.
 	
 ### android.webkit.WebView
-Widget which adds displaying simple staic html pages.
+Widget which adds support for displaying simple static html pages.
 
 Name                	| Description
 -------------       	| -------------
