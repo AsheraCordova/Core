@@ -4858,7 +4858,10 @@ public void setOnSwiped(String value) {
 	}
 	public static void nativeMakeFrame(Object nativeWidget, int l, int t, int r, int b) {
 		HTMLElement htmlElement = (org.teavm.jso.dom.html.HTMLElement) nativeWidget;
-		htmlElement.getStyle().setProperty("position", "absolute");
+		String propertyValue = htmlElement.getStyle().getPropertyValue("position");
+		if (propertyValue == null || propertyValue.trim().equals("")) {
+			htmlElement.getStyle().setProperty("position", "absolute");
+		}
 		htmlElement.getStyle().setProperty("width", r - l + "px");
 		htmlElement.getStyle().setProperty("height", b - t + "px");
 		htmlElement.getStyle().setProperty("left", l + "px");

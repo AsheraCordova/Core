@@ -49,7 +49,7 @@ public class FragmentManager {
 		NodeList<? extends HTMLElement> dialogs = shadowRoot.querySelectorAll(".web-dialog");
 		if (dialogs.getLength() > 0) {
 			HTMLElement element = dialogs.get(dialogs.getLength() - 1);
-			removeChildFromShadowRoot(element);
+			removeChildFromParent(element);
 			handleDialogClose(dialogFragments.get(element.getAttribute("fragmentId")));
 		}
 	}
@@ -69,25 +69,48 @@ public class FragmentManager {
 		
 		HTMLElement root = updateLeftAndTop(genericFragment, screenWidth, screenHeight);
 		dialog.appendChild(root);
-		appendChildToShadowRoot(dialog);
+		
+		HTMLElement currentActiveRoot = getCurrentActiveRoot();
+		currentActiveRoot.appendChild(dialog);
 
 		if ("true".equals(windowCloseOnTouchOutside)) {
 			dialog.addEventListener("click", (event) -> {
 				HTMLElement element = (HTMLElement) event.getTarget().cast();
 				if(element.getAttribute("dialog") != null) {
-					removeChildFromShadowRoot(dialog);
+					removeChildFromParent(dialog);
 					handleDialogClose(genericFragment);
 				}
 			});		
 		}
 	}
 
+	private HTMLElement getCurrentActiveRoot() {
+		HTMLElement shadowRoot = getShadowRoot();
+		NodeList<? extends HTMLElement> dialogs = shadowRoot.querySelectorAll(".root");
+		HTMLElement currentActiveRoot = null;
+
+		for (int i = dialogs.getLength() - 1; i >= 0; i--) {
+			currentActiveRoot =  dialogs.get(i);
+			
+			if (currentActiveRoot.getParentNode() == shadowRoot) {
+				break;
+			}
+		}
+		return currentActiveRoot;
+	}
+
 	private HTMLElement updateLeftAndTop(DialogFragment genericFragment, int screenWidth, int screenHeight) {
 		HTMLElement root = getRoot(genericFragment);
+		root.getStyle().setProperty("position", "relative");
+		HTMLElement rootWrapper = org.teavm.jso.browser.Window.current().getDocument().createElement("div");
+		rootWrapper.getStyle().setProperty("position", "absolute");
+		rootWrapper.getStyle().setProperty("width", "max-content");
+		rootWrapper.getStyle().setProperty("height", "max-content");
 		r.android.view.View view = (r.android.view.View)genericFragment.getRootWidget().asWidget();
-		root.getStyle().setProperty("left", (screenWidth - view.getMeasuredWidth()) /2 + "");
-		root.getStyle().setProperty("top", (screenHeight - view.getMeasuredHeight()) /2 + "");
-		return root;
+		rootWrapper.getStyle().setProperty("left", (screenWidth - view.getMeasuredWidth()) /2 + "");
+		rootWrapper.getStyle().setProperty("top", (screenHeight - view.getMeasuredHeight()) /2 + "");
+		rootWrapper.appendChild(root);
+		return rootWrapper;
 	}
 
 	private void deactivateCurrentFragment(GenericFragment activeFragment) {
@@ -101,6 +124,10 @@ public class FragmentManager {
 			removeChildFromShadowRoot(getRoot(fragmentToBeDisposed));
 		}
 	}	
+	
+	private void removeChildFromParent(HTMLElement element) {
+		element.getParentNode().removeChild(element);
+	}
 
 
 	private void addRootToView(GenericFragment genericFragment) {

@@ -1020,11 +1020,18 @@ public void initialized() {
 
 private void navigate(Object actionId, Object scopeObjects) {
 	if (isValidFragment()) {
+		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, null, false, false, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
 	}
 	
+}
+
+private void checkIfDialog(Object actionId) {
+	if (((String)actionId).startsWith("dialog#")) {
+		throw new RuntimeException("Dialog is not supported. Use navigator.navigate(...).");
+	}
 }
 
 private void popBackStack() {
@@ -1047,6 +1054,7 @@ private void popBackStackTo(Object destinationId, Object inclusive) {
 private void navigateWithPopBackStackTo(Object actionId, Object destinationId, Object inclusive,
 		Object scopeObjects) {
 	if (isValidFragment()) {
+		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, (String) destinationId, (boolean)inclusive, false, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -1057,6 +1065,7 @@ private void navigateWithPopBackStackTo(Object actionId, Object destinationId, O
 
 private void navigateAsTop(Object actionId, Object scopeObjects) {
 	if (isValidFragment()) {
+		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, null, false, true, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -1066,6 +1075,7 @@ private void navigateAsTop(Object actionId, Object scopeObjects) {
 
 private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 	if (isValidFragment()) {
+		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, null, true, false, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -1154,5 +1164,14 @@ private void makeCurrentFragmentActive() {
 		}, 0);
 	}
 
+}
+
+
+private void closeDialog() {
+	if (isValidFragment()) {
+		getNavigator().closeDialog(fragment);
+		makeCurrentFragmentActive();
+	}
+	
 }
 }

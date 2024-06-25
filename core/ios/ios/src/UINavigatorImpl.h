@@ -32,6 +32,8 @@
 
 - (void)closeDialog;
 
+- (void)closeDialogWithASIFragment:(id<ASIFragment>)fragment;
+
 - (id<ASIFragment>)getActiveFragmentWithASIFragment:(id<ASIFragment>)fragment;
 
 - (jint)getPopCountWithNSString:(NSString *)destinationId

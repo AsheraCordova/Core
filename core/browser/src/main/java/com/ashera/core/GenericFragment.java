@@ -150,7 +150,7 @@ public class GenericFragment extends Fragment implements IFragment{
 			int scopedObjectCount = scopedObjects.size();
 			bundle.putInt("count", scopedObjectCount);
 			for (int i = 0; i < scopedObjectCount; i++) {
-				Map<String, Object> map = scopedObjects.get(i);
+				Map<String, Object> map = PluginInvoker.getMap(scopedObjects.get(i));
 				bundle.putString("expression" + i, PluginInvoker.getString(map.get("expression")));
 
 				Object payload = map.get("payload");
@@ -297,14 +297,14 @@ public class GenericFragment extends Fragment implements IFragment{
 		if (view == null) {
 			try {
 				IFragment rootFragment = getParent();
-
+				String myFileName = fileName;
 				if (rootFragment != null) { 
 					String html = rootFragment.getInlineResource(fileName);
 					if (html != null) {
-						fileName = html;
+						myFileName = html;
 					}
 				}
-				IWidget widget = PluginInvoker.parseFragment(fileName, false, this);
+				IWidget widget = PluginInvoker.parseFragment(myFileName, false, this);
 				createChildFragments();
 
 				if (measure) {
@@ -634,5 +634,19 @@ public class GenericFragment extends Fragment implements IFragment{
 	}
 
 	public void createChildFragments() {
+	}
+
+	@Override
+	public IFragment getRootFragment() {
+		IFragment rootFragment = this;
+		Fragment parentFragment = getParentFragment();
+		while (parentFragment != null) {
+			if (parentFragment instanceof IFragment) {
+				rootFragment = (IFragment) parentFragment;
+			}
+
+			parentFragment = parentFragment.getParentFragment();
+		}
+		return rootFragment;
 	}
 }

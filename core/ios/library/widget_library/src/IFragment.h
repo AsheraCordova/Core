@@ -46,6 +46,8 @@
 
 - (id)onCreateViewWithBoolean:(jboolean)measure;
 
+- (id<ASIFragment>)getRootFragment;
+
 - (ASEventBus *)getEventBus;
 
 - (id<ASIWidget>)getRootWidget;

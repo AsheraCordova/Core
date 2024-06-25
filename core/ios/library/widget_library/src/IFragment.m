@@ -25,6 +25,7 @@
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x401, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LASIFragment;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASEventBus;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIWidget;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x401, 4, 5, -1, -1, -1, -1 },
@@ -71,41 +72,42 @@
   methods[7].selector = @selector(onPause);
   methods[8].selector = @selector(onCloseDialog);
   methods[9].selector = @selector(onCreateViewWithBoolean:);
-  methods[10].selector = @selector(getEventBus);
-  methods[11].selector = @selector(getRootWidget);
-  methods[12].selector = @selector(hasDevDataWithNSString:);
-  methods[13].selector = @selector(getDevDataWithNSString:);
-  methods[14].selector = @selector(getRootActivity);
-  methods[15].selector = @selector(getArgumentsBundle);
-  methods[16].selector = @selector(setRootWidgetWithASIWidget:);
-  methods[17].selector = @selector(storeUserDataWithNSString:withId:);
-  methods[18].selector = @selector(getUserDataWithNSString:);
-  methods[19].selector = @selector(storeInTempCacheWithNSString:withId:);
-  methods[20].selector = @selector(getFromTempCacheWithNSString:);
-  methods[21].selector = @selector(getParentForRootWidget);
-  methods[22].selector = @selector(getStyleSheet);
-  methods[23].selector = @selector(setStyleSheetWithCSSStyleSheet:);
-  methods[24].selector = @selector(isViewLoaded);
-  methods[25].selector = @selector(setFrameWithInt:withInt:withInt:withInt:);
-  methods[26].selector = @selector(remeasure);
-  methods[27].selector = @selector(disableRemeasure);
-  methods[28].selector = @selector(enableRemeasure);
-  methods[29].selector = @selector(getDisposables);
-  methods[30].selector = @selector(addDisposableWithId:);
-  methods[31].selector = @selector(addListenerWithASIWidget:withId:);
-  methods[32].selector = @selector(getListenerWithIOSClass:);
-  methods[33].selector = @selector(getListenerWithASIWidget:withIOSClass:);
-  methods[34].selector = @selector(removeListenerWithASIWidget:withId:);
-  methods[35].selector = @selector(addErrorWithASError:);
-  methods[36].selector = @selector(hasErrors);
-  methods[37].selector = @selector(resizeWindowWithInt:withInt:);
-  methods[38].selector = @selector(getInlineResourceWithNSString:);
-  methods[39].selector = @selector(setInlineResourceWithNSString:withNSString:withBoolean:);
-  methods[40].selector = @selector(getParent);
-  methods[41].selector = @selector(getUId);
+  methods[10].selector = @selector(getRootFragment);
+  methods[11].selector = @selector(getEventBus);
+  methods[12].selector = @selector(getRootWidget);
+  methods[13].selector = @selector(hasDevDataWithNSString:);
+  methods[14].selector = @selector(getDevDataWithNSString:);
+  methods[15].selector = @selector(getRootActivity);
+  methods[16].selector = @selector(getArgumentsBundle);
+  methods[17].selector = @selector(setRootWidgetWithASIWidget:);
+  methods[18].selector = @selector(storeUserDataWithNSString:withId:);
+  methods[19].selector = @selector(getUserDataWithNSString:);
+  methods[20].selector = @selector(storeInTempCacheWithNSString:withId:);
+  methods[21].selector = @selector(getFromTempCacheWithNSString:);
+  methods[22].selector = @selector(getParentForRootWidget);
+  methods[23].selector = @selector(getStyleSheet);
+  methods[24].selector = @selector(setStyleSheetWithCSSStyleSheet:);
+  methods[25].selector = @selector(isViewLoaded);
+  methods[26].selector = @selector(setFrameWithInt:withInt:withInt:withInt:);
+  methods[27].selector = @selector(remeasure);
+  methods[28].selector = @selector(disableRemeasure);
+  methods[29].selector = @selector(enableRemeasure);
+  methods[30].selector = @selector(getDisposables);
+  methods[31].selector = @selector(addDisposableWithId:);
+  methods[32].selector = @selector(addListenerWithASIWidget:withId:);
+  methods[33].selector = @selector(getListenerWithIOSClass:);
+  methods[34].selector = @selector(getListenerWithASIWidget:withIOSClass:);
+  methods[35].selector = @selector(removeListenerWithASIWidget:withId:);
+  methods[36].selector = @selector(addErrorWithASError:);
+  methods[37].selector = @selector(hasErrors);
+  methods[38].selector = @selector(resizeWindowWithInt:withInt:);
+  methods[39].selector = @selector(getInlineResourceWithNSString:);
+  methods[40].selector = @selector(setInlineResourceWithNSString:withNSString:withBoolean:);
+  methods[41].selector = @selector(getParent);
+  methods[42].selector = @selector(getUId);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "onAttach", "LASIActivity;", "onCreateView", "Z", "hasDevData", "LNSString;", "getDevData", "setRootWidget", "LASIWidget;", "storeUserData", "LNSString;LNSObject;", "getUserData", "storeInTempCache", "getFromTempCache", "setStyleSheet", "LCSSStyleSheet;", "setFrame", "IIII", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "addError", "LASError;", "resizeWindow", "II", "getInlineResource", "setInlineResource", "LNSString;LNSString;Z" };
-  static const J2ObjcClassInfo _ASIFragment = { "IFragment", "com.ashera.core", ptrTable, methods, NULL, 7, 0x609, 42, 0, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASIFragment = { "IFragment", "com.ashera.core", ptrTable, methods, NULL, 7, 0x609, 43, 0, -1, -1, -1, -1, -1 };
   return &_ASIFragment;
 }
 

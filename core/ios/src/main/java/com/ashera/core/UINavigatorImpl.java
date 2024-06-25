@@ -197,6 +197,9 @@ public class UINavigatorImpl {
 	  	[CATransaction commit];
 	]-*/;
 
+	public void closeDialog(IFragment fragment) {
+		closeDialog();
+	}
 	public void closeDialog() {
 		Object presentedController = getTopPresentedController();
 		closeDialog(presentedController);

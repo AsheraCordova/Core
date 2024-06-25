@@ -94,6 +94,8 @@
 
 - (id<ASIActivity>)getRootActivity;
 
+- (id<ASIFragment>)getRootFragment;
+
 - (id<ASIWidget>)getRootWidget;
 
 - (id<CSSStyleSheet>)getStyleSheet;

@@ -301,6 +301,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASUINavigatorImpl_navigateToControllerWithId_withBoolean_withBoolean_withInt_withBoolean_(self, rootFragment, finish, clear, popCount, remeasure);
 }
 
+- (void)closeDialogWithASIFragment:(id<ASIFragment>)fragment {
+  [self closeDialog];
+}
+
 - (void)closeDialog {
   id presentedController = ASUINavigatorImpl_getTopPresentedController(self);
   ASUINavigatorImpl_closeDialogWithId_(self, presentedController);
@@ -384,15 +388,16 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 19, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 22, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 21, 22, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 23, 22, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 23, 24, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 21, 24, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 25, 22, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 26, 27, -1, 28, -1, -1 },
-    { NULL, "V", 0x1, 24, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 25, 29, -1, -1, -1, -1 },
     { NULL, "I", 0x1, 30, 31, 32, -1, -1, -1 },
-    { NULL, "LASIFragment;", 0x1, 33, 25, -1, -1, -1, -1 },
+    { NULL, "LASIFragment;", 0x1, 33, 22, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -411,23 +416,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[11].selector = @selector(getNavController);
   methods[12].selector = @selector(getRootNavController);
   methods[13].selector = @selector(navigateToControllerWithId:withBoolean:withBoolean:withInt:withBoolean:);
-  methods[14].selector = @selector(closeDialog);
-  methods[15].selector = @selector(getFragmentWithId:);
-  methods[16].selector = @selector(closeDialogWithId:);
-  methods[17].selector = @selector(getTopPresentedController);
-  methods[18].selector = @selector(popBackStackWithASIFragment:);
-  methods[19].selector = @selector(getGenericFragmentsWithJavaUtilList:);
-  methods[20].selector = @selector(popBackStackWithASIFragment:withNSString:withBoolean:);
-  methods[21].selector = @selector(getPopCountWithNSString:withBoolean:);
-  methods[22].selector = @selector(getActiveFragmentWithASIFragment:);
+  methods[14].selector = @selector(closeDialogWithASIFragment:);
+  methods[15].selector = @selector(closeDialog);
+  methods[16].selector = @selector(getFragmentWithId:);
+  methods[17].selector = @selector(closeDialogWithId:);
+  methods[18].selector = @selector(getTopPresentedController);
+  methods[19].selector = @selector(popBackStackWithASIFragment:);
+  methods[20].selector = @selector(getGenericFragmentsWithJavaUtilList:);
+  methods[21].selector = @selector(popBackStackWithASIFragment:withNSString:withBoolean:);
+  methods[22].selector = @selector(getPopCountWithNSString:withBoolean:);
+  methods[23].selector = @selector(getActiveFragmentWithASIFragment:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "navController_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "fragmentFactory_", "LASUINavigatorImpl_FragmentFactory;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "remeasure_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASUINavigatorImpl_FragmentFactory;LNSObject;Z", "navigate", "LNSString;LNSString;ZZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "navigateWithPopBackStack", "navigateAsTop", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;ZIZLASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;ZIZLcom/ashera/core/IFragment;)V", "getFileName", "[LNSString;I", "updateViewFrame", "LNSObject;LNSObject;", "navigateToDialog", "LNSObject;LNSObject;LNSString;LNSString;", "navigateToController", "LNSObject;ZZIZ", "getFragment", "LNSObject;", "closeDialog", "popBackStack", "LASIFragment;", "getGenericFragments", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/core/GenericFragment;>;)V", "LASIFragment;LNSString;Z", "getPopCount", "LNSString;Z", "LASUINavigatorImpl_DestinatinNotFoundException;", "getActiveFragment", "LASUINavigatorImpl_IosDialogFragment;LASUINavigatorImpl_DestinatinNotFoundException;LASUINavigatorImpl_FragmentFactory;" };
-  static const J2ObjcClassInfo _ASUINavigatorImpl = { "UINavigatorImpl", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 23, 3, -1, 34, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASUINavigatorImpl_FragmentFactory;LNSObject;Z", "navigate", "LNSString;LNSString;ZZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "navigateWithPopBackStack", "navigateAsTop", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLJavaUtilList;LASIFragment;", "(Ljava/lang/String;Ljava/lang/String;ZLjava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;Lcom/ashera/core/IFragment;)V", "LNSString;LJavaUtilList;ZIZLASIFragment;", "(Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;ZIZLcom/ashera/core/IFragment;)V", "getFileName", "[LNSString;I", "updateViewFrame", "LNSObject;LNSObject;", "navigateToDialog", "LNSObject;LNSObject;LNSString;LNSString;", "navigateToController", "LNSObject;ZZIZ", "closeDialog", "LASIFragment;", "getFragment", "LNSObject;", "popBackStack", "getGenericFragments", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/core/GenericFragment;>;)V", "LASIFragment;LNSString;Z", "getPopCount", "LNSString;Z", "LASUINavigatorImpl_DestinatinNotFoundException;", "getActiveFragment", "LASUINavigatorImpl_IosDialogFragment;LASUINavigatorImpl_DestinatinNotFoundException;LASUINavigatorImpl_FragmentFactory;" };
+  static const J2ObjcClassInfo _ASUINavigatorImpl = { "UINavigatorImpl", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 24, 3, -1, 34, -1, -1, -1 };
   return &_ASUINavigatorImpl;
 }
 

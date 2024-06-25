@@ -304,13 +304,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (view_ == nil) {
     @try {
       id<ASIFragment> rootFragment = [self getParent];
+      NSString *myFileName = fileName_;
       if (rootFragment != nil) {
         NSString *html = [rootFragment getInlineResourceWithNSString:fileName_];
         if (html != nil) {
-          fileName_ = html;
+          myFileName = html;
         }
       }
-      id<ASIWidget> widget = ASPluginInvoker_parseFragmentWithNSString_withBoolean_withASIFragment_(fileName_, false, self);
+      id<ASIWidget> widget = ASPluginInvoker_parseFragmentWithNSString_withBoolean_withASIFragment_(myFileName, false, self);
       [self createChildFragments];
       if (measure) {
         [self remeasure];
@@ -566,6 +567,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)createChildFragments {
 }
 
+- (id<ASIFragment>)getRootFragment {
+  id<ASIFragment> rootFragment = self;
+  ADXFragment *parentFragment = [self getParentFragment];
+  while (parentFragment != nil) {
+    if ([ASIFragment_class_() isInstance:parentFragment]) {
+      rootFragment = (id<ASIFragment>) cast_check(parentFragment, ASIFragment_class_());
+    }
+    parentFragment = [parentFragment getParentFragment];
+  }
+  return rootFragment;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -625,6 +638,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIFragment;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASIFragment;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -686,6 +700,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[54].selector = @selector(getUId);
   methods[55].selector = @selector(getParent);
   methods[56].selector = @selector(createChildFragments);
+  methods[57].selector = @selector(getRootFragment);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "activity_", "LASIActivity;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -714,7 +729,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "remeasureOnResume_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "addListener", "LASIWidget;LNSObject;", "getListener", "LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "LASIWidget;LIOSClass;", "<T:Ljava/lang/Object;>(Lcom/ashera/widget/IWidget;Ljava/lang/Class<TT;>;)Ljava/util/List<TT;>;", "removeListener", "()Ljava/util/List<Ljava/lang/Object;>;", "addDisposable", "LNSObject;", "getInitialBundle", "LNSString;LNSString;LJavaUtilList;", "(Ljava/lang/String;Ljava/lang/String;Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;)Lr/android/os/Bundle;", "onAttach", "LADContext;", "LASIActivity;", "onCreate", "LADBundle;", "getFileAsProperties", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Properties;", "getEventData", "LNSString;", "onCreateView", "LADLayoutInflater;LADViewGroup;LADBundle;", "Z", "onViewCreated", "LADView;LADBundle;", "onActivityCreated", "sendLifeCycleEvent", "LNSString;LNSString;LNSString;", "setRootWidget", "LASIWidget;", "getUserData", "storeUserData", "LNSString;LNSObject;", "hasDevData", "getDevData", "setStyleSheet", "LCSSStyleSheet;", "storeInTempCache", "getFromTempCache", "setFrame", "IIII", "resizeWindow", "II", "addError", "LASError;", "getInlineResource", "setInlineResource", "LNSString;LNSString;Z", "id", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", &ASGenericFragment_POSTMEASURE_EVENT, &ASGenericFragment_PREMEASURE_EVENT, "Ljava/util/WeakHashMap<Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;>;", "Ljava/util/List<Ljava/lang/Object;>;", "Ljava/util/Stack<Ljava/lang/Boolean;>;" };
-  static const J2ObjcClassInfo _ASGenericFragment = { "GenericFragment", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 57, 24, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ASGenericFragment = { "GenericFragment", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 58, 24, -1, -1, -1, -1, -1 };
   return &_ASGenericFragment;
 }
 
@@ -756,7 +771,7 @@ ADBundle *ASGenericFragment_getInitialBundleWithNSString_withNSString_withJavaUt
     jint scopedObjectCount = [scopedObjects size];
     [bundle putIntWithNSString:@"count" withInt:scopedObjectCount];
     for (jint i = 0; i < scopedObjectCount; i++) {
-      id<JavaUtilMap> map = [scopedObjects getWithInt:i];
+      id<JavaUtilMap> map = ASPluginInvoker_getMapWithId_([scopedObjects getWithInt:i]);
       [bundle putStringWithNSString:JreStrcat("$I", @"expression", i) withNSString:ASPluginInvoker_getStringWithId_([((id<JavaUtilMap>) nil_chk(map)) getWithId:@"expression"])];
       id payload = [map getWithId:@"payload"];
       if ([JavaIoSerializable_class_() isInstance:payload]) {
