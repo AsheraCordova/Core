@@ -577,4 +577,5 @@ popBackStack()	| Remove the top view from stack. Equivalent of hitting back butt
 popBackStackTo(destinationId: string, inclusive: boolean)	| Pop all screens until the destinationId<Id of fragment defined in xml> based on inclusive flag.
 navigateWithPopBackStackTo(actionId:string, destinationId: string, inclusive: boolean, ...scopedObjects:ScopedObject[])	| Navigate to page with actionId (a constant defined in NavGraph.ts) and pop all screens until the destinationId<Id of fragment defined in xml> based on inclusive flag.
 navigateAsTop(actionId:string, ...scopedObjects:ScopedObject[])	| Remove all screens in stack and make this the top most screen.
-closeDialog()	| Use this method to close dialogs instead of popBackStack().
+
+Note: dialog is not supported in fragments. Instead use navigator.navigate(...) methods and declare dialogs in the main nav_graph.xml.
