@@ -173,6 +173,7 @@ Object to UI and UI to Object is the provided as part of the core framework. It 
 ### Scope
 Scope where an object is stored can be one of the following:
 * view - It is stored on the fragment which is the root for all views. When a fragment is destroyed, the object is also removed along with the fragment.
+* parentview - If we have nested fragments, store it on the root fragment for the nested fragment.
 * session - It is stored on the application object. As long as the application is alive, the object is available.
 * loopvar - Whenever we loop on object, a loopvar is created and stored on the widget on which we are looping.
 * local - It is stored on the widget on which the modelParam is declared.
