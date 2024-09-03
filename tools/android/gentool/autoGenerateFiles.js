@@ -204,6 +204,11 @@ function generateFile(name) {
 	let fileName = pathArr[pathArr.length - 1];
 
 	if (name.startsWith(respath + 'drawable') && name.indexOf(".xml") != -1) {
+		//temp fix
+		if (name.endsWith("ic_cdv_splashscreen.xml")) {
+			return;
+		}
+
 		console.log("xslt triggered " + name);
 		let outFileName = fileName.replace('.xml', ".json");
 		runXmlToJson(name, "../resources/drawable/" + outFileName);
