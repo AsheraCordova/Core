@@ -23,6 +23,7 @@
      <source-file src="res/layout/autocomplete_completion.xml" target-dir="res/layout"/>
      <source-file src="res/layout/autocomplete_entries.xml" target-dir="res/layout"/>
      <source-file src="res/values/model_attrs.xml" target-dir="res/values"/>
+     <source-file src="res/values/viewoverlay_attrs.xml" target-dir="res/values"/>
      <!-- res end -->
 	 <!-- start src -->
      <source-file src="src/com/ashera/layout/AndroidLayoutsCordovaPlugin.java" target-dir="src/com/ashera/layout"/>
@@ -63,6 +64,8 @@
      <source-file src="src/com/ashera/layout/ViewGroupModelImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/ViewOnlyImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="src/com/ashera/layout/ViewOverlay.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="src/com/ashera/layout/ViewOverlayImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="src/com/ashera/layout/WebViewImpl.java" target-dir="src/com/ashera/layout"/>
      <!-- src end -->
      
@@ -99,6 +102,7 @@
      <source-file src="tsc/src/android/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/ViewOnlyImpl.ts" target-dir="tsc/src/android/widget"/>
+     <source-file src="tsc/src/android/widget/ViewOverlayImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="tsc/src/android/widget/WebViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <!-- tsc end -->
   </platform>

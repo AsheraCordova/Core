@@ -72,7 +72,7 @@ public class ColorImageConverter extends ColorConverter {
 	                // try
 	                try (java.io.InputStream fis = f) {
 	                	Image image = new Image(Display.getDefault(), fis);
-	                	
+	                	((Display)image.getDevice()).setData(image.hashCode() + "", fileExtension);
 	                	fragment.addDisposable(image);
 	                    return image;
 	                } catch (IOException e) {

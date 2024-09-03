@@ -197,6 +197,7 @@ public class fragmentImpl extends BaseHasWidgets implements com.ashera.core.IFra
 	public class fragmentExt extends r.android.widget.FrameLayout implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return fragmentImpl.this;
 		}
@@ -248,9 +249,12 @@ public class fragmentImpl extends BaseHasWidgets implements com.ashera.core.IFra
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(fragmentImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(fragmentImpl.this);
+	        overlays = ViewImpl.drawOverlay(fragmentImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -381,7 +385,7 @@ public class fragmentImpl extends BaseHasWidgets implements com.ashera.core.IFra
 				setState4(value);
 				return;
 			}
-			fragmentImpl.this.setAttribute(name, value, true);
+			fragmentImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -659,6 +663,9 @@ if (objValue instanceof java.util.List) {
     public Object asNativeWidget() {
         return pane;
     }
+    public boolean isWidgetDisposed() {
+		return ((org.eclipse.swt.widgets.Control) pane).isDisposed();
+	}
     
     @Override
     public void requestLayout() {

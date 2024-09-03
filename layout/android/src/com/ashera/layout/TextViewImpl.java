@@ -376,6 +376,7 @@ public class TextViewImpl extends BaseWidget implements com.ashera.validations.V
 	public class TextViewExt extends androidx.appcompat.widget.AppCompatTextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		
 		public IWidget getWidget() {
 			return TextViewImpl.this;
 		}
@@ -405,7 +406,9 @@ public class TextViewImpl extends BaseWidget implements com.ashera.validations.V
 		@Override
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
+			
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			
 			replayBufferedEvents();
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();

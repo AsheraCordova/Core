@@ -290,6 +290,7 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 	public class CheckBoxExt extends r.android.widget.CheckBox implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return CheckBoxImpl.this;
 		}
@@ -316,11 +317,14 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(CheckBoxImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 			canvas.reset();
 			onDraw(canvas);
 	        ViewImpl.redrawDrawables(CheckBoxImpl.this);
+	        overlays = ViewImpl.drawOverlay(CheckBoxImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -449,7 +453,7 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 				setState4(value);
 				return;
 			}
-			CheckBoxImpl.this.setAttribute(name, value, true);
+			CheckBoxImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

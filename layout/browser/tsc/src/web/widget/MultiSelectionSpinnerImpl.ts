@@ -94,7 +94,6 @@ export class TextStyleTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{

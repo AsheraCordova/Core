@@ -185,7 +185,6 @@ export class AutoLinkTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class CheckBoxImpl<T> extends ViewImpl<T>{

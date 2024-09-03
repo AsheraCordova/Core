@@ -286,6 +286,7 @@ public class TextViewImpl extends BaseWidget implements com.ashera.validations.V
 	public class TextViewExt extends r.android.widget.TextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return TextViewImpl.this;
 		}
@@ -312,9 +313,12 @@ public class TextViewImpl extends BaseWidget implements com.ashera.validations.V
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(TextViewImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(TextViewImpl.this);
+	        overlays = ViewImpl.drawOverlay(TextViewImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -443,7 +447,7 @@ public class TextViewImpl extends BaseWidget implements com.ashera.validations.V
 				setState4(value);
 				return;
 			}
-			TextViewImpl.this.setAttribute(name, value, true);
+			TextViewImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

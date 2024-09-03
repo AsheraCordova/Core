@@ -6,6 +6,8 @@
 #include "AbstractEnumToIntConverter.h"
 #include "BaseWidget.h"
 #include "Bitmap.h"
+#include "Color.h"
+#include "ColorStateList.h"
 #include "Context.h"
 #include "ConverterFactory.h"
 #include "Drawable.h"
@@ -52,6 +54,7 @@
 #include "ASUIImageView.h"
 
 @class JavaLangInteger;
+@protocol JavaUtilList;
 @protocol JavaUtilMap;
 
 
@@ -65,6 +68,7 @@
   ADDrawable *imageFromUrlPlaceHolder_;
   jboolean measureCalled_;
   ADDrawable *imageFromUrlError_;
+  id tintColor_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -162,8 +166,6 @@
 
 - (void)setTintColorWithId:(id)objValue;
 
-- (void)nativeSetTintColorWithId:(id)objValue;
-
 - (id)getTintColor;
 
 - (void)registerCommandAttributes;
@@ -186,6 +188,7 @@ J2OBJC_FIELD_SETTER(ASImageViewImpl, bean_, ASImageViewImpl_ImageViewBean *)
 J2OBJC_FIELD_SETTER(ASImageViewImpl, simpleWrapableView_, ASSimpleWrapableView *)
 J2OBJC_FIELD_SETTER(ASImageViewImpl, imageFromUrlPlaceHolder_, ADDrawable *)
 J2OBJC_FIELD_SETTER(ASImageViewImpl, imageFromUrlError_, ADDrawable *)
+J2OBJC_FIELD_SETTER(ASImageViewImpl, tintColor_, id)
 
 inline NSString *ASImageViewImpl_get_FOREGROUND_REGEX(void);
 static NSString *ASImageViewImpl_FOREGROUND_REGEX = @"drawForeground";
@@ -294,8 +297,6 @@ __attribute__((unused)) static void ASImageViewImpl_nativeSetContentModeWithInt_
 
 __attribute__((unused)) static void ASImageViewImpl_setTintColorWithId_(ASImageViewImpl *self, id objValue);
 
-__attribute__((unused)) static void ASImageViewImpl_nativeSetTintColorWithId_(ASImageViewImpl *self, id objValue);
-
 __attribute__((unused)) static id ASImageViewImpl_getTintColor(ASImageViewImpl *self);
 
 __attribute__((unused)) static void ASImageViewImpl_registerCommandAttributes(ASImageViewImpl *self);
@@ -322,6 +323,7 @@ J2OBJC_FIELD_SETTER(ASImageViewImpl_ScaleType, mapping_, id<JavaUtilMap>)
   __unsafe_unretained ASImageViewImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
+  id<JavaUtilList> overlays_;
   id<JavaUtilMap> templates_;
 }
 
@@ -329,6 +331,7 @@ J2OBJC_FIELD_SETTER(ASImageViewImpl_ScaleType, mapping_, id<JavaUtilMap>)
 
 J2OBJC_FIELD_SETTER(ASImageViewImpl_ImageViewExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASImageViewImpl_ImageViewExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASImageViewImpl_ImageViewExt, overlays_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASImageViewImpl_ImageViewExt, templates_, id<JavaUtilMap>)
 
 @interface ASImageViewImpl_ImageViewCommandBuilder () {
@@ -376,7 +379,7 @@ NSString *ASImageViewImpl_GROUP_NAME = @"ImageView";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingVertical"])) withTypeWithNSString:@"dimension"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"baseline"])) withTypeWithNSString:@"dimension"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"baselineAlignBottom"])) withTypeWithNSString:@"boolean"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"tint"])) withTypeWithNSString:@"color"])) withOrderWithInt:-10]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"tint"])) withTypeWithNSString:@"colorstate"])) withOrderWithInt:-10]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"cropToPadding"])) withTypeWithNSString:@"boolean"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
 }
 
@@ -667,6 +670,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (imageDrawable != nil && [imageDrawable isStateful] && [imageDrawable setStateWithIntArray:[((ADImageView *) nil_chk(measurableView_)) getDrawableState]]) {
     [self setImageWithId:imageDrawable];
   }
+  if (tintColor_ != nil && [tintColor_ isKindOfClass:[ADColorStateList class]] && [((ADColorStateList *) cast_chk(tintColor_, [ADColorStateList class])) isStateful]) {
+    ASImageViewImpl_setTintColorWithId_(self, tintColor_);
+  }
 }
 
 - (id)getPaddingBottom {
@@ -900,8 +906,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setImageWithId:(id)value {
-  [((ADImageView *) nil_chk(measurableView_)) setImageDrawableWithADDrawable:(ADDrawable *) cast_chk(value, [ADDrawable class])];
-  [self setImageNativeWithId:[((ADDrawable *) nil_chk(((ADDrawable *) cast_chk(value, [ADDrawable class])))) getDrawable]];
+  ADDrawable *drawable = (ADDrawable *) cast_chk(value, [ADDrawable class]);
+  [((ADImageView *) nil_chk(measurableView_)) setImageDrawableWithADDrawable:drawable];
+  [self setImageNativeWithId:[((ADDrawable *) nil_chk(drawable)) getDrawable] withId:[drawable getTintColor]];
 }
 
 - (id)getSrc {
@@ -969,12 +976,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ((ASUIImageView*) self->uiView_).image;
 }
 
-- (void)setImageNativeWithId:(id)value {
+- (void)setImageNativeWithId:(id)value
+                      withId:(id)tintColor {
   if ([value isKindOfClass:[UIImage class]]) {
+    if (tintColor != nil) {
+      value = [(UIImage*) value imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+      [((ASUIImageView*)self->uiView_) setTintColor:(UIColor*)tintColor];
+    }
     ((ASUIImageView*) self->uiView_).image = (UIImage*) value;
     [((ASUIImageView*) self->uiView_) setBackgroundColor:[UIColor clearColor]];
   } else if ([value isKindOfClass:[UIColor class]]) {
     [((ASUIImageView*) self->uiView_) setBackgroundColor:((UIColor*) value)];
+    ((ASUIImageView*) self->uiView_).image = nil;
+  } else {
+    [((ASUIImageView*) self->uiView_) setBackgroundColor:[UIColor clearColor]];
     ((ASUIImageView*) self->uiView_).image = nil;
   }
 }
@@ -989,10 +1004,6 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setTintColorWithId:(id)objValue {
   ASImageViewImpl_setTintColorWithId_(self, objValue);
-}
-
-- (void)nativeSetTintColorWithId:(id)objValue {
-  ASImageViewImpl_nativeSetTintColorWithId_(self, objValue);
 }
 
 - (id)getTintColor {
@@ -1133,11 +1144,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 50, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 51, 52, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 53, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 53, 54, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 54, 36, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 55, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 56, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 55, 36, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 56, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 57, 58, -1, 59, -1, -1 },
@@ -1227,20 +1237,19 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[73].selector = @selector(onBitmapLoadedWithId:);
   methods[74].selector = @selector(postOnMeasureWithInt:withInt:);
   methods[75].selector = @selector(getImageNative);
-  methods[76].selector = @selector(setImageNativeWithId:);
+  methods[76].selector = @selector(setImageNativeWithId:withId:);
   methods[77].selector = @selector(nativeGetContentMode);
   methods[78].selector = @selector(nativeSetContentModeWithInt:);
   methods[79].selector = @selector(setTintColorWithId:);
-  methods[80].selector = @selector(nativeSetTintColorWithId:);
-  methods[81].selector = @selector(getTintColor);
-  methods[82].selector = @selector(registerCommandAttributes);
-  methods[83].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[84].selector = @selector(nativeRequestLayout);
-  methods[85].selector = @selector(createMaskWithId:withInt:withInt:withInt:withInt:);
-  methods[86].selector = @selector(removeMaskWithId:);
-  methods[87].selector = @selector(nativeInvalidate);
-  methods[88].selector = @selector(nativeCreateViewWithInt:);
-  methods[89].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[80].selector = @selector(getTintColor);
+  methods[81].selector = @selector(registerCommandAttributes);
+  methods[82].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[83].selector = @selector(nativeRequestLayout);
+  methods[84].selector = @selector(createMaskWithId:withInt:withInt:withInt:withInt:);
+  methods[85].selector = @selector(removeMaskWithId:);
+  methods[86].selector = @selector(nativeInvalidate);
+  methods[87].selector = @selector(nativeCreateViewWithInt:);
+  methods[88].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "FOREGROUND_REGEX", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 65, -1, -1 },
@@ -1257,9 +1266,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "imageFromUrlPlaceHolder_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "measureCalled_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "imageFromUrlError_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tintColor_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setBaseLine", "LNSObject;", "setBaselineAlignBottom", "setCropToPadding", "setMaxWidth", "setMaxHeight", "setAdjustViewBounds", "setPaddingVertical", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "setForegroundFrame", "IIII", "createWrapperView", "LNSObject;I", "createWrapperViewHolder", "I", "nativeAddForeGround", "LASIWidget;", "createWrapperViewHolderNative", "setScaleType", "LNSString;LNSObject;", "setImage", "getImageHeight", "getImageWidth", "setImageFromUrlError", "setImageFromUrlPlaceHolder", "setImageFromUrl", "onBitmapFailed", "onPrepareLoad", "onBitmapLoaded", "postOnMeasure", "II", "setImageNative", "nativeSetContentMode", "setTintColor", "nativeSetTintColor", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "createMask", "LNSObject;IIII", "removeMask", "nativeCreateView", "nativeMakeFrameForChildWidget", &ASImageViewImpl_FOREGROUND_REGEX, &ASImageViewImpl_VIEW_HOLDER_REGEX, &ASImageViewImpl_WIDGET_REGEX, &ASImageViewImpl_LOCAL_NAME, &ASImageViewImpl_GROUP_NAME, &ASImageViewImpl_scaleTypeToContentModeMapping, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageViewImpl_ScaleType;LASImageViewImpl_ImageViewExt;LASImageViewImpl_ImageViewCommandBuilder;LASImageViewImpl_ImageViewBean;" };
-  static const J2ObjcClassInfo _ASImageViewImpl = { "ImageViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 90, 14, -1, 72, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setBaseLine", "LNSObject;", "setBaselineAlignBottom", "setCropToPadding", "setMaxWidth", "setMaxHeight", "setAdjustViewBounds", "setPaddingVertical", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "setForegroundFrame", "IIII", "createWrapperView", "LNSObject;I", "createWrapperViewHolder", "I", "nativeAddForeGround", "LASIWidget;", "createWrapperViewHolderNative", "setScaleType", "LNSString;LNSObject;", "setImage", "getImageHeight", "getImageWidth", "setImageFromUrlError", "setImageFromUrlPlaceHolder", "setImageFromUrl", "onBitmapFailed", "onPrepareLoad", "onBitmapLoaded", "postOnMeasure", "II", "setImageNative", "LNSObject;LNSObject;", "nativeSetContentMode", "setTintColor", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "createMask", "LNSObject;IIII", "removeMask", "nativeCreateView", "nativeMakeFrameForChildWidget", &ASImageViewImpl_FOREGROUND_REGEX, &ASImageViewImpl_VIEW_HOLDER_REGEX, &ASImageViewImpl_WIDGET_REGEX, &ASImageViewImpl_LOCAL_NAME, &ASImageViewImpl_GROUP_NAME, &ASImageViewImpl_scaleTypeToContentModeMapping, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageViewImpl_ScaleType;LASImageViewImpl_ImageViewExt;LASImageViewImpl_ImageViewCommandBuilder;LASImageViewImpl_ImageViewBean;" };
+  static const J2ObjcClassInfo _ASImageViewImpl = { "ImageViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 89, 15, -1, 72, -1, -1, -1 };
   return &_ASImageViewImpl;
 }
 
@@ -1532,12 +1542,12 @@ void ASImageViewImpl_nativeSetContentModeWithInt_(ASImageViewImpl *self, jint co
 }
 
 void ASImageViewImpl_setTintColorWithId_(ASImageViewImpl *self, id objValue) {
-  [self applyAttributeCommandWithNSString:@"src" withNSString:@"tintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"tint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithLength:0 type:NSObject_class_()]];
-  ASImageViewImpl_nativeSetTintColorWithId_(self, objValue);
-}
-
-void ASImageViewImpl_nativeSetTintColorWithId_(ASImageViewImpl *self, id objValue) {
-  [((ASUIImageView*)self->uiView_) setTintColor:(UIColor*)objValue];
+  self->tintColor_ = objValue;
+  if ([objValue isKindOfClass:[ADColorStateList class]]) {
+    ADColorStateList *colorStateList = (ADColorStateList *) objValue;
+    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(colorStateList)) getColorForStateWithIntArray:[((ADImageView *) nil_chk(self->measurableView_)) getDrawableState] withInt:ADColor_BLACK]);
+  }
+  [self applyAttributeCommandWithNSString:@"src" withNSString:@"tintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"tint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ ASViewImpl_getColorWithId_(objValue) } count:1 type:NSObject_class_()]];
 }
 
 id ASImageViewImpl_getTintColor(ASImageViewImpl *self) {
@@ -1672,10 +1682,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
                     withInt:(jint)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
-  ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b);
-  ASImageViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
+  if (![self isOverlay]) {
+    ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b);
+    ASImageViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
+  }
   [this$0_ replayBufferedEvents];
   ASViewImpl_redrawDrawablesWithASIWidget_(this$0_);
+  overlays_ = ASViewImpl_drawOverlayWithASIWidget_withJavaUtilList_(this$0_, overlays_);
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
     [((ASOnLayoutEvent *) nil_chk(onLayoutEvent_)) setBWithInt:b];
@@ -1793,7 +1806,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
     [self setState4WithId:value];
     return;
   }
-  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
 - (void)setVisibilityWithInt:(jint)visibility {
@@ -1931,10 +1944,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
     { "this$0_", "LASImageViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
     { "measureFinished_", "LASMeasureEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
+    { "overlays_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 34, -1 },
   };
-  static const void *ptrTable[] = { "LASImageViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASImageViewImpl_ImageViewExt = { "ImageViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 33, 4, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASImageViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASImageViewImpl_ImageViewExt = { "ImageViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 33, 5, 0, -1, -1, -1, -1 };
   return &_ASImageViewImpl_ImageViewExt;
 }
 

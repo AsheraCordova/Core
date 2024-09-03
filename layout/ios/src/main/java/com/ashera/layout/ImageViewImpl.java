@@ -106,7 +106,7 @@ public class ImageViewImpl extends BaseWidget implements IsImage, com.ashera.ima
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("baseline").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("baselineAlignBottom").withType("boolean"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("tint").withType("color").withOrder(-10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("tint").withType("colorstate").withOrder(-10));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("cropToPadding").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 	}
 	
@@ -124,6 +124,7 @@ public class ImageViewImpl extends BaseWidget implements IsImage, com.ashera.ima
 	public class ImageViewExt extends r.android.widget.ImageView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return ImageViewImpl.this;
 		}
@@ -151,10 +152,13 @@ public class ImageViewImpl extends BaseWidget implements IsImage, com.ashera.ima
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(ImageViewImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
 			nativeMakeFrameForChildWidget(l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(ImageViewImpl.this);
+	        overlays = ViewImpl.drawOverlay(ImageViewImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -283,7 +287,7 @@ public class ImageViewImpl extends BaseWidget implements IsImage, com.ashera.ima
 				setState4(value);
 				return;
 			}
-			ImageViewImpl.this.setAttribute(name, value, true);
+			ImageViewImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -689,8 +693,11 @@ return getCropToPadding();				}
 		if (imageDrawable != null && imageDrawable.isStateful() && imageDrawable.setState(measurableView.getDrawableState())) {
 			setImage(imageDrawable);
 		}
+		
+		if (tintColor != null && tintColor instanceof r.android.content.res.ColorStateList && ((r.android.content.res.ColorStateList)tintColor).isStateful()) {
+			setTintColor(tintColor);
+		}
 	}
-	
     
 
 
@@ -1474,9 +1481,10 @@ public void setCropToPadding(boolean value) {
 	}	
 
 	public void setImage(Object value) {
-		measurableView.setImageDrawable((r.android.graphics.drawable.Drawable) value);
+		r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) value;
+		measurableView.setImageDrawable(drawable);
 		
-		setImageNative(((r.android.graphics.drawable.Drawable) value).getDrawable());
+		setImageNative(drawable.getDrawable(), drawable.getTintColor());
 	}
 	
 	
@@ -1553,12 +1561,19 @@ public void setCropToPadding(boolean value) {
 		return ((ASUIImageView*) self->uiView_).image;
 	]-*/;
 
-	public native void setImageNative(Object value) /*-[
+	public native void setImageNative(Object value, Object tintColor) /*-[
 		if ([value isKindOfClass:[UIImage class]]) {
+			if (tintColor != nil) {
+				value = [(UIImage*) value imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+				[((ASUIImageView*)self->uiView_) setTintColor:(UIColor*)tintColor];
+			}
 			((ASUIImageView*) self->uiView_).image = (UIImage*) value;
 			[((ASUIImageView*) self->uiView_) setBackgroundColor:[UIColor clearColor]];
 		} else if ([value isKindOfClass:[UIColor class]]) {
 			[((ASUIImageView*) self->uiView_) setBackgroundColor:((UIColor*) value)];
+			((ASUIImageView*) self->uiView_).image = nil;
+		} else {
+			[((ASUIImageView*) self->uiView_) setBackgroundColor:[UIColor clearColor]];
 			((ASUIImageView*) self->uiView_).image = nil;
 		}
 	]-*/;
@@ -1570,15 +1585,16 @@ public void setCropToPadding(boolean value) {
 		[((ASUIImageView*)self->uiView_) setContentMode:contentMode];
 	]-*/;
 	
+	private Object tintColor;
+	
 	private void setTintColor(Object objValue) {
-		applyAttributeCommand("src", "tintColor", new String[] {"tint"}, true);
-		nativeSetTintColor(objValue);
+		tintColor = objValue;
+		if (objValue instanceof r.android.content.res.ColorStateList) {
+			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
+			objValue = colorStateList.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.BLACK);
+		}
+		applyAttributeCommand("src", "tintColor", new String[] {"tint"}, true, ViewImpl.getColor(objValue));
 	}
-	
-	private native void nativeSetTintColor(Object objValue) /*-[
-		[((ASUIImageView*)self->uiView_) setTintColor:(UIColor*)objValue];
-	]-*/;
-	
 	
 	private native Object getTintColor() /*-[
 		return ((ASUIImageView*)self->uiView_).tintColor;

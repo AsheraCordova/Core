@@ -94,6 +94,7 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 	public class ProgressBarExt extends r.android.widget.ProgressBar implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return ProgressBarImpl.this;
 		}
@@ -145,10 +146,13 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(ProgressBarImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
 			nativeMakeFrameForChildWidget(l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(ProgressBarImpl.this);
+	        overlays = ViewImpl.drawOverlay(ProgressBarImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -277,7 +281,7 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
 				setState4(value);
 				return;
 			}
-			ProgressBarImpl.this.setAttribute(name, value, true);
+			ProgressBarImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

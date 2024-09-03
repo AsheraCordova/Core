@@ -5,19 +5,23 @@
 
 #include "AttributeCommand.h"
 #include "BaseAttributeCommand.h"
+#include "Drawable.h"
 #include "IOSObjectArray.h"
 #include "IWidget.h"
 #include "J2ObjC_source.h"
 #include "TintColorCommandConverter.h"
 
 
-@interface ASTintColorCommandConverter ()
-
-- (id)setImageWithRenderingModeAlwaysTemplateWithId:(id)image;
+@interface ASTintColorCommandConverter () {
+ @public
+  id tintColor_;
+  NSString *tintMode_;
+}
 
 @end
 
-__attribute__((unused)) static id ASTintColorCommandConverter_setImageWithRenderingModeAlwaysTemplateWithId_(ASTintColorCommandConverter *self, id image);
+J2OBJC_FIELD_SETTER(ASTintColorCommandConverter, tintColor_, id)
+J2OBJC_FIELD_SETTER(ASTintColorCommandConverter, tintMode_, NSString *)
 
 @implementation ASTintColorCommandConverter
 
@@ -31,43 +35,51 @@ __attribute__((unused)) static id ASTintColorCommandConverter_setImageWithRender
                   withNSString:(NSString *)phase
                   withNSString:(NSString *)attributeName
                         withId:(id)value {
-  if (value != nil) {
-    value = ASTintColorCommandConverter_setImageWithRenderingModeAlwaysTemplateWithId_(self, value);
+  if (value != nil && tintColor_ != nil) {
+    if ([value isKindOfClass:[ADDrawable class]]) {
+      [((ADDrawable *) value) setTintColorWithId:tintColor_];
+      [((ADDrawable *) value) setTintModeWithNSString:tintMode_];
+    }
   }
   return value;
 }
 
-- (id)setImageWithRenderingModeAlwaysTemplateWithId:(id)image {
-  return ASTintColorCommandConverter_setImageWithRenderingModeAlwaysTemplateWithId_(self, image);
-}
-
 - (id<ASAttributeCommand>)newInstanceWithNSObjectArray:(IOSObjectArray *)args {
   ASTintColorCommandConverter *capInsetsCommandConverter = new_ASTintColorCommandConverter_initWithNSString_(self->id__);
+  [capInsetsCommandConverter updateArgsWithNSObjectArray:args];
   return capInsetsCommandConverter;
 }
 
 - (void)updateArgsWithNSObjectArray:(IOSObjectArray *)args {
+  if ([IOSObjectArray_Get(nil_chk(args), 0) isKindOfClass:[NSString class]]) {
+    self->tintMode_ = (NSString *) cast_chk(IOSObjectArray_Get(args, 0), [NSString class]);
+  }
+  else {
+    self->tintColor_ = IOSObjectArray_Get(args, 0);
+  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASAttributeCommand;", 0x81, 5, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x81, 7, 6, -1, -1, -1, -1 },
+    { NULL, "LASAttributeCommand;", 0x81, 3, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x81, 5, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithNSString:);
   methods[1].selector = @selector(modifyValueWithASIWidget:withId:withNSString:withNSString:withId:);
-  methods[2].selector = @selector(setImageWithRenderingModeAlwaysTemplateWithId:);
-  methods[3].selector = @selector(newInstanceWithNSObjectArray:);
-  methods[4].selector = @selector(updateArgsWithNSObjectArray:);
+  methods[2].selector = @selector(newInstanceWithNSObjectArray:);
+  methods[3].selector = @selector(updateArgsWithNSObjectArray:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LNSString;", "modifyValue", "LASIWidget;LNSObject;LNSString;LNSString;LNSObject;", "setImageWithRenderingModeAlwaysTemplate", "LNSObject;", "newInstance", "[LNSObject;", "updateArgs" };
-  static const J2ObjcClassInfo _ASTintColorCommandConverter = { "TintColorCommandConverter", "com.ashera.converter", ptrTable, methods, NULL, 7, 0x1, 5, 0, -1, -1, -1, -1, -1 };
+  static const J2ObjcFieldInfo fields[] = {
+    { "tintColor_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tintMode_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LNSString;", "modifyValue", "LASIWidget;LNSObject;LNSString;LNSString;LNSObject;", "newInstance", "[LNSObject;", "updateArgs" };
+  static const J2ObjcClassInfo _ASTintColorCommandConverter = { "TintColorCommandConverter", "com.ashera.converter", ptrTable, methods, fields, 7, 0x1, 4, 2, -1, -1, -1, -1, -1 };
   return &_ASTintColorCommandConverter;
 }
 
@@ -83,14 +95,6 @@ ASTintColorCommandConverter *new_ASTintColorCommandConverter_initWithNSString_(N
 
 ASTintColorCommandConverter *create_ASTintColorCommandConverter_initWithNSString_(NSString *id_) {
   J2OBJC_CREATE_IMPL(ASTintColorCommandConverter, initWithNSString_, id_)
-}
-
-id ASTintColorCommandConverter_setImageWithRenderingModeAlwaysTemplateWithId_(ASTintColorCommandConverter *self, id image) {
-  if ([image isKindOfClass:[UIImage class]]) {
-    return [(UIImage*) image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-  } else {
-    return image;
-  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTintColorCommandConverter)

@@ -25,6 +25,7 @@
 @class ADRenderNode;
 @class ADResources;
 @class ADViewGroup_LayoutParams;
+@class ADViewOverlay;
 @class ADViewTreeObserver;
 @class ADView_AccessibilityNodeProvider;
 @class ADView_AttachInfo;
@@ -81,6 +82,7 @@
   jboolean mDefaultFocusHighlightEnabled_;
   jint mLayerType_;
   jboolean mCachingFailed_;
+  ADViewOverlay *mOverlay_;
   ADRenderNode *mRenderNode_;
   ADView_AttachInfo *mAttachInfo_;
   ADView_ThreadLocal *sThreadLocal_;
@@ -178,6 +180,8 @@
 
 - (IOSIntArray *)getDrawableState;
 
+- (void)getDrawingRectWithADRect:(ADRect *)anchorRect;
+
 - (jfloat)getElevation;
 
 - (ADDrawable *)getForeground;
@@ -224,6 +228,8 @@
 - (id<ADView_OnKeyListener>)getOnKeyListener;
 
 - (ADInsets *)getOpticalInsets;
+
+- (ADViewOverlay *)getOverlay;
 
 - (jint)getPaddingBottom;
 
@@ -383,6 +389,8 @@
 - (jboolean)isNestedScrollingEnabled;
 
 - (jboolean)isOpaque;
+
+- (jboolean)isOverlay;
 
 - (jboolean)isPressed;
 
@@ -559,6 +567,8 @@
 
 - (void)setOnKeyListenerWithADView_OnKeyListener:(id<ADView_OnKeyListener>)l;
 
+- (void)setOverlayWithBoolean:(jboolean)isOverlay;
+
 - (void)setOverScrollModeWithInt:(jint)overScrollNever;
 
 - (void)setPaddingWithInt:(jint)left
@@ -719,6 +729,8 @@
 - (void)setMeasuredDimensionWithInt:(jint)measuredWidth
                             withInt:(jint)measuredHeight;
 
+- (jboolean)verifyDrawableWithADDrawable:(ADDrawable *)who;
+
 #pragma mark Package-Private
 
 - (jboolean)areDrawablesResolved;
@@ -780,6 +792,7 @@ J2OBJC_EMPTY_STATIC_INIT(ADView)
 
 J2OBJC_FIELD_SETTER(ADView, mLayoutParams_, ADViewGroup_LayoutParams *)
 J2OBJC_FIELD_SETTER(ADView, mContext_, ADContext *)
+J2OBJC_FIELD_SETTER(ADView, mOverlay_, ADViewOverlay *)
 J2OBJC_FIELD_SETTER(ADView, mRenderNode_, ADRenderNode *)
 J2OBJC_FIELD_SETTER(ADView, mAttachInfo_, ADView_AttachInfo *)
 J2OBJC_FIELD_SETTER(ADView, sThreadLocal_, ADView_ThreadLocal *)

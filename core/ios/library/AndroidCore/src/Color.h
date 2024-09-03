@@ -37,12 +37,16 @@
 J2OBJC_EMPTY_STATIC_INIT(ADColor)
 
 inline jint ADColor_get_BLACK(void);
-#define ADColor_BLACK 0
+#define ADColor_BLACK -16777216
 J2OBJC_STATIC_FIELD_CONSTANT(ADColor, BLACK, jint)
 
 inline jint ADColor_get_RED(void);
 #define ADColor_RED -65536
 J2OBJC_STATIC_FIELD_CONSTANT(ADColor, RED, jint)
+
+inline jint ADColor_get_WHITE(void);
+#define ADColor_WHITE -1
+J2OBJC_STATIC_FIELD_CONSTANT(ADColor, WHITE, jint)
 
 FOUNDATION_EXPORT void ADColor_init(ADColor *self);
 

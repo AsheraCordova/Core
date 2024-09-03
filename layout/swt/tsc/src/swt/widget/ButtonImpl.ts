@@ -1,5 +1,13 @@
 // start - imports
 
+export const enum TintMode {
+add = "add",
+multiply = "multiply",
+screen = "screen",
+src_atop = "src_atop",
+src_in = "src_in",
+src_over = "src_over",
+}
 export const enum Font {
 monospace = "monospace",
 normal = "normal",
@@ -24,6 +32,8 @@ import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
 import { Mixin, decorate } from 'ts-mixer';
+
+
 
 
 
@@ -106,6 +116,12 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "swtImage" }))
 	swtImage!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTint" }))
+	drawableTint!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTintMode" }))
+	drawableTintMode!:CommandAttr<TintMode>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "firstBaselineToTopHeight" }))
 	firstBaselineToTopHeight!:CommandAttr<string>| undefined;
@@ -228,6 +244,8 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 		super.reset();
 		this.swtBackground = undefined;
 		this.swtImage = undefined;
+		this.drawableTint = undefined;
+		this.drawableTintMode = undefined;
 		this.firstBaselineToTopHeight = undefined;
 		this.lastBaselineToBottomHeight = undefined;
 		this.textFormat = undefined;
@@ -334,6 +352,34 @@ export abstract class ButtonImpl<T> extends ViewImpl<T>{
 		this.swtImage.setValue(value);
 		this.orderSet++;
 		this.swtImage.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableTint(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableTint == null || this.drawableTint == undefined) {
+			this.drawableTint = new CommandAttr<string>();
+		}
+		
+		this.drawableTint.setSetter(true);
+		this.drawableTint.setValue(value);
+		this.orderSet++;
+		this.drawableTint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableTintMode(value : TintMode) : T {
+		this.resetIfRequired();
+		if (this.drawableTintMode == null || this.drawableTintMode == undefined) {
+			this.drawableTintMode = new CommandAttr<TintMode>();
+		}
+		
+		this.drawableTintMode.setSetter(true);
+		this.drawableTintMode.setValue(value);
+		this.orderSet++;
+		this.drawableTintMode.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

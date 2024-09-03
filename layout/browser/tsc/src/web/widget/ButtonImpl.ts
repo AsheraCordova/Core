@@ -137,7 +137,6 @@ export class TextStyleTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ButtonImpl<T> extends ViewImpl<T>{

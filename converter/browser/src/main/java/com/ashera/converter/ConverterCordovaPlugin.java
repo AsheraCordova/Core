@@ -21,6 +21,7 @@ public class ConverterCordovaPlugin extends CordovaPlugin {
 		ConverterFactory.register("color", new ColorConverter());
 		ConverterFactory.register(CommonConverters.font, new FontConverter());
 		ConverterFactory.register("colorstate", new ColorStateConverter());
+		ConverterFactory.register("colorint", new ColorIntConverter());
 		ConverterFactory.registerCommandConverter(new ImageRepeatCommandConverter("imageRepeat"));
 		ConverterFactory.registerCommandConverter(new AutoLinkifyCommandConverter("autoLink"));
 	}

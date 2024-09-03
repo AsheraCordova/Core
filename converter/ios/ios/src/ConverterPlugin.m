@@ -7,6 +7,7 @@
 #include "CGTintColorCommandConverter.h"
 #include "ColorConverter.h"
 #include "ColorImageConverter.h"
+#include "ColorIntConverter.h"
 #include "ColorStateConverter.h"
 #include "ColorUtil.h"
 #include "CommonConverters.h"
@@ -184,6 +185,7 @@ void ASConverterPlugin_initPlugin() {
   ASConverterFactory_register__WithNSString_withASIConverter_(@"drawable", new_ASDrawableConverter_init());
   ASConverterFactory_register__WithNSString_withASIConverter_(@"font", new_ASFontConverter_init());
   ASConverterFactory_register__WithNSString_withASIConverter_(@"colorstate", new_ASColorStateConverter_init());
+  ASConverterFactory_register__WithNSString_withASIConverter_(@"colorint", new_ASColorIntConverter_init());
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASImageRepeatCommandConverter_initWithNSString_(@"imageRepeat"));
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASTintColorCommandConverter_initWithNSString_(@"tintColor"));
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASCGTintColorCommandConverter_initWithNSString_(@"cgTintColor"));

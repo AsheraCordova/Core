@@ -63,6 +63,7 @@ public class ViewOnlyImpl extends BaseWidget {
 	public class ViewOnlyExt extends r.android.widget.FrameLayout implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return ViewOnlyImpl.this;
 		}
@@ -114,9 +115,12 @@ public class ViewOnlyImpl extends BaseWidget {
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(ViewOnlyImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(ViewOnlyImpl.this);
+	        overlays = ViewImpl.drawOverlay(ViewOnlyImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -246,7 +250,7 @@ public class ViewOnlyImpl extends BaseWidget {
 				setState4(value);
 				return;
 			}
-			ViewOnlyImpl.this.setAttribute(name, value, true);
+			ViewOnlyImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

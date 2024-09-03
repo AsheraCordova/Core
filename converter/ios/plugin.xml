@@ -24,6 +24,8 @@
      <source-file src="ios/src/ColorConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/ColorImageConverter.h" target-dir="ConverterPlugin/ios/src"/>
      <source-file src="ios/src/ColorImageConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/src/ColorIntConverter.h" target-dir="ConverterPlugin/ios/src"/>
+     <source-file src="ios/src/ColorIntConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/ColorStateConverter.h" target-dir="ConverterPlugin/ios/src"/>
      <source-file src="ios/src/ColorStateConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/ConverterCordovaPlugin.h" target-dir="ConverterPlugin/ios/src"/>
@@ -139,6 +141,8 @@
      <source-file src="library/Plugin_Converter/src/NotEmpty.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_Converter/src/ObjectToMapConverter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
      <source-file src="library/Plugin_Converter/src/ObjectToMapConverter.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/Plugin_Converter/src/OverlayBoundsConverter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
+     <source-file src="library/Plugin_Converter/src/OverlayBoundsConverter.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_Converter/src/PasswordCommandConveter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
      <source-file src="library/Plugin_Converter/src/PasswordCommandConveter.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_Converter/src/Pattern.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>

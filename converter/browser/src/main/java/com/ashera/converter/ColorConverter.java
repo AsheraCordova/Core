@@ -18,9 +18,6 @@ public class ColorConverter implements IConverter<Object, String> {
         if (value.startsWith("#") || value.startsWith("@color/") || !value.startsWith("@")) {
             String color = ResourceBundleUtils.getString("color/color", "color", value, fragment);
             color = ColorUtil.colorToHex(color);
-            if (color.length() == 9) {
-            	color = "#" + color.substring(3) + color.substring(1, 3); 
-            }
             return com.ashera.widget.PluginInvoker.getColor(color);
         }        
         return null;

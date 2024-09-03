@@ -2540,6 +2540,93 @@ return getMaxHeight(w);			}
 		return view.getLeft();
 	}
 	
+	public static java.util.List<IWidget> drawOverlay(IWidget overlayWrapper, java.util.List<IWidget> overlays) {
+		r.android.view.ViewOverlay overlay = ((View) overlayWrapper.asWidget()).getOverlay();
+		java.util.List<r.android.graphics.drawable.Drawable> drawables = overlay.getDrawables();
+		if (drawables != null) {
+			overlayWrapper.setAttribute("swtRedraw", false, true);
+			if (overlays == null) {
+				overlays = new ArrayList<>();
+			} else {
+				for (int i = overlays.size() - 1; i >= 0; i--) {
+					overlayWrapper.getParent().remove(overlays.get(i));
+				}
+				
+				overlays.clear();
+			}
+			Map<String, java.util.List> attrs = new java.util.HashMap<>(); 
+
+			for (r.android.graphics.drawable.Drawable drawable : drawables) {
+				if (drawable.getSimulatedWidgetLocalName() != null && drawable.getSimulatedWidgetGroupName() != null) {
+					IWidget w = WidgetFactory.createWidget(drawable.getSimulatedWidgetLocalName(), drawable.getSimulatedWidgetGroupName(), overlayWrapper.getParent(), false);
+					
+					
+					String[] simulatedWidgetAttrs = drawable.getSimulatedWidgetAttrs();
+					
+					if (simulatedWidgetAttrs != null) {
+						for (int i = 0; i < simulatedWidgetAttrs.length; i++) {
+							String attrName = simulatedWidgetAttrs[i];
+							Object value = drawable.getAttribute(attrName);
+							w.setAttribute(attrName, value, !(value instanceof String));
+						}
+					}
+					
+					drawable.setMeasureTextHelper(new r.android.graphics.drawable.Drawable.MeasureTextHelper() {
+						@Override
+						public float getTextWidth() {
+							View view = (View) w.asWidget();
+							view.measure(0, 0);
+							return view.getMeasuredWidth() + 5;
+						}
+	
+						@Override
+						public float getTextHeight() {
+							View view = (View) w.asWidget();
+							view.measure(0, 0);
+							return view.getMeasuredHeight();
+						}
+						
+					});
+					r.android.graphics.Rect bounds = drawable.getBounds();
+					View view = (View) w.asWidget();
+					view.setLeft(bounds.left);
+					view.setRight(bounds.right);
+					view.setTop(bounds.top);
+					view.setBottom(bounds.bottom);
+					view.measure(0, 0);
+					view.relayout();
+					view.setOverlay(true);
+					overlays.add(w);
+				}
+				
+				String[] viewAttrs = drawable.getViewAttrs();
+				if (viewAttrs != null) {
+					for (int i = 0; i < viewAttrs.length; i++) {
+						String attrName = viewAttrs[i];
+						drawable.getBounds();
+						Object value = drawable.getAttribute(attrName);
+						if (value instanceof java.util.List) {
+							java.util.List values = attrs.get(attrName);
+							if (values == null) {
+								attrs.put(attrName, new java.util.ArrayList<>());
+							}
+							attrs.get(attrName).addAll((java.util.List) value);
+						} else {
+							overlayWrapper.setAttribute(attrName, value, !(value instanceof String));
+						}
+					}
+				}
+				
+				for (String key : attrs.keySet()) {
+					overlayWrapper.setAttribute(key, attrs.get(key), true);	
+				}
+			}
+			overlayWrapper.setAttribute("swtRedraw", true, true);
+		}
+		
+		return overlays;
+	}
+	
 
 
 	private static void setAnimatorXml(IWidget w, Object objValue) {

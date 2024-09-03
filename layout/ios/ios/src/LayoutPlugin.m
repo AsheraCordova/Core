@@ -38,6 +38,7 @@
 #include "UITextViewLabelImpl.h"
 #include "ViewGroupImpl.h"
 #include "ViewOnlyImpl.h"
+#include "ViewOverlayImpl.h"
 #include "WebViewImpl.h"
 #include "WidgetFactory.h"
 #include "fragmentImpl.h"
@@ -112,6 +113,7 @@ void ASLayoutPlugin_initPlugin() {
   ASWidgetFactory_register__WithASIWidget_(new_ASCheckBoxImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASRadioButtonImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASToggleButtonImpl_init());
+  ASWidgetFactory_register__WithASIWidget_(new_ASViewOverlayImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASfragmentImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASSpinnerImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASMultiSelectionSpinnerImpl_init());

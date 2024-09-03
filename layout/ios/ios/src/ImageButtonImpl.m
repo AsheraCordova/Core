@@ -6,6 +6,8 @@
 #include "AbstractEnumToIntConverter.h"
 #include "BaseWidget.h"
 #include "Bitmap.h"
+#include "Color.h"
+#include "ColorStateList.h"
 #include "Context.h"
 #include "ConverterFactory.h"
 #include "Drawable.h"
@@ -46,6 +48,7 @@
 
 #include "ASUIButton.h"
 
+@protocol JavaUtilList;
 @protocol JavaUtilMap;
 
 
@@ -58,6 +61,7 @@
   ADDrawable *imageFromUrlError_;
   ASImageButtonImpl_ImageButtonCommandBuilder *builder_;
   ASImageButtonImpl_ImageButtonBean *bean_;
+  id tintColor_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -134,17 +138,17 @@
 
 - (void)setTintColorWithId:(id)objValue;
 
-- (void)nativeSetTintColorWithId:(id)objValue;
-
 - (id)getTintColor;
 
 - (id)getImageNative;
 
-- (void)setImageNativeWithId:(id)value;
+- (void)setImageNativeWithId:(id)value
+                      withId:(id)tintColor;
 
 - (void)setImageNativeSimpleWithId:(id)value;
 
-- (void)setImageNativeWithTemplateWithId:(id)value;
+- (void)setImageNativeWithTemplateWithId:(id)value
+                                  withId:(id)tintColor;
 
 - (void)nativeSetContentModeWithInt:(jint)contentMode;
 
@@ -154,6 +158,7 @@ J2OBJC_FIELD_SETTER(ASImageButtonImpl, imageFromUrlPlaceHolder_, ADDrawable *)
 J2OBJC_FIELD_SETTER(ASImageButtonImpl, imageFromUrlError_, ADDrawable *)
 J2OBJC_FIELD_SETTER(ASImageButtonImpl, builder_, ASImageButtonImpl_ImageButtonCommandBuilder *)
 J2OBJC_FIELD_SETTER(ASImageButtonImpl, bean_, ASImageButtonImpl_ImageButtonBean *)
+J2OBJC_FIELD_SETTER(ASImageButtonImpl, tintColor_, id)
 
 inline id<JavaUtilMap> ASImageButtonImpl_get_scaleTypeToContentModeMapping(void);
 inline id<JavaUtilMap> ASImageButtonImpl_set_scaleTypeToContentModeMapping(id<JavaUtilMap> value);
@@ -232,17 +237,15 @@ __attribute__((unused)) static jboolean ASImageButtonImpl_isViewWrapped(ASImageB
 
 __attribute__((unused)) static void ASImageButtonImpl_setTintColorWithId_(ASImageButtonImpl *self, id objValue);
 
-__attribute__((unused)) static void ASImageButtonImpl_nativeSetTintColorWithId_(ASImageButtonImpl *self, id objValue);
-
 __attribute__((unused)) static id ASImageButtonImpl_getTintColor(ASImageButtonImpl *self);
 
 __attribute__((unused)) static id ASImageButtonImpl_getImageNative(ASImageButtonImpl *self);
 
-__attribute__((unused)) static void ASImageButtonImpl_setImageNativeWithId_(ASImageButtonImpl *self, id value);
+__attribute__((unused)) static void ASImageButtonImpl_setImageNativeWithId_withId_(ASImageButtonImpl *self, id value, id tintColor);
 
 __attribute__((unused)) static void ASImageButtonImpl_setImageNativeSimpleWithId_(ASImageButtonImpl *self, id value);
 
-__attribute__((unused)) static void ASImageButtonImpl_setImageNativeWithTemplateWithId_(ASImageButtonImpl *self, id value);
+__attribute__((unused)) static void ASImageButtonImpl_setImageNativeWithTemplateWithId_withId_(ASImageButtonImpl *self, id value, id tintColor);
 
 __attribute__((unused)) static void ASImageButtonImpl_nativeSetContentModeWithInt_(ASImageButtonImpl *self, jint contentMode);
 
@@ -260,6 +263,7 @@ J2OBJC_FIELD_SETTER(ASImageButtonImpl_ScaleType, mapping_, id<JavaUtilMap>)
   __unsafe_unretained ASImageButtonImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
+  id<JavaUtilList> overlays_;
   id<JavaUtilMap> templates_;
 }
 
@@ -267,6 +271,7 @@ J2OBJC_FIELD_SETTER(ASImageButtonImpl_ScaleType, mapping_, id<JavaUtilMap>)
 
 J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, overlays_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, templates_, id<JavaUtilMap>)
 
 @interface ASImageButtonImpl_ImageButtonCommandBuilder () {
@@ -314,7 +319,7 @@ NSString *ASImageButtonImpl_GROUP_NAME = @"ImageButton";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingVertical"])) withTypeWithNSString:@"dimension"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"baseline"])) withTypeWithNSString:@"dimension"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"baselineAlignBottom"])) withTypeWithNSString:@"boolean"]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"tint"])) withTypeWithNSString:@"color"])) withOrderWithInt:-10]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"tint"])) withTypeWithNSString:@"colorstate"])) withOrderWithInt:-10]);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -562,8 +567,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)setImageWithId:(id)value {
-  [((ADImageView *) nil_chk(measurableView_)) setImageDrawableWithADDrawable:(ADDrawable *) cast_chk(value, [ADDrawable class])];
-  ASImageButtonImpl_setImageNativeWithId_(self, [((ADDrawable *) nil_chk(((ADDrawable *) cast_chk(value, [ADDrawable class])))) getDrawable]);
+  ADDrawable *drawable = (ADDrawable *) cast_chk(value, [ADDrawable class]);
+  [((ADImageView *) nil_chk(measurableView_)) setImageDrawableWithADDrawable:drawable];
+  ASImageButtonImpl_setImageNativeWithId_withId_(self, [((ADDrawable *) nil_chk(drawable)) getDrawable], [drawable getTintColor]);
 }
 
 - (id)getSrc {
@@ -680,6 +686,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADDrawable *imageDrawable = [((ADImageView *) nil_chk(measurableView_)) getImageDrawable];
   if (imageDrawable != nil && [imageDrawable isStateful] && [imageDrawable setStateWithIntArray:[((ADImageView *) nil_chk(measurableView_)) getDrawableState]]) {
     [self setImageWithId:imageDrawable];
+  }
+  if (tintColor_ != nil && [tintColor_ isKindOfClass:[ADColorStateList class]] && [((ADColorStateList *) cast_chk(tintColor_, [ADColorStateList class])) isStateful]) {
+    ASImageButtonImpl_setTintColorWithId_(self, tintColor_);
   }
 }
 
@@ -835,10 +844,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASImageButtonImpl_setTintColorWithId_(self, objValue);
 }
 
-- (void)nativeSetTintColorWithId:(id)objValue {
-  ASImageButtonImpl_nativeSetTintColorWithId_(self, objValue);
-}
-
 - (id)getTintColor {
   return ASImageButtonImpl_getTintColor(self);
 }
@@ -847,16 +852,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASImageButtonImpl_getImageNative(self);
 }
 
-- (void)setImageNativeWithId:(id)value {
-  ASImageButtonImpl_setImageNativeWithId_(self, value);
+- (void)setImageNativeWithId:(id)value
+                      withId:(id)tintColor {
+  ASImageButtonImpl_setImageNativeWithId_withId_(self, value, tintColor);
 }
 
 - (void)setImageNativeSimpleWithId:(id)value {
   ASImageButtonImpl_setImageNativeSimpleWithId_(self, value);
 }
 
-- (void)setImageNativeWithTemplateWithId:(id)value {
-  ASImageButtonImpl_setImageNativeWithTemplateWithId_(self, value);
+- (void)setImageNativeWithTemplateWithId:(id)value
+                                  withId:(id)tintColor {
+  ASImageButtonImpl_setImageNativeWithTemplateWithId_withId_(self, value, tintColor);
 }
 
 - (void)nativeSetContentModeWithInt:(jint)contentMode {
@@ -937,12 +944,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 52, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 53, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 54, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 53, 54, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 55, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 56, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 56, 54, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 57, 40, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -1020,13 +1026,12 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[69].selector = @selector(asNativeWidget);
   methods[70].selector = @selector(isViewWrapped);
   methods[71].selector = @selector(setTintColorWithId:);
-  methods[72].selector = @selector(nativeSetTintColorWithId:);
-  methods[73].selector = @selector(getTintColor);
-  methods[74].selector = @selector(getImageNative);
-  methods[75].selector = @selector(setImageNativeWithId:);
-  methods[76].selector = @selector(setImageNativeSimpleWithId:);
-  methods[77].selector = @selector(setImageNativeWithTemplateWithId:);
-  methods[78].selector = @selector(nativeSetContentModeWithInt:);
+  methods[72].selector = @selector(getTintColor);
+  methods[73].selector = @selector(getImageNative);
+  methods[74].selector = @selector(setImageNativeWithId:withId:);
+  methods[75].selector = @selector(setImageNativeSimpleWithId:);
+  methods[76].selector = @selector(setImageNativeWithTemplateWithId:withId:);
+  methods[77].selector = @selector(nativeSetContentModeWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 58, -1, -1 },
@@ -1039,9 +1044,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "imageFromUrlError_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "builder_", "LASImageButtonImpl_ImageButtonCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bean_", "LASImageButtonImpl_ImageButtonBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "tintColor_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setScaleType", "LNSString;LNSObject;", "setImage", "LNSObject;", "getImageHeight", "getImageWidth", "setImageFromUrlError", "setImageFromUrlPlaceHolder", "setImageFromUrl", "onBitmapFailed", "onPrepareLoad", "onBitmapLoaded", "postOnMeasure", "II", "setBaseLine", "setBaselineAlignBottom", "setCropToPadding", "setMaxWidth", "setMaxHeight", "setAdjustViewBounds", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "I", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setTintColor", "nativeSetTintColor", "setImageNative", "setImageNativeSimple", "setImageNativeWithTemplate", "nativeSetContentMode", &ASImageButtonImpl_LOCAL_NAME, &ASImageButtonImpl_GROUP_NAME, &ASImageButtonImpl_scaleTypeToContentModeMapping, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageButtonImpl_ScaleType;LASImageButtonImpl_ImageButtonExt;LASImageButtonImpl_ImageButtonCommandBuilder;LASImageButtonImpl_ImageButtonBean;" };
-  static const J2ObjcClassInfo _ASImageButtonImpl = { "ImageButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 79, 10, -1, 62, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setScaleType", "LNSString;LNSObject;", "setImage", "LNSObject;", "getImageHeight", "getImageWidth", "setImageFromUrlError", "setImageFromUrlPlaceHolder", "setImageFromUrl", "onBitmapFailed", "onPrepareLoad", "onBitmapLoaded", "postOnMeasure", "II", "setBaseLine", "setBaselineAlignBottom", "setCropToPadding", "setMaxWidth", "setMaxHeight", "setAdjustViewBounds", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "I", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setTintColor", "setImageNative", "LNSObject;LNSObject;", "setImageNativeSimple", "setImageNativeWithTemplate", "nativeSetContentMode", &ASImageButtonImpl_LOCAL_NAME, &ASImageButtonImpl_GROUP_NAME, &ASImageButtonImpl_scaleTypeToContentModeMapping, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageButtonImpl_ScaleType;LASImageButtonImpl_ImageButtonExt;LASImageButtonImpl_ImageButtonCommandBuilder;LASImageButtonImpl_ImageButtonBean;" };
+  static const J2ObjcClassInfo _ASImageButtonImpl = { "ImageButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 78, 11, -1, 62, -1, -1, -1 };
   return &_ASImageButtonImpl;
 }
 
@@ -1258,6 +1264,7 @@ void ASImageButtonImpl_nativeSetPaddingTopWithInt_(ASImageButtonImpl *self, jint
 
 void ASImageButtonImpl_nativeCreateWithJavaUtilMap_(ASImageButtonImpl *self, id<JavaUtilMap> params) {
   ASImageButtonImpl_createButton(self);
+  [self registerForAttributeCommandChainWithNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"src" } count:1 type:NSString_class_()]];
 }
 
 void ASImageButtonImpl_createButton(ASImageButtonImpl *self) {
@@ -1276,11 +1283,12 @@ jboolean ASImageButtonImpl_isViewWrapped(ASImageButtonImpl *self) {
 }
 
 void ASImageButtonImpl_setTintColorWithId_(ASImageButtonImpl *self, id objValue) {
-  ASImageButtonImpl_nativeSetTintColorWithId_(self, objValue);
-}
-
-void ASImageButtonImpl_nativeSetTintColorWithId_(ASImageButtonImpl *self, id objValue) {
-  [((ASUIButton*)self->uiView_).imageView setTintColor:(UIColor*)objValue];
+  self->tintColor_ = objValue;
+  if ([objValue isKindOfClass:[ADColorStateList class]]) {
+    ADColorStateList *colorStateList = (ADColorStateList *) objValue;
+    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(colorStateList)) getColorForStateWithIntArray:[((ADImageView *) nil_chk(self->measurableView_)) getDrawableState] withInt:ADColor_BLACK]);
+  }
+  [self applyAttributeCommandWithNSString:@"src" withNSString:@"tintColor" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"tint" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ ASViewImpl_getColorWithId_(objValue) } count:1 type:NSObject_class_()]];
 }
 
 id ASImageButtonImpl_getTintColor(ASImageButtonImpl *self) {
@@ -1291,9 +1299,9 @@ id ASImageButtonImpl_getImageNative(ASImageButtonImpl *self) {
   return [((ASUIButton*)self->uiView_) imageForState:UIControlStateNormal];
 }
 
-void ASImageButtonImpl_setImageNativeWithId_(ASImageButtonImpl *self, id value) {
+void ASImageButtonImpl_setImageNativeWithId_withId_(ASImageButtonImpl *self, id value, id tintColor) {
   if ([self hasFeatureWithNSString:@"enableFeatures" withNSString:@"UIImageRenderingModeAlwaysTemplate"]) {
-    ASImageButtonImpl_setImageNativeWithTemplateWithId_(self, value);
+    ASImageButtonImpl_setImageNativeWithTemplateWithId_withId_(self, value, tintColor);
   }
   else {
     ASImageButtonImpl_setImageNativeSimpleWithId_(self, value);
@@ -1307,10 +1315,16 @@ void ASImageButtonImpl_setImageNativeSimpleWithId_(ASImageButtonImpl *self, id v
   } else if ([value isKindOfClass:[UIColor class]]) {
     [((ASUIButton*) self->uiView_) setBackgroundColor:((UIColor*) value)];
     [((ASUIButton*) self->uiView_) setImage:nil forState:UIControlStateNormal];
+  } else {
+    [((ASUIButton*) self->uiView_) setBackgroundColor:[UIColor clearColor]];
+    [((ASUIButton*) self->uiView_) setImage:nil forState:UIControlStateNormal];
   }
 }
 
-void ASImageButtonImpl_setImageNativeWithTemplateWithId_(ASImageButtonImpl *self, id value) {
+void ASImageButtonImpl_setImageNativeWithTemplateWithId_withId_(ASImageButtonImpl *self, id value, id tintColor) {
+  if (tintColor != nil) {
+    [((ASUIButton*)self->uiView_).imageView setTintColor:(UIColor*)tintColor];
+  }
   [((ASUIButton*) self->uiView_) setImage:[(UIImage*) value imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
 }
 
@@ -1415,9 +1429,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
                     withInt:(jint)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
-  ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b);
+  if (![self isOverlay]) {
+    ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b);
+  }
   [this$0_ replayBufferedEvents];
   ASViewImpl_redrawDrawablesWithASIWidget_(this$0_);
+  overlays_ = ASViewImpl_drawOverlayWithASIWidget_withJavaUtilList_(this$0_, overlays_);
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
     [((ASOnLayoutEvent *) nil_chk(onLayoutEvent_)) setBWithInt:b];
@@ -1535,7 +1552,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
     [self setState4WithId:value];
     return;
   }
-  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
 - (void)setVisibilityWithInt:(jint)visibility {
@@ -1673,10 +1690,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ScaleType)
     { "this$0_", "LASImageButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
     { "measureFinished_", "LASMeasureEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
+    { "overlays_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 33, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 34, -1 },
   };
-  static const void *ptrTable[] = { "LASImageButtonImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASImageButtonImpl_ImageButtonExt = { "ImageButtonExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 33, 4, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASImageButtonImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "setState0", "LNSObject;", "setState1", "setState2", "setState3", "setState4", "Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASImageButtonImpl_ImageButtonExt = { "ImageButtonExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 33, 5, 0, -1, -1, -1, -1 };
   return &_ASImageButtonImpl_ImageButtonExt;
 }
 

@@ -219,6 +219,7 @@ public class ChronometerImpl extends BaseWidget {
 	public class ChronometerExt extends r.android.widget.Chronometer implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return ChronometerImpl.this;
 		}
@@ -245,9 +246,12 @@ public class ChronometerImpl extends BaseWidget {
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(ChronometerImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(ChronometerImpl.this);
+	        overlays = ViewImpl.drawOverlay(ChronometerImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -376,7 +380,7 @@ public class ChronometerImpl extends BaseWidget {
 				setState4(value);
 				return;
 			}
-			ChronometerImpl.this.setAttribute(name, value, true);
+			ChronometerImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

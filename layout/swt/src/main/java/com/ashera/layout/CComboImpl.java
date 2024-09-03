@@ -130,6 +130,7 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
 	public class CComboExt extends r.android.widget.Spinner implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return CComboImpl.this;
 		}
@@ -181,10 +182,13 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(CComboImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
 			nativeMakeFrameForChildWidget(l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(CComboImpl.this);
+	        overlays = ViewImpl.drawOverlay(CComboImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -315,7 +319,7 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
 				setState4(value);
 				return;
 			}
-			CComboImpl.this.setAttribute(name, value, true);
+			CComboImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

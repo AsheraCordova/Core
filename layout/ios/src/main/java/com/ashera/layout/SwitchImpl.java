@@ -274,6 +274,7 @@ public class SwitchImpl extends BaseWidget implements ICustomMeasureWidth{
 	public class SwitchExt extends r.android.widget.Switch implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return SwitchImpl.this;
 		}
@@ -300,10 +301,13 @@ public class SwitchImpl extends BaseWidget implements ICustomMeasureWidth{
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(SwitchImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
 			nativeMakeFrameForChildWidget(l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(SwitchImpl.this);
+	        overlays = ViewImpl.drawOverlay(SwitchImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -432,7 +436,7 @@ public class SwitchImpl extends BaseWidget implements ICustomMeasureWidth{
 				setState4(value);
 				return;
 			}
-			SwitchImpl.this.setAttribute(name, value, true);
+			SwitchImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

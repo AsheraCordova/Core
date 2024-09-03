@@ -21,6 +21,14 @@ export const enum BackgroundRepeat {
 no_repeat = "no-repeat",
 repeat = "repeat",
 }
+export const enum TintMode {
+add = "add",
+multiply = "multiply",
+screen = "screen",
+src_atop = "src_atop",
+src_in = "src_in",
+src_over = "src_over",
+}
 export const enum LayoutDirection {
 inherit = "inherit",
 locale = "locale",
@@ -99,6 +107,10 @@ export class ValidationErrorDisplayTransformer implements ITranform {
         }
     }
 }
+
+
+
+
 
 
 
@@ -295,6 +307,12 @@ export abstract class ViewImpl<T> {
 	@decorate(Expose({ name: "backgroundRepeat" }))
 	backgroundRepeat!:CommandAttr<BackgroundRepeat>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "backgroundTint" }))
+	backgroundTint!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "backgroundTintMode" }))
+	backgroundTintMode!:CommandAttr<TintMode>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "minWidth" }))
 	minWidth!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -463,6 +481,8 @@ export abstract class ViewImpl<T> {
 		this.visibility = undefined;
 		this.background = undefined;
 		this.backgroundRepeat = undefined;
+		this.backgroundTint = undefined;
+		this.backgroundTintMode = undefined;
 		this.minWidth = undefined;
 		this.minHeight = undefined;
 		this.invalidate_ = undefined;
@@ -1334,6 +1354,52 @@ payload : any) : T {
 		this.backgroundRepeat.setValue(value);
 		this.orderSet++;
 		this.backgroundRepeat.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetBackgroundTint() : T {
+		this.resetIfRequired();
+		if (this.backgroundTint == null || this.backgroundTint == undefined) {
+			this.backgroundTint = new CommandAttr<string>()
+		}
+		
+		this.backgroundTint.setGetter(true);
+		this.orderGet++;
+		this.backgroundTint.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getBackgroundTint() : string {
+		if (this.backgroundTint == null || this.backgroundTint == undefined) {
+			this.backgroundTint = new CommandAttr<string>();
+		}
+		return this.backgroundTint.getCommandReturnValue();
+	}
+	public setBackgroundTint(value : string) : T {
+		this.resetIfRequired();
+		if (this.backgroundTint == null || this.backgroundTint == undefined) {
+			this.backgroundTint = new CommandAttr<string>();
+		}
+		
+		this.backgroundTint.setSetter(true);
+		this.backgroundTint.setValue(value);
+		this.orderSet++;
+		this.backgroundTint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setBackgroundTintMode(value : TintMode) : T {
+		this.resetIfRequired();
+		if (this.backgroundTintMode == null || this.backgroundTintMode == undefined) {
+			this.backgroundTintMode = new CommandAttr<TintMode>();
+		}
+		
+		this.backgroundTintMode.setSetter(true);
+		this.backgroundTintMode.setValue(value);
+		this.orderSet++;
+		this.backgroundTintMode.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

@@ -83,6 +83,27 @@ public class CheckBoxImpl extends BaseWidget implements IDrawable, ICustomMeasur
 				}
 				}
 		@SuppressLint("NewApi")
+		final static class TintMode extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("add",  0x1);
+				mapping.put("multiply",  0x2);
+				mapping.put("screen",  0x3);
+				mapping.put("src_atop",  0x4);
+				mapping.put("src_in",  0x5);
+				mapping.put("src_over",  0x6);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
 		final static class Ellipsize extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
 				{
@@ -170,6 +191,9 @@ public class CheckBoxImpl extends BaseWidget implements IDrawable, ICustomMeasur
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableBottom").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawablePadding").withType("dimension").withOrder(1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate").withOrder(-10));
+		ConverterFactory.register("CheckBox.tintMode", new TintMode());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("CheckBox.tintMode").withOrder(-10));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxLength").withType("int").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
@@ -201,6 +225,7 @@ public class CheckBoxImpl extends BaseWidget implements IDrawable, ICustomMeasur
 	public class CheckBoxExt extends r.android.widget.CheckBox implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return CheckBoxImpl.this;
 		}
@@ -227,11 +252,14 @@ public class CheckBoxImpl extends BaseWidget implements IDrawable, ICustomMeasur
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(CheckBoxImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 			canvas.reset();
 			onDraw(canvas);
 	        ViewImpl.redrawDrawables(CheckBoxImpl.this);
+	        overlays = ViewImpl.drawOverlay(CheckBoxImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -362,7 +390,7 @@ public class CheckBoxImpl extends BaseWidget implements IDrawable, ICustomMeasur
 				setState4(value);
 				return;
 			}
-			CheckBoxImpl.this.setAttribute(name, value, true);
+			CheckBoxImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -870,6 +898,26 @@ public class CheckBoxImpl extends BaseWidget implements IDrawable, ICustomMeasur
 
 			}
 			break;
+			case "drawableTint": {
+				
+
+
+		setDrawableTint(objValue);
+
+
+
+			}
+			break;
+			case "drawableTintMode": {
+				
+
+
+		setDrawableTintMode(strValue);
+
+
+
+			}
+			break;
 			case "maxLength": {
 				
 
@@ -1133,6 +1181,12 @@ return getLastBaselineToBottomHeight();				}
         	cancelTimer();
         });
 		registerForAttributeCommandChain("text");
+		registerForAttributeCommandChain("drawableStart");
+		registerForAttributeCommandChain("drawableLeft");
+		registerForAttributeCommandChain("drawableTop");
+		registerForAttributeCommandChain("drawableBottom");
+		registerForAttributeCommandChain("drawableRight");
+		registerForAttributeCommandChain("drawableEnd");
 	}
 
 	//start - html
@@ -1528,9 +1582,13 @@ return getLastBaselineToBottomHeight();				}
 		if (measurableView.getTextColors() != null) {
 			setTextColor(measurableView.getCurrentTextColor());
 		}
+		
+		if (drawableTint != null && drawableTint.isStateful()) {
+			setDrawableTint(drawableTint);
+		}
 		drawableStateChangedAdditional();
 	}
-
+    
 	private void drawableStateChange(Label mydrawable, r.android.graphics.drawable.Drawable dr, String attribute) {
 		if (mydrawable != null) {
 			final int[] state = measurableView.getDrawableState();
@@ -1554,6 +1612,49 @@ return getLastBaselineToBottomHeight();				}
 		}
 	}
     //start - leftdrawable
+	private void setDrawableTintMode(Object value) {
+		applyAttributeCommand("drawableLeft", "tintColor", "drawableTintMode", value);
+		applyAttributeCommand("drawableStart", "tintColor", "drawableTintMode", value);
+		applyAttributeCommand("drawableEnd", "tintColor", "drawableTintMode", value);
+		applyAttributeCommand("drawableRight", "tintColor", "drawableTintMode", value);
+		applyAttributeCommand("drawableTop", "tintColor", "drawableTintMode", value);
+		applyAttributeCommand("drawableBottom", "tintColor", "drawableTintMode", value);
+
+	}
+	private r.android.content.res.ColorStateList drawableTint; 
+	private void setDrawableTint(Object objValue) {
+		if (objValue instanceof r.android.content.res.ColorStateList) {
+			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
+			this.drawableTint = colorStateList;
+			objValue = drawableTint.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
+		}
+		
+		Object color = ViewImpl.getColor(objValue);
+
+		applyAttributeCommand("drawableLeft", "tintColor", "drawableTint", color);
+		applyAttributeCommand("drawableStart", "tintColor", "drawableTint", color);
+		applyAttributeCommand("drawableEnd", "tintColor", "drawableTint", color);
+		applyAttributeCommand("drawableRight", "tintColor", "drawableTint", color);
+		applyAttributeCommand("drawableTop", "tintColor", "drawableTint", color);
+		applyAttributeCommand("drawableBottom", "tintColor", "drawableTint", color);
+		
+	}
+	private boolean disableApplyCommmand;
+	private void applyAttributeCommand(String sourceName, String commandName, String attribute, Object value) {
+		if (!isInitialised() || attributes.containsKey(sourceName)) {
+			applyAttributeCommand(sourceName, commandName, new String[] {attribute}, true, value);
+		} else {
+			disableApplyCommmand = true;
+			applyAttributeCommand(sourceName, commandName, new String[] {attribute}, false);
+			disableApplyCommmand = false;
+		}
+	}
+	
+	@Override
+	public boolean disableRemoveAttributeCommandFromChain() {
+		return disableApplyCommmand;
+	}
+	
     private Label drawableLeft;
 
 	private r.android.graphics.drawable.Drawable getDrawable(Object objValue) {
@@ -1584,7 +1685,7 @@ return getLastBaselineToBottomHeight();				}
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
 			measurableView.setLeftDrawable(drawable);
 			disposeAll(drawableLeft.getImage());
-			setImageOrColorOnDrawable(drawableLeft, drawable.getDrawable());
+			setImageOrColorOnDrawable(drawableLeft, drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
 		}
 	}
 
@@ -1599,17 +1700,20 @@ return getLastBaselineToBottomHeight();				}
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
 			measurableView.setRightDrawable(drawable);
 			disposeAll(drawableRight.getImage());
-			setImageOrColorOnDrawable(drawableRight,  drawable.getDrawable());
+			setImageOrColorOnDrawable(drawableRight,  drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
 		}
 	}
 	
-	private void setImageOrColorOnDrawable(Label drawable, Object imageOrColor) {
+	private void setImageOrColorOnDrawable(Label drawable, Object imageOrColor, Object tintColor, String tintMode) {
 		if (imageOrColor instanceof Color) {
 			drawable.setBackground((Color)imageOrColor);
 		} else {
 			drawable.setBackground(null);
 		}
 		if (imageOrColor instanceof Image) {
+			if (tintColor != null) {
+				imageOrColor = com.ashera.common.ImageUtils.tintImage((Image) imageOrColor, (Color) tintColor, tintMode);
+			}
 			drawable.setImage((Image) imageOrColor);
 		} else {
 			drawable.setImage(null);
@@ -1627,7 +1731,7 @@ return getLastBaselineToBottomHeight();				}
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
 			measurableView.setBottomDrawable(drawable);
 			disposeAll(drawableBottom.getImage());
-			setImageOrColorOnDrawable(drawableBottom, drawable.getDrawable());
+			setImageOrColorOnDrawable(drawableBottom, drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
 		}
 	}
 
@@ -1642,7 +1746,7 @@ return getLastBaselineToBottomHeight();				}
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
 			measurableView.setTopDrawable(drawable);
 			disposeAll(drawableTop.getImage());
-			setImageOrColorOnDrawable(drawableTop,  drawable.getDrawable());
+			setImageOrColorOnDrawable(drawableTop,  drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
 		}
 	}
 
@@ -3028,6 +3132,22 @@ public CheckBoxCommandBuilder setDrawablePadding(String value) {
 
 	attrs.put("value", value);
 return this;}
+public CheckBoxCommandBuilder setDrawableTint(String value) {
+	Map<String, Object> attrs = initCommand("drawableTint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public CheckBoxCommandBuilder setDrawableTintMode(String value) {
+	Map<String, Object> attrs = initCommand("drawableTintMode");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public CheckBoxCommandBuilder setMaxLength(int value) {
 	Map<String, Object> attrs = initCommand("maxLength");
 	attrs.put("type", "attribute");
@@ -3403,6 +3523,14 @@ public Object getDrawablePadding() {
 }
 public void setDrawablePadding(String value) {
 	getBuilder().reset().setDrawablePadding(value).execute(true);
+}
+
+public void setDrawableTint(String value) {
+	getBuilder().reset().setDrawableTint(value).execute(true);
+}
+
+public void setDrawableTintMode(String value) {
+	getBuilder().reset().setDrawableTintMode(value).execute(true);
 }
 
 public void setMaxLength(int value) {

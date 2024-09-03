@@ -49,7 +49,7 @@ public class AttributeCommandResizeListener implements Listener {
 			listener = new AttributeCommandResizeListener(widget, nativeWidget, attribute, valueSetter);
 			control.setData("resizeListener", listener);
 			control.addListener(org.eclipse.swt.SWT.Resize, listener);
-		}	
+		}
 	    
 	    return listener;
 	}

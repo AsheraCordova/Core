@@ -246,6 +246,7 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 	public class ButtonExt extends r.android.widget.Button implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return ButtonImpl.this;
 		}
@@ -272,10 +273,13 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(ButtonImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
 			nativeMakeFrameForChildWidget(l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(ButtonImpl.this);
+	        overlays = ViewImpl.drawOverlay(ButtonImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -404,7 +408,7 @@ public class ButtonImpl extends BaseWidget implements com.ashera.widget.ICustomM
 				setState4(value);
 				return;
 			}
-			ButtonImpl.this.setAttribute(name, value, true);
+			ButtonImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

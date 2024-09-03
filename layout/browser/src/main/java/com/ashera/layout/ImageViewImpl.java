@@ -42,6 +42,27 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 	protected r.android.widget.ImageView measurableView;	
 	
 		@SuppressLint("NewApi")
+		final static class TintMode extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("add",  0x1);
+				mapping.put("multiply",  0x2);
+				mapping.put("screen",  0x3);
+				mapping.put("src_atop",  0x4);
+				mapping.put("src_in",  0x5);
+				mapping.put("src_over",  0x6);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
 		final static class ScaleType extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
 				{
@@ -79,6 +100,9 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("imageFromUrlError").withType("drawable").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("baseline").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("baselineAlignBottom").withType("boolean"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("tint").withType("colorstate").withOrder(-10));
+		ConverterFactory.register("ImageView.tintMode", new TintMode());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("tintMode").withType("ImageView.tintMode").withOrder(-10));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("cropToPadding").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("padding").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -107,6 +131,7 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 	public class ImageViewExt extends r.android.widget.ImageView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return ImageViewImpl.this;
 		}
@@ -134,10 +159,13 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(ImageViewImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
 			nativeMakeFrameForChildWidget(l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(ImageViewImpl.this);
+	        overlays = ViewImpl.drawOverlay(ImageViewImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -267,7 +295,7 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 				setState4(value);
 				return;
 			}
-			ImageViewImpl.this.setAttribute(name, value, true);
+			ImageViewImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -433,6 +461,26 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
 
 			}
 			break;
+			case "tint": {
+				
+
+
+		setTintColor(objValue);
+
+
+
+			}
+			break;
+			case "tintMode": {
+				
+
+
+		setTintMode(strValue);
+
+
+
+			}
+			break;
 			case "cropToPadding": {
 				
 
@@ -570,6 +618,8 @@ return getMaxWidth();				}
 return getBaseLine();				}
 			case "baselineAlignBottom": {
 return getBaselineAlignBottom();				}
+			case "tint": {
+return getTintColor();				}
 			case "cropToPadding": {
 return getCropToPadding();				}
 			case "paddingTop": {
@@ -716,8 +766,11 @@ return getScaleType();				}
 		if (imageDrawable != null && imageDrawable.isStateful() && imageDrawable.setState(measurableView.getDrawableState())) {
 			setImage(imageDrawable);
 		}
+		
+		if (tintColor != null && tintColor instanceof r.android.content.res.ColorStateList && ((r.android.content.res.ColorStateList)tintColor).isStateful()) {
+			setTintColor(tintColor);
+		}
 	}
-	
     
 
 	
@@ -918,6 +971,33 @@ public Object isBaselineAlignBottom() {
 }
 public ImageViewCommandBuilder setBaselineAlignBottom(boolean value) {
 	Map<String, Object> attrs = initCommand("baselineAlignBottom");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ImageViewCommandBuilder tryGetTint() {
+	Map<String, Object> attrs = initCommand("tint");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return this;}
+
+public Object getTint() {
+	Map<String, Object> attrs = initCommand("tint");
+	return attrs.get("commandReturnValue");
+}
+public ImageViewCommandBuilder setTint(String value) {
+	Map<String, Object> attrs = initCommand("tint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ImageViewCommandBuilder setTintMode(String value) {
+	Map<String, Object> attrs = initCommand("tintMode");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -1157,6 +1237,17 @@ public Object isBaselineAlignBottom() {
 }
 public void setBaselineAlignBottom(boolean value) {
 	getBuilder().reset().setBaselineAlignBottom(value).execute(true);
+}
+
+public Object getTint() {
+	return getBuilder().reset().tryGetTint().execute(false).getTint(); 
+}
+public void setTint(String value) {
+	getBuilder().reset().setTint(value).execute(true);
+}
+
+public void setTintMode(String value) {
+	getBuilder().reset().setTintMode(value).execute(true);
 }
 
 public Object isCropToPadding() {
@@ -1491,5 +1582,37 @@ public void setScaleType(String value) {
 		}
 	}
     //end - image
+	//start - tint
+	private Object tintColor;
+	private String tintColorStr;
+	private String tintMode = "src_atop";
+	private void setTintColor(Object objValue) {
+		tintColor = objValue;
+		if (objValue instanceof r.android.content.res.ColorStateList) {
+			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
+			objValue = colorStateList.getColorForState(measurableView.getDrawableState(), 0);
+		}
 
+		Object color = ViewImpl.getColor(objValue);
+		tintColorStr = (String) color;
+		ViewImpl.updateTintColor(this, getNativeWidgetForTint(), tintColorStr, tintMode);
+		
+	}
+
+	private void setTintMode(String strValue) {
+		this.tintMode = strValue;
+		ViewImpl.updateTintColor(this, getNativeWidgetForTint(), tintColorStr, tintMode);
+	}
+	
+
+	private Object getTintColor() {
+		return tintColor;
+	}
+	//end - tint
+	
+
+	private Object getNativeWidgetForTint() {
+		return simpleWrapableView.getWrappedView();
+	}
+	
 }

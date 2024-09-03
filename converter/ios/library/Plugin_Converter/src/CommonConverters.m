@@ -44,6 +44,7 @@
 #include "NilConverter.h"
 #include "NotEmpty.h"
 #include "ObjectToMapConverter.h"
+#include "OverlayBoundsConverter.h"
 #include "PasswordCommandConveter.h"
 #include "Pattern.h"
 #include "PercentConverter.h"
@@ -189,6 +190,7 @@ J2OBJC_IGNORE_DESIGNATED_END
       ASConverterFactory_register__WithNSString_withASIConverter_(ASCommonConverters_array, create_ASArrayConverter_init());
       ASConverterFactory_register__WithNSString_withASIConverter_(ASCommonConverters_listtointarray, create_ASListToIntArrayConverter_init());
       ASConverterFactory_register__WithNSString_withASIConverter_(ASCommonConverters_nil, create_ASNilConverter_init());
+      ASConverterFactory_register__WithNSString_withASIConverter_(@"overlay_bounds", create_ASOverlayBoundsConverter_init());
       ASConverterFactory_registerCommandConverterWithASAttributeCommand_(create_ASPasswordCommandConveter_initWithNSString_(ASCommonConverters_command_password));
       ASConverterFactory_registerCommandConverterWithASAttributeCommand_(create_ASUpperCaseCommandConveter_initWithNSString_(ASCommonConverters_command_uppercase));
       ASConverterFactory_registerCommandConverterWithASAttributeCommand_(create_ASMaxLengthCommandConveter_initWithNSString_(ASCommonConverters_command_maxlength));

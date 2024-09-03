@@ -57,6 +57,7 @@
      <source-file src="tsc/src/swt/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/ViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/ViewOnlyImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="tsc/src/swt/widget/ViewOverlayImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="tsc/src/swt/widget/WebViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <!-- tsc end -->
   </platform>

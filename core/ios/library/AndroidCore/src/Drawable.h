@@ -19,7 +19,10 @@
 @class ADInsets;
 @class ADRect;
 @class IOSIntArray;
+@class IOSObjectArray;
 @protocol ADCanvas;
+@protocol ADDrawable_MeasureTextHelper;
+@protocol ASIWidget;
 
 @interface ADDrawable : NSObject
 
@@ -28,6 +31,8 @@
 - (instancetype)init;
 
 - (void)drawWithADCanvas:(id<ADCanvas>)canvas;
+
+- (id)getAttributeWithNSString:(NSString *)key;
 
 - (jint)getBottom;
 
@@ -41,6 +46,8 @@
 
 - (jint)getLeft;
 
+- (id<ADDrawable_MeasureTextHelper>)getMeasureTextHelper;
+
 - (jint)getMinimumHeight;
 
 - (jint)getMinimumWidth;
@@ -51,6 +58,12 @@
 
 - (jint)getRight;
 
+- (IOSObjectArray *)getSimulatedWidgetAttrs;
+
+- (NSString *)getSimulatedWidgetGroupName;
+
+- (NSString *)getSimulatedWidgetLocalName;
+
 /*!
  @brief Describes the current state, as a union of primitve states, such as 
  <code>android.R.attr.state_focused</code>,
@@ -60,7 +73,13 @@
  */
 - (IOSIntArray *)getState;
 
+- (id)getTintColor;
+
+- (NSString *)getTintMode;
+
 - (jint)getTop;
+
+- (IOSObjectArray *)getViewAttrs;
 
 - (void)invalidateSelf;
 
@@ -98,15 +117,25 @@
 
 - (void)setLayoutDirectionWithInt:(jint)layoutDirection;
 
+- (void)setMeasureTextHelperWithADDrawable_MeasureTextHelper:(id<ADDrawable_MeasureTextHelper>)helper;
+
 - (void)setMinimumHeightWithInt:(jint)minimumHeight;
 
 - (void)setMinimumWidthWithInt:(jint)minimumWidth;
+
+- (void)setOverlayWithASIWidget:(id<ASIWidget>)overlay;
 
 - (void)setRedrawWithBoolean:(jboolean)redraw;
 
 - (jboolean)setStateWithIntArray:(IOSIntArray *)stateSet;
 
 - (void)setStateWithId:(id)drawableState;
+
+- (void)setTintColorWithId:(id)tintColor;
+
+- (void)setTintModeWithNSString:(NSString *)tintMode;
+
+- (void)setUseGCWithBoolean:(jboolean)useGC;
 
 - (void)setVisibleWithBoolean:(jboolean)b
                   withBoolean:(jboolean)c;
@@ -140,6 +169,23 @@ FOUNDATION_EXPORT ADDrawable *create_ADDrawable_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADDrawable)
 
 @compatibility_alias RAndroidGraphicsDrawableDrawable ADDrawable;
+
+#endif
+
+#if !defined (ADDrawable_MeasureTextHelper_) && (INCLUDE_ALL_Drawable || defined(INCLUDE_ADDrawable_MeasureTextHelper))
+#define ADDrawable_MeasureTextHelper_
+
+@protocol ADDrawable_MeasureTextHelper < JavaObject >
+
+- (jfloat)getTextWidth;
+
+- (jfloat)getTextHeight;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ADDrawable_MeasureTextHelper)
+
+J2OBJC_TYPE_LITERAL_HEADER(ADDrawable_MeasureTextHelper)
 
 #endif
 

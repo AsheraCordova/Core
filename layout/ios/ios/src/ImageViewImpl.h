@@ -131,7 +131,8 @@
 
 - (void)setImageWithId:(id)value;
 
-- (void)setImageNativeWithId:(id)value;
+- (void)setImageNativeWithId:(id)value
+                      withId:(id)tintColor;
 
 - (void)setVisibleWithBoolean:(jboolean)b;
 

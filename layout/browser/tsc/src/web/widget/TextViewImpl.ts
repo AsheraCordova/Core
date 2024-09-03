@@ -193,7 +193,6 @@ export class AutoLinkTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class TextViewImpl<T> extends ViewImpl<T>{

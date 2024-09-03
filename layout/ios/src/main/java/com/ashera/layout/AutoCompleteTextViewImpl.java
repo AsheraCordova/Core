@@ -395,6 +395,7 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
 	public class AutoCompleteTextViewExt extends r.android.widget.AutoCompleteTextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return AutoCompleteTextViewImpl.this;
 		}
@@ -421,10 +422,13 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(AutoCompleteTextViewImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
 			nativeMakeFrameForChildWidget(l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(AutoCompleteTextViewImpl.this);
+	        overlays = ViewImpl.drawOverlay(AutoCompleteTextViewImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -553,7 +557,7 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
 				setState4(value);
 				return;
 			}
-			AutoCompleteTextViewImpl.this.setAttribute(name, value, true);
+			AutoCompleteTextViewImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

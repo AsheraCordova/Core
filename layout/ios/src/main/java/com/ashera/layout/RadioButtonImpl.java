@@ -290,6 +290,7 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 	public class RadioButtonExt extends r.android.widget.RadioButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return RadioButtonImpl.this;
 		}
@@ -316,11 +317,14 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(RadioButtonImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 			canvas.reset();
 			onDraw(canvas);
 	        ViewImpl.redrawDrawables(RadioButtonImpl.this);
+	        overlays = ViewImpl.drawOverlay(RadioButtonImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -449,7 +453,7 @@ public class RadioButtonImpl extends BaseWidget implements IsRadioButton, ICusto
 				setState4(value);
 				return;
 			}
-			RadioButtonImpl.this.setAttribute(name, value, true);
+			RadioButtonImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

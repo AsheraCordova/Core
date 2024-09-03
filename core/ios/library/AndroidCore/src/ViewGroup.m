@@ -1079,6 +1079,16 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   }
 }
 
+- (jboolean)hasChildWithADView:(ADView *)child {
+  for (jint i = 0; i < [self getChildCount]; i++) {
+    ADView *view = JreRetainedLocalValue([self getChildAtWithInt:i]);
+    if (view == child) {
+      return true;
+    }
+  }
+  return false;
+}
+
 - (void)dealloc {
   RELEASE_(mDisappearingChildren_);
   RELEASE_(mOnHierarchyChangeListener_);
@@ -1194,6 +1204,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
     { NULL, "V", 0x2, 92, 11, -1, -1, -1, -1 },
     { NULL, "I", 0x1, 93, 94, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 95, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 96, 11, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1293,17 +1304,18 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
   methods[92].selector = @selector(clearDefaultFocusWithADView:);
   methods[93].selector = @selector(measureHeightOfChildrenWithInt:withInt:withInt:withInt:withInt:);
   methods[94].selector = @selector(setRedrawWithBoolean:);
+  methods[95].selector = @selector(hasChildWithADView:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "DBG", "Z", .constantValue.asBOOL = ADViewGroup_DBG, 0x1a, -1, -1, -1, -1 },
-    { "mDisappearingChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x4, -1, -1, 96, -1 },
+    { "mDisappearingChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x4, -1, -1, 97, -1 },
     { "mOnHierarchyChangeListener_", "LADViewGroup_OnHierarchyChangeListener;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "mFocused_", "LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mDefaultFocus_", "LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mFocusedInCluster_", "LADView;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mCurrentDragStartEvent_", "LADViewGroup_DragEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mIsInterestedInDrag_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mChildrenInterestedInDrag_", "LJavaUtilHashSet;", .constantValue.asLong = 0, 0x2, -1, -1, 97, -1 },
+    { "mChildrenInterestedInDrag_", "LJavaUtilHashSet;", .constantValue.asLong = 0, 0x2, -1, -1, 98, -1 },
     { "mLastTouchDownTime_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mLastTouchDownIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mHoveredSelf_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -1348,7 +1360,7 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
     { "LAYOUT_MODE_UNDEFINED", "I", .constantValue.asInt = ADViewGroup_LAYOUT_MODE_UNDEFINED, 0x1a, -1, -1, -1, -1 },
     { "LAYOUT_MODE_CLIP_BOUNDS", "I", .constantValue.asInt = ADViewGroup_LAYOUT_MODE_CLIP_BOUNDS, 0x19, -1, -1, -1, -1 },
     { "LAYOUT_MODE_OPTICAL_BOUNDS", "I", .constantValue.asInt = ADViewGroup_LAYOUT_MODE_OPTICAL_BOUNDS, 0x19, -1, -1, -1, -1 },
-    { "LAYOUT_MODE_DEFAULT", "I", .constantValue.asLong = 0, 0x9, -1, 98, -1, -1 },
+    { "LAYOUT_MODE_DEFAULT", "I", .constantValue.asLong = 0, 0x9, -1, 99, -1, -1 },
     { "CLIP_TO_PADDING_MASK", "I", .constantValue.asInt = ADViewGroup_CLIP_TO_PADDING_MASK, 0x1c, -1, -1, -1, -1 },
     { "CHILD_LEFT_INDEX", "I", .constantValue.asInt = ADViewGroup_CHILD_LEFT_INDEX, 0x1a, -1, -1, -1, -1 },
     { "CHILD_TOP_INDEX", "I", .constantValue.asInt = ADViewGroup_CHILD_TOP_INDEX, 0x1a, -1, -1, -1, -1 },
@@ -1358,18 +1370,18 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params {
     { "ARRAY_INITIAL_CAPACITY", "I", .constantValue.asInt = ADViewGroup_ARRAY_INITIAL_CAPACITY, 0x1a, -1, -1, -1, -1 },
     { "ARRAY_CAPACITY_INCREMENT", "I", .constantValue.asInt = ADViewGroup_ARRAY_CAPACITY_INCREMENT, 0x1a, -1, -1, -1, -1 },
     { "mTransition_", "LADLayoutTransition;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mTransitioningViews_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 96, -1 },
-    { "mVisibilityChangingChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 96, -1 },
+    { "mTransitioningViews_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 97, -1 },
+    { "mVisibilityChangingChildren_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 97, -1 },
     { "mChildCountWithTransientState_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mNestedScrollAxes_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mTransientIndices_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 99, -1 },
-    { "mTransientViews_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 100, -1 },
+    { "mTransientIndices_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 100, -1 },
+    { "mTransientViews_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 101, -1 },
     { "mChildUnhandledKeyListeners_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mLayoutTransitionListener_", "LADLayoutTransition_TransitionListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChildren_", "[LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "onChildVisibilityChanged", "LADView;II", "dispatchAttachedToWindow", "LADView_AttachInfo;I", "setClipToPadding", "Z", "dispatchSetPressed", "findViewTraversal", "I", "<T:Lr/android/view/View;>(I)TT;", "addView", "LADView;", "LADView;I", "LADView;LADViewGroup_LayoutParams;", "LADView;ILADViewGroup_LayoutParams;", "checkLayoutParams", "LADViewGroup_LayoutParams;", "setOnHierarchyChangeListener", "LADViewGroup_OnHierarchyChangeListener;", "dispatchViewAdded", "onViewAdded", "dispatchViewRemoved", "onViewRemoved", "addViewInLayout", "LADView;ILADViewGroup_LayoutParams;Z", "cleanupLayoutState", "addViewInner", "addInArray", "removeFromArray", "II", "removeView", "removeViewAt", "removeViewInternal", "ILADView;", "setLayoutTransition", "LADLayoutTransition;", "attachViewToParent", "detachViewFromParent", "detachViewsFromParent", "offsetChildrenTopAndBottom", "hasBooleanFlag", "setBooleanFlag", "IZ", "setLayoutMode", "invalidateInheritedLayoutMode", "indexOfChild", "getChildAt", "measureChildren", "measureChild", "measureChildWithMargins", "LADView;IIII", "getChildMeasureSpec", "III", "addDisappearingView", "startViewTransition", "endViewTransition", "onCreateDrawableState", "setAddStatesFromChildren", "childDrawableStateChanged", "requestTransitionStart", "onStartNestedScroll", "LADView;LADView;I", "onNestedScrollAccepted", "onStopNestedScroll", "onNestedScroll", "onNestedPreScroll", "LADView;II[I", "onNestedFling", "LADView;FFZ", "onNestedPreFling", "LADView;FF", "onSetLayoutParams", "isViewTransitioning", "invalidateChild", "LADView;LADRect;", "recomputeViewAttributes", "focusableViewAvailable", "generateLayoutParams", "requestChildFocus", "LADView;LNSObject;", "childHasTransientStateChanged", "LADView;Z", "notifyGlobalFocusCleared", "LNSObject;", "clearChildFocus", "cancelHoverTarget", "cancelTouchTarget", "touchAccessibilityNodeProviderIfNeeded", "setDefaultFocus", "notifyChildOfDragStart", "dispatchVisibilityAggregated", "clearFocusedInCluster", "clearDefaultFocus", "measureHeightOfChildren", "IIIII", "setRedraw", "Ljava/util/ArrayList<Lr/android/view/View;>;", "Ljava/util/HashSet<Lr/android/view/View;>;", &ADViewGroup_LAYOUT_MODE_DEFAULT, "Ljava/util/List<Ljava/lang/Integer;>;", "Ljava/util/List<Lr/android/view/View;>;", "LADViewGroup_OnHierarchyChangeListener;LADViewGroup_LayoutParams;LADViewGroup_MarginLayoutParams;LADViewGroup_DragEvent;" };
-  static const J2ObjcClassInfo _ADViewGroup = { "ViewGroup", "r.android.view", ptrTable, methods, fields, 7, 0x401, 95, 72, -1, 101, -1, -1, -1 };
+  static const void *ptrTable[] = { "onChildVisibilityChanged", "LADView;II", "dispatchAttachedToWindow", "LADView_AttachInfo;I", "setClipToPadding", "Z", "dispatchSetPressed", "findViewTraversal", "I", "<T:Lr/android/view/View;>(I)TT;", "addView", "LADView;", "LADView;I", "LADView;LADViewGroup_LayoutParams;", "LADView;ILADViewGroup_LayoutParams;", "checkLayoutParams", "LADViewGroup_LayoutParams;", "setOnHierarchyChangeListener", "LADViewGroup_OnHierarchyChangeListener;", "dispatchViewAdded", "onViewAdded", "dispatchViewRemoved", "onViewRemoved", "addViewInLayout", "LADView;ILADViewGroup_LayoutParams;Z", "cleanupLayoutState", "addViewInner", "addInArray", "removeFromArray", "II", "removeView", "removeViewAt", "removeViewInternal", "ILADView;", "setLayoutTransition", "LADLayoutTransition;", "attachViewToParent", "detachViewFromParent", "detachViewsFromParent", "offsetChildrenTopAndBottom", "hasBooleanFlag", "setBooleanFlag", "IZ", "setLayoutMode", "invalidateInheritedLayoutMode", "indexOfChild", "getChildAt", "measureChildren", "measureChild", "measureChildWithMargins", "LADView;IIII", "getChildMeasureSpec", "III", "addDisappearingView", "startViewTransition", "endViewTransition", "onCreateDrawableState", "setAddStatesFromChildren", "childDrawableStateChanged", "requestTransitionStart", "onStartNestedScroll", "LADView;LADView;I", "onNestedScrollAccepted", "onStopNestedScroll", "onNestedScroll", "onNestedPreScroll", "LADView;II[I", "onNestedFling", "LADView;FFZ", "onNestedPreFling", "LADView;FF", "onSetLayoutParams", "isViewTransitioning", "invalidateChild", "LADView;LADRect;", "recomputeViewAttributes", "focusableViewAvailable", "generateLayoutParams", "requestChildFocus", "LADView;LNSObject;", "childHasTransientStateChanged", "LADView;Z", "notifyGlobalFocusCleared", "LNSObject;", "clearChildFocus", "cancelHoverTarget", "cancelTouchTarget", "touchAccessibilityNodeProviderIfNeeded", "setDefaultFocus", "notifyChildOfDragStart", "dispatchVisibilityAggregated", "clearFocusedInCluster", "clearDefaultFocus", "measureHeightOfChildren", "IIIII", "setRedraw", "hasChild", "Ljava/util/ArrayList<Lr/android/view/View;>;", "Ljava/util/HashSet<Lr/android/view/View;>;", &ADViewGroup_LAYOUT_MODE_DEFAULT, "Ljava/util/List<Ljava/lang/Integer;>;", "Ljava/util/List<Lr/android/view/View;>;", "LADViewGroup_OnHierarchyChangeListener;LADViewGroup_LayoutParams;LADViewGroup_MarginLayoutParams;LADViewGroup_DragEvent;" };
+  static const J2ObjcClassInfo _ADViewGroup = { "ViewGroup", "r.android.view", ptrTable, methods, fields, 7, 0x401, 96, 72, -1, 102, -1, -1, -1 };
   return &_ADViewGroup;
 }
 

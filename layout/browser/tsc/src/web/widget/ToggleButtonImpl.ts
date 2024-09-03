@@ -141,7 +141,6 @@ export class TextStyleTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{

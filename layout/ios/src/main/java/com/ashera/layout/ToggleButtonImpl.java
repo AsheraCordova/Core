@@ -251,6 +251,7 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 	public class ToggleButtonExt extends r.android.widget.ToggleButton implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return ToggleButtonImpl.this;
 		}
@@ -277,9 +278,12 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(ToggleButtonImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(ToggleButtonImpl.this);
+	        overlays = ViewImpl.drawOverlay(ToggleButtonImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -408,7 +412,7 @@ public class ToggleButtonImpl extends BaseWidget implements com.ashera.widget.IC
 				setState4(value);
 				return;
 			}
-			ToggleButtonImpl.this.setAttribute(name, value, true);
+			ToggleButtonImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

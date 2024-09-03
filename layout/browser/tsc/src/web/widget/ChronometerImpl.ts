@@ -119,7 +119,6 @@ export class TextStyleTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ChronometerImpl<T> extends ViewImpl<T>{

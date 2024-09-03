@@ -79,6 +79,9 @@
 
 + (void)drawableStateChangedWithASIWidget:(id<ASIWidget>)w;
 
++ (id<JavaUtilList>)drawOverlayWithASIWidget:(id<ASIWidget>)overlayWrapper
+                            withJavaUtilList:(id<JavaUtilList>)overlays;
+
 + (id)getAccessibilityHintWithId:(id)uiView;
 
 + (id)getAccessibilityIgnoresInvertColorsWithId:(id)uiView;
@@ -542,6 +545,8 @@ FOUNDATION_EXPORT void ASViewImpl_requestLayoutWithASIWidget_(id<ASIWidget> w);
 FOUNDATION_EXPORT ADDrawable *ASViewImpl_getDrawableWithADColorStateList_(ADColorStateList *colorStateList);
 
 FOUNDATION_EXPORT NSString *ASViewImpl_getValueWithNSString_withOrgXmlSaxAttributes_(NSString *key, id<OrgXmlSaxAttributes> attributes);
+
+FOUNDATION_EXPORT id<JavaUtilList> ASViewImpl_drawOverlayWithASIWidget_withJavaUtilList_(id<ASIWidget> overlayWrapper, id<JavaUtilList> overlays);
 
 FOUNDATION_EXPORT id<ADInterpolator> ASViewImpl_getInterpolatorWithASIWidget_withId_(id<ASIWidget> w, id objValue);
 

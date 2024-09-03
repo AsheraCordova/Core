@@ -251,7 +251,6 @@ public class LinkImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lineSpacingMultiplier").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
-	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("webEnableTintFilter").withType("boolean"));
 	}
 	
 	public LinkImpl() {
@@ -268,6 +267,7 @@ public class LinkImpl extends BaseWidget {
 	public class LinkExt extends r.android.widget.TextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return LinkImpl.this;
 		}
@@ -294,10 +294,13 @@ public class LinkImpl extends BaseWidget {
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(LinkImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
 			nativeMakeFrameForChildWidget(l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(LinkImpl.this);
+	        overlays = ViewImpl.drawOverlay(LinkImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -427,7 +430,7 @@ public class LinkImpl extends BaseWidget {
 				setState4(value);
 				return;
 			}
-			LinkImpl.this.setAttribute(name, value, true);
+			LinkImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -1964,7 +1967,6 @@ return getLineSpacingMultiplier();				}
 	
 	//end - nativeMeasure
 	//start - drawable
-	private boolean enableTintFilter;
 	private HTMLElement drawableLeft;
 	private HTMLElement drawableLeftWrapper;
 	private HTMLElement drawableTop;
@@ -2106,40 +2108,14 @@ return getLineSpacingMultiplier();				}
 	}
 	
 	private void setDrawableTintMode(String strValue) {
-		//add,multiply,screen,src_atop,src_in,src_over
-		String mixBlendMode = "initial";
-		String maskComposite = "none";
-		switch (strValue) {
-		case "add":
-			break;
-		case "screen":
-			mixBlendMode = "screen";
-			break;
-		case "multiply":
-			mixBlendMode = "multiply";
-			break;
-		case "src_atop":
-			maskComposite = "source-atop";
-			break;
-		case "src_in":
-			maskComposite = "source-in";
-			break;
-		case "src_over":
-			maskComposite = "source-over";
-			mixBlendMode = "overlay";
-			break;
-		default:
-			break;
-		}
-		
-		setDrawableTintMode(mixBlendMode, maskComposite, drawableBottom,  drawableTop, drawableLeft, drawableRight);
+		setDrawableTintMode(strValue, drawableBottom,  drawableTop, drawableLeft, drawableRight);
 	}
 	
-	private void setDrawableTintMode(String blendMode, String maskComposite, HTMLElement... htmlElements) {
+	private void setDrawableTintMode(String tintColorMode, HTMLElement... htmlElements) {
 		for (HTMLElement htmlElement : htmlElements) {
 			if (htmlElement != null) {
-				htmlElement.getStyle().setProperty("mix-blend-mode", blendMode);
-				htmlElement.getStyle().setProperty("-webkit-mask-composite", maskComposite);
+				this.tintColorMode= tintColorMode;
+				ViewImpl.updateTintColor(this, htmlElement, tintColor, tintColorMode);
 			}
 		}
 	}
@@ -2151,22 +2127,17 @@ return getLineSpacingMultiplier();				}
 			this.drawableTint = colorStateList;
 		}
 		
-		setDrawableTint(objValue, drawableBottomWrapper, drawableTopWrapper, drawableLeftWrapper, drawableRightWrapper);
+		setDrawableTint(objValue, drawableBottom, drawableTop, drawableLeft, drawableRight);
 	}
 	
+	private String tintColor;
+	private String tintColorMode = "src_atop";
 	private void setDrawableTint(Object objValue, HTMLElement... htmlElements) {
-		String filter = null;
 		String hexColor = (String) ViewImpl.getColor(objValue);
-		if (enableTintFilter) {
-			filter = new com.ashera.layout.filter.FilterSolver(hexColor).solve();
-		}
+		this.tintColor= hexColor;
 		for (HTMLElement htmlElement : htmlElements) {
 			if (htmlElement != null) {
-				if (filter != null) {
-					htmlElement.getStyle().setProperty("filter", filter);
-				} else {
-					htmlElement.getStyle().setProperty("background-color", hexColor);
-				}
+				ViewImpl.updateTintColor(this, htmlElement, tintColor, tintColorMode);
 			}
 		}
 	}	
@@ -2513,9 +2484,6 @@ return getLineSpacingMultiplier();				}
     	escapeHtml = true;
     	registerForAttributeCommandChain("text");
     	initHtml(params);
-    	if ("true".equals(params.get("webEnableTintFilter"))) {
-    		enableTintFilter = true;
-    	}
 		nativeCreateLabel("div");
     }
 

@@ -95,6 +95,8 @@
 
 - (id)createWrapperViewHolderWithInt:(jint)viewType;
 
+- (jboolean)disableRemoveAttributeCommandFromChain;
+
 - (void)drawableStateChanged;
 
 - (void)executeCommandWithASIWidget:(id<ASIWidget>)w

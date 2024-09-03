@@ -200,7 +200,6 @@ export class NumericTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class EditTextImpl<T> extends ViewImpl<T>{

@@ -430,6 +430,7 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
 	public class SwitchExt extends androidx.appcompat.widget.SwitchCompat implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		
 		public IWidget getWidget() {
 			return SwitchImpl.this;
 		}
@@ -459,7 +460,9 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
 		@Override
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
+			
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			
 			replayBufferedEvents();
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();

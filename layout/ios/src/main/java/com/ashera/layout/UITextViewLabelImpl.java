@@ -307,6 +307,7 @@ public class UITextViewLabelImpl extends BaseWidget implements com.ashera.valida
 	public class UITextViewLabelExt extends r.android.widget.TextView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return UITextViewLabelImpl.this;
 		}
@@ -333,10 +334,13 @@ public class UITextViewLabelImpl extends BaseWidget implements com.ashera.valida
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(UITextViewLabelImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
 			nativeMakeFrameForChildWidget(l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(UITextViewLabelImpl.this);
+	        overlays = ViewImpl.drawOverlay(UITextViewLabelImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -465,7 +469,7 @@ public class UITextViewLabelImpl extends BaseWidget implements com.ashera.valida
 				setState4(value);
 				return;
 			}
-			UITextViewLabelImpl.this.setAttribute(name, value, true);
+			UITextViewLabelImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

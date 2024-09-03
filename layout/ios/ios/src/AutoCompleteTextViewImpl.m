@@ -1177,6 +1177,7 @@ J2OBJC_FIELD_SETTER(ASAutoCompleteTextViewImpl_InputView, mapping_, id<JavaUtilM
   __unsafe_unretained ASAutoCompleteTextViewImpl *this$0_;
   ASMeasureEvent *measureFinished_;
   ASOnLayoutEvent *onLayoutEvent_;
+  id<JavaUtilList> overlays_;
   id<JavaUtilMap> templates_;
 }
 
@@ -1184,6 +1185,7 @@ J2OBJC_FIELD_SETTER(ASAutoCompleteTextViewImpl_InputView, mapping_, id<JavaUtilM
 
 J2OBJC_FIELD_SETTER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt, onLayoutEvent_, ASOnLayoutEvent *)
+J2OBJC_FIELD_SETTER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt, overlays_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt, templates_, id<JavaUtilMap>)
 
 @interface ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt_$Lambda$1 : NSObject < JavaLangRunnable > {
@@ -6599,10 +6601,13 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
                     withInt:(jint)b {
   [super onLayoutWithBoolean:changed withInt:l withInt:t withInt:r withInt:b];
   ASViewImpl_setDrawableBoundsWithASIWidget_withInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
-  ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b);
-  ASAutoCompleteTextViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
+  if (![self isOverlay]) {
+    ASViewImpl_nativeMakeFrameWithId_withInt_withInt_withInt_withInt_([this$0_ asNativeWidget], l, t, r, b);
+    ASAutoCompleteTextViewImpl_nativeMakeFrameForChildWidgetWithInt_withInt_withInt_withInt_(this$0_, l, t, r, b);
+  }
   [this$0_ replayBufferedEvents];
   ASViewImpl_redrawDrawablesWithASIWidget_(this$0_);
+  overlays_ = ASViewImpl_drawOverlayWithASIWidget_withJavaUtilList_(this$0_, overlays_);
   id<ASIWidgetLifeCycleListener> listener = [this$0_ getListener];
   if (listener != nil) {
     [((ASOnLayoutEvent *) nil_chk(onLayoutEvent_)) setBWithInt:b];
@@ -6720,7 +6725,7 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
     [self setState4WithId:value];
     return;
   }
-  [this$0_ setAttributeWithNSString:name withId:value withBoolean:true];
+  [this$0_ setAttributeWithNSString:name withId:value withBoolean:!([value isKindOfClass:[NSString class]])];
 }
 
 - (void)setVisibilityWithInt:(jint)visibility {
@@ -6913,10 +6918,11 @@ J2OBJC_INITIALIZED_DEFN(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
     { "this$0_", "LASAutoCompleteTextViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
     { "measureFinished_", "LASMeasureEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "onLayoutEvent_", "LASOnLayoutEvent;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 38, -1 },
+    { "overlays_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 38, -1 },
+    { "templates_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 39, -1 },
   };
-  static const void *ptrTable[] = { "LASAutoCompleteTextViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "computeSize", "F", "setState0", "setState1", "setState2", "setState3", "setState4", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
-  static const J2ObjcClassInfo _ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt = { "AutoCompleteTextViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 42, 4, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASAutoCompleteTextViewImpl;", "onMeasure", "II", "onLayout", "ZIIII", "execute", "LNSString;[LNSObject;", "updateMeasuredDimension", "newInstance", "LASIWidget;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;", "()Ljava/util/List<Ljava/lang/String;>;", "getAttribute", "LASWidgetAttribute;", "inflateView", "LNSString;", "getLocationOnScreen", "[I", "getWindowVisibleDisplayFrame", "LADRect;", "offsetTopAndBottom", "I", "offsetLeftAndRight", "setMyAttribute", "LNSString;LNSObject;", "setVisibility", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "computeSize", "F", "setState0", "setState1", "setState2", "setState3", "setState4", "Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;" };
+  static const J2ObjcClassInfo _ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt = { "AutoCompleteTextViewExt", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 42, 5, 0, -1, -1, -1, -1 };
   return &_ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt;
 }
 

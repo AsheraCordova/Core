@@ -44,6 +44,27 @@ public class StyledTextImpl extends BaseWidget implements IDrawable, IHasMultiNa
 	protected r.android.widget.EditText measurableView;	
 	
 		@SuppressLint("NewApi")
+		final static class TintMode extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("add",  0x1);
+				mapping.put("multiply",  0x2);
+				mapping.put("screen",  0x3);
+				mapping.put("src_atop",  0x4);
+				mapping.put("src_in",  0x5);
+				mapping.put("src_over",  0x6);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
 		final static class Font extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
 				{
@@ -137,6 +158,9 @@ public class StyledTextImpl extends BaseWidget implements IDrawable, IHasMultiNa
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtTopPixel").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtWordWrap").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtWrapIndent").withType("int"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate").withOrder(-10));
+		ConverterFactory.register("StyledText.tintMode", new TintMode());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("StyledText.tintMode").withOrder(-10));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lineSpacingExtra").withType("dimensionfloat"));
@@ -215,6 +239,7 @@ public class StyledTextImpl extends BaseWidget implements IDrawable, IHasMultiNa
 	public class StyledTextExt extends r.android.widget.EditText implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return StyledTextImpl.this;
 		}
@@ -241,9 +266,12 @@ public class StyledTextImpl extends BaseWidget implements IDrawable, IHasMultiNa
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(StyledTextImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(StyledTextImpl.this);
+	        overlays = ViewImpl.drawOverlay(StyledTextImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -374,7 +402,7 @@ public class StyledTextImpl extends BaseWidget implements IDrawable, IHasMultiNa
 				setState4(value);
 				return;
 			}
-			StyledTextImpl.this.setAttribute(name, value, true);
+			StyledTextImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -788,6 +816,26 @@ public class StyledTextImpl extends BaseWidget implements IDrawable, IHasMultiNa
 
 
 		 styledText.setWrapIndent((int)objValue);
+
+
+
+			}
+			break;
+			case "drawableTint": {
+				
+
+
+		setDrawableTint(objValue);
+
+
+
+			}
+			break;
+			case "drawableTintMode": {
+				
+
+
+		setDrawableTintMode(strValue);
 
 
 
@@ -1524,7 +1572,7 @@ return this.getDrawablePadding();				}
 	}
 	
 
-    private void setMyFont(org.eclipse.swt.graphics.Font newFont2) {
+    private void setMyFont(org.eclipse.swt.graphics.Font newFont) {
         org.eclipse.swt.custom.StyleRange styleRange = new org.eclipse.swt.custom.StyleRange();
         styleRange.start = 0;
         styleRange.font = newFont;
@@ -1626,6 +1674,12 @@ return this.getDrawablePadding();				}
         styledText.addDisposeListener((e) -> disposeAll(newFont));
         registerCommandAttrs();
         registerForAttributeCommandChain("hint");
+		registerForAttributeCommandChain("drawableStart");
+		registerForAttributeCommandChain("drawableLeft");
+		registerForAttributeCommandChain("drawableTop");
+		registerForAttributeCommandChain("drawableBottom");
+		registerForAttributeCommandChain("drawableRight");
+		registerForAttributeCommandChain("drawableEnd");
 	}
 
 	private void loadCustomAttributes(String attributeName) {
@@ -2290,9 +2344,13 @@ return this.getDrawablePadding();				}
 		if (measurableView.getTextColors() != null) {
 			setTextColor(measurableView.getCurrentTextColor());
 		}
+		
+		if (drawableTint != null && drawableTint.isStateful()) {
+			setDrawableTint(drawableTint);
+		}
 		drawableStateChangedAdditional();
 	}
-
+    
 	private void drawableStateChange(Label mydrawable, r.android.graphics.drawable.Drawable dr, String attribute) {
 		if (mydrawable != null) {
 			final int[] state = measurableView.getDrawableState();
@@ -2316,6 +2374,49 @@ return this.getDrawablePadding();				}
 		}
 	}
     //start - leftdrawable
+	private void setDrawableTintMode(Object value) {
+		applyAttributeCommand("drawableLeft", "tintColor", "drawableTintMode", value);
+		applyAttributeCommand("drawableStart", "tintColor", "drawableTintMode", value);
+		applyAttributeCommand("drawableEnd", "tintColor", "drawableTintMode", value);
+		applyAttributeCommand("drawableRight", "tintColor", "drawableTintMode", value);
+		applyAttributeCommand("drawableTop", "tintColor", "drawableTintMode", value);
+		applyAttributeCommand("drawableBottom", "tintColor", "drawableTintMode", value);
+
+	}
+	private r.android.content.res.ColorStateList drawableTint; 
+	private void setDrawableTint(Object objValue) {
+		if (objValue instanceof r.android.content.res.ColorStateList) {
+			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
+			this.drawableTint = colorStateList;
+			objValue = drawableTint.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
+		}
+		
+		Object color = ViewImpl.getColor(objValue);
+
+		applyAttributeCommand("drawableLeft", "tintColor", "drawableTint", color);
+		applyAttributeCommand("drawableStart", "tintColor", "drawableTint", color);
+		applyAttributeCommand("drawableEnd", "tintColor", "drawableTint", color);
+		applyAttributeCommand("drawableRight", "tintColor", "drawableTint", color);
+		applyAttributeCommand("drawableTop", "tintColor", "drawableTint", color);
+		applyAttributeCommand("drawableBottom", "tintColor", "drawableTint", color);
+		
+	}
+	private boolean disableApplyCommmand;
+	private void applyAttributeCommand(String sourceName, String commandName, String attribute, Object value) {
+		if (!isInitialised() || attributes.containsKey(sourceName)) {
+			applyAttributeCommand(sourceName, commandName, new String[] {attribute}, true, value);
+		} else {
+			disableApplyCommmand = true;
+			applyAttributeCommand(sourceName, commandName, new String[] {attribute}, false);
+			disableApplyCommmand = false;
+		}
+	}
+	
+	@Override
+	public boolean disableRemoveAttributeCommandFromChain() {
+		return disableApplyCommmand;
+	}
+	
     private Label drawableLeft;
 
 	private r.android.graphics.drawable.Drawable getDrawable(Object objValue) {
@@ -2346,7 +2447,7 @@ return this.getDrawablePadding();				}
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
 			measurableView.setLeftDrawable(drawable);
 			disposeAll(drawableLeft.getImage());
-			setImageOrColorOnDrawable(drawableLeft, drawable.getDrawable());
+			setImageOrColorOnDrawable(drawableLeft, drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
 		}
 	}
 
@@ -2361,17 +2462,20 @@ return this.getDrawablePadding();				}
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
 			measurableView.setRightDrawable(drawable);
 			disposeAll(drawableRight.getImage());
-			setImageOrColorOnDrawable(drawableRight,  drawable.getDrawable());
+			setImageOrColorOnDrawable(drawableRight,  drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
 		}
 	}
 	
-	private void setImageOrColorOnDrawable(Label drawable, Object imageOrColor) {
+	private void setImageOrColorOnDrawable(Label drawable, Object imageOrColor, Object tintColor, String tintMode) {
 		if (imageOrColor instanceof Color) {
 			drawable.setBackground((Color)imageOrColor);
 		} else {
 			drawable.setBackground(null);
 		}
 		if (imageOrColor instanceof Image) {
+			if (tintColor != null) {
+				imageOrColor = com.ashera.common.ImageUtils.tintImage((Image) imageOrColor, (Color) tintColor, tintMode);
+			}
 			drawable.setImage((Image) imageOrColor);
 		} else {
 			drawable.setImage(null);
@@ -2389,7 +2493,7 @@ return this.getDrawablePadding();				}
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
 			measurableView.setBottomDrawable(drawable);
 			disposeAll(drawableBottom.getImage());
-			setImageOrColorOnDrawable(drawableBottom, drawable.getDrawable());
+			setImageOrColorOnDrawable(drawableBottom, drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
 		}
 	}
 
@@ -2404,7 +2508,7 @@ return this.getDrawablePadding();				}
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
 			measurableView.setTopDrawable(drawable);
 			disposeAll(drawableTop.getImage());
-			setImageOrColorOnDrawable(drawableTop,  drawable.getDrawable());
+			setImageOrColorOnDrawable(drawableTop,  drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
 		}
 	}
 
@@ -3793,6 +3897,22 @@ public StyledTextCommandBuilder setSwtWrapIndent(int value) {
 
 	attrs.put("value", value);
 return this;}
+public StyledTextCommandBuilder setDrawableTint(String value) {
+	Map<String, Object> attrs = initCommand("drawableTint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public StyledTextCommandBuilder setDrawableTintMode(String value) {
+	Map<String, Object> attrs = initCommand("drawableTintMode");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public StyledTextCommandBuilder tryGetFirstBaselineToTopHeight() {
 	Map<String, Object> attrs = initCommand("firstBaselineToTopHeight");
 	attrs.put("type", "attribute");
@@ -4730,6 +4850,14 @@ public Object getSwtWrapIndent() {
 }
 public void setSwtWrapIndent(int value) {
 	getBuilder().reset().setSwtWrapIndent(value).execute(true);
+}
+
+public void setDrawableTint(String value) {
+	getBuilder().reset().setDrawableTint(value).execute(true);
+}
+
+public void setDrawableTintMode(String value) {
+	getBuilder().reset().setDrawableTintMode(value).execute(true);
 }
 
 public Object getFirstBaselineToTopHeight() {

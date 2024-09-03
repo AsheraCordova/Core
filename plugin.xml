@@ -201,6 +201,7 @@
      <source-file src="layout/android/res/layout/autocomplete_completion.xml" target-dir="res/layout"/>
      <source-file src="layout/android/res/layout/autocomplete_entries.xml" target-dir="res/layout"/>
      <source-file src="layout/android/res/values/model_attrs.xml" target-dir="res/values"/>
+     <source-file src="layout/android/res/values/viewoverlay_attrs.xml" target-dir="res/values"/>
      <!-- res end -->
 	 <!-- start src -->
      <source-file src="layout/android/src/com/ashera/layout/AndroidLayoutsCordovaPlugin.java" target-dir="src/com/ashera/layout"/>
@@ -241,6 +242,8 @@
      <source-file src="layout/android/src/com/ashera/layout/ViewGroupModelImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ViewImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/ViewOnlyImpl.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/ViewOverlay.java" target-dir="src/com/ashera/layout"/>
+     <source-file src="layout/android/src/com/ashera/layout/ViewOverlayImpl.java" target-dir="src/com/ashera/layout"/>
      <source-file src="layout/android/src/com/ashera/layout/WebViewImpl.java" target-dir="src/com/ashera/layout"/>
      <!-- src end -->
      
@@ -277,6 +280,7 @@
      <source-file src="layout/android/tsc/src/android/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/ViewOnlyImpl.ts" target-dir="tsc/src/android/widget"/>
+     <source-file src="layout/android/tsc/src/android/widget/ViewOverlayImpl.ts" target-dir="tsc/src/android/widget"/>
      <source-file src="layout/android/tsc/src/android/widget/WebViewImpl.ts" target-dir="tsc/src/android/widget"/>
      <!-- tsc end -->
   </platform>
@@ -1076,6 +1080,10 @@
      <source-file src="core/ios/library/AndroidCore/src/View.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ViewGroup.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ViewGroup.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/ViewGroupOverlay.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/ViewGroupOverlay.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/ViewOverlay.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/ViewOverlay.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ViewParent.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ViewParent.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ViewTreeObserver.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1099,6 +1107,8 @@
      <!-- AndroidCore end -->
      
       <!-- start AndroidXCore -->
+     <header-file src="core/ios/library/AndroidXCore/src/BaseMenuPresenter.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/BaseMenuPresenter.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/FastOutLinearInInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/FastOutLinearInInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/FastOutSlowInInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
@@ -1113,12 +1123,22 @@
      <source-file src="core/ios/library/AndroidXCore/src/GravityCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/LayoutRes.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/LayoutRes.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/LinearLayoutCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/LinearLayoutCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/LinearOutSlowInInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/LinearOutSlowInInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/LookupTableInterpolator.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/LookupTableInterpolator.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/MarginLayoutParamsCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/MarginLayoutParamsCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/MenuBuilder.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/MenuBuilder.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/MenuItemImpl.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/MenuItemImpl.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/MenuParser.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/MenuParser.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/MenuPresenter.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/MenuPresenter.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/NestedScrollingChild.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/NestedScrollingChild.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/NestedScrollingChild2.h" target-dir="CorePlugin/AndroidXCore/src"/>
@@ -1139,10 +1159,16 @@
      <source-file src="core/ios/library/AndroidXCore/src/NestedScrollView.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/RestrictTo.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/RestrictTo.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/RtlSpacingHelper.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/RtlSpacingHelper.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/ScrollingView.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/ScrollingView.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/SimpleArrayMap.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/SimpleArrayMap.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/SubMenuBuilder.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/SubMenuBuilder.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/SupportMenuItem.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/SupportMenuItem.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/TraceCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/TraceCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/ViewCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
@@ -1151,11 +1177,25 @@
      <source-file src="core/ios/library/AndroidXCore/src/ViewGroupCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/ViewParentCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/ViewParentCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/ViewUtils.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/ViewUtils.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/VisibleForTesting.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/VisibleForTesting.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/WindowInsetsCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/WindowInsetsCompat.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <!-- AndroidXCore end -->
+     
+     <!-- start AndroidJMaterial -->
+     <header-file src="core/ios/library/AndroidJMaterial/src/BadgeDrawable.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="core/ios/library/AndroidJMaterial/src/BadgeDrawable.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidJMaterial/src/BadgeState.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="core/ios/library/AndroidJMaterial/src/BadgeState.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidJMaterial/src/BadgeUtils.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="core/ios/library/AndroidJMaterial/src/BadgeUtils.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidJMaterial/src/HideBottomViewOnScrollBehavior.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="core/ios/library/AndroidJMaterial/src/HideBottomViewOnScrollBehavior.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <!-- AndroidJMaterial end -->
+     
   
     <config-file target="config.xml" parent="/widget">
       <feature name="com.ashera.converter.ios">
@@ -1171,6 +1211,8 @@
      <source-file src="converter/ios/ios/src/ColorConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="converter/ios/ios/src/ColorImageConverter.h" target-dir="ConverterPlugin/ios/src"/>
      <source-file src="converter/ios/ios/src/ColorImageConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="converter/ios/ios/src/ColorIntConverter.h" target-dir="ConverterPlugin/ios/src"/>
+     <source-file src="converter/ios/ios/src/ColorIntConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="converter/ios/ios/src/ColorStateConverter.h" target-dir="ConverterPlugin/ios/src"/>
      <source-file src="converter/ios/ios/src/ColorStateConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="converter/ios/ios/src/ConverterCordovaPlugin.h" target-dir="ConverterPlugin/ios/src"/>
@@ -1286,6 +1328,8 @@
      <source-file src="converter/ios/library/Plugin_Converter/src/NotEmpty.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="converter/ios/library/Plugin_Converter/src/ObjectToMapConverter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
      <source-file src="converter/ios/library/Plugin_Converter/src/ObjectToMapConverter.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="converter/ios/library/Plugin_Converter/src/OverlayBoundsConverter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
+     <source-file src="converter/ios/library/Plugin_Converter/src/OverlayBoundsConverter.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="converter/ios/library/Plugin_Converter/src/PasswordCommandConveter.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
      <source-file src="converter/ios/library/Plugin_Converter/src/PasswordCommandConveter.m" target-dir="ConverterPlugin/Plugin_Converter/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="converter/ios/library/Plugin_Converter/src/Pattern.h" target-dir="ConverterPlugin/Plugin_Converter/src"/>
@@ -1375,6 +1419,7 @@
      <source-file src="layout/ios/tsc/src/ios/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ViewOnlyImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <source-file src="layout/ios/tsc/src/ios/widget/ViewOverlayImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/WebViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <!-- tsc end -->
 	<!-- start ios -->
@@ -1454,6 +1499,8 @@
      <source-file src="layout/ios/ios/src/ViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ViewOnlyImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/ViewOnlyImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="layout/ios/ios/src/ViewOverlayImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="layout/ios/ios/src/ViewOverlayImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/WebViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/WebViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <!-- ios end -->
@@ -1581,6 +1628,7 @@
      <source-file src="layout/browser/tsc/src/web/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/ViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/ViewOnlyImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/ViewOverlayImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/WebViewImpl.ts" target-dir="tsc/src/web/widget"/>
      <!-- tsc end -->
   </platform>
@@ -1666,6 +1714,7 @@
      <source-file src="layout/swt/tsc/src/swt/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/ViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/ViewOnlyImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/ViewOverlayImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/WebViewImpl.ts" target-dir="tsc/src/swt/widget"/>
      <!-- tsc end -->
   </platform>

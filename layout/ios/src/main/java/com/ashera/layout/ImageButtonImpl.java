@@ -102,7 +102,7 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("baseline").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("baselineAlignBottom").withType("boolean"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("tint").withType("color").withOrder(-10));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("tint").withType("colorstate").withOrder(-10));
 	}
 	
 	public ImageButtonImpl() {
@@ -119,6 +119,7 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
 	public class ImageButtonExt extends r.android.widget.ImageView implements ILifeCycleDecorator{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return ImageButtonImpl.this;
 		}
@@ -146,9 +147,12 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(ImageButtonImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(ImageButtonImpl.this);
+	        overlays = ViewImpl.drawOverlay(ImageButtonImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -277,7 +281,7 @@ public class ImageButtonImpl extends BaseWidget implements IsImage, com.ashera.i
 				setState4(value);
 				return;
 			}
-			ImageButtonImpl.this.setAttribute(name, value, true);
+			ImageButtonImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -659,9 +663,10 @@ return getTintColor();				}
 	}	
 
 	public void setImage(Object value) {
-		measurableView.setImageDrawable((r.android.graphics.drawable.Drawable) value);
+		r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) value;
+		measurableView.setImageDrawable(drawable);
 		
-		setImageNative(((r.android.graphics.drawable.Drawable) value).getDrawable());
+		setImageNative(drawable.getDrawable(), drawable.getTintColor());
 	}
 	
 	
@@ -794,8 +799,11 @@ return getTintColor();				}
 		if (imageDrawable != null && imageDrawable.isStateful() && imageDrawable.setState(measurableView.getDrawableState())) {
 			setImage(imageDrawable);
 		}
+		
+		if (tintColor != null && tintColor instanceof r.android.content.res.ColorStateList && ((r.android.content.res.ColorStateList)tintColor).isStateful()) {
+			setTintColor(tintColor);
+		}
 	}
-	
     
 
 
@@ -1410,6 +1418,7 @@ public void setTint(String value) {
 	//end - body
 	private void nativeCreate(Map<String, Object> params) {
 		createButton();
+		registerForAttributeCommandChain("src");
 	}
 	
 	private native void createButton()/*-[
@@ -1433,14 +1442,16 @@ public void setTint(String value) {
 		return false;
 	}
 	
+	private Object tintColor;
 	
 	private void setTintColor(Object objValue) {
-		nativeSetTintColor(objValue);
+		tintColor = objValue;
+		if (objValue instanceof r.android.content.res.ColorStateList) {
+			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
+			objValue = colorStateList.getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.BLACK);
+		}
+		applyAttributeCommand("src", "tintColor", new String[] {"tint"}, true, ViewImpl.getColor(objValue));
 	}
-	
-	private native void nativeSetTintColor(Object objValue) /*-[
-		[((ASUIButton*)self->uiView_).imageView setTintColor:(UIColor*)objValue];
-	]-*/;	
 	
 	private native Object getTintColor() /*-[
 		return ((ASUIButton*)self->uiView_).imageView.tintColor;
@@ -1452,9 +1463,9 @@ public void setTint(String value) {
 	]-*/;
 	
 	
-	private void setImageNative(Object value) {
+	private void setImageNative(Object value, Object tintColor) {
 		if (hasFeature("enableFeatures", "UIImageRenderingModeAlwaysTemplate")) {
-			setImageNativeWithTemplate(value);
+			setImageNativeWithTemplate(value, tintColor);
 		} else {
 			setImageNativeSimple(value);
 		}
@@ -1467,10 +1478,16 @@ public void setTint(String value) {
 		} else if ([value isKindOfClass:[UIColor class]]) {
 			[((ASUIButton*) self->uiView_) setBackgroundColor:((UIColor*) value)];
 			[((ASUIButton*) self->uiView_) setImage:nil forState:UIControlStateNormal];
+		} else {
+			[((ASUIButton*) self->uiView_) setBackgroundColor:[UIColor clearColor]];
+			[((ASUIButton*) self->uiView_) setImage:nil forState:UIControlStateNormal];
 		}
 	]-*/;
 	
-	private native void setImageNativeWithTemplate(Object value) /*-[
+	private native void setImageNativeWithTemplate(Object value, Object tintColor) /*-[
+		if (tintColor != nil) {
+			[((ASUIButton*)self->uiView_).imageView setTintColor:(UIColor*)tintColor];
+		}
 		[((ASUIButton*) self->uiView_) setImage:[(UIImage*) value imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate] forState:UIControlStateNormal];
 	]-*/;
 	

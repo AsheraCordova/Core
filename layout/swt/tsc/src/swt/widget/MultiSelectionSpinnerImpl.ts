@@ -10,6 +10,14 @@ export const enum TextStyle {
 bold = "bold",
 italic = "italic",
 normal = "normal",
+}
+export const enum TintMode {
+add = "add",
+multiply = "multiply",
+screen = "screen",
+src_atop = "src_atop",
+src_in = "src_in",
+src_over = "src_over",
 }	
 import CommandAttr from '../../widget/CommandAttr';
 import IWidget from '../../widget/IWidget';
@@ -65,6 +73,8 @@ export class TextStyleTransformer implements ITranform {
         }
     }
 }
+
+
 
 
 
@@ -159,6 +169,12 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "drawablePadding" }))
 	drawablePadding!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTint" }))
+	drawableTint!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableTintMode" }))
+	drawableTintMode!:CommandAttr<TintMode>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "enabled" }))
 	enabled!:CommandAttr<boolean>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -213,6 +229,8 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 		this.drawableTop = undefined;
 		this.drawableBottom = undefined;
 		this.drawablePadding = undefined;
+		this.drawableTint = undefined;
+		this.drawableTintMode = undefined;
 		this.enabled = undefined;
 		this.editable = undefined;
 		this.values = undefined;
@@ -714,6 +732,34 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.drawablePadding.setValue(value);
 		this.orderSet++;
 		this.drawablePadding.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableTint(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableTint == null || this.drawableTint == undefined) {
+			this.drawableTint = new CommandAttr<string>();
+		}
+		
+		this.drawableTint.setSetter(true);
+		this.drawableTint.setValue(value);
+		this.orderSet++;
+		this.drawableTint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableTintMode(value : TintMode) : T {
+		this.resetIfRequired();
+		if (this.drawableTintMode == null || this.drawableTintMode == undefined) {
+			this.drawableTintMode = new CommandAttr<TintMode>();
+		}
+		
+		this.drawableTintMode.setSetter(true);
+		this.drawableTintMode.setValue(value);
+		this.orderSet++;
+		this.drawableTintMode.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

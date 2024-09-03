@@ -1,5 +1,6 @@
 package com.ashera.converter;
 
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
@@ -24,9 +25,12 @@ public class ImageRepeatCommandConverter extends BaseAttributeCommand {
 		Control control = (Control) widget.asNativeWidget();
 
 		Rectangle rect = control.getBounds();
-		
+		Object tintColor = null;
+		String tintMode = null;
 		if (value instanceof r.android.graphics.drawable.Drawable) {
 			Drawable drawable = (r.android.graphics.drawable.Drawable) value;
+			tintColor = drawable.getTintColor();
+			tintMode = drawable.getTintMode();
 			//drawable.setBounds(rect.x, rect.y, rect.x + rect.width, rect.y + rect.height);
 			value = drawable.getDrawable();
 		}
@@ -34,12 +38,15 @@ public class ImageRepeatCommandConverter extends BaseAttributeCommand {
 		if (rect.height == 0 || rect.width == 0 || value == null || !(value instanceof Image)) {
 			return value;
 		}
+		
+		if (tintColor != null) {
+			value = com.ashera.common.ImageUtils.tintImage((Image) value, (Color) tintColor, tintMode);
+		}
 		if (backgroundRepeat == null || backgroundRepeat.equals("no-repeat") || backgroundRepeat.equals("no_repeat")) {
 			org.eclipse.swt.graphics.Rectangle bounds = control.getBounds();
 			Image image = (Image) value;
 			
-			if (bounds.height != image.getBounds().height ||
-					bounds.width != image.getBounds().width) {
+			if (bounds.height != image.getBounds().height || bounds.width != image.getBounds().width) {
 				com.ashera.common.ImageUtils.ResizeOptions.Builder builder = new com.ashera.common.ImageUtils.ResizeOptions.Builder();
 				ResizeOptions options = builder.withUseBackgroundHint(true).withBackgroundHint(control.getParent().getBackground()).initFromAttr(widget, "background").
 					build();

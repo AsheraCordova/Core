@@ -186,7 +186,6 @@ export class AutoLinkTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class SwitchImpl<T> extends ViewImpl<T>{

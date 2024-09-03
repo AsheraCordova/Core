@@ -12,6 +12,14 @@ popup = "popup",
 label = "label",
 style = "style",
 }
+export const enum TintMode {
+add = "add",
+multiply = "multiply",
+screen = "screen",
+src_atop = "src_atop",
+src_in = "src_in",
+src_over = "src_over",
+}
 export const enum Visibility {
 gone = "gone",
 invisible = "invisible",
@@ -111,6 +119,9 @@ export class ValidationErrorDisplayTransformer implements ITranform {
         }
     }
 }
+
+
+
 
 
 
@@ -315,6 +326,12 @@ export abstract class ViewImpl<T> {
 	@decorate(Expose({ name: "elevation" }))
 	elevation!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "backgroundTint" }))
+	backgroundTint!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "backgroundTintMode" }))
+	backgroundTintMode!:CommandAttr<TintMode>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "updateModelData" }))
 	updateModelData_!:CommandAttr<ScopedObject|ScopedObject[]>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -434,6 +451,9 @@ export abstract class ViewImpl<T> {
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "bottom" }))
 	bottom!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "swtGCImage" }))
+	swtGCImage!:CommandAttr<string>| undefined;
 
 	@decorate(Exclude())
 	protected thisPointer: T;	
@@ -496,6 +516,8 @@ export abstract class ViewImpl<T> {
 		this.refreshUiFromModel_ = undefined;
 		this.modelUiToPojoEventIds = undefined;
 		this.elevation = undefined;
+		this.backgroundTint = undefined;
+		this.backgroundTintMode = undefined;
 		this.updateModelData_ = undefined;
 		this.notifyDataSetChanged_ = undefined;
 		this.visibility = undefined;
@@ -536,6 +558,7 @@ export abstract class ViewImpl<T> {
 		this.right = undefined;
 		this.top = undefined;
 		this.bottom = undefined;
+		this.swtGCImage = undefined;
 		this.orderGet = 0;
 		this.orderSet = 0;
 		this.flush = false;
@@ -1500,6 +1523,52 @@ this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		retur
 	}
 		
 
+	public tryGetBackgroundTint() : T {
+		this.resetIfRequired();
+		if (this.backgroundTint == null || this.backgroundTint == undefined) {
+			this.backgroundTint = new CommandAttr<string>()
+		}
+		
+		this.backgroundTint.setGetter(true);
+		this.orderGet++;
+		this.backgroundTint.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getBackgroundTint() : string {
+		if (this.backgroundTint == null || this.backgroundTint == undefined) {
+			this.backgroundTint = new CommandAttr<string>();
+		}
+		return this.backgroundTint.getCommandReturnValue();
+	}
+	public setBackgroundTint(value : string) : T {
+		this.resetIfRequired();
+		if (this.backgroundTint == null || this.backgroundTint == undefined) {
+			this.backgroundTint = new CommandAttr<string>();
+		}
+		
+		this.backgroundTint.setSetter(true);
+		this.backgroundTint.setValue(value);
+		this.orderSet++;
+		this.backgroundTint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setBackgroundTintMode(value : TintMode) : T {
+		this.resetIfRequired();
+		if (this.backgroundTintMode == null || this.backgroundTintMode == undefined) {
+			this.backgroundTintMode = new CommandAttr<TintMode>();
+		}
+		
+		this.backgroundTintMode.setSetter(true);
+		this.backgroundTintMode.setValue(value);
+		this.orderSet++;
+		this.backgroundTintMode.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
 	public updateModelData(expression : string,
 payload : any) : T {
 		this.resetIfRequired();
@@ -2414,6 +2483,20 @@ payload : any) : T {
 		this.bottom.setValue(value);
 		this.orderSet++;
 		this.bottom.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setSwtGCImage(value : string) : T {
+		this.resetIfRequired();
+		if (this.swtGCImage == null || this.swtGCImage == undefined) {
+			this.swtGCImage = new CommandAttr<string>();
+		}
+		
+		this.swtGCImage.setSetter(true);
+		this.swtGCImage.setValue(value);
+		this.orderSet++;
+		this.swtGCImage.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

@@ -214,6 +214,7 @@ return layoutParams.gravity;			}
 	public class ScrollViewExt extends r.android.widget.ScrollView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return ScrollViewImpl.this;
 		}
@@ -265,9 +266,12 @@ return layoutParams.gravity;			}
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(ScrollViewImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b, (int) (computeVerticalScrollRange()));
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(ScrollViewImpl.this);
+	        overlays = ViewImpl.drawOverlay(ScrollViewImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -396,7 +400,7 @@ return layoutParams.gravity;			}
 				setState4(value);
 				return;
 			}
-			ScrollViewImpl.this.setAttribute(name, value, true);
+			ScrollViewImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {

@@ -248,6 +248,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "MEASURED_SIZE_MASK", "I", .constantValue.asInt = ADXViewCompat_MEASURED_SIZE_MASK, 0x19, -1, -1, -1, -1 },
     { "LAYOUT_DIRECTION_LTR", "I", .constantValue.asInt = ADXViewCompat_LAYOUT_DIRECTION_LTR, 0x19, -1, -1, -1, -1 },
     { "IMPORTANT_FOR_ACCESSIBILITY_AUTO", "I", .constantValue.asInt = ADXViewCompat_IMPORTANT_FOR_ACCESSIBILITY_AUTO, 0x19, -1, -1, -1, -1 },
+    { "IMPORTANT_FOR_ACCESSIBILITY_NO", "I", .constantValue.asInt = ADXViewCompat_IMPORTANT_FOR_ACCESSIBILITY_NO, 0x19, -1, -1, -1, -1 },
     { "IMPORTANT_FOR_ACCESSIBILITY_YES", "I", .constantValue.asInt = ADXViewCompat_IMPORTANT_FOR_ACCESSIBILITY_YES, 0x19, -1, -1, -1, -1 },
     { "SCROLL_AXIS_NONE", "I", .constantValue.asInt = ADXViewCompat_SCROLL_AXIS_NONE, 0x19, -1, -1, -1, -1 },
     { "SCROLL_AXIS_HORIZONTAL", "I", .constantValue.asInt = ADXViewCompat_SCROLL_AXIS_HORIZONTAL, 0x19, -1, -1, -1, -1 },
@@ -256,7 +257,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "TYPE_NON_TOUCH", "I", .constantValue.asInt = ADXViewCompat_TYPE_NON_TOUCH, 0x19, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "getMeasuredWidthAndState", "LADView;", "getMeasuredHeightAndState", "getLayoutDirection", "resolveSizeAndState", "III", "combineMeasuredStates", "II", "getMeasuredState", "getPaddingStart", "LADViewGroup;", "getPaddingEnd", "setLayoutDirection", "LADViewGroup;I", "setPaddingRelative", "LADView;IIII", "setX", "LADView;I", "setY", "getMinimumHeight", "jumpDrawablesToCurrentState", "getFitsSystemWindows", "setElevation", "LADView;F", "getElevation", "dispatchApplyWindowInsets", "LADView;LNSObject;", "getRootWindowInsets", "LNSObject;", "getMinimumWidth", "getImportantForAccessibility", "setImportantForAccessibility", "dispatchFinishTemporaryDetach", "dispatchStartTemporaryDetach", "hasTransientState", "isLayoutDirectionResolved", "offsetLeftAndRight", "offsetTopAndBottom", "isLaidOut", "isPaddingRelative", "stopNestedScroll" };
-  static const J2ObjcClassInfo _ADXViewCompat = { "ViewCompat", "androidx.core.view", ptrTable, methods, fields, 7, 0x1, 34, 13, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADXViewCompat = { "ViewCompat", "androidx.core.view", ptrTable, methods, fields, 7, 0x1, 34, 14, -1, -1, -1, -1, -1 };
   return &_ADXViewCompat;
 }
 

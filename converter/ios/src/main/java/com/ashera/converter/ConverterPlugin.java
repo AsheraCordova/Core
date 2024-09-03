@@ -84,6 +84,7 @@ public class ConverterPlugin extends BaseConverterPlugin  {
 		ConverterFactory.register("drawable", new DrawableConverter());
 		ConverterFactory.register("font", new FontConverter());
 		ConverterFactory.register("colorstate", new ColorStateConverter());
+		ConverterFactory.register("colorint", new ColorIntConverter());
 		ConverterFactory.registerCommandConverter(new ImageRepeatCommandConverter("imageRepeat"));
 		ConverterFactory.registerCommandConverter(new TintColorCommandConverter("tintColor"));
 		ConverterFactory.registerCommandConverter(new CGTintColorCommandConverter("cgTintColor"));

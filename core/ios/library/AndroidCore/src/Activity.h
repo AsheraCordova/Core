@@ -23,12 +23,12 @@
 @class ADBundle;
 @class ADConfiguration;
 @class ADIntent;
-@class ADMenu;
 @class ADPackageManager;
 @class ADView;
 @class ADWindow;
 @class IOSIntArray;
 @class IOSObjectArray;
+@protocol ADMenu;
 @protocol ADMenuItem;
 @protocol JavaLangRunnable;
 
@@ -52,13 +52,13 @@
 
 - (void)onCreateWithADBundle:(ADBundle *)savedInstanceState;
 
-- (jboolean)onCreateOptionsMenuWithADMenu:(ADMenu *)menu;
+- (jboolean)onCreateOptionsMenuWithADMenu:(id<ADMenu>)menu;
 
 - (void)onDestroy;
 
 - (jboolean)onOptionsItemSelectedWithADMenuItem:(id<ADMenuItem>)item;
 
-- (jboolean)onPrepareOptionsMenuWithADMenu:(ADMenu *)menu;
+- (jboolean)onPrepareOptionsMenuWithADMenu:(id<ADMenu>)menu;
 
 - (void)onRequestPermissionsResultWithInt:(jint)requestCode
                         withNSStringArray:(IOSObjectArray *)permissions

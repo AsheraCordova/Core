@@ -15,6 +15,9 @@ public class ConverterPlugin extends BaseConverterPlugin  {
 
 
 	public Object getColor(String color) {
+		 if (color.length() == 9) {
+         	color = "#" + color.substring(3) + color.substring(1, 3); 
+         }
 		return color;
 	}
 

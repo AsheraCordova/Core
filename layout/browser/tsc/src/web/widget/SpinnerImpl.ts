@@ -96,7 +96,6 @@ export class TextStyleTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class SpinnerImpl<T> extends ViewImpl<T>{

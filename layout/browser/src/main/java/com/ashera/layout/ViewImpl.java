@@ -100,6 +100,27 @@ public class ViewImpl {
 				}
 				}
 		@SuppressLint("NewApi")
+		final static class TintMode extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("add",  0x1);
+				mapping.put("multiply",  0x2);
+				mapping.put("screen",  0x3);
+				mapping.put("src_atop",  0x4);
+				mapping.put("src_in",  0x5);
+				mapping.put("src_over",  0x6);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
 		final static class LayoutDirection extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
 				{
@@ -212,6 +233,9 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("background").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		ConverterFactory.register("View.backgroundRepeat", new BackgroundRepeat());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("backgroundRepeat").withType("View.backgroundRepeat").withOrder(-10).withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("backgroundTint").withType("colorstate").withOrder(-10).withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
+		ConverterFactory.register("View.tintMode", new TintMode());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("backgroundTintMode").withType("View.tintMode").withOrder(-10).withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("minWidth").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("minHeight").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("invalidate").withType("nil"));
@@ -254,6 +278,8 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onSwiped").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("enableFeatures").withType("string"));
+	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("webEnableTintFilter").withType("boolean"));
+	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("webUseImgAsBackground").withType("boolean"));
 		
 		java.util.List<IAttributable> attributables = WidgetFactory.getAttributables("View", localName);
 		if (attributables != null) {
@@ -680,6 +706,24 @@ if (objValue instanceof java.util.List) {
 
 			}
 			break;
+		case "backgroundTint": {
+
+
+		setBackgroundTint(w, objValue);
+
+
+
+			}
+			break;
+		case "backgroundTintMode": {
+
+
+		setBackgroundTintMode(w, strValue);
+
+
+
+			}
+			break;
 		case "minWidth": {
 
 
@@ -1062,6 +1106,8 @@ return getModelUiToPojo(w);			}
 return getVisibility(w);			}
 			case "background": {
 return view.getBackground();			}
+			case "backgroundTint": {
+return getBackgroundTint(w);			}
 			case "minWidth": {
 return getMinWidth(w);			}
 			case "minHeight": {
@@ -1400,6 +1446,93 @@ return getScaleY(w, nativeWidget);			}
 	private static Object getLeft(IWidget w) {
 		View view = (View) w.asWidget();
 		return view.getLeft();
+	}
+	
+	public static java.util.List<IWidget> drawOverlay(IWidget overlayWrapper, java.util.List<IWidget> overlays) {
+		r.android.view.ViewOverlay overlay = ((View) overlayWrapper.asWidget()).getOverlay();
+		java.util.List<r.android.graphics.drawable.Drawable> drawables = overlay.getDrawables();
+		if (drawables != null) {
+			overlayWrapper.setAttribute("swtRedraw", false, true);
+			if (overlays == null) {
+				overlays = new ArrayList<>();
+			} else {
+				for (int i = overlays.size() - 1; i >= 0; i--) {
+					overlayWrapper.getParent().remove(overlays.get(i));
+				}
+				
+				overlays.clear();
+			}
+			Map<String, java.util.List> attrs = new java.util.HashMap<>(); 
+
+			for (r.android.graphics.drawable.Drawable drawable : drawables) {
+				if (drawable.getSimulatedWidgetLocalName() != null && drawable.getSimulatedWidgetGroupName() != null) {
+					IWidget w = WidgetFactory.createWidget(drawable.getSimulatedWidgetLocalName(), drawable.getSimulatedWidgetGroupName(), overlayWrapper.getParent(), false);
+					
+					
+					String[] simulatedWidgetAttrs = drawable.getSimulatedWidgetAttrs();
+					
+					if (simulatedWidgetAttrs != null) {
+						for (int i = 0; i < simulatedWidgetAttrs.length; i++) {
+							String attrName = simulatedWidgetAttrs[i];
+							Object value = drawable.getAttribute(attrName);
+							w.setAttribute(attrName, value, !(value instanceof String));
+						}
+					}
+					
+					drawable.setMeasureTextHelper(new r.android.graphics.drawable.Drawable.MeasureTextHelper() {
+						@Override
+						public float getTextWidth() {
+							View view = (View) w.asWidget();
+							view.measure(0, 0);
+							return view.getMeasuredWidth() + 5;
+						}
+	
+						@Override
+						public float getTextHeight() {
+							View view = (View) w.asWidget();
+							view.measure(0, 0);
+							return view.getMeasuredHeight();
+						}
+						
+					});
+					r.android.graphics.Rect bounds = drawable.getBounds();
+					View view = (View) w.asWidget();
+					view.setLeft(bounds.left);
+					view.setRight(bounds.right);
+					view.setTop(bounds.top);
+					view.setBottom(bounds.bottom);
+					view.measure(0, 0);
+					view.relayout();
+					view.setOverlay(true);
+					overlays.add(w);
+				}
+				
+				String[] viewAttrs = drawable.getViewAttrs();
+				if (viewAttrs != null) {
+					for (int i = 0; i < viewAttrs.length; i++) {
+						String attrName = viewAttrs[i];
+						drawable.getBounds();
+						Object value = drawable.getAttribute(attrName);
+						if (value instanceof java.util.List) {
+							java.util.List values = attrs.get(attrName);
+							if (values == null) {
+								attrs.put(attrName, new java.util.ArrayList<>());
+							}
+							attrs.get(attrName).addAll((java.util.List) value);
+						} else {
+							overlayWrapper.setAttribute(attrName, value, !(value instanceof String));
+						}
+					}
+				}
+				
+				for (String key : attrs.keySet()) {
+					overlayWrapper.setAttribute(key, attrs.get(key), true);	
+				}
+			}
+			overlayWrapper.setAttribute("swtRedraw", true, true);
+		}
+		
+		return overlays;
 	}
 	
 
@@ -3902,6 +4035,33 @@ public T setBackgroundRepeat(String value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T tryGetBackgroundTint() {
+	Map<String, Object> attrs = initCommand("backgroundTint");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getBackgroundTint() {
+	Map<String, Object> attrs = initCommand("backgroundTint");
+	return attrs.get("commandReturnValue");
+}
+public T setBackgroundTint(String value) {
+	Map<String, Object> attrs = initCommand("backgroundTint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setBackgroundTintMode(String value) {
+	Map<String, Object> attrs = initCommand("backgroundTintMode");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 public T tryGetMinWidth() {
 	Map<String, Object> attrs = initCommand("minWidth");
 	attrs.put("type", "attribute");
@@ -4633,6 +4793,17 @@ public void setBackgroundRepeat(String value) {
 	getBuilder().reset().setBackgroundRepeat(value).execute(true);
 }
 
+public Object getBackgroundTint() {
+	return getBuilder().reset().tryGetBackgroundTint().execute(false).getBackgroundTint(); 
+}
+public void setBackgroundTint(String value) {
+	getBuilder().reset().setBackgroundTint(value).execute(true);
+}
+
+public void setBackgroundTintMode(String value) {
+	getBuilder().reset().setBackgroundTintMode(value).execute(true);
+}
+
 public Object getMinWidth() {
 	return getBuilder().reset().tryGetMinWidth().execute(false).getMinWidth(); 
 }
@@ -4880,7 +5051,7 @@ public void setOnSwiped(String value) {
 			return 0;
 		}
 		propertyValue = propertyValue.replace("px", "");
-		int intVal = Integer.parseInt(propertyValue);
+		int intVal = (int) Float.parseFloat(propertyValue);
 		return intVal;
 	}
 	
@@ -4929,13 +5100,13 @@ public void setOnSwiped(String value) {
 			view.setBackground(drawable);
 
 			Object colorOrImage = drawable.getDrawable();
-			setBgOnControl(nativeWidget, colorOrImage);
+			setBgOnControl(w, nativeWidget, colorOrImage);
 			
 			if (stateChange) {
 				w.applyAttributeCommand("background", CommonConverters.command_imagestate, new String[] {}, true, colorOrImage);	
 			}
 		} else {
-			setBgOnControl(nativeWidget, objValue);
+			setBgOnControl(w, nativeWidget, objValue);
 		}
 
 		BackgroundResizeListener listener = (BackgroundResizeListener) w.getFromTempCache("ResizeObserver");
@@ -4972,7 +5143,7 @@ public void setOnSwiped(String value) {
 				if (attributeCommandChain != null) {
 					Object value = attributeCommandChain.getValue(w, w.asNativeWidget(), "predraw");
 					if (!(value instanceof r.android.graphics.drawable.Drawable)) {
-						setBgOnControl(nativeWidget, value);
+						setBgOnControl(w, nativeWidget, value);
 					}
 				}
 				viewWidth = element.getClientWidth();
@@ -4989,7 +5160,7 @@ public void setOnSwiped(String value) {
 		w.applyAttributeCommand("background", "imageRepeat", new String[] {"backgroundRepeat"}, true, strValue);
 	}
 	
-	private static void setBgOnControl(Object nativeWidget, Object colorOrImage) {
+	private static void setBgOnControl(IWidget w, Object nativeWidget, Object colorOrImage) {
 		HTMLElement htmlElement = (HTMLElement) nativeWidget;
 		if ((colorOrImage instanceof String && ((String) colorOrImage).startsWith("#")) || (colorOrImage instanceof Integer)) {
 			if (colorOrImage instanceof Integer) {
@@ -5001,10 +5172,47 @@ public void setOnSwiped(String value) {
 		}
 		
 		if (colorOrImage instanceof String && ((String) colorOrImage).startsWith("data")) {
-			htmlElement.getStyle().setProperty("background-image", "url('" + colorOrImage + "')");
+			setBGImage(w, htmlElement, colorOrImage);
 		} else if (colorOrImage instanceof String && ((String) colorOrImage).startsWith("res")) {
-			htmlElement.getStyle().setProperty("background-image", "url(" + colorOrImage + ")");
-			
+			setBGImage(w, htmlElement, colorOrImage);
+		} else {
+			removeBGImage(w, htmlElement);
+		}
+	}
+	
+	private static void setBGImage(IWidget w, HTMLElement htmlElement, Object colorOrImage) {
+		boolean useImgAsBackground = "true".equals(w.getParams().get("webUseImgAsBackground"));
+		
+		if (useImgAsBackground) {
+			HTMLElement imgElement = createOrGetImgElement(htmlElement);
+			imgElement.setAttribute("src", (String) colorOrImage);
+		} else {
+			htmlElement.getStyle().setProperty("background-image", "url('" +colorOrImage + "')");
+		}
+	}
+
+	private static HTMLElement createOrGetImgElement(HTMLElement htmlElement) {
+		HTMLElement imgElement = htmlElement.querySelector(".background-img");
+		if (imgElement == null) {
+			imgElement= htmlElement.getOwnerDocument().createElement("img");
+			imgElement.getStyle().setProperty("width", "100%");
+			imgElement.getStyle().setProperty("height", "100%");
+			imgElement.getStyle().setProperty("position", "absolute");
+			imgElement.getStyle().setProperty("z-index", "-100000");
+			imgElement.setAttribute("class", "background-img");
+			htmlElement.appendChild(imgElement);
+		}
+		return imgElement;
+	}
+	
+	private static void removeBGImage(IWidget w, HTMLElement htmlElement) {
+		boolean useImgAsBackground = "true".equals(w.getParams().get("webUseImgAsBackground"));
+		
+		if (useImgAsBackground) {
+			HTMLElement imgElement = htmlElement.querySelector(".background-img");
+			if (imgElement != null) {
+				htmlElement.removeChild(imgElement);	
+			}
 		} else {
 			htmlElement.getStyle().removeProperty("background-image");
 		}
@@ -5759,5 +5967,100 @@ public void setOnSwiped(String value) {
 		for (String key : params.keySet()) {
 			((HTMLElement) nativeWidget).setAttribute(key, (String) params.get(key));
 		}
+	}
+	
+	public static void updateTintColor(IWidget widget, Object nativeView, String tintColor, String tintMode) {
+		if (tintColor != null) {
+			boolean enableTintFilter = "true".equals(widget.getParams().get("webEnableTintFilter"));
+			if (enableTintFilter) {
+				String filter = new com.ashera.layout.filter.FilterSolver(tintColor).solve();
+				HTMLElement htmlElement = (HTMLElement) nativeView;
+				htmlElement.getStyle().setProperty("filter", filter);
+			} else {
+				String svgFilterId = (String) widget.getFromTempCache("svgFilterId");
+				if (svgFilterId == null) {
+					svgFilterId = java.util.UUID.randomUUID().toString();
+					widget.storeInTempCache("svgFilterId", svgFilterId);
+				}
+				
+				HTMLElement htmlElement = (HTMLElement) nativeView;
+				htmlElement.getStyle().setProperty("filter", "url(#tint-" + svgFilterId + ")");
+	
+				String svgStr = "<svg viewBox='0 0 10 10' style='position: absolute; height: 0px; visibility: hidden; width: 0px;'><defs><filter id='%s' x='0' y='0' width='%s' height='%s'>";
+				
+				switch (tintMode) {
+				case "add":
+					svgStr += "<feFlood flood-color='%s' result='tint'></feFlood><feComposite in='SourceGraphic' in2='tint' operator='arithmetic' k1='0' k2='1' k3='1' k4='0' />";
+					break;
+				case "multiply":
+					svgStr += "<feFlood flood-color='%s' result='tint'></feFlood><feComposite in='SourceGraphic' in2='tint' operator='arithmetic' k1='1' k2='0' k3='0' k4='0' />";
+					break;
+				case "src_atop":
+					svgStr += "<feFlood flood-color='%s'></feFlood><feComposite in2='SourceGraphic' operator='atop'></feComposite>";
+					break;
+				case "src_over":
+					svgStr += "<feFlood flood-color='%s'></feFlood><feComposite in2='SourceGraphic' operator='over'></feComposite>";
+					break;
+				case "src_in":
+					svgStr += "<feFlood flood-color='%s'></feFlood><feComposite in2='SourceGraphic' operator='in'></feComposite>";
+					break;
+				case "screen":
+					svgStr += "<feFlood flood-color='%s' result='tint'></feFlood><feComposite in='SourceGraphic' in2='tint' operator='arithmetic' k1='-1' k2='1' k3='1' k4='0' />";
+					break;
+				default:
+					break;
+				}
+				
+				svgStr += "</filter></defs></svg>";
+				String svgFilter = String.format(svgStr, "tint-" + svgFilterId, "100%", "100%", tintColor);
+				HTMLElement phtmlElement = (HTMLElement) widget.getParent().asNativeWidget();
+				HTMLElement filterElement = phtmlElement.querySelector("#div_svg_" + svgFilterId); 
+				if (filterElement == null) {
+					filterElement = phtmlElement.getOwnerDocument().createElement("div");
+					filterElement.setAttribute("id", "div_svg_" + svgFilterId);
+					phtmlElement.appendChild(filterElement);
+				}
+				
+				filterElement.setInnerHTML(svgFilter);
+			}
+		}
+	}
+	
+	private static void setBackgroundTintMode(IWidget w, String strValue) {
+		w.storeInTempCache("backgroundTintMode", strValue);
+		boolean useImgAsBackground = "true".equals(w.getParams().get("webUseImgAsBackground"));
+		
+		if (useImgAsBackground) {
+			HTMLElement imgElement = createOrGetImgElement((HTMLElement) w.asNativeWidget());
+			updateTintColor(w, imgElement, (String) w.getFromTempCache("backgroundTint"), strValue);
+		}
+	}
+
+	private static void setBackgroundTint(IWidget w, Object objValue) {
+		if (objValue instanceof r.android.content.res.ColorStateList) {
+			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
+			View view = (View)w.asWidget();
+			view.setBackgroundTintList(colorStateList);
+			objValue = colorStateList.getColorForState(view.getDrawableState(), 0);
+		}
+
+		Object color = ViewImpl.getColor(objValue);
+		w.storeInTempCache("backgroundTint", color);
+		String tintMode = (String) w.getFromTempCache("backgroundTintMode");
+		
+		if (tintMode == null) {
+			tintMode = "src_atop";
+		}
+		
+		boolean useImgAsBackground = "true".equals(w.getParams().get("webUseImgAsBackground"));
+		
+		if (useImgAsBackground) {
+			HTMLElement imgElement = createOrGetImgElement((HTMLElement) w.asNativeWidget());
+			updateTintColor(w, imgElement, (String) color, tintMode);
+		}
+	}
+
+	private static Object getBackgroundTint(IWidget w) {
+		return w.getFromTempCache("backgroundTint");
 	}
 }

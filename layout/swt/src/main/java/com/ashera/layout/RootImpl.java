@@ -478,6 +478,7 @@ return layoutParams.alignWithParent;			}
 	public class RootExt extends r.android.widget.RelativeLayout implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		private List<IWidget> overlays;
 		public IWidget getWidget() {
 			return RootImpl.this;
 		}
@@ -529,9 +530,12 @@ return layoutParams.alignWithParent;			}
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
 			ViewImpl.setDrawableBounds(RootImpl.this, l, t, r, b);
+			if (!isOverlay()) {
 			ViewImpl.nativeMakeFrame(asNativeWidget(), l, t, r, b);
+			}
 			replayBufferedEvents();
 	        ViewImpl.redrawDrawables(RootImpl.this);
+	        overlays = ViewImpl.drawOverlay(RootImpl.this, overlays);
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();
 			if (listener != null) {
@@ -662,7 +666,7 @@ return layoutParams.alignWithParent;			}
 				setState4(value);
 				return;
 			}
-			RootImpl.this.setAttribute(name, value, true);
+			RootImpl.this.setAttribute(name, value, !(value instanceof String));
 		}
         @Override
         public void setVisibility(int visibility) {
@@ -772,6 +776,9 @@ return relativeLayout.getGravity();			}
     public Object asNativeWidget() {
         return pane;
     }
+    public boolean isWidgetDisposed() {
+		return ((org.eclipse.swt.widgets.Control) pane).isDisposed();
+	}
     
     @Override
     public void requestLayout() {

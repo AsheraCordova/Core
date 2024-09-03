@@ -62,6 +62,13 @@ inline jint *ADR_id_getRef_view_transition(void);
 FOUNDATION_EXPORT jint ADR_id_view_transition;
 J2OBJC_STATIC_FIELD_PRIMITIVE(ADR_id, view_transition, jint)
 
+inline jint ADR_id_get_mtrl_view_tag_bottom_padding(void);
+inline jint ADR_id_set_mtrl_view_tag_bottom_padding(jint value);
+inline jint *ADR_id_getRef_mtrl_view_tag_bottom_padding(void);
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT jint ADR_id_mtrl_view_tag_bottom_padding;
+J2OBJC_STATIC_FIELD_PRIMITIVE(ADR_id, mtrl_view_tag_bottom_padding, jint)
+
 FOUNDATION_EXPORT void ADR_id_init(ADR_id *self);
 
 FOUNDATION_EXPORT ADR_id *new_ADR_id_init(void) NS_RETURNS_RETAINED;

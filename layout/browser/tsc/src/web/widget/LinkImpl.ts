@@ -145,7 +145,6 @@ export class TextStyleTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class LinkImpl<T> extends ViewImpl<T>{

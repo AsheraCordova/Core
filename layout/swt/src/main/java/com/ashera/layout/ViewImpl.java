@@ -68,6 +68,27 @@ public class ViewImpl {
 				}
 				}
 		@SuppressLint("NewApi")
+		final static class TintMode extends AbstractEnumToIntConverter{
+		private Map<String, Integer> mapping = new HashMap<>();
+				{
+				mapping.put("add",  0x1);
+				mapping.put("multiply",  0x2);
+				mapping.put("screen",  0x3);
+				mapping.put("src_atop",  0x4);
+				mapping.put("src_in",  0x5);
+				mapping.put("src_over",  0x6);
+				}
+		@Override
+		public Map<String, Integer> getMapping() {
+				return mapping;
+				}
+
+		@Override
+		public Integer getDefault() {
+				return 0;
+				}
+				}
+		@SuppressLint("NewApi")
 		final static class Visibility extends AbstractEnumToIntConverter{
 		private Map<String, Integer> mapping = new HashMap<>();
 				{
@@ -218,6 +239,9 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("refreshUiFromModel").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("modelUiToPojoEventIds").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("elevation").withType("dimensionfloat"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("backgroundTint").withType("colorstate").withOrder(-10));
+		ConverterFactory.register("View.tintMode", new TintMode());
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("backgroundTintMode").withType("View.tintMode").withOrder(-10));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("updateModelData").withType("object"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("notifyDataSetChanged").withType("boolean"));
 		ConverterFactory.register("View.visibility", new Visibility());
@@ -263,6 +287,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("right").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("top").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("bottom").withType("dimension"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtGCImage").withType("drawable"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("swtStyle").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("enableFeatures").withType("string"));
@@ -713,6 +738,24 @@ public class ViewImpl {
 
 			}
 			break;
+		case "backgroundTint": {
+
+
+		setBackgroundTint(w, objValue);
+
+
+
+			}
+			break;
+		case "backgroundTintMode": {
+
+
+		setBackgroundTintMode(w, strValue);
+
+
+
+			}
+			break;
 		case "updateModelData": {
 		if (objValue instanceof Map) {
 			Map<String, Object> data = ((Map<String, Object>) objValue);
@@ -1090,6 +1133,15 @@ if (objValue instanceof java.util.List) {
 
 			}
 			break;
+		case "swtGCImage": {
+
+
+		 drawImageUsingGC(w, objValue);
+
+
+
+			}
+			break;
 		default:
 			java.util.List<IAttributable> attributables = WidgetFactory.getAttributables("View", w.getLocalName());
 			if (attributables != null) {
@@ -1146,6 +1198,8 @@ return getModelParam(w);			}
 return getModelPojoToUi(w);			}
 			case "modelUiToPojo": {
 return getModelUiToPojo(w);			}
+			case "backgroundTint": {
+return getBackgroundTint(w);			}
 			case "visibility": {
 return getVisibility(w);			}
 			case "background": {
@@ -3280,6 +3334,33 @@ public T setElevation(String value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T tryGetBackgroundTint() {
+	Map<String, Object> attrs = initCommand("backgroundTint");
+	attrs.put("type", "attribute");
+	attrs.put("getter", true);
+	attrs.put("orderGet", ++orderGet);
+return (T) this;}
+
+public Object getBackgroundTint() {
+	Map<String, Object> attrs = initCommand("backgroundTint");
+	return attrs.get("commandReturnValue");
+}
+public T setBackgroundTint(String value) {
+	Map<String, Object> attrs = initCommand("backgroundTint");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
+public T setBackgroundTintMode(String value) {
+	Map<String, Object> attrs = initCommand("backgroundTintMode");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 public T updateModelData(String expression,
 Object payload) {
 	Map<String, Object> attrs = initCommand("updateModelData");
@@ -3813,6 +3894,14 @@ public T setBottom(String value) {
 
 	attrs.put("value", value);
 return (T) this;}
+public T setSwtGCImage(String value) {
+	Map<String, Object> attrs = initCommand("swtGCImage");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return (T) this;}
 }
 static class ViewCommandBuilderInternal extends ViewCommandBuilder<ViewCommandBuilderInternal> {
 	private IWidget widget;
@@ -4069,6 +4158,17 @@ public void setElevation(String value) {
 	getBuilder().reset().setElevation(value).execute(true);
 }
 
+public Object getBackgroundTint() {
+	return getBuilder().reset().tryGetBackgroundTint().execute(false).getBackgroundTint(); 
+}
+public void setBackgroundTint(String value) {
+	getBuilder().reset().setBackgroundTint(value).execute(true);
+}
+
+public void setBackgroundTintMode(String value) {
+	getBuilder().reset().setBackgroundTintMode(value).execute(true);
+}
+
 public void updateModelData(String expression,
 Object payload) {
 	getBuilder().reset().updateModelData(expression,
@@ -4288,6 +4388,10 @@ public void setBottom(String value) {
 	getBuilder().reset().setBottom(value).execute(true);
 }
 
+public void setSwtGCImage(String value) {
+	getBuilder().reset().setSwtGCImage(value).execute(true);
+}
+
 }
 
 
@@ -4353,9 +4457,6 @@ public void setBottom(String value) {
 	}
 
     public static Composite getParent(IWidget widget) {        
-    	if (widget.getParent() == null) {
-    		System.out.println("sd");
-    	}
         org.eclipse.swt.widgets.Composite parent = (org.eclipse.swt.widgets.Composite)widget.getParent().getCompositeLeaf(widget).asNativeWidget();
         return parent;
     }
@@ -4487,9 +4588,25 @@ public void setBottom(String value) {
 	private static void setForegroundTint(IWidget w, r.android.content.res.ColorStateList foregroundTintList) {
 	}
 
-	private static void setBackgroundTint(IWidget w, r.android.content.res.ColorStateList backgroundTintList) {
+	private static void setBackgroundTintMode(IWidget w, Object objValue) {
+		w.applyAttributeCommand("background", "tintColor", new String[] {"backgroundTintMode"}, true, objValue);
 	}
 
+	private static void setBackgroundTint(IWidget w,Object objValue) {
+		if (objValue instanceof r.android.content.res.ColorStateList) {
+			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
+			View view = (View)w.asWidget();
+			view.setBackgroundTintList(colorStateList);
+			objValue = colorStateList.getColorForState(view.getDrawableState(), 0);
+		}
+		
+		w.applyAttributeCommand("background", "tintColor", new String[] {"backgroundTint"}, true, ViewImpl.getColor(objValue));		
+	}
+	
+	private static Object getBackgroundTint(IWidget w) {
+		return ((View) w.asWidget()).getBackgroundTintList();
+	}
+	
 	private static boolean isColor(Object objValue) {
 		return objValue instanceof Color;
 	}
@@ -4688,6 +4805,93 @@ public void setBottom(String value) {
 	private static Object getLeft(IWidget w) {
 		View view = (View) w.asWidget();
 		return view.getLeft();
+	}
+	
+	public static java.util.List<IWidget> drawOverlay(IWidget overlayWrapper, java.util.List<IWidget> overlays) {
+		r.android.view.ViewOverlay overlay = ((View) overlayWrapper.asWidget()).getOverlay();
+		java.util.List<r.android.graphics.drawable.Drawable> drawables = overlay.getDrawables();
+		if (drawables != null) {
+			overlayWrapper.setAttribute("swtRedraw", false, true);
+			if (overlays == null) {
+				overlays = new ArrayList<>();
+			} else {
+				for (int i = overlays.size() - 1; i >= 0; i--) {
+					overlayWrapper.getParent().remove(overlays.get(i));
+				}
+				
+				overlays.clear();
+			}
+			Map<String, java.util.List> attrs = new java.util.HashMap<>(); 
+
+			for (r.android.graphics.drawable.Drawable drawable : drawables) {
+				if (drawable.getSimulatedWidgetLocalName() != null && drawable.getSimulatedWidgetGroupName() != null) {
+					IWidget w = WidgetFactory.createWidget(drawable.getSimulatedWidgetLocalName(), drawable.getSimulatedWidgetGroupName(), overlayWrapper.getParent(), false);
+					
+					
+					String[] simulatedWidgetAttrs = drawable.getSimulatedWidgetAttrs();
+					
+					if (simulatedWidgetAttrs != null) {
+						for (int i = 0; i < simulatedWidgetAttrs.length; i++) {
+							String attrName = simulatedWidgetAttrs[i];
+							Object value = drawable.getAttribute(attrName);
+							w.setAttribute(attrName, value, !(value instanceof String));
+						}
+					}
+					
+					drawable.setMeasureTextHelper(new r.android.graphics.drawable.Drawable.MeasureTextHelper() {
+						@Override
+						public float getTextWidth() {
+							View view = (View) w.asWidget();
+							view.measure(0, 0);
+							return view.getMeasuredWidth() + 5;
+						}
+	
+						@Override
+						public float getTextHeight() {
+							View view = (View) w.asWidget();
+							view.measure(0, 0);
+							return view.getMeasuredHeight();
+						}
+						
+					});
+					r.android.graphics.Rect bounds = drawable.getBounds();
+					View view = (View) w.asWidget();
+					view.setLeft(bounds.left);
+					view.setRight(bounds.right);
+					view.setTop(bounds.top);
+					view.setBottom(bounds.bottom);
+					view.measure(0, 0);
+					view.relayout();
+					view.setOverlay(true);
+					overlays.add(w);
+				}
+				
+				String[] viewAttrs = drawable.getViewAttrs();
+				if (viewAttrs != null) {
+					for (int i = 0; i < viewAttrs.length; i++) {
+						String attrName = viewAttrs[i];
+						drawable.getBounds();
+						Object value = drawable.getAttribute(attrName);
+						if (value instanceof java.util.List) {
+							java.util.List values = attrs.get(attrName);
+							if (values == null) {
+								attrs.put(attrName, new java.util.ArrayList<>());
+							}
+							attrs.get(attrName).addAll((java.util.List) value);
+						} else {
+							overlayWrapper.setAttribute(attrName, value, !(value instanceof String));
+						}
+					}
+				}
+				
+				for (String key : attrs.keySet()) {
+					overlayWrapper.setAttribute(key, attrs.get(key), true);	
+				}
+			}
+			overlayWrapper.setAttribute("swtRedraw", true, true);
+		}
+		
+		return overlays;
 	}
 	//end - viewcode
     
@@ -6059,5 +6263,54 @@ break;}
 		int data = view.getTop();
 		return control.getBounds().y - data;
 	}
+	
+	
+	private static void drawImageUsingGC(IWidget w, Object objValue) {
+		Control control = (Control) w.asNativeWidget();
+		if (control.getData("paintListener") != null) {
+			control.removePaintListener((org.eclipse.swt.events.PaintListener) control.getData("paintListener"));
+		}
 		
+		org.eclipse.swt.events.PaintListener listener = new org.eclipse.swt.events.PaintListener() {
+			@Override
+			public void paintControl(org.eclipse.swt.events.PaintEvent e) {
+				GC gc = e.gc;
+				if (objValue instanceof r.android.graphics.drawable.Drawable) {
+					drawImage(gc, (r.android.graphics.drawable.Drawable) objValue);
+				}
+				
+				if (objValue instanceof java.util.List) {
+					for (Object obj : (java.util.List) objValue) {
+						if (obj instanceof r.android.graphics.drawable.Drawable) {
+							drawImage(gc, (r.android.graphics.drawable.Drawable) obj);	
+						}
+					}
+				}
+				
+			}
+
+			private void drawImage(GC gc, r.android.graphics.drawable.Drawable drawable) {
+				Object imageOrColor = drawable.getDrawable();
+				
+				if (imageOrColor instanceof Image) {
+					r.android.graphics.Rect bounds = drawable.getBounds();
+					Image image = (Image) imageOrColor;
+					if (bounds.width() != 0 && bounds.height() != 0) {
+						gc.drawImage(image, 0, 0, image.getImageData().width, image.getImageData().height, bounds.left, bounds.top, bounds.width(), bounds.height());
+					} else {
+						gc.drawImage(image, drawable.getLeft(), drawable.getTop());
+					}
+				}
+				if (imageOrColor instanceof Color) {
+					gc.setBackground((Color) imageOrColor);
+					r.android.graphics.Rect bounds = drawable.getBounds();
+					gc.fillRectangle(bounds.left, bounds.top, bounds.width(), bounds.height());
+				}
+			}
+			
+		};
+		control.setData("paintListener", listener);
+		control.addPaintListener(listener);
+		control.redraw();
+	}
 }

@@ -108,11 +108,11 @@ J2OBJC_IGNORE_DESIGNATED_END
                    withADIntent:(ADIntent *)intent2 {
 }
 
-- (jboolean)onCreateOptionsMenuWithADMenu:(ADMenu *)menu {
+- (jboolean)onCreateOptionsMenuWithADMenu:(id<ADMenu>)menu {
   return false;
 }
 
-- (jboolean)onPrepareOptionsMenuWithADMenu:(ADMenu *)menu {
+- (jboolean)onPrepareOptionsMenuWithADMenu:(id<ADMenu>)menu {
   return false;
 }
 

@@ -216,6 +216,7 @@ return layoutParams.gravity;			}
 	public class HorizontalScrollViewExt extends android.widget.HorizontalScrollView implements ILifeCycleDecorator, com.ashera.widget.IMaxDimension{
 		private MeasureEvent measureFinished = new MeasureEvent();
 		private OnLayoutEvent onLayoutEvent = new OnLayoutEvent();
+		
 		public IWidget getWidget() {
 			return HorizontalScrollViewImpl.this;
 		}
@@ -273,7 +274,9 @@ return layoutParams.gravity;			}
 		@Override
 		protected void onLayout(boolean changed, int l, int t, int r, int b) {
 			super.onLayout(changed, l, t, r, b);
+			
 			ViewImpl.nativeMakeFrameForHorizontalScrollView(asNativeWidget(), l, t, r, b, (int) (computeHorizontalScrollRange()));
+			
 			replayBufferedEvents();
 			
 			IWidgetLifeCycleListener listener = (IWidgetLifeCycleListener) getListener();

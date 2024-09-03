@@ -53,6 +53,7 @@
      <source-file src="tsc/src/ios/widget/ViewGroupModelImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/ViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/ViewOnlyImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <source-file src="tsc/src/ios/widget/ViewOverlayImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/WebViewImpl.ts" target-dir="tsc/src/ios/widget"/>
      <!-- tsc end -->
 	<!-- start ios -->
@@ -132,6 +133,8 @@
      <source-file src="ios/src/ViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/ViewOnlyImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/ViewOnlyImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/src/ViewOverlayImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="ios/src/ViewOverlayImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/WebViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/WebViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <!-- ios end -->

@@ -7657,5 +7657,5 @@ public void setBottom(String value) {
 	private static Object getLeft(IWidget w) {
 		View view = (View) w.asWidget();
 		return view.getLeft();
-	}
+	}	
 }

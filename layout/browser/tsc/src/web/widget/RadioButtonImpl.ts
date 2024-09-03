@@ -185,7 +185,6 @@ export class AutoLinkTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class RadioButtonImpl<T> extends ViewImpl<T>{

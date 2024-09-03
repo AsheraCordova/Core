@@ -92,6 +92,8 @@ withADViewGroup_LayoutParams:(ADViewGroup_LayoutParams *)params;
 
 - (ADRect *)getPaddingMaskBounds;
 
+- (jboolean)hasChildWithADView:(ADView *)child;
+
 - (void)incrementChildUnhandledKeyListeners;
 
 - (jint)indexOfChildWithADView:(ADView *)child;

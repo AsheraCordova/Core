@@ -58,9 +58,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcFieldInfo fields[] = {
     { "BLACK", "I", .constantValue.asInt = ADColor_BLACK, 0x19, -1, -1, -1, -1 },
     { "RED", "I", .constantValue.asInt = ADColor_RED, 0x19, -1, -1, -1, -1 },
+    { "WHITE", "I", .constantValue.asInt = ADColor_WHITE, 0x19, -1, -1, -1, -1 },
   };
   static const void *ptrTable[] = { "HSVToColor", "[F", "alpha", "I", "parseColor", "LNSString;", "formatColor" };
-  static const J2ObjcClassInfo _ADColor = { "Color", "r.android.graphics", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADColor = { "Color", "r.android.graphics", ptrTable, methods, fields, 7, 0x1, 5, 3, -1, -1, -1, -1, -1 };
   return &_ADColor;
 }
 
@@ -108,7 +109,7 @@ jint ADColor_parseColorWithNSString_(NSString *colorString) {
 
 NSString *ADColor_formatColorWithInt_(jint intColor) {
   ADColor_initialize();
-  NSString *hexColor = NSString_java_formatWithNSString_withNSObjectArray_(@"#%06X", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(((jint) 0xFFFFFF & intColor)) } count:1 type:NSObject_class_()]);
+  NSString *hexColor = NSString_java_formatWithNSString_withNSObjectArray_(@"#%08X", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(((jint) 0xFFFFFFFF & intColor)) } count:1 type:NSObject_class_()]);
   return hexColor;
 }
 

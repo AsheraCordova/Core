@@ -1,5 +1,13 @@
 // start - imports
 
+export const enum TintMode {
+add = "add",
+multiply = "multiply",
+screen = "screen",
+src_atop = "src_atop",
+src_in = "src_in",
+src_over = "src_over",
+}
 export const enum ScaleType {
 center = "center",
 centerCrop = "centerCrop",
@@ -23,6 +31,8 @@ import {DragEvent} from '../../app/DragEvent';
 import {KeyEvent} from '../../app/KeyEvent';
 import { ScopedObject } from '../../app/ScopedObject';
 import { Mixin, decorate } from 'ts-mixer';
+
+
 
 
 
@@ -79,6 +89,12 @@ export abstract class ImageButtonImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "baselineAlignBottom" }))
 	baselineAlignBottom!:CommandAttr<boolean>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "tint" }))
+	tint!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "tintMode" }))
+	tintMode!:CommandAttr<TintMode>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "padding" }))
 	padding!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -123,6 +139,8 @@ export abstract class ImageButtonImpl<T> extends ViewImpl<T>{
 		this.imageFromUrlError = undefined;
 		this.baseline = undefined;
 		this.baselineAlignBottom = undefined;
+		this.tint = undefined;
+		this.tintMode = undefined;
 		this.padding = undefined;
 		this.paddingTop = undefined;
 		this.paddingBottom = undefined;
@@ -371,6 +389,52 @@ export abstract class ImageButtonImpl<T> extends ViewImpl<T>{
 		this.baselineAlignBottom.setValue(value);
 		this.orderSet++;
 		this.baselineAlignBottom.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public tryGetTint() : T {
+		this.resetIfRequired();
+		if (this.tint == null || this.tint == undefined) {
+			this.tint = new CommandAttr<string>()
+		}
+		
+		this.tint.setGetter(true);
+		this.orderGet++;
+		this.tint.setOrderGet(this.orderGet);
+		return this.thisPointer;
+	}
+	
+	public getTint() : string {
+		if (this.tint == null || this.tint == undefined) {
+			this.tint = new CommandAttr<string>();
+		}
+		return this.tint.getCommandReturnValue();
+	}
+	public setTint(value : string) : T {
+		this.resetIfRequired();
+		if (this.tint == null || this.tint == undefined) {
+			this.tint = new CommandAttr<string>();
+		}
+		
+		this.tint.setSetter(true);
+		this.tint.setValue(value);
+		this.orderSet++;
+		this.tint.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setTintMode(value : TintMode) : T {
+		this.resetIfRequired();
+		if (this.tintMode == null || this.tintMode == undefined) {
+			this.tintMode = new CommandAttr<TintMode>();
+		}
+		
+		this.tintMode.setSetter(true);
+		this.tintMode.setValue(value);
+		this.orderSet++;
+		this.tintMode.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
