@@ -5,5 +5,5 @@ repositories {
 }
 
 dependencies {
-    compile 'com.ashera:converter:1.0.0';
+    implementation 'com.ashera:converter:1.0.0';
 }
