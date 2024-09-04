@@ -10,9 +10,13 @@ export default class LocaleManager {
 		return LocaleManager.localeManager;
 	}
 
-	public init() {
+
+	public init(callBack:any) {
 		coreManager.executeSimpleCommand([["loadLocale", this.keys]], function (obj: any) {
 			LocaleManager.localeMap = JSON.parse(obj)["loadLocale"];
+			if (callBack) {
+				callBack();
+			}
 		});
 	}
 

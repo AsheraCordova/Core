@@ -25,8 +25,9 @@ class App {
     onDeviceReady() {
         document.addEventListener("action", this.onAction.bind(this), false);
         document.addEventListener("nativeevent", this.nativeEvent.bind(this), false);
-		coreManager.onDeviceReady();
-		this.localManager.init();
+		this.localManager.init(() => {
+            coreManager.onDeviceReady();
+        });
     }
 
      onAction(obj:any) {
