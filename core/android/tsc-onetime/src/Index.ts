@@ -1,7 +1,9 @@
 //start - import
-import {Fragment} from './app/Fragment';
-
 //end - import
+
+import { Fragment, Inject } from './app/Fragment';
+import { NavController, InjectController } from './navigation/NavController';
+import { ScopedObject } from './app/ScopedObject';
 export default class Index extends Fragment{
 	//start - body
 	//end - body
