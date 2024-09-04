@@ -21,7 +21,7 @@ export default class LocaleManager {
 	}
 
 	public translate(key: string) {
-		if (LocaleManager.localeMap[key]) {
+		if (LocaleManager.localeMap && LocaleManager.localeMap[key]) {
 			return LocaleManager.localeMap[key];
 		}
 
