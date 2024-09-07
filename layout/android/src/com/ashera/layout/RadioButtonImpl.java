@@ -2018,10 +2018,10 @@ return null;				}
 	
 	private void removeaddTextChangedListenerIfNeeded(String action) {
 		if (isInitialised()) {
-			List<IListener> listeners = (List<IListener>)getFieldValueUsingReflection(appCompatRadioButton, "mListeners");
+			List listeners = (List) getFieldValueUsingReflection(appCompatRadioButton, "mListeners");
 			if (listeners != null) {
-				for (IListener listener : listeners) {
-					if (action.equals(listener.getAction())) {
+				for (Object listener : listeners) {
+					if (listener instanceof IListener && action.equals(((IListener)listener).getAction())) {
 						appCompatRadioButton.removeTextChangedListener((TextWatcher) listener);
 					}
 				}

@@ -1963,10 +1963,10 @@ return null;				}
 	
 	private void removeaddTextChangedListenerIfNeeded(String action) {
 		if (isInitialised()) {
-			List<IListener> listeners = (List<IListener>)getFieldValueUsingReflection(appCompatCheckBox, "mListeners");
+			List listeners = (List) getFieldValueUsingReflection(appCompatCheckBox, "mListeners");
 			if (listeners != null) {
-				for (IListener listener : listeners) {
-					if (action.equals(listener.getAction())) {
+				for (Object listener : listeners) {
+					if (listener instanceof IListener && action.equals(((IListener)listener).getAction())) {
 						appCompatCheckBox.removeTextChangedListener((TextWatcher) listener);
 					}
 				}

@@ -1686,10 +1686,10 @@ return null;				}
 	
 	private void removeaddTextChangedListenerIfNeeded(String action) {
 		if (isInitialised()) {
-			List<IListener> listeners = (List<IListener>)getFieldValueUsingReflection(chronometer, "mListeners");
+			List listeners = (List) getFieldValueUsingReflection(chronometer, "mListeners");
 			if (listeners != null) {
-				for (IListener listener : listeners) {
-					if (action.equals(listener.getAction())) {
+				for (Object listener : listeners) {
+					if (listener instanceof IListener && action.equals(((IListener)listener).getAction())) {
 						chronometer.removeTextChangedListener((TextWatcher) listener);
 					}
 				}
