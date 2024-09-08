@@ -58,6 +58,7 @@ Browser	      | Teavm
 * android.webkit.WebView
 * ListView
 * fragment
+* ViewOverlay
 
 Important Links:
 
@@ -580,3 +581,16 @@ navigateWithPopBackStackTo(actionId:string, destinationId: string, inclusive: bo
 navigateAsTop(actionId:string, ...scopedObjects:ScopedObject[])	| Remove all screens in stack and make this the top most screen.
 
 Note: dialog is not supported in fragments. Instead use navigator.navigate(...) methods and declare dialogs in the main nav_graph.xml.
+
+
+### Viewoverlay
+Name                	| Description
+-------------       	| -------------
+anchorRef 		| The view ref for which the ViewOvelay needs to be attached. 
+drawable		|
+boundsConverter 	|	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
+boundsType 		| 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
+drawableHeight 	 	| 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
+drawableWidth 	 	| 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
+offsetHorizontal 	| 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
+offsetVertical		| 
