@@ -586,11 +586,11 @@ Note: dialog is not supported in fragments. Instead use navigator.navigate(...) 
 ### Viewoverlay
 Name                	| Description
 -------------       	| -------------
-anchorRef 		| The view ref for which the ViewOvelay needs to be attached. 
-drawable		|
-boundsConverter 	|	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
-boundsType 		| 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
-drawableHeight 	 	| 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
-drawableWidth 	 	| 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
-offsetHorizontal 	| 	 	 	 	 	 	 	 	 	 	 	 	 	 	 	 
-offsetVertical		| 
+anchorRef 		| View ref for which the ViewOverlay needs to be attached. 
+drawable		| Drawable which needs to be used as ViewOverlay.
+drawableHeight 	 	| Drawable height e.g. 10dp, 50%w (50% of the anchor view ref width), 50%h (50% of the anchor view ref height) 
+drawableWidth 	 	| Drawable width e.g. 10dp, 50%w (50% of the anchor view ref width), 50%h (50% of the anchor view ref height) 
+boundsType 		| Can be one of these: center, top_left, top_right, bottom_right, bottom_left	 
+offsetHorizontal 	| Horizontal Offset from the bounds calculated using the bounds type. e.g. 10dp
+offsetVertical		| Vertical Offset from the bounds calculated using the bounds type. e.g. 10dp
+boundsConverter 	| Custom converter which extends OverlayBoundsConverter. If custom logic is required, 
