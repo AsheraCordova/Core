@@ -593,4 +593,4 @@ drawableWidth 	 	| Drawable width e.g. 10dp, 50%w (50% of the anchor view ref wi
 boundsType 		| Can be one of these: center, top_left, top_right, bottom_right, bottom_left	 
 offsetHorizontal 	| Horizontal Offset from the bounds calculated using the bounds type. e.g. 10dp
 offsetVertical		| Vertical Offset from the bounds calculated using the bounds type. e.g. 10dp
-boundsConverter 	| Custom converter which extends OverlayBoundsConverter. If custom logic is required, 
+boundsConverter 	| Custom converter which extends [OverlayBoundsConverter](https://raw.githubusercontent.com/AsheraCordova/Plugin_Converter/main/src/com/ashera/converter/OverlayBoundsConverter.java). If custom logic is required, extend the OverlayBoundsConverter and register it using new key "overlay_bounds_new" e.g. ConverterFactory.register("overlay_bounds_new", new ExtendedOverlayBoundsConverter());
