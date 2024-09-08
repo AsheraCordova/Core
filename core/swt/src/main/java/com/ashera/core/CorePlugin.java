@@ -160,7 +160,11 @@ public class CorePlugin implements IPlugin, ICore {
 	@Override
 	public Object postDelayed(Runnable mTickRunnable, int delay) {
 		Display display = Display.getDefault();
-		display.timerExec(delay, mTickRunnable);
+		if (delay <= 0) {
+			Display.getDefault().asyncExec(mTickRunnable);
+		} else {
+			Display.getDefault().timerExec(delay, mTickRunnable);
+		}
 		return display;
 	}
 
