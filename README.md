@@ -588,8 +588,8 @@ Name                	| Description
 -------------       	| -------------
 anchorRef 		| View ref for which the ViewOverlay needs to be attached. 
 drawable		| Drawable which needs to be used as ViewOverlay.
-drawableHeight 	 	| Drawable height e.g. 10dp, 50%w (50% of the anchor view ref width), 50%h (50% of the anchor view ref height) 
-drawableWidth 	 	| Drawable width e.g. 10dp, 50%w (50% of the anchor view ref width), 50%h (50% of the anchor view ref height) 
+drawableHeight 	 	| Drawable height e.g. 10dp, 50%w (50% of the anchor view ref width), 50%h (50% of the anchor view ref height). If the attribute is not defined, intrinsic width of the drawable is used.
+drawableWidth 	 	| Drawable width e.g. 10dp, 50%w (50% of the anchor view ref width), 50%h (50% of the anchor view ref height). If the attribute is not defined, intrinsic width of the drawable is used. 
 boundsType 		| Can be one of these: center, top_left, top_right, bottom_right, bottom_left	 
 offsetHorizontal 	| Horizontal Offset from the bounds calculated using the bounds type. e.g. 10dp
 offsetVertical		| Vertical Offset from the bounds calculated using the bounds type. e.g. 10dp
