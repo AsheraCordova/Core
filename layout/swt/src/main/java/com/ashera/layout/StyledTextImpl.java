@@ -1978,7 +1978,11 @@ return this.getDrawablePadding();				}
 	    		@Override
 	    		public void focusGained(org.eclipse.swt.events.FocusEvent e) {
 	    			placeholder.setVisible(false);
-	    			PluginInvoker.postDelayed(() -> styledText.forceFocus(), 0);
+	    			PluginInvoker.postDelayed(() -> {
+	    				if (!styledText.isDisposed()) {
+	    					styledText.forceFocus();
+	    				}
+	    			}, 0);
 	    			
 	    		}
 	    	});

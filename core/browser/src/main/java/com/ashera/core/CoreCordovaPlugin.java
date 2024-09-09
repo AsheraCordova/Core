@@ -134,6 +134,7 @@ public class CoreCordovaPlugin extends CordovaPlugin {
 						}
 					} catch (Exception e) {
 						callbackContext.error(e.getMessage());
+						e.printStackTrace();
 					}
 				
 				}
@@ -146,6 +147,7 @@ public class CoreCordovaPlugin extends CordovaPlugin {
 			
 		} catch (Exception e) {
 			callbackContext.error(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	private void executeCommand(JSONArray command, final CallbackContext callbackContext,

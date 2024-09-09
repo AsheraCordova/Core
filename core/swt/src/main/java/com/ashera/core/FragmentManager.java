@@ -56,14 +56,29 @@ public class FragmentManager {
 	private void updateSizeIfRequired(DialogFragment dialogFragment) {
 		Shell dialog = (Shell) dialogFragment.getParentForRootWidget();
 		Rectangle bounds = getRoot(dialogFragment).getBounds();
-		Shell activeShell = Display.getDefault().getActiveShell();
+		Shell activeShell = getActiveShell();
 		int topBarHeight = activeShell.getBounds().height - activeShell.getClientArea().height;
 		int dialogExtraWidth = activeShell.getBounds().width - activeShell.getClientArea().width;
 		dialog.setSize(bounds.width + dialogExtraWidth, bounds.height + topBarHeight);
 	}
+	private Shell getActiveShell() {
+		Shell activeShell = Display.getDefault().getActiveShell();
+		if (activeShell == null) {
+			if (dialogFragments.entrySet().size() > 1) {
+				List<Entry<String, DialogFragment>> entryList = new ArrayList<>(dialogFragments.entrySet());
+				Entry<String, DialogFragment> lastActiveEntry = entryList.get(entryList.size() - 2);
+				activeShell = ((Control) lastActiveEntry.getValue().getRootWidget().asNativeWidget()).getShell();
+			} else {
+				activeShell = ((Control) (fragments.get(fragments.size() - 1).getRootWidget().asNativeWidget())).getShell();
+				
+			}
+		}
+		return activeShell;
+	}
+
 	private void openDialog(Object mydialog, int width, int height, String windowCloseOnTouchOutside, Object backdropColor, String backgroundDimEnabled, DialogFragment dialogFragment) {
 		Shell dialog = (Shell) mydialog;
-		Shell activeShell = Display.getDefault().getActiveShell();
+		Shell activeShell = getActiveShell();
 		GenericDialog de = new GenericDialog(activeShell, dialog);
 		Rectangle bounds = getRoot(dialogFragment).getBounds();
 		int topBarHeight = activeShell.getBounds().height - activeShell.getClientArea().height;

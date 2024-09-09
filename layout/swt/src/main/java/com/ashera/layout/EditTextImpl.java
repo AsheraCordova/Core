@@ -3867,7 +3867,11 @@ public void setSetFocus(boolean value) {
 	    		@Override
 	    		public void focusGained(org.eclipse.swt.events.FocusEvent e) {
 	    			placeholder.setVisible(false);
-	    			PluginInvoker.postDelayed(() -> text.forceFocus(), 0);
+	    			PluginInvoker.postDelayed(() -> {
+	    				if (!text.isDisposed()) {
+	    					text.forceFocus();
+	    				}
+	    			}, 0);
 	    			
 	    		}
 	    	});

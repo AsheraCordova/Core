@@ -9,6 +9,9 @@ public class DrawableComposite extends Composite {
 	
 	@Override
 	public boolean forceFocus() {
+		if (widget.getControl().isDisposed()) {
+			return false;
+		}
 		return widget.getControl().forceFocus();
 	}
 	public DrawableComposite(Composite parent, IDrawable widget, int style) {
