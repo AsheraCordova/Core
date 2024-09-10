@@ -5563,8 +5563,9 @@ id<JavaUtilList> ASViewImpl_drawOverlayWithASIWidget_withJavaUtilList_(id<ASIWid
         }
         [drawable setMeasureTextHelperWithADDrawable_MeasureTextHelper:new_ASViewImpl_2_initWithASIWidget_(w)];
         ADRect *bounds = [drawable getBounds];
+        [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("ICIC@", [((ADRect *) nil_chk(bounds)) width], ' ', [bounds height], ' ', drawable)];
         ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
-        [((ADView *) nil_chk(view)) setLeftWithInt:((ADRect *) nil_chk(bounds))->left_];
+        [((ADView *) nil_chk(view)) setLeftWithInt:bounds->left_];
         [view setRightWithInt:bounds->right_];
         [view setTopWithInt:bounds->top_];
         [view setBottomWithInt:bounds->bottom_];
@@ -7434,7 +7435,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationCallBack)
 - (jfloat)getTextWidth {
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(val$w_)) asWidget], [ADView class]);
   [((ADView *) nil_chk(view)) measureWithInt:0 withInt:0];
-  return [view getMeasuredWidth] + 5;
+  return [view getMeasuredWidth];
 }
 
 - (jfloat)getTextHeight {

@@ -466,7 +466,7 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
 - (id)getAttributeWithNSString:(NSString *)key {
   {
     ADDrawable *bgdrawable;
-    switch (JreIndexOfStr(key, (id[]){ @"text", @"textColor", @"borderRadius", @"background", @"textSize", @"zIndex", @"gravity", @"typeface", @"paddingHorizontal", @"alpha", @"visibility", @"textAppearance", @"borderWidth" }, 13)) {
+    switch (JreIndexOfStr(key, (id[]){ @"text", @"textColor", @"borderRadius", @"background", @"textSize", @"zIndex", @"gravity", @"typeface", @"alpha", @"visibility", @"textAppearance", @"borderWidth" }, 12)) {
       case 0:
       return ADXBadgeDrawable_getBadgeContent(self);
       case 1:
@@ -486,14 +486,12 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
       case 7:
       return @"sans";
       case 8:
-      return @"1dp";
-      case 9:
       return JavaLangFloat_valueOfWithFloat_((jfloat) [((ADXBadgeState *) nil_chk(state_)) getAlpha] / 255.0f);
-      case 10:
+      case 9:
       return [((ADXBadgeState *) nil_chk(state_)) isVisible] ? @"visible" : @"gone";
-      case 11:
+      case 10:
       return textAppearanceResource_;
-      case 12:
+      case 11:
       return @"0dp";
       default:
       break;
@@ -512,7 +510,7 @@ NSString *ADXBadgeDrawable_DEFAULT_EXCEED_MAX_BADGE_TEXT_SUFFIX = @"\u2026";
 }
 
 - (IOSObjectArray *)getSimulatedWidgetAttrs {
-  return [IOSObjectArray arrayWithObjects:(id[]){ @"zIndex", @"textSize", @"gravity", @"text", @"typeface", @"textColor", @"background", @"paddingHorizontal", @"alpha", @"visibility", @"borderRadius", @"textAppearance", @"borderWidth" } count:13 type:NSString_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ @"zIndex", @"textSize", @"gravity", @"text", @"typeface", @"textColor", @"background", @"alpha", @"visibility", @"borderRadius", @"textAppearance", @"borderWidth" } count:12 type:NSString_class_()];
 }
 
 - (NSString *)getSimulatedWidgetLocalName {

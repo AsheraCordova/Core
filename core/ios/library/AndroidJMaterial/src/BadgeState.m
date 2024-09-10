@@ -437,7 +437,7 @@ void ADXBadgeState_initWithADContext_withADXBadgeState_State_(ADXBadgeState *sel
   }
   self->badgeRadius_ = ASPluginInvoker_convertDpToPixelWithNSString_(@"4dp");
   self->horizontalInset_ = 0;
-  self->badgeWithTextRadius_ = ASPluginInvoker_convertDpToPixelWithNSString_(@"8dp");
+  self->badgeWithTextRadius_ = ASPluginInvoker_convertDpToPixelWithNSString_(@"10dp");
   self->badgeWidth_ = 0;
   self->badgeHeight_ = 0;
   self->badgeWithTextWidth_ = 0;
@@ -445,7 +445,7 @@ void ADXBadgeState_initWithADContext_withADXBadgeState_State_(ADXBadgeState *sel
   self->horizontalInsetWithText_ = 0;
   JreStrongAssign(&self->overridingState_, storedState);
   JreStrongAssign(&self->currentState_->numberLocale_, JavaUtilLocale_getDefault());
-  JreStrongAssign(&self->currentState_->badgeHorizontalPadding_, JavaLangInteger_valueOfWithInt_(0));
+  JreStrongAssign(&self->currentState_->badgeHorizontalPadding_, JavaLangInteger_valueOfWithInt_(JreFpToInt(ASPluginInvoker_convertDpToPixelWithNSString_(@"4dp"))));
   JreStrongAssign(&self->currentState_->badgeVerticalPadding_, JavaLangInteger_valueOfWithInt_(0));
   JreStrongAssign(&self->currentState_->horizontalOffsetWithoutText_, JavaLangInteger_valueOfWithInt_(0));
   JreStrongAssign(&self->currentState_->verticalOffsetWithoutText_, JavaLangInteger_valueOfWithInt_(0));

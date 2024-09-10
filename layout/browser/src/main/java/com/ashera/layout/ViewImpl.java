@@ -1484,7 +1484,7 @@ return getScaleY(w, nativeWidget);			}
 						public float getTextWidth() {
 							View view = (View) w.asWidget();
 							view.measure(0, 0);
-							return view.getMeasuredWidth() + 5;
+							return view.getMeasuredWidth();
 						}
 	
 						@Override
@@ -1496,6 +1496,7 @@ return getScaleY(w, nativeWidget);			}
 						
 					});
 					r.android.graphics.Rect bounds = drawable.getBounds();
+					System.out.println(bounds.width() + " " + bounds.height() + " " + drawable);
 					View view = (View) w.asWidget();
 					view.setLeft(bounds.left);
 					view.setRight(bounds.right);
