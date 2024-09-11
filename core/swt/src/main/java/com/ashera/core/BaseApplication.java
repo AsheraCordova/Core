@@ -16,6 +16,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
 import com.ashera.common.OperatingSystem;
+import com.ashera.common.ShellManager;
 import com.ashera.utils.FileUtils;
 
 public abstract class BaseApplication  {
@@ -28,7 +29,7 @@ public abstract class BaseApplication  {
 	}
 
 	public Shell start(Display display, int style) {
-	    Shell shell = new Shell(display, style);
+	    Shell shell = ShellManager.getInstance().createRootShell(display, style);
 	    shell.setBounds(0, 0, PreferenceWrapper.getCurrentWidth(), PreferenceWrapper.getDefaultHeight());
 	    shell.setBackgroundMode(SWT.INHERIT_FORCE);
 	    

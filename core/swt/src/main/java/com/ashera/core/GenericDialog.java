@@ -23,7 +23,7 @@ class GenericDialog extends Dialog {
 	}
 
 	public static Shell createDialogShell(Shell parent) {
-		Shell dialog = new Shell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL| SWT.MIN | SWT.RESIZE);
+		Shell dialog = com.ashera.common.ShellManager.getInstance().createDialogShell(parent, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL| SWT.MIN | SWT.RESIZE);
 		dialog.setData("dialog");
 		dialog.setBackgroundMode(SWT.INHERIT_FORCE);
 		return dialog;

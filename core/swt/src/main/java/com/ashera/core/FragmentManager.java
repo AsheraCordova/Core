@@ -22,6 +22,7 @@ import com.ashera.converter.ConverterFactory;
 public class FragmentManager {
 	private StackLayout stackLayout;
 	private Composite rootComposite;
+	private static final com.ashera.common.ShellManager SHELL_MANAGER = com.ashera.common.ShellManager.getInstance();
 	private java.util.Stack<Control> nativeWidgetStack = new java.util.Stack<>();
 	public FragmentManager(StackLayout stackLayout, Composite rootComposite, IActivity activity) {
 		this.rootComposite = rootComposite;
@@ -56,12 +57,12 @@ public class FragmentManager {
 	private void updateSizeIfRequired(DialogFragment dialogFragment) {
 		Shell dialog = (Shell) dialogFragment.getParentForRootWidget();
 		Rectangle bounds = getRoot(dialogFragment).getBounds();
-		Shell activeShell = getActiveShell();
+		Shell activeShell = SHELL_MANAGER.getActiveShell();
 		int topBarHeight = activeShell.getBounds().height - activeShell.getClientArea().height;
 		int dialogExtraWidth = activeShell.getBounds().width - activeShell.getClientArea().width;
 		dialog.setSize(bounds.width + dialogExtraWidth, bounds.height + topBarHeight);
 	}
-	private Shell getActiveShell() {
+	/*private Shell getActiveShell() {
 		Shell activeShell = Display.getDefault().getActiveShell();
 		if (activeShell == null) {
 			if (dialogFragments.entrySet().size() > 1) {
@@ -74,11 +75,11 @@ public class FragmentManager {
 			}
 		}
 		return activeShell;
-	}
+	}*/
 
 	private void openDialog(Object mydialog, int width, int height, String windowCloseOnTouchOutside, Object backdropColor, String backgroundDimEnabled, DialogFragment dialogFragment) {
 		Shell dialog = (Shell) mydialog;
-		Shell activeShell = getActiveShell();
+		Shell activeShell = SHELL_MANAGER.getActiveShell();
 		GenericDialog de = new GenericDialog(activeShell, dialog);
 		Rectangle bounds = getRoot(dialogFragment).getBounds();
 		int topBarHeight = activeShell.getBounds().height - activeShell.getClientArea().height;
@@ -105,15 +106,15 @@ public class FragmentManager {
 	}
 	
 	public void closeDialog() {
-		Shell[] shells = Display.getDefault().getShells();
-		Shell activeShell = shells[shells.length - 1];
+		Control control = (Control) getLastDialogEntry().getValue().getRootWidget().asNativeWidget();
+		Shell activeShell = control.getShell();
 		activeShell.close();
 		activeShell.dispose();
 	}
 
 	private Shell createDialog() {
-		Shell[] shells = Display.getDefault().getShells();
-		Shell activeShell = shells[shells.length - 1];
+//		Shell[] shells = Display.getDefault().getShells();
+		Shell activeShell = SHELL_MANAGER.getActiveShell();
 		Shell dialog = GenericDialog.createDialogShell(activeShell);
 		return dialog;
 	}
