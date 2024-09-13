@@ -124,35 +124,3 @@
     return ((ASGenericFragmentController*) [self.navController.viewControllers lastObject]).rootFragment;
 }
 @end
-
-@implementation ASMainCommandDelegate
-
-/* To override the methods, uncomment the line in the init function(s)
-   in MainViewController.m
- */
-
-#pragma mark CDVCommandDelegate implementation
-
-- (id)getCommandInstance:(NSString*)className
-{
-    return [super getCommandInstance:className];
-}
-
-- (NSString*)pathForResource:(NSString*)resourcepath
-{
-    return [super pathForResource:resourcepath];
-}
-
-@end
-
-@implementation ASMainCommandQueue
-
-/* To override, uncomment the line in the init function(s)
-   in MainViewController.m
- */
-- (BOOL)execute:(CDVInvokedUrlCommand*)command
-{
-    return [super execute:command];
-}
-
-@end
