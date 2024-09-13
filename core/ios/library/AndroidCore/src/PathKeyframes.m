@@ -3,10 +3,10 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\animation\PathKeyframes.java
 //
 
+#include "IKeyframes.h"
 #include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "Keyframes.h"
 #include "Path.h"
 #include "PathKeyframes.h"
 #include "PointF.h"
@@ -71,15 +71,15 @@ __attribute__((unused)) static ADPointF *ADPathKeyframes_pointForIndexWithInt_(A
 
 __attribute__((unused)) static jfloat ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(jfloat fraction, jfloat startValue, jfloat endValue);
 
-@interface ADPathKeyframes_SimpleKeyframes ()
+@interface ADPathKeyframes_SimpleIKeyframes ()
 
 - (instancetype)init;
 
 @end
 
-__attribute__((unused)) static void ADPathKeyframes_SimpleKeyframes_init(ADPathKeyframes_SimpleKeyframes *self);
+__attribute__((unused)) static void ADPathKeyframes_SimpleIKeyframes_init(ADPathKeyframes_SimpleIKeyframes *self);
 
-@interface ADPathKeyframes_1 : ADPathKeyframes_FloatKeyframesBase {
+@interface ADPathKeyframes_1 : ADPathKeyframes_FloatIKeyframesBase {
  @public
   ADPathKeyframes *this$0_;
 }
@@ -88,9 +88,9 @@ __attribute__((unused)) static void ADPathKeyframes_SimpleKeyframes_init(ADPathK
 
 - (jfloat)getFloatValueWithFloat:(jfloat)fraction;
 
-- (id<ADKeyframes>)java_clone;
+- (id<ADIKeyframes>)java_clone;
 
-- (JavaUtilArrayList *)getKeyframes;
+- (JavaUtilArrayList *)getIKeyframes;
 
 @end
 
@@ -102,7 +102,7 @@ __attribute__((unused)) static ADPathKeyframes_1 *new_ADPathKeyframes_1_initWith
 
 __attribute__((unused)) static ADPathKeyframes_1 *create_ADPathKeyframes_1_initWithADPathKeyframes_(ADPathKeyframes *outer$);
 
-@interface ADPathKeyframes_2 : ADPathKeyframes_FloatKeyframesBase {
+@interface ADPathKeyframes_2 : ADPathKeyframes_FloatIKeyframesBase {
  @public
   ADPathKeyframes *this$0_;
 }
@@ -111,9 +111,9 @@ __attribute__((unused)) static ADPathKeyframes_1 *create_ADPathKeyframes_1_initW
 
 - (jfloat)getFloatValueWithFloat:(jfloat)fraction;
 
-- (id<ADKeyframes>)java_clone;
+- (id<ADIKeyframes>)java_clone;
 
-- (JavaUtilArrayList *)getKeyframes;
+- (JavaUtilArrayList *)getIKeyframes;
 
 @end
 
@@ -125,7 +125,7 @@ __attribute__((unused)) static ADPathKeyframes_2 *new_ADPathKeyframes_2_initWith
 
 __attribute__((unused)) static ADPathKeyframes_2 *create_ADPathKeyframes_2_initWithADPathKeyframes_(ADPathKeyframes *outer$);
 
-@interface ADPathKeyframes_3 : ADPathKeyframes_IntKeyframesBase {
+@interface ADPathKeyframes_3 : ADPathKeyframes_IntIKeyframesBase {
  @public
   ADPathKeyframes *this$0_;
 }
@@ -134,9 +134,9 @@ __attribute__((unused)) static ADPathKeyframes_2 *create_ADPathKeyframes_2_initW
 
 - (jint)getIntValueWithFloat:(jfloat)fraction;
 
-- (id<ADKeyframes>)java_clone;
+- (id<ADIKeyframes>)java_clone;
 
-- (JavaUtilArrayList *)getKeyframes;
+- (JavaUtilArrayList *)getIKeyframes;
 
 @end
 
@@ -148,7 +148,7 @@ __attribute__((unused)) static ADPathKeyframes_3 *new_ADPathKeyframes_3_initWith
 
 __attribute__((unused)) static ADPathKeyframes_3 *create_ADPathKeyframes_3_initWithADPathKeyframes_(ADPathKeyframes *outer$);
 
-@interface ADPathKeyframes_4 : ADPathKeyframes_IntKeyframesBase {
+@interface ADPathKeyframes_4 : ADPathKeyframes_IntIKeyframesBase {
  @public
   ADPathKeyframes *this$0_;
 }
@@ -157,9 +157,9 @@ __attribute__((unused)) static ADPathKeyframes_3 *create_ADPathKeyframes_3_initW
 
 - (jint)getIntValueWithFloat:(jfloat)fraction;
 
-- (id<ADKeyframes>)java_clone;
+- (id<ADIKeyframes>)java_clone;
 
-- (JavaUtilArrayList *)getKeyframes;
+- (JavaUtilArrayList *)getIKeyframes;
 
 @end
 
@@ -186,7 +186,7 @@ J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
   return self;
 }
 
-- (JavaUtilArrayList *)getKeyframes {
+- (JavaUtilArrayList *)getIKeyframes {
   return ADPathKeyframes_EMPTY_KEYFRAMES;
 }
 
@@ -237,10 +237,10 @@ J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
   return ADPointF_class_();
 }
 
-- (id<ADKeyframes>)java_clone {
-  id<ADKeyframes> clone = nil;
+- (id<ADIKeyframes>)java_clone {
+  id<ADIKeyframes> clone = nil;
   @try {
-    clone = (id<ADKeyframes>) cast_check([super java_clone], ADKeyframes_class_());
+    clone = (id<ADIKeyframes>) cast_check([super java_clone], ADIKeyframes_class_());
   }
   @catch (JavaLangCloneNotSupportedException *e) {
   }
@@ -257,23 +257,23 @@ J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
   return ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(fraction, startValue, endValue);
 }
 
-- (id<ADKeyframes_FloatKeyframes>)createXFloatKeyframes {
+- (id<ADIKeyframes_FloatIKeyframes>)createXFloatKeyframes {
   return create_ADPathKeyframes_1_initWithADPathKeyframes_(self);
 }
 
-- (id<ADKeyframes_FloatKeyframes>)createYFloatKeyframes {
+- (id<ADIKeyframes_FloatIKeyframes>)createYFloatKeyframes {
   return create_ADPathKeyframes_2_initWithADPathKeyframes_(self);
 }
 
-- (id<ADKeyframes_IntKeyframes>)createXIntKeyframes {
+- (id<ADIKeyframes_IntIKeyframes>)createXIntKeyframes {
   return create_ADPathKeyframes_3_initWithADPathKeyframes_(self);
 }
 
-- (id<ADKeyframes_IntKeyframes>)createYIntKeyframes {
+- (id<ADIKeyframes_IntIKeyframes>)createYIntKeyframes {
   return create_ADPathKeyframes_4_initWithADPathKeyframes_(self);
 }
 
-- (id<ADKeyframes>)clone {
+- (id<ADIKeyframes>)clone {
   return [self java_clone];
 }
 
@@ -292,20 +292,20 @@ J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
     { NULL, "LADPointF;", 0x2, 5, 6, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
     { NULL, "LIOSClass;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADKeyframes;", 0x1, 9, -1, -1, -1, -1, -1 },
+    { NULL, "LADIKeyframes;", 0x1, 9, -1, -1, -1, -1, -1 },
     { NULL, "LADPointF;", 0x2, 10, 11, -1, -1, -1, -1 },
     { NULL, "F", 0xa, 12, 13, -1, -1, -1, -1 },
-    { NULL, "LADKeyframes_FloatKeyframes;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADKeyframes_FloatKeyframes;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADKeyframes_IntKeyframes;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADKeyframes_IntKeyframes;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LADIKeyframes_FloatIKeyframes;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LADIKeyframes_FloatIKeyframes;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LADIKeyframes_IntIKeyframes;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LADIKeyframes_IntIKeyframes;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithADPath:);
   methods[1].selector = @selector(initWithADPath:withFloat:);
-  methods[2].selector = @selector(getKeyframes);
+  methods[2].selector = @selector(getIKeyframes);
   methods[3].selector = @selector(getValueWithFloat:);
   methods[4].selector = @selector(interpolateInRangeWithFloat:withInt:withInt:);
   methods[5].selector = @selector(setEvaluatorWithADTypeEvaluator:);
@@ -327,7 +327,7 @@ J2OBJC_INITIALIZED_DEFN(ADPathKeyframes)
     { "mTempPointF_", "LADPointF;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mKeyframeData_", "[F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LADPath;", "LADPath;F", "()Ljava/util/ArrayList<Lr/android/animation/Keyframe;>;", "getValue", "F", "interpolateInRange", "FII", "setEvaluator", "LADTypeEvaluator;", "clone", "pointForIndex", "I", "interpolate", "FFF", &ADPathKeyframes_EMPTY_KEYFRAMES, "Ljava/util/ArrayList<Lr/android/animation/Keyframe;>;", "LADPathKeyframes_SimpleKeyframes;LADPathKeyframes_IntKeyframesBase;LADPathKeyframes_FloatKeyframesBase;" };
+  static const void *ptrTable[] = { "LADPath;", "LADPath;F", "()Ljava/util/ArrayList<Lr/android/animation/Keyframe;>;", "getValue", "F", "interpolateInRange", "FII", "setEvaluator", "LADTypeEvaluator;", "clone", "pointForIndex", "I", "interpolate", "FFF", &ADPathKeyframes_EMPTY_KEYFRAMES, "Ljava/util/ArrayList<Lr/android/animation/Keyframe;>;", "LADPathKeyframes_SimpleIKeyframes;LADPathKeyframes_IntIKeyframesBase;LADPathKeyframes_FloatIKeyframesBase;" };
   static const J2ObjcClassInfo _ADPathKeyframes = { "PathKeyframes", "r.android.animation", ptrTable, methods, fields, 7, 0x1, 14, 7, -1, 16, -1, -1, -1 };
   return &_ADPathKeyframes;
 }
@@ -406,11 +406,11 @@ jfloat ADPathKeyframes_interpolateWithFloat_withFloat_withFloat_(jfloat fraction
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes)
 
-@implementation ADPathKeyframes_SimpleKeyframes
+@implementation ADPathKeyframes_SimpleIKeyframes
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
-  ADPathKeyframes_SimpleKeyframes_init(self);
+  ADPathKeyframes_SimpleIKeyframes_init(self);
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
@@ -418,21 +418,21 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)setEvaluatorWithADTypeEvaluator:(id<ADTypeEvaluator>)evaluator {
 }
 
-- (JavaUtilArrayList *)getKeyframes {
+- (JavaUtilArrayList *)getIKeyframes {
   return JreLoadStatic(ADPathKeyframes, EMPTY_KEYFRAMES);
 }
 
-- (id<ADKeyframes>)java_clone {
-  id<ADKeyframes> clone = nil;
+- (id<ADIKeyframes>)java_clone {
+  id<ADIKeyframes> clone = nil;
   @try {
-    clone = (id<ADKeyframes>) cast_check([super java_clone], ADKeyframes_class_());
+    clone = (id<ADIKeyframes>) cast_check([super java_clone], ADIKeyframes_class_());
   }
   @catch (JavaLangCloneNotSupportedException *e) {
   }
   return clone;
 }
 
-- (id<ADKeyframes>)clone {
+- (id<ADIKeyframes>)clone {
   return [self java_clone];
 }
 
@@ -441,19 +441,19 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, "LJavaUtilArrayList;", 0x1, -1, -1, -1, 2, -1, -1 },
-    { NULL, "LADKeyframes;", 0x1, 3, -1, -1, -1, -1, -1 },
+    { NULL, "LADIKeyframes;", 0x1, 3, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(setEvaluatorWithADTypeEvaluator:);
-  methods[2].selector = @selector(getKeyframes);
+  methods[2].selector = @selector(getIKeyframes);
   methods[3].selector = @selector(java_clone);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "setEvaluator", "LADTypeEvaluator;", "()Ljava/util/ArrayList<Lr/android/animation/Keyframe;>;", "clone", "LADPathKeyframes;" };
-  static const J2ObjcClassInfo _ADPathKeyframes_SimpleKeyframes = { "SimpleKeyframes", "r.android.animation", ptrTable, methods, NULL, 7, 0x40a, 4, 0, 4, -1, -1, -1, -1 };
-  return &_ADPathKeyframes_SimpleKeyframes;
+  static const J2ObjcClassInfo _ADPathKeyframes_SimpleIKeyframes = { "SimpleIKeyframes", "r.android.animation", ptrTable, methods, NULL, 7, 0x40a, 4, 0, 4, -1, -1, -1, -1 };
+  return &_ADPathKeyframes_SimpleIKeyframes;
 }
 
 - (id)copyWithZone:(NSZone *)zone {
@@ -462,17 +462,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 @end
 
-void ADPathKeyframes_SimpleKeyframes_init(ADPathKeyframes_SimpleKeyframes *self) {
+void ADPathKeyframes_SimpleIKeyframes_init(ADPathKeyframes_SimpleIKeyframes *self) {
   NSObject_init(self);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_SimpleKeyframes)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_SimpleIKeyframes)
 
-@implementation ADPathKeyframes_FloatKeyframesBase
+@implementation ADPathKeyframes_FloatIKeyframesBase
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
-  ADPathKeyframes_FloatKeyframesBase_init(self);
+  ADPathKeyframes_FloatIKeyframesBase_init(self);
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
@@ -499,17 +499,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[2].selector = @selector(getValueWithFloat:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "getValue", "F", "LADPathKeyframes;" };
-  static const J2ObjcClassInfo _ADPathKeyframes_FloatKeyframesBase = { "FloatKeyframesBase", "r.android.animation", ptrTable, methods, NULL, 7, 0x408, 3, 0, 2, -1, -1, -1, -1 };
-  return &_ADPathKeyframes_FloatKeyframesBase;
+  static const J2ObjcClassInfo _ADPathKeyframes_FloatIKeyframesBase = { "FloatIKeyframesBase", "r.android.animation", ptrTable, methods, NULL, 7, 0x408, 3, 0, 2, -1, -1, -1, -1 };
+  return &_ADPathKeyframes_FloatIKeyframesBase;
 }
 
 @end
 
-void ADPathKeyframes_FloatKeyframesBase_init(ADPathKeyframes_FloatKeyframesBase *self) {
-  ADPathKeyframes_SimpleKeyframes_init(self);
+void ADPathKeyframes_FloatIKeyframesBase_init(ADPathKeyframes_FloatIKeyframesBase *self) {
+  ADPathKeyframes_SimpleIKeyframes_init(self);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_FloatKeyframesBase)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_FloatIKeyframesBase)
 
 @implementation ADPathKeyframes_1
 
@@ -551,7 +551,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_FloatKeyframesBase)
 
 void ADPathKeyframes_1_initWithADPathKeyframes_(ADPathKeyframes_1 *self, ADPathKeyframes *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
-  ADPathKeyframes_FloatKeyframesBase_init(self);
+  ADPathKeyframes_FloatIKeyframesBase_init(self);
 }
 
 ADPathKeyframes_1 *new_ADPathKeyframes_1_initWithADPathKeyframes_(ADPathKeyframes *outer$) {
@@ -602,7 +602,7 @@ ADPathKeyframes_1 *create_ADPathKeyframes_1_initWithADPathKeyframes_(ADPathKeyfr
 
 void ADPathKeyframes_2_initWithADPathKeyframes_(ADPathKeyframes_2 *self, ADPathKeyframes *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
-  ADPathKeyframes_FloatKeyframesBase_init(self);
+  ADPathKeyframes_FloatIKeyframesBase_init(self);
 }
 
 ADPathKeyframes_2 *new_ADPathKeyframes_2_initWithADPathKeyframes_(ADPathKeyframes *outer$) {
@@ -613,11 +613,11 @@ ADPathKeyframes_2 *create_ADPathKeyframes_2_initWithADPathKeyframes_(ADPathKeyfr
   J2OBJC_CREATE_IMPL(ADPathKeyframes_2, initWithADPathKeyframes_, outer$)
 }
 
-@implementation ADPathKeyframes_IntKeyframesBase
+@implementation ADPathKeyframes_IntIKeyframesBase
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
-  ADPathKeyframes_IntKeyframesBase_init(self);
+  ADPathKeyframes_IntIKeyframesBase_init(self);
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
@@ -644,17 +644,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[2].selector = @selector(getValueWithFloat:);
   #pragma clang diagnostic pop
   static const void *ptrTable[] = { "getValue", "F", "LADPathKeyframes;" };
-  static const J2ObjcClassInfo _ADPathKeyframes_IntKeyframesBase = { "IntKeyframesBase", "r.android.animation", ptrTable, methods, NULL, 7, 0x408, 3, 0, 2, -1, -1, -1, -1 };
-  return &_ADPathKeyframes_IntKeyframesBase;
+  static const J2ObjcClassInfo _ADPathKeyframes_IntIKeyframesBase = { "IntIKeyframesBase", "r.android.animation", ptrTable, methods, NULL, 7, 0x408, 3, 0, 2, -1, -1, -1, -1 };
+  return &_ADPathKeyframes_IntIKeyframesBase;
 }
 
 @end
 
-void ADPathKeyframes_IntKeyframesBase_init(ADPathKeyframes_IntKeyframesBase *self) {
-  ADPathKeyframes_SimpleKeyframes_init(self);
+void ADPathKeyframes_IntIKeyframesBase_init(ADPathKeyframes_IntIKeyframesBase *self) {
+  ADPathKeyframes_SimpleIKeyframes_init(self);
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_IntKeyframesBase)
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_IntIKeyframesBase)
 
 @implementation ADPathKeyframes_3
 
@@ -696,7 +696,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPathKeyframes_IntKeyframesBase)
 
 void ADPathKeyframes_3_initWithADPathKeyframes_(ADPathKeyframes_3 *self, ADPathKeyframes *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
-  ADPathKeyframes_IntKeyframesBase_init(self);
+  ADPathKeyframes_IntIKeyframesBase_init(self);
 }
 
 ADPathKeyframes_3 *new_ADPathKeyframes_3_initWithADPathKeyframes_(ADPathKeyframes *outer$) {
@@ -747,7 +747,7 @@ ADPathKeyframes_3 *create_ADPathKeyframes_3_initWithADPathKeyframes_(ADPathKeyfr
 
 void ADPathKeyframes_4_initWithADPathKeyframes_(ADPathKeyframes_4 *self, ADPathKeyframes *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
-  ADPathKeyframes_IntKeyframesBase_init(self);
+  ADPathKeyframes_IntIKeyframesBase_init(self);
 }
 
 ADPathKeyframes_4 *new_ADPathKeyframes_4_initWithADPathKeyframes_(ADPathKeyframes *outer$) {

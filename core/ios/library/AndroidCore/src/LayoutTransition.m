@@ -7,13 +7,13 @@
 #include "Animator.h"
 #include "AnimatorListenerAdapter.h"
 #include "DecelerateInterpolator.h"
+#include "IKeyframes.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "Keyframe.h"
 #include "KeyframeSet.h"
-#include "Keyframes.h"
 #include "LayoutTransition.h"
 #include "ObjectAnimator.h"
 #include "PropertyValuesHolder.h"
@@ -1508,7 +1508,7 @@ ADLayoutTransition_1 *create_ADLayoutTransition_1_initWithADLayoutTransition_wit
           valuesDiffer = true;
         }
       }
-      else if (![nil_chk([((id<ADKeyframes>) nil_chk(pvh->mKeyframes_)) getValueWithFloat:0]) isEqual:[((id<ADKeyframes>) nil_chk(pvh->mKeyframes_)) getValueWithFloat:1]]) {
+      else if (![nil_chk([((id<ADIKeyframes>) nil_chk(pvh->mKeyframes_)) getValueWithFloat:0]) isEqual:[((id<ADIKeyframes>) nil_chk(pvh->mKeyframes_)) getValueWithFloat:1]]) {
         valuesDiffer = true;
       }
     }

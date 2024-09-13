@@ -826,6 +826,8 @@
      <source-file src="core/ios/library/AndroidCore/src/HttpAuthHandler.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/IBinder.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/IBinder.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/IKeyframes.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/IKeyframes.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ImageView.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ImageView.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/IMessenger.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -864,8 +866,6 @@
      <source-file src="core/ios/library/AndroidCore/src/KeyEvent.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Keyframe.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Keyframe.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
-     <header-file src="core/ios/library/AndroidCore/src/Keyframes.h" target-dir="CorePlugin/AndroidCore/src"/>
-     <source-file src="core/ios/library/AndroidCore/src/Keyframes.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/KeyframeSet.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/KeyframeSet.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Layout.h" target-dir="CorePlugin/AndroidCore/src"/>

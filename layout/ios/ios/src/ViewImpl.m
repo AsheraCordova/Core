@@ -35,6 +35,7 @@
 #include "IActivity.h"
 #include "IAttributable.h"
 #include "IFragment.h"
+#include "IKeyframes.h"
 #include "ILifeCycleDecorator.h"
 #include "IListener.h"
 #include "IMaxDimension.h"
@@ -47,7 +48,6 @@
 #include "J2ObjC_source.h"
 #include "KeyEvent.h"
 #include "KeyframeSet.h"
-#include "Keyframes.h"
 #include "LayoutNativeVars.h"
 #include "MenuItem.h"
 #include "MotionEvent.h"
@@ -7968,8 +7968,8 @@ void ASViewImpl_AnimationContentHandler_setUpPathWithADObjectAnimator_(ASViewImp
     ADPath *path = ADPath_createPathFromPathDataWithNSString_(self->pathData_);
     jfloat error = 0.5f * pixelSize;
     ADPathKeyframes *keyframeSet = ADKeyframeSet_ofPathWithADPath_withFloat_(path, error);
-    id<ADKeyframes> xKeyframes;
-    id<ADKeyframes> yKeyframes;
+    id<ADIKeyframes> xKeyframes;
+    id<ADIKeyframes> yKeyframes;
     if (self->valueType_ == ASViewImpl_AnimationContentHandler_VALUE_TYPE_FLOAT) {
       xKeyframes = [((ADPathKeyframes *) nil_chk(keyframeSet)) createXFloatKeyframes];
       yKeyframes = [keyframeSet createYFloatKeyframes];
@@ -7981,10 +7981,10 @@ void ASViewImpl_AnimationContentHandler_setUpPathWithADObjectAnimator_(ASViewImp
     ADPropertyValuesHolder *x = nil;
     ADPropertyValuesHolder *y = nil;
     if (self->propertyXName_ != nil) {
-      x = ADPropertyValuesHolder_ofKeyframesWithNSString_withADKeyframes_(self->propertyXName_, xKeyframes);
+      x = ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(self->propertyXName_, xKeyframes);
     }
     if (self->propertyYName_ != nil) {
-      y = ADPropertyValuesHolder_ofKeyframesWithNSString_withADKeyframes_(self->propertyYName_, yKeyframes);
+      y = ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(self->propertyYName_, yKeyframes);
     }
     if (x == nil) {
       [((ADObjectAnimator *) nil_chk(objectAnimator)) setValuesWithADPropertyValuesHolderArray:[IOSObjectArray newArrayWithObjects:(id[]){ y } count:1 type:ADPropertyValuesHolder_class_()]];

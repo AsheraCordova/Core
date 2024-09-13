@@ -7,6 +7,7 @@
 #include "FloatArrayEvaluator.h"
 #include "FloatEvaluator.h"
 #include "FloatProperty.h"
+#include "IKeyframes.h"
 #include "ILifeCycleDecorator.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
@@ -18,7 +19,6 @@
 #include "J2ObjC_source.h"
 #include "Keyframe.h"
 #include "KeyframeSet.h"
-#include "Keyframes.h"
 #include "Log.h"
 #include "Path.h"
 #include "PathKeyframes.h"
@@ -548,13 +548,13 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
 }
 
 + (ADPropertyValuesHolder *)ofKeyframesWithNSString:(NSString *)propertyName
-                                    withADKeyframes:(id<ADKeyframes>)keyframes {
-  return ADPropertyValuesHolder_ofKeyframesWithNSString_withADKeyframes_(propertyName, keyframes);
+                                   withADIKeyframes:(id<ADIKeyframes>)keyframes {
+  return ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(propertyName, keyframes);
 }
 
 + (ADPropertyValuesHolder *)ofKeyframesWithADProperty:(ADProperty *)property
-                                      withADKeyframes:(id<ADKeyframes>)keyframes {
-  return ADPropertyValuesHolder_ofKeyframesWithADProperty_withADKeyframes_(property, keyframes);
+                                     withADIKeyframes:(id<ADIKeyframes>)keyframes {
+  return ADPropertyValuesHolder_ofKeyframesWithADProperty_withADIKeyframes_(property, keyframes);
 }
 
 - (void)setIntValuesWithIntArray:(IOSIntArray *)values {
@@ -565,7 +565,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
   ADPropertyValuesHolder_setFloatValuesWithFloatArray_(self, values);
 }
 
-- (void)setKeyframesWithADKeyframeArray:(IOSObjectArray *)values {
+- (void)setIKeyframesWithADKeyframeArray:(IOSObjectArray *)values {
   jint numKeyframes = ((IOSObjectArray *) nil_chk(values))->size_;
   IOSObjectArray *keyframes = [IOSObjectArray arrayWithLength:JavaLangMath_maxWithInt_withInt_(numKeyframes, 2) type:ADKeyframe_class_()];
   JreStrongAssign(&mValueType_, [((ADKeyframe *) nil_chk((IOSObjectArray_Get(values, 0)))) getType]);
@@ -579,7 +579,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
   JreStrongAssign(&mValueType_, [nil_chk(IOSObjectArray_Get(nil_chk(values), 0)) java_getClass]);
   JreStrongAssign(&mKeyframes_, ADKeyframeSet_ofObjectWithNSObjectArray_(values));
   if (mEvaluator_ != nil) {
-    [((id<ADKeyframes>) nil_chk(mKeyframes_)) setEvaluatorWithADTypeEvaluator:mEvaluator_];
+    [((id<ADIKeyframes>) nil_chk(mKeyframes_)) setEvaluatorWithADTypeEvaluator:mEvaluator_];
   }
 }
 
@@ -612,7 +612,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
   if (mProperty_ != nil) {
     @try {
       id testValue = nil;
-      id<JavaUtilList> keyframes = JreRetainedLocalValue([((id<ADKeyframes>) nil_chk(mKeyframes_)) getKeyframes]);
+      id<JavaUtilList> keyframes = JreRetainedLocalValue([((id<ADIKeyframes>) nil_chk(mKeyframes_)) getIKeyframes]);
       jint keyframeCount = keyframes == nil ? 0 : [keyframes size];
       for (jint i = 0; i < keyframeCount; i++) {
         ADKeyframe *kf = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i]);
@@ -636,7 +636,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
     if (mSetter_ == nil) {
       [self setupSetterWithIOSClass:targetClass];
     }
-    id<JavaUtilList> keyframes = JreRetainedLocalValue([((id<ADKeyframes>) nil_chk(mKeyframes_)) getKeyframes]);
+    id<JavaUtilList> keyframes = JreRetainedLocalValue([((id<ADIKeyframes>) nil_chk(mKeyframes_)) getIKeyframes]);
     jint keyframeCount = keyframes == nil ? 0 : [keyframes size];
     for (jint i = 0; i < keyframeCount; i++) {
       ADKeyframe *kf = JreRetainedLocalValue([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i]);
@@ -673,14 +673,14 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
 }
 
 - (void)setupStartValueWithId:(id)target {
-  id<JavaUtilList> keyframes = JreRetainedLocalValue([((id<ADKeyframes>) nil_chk(mKeyframes_)) getKeyframes]);
+  id<JavaUtilList> keyframes = JreRetainedLocalValue([((id<ADIKeyframes>) nil_chk(mKeyframes_)) getIKeyframes]);
   if (![((id<JavaUtilList>) nil_chk(keyframes)) isEmpty]) {
     ADPropertyValuesHolder_setupValueWithId_withADKeyframe_(self, target, [keyframes getWithInt:0]);
   }
 }
 
 - (void)setupEndValueWithId:(id)target {
-  id<JavaUtilList> keyframes = JreRetainedLocalValue([((id<ADKeyframes>) nil_chk(mKeyframes_)) getKeyframes]);
+  id<JavaUtilList> keyframes = JreRetainedLocalValue([((id<ADIKeyframes>) nil_chk(mKeyframes_)) getIKeyframes]);
   if (![((id<JavaUtilList>) nil_chk(keyframes)) isEmpty]) {
     ADPropertyValuesHolder_setupValueWithId_withADKeyframe_(self, target, [keyframes getWithInt:[keyframes size] - 1]);
   }
@@ -691,7 +691,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
     ADPropertyValuesHolder *newPVH = (ADPropertyValuesHolder *) cast_chk([super java_clone], [ADPropertyValuesHolder class]);
     JreStrongAssign(&((ADPropertyValuesHolder *) nil_chk(newPVH))->mPropertyName_, mPropertyName_);
     JreStrongAssign(&newPVH->mProperty_, mProperty_);
-    JreStrongAssign(&newPVH->mKeyframes_, [((id<ADKeyframes>) nil_chk(mKeyframes_)) clone]);
+    JreStrongAssign(&newPVH->mKeyframes_, [((id<ADIKeyframes>) nil_chk(mKeyframes_)) clone]);
     JreStrongAssign(&newPVH->mEvaluator_, mEvaluator_);
     return newPVH;
   }
@@ -723,17 +723,17 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
     JreStrongAssign(&mEvaluator_, (mValueType_ == JavaLangInteger_class_()) ? ADPropertyValuesHolder_sIntEvaluator : (mValueType_ == JavaLangFloat_class_()) ? ADPropertyValuesHolder_sFloatEvaluator : nil);
   }
   if (mEvaluator_ != nil) {
-    [((id<ADKeyframes>) nil_chk(mKeyframes_)) setEvaluatorWithADTypeEvaluator:mEvaluator_];
+    [((id<ADIKeyframes>) nil_chk(mKeyframes_)) setEvaluatorWithADTypeEvaluator:mEvaluator_];
   }
 }
 
 - (void)setEvaluatorWithADTypeEvaluator:(id<ADTypeEvaluator>)evaluator {
   JreStrongAssign(&mEvaluator_, evaluator);
-  [((id<ADKeyframes>) nil_chk(mKeyframes_)) setEvaluatorWithADTypeEvaluator:evaluator];
+  [((id<ADIKeyframes>) nil_chk(mKeyframes_)) setEvaluatorWithADTypeEvaluator:evaluator];
 }
 
 - (void)calculateValueWithFloat:(jfloat)fraction {
-  id value = JreRetainedLocalValue([((id<ADKeyframes>) nil_chk(mKeyframes_)) getValueWithFloat:fraction]);
+  id value = JreRetainedLocalValue([((id<ADIKeyframes>) nil_chk(mKeyframes_)) getValueWithFloat:fraction]);
   JreStrongAssign(&mAnimatedValue_, mConverter_ == nil ? value : [mConverter_ convertWithId:value]);
 }
 
@@ -757,15 +757,15 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
   [self init__];
   JreStrongAssign(&((ADPropertyValuesHolder_PropertyValues *) nil_chk(values))->propertyName_, mPropertyName_);
   JreStrongAssign(&values->type_, mValueType_);
-  JreStrongAssign(&values->startValue_, [((id<ADKeyframes>) nil_chk(mKeyframes_)) getValueWithFloat:0]);
+  JreStrongAssign(&values->startValue_, [((id<ADIKeyframes>) nil_chk(mKeyframes_)) getValueWithFloat:0]);
   if ([values->startValue_ isKindOfClass:[ADPathParser_PathData class]]) {
     JreStrongAssignAndConsume(&values->startValue_, new_ADPathParser_PathData_initWithADPathParser_PathData_((ADPathParser_PathData *) values->startValue_));
   }
-  JreStrongAssign(&values->endValue_, [((id<ADKeyframes>) nil_chk(mKeyframes_)) getValueWithFloat:1]);
+  JreStrongAssign(&values->endValue_, [((id<ADIKeyframes>) nil_chk(mKeyframes_)) getValueWithFloat:1]);
   if ([values->endValue_ isKindOfClass:[ADPathParser_PathData class]]) {
     JreStrongAssignAndConsume(&values->endValue_, new_ADPathParser_PathData_initWithADPathParser_PathData_((ADPathParser_PathData *) values->endValue_));
   }
-  if ([mKeyframes_ isKindOfClass:[ADPathKeyframes_FloatKeyframesBase class]] || [mKeyframes_ isKindOfClass:[ADPathKeyframes_IntKeyframesBase class]] || ([((id<ADKeyframes>) nil_chk(mKeyframes_)) getKeyframes] != nil && [((id<JavaUtilList>) nil_chk([((id<ADKeyframes>) nil_chk(mKeyframes_)) getKeyframes])) size] > 2)) {
+  if ([mKeyframes_ isKindOfClass:[ADPathKeyframes_FloatIKeyframesBase class]] || [mKeyframes_ isKindOfClass:[ADPathKeyframes_IntIKeyframesBase class]] || ([((id<ADIKeyframes>) nil_chk(mKeyframes_)) getIKeyframes] != nil && [((id<JavaUtilList>) nil_chk([((id<ADIKeyframes>) nil_chk(mKeyframes_)) getIKeyframes])) size] > 2)) {
     JreStrongAssignAndConsume(&values->dataSource_, new_ADPropertyValuesHolder_1_initWithADPropertyValuesHolder_(self));
   }
   else {
@@ -778,7 +778,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
 }
 
 - (NSString *)description {
-  return JreStrcat("$$$", mPropertyName_, @": ", [((id<ADKeyframes>) nil_chk(mKeyframes_)) description]);
+  return JreStrcat("$$$", mPropertyName_, @": ", [((id<ADIKeyframes>) nil_chk(mKeyframes_)) description]);
 }
 
 + (NSString *)getMethodNameWithNSString:(NSString *)prefix
@@ -967,11 +967,11 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
   methods[18].selector = @selector(ofObjectWithADProperty:withADTypeConverter:withADPath:);
   methods[19].selector = @selector(ofKeyframeWithNSString:withADKeyframeArray:);
   methods[20].selector = @selector(ofKeyframeWithADProperty:withADKeyframeArray:);
-  methods[21].selector = @selector(ofKeyframesWithNSString:withADKeyframes:);
-  methods[22].selector = @selector(ofKeyframesWithADProperty:withADKeyframes:);
+  methods[21].selector = @selector(ofKeyframesWithNSString:withADIKeyframes:);
+  methods[22].selector = @selector(ofKeyframesWithADProperty:withADIKeyframes:);
   methods[23].selector = @selector(setIntValuesWithIntArray:);
   methods[24].selector = @selector(setFloatValuesWithFloatArray:);
-  methods[25].selector = @selector(setKeyframesWithADKeyframeArray:);
+  methods[25].selector = @selector(setIKeyframesWithADKeyframeArray:);
   methods[26].selector = @selector(setObjectValuesWithNSObjectArray:);
   methods[27].selector = @selector(setConverterWithADTypeConverter:);
   methods[28].selector = @selector(getPropertyFunctionWithIOSClass:withNSString:withIOSClass:);
@@ -1015,7 +1015,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
     { "mSetter_", "LJavaLangReflectMethod;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mGetter_", "LJavaLangReflectMethod;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mValueType_", "LIOSClass;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
-    { "mKeyframes_", "LADKeyframes;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "mKeyframes_", "LADIKeyframes;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "sIntEvaluator", "LADTypeEvaluator;", .constantValue.asLong = 0, 0x1a, -1, 102, -1, -1 },
     { "sFloatEvaluator", "LADTypeEvaluator;", .constantValue.asLong = 0, 0x1a, -1, 103, -1, -1 },
     { "FLOAT_VARIANTS", "[LIOSClass;", .constantValue.asLong = 0, 0xa, -1, 104, -1, -1 },
@@ -1028,7 +1028,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder)
     { "mAnimatedValue_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mConverter_", "LADTypeConverter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LNSString;", "LADProperty;", "ofInt", "LNSString;[I", "LADProperty;[I", "(Lr/android/util/Property<*Ljava/lang/Integer;>;[I)Lr/android/animation/PropertyValuesHolder;", "ofMultiInt", "LNSString;[[I", "LNSString;LADPath;", "LNSString;LADTypeConverter;LADTypeEvaluator;[LNSObject;", "<V:Ljava/lang/Object;>(Ljava/lang/String;Lr/android/animation/TypeConverter<TV;[I>;Lr/android/animation/TypeEvaluator<TV;>;[TV;)Lr/android/animation/PropertyValuesHolder;", (void *)&ADPropertyValuesHolder__Annotations$0, "LNSString;LADTypeConverter;LADTypeEvaluator;[LADKeyframe;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Lr/android/animation/TypeConverter<TT;[I>;Lr/android/animation/TypeEvaluator<TT;>;[Lr/android/animation/Keyframe;)Lr/android/animation/PropertyValuesHolder;", "ofFloat", "LNSString;[F", "LADProperty;[F", "(Lr/android/util/Property<*Ljava/lang/Float;>;[F)Lr/android/animation/PropertyValuesHolder;", "ofMultiFloat", "LNSString;[[F", "<V:Ljava/lang/Object;>(Ljava/lang/String;Lr/android/animation/TypeConverter<TV;[F>;Lr/android/animation/TypeEvaluator<TV;>;[TV;)Lr/android/animation/PropertyValuesHolder;", (void *)&ADPropertyValuesHolder__Annotations$1, "<T:Ljava/lang/Object;>(Ljava/lang/String;Lr/android/animation/TypeConverter<TT;[F>;Lr/android/animation/TypeEvaluator<TT;>;[Lr/android/animation/Keyframe;)Lr/android/animation/PropertyValuesHolder;", "ofObject", "LNSString;LADTypeEvaluator;[LNSObject;", "LNSString;LADTypeConverter;LADPath;", "(Ljava/lang/String;Lr/android/animation/TypeConverter<Lr/android/graphics/PointF;*>;Lr/android/graphics/Path;)Lr/android/animation/PropertyValuesHolder;", "LADProperty;LADTypeEvaluator;[LNSObject;", "<V:Ljava/lang/Object;>(Lr/android/util/Property;Lr/android/animation/TypeEvaluator<TV;>;[TV;)Lr/android/animation/PropertyValuesHolder;", (void *)&ADPropertyValuesHolder__Annotations$2, "LADProperty;LADTypeConverter;LADTypeEvaluator;[LNSObject;", "<T:Ljava/lang/Object;V:Ljava/lang/Object;>(Lr/android/util/Property<*TV;>;Lr/android/animation/TypeConverter<TT;TV;>;Lr/android/animation/TypeEvaluator<TT;>;[TT;)Lr/android/animation/PropertyValuesHolder;", (void *)&ADPropertyValuesHolder__Annotations$3, "LADProperty;LADTypeConverter;LADPath;", "<V:Ljava/lang/Object;>(Lr/android/util/Property<*TV;>;Lr/android/animation/TypeConverter<Lr/android/graphics/PointF;TV;>;Lr/android/graphics/Path;)Lr/android/animation/PropertyValuesHolder;", "ofKeyframe", "LNSString;[LADKeyframe;", "LADProperty;[LADKeyframe;", "ofKeyframes", "LNSString;LADKeyframes;", "LADProperty;LADKeyframes;", "setIntValues", "[I", "setFloatValues", "[F", "setKeyframes", "[LADKeyframe;", "setObjectValues", "[LNSObject;", "setConverter", "LADTypeConverter;", "getPropertyFunction", "LIOSClass;LNSString;LIOSClass;", "setupSetterOrGetter", "LIOSClass;LJavaUtilHashMap;LNSString;LIOSClass;", "(Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/reflect/Method;>;>;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/reflect/Method;", "setupSetter", "LIOSClass;", "setupGetter", "setupSetterAndGetter", "LNSObject;", "convertBack", "setupValue", "LNSObject;LADKeyframe;", "setupStartValue", "setupEndValue", "clone", "setAnimatedValue", "init", "setEvaluator", "LADTypeEvaluator;", "calculateValue", "F", "setPropertyName", "setProperty", "getPropertyValues", "LADPropertyValuesHolder_PropertyValues;", "toString", "getMethodName", "LNSString;LNSString;", "nGetIntMethod", "LIOSClass;LNSString;", "nGetFloatMethod", "nGetMultipleIntMethod", "LIOSClass;LNSString;I", "nGetMultipleFloatMethod", "nCallIntMethod", "LNSObject;LNSString;I", "nCallFloatMethod", "LNSObject;LNSString;F", "nCallTwoIntMethod", "LNSObject;LNSString;II", "nCallFourIntMethod", "LNSObject;LNSString;IIII", "nCallMultipleIntMethod", "LNSObject;LNSString;[I", "nCallTwoFloatMethod", "LNSObject;LNSString;FF", "nCallFourFloatMethod", "LNSObject;LNSString;FFFF", "nCallMultipleFloatMethod", "LNSObject;LNSString;[F", &ADPropertyValuesHolder_sIntEvaluator, &ADPropertyValuesHolder_sFloatEvaluator, &ADPropertyValuesHolder_FLOAT_VARIANTS, &ADPropertyValuesHolder_INTEGER_VARIANTS, &ADPropertyValuesHolder_DOUBLE_VARIANTS, &ADPropertyValuesHolder_sSetterPropertyMap, "Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/reflect/Method;>;>;", &ADPropertyValuesHolder_sGetterPropertyMap, "LADPropertyValuesHolder_IntPropertyValuesHolder;LADPropertyValuesHolder_FloatPropertyValuesHolder;LADPropertyValuesHolder_MultiFloatValuesHolder;LADPropertyValuesHolder_MultiIntValuesHolder;LADPropertyValuesHolder_PointFToFloatArray;LADPropertyValuesHolder_PointFToIntArray;LADPropertyValuesHolder_PropertyValues;" };
+  static const void *ptrTable[] = { "LNSString;", "LADProperty;", "ofInt", "LNSString;[I", "LADProperty;[I", "(Lr/android/util/Property<*Ljava/lang/Integer;>;[I)Lr/android/animation/PropertyValuesHolder;", "ofMultiInt", "LNSString;[[I", "LNSString;LADPath;", "LNSString;LADTypeConverter;LADTypeEvaluator;[LNSObject;", "<V:Ljava/lang/Object;>(Ljava/lang/String;Lr/android/animation/TypeConverter<TV;[I>;Lr/android/animation/TypeEvaluator<TV;>;[TV;)Lr/android/animation/PropertyValuesHolder;", (void *)&ADPropertyValuesHolder__Annotations$0, "LNSString;LADTypeConverter;LADTypeEvaluator;[LADKeyframe;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Lr/android/animation/TypeConverter<TT;[I>;Lr/android/animation/TypeEvaluator<TT;>;[Lr/android/animation/Keyframe;)Lr/android/animation/PropertyValuesHolder;", "ofFloat", "LNSString;[F", "LADProperty;[F", "(Lr/android/util/Property<*Ljava/lang/Float;>;[F)Lr/android/animation/PropertyValuesHolder;", "ofMultiFloat", "LNSString;[[F", "<V:Ljava/lang/Object;>(Ljava/lang/String;Lr/android/animation/TypeConverter<TV;[F>;Lr/android/animation/TypeEvaluator<TV;>;[TV;)Lr/android/animation/PropertyValuesHolder;", (void *)&ADPropertyValuesHolder__Annotations$1, "<T:Ljava/lang/Object;>(Ljava/lang/String;Lr/android/animation/TypeConverter<TT;[F>;Lr/android/animation/TypeEvaluator<TT;>;[Lr/android/animation/Keyframe;)Lr/android/animation/PropertyValuesHolder;", "ofObject", "LNSString;LADTypeEvaluator;[LNSObject;", "LNSString;LADTypeConverter;LADPath;", "(Ljava/lang/String;Lr/android/animation/TypeConverter<Lr/android/graphics/PointF;*>;Lr/android/graphics/Path;)Lr/android/animation/PropertyValuesHolder;", "LADProperty;LADTypeEvaluator;[LNSObject;", "<V:Ljava/lang/Object;>(Lr/android/util/Property;Lr/android/animation/TypeEvaluator<TV;>;[TV;)Lr/android/animation/PropertyValuesHolder;", (void *)&ADPropertyValuesHolder__Annotations$2, "LADProperty;LADTypeConverter;LADTypeEvaluator;[LNSObject;", "<T:Ljava/lang/Object;V:Ljava/lang/Object;>(Lr/android/util/Property<*TV;>;Lr/android/animation/TypeConverter<TT;TV;>;Lr/android/animation/TypeEvaluator<TT;>;[TT;)Lr/android/animation/PropertyValuesHolder;", (void *)&ADPropertyValuesHolder__Annotations$3, "LADProperty;LADTypeConverter;LADPath;", "<V:Ljava/lang/Object;>(Lr/android/util/Property<*TV;>;Lr/android/animation/TypeConverter<Lr/android/graphics/PointF;TV;>;Lr/android/graphics/Path;)Lr/android/animation/PropertyValuesHolder;", "ofKeyframe", "LNSString;[LADKeyframe;", "LADProperty;[LADKeyframe;", "ofKeyframes", "LNSString;LADIKeyframes;", "LADProperty;LADIKeyframes;", "setIntValues", "[I", "setFloatValues", "[F", "setIKeyframes", "[LADKeyframe;", "setObjectValues", "[LNSObject;", "setConverter", "LADTypeConverter;", "getPropertyFunction", "LIOSClass;LNSString;LIOSClass;", "setupSetterOrGetter", "LIOSClass;LJavaUtilHashMap;LNSString;LIOSClass;", "(Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/reflect/Method;>;>;Ljava/lang/String;Ljava/lang/Class;)Ljava/lang/reflect/Method;", "setupSetter", "LIOSClass;", "setupGetter", "setupSetterAndGetter", "LNSObject;", "convertBack", "setupValue", "LNSObject;LADKeyframe;", "setupStartValue", "setupEndValue", "clone", "setAnimatedValue", "init", "setEvaluator", "LADTypeEvaluator;", "calculateValue", "F", "setPropertyName", "setProperty", "getPropertyValues", "LADPropertyValuesHolder_PropertyValues;", "toString", "getMethodName", "LNSString;LNSString;", "nGetIntMethod", "LIOSClass;LNSString;", "nGetFloatMethod", "nGetMultipleIntMethod", "LIOSClass;LNSString;I", "nGetMultipleFloatMethod", "nCallIntMethod", "LNSObject;LNSString;I", "nCallFloatMethod", "LNSObject;LNSString;F", "nCallTwoIntMethod", "LNSObject;LNSString;II", "nCallFourIntMethod", "LNSObject;LNSString;IIII", "nCallMultipleIntMethod", "LNSObject;LNSString;[I", "nCallTwoFloatMethod", "LNSObject;LNSString;FF", "nCallFourFloatMethod", "LNSObject;LNSString;FFFF", "nCallMultipleFloatMethod", "LNSObject;LNSString;[F", &ADPropertyValuesHolder_sIntEvaluator, &ADPropertyValuesHolder_sFloatEvaluator, &ADPropertyValuesHolder_FLOAT_VARIANTS, &ADPropertyValuesHolder_INTEGER_VARIANTS, &ADPropertyValuesHolder_DOUBLE_VARIANTS, &ADPropertyValuesHolder_sSetterPropertyMap, "Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/reflect/Method;>;>;", &ADPropertyValuesHolder_sGetterPropertyMap, "LADPropertyValuesHolder_IntPropertyValuesHolder;LADPropertyValuesHolder_FloatPropertyValuesHolder;LADPropertyValuesHolder_MultiFloatValuesHolder;LADPropertyValuesHolder_MultiIntValuesHolder;LADPropertyValuesHolder_PointFToFloatArray;LADPropertyValuesHolder_PointFToIntArray;LADPropertyValuesHolder_PropertyValues;" };
   static const J2ObjcClassInfo _ADPropertyValuesHolder = { "PropertyValuesHolder", "r.android.animation", ptrTable, methods, fields, 7, 0x1, 62, 17, -1, 110, -1, -1, -1 };
   return &_ADPropertyValuesHolder;
 }
@@ -1123,9 +1123,9 @@ ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiIntWithNSString_withIntArr
 
 ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiIntWithNSString_withADPath_(NSString *propertyName, ADPath *path) {
   ADPropertyValuesHolder_initialize();
-  id<ADKeyframes> keyframes = ADKeyframeSet_ofPathWithADPath_(path);
+  id<ADIKeyframes> keyframes = ADKeyframeSet_ofPathWithADPath_(path);
   ADPropertyValuesHolder_PointFToIntArray *converter = create_ADPropertyValuesHolder_PointFToIntArray_init();
-  return create_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(propertyName, converter, nil, keyframes);
+  return create_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(propertyName, converter, nil, keyframes);
 }
 
 ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiIntWithNSString_withADTypeConverter_withADTypeEvaluator_withNSObjectArray_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, IOSObjectArray *values) {
@@ -1136,7 +1136,7 @@ ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiIntWithNSString_withADType
 ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiIntWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframeArray_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, IOSObjectArray *values) {
   ADPropertyValuesHolder_initialize();
   ADKeyframeSet *keyframeSet = ADKeyframeSet_ofKeyframeWithADKeyframeArray_(values);
-  return create_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(propertyName, converter, evaluator, keyframeSet);
+  return create_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(propertyName, converter, evaluator, keyframeSet);
 }
 
 ADPropertyValuesHolder *ADPropertyValuesHolder_ofFloatWithNSString_withFloatArray_(NSString *propertyName, IOSFloatArray *values) {
@@ -1173,9 +1173,9 @@ ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiFloatWithNSString_withFloa
 
 ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiFloatWithNSString_withADPath_(NSString *propertyName, ADPath *path) {
   ADPropertyValuesHolder_initialize();
-  id<ADKeyframes> keyframes = ADKeyframeSet_ofPathWithADPath_(path);
+  id<ADIKeyframes> keyframes = ADKeyframeSet_ofPathWithADPath_(path);
   ADPropertyValuesHolder_PointFToFloatArray *converter = create_ADPropertyValuesHolder_PointFToFloatArray_init();
-  return create_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(propertyName, converter, nil, keyframes);
+  return create_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(propertyName, converter, nil, keyframes);
 }
 
 ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiFloatWithNSString_withADTypeConverter_withADTypeEvaluator_withNSObjectArray_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, IOSObjectArray *values) {
@@ -1186,7 +1186,7 @@ ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiFloatWithNSString_withADTy
 ADPropertyValuesHolder *ADPropertyValuesHolder_ofMultiFloatWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframeArray_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, IOSObjectArray *values) {
   ADPropertyValuesHolder_initialize();
   ADKeyframeSet *keyframeSet = ADKeyframeSet_ofKeyframeWithADKeyframeArray_(values);
-  return create_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(propertyName, converter, evaluator, keyframeSet);
+  return create_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(propertyName, converter, evaluator, keyframeSet);
 }
 
 ADPropertyValuesHolder *ADPropertyValuesHolder_ofObjectWithNSString_withADTypeEvaluator_withNSObjectArray_(NSString *propertyName, id<ADTypeEvaluator> evaluator, IOSObjectArray *values) {
@@ -1235,43 +1235,43 @@ ADPropertyValuesHolder *ADPropertyValuesHolder_ofObjectWithADProperty_withADType
 ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframeWithNSString_withADKeyframeArray_(NSString *propertyName, IOSObjectArray *values) {
   ADPropertyValuesHolder_initialize();
   ADKeyframeSet *keyframeSet = ADKeyframeSet_ofKeyframeWithADKeyframeArray_(values);
-  return ADPropertyValuesHolder_ofKeyframesWithNSString_withADKeyframes_(propertyName, keyframeSet);
+  return ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(propertyName, keyframeSet);
 }
 
 ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframeWithADProperty_withADKeyframeArray_(ADProperty *property, IOSObjectArray *values) {
   ADPropertyValuesHolder_initialize();
   ADKeyframeSet *keyframeSet = ADKeyframeSet_ofKeyframeWithADKeyframeArray_(values);
-  return ADPropertyValuesHolder_ofKeyframesWithADProperty_withADKeyframes_(property, keyframeSet);
+  return ADPropertyValuesHolder_ofKeyframesWithADProperty_withADIKeyframes_(property, keyframeSet);
 }
 
-ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframesWithNSString_withADKeyframes_(NSString *propertyName, id<ADKeyframes> keyframes) {
+ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(NSString *propertyName, id<ADIKeyframes> keyframes) {
   ADPropertyValuesHolder_initialize();
-  if ([ADKeyframes_IntKeyframes_class_() isInstance:keyframes]) {
-    return create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADKeyframes_IntKeyframes_(propertyName, (id<ADKeyframes_IntKeyframes>) cast_check(keyframes, ADKeyframes_IntKeyframes_class_()));
+  if ([ADIKeyframes_IntIKeyframes_class_() isInstance:keyframes]) {
+    return create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADIKeyframes_IntIKeyframes_(propertyName, (id<ADIKeyframes_IntIKeyframes>) cast_check(keyframes, ADIKeyframes_IntIKeyframes_class_()));
   }
-  else if ([ADKeyframes_FloatKeyframes_class_() isInstance:keyframes]) {
-    return create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADKeyframes_FloatKeyframes_(propertyName, (id<ADKeyframes_FloatKeyframes>) cast_check(keyframes, ADKeyframes_FloatKeyframes_class_()));
+  else if ([ADIKeyframes_FloatIKeyframes_class_() isInstance:keyframes]) {
+    return create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADIKeyframes_FloatIKeyframes_(propertyName, (id<ADIKeyframes_FloatIKeyframes>) cast_check(keyframes, ADIKeyframes_FloatIKeyframes_class_()));
   }
   else {
     ADPropertyValuesHolder *pvh = create_ADPropertyValuesHolder_initWithNSString_(propertyName);
     JreStrongAssign(&pvh->mKeyframes_, keyframes);
-    JreStrongAssign(&pvh->mValueType_, [((id<ADKeyframes>) nil_chk(keyframes)) getType]);
+    JreStrongAssign(&pvh->mValueType_, [((id<ADIKeyframes>) nil_chk(keyframes)) getType]);
     return pvh;
   }
 }
 
-ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframesWithADProperty_withADKeyframes_(ADProperty *property, id<ADKeyframes> keyframes) {
+ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframesWithADProperty_withADIKeyframes_(ADProperty *property, id<ADIKeyframes> keyframes) {
   ADPropertyValuesHolder_initialize();
-  if ([ADKeyframes_IntKeyframes_class_() isInstance:keyframes]) {
-    return create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADKeyframes_IntKeyframes_(property, (id<ADKeyframes_IntKeyframes>) cast_check(keyframes, ADKeyframes_IntKeyframes_class_()));
+  if ([ADIKeyframes_IntIKeyframes_class_() isInstance:keyframes]) {
+    return create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADIKeyframes_IntIKeyframes_(property, (id<ADIKeyframes_IntIKeyframes>) cast_check(keyframes, ADIKeyframes_IntIKeyframes_class_()));
   }
-  else if ([ADKeyframes_FloatKeyframes_class_() isInstance:keyframes]) {
-    return create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADKeyframes_FloatKeyframes_(property, (id<ADKeyframes_FloatKeyframes>) cast_check(keyframes, ADKeyframes_FloatKeyframes_class_()));
+  else if ([ADIKeyframes_FloatIKeyframes_class_() isInstance:keyframes]) {
+    return create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADIKeyframes_FloatIKeyframes_(property, (id<ADIKeyframes_FloatIKeyframes>) cast_check(keyframes, ADIKeyframes_FloatIKeyframes_class_()));
   }
   else {
     ADPropertyValuesHolder *pvh = create_ADPropertyValuesHolder_initWithADProperty_(property);
     JreStrongAssign(&pvh->mKeyframes_, keyframes);
-    JreStrongAssign(&pvh->mValueType_, [((id<ADKeyframes>) nil_chk(keyframes)) getType]);
+    JreStrongAssign(&pvh->mValueType_, [((id<ADIKeyframes>) nil_chk(keyframes)) getType]);
     return pvh;
   }
 }
@@ -1532,7 +1532,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADPropertyValuesHolder_PropertyValues_DataS
 }
 
 - (id)getValueAtFractionWithFloat:(jfloat)fraction {
-  return [((id<ADKeyframes>) nil_chk(this$0_->mKeyframes_)) getValueWithFloat:fraction];
+  return [((id<ADIKeyframes>) nil_chk(this$0_->mKeyframes_)) getValueWithFloat:fraction];
 }
 
 - (void)dealloc {
@@ -1579,14 +1579,14 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_IntPropertyValuesHolder)
 @implementation ADPropertyValuesHolder_IntPropertyValuesHolder
 
 - (instancetype)initWithNSString:(NSString *)propertyName
-    withADKeyframes_IntKeyframes:(id<ADKeyframes_IntKeyframes>)keyframes {
-  ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADKeyframes_IntKeyframes_(self, propertyName, keyframes);
+  withADIKeyframes_IntIKeyframes:(id<ADIKeyframes_IntIKeyframes>)keyframes {
+  ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADIKeyframes_IntIKeyframes_(self, propertyName, keyframes);
   return self;
 }
 
 - (instancetype)initWithADProperty:(ADProperty *)property
-      withADKeyframes_IntKeyframes:(id<ADKeyframes_IntKeyframes>)keyframes {
-  ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADKeyframes_IntKeyframes_(self, property, keyframes);
+    withADIKeyframes_IntIKeyframes:(id<ADIKeyframes_IntIKeyframes>)keyframes {
+  ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADIKeyframes_IntIKeyframes_(self, property, keyframes);
   return self;
 }
 
@@ -1613,11 +1613,11 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_IntPropertyValuesHolder)
 
 - (void)setIntValuesWithIntArray:(IOSIntArray *)values {
   ADPropertyValuesHolder_setIntValuesWithIntArray_(self, values);
-  JreStrongAssign(&mIntKeyframes_, (id<ADKeyframes_IntKeyframes>) cast_check(mKeyframes_, ADKeyframes_IntKeyframes_class_()));
+  JreStrongAssign(&mIntIKeyframes_, (id<ADIKeyframes_IntIKeyframes>) cast_check(mKeyframes_, ADIKeyframes_IntIKeyframes_class_()));
 }
 
 - (void)calculateValueWithFloat:(jfloat)fraction {
-  mIntAnimatedValue_ = [((id<ADKeyframes_IntKeyframes>) nil_chk(mIntKeyframes_)) getIntValueWithFloat:fraction];
+  mIntAnimatedValue_ = [((id<ADIKeyframes_IntIKeyframes>) nil_chk(mIntIKeyframes_)) getIntValueWithFloat:fraction];
 }
 
 - (id)getAnimatedValue {
@@ -1626,7 +1626,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_IntPropertyValuesHolder)
 
 - (ADPropertyValuesHolder_IntPropertyValuesHolder *)java_clone {
   ADPropertyValuesHolder_IntPropertyValuesHolder *newPVH = (ADPropertyValuesHolder_IntPropertyValuesHolder *) cast_chk([super java_clone], [ADPropertyValuesHolder_IntPropertyValuesHolder class]);
-  JreStrongAssign(&((ADPropertyValuesHolder_IntPropertyValuesHolder *) nil_chk(newPVH))->mIntKeyframes_, (id<ADKeyframes_IntKeyframes>) cast_check(newPVH->mKeyframes_, ADKeyframes_IntKeyframes_class_()));
+  JreStrongAssign(&((ADPropertyValuesHolder_IntPropertyValuesHolder *) nil_chk(newPVH))->mIntIKeyframes_, (id<ADIKeyframes_IntIKeyframes>) cast_check(newPVH->mKeyframes_, ADIKeyframes_IntIKeyframes_class_()));
   return newPVH;
 }
 
@@ -1695,7 +1695,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_IntPropertyValuesHolder)
 - (void)dealloc {
   RELEASE_(mJniSetter_);
   RELEASE_(mIntProperty_);
-  RELEASE_(mIntKeyframes_);
+  RELEASE_(mIntIKeyframes_);
   [super dealloc];
 }
 
@@ -1716,8 +1716,8 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_IntPropertyValuesHolder)
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithNSString:withADKeyframes_IntKeyframes:);
-  methods[1].selector = @selector(initWithADProperty:withADKeyframes_IntKeyframes:);
+  methods[0].selector = @selector(initWithNSString:withADIKeyframes_IntIKeyframes:);
+  methods[1].selector = @selector(initWithADProperty:withADIKeyframes_IntIKeyframes:);
   methods[2].selector = @selector(initWithNSString:withIntArray:);
   methods[3].selector = @selector(initWithADProperty:withIntArray:);
   methods[4].selector = @selector(setPropertyWithADProperty:);
@@ -1732,10 +1732,10 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_IntPropertyValuesHolder)
     { "sJNISetterPropertyMap", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x1a, -1, 15, 16, -1 },
     { "mJniSetter_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mIntProperty_", "LADIntProperty;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mIntKeyframes_", "LADKeyframes_IntKeyframes;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "mIntIKeyframes_", "LADIKeyframes_IntIKeyframes;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mIntAnimatedValue_", "I", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LNSString;LADKeyframes_IntKeyframes;", "LADProperty;LADKeyframes_IntKeyframes;", "LNSString;[I", "LADProperty;[I", "setProperty", "LADProperty;", "setIntValues", "[I", "calculateValue", "F", "clone", "setAnimatedValue", "LNSObject;", "setupSetter", "LIOSClass;", &ADPropertyValuesHolder_IntPropertyValuesHolder_sJNISetterPropertyMap, "Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/String;>;>;", "LADPropertyValuesHolder;" };
+  static const void *ptrTable[] = { "LNSString;LADIKeyframes_IntIKeyframes;", "LADProperty;LADIKeyframes_IntIKeyframes;", "LNSString;[I", "LADProperty;[I", "setProperty", "LADProperty;", "setIntValues", "[I", "calculateValue", "F", "clone", "setAnimatedValue", "LNSObject;", "setupSetter", "LIOSClass;", &ADPropertyValuesHolder_IntPropertyValuesHolder_sJNISetterPropertyMap, "Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/String;>;>;", "LADPropertyValuesHolder;" };
   static const J2ObjcClassInfo _ADPropertyValuesHolder_IntPropertyValuesHolder = { "IntPropertyValuesHolder", "r.android.animation", ptrTable, methods, fields, 7, 0x8, 11, 5, 17, -1, -1, -1, -1 };
   return &_ADPropertyValuesHolder_IntPropertyValuesHolder;
 }
@@ -1749,37 +1749,37 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_IntPropertyValuesHolder)
 
 @end
 
-void ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADKeyframes_IntKeyframes_(ADPropertyValuesHolder_IntPropertyValuesHolder *self, NSString *propertyName, id<ADKeyframes_IntKeyframes> keyframes) {
+void ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADIKeyframes_IntIKeyframes_(ADPropertyValuesHolder_IntPropertyValuesHolder *self, NSString *propertyName, id<ADIKeyframes_IntIKeyframes> keyframes) {
   ADPropertyValuesHolder_initWithNSString_(self, propertyName);
   JreStrongAssign(&self->mValueType_, [IOSClass intClass]);
   JreStrongAssign(&self->mKeyframes_, keyframes);
-  JreStrongAssign(&self->mIntKeyframes_, keyframes);
+  JreStrongAssign(&self->mIntIKeyframes_, keyframes);
 }
 
-ADPropertyValuesHolder_IntPropertyValuesHolder *new_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADKeyframes_IntKeyframes_(NSString *propertyName, id<ADKeyframes_IntKeyframes> keyframes) {
-  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_IntPropertyValuesHolder, initWithNSString_withADKeyframes_IntKeyframes_, propertyName, keyframes)
+ADPropertyValuesHolder_IntPropertyValuesHolder *new_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADIKeyframes_IntIKeyframes_(NSString *propertyName, id<ADIKeyframes_IntIKeyframes> keyframes) {
+  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_IntPropertyValuesHolder, initWithNSString_withADIKeyframes_IntIKeyframes_, propertyName, keyframes)
 }
 
-ADPropertyValuesHolder_IntPropertyValuesHolder *create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADKeyframes_IntKeyframes_(NSString *propertyName, id<ADKeyframes_IntKeyframes> keyframes) {
-  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_IntPropertyValuesHolder, initWithNSString_withADKeyframes_IntKeyframes_, propertyName, keyframes)
+ADPropertyValuesHolder_IntPropertyValuesHolder *create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADIKeyframes_IntIKeyframes_(NSString *propertyName, id<ADIKeyframes_IntIKeyframes> keyframes) {
+  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_IntPropertyValuesHolder, initWithNSString_withADIKeyframes_IntIKeyframes_, propertyName, keyframes)
 }
 
-void ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADKeyframes_IntKeyframes_(ADPropertyValuesHolder_IntPropertyValuesHolder *self, ADProperty *property, id<ADKeyframes_IntKeyframes> keyframes) {
+void ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADIKeyframes_IntIKeyframes_(ADPropertyValuesHolder_IntPropertyValuesHolder *self, ADProperty *property, id<ADIKeyframes_IntIKeyframes> keyframes) {
   ADPropertyValuesHolder_initWithADProperty_(self, property);
   JreStrongAssign(&self->mValueType_, [IOSClass intClass]);
   JreStrongAssign(&self->mKeyframes_, keyframes);
-  JreStrongAssign(&self->mIntKeyframes_, keyframes);
+  JreStrongAssign(&self->mIntIKeyframes_, keyframes);
   if ([property isKindOfClass:[ADIntProperty class]]) {
     JreStrongAssign(&self->mIntProperty_, (ADIntProperty *) cast_chk(self->mProperty_, [ADIntProperty class]));
   }
 }
 
-ADPropertyValuesHolder_IntPropertyValuesHolder *new_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADKeyframes_IntKeyframes_(ADProperty *property, id<ADKeyframes_IntKeyframes> keyframes) {
-  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_IntPropertyValuesHolder, initWithADProperty_withADKeyframes_IntKeyframes_, property, keyframes)
+ADPropertyValuesHolder_IntPropertyValuesHolder *new_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADIKeyframes_IntIKeyframes_(ADProperty *property, id<ADIKeyframes_IntIKeyframes> keyframes) {
+  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_IntPropertyValuesHolder, initWithADProperty_withADIKeyframes_IntIKeyframes_, property, keyframes)
 }
 
-ADPropertyValuesHolder_IntPropertyValuesHolder *create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADKeyframes_IntKeyframes_(ADProperty *property, id<ADKeyframes_IntKeyframes> keyframes) {
-  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_IntPropertyValuesHolder, initWithADProperty_withADKeyframes_IntKeyframes_, property, keyframes)
+ADPropertyValuesHolder_IntPropertyValuesHolder *create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADIKeyframes_IntIKeyframes_(ADProperty *property, id<ADIKeyframes_IntIKeyframes> keyframes) {
+  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_IntPropertyValuesHolder, initWithADProperty_withADIKeyframes_IntIKeyframes_, property, keyframes)
 }
 
 void ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withIntArray_(ADPropertyValuesHolder_IntPropertyValuesHolder *self, NSString *propertyName, IOSIntArray *values) {
@@ -1818,14 +1818,14 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_FloatPropertyValuesHolder)
 @implementation ADPropertyValuesHolder_FloatPropertyValuesHolder
 
 - (instancetype)initWithNSString:(NSString *)propertyName
-  withADKeyframes_FloatKeyframes:(id<ADKeyframes_FloatKeyframes>)keyframes {
-  ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADKeyframes_FloatKeyframes_(self, propertyName, keyframes);
+withADIKeyframes_FloatIKeyframes:(id<ADIKeyframes_FloatIKeyframes>)keyframes {
+  ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADIKeyframes_FloatIKeyframes_(self, propertyName, keyframes);
   return self;
 }
 
 - (instancetype)initWithADProperty:(ADProperty *)property
-    withADKeyframes_FloatKeyframes:(id<ADKeyframes_FloatKeyframes>)keyframes {
-  ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADKeyframes_FloatKeyframes_(self, property, keyframes);
+  withADIKeyframes_FloatIKeyframes:(id<ADIKeyframes_FloatIKeyframes>)keyframes {
+  ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADIKeyframes_FloatIKeyframes_(self, property, keyframes);
   return self;
 }
 
@@ -1852,11 +1852,11 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_FloatPropertyValuesHolder)
 
 - (void)setFloatValuesWithFloatArray:(IOSFloatArray *)values {
   ADPropertyValuesHolder_setFloatValuesWithFloatArray_(self, values);
-  JreStrongAssign(&mFloatKeyframes_, (id<ADKeyframes_FloatKeyframes>) cast_check(mKeyframes_, ADKeyframes_FloatKeyframes_class_()));
+  JreStrongAssign(&mFloatIKeyframes_, (id<ADIKeyframes_FloatIKeyframes>) cast_check(mKeyframes_, ADIKeyframes_FloatIKeyframes_class_()));
 }
 
 - (void)calculateValueWithFloat:(jfloat)fraction {
-  mFloatAnimatedValue_ = [((id<ADKeyframes_FloatKeyframes>) nil_chk(mFloatKeyframes_)) getFloatValueWithFloat:fraction];
+  mFloatAnimatedValue_ = [((id<ADIKeyframes_FloatIKeyframes>) nil_chk(mFloatIKeyframes_)) getFloatValueWithFloat:fraction];
 }
 
 - (id)getAnimatedValue {
@@ -1865,7 +1865,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_FloatPropertyValuesHolder)
 
 - (ADPropertyValuesHolder_FloatPropertyValuesHolder *)java_clone {
   ADPropertyValuesHolder_FloatPropertyValuesHolder *newPVH = (ADPropertyValuesHolder_FloatPropertyValuesHolder *) cast_chk([super java_clone], [ADPropertyValuesHolder_FloatPropertyValuesHolder class]);
-  JreStrongAssign(&((ADPropertyValuesHolder_FloatPropertyValuesHolder *) nil_chk(newPVH))->mFloatKeyframes_, (id<ADKeyframes_FloatKeyframes>) cast_check(newPVH->mKeyframes_, ADKeyframes_FloatKeyframes_class_()));
+  JreStrongAssign(&((ADPropertyValuesHolder_FloatPropertyValuesHolder *) nil_chk(newPVH))->mFloatIKeyframes_, (id<ADIKeyframes_FloatIKeyframes>) cast_check(newPVH->mKeyframes_, ADIKeyframes_FloatIKeyframes_class_()));
   return newPVH;
 }
 
@@ -1934,7 +1934,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_FloatPropertyValuesHolder)
 - (void)dealloc {
   RELEASE_(mJniSetter_);
   RELEASE_(mFloatProperty_);
-  RELEASE_(mFloatKeyframes_);
+  RELEASE_(mFloatIKeyframes_);
   [super dealloc];
 }
 
@@ -1955,8 +1955,8 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_FloatPropertyValuesHolder)
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithNSString:withADKeyframes_FloatKeyframes:);
-  methods[1].selector = @selector(initWithADProperty:withADKeyframes_FloatKeyframes:);
+  methods[0].selector = @selector(initWithNSString:withADIKeyframes_FloatIKeyframes:);
+  methods[1].selector = @selector(initWithADProperty:withADIKeyframes_FloatIKeyframes:);
   methods[2].selector = @selector(initWithNSString:withFloatArray:);
   methods[3].selector = @selector(initWithADProperty:withFloatArray:);
   methods[4].selector = @selector(setPropertyWithADProperty:);
@@ -1971,10 +1971,10 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_FloatPropertyValuesHolder)
     { "sJNISetterPropertyMap", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x1a, -1, 15, 16, -1 },
     { "mJniSetter_", "LNSString;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mFloatProperty_", "LADFloatProperty;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mFloatKeyframes_", "LADKeyframes_FloatKeyframes;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
+    { "mFloatIKeyframes_", "LADIKeyframes_FloatIKeyframes;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
     { "mFloatAnimatedValue_", "F", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LNSString;LADKeyframes_FloatKeyframes;", "LADProperty;LADKeyframes_FloatKeyframes;", "LNSString;[F", "LADProperty;[F", "setProperty", "LADProperty;", "setFloatValues", "[F", "calculateValue", "F", "clone", "setAnimatedValue", "LNSObject;", "setupSetter", "LIOSClass;", &ADPropertyValuesHolder_FloatPropertyValuesHolder_sJNISetterPropertyMap, "Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/String;>;>;", "LADPropertyValuesHolder;" };
+  static const void *ptrTable[] = { "LNSString;LADIKeyframes_FloatIKeyframes;", "LADProperty;LADIKeyframes_FloatIKeyframes;", "LNSString;[F", "LADProperty;[F", "setProperty", "LADProperty;", "setFloatValues", "[F", "calculateValue", "F", "clone", "setAnimatedValue", "LNSObject;", "setupSetter", "LIOSClass;", &ADPropertyValuesHolder_FloatPropertyValuesHolder_sJNISetterPropertyMap, "Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/String;>;>;", "LADPropertyValuesHolder;" };
   static const J2ObjcClassInfo _ADPropertyValuesHolder_FloatPropertyValuesHolder = { "FloatPropertyValuesHolder", "r.android.animation", ptrTable, methods, fields, 7, 0x8, 11, 5, 17, -1, -1, -1, -1 };
   return &_ADPropertyValuesHolder_FloatPropertyValuesHolder;
 }
@@ -1988,37 +1988,37 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_FloatPropertyValuesHolder)
 
 @end
 
-void ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADKeyframes_FloatKeyframes_(ADPropertyValuesHolder_FloatPropertyValuesHolder *self, NSString *propertyName, id<ADKeyframes_FloatKeyframes> keyframes) {
+void ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADIKeyframes_FloatIKeyframes_(ADPropertyValuesHolder_FloatPropertyValuesHolder *self, NSString *propertyName, id<ADIKeyframes_FloatIKeyframes> keyframes) {
   ADPropertyValuesHolder_initWithNSString_(self, propertyName);
   JreStrongAssign(&self->mValueType_, [IOSClass floatClass]);
   JreStrongAssign(&self->mKeyframes_, keyframes);
-  JreStrongAssign(&self->mFloatKeyframes_, keyframes);
+  JreStrongAssign(&self->mFloatIKeyframes_, keyframes);
 }
 
-ADPropertyValuesHolder_FloatPropertyValuesHolder *new_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADKeyframes_FloatKeyframes_(NSString *propertyName, id<ADKeyframes_FloatKeyframes> keyframes) {
-  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_FloatPropertyValuesHolder, initWithNSString_withADKeyframes_FloatKeyframes_, propertyName, keyframes)
+ADPropertyValuesHolder_FloatPropertyValuesHolder *new_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADIKeyframes_FloatIKeyframes_(NSString *propertyName, id<ADIKeyframes_FloatIKeyframes> keyframes) {
+  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_FloatPropertyValuesHolder, initWithNSString_withADIKeyframes_FloatIKeyframes_, propertyName, keyframes)
 }
 
-ADPropertyValuesHolder_FloatPropertyValuesHolder *create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADKeyframes_FloatKeyframes_(NSString *propertyName, id<ADKeyframes_FloatKeyframes> keyframes) {
-  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_FloatPropertyValuesHolder, initWithNSString_withADKeyframes_FloatKeyframes_, propertyName, keyframes)
+ADPropertyValuesHolder_FloatPropertyValuesHolder *create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADIKeyframes_FloatIKeyframes_(NSString *propertyName, id<ADIKeyframes_FloatIKeyframes> keyframes) {
+  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_FloatPropertyValuesHolder, initWithNSString_withADIKeyframes_FloatIKeyframes_, propertyName, keyframes)
 }
 
-void ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADKeyframes_FloatKeyframes_(ADPropertyValuesHolder_FloatPropertyValuesHolder *self, ADProperty *property, id<ADKeyframes_FloatKeyframes> keyframes) {
+void ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADIKeyframes_FloatIKeyframes_(ADPropertyValuesHolder_FloatPropertyValuesHolder *self, ADProperty *property, id<ADIKeyframes_FloatIKeyframes> keyframes) {
   ADPropertyValuesHolder_initWithADProperty_(self, property);
   JreStrongAssign(&self->mValueType_, [IOSClass floatClass]);
   JreStrongAssign(&self->mKeyframes_, keyframes);
-  JreStrongAssign(&self->mFloatKeyframes_, keyframes);
+  JreStrongAssign(&self->mFloatIKeyframes_, keyframes);
   if ([property isKindOfClass:[ADFloatProperty class]]) {
     JreStrongAssign(&self->mFloatProperty_, (ADFloatProperty *) cast_chk(self->mProperty_, [ADFloatProperty class]));
   }
 }
 
-ADPropertyValuesHolder_FloatPropertyValuesHolder *new_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADKeyframes_FloatKeyframes_(ADProperty *property, id<ADKeyframes_FloatKeyframes> keyframes) {
-  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_FloatPropertyValuesHolder, initWithADProperty_withADKeyframes_FloatKeyframes_, property, keyframes)
+ADPropertyValuesHolder_FloatPropertyValuesHolder *new_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADIKeyframes_FloatIKeyframes_(ADProperty *property, id<ADIKeyframes_FloatIKeyframes> keyframes) {
+  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_FloatPropertyValuesHolder, initWithADProperty_withADIKeyframes_FloatIKeyframes_, property, keyframes)
 }
 
-ADPropertyValuesHolder_FloatPropertyValuesHolder *create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADKeyframes_FloatKeyframes_(ADProperty *property, id<ADKeyframes_FloatKeyframes> keyframes) {
-  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_FloatPropertyValuesHolder, initWithADProperty_withADKeyframes_FloatKeyframes_, property, keyframes)
+ADPropertyValuesHolder_FloatPropertyValuesHolder *create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADIKeyframes_FloatIKeyframes_(ADProperty *property, id<ADIKeyframes_FloatIKeyframes> keyframes) {
+  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_FloatPropertyValuesHolder, initWithADProperty_withADIKeyframes_FloatIKeyframes_, property, keyframes)
 }
 
 void ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withFloatArray_(ADPropertyValuesHolder_FloatPropertyValuesHolder *self, NSString *propertyName, IOSFloatArray *values) {
@@ -2067,8 +2067,8 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiFloatValuesHolder)
 - (instancetype)initWithNSString:(NSString *)propertyName
              withADTypeConverter:(ADTypeConverter *)converter
              withADTypeEvaluator:(id<ADTypeEvaluator>)evaluator
-                 withADKeyframes:(id<ADKeyframes>)keyframes {
-  ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(self, propertyName, converter, evaluator, keyframes);
+                withADIKeyframes:(id<ADIKeyframes>)keyframes {
+  ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(self, propertyName, converter, evaluator, keyframes);
   return self;
 }
 
@@ -2156,7 +2156,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiFloatValuesHolder)
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithNSString:withADTypeConverter:withADTypeEvaluator:withNSObjectArray:);
-  methods[1].selector = @selector(initWithNSString:withADTypeConverter:withADTypeEvaluator:withADKeyframes:);
+  methods[1].selector = @selector(initWithNSString:withADTypeConverter:withADTypeEvaluator:withADIKeyframes:);
   methods[2].selector = @selector(setAnimatedValueWithId:);
   methods[3].selector = @selector(setupSetterAndGetterWithId:);
   methods[4].selector = @selector(setupSetterWithIOSClass:);
@@ -2165,7 +2165,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiFloatValuesHolder)
     { "mJniSetter_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "sJNISetterPropertyMap", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x1a, -1, 7, 8, -1 },
   };
-  static const void *ptrTable[] = { "LNSString;LADTypeConverter;LADTypeEvaluator;[LNSObject;", "LNSString;LADTypeConverter;LADTypeEvaluator;LADKeyframes;", "setAnimatedValue", "LNSObject;", "setupSetterAndGetter", "setupSetter", "LIOSClass;", &ADPropertyValuesHolder_MultiFloatValuesHolder_sJNISetterPropertyMap, "Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/String;>;>;", "LADPropertyValuesHolder;" };
+  static const void *ptrTable[] = { "LNSString;LADTypeConverter;LADTypeEvaluator;[LNSObject;", "LNSString;LADTypeConverter;LADTypeEvaluator;LADIKeyframes;", "setAnimatedValue", "LNSObject;", "setupSetterAndGetter", "setupSetter", "LIOSClass;", &ADPropertyValuesHolder_MultiFloatValuesHolder_sJNISetterPropertyMap, "Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/String;>;>;", "LADPropertyValuesHolder;" };
   static const J2ObjcClassInfo _ADPropertyValuesHolder_MultiFloatValuesHolder = { "MultiFloatValuesHolder", "r.android.animation", ptrTable, methods, fields, 7, 0x8, 5, 2, 9, -1, -1, -1, -1 };
   return &_ADPropertyValuesHolder_MultiFloatValuesHolder;
 }
@@ -2194,19 +2194,19 @@ ADPropertyValuesHolder_MultiFloatValuesHolder *create_ADPropertyValuesHolder_Mul
   J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_MultiFloatValuesHolder, initWithNSString_withADTypeConverter_withADTypeEvaluator_withNSObjectArray_, propertyName, converter, evaluator, values)
 }
 
-void ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(ADPropertyValuesHolder_MultiFloatValuesHolder *self, NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes) {
+void ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(ADPropertyValuesHolder_MultiFloatValuesHolder *self, NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes) {
   ADPropertyValuesHolder_initWithNSString_(self, propertyName);
   [self setConverterWithADTypeConverter:converter];
   JreStrongAssign(&self->mKeyframes_, keyframes);
   [self setEvaluatorWithADTypeEvaluator:evaluator];
 }
 
-ADPropertyValuesHolder_MultiFloatValuesHolder *new_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes) {
-  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_MultiFloatValuesHolder, initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_, propertyName, converter, evaluator, keyframes)
+ADPropertyValuesHolder_MultiFloatValuesHolder *new_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes) {
+  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_MultiFloatValuesHolder, initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_, propertyName, converter, evaluator, keyframes)
 }
 
-ADPropertyValuesHolder_MultiFloatValuesHolder *create_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes) {
-  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_MultiFloatValuesHolder, initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_, propertyName, converter, evaluator, keyframes)
+ADPropertyValuesHolder_MultiFloatValuesHolder *create_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes) {
+  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_MultiFloatValuesHolder, initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_, propertyName, converter, evaluator, keyframes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPropertyValuesHolder_MultiFloatValuesHolder)
@@ -2226,8 +2226,8 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiIntValuesHolder)
 - (instancetype)initWithNSString:(NSString *)propertyName
              withADTypeConverter:(ADTypeConverter *)converter
              withADTypeEvaluator:(id<ADTypeEvaluator>)evaluator
-                 withADKeyframes:(id<ADKeyframes>)keyframes {
-  ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(self, propertyName, converter, evaluator, keyframes);
+                withADIKeyframes:(id<ADIKeyframes>)keyframes {
+  ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(self, propertyName, converter, evaluator, keyframes);
   return self;
 }
 
@@ -2315,7 +2315,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiIntValuesHolder)
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithNSString:withADTypeConverter:withADTypeEvaluator:withNSObjectArray:);
-  methods[1].selector = @selector(initWithNSString:withADTypeConverter:withADTypeEvaluator:withADKeyframes:);
+  methods[1].selector = @selector(initWithNSString:withADTypeConverter:withADTypeEvaluator:withADIKeyframes:);
   methods[2].selector = @selector(setAnimatedValueWithId:);
   methods[3].selector = @selector(setupSetterAndGetterWithId:);
   methods[4].selector = @selector(setupSetterWithIOSClass:);
@@ -2324,7 +2324,7 @@ J2OBJC_INITIALIZED_DEFN(ADPropertyValuesHolder_MultiIntValuesHolder)
     { "mJniSetter_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "sJNISetterPropertyMap", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x1a, -1, 7, 8, -1 },
   };
-  static const void *ptrTable[] = { "LNSString;LADTypeConverter;LADTypeEvaluator;[LNSObject;", "LNSString;LADTypeConverter;LADTypeEvaluator;LADKeyframes;", "setAnimatedValue", "LNSObject;", "setupSetterAndGetter", "setupSetter", "LIOSClass;", &ADPropertyValuesHolder_MultiIntValuesHolder_sJNISetterPropertyMap, "Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/String;>;>;", "LADPropertyValuesHolder;" };
+  static const void *ptrTable[] = { "LNSString;LADTypeConverter;LADTypeEvaluator;[LNSObject;", "LNSString;LADTypeConverter;LADTypeEvaluator;LADIKeyframes;", "setAnimatedValue", "LNSObject;", "setupSetterAndGetter", "setupSetter", "LIOSClass;", &ADPropertyValuesHolder_MultiIntValuesHolder_sJNISetterPropertyMap, "Ljava/util/HashMap<Ljava/lang/Class;Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/String;>;>;", "LADPropertyValuesHolder;" };
   static const J2ObjcClassInfo _ADPropertyValuesHolder_MultiIntValuesHolder = { "MultiIntValuesHolder", "r.android.animation", ptrTable, methods, fields, 7, 0x8, 5, 2, 9, -1, -1, -1, -1 };
   return &_ADPropertyValuesHolder_MultiIntValuesHolder;
 }
@@ -2353,19 +2353,19 @@ ADPropertyValuesHolder_MultiIntValuesHolder *create_ADPropertyValuesHolder_Multi
   J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_MultiIntValuesHolder, initWithNSString_withADTypeConverter_withADTypeEvaluator_withNSObjectArray_, propertyName, converter, evaluator, values)
 }
 
-void ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(ADPropertyValuesHolder_MultiIntValuesHolder *self, NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes) {
+void ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(ADPropertyValuesHolder_MultiIntValuesHolder *self, NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes) {
   ADPropertyValuesHolder_initWithNSString_(self, propertyName);
   [self setConverterWithADTypeConverter:converter];
   JreStrongAssign(&self->mKeyframes_, keyframes);
   [self setEvaluatorWithADTypeEvaluator:evaluator];
 }
 
-ADPropertyValuesHolder_MultiIntValuesHolder *new_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes) {
-  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_MultiIntValuesHolder, initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_, propertyName, converter, evaluator, keyframes)
+ADPropertyValuesHolder_MultiIntValuesHolder *new_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes) {
+  J2OBJC_NEW_IMPL(ADPropertyValuesHolder_MultiIntValuesHolder, initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_, propertyName, converter, evaluator, keyframes)
 }
 
-ADPropertyValuesHolder_MultiIntValuesHolder *create_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes) {
-  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_MultiIntValuesHolder, initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_, propertyName, converter, evaluator, keyframes)
+ADPropertyValuesHolder_MultiIntValuesHolder *create_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes) {
+  J2OBJC_CREATE_IMPL(ADPropertyValuesHolder_MultiIntValuesHolder, initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_, propertyName, converter, evaluator, keyframes)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPropertyValuesHolder_MultiIntValuesHolder)

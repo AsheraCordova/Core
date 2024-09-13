@@ -4,6 +4,7 @@
 //
 
 #include "FloatKeyframeSet.h"
+#include "IKeyframes.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
@@ -11,7 +12,6 @@
 #include "J2ObjC_source.h"
 #include "Keyframe.h"
 #include "KeyframeSet.h"
-#include "Keyframes.h"
 #include "Log.h"
 #include "Path.h"
 #include "PathKeyframes.h"
@@ -30,7 +30,7 @@
   return self;
 }
 
-- (id<JavaUtilList>)getKeyframes {
+- (id<JavaUtilList>)getIKeyframes {
   return mKeyframes_;
 }
 
@@ -70,11 +70,11 @@
 - (ADKeyframeSet *)java_clone {
   id<JavaUtilList> keyframes = JreRetainedLocalValue(mKeyframes_);
   jint numKeyframes = [((id<JavaUtilList>) nil_chk(mKeyframes_)) size];
-  IOSObjectArray *newKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_class_()];
+  IOSObjectArray *newIKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_class_()];
   for (jint i = 0; i < numKeyframes; ++i) {
-    IOSObjectArray_Set(newKeyframes, i, [((ADKeyframe *) nil_chk([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i])) java_clone]);
+    IOSObjectArray_Set(newIKeyframes, i, [((ADKeyframe *) nil_chk([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i])) java_clone]);
   }
-  ADKeyframeSet *newSet = create_ADKeyframeSet_initWithADKeyframeArray_(newKeyframes);
+  ADKeyframeSet *newSet = create_ADKeyframeSet_initWithADKeyframeArray_(newIKeyframes);
   return newSet;
 }
 
@@ -130,7 +130,7 @@
   return returnVal;
 }
 
-- (id<ADKeyframes>)clone {
+- (id<ADIKeyframes>)clone {
   return [self java_clone];
 }
 
@@ -163,7 +163,7 @@
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithADKeyframeArray:);
-  methods[1].selector = @selector(getKeyframes);
+  methods[1].selector = @selector(getIKeyframes);
   methods[2].selector = @selector(ofIntWithIntArray:);
   methods[3].selector = @selector(ofFloatWithFloatArray:);
   methods[4].selector = @selector(ofKeyframeWithADKeyframeArray:);
@@ -274,18 +274,18 @@ ADKeyframeSet *ADKeyframeSet_ofKeyframeWithADKeyframeArray_(IOSObjectArray *keyf
     }
   }
   if (hasFloat && !hasInt && !hasOther) {
-    IOSObjectArray *floatKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_FloatKeyframe_class_()];
+    IOSObjectArray *floatIKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_FloatKeyframe_class_()];
     for (jint i = 0; i < numKeyframes; ++i) {
-      IOSObjectArray_Set(floatKeyframes, i, (ADKeyframe_FloatKeyframe *) cast_chk(IOSObjectArray_Get(keyframes, i), [ADKeyframe_FloatKeyframe class]));
+      IOSObjectArray_Set(floatIKeyframes, i, (ADKeyframe_FloatKeyframe *) cast_chk(IOSObjectArray_Get(keyframes, i), [ADKeyframe_FloatKeyframe class]));
     }
-    return create_ADFloatKeyframeSet_initPackagePrivateWithADKeyframe_FloatKeyframeArray_(floatKeyframes);
+    return create_ADFloatKeyframeSet_initPackagePrivateWithADKeyframe_FloatKeyframeArray_(floatIKeyframes);
   }
   else if (hasInt && !hasFloat && !hasOther) {
-    IOSObjectArray *intKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_IntKeyframe_class_()];
+    IOSObjectArray *intIKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_IntKeyframe_class_()];
     for (jint i = 0; i < numKeyframes; ++i) {
-      IOSObjectArray_Set(intKeyframes, i, (ADKeyframe_IntKeyframe *) cast_chk(IOSObjectArray_Get(keyframes, i), [ADKeyframe_IntKeyframe class]));
+      IOSObjectArray_Set(intIKeyframes, i, (ADKeyframe_IntKeyframe *) cast_chk(IOSObjectArray_Get(keyframes, i), [ADKeyframe_IntKeyframe class]));
     }
-    return create_ADIntKeyframeSet_initPackagePrivateWithADKeyframe_IntKeyframeArray_(intKeyframes);
+    return create_ADIntKeyframeSet_initPackagePrivateWithADKeyframe_IntKeyframeArray_(intIKeyframes);
   }
   else {
     return create_ADKeyframeSet_initWithADKeyframeArray_(keyframes);

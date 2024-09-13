@@ -16,9 +16,9 @@
 #if !defined (ADKeyframeSet_) && (INCLUDE_ALL_KeyframeSet || defined(INCLUDE_ADKeyframeSet))
 #define ADKeyframeSet_
 
-#define RESTRICT_Keyframes 1
-#define INCLUDE_ADKeyframes 1
-#include "Keyframes.h"
+#define RESTRICT_IKeyframes 1
+#define INCLUDE_ADIKeyframes 1
+#include "IKeyframes.h"
 
 @class ADKeyframe;
 @class ADPath;
@@ -34,9 +34,9 @@
 /*!
  @brief This class holds a collection of Keyframe objects and is called by ValueAnimator to calculate
   values between those keyframes for a given animation.The class internal to the animation
-  package because it is an implementation detail of how Keyframes are stored and used.
+  package because it is an implementation detail of how IKeyframes are stored and used.
  */
-@interface ADKeyframeSet : NSObject < ADKeyframes > {
+@interface ADKeyframeSet : NSObject < ADIKeyframes > {
  @public
   jint mNumKeyframes_;
   ADKeyframe *mFirstKeyframe_;
@@ -52,7 +52,7 @@
 
 - (ADKeyframeSet *)java_clone;
 
-- (id<JavaUtilList>)getKeyframes;
+- (id<JavaUtilList>)getIKeyframes;
 
 - (IOSClass *)getType;
 

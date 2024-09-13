@@ -12,32 +12,32 @@
 #define INCLUDE_ALL_PathKeyframes 1
 #endif
 #undef RESTRICT_PathKeyframes
-#ifdef INCLUDE_ADPathKeyframes_IntKeyframesBase
-#define INCLUDE_ADPathKeyframes_SimpleKeyframes 1
+#ifdef INCLUDE_ADPathKeyframes_IntIKeyframesBase
+#define INCLUDE_ADPathKeyframes_SimpleIKeyframes 1
 #endif
-#ifdef INCLUDE_ADPathKeyframes_FloatKeyframesBase
-#define INCLUDE_ADPathKeyframes_SimpleKeyframes 1
+#ifdef INCLUDE_ADPathKeyframes_FloatIKeyframesBase
+#define INCLUDE_ADPathKeyframes_SimpleIKeyframes 1
 #endif
 
 #if !defined (ADPathKeyframes_) && (INCLUDE_ALL_PathKeyframes || defined(INCLUDE_ADPathKeyframes))
 #define ADPathKeyframes_
 
-#define RESTRICT_Keyframes 1
-#define INCLUDE_ADKeyframes 1
-#include "Keyframes.h"
+#define RESTRICT_IKeyframes 1
+#define INCLUDE_ADIKeyframes 1
+#include "IKeyframes.h"
 
 @class ADPath;
 @class IOSClass;
 @class JavaUtilArrayList;
-@protocol ADKeyframes_FloatKeyframes;
-@protocol ADKeyframes_IntKeyframes;
+@protocol ADIKeyframes_FloatIKeyframes;
+@protocol ADIKeyframes_IntIKeyframes;
 @protocol ADTypeEvaluator;
 
 /*!
  @brief PathKeyframes relies on approximating the Path as a series of line segments.
  The line segments are recursively divided until there is less than 1/2 pixel error
   between the lines and the curve. Each point of the line segment is converted
-  to a Keyframe and a linear interpolation between Keyframes creates a good approximation
+  to a Keyframe and a linear interpolation between IKeyframes creates a good approximation
   of the curve. 
  <p>
   PathKeyframes is optimized to reduce the number of objects created when there are
@@ -45,10 +45,10 @@
  </p>
   <p>
   Typically, the returned type is a PointF, but the individual components can be extracted
-  as either an IntKeyframes or FloatKeyframes. 
+  as either an IntIKeyframes or FloatIKeyframes. 
  </p>
  */
-@interface ADPathKeyframes : NSObject < ADKeyframes >
+@interface ADPathKeyframes : NSObject < ADIKeyframes >
 
 #pragma mark Public
 
@@ -57,33 +57,33 @@
 - (instancetype)initWithADPath:(ADPath *)path
                      withFloat:(jfloat)error;
 
-- (id<ADKeyframes>)java_clone;
+- (id<ADIKeyframes>)java_clone;
 
 /*!
- @brief Returns a FloatKeyframes for the X component of the Path.
- @return a FloatKeyframes for the X component of the Path.
+ @brief Returns a FloatIKeyframes for the X component of the Path.
+ @return a FloatIKeyframes for the X component of the Path.
  */
-- (id<ADKeyframes_FloatKeyframes>)createXFloatKeyframes;
+- (id<ADIKeyframes_FloatIKeyframes>)createXFloatKeyframes;
 
 /*!
- @brief Returns an IntKeyframes for the X component of the Path.
- @return an IntKeyframes for the X component of the Path.
+ @brief Returns an IntIKeyframes for the X component of the Path.
+ @return an IntIKeyframes for the X component of the Path.
  */
-- (id<ADKeyframes_IntKeyframes>)createXIntKeyframes;
+- (id<ADIKeyframes_IntIKeyframes>)createXIntKeyframes;
 
 /*!
- @brief Returns a FloatKeyframes for the Y component of the Path.
- @return a FloatKeyframes for the Y component of the Path.
+ @brief Returns a FloatIKeyframes for the Y component of the Path.
+ @return a FloatIKeyframes for the Y component of the Path.
  */
-- (id<ADKeyframes_FloatKeyframes>)createYFloatKeyframes;
+- (id<ADIKeyframes_FloatIKeyframes>)createYFloatKeyframes;
 
 /*!
  @brief Returns an IntKeyframeSet for the Y component of the Path.
  @return an IntKeyframeSet for the Y component of the Path.
  */
-- (id<ADKeyframes_IntKeyframes>)createYIntKeyframes;
+- (id<ADIKeyframes_IntIKeyframes>)createYIntKeyframes;
 
-- (JavaUtilArrayList *)getKeyframes;
+- (JavaUtilArrayList *)getIKeyframes;
 
 - (IOSClass *)getType;
 
@@ -117,56 +117,56 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes)
 
 #endif
 
-#if !defined (ADPathKeyframes_SimpleKeyframes_) && (INCLUDE_ALL_PathKeyframes || defined(INCLUDE_ADPathKeyframes_SimpleKeyframes))
-#define ADPathKeyframes_SimpleKeyframes_
+#if !defined (ADPathKeyframes_SimpleIKeyframes_) && (INCLUDE_ALL_PathKeyframes || defined(INCLUDE_ADPathKeyframes_SimpleIKeyframes))
+#define ADPathKeyframes_SimpleIKeyframes_
 
-#define RESTRICT_Keyframes 1
-#define INCLUDE_ADKeyframes 1
-#include "Keyframes.h"
+#define RESTRICT_IKeyframes 1
+#define INCLUDE_ADIKeyframes 1
+#include "IKeyframes.h"
 
 @class JavaUtilArrayList;
 @protocol ADTypeEvaluator;
 
-@interface ADPathKeyframes_SimpleKeyframes : NSObject < ADKeyframes >
+@interface ADPathKeyframes_SimpleIKeyframes : NSObject < ADIKeyframes >
 
 #pragma mark Public
 
-- (id<ADKeyframes>)java_clone;
+- (id<ADIKeyframes>)java_clone;
 
-- (JavaUtilArrayList *)getKeyframes;
+- (JavaUtilArrayList *)getIKeyframes;
 
 - (void)setEvaluatorWithADTypeEvaluator:(id<ADTypeEvaluator>)evaluator;
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(ADPathKeyframes_SimpleKeyframes)
+J2OBJC_EMPTY_STATIC_INIT(ADPathKeyframes_SimpleIKeyframes)
 
-J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_SimpleKeyframes)
+J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_SimpleIKeyframes)
 
 #endif
 
-#if !defined (ADPathKeyframes_FloatKeyframesBase_) && (INCLUDE_ALL_PathKeyframes || defined(INCLUDE_ADPathKeyframes_FloatKeyframesBase))
-#define ADPathKeyframes_FloatKeyframesBase_
+#if !defined (ADPathKeyframes_FloatIKeyframesBase_) && (INCLUDE_ALL_PathKeyframes || defined(INCLUDE_ADPathKeyframes_FloatIKeyframesBase))
+#define ADPathKeyframes_FloatIKeyframesBase_
 
-#define RESTRICT_Keyframes 1
-#define INCLUDE_ADKeyframes_FloatKeyframes 1
-#include "Keyframes.h"
+#define RESTRICT_IKeyframes 1
+#define INCLUDE_ADIKeyframes_FloatIKeyframes 1
+#include "IKeyframes.h"
 
 @class IOSClass;
 @class JavaUtilArrayList;
-@protocol ADKeyframes;
+@protocol ADIKeyframes;
 
-@interface ADPathKeyframes_FloatKeyframesBase : ADPathKeyframes_SimpleKeyframes < ADKeyframes_FloatKeyframes >
+@interface ADPathKeyframes_FloatIKeyframesBase : ADPathKeyframes_SimpleIKeyframes < ADIKeyframes_FloatIKeyframes >
 
 #pragma mark Public
 
-- (JavaUtilArrayList *)getKeyframes;
+- (JavaUtilArrayList *)getIKeyframes;
 
 - (IOSClass *)getType;
 
 - (id)getValueWithFloat:(jfloat)fraction;
 
-- (id<ADKeyframes>)java_clone;
+- (id<ADIKeyframes>)java_clone;
 
 #pragma mark Package-Private
 
@@ -174,36 +174,36 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_SimpleKeyframes)
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(ADPathKeyframes_FloatKeyframesBase)
+J2OBJC_EMPTY_STATIC_INIT(ADPathKeyframes_FloatIKeyframesBase)
 
-FOUNDATION_EXPORT void ADPathKeyframes_FloatKeyframesBase_init(ADPathKeyframes_FloatKeyframesBase *self);
+FOUNDATION_EXPORT void ADPathKeyframes_FloatIKeyframesBase_init(ADPathKeyframes_FloatIKeyframesBase *self);
 
-J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_FloatKeyframesBase)
+J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_FloatIKeyframesBase)
 
 #endif
 
-#if !defined (ADPathKeyframes_IntKeyframesBase_) && (INCLUDE_ALL_PathKeyframes || defined(INCLUDE_ADPathKeyframes_IntKeyframesBase))
-#define ADPathKeyframes_IntKeyframesBase_
+#if !defined (ADPathKeyframes_IntIKeyframesBase_) && (INCLUDE_ALL_PathKeyframes || defined(INCLUDE_ADPathKeyframes_IntIKeyframesBase))
+#define ADPathKeyframes_IntIKeyframesBase_
 
-#define RESTRICT_Keyframes 1
-#define INCLUDE_ADKeyframes_IntKeyframes 1
-#include "Keyframes.h"
+#define RESTRICT_IKeyframes 1
+#define INCLUDE_ADIKeyframes_IntIKeyframes 1
+#include "IKeyframes.h"
 
 @class IOSClass;
 @class JavaUtilArrayList;
-@protocol ADKeyframes;
+@protocol ADIKeyframes;
 
-@interface ADPathKeyframes_IntKeyframesBase : ADPathKeyframes_SimpleKeyframes < ADKeyframes_IntKeyframes >
+@interface ADPathKeyframes_IntIKeyframesBase : ADPathKeyframes_SimpleIKeyframes < ADIKeyframes_IntIKeyframes >
 
 #pragma mark Public
 
-- (JavaUtilArrayList *)getKeyframes;
+- (JavaUtilArrayList *)getIKeyframes;
 
 - (IOSClass *)getType;
 
 - (id)getValueWithFloat:(jfloat)fraction;
 
-- (id<ADKeyframes>)java_clone;
+- (id<ADIKeyframes>)java_clone;
 
 #pragma mark Package-Private
 
@@ -211,11 +211,11 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_FloatKeyframesBase)
 
 @end
 
-J2OBJC_EMPTY_STATIC_INIT(ADPathKeyframes_IntKeyframesBase)
+J2OBJC_EMPTY_STATIC_INIT(ADPathKeyframes_IntIKeyframesBase)
 
-FOUNDATION_EXPORT void ADPathKeyframes_IntKeyframesBase_init(ADPathKeyframes_IntKeyframesBase *self);
+FOUNDATION_EXPORT void ADPathKeyframes_IntIKeyframesBase_init(ADPathKeyframes_IntIKeyframesBase *self);
 
-J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_IntKeyframesBase)
+J2OBJC_TYPE_LITERAL_HEADER(ADPathKeyframes_IntIKeyframesBase)
 
 #endif
 

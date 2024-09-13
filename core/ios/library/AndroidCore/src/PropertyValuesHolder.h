@@ -37,7 +37,7 @@
 @class IOSIntArray;
 @class IOSObjectArray;
 @class JavaLangReflectMethod;
-@protocol ADKeyframes;
+@protocol ADIKeyframes;
 @protocol ADTypeEvaluator;
 
 /*!
@@ -74,7 +74,7 @@
   /*!
    @brief The set of keyframes (time/value pairs) that define this animation.
    */
-  id<ADKeyframes> mKeyframes_;
+  id<ADIKeyframes> mKeyframes_;
   IOSObjectArray *mTmpValueArray_;
 }
 
@@ -184,10 +184,10 @@
                                withADKeyframeArray:(IOSObjectArray *)values;
 
 + (ADPropertyValuesHolder *)ofKeyframesWithADProperty:(ADProperty *)property
-                                      withADKeyframes:(id<ADKeyframes>)keyframes;
+                                     withADIKeyframes:(id<ADIKeyframes>)keyframes;
 
 + (ADPropertyValuesHolder *)ofKeyframesWithNSString:(NSString *)propertyName
-                                    withADKeyframes:(id<ADKeyframes>)keyframes;
+                                   withADIKeyframes:(id<ADIKeyframes>)keyframes;
 
 /*!
  @brief Constructs and returns a PropertyValuesHolder with a given property name and
@@ -229,7 +229,7 @@
  <p>At least two values must be supplied, a start and an end value.</p>
  @param propertyName The name of the property to associate with the set of values. This                      may also be the complete name of a setter function.
  @param converter Converts  <code> values </code>  into float parameters for the setter.
-                       Can be null if the Keyframes have float[] values.
+                       Can be null if the IKeyframes have float[] values.
  @param evaluator Used to interpolate between values.
  @param values The values at specific fractional times to evaluate between
  @return A PropertyValuesHolder for a multi-float parameter setter.
@@ -296,7 +296,7 @@
  <p>At least two values must be supplied, a start and an end value.</p>
  @param propertyName The name of the property to associate with the set of values. This                      may also be the complete name of a setter function.
  @param converter Converts  <code> values </code>  into int parameters for the setter.
-                       Can be null if the Keyframes have int[] values.
+                       Can be null if the IKeyframes have int[] values.
  @param evaluator Used to interpolate between values.
  @param values The values at specific fractional times to evaluate between
  @return A PropertyValuesHolder for a multi-int parameter setter.
@@ -457,6 +457,12 @@
 - (void)setFloatValuesWithFloatArray:(IOSFloatArray *)values;
 
 /*!
+ @brief Set the animated values for this object to this set of IKeyframes.
+ @param values One or more values that the animation will animate between.
+ */
+- (void)setIKeyframesWithADKeyframeArray:(IOSObjectArray *)values;
+
+/*!
  @brief Set the animated values for this object to this set of ints.
  If there is only one value, it is assumed to be the end value of an animation,
   and an initial value will be derived, if possible, by calling a getter function
@@ -469,12 +475,6 @@
  @param values One or more values that the animation will animate between.
  */
 - (void)setIntValuesWithIntArray:(IOSIntArray *)values;
-
-/*!
- @brief Set the animated values for this object to this set of Keyframes.
- @param values One or more values that the animation will animate between.
- */
-- (void)setKeyframesWithADKeyframeArray:(IOSObjectArray *)values;
 
 /*!
  @brief Set the animated values for this object to this set of Objects.
@@ -611,7 +611,7 @@ J2OBJC_FIELD_SETTER(ADPropertyValuesHolder, mPropertyName_, NSString *)
 J2OBJC_FIELD_SETTER(ADPropertyValuesHolder, mProperty_, ADProperty *)
 J2OBJC_FIELD_SETTER(ADPropertyValuesHolder, mSetter_, JavaLangReflectMethod *)
 J2OBJC_FIELD_SETTER(ADPropertyValuesHolder, mValueType_, IOSClass *)
-J2OBJC_FIELD_SETTER(ADPropertyValuesHolder, mKeyframes_, id<ADKeyframes>)
+J2OBJC_FIELD_SETTER(ADPropertyValuesHolder, mKeyframes_, id<ADIKeyframes>)
 J2OBJC_FIELD_SETTER(ADPropertyValuesHolder, mTmpValueArray_, IOSObjectArray *)
 
 FOUNDATION_EXPORT ADPropertyValuesHolder *ADPropertyValuesHolder_ofIntWithNSString_withIntArray_(NSString *propertyName, IOSIntArray *values);
@@ -652,9 +652,9 @@ FOUNDATION_EXPORT ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframeWithN
 
 FOUNDATION_EXPORT ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframeWithADProperty_withADKeyframeArray_(ADProperty *property, IOSObjectArray *values);
 
-FOUNDATION_EXPORT ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframesWithNSString_withADKeyframes_(NSString *propertyName, id<ADKeyframes> keyframes);
+FOUNDATION_EXPORT ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(NSString *propertyName, id<ADIKeyframes> keyframes);
 
-FOUNDATION_EXPORT ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframesWithADProperty_withADKeyframes_(ADProperty *property, id<ADKeyframes> keyframes);
+FOUNDATION_EXPORT ADPropertyValuesHolder *ADPropertyValuesHolder_ofKeyframesWithADProperty_withADIKeyframes_(ADProperty *property, id<ADIKeyframes> keyframes);
 
 FOUNDATION_EXPORT NSString *ADPropertyValuesHolder_getMethodNameWithNSString_withNSString_(NSString *prefix, NSString *propertyName);
 
@@ -685,12 +685,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_PropertyValues_DataSource)
 @class ADProperty;
 @class IOSClass;
 @class IOSIntArray;
-@protocol ADKeyframes_IntKeyframes;
+@protocol ADIKeyframes_IntIKeyframes;
 
 @interface ADPropertyValuesHolder_IntPropertyValuesHolder : ADPropertyValuesHolder {
  @public
   NSString *mJniSetter_;
-  id<ADKeyframes_IntKeyframes> mIntKeyframes_;
+  id<ADIKeyframes_IntIKeyframes> mIntIKeyframes_;
   jint mIntAnimatedValue_;
 }
 
@@ -700,13 +700,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_PropertyValues_DataSource)
                       withIntArray:(IOSIntArray *)values;
 
 - (instancetype)initWithADProperty:(ADProperty *)property
-      withADKeyframes_IntKeyframes:(id<ADKeyframes_IntKeyframes>)keyframes;
+    withADIKeyframes_IntIKeyframes:(id<ADIKeyframes_IntIKeyframes>)keyframes;
 
 - (instancetype)initWithNSString:(NSString *)propertyName
                     withIntArray:(IOSIntArray *)values;
 
 - (instancetype)initWithNSString:(NSString *)propertyName
-    withADKeyframes_IntKeyframes:(id<ADKeyframes_IntKeyframes>)keyframes;
+  withADIKeyframes_IntIKeyframes:(id<ADIKeyframes_IntIKeyframes>)keyframes;
 
 - (ADPropertyValuesHolder_IntPropertyValuesHolder *)java_clone;
 
@@ -736,19 +736,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_PropertyValues_DataSource)
 J2OBJC_STATIC_INIT(ADPropertyValuesHolder_IntPropertyValuesHolder)
 
 J2OBJC_FIELD_SETTER(ADPropertyValuesHolder_IntPropertyValuesHolder, mJniSetter_, NSString *)
-J2OBJC_FIELD_SETTER(ADPropertyValuesHolder_IntPropertyValuesHolder, mIntKeyframes_, id<ADKeyframes_IntKeyframes>)
+J2OBJC_FIELD_SETTER(ADPropertyValuesHolder_IntPropertyValuesHolder, mIntIKeyframes_, id<ADIKeyframes_IntIKeyframes>)
 
-FOUNDATION_EXPORT void ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADKeyframes_IntKeyframes_(ADPropertyValuesHolder_IntPropertyValuesHolder *self, NSString *propertyName, id<ADKeyframes_IntKeyframes> keyframes);
+FOUNDATION_EXPORT void ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADIKeyframes_IntIKeyframes_(ADPropertyValuesHolder_IntPropertyValuesHolder *self, NSString *propertyName, id<ADIKeyframes_IntIKeyframes> keyframes);
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_IntPropertyValuesHolder *new_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADKeyframes_IntKeyframes_(NSString *propertyName, id<ADKeyframes_IntKeyframes> keyframes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPropertyValuesHolder_IntPropertyValuesHolder *new_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADIKeyframes_IntIKeyframes_(NSString *propertyName, id<ADIKeyframes_IntIKeyframes> keyframes) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_IntPropertyValuesHolder *create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADKeyframes_IntKeyframes_(NSString *propertyName, id<ADKeyframes_IntKeyframes> keyframes);
+FOUNDATION_EXPORT ADPropertyValuesHolder_IntPropertyValuesHolder *create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withADIKeyframes_IntIKeyframes_(NSString *propertyName, id<ADIKeyframes_IntIKeyframes> keyframes);
 
-FOUNDATION_EXPORT void ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADKeyframes_IntKeyframes_(ADPropertyValuesHolder_IntPropertyValuesHolder *self, ADProperty *property, id<ADKeyframes_IntKeyframes> keyframes);
+FOUNDATION_EXPORT void ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADIKeyframes_IntIKeyframes_(ADPropertyValuesHolder_IntPropertyValuesHolder *self, ADProperty *property, id<ADIKeyframes_IntIKeyframes> keyframes);
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_IntPropertyValuesHolder *new_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADKeyframes_IntKeyframes_(ADProperty *property, id<ADKeyframes_IntKeyframes> keyframes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPropertyValuesHolder_IntPropertyValuesHolder *new_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADIKeyframes_IntIKeyframes_(ADProperty *property, id<ADIKeyframes_IntIKeyframes> keyframes) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_IntPropertyValuesHolder *create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADKeyframes_IntKeyframes_(ADProperty *property, id<ADKeyframes_IntKeyframes> keyframes);
+FOUNDATION_EXPORT ADPropertyValuesHolder_IntPropertyValuesHolder *create_ADPropertyValuesHolder_IntPropertyValuesHolder_initWithADProperty_withADIKeyframes_IntIKeyframes_(ADProperty *property, id<ADIKeyframes_IntIKeyframes> keyframes);
 
 FOUNDATION_EXPORT void ADPropertyValuesHolder_IntPropertyValuesHolder_initWithNSString_withIntArray_(ADPropertyValuesHolder_IntPropertyValuesHolder *self, NSString *propertyName, IOSIntArray *values);
 
@@ -772,12 +772,12 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_IntPropertyValuesHolder)
 @class ADProperty;
 @class IOSClass;
 @class IOSFloatArray;
-@protocol ADKeyframes_FloatKeyframes;
+@protocol ADIKeyframes_FloatIKeyframes;
 
 @interface ADPropertyValuesHolder_FloatPropertyValuesHolder : ADPropertyValuesHolder {
  @public
   NSString *mJniSetter_;
-  id<ADKeyframes_FloatKeyframes> mFloatKeyframes_;
+  id<ADIKeyframes_FloatIKeyframes> mFloatIKeyframes_;
   jfloat mFloatAnimatedValue_;
 }
 
@@ -787,13 +787,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_IntPropertyValuesHolder)
                     withFloatArray:(IOSFloatArray *)values;
 
 - (instancetype)initWithADProperty:(ADProperty *)property
-    withADKeyframes_FloatKeyframes:(id<ADKeyframes_FloatKeyframes>)keyframes;
+  withADIKeyframes_FloatIKeyframes:(id<ADIKeyframes_FloatIKeyframes>)keyframes;
 
 - (instancetype)initWithNSString:(NSString *)propertyName
                   withFloatArray:(IOSFloatArray *)values;
 
 - (instancetype)initWithNSString:(NSString *)propertyName
-  withADKeyframes_FloatKeyframes:(id<ADKeyframes_FloatKeyframes>)keyframes;
+withADIKeyframes_FloatIKeyframes:(id<ADIKeyframes_FloatIKeyframes>)keyframes;
 
 - (ADPropertyValuesHolder_FloatPropertyValuesHolder *)java_clone;
 
@@ -823,19 +823,19 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_IntPropertyValuesHolder)
 J2OBJC_STATIC_INIT(ADPropertyValuesHolder_FloatPropertyValuesHolder)
 
 J2OBJC_FIELD_SETTER(ADPropertyValuesHolder_FloatPropertyValuesHolder, mJniSetter_, NSString *)
-J2OBJC_FIELD_SETTER(ADPropertyValuesHolder_FloatPropertyValuesHolder, mFloatKeyframes_, id<ADKeyframes_FloatKeyframes>)
+J2OBJC_FIELD_SETTER(ADPropertyValuesHolder_FloatPropertyValuesHolder, mFloatIKeyframes_, id<ADIKeyframes_FloatIKeyframes>)
 
-FOUNDATION_EXPORT void ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADKeyframes_FloatKeyframes_(ADPropertyValuesHolder_FloatPropertyValuesHolder *self, NSString *propertyName, id<ADKeyframes_FloatKeyframes> keyframes);
+FOUNDATION_EXPORT void ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADIKeyframes_FloatIKeyframes_(ADPropertyValuesHolder_FloatPropertyValuesHolder *self, NSString *propertyName, id<ADIKeyframes_FloatIKeyframes> keyframes);
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_FloatPropertyValuesHolder *new_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADKeyframes_FloatKeyframes_(NSString *propertyName, id<ADKeyframes_FloatKeyframes> keyframes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPropertyValuesHolder_FloatPropertyValuesHolder *new_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADIKeyframes_FloatIKeyframes_(NSString *propertyName, id<ADIKeyframes_FloatIKeyframes> keyframes) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_FloatPropertyValuesHolder *create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADKeyframes_FloatKeyframes_(NSString *propertyName, id<ADKeyframes_FloatKeyframes> keyframes);
+FOUNDATION_EXPORT ADPropertyValuesHolder_FloatPropertyValuesHolder *create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withADIKeyframes_FloatIKeyframes_(NSString *propertyName, id<ADIKeyframes_FloatIKeyframes> keyframes);
 
-FOUNDATION_EXPORT void ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADKeyframes_FloatKeyframes_(ADPropertyValuesHolder_FloatPropertyValuesHolder *self, ADProperty *property, id<ADKeyframes_FloatKeyframes> keyframes);
+FOUNDATION_EXPORT void ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADIKeyframes_FloatIKeyframes_(ADPropertyValuesHolder_FloatPropertyValuesHolder *self, ADProperty *property, id<ADIKeyframes_FloatIKeyframes> keyframes);
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_FloatPropertyValuesHolder *new_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADKeyframes_FloatKeyframes_(ADProperty *property, id<ADKeyframes_FloatKeyframes> keyframes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPropertyValuesHolder_FloatPropertyValuesHolder *new_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADIKeyframes_FloatIKeyframes_(ADProperty *property, id<ADIKeyframes_FloatIKeyframes> keyframes) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_FloatPropertyValuesHolder *create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADKeyframes_FloatKeyframes_(ADProperty *property, id<ADKeyframes_FloatKeyframes> keyframes);
+FOUNDATION_EXPORT ADPropertyValuesHolder_FloatPropertyValuesHolder *create_ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithADProperty_withADIKeyframes_FloatIKeyframes_(ADProperty *property, id<ADIKeyframes_FloatIKeyframes> keyframes);
 
 FOUNDATION_EXPORT void ADPropertyValuesHolder_FloatPropertyValuesHolder_initWithNSString_withFloatArray_(ADPropertyValuesHolder_FloatPropertyValuesHolder *self, NSString *propertyName, IOSFloatArray *values);
 
@@ -859,7 +859,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_FloatPropertyValuesHolder)
 @class ADTypeConverter;
 @class IOSClass;
 @class IOSObjectArray;
-@protocol ADKeyframes;
+@protocol ADIKeyframes;
 @protocol ADTypeEvaluator;
 
 @interface ADPropertyValuesHolder_MultiFloatValuesHolder : ADPropertyValuesHolder
@@ -869,7 +869,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_FloatPropertyValuesHolder)
 - (instancetype)initWithNSString:(NSString *)propertyName
              withADTypeConverter:(ADTypeConverter *)converter
              withADTypeEvaluator:(id<ADTypeEvaluator>)evaluator
-                 withADKeyframes:(id<ADKeyframes>)keyframes;
+                withADIKeyframes:(id<ADIKeyframes>)keyframes;
 
 - (instancetype)initWithNSString:(NSString *)propertyName
              withADTypeConverter:(ADTypeConverter *)converter
@@ -906,11 +906,11 @@ FOUNDATION_EXPORT ADPropertyValuesHolder_MultiFloatValuesHolder *new_ADPropertyV
 
 FOUNDATION_EXPORT ADPropertyValuesHolder_MultiFloatValuesHolder *create_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withNSObjectArray_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, IOSObjectArray *values);
 
-FOUNDATION_EXPORT void ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(ADPropertyValuesHolder_MultiFloatValuesHolder *self, NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes);
+FOUNDATION_EXPORT void ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(ADPropertyValuesHolder_MultiFloatValuesHolder *self, NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes);
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_MultiFloatValuesHolder *new_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPropertyValuesHolder_MultiFloatValuesHolder *new_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_MultiFloatValuesHolder *create_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes);
+FOUNDATION_EXPORT ADPropertyValuesHolder_MultiFloatValuesHolder *create_ADPropertyValuesHolder_MultiFloatValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_MultiFloatValuesHolder)
 
@@ -922,7 +922,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_MultiFloatValuesHolder)
 @class ADTypeConverter;
 @class IOSClass;
 @class IOSObjectArray;
-@protocol ADKeyframes;
+@protocol ADIKeyframes;
 @protocol ADTypeEvaluator;
 
 @interface ADPropertyValuesHolder_MultiIntValuesHolder : ADPropertyValuesHolder
@@ -932,7 +932,7 @@ J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_MultiFloatValuesHolder)
 - (instancetype)initWithNSString:(NSString *)propertyName
              withADTypeConverter:(ADTypeConverter *)converter
              withADTypeEvaluator:(id<ADTypeEvaluator>)evaluator
-                 withADKeyframes:(id<ADKeyframes>)keyframes;
+                withADIKeyframes:(id<ADIKeyframes>)keyframes;
 
 - (instancetype)initWithNSString:(NSString *)propertyName
              withADTypeConverter:(ADTypeConverter *)converter
@@ -969,11 +969,11 @@ FOUNDATION_EXPORT ADPropertyValuesHolder_MultiIntValuesHolder *new_ADPropertyVal
 
 FOUNDATION_EXPORT ADPropertyValuesHolder_MultiIntValuesHolder *create_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withNSObjectArray_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, IOSObjectArray *values);
 
-FOUNDATION_EXPORT void ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(ADPropertyValuesHolder_MultiIntValuesHolder *self, NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes);
+FOUNDATION_EXPORT void ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(ADPropertyValuesHolder_MultiIntValuesHolder *self, NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes);
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_MultiIntValuesHolder *new_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADPropertyValuesHolder_MultiIntValuesHolder *new_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADPropertyValuesHolder_MultiIntValuesHolder *create_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADKeyframes> keyframes);
+FOUNDATION_EXPORT ADPropertyValuesHolder_MultiIntValuesHolder *create_ADPropertyValuesHolder_MultiIntValuesHolder_initWithNSString_withADTypeConverter_withADTypeEvaluator_withADIKeyframes_(NSString *propertyName, ADTypeConverter *converter, id<ADTypeEvaluator> evaluator, id<ADIKeyframes> keyframes);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADPropertyValuesHolder_MultiIntValuesHolder)
 

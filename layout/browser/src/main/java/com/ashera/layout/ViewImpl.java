@@ -1550,7 +1550,7 @@ return getScaleY(w, nativeWidget);			}
  			r.android.animation.Animator animator = handler.getAnimatorSet();
  			animator.setTarget((View) w.asWidget());
 			w.getFragment().addDisposable(animator); 				
- 			w.setAnimator(animator); 			
+ 			w.setAnimator(animator); 		
  		}
 	}
 	
@@ -1717,8 +1717,8 @@ return getScaleY(w, nativeWidget);			}
 			    r.android.graphics.Path path = r.android.graphics.Path.createPathFromPathData(pathData);
 			    float error = 0.5f * pixelSize; // max half a pixel error
 			    r.android.animation.PathKeyframes keyframeSet = r.android.animation.KeyframeSet.ofPath(path, error);
-			    r.android.animation.Keyframes xKeyframes;
-			    r.android.animation.Keyframes yKeyframes;
+			    r.android.animation.IKeyframes xKeyframes;
+			    r.android.animation.IKeyframes yKeyframes;
 			    if (valueType == VALUE_TYPE_FLOAT) {
 			        xKeyframes = keyframeSet.createXFloatKeyframes();
 			        yKeyframes = keyframeSet.createYFloatKeyframes();

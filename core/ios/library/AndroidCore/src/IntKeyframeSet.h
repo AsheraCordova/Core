@@ -20,9 +20,9 @@
 #define INCLUDE_ADKeyframeSet 1
 #include "KeyframeSet.h"
 
-#define RESTRICT_Keyframes 1
-#define INCLUDE_ADKeyframes_IntKeyframes 1
-#include "Keyframes.h"
+#define RESTRICT_IKeyframes 1
+#define INCLUDE_ADIKeyframes_IntIKeyframes 1
+#include "IKeyframes.h"
 
 @class IOSClass;
 @class IOSObjectArray;
@@ -30,13 +30,13 @@
 /*!
  @brief This class holds a collection of IntKeyframe objects and is called by ValueAnimator to calculate
   values between those keyframes for a given animation.The class internal to the animation
-  package because it is an implementation detail of how Keyframes are stored and used.
+  package because it is an implementation detail of how IKeyframes are stored and used.
  <p>This type-specific subclass of KeyframeSet, along with the other type-specific subclass for
   float, exists to speed up the getValue() method when there is no custom
   TypeEvaluator set for the animation, so that values can be calculated without autoboxing to the
   Object equivalents of these primitive types.</p>
  */
-@interface ADIntKeyframeSet : ADKeyframeSet < ADKeyframes_IntKeyframes >
+@interface ADIntKeyframeSet : ADKeyframeSet < ADIKeyframes_IntIKeyframes >
 
 #pragma mark Public
 

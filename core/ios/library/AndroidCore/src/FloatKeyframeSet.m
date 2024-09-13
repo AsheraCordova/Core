@@ -29,11 +29,11 @@
 - (ADFloatKeyframeSet *)java_clone {
   id<JavaUtilList> keyframes = mKeyframes_;
   jint numKeyframes = [((id<JavaUtilList>) nil_chk(mKeyframes_)) size];
-  IOSObjectArray *newKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_FloatKeyframe_class_()];
+  IOSObjectArray *newIKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_FloatKeyframe_class_()];
   for (jint i = 0; i < numKeyframes; ++i) {
-    IOSObjectArray_Set(newKeyframes, i, (ADKeyframe_FloatKeyframe *) cast_chk([((ADKeyframe *) nil_chk([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i])) java_clone], [ADKeyframe_FloatKeyframe class]));
+    IOSObjectArray_Set(newIKeyframes, i, (ADKeyframe_FloatKeyframe *) cast_chk([((ADKeyframe *) nil_chk([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i])) java_clone], [ADKeyframe_FloatKeyframe class]));
   }
-  ADFloatKeyframeSet *newSet = create_ADFloatKeyframeSet_initPackagePrivateWithADKeyframe_FloatKeyframeArray_(newKeyframes);
+  ADFloatKeyframeSet *newSet = create_ADFloatKeyframeSet_initPackagePrivateWithADKeyframe_FloatKeyframeArray_(newIKeyframes);
   return newSet;
 }
 

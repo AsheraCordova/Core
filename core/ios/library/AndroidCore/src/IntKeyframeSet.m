@@ -29,11 +29,11 @@
 - (ADIntKeyframeSet *)java_clone {
   id<JavaUtilList> keyframes = JreRetainedLocalValue(mKeyframes_);
   jint numKeyframes = [((id<JavaUtilList>) nil_chk(mKeyframes_)) size];
-  IOSObjectArray *newKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_IntKeyframe_class_()];
+  IOSObjectArray *newIKeyframes = [IOSObjectArray arrayWithLength:numKeyframes type:ADKeyframe_IntKeyframe_class_()];
   for (jint i = 0; i < numKeyframes; ++i) {
-    IOSObjectArray_Set(newKeyframes, i, (ADKeyframe_IntKeyframe *) cast_chk([((ADKeyframe *) nil_chk([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i])) java_clone], [ADKeyframe_IntKeyframe class]));
+    IOSObjectArray_Set(newIKeyframes, i, (ADKeyframe_IntKeyframe *) cast_chk([((ADKeyframe *) nil_chk([((id<JavaUtilList>) nil_chk(keyframes)) getWithInt:i])) java_clone], [ADKeyframe_IntKeyframe class]));
   }
-  ADIntKeyframeSet *newSet = create_ADIntKeyframeSet_initPackagePrivateWithADKeyframe_IntKeyframeArray_(newKeyframes);
+  ADIntKeyframeSet *newSet = create_ADIntKeyframeSet_initPackagePrivateWithADKeyframe_IntKeyframeArray_(newIKeyframes);
   return newSet;
 }
 

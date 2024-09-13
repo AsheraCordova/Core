@@ -6,12 +6,12 @@
 #include "AnimationHandler.h"
 #include "Animator.h"
 #include "ArgbEvaluator.h"
+#include "IKeyframes.h"
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "KeyframeSet.h"
-#include "Keyframes.h"
 #include "ObjectAnimator.h"
 #include "Path.h"
 #include "PathKeyframes.h"
@@ -658,8 +658,8 @@ ADObjectAnimator *ADObjectAnimator_ofIntWithId_withNSString_withIntArray_(id tar
 ADObjectAnimator *ADObjectAnimator_ofIntWithId_withNSString_withNSString_withADPath_(id target, NSString *xPropertyName, NSString *yPropertyName, ADPath *path) {
   ADObjectAnimator_initialize();
   ADPathKeyframes *keyframes = ADKeyframeSet_ofPathWithADPath_(path);
-  ADPropertyValuesHolder *x = ADPropertyValuesHolder_ofKeyframesWithNSString_withADKeyframes_(xPropertyName, [((ADPathKeyframes *) nil_chk(keyframes)) createXIntKeyframes]);
-  ADPropertyValuesHolder *y = ADPropertyValuesHolder_ofKeyframesWithNSString_withADKeyframes_(yPropertyName, [keyframes createYIntKeyframes]);
+  ADPropertyValuesHolder *x = ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(xPropertyName, [((ADPathKeyframes *) nil_chk(keyframes)) createXIntKeyframes]);
+  ADPropertyValuesHolder *y = ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(yPropertyName, [keyframes createYIntKeyframes]);
   return ADObjectAnimator_ofPropertyValuesHolderWithId_withADPropertyValuesHolderArray_(target, [IOSObjectArray arrayWithObjects:(id[]){ x, y } count:2 type:ADPropertyValuesHolder_class_()]);
 }
 
@@ -673,8 +673,8 @@ ADObjectAnimator *ADObjectAnimator_ofIntWithId_withADProperty_withIntArray_(id t
 ADObjectAnimator *ADObjectAnimator_ofIntWithId_withADProperty_withADProperty_withADPath_(id target, ADProperty *xProperty, ADProperty *yProperty, ADPath *path) {
   ADObjectAnimator_initialize();
   ADPathKeyframes *keyframes = ADKeyframeSet_ofPathWithADPath_(path);
-  ADPropertyValuesHolder *x = ADPropertyValuesHolder_ofKeyframesWithADProperty_withADKeyframes_(xProperty, [((ADPathKeyframes *) nil_chk(keyframes)) createXIntKeyframes]);
-  ADPropertyValuesHolder *y = ADPropertyValuesHolder_ofKeyframesWithADProperty_withADKeyframes_(yProperty, [keyframes createYIntKeyframes]);
+  ADPropertyValuesHolder *x = ADPropertyValuesHolder_ofKeyframesWithADProperty_withADIKeyframes_(xProperty, [((ADPathKeyframes *) nil_chk(keyframes)) createXIntKeyframes]);
+  ADPropertyValuesHolder *y = ADPropertyValuesHolder_ofKeyframesWithADProperty_withADIKeyframes_(yProperty, [keyframes createYIntKeyframes]);
   return ADObjectAnimator_ofPropertyValuesHolderWithId_withADPropertyValuesHolderArray_(target, [IOSObjectArray arrayWithObjects:(id[]){ x, y } count:2 type:ADPropertyValuesHolder_class_()]);
 }
 
@@ -720,8 +720,8 @@ ADObjectAnimator *ADObjectAnimator_ofFloatWithId_withNSString_withFloatArray_(id
 ADObjectAnimator *ADObjectAnimator_ofFloatWithId_withNSString_withNSString_withADPath_(id target, NSString *xPropertyName, NSString *yPropertyName, ADPath *path) {
   ADObjectAnimator_initialize();
   ADPathKeyframes *keyframes = ADKeyframeSet_ofPathWithADPath_(path);
-  ADPropertyValuesHolder *x = ADPropertyValuesHolder_ofKeyframesWithNSString_withADKeyframes_(xPropertyName, [((ADPathKeyframes *) nil_chk(keyframes)) createXFloatKeyframes]);
-  ADPropertyValuesHolder *y = ADPropertyValuesHolder_ofKeyframesWithNSString_withADKeyframes_(yPropertyName, [keyframes createYFloatKeyframes]);
+  ADPropertyValuesHolder *x = ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(xPropertyName, [((ADPathKeyframes *) nil_chk(keyframes)) createXFloatKeyframes]);
+  ADPropertyValuesHolder *y = ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(yPropertyName, [keyframes createYFloatKeyframes]);
   return ADObjectAnimator_ofPropertyValuesHolderWithId_withADPropertyValuesHolderArray_(target, [IOSObjectArray arrayWithObjects:(id[]){ x, y } count:2 type:ADPropertyValuesHolder_class_()]);
 }
 
@@ -735,8 +735,8 @@ ADObjectAnimator *ADObjectAnimator_ofFloatWithId_withADProperty_withFloatArray_(
 ADObjectAnimator *ADObjectAnimator_ofFloatWithId_withADProperty_withADProperty_withADPath_(id target, ADProperty *xProperty, ADProperty *yProperty, ADPath *path) {
   ADObjectAnimator_initialize();
   ADPathKeyframes *keyframes = ADKeyframeSet_ofPathWithADPath_(path);
-  ADPropertyValuesHolder *x = ADPropertyValuesHolder_ofKeyframesWithADProperty_withADKeyframes_(xProperty, [((ADPathKeyframes *) nil_chk(keyframes)) createXFloatKeyframes]);
-  ADPropertyValuesHolder *y = ADPropertyValuesHolder_ofKeyframesWithADProperty_withADKeyframes_(yProperty, [keyframes createYFloatKeyframes]);
+  ADPropertyValuesHolder *x = ADPropertyValuesHolder_ofKeyframesWithADProperty_withADIKeyframes_(xProperty, [((ADPathKeyframes *) nil_chk(keyframes)) createXFloatKeyframes]);
+  ADPropertyValuesHolder *y = ADPropertyValuesHolder_ofKeyframesWithADProperty_withADIKeyframes_(yProperty, [keyframes createYFloatKeyframes]);
   return ADObjectAnimator_ofPropertyValuesHolderWithId_withADPropertyValuesHolderArray_(target, [IOSObjectArray arrayWithObjects:(id[]){ x, y } count:2 type:ADPropertyValuesHolder_class_()]);
 }
 
