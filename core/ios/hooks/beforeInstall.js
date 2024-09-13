@@ -38,8 +38,8 @@ function appendstring_in_file(filename, str) {
 var filestoreplace = [
     "platforms/ios",
     "main.m",
-    '@"AppDelegate"',
-    '@"ASAppDelegate"',
+    "AppDelegate",
+    "ASAppDelegate",
 ];
 
 var filestoappend = [

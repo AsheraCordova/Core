@@ -5607,7 +5607,7 @@ public void setSwtGCImage(String value) {
  			r.android.animation.Animator animator = handler.getAnimatorSet();
  			animator.setTarget((View) w.asWidget());
 			w.getFragment().addDisposable(animator); 				
- 			w.setAnimator(animator); 			
+ 			w.setAnimator(animator); 		
  		}
 	}
 	
