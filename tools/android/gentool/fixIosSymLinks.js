@@ -17,7 +17,7 @@ myProj = xcode.project(projectPath);
 //27E45212286452BC00FEBE6F /* color */ = {isa = PBXFileReference; lastKnownFileType = folder; name = color; path = resources/color; sourceTree = "<group>"; };
 myProj.parse(function (err) {
 	
-	var baseNames = ['drawable-ios', 'color', 'xml', 'menu', 'drawable', 'values', 'font'];
+	var baseNames = ['drawable-ios', 'color', 'xml', 'menu', 'drawable', 'values', 'font', 'res_xml', 'anim', 'animator', 'navigation'];
 	var group = 'Resources';
 	for (var i = 0; i < baseNames.length; i++) {
 	
@@ -31,9 +31,13 @@ myProj.parse(function (err) {
 			path = "../../../android/app/src/main/res-ios/" + baseName;
 		}
 
-		if (baseName == 'font') {
+		if (baseName == 'font' || baseName == 'res_xml') {
 			path = "../../" + baseName;
-		}			
+		}	
+		
+		if (baseName == 'anim' || baseName == 'animator') {
+			path = "../../../android/app/src/main/res/" + baseName;
+		}	
 	    
 	    var found = false;
 	    for (j in myProj.pbxFileReferenceSection()) {
