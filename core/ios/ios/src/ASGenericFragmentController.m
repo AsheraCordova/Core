@@ -49,8 +49,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    //[self.rootFragment onAttachWithASIActivity:self.cordovaActivity];
+    //[self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.rootFragment onAttachWithASIActivity:self.cordovaActivity];
     [self.rootFragment onCreateWithADBundle:nil];
     UIView* uiView = [self.rootFragment onCreateViewWithBoolean:NO];
     [self.view addSubview:uiView];
