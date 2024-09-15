@@ -240,6 +240,7 @@ void ADXMenuParser_createMenuItemWithASHasWidgets_withADXMenuBuilder_withASIFrag
     icon = (ADDrawable *) cast_chk(ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASPluginInvoker_getConverterWithNSString_(@"drawable"), nil, [itemMap getWithId:@"@android:icon"], fragment), [ADDrawable class]);
   }
   if ([itemMap containsKeyWithId:@"@app:showAsAction"]) {
+    ASWidgetFactory_getWithNSString_withBoolean_(@"androidx.appcompat.widget.ActionMenuView", false);
     showAsAction = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(ASPluginInvoker_getConverterWithNSString_(@"androidx.appcompat.widget.ActionMenuView.showAsAction"), nil, [itemMap getWithId:@"@app:showAsAction"], fragment), [JavaLangInteger class]))) intValue];
   }
   id<ADMenuItem> menuItem = JreRetainedLocalValue([((ADXMenuBuilder *) nil_chk(menu)) addWithInt:groupId withInt:id_ withInt:categoryOrder withJavaLangCharSequence:title]);
