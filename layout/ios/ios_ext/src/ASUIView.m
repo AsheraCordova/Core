@@ -52,6 +52,7 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
     [_widget replayBufferedEvents];
+    [self mylayoutSubviews];
 }
 
 -(id<ASIWidget>) getWidget {
@@ -131,4 +132,7 @@
 }
 //end - body
 
+- (void)mylayoutSubviews {
+	self.layer.backgroundColor = self.backgroundColor.CGColor; 
+}
 @end
