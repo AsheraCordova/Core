@@ -501,7 +501,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)getActionUrl {
-  if (![((NSString *) nil_chk(fileName_)) java_hasPrefix:@"layout"]) {
+  if (fileName_ != nil && ![fileName_ java_hasPrefix:@"layout"]) {
     return (NSString *) cast_chk([((ADBundle *) nil_chk([self getArguments])) getWithNSString:@"id"], [NSString class]);
   }
   return fileName_;
@@ -816,28 +816,30 @@ NSString *ASGenericFragment_getEventDataWithNSString_(ASGenericFragment *self, N
 }
 
 void ASGenericFragment_sendLifeCycleEventWithNSString_withNSString_withNSString_(ASGenericFragment *self, NSString *action, NSString *eventExpression, NSString *javascript) {
-  id<JavaUtilMap> dataMap = ASPluginInvoker_getJSONCompatMap();
-  (void) [((id<JavaUtilMap>) nil_chk(dataMap)) putWithId:@"action" withId:@"nativeevent"];
-  (void) [dataMap putWithId:@"event" withId:action];
-  (void) [dataMap putWithId:@"actionUrl" withId:[self getActionUrl]];
-  (void) [dataMap putWithId:@"fragmentId" withId:self->id__];
-  JavaUtilArrayList *parentFragments = new_JavaUtilArrayList_init();
-  id<ASIFragment> parentFragment = [self getParent];
-  while (parentFragment != nil) {
-    [parentFragments addWithId:[parentFragment getUId]];
-    parentFragment = [parentFragment getParent];
+  if (self->activity_ != nil) {
+    id<JavaUtilMap> dataMap = ASPluginInvoker_getJSONCompatMap();
+    (void) [((id<JavaUtilMap>) nil_chk(dataMap)) putWithId:@"action" withId:@"nativeevent"];
+    (void) [dataMap putWithId:@"event" withId:action];
+    (void) [dataMap putWithId:@"actionUrl" withId:[self getActionUrl]];
+    (void) [dataMap putWithId:@"fragmentId" withId:self->id__];
+    JavaUtilArrayList *parentFragments = new_JavaUtilArrayList_init();
+    id<ASIFragment> parentFragment = [self getParent];
+    while (parentFragment != nil) {
+      [parentFragments addWithId:[parentFragment getUId]];
+      parentFragment = [parentFragment getParent];
+    }
+    if ([parentFragments size] > 0) {
+      (void) [dataMap putWithId:@"parentFragments" withId:NSString_java_joinWithJavaLangCharSequence_withJavaLangIterable_(@",", parentFragments)];
+    }
+    if (javascript != nil) {
+      (void) [dataMap putWithId:@"javascript" withId:javascript];
+    }
+    if (eventExpression != nil) {
+      (void) ASEventExpressionParser_parseEventExpressionWithNSString_withJavaUtilMap_(eventExpression, dataMap);
+      [((id<ASIWidget>) nil_chk(self->rootWidget_)) updateModelToEventMapWithJavaUtilMap:dataMap withNSString:(NSString *) cast_chk([dataMap getWithId:ASEventExpressionParser_KEY_EVENT], [NSString class]) withNSString:(NSString *) cast_chk([dataMap getWithId:ASEventExpressionParser_KEY_EVENT_ARGS], [NSString class])];
+    }
+    [((id<ASIActivity>) nil_chk(self->activity_)) sendEventMessageWithJavaUtilMap:dataMap];
   }
-  if ([parentFragments size] > 0) {
-    (void) [dataMap putWithId:@"parentFragments" withId:NSString_java_joinWithJavaLangCharSequence_withJavaLangIterable_(@",", parentFragments)];
-  }
-  if (javascript != nil) {
-    (void) [dataMap putWithId:@"javascript" withId:javascript];
-  }
-  if (eventExpression != nil) {
-    (void) ASEventExpressionParser_parseEventExpressionWithNSString_withJavaUtilMap_(eventExpression, dataMap);
-    [((id<ASIWidget>) nil_chk(self->rootWidget_)) updateModelToEventMapWithJavaUtilMap:dataMap withNSString:(NSString *) cast_chk([dataMap getWithId:ASEventExpressionParser_KEY_EVENT], [NSString class]) withNSString:(NSString *) cast_chk([dataMap getWithId:ASEventExpressionParser_KEY_EVENT_ARGS], [NSString class])];
-  }
-  [((id<ASIActivity>) nil_chk(self->activity_)) sendEventMessageWithJavaUtilMap:dataMap];
 }
 
 ASErrors *ASGenericFragment_getFatalErrors(ASGenericFragment *self) {

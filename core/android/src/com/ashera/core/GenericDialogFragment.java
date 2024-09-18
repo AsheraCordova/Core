@@ -378,36 +378,38 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 	}
 
 	private void sendLifeCycleEvent(String action, String eventExpression, String javascript) {
-		Map<String, Object> dataMap = com.ashera.widget.PluginInvoker.getJSONCompatMap();
-		dataMap.put("action", "nativeevent");
-		dataMap.put("event", action);
-		dataMap.put("actionUrl", getActionUrl());
-		dataMap.put("fragmentId", id);
-
-		ArrayList<String> parentFragments = new ArrayList<String>();
-
-
-		IFragment parentFragment = getParent();
-
-		while (parentFragment != null) {
-			parentFragments.add(parentFragment.getUId());
-			parentFragment = parentFragment.getParent();
+		if (activity != null) {
+			Map<String, Object> dataMap = com.ashera.widget.PluginInvoker.getJSONCompatMap();
+			dataMap.put("action", "nativeevent");
+			dataMap.put("event", action);
+			dataMap.put("actionUrl", getActionUrl());
+			dataMap.put("fragmentId", id);
+	
+			ArrayList<String> parentFragments = new ArrayList<String>();
+	
+	
+			IFragment parentFragment = getParent();
+	
+			while (parentFragment != null) {
+				parentFragments.add(parentFragment.getUId());
+				parentFragment = parentFragment.getParent();
+			}
+	
+			if (parentFragments.size() > 0) {
+				dataMap.put("parentFragments", String.join(",", parentFragments));
+			}
+	
+			if (javascript != null) {
+				dataMap.put("javascript", javascript);
+			}
+	
+			if (eventExpression != null) {
+				EventExpressionParser.parseEventExpression(eventExpression, dataMap);
+				rootWidget.updateModelToEventMap(dataMap, (String) dataMap.get(EventExpressionParser.KEY_EVENT),
+						(String) dataMap.get(EventExpressionParser.KEY_EVENT_ARGS));
+			}
+			activity.sendEventMessage(dataMap);
 		}
-
-		if (parentFragments.size() > 0) {
-			dataMap.put("parentFragments", String.join(",", parentFragments));
-		}
-
-		if (javascript != null) {
-			dataMap.put("javascript", javascript);
-		}
-
-		if (eventExpression != null) {
-			EventExpressionParser.parseEventExpression(eventExpression, dataMap);
-			rootWidget.updateModelToEventMap(dataMap, (String) dataMap.get(EventExpressionParser.KEY_EVENT),
-					(String) dataMap.get(EventExpressionParser.KEY_EVENT_ARGS));
-		}
-		activity.sendEventMessage(dataMap);
 	}
 	@Override
 	public EventBus getEventBus() {
@@ -553,7 +555,7 @@ public class GenericDialogFragment extends androidx.fragment.app.DialogFragment 
 
 	@Override
 	public String getActionUrl() {
-		if (!fileName.startsWith("layout")) {
+		if (fileName != null && !fileName.startsWith("layout")) {
 			return (String) getArguments().get("id");
 		}
 		return fileName;
