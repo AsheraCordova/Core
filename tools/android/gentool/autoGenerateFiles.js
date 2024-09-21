@@ -183,6 +183,7 @@ function createFolders() {
 		"../resources/xml",
 		"../resources/color",
 		"../resources/menu",
+		"../resources/font",
 		"../resources/navigation",
 		"../tsc/src/R",
 		"../res/anim",
@@ -461,6 +462,10 @@ function sortAndConcatRecylerFiles() {
 			str += '\n';
 		}
 	}
+	
+	str = str.replace(/"section1":/gi, '"section":');
+	str = str.replace(/"section2":/gi, '"section":');
+	str = str.replace(/"section3":/gi, '"section":');
 	fs.writeFileSync(finalColorFile, str);
 }
 function sortAndConcatMenuFiles() {

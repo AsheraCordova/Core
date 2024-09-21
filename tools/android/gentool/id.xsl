@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <xsl:template match="/">
         <xsl:for-each select="//*[@android:id != '']">
-            <xsl:variable name="id" select="substring(@android:id, 6)"/>
+            <xsl:variable name="id" select="substring-after(@android:id, '/')"/>
             <xsl:text>export const </xsl:text><xsl:value-of select="$id" /><xsl:text>:string = </xsl:text>'<xsl:value-of select="@android:id" /><xsl:text>';&#xa;</xsl:text>
         </xsl:for-each>
     </xsl:template>
