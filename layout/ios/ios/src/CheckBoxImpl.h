@@ -832,11 +832,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_PostMeasureHandler)
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASCheckBoxImpl_CheckBoxCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASCheckBoxImpl_CheckBoxCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1505,11 +1503,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASCheckBoxImpl_CheckBoxCommandBuilder)
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

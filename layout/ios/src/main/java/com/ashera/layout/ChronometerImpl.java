@@ -187,9 +187,7 @@ public class ChronometerImpl extends BaseWidget {
 		ConverterFactory.register("Chronometer.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("Chronometer.textStyle").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableEnd").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableBottom").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
@@ -202,6 +200,7 @@ public class ChronometerImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("html").withType("boolean"));
 	}
 	
@@ -307,7 +306,9 @@ public class ChronometerImpl extends BaseWidget {
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ChronometerImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ChronometerImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -320,9 +321,10 @@ public class ChronometerImpl extends BaseWidget {
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(ChronometerImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -465,6 +467,7 @@ public class ChronometerImpl extends BaseWidget {
         	ViewImpl.stateNo(ChronometerImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ChronometerExt.class;
@@ -989,31 +992,11 @@ public class ChronometerImpl extends BaseWidget {
 
 			}
 			break;
-			case "drawableLeft": {
-				
-
-
-		setDrawableLeft("drawableLeft", objValue);
-
-
-
-			}
-			break;
 			case "drawableStart": {
 				
 
 
 		setDrawableLeft("drawableStart", objValue);
-
-
-
-			}
-			break;
-			case "drawableRight": {
-				
-
-
-		setDrawableRight("drawableRight", objValue);
 
 
 
@@ -1124,6 +1107,16 @@ public class ChronometerImpl extends BaseWidget {
 
 
 		ViewImpl.setStyle(this, objValue);
+
+
+
+			}
+			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
 
 
 
@@ -1415,6 +1408,15 @@ return getTextColorState();				}
 		}
 	}
 
+	
+
+
+	private void setDrawableIconSize(Object objValue) {
+		applyAttributeCommand("drawableStart", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableEnd", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableTop", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableBottom", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+	}
 	
 
 
@@ -3603,24 +3605,8 @@ public ChronometerCommandBuilder setFontFamily(String value) {
 
 	attrs.put("value", value);
 return this;}
-public ChronometerCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public ChronometerCommandBuilder setDrawableStart(String value) {
 	Map<String, Object> attrs = initCommand("drawableStart");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ChronometerCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -3753,6 +3739,14 @@ public ChronometerCommandBuilder setTextColor(String value) {
 return this;}
 public ChronometerCommandBuilder setTextAppearance(String value) {
 	Map<String, Object> attrs = initCommand("textAppearance");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public ChronometerCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -4080,16 +4074,8 @@ public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
 }
 
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
 public void setDrawableStart(String value) {
 	getBuilder().reset().setDrawableStart(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
 }
 
 public void setDrawableEnd(String value) {
@@ -4146,6 +4132,10 @@ public void setTextColor(String value) {
 
 public void setTextAppearance(String value) {
 	getBuilder().reset().setTextAppearance(value).execute(true);
+}
+
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
 }
 
 }

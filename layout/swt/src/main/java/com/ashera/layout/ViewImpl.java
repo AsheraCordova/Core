@@ -288,6 +288,7 @@ public class ViewImpl {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("top").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("bottom").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("swtGCImage").withType("drawable"));
+	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("swtIgnoreEventBubblers").withType("boolean"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("formGroupId").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("swtStyle").withType("string"));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("enableFeatures").withType("string"));
@@ -4855,7 +4856,6 @@ public void setSwtGCImage(String value) {
 						
 					});
 					r.android.graphics.Rect bounds = drawable.getBounds();
-					System.out.println(bounds.width() + " " + bounds.height() + " " + drawable);
 					View view = (View) w.asWidget();
 					view.setLeft(bounds.left);
 					view.setRight(bounds.right);
@@ -4894,6 +4894,7 @@ public void setSwtGCImage(String value) {
 		
 		return overlays;
 	}
+
 	//end - viewcode
     
     
@@ -5145,12 +5146,14 @@ public void setSwtGCImage(String value) {
 		widget.registerForAttributeCommandChain("background");
 		widget.applyAttributeCommand("background", "imageRepeat", new String[] {"backgroundRepeat"}, true, "no-repeat");
 		
-		HasWidgets parent = widget.getParent();
-		if (parent != null) {
-			Set<Integer> eventBubblers = parent.getEventBubblers();
-			if (eventBubblers != null) {
-				for (Integer flag : eventBubblers) {
-					addBubbleUpListener(widget, flag);
+		if (!widget.getParams().containsKey("swtIgnoreEventBubblers")) {
+			HasWidgets parent = widget.getParent();
+			if (parent != null) {
+				Set<Integer> eventBubblers = parent.getEventBubblers();
+				if (eventBubblers != null) {
+					for (Integer flag : eventBubblers) {
+						addBubbleUpListener(widget, flag);
+					}
 				}
 			}
 		}

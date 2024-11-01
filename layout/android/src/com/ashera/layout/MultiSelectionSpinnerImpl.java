@@ -126,9 +126,7 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableEnd").withType("drawable").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableBottom").withType("drawable").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
@@ -142,6 +140,7 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		ConverterFactory.register("com.ashera.layout.MultiSelectionSpinner.drawableTintMode", new DrawableTintMode());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("com.ashera.layout.MultiSelectionSpinner.drawableTintMode").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hint").withType("resourcestring").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHint").withType("colorstate").withBufferStrategy(BUFFER_STRATEGY_ALWAYS));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("entries").withType("array").withArrayType("resourcestring"));
@@ -314,7 +313,9 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(MultiSelectionSpinnerImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(MultiSelectionSpinnerImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -452,6 +453,7 @@ public class MultiSelectionSpinnerImpl extends BaseHasWidgets implements com.ash
         	ViewImpl.stateNo(MultiSelectionSpinnerImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return MultiSelectionSpinnerExt.class;
@@ -543,31 +545,11 @@ Context context = (Context) fragment.getRootActivity();
 
 			}
 			break;
-			case "drawableLeft": {
-				
-
-
-		setDrawableLeft(objValue);
-
-
-
-			}
-			break;
 			case "drawableStart": {
 				
 
 
 		setDrawableLeft(objValue);
-
-
-
-			}
-			break;
-			case "drawableRight": {
-				
-
-
-		setDrawableRight(objValue);
 
 
 
@@ -668,6 +650,16 @@ Context context = (Context) fragment.getRootActivity();
 
 
 		setDrawableTintMode(objValue);
+
+
+
+			}
+			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
 
 
 
@@ -866,6 +858,7 @@ return getSelectedValues();				}
 	
 
 
+	private int iconSize = -1;
 	private void setDrawableLeft(Object objValue) {
 		android.graphics.drawable.Drawable[] drawables = appCompatTextView.getCompoundDrawables();
 		setBoundsOfDrawable(objValue);
@@ -874,9 +867,28 @@ return getSelectedValues();				}
 
 	private void setBoundsOfDrawable(Object objValue) {
 		android.graphics.drawable.Drawable image = (android.graphics.drawable.Drawable) objValue;
-		int h = image.getIntrinsicHeight();
-		int w = image.getIntrinsicWidth();
-		image.setBounds( 0, 0, w, h);
+		
+		if (iconSize != -1) {
+			image.setBounds( 0, 0, iconSize, iconSize);
+		} else {
+			int h = image.getIntrinsicHeight();
+			int w = image.getIntrinsicWidth();
+			image.setBounds( 0, 0, w, h);
+		}
+	}
+	
+	private void setDrawableIconSize(Object objValue) {
+		iconSize = (int) objValue;
+		
+		if (isInitialised()) {
+			android.graphics.drawable.Drawable[] drawables = appCompatTextView.getCompoundDrawablesRelative();
+			for (android.graphics.drawable.Drawable drawable : drawables) {
+				if (drawable != null) {
+					setBoundsOfDrawable(drawable);
+				}
+			}
+			TextViewCompat.setCompoundDrawablesRelative(appCompatTextView, drawables[0], drawables[1], drawables[2], drawables[3]);
+		}
 	}
 	
 	private void setDrawableRight(Object objValue) {
@@ -1295,24 +1307,8 @@ public MultiSelectionSpinnerCommandBuilder setTextSize(String value) {
 
 	attrs.put("value", value);
 return this;}
-public MultiSelectionSpinnerCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public MultiSelectionSpinnerCommandBuilder setDrawableStart(String value) {
 	Map<String, Object> attrs = initCommand("drawableStart");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public MultiSelectionSpinnerCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -1393,6 +1389,14 @@ public MultiSelectionSpinnerCommandBuilder setDrawableTint(String value) {
 return this;}
 public MultiSelectionSpinnerCommandBuilder setDrawableTintMode(DrawableTintMode value) {
 	Map<String, Object> attrs = initCommand("drawableTintMode");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public MultiSelectionSpinnerCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -1534,16 +1538,8 @@ public void setTextSize(String value) {
 	getBuilder().reset().setTextSize(value).execute(true);
 }
 
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
 public void setDrawableStart(String value) {
 	getBuilder().reset().setDrawableStart(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
 }
 
 public void setDrawableEnd(String value) {
@@ -1584,6 +1580,10 @@ public void setDrawableTint(String value) {
 
 public void setDrawableTintMode(DrawableTintMode value) {
 	getBuilder().reset().setDrawableTintMode(value).execute(true);
+}
+
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
 }
 
 public Object getHint() {

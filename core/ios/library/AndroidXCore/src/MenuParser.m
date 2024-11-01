@@ -13,8 +13,10 @@
 #include "J2ObjC_source.h"
 #include "MenuBuilder.h"
 #include "MenuItem.h"
+#include "MenuItemImpl.h"
 #include "MenuParser.h"
 #include "PluginInvoker.h"
+#include "SubMenuBuilder.h"
 #include "SupportMenuItem.h"
 #include "View.h"
 #include "WidgetFactory.h"
@@ -267,6 +269,12 @@ void ADXMenuParser_createMenuItemWithASHasWidgets_withADXMenuBuilder_withASIFrag
   }
   if (showAsAction != -1) {
     [menuItem setShowAsActionWithInt:showAsAction];
+  }
+  if ([itemMap containsKeyWithId:@"menu"]) {
+    id<JavaUtilMap> menuMap = ASPluginInvoker_getMapWithId_([itemMap getWithId:@"menu"]);
+    ADXSubMenuBuilder *subMenu = create_ADXSubMenuBuilder_initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_(nil, menu, (ADXMenuItemImpl *) cast_chk(menuItem, [ADXMenuItemImpl class]));
+    [((ADXMenuItemImpl *) cast_chk(menuItem, [ADXMenuItemImpl class])) setSubMenuWithADXSubMenuBuilder:subMenu];
+    ADXMenuParser_parseGroupAndItemWithASHasWidgets_withADXMenuBuilder_withASIFragment_withJavaUtilMap_withInt_(parent, subMenu, fragment, menuMap, 0);
   }
 }
 

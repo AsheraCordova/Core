@@ -2588,7 +2588,6 @@ return getMaxHeight(w);			}
 						
 					});
 					r.android.graphics.Rect bounds = drawable.getBounds();
-					System.out.println(bounds.width() + " " + bounds.height() + " " + drawable);
 					View view = (View) w.asWidget();
 					view.setLeft(bounds.left);
 					view.setRight(bounds.right);
@@ -2627,6 +2626,7 @@ return getMaxHeight(w);			}
 		
 		return overlays;
 	}
+
 	
 
 

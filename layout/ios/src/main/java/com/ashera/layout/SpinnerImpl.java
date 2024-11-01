@@ -143,9 +143,7 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension").withUiFlag(UPDATE_UI_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension").withUiFlag(UPDATE_UI_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension").withUiFlag(UPDATE_UI_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableEnd").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableBottom").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
@@ -153,6 +151,7 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate").withUiFlag(UPDATE_UI_INVALIDATE));
 		ConverterFactory.register("Spinner.drawableTintMode", new DrawableTintMode());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("Spinner.drawableTintMode").withUiFlag(UPDATE_UI_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
 		ConverterFactory.register("Spinner.font", new Font());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("typeface").withType("Spinner.font").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -294,7 +293,9 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(SpinnerImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(SpinnerImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -307,9 +308,10 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(SpinnerImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -425,6 +427,7 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
         	ViewImpl.stateNo(SpinnerImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return SpinnerExt.class;
@@ -720,31 +723,11 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 
 			}
 			break;
-			case "drawableLeft": {
-				
-
-
-		setDrawableLeft("drawableLeft", objValue);
-
-
-
-			}
-			break;
 			case "drawableStart": {
 				
 
 
 		setDrawableLeft("drawableStart", objValue);
-
-
-
-			}
-			break;
-			case "drawableRight": {
-				
-
-
-		setDrawableRight("drawableRight", objValue);
 
 
 
@@ -805,6 +788,16 @@ public class SpinnerImpl extends BaseHasWidgets implements ICustomMeasureHeight,
 
 
 		setDrawableTintMode(objValue);
+
+
+
+			}
+			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
 
 
 
@@ -1101,6 +1094,15 @@ return getTextSize();				}
 		}
 	}
 
+	
+
+
+	private void setDrawableIconSize(Object objValue) {
+		applyAttributeCommand("drawableStart", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableEnd", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableTop", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableBottom", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+	}
 	
 
 
@@ -2470,24 +2472,8 @@ public SpinnerCommandBuilder setPaddingVertical(String value) {
 
 	attrs.put("value", value);
 return this;}
-public SpinnerCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public SpinnerCommandBuilder setDrawableStart(String value) {
 	Map<String, Object> attrs = initCommand("drawableStart");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SpinnerCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -2547,6 +2533,14 @@ public SpinnerCommandBuilder setDrawableTint(String value) {
 return this;}
 public SpinnerCommandBuilder setDrawableTintMode(String value) {
 	Map<String, Object> attrs = initCommand("drawableTintMode");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SpinnerCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -2836,16 +2830,8 @@ public void setPaddingVertical(String value) {
 	getBuilder().reset().setPaddingVertical(value).execute(true);
 }
 
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
 public void setDrawableStart(String value) {
 	getBuilder().reset().setDrawableStart(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
 }
 
 public void setDrawableEnd(String value) {
@@ -2873,6 +2859,10 @@ public void setDrawableTint(String value) {
 
 public void setDrawableTintMode(String value) {
 	getBuilder().reset().setDrawableTintMode(value).execute(true);
+}
+
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
 }
 
 public void setEditable(boolean value) {

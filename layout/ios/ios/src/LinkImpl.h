@@ -816,11 +816,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_PostMeasureHandler)
 
 - (ASLinkImpl_LinkCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASLinkImpl_LinkCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASLinkImpl_LinkCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASLinkImpl_LinkCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASLinkImpl_LinkCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASLinkImpl_LinkCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1489,11 +1487,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASLinkImpl_LinkCommandBuilder)
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

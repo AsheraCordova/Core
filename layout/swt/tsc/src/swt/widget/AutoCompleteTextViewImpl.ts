@@ -84,6 +84,7 @@ import { Mixin, decorate } from 'ts-mixer';
 
 
 
+
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -170,8 +171,6 @@ export class NumericTransformer implements ITranform {
 
 
 
-
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class AutoCompleteTextViewImpl<T> extends ViewImpl<T>{
@@ -219,6 +218,9 @@ export abstract class AutoCompleteTextViewImpl<T> extends ViewImpl<T>{
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "lastBaselineToBottomHeight" }))
 	lastBaselineToBottomHeight!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableIconSize" }))
+	drawableIconSize!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "completionThreshold" }))
 	completionThreshold!:CommandAttr<number>| undefined;
@@ -364,12 +366,6 @@ export abstract class AutoCompleteTextViewImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "gravity" }))
 	gravity!:CommandAttr<Gravity[]>| undefined;
 	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "drawableLeft" }))
-	drawableLeft!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "drawableRight" }))
-	drawableRight!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "drawableStart" }))
 	drawableStart!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -436,6 +432,7 @@ export abstract class AutoCompleteTextViewImpl<T> extends ViewImpl<T>{
 		this.drawableTintMode = undefined;
 		this.firstBaselineToTopHeight = undefined;
 		this.lastBaselineToBottomHeight = undefined;
+		this.drawableIconSize = undefined;
 		this.completionThreshold = undefined;
 		this.completionHintView = undefined;
 		this.completionHint = undefined;
@@ -484,8 +481,6 @@ export abstract class AutoCompleteTextViewImpl<T> extends ViewImpl<T>{
 		this.hint = undefined;
 		this.hintTextFormat = undefined;
 		this.gravity = undefined;
-		this.drawableLeft = undefined;
-		this.drawableRight = undefined;
 		this.drawableStart = undefined;
 		this.drawableEnd = undefined;
 		this.drawableTop = undefined;
@@ -932,6 +927,20 @@ export abstract class AutoCompleteTextViewImpl<T> extends ViewImpl<T>{
 		this.lastBaselineToBottomHeight.setValue(value);
 		this.orderSet++;
 		this.lastBaselineToBottomHeight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableIconSize(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableIconSize == null || this.drawableIconSize == undefined) {
+			this.drawableIconSize = new CommandAttr<string>();
+		}
+		
+		this.drawableIconSize.setSetter(true);
+		this.drawableIconSize.setValue(value);
+		this.orderSet++;
+		this.drawableIconSize.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -2019,34 +2028,6 @@ this.gravity.setTransformer('gravity');		return this.gravity.getCommandReturnVal
 		this.orderSet++;
 		this.gravity.setOrderSet(this.orderSet);
 this.gravity.setTransformer('gravity');		return this.thisPointer;
-	}
-		
-
-	public setDrawableLeft(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableLeft == null || this.drawableLeft == undefined) {
-			this.drawableLeft = new CommandAttr<string>();
-		}
-		
-		this.drawableLeft.setSetter(true);
-		this.drawableLeft.setValue(value);
-		this.orderSet++;
-		this.drawableLeft.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableRight(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableRight == null || this.drawableRight == undefined) {
-			this.drawableRight = new CommandAttr<string>();
-		}
-		
-		this.drawableRight.setSetter(true);
-		this.drawableRight.setValue(value);
-		this.orderSet++;
-		this.drawableRight.setOrderSet(this.orderSet);
-		return this.thisPointer;
 	}
 		
 

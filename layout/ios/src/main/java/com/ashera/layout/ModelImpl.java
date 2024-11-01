@@ -60,7 +60,7 @@ public class ModelImpl extends BaseWidget {
 		nativeCreate(fragment, params);	
 	}
 	
-	public class ViewExt extends View{
+	public class ViewExt extends View implements com.ashera.model.IViewStub{
 		@Override
 		public void remeasure() {
 			if (getFragment() != null) {

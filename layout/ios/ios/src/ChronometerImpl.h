@@ -690,11 +690,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_PostMeasureHandler)
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASChronometerImpl_ChronometerCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASChronometerImpl_ChronometerCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASChronometerImpl_ChronometerCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASChronometerImpl_ChronometerCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1333,11 +1331,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASChronometerImpl_ChronometerCommandBuilder)
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

@@ -147,6 +147,8 @@
 
 + (jboolean)isBooleanWithId:(id)obj;
 
++ (jboolean)isNullWithId:(id)obj;
+
 + (NSString *)marshalWithId:(id)object;
 
 + (void)navigateWithNSString:(NSString *)actionId
@@ -265,6 +267,8 @@ FOUNDATION_EXPORT id ASPluginInvoker_unmarshalWithNSString_withIOSClass_(NSStrin
 FOUNDATION_EXPORT id<JavaUtilMap> ASPluginInvoker_getJSONCompatMap(void);
 
 FOUNDATION_EXPORT id ASPluginInvoker_getJSONSafeObjWithId_(id obj);
+
+FOUNDATION_EXPORT jboolean ASPluginInvoker_isNullWithId_(id obj);
 
 FOUNDATION_EXPORT void ASPluginInvoker_navigateWithNSString_withNSString_withId_withASIFragment_(NSString *actionId, NSString *varExpression, id payload, id<ASIFragment> fragment);
 

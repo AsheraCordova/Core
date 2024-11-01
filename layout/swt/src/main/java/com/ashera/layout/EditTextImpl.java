@@ -141,6 +141,7 @@ public class EditTextImpl extends BaseWidget implements IDrawable, IHasMultiNati
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("EditText.tintMode").withOrder(-10));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("padding").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingBottom").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingRight").withType("dimension"));
@@ -179,8 +180,6 @@ public class EditTextImpl extends BaseWidget implements IDrawable, IHasMultiNati
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hint").withType("resourcestring").withOrder(900).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("hintTextFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("gravity").withType("gravity").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableEnd").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
@@ -303,7 +302,9 @@ public class EditTextImpl extends BaseWidget implements IDrawable, IHasMultiNati
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(EditTextImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(EditTextImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -316,9 +317,10 @@ public class EditTextImpl extends BaseWidget implements IDrawable, IHasMultiNati
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(EditTextImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -383,7 +385,10 @@ public class EditTextImpl extends BaseWidget implements IDrawable, IHasMultiNati
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
-            ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
+            org.eclipse.swt.widgets.Control control = ((org.eclipse.swt.widgets.Control)asNativeWidget());
+            if (!control.isDisposed()) {
+            	control.setVisible(View.VISIBLE == visibility);
+            }
             
         }
 		  public int getBorderPadding(){
@@ -459,6 +464,7 @@ public class EditTextImpl extends BaseWidget implements IDrawable, IHasMultiNati
         	ViewImpl.stateNo(EditTextImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return EditTextExt.class;
@@ -612,6 +618,16 @@ public class EditTextImpl extends BaseWidget implements IDrawable, IHasMultiNati
 
 
 		setLastBaselineToBottomHeight(objValue);
+
+
+
+			}
+			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
 
 
 
@@ -967,26 +983,6 @@ public class EditTextImpl extends BaseWidget implements IDrawable, IHasMultiNati
 
 			}
 			break;
-			case "drawableLeft": {
-				
-
-
-		 setDrawableLeft(objValue); 
-
-
-
-			}
-			break;
-			case "drawableRight": {
-				
-
-
-		 setDrawableRight(objValue); 
-
-
-
-			}
-			break;
 			case "drawableStart": {
 				
 
@@ -1310,8 +1306,8 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	public void drawableStateChanged() {
     	super.drawableStateChanged();
 		drawableStateChange(drawableBottom, measurableView.getBottomDrawable(), "drawableBottom");
-		drawableStateChange(drawableLeft, measurableView.getLeftDrawable(), "drawableLeft");
-		drawableStateChange(drawableRight, measurableView.getRightDrawable(), "drawableRight");
+		drawableStateChange(drawableLeft, measurableView.getLeftDrawable(), "drawableStart");
+		drawableStateChange(drawableRight, measurableView.getRightDrawable(), "drawableEnd");
 		drawableStateChange(drawableTop, measurableView.getTopDrawable(), "drawableTop");
 		
 		if (measurableView.getTextColors() != null) {
@@ -1348,14 +1344,20 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	}
     //start - leftdrawable
 	private void setDrawableTintMode(Object value) {
-		applyAttributeCommand("drawableLeft", "tintColor", "drawableTintMode", value);
 		applyAttributeCommand("drawableStart", "tintColor", "drawableTintMode", value);
 		applyAttributeCommand("drawableEnd", "tintColor", "drawableTintMode", value);
-		applyAttributeCommand("drawableRight", "tintColor", "drawableTintMode", value);
 		applyAttributeCommand("drawableTop", "tintColor", "drawableTintMode", value);
 		applyAttributeCommand("drawableBottom", "tintColor", "drawableTintMode", value);
-
 	}
+
+	//start - iconsize
+	private void setDrawableIconSize(Object objValue) {
+		applyAttributeCommand("drawableStart", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableEnd", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableTop", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableBottom", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+	}
+	//end - iconsize
 	private r.android.content.res.ColorStateList drawableTint; 
 	private void setDrawableTint(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
@@ -1366,28 +1368,14 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		
 		Object color = ViewImpl.getColor(objValue);
 
-		applyAttributeCommand("drawableLeft", "tintColor", "drawableTint", color);
 		applyAttributeCommand("drawableStart", "tintColor", "drawableTint", color);
 		applyAttributeCommand("drawableEnd", "tintColor", "drawableTint", color);
-		applyAttributeCommand("drawableRight", "tintColor", "drawableTint", color);
 		applyAttributeCommand("drawableTop", "tintColor", "drawableTint", color);
 		applyAttributeCommand("drawableBottom", "tintColor", "drawableTint", color);
 		
 	}
-	private boolean disableApplyCommmand;
 	private void applyAttributeCommand(String sourceName, String commandName, String attribute, Object value) {
-		if (!isInitialised() || attributes.containsKey(sourceName)) {
-			applyAttributeCommand(sourceName, commandName, new String[] {attribute}, true, value);
-		} else {
-			disableApplyCommmand = true;
-			applyAttributeCommand(sourceName, commandName, new String[] {attribute}, false);
-			disableApplyCommmand = false;
-		}
-	}
-	
-	@Override
-	public boolean disableRemoveAttributeCommandFromChain() {
-		return disableApplyCommmand;
+		applyAttributeCommand(sourceName, commandName, new String[] {attribute}, true, value);
 	}
 	
     private Label drawableLeft;
@@ -1410,78 +1398,140 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     //end - leftdrawable
     
 	private void setDrawableLeft(Object objValue) {
-		if (drawableLeft == null) {
-			// create left
-			this.drawableLeft = new Label(wrapperComposite, org.eclipse.swt.SWT.NONE);
-			drawableLeft.addDisposeListener((e) -> disposeAll(drawableLeft.getImage()));
-		}
-		
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setLeftDrawable(drawable);
-			disposeAll(drawableLeft.getImage());
-			setImageOrColorOnDrawable(drawableLeft, drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
+			
+			if (drawable.hasDrawable()) {
+				if (drawableLeft == null) {
+					// create left
+					this.drawableLeft = new Label(wrapperComposite, org.eclipse.swt.SWT.NONE);
+					drawableLeft.addDisposeListener((e) -> disposeAll(drawableLeft.getImage()));
+				}
+				
+				measurableView.setLeftDrawable(drawable);
+				if (!drawable.isRecycleable()) {
+					disposeAll(drawableLeft.getImage());
+				}
+				setImageOrColorOnDrawable(drawableLeft, drawable, drawable.getTintColor(), drawable.getTintMode(), "drawableStart");
+			}
+		} else {
+			measurableView.setLeftDrawable(null);
+			// null case
+			if (drawableLeft != null) {
+				drawableLeft.dispose();
+				drawableLeft = null;
+			}
 		}
 	}
 
 	private void setDrawableRight(Object objValue) {		
-		if (drawableRight == null) {
-			// create right
-			this.drawableRight = new Label(wrapperComposite, org.eclipse.swt.SWT.NONE);
-			drawableRight.addDisposeListener((e) -> disposeAll(drawableRight.getImage()));
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setRightDrawable(drawable);
-			disposeAll(drawableRight.getImage());
-			setImageOrColorOnDrawable(drawableRight,  drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
+
+			if (drawable.hasDrawable()) {
+				if (drawableRight == null) {
+					// create right
+					this.drawableRight = new Label(wrapperComposite, org.eclipse.swt.SWT.NONE);
+					drawableRight.addDisposeListener((e) -> disposeAll(drawableRight.getImage()));
+				}
+	
+				measurableView.setRightDrawable(drawable);
+				if (!drawable.isRecycleable()) {
+					disposeAll(drawableRight.getImage());
+				}
+				setImageOrColorOnDrawable(drawableRight,  drawable, drawable.getTintColor(), drawable.getTintMode(), "drawableEnd");
+			}
+		} else {
+			measurableView.setRightDrawable(null);
+			// null case
+			if (drawableRight != null) {
+				drawableRight.dispose();
+				drawableRight = null;
+			}
 		}
 	}
 	
-	private void setImageOrColorOnDrawable(Label drawable, Object imageOrColor, Object tintColor, String tintMode) {
+	private void setImageOrColorOnDrawable(Label control, r.android.graphics.drawable.Drawable drawable, Object tintColor, String tintMode, String attribute) {
+		Object imageOrColor = drawable.getDrawable();
 		if (imageOrColor instanceof Color) {
-			drawable.setBackground((Color)imageOrColor);
+			control.setBackground((Color)imageOrColor);
 		} else {
-			drawable.setBackground(null);
+			control.setBackground(null);
 		}
 		if (imageOrColor instanceof Image) {
 			if (tintColor != null) {
+				if (tintColor instanceof r.android.content.res.ColorStateList) {
+					tintColor = ((r.android.content.res.ColorStateList)tintColor).getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
+					tintColor = ViewImpl.getColor(tintColor);
+				}
 				imageOrColor = com.ashera.common.ImageUtils.tintImage((Image) imageOrColor, (Color) tintColor, tintMode);
+				fragment.addDisposable(imageOrColor);
 			}
-			drawable.setImage((Image) imageOrColor);
+			
+			if (drawable.getMinimumWidth() != 0 && drawable.getMinimumHeight() != 0 
+					&& ((Image) imageOrColor).getImageData().width != drawable.getMinimumWidth() && ((Image) imageOrColor).getImageData().height != drawable.getMinimumHeight()) {
+				imageOrColor = com.ashera.common.ImageUtils.resize((Image) imageOrColor, drawable.getMinimumWidth(), drawable.getMinimumHeight(), 
+						new com.ashera.common.ImageUtils.ResizeOptions.Builder().initFromAttr(this, attribute).build());
+				fragment.addDisposable(imageOrColor);
+			}
+			control.setImage((Image) imageOrColor);
 		} else {
-			drawable.setImage(null);
+			control.setImage(null);
 		}
 	}
 
 	private void setDrawableBottom(Object objValue) {
-		if (drawableBottom == null) {
-			// create bottom
-			this.drawableBottom = new Label(wrapperComposite, org.eclipse.swt.SWT.NONE);
-			drawableBottom.addDisposeListener((e) -> disposeAll(drawableBottom.getImage()));
-		}
-
-		if (objValue instanceof r.android.graphics.drawable.Drawable) {
+				if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setBottomDrawable(drawable);
-			disposeAll(drawableBottom.getImage());
-			setImageOrColorOnDrawable(drawableBottom, drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
+			if (drawable.hasDrawable()) {
+				measurableView.setBottomDrawable(drawable);
+			
+				if (drawableBottom == null) {
+					// create bottom
+					this.drawableBottom = new Label(wrapperComposite, org.eclipse.swt.SWT.NONE);
+					drawableBottom.addDisposeListener((e) -> disposeAll(drawableBottom.getImage()));
+				}
+				
+				if (!drawable.isRecycleable()) {
+					disposeAll(drawableBottom.getImage());
+				}
+				setImageOrColorOnDrawable(drawableBottom, drawable, drawable.getTintColor(), drawable.getTintMode(), "drawableStart");
+			} else {
+				measurableView.setBottomDrawable(null);
+				// null case
+				if (drawableBottom != null) {
+					drawableBottom.dispose();
+					drawableBottom = null;
+				}
+			}
 		}
 	}
 
 	private void setDrawableTop(Object objValue) {
-		if (drawableTop == null) {
-			// create top
-			this.drawableTop = new Label(wrapperComposite, org.eclipse.swt.SWT.NONE);
-			drawableTop.addDisposeListener((e) -> disposeAll(drawableTop.getImage()));
-		}
-		
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setTopDrawable(drawable);
-			disposeAll(drawableTop.getImage());
-			setImageOrColorOnDrawable(drawableTop,  drawable.getDrawable(), drawable.getTintColor(), drawable.getTintMode());
+
+			if (drawable.hasDrawable()) {
+				if (drawableTop == null) {
+					// create top
+					this.drawableTop = new Label(wrapperComposite, org.eclipse.swt.SWT.NONE);
+					drawableTop.addDisposeListener((e) -> disposeAll(drawableTop.getImage()));
+				}
+				
+	
+				measurableView.setTopDrawable(drawable);
+				if (!drawable.isRecycleable()) {
+					disposeAll(drawableTop.getImage());
+				}
+				setImageOrColorOnDrawable(drawableTop,  drawable, drawable.getTintColor(), drawable.getTintMode(), "drawableTop");
+			} else {
+				measurableView.setTopDrawable(null);
+				// null case
+				if (drawableTop != null) {
+					drawableTop.dispose();
+					drawableTop = null;
+				}
+			}
 		}
 	}
 
@@ -1520,11 +1570,12 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     
 
 
+    //start - variables
     private org.eclipse.swt.graphics.Font newFont;
 	private static final int ITALIC_FONT_TRAIT = org.eclipse.swt.SWT.ITALIC;
 	private static final int BOLD_FONT_TRAIT = org.eclipse.swt.SWT.BOLD;
 	private static final int NORMAL_FONT_TRAIT = org.eclipse.swt.SWT.NORMAL;
-
+	//end - variables
 	//start - code3
     private Map<String, com.ashera.model.FontDescriptor> fontDescriptors ;
 
@@ -1582,7 +1633,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 
     }
 	//end - code3
-
+    //start - nativefont
 	private int nativeGetFontSize() {
 		FontData[] fontData = text.getFont().getFontData();
         int height = fontData[0].getHeight();
@@ -1628,6 +1679,12 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     }
     
 	
+	private Object getTextSize() {
+		return text.getFont().getFontData()[0].getHeight();
+	}
+    //end - nativefont
+    
+	
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
@@ -1636,10 +1693,6 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		}
 		
 		text.setForeground((Color)ViewImpl.getColor(objValue));
-	}
-	
-	private Object getTextSize() {
-		return text.getFont().getFontData()[0].getHeight();
 	}
 
 	private Object getTextColor() {
@@ -2518,6 +2571,14 @@ public EditTextCommandBuilder setLastBaselineToBottomHeight(String value) {
 
 	attrs.put("value", value);
 return this;}
+public EditTextCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public EditTextCommandBuilder setPadding(String value) {
 	Map<String, Object> attrs = initCommand("padding");
 	attrs.put("type", "attribute");
@@ -2985,22 +3046,6 @@ public EditTextCommandBuilder setGravity(String value) {
 
 	attrs.put("value", value);
 return this;}
-public EditTextCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public EditTextCommandBuilder setDrawableStart(String value) {
 	Map<String, Object> attrs = initCommand("drawableStart");
 	attrs.put("type", "attribute");
@@ -3252,6 +3297,10 @@ public void setLastBaselineToBottomHeight(String value) {
 	getBuilder().reset().setLastBaselineToBottomHeight(value).execute(true);
 }
 
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
+}
+
 public void setPadding(String value) {
 	getBuilder().reset().setPadding(value).execute(true);
 }
@@ -3443,14 +3492,6 @@ public void setGravity(String value) {
 	getBuilder().reset().setGravity(value).execute(true);
 }
 
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
-}
-
 public void setDrawableStart(String value) {
 	getBuilder().reset().setDrawableStart(value).execute(true);
 }
@@ -3564,10 +3605,8 @@ public void setSetFocus(boolean value) {
         registerCommandAttrs();
         registerForAttributeCommandChain("hint");
 		registerForAttributeCommandChain("drawableStart");
-		registerForAttributeCommandChain("drawableLeft");
 		registerForAttributeCommandChain("drawableTop");
 		registerForAttributeCommandChain("drawableBottom");
-		registerForAttributeCommandChain("drawableRight");
 		registerForAttributeCommandChain("drawableEnd");
 	}
 

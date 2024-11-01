@@ -66,7 +66,8 @@ public class TestRecordPanel implements com.ashera.plugin.IPlugin {
         this.attributeName = attributeName;
         saveButton.setEnabled(widgetUnderTest != null);
         attrInfo.setText(enviromentUnderTest.getText() + " - " + attributeName);
-        File myFile = new File("../../core-widget_library/code_generator/testcasedata/" + widgetUnderTest + enviromentUnderTest.getText() + ".json");
+        File myFile = new File("../../../../../../core-widget_library/code_generator/testcasedata/" + widgetUnderTest + enviromentUnderTest.getText() + ".json");
+        
         myFile.getParentFile().mkdir();
         if (jsonFile == null || !jsonFile.getAbsolutePath().toString().equals(myFile.getAbsolutePath().toString())) {
             jsonFile = myFile;

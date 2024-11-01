@@ -245,6 +245,11 @@
 
 - (void)setAnimatorWithId:(id)animator;
 
+- (void)addUnResolvedAttributeWithNSString:(NSString *)key
+                              withNSString:(NSString *)value;
+
+- (id<JavaUtilMap>)getUnResolvedAttributes;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASIWidget)

@@ -81,7 +81,7 @@ public class TableRowImpl extends BaseHasWidgets {
 	}
 
 	@Override
-	public boolean remove(IWidget w) {		
+	public boolean remove(IWidget w) {
 		boolean remove = super.remove(w);
 		tableRow.removeView((View) w.asWidget());
 		 nativeRemoveView(w);            
@@ -341,7 +341,9 @@ return layoutParams.span;			}
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(TableRowImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(TableRowImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -354,9 +356,10 @@ return layoutParams.span;			}
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
-    		IWidget widget = template.loadLazyWidgets(TableRowImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+    		
+    		IWidget widget = template.loadLazyWidgets(TableRowImpl.this);
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -469,6 +472,7 @@ return layoutParams.span;			}
 			super.endViewTransition(view);
 			runBufferedRunnables();
 		}
+	
 	}
 	@Override
 	public Class getViewClass() {

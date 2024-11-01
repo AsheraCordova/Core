@@ -19,6 +19,7 @@
 @class ADContext;
 @class ADView;
 @class ADViewGroup;
+@protocol ADView_OnClickListener;
 
 @interface ADLayoutInflater : NSObject
 
@@ -32,6 +33,13 @@
            withADViewGroup:(ADViewGroup *)parent
                withBoolean:(jboolean)b;
 
+- (ADView *)inflateWithNSString:(NSString *)layout
+                withADViewGroup:(ADViewGroup *)parent
+                    withBoolean:(jboolean)b;
+
++ (void)recurseSetWithADViewGroup:(ADViewGroup *)parent
+       withADView_OnClickListener:(id<ADView_OnClickListener>)onClickListener;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADLayoutInflater)
@@ -43,6 +51,8 @@ FOUNDATION_EXPORT ADLayoutInflater *new_ADLayoutInflater_init(void) NS_RETURNS_R
 FOUNDATION_EXPORT ADLayoutInflater *create_ADLayoutInflater_init(void);
 
 FOUNDATION_EXPORT ADLayoutInflater *ADLayoutInflater_fromWithADContext_(ADContext *context);
+
+FOUNDATION_EXPORT void ADLayoutInflater_recurseSetWithADViewGroup_withADView_OnClickListener_(ADViewGroup *parent, id<ADView_OnClickListener> onClickListener);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADLayoutInflater)
 

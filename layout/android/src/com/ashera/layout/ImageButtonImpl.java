@@ -281,7 +281,9 @@ public class ImageButtonImpl extends BaseWidget implements com.ashera.image.ITar
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ImageButtonImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ImageButtonImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -419,6 +421,7 @@ public class ImageButtonImpl extends BaseWidget implements com.ashera.image.ITar
         	ViewImpl.stateNo(ImageButtonImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ImageButtonExt.class;

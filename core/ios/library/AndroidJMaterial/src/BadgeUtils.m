@@ -39,6 +39,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ADXBadgeUtils_attachBadgeDrawableWithADXBadgeDrawable_withADView_withADFrameLayout_(badgeDrawable, anchor, customBadgeParent);
 }
 
++ (void)detachBadgeDrawableWithADXBadgeDrawable:(ADXBadgeDrawable *)badgeDrawable
+                                     withADView:(ADView *)anchor {
+  ADXBadgeUtils_detachBadgeDrawableWithADXBadgeDrawable_withADView_(badgeDrawable, anchor);
+}
+
 + (void)setBadgeDrawableBoundsWithADXBadgeDrawable:(ADXBadgeDrawable *)badgeDrawable
                                         withADView:(ADView *)anchor
                                  withADFrameLayout:(ADFrameLayout *)compatBadgeParent {
@@ -50,7 +55,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 0, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 2, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 4, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 4, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 6, 3, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -58,14 +64,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(updateBadgeBoundsWithADRect:withFloat:withFloat:withFloat:withFloat:);
   methods[2].selector = @selector(attachBadgeDrawableWithADXBadgeDrawable:withADView:withADFrameLayout:);
-  methods[3].selector = @selector(setBadgeDrawableBoundsWithADXBadgeDrawable:withADView:withADFrameLayout:);
+  methods[3].selector = @selector(detachBadgeDrawableWithADXBadgeDrawable:withADView:);
+  methods[4].selector = @selector(setBadgeDrawableBoundsWithADXBadgeDrawable:withADView:withADFrameLayout:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOG_TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 5, -1, -1 },
+    { "LOG_TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 7, -1, -1 },
     { "USE_COMPAT_PARENT", "Z", .constantValue.asBOOL = ADXBadgeUtils_USE_COMPAT_PARENT, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "updateBadgeBounds", "LADRect;FFFF", "attachBadgeDrawable", "LADXBadgeDrawable;LADView;LADFrameLayout;", "setBadgeDrawableBounds", &ADXBadgeUtils_LOG_TAG };
-  static const J2ObjcClassInfo _ADXBadgeUtils = { "BadgeUtils", "com.google.android.material.badge", ptrTable, methods, fields, 7, 0x1, 4, 2, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "updateBadgeBounds", "LADRect;FFFF", "attachBadgeDrawable", "LADXBadgeDrawable;LADView;LADFrameLayout;", "detachBadgeDrawable", "LADXBadgeDrawable;LADView;", "setBadgeDrawableBounds", &ADXBadgeUtils_LOG_TAG };
+  static const J2ObjcClassInfo _ADXBadgeUtils = { "BadgeUtils", "com.google.android.material.badge", ptrTable, methods, fields, 7, 0x1, 5, 2, -1, -1, -1, -1, -1 };
   return &_ADXBadgeUtils;
 }
 
@@ -96,6 +103,19 @@ void ADXBadgeUtils_attachBadgeDrawableWithADXBadgeDrawable_withADView_withADFram
   }
   else {
     [((ADViewOverlay *) nil_chk([((ADView *) nil_chk(anchor)) getOverlay])) addWithADDrawable:badgeDrawable];
+  }
+}
+
+void ADXBadgeUtils_detachBadgeDrawableWithADXBadgeDrawable_withADView_(ADXBadgeDrawable *badgeDrawable, ADView *anchor) {
+  ADXBadgeUtils_initialize();
+  if (badgeDrawable == nil) {
+    return;
+  }
+  if ([badgeDrawable getCustomBadgeParent] != nil) {
+    [((ADFrameLayout *) nil_chk([badgeDrawable getCustomBadgeParent])) setForegroundWithADDrawable:nil];
+  }
+  else {
+    [((ADViewOverlay *) nil_chk([((ADView *) nil_chk(anchor)) getOverlay])) removeWithADDrawable:badgeDrawable];
   }
 }
 

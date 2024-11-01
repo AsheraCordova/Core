@@ -33,6 +33,7 @@
      <source-file src="tsc/src/web/widget/LinearLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/LinkImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/ListViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="tsc/src/web/widget/mergeImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/ModelImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="tsc/src/web/widget/PopupWindowImpl.ts" target-dir="tsc/src/web/widget"/>

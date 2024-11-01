@@ -211,7 +211,9 @@ public class ViewOnlyImpl extends BaseWidget {
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ViewOnlyImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ViewOnlyImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -349,6 +351,7 @@ public class ViewOnlyImpl extends BaseWidget {
         	ViewImpl.stateNo(ViewOnlyImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ViewOnlyExt.class;

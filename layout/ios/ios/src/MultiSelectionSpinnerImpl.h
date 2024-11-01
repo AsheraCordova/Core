@@ -661,11 +661,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnM
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1218,11 +1216,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerComm
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

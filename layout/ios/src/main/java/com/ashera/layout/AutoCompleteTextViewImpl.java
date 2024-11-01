@@ -298,9 +298,7 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension").withUiFlag(UPDATE_UI_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension").withUiFlag(UPDATE_UI_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension").withUiFlag(UPDATE_UI_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableEnd").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableBottom").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
@@ -308,6 +306,7 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTint").withType("colorstate").withUiFlag(UPDATE_UI_INVALIDATE));
 		ConverterFactory.register("AutoCompleteTextView.drawableTintMode", new DrawableTintMode());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTintMode").withType("AutoCompleteTextView.drawableTintMode").withUiFlag(UPDATE_UI_INVALIDATE));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("minLines").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lines").withType("int"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("maxLines").withType("int"));
@@ -484,7 +483,9 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(AutoCompleteTextViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(AutoCompleteTextViewImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -497,9 +498,10 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(AutoCompleteTextViewImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -645,6 +647,7 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
         	ViewImpl.stateNo(AutoCompleteTextViewImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return AutoCompleteTextViewExt.class;
@@ -871,31 +874,11 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
 
 			}
 			break;
-			case "drawableLeft": {
-				
-
-
-		setDrawableLeft("drawableLeft", objValue);
-
-
-
-			}
-			break;
 			case "drawableStart": {
 				
 
 
 		setDrawableLeft("drawableStart", objValue);
-
-
-
-			}
-			break;
-			case "drawableRight": {
-				
-
-
-		setDrawableRight("drawableRight", objValue);
 
 
 
@@ -956,6 +939,16 @@ public class AutoCompleteTextViewImpl extends BaseHasWidgets implements ICustomM
 
 
 		setDrawableTintMode(objValue);
+
+
+
+			}
+			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
 
 
 
@@ -2992,6 +2985,15 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	
 
 
+	private void setDrawableIconSize(Object objValue) {
+		applyAttributeCommand("drawableStart", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableEnd", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableTop", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableBottom", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+	}
+	
+
+
     private Map<String, com.ashera.model.FontDescriptor> fontDescriptors ;
 
     private void setTypeFace(Object objValue, String strValue) {
@@ -4661,24 +4663,8 @@ public AutoCompleteTextViewCommandBuilder setPaddingVertical(String value) {
 
 	attrs.put("value", value);
 return this;}
-public AutoCompleteTextViewCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public AutoCompleteTextViewCommandBuilder setDrawableStart(String value) {
 	Map<String, Object> attrs = initCommand("drawableStart");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public AutoCompleteTextViewCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -4738,6 +4724,14 @@ public AutoCompleteTextViewCommandBuilder setDrawableTint(String value) {
 return this;}
 public AutoCompleteTextViewCommandBuilder setDrawableTintMode(String value) {
 	Map<String, Object> attrs = initCommand("drawableTintMode");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public AutoCompleteTextViewCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -5684,16 +5678,8 @@ public void setPaddingVertical(String value) {
 	getBuilder().reset().setPaddingVertical(value).execute(true);
 }
 
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
 public void setDrawableStart(String value) {
 	getBuilder().reset().setDrawableStart(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
 }
 
 public void setDrawableEnd(String value) {
@@ -5721,6 +5707,10 @@ public void setDrawableTint(String value) {
 
 public void setDrawableTintMode(String value) {
 	getBuilder().reset().setDrawableTintMode(value).execute(true);
+}
+
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
 }
 
 public Object getMinLines() {

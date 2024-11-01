@@ -3,45 +3,106 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroidX-core\src\main\java\androidx\appcompat\view\menu\SubMenuBuilder.java
 //
 
+#include "Context.h"
+#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "MenuBuilder.h"
+#include "MenuItem.h"
+#include "MenuItemImpl.h"
+#include "SubMenu.h"
 #include "SubMenuBuilder.h"
+#include "java/lang/CharSequence.h"
 
+
+@interface ADXSubMenuBuilder () {
+ @public
+  ADXMenuBuilder *mParentMenu_;
+  ADXMenuItemImpl *mItem_;
+}
+
+@end
+
+J2OBJC_FIELD_SETTER(ADXSubMenuBuilder, mParentMenu_, ADXMenuBuilder *)
+J2OBJC_FIELD_SETTER(ADXSubMenuBuilder, mItem_, ADXMenuItemImpl *)
 
 @implementation ADXSubMenuBuilder
 
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  ADXSubMenuBuilder_init(self);
+- (instancetype)initWithADContext:(ADContext *)context
+               withADXMenuBuilder:(ADXMenuBuilder *)parentMenu
+              withADXMenuItemImpl:(ADXMenuItemImpl *)item {
+  ADXSubMenuBuilder_initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_(self, context, parentMenu, item);
   return self;
 }
-J2OBJC_IGNORE_DESIGNATED_END
+
+- (id<ADMenuItem>)getItem {
+  return mItem_;
+}
+
+- (void)setCallbackWithADXMenuBuilder_Callback:(id<ADXMenuBuilder_Callback>)callback {
+  [((ADXMenuBuilder *) nil_chk(mParentMenu_)) setCallbackWithADXMenuBuilder_Callback:callback];
+}
+
+- (jboolean)dispatchMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
+                                        withADMenuItem:(id<ADMenuItem>)item {
+  return [super dispatchMenuItemSelectedWithADXMenuBuilder:menu withADMenuItem:item] || [((ADXMenuBuilder *) nil_chk(mParentMenu_)) dispatchMenuItemSelectedWithADXMenuBuilder:menu withADMenuItem:item];
+}
+
+- (id<ADSubMenu>)setHeaderTitleWithJavaLangCharSequence:(id<JavaLangCharSequence>)title {
+  return (id<ADSubMenu>) cast_check([super setHeaderTitleIntWithJavaLangCharSequence:title], ADSubMenu_class_());
+}
+
+- (id<ADSubMenu>)setHeaderTitleWithInt:(jint)titleRes {
+  return (id<ADSubMenu>) cast_check([super setHeaderTitleIntWithInt:titleRes], ADSubMenu_class_());
+}
+
+- (void)dealloc {
+  RELEASE_(mParentMenu_);
+  RELEASE_(mItem_);
+  [super dealloc];
+}
 
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
+    { NULL, "LADMenuItem;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LADSubMenu;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LADSubMenu;", 0x1, 5, 7, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(init);
+  methods[0].selector = @selector(initWithADContext:withADXMenuBuilder:withADXMenuItemImpl:);
+  methods[1].selector = @selector(getItem);
+  methods[2].selector = @selector(setCallbackWithADXMenuBuilder_Callback:);
+  methods[3].selector = @selector(dispatchMenuItemSelectedWithADXMenuBuilder:withADMenuItem:);
+  methods[4].selector = @selector(setHeaderTitleWithJavaLangCharSequence:);
+  methods[5].selector = @selector(setHeaderTitleWithInt:);
   #pragma clang diagnostic pop
-  static const J2ObjcClassInfo _ADXSubMenuBuilder = { "SubMenuBuilder", "androidx.appcompat.view.menu", NULL, methods, NULL, 7, 0x1, 1, 0, -1, -1, -1, -1, -1 };
+  static const J2ObjcFieldInfo fields[] = {
+    { "mParentMenu_", "LADXMenuBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "mItem_", "LADXMenuItemImpl;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LADContext;LADXMenuBuilder;LADXMenuItemImpl;", "setCallback", "LADXMenuBuilder_Callback;", "dispatchMenuItemSelected", "LADXMenuBuilder;LADMenuItem;", "setHeaderTitle", "LJavaLangCharSequence;", "I" };
+  static const J2ObjcClassInfo _ADXSubMenuBuilder = { "SubMenuBuilder", "androidx.appcompat.view.menu", ptrTable, methods, fields, 7, 0x1, 6, 2, -1, -1, -1, -1, -1 };
   return &_ADXSubMenuBuilder;
 }
 
 @end
 
-void ADXSubMenuBuilder_init(ADXSubMenuBuilder *self) {
+void ADXSubMenuBuilder_initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_(ADXSubMenuBuilder *self, ADContext *context, ADXMenuBuilder *parentMenu, ADXMenuItemImpl *item) {
   ADXMenuBuilder_init(self);
+  JreStrongAssign(&self->mParentMenu_, parentMenu);
+  JreStrongAssign(&self->mItem_, item);
 }
 
-ADXSubMenuBuilder *new_ADXSubMenuBuilder_init() {
-  J2OBJC_NEW_IMPL(ADXSubMenuBuilder, init)
+ADXSubMenuBuilder *new_ADXSubMenuBuilder_initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_(ADContext *context, ADXMenuBuilder *parentMenu, ADXMenuItemImpl *item) {
+  J2OBJC_NEW_IMPL(ADXSubMenuBuilder, initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_, context, parentMenu, item)
 }
 
-ADXSubMenuBuilder *create_ADXSubMenuBuilder_init() {
-  J2OBJC_CREATE_IMPL(ADXSubMenuBuilder, init)
+ADXSubMenuBuilder *create_ADXSubMenuBuilder_initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_(ADContext *context, ADXMenuBuilder *parentMenu, ADXMenuItemImpl *item) {
+  J2OBJC_CREATE_IMPL(ADXSubMenuBuilder, initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_, context, parentMenu, item)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXSubMenuBuilder)

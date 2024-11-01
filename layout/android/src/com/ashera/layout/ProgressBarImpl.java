@@ -367,7 +367,9 @@ public class ProgressBarImpl extends BaseWidget {
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ProgressBarImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ProgressBarImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -505,6 +507,7 @@ public class ProgressBarImpl extends BaseWidget {
         	ViewImpl.stateNo(ProgressBarImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ProgressBarExt.class;

@@ -384,9 +384,7 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("switchTextAppearance").withType("style"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("text").withType("resourcestring"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textSize").withType("dimensionsp"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableEnd").withType("drawable"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableBottom").withType("drawable"));
@@ -413,6 +411,7 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("html").withType("boolean"));
 	}
 	
@@ -545,7 +544,9 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(SwitchImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(SwitchImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -683,6 +684,7 @@ public class SwitchImpl extends BaseWidget implements com.ashera.validations.For
         	ViewImpl.stateNo(SwitchImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return SwitchExt.class;
@@ -1333,31 +1335,11 @@ if (Build.VERSION.SDK_INT >= 23) {
 
 			}
 			break;
-			case "drawableLeft": {
-				
-
-
-		setDrawableLeft(objValue);
-
-
-
-			}
-			break;
 			case "drawableStart": {
 				
 
 
 		setDrawableLeft(objValue);
-
-
-
-			}
-			break;
-			case "drawableRight": {
-				
-
-
-		setDrawableRight(objValue);
 
 
 
@@ -1588,6 +1570,16 @@ if (Build.VERSION.SDK_INT >= 23) {
 
 
 		setTextFormat(objValue);
+
+
+
+			}
+			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
 
 
 
@@ -1844,6 +1836,7 @@ return null;				}
 	//end - textsize
 	
 	//start - drawable
+	private int iconSize = -1;
 	private void setDrawableLeft(Object objValue) {
 		android.graphics.drawable.Drawable[] drawables = switchCompat.getCompoundDrawables();
 		setBoundsOfDrawable(objValue);
@@ -1852,9 +1845,28 @@ return null;				}
 
 	private void setBoundsOfDrawable(Object objValue) {
 		android.graphics.drawable.Drawable image = (android.graphics.drawable.Drawable) objValue;
-		int h = image.getIntrinsicHeight();
-		int w = image.getIntrinsicWidth();
-		image.setBounds( 0, 0, w, h);
+		
+		if (iconSize != -1) {
+			image.setBounds( 0, 0, iconSize, iconSize);
+		} else {
+			int h = image.getIntrinsicHeight();
+			int w = image.getIntrinsicWidth();
+			image.setBounds( 0, 0, w, h);
+		}
+	}
+	
+	private void setDrawableIconSize(Object objValue) {
+		iconSize = (int) objValue;
+		
+		if (isInitialised()) {
+			android.graphics.drawable.Drawable[] drawables = switchCompat.getCompoundDrawablesRelative();
+			for (android.graphics.drawable.Drawable drawable : drawables) {
+				if (drawable != null) {
+					setBoundsOfDrawable(drawable);
+				}
+			}
+			TextViewCompat.setCompoundDrawablesRelative(switchCompat, drawables[0], drawables[1], drawables[2], drawables[3]);
+		}
 	}
 	
 	private void setDrawableRight(Object objValue) {
@@ -3627,24 +3639,8 @@ public SwitchCommandBuilder setTextSize(String value) {
 
 	attrs.put("value", value);
 return this;}
-public SwitchCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public SwitchCommandBuilder setDrawableStart(String value) {
 	Map<String, Object> attrs = initCommand("drawableStart");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public SwitchCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -3895,6 +3891,14 @@ public SwitchCommandBuilder setPaddingVertical(String value) {
 return this;}
 public SwitchCommandBuilder setTextFormat(String value) {
 	Map<String, Object> attrs = initCommand("textFormat");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public SwitchCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -4305,16 +4309,8 @@ public void setTextSize(String value) {
 	getBuilder().reset().setTextSize(value).execute(true);
 }
 
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
 public void setDrawableStart(String value) {
 	getBuilder().reset().setDrawableStart(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
 }
 
 public void setDrawableEnd(String value) {
@@ -4425,6 +4421,10 @@ public void setPaddingVertical(String value) {
 
 public void setTextFormat(String value) {
 	getBuilder().reset().setTextFormat(value).execute(true);
+}
+
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
 }
 
 }

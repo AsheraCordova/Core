@@ -146,7 +146,7 @@ public class RootImpl extends BaseHasWidgets implements com.ashera.widget.IRoot 
 	}
 
 	@Override
-	public boolean remove(IWidget w) {		
+	public boolean remove(IWidget w) {
 		boolean remove = super.remove(w);
 		relativeLayout.removeView((View) w.asWidget());
 		 nativeRemoveView(w);            
@@ -591,7 +591,9 @@ return layoutParams.alignWithParent;			}
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(RootImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(RootImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -604,9 +606,10 @@ return layoutParams.alignWithParent;			}
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
-    		IWidget widget = template.loadLazyWidgets(RootImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+    		
+    		IWidget widget = template.loadLazyWidgets(RootImpl.this);
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -719,6 +722,7 @@ return layoutParams.alignWithParent;			}
 			super.endViewTransition(view);
 			runBufferedRunnables();
 		}
+	
 	}
 	@Override
 	public Class getViewClass() {

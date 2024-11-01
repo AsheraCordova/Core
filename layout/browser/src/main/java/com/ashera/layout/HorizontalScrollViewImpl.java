@@ -81,7 +81,7 @@ public class HorizontalScrollViewImpl extends BaseHasWidgets {
 	}
 
 	@Override
-	public boolean remove(IWidget w) {		
+	public boolean remove(IWidget w) {
 		boolean remove = super.remove(w);
 		horizontalScrollView.removeView((View) w.asWidget());
 		 nativeRemoveView(w);            
@@ -315,7 +315,9 @@ return layoutParams.gravity;			}
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(HorizontalScrollViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(HorizontalScrollViewImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -328,9 +330,10 @@ return layoutParams.gravity;			}
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
-    		IWidget widget = template.loadLazyWidgets(HorizontalScrollViewImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+    		
+    		IWidget widget = template.loadLazyWidgets(HorizontalScrollViewImpl.this);
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -443,6 +446,7 @@ return layoutParams.gravity;			}
 			super.endViewTransition(view);
 			runBufferedRunnables();
 		}
+	
 	}
 	@Override
 	public Class getViewClass() {
@@ -893,6 +897,7 @@ return this;}
     	}, "scroll", "scroll");
 	}
 	
+	//start - scrollX
 	private void setScrollX(Object objValue) {
     	if (!isInitialised()) {
     		 org.teavm.jso.dom.html.HTMLDocument.current().addEventListener("DOMContentLoaded", new org.teavm.jso.dom.events.EventListener<org.teavm.jso.dom.events.Event>() {
@@ -910,12 +915,20 @@ return this;}
 	private Object getScrollX() {
 		return htmlElement.getScrollLeft();
 	}
+	//end - scrollX
 	
-    @org.teavm.jso.JSBody(params = {}, script = "return window.getScrollbarWidth();")
-    private static native int getScrollbarWidth();
     @Override
     public void initialized() {
     	super.initialized();
-    	thumbHeight = getScrollbarWidth();
+    	initThumbHeight();
     }
+    //start - initThumbHeight
+    @org.teavm.jso.JSBody(params = {}, script = "return window.getScrollbarWidth();")
+    private static native int getScrollbarWidth();
+
+    private void initThumbHeight() {
+		thumbHeight = getScrollbarWidth();
+	}
+    //end - initThumbHeight
+
 }

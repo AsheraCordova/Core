@@ -244,7 +244,9 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(CComboImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(CComboImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -257,9 +259,10 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(CComboImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -324,7 +327,10 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
-            ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
+            org.eclipse.swt.widgets.Control control = ((org.eclipse.swt.widgets.Control)asNativeWidget());
+            if (!control.isDisposed()) {
+            	control.setVisible(View.VISIBLE == visibility);
+            }
             
         }
         @Override
@@ -377,6 +383,7 @@ public class CComboImpl extends BaseHasWidgets implements com.ashera.validations
         	ViewImpl.stateNo(CComboImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return CComboExt.class;
@@ -820,11 +827,12 @@ return hint;				}
     
 
 
+    //start - variables
     private org.eclipse.swt.graphics.Font newFont;
 	private static final int ITALIC_FONT_TRAIT = org.eclipse.swt.SWT.ITALIC;
 	private static final int BOLD_FONT_TRAIT = org.eclipse.swt.SWT.BOLD;
 	private static final int NORMAL_FONT_TRAIT = org.eclipse.swt.SWT.NORMAL;
-
+	//end - variables
 	//start - code3
     private Map<String, com.ashera.model.FontDescriptor> fontDescriptors ;
 
@@ -882,7 +890,7 @@ return hint;				}
 
     }
 	//end - code3
-
+    //start - nativefont
 	private int nativeGetFontSize() {
 		FontData[] fontData = cCombo.getFont().getFontData();
         int height = fontData[0].getHeight();
@@ -928,6 +936,12 @@ return hint;				}
     }
     
 	
+	private Object getTextSize() {
+		return cCombo.getFont().getFontData()[0].getHeight();
+	}
+    //end - nativefont
+    
+	
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
@@ -936,10 +950,6 @@ return hint;				}
 		}
 		
 		cCombo.setForeground((Color)ViewImpl.getColor(objValue));
-	}
-	
-	private Object getTextSize() {
-		return cCombo.getFont().getFontData()[0].getHeight();
 	}
 
 	private Object getTextColor() {

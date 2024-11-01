@@ -101,6 +101,8 @@
 
 - (id)getGravity;
 
+- (void)setDrawableIconSizeWithId:(id)objValue;
+
 - (id)getMinHeight;
 
 - (id)getMinWidth;
@@ -416,6 +418,8 @@ __attribute__((unused)) static void ASButtonImpl_setGravityWithId_(ASButtonImpl 
 __attribute__((unused)) static void ASButtonImpl_updateTextAlignment(ASButtonImpl *self);
 
 __attribute__((unused)) static id ASButtonImpl_getGravity(ASButtonImpl *self);
+
+__attribute__((unused)) static void ASButtonImpl_setDrawableIconSizeWithId_(ASButtonImpl *self, id objValue);
 
 __attribute__((unused)) static id ASButtonImpl_getMinHeight(ASButtonImpl *self);
 
@@ -828,9 +832,7 @@ NSString *ASButtonImpl_GROUP_NAME = @"Button";
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName {
   ASViewImpl_register__WithNSString_(attributeName);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableLeft"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableStart"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableRight"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableEnd"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTop"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableBottom"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
@@ -838,6 +840,7 @@ NSString *ASButtonImpl_GROUP_NAME = @"Button";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTint"])) withTypeWithNSString:@"colorstate"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_INVALIDATE]);
   ASConverterFactory_register__WithNSString_withASIConverter_(@"Button.drawableTintMode", new_ASButtonImpl_DrawableTintMode_init());
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTintMode"])) withTypeWithNSString:@"Button.drawableTintMode"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_INVALIDATE]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableIconSize"])) withTypeWithNSString:@"dimension"])) withOrderWithInt:-1])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"minLines"])) withTypeWithNSString:@"int"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"lines"])) withTypeWithNSString:@"int"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"maxLines"])) withTypeWithNSString:@"int"]);
@@ -933,263 +936,258 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
   ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"marqueeRepeatLimit", @"editable", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"textFormat", @"enabled", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"textColor", @"textAllCaps", @"singleLine", @"ellipsize", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"justificationMode", @"scrollHorizontally", @"shadowDx", @"shadowDy", @"shadowColor" }, 52)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"drawableStart", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"drawableIconSize", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"marqueeRepeatLimit", @"editable", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"textFormat", @"enabled", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"textColor", @"textAllCaps", @"singleLine", @"ellipsize", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"justificationMode", @"scrollHorizontally", @"shadowDx", @"shadowDy", @"shadowColor" }, 51)) {
     case 0:
-    {
-      ASButtonImpl_setDrawableLeftWithNSString_withId_(self, @"drawableLeft", objValue);
-    }
-    break;
-    case 1:
     {
       ASButtonImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
     }
     break;
-    case 2:
-    {
-      ASButtonImpl_setDrawableRightWithNSString_withId_(self, @"drawableRight", objValue);
-    }
-    break;
-    case 3:
+    case 1:
     {
       ASButtonImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
     }
     break;
-    case 4:
+    case 2:
     {
       ASButtonImpl_setDrawableTopWithId_(self, objValue);
     }
     break;
-    case 5:
+    case 3:
     {
       ASButtonImpl_setDrawableBottomWithId_(self, objValue);
     }
     break;
-    case 6:
+    case 4:
     {
       ASButtonImpl_setDrawablePaddingWithId_(self, objValue);
     }
     break;
-    case 7:
+    case 5:
     {
       ASButtonImpl_setDrawableTintWithId_(self, objValue);
     }
     break;
-    case 8:
+    case 6:
     {
       ASButtonImpl_setDrawableTintModeWithId_(self, objValue);
     }
     break;
-    case 9:
+    case 7:
+    {
+      ASButtonImpl_setDrawableIconSizeWithId_(self, objValue);
+    }
+    break;
+    case 8:
     {
       ASButtonImpl_setMinLinesWithId_(self, objValue);
     }
     break;
-    case 10:
+    case 9:
     {
       ASButtonImpl_setLinesWithId_(self, objValue);
     }
     break;
-    case 11:
+    case 10:
     {
       ASButtonImpl_setMaxLinesWithId_(self, objValue);
     }
     break;
-    case 12:
+    case 11:
     {
       ASButtonImpl_setMinWidthWithId_(self, objValue);
     }
     break;
-    case 13:
+    case 12:
     {
       ASButtonImpl_setMinHeightWithId_(self, objValue);
     }
     break;
-    case 14:
+    case 13:
     {
       ASButtonImpl_setMaxWidthWithId_(self, objValue);
     }
     break;
-    case 15:
+    case 14:
     {
       ASButtonImpl_setMaxHeightWithId_(self, objValue);
     }
     break;
-    case 16:
+    case 15:
     {
       ASButtonImpl_setHeightWithId_(self, objValue);
     }
     break;
-    case 17:
+    case 16:
     {
       ASButtonImpl_setWidthWithId_(self, objValue);
     }
     break;
-    case 18:
+    case 17:
     {
       ASButtonImpl_setMaxEmsWithId_(self, objValue);
     }
     break;
-    case 19:
+    case 18:
     {
       ASButtonImpl_setMinEmsWithId_(self, objValue);
     }
     break;
-    case 20:
+    case 19:
     {
       ASButtonImpl_setEmsWithId_(self, objValue);
     }
     break;
-    case 21:
+    case 20:
     {
       ASButtonImpl_setMarqueeRepeatLimitWithId_(self, objValue);
     }
     break;
-    case 22:
+    case 21:
     {
       ASButtonImpl_setEnabledWithId_(self, objValue);
     }
     break;
-    case 23:
+    case 22:
     {
       ASButtonImpl_setMaxLengthWithId_(self, objValue);
     }
     break;
-    case 24:
+    case 23:
     {
       ASButtonImpl_setTypeFaceWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 25:
+    case 24:
     {
       ASButtonImpl_setTextStyleWithId_(self, objValue);
     }
     break;
-    case 26:
+    case 25:
     {
       ASButtonImpl_setFontFamilyWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 27:
+    case 26:
     {
       ASButtonImpl_setTextFormatWithId_(self, objValue);
     }
     break;
-    case 28:
+    case 27:
     {
       ASButtonImpl_setEnabledWithId_(self, objValue);
     }
     break;
-    case 29:
+    case 28:
     {
       [self setMyTextWithId:objValue];
     }
     break;
-    case 30:
+    case 29:
     {
       ASButtonImpl_setGravityWithId_(self, objValue);
     }
     break;
-    case 31:
+    case 30:
     {
       ASButtonImpl_setMyTextSizeWithId_(self, objValue);
     }
     break;
-    case 32:
+    case 31:
     {
       ASButtonImpl_setPaddingWithId_(self, objValue);
     }
     break;
-    case 33:
+    case 32:
     {
       [self setPaddingBottomWithId:objValue];
     }
     break;
-    case 34:
+    case 33:
     {
       [self setPaddingRightWithId:objValue];
     }
     break;
-    case 35:
+    case 34:
     {
       [self setPaddingLeftWithId:objValue];
     }
     break;
-    case 36:
+    case 35:
     {
       ASButtonImpl_setPaddingStartWithId_(self, objValue);
     }
     break;
-    case 37:
+    case 36:
     {
       ASButtonImpl_setPaddingEndWithId_(self, objValue);
     }
     break;
-    case 38:
+    case 37:
     {
       [self setPaddingTopWithId:objValue];
     }
     break;
-    case 39:
+    case 38:
     {
       ASButtonImpl_setPaddingHorizontalWithId_(self, objValue);
     }
     break;
-    case 40:
+    case 39:
     {
       ASButtonImpl_setPaddingVerticalWithId_(self, objValue);
     }
     break;
-    case 41:
+    case 40:
     {
       ASButtonImpl_setTextColorWithId_(self, objValue);
     }
     break;
-    case 42:
+    case 41:
     {
       ASButtonImpl_setTextAllCapsWithId_(self, objValue);
     }
     break;
-    case 43:
+    case 42:
     {
       ASButtonImpl_setSingleLineWithId_(self, objValue);
     }
     break;
-    case 44:
+    case 43:
     {
       ASButtonImpl_setEllipsizeWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 45:
+    case 44:
     {
       ASButtonImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
     }
     break;
-    case 46:
+    case 45:
     {
       ASButtonImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
     }
     break;
-    case 47:
+    case 46:
     {
       ASButtonImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 48:
+    case 47:
     {
       ASButtonImpl_setScrollHorizontallyWithId_(self, objValue);
     }
     break;
-    case 49:
+    case 48:
     {
       ASButtonImpl_setShadowDxWithJavaLangFloat_withNSString_(self, (JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]), strValue);
     }
     break;
-    case 50:
+    case 49:
     {
       ASButtonImpl_setShadowDyWithJavaLangFloat_withNSString_(self, (JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]), strValue);
     }
     break;
-    case 51:
+    case 50:
     {
       ASButtonImpl_setShadowColorWithId_withNSString_(self, objValue, strValue);
     }
@@ -1348,6 +1346,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   if ([((ADButton *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADButton *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASButtonImpl_updateTextAlignment(self);
   }
+}
+
+- (void)setDrawableIconSizeWithId:(id)objValue {
+  ASButtonImpl_setDrawableIconSizeWithId_(self, objValue);
 }
 
 - (id)getMinHeight {
@@ -2040,15 +2042,15 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 14, 11, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 15, 11, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 16, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 17, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 18, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 19, 11, -1, -1, -1, -1 },
@@ -2056,58 +2058,59 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 21, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 22, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 23, 11, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 24, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 25, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 26, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 26, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 29, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 27, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 29, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 30, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 31, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 32, 11, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 33, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 34, 35, -1, 36, -1, -1 },
+    { NULL, "V", 0x2, 34, 11, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 35, 36, -1, 37, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 37, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 38, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 39, 11, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 11, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 40, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 41, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 42, 11, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 41, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 42, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 43, 11, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 44, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 45, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 46, 47, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 48, 47, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 49, 47, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 50, 47, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 51, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 46, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 47, 48, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 49, 48, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 50, 48, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 51, 48, -1, -1, -1, -1 },
     { NULL, "I", 0x102, 52, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 53, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 53, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 54, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 55, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 55, 56, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 56, 57, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 57, 58, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 59, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 60, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 58, 59, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 60, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 61, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 61, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 62, 28, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
@@ -2117,22 +2120,22 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 62, 63, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 63, 64, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 64, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 65, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 66, 67, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 65, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 66, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 67, 68, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 68, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 69, 1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 69, 35, -1, 36, -1, -1 },
-    { NULL, "V", 0x102, 70, 35, -1, 36, -1, -1 },
-    { NULL, "I", 0x1, 71, 13, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 72, 73, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 74, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 75, 27, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 70, 36, -1, 37, -1, -1 },
+    { NULL, "V", 0x102, 71, 36, -1, 37, -1, -1 },
+    { NULL, "I", 0x1, 72, 13, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 73, 74, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 75, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 76, 28, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
@@ -2145,53 +2148,53 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 76, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 77, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 78, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 79, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 80, 11, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 80, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 81, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 82, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 83, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 84, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 85, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 85, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 86, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 87, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 88, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 89, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 42, 90, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 89, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 90, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 43, 91, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 91, 92, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 92, 93, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 93, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 94, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 95, 67, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 94, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 95, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 96, 68, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 96, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 97, 73, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 98, 13, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 97, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 98, 74, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 99, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 99, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 100, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 100, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 101, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 101, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 102, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 102, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 103, 104, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 105, 104, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 103, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 104, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 106, 105, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 106, 107, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 107, 108, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -2211,174 +2214,175 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[12].selector = @selector(updateTextAlignment);
   methods[13].selector = @selector(getGravity);
   methods[14].selector = @selector(onRtlPropertiesChangedWithInt:);
-  methods[15].selector = @selector(getMinHeight);
-  methods[16].selector = @selector(getMinWidth);
-  methods[17].selector = @selector(setEmsWithId:);
-  methods[18].selector = @selector(getMaxEms);
-  methods[19].selector = @selector(getMinEms);
-  methods[20].selector = @selector(setMinEmsWithId:);
-  methods[21].selector = @selector(getMinLines);
-  methods[22].selector = @selector(getMaxLines);
-  methods[23].selector = @selector(setMaxEmsWithId:);
-  methods[24].selector = @selector(setWidthWithId:);
-  methods[25].selector = @selector(setHeightWithId:);
-  methods[26].selector = @selector(setMaxLinesWithId:);
-  methods[27].selector = @selector(setLinesWithId:);
-  methods[28].selector = @selector(setMinLinesWithId:);
-  methods[29].selector = @selector(setMaxHeightWithId:);
-  methods[30].selector = @selector(setMaxWidthWithId:);
-  methods[31].selector = @selector(getMaxWidth);
-  methods[32].selector = @selector(getMaxHeight);
-  methods[33].selector = @selector(setMinHeightWithId:);
-  methods[34].selector = @selector(setMinWidthWithId:);
-  methods[35].selector = @selector(getWidth);
-  methods[36].selector = @selector(getHeight);
-  methods[37].selector = @selector(setTypeFaceWithId:withNSString:);
-  methods[38].selector = @selector(setFontFamilyWithId:withNSString:);
-  methods[39].selector = @selector(setTextStyleWithId:);
-  methods[40].selector = @selector(setMaxLengthWithId:);
-  methods[41].selector = @selector(setTextAllCapsWithId:);
-  methods[42].selector = @selector(setFirstBaselineToTopHeightWithId:);
-  methods[43].selector = @selector(getIncludeFontPadding);
-  methods[44].selector = @selector(getFirstBaselineToTopHeight);
-  methods[45].selector = @selector(setLastBaselineToBottomHeightWithId:);
-  methods[46].selector = @selector(getLastBaselineToBottomHeight);
-  methods[47].selector = @selector(initHtmlWithJavaUtilMap:);
-  methods[48].selector = @selector(calcNumberOfWhiteSpaces);
-  methods[49].selector = @selector(cancelTimer);
-  methods[50].selector = @selector(startTimer);
-  methods[51].selector = @selector(getMarqueeRepeatLimit);
-  methods[52].selector = @selector(setMarqueeRepeatLimitWithId:);
-  methods[53].selector = @selector(startOrStopMarqueeWithId:);
-  methods[54].selector = @selector(getLabelWidth);
-  methods[55].selector = @selector(isLabelMeasured);
-  methods[56].selector = @selector(setTextFormatWithId:);
-  methods[57].selector = @selector(getTextSize);
-  methods[58].selector = @selector(setMyTextSizeWithId:);
-  methods[59].selector = @selector(nativeSetTextSizeWithInt:);
-  methods[60].selector = @selector(setTextColorWithId:);
-  methods[61].selector = @selector(getTextColorState);
-  methods[62].selector = @selector(setDrawablePaddingWithId:);
-  methods[63].selector = @selector(setDrawableBottomWithId:);
-  methods[64].selector = @selector(setDrawableTopWithId:);
-  methods[65].selector = @selector(setDrawableRightWithNSString:withId:);
-  methods[66].selector = @selector(setDrawableRightInternalWithNSString:withId:);
-  methods[67].selector = @selector(setDrawableLeftWithNSString:withId:);
-  methods[68].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
-  methods[69].selector = @selector(getImageHeightWithId:);
-  methods[70].selector = @selector(getImageWidthWithId:);
-  methods[71].selector = @selector(getDrawablePadding);
-  methods[72].selector = @selector(setDrawableTintModeWithId:);
-  methods[73].selector = @selector(setDrawableTintWithId:);
-  methods[74].selector = @selector(drawableStateChanged);
-  methods[75].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
-  methods[76].selector = @selector(nativeGetFontSize);
-  methods[77].selector = @selector(nativeGetFontStyle);
-  methods[78].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
-  methods[79].selector = @selector(nativeSetFontStyleWithInt:);
-  methods[80].selector = @selector(setSingleLineWithId:);
-  methods[81].selector = @selector(getEllipsize);
-  methods[82].selector = @selector(setEllipsizeWithId:withNSString:);
-  methods[83].selector = @selector(getBorderPadding);
-  methods[84].selector = @selector(getLineHeightPadding);
-  methods[85].selector = @selector(getLineHeight);
-  methods[86].selector = @selector(getBorderWidth);
-  methods[87].selector = @selector(canMarquee);
-  methods[88].selector = @selector(cancelNativeTimer);
-  methods[89].selector = @selector(isDisposed);
-  methods[90].selector = @selector(addDeallocHandler);
-  methods[91].selector = @selector(schedule);
-  methods[92].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
-  methods[93].selector = @selector(asNativeWidget);
-  methods[94].selector = @selector(checkIosVersionWithNSString:);
-  methods[95].selector = @selector(setIdWithNSString:);
-  methods[96].selector = @selector(setVisibleWithBoolean:);
-  methods[97].selector = @selector(requestLayout);
-  methods[98].selector = @selector(invalidate);
-  methods[99].selector = @selector(getPluginWithNSString:);
-  methods[100].selector = @selector(getBean);
-  methods[101].selector = @selector(getBuilder);
-  methods[102].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[103].selector = @selector(createNativeWidgetWithJavaUtilMap:);
-  methods[104].selector = @selector(measureHeightWithInt:);
-  methods[105].selector = @selector(nativeMeasureHeightButtonWithId:withInt:);
-  methods[106].selector = @selector(setMyTextWithId:);
-  methods[107].selector = @selector(nativeSetTextWithId:withNSString:);
-  methods[108].selector = @selector(getMyText);
-  methods[109].selector = @selector(getTitleLabel);
-  methods[110].selector = @selector(setHorizontalAligmentCenter);
-  methods[111].selector = @selector(setHorizontalAligmentRight);
-  methods[112].selector = @selector(setHorizontalAligmentLeft);
-  methods[113].selector = @selector(setVerticalAligmentCenter);
-  methods[114].selector = @selector(nativeSetVerticalAligmentBottom);
-  methods[115].selector = @selector(nativeSetVerticalAligmentTop);
-  methods[116].selector = @selector(nativeSetVerticalAligmentCenter);
-  methods[117].selector = @selector(setVerticalAligmentBottom);
-  methods[118].selector = @selector(setVerticalAligmentTop);
-  methods[119].selector = @selector(getTextAlignment);
-  methods[120].selector = @selector(getPaddingLeft);
-  methods[121].selector = @selector(setPaddingLeftWithId:);
-  methods[122].selector = @selector(getPaddingRight);
-  methods[123].selector = @selector(setPaddingRightWithId:);
-  methods[124].selector = @selector(getPaddingTop);
-  methods[125].selector = @selector(setPaddingTopWithId:);
-  methods[126].selector = @selector(getPaddingBottom);
-  methods[127].selector = @selector(getPaddingEnd);
-  methods[128].selector = @selector(getPaddingStart);
-  methods[129].selector = @selector(setPaddingBottomWithId:);
-  methods[130].selector = @selector(setPaddingVerticalWithId:);
-  methods[131].selector = @selector(setPaddingHorizontalWithId:);
-  methods[132].selector = @selector(setPaddingEndWithId:);
-  methods[133].selector = @selector(setPaddingStartWithId:);
-  methods[134].selector = @selector(setPaddingWithId:);
-  methods[135].selector = @selector(updatePadding);
-  methods[136].selector = @selector(nativeSetPaddingBottomWithInt:);
-  methods[137].selector = @selector(nativeSetPaddingLeftWithInt:);
-  methods[138].selector = @selector(nativeSetPaddingRightWithInt:);
-  methods[139].selector = @selector(nativeSetPaddingTopWithInt:);
-  methods[140].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[141].selector = @selector(setTextColorWithId:withId:);
-  methods[142].selector = @selector(addMinMaxListener);
-  methods[143].selector = @selector(setTextColorLinkWithADColorStateList:);
-  methods[144].selector = @selector(syncPlaceholderLabel);
-  methods[145].selector = @selector(setHintColorWithInt:);
-  methods[146].selector = @selector(setEnabledWithId:);
-  methods[147].selector = @selector(nativeSetEnabledWithBoolean:);
-  methods[148].selector = @selector(measureWidth);
-  methods[149].selector = @selector(nativeMeasureWidthButtonWithId:);
-  methods[150].selector = @selector(setNumberOfLinesWithId:withInt:);
-  methods[151].selector = @selector(nativeSetLineBreakModeWithInt:);
-  methods[152].selector = @selector(nativeGetLinBreakMode);
-  methods[153].selector = @selector(getSingleLine);
-  methods[154].selector = @selector(getFont);
-  methods[155].selector = @selector(setJustificationModeWithId:withNSString:);
-  methods[156].selector = @selector(nativeSetTextAligmentWithInt:);
-  methods[157].selector = @selector(getJustificationMode);
-  methods[158].selector = @selector(nativeGetTextAligment);
-  methods[159].selector = @selector(setScrollHorizontallyWithId:);
-  methods[160].selector = @selector(getShadowColor);
-  methods[161].selector = @selector(setShadowColorWithId:withNSString:);
-  methods[162].selector = @selector(setShadowDyWithJavaLangFloat:withNSString:);
-  methods[163].selector = @selector(setShadowDxWithJavaLangFloat:withNSString:);
-  methods[164].selector = @selector(getShadowDy);
-  methods[165].selector = @selector(getShadowDx);
-  methods[166].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[15].selector = @selector(setDrawableIconSizeWithId:);
+  methods[16].selector = @selector(getMinHeight);
+  methods[17].selector = @selector(getMinWidth);
+  methods[18].selector = @selector(setEmsWithId:);
+  methods[19].selector = @selector(getMaxEms);
+  methods[20].selector = @selector(getMinEms);
+  methods[21].selector = @selector(setMinEmsWithId:);
+  methods[22].selector = @selector(getMinLines);
+  methods[23].selector = @selector(getMaxLines);
+  methods[24].selector = @selector(setMaxEmsWithId:);
+  methods[25].selector = @selector(setWidthWithId:);
+  methods[26].selector = @selector(setHeightWithId:);
+  methods[27].selector = @selector(setMaxLinesWithId:);
+  methods[28].selector = @selector(setLinesWithId:);
+  methods[29].selector = @selector(setMinLinesWithId:);
+  methods[30].selector = @selector(setMaxHeightWithId:);
+  methods[31].selector = @selector(setMaxWidthWithId:);
+  methods[32].selector = @selector(getMaxWidth);
+  methods[33].selector = @selector(getMaxHeight);
+  methods[34].selector = @selector(setMinHeightWithId:);
+  methods[35].selector = @selector(setMinWidthWithId:);
+  methods[36].selector = @selector(getWidth);
+  methods[37].selector = @selector(getHeight);
+  methods[38].selector = @selector(setTypeFaceWithId:withNSString:);
+  methods[39].selector = @selector(setFontFamilyWithId:withNSString:);
+  methods[40].selector = @selector(setTextStyleWithId:);
+  methods[41].selector = @selector(setMaxLengthWithId:);
+  methods[42].selector = @selector(setTextAllCapsWithId:);
+  methods[43].selector = @selector(setFirstBaselineToTopHeightWithId:);
+  methods[44].selector = @selector(getIncludeFontPadding);
+  methods[45].selector = @selector(getFirstBaselineToTopHeight);
+  methods[46].selector = @selector(setLastBaselineToBottomHeightWithId:);
+  methods[47].selector = @selector(getLastBaselineToBottomHeight);
+  methods[48].selector = @selector(initHtmlWithJavaUtilMap:);
+  methods[49].selector = @selector(calcNumberOfWhiteSpaces);
+  methods[50].selector = @selector(cancelTimer);
+  methods[51].selector = @selector(startTimer);
+  methods[52].selector = @selector(getMarqueeRepeatLimit);
+  methods[53].selector = @selector(setMarqueeRepeatLimitWithId:);
+  methods[54].selector = @selector(startOrStopMarqueeWithId:);
+  methods[55].selector = @selector(getLabelWidth);
+  methods[56].selector = @selector(isLabelMeasured);
+  methods[57].selector = @selector(setTextFormatWithId:);
+  methods[58].selector = @selector(getTextSize);
+  methods[59].selector = @selector(setMyTextSizeWithId:);
+  methods[60].selector = @selector(nativeSetTextSizeWithInt:);
+  methods[61].selector = @selector(setTextColorWithId:);
+  methods[62].selector = @selector(getTextColorState);
+  methods[63].selector = @selector(setDrawablePaddingWithId:);
+  methods[64].selector = @selector(setDrawableBottomWithId:);
+  methods[65].selector = @selector(setDrawableTopWithId:);
+  methods[66].selector = @selector(setDrawableRightWithNSString:withId:);
+  methods[67].selector = @selector(setDrawableRightInternalWithNSString:withId:);
+  methods[68].selector = @selector(setDrawableLeftWithNSString:withId:);
+  methods[69].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
+  methods[70].selector = @selector(getImageHeightWithId:);
+  methods[71].selector = @selector(getImageWidthWithId:);
+  methods[72].selector = @selector(getDrawablePadding);
+  methods[73].selector = @selector(setDrawableTintModeWithId:);
+  methods[74].selector = @selector(setDrawableTintWithId:);
+  methods[75].selector = @selector(drawableStateChanged);
+  methods[76].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
+  methods[77].selector = @selector(nativeGetFontSize);
+  methods[78].selector = @selector(nativeGetFontStyle);
+  methods[79].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
+  methods[80].selector = @selector(nativeSetFontStyleWithInt:);
+  methods[81].selector = @selector(setSingleLineWithId:);
+  methods[82].selector = @selector(getEllipsize);
+  methods[83].selector = @selector(setEllipsizeWithId:withNSString:);
+  methods[84].selector = @selector(getBorderPadding);
+  methods[85].selector = @selector(getLineHeightPadding);
+  methods[86].selector = @selector(getLineHeight);
+  methods[87].selector = @selector(getBorderWidth);
+  methods[88].selector = @selector(canMarquee);
+  methods[89].selector = @selector(cancelNativeTimer);
+  methods[90].selector = @selector(isDisposed);
+  methods[91].selector = @selector(addDeallocHandler);
+  methods[92].selector = @selector(schedule);
+  methods[93].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
+  methods[94].selector = @selector(asNativeWidget);
+  methods[95].selector = @selector(checkIosVersionWithNSString:);
+  methods[96].selector = @selector(setIdWithNSString:);
+  methods[97].selector = @selector(setVisibleWithBoolean:);
+  methods[98].selector = @selector(requestLayout);
+  methods[99].selector = @selector(invalidate);
+  methods[100].selector = @selector(getPluginWithNSString:);
+  methods[101].selector = @selector(getBean);
+  methods[102].selector = @selector(getBuilder);
+  methods[103].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[104].selector = @selector(createNativeWidgetWithJavaUtilMap:);
+  methods[105].selector = @selector(measureHeightWithInt:);
+  methods[106].selector = @selector(nativeMeasureHeightButtonWithId:withInt:);
+  methods[107].selector = @selector(setMyTextWithId:);
+  methods[108].selector = @selector(nativeSetTextWithId:withNSString:);
+  methods[109].selector = @selector(getMyText);
+  methods[110].selector = @selector(getTitleLabel);
+  methods[111].selector = @selector(setHorizontalAligmentCenter);
+  methods[112].selector = @selector(setHorizontalAligmentRight);
+  methods[113].selector = @selector(setHorizontalAligmentLeft);
+  methods[114].selector = @selector(setVerticalAligmentCenter);
+  methods[115].selector = @selector(nativeSetVerticalAligmentBottom);
+  methods[116].selector = @selector(nativeSetVerticalAligmentTop);
+  methods[117].selector = @selector(nativeSetVerticalAligmentCenter);
+  methods[118].selector = @selector(setVerticalAligmentBottom);
+  methods[119].selector = @selector(setVerticalAligmentTop);
+  methods[120].selector = @selector(getTextAlignment);
+  methods[121].selector = @selector(getPaddingLeft);
+  methods[122].selector = @selector(setPaddingLeftWithId:);
+  methods[123].selector = @selector(getPaddingRight);
+  methods[124].selector = @selector(setPaddingRightWithId:);
+  methods[125].selector = @selector(getPaddingTop);
+  methods[126].selector = @selector(setPaddingTopWithId:);
+  methods[127].selector = @selector(getPaddingBottom);
+  methods[128].selector = @selector(getPaddingEnd);
+  methods[129].selector = @selector(getPaddingStart);
+  methods[130].selector = @selector(setPaddingBottomWithId:);
+  methods[131].selector = @selector(setPaddingVerticalWithId:);
+  methods[132].selector = @selector(setPaddingHorizontalWithId:);
+  methods[133].selector = @selector(setPaddingEndWithId:);
+  methods[134].selector = @selector(setPaddingStartWithId:);
+  methods[135].selector = @selector(setPaddingWithId:);
+  methods[136].selector = @selector(updatePadding);
+  methods[137].selector = @selector(nativeSetPaddingBottomWithInt:);
+  methods[138].selector = @selector(nativeSetPaddingLeftWithInt:);
+  methods[139].selector = @selector(nativeSetPaddingRightWithInt:);
+  methods[140].selector = @selector(nativeSetPaddingTopWithInt:);
+  methods[141].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[142].selector = @selector(setTextColorWithId:withId:);
+  methods[143].selector = @selector(addMinMaxListener);
+  methods[144].selector = @selector(setTextColorLinkWithADColorStateList:);
+  methods[145].selector = @selector(syncPlaceholderLabel);
+  methods[146].selector = @selector(setHintColorWithInt:);
+  methods[147].selector = @selector(setEnabledWithId:);
+  methods[148].selector = @selector(nativeSetEnabledWithBoolean:);
+  methods[149].selector = @selector(measureWidth);
+  methods[150].selector = @selector(nativeMeasureWidthButtonWithId:);
+  methods[151].selector = @selector(setNumberOfLinesWithId:withInt:);
+  methods[152].selector = @selector(nativeSetLineBreakModeWithInt:);
+  methods[153].selector = @selector(nativeGetLinBreakMode);
+  methods[154].selector = @selector(getSingleLine);
+  methods[155].selector = @selector(getFont);
+  methods[156].selector = @selector(setJustificationModeWithId:withNSString:);
+  methods[157].selector = @selector(nativeSetTextAligmentWithInt:);
+  methods[158].selector = @selector(getJustificationMode);
+  methods[159].selector = @selector(nativeGetTextAligment);
+  methods[160].selector = @selector(setScrollHorizontallyWithId:);
+  methods[161].selector = @selector(getShadowColor);
+  methods[162].selector = @selector(setShadowColorWithId:withNSString:);
+  methods[163].selector = @selector(setShadowDyWithJavaLangFloat:withNSString:);
+  methods[164].selector = @selector(setShadowDxWithJavaLangFloat:withNSString:);
+  methods[165].selector = @selector(getShadowDy);
+  methods[166].selector = @selector(getShadowDx);
+  methods[167].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 108, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 109, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 109, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 110, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADButton;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 110, -1 },
+    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 111, -1 },
     { "html_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "escapeHtml_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 111, -1 },
+    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 112, -1 },
     { "marqueeTask_", "LASButtonImpl_MarqueeTask;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeRepeatLimit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeCommandConverter_", "LASMarqueeCommandConverter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "drawableTint_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 112, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 113, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 113, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 114, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASButtonImpl_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
     { "ellipsize_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "timer_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2390,8 +2394,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "TEXT_ALIGN_LEFT", "I", .constantValue.asInt = ASButtonImpl_TEXT_ALIGN_LEFT, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_RIGHT", "I", .constantValue.asInt = ASButtonImpl_TEXT_ALIGN_RIGHT, 0x1a, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setGravity", "LNSObject;", "onRtlPropertiesChanged", "I", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "setMaxLength", "setTextAllCaps", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "initHtml", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setMarqueeRepeatLimit", "startOrStopMarquee", "setTextFormat", "setMyTextSize", "nativeSetTextSize", "setTextColor", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "drawableStateChange", "LNSString;LADDrawable;", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setSingleLine", "setEllipsize", "executeOnMainThread", "LJavaLangRunnable;", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "createNativeWidget", "measureHeight", "nativeMeasureHeightButton", "LNSObject;I", "setMyText", "nativeSetText", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "postSetAttribute", "LNSObject;LNSObject;", "setTextColorLink", "LADColorStateList;", "setHintColor", "setEnabled", "nativeSetEnabled", "nativeMeasureWidthButton", "setNumberOfLines", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setScrollHorizontally", "setShadowColor", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "nativeMakeFrameForChildWidget", "IIII", &ASButtonImpl_LOCAL_NAME, &ASButtonImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASButtonImpl_ITALIC_FONT_TRAIT, &ASButtonImpl_BOLD_FONT_TRAIT, "LASButtonImpl_DrawableTintMode;LASButtonImpl_MarqueeRepeatLimit;LASButtonImpl_Font;LASButtonImpl_TextStyle;LASButtonImpl_Ellipsize;LASButtonImpl_JustificationMode;LASButtonImpl_ButtonExt;LASButtonImpl_MarqueeTask;LASButtonImpl_DellocHandler;LASButtonImpl_ButtonCommandBuilder;LASButtonImpl_ButtonBean;" };
-  static const J2ObjcClassInfo _ASButtonImpl = { "ButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 167, 24, -1, 114, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setGravity", "LNSObject;", "onRtlPropertiesChanged", "I", "setDrawableIconSize", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "setMaxLength", "setTextAllCaps", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "initHtml", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setMarqueeRepeatLimit", "startOrStopMarquee", "setTextFormat", "setMyTextSize", "nativeSetTextSize", "setTextColor", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "drawableStateChange", "LNSString;LADDrawable;", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setSingleLine", "setEllipsize", "executeOnMainThread", "LJavaLangRunnable;", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "createNativeWidget", "measureHeight", "nativeMeasureHeightButton", "LNSObject;I", "setMyText", "nativeSetText", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "postSetAttribute", "LNSObject;LNSObject;", "setTextColorLink", "LADColorStateList;", "setHintColor", "setEnabled", "nativeSetEnabled", "nativeMeasureWidthButton", "setNumberOfLines", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setScrollHorizontally", "setShadowColor", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "nativeMakeFrameForChildWidget", "IIII", &ASButtonImpl_LOCAL_NAME, &ASButtonImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASButtonImpl_ITALIC_FONT_TRAIT, &ASButtonImpl_BOLD_FONT_TRAIT, "LASButtonImpl_DrawableTintMode;LASButtonImpl_MarqueeRepeatLimit;LASButtonImpl_Font;LASButtonImpl_TextStyle;LASButtonImpl_Ellipsize;LASButtonImpl_JustificationMode;LASButtonImpl_ButtonExt;LASButtonImpl_MarqueeTask;LASButtonImpl_DellocHandler;LASButtonImpl_ButtonCommandBuilder;LASButtonImpl_ButtonBean;" };
+  static const J2ObjcClassInfo _ASButtonImpl = { "ButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 168, 24, -1, 115, -1, -1, -1 };
   return &_ASButtonImpl;
 }
 
@@ -2553,6 +2557,13 @@ id ASButtonImpl_getGravity(ASButtonImpl *self) {
   }
   jint gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
+}
+
+void ASButtonImpl_setDrawableIconSizeWithId_(ASButtonImpl *self, id objValue) {
+  [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
 }
 
 id ASButtonImpl_getMinHeight(ASButtonImpl *self) {
@@ -3829,7 +3840,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_JustificationMode)
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  if (![this$0_ isWidgetDisposed]) {
+    ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  }
 }
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout {
@@ -4303,26 +4316,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_DellocHandler)
   return self;
 }
 
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
 - (ASButtonImpl_ButtonCommandBuilder *)setDrawableStartWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableRight"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -4390,6 +4385,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_DellocHandler)
 
 - (ASButtonImpl_ButtonCommandBuilder *)setDrawableTintModeWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTintMode"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASButtonImpl_ButtonCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableIconSize"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -5156,20 +5160,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_DellocHandler)
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 5, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 6, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 7, 4, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 8, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 9, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 10, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 11, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 12, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 13, 14, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 15, 14, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 14, 13, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 16, 14, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 15, 13, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 16, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 17, 4, -1, -1, -1, -1 },
@@ -5187,33 +5193,33 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_DellocHandler)
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 21, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 22, 4, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 22, 13, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 23, 14, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 23, 13, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 24, 13, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 24, 14, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 25, 14, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 26, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 27, 2, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 28, 14, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 25, 4, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 26, 2, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 27, 13, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 28, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 29, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 30, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 31, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 32, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 33, 2, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 32, 2, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 33, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 34, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 35, 4, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 36, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 36, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 37, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -5230,16 +5236,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_DellocHandler)
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 42, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 43, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 44, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 45, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 46, 4, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 45, 4, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 46, 2, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 47, 2, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 48, 2, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 48, 4, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 49, 4, -1, -1, -1, -1 },
@@ -5249,141 +5255,137 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_DellocHandler)
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 51, 4, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 52, 2, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 52, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 53, 2, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 53, 54, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 54, 55, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 55, 54, -1, -1, -1, -1 },
     { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 56, 55, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 57, 4, -1, -1, -1, -1 },
+    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 56, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithASButtonImpl:);
   methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setDrawableLeftWithNSString:);
-  methods[3].selector = @selector(setDrawableStartWithNSString:);
-  methods[4].selector = @selector(setDrawableRightWithNSString:);
-  methods[5].selector = @selector(setDrawableEndWithNSString:);
-  methods[6].selector = @selector(setDrawableTopWithNSString:);
-  methods[7].selector = @selector(setDrawableBottomWithNSString:);
-  methods[8].selector = @selector(tryGetDrawablePadding);
-  methods[9].selector = @selector(getDrawablePadding);
-  methods[10].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[11].selector = @selector(setDrawableTintWithNSString:);
-  methods[12].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[13].selector = @selector(tryGetMinLines);
-  methods[14].selector = @selector(getMinLines);
-  methods[15].selector = @selector(setMinLinesWithInt:);
-  methods[16].selector = @selector(setLinesWithInt:);
-  methods[17].selector = @selector(tryGetMaxLines);
-  methods[18].selector = @selector(getMaxLines);
-  methods[19].selector = @selector(setMaxLinesWithInt:);
-  methods[20].selector = @selector(tryGetMinWidth);
-  methods[21].selector = @selector(getMinWidth);
-  methods[22].selector = @selector(setMinWidthWithNSString:);
-  methods[23].selector = @selector(tryGetMinHeight);
-  methods[24].selector = @selector(getMinHeight);
-  methods[25].selector = @selector(setMinHeightWithNSString:);
-  methods[26].selector = @selector(tryGetMaxWidth);
-  methods[27].selector = @selector(getMaxWidth);
-  methods[28].selector = @selector(setMaxWidthWithNSString:);
-  methods[29].selector = @selector(tryGetMaxHeight);
-  methods[30].selector = @selector(getMaxHeight);
-  methods[31].selector = @selector(setMaxHeightWithNSString:);
-  methods[32].selector = @selector(tryGetHeight);
-  methods[33].selector = @selector(getHeight);
-  methods[34].selector = @selector(setHeightWithNSString:);
-  methods[35].selector = @selector(tryGetWidth);
-  methods[36].selector = @selector(getWidth);
-  methods[37].selector = @selector(setWidthWithNSString:);
-  methods[38].selector = @selector(tryGetMaxEms);
-  methods[39].selector = @selector(getMaxEms);
-  methods[40].selector = @selector(setMaxEmsWithInt:);
-  methods[41].selector = @selector(tryGetMinEms);
-  methods[42].selector = @selector(getMinEms);
-  methods[43].selector = @selector(setMinEmsWithInt:);
-  methods[44].selector = @selector(setEmsWithInt:);
-  methods[45].selector = @selector(tryGetMarqueeRepeatLimit);
-  methods[46].selector = @selector(getMarqueeRepeatLimit);
-  methods[47].selector = @selector(setMarqueeRepeatLimitWithNSString:);
-  methods[48].selector = @selector(setEditableWithBoolean:);
-  methods[49].selector = @selector(setMaxLengthWithInt:);
-  methods[50].selector = @selector(setTypefaceWithNSString:);
-  methods[51].selector = @selector(setTextStyleWithNSString:);
-  methods[52].selector = @selector(setFontFamilyWithNSString:);
-  methods[53].selector = @selector(setTextFormatWithNSString:);
-  methods[54].selector = @selector(setEnabledWithBoolean:);
-  methods[55].selector = @selector(tryGetText);
-  methods[56].selector = @selector(getText);
-  methods[57].selector = @selector(setTextWithNSString:);
-  methods[58].selector = @selector(tryGetGravity);
-  methods[59].selector = @selector(getGravity);
-  methods[60].selector = @selector(setGravityWithNSString:);
-  methods[61].selector = @selector(tryGetTextSize);
-  methods[62].selector = @selector(getTextSize);
-  methods[63].selector = @selector(setTextSizeWithNSString:);
-  methods[64].selector = @selector(setPaddingWithNSString:);
-  methods[65].selector = @selector(tryGetPaddingBottom);
-  methods[66].selector = @selector(getPaddingBottom);
-  methods[67].selector = @selector(setPaddingBottomWithNSString:);
-  methods[68].selector = @selector(tryGetPaddingRight);
-  methods[69].selector = @selector(getPaddingRight);
-  methods[70].selector = @selector(setPaddingRightWithNSString:);
-  methods[71].selector = @selector(tryGetPaddingLeft);
-  methods[72].selector = @selector(getPaddingLeft);
-  methods[73].selector = @selector(setPaddingLeftWithNSString:);
-  methods[74].selector = @selector(tryGetPaddingStart);
-  methods[75].selector = @selector(getPaddingStart);
-  methods[76].selector = @selector(setPaddingStartWithNSString:);
-  methods[77].selector = @selector(tryGetPaddingEnd);
-  methods[78].selector = @selector(getPaddingEnd);
-  methods[79].selector = @selector(setPaddingEndWithNSString:);
-  methods[80].selector = @selector(tryGetPaddingTop);
-  methods[81].selector = @selector(getPaddingTop);
-  methods[82].selector = @selector(setPaddingTopWithNSString:);
-  methods[83].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[84].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[85].selector = @selector(tryGetTextColor);
-  methods[86].selector = @selector(getTextColor);
-  methods[87].selector = @selector(setTextColorWithNSString:);
-  methods[88].selector = @selector(setTextAllCapsWithBoolean:);
-  methods[89].selector = @selector(setSingleLineWithBoolean:);
-  methods[90].selector = @selector(tryGetEllipsize);
-  methods[91].selector = @selector(getEllipsize);
-  methods[92].selector = @selector(setEllipsizeWithNSString:);
-  methods[93].selector = @selector(tryGetFirstBaselineToTopHeight);
-  methods[94].selector = @selector(getFirstBaselineToTopHeight);
-  methods[95].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[96].selector = @selector(tryGetLastBaselineToBottomHeight);
-  methods[97].selector = @selector(getLastBaselineToBottomHeight);
-  methods[98].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[99].selector = @selector(tryGetJustificationMode);
-  methods[100].selector = @selector(getJustificationMode);
-  methods[101].selector = @selector(setJustificationModeWithNSString:);
-  methods[102].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[103].selector = @selector(tryGetShadowDx);
-  methods[104].selector = @selector(getShadowDx);
-  methods[105].selector = @selector(setShadowDxWithFloat:);
-  methods[106].selector = @selector(tryGetShadowDy);
-  methods[107].selector = @selector(getShadowDy);
-  methods[108].selector = @selector(setShadowDyWithFloat:);
-  methods[109].selector = @selector(tryGetShadowColor);
-  methods[110].selector = @selector(getShadowColor);
-  methods[111].selector = @selector(setShadowColorWithNSString:);
+  methods[2].selector = @selector(setDrawableStartWithNSString:);
+  methods[3].selector = @selector(setDrawableEndWithNSString:);
+  methods[4].selector = @selector(setDrawableTopWithNSString:);
+  methods[5].selector = @selector(setDrawableBottomWithNSString:);
+  methods[6].selector = @selector(tryGetDrawablePadding);
+  methods[7].selector = @selector(getDrawablePadding);
+  methods[8].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[9].selector = @selector(setDrawableTintWithNSString:);
+  methods[10].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[11].selector = @selector(setDrawableIconSizeWithNSString:);
+  methods[12].selector = @selector(tryGetMinLines);
+  methods[13].selector = @selector(getMinLines);
+  methods[14].selector = @selector(setMinLinesWithInt:);
+  methods[15].selector = @selector(setLinesWithInt:);
+  methods[16].selector = @selector(tryGetMaxLines);
+  methods[17].selector = @selector(getMaxLines);
+  methods[18].selector = @selector(setMaxLinesWithInt:);
+  methods[19].selector = @selector(tryGetMinWidth);
+  methods[20].selector = @selector(getMinWidth);
+  methods[21].selector = @selector(setMinWidthWithNSString:);
+  methods[22].selector = @selector(tryGetMinHeight);
+  methods[23].selector = @selector(getMinHeight);
+  methods[24].selector = @selector(setMinHeightWithNSString:);
+  methods[25].selector = @selector(tryGetMaxWidth);
+  methods[26].selector = @selector(getMaxWidth);
+  methods[27].selector = @selector(setMaxWidthWithNSString:);
+  methods[28].selector = @selector(tryGetMaxHeight);
+  methods[29].selector = @selector(getMaxHeight);
+  methods[30].selector = @selector(setMaxHeightWithNSString:);
+  methods[31].selector = @selector(tryGetHeight);
+  methods[32].selector = @selector(getHeight);
+  methods[33].selector = @selector(setHeightWithNSString:);
+  methods[34].selector = @selector(tryGetWidth);
+  methods[35].selector = @selector(getWidth);
+  methods[36].selector = @selector(setWidthWithNSString:);
+  methods[37].selector = @selector(tryGetMaxEms);
+  methods[38].selector = @selector(getMaxEms);
+  methods[39].selector = @selector(setMaxEmsWithInt:);
+  methods[40].selector = @selector(tryGetMinEms);
+  methods[41].selector = @selector(getMinEms);
+  methods[42].selector = @selector(setMinEmsWithInt:);
+  methods[43].selector = @selector(setEmsWithInt:);
+  methods[44].selector = @selector(tryGetMarqueeRepeatLimit);
+  methods[45].selector = @selector(getMarqueeRepeatLimit);
+  methods[46].selector = @selector(setMarqueeRepeatLimitWithNSString:);
+  methods[47].selector = @selector(setEditableWithBoolean:);
+  methods[48].selector = @selector(setMaxLengthWithInt:);
+  methods[49].selector = @selector(setTypefaceWithNSString:);
+  methods[50].selector = @selector(setTextStyleWithNSString:);
+  methods[51].selector = @selector(setFontFamilyWithNSString:);
+  methods[52].selector = @selector(setTextFormatWithNSString:);
+  methods[53].selector = @selector(setEnabledWithBoolean:);
+  methods[54].selector = @selector(tryGetText);
+  methods[55].selector = @selector(getText);
+  methods[56].selector = @selector(setTextWithNSString:);
+  methods[57].selector = @selector(tryGetGravity);
+  methods[58].selector = @selector(getGravity);
+  methods[59].selector = @selector(setGravityWithNSString:);
+  methods[60].selector = @selector(tryGetTextSize);
+  methods[61].selector = @selector(getTextSize);
+  methods[62].selector = @selector(setTextSizeWithNSString:);
+  methods[63].selector = @selector(setPaddingWithNSString:);
+  methods[64].selector = @selector(tryGetPaddingBottom);
+  methods[65].selector = @selector(getPaddingBottom);
+  methods[66].selector = @selector(setPaddingBottomWithNSString:);
+  methods[67].selector = @selector(tryGetPaddingRight);
+  methods[68].selector = @selector(getPaddingRight);
+  methods[69].selector = @selector(setPaddingRightWithNSString:);
+  methods[70].selector = @selector(tryGetPaddingLeft);
+  methods[71].selector = @selector(getPaddingLeft);
+  methods[72].selector = @selector(setPaddingLeftWithNSString:);
+  methods[73].selector = @selector(tryGetPaddingStart);
+  methods[74].selector = @selector(getPaddingStart);
+  methods[75].selector = @selector(setPaddingStartWithNSString:);
+  methods[76].selector = @selector(tryGetPaddingEnd);
+  methods[77].selector = @selector(getPaddingEnd);
+  methods[78].selector = @selector(setPaddingEndWithNSString:);
+  methods[79].selector = @selector(tryGetPaddingTop);
+  methods[80].selector = @selector(getPaddingTop);
+  methods[81].selector = @selector(setPaddingTopWithNSString:);
+  methods[82].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[83].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[84].selector = @selector(tryGetTextColor);
+  methods[85].selector = @selector(getTextColor);
+  methods[86].selector = @selector(setTextColorWithNSString:);
+  methods[87].selector = @selector(setTextAllCapsWithBoolean:);
+  methods[88].selector = @selector(setSingleLineWithBoolean:);
+  methods[89].selector = @selector(tryGetEllipsize);
+  methods[90].selector = @selector(getEllipsize);
+  methods[91].selector = @selector(setEllipsizeWithNSString:);
+  methods[92].selector = @selector(tryGetFirstBaselineToTopHeight);
+  methods[93].selector = @selector(getFirstBaselineToTopHeight);
+  methods[94].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[95].selector = @selector(tryGetLastBaselineToBottomHeight);
+  methods[96].selector = @selector(getLastBaselineToBottomHeight);
+  methods[97].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[98].selector = @selector(tryGetJustificationMode);
+  methods[99].selector = @selector(getJustificationMode);
+  methods[100].selector = @selector(setJustificationModeWithNSString:);
+  methods[101].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[102].selector = @selector(tryGetShadowDx);
+  methods[103].selector = @selector(getShadowDx);
+  methods[104].selector = @selector(setShadowDxWithFloat:);
+  methods[105].selector = @selector(tryGetShadowDy);
+  methods[106].selector = @selector(getShadowDy);
+  methods[107].selector = @selector(setShadowDyWithFloat:);
+  methods[108].selector = @selector(tryGetShadowColor);
+  methods[109].selector = @selector(getShadowColor);
+  methods[110].selector = @selector(setShadowColorWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASButtonImpl;", "execute", "Z", "setDrawableLeft", "LNSString;", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ButtonImpl$ButtonCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASButtonImpl_ButtonCommandBuilder = { "ButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 112, 1, 0, -1, -1, 58, -1 };
+  static const void *ptrTable[] = { "LASButtonImpl;", "execute", "Z", "setDrawableStart", "LNSString;", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setDrawableIconSize", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ButtonImpl$ButtonCommandBuilder;>;" };
+  static const J2ObjcClassInfo _ASButtonImpl_ButtonCommandBuilder = { "ButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 111, 1, 0, -1, -1, 57, -1 };
   return &_ASButtonImpl_ButtonCommandBuilder;
 }
 
@@ -5411,16 +5413,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_ButtonCommandBuilder)
   return self;
 }
 
-- (void)setDrawableLeftWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableLeftWithNSString:value])) executeWithBoolean:true];
-}
-
 - (void)setDrawableStartWithNSString:(NSString *)value {
   (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableRightWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableRightWithNSString:value])) executeWithBoolean:true];
 }
 
 - (void)setDrawableEndWithNSString:(NSString *)value {
@@ -5449,6 +5443,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_ButtonCommandBuilder)
 
 - (void)setDrawableTintModeWithNSString:(NSString *)value {
   (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTintModeWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableIconSizeWithNSString:(NSString *)value {
+  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableIconSizeWithNSString:value])) executeWithBoolean:true];
 }
 
 - (id)getMinLines {
@@ -5742,17 +5740,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_ButtonCommandBuilder)
     { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 9, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 11, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 15, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -5764,27 +5763,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_ButtonCommandBuilder)
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 19, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 12, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 24, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 25, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 27, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 27, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 28, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 29, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 30, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 31, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 32, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 31, 25, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 32, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 33, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 34, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 35, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 36, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 37, 2, -1, -1, -1, -1 },
@@ -5796,121 +5795,118 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_ButtonCommandBuilder)
     { NULL, "V", 0x1, 40, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 41, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 42, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 43, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 44, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 45, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 46, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 47, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 44, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 45, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 46, 25, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 47, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 48, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 49, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 50, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 51, 25, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 51, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 52, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 52, 53, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 53, 54, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 54, 53, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 55, 54, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 56, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 55, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithASButtonImpl:);
-  methods[1].selector = @selector(setDrawableLeftWithNSString:);
-  methods[2].selector = @selector(setDrawableStartWithNSString:);
-  methods[3].selector = @selector(setDrawableRightWithNSString:);
-  methods[4].selector = @selector(setDrawableEndWithNSString:);
-  methods[5].selector = @selector(setDrawableTopWithNSString:);
-  methods[6].selector = @selector(setDrawableBottomWithNSString:);
-  methods[7].selector = @selector(getDrawablePadding);
-  methods[8].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[9].selector = @selector(setDrawableTintWithNSString:);
-  methods[10].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[11].selector = @selector(getMinLines);
-  methods[12].selector = @selector(setMinLinesWithInt:);
-  methods[13].selector = @selector(setLinesWithInt:);
-  methods[14].selector = @selector(getMaxLines);
-  methods[15].selector = @selector(setMaxLinesWithInt:);
-  methods[16].selector = @selector(getMinWidth);
-  methods[17].selector = @selector(setMinWidthWithNSString:);
-  methods[18].selector = @selector(getMinHeight);
-  methods[19].selector = @selector(setMinHeightWithNSString:);
-  methods[20].selector = @selector(getMaxWidth);
-  methods[21].selector = @selector(setMaxWidthWithNSString:);
-  methods[22].selector = @selector(getMaxHeight);
-  methods[23].selector = @selector(setMaxHeightWithNSString:);
-  methods[24].selector = @selector(getHeight);
-  methods[25].selector = @selector(setHeightWithNSString:);
-  methods[26].selector = @selector(getWidth);
-  methods[27].selector = @selector(setWidthWithNSString:);
-  methods[28].selector = @selector(getMaxEms);
-  methods[29].selector = @selector(setMaxEmsWithInt:);
-  methods[30].selector = @selector(getMinEms);
-  methods[31].selector = @selector(setMinEmsWithInt:);
-  methods[32].selector = @selector(setEmsWithInt:);
-  methods[33].selector = @selector(getMarqueeRepeatLimit);
-  methods[34].selector = @selector(setMarqueeRepeatLimitWithNSString:);
-  methods[35].selector = @selector(setEditableWithBoolean:);
-  methods[36].selector = @selector(setMaxLengthWithInt:);
-  methods[37].selector = @selector(setTypefaceWithNSString:);
-  methods[38].selector = @selector(setTextStyleWithNSString:);
-  methods[39].selector = @selector(setFontFamilyWithNSString:);
-  methods[40].selector = @selector(setTextFormatWithNSString:);
-  methods[41].selector = @selector(setEnabledWithBoolean:);
-  methods[42].selector = @selector(getText);
-  methods[43].selector = @selector(setTextWithNSString:);
-  methods[44].selector = @selector(getGravity);
-  methods[45].selector = @selector(setGravityWithNSString:);
-  methods[46].selector = @selector(getTextSize);
-  methods[47].selector = @selector(setTextSizeWithNSString:);
-  methods[48].selector = @selector(setPaddingWithNSString:);
-  methods[49].selector = @selector(getPaddingBottom);
-  methods[50].selector = @selector(setPaddingBottomWithNSString:);
-  methods[51].selector = @selector(getPaddingRight);
-  methods[52].selector = @selector(setPaddingRightWithNSString:);
-  methods[53].selector = @selector(getPaddingLeft);
-  methods[54].selector = @selector(setPaddingLeftWithNSString:);
-  methods[55].selector = @selector(getPaddingStart);
-  methods[56].selector = @selector(setPaddingStartWithNSString:);
-  methods[57].selector = @selector(getPaddingEnd);
-  methods[58].selector = @selector(setPaddingEndWithNSString:);
-  methods[59].selector = @selector(getPaddingTop);
-  methods[60].selector = @selector(setPaddingTopWithNSString:);
-  methods[61].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[62].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[63].selector = @selector(getTextColor);
-  methods[64].selector = @selector(setTextColorWithNSString:);
-  methods[65].selector = @selector(setTextAllCapsWithBoolean:);
-  methods[66].selector = @selector(setSingleLineWithBoolean:);
-  methods[67].selector = @selector(getEllipsize);
-  methods[68].selector = @selector(setEllipsizeWithNSString:);
-  methods[69].selector = @selector(getFirstBaselineToTopHeight);
-  methods[70].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[71].selector = @selector(getLastBaselineToBottomHeight);
-  methods[72].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[73].selector = @selector(getJustificationMode);
-  methods[74].selector = @selector(setJustificationModeWithNSString:);
-  methods[75].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[76].selector = @selector(getShadowDx);
-  methods[77].selector = @selector(setShadowDxWithFloat:);
-  methods[78].selector = @selector(getShadowDy);
-  methods[79].selector = @selector(setShadowDyWithFloat:);
-  methods[80].selector = @selector(getShadowColor);
-  methods[81].selector = @selector(setShadowColorWithNSString:);
+  methods[1].selector = @selector(setDrawableStartWithNSString:);
+  methods[2].selector = @selector(setDrawableEndWithNSString:);
+  methods[3].selector = @selector(setDrawableTopWithNSString:);
+  methods[4].selector = @selector(setDrawableBottomWithNSString:);
+  methods[5].selector = @selector(getDrawablePadding);
+  methods[6].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[7].selector = @selector(setDrawableTintWithNSString:);
+  methods[8].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[9].selector = @selector(setDrawableIconSizeWithNSString:);
+  methods[10].selector = @selector(getMinLines);
+  methods[11].selector = @selector(setMinLinesWithInt:);
+  methods[12].selector = @selector(setLinesWithInt:);
+  methods[13].selector = @selector(getMaxLines);
+  methods[14].selector = @selector(setMaxLinesWithInt:);
+  methods[15].selector = @selector(getMinWidth);
+  methods[16].selector = @selector(setMinWidthWithNSString:);
+  methods[17].selector = @selector(getMinHeight);
+  methods[18].selector = @selector(setMinHeightWithNSString:);
+  methods[19].selector = @selector(getMaxWidth);
+  methods[20].selector = @selector(setMaxWidthWithNSString:);
+  methods[21].selector = @selector(getMaxHeight);
+  methods[22].selector = @selector(setMaxHeightWithNSString:);
+  methods[23].selector = @selector(getHeight);
+  methods[24].selector = @selector(setHeightWithNSString:);
+  methods[25].selector = @selector(getWidth);
+  methods[26].selector = @selector(setWidthWithNSString:);
+  methods[27].selector = @selector(getMaxEms);
+  methods[28].selector = @selector(setMaxEmsWithInt:);
+  methods[29].selector = @selector(getMinEms);
+  methods[30].selector = @selector(setMinEmsWithInt:);
+  methods[31].selector = @selector(setEmsWithInt:);
+  methods[32].selector = @selector(getMarqueeRepeatLimit);
+  methods[33].selector = @selector(setMarqueeRepeatLimitWithNSString:);
+  methods[34].selector = @selector(setEditableWithBoolean:);
+  methods[35].selector = @selector(setMaxLengthWithInt:);
+  methods[36].selector = @selector(setTypefaceWithNSString:);
+  methods[37].selector = @selector(setTextStyleWithNSString:);
+  methods[38].selector = @selector(setFontFamilyWithNSString:);
+  methods[39].selector = @selector(setTextFormatWithNSString:);
+  methods[40].selector = @selector(setEnabledWithBoolean:);
+  methods[41].selector = @selector(getText);
+  methods[42].selector = @selector(setTextWithNSString:);
+  methods[43].selector = @selector(getGravity);
+  methods[44].selector = @selector(setGravityWithNSString:);
+  methods[45].selector = @selector(getTextSize);
+  methods[46].selector = @selector(setTextSizeWithNSString:);
+  methods[47].selector = @selector(setPaddingWithNSString:);
+  methods[48].selector = @selector(getPaddingBottom);
+  methods[49].selector = @selector(setPaddingBottomWithNSString:);
+  methods[50].selector = @selector(getPaddingRight);
+  methods[51].selector = @selector(setPaddingRightWithNSString:);
+  methods[52].selector = @selector(getPaddingLeft);
+  methods[53].selector = @selector(setPaddingLeftWithNSString:);
+  methods[54].selector = @selector(getPaddingStart);
+  methods[55].selector = @selector(setPaddingStartWithNSString:);
+  methods[56].selector = @selector(getPaddingEnd);
+  methods[57].selector = @selector(setPaddingEndWithNSString:);
+  methods[58].selector = @selector(getPaddingTop);
+  methods[59].selector = @selector(setPaddingTopWithNSString:);
+  methods[60].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[61].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[62].selector = @selector(getTextColor);
+  methods[63].selector = @selector(setTextColorWithNSString:);
+  methods[64].selector = @selector(setTextAllCapsWithBoolean:);
+  methods[65].selector = @selector(setSingleLineWithBoolean:);
+  methods[66].selector = @selector(getEllipsize);
+  methods[67].selector = @selector(setEllipsizeWithNSString:);
+  methods[68].selector = @selector(getFirstBaselineToTopHeight);
+  methods[69].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[70].selector = @selector(getLastBaselineToBottomHeight);
+  methods[71].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[72].selector = @selector(getJustificationMode);
+  methods[73].selector = @selector(setJustificationModeWithNSString:);
+  methods[74].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[75].selector = @selector(getShadowDx);
+  methods[76].selector = @selector(setShadowDxWithFloat:);
+  methods[77].selector = @selector(getShadowDy);
+  methods[78].selector = @selector(setShadowDyWithFloat:);
+  methods[79].selector = @selector(getShadowColor);
+  methods[80].selector = @selector(setShadowColorWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASButtonImpl;", "setDrawableLeft", "LNSString;", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "Z", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor" };
-  static const J2ObjcClassInfo _ASButtonImpl_ButtonBean = { "ButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 82, 1, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASButtonImpl;", "setDrawableStart", "LNSString;", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setDrawableIconSize", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "Z", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor" };
+  static const J2ObjcClassInfo _ASButtonImpl_ButtonBean = { "ButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 81, 1, 0, -1, -1, -1, -1 };
   return &_ASButtonImpl_ButtonBean;
 }
 

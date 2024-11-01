@@ -31,6 +31,7 @@
      <source-file src="tsc/src/ios/widget/LinearLayoutImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/LinkImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/ListViewImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <source-file src="tsc/src/ios/widget/mergeImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/ModelImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="tsc/src/ios/widget/PopupWindowImpl.ts" target-dir="tsc/src/ios/widget"/>
@@ -89,6 +90,8 @@
      <source-file src="ios/src/LinkImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/ListViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/ListViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/src/mergeImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="ios/src/mergeImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/ModelImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="ios/src/ModelImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/MultiSelectionSpinnerImpl.h" target-dir="LayoutPlugin/ios/src"/>

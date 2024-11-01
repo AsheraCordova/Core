@@ -19,6 +19,7 @@
 @class ADColorStateList;
 @class ADDrawable;
 @class ADView;
+@protocol ADSubMenu;
 @protocol JavaLangCharSequence;
 
 @protocol ADMenuItem < JavaObject >
@@ -48,6 +49,10 @@
 - (id<ADMenuItem>)setEnabledWithBoolean:(jboolean)enabled;
 
 - (jboolean)isEnabled;
+
+- (jboolean)hasSubMenu;
+
+- (id<ADSubMenu>)getSubMenu;
 
 - (void)setShowAsActionWithInt:(jint)actionEnum;
 

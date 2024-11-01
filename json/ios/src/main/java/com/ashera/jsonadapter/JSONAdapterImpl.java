@@ -51,6 +51,8 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 			return getJSONCompatMap();
 		case "getJSONSafeObj":
 			return getJSONSafeObj((Object) args[0]);
+		case "isNull":
+			return isNull((Object) args[0]);
 		default:
 			break;
 		}
@@ -429,4 +431,14 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 		}
 		return false;
 	}
+	
+
+	@Override
+	public boolean isNull(Object object) {
+		return object == null || nativeIsNull(object);
+	}
+	
+	private native boolean nativeIsNull(Object object) /*-[
+	  return object  == [NSNull null];
+	]-*/;
 }

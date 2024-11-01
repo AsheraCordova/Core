@@ -650,11 +650,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonExt)
 
 - (ASButtonImpl_ButtonCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASButtonImpl_ButtonCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASButtonImpl_ButtonCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1227,11 +1225,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_ButtonCommandBuilder)
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

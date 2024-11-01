@@ -93,5 +93,6 @@ public class ConverterPlugin extends BaseConverterPlugin  {
 		ConverterFactory.registerCommandConverter(new DrawForegroundCommandConverter("drawForeground"));
 		ConverterFactory.registerCommandConverter(new DrawDrawableCommandConverter("drawDrawableIcon"));
 		ConverterFactory.registerCommandConverter(new TransformCommandConverter("transform"));
+		ConverterFactory.registerCommandConverter(new DrawableiconSizeConverter("drawableIconSize"));
 	}
 }

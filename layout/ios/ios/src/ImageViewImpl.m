@@ -1736,7 +1736,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageViewImpl_ScaleType)
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  if (![this$0_ isWidgetDisposed]) {
+    ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  }
 }
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout {

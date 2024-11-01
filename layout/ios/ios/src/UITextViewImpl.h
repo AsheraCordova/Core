@@ -818,11 +818,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewExt)
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASUITextViewImpl_UITextViewCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASUITextViewImpl_UITextViewCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASUITextViewImpl_UITextViewCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASUITextViewImpl_UITextViewCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1483,11 +1481,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASUITextViewImpl_UITextViewCommandBuilder)
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

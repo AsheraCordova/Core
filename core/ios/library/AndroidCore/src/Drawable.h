@@ -21,6 +21,7 @@
 @class IOSIntArray;
 @class IOSObjectArray;
 @protocol ADCanvas;
+@protocol ADDrawable_AttributeChangeListener;
 @protocol ADDrawable_MeasureTextHelper;
 @protocol ASIWidget;
 
@@ -81,15 +82,23 @@
 
 - (IOSObjectArray *)getViewAttrs;
 
+- (jboolean)hasDrawable;
+
 - (void)invalidateSelf;
 
 - (jboolean)isProjected;
+
+- (jboolean)isRecycleable;
 
 - (jboolean)isRedraw;
 
 - (jboolean)isStateful;
 
 - (void)jumpToCurrentState;
+
+- (void)setAlphaWithInt:(jint)alpha;
+
+- (void)setAttributeChangeListenerWithADDrawable_AttributeChangeListener:(id<ADDrawable_AttributeChangeListener>)attributeChangeListener;
 
 /*!
  @brief Specify a bounding rectangle for the Drawable.This is where the drawable
@@ -124,6 +133,8 @@
 - (void)setMinimumWidthWithInt:(jint)minimumWidth;
 
 - (void)setOverlayWithASIWidget:(id<ASIWidget>)overlay;
+
+- (void)setRecycleableWithBoolean:(jboolean)recycleable;
 
 - (void)setRedrawWithBoolean:(jboolean)redraw;
 
@@ -169,6 +180,22 @@ FOUNDATION_EXPORT ADDrawable *create_ADDrawable_init(void);
 J2OBJC_TYPE_LITERAL_HEADER(ADDrawable)
 
 @compatibility_alias RAndroidGraphicsDrawableDrawable ADDrawable;
+
+#endif
+
+#if !defined (ADDrawable_AttributeChangeListener_) && (INCLUDE_ALL_Drawable || defined(INCLUDE_ADDrawable_AttributeChangeListener))
+#define ADDrawable_AttributeChangeListener_
+
+@protocol ADDrawable_AttributeChangeListener < JavaObject >
+
+- (void)onAttributeChangeWithNSString:(NSString *)name
+                               withId:(id)attribute;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ADDrawable_AttributeChangeListener)
+
+J2OBJC_TYPE_LITERAL_HEADER(ADDrawable_AttributeChangeListener)
 
 #endif
 

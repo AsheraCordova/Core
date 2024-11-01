@@ -239,6 +239,8 @@
 
 - (id)getGravity;
 
+- (void)setDrawableIconSizeWithId:(id)objValue;
+
 - (id)getMinHeight;
 
 - (id)getMinWidth;
@@ -563,6 +565,8 @@ __attribute__((unused)) static void ASToggleButtonImpl_setGravityWithId_(ASToggl
 __attribute__((unused)) static void ASToggleButtonImpl_updateTextAlignment(ASToggleButtonImpl *self);
 
 __attribute__((unused)) static id ASToggleButtonImpl_getGravity(ASToggleButtonImpl *self);
+
+__attribute__((unused)) static void ASToggleButtonImpl_setDrawableIconSizeWithId_(ASToggleButtonImpl *self, id objValue);
 
 __attribute__((unused)) static id ASToggleButtonImpl_getMinHeight(ASToggleButtonImpl *self);
 
@@ -944,9 +948,7 @@ NSString *ASToggleButtonImpl_GROUP_NAME = @"ToggleButton";
 
 - (void)loadAttributesWithNSString:(NSString *)attributeName {
   ASViewImpl_register__WithNSString_(attributeName);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableLeft"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableStart"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableRight"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableEnd"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTop"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableBottom"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
@@ -954,6 +956,7 @@ NSString *ASToggleButtonImpl_GROUP_NAME = @"ToggleButton";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTint"])) withTypeWithNSString:@"colorstate"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_INVALIDATE]);
   ASConverterFactory_register__WithNSString_withASIConverter_(@"ToggleButton.drawableTintMode", new_ASToggleButtonImpl_DrawableTintMode_init());
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTintMode"])) withTypeWithNSString:@"ToggleButton.drawableTintMode"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_INVALIDATE]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableIconSize"])) withTypeWithNSString:@"dimension"])) withOrderWithInt:-1])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"minLines"])) withTypeWithNSString:@"int"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"lines"])) withTypeWithNSString:@"int"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"maxLines"])) withTypeWithNSString:@"int"]);
@@ -1053,283 +1056,278 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
   ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"marqueeRepeatLimit", @"editable", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"textFormat", @"enabled", @"onCheckedChange", @"checked", @"textOn", @"textOff", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"textColor", @"textAllCaps", @"singleLine", @"ellipsize", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"justificationMode", @"scrollHorizontally", @"shadowDx", @"shadowDy", @"shadowColor" }, 56)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"drawableStart", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"drawableIconSize", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"marqueeRepeatLimit", @"editable", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"textFormat", @"enabled", @"onCheckedChange", @"checked", @"textOn", @"textOff", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"textColor", @"textAllCaps", @"singleLine", @"ellipsize", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"justificationMode", @"scrollHorizontally", @"shadowDx", @"shadowDy", @"shadowColor" }, 55)) {
     case 0:
-    {
-      ASToggleButtonImpl_setDrawableLeftWithNSString_withId_(self, @"drawableLeft", objValue);
-    }
-    break;
-    case 1:
     {
       ASToggleButtonImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
     }
     break;
-    case 2:
-    {
-      ASToggleButtonImpl_setDrawableRightWithNSString_withId_(self, @"drawableRight", objValue);
-    }
-    break;
-    case 3:
+    case 1:
     {
       ASToggleButtonImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
     }
     break;
-    case 4:
+    case 2:
     {
       ASToggleButtonImpl_setDrawableTopWithId_(self, objValue);
     }
     break;
-    case 5:
+    case 3:
     {
       ASToggleButtonImpl_setDrawableBottomWithId_(self, objValue);
     }
     break;
-    case 6:
+    case 4:
     {
       ASToggleButtonImpl_setDrawablePaddingWithId_(self, objValue);
     }
     break;
-    case 7:
+    case 5:
     {
       ASToggleButtonImpl_setDrawableTintWithId_(self, objValue);
     }
     break;
-    case 8:
+    case 6:
     {
       ASToggleButtonImpl_setDrawableTintModeWithId_(self, objValue);
     }
     break;
-    case 9:
+    case 7:
+    {
+      ASToggleButtonImpl_setDrawableIconSizeWithId_(self, objValue);
+    }
+    break;
+    case 8:
     {
       ASToggleButtonImpl_setMinLinesWithId_(self, objValue);
     }
     break;
-    case 10:
+    case 9:
     {
       ASToggleButtonImpl_setLinesWithId_(self, objValue);
     }
     break;
-    case 11:
+    case 10:
     {
       ASToggleButtonImpl_setMaxLinesWithId_(self, objValue);
     }
     break;
-    case 12:
+    case 11:
     {
       ASToggleButtonImpl_setMinWidthWithId_(self, objValue);
     }
     break;
-    case 13:
+    case 12:
     {
       ASToggleButtonImpl_setMinHeightWithId_(self, objValue);
     }
     break;
-    case 14:
+    case 13:
     {
       ASToggleButtonImpl_setMaxWidthWithId_(self, objValue);
     }
     break;
-    case 15:
+    case 14:
     {
       ASToggleButtonImpl_setMaxHeightWithId_(self, objValue);
     }
     break;
-    case 16:
+    case 15:
     {
       ASToggleButtonImpl_setHeightWithId_(self, objValue);
     }
     break;
-    case 17:
+    case 16:
     {
       ASToggleButtonImpl_setWidthWithId_(self, objValue);
     }
     break;
-    case 18:
+    case 17:
     {
       ASToggleButtonImpl_setMaxEmsWithId_(self, objValue);
     }
     break;
-    case 19:
+    case 18:
     {
       ASToggleButtonImpl_setMinEmsWithId_(self, objValue);
     }
     break;
-    case 20:
+    case 19:
     {
       ASToggleButtonImpl_setEmsWithId_(self, objValue);
     }
     break;
-    case 21:
+    case 20:
     {
       ASToggleButtonImpl_setMarqueeRepeatLimitWithId_(self, objValue);
     }
     break;
-    case 22:
+    case 21:
     {
       ASToggleButtonImpl_setEnabledWithId_(self, objValue);
     }
     break;
-    case 23:
+    case 22:
     {
       ASToggleButtonImpl_setMaxLengthWithId_(self, objValue);
     }
     break;
-    case 24:
+    case 23:
     {
       ASToggleButtonImpl_setTypeFaceWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 25:
+    case 24:
     {
       ASToggleButtonImpl_setTextStyleWithId_(self, objValue);
     }
     break;
-    case 26:
+    case 25:
     {
       ASToggleButtonImpl_setFontFamilyWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 27:
+    case 26:
     {
       ASToggleButtonImpl_setTextFormatWithId_(self, objValue);
     }
     break;
-    case 28:
+    case 27:
     {
       ASToggleButtonImpl_setEnabledWithId_(self, objValue);
     }
     break;
-    case 29:
+    case 28:
     {
       ASToggleButtonImpl_setOnCheckedWithId_(self, objValue);
     }
     break;
-    case 30:
+    case 29:
     {
       ASToggleButtonImpl_setCheckedWithId_(self, objValue);
     }
     break;
-    case 31:
+    case 30:
     {
       ASToggleButtonImpl_setTextOnWithId_(self, objValue);
     }
     break;
-    case 32:
+    case 31:
     {
       ASToggleButtonImpl_setTextOffWithId_(self, objValue);
     }
     break;
-    case 33:
+    case 32:
     {
       [self setMyTextWithId:objValue];
     }
     break;
-    case 34:
+    case 33:
     {
       ASToggleButtonImpl_setGravityWithId_(self, objValue);
     }
     break;
-    case 35:
+    case 34:
     {
       ASToggleButtonImpl_setMyTextSizeWithId_(self, objValue);
     }
     break;
-    case 36:
+    case 35:
     {
       ASToggleButtonImpl_setPaddingWithId_(self, objValue);
     }
     break;
-    case 37:
+    case 36:
     {
       [self setPaddingBottomWithId:objValue];
     }
     break;
-    case 38:
+    case 37:
     {
       [self setPaddingRightWithId:objValue];
     }
     break;
-    case 39:
+    case 38:
     {
       [self setPaddingLeftWithId:objValue];
     }
     break;
-    case 40:
+    case 39:
     {
       ASToggleButtonImpl_setPaddingStartWithId_(self, objValue);
     }
     break;
-    case 41:
+    case 40:
     {
       ASToggleButtonImpl_setPaddingEndWithId_(self, objValue);
     }
     break;
-    case 42:
+    case 41:
     {
       [self setPaddingTopWithId:objValue];
     }
     break;
-    case 43:
+    case 42:
     {
       ASToggleButtonImpl_setPaddingHorizontalWithId_(self, objValue);
     }
     break;
-    case 44:
+    case 43:
     {
       ASToggleButtonImpl_setPaddingVerticalWithId_(self, objValue);
     }
     break;
-    case 45:
+    case 44:
     {
       ASToggleButtonImpl_setTextColorWithId_(self, objValue);
     }
     break;
-    case 46:
+    case 45:
     {
       ASToggleButtonImpl_setTextAllCapsWithId_(self, objValue);
     }
     break;
-    case 47:
+    case 46:
     {
       ASToggleButtonImpl_setSingleLineWithId_(self, objValue);
     }
     break;
-    case 48:
+    case 47:
     {
       ASToggleButtonImpl_setEllipsizeWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 49:
+    case 48:
     {
       ASToggleButtonImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
     }
     break;
-    case 50:
+    case 49:
     {
       ASToggleButtonImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
     }
     break;
-    case 51:
+    case 50:
     {
       ASToggleButtonImpl_setJustificationModeWithId_withNSString_(self, objValue, strValue);
     }
     break;
-    case 52:
+    case 51:
     {
       ASToggleButtonImpl_setScrollHorizontallyWithId_(self, objValue);
     }
     break;
-    case 53:
+    case 52:
     {
       ASToggleButtonImpl_setShadowDxWithJavaLangFloat_withNSString_(self, (JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]), strValue);
     }
     break;
-    case 54:
+    case 53:
     {
       ASToggleButtonImpl_setShadowDyWithJavaLangFloat_withNSString_(self, (JavaLangFloat *) cast_chk(objValue, [JavaLangFloat class]), strValue);
     }
     break;
-    case 55:
+    case 54:
     {
       ASToggleButtonImpl_setShadowColorWithId_withNSString_(self, objValue, strValue);
     }
@@ -1802,6 +1800,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   if ([((ADToggleButton *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADToggleButton *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASToggleButtonImpl_updateTextAlignment(self);
   }
+}
+
+- (void)setDrawableIconSizeWithId:(id)objValue {
+  ASToggleButtonImpl_setDrawableIconSizeWithId_(self, objValue);
 }
 
 - (id)getMinHeight {
@@ -2300,15 +2302,15 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 57, 14, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 58, 18, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 59, 18, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 60, 18, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 61, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 62, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 63, 18, -1, -1, -1, -1 },
@@ -2316,58 +2318,59 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 65, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 66, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 67, 18, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 68, 18, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 69, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 70, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 70, 20, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 71, 20, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 72, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 72, 20, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 73, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 74, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 75, 18, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 76, 18, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 77, 11, -1, 12, -1, -1 },
+    { NULL, "V", 0x2, 77, 18, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 78, 11, -1, 12, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 78, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 79, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 80, 18, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 80, 18, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 81, 18, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 82, 14, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 82, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 83, 14, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 35, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 83, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 84, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 85, 18, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 86, 87, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 88, 87, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 89, 87, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 90, 87, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 91, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 86, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 87, 88, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 89, 88, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 90, 88, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 91, 88, -1, -1, -1, -1 },
     { NULL, "I", 0x102, 92, 18, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 93, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 93, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 94, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 95, 18, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 95, 96, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 96, 97, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 97, 98, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 99, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 100, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 98, 99, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 100, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 101, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 101, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 102, 20, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
@@ -2377,18 +2380,18 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 102, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 103, 104, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 104, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 105, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 106, 42, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 105, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 106, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 107, 42, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 107, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 108, 1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 108, 11, -1, 12, -1, -1 },
-    { NULL, "V", 0x2, 109, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 109, 11, -1, 12, -1, -1 },
+    { NULL, "V", 0x2, 110, 18, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
   };
@@ -2481,101 +2484,102 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[83].selector = @selector(updateTextAlignment);
   methods[84].selector = @selector(getGravity);
   methods[85].selector = @selector(onRtlPropertiesChangedWithInt:);
-  methods[86].selector = @selector(getMinHeight);
-  methods[87].selector = @selector(getMinWidth);
-  methods[88].selector = @selector(setEmsWithId:);
-  methods[89].selector = @selector(getMaxEms);
-  methods[90].selector = @selector(getMinEms);
-  methods[91].selector = @selector(setMinEmsWithId:);
-  methods[92].selector = @selector(getMinLines);
-  methods[93].selector = @selector(getMaxLines);
-  methods[94].selector = @selector(setMaxEmsWithId:);
-  methods[95].selector = @selector(setWidthWithId:);
-  methods[96].selector = @selector(setHeightWithId:);
-  methods[97].selector = @selector(setMaxLinesWithId:);
-  methods[98].selector = @selector(setLinesWithId:);
-  methods[99].selector = @selector(setMinLinesWithId:);
-  methods[100].selector = @selector(setMaxHeightWithId:);
-  methods[101].selector = @selector(setMaxWidthWithId:);
-  methods[102].selector = @selector(getMaxWidth);
-  methods[103].selector = @selector(getMaxHeight);
-  methods[104].selector = @selector(setMinHeightWithId:);
-  methods[105].selector = @selector(setMinWidthWithId:);
-  methods[106].selector = @selector(getWidth);
-  methods[107].selector = @selector(getHeight);
-  methods[108].selector = @selector(setTypeFaceWithId:withNSString:);
-  methods[109].selector = @selector(setFontFamilyWithId:withNSString:);
-  methods[110].selector = @selector(setTextStyleWithId:);
-  methods[111].selector = @selector(setMaxLengthWithId:);
-  methods[112].selector = @selector(setTextAllCapsWithId:);
-  methods[113].selector = @selector(setFirstBaselineToTopHeightWithId:);
-  methods[114].selector = @selector(getIncludeFontPadding);
-  methods[115].selector = @selector(getFirstBaselineToTopHeight);
-  methods[116].selector = @selector(setLastBaselineToBottomHeightWithId:);
-  methods[117].selector = @selector(getLastBaselineToBottomHeight);
-  methods[118].selector = @selector(initHtmlWithJavaUtilMap:);
-  methods[119].selector = @selector(calcNumberOfWhiteSpaces);
-  methods[120].selector = @selector(cancelTimer);
-  methods[121].selector = @selector(startTimer);
-  methods[122].selector = @selector(getMarqueeRepeatLimit);
-  methods[123].selector = @selector(setMarqueeRepeatLimitWithId:);
-  methods[124].selector = @selector(startOrStopMarqueeWithId:);
-  methods[125].selector = @selector(getLabelWidth);
-  methods[126].selector = @selector(isLabelMeasured);
-  methods[127].selector = @selector(setTextFormatWithId:);
-  methods[128].selector = @selector(getTextSize);
-  methods[129].selector = @selector(setMyTextSizeWithId:);
-  methods[130].selector = @selector(nativeSetTextSizeWithInt:);
-  methods[131].selector = @selector(setTextColorWithId:);
-  methods[132].selector = @selector(getTextColorState);
-  methods[133].selector = @selector(setDrawablePaddingWithId:);
-  methods[134].selector = @selector(setDrawableBottomWithId:);
-  methods[135].selector = @selector(setDrawableTopWithId:);
-  methods[136].selector = @selector(setDrawableRightWithNSString:withId:);
-  methods[137].selector = @selector(setDrawableRightInternalWithNSString:withId:);
-  methods[138].selector = @selector(setDrawableLeftWithNSString:withId:);
-  methods[139].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
-  methods[140].selector = @selector(getImageHeightWithId:);
-  methods[141].selector = @selector(getImageWidthWithId:);
-  methods[142].selector = @selector(getDrawablePadding);
-  methods[143].selector = @selector(setDrawableTintModeWithId:);
-  methods[144].selector = @selector(setDrawableTintWithId:);
-  methods[145].selector = @selector(drawableStateChanged);
-  methods[146].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
-  methods[147].selector = @selector(nativeGetFontSize);
-  methods[148].selector = @selector(nativeGetFontStyle);
-  methods[149].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
-  methods[150].selector = @selector(nativeSetFontStyleWithInt:);
-  methods[151].selector = @selector(setSingleLineWithId:);
-  methods[152].selector = @selector(getEllipsize);
-  methods[153].selector = @selector(setEllipsizeWithId:withNSString:);
-  methods[154].selector = @selector(getBorderPadding);
-  methods[155].selector = @selector(getLineHeightPadding);
-  methods[156].selector = @selector(getLineHeight);
-  methods[157].selector = @selector(getBorderWidth);
-  methods[158].selector = @selector(canMarquee);
-  methods[159].selector = @selector(cancelNativeTimer);
-  methods[160].selector = @selector(isDisposed);
-  methods[161].selector = @selector(addDeallocHandler);
-  methods[162].selector = @selector(schedule);
-  methods[163].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
-  methods[164].selector = @selector(asNativeWidget);
-  methods[165].selector = @selector(checkIosVersionWithNSString:);
-  methods[166].selector = @selector(setIdWithNSString:);
-  methods[167].selector = @selector(setVisibleWithBoolean:);
-  methods[168].selector = @selector(requestLayout);
-  methods[169].selector = @selector(invalidate);
-  methods[170].selector = @selector(getPluginWithNSString:);
-  methods[171].selector = @selector(getBean);
-  methods[172].selector = @selector(getBuilder);
-  methods[173].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[174].selector = @selector(setCheckedWithId:);
-  methods[175].selector = @selector(getChecked);
-  methods[176].selector = @selector(toggleChecked);
+  methods[86].selector = @selector(setDrawableIconSizeWithId:);
+  methods[87].selector = @selector(getMinHeight);
+  methods[88].selector = @selector(getMinWidth);
+  methods[89].selector = @selector(setEmsWithId:);
+  methods[90].selector = @selector(getMaxEms);
+  methods[91].selector = @selector(getMinEms);
+  methods[92].selector = @selector(setMinEmsWithId:);
+  methods[93].selector = @selector(getMinLines);
+  methods[94].selector = @selector(getMaxLines);
+  methods[95].selector = @selector(setMaxEmsWithId:);
+  methods[96].selector = @selector(setWidthWithId:);
+  methods[97].selector = @selector(setHeightWithId:);
+  methods[98].selector = @selector(setMaxLinesWithId:);
+  methods[99].selector = @selector(setLinesWithId:);
+  methods[100].selector = @selector(setMinLinesWithId:);
+  methods[101].selector = @selector(setMaxHeightWithId:);
+  methods[102].selector = @selector(setMaxWidthWithId:);
+  methods[103].selector = @selector(getMaxWidth);
+  methods[104].selector = @selector(getMaxHeight);
+  methods[105].selector = @selector(setMinHeightWithId:);
+  methods[106].selector = @selector(setMinWidthWithId:);
+  methods[107].selector = @selector(getWidth);
+  methods[108].selector = @selector(getHeight);
+  methods[109].selector = @selector(setTypeFaceWithId:withNSString:);
+  methods[110].selector = @selector(setFontFamilyWithId:withNSString:);
+  methods[111].selector = @selector(setTextStyleWithId:);
+  methods[112].selector = @selector(setMaxLengthWithId:);
+  methods[113].selector = @selector(setTextAllCapsWithId:);
+  methods[114].selector = @selector(setFirstBaselineToTopHeightWithId:);
+  methods[115].selector = @selector(getIncludeFontPadding);
+  methods[116].selector = @selector(getFirstBaselineToTopHeight);
+  methods[117].selector = @selector(setLastBaselineToBottomHeightWithId:);
+  methods[118].selector = @selector(getLastBaselineToBottomHeight);
+  methods[119].selector = @selector(initHtmlWithJavaUtilMap:);
+  methods[120].selector = @selector(calcNumberOfWhiteSpaces);
+  methods[121].selector = @selector(cancelTimer);
+  methods[122].selector = @selector(startTimer);
+  methods[123].selector = @selector(getMarqueeRepeatLimit);
+  methods[124].selector = @selector(setMarqueeRepeatLimitWithId:);
+  methods[125].selector = @selector(startOrStopMarqueeWithId:);
+  methods[126].selector = @selector(getLabelWidth);
+  methods[127].selector = @selector(isLabelMeasured);
+  methods[128].selector = @selector(setTextFormatWithId:);
+  methods[129].selector = @selector(getTextSize);
+  methods[130].selector = @selector(setMyTextSizeWithId:);
+  methods[131].selector = @selector(nativeSetTextSizeWithInt:);
+  methods[132].selector = @selector(setTextColorWithId:);
+  methods[133].selector = @selector(getTextColorState);
+  methods[134].selector = @selector(setDrawablePaddingWithId:);
+  methods[135].selector = @selector(setDrawableBottomWithId:);
+  methods[136].selector = @selector(setDrawableTopWithId:);
+  methods[137].selector = @selector(setDrawableRightWithNSString:withId:);
+  methods[138].selector = @selector(setDrawableRightInternalWithNSString:withId:);
+  methods[139].selector = @selector(setDrawableLeftWithNSString:withId:);
+  methods[140].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
+  methods[141].selector = @selector(getImageHeightWithId:);
+  methods[142].selector = @selector(getImageWidthWithId:);
+  methods[143].selector = @selector(getDrawablePadding);
+  methods[144].selector = @selector(setDrawableTintModeWithId:);
+  methods[145].selector = @selector(setDrawableTintWithId:);
+  methods[146].selector = @selector(drawableStateChanged);
+  methods[147].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
+  methods[148].selector = @selector(nativeGetFontSize);
+  methods[149].selector = @selector(nativeGetFontStyle);
+  methods[150].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
+  methods[151].selector = @selector(nativeSetFontStyleWithInt:);
+  methods[152].selector = @selector(setSingleLineWithId:);
+  methods[153].selector = @selector(getEllipsize);
+  methods[154].selector = @selector(setEllipsizeWithId:withNSString:);
+  methods[155].selector = @selector(getBorderPadding);
+  methods[156].selector = @selector(getLineHeightPadding);
+  methods[157].selector = @selector(getLineHeight);
+  methods[158].selector = @selector(getBorderWidth);
+  methods[159].selector = @selector(canMarquee);
+  methods[160].selector = @selector(cancelNativeTimer);
+  methods[161].selector = @selector(isDisposed);
+  methods[162].selector = @selector(addDeallocHandler);
+  methods[163].selector = @selector(schedule);
+  methods[164].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
+  methods[165].selector = @selector(asNativeWidget);
+  methods[166].selector = @selector(checkIosVersionWithNSString:);
+  methods[167].selector = @selector(setIdWithNSString:);
+  methods[168].selector = @selector(setVisibleWithBoolean:);
+  methods[169].selector = @selector(requestLayout);
+  methods[170].selector = @selector(invalidate);
+  methods[171].selector = @selector(getPluginWithNSString:);
+  methods[172].selector = @selector(getBean);
+  methods[173].selector = @selector(getBuilder);
+  methods[174].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[175].selector = @selector(setCheckedWithId:);
+  methods[176].selector = @selector(getChecked);
+  methods[177].selector = @selector(toggleChecked);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 110, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 111, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 111, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 112, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADToggleButton;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "TEXT_ALIGN_CENTER", "I", .constantValue.asInt = ASToggleButtonImpl_TEXT_ALIGN_CENTER, 0x1a, -1, -1, -1, -1 },
@@ -2584,16 +2588,16 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "textOff_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "textOn_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "onCheckedChangeListener_", "LADCompoundButton_OnCheckedChangeListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 112, -1 },
+    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 113, -1 },
     { "html_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "escapeHtml_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 113, -1 },
+    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 114, -1 },
     { "marqueeTask_", "LASToggleButtonImpl_MarqueeTask;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeRepeatLimit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeCommandConverter_", "LASMarqueeCommandConverter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "drawableTint_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 114, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 115, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 115, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 116, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASToggleButtonImpl_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
     { "ellipsize_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "timer_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2603,8 +2607,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "bean_", "LASToggleButtonImpl_ToggleButtonBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "checked_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "createNativeWidget", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "measureHeight", "I", "nativeMeasureHeightButton", "LNSObject;I", "setMyText", "LNSObject;", "nativeSetText", "LNSObject;LNSString;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "postSetAttribute", "setTextColor", "LNSObject;LNSObject;", "setTextColorLink", "LADColorStateList;", "setHintColor", "setEnabled", "nativeSetEnabled", "Z", "nativeMeasureWidthButton", "setNumberOfLines", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setScrollHorizontally", "setShadowColor", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setTextOff", "setTextOn", "setOnChecked", "setGravity", "onRtlPropertiesChanged", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "setTypeFace", "setFontFamily", "setTextStyle", "setMaxLength", "setTextAllCaps", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "initHtml", "setMarqueeRepeatLimit", "startOrStopMarquee", "setTextFormat", "setMyTextSize", "nativeSetTextSize", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "drawableStateChange", "LNSString;LADDrawable;", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setSingleLine", "setEllipsize", "executeOnMainThread", "LJavaLangRunnable;", "checkIosVersion", "setId", "setVisible", "getPlugin", "nativeCreate", "setChecked", &ASToggleButtonImpl_LOCAL_NAME, &ASToggleButtonImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASToggleButtonImpl_ITALIC_FONT_TRAIT, &ASToggleButtonImpl_BOLD_FONT_TRAIT, "LASToggleButtonImpl_DrawableTintMode;LASToggleButtonImpl_MarqueeRepeatLimit;LASToggleButtonImpl_Font;LASToggleButtonImpl_TextStyle;LASToggleButtonImpl_Ellipsize;LASToggleButtonImpl_JustificationMode;LASToggleButtonImpl_ToggleButtonExt;LASToggleButtonImpl_MarqueeTask;LASToggleButtonImpl_DellocHandler;LASToggleButtonImpl_OnCheckedChangeListener;LASToggleButtonImpl_ToggleButtonCommandBuilder;LASToggleButtonImpl_ToggleButtonBean;LASToggleButtonImpl_StateToggler;" };
-  static const J2ObjcClassInfo _ASToggleButtonImpl = { "ToggleButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 177, 28, -1, 116, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "createNativeWidget", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "measureHeight", "I", "nativeMeasureHeightButton", "LNSObject;I", "setMyText", "LNSObject;", "nativeSetText", "LNSObject;LNSString;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "postSetAttribute", "setTextColor", "LNSObject;LNSObject;", "setTextColorLink", "LADColorStateList;", "setHintColor", "setEnabled", "nativeSetEnabled", "Z", "nativeMeasureWidthButton", "setNumberOfLines", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setScrollHorizontally", "setShadowColor", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setTextOff", "setTextOn", "setOnChecked", "setGravity", "onRtlPropertiesChanged", "setDrawableIconSize", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "setTypeFace", "setFontFamily", "setTextStyle", "setMaxLength", "setTextAllCaps", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "initHtml", "setMarqueeRepeatLimit", "startOrStopMarquee", "setTextFormat", "setMyTextSize", "nativeSetTextSize", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "drawableStateChange", "LNSString;LADDrawable;", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setSingleLine", "setEllipsize", "executeOnMainThread", "LJavaLangRunnable;", "checkIosVersion", "setId", "setVisible", "getPlugin", "nativeCreate", "setChecked", &ASToggleButtonImpl_LOCAL_NAME, &ASToggleButtonImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASToggleButtonImpl_ITALIC_FONT_TRAIT, &ASToggleButtonImpl_BOLD_FONT_TRAIT, "LASToggleButtonImpl_DrawableTintMode;LASToggleButtonImpl_MarqueeRepeatLimit;LASToggleButtonImpl_Font;LASToggleButtonImpl_TextStyle;LASToggleButtonImpl_Ellipsize;LASToggleButtonImpl_JustificationMode;LASToggleButtonImpl_ToggleButtonExt;LASToggleButtonImpl_MarqueeTask;LASToggleButtonImpl_DellocHandler;LASToggleButtonImpl_OnCheckedChangeListener;LASToggleButtonImpl_ToggleButtonCommandBuilder;LASToggleButtonImpl_ToggleButtonBean;LASToggleButtonImpl_StateToggler;" };
+  static const J2ObjcClassInfo _ASToggleButtonImpl = { "ToggleButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 178, 28, -1, 117, -1, -1, -1 };
   return &_ASToggleButtonImpl;
 }
 
@@ -3055,6 +3059,13 @@ id ASToggleButtonImpl_getGravity(ASToggleButtonImpl *self) {
   }
   jint gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
+}
+
+void ASToggleButtonImpl_setDrawableIconSizeWithId_(ASToggleButtonImpl *self, id objValue) {
+  [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
 }
 
 id ASToggleButtonImpl_getMinHeight(ASToggleButtonImpl *self) {
@@ -4095,7 +4106,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_JustificationMode)
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  if (![this$0_ isWidgetDisposed]) {
+    ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  }
 }
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout {
@@ -4697,26 +4710,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_OnCheckedChangeListener)
   return self;
 }
 
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableStartWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableRight"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -4784,6 +4779,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_OnCheckedChangeListener)
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableTintModeWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTintMode"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableIconSize"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -5625,20 +5629,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_OnCheckedChangeListener)
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 5, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 6, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 7, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 8, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 9, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 10, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 11, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 12, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 13, 14, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 15, 14, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 12, 13, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 14, 13, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 16, 14, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 15, 13, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 16, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 17, 4, -1, -1, -1, -1 },
@@ -5656,28 +5662,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_OnCheckedChangeListener)
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 21, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 22, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 22, 13, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 23, 14, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 23, 13, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 24, 13, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 24, 14, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 25, 14, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 26, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 27, 2, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 28, 14, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 25, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 26, 2, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 27, 13, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 28, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 29, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 30, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 31, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 32, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 33, 2, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 34, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 32, 2, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 33, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 35, 2, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 34, 2, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 35, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 36, 4, -1, -1, -1, -1 },
@@ -5690,9 +5696,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_OnCheckedChangeListener)
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 39, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 40, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 40, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 41, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -5709,16 +5715,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_OnCheckedChangeListener)
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 46, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 47, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 48, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 49, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 50, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 49, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 50, 2, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 51, 2, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 52, 2, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 52, 4, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 53, 4, -1, -1, -1, -1 },
@@ -5728,151 +5734,147 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_OnCheckedChangeListener)
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 55, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 56, 2, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 56, 4, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 57, 2, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 57, 58, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 58, 59, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 59, 58, -1, -1, -1, -1 },
     { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 60, 59, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 61, 4, -1, -1, -1, -1 },
+    { NULL, "LASToggleButtonImpl_ToggleButtonCommandBuilder;", 0x1, 60, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithASToggleButtonImpl:);
   methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setDrawableLeftWithNSString:);
-  methods[3].selector = @selector(setDrawableStartWithNSString:);
-  methods[4].selector = @selector(setDrawableRightWithNSString:);
-  methods[5].selector = @selector(setDrawableEndWithNSString:);
-  methods[6].selector = @selector(setDrawableTopWithNSString:);
-  methods[7].selector = @selector(setDrawableBottomWithNSString:);
-  methods[8].selector = @selector(tryGetDrawablePadding);
-  methods[9].selector = @selector(getDrawablePadding);
-  methods[10].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[11].selector = @selector(setDrawableTintWithNSString:);
-  methods[12].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[13].selector = @selector(tryGetMinLines);
-  methods[14].selector = @selector(getMinLines);
-  methods[15].selector = @selector(setMinLinesWithInt:);
-  methods[16].selector = @selector(setLinesWithInt:);
-  methods[17].selector = @selector(tryGetMaxLines);
-  methods[18].selector = @selector(getMaxLines);
-  methods[19].selector = @selector(setMaxLinesWithInt:);
-  methods[20].selector = @selector(tryGetMinWidth);
-  methods[21].selector = @selector(getMinWidth);
-  methods[22].selector = @selector(setMinWidthWithNSString:);
-  methods[23].selector = @selector(tryGetMinHeight);
-  methods[24].selector = @selector(getMinHeight);
-  methods[25].selector = @selector(setMinHeightWithNSString:);
-  methods[26].selector = @selector(tryGetMaxWidth);
-  methods[27].selector = @selector(getMaxWidth);
-  methods[28].selector = @selector(setMaxWidthWithNSString:);
-  methods[29].selector = @selector(tryGetMaxHeight);
-  methods[30].selector = @selector(getMaxHeight);
-  methods[31].selector = @selector(setMaxHeightWithNSString:);
-  methods[32].selector = @selector(tryGetHeight);
-  methods[33].selector = @selector(getHeight);
-  methods[34].selector = @selector(setHeightWithNSString:);
-  methods[35].selector = @selector(tryGetWidth);
-  methods[36].selector = @selector(getWidth);
-  methods[37].selector = @selector(setWidthWithNSString:);
-  methods[38].selector = @selector(tryGetMaxEms);
-  methods[39].selector = @selector(getMaxEms);
-  methods[40].selector = @selector(setMaxEmsWithInt:);
-  methods[41].selector = @selector(tryGetMinEms);
-  methods[42].selector = @selector(getMinEms);
-  methods[43].selector = @selector(setMinEmsWithInt:);
-  methods[44].selector = @selector(setEmsWithInt:);
-  methods[45].selector = @selector(tryGetMarqueeRepeatLimit);
-  methods[46].selector = @selector(getMarqueeRepeatLimit);
-  methods[47].selector = @selector(setMarqueeRepeatLimitWithNSString:);
-  methods[48].selector = @selector(setEditableWithBoolean:);
-  methods[49].selector = @selector(setMaxLengthWithInt:);
-  methods[50].selector = @selector(setTypefaceWithNSString:);
-  methods[51].selector = @selector(setTextStyleWithNSString:);
-  methods[52].selector = @selector(setFontFamilyWithNSString:);
-  methods[53].selector = @selector(setTextFormatWithNSString:);
-  methods[54].selector = @selector(setEnabledWithBoolean:);
-  methods[55].selector = @selector(setOnCheckedChangeWithNSString:);
-  methods[56].selector = @selector(tryGetChecked);
-  methods[57].selector = @selector(isChecked);
-  methods[58].selector = @selector(setCheckedWithBoolean:);
-  methods[59].selector = @selector(tryGetTextOn);
-  methods[60].selector = @selector(getTextOn);
-  methods[61].selector = @selector(setTextOnWithNSString:);
-  methods[62].selector = @selector(tryGetTextOff);
-  methods[63].selector = @selector(getTextOff);
-  methods[64].selector = @selector(setTextOffWithNSString:);
-  methods[65].selector = @selector(tryGetText);
-  methods[66].selector = @selector(getText);
-  methods[67].selector = @selector(setTextWithNSString:);
-  methods[68].selector = @selector(tryGetGravity);
-  methods[69].selector = @selector(getGravity);
-  methods[70].selector = @selector(setGravityWithNSString:);
-  methods[71].selector = @selector(tryGetTextSize);
-  methods[72].selector = @selector(getTextSize);
-  methods[73].selector = @selector(setTextSizeWithNSString:);
-  methods[74].selector = @selector(setPaddingWithNSString:);
-  methods[75].selector = @selector(tryGetPaddingBottom);
-  methods[76].selector = @selector(getPaddingBottom);
-  methods[77].selector = @selector(setPaddingBottomWithNSString:);
-  methods[78].selector = @selector(tryGetPaddingRight);
-  methods[79].selector = @selector(getPaddingRight);
-  methods[80].selector = @selector(setPaddingRightWithNSString:);
-  methods[81].selector = @selector(tryGetPaddingLeft);
-  methods[82].selector = @selector(getPaddingLeft);
-  methods[83].selector = @selector(setPaddingLeftWithNSString:);
-  methods[84].selector = @selector(tryGetPaddingStart);
-  methods[85].selector = @selector(getPaddingStart);
-  methods[86].selector = @selector(setPaddingStartWithNSString:);
-  methods[87].selector = @selector(tryGetPaddingEnd);
-  methods[88].selector = @selector(getPaddingEnd);
-  methods[89].selector = @selector(setPaddingEndWithNSString:);
-  methods[90].selector = @selector(tryGetPaddingTop);
-  methods[91].selector = @selector(getPaddingTop);
-  methods[92].selector = @selector(setPaddingTopWithNSString:);
-  methods[93].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[94].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[95].selector = @selector(tryGetTextColor);
-  methods[96].selector = @selector(getTextColor);
-  methods[97].selector = @selector(setTextColorWithNSString:);
-  methods[98].selector = @selector(setTextAllCapsWithBoolean:);
-  methods[99].selector = @selector(setSingleLineWithBoolean:);
-  methods[100].selector = @selector(tryGetEllipsize);
-  methods[101].selector = @selector(getEllipsize);
-  methods[102].selector = @selector(setEllipsizeWithNSString:);
-  methods[103].selector = @selector(tryGetFirstBaselineToTopHeight);
-  methods[104].selector = @selector(getFirstBaselineToTopHeight);
-  methods[105].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[106].selector = @selector(tryGetLastBaselineToBottomHeight);
-  methods[107].selector = @selector(getLastBaselineToBottomHeight);
-  methods[108].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[109].selector = @selector(tryGetJustificationMode);
-  methods[110].selector = @selector(getJustificationMode);
-  methods[111].selector = @selector(setJustificationModeWithNSString:);
-  methods[112].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[113].selector = @selector(tryGetShadowDx);
-  methods[114].selector = @selector(getShadowDx);
-  methods[115].selector = @selector(setShadowDxWithFloat:);
-  methods[116].selector = @selector(tryGetShadowDy);
-  methods[117].selector = @selector(getShadowDy);
-  methods[118].selector = @selector(setShadowDyWithFloat:);
-  methods[119].selector = @selector(tryGetShadowColor);
-  methods[120].selector = @selector(getShadowColor);
-  methods[121].selector = @selector(setShadowColorWithNSString:);
+  methods[2].selector = @selector(setDrawableStartWithNSString:);
+  methods[3].selector = @selector(setDrawableEndWithNSString:);
+  methods[4].selector = @selector(setDrawableTopWithNSString:);
+  methods[5].selector = @selector(setDrawableBottomWithNSString:);
+  methods[6].selector = @selector(tryGetDrawablePadding);
+  methods[7].selector = @selector(getDrawablePadding);
+  methods[8].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[9].selector = @selector(setDrawableTintWithNSString:);
+  methods[10].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[11].selector = @selector(setDrawableIconSizeWithNSString:);
+  methods[12].selector = @selector(tryGetMinLines);
+  methods[13].selector = @selector(getMinLines);
+  methods[14].selector = @selector(setMinLinesWithInt:);
+  methods[15].selector = @selector(setLinesWithInt:);
+  methods[16].selector = @selector(tryGetMaxLines);
+  methods[17].selector = @selector(getMaxLines);
+  methods[18].selector = @selector(setMaxLinesWithInt:);
+  methods[19].selector = @selector(tryGetMinWidth);
+  methods[20].selector = @selector(getMinWidth);
+  methods[21].selector = @selector(setMinWidthWithNSString:);
+  methods[22].selector = @selector(tryGetMinHeight);
+  methods[23].selector = @selector(getMinHeight);
+  methods[24].selector = @selector(setMinHeightWithNSString:);
+  methods[25].selector = @selector(tryGetMaxWidth);
+  methods[26].selector = @selector(getMaxWidth);
+  methods[27].selector = @selector(setMaxWidthWithNSString:);
+  methods[28].selector = @selector(tryGetMaxHeight);
+  methods[29].selector = @selector(getMaxHeight);
+  methods[30].selector = @selector(setMaxHeightWithNSString:);
+  methods[31].selector = @selector(tryGetHeight);
+  methods[32].selector = @selector(getHeight);
+  methods[33].selector = @selector(setHeightWithNSString:);
+  methods[34].selector = @selector(tryGetWidth);
+  methods[35].selector = @selector(getWidth);
+  methods[36].selector = @selector(setWidthWithNSString:);
+  methods[37].selector = @selector(tryGetMaxEms);
+  methods[38].selector = @selector(getMaxEms);
+  methods[39].selector = @selector(setMaxEmsWithInt:);
+  methods[40].selector = @selector(tryGetMinEms);
+  methods[41].selector = @selector(getMinEms);
+  methods[42].selector = @selector(setMinEmsWithInt:);
+  methods[43].selector = @selector(setEmsWithInt:);
+  methods[44].selector = @selector(tryGetMarqueeRepeatLimit);
+  methods[45].selector = @selector(getMarqueeRepeatLimit);
+  methods[46].selector = @selector(setMarqueeRepeatLimitWithNSString:);
+  methods[47].selector = @selector(setEditableWithBoolean:);
+  methods[48].selector = @selector(setMaxLengthWithInt:);
+  methods[49].selector = @selector(setTypefaceWithNSString:);
+  methods[50].selector = @selector(setTextStyleWithNSString:);
+  methods[51].selector = @selector(setFontFamilyWithNSString:);
+  methods[52].selector = @selector(setTextFormatWithNSString:);
+  methods[53].selector = @selector(setEnabledWithBoolean:);
+  methods[54].selector = @selector(setOnCheckedChangeWithNSString:);
+  methods[55].selector = @selector(tryGetChecked);
+  methods[56].selector = @selector(isChecked);
+  methods[57].selector = @selector(setCheckedWithBoolean:);
+  methods[58].selector = @selector(tryGetTextOn);
+  methods[59].selector = @selector(getTextOn);
+  methods[60].selector = @selector(setTextOnWithNSString:);
+  methods[61].selector = @selector(tryGetTextOff);
+  methods[62].selector = @selector(getTextOff);
+  methods[63].selector = @selector(setTextOffWithNSString:);
+  methods[64].selector = @selector(tryGetText);
+  methods[65].selector = @selector(getText);
+  methods[66].selector = @selector(setTextWithNSString:);
+  methods[67].selector = @selector(tryGetGravity);
+  methods[68].selector = @selector(getGravity);
+  methods[69].selector = @selector(setGravityWithNSString:);
+  methods[70].selector = @selector(tryGetTextSize);
+  methods[71].selector = @selector(getTextSize);
+  methods[72].selector = @selector(setTextSizeWithNSString:);
+  methods[73].selector = @selector(setPaddingWithNSString:);
+  methods[74].selector = @selector(tryGetPaddingBottom);
+  methods[75].selector = @selector(getPaddingBottom);
+  methods[76].selector = @selector(setPaddingBottomWithNSString:);
+  methods[77].selector = @selector(tryGetPaddingRight);
+  methods[78].selector = @selector(getPaddingRight);
+  methods[79].selector = @selector(setPaddingRightWithNSString:);
+  methods[80].selector = @selector(tryGetPaddingLeft);
+  methods[81].selector = @selector(getPaddingLeft);
+  methods[82].selector = @selector(setPaddingLeftWithNSString:);
+  methods[83].selector = @selector(tryGetPaddingStart);
+  methods[84].selector = @selector(getPaddingStart);
+  methods[85].selector = @selector(setPaddingStartWithNSString:);
+  methods[86].selector = @selector(tryGetPaddingEnd);
+  methods[87].selector = @selector(getPaddingEnd);
+  methods[88].selector = @selector(setPaddingEndWithNSString:);
+  methods[89].selector = @selector(tryGetPaddingTop);
+  methods[90].selector = @selector(getPaddingTop);
+  methods[91].selector = @selector(setPaddingTopWithNSString:);
+  methods[92].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[93].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[94].selector = @selector(tryGetTextColor);
+  methods[95].selector = @selector(getTextColor);
+  methods[96].selector = @selector(setTextColorWithNSString:);
+  methods[97].selector = @selector(setTextAllCapsWithBoolean:);
+  methods[98].selector = @selector(setSingleLineWithBoolean:);
+  methods[99].selector = @selector(tryGetEllipsize);
+  methods[100].selector = @selector(getEllipsize);
+  methods[101].selector = @selector(setEllipsizeWithNSString:);
+  methods[102].selector = @selector(tryGetFirstBaselineToTopHeight);
+  methods[103].selector = @selector(getFirstBaselineToTopHeight);
+  methods[104].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[105].selector = @selector(tryGetLastBaselineToBottomHeight);
+  methods[106].selector = @selector(getLastBaselineToBottomHeight);
+  methods[107].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[108].selector = @selector(tryGetJustificationMode);
+  methods[109].selector = @selector(getJustificationMode);
+  methods[110].selector = @selector(setJustificationModeWithNSString:);
+  methods[111].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[112].selector = @selector(tryGetShadowDx);
+  methods[113].selector = @selector(getShadowDx);
+  methods[114].selector = @selector(setShadowDxWithFloat:);
+  methods[115].selector = @selector(tryGetShadowDy);
+  methods[116].selector = @selector(getShadowDy);
+  methods[117].selector = @selector(setShadowDyWithFloat:);
+  methods[118].selector = @selector(tryGetShadowColor);
+  methods[119].selector = @selector(getShadowColor);
+  methods[120].selector = @selector(setShadowColorWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASToggleButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASToggleButtonImpl;", "execute", "Z", "setDrawableLeft", "LNSString;", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setOnCheckedChange", "setChecked", "setTextOn", "setTextOff", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ToggleButtonImpl$ToggleButtonCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASToggleButtonImpl_ToggleButtonCommandBuilder = { "ToggleButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 122, 1, 0, -1, -1, 62, -1 };
+  static const void *ptrTable[] = { "LASToggleButtonImpl;", "execute", "Z", "setDrawableStart", "LNSString;", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setDrawableIconSize", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setOnCheckedChange", "setChecked", "setTextOn", "setTextOff", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ToggleButtonImpl$ToggleButtonCommandBuilder;>;" };
+  static const J2ObjcClassInfo _ASToggleButtonImpl_ToggleButtonCommandBuilder = { "ToggleButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 121, 1, 0, -1, -1, 61, -1 };
   return &_ASToggleButtonImpl_ToggleButtonCommandBuilder;
 }
 
@@ -5900,16 +5902,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_ToggleButtonCommandBuilder)
   return self;
 }
 
-- (void)setDrawableLeftWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableLeftWithNSString:value])) executeWithBoolean:true];
-}
-
 - (void)setDrawableStartWithNSString:(NSString *)value {
   (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableRightWithNSString:(NSString *)value {
-  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableRightWithNSString:value])) executeWithBoolean:true];
 }
 
 - (void)setDrawableEndWithNSString:(NSString *)value {
@@ -5938,6 +5932,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_ToggleButtonCommandBuilder)
 
 - (void)setDrawableTintModeWithNSString:(NSString *)value {
   (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTintModeWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableIconSizeWithNSString:(NSString *)value {
+  (void) [((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([((ASToggleButtonImpl_ToggleButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableIconSizeWithNSString:value])) executeWithBoolean:true];
 }
 
 - (id)getMinLines {
@@ -6259,17 +6257,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_ToggleButtonCommandBuilder)
     { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 9, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 13, 11, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 14, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 15, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -6281,24 +6280,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_ToggleButtonCommandBuilder)
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 19, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 22, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 12, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 24, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 25, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 27, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 26, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 27, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 28, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 29, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 30, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 31, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 32, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 33, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 31, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 32, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 34, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 33, 25, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 34, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 35, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -6307,8 +6306,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_ToggleButtonCommandBuilder)
     { NULL, "V", 0x1, 37, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 38, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 39, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 40, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 41, 2, -1, -1, -1, -1 },
@@ -6320,128 +6319,125 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASToggleButtonImpl_ToggleButtonCommandBuilder)
     { NULL, "V", 0x1, 44, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 45, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 46, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 47, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 48, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 49, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 50, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 51, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 48, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 49, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 50, 25, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 51, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 52, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 53, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 54, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 55, 25, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 55, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 56, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 56, 57, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 57, 58, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 58, 57, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 59, 58, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 60, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 59, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(initWithASToggleButtonImpl:);
-  methods[1].selector = @selector(setDrawableLeftWithNSString:);
-  methods[2].selector = @selector(setDrawableStartWithNSString:);
-  methods[3].selector = @selector(setDrawableRightWithNSString:);
-  methods[4].selector = @selector(setDrawableEndWithNSString:);
-  methods[5].selector = @selector(setDrawableTopWithNSString:);
-  methods[6].selector = @selector(setDrawableBottomWithNSString:);
-  methods[7].selector = @selector(getDrawablePadding);
-  methods[8].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[9].selector = @selector(setDrawableTintWithNSString:);
-  methods[10].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[11].selector = @selector(getMinLines);
-  methods[12].selector = @selector(setMinLinesWithInt:);
-  methods[13].selector = @selector(setLinesWithInt:);
-  methods[14].selector = @selector(getMaxLines);
-  methods[15].selector = @selector(setMaxLinesWithInt:);
-  methods[16].selector = @selector(getMinWidth);
-  methods[17].selector = @selector(setMinWidthWithNSString:);
-  methods[18].selector = @selector(getMinHeight);
-  methods[19].selector = @selector(setMinHeightWithNSString:);
-  methods[20].selector = @selector(getMaxWidth);
-  methods[21].selector = @selector(setMaxWidthWithNSString:);
-  methods[22].selector = @selector(getMaxHeight);
-  methods[23].selector = @selector(setMaxHeightWithNSString:);
-  methods[24].selector = @selector(getHeight);
-  methods[25].selector = @selector(setHeightWithNSString:);
-  methods[26].selector = @selector(getWidth);
-  methods[27].selector = @selector(setWidthWithNSString:);
-  methods[28].selector = @selector(getMaxEms);
-  methods[29].selector = @selector(setMaxEmsWithInt:);
-  methods[30].selector = @selector(getMinEms);
-  methods[31].selector = @selector(setMinEmsWithInt:);
-  methods[32].selector = @selector(setEmsWithInt:);
-  methods[33].selector = @selector(getMarqueeRepeatLimit);
-  methods[34].selector = @selector(setMarqueeRepeatLimitWithNSString:);
-  methods[35].selector = @selector(setEditableWithBoolean:);
-  methods[36].selector = @selector(setMaxLengthWithInt:);
-  methods[37].selector = @selector(setTypefaceWithNSString:);
-  methods[38].selector = @selector(setTextStyleWithNSString:);
-  methods[39].selector = @selector(setFontFamilyWithNSString:);
-  methods[40].selector = @selector(setTextFormatWithNSString:);
-  methods[41].selector = @selector(setEnabledWithBoolean:);
-  methods[42].selector = @selector(setOnCheckedChangeWithNSString:);
-  methods[43].selector = @selector(isChecked);
-  methods[44].selector = @selector(setCheckedWithBoolean:);
-  methods[45].selector = @selector(getTextOn);
-  methods[46].selector = @selector(setTextOnWithNSString:);
-  methods[47].selector = @selector(getTextOff);
-  methods[48].selector = @selector(setTextOffWithNSString:);
-  methods[49].selector = @selector(getText);
-  methods[50].selector = @selector(setTextWithNSString:);
-  methods[51].selector = @selector(getGravity);
-  methods[52].selector = @selector(setGravityWithNSString:);
-  methods[53].selector = @selector(getTextSize);
-  methods[54].selector = @selector(setTextSizeWithNSString:);
-  methods[55].selector = @selector(setPaddingWithNSString:);
-  methods[56].selector = @selector(getPaddingBottom);
-  methods[57].selector = @selector(setPaddingBottomWithNSString:);
-  methods[58].selector = @selector(getPaddingRight);
-  methods[59].selector = @selector(setPaddingRightWithNSString:);
-  methods[60].selector = @selector(getPaddingLeft);
-  methods[61].selector = @selector(setPaddingLeftWithNSString:);
-  methods[62].selector = @selector(getPaddingStart);
-  methods[63].selector = @selector(setPaddingStartWithNSString:);
-  methods[64].selector = @selector(getPaddingEnd);
-  methods[65].selector = @selector(setPaddingEndWithNSString:);
-  methods[66].selector = @selector(getPaddingTop);
-  methods[67].selector = @selector(setPaddingTopWithNSString:);
-  methods[68].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[69].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[70].selector = @selector(getTextColor);
-  methods[71].selector = @selector(setTextColorWithNSString:);
-  methods[72].selector = @selector(setTextAllCapsWithBoolean:);
-  methods[73].selector = @selector(setSingleLineWithBoolean:);
-  methods[74].selector = @selector(getEllipsize);
-  methods[75].selector = @selector(setEllipsizeWithNSString:);
-  methods[76].selector = @selector(getFirstBaselineToTopHeight);
-  methods[77].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[78].selector = @selector(getLastBaselineToBottomHeight);
-  methods[79].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[80].selector = @selector(getJustificationMode);
-  methods[81].selector = @selector(setJustificationModeWithNSString:);
-  methods[82].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[83].selector = @selector(getShadowDx);
-  methods[84].selector = @selector(setShadowDxWithFloat:);
-  methods[85].selector = @selector(getShadowDy);
-  methods[86].selector = @selector(setShadowDyWithFloat:);
-  methods[87].selector = @selector(getShadowColor);
-  methods[88].selector = @selector(setShadowColorWithNSString:);
+  methods[1].selector = @selector(setDrawableStartWithNSString:);
+  methods[2].selector = @selector(setDrawableEndWithNSString:);
+  methods[3].selector = @selector(setDrawableTopWithNSString:);
+  methods[4].selector = @selector(setDrawableBottomWithNSString:);
+  methods[5].selector = @selector(getDrawablePadding);
+  methods[6].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[7].selector = @selector(setDrawableTintWithNSString:);
+  methods[8].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[9].selector = @selector(setDrawableIconSizeWithNSString:);
+  methods[10].selector = @selector(getMinLines);
+  methods[11].selector = @selector(setMinLinesWithInt:);
+  methods[12].selector = @selector(setLinesWithInt:);
+  methods[13].selector = @selector(getMaxLines);
+  methods[14].selector = @selector(setMaxLinesWithInt:);
+  methods[15].selector = @selector(getMinWidth);
+  methods[16].selector = @selector(setMinWidthWithNSString:);
+  methods[17].selector = @selector(getMinHeight);
+  methods[18].selector = @selector(setMinHeightWithNSString:);
+  methods[19].selector = @selector(getMaxWidth);
+  methods[20].selector = @selector(setMaxWidthWithNSString:);
+  methods[21].selector = @selector(getMaxHeight);
+  methods[22].selector = @selector(setMaxHeightWithNSString:);
+  methods[23].selector = @selector(getHeight);
+  methods[24].selector = @selector(setHeightWithNSString:);
+  methods[25].selector = @selector(getWidth);
+  methods[26].selector = @selector(setWidthWithNSString:);
+  methods[27].selector = @selector(getMaxEms);
+  methods[28].selector = @selector(setMaxEmsWithInt:);
+  methods[29].selector = @selector(getMinEms);
+  methods[30].selector = @selector(setMinEmsWithInt:);
+  methods[31].selector = @selector(setEmsWithInt:);
+  methods[32].selector = @selector(getMarqueeRepeatLimit);
+  methods[33].selector = @selector(setMarqueeRepeatLimitWithNSString:);
+  methods[34].selector = @selector(setEditableWithBoolean:);
+  methods[35].selector = @selector(setMaxLengthWithInt:);
+  methods[36].selector = @selector(setTypefaceWithNSString:);
+  methods[37].selector = @selector(setTextStyleWithNSString:);
+  methods[38].selector = @selector(setFontFamilyWithNSString:);
+  methods[39].selector = @selector(setTextFormatWithNSString:);
+  methods[40].selector = @selector(setEnabledWithBoolean:);
+  methods[41].selector = @selector(setOnCheckedChangeWithNSString:);
+  methods[42].selector = @selector(isChecked);
+  methods[43].selector = @selector(setCheckedWithBoolean:);
+  methods[44].selector = @selector(getTextOn);
+  methods[45].selector = @selector(setTextOnWithNSString:);
+  methods[46].selector = @selector(getTextOff);
+  methods[47].selector = @selector(setTextOffWithNSString:);
+  methods[48].selector = @selector(getText);
+  methods[49].selector = @selector(setTextWithNSString:);
+  methods[50].selector = @selector(getGravity);
+  methods[51].selector = @selector(setGravityWithNSString:);
+  methods[52].selector = @selector(getTextSize);
+  methods[53].selector = @selector(setTextSizeWithNSString:);
+  methods[54].selector = @selector(setPaddingWithNSString:);
+  methods[55].selector = @selector(getPaddingBottom);
+  methods[56].selector = @selector(setPaddingBottomWithNSString:);
+  methods[57].selector = @selector(getPaddingRight);
+  methods[58].selector = @selector(setPaddingRightWithNSString:);
+  methods[59].selector = @selector(getPaddingLeft);
+  methods[60].selector = @selector(setPaddingLeftWithNSString:);
+  methods[61].selector = @selector(getPaddingStart);
+  methods[62].selector = @selector(setPaddingStartWithNSString:);
+  methods[63].selector = @selector(getPaddingEnd);
+  methods[64].selector = @selector(setPaddingEndWithNSString:);
+  methods[65].selector = @selector(getPaddingTop);
+  methods[66].selector = @selector(setPaddingTopWithNSString:);
+  methods[67].selector = @selector(setPaddingHorizontalWithNSString:);
+  methods[68].selector = @selector(setPaddingVerticalWithNSString:);
+  methods[69].selector = @selector(getTextColor);
+  methods[70].selector = @selector(setTextColorWithNSString:);
+  methods[71].selector = @selector(setTextAllCapsWithBoolean:);
+  methods[72].selector = @selector(setSingleLineWithBoolean:);
+  methods[73].selector = @selector(getEllipsize);
+  methods[74].selector = @selector(setEllipsizeWithNSString:);
+  methods[75].selector = @selector(getFirstBaselineToTopHeight);
+  methods[76].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[77].selector = @selector(getLastBaselineToBottomHeight);
+  methods[78].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[79].selector = @selector(getJustificationMode);
+  methods[80].selector = @selector(setJustificationModeWithNSString:);
+  methods[81].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[82].selector = @selector(getShadowDx);
+  methods[83].selector = @selector(setShadowDxWithFloat:);
+  methods[84].selector = @selector(getShadowDy);
+  methods[85].selector = @selector(setShadowDyWithFloat:);
+  methods[86].selector = @selector(getShadowColor);
+  methods[87].selector = @selector(setShadowColorWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASToggleButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASToggleButtonImpl;", "setDrawableLeft", "LNSString;", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "Z", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setOnCheckedChange", "setChecked", "setTextOn", "setTextOff", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor" };
-  static const J2ObjcClassInfo _ASToggleButtonImpl_ToggleButtonBean = { "ToggleButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 89, 1, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASToggleButtonImpl;", "setDrawableStart", "LNSString;", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setDrawableIconSize", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "Z", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setOnCheckedChange", "setChecked", "setTextOn", "setTextOff", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor" };
+  static const J2ObjcClassInfo _ASToggleButtonImpl_ToggleButtonBean = { "ToggleButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 88, 1, 0, -1, -1, -1, -1 };
   return &_ASToggleButtonImpl_ToggleButtonBean;
 }
 

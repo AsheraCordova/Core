@@ -57,6 +57,8 @@
 
 - (id)tryNativeFloatTypeWithId:(id)object;
 
+- (jboolean)nativeIsNullWithId:(id)object;
+
 @end
 
 __attribute__((unused)) static id ASJSONAdapterImpl_getASDictionaryMapWithId_(ASJSONAdapterImpl *self, id payload);
@@ -87,6 +89,8 @@ __attribute__((unused)) static id ASJSONAdapterImpl_tryNativeDoubleTypeWithId_(A
 
 __attribute__((unused)) static id ASJSONAdapterImpl_tryNativeFloatTypeWithId_(ASJSONAdapterImpl *self, id object);
 
+__attribute__((unused)) static jboolean ASJSONAdapterImpl_nativeIsNullWithId_(ASJSONAdapterImpl *self, id object);
+
 @implementation ASJSONAdapterImpl
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -98,7 +102,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)invokeWithNSString:(NSString *)name
        withNSObjectArray:(IOSObjectArray *)args {
-  switch (JreIndexOfStr(name, (id[]){ @"getMap", @"getNativeMap", @"putJSONSafeObjectIntoMap", @"getArray", @"getList", @"isBoolean", @"getBoolean", @"getString", @"getInt", @"getFloat", @"getDouble", @"marshal", @"toJsonTree", @"unmarshal", @"getJSONCompatMap", @"getJSONSafeObj" }, 16)) {
+  switch (JreIndexOfStr(name, (id[]){ @"getMap", @"getNativeMap", @"putJSONSafeObjectIntoMap", @"getArray", @"getList", @"isBoolean", @"getBoolean", @"getString", @"getInt", @"getFloat", @"getDouble", @"marshal", @"toJsonTree", @"unmarshal", @"getJSONCompatMap", @"getJSONSafeObj", @"isNull" }, 17)) {
     case 0:
     return [self getMapWithId:IOSObjectArray_Get(nil_chk(args), 0)];
     case 1:
@@ -132,6 +136,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     return [self getJSONCompatMap];
     case 15:
     return [self getJSONSafeObjWithId:IOSObjectArray_Get(nil_chk(args), 0)];
+    case 16:
+    return JavaLangBoolean_valueOfWithBoolean_([self isNullWithId:IOSObjectArray_Get(nil_chk(args), 0)]);
     default:
     break;
   }
@@ -445,6 +451,14 @@ J2OBJC_IGNORE_DESIGNATED_END
   return false;
 }
 
+- (jboolean)isNullWithId:(id)object {
+  return object == nil || ASJSONAdapterImpl_nativeIsNullWithId_(self, object);
+}
+
+- (jboolean)nativeIsNullWithId:(id)object {
+  return ASJSONAdapterImpl_nativeIsNullWithId_(self, object);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -483,6 +497,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x101, 43, 44, -1, 45, -1, -1 },
     { NULL, "V", 0x1, 46, 47, -1, 48, -1, -1 },
     { NULL, "Z", 0x1, 49, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 50, 3, -1, -1, -1, -1 },
+    { NULL, "Z", 0x102, 51, 3, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -523,9 +539,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[33].selector = @selector(getNativeMapWithJavaUtilMap:);
   methods[34].selector = @selector(putJSONSafeObjectIntoMapWithJavaUtilMap:withNSString:withId:);
   methods[35].selector = @selector(isBooleanWithId:);
+  methods[36].selector = @selector(isNullWithId:);
+  methods[37].selector = @selector(nativeIsNullWithId:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "getMap", "LNSObject;", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getASDictionaryMap", "getArray", "getNativeArray", "getList", "(Ljava/lang/Object;)Ljava/util/List<Ljava/lang/Object;>;", "getBoolean", "isClassNSMutableArray", "getString", "tryNativeType", "getInt", "tryNativeIntType", "marshal", "toJsonTree", "getJSONString", "unmarshal", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "LNSString;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getJSONSafeObj", "convertToNSInteger", "I", "convertToNSDouble", "D", "convertToNSFloat", "F", "convertToNSLong", "J", "nsArrayFromList", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)Ljava/lang/Object;", "addObject", "LNSObject;LNSObject;", "getNSDictionary", "getDouble", "tryNativeDoubleType", "tryNativeFloatType", "getFloat", "getNativeMap", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "putJSONSafeObjectIntoMap", "LJavaUtilMap;LNSString;LNSObject;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/Object;)V", "isBoolean" };
-  static const J2ObjcClassInfo _ASJSONAdapterImpl = { "JSONAdapterImpl", "com.ashera.jsonadapter", ptrTable, methods, NULL, 7, 0x1, 36, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "getMap", "LNSObject;", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getASDictionaryMap", "getArray", "getNativeArray", "getList", "(Ljava/lang/Object;)Ljava/util/List<Ljava/lang/Object;>;", "getBoolean", "isClassNSMutableArray", "getString", "tryNativeType", "getInt", "tryNativeIntType", "marshal", "toJsonTree", "getJSONString", "unmarshal", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "LNSString;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getJSONSafeObj", "convertToNSInteger", "I", "convertToNSDouble", "D", "convertToNSFloat", "F", "convertToNSLong", "J", "nsArrayFromList", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)Ljava/lang/Object;", "addObject", "LNSObject;LNSObject;", "getNSDictionary", "getDouble", "tryNativeDoubleType", "tryNativeFloatType", "getFloat", "getNativeMap", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "putJSONSafeObjectIntoMap", "LJavaUtilMap;LNSString;LNSObject;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/Object;)V", "isBoolean", "isNull", "nativeIsNull" };
+  static const J2ObjcClassInfo _ASJSONAdapterImpl = { "JSONAdapterImpl", "com.ashera.jsonadapter", ptrTable, methods, NULL, 7, 0x1, 38, 0, -1, -1, -1, -1, -1 };
   return &_ASJSONAdapterImpl;
 }
 
@@ -626,6 +644,10 @@ id ASJSONAdapterImpl_tryNativeFloatTypeWithId_(ASJSONAdapterImpl *self, id objec
     return [JavaLangFloat valueOfWithFloat:[(NSNumber*) object floatValue] ];
   }
   return nil;
+}
+
+jboolean ASJSONAdapterImpl_nativeIsNullWithId_(ASJSONAdapterImpl *self, id object) {
+  return object  == [NSNull null];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASJSONAdapterImpl)

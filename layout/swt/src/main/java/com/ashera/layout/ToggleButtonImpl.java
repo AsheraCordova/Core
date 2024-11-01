@@ -117,6 +117,7 @@ public class ToggleButtonImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("firstBaselineToTopHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lastBaselineToBottomHeight").withType("dimension").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("onCheckedChange").withType("string"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("checked").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textOn").withType("resourcestring"));
@@ -133,7 +134,6 @@ public class ToggleButtonImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingTop").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingHorizontal").withType("dimension"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("paddingVertical").withType("dimension"));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("enabled").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("editable").withType("boolean"));
@@ -263,7 +263,9 @@ public class ToggleButtonImpl extends BaseWidget {
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ToggleButtonImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ToggleButtonImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -276,9 +278,10 @@ public class ToggleButtonImpl extends BaseWidget {
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(ToggleButtonImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -343,7 +346,10 @@ public class ToggleButtonImpl extends BaseWidget {
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
-            ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
+            org.eclipse.swt.widgets.Control control = ((org.eclipse.swt.widgets.Control)asNativeWidget());
+            if (!control.isDisposed()) {
+            	control.setVisible(View.VISIBLE == visibility);
+            }
             
         }
 		  public int getBorderPadding(){
@@ -419,6 +425,7 @@ public class ToggleButtonImpl extends BaseWidget {
         	ViewImpl.stateNo(ToggleButtonImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ToggleButtonExt.class;
@@ -511,6 +518,16 @@ public class ToggleButtonImpl extends BaseWidget {
 
 
 		setTextFormat(objValue);
+
+
+
+			}
+			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
 
 
 
@@ -671,16 +688,6 @@ public class ToggleButtonImpl extends BaseWidget {
 
 
 		setPaddingVertical(objValue);
-
-
-
-			}
-			break;
-			case "drawableLeft": {
-				
-
-
-		setDrawableLeft(objValue);
 
 
 
@@ -999,17 +1006,48 @@ return getGravity();				}
 		lineHeight = button.computeSize(20, org.eclipse.swt.SWT.DEFAULT).y;
 		initCustomAttributes();
 		registerForAttributeCommandChain("text");
+		registerForAttributeCommandChain("drawableStart");
+		registerForAttributeCommandChain("drawableTop");
+		registerForAttributeCommandChain("drawableBottom");
+		registerForAttributeCommandChain("drawableEnd");
+		
 	}
 	
 	private void setDrawableLeft(Object objValue) {
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
-			measurableView.setLeftDrawable((r.android.graphics.drawable.Drawable) objValue);
-			objValue = ((r.android.graphics.drawable.Drawable) objValue).getDrawable();
-		}
-		
-		if (objValue instanceof Image) {
-			button.setImage((Image) objValue);
+			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
+			
+			if (drawable.hasDrawable()) {
+				measurableView.setLeftDrawable(drawable);
+				objValue = drawable.getDrawable();
+				Object tintColor = drawable.getTintColor();
+				String tintMode = drawable.getTintMode();
+			
+				if (objValue instanceof Image) {
+					Image image = (Image) objValue;
+					if (tintColor != null) {
+						if (tintColor instanceof r.android.content.res.ColorStateList) {
+							tintColor = ((r.android.content.res.ColorStateList)tintColor).getColorForState(measurableView.getDrawableState(), r.android.graphics.Color.RED);
+							tintColor = ViewImpl.getColor(tintColor);
+						}
+						image = com.ashera.common.ImageUtils.tintImage(image, (Color) tintColor, tintMode);
+						fragment.addDisposable(objValue);
+					}
+					
+					if (drawable.getMinimumWidth() != 0 && drawable.getMinimumHeight() != 0 
+							&& image.getImageData().width != drawable.getMinimumWidth() && image.getImageData().height != drawable.getMinimumHeight()) {
+						image = com.ashera.common.ImageUtils.resize(image, drawable.getMinimumWidth(), drawable.getMinimumHeight(), 
+								new com.ashera.common.ImageUtils.ResizeOptions.Builder().initFromAttr(this, "drawableStart").build());
+						fragment.addDisposable(objValue);
+					}
+					button.setImage(image);
+				}
+			} else {
+				measurableView.setLeftDrawable(null);
+				button.setImage(null);
+			}
 		} else {
+			measurableView.setLeftDrawable(null);
 			button.setImage(null);
 		}
 	}
@@ -1178,14 +1216,20 @@ return getGravity();				}
 
 
 	private void setDrawableTintMode(Object value) {
-		applyAttributeCommand("drawableLeft", "tintColor", "drawableTintMode", value);
 		applyAttributeCommand("drawableStart", "tintColor", "drawableTintMode", value);
 		applyAttributeCommand("drawableEnd", "tintColor", "drawableTintMode", value);
-		applyAttributeCommand("drawableRight", "tintColor", "drawableTintMode", value);
 		applyAttributeCommand("drawableTop", "tintColor", "drawableTintMode", value);
 		applyAttributeCommand("drawableBottom", "tintColor", "drawableTintMode", value);
-
 	}
+
+	//start - iconsize
+	private void setDrawableIconSize(Object objValue) {
+		applyAttributeCommand("drawableStart", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableEnd", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableTop", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableBottom", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+	}
+	//end - iconsize
 	private r.android.content.res.ColorStateList drawableTint; 
 	private void setDrawableTint(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
@@ -1196,28 +1240,14 @@ return getGravity();				}
 		
 		Object color = ViewImpl.getColor(objValue);
 
-		applyAttributeCommand("drawableLeft", "tintColor", "drawableTint", color);
 		applyAttributeCommand("drawableStart", "tintColor", "drawableTint", color);
 		applyAttributeCommand("drawableEnd", "tintColor", "drawableTint", color);
-		applyAttributeCommand("drawableRight", "tintColor", "drawableTint", color);
 		applyAttributeCommand("drawableTop", "tintColor", "drawableTint", color);
 		applyAttributeCommand("drawableBottom", "tintColor", "drawableTint", color);
 		
 	}
-	private boolean disableApplyCommmand;
 	private void applyAttributeCommand(String sourceName, String commandName, String attribute, Object value) {
-		if (!isInitialised() || attributes.containsKey(sourceName)) {
-			applyAttributeCommand(sourceName, commandName, new String[] {attribute}, true, value);
-		} else {
-			disableApplyCommmand = true;
-			applyAttributeCommand(sourceName, commandName, new String[] {attribute}, false);
-			disableApplyCommmand = false;
-		}
-	}
-	
-	@Override
-	public boolean disableRemoveAttributeCommandFromChain() {
-		return disableApplyCommmand;
+		applyAttributeCommand(sourceName, commandName, new String[] {attribute}, true, value);
 	}
 	
     private Button drawableLeft;
@@ -1258,11 +1288,12 @@ return getGravity();				}
 	
 
 
+    //start - variables
     private org.eclipse.swt.graphics.Font newFont;
 	private static final int ITALIC_FONT_TRAIT = org.eclipse.swt.SWT.ITALIC;
 	private static final int BOLD_FONT_TRAIT = org.eclipse.swt.SWT.BOLD;
 	private static final int NORMAL_FONT_TRAIT = org.eclipse.swt.SWT.NORMAL;
-
+	//end - variables
 	//start - code3
     private Map<String, com.ashera.model.FontDescriptor> fontDescriptors ;
 
@@ -1320,7 +1351,7 @@ return getGravity();				}
 
     }
 	//end - code3
-
+    //start - nativefont
 	private int nativeGetFontSize() {
 		FontData[] fontData = button.getFont().getFontData();
         int height = fontData[0].getHeight();
@@ -1366,6 +1397,12 @@ return getGravity();				}
     }
     
 	
+	private Object getTextSize() {
+		return button.getFont().getFontData()[0].getHeight();
+	}
+    //end - nativefont
+    
+	
 	private void setTextColor(Object objValue) {
 		if (objValue instanceof r.android.content.res.ColorStateList) {
 			r.android.content.res.ColorStateList colorStateList = (r.android.content.res.ColorStateList) objValue;
@@ -1374,10 +1411,6 @@ return getGravity();				}
 		}
 		
 		button.setForeground((Color)ViewImpl.getColor(objValue));
-	}
-	
-	private Object getTextSize() {
-		return button.getFont().getFontData()[0].getHeight();
 	}
 
 	private Object getTextColor() {
@@ -1967,6 +2000,14 @@ public ToggleButtonCommandBuilder setTextFormat(String value) {
 
 	attrs.put("value", value);
 return this;}
+public ToggleButtonCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public ToggleButtonCommandBuilder setOnCheckedChange(String value) {
 	Map<String, Object> attrs = initCommand("onCheckedChange");
 	attrs.put("type", "attribute");
@@ -2221,14 +2262,6 @@ public ToggleButtonCommandBuilder setPaddingHorizontal(String value) {
 return this;}
 public ToggleButtonCommandBuilder setPaddingVertical(String value) {
 	Map<String, Object> attrs = initCommand("paddingVertical");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ToggleButtonCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -2577,6 +2610,10 @@ public void setTextFormat(String value) {
 	getBuilder().reset().setTextFormat(value).execute(true);
 }
 
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
+}
+
 public void setOnCheckedChange(String value) {
 	getBuilder().reset().setOnCheckedChange(value).execute(true);
 }
@@ -2675,10 +2712,6 @@ public void setPaddingHorizontal(String value) {
 
 public void setPaddingVertical(String value) {
 	getBuilder().reset().setPaddingVertical(value).execute(true);
-}
-
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
 }
 
 public void setDrawableStart(String value) {

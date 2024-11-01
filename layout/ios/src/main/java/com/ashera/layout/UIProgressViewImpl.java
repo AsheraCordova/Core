@@ -214,7 +214,9 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(UIProgressViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(UIProgressViewImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -227,9 +229,10 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(UIProgressViewImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -345,6 +348,7 @@ public class UIProgressViewImpl extends BaseWidget  implements ICustomMeasureHei
         	ViewImpl.stateNo(UIProgressViewImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return UIProgressViewExt.class;

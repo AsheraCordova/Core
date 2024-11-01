@@ -270,6 +270,8 @@
      <source-file src="library/widget_library/src/ITarget.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/ITemplate.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="library/widget_library/src/ITemplate.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/widget_library/src/IViewStub.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="library/widget_library/src/IViewStub.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/IWidget.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="library/widget_library/src/IWidget.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/widget_library/src/IWidgetLifeCycleListener.h" target-dir="CorePlugin/widget_library/src"/>
@@ -751,6 +753,8 @@
      <source-file src="library/AndroidCore/src/StateListDrawable.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/StateSet.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="library/AndroidCore/src/StateSet.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidCore/src/SubMenu.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="library/AndroidCore/src/SubMenu.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/SuppressLint.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="library/AndroidCore/src/SuppressLint.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/SwipeHelper.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -917,8 +921,8 @@
      <source-file src="library/AndroidJMaterial/src/BadgeState.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidJMaterial/src/BadgeUtils.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
      <source-file src="library/AndroidJMaterial/src/BadgeUtils.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
-     <header-file src="library/AndroidJMaterial/src/HideBottomViewOnScrollBehavior.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
-     <source-file src="library/AndroidJMaterial/src/HideBottomViewOnScrollBehavior.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidJMaterial/src/MaterialAnimationUtils.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="library/AndroidJMaterial/src/MaterialAnimationUtils.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
      <!-- AndroidJMaterial end -->
      
   </platform>

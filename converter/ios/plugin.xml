@@ -34,6 +34,8 @@
      <source-file src="ios/src/ConverterPlugin.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/DrawableConverter.h" target-dir="ConverterPlugin/ios/src"/>
      <source-file src="ios/src/DrawableConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="ios/src/DrawableiconSizeConverter.h" target-dir="ConverterPlugin/ios/src"/>
+     <source-file src="ios/src/DrawableiconSizeConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/DrawDrawableCommandConverter.h" target-dir="ConverterPlugin/ios/src"/>
      <source-file src="ios/src/DrawDrawableCommandConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="ios/src/DrawForegroundCommandConverter.h" target-dir="ConverterPlugin/ios/src"/>

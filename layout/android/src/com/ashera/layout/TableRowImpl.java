@@ -86,7 +86,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {		
+	public boolean remove(IWidget w) {
 		boolean remove = super.remove(w);
 		tableRow.removeView((View) w.asWidget());
 		return remove;
@@ -356,7 +356,9 @@ return layoutParams.span;			}
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(TableRowImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(TableRowImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -494,6 +496,7 @@ return layoutParams.span;			}
         	ViewImpl.stateNo(TableRowImpl.this);
         }
      
+	
 	}
 	@Override
 	public Class getViewClass() {

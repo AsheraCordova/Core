@@ -95,6 +95,8 @@
 
 - (void)setShowAsActionWithInt:(jint)actionEnum;
 
+- (void)setSubMenuWithADXSubMenuBuilder:(ADXSubMenuBuilder *)subMenu;
+
 - (id<ADMenuItem>)setVisibleWithBoolean:(jboolean)shown;
 
 #pragma mark Package-Private

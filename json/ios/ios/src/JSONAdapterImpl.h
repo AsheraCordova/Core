@@ -73,6 +73,8 @@
 
 - (jboolean)isBooleanWithId:(id)obj;
 
+- (jboolean)isNullWithId:(id)object;
+
 - (NSString *)marshalWithId:(id)payload;
 
 - (id)nsArrayFromListWithJavaUtilList:(id<JavaUtilList>)list;

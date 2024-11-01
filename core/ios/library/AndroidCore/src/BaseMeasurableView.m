@@ -46,7 +46,8 @@
 
 - (jint)getDrawableWidthWithADDrawable:(ADDrawable *)drawable;
 
-- (jint)getDrawableHeightWithADDrawable:(ADDrawable *)drawable;
+- (jint)getDrawableHeightWithADDrawable:(ADDrawable *)drawable
+                            withBoolean:(jboolean)considerPadding;
 
 + (void)measureWithASHasWidgets:(id<ASHasWidgets>)parent
                   withASIWidget:(id<ASIWidget>)widget
@@ -72,7 +73,7 @@ __attribute__((unused)) static jint ASBaseMeasurableView_measureWidgetHeightWith
 
 __attribute__((unused)) static jint ASBaseMeasurableView_getDrawableWidthWithADDrawable_(ASBaseMeasurableView *self, ADDrawable *drawable);
 
-__attribute__((unused)) static jint ASBaseMeasurableView_getDrawableHeightWithADDrawable_(ASBaseMeasurableView *self, ADDrawable *drawable);
+__attribute__((unused)) static jint ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(ASBaseMeasurableView *self, ADDrawable *drawable, jboolean considerPadding);
 
 __attribute__((unused)) static void ASBaseMeasurableView_measureWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, jint level, jint indent, jint initialWidth);
 
@@ -220,15 +221,15 @@ jint ASBaseMeasurableView_VERY_WIDE;
     if ([ASIMeasureHeight_class_() isInstance:widget_]) {
       height = [((id<ASIMeasureHeight>) nil_chk(((id<ASIMeasureHeight>) cast_check(widget_, ASIMeasureHeight_class_())))) measureHeightWithInt:heightMode withInt:heightSize withInt:height];
     }
-    height += mPaddingTop_ + mPaddingBottom_ + (ignoreDrawableHeight_ ? 0 : ASBaseMeasurableView_getDrawableHeightWithADDrawable_(self, topDrawable_) + ASBaseMeasurableView_getDrawableHeightWithADDrawable_(self, bottomDrawable_));
+    height += mPaddingTop_ + mPaddingBottom_ + (ignoreDrawableHeight_ ? 0 : ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(self, topDrawable_, true) + ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(self, bottomDrawable_, true));
     if ([ASIMaxHeight_class_() isInstance:widget_]) {
       jint maxHeight = [((id<ASIMaxHeight>) nil_chk(((id<ASIMaxHeight>) cast_check(widget_, ASIMaxHeight_class_())))) getMaxHeight];
       if (maxHeight != -1) {
         height = JavaLangMath_minWithInt_withInt_(height, maxHeight);
       }
     }
-    height = JavaLangMath_maxWithInt_withInt_(height, ASBaseMeasurableView_getDrawableHeightWithADDrawable_(self, leftDrawable_) + mPaddingTop_ + mPaddingBottom_);
-    height = JavaLangMath_maxWithInt_withInt_(height, ASBaseMeasurableView_getDrawableHeightWithADDrawable_(self, rightDrawable_) + mPaddingTop_ + mPaddingBottom_);
+    height = JavaLangMath_maxWithInt_withInt_(height, ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(self, leftDrawable_, false) + mPaddingTop_ + mPaddingBottom_);
+    height = JavaLangMath_maxWithInt_withInt_(height, ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(self, rightDrawable_, false) + mPaddingTop_ + mPaddingBottom_);
     height = JavaLangMath_maxWithInt_withInt_([self getSuggestedMinimumHeight], height);
     if (heightMode == ADView_MeasureSpec_AT_MOST) {
       height = JavaLangMath_minWithInt_withInt_(height, heightSize);
@@ -250,8 +251,9 @@ jint ASBaseMeasurableView_VERY_WIDE;
   return ASBaseMeasurableView_getDrawableWidthWithADDrawable_(self, drawable);
 }
 
-- (jint)getDrawableHeightWithADDrawable:(ADDrawable *)drawable {
-  return ASBaseMeasurableView_getDrawableHeightWithADDrawable_(self, drawable);
+- (jint)getDrawableHeightWithADDrawable:(ADDrawable *)drawable
+                            withBoolean:(jboolean)considerPadding {
+  return ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(self, drawable, considerPadding);
 }
 
 - (jint)nativeMeasureWidthWithId:(id)uiView {
@@ -540,24 +542,24 @@ jint ASBaseMeasurableView_VERY_WIDE;
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x82, 18, 19, -1, -1, -1, -1 },
     { NULL, "I", 0x2, 20, 11, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 21, 11, -1, -1, -1, -1 },
-    { NULL, "I", 0x401, 22, 23, -1, -1, -1, -1 },
-    { NULL, "I", 0x401, 24, 25, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 26, 27, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 28, 27, -1, -1, -1, -1 },
-    { NULL, "I", 0xa, 29, 30, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 21, 22, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, 23, 24, -1, -1, -1, -1 },
+    { NULL, "I", 0x401, 25, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 27, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 29, 28, -1, -1, -1, -1 },
+    { NULL, "I", 0xa, 30, 31, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASRectM;", 0x81, 31, 32, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASRectM;", 0x81, 32, 33, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASRectM;", 0x1, 33, 34, -1, -1, -1, -1 },
-    { NULL, "LASRectM;", 0x1, 35, 34, -1, -1, -1, -1 },
-    { NULL, "LASRectM;", 0x1, 36, 34, -1, -1, -1, -1 },
-    { NULL, "LASRectM;", 0x1, 37, 34, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASRectM;", 0x1, 34, 35, -1, -1, -1, -1 },
+    { NULL, "LASRectM;", 0x1, 36, 35, -1, -1, -1, -1 },
+    { NULL, "LASRectM;", 0x1, 37, 35, -1, -1, -1, -1 },
+    { NULL, "LASRectM;", 0x1, 38, 35, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -591,7 +593,7 @@ jint ASBaseMeasurableView_VERY_WIDE;
   methods[22].selector = @selector(measureWidth);
   methods[23].selector = @selector(measureWidgetHeightWithInt:withNSObjectArray:);
   methods[24].selector = @selector(getDrawableWidthWithADDrawable:);
-  methods[25].selector = @selector(getDrawableHeightWithADDrawable:);
+  methods[25].selector = @selector(getDrawableHeightWithADDrawable:withBoolean:);
   methods[26].selector = @selector(nativeMeasureWidthWithId:);
   methods[27].selector = @selector(nativeMeasureHeightWithId:withInt:);
   methods[28].selector = @selector(measureWidgetWithNoParentWithASHasWidgets:withASIWidget:withInt:withInt:withInt:);
@@ -626,10 +628,10 @@ jint ASBaseMeasurableView_VERY_WIDE;
     { "drawablePadding_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "ignoreDrawableHeight_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mHorizontallyScrolling_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "VERY_WIDE", "I", .constantValue.asLong = 0, 0x9, -1, 38, -1, -1 },
+    { "VERY_WIDE", "I", .constantValue.asLong = 0, 0x9, -1, 39, -1, -1 },
   };
-  static const void *ptrTable[] = { "setCompoundHorizontalPaddingConsumed", "Z", "setHorizontallyScrolling", "setIgnoreDrawableHeight", "setVerticalAligment", "LASBaseMeasurableView_VerticalAligment;", "setHorizonantalAligment", "LASBaseMeasurableView_HorizonantalAligment;", "setDrawablePadding", "I", "setBottomDrawable", "LADDrawable;", "setLeftDrawable", "setRightDrawable", "setTopDrawable", "LASIWidget;", "onMeasure", "II", "measureWidgetHeight", "I[LNSObject;", "getDrawableWidth", "getDrawableHeight", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "measureWidgetWithNoParent", "LASHasWidgets;LASIWidget;III", "measure", "nativeGetWidth", "LASHasWidgets;III", "getWidgetBounds", "II[LNSObject;", "getLeftDrawableBounds", "IIII", "getRightDrawableBounds", "getTopDrawableBounds", "getBottomDrawableBounds", &ASBaseMeasurableView_VERY_WIDE, "LASBaseMeasurableView_VerticalAligment;LASBaseMeasurableView_HorizonantalAligment;" };
-  static const J2ObjcClassInfo _ASBaseMeasurableView = { "BaseMeasurableView", "com.ashera.view", ptrTable, methods, fields, 7, 0x401, 47, 12, -1, 39, -1, -1, -1 };
+  static const void *ptrTable[] = { "setCompoundHorizontalPaddingConsumed", "Z", "setHorizontallyScrolling", "setIgnoreDrawableHeight", "setVerticalAligment", "LASBaseMeasurableView_VerticalAligment;", "setHorizonantalAligment", "LASBaseMeasurableView_HorizonantalAligment;", "setDrawablePadding", "I", "setBottomDrawable", "LADDrawable;", "setLeftDrawable", "setRightDrawable", "setTopDrawable", "LASIWidget;", "onMeasure", "II", "measureWidgetHeight", "I[LNSObject;", "getDrawableWidth", "getDrawableHeight", "LADDrawable;Z", "nativeMeasureWidth", "LNSObject;", "nativeMeasureHeight", "LNSObject;I", "measureWidgetWithNoParent", "LASHasWidgets;LASIWidget;III", "measure", "nativeGetWidth", "LASHasWidgets;III", "getWidgetBounds", "II[LNSObject;", "getLeftDrawableBounds", "IIII", "getRightDrawableBounds", "getTopDrawableBounds", "getBottomDrawableBounds", &ASBaseMeasurableView_VERY_WIDE, "LASBaseMeasurableView_VerticalAligment;LASBaseMeasurableView_HorizonantalAligment;" };
+  static const J2ObjcClassInfo _ASBaseMeasurableView = { "BaseMeasurableView", "com.ashera.view", ptrTable, methods, fields, 7, 0x401, 47, 12, -1, 40, -1, -1, -1 };
   return &_ASBaseMeasurableView;
 }
 
@@ -688,11 +690,11 @@ jint ASBaseMeasurableView_getDrawableWidthWithADDrawable_(ASBaseMeasurableView *
   return [drawable getMinimumWidth] + self->drawablePadding_;
 }
 
-jint ASBaseMeasurableView_getDrawableHeightWithADDrawable_(ASBaseMeasurableView *self, ADDrawable *drawable) {
-  if (drawable == nil) {
+jint ASBaseMeasurableView_getDrawableHeightWithADDrawable_withBoolean_(ASBaseMeasurableView *self, ADDrawable *drawable, jboolean considerPadding) {
+  if (drawable == nil || ![drawable hasDrawable]) {
     return 0;
   }
-  return [drawable getMinimumHeight] + self->drawablePadding_;
+  return [drawable getMinimumHeight] + (considerPadding ? self->drawablePadding_ : 0);
 }
 
 void ASBaseMeasurableView_measureWidgetWithNoParentWithASHasWidgets_withASIWidget_withInt_withInt_withInt_(id<ASHasWidgets> parent, id<ASIWidget> widget, jint level, jint initialWidth, jint indent) {

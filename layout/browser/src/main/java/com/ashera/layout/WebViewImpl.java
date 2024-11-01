@@ -179,7 +179,9 @@ public class WebViewImpl extends BaseWidget {
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(WebViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(WebViewImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -192,9 +194,10 @@ public class WebViewImpl extends BaseWidget {
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(WebViewImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -302,6 +305,7 @@ public class WebViewImpl extends BaseWidget {
         	ViewImpl.stateNo(WebViewImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return WebViewExt.class;

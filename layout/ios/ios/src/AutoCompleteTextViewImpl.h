@@ -919,11 +919,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewExt)
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASAutoCompleteTextViewImpl_AutoCompleteTextViewCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1644,11 +1642,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASAutoCompleteTextViewImpl_AutoCompleteTextViewComman
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

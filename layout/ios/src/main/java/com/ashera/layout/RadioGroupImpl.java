@@ -142,7 +142,7 @@ public class RadioGroupImpl extends BaseHasWidgets implements com.ashera.validat
 	}
 
 	@Override
-	public boolean remove(IWidget w) {		
+	public boolean remove(IWidget w) {
 		boolean remove = super.remove(w);
 		radioGroup.removeView((View) w.asWidget());
 		 nativeRemoveView(w);            
@@ -386,7 +386,9 @@ return layoutParams.weight;			}
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(RadioGroupImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(RadioGroupImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -399,9 +401,10 @@ return layoutParams.weight;			}
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
-    		IWidget widget = template.loadLazyWidgets(RadioGroupImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+    		
+    		IWidget widget = template.loadLazyWidgets(RadioGroupImpl.this);
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -513,6 +516,7 @@ return layoutParams.weight;			}
 			super.endViewTransition(view);
 			runBufferedRunnables();
 		}
+	
 	}
 	@Override
 	public Class getViewClass() {
@@ -723,6 +727,7 @@ return getDividerPadding();			}
 	@com.google.j2objc.annotations.WeakOuter
 	private static final class CanvasImpl implements r.android.graphics.Canvas {
 		private boolean canvasReset = true;
+		private boolean requiresAttrChangeListener = false;
 		private List<Object> imageViews = new java.util.ArrayList<Object>();
 		@com.google.j2objc.annotations.Weak private IWidget widget;
 		public CanvasImpl(IWidget widget) {
@@ -736,8 +741,30 @@ return getDividerPadding();			}
 					return;
 				}
 			}
-			if (mDivider.getDrawable() != null) {
-				Object imageView = nativeCreateImageView(mDivider.getDrawable());
+			
+			Object image = mDivider.getDrawable();
+			if (image != null) {
+				if (image instanceof Integer){
+					image = ViewImpl.getColor(image);
+				}
+
+				Object imageView = nativeCreateImageView(image);
+				if (requiresAttrChangeListener) {
+					mDivider.setAttributeChangeListener((name, value) -> {
+						switch (name) {
+						case "bounds":
+							r.android.graphics.Rect rect = (r.android.graphics.Rect) value;
+							ViewImpl.nativeMakeFrame(imageView, rect.left, rect.top, rect.right, rect.bottom);
+							break;
+						case "alpha":
+							int alpha = (int) value;
+							ViewImpl.setAlpha(imageView, alpha/255f);
+							break;
+						default:
+							break;
+						}
+					});
+				}
 				ViewImpl.nativeMakeFrame(imageView, mDivider.getLeft(), mDivider.getTop(), mDivider.getRight(), mDivider.getBottom());
 				imageViews.add(imageView);				
 				ViewGroupImpl.nativeAddView(widget.asNativeWidget(), imageView);

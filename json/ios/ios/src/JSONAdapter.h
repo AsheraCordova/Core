@@ -62,6 +62,8 @@
 
 - (id)getJSONSafeObjWithId:(id)obj;
 
+- (jboolean)isNullWithId:(id)obj;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASJSONAdapter)

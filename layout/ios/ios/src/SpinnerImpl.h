@@ -637,11 +637,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_AdapterView_OnItemSelectedListener)
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASSpinnerImpl_SpinnerCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASSpinnerImpl_SpinnerCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASSpinnerImpl_SpinnerCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASSpinnerImpl_SpinnerCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1194,11 +1192,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSpinnerImpl_SpinnerCommandBuilder)
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

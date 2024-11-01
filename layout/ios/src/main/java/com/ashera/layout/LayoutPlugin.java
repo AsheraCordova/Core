@@ -33,6 +33,7 @@ public class LayoutPlugin  {
         WidgetFactory.register(new com.ashera.layout.RadioButtonImpl());
         WidgetFactory.register(new com.ashera.layout.ToggleButtonImpl());
         WidgetFactory.register(new com.ashera.layout.ViewOverlayImpl());
+        WidgetFactory.register(new com.ashera.layout.mergeImpl());
         WidgetFactory.register(new com.ashera.layout.fragmentImpl());
         WidgetFactory.register(new com.ashera.layout.SpinnerImpl());
         WidgetFactory.register(new com.ashera.layout.MultiSelectionSpinnerImpl());

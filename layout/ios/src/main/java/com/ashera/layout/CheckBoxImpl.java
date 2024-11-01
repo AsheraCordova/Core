@@ -257,9 +257,7 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 		ConverterFactory.register("CheckBox.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("CheckBox.textStyle").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableEnd").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableBottom").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE));
@@ -273,6 +271,7 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColor").withType("colorstate"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("html").withType("boolean"));
 	}
 	
@@ -380,7 +379,9 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(CheckBoxImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(CheckBoxImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -393,9 +394,10 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(CheckBoxImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -534,6 +536,7 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
         	ViewImpl.stateNo(CheckBoxImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return CheckBoxExt.class;
@@ -1097,31 +1100,11 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 
 			}
 			break;
-			case "drawableLeft": {
-				
-
-
-		setDrawableLeft("drawableLeft", objValue);
-
-
-
-			}
-			break;
 			case "drawableStart": {
 				
 
 
 		setDrawableLeft("drawableStart", objValue);
-
-
-
-			}
-			break;
-			case "drawableRight": {
-				
-
-
-		setDrawableRight("drawableRight", objValue);
 
 
 
@@ -1242,6 +1225,16 @@ public class CheckBoxImpl extends BaseWidget implements ICustomMeasureWidth, com
 
 
 		ViewImpl.setStyle(this, objValue);
+
+
+
+			}
+			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
 
 
 
@@ -2161,6 +2154,15 @@ return getTextColorState();				}
 		}
 	}
 
+	
+
+
+	private void setDrawableIconSize(Object objValue) {
+		applyAttributeCommand("drawableStart", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableEnd", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableTop", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableBottom", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+	}
 	
 
 
@@ -3798,24 +3800,8 @@ public CheckBoxCommandBuilder setFontFamily(String value) {
 
 	attrs.put("value", value);
 return this;}
-public CheckBoxCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public CheckBoxCommandBuilder setDrawableStart(String value) {
 	Map<String, Object> attrs = initCommand("drawableStart");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public CheckBoxCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -3956,6 +3942,14 @@ public CheckBoxCommandBuilder setTextFormat(String value) {
 return this;}
 public CheckBoxCommandBuilder setTextAppearance(String value) {
 	Map<String, Object> attrs = initCommand("textAppearance");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
+public CheckBoxCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -4314,16 +4308,8 @@ public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
 }
 
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
 public void setDrawableStart(String value) {
 	getBuilder().reset().setDrawableStart(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
 }
 
 public void setDrawableEnd(String value) {
@@ -4384,6 +4370,10 @@ public void setTextFormat(String value) {
 
 public void setTextAppearance(String value) {
 	getBuilder().reset().setTextAppearance(value).execute(true);
+}
+
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
 }
 
 }

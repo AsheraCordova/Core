@@ -47,6 +47,8 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 			return getJSONCompatMap();
 		case "getJSONSafeObj":
 			return getJSONSafeObj((Object) args[0]);
+		case "isNull":
+			return isNull((Object) args[0]);
 		default:
 			break;
 		}
@@ -246,6 +248,11 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 	@Override
 	public boolean isBoolean(Object obj) {
 		return obj instanceof Boolean;
+	}
+	
+	@Override
+	public boolean isNull(Object object) {
+		return object == null;
 	}
 	//end - web
 	@Override

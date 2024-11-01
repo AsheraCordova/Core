@@ -64,7 +64,6 @@ import { Mixin, decorate } from 'ts-mixer';
 
 
 
-
 export class TextStyleTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -175,14 +174,8 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "paddingVertical" }))
 	paddingVertical!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "drawableLeft" }))
-	drawableLeft!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "drawableStart" }))
 	drawableStart!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "drawableRight" }))
-	drawableRight!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "drawableEnd" }))
 	drawableEnd!:CommandAttr<string>| undefined;
@@ -201,6 +194,9 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "drawableTintMode" }))
 	drawableTintMode!:CommandAttr<DrawableTintMode>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableIconSize" }))
+	drawableIconSize!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "editable" }))
 	editable!:CommandAttr<boolean>| undefined;
@@ -278,15 +274,14 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 		this.paddingTop = undefined;
 		this.paddingHorizontal = undefined;
 		this.paddingVertical = undefined;
-		this.drawableLeft = undefined;
 		this.drawableStart = undefined;
-		this.drawableRight = undefined;
 		this.drawableEnd = undefined;
 		this.drawableTop = undefined;
 		this.drawableBottom = undefined;
 		this.drawablePadding = undefined;
 		this.drawableTint = undefined;
 		this.drawableTintMode = undefined;
+		this.drawableIconSize = undefined;
 		this.editable = undefined;
 		this.typeface = undefined;
 		this.textStyle = undefined;
@@ -919,20 +914,6 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 	}
 		
 
-	public setDrawableLeft(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableLeft == null || this.drawableLeft == undefined) {
-			this.drawableLeft = new CommandAttr<string>();
-		}
-		
-		this.drawableLeft.setSetter(true);
-		this.drawableLeft.setValue(value);
-		this.orderSet++;
-		this.drawableLeft.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
 	public setDrawableStart(value : string) : T {
 		this.resetIfRequired();
 		if (this.drawableStart == null || this.drawableStart == undefined) {
@@ -943,20 +924,6 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 		this.drawableStart.setValue(value);
 		this.orderSet++;
 		this.drawableStart.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableRight(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableRight == null || this.drawableRight == undefined) {
-			this.drawableRight = new CommandAttr<string>();
-		}
-		
-		this.drawableRight.setSetter(true);
-		this.drawableRight.setValue(value);
-		this.orderSet++;
-		this.drawableRight.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -1059,6 +1026,20 @@ export abstract class MultiSelectionSpinnerImpl<T> extends ViewImpl<T>{
 		this.drawableTintMode.setValue(value);
 		this.orderSet++;
 		this.drawableTintMode.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableIconSize(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableIconSize == null || this.drawableIconSize == undefined) {
+			this.drawableIconSize = new CommandAttr<string>();
+		}
+		
+		this.drawableIconSize.setSetter(true);
+		this.drawableIconSize.setValue(value);
+		this.orderSet++;
+		this.drawableIconSize.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

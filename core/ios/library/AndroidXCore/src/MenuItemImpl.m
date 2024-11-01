@@ -9,6 +9,7 @@
 #include "MenuBuilder.h"
 #include "MenuItem.h"
 #include "MenuItemImpl.h"
+#include "SubMenu.h"
 #include "SubMenuBuilder.h"
 #include "SupportMenuItem.h"
 #include "View.h"
@@ -128,6 +129,11 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
 
 - (jboolean)hasSubMenu {
   return mSubMenu_ != nil;
+}
+
+- (void)setSubMenuWithADXSubMenuBuilder:(ADXSubMenuBuilder *)subMenu {
+  JreStrongAssign(&mSubMenu_, subMenu);
+  [((ADXSubMenuBuilder *) nil_chk(subMenu)) setHeaderTitleWithJavaLangCharSequence:[self getTitle]];
 }
 
 - (id<ADMenuItem>)setIconWithADDrawable:(ADDrawable *)icon {
@@ -327,25 +333,26 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADXSubMenuBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADMenuItem;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LADMenuItem;", 0x1, 3, 5, -1, -1, -1, -1 },
-    { NULL, "LADMenuItem;", 0x1, 6, 7, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADMenuItem;", 0x1, 8, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 2, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
+    { NULL, "LADMenuItem;", 0x1, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LADMenuItem;", 0x1, 5, 7, -1, -1, -1, -1 },
+    { NULL, "LADMenuItem;", 0x1, 8, 9, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADMenuItem;", 0x1, 10, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 11, 2, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x0, 12, 2, -1, -1, -1, -1 },
-    { NULL, "LADMenuItem;", 0x1, 13, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 2, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LADMenuItem;", 0x1, 12, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 13, 2, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 5, -1, -1, -1, -1 },
-    { NULL, "LADXSupportMenuItem;", 0x1, 16, 17, -1, -1, -1, -1 },
+    { NULL, "Z", 0x0, 14, 2, -1, -1, -1, -1 },
+    { NULL, "LADMenuItem;", 0x1, 15, 2, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 17, 7, -1, -1, -1, -1 },
+    { NULL, "LADXSupportMenuItem;", 0x1, 18, 19, -1, -1, -1, -1 },
     { NULL, "LADView;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -365,32 +372,33 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
   methods[5].selector = @selector(getOrdering);
   methods[6].selector = @selector(getSubMenu);
   methods[7].selector = @selector(hasSubMenu);
-  methods[8].selector = @selector(setIconWithADDrawable:);
-  methods[9].selector = @selector(setIconWithInt:);
-  methods[10].selector = @selector(setIconTintListWithADColorStateList:);
-  methods[11].selector = @selector(isCheckable);
-  methods[12].selector = @selector(setCheckableWithBoolean:);
-  methods[13].selector = @selector(setExclusiveCheckableWithBoolean:);
-  methods[14].selector = @selector(isExclusiveCheckable);
-  methods[15].selector = @selector(isChecked);
-  methods[16].selector = @selector(setCheckedWithBoolean:);
-  methods[17].selector = @selector(setCheckedIntWithBoolean:);
-  methods[18].selector = @selector(isVisible);
-  methods[19].selector = @selector(setVisibleIntWithBoolean:);
-  methods[20].selector = @selector(setVisibleWithBoolean:);
-  methods[21].selector = @selector(isActionButton);
-  methods[22].selector = @selector(requestsActionButton);
-  methods[23].selector = @selector(requiresActionButton);
-  methods[24].selector = @selector(setIsActionButtonWithBoolean:);
-  methods[25].selector = @selector(setShowAsActionWithInt:);
-  methods[26].selector = @selector(setActionViewWithADView:);
-  methods[27].selector = @selector(getActionView);
-  methods[28].selector = @selector(hasCollapsibleActionView);
-  methods[29].selector = @selector(isActionViewExpanded);
-  methods[30].selector = @selector(getTooltipText);
-  methods[31].selector = @selector(getTitle);
-  methods[32].selector = @selector(getIcon);
-  methods[33].selector = @selector(invoke);
+  methods[8].selector = @selector(setSubMenuWithADXSubMenuBuilder:);
+  methods[9].selector = @selector(setIconWithADDrawable:);
+  methods[10].selector = @selector(setIconWithInt:);
+  methods[11].selector = @selector(setIconTintListWithADColorStateList:);
+  methods[12].selector = @selector(isCheckable);
+  methods[13].selector = @selector(setCheckableWithBoolean:);
+  methods[14].selector = @selector(setExclusiveCheckableWithBoolean:);
+  methods[15].selector = @selector(isExclusiveCheckable);
+  methods[16].selector = @selector(isChecked);
+  methods[17].selector = @selector(setCheckedWithBoolean:);
+  methods[18].selector = @selector(setCheckedIntWithBoolean:);
+  methods[19].selector = @selector(isVisible);
+  methods[20].selector = @selector(setVisibleIntWithBoolean:);
+  methods[21].selector = @selector(setVisibleWithBoolean:);
+  methods[22].selector = @selector(isActionButton);
+  methods[23].selector = @selector(requestsActionButton);
+  methods[24].selector = @selector(requiresActionButton);
+  methods[25].selector = @selector(setIsActionButtonWithBoolean:);
+  methods[26].selector = @selector(setShowAsActionWithInt:);
+  methods[27].selector = @selector(setActionViewWithADView:);
+  methods[28].selector = @selector(getActionView);
+  methods[29].selector = @selector(hasCollapsibleActionView);
+  methods[30].selector = @selector(isActionViewExpanded);
+  methods[31].selector = @selector(getTooltipText);
+  methods[32].selector = @selector(getTitle);
+  methods[33].selector = @selector(getIcon);
+  methods[34].selector = @selector(invoke);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "SHOW_AS_ACTION_MASK", "I", .constantValue.asInt = ADXMenuItemImpl_SHOW_AS_ACTION_MASK, 0x1a, -1, -1, -1, -1 },
@@ -421,8 +429,8 @@ J2OBJC_STATIC_FIELD_CONSTANT(ADXMenuItemImpl, IS_ACTION, jint)
     { "mActionView_", "LADView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mActionProvider_", "LADXMenuItemImpl_ActionProvider;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LADXMenuBuilder;IIIILJavaLangCharSequence;I", "setEnabled", "Z", "setIcon", "LADDrawable;", "I", "setIconTintList", "LADColorStateList;", "setCheckable", "setExclusiveCheckable", "setChecked", "setCheckedInt", "setVisibleInt", "setVisible", "setIsActionButton", "setShowAsAction", "setActionView", "LADView;", "LADXMenuItemImpl_ActionProvider;" };
-  static const J2ObjcClassInfo _ADXMenuItemImpl = { "MenuItemImpl", "androidx.appcompat.view.menu", ptrTable, methods, fields, 7, 0x11, 34, 27, -1, 18, -1, -1, -1 };
+  static const void *ptrTable[] = { "LADXMenuBuilder;IIIILJavaLangCharSequence;I", "setEnabled", "Z", "setSubMenu", "LADXSubMenuBuilder;", "setIcon", "LADDrawable;", "I", "setIconTintList", "LADColorStateList;", "setCheckable", "setExclusiveCheckable", "setChecked", "setCheckedInt", "setVisibleInt", "setVisible", "setIsActionButton", "setShowAsAction", "setActionView", "LADView;", "LADXMenuItemImpl_ActionProvider;" };
+  static const J2ObjcClassInfo _ADXMenuItemImpl = { "MenuItemImpl", "androidx.appcompat.view.menu", ptrTable, methods, fields, 7, 0x11, 35, 27, -1, 20, -1, -1, -1 };
   return &_ADXMenuItemImpl;
 }
 

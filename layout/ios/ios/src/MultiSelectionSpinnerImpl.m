@@ -104,6 +104,8 @@
 
 - (id)getGravity;
 
+- (void)setDrawableIconSizeWithId:(id)objValue;
+
 - (void)setTypeFaceWithId:(id)objValue
              withNSString:(NSString *)strValue;
 
@@ -307,6 +309,8 @@ __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setGravityWithId
 __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_updateTextAlignment(ASMultiSelectionSpinnerImpl *self);
 
 __attribute__((unused)) static id ASMultiSelectionSpinnerImpl_getGravity(ASMultiSelectionSpinnerImpl *self);
+
+__attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setDrawableIconSizeWithId_(ASMultiSelectionSpinnerImpl *self, id objValue);
 
 __attribute__((unused)) static void ASMultiSelectionSpinnerImpl_setTypeFaceWithId_withNSString_(ASMultiSelectionSpinnerImpl *self, id objValue, NSString *strValue);
 
@@ -596,9 +600,7 @@ NSString *ASMultiSelectionSpinnerImpl_GROUP_NAME = @"com.ashera.layout.MultiSele
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingTop"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingHorizontal"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"paddingVertical"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_INVALIDATE]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableLeft"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableStart"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableRight"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableEnd"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTop"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableBottom"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
@@ -606,6 +608,7 @@ NSString *ASMultiSelectionSpinnerImpl_GROUP_NAME = @"com.ashera.layout.MultiSele
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTint"])) withTypeWithNSString:@"colorstate"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_INVALIDATE]);
   ASConverterFactory_register__WithNSString_withASIConverter_(@"com.ashera.layout.MultiSelectionSpinner.drawableTintMode", new_ASMultiSelectionSpinnerImpl_DrawableTintMode_init());
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTintMode"])) withTypeWithNSString:@"com.ashera.layout.MultiSelectionSpinner.drawableTintMode"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_INVALIDATE]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableIconSize"])) withTypeWithNSString:@"dimension"])) withOrderWithInt:-1])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"editable"])) withTypeWithNSString:@"boolean"]);
   ASConverterFactory_register__WithNSString_withASIConverter_(@"com.ashera.layout.MultiSelectionSpinner.font", new_ASMultiSelectionSpinnerImpl_Font_init());
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"typeface"])) withTypeWithNSString:@"com.ashera.layout.MultiSelectionSpinner.font"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
@@ -672,7 +675,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
   ASViewGroupModelImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"hint", @"iosPlaceholder", @"iosTextColor", @"iosAdjustsFontSizeToFitWidth", @"iosMinimumFontSize", @"iosIsEditing", @"iosClearsOnBeginEditing", @"iosClearsOnInsertion", @"iosAllowsEditingTextAttributes", @"iosBackground", @"iosDisabledBackground", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"editable", @"typeface", @"textStyle", @"fontFamily", @"textColor", @"enabled", @"values", @"selectedValues", @"hintTextFormat", @"entries", @"selection", @"modelOptionTextPath", @"onItemSelected", @"modelOptionValuePath", @"gravity", @"textSize", @"textColorHint" }, 47)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"hint", @"iosPlaceholder", @"iosTextColor", @"iosAdjustsFontSizeToFitWidth", @"iosMinimumFontSize", @"iosIsEditing", @"iosClearsOnBeginEditing", @"iosClearsOnInsertion", @"iosAllowsEditingTextAttributes", @"iosBackground", @"iosDisabledBackground", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"drawableStart", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"drawableIconSize", @"editable", @"typeface", @"textStyle", @"fontFamily", @"textColor", @"enabled", @"values", @"selectedValues", @"hintTextFormat", @"entries", @"selection", @"modelOptionTextPath", @"onItemSelected", @"modelOptionValuePath", @"gravity", @"textSize", @"textColorHint" }, 46)) {
     case 0:
     {
       [self setTextWithId:nativeWidget withId:objValue];
@@ -775,110 +778,105 @@ J2OBJC_IGNORE_DESIGNATED_END
     break;
     case 21:
     {
-      ASMultiSelectionSpinnerImpl_setDrawableLeftWithNSString_withId_(self, @"drawableLeft", objValue);
+      ASMultiSelectionSpinnerImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
     }
     break;
     case 22:
     {
-      ASMultiSelectionSpinnerImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
+      ASMultiSelectionSpinnerImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
     }
     break;
     case 23:
     {
-      ASMultiSelectionSpinnerImpl_setDrawableRightWithNSString_withId_(self, @"drawableRight", objValue);
+      ASMultiSelectionSpinnerImpl_setDrawableTopWithId_(self, objValue);
     }
     break;
     case 24:
     {
-      ASMultiSelectionSpinnerImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
+      ASMultiSelectionSpinnerImpl_setDrawableBottomWithId_(self, objValue);
     }
     break;
     case 25:
     {
-      ASMultiSelectionSpinnerImpl_setDrawableTopWithId_(self, objValue);
+      ASMultiSelectionSpinnerImpl_setDrawablePaddingWithId_(self, objValue);
     }
     break;
     case 26:
     {
-      ASMultiSelectionSpinnerImpl_setDrawableBottomWithId_(self, objValue);
+      ASMultiSelectionSpinnerImpl_setDrawableTintWithId_(self, objValue);
     }
     break;
     case 27:
     {
-      ASMultiSelectionSpinnerImpl_setDrawablePaddingWithId_(self, objValue);
+      ASMultiSelectionSpinnerImpl_setDrawableTintModeWithId_(self, objValue);
     }
     break;
     case 28:
     {
-      ASMultiSelectionSpinnerImpl_setDrawableTintWithId_(self, objValue);
+      ASMultiSelectionSpinnerImpl_setDrawableIconSizeWithId_(self, objValue);
     }
     break;
     case 29:
     {
-      ASMultiSelectionSpinnerImpl_setDrawableTintModeWithId_(self, objValue);
+      [self setEnabledWithId:objValue];
     }
     break;
     case 30:
     {
-      [self setEnabledWithId:objValue];
+      ASMultiSelectionSpinnerImpl_setTypeFaceWithId_withNSString_(self, objValue, strValue);
     }
     break;
     case 31:
     {
-      ASMultiSelectionSpinnerImpl_setTypeFaceWithId_withNSString_(self, objValue, strValue);
+      ASMultiSelectionSpinnerImpl_setTextStyleWithId_(self, objValue);
     }
     break;
     case 32:
     {
-      ASMultiSelectionSpinnerImpl_setTextStyleWithId_(self, objValue);
+      ASMultiSelectionSpinnerImpl_setFontFamilyWithId_withNSString_(self, objValue, strValue);
     }
     break;
     case 33:
     {
-      ASMultiSelectionSpinnerImpl_setFontFamilyWithId_withNSString_(self, objValue, strValue);
+      ASMultiSelectionSpinnerImpl_setTextColorWithId_(self, objValue);
     }
     break;
     case 34:
     {
-      ASMultiSelectionSpinnerImpl_setTextColorWithId_(self, objValue);
+      [self setEnabledWithId:objValue];
     }
     break;
     case 35:
     {
-      [self setEnabledWithId:objValue];
+      ASMultiSelectionSpinnerImpl_setValuesWithId_(self, objValue);
     }
     break;
     case 36:
     {
-      ASMultiSelectionSpinnerImpl_setValuesWithId_(self, objValue);
+      ASMultiSelectionSpinnerImpl_setSelectedValuesWithId_(self, objValue);
     }
     break;
     case 37:
     {
-      ASMultiSelectionSpinnerImpl_setSelectedValuesWithId_(self, objValue);
+      ASMultiSelectionSpinnerImpl_setHintTextFormatWithId_(self, objValue);
     }
     break;
     case 38:
     {
-      ASMultiSelectionSpinnerImpl_setHintTextFormatWithId_(self, objValue);
+      ASMultiSelectionSpinnerImpl_setEntriesWithId_(self, objValue);
     }
     break;
     case 39:
     {
-      ASMultiSelectionSpinnerImpl_setEntriesWithId_(self, objValue);
+      ASMultiSelectionSpinnerImpl_setSelectionWithId_(self, objValue);
     }
     break;
     case 40:
     {
-      ASMultiSelectionSpinnerImpl_setSelectionWithId_(self, objValue);
-    }
-    break;
-    case 41:
-    {
       ASMultiSelectionSpinnerImpl_setModelOptionTextPathWithId_(self, objValue);
     }
     break;
-    case 42:
+    case 41:
     {
       if ([objValue isKindOfClass:[NSString class]]) {
         ASMultiSelectionSpinnerImpl_setOnMultiItemSelectedListenerWithASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener_(self, new_ASMultiSelectionSpinnerImpl_OnMultiItemSelectedListener_initWithASIWidget_withNSString_withNSString_(self, strValue, @"onItemSelected"));
@@ -888,22 +886,22 @@ J2OBJC_IGNORE_DESIGNATED_END
       }
     }
     break;
-    case 43:
+    case 42:
     {
       ASMultiSelectionSpinnerImpl_setModelOptionValuePathWithId_(self, objValue);
     }
     break;
-    case 44:
+    case 43:
     {
       ASMultiSelectionSpinnerImpl_setGravityWithId_(self, objValue);
     }
     break;
-    case 45:
+    case 44:
     {
       ASMultiSelectionSpinnerImpl_setMyTextSizeWithId_(self, objValue);
     }
     break;
-    case 46:
+    case 45:
     {
       ASMultiSelectionSpinnerImpl_setHintColorWithId_(self, objValue);
     }
@@ -1058,6 +1056,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   if ([((ADSpinner *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADSpinner *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASMultiSelectionSpinnerImpl_updateTextAlignment(self);
   }
+}
+
+- (void)setDrawableIconSizeWithId:(id)objValue {
+  ASMultiSelectionSpinnerImpl_setDrawableIconSizeWithId_(self, objValue);
 }
 
 - (void)setTypeFaceWithId:(id)objValue
@@ -1712,36 +1714,37 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 22, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 24, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 25, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 22, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 23, 24, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 25, 24, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 26, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 27, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 28, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 28, 29, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 30, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 31, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 29, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 31, 21, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 32, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 33, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 34, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 35, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 36, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 36, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 37, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 38, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 39, 15, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 40, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 41, 21, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 41, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 42, 21, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
@@ -1751,86 +1754,86 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 42, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 43, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 44, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 45, 46, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 47, 46, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 48, 46, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 49, 46, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 50, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 45, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 46, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 48, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 49, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 50, 47, -1, -1, -1, -1 },
     { NULL, "I", 0x102, 51, 15, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 52, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 52, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 53, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 54, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 55, 15, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 55, 56, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 56, 57, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 57, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 58, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 58, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 59, 15, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 59, 21, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 60, 21, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 60, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 61, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 61, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 62, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 62, 63, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 64, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 63, 64, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 65, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 65, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 66, 67, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 67, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 68, 67, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 54, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 55, 67, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 68, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 69, 67, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 69, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 70, 67, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 70, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 71, 67, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 71, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 72, 67, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 72, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 73, 67, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 73, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 74, 67, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 74, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 75, 67, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 75, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 76, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 77, 63, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 76, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 77, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 78, 64, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 78, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 79, 1, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 79, 80, -1, 81, -1, -1 },
+    { NULL, "V", 0x2, 80, 81, -1, 82, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 82, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 83, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 83, 84, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 85, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 84, 85, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 86, 15, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 86, 87, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 87, 88, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 88, 89, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x2, -1, -1, -1, 90, -1, -1 },
+    { NULL, "V", 0x2, 89, 90, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x2, -1, -1, -1, 91, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 91, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 92, 15, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1855,138 +1858,139 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[17].selector = @selector(updateTextAlignment);
   methods[18].selector = @selector(getGravity);
   methods[19].selector = @selector(onRtlPropertiesChangedWithInt:);
-  methods[20].selector = @selector(setTypeFaceWithId:withNSString:);
-  methods[21].selector = @selector(setFontFamilyWithId:withNSString:);
-  methods[22].selector = @selector(setTextStyleWithId:);
-  methods[23].selector = @selector(setValuesWithId:);
-  methods[24].selector = @selector(setSelectedValuesWithId:);
-  methods[25].selector = @selector(getSelectedValues);
-  methods[26].selector = @selector(getTextEntered);
-  methods[27].selector = @selector(initialized);
-  methods[28].selector = @selector(nativeGetFontSize);
-  methods[29].selector = @selector(nativeGetFontStyle);
-  methods[30].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
-  methods[31].selector = @selector(nativeSetFontStyleWithInt:);
-  methods[32].selector = @selector(setPaddingWithId:);
-  methods[33].selector = @selector(setPaddingBottomWithId:);
-  methods[34].selector = @selector(setPaddingTopWithId:);
-  methods[35].selector = @selector(setPaddingLeftWithId:);
-  methods[36].selector = @selector(setPaddingRightWithId:);
-  methods[37].selector = @selector(getPaddingTop);
-  methods[38].selector = @selector(getPaddingEnd);
-  methods[39].selector = @selector(getPaddingStart);
-  methods[40].selector = @selector(getPaddingLeft);
-  methods[41].selector = @selector(getPaddingRight);
-  methods[42].selector = @selector(getPaddingBottom);
-  methods[43].selector = @selector(setPaddingVerticalWithId:);
-  methods[44].selector = @selector(setPaddingHorizontalWithId:);
-  methods[45].selector = @selector(setPaddingEndWithId:);
-  methods[46].selector = @selector(setPaddingStartWithId:);
-  methods[47].selector = @selector(getTextSize);
-  methods[48].selector = @selector(setMyTextSizeWithId:);
-  methods[49].selector = @selector(nativeSetTextSizeWithInt:);
-  methods[50].selector = @selector(setVerticalAligmentCenter);
-  methods[51].selector = @selector(setVerticalAligmentBottom);
-  methods[52].selector = @selector(setVerticalAligmentTop);
-  methods[53].selector = @selector(setHorizontalAligmentCenter);
-  methods[54].selector = @selector(setHorizontalAligmentRight);
-  methods[55].selector = @selector(setHorizontalAligmentRightInternal);
-  methods[56].selector = @selector(setHorizontalAligmentLeft);
-  methods[57].selector = @selector(setHorizontalAligmentLeftInternal);
-  methods[58].selector = @selector(getTextAlignment);
-  methods[59].selector = @selector(setDrawablePaddingWithId:);
-  methods[60].selector = @selector(setDrawableBottomWithId:);
-  methods[61].selector = @selector(setDrawableTopWithId:);
-  methods[62].selector = @selector(setDrawableRightWithNSString:withId:);
-  methods[63].selector = @selector(setDrawableRightInternalWithNSString:withId:);
-  methods[64].selector = @selector(setDrawableLeftWithNSString:withId:);
-  methods[65].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
-  methods[66].selector = @selector(getImageHeightWithId:);
-  methods[67].selector = @selector(getImageWidthWithId:);
-  methods[68].selector = @selector(getDrawablePadding);
-  methods[69].selector = @selector(setDrawableTintModeWithId:);
-  methods[70].selector = @selector(setDrawableTintWithId:);
-  methods[71].selector = @selector(setTextColorWithId:);
-  methods[72].selector = @selector(getTextColorState);
-  methods[73].selector = @selector(drawableStateChanged);
-  methods[74].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
-  methods[75].selector = @selector(getBorderPadding);
-  methods[76].selector = @selector(getLineHeightPadding);
-  methods[77].selector = @selector(getLineHeight);
-  methods[78].selector = @selector(getBorderWidth);
-  methods[79].selector = @selector(resetError);
-  methods[80].selector = @selector(showErrorWithNSString:);
-  methods[81].selector = @selector(setHintTextFormatWithId:);
-  methods[82].selector = @selector(measureWidth);
-  methods[83].selector = @selector(measureHeightWithInt:);
-  methods[84].selector = @selector(updatePadding);
-  methods[85].selector = @selector(nativeSetVerticalAligmentCenter);
-  methods[86].selector = @selector(nativeSetVerticalAligmentBottom);
-  methods[87].selector = @selector(nativeSetVerticalAligmentTop);
-  methods[88].selector = @selector(setHintColorWithId:);
-  methods[89].selector = @selector(nativeSetHintColorWithId:);
-  methods[90].selector = @selector(syncPlaceholderLabel);
-  methods[91].selector = @selector(nativeSetEnabledWithBoolean:);
-  methods[92].selector = @selector(setEnabledWithId:);
-  methods[93].selector = @selector(becomeFirstResponder);
-  methods[94].selector = @selector(setTextWithId:withId:);
-  methods[95].selector = @selector(getText);
-  methods[96].selector = @selector(setPlaceholderWithId:withId:);
-  methods[97].selector = @selector(getPlaceholder);
-  methods[98].selector = @selector(setTextColorWithId:withId:);
-  methods[99].selector = @selector(getTextColor);
-  methods[100].selector = @selector(setAdjustsFontSizeToFitWidthWithId:withId:);
-  methods[101].selector = @selector(getAdjustsFontSizeToFitWidth);
-  methods[102].selector = @selector(setMinimumFontSizeWithId:withId:);
-  methods[103].selector = @selector(getMinimumFontSize);
-  methods[104].selector = @selector(getIsEditing);
-  methods[105].selector = @selector(setClearsOnBeginEditingWithId:withId:);
-  methods[106].selector = @selector(getClearsOnBeginEditing);
-  methods[107].selector = @selector(setClearsOnInsertionWithId:withId:);
-  methods[108].selector = @selector(getClearsOnInsertion);
-  methods[109].selector = @selector(setAllowsEditingTextAttributesWithId:withId:);
-  methods[110].selector = @selector(getAllowsEditingTextAttributes);
-  methods[111].selector = @selector(setBackgroundWithId:withId:);
-  methods[112].selector = @selector(getBackground);
-  methods[113].selector = @selector(setDisabledBackgroundWithId:withId:);
-  methods[114].selector = @selector(getDisabledBackground);
-  methods[115].selector = @selector(asNativeWidget);
-  methods[116].selector = @selector(checkIosVersionWithNSString:);
-  methods[117].selector = @selector(setIdWithNSString:);
-  methods[118].selector = @selector(setVisibleWithBoolean:);
-  methods[119].selector = @selector(requestLayout);
-  methods[120].selector = @selector(invalidate);
-  methods[121].selector = @selector(getPluginWithNSString:);
-  methods[122].selector = @selector(getBean);
-  methods[123].selector = @selector(getBuilder);
-  methods[124].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[125].selector = @selector(nativeCreateView);
-  methods[126].selector = @selector(setEntriesWithId:);
-  methods[127].selector = @selector(updateText);
-  methods[128].selector = @selector(getSelectedText);
-  methods[129].selector = @selector(setOnMultiItemSelectedListenerWithASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener:);
-  methods[130].selector = @selector(setSelectionWithId:);
-  methods[131].selector = @selector(reloadAllComponents);
-  methods[132].selector = @selector(addItemToParentWithInt:withNSString:withASLoopParam:);
-  methods[133].selector = @selector(getMyText);
-  methods[134].selector = @selector(setTextColorLinkWithADColorStateList:);
-  methods[135].selector = @selector(getSelectedItemPositions);
-  methods[136].selector = @selector(isViewVisible);
-  methods[137].selector = @selector(focus);
-  methods[138].selector = @selector(setErrorWithId:);
+  methods[20].selector = @selector(setDrawableIconSizeWithId:);
+  methods[21].selector = @selector(setTypeFaceWithId:withNSString:);
+  methods[22].selector = @selector(setFontFamilyWithId:withNSString:);
+  methods[23].selector = @selector(setTextStyleWithId:);
+  methods[24].selector = @selector(setValuesWithId:);
+  methods[25].selector = @selector(setSelectedValuesWithId:);
+  methods[26].selector = @selector(getSelectedValues);
+  methods[27].selector = @selector(getTextEntered);
+  methods[28].selector = @selector(initialized);
+  methods[29].selector = @selector(nativeGetFontSize);
+  methods[30].selector = @selector(nativeGetFontStyle);
+  methods[31].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
+  methods[32].selector = @selector(nativeSetFontStyleWithInt:);
+  methods[33].selector = @selector(setPaddingWithId:);
+  methods[34].selector = @selector(setPaddingBottomWithId:);
+  methods[35].selector = @selector(setPaddingTopWithId:);
+  methods[36].selector = @selector(setPaddingLeftWithId:);
+  methods[37].selector = @selector(setPaddingRightWithId:);
+  methods[38].selector = @selector(getPaddingTop);
+  methods[39].selector = @selector(getPaddingEnd);
+  methods[40].selector = @selector(getPaddingStart);
+  methods[41].selector = @selector(getPaddingLeft);
+  methods[42].selector = @selector(getPaddingRight);
+  methods[43].selector = @selector(getPaddingBottom);
+  methods[44].selector = @selector(setPaddingVerticalWithId:);
+  methods[45].selector = @selector(setPaddingHorizontalWithId:);
+  methods[46].selector = @selector(setPaddingEndWithId:);
+  methods[47].selector = @selector(setPaddingStartWithId:);
+  methods[48].selector = @selector(getTextSize);
+  methods[49].selector = @selector(setMyTextSizeWithId:);
+  methods[50].selector = @selector(nativeSetTextSizeWithInt:);
+  methods[51].selector = @selector(setVerticalAligmentCenter);
+  methods[52].selector = @selector(setVerticalAligmentBottom);
+  methods[53].selector = @selector(setVerticalAligmentTop);
+  methods[54].selector = @selector(setHorizontalAligmentCenter);
+  methods[55].selector = @selector(setHorizontalAligmentRight);
+  methods[56].selector = @selector(setHorizontalAligmentRightInternal);
+  methods[57].selector = @selector(setHorizontalAligmentLeft);
+  methods[58].selector = @selector(setHorizontalAligmentLeftInternal);
+  methods[59].selector = @selector(getTextAlignment);
+  methods[60].selector = @selector(setDrawablePaddingWithId:);
+  methods[61].selector = @selector(setDrawableBottomWithId:);
+  methods[62].selector = @selector(setDrawableTopWithId:);
+  methods[63].selector = @selector(setDrawableRightWithNSString:withId:);
+  methods[64].selector = @selector(setDrawableRightInternalWithNSString:withId:);
+  methods[65].selector = @selector(setDrawableLeftWithNSString:withId:);
+  methods[66].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
+  methods[67].selector = @selector(getImageHeightWithId:);
+  methods[68].selector = @selector(getImageWidthWithId:);
+  methods[69].selector = @selector(getDrawablePadding);
+  methods[70].selector = @selector(setDrawableTintModeWithId:);
+  methods[71].selector = @selector(setDrawableTintWithId:);
+  methods[72].selector = @selector(setTextColorWithId:);
+  methods[73].selector = @selector(getTextColorState);
+  methods[74].selector = @selector(drawableStateChanged);
+  methods[75].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
+  methods[76].selector = @selector(getBorderPadding);
+  methods[77].selector = @selector(getLineHeightPadding);
+  methods[78].selector = @selector(getLineHeight);
+  methods[79].selector = @selector(getBorderWidth);
+  methods[80].selector = @selector(resetError);
+  methods[81].selector = @selector(showErrorWithNSString:);
+  methods[82].selector = @selector(setHintTextFormatWithId:);
+  methods[83].selector = @selector(measureWidth);
+  methods[84].selector = @selector(measureHeightWithInt:);
+  methods[85].selector = @selector(updatePadding);
+  methods[86].selector = @selector(nativeSetVerticalAligmentCenter);
+  methods[87].selector = @selector(nativeSetVerticalAligmentBottom);
+  methods[88].selector = @selector(nativeSetVerticalAligmentTop);
+  methods[89].selector = @selector(setHintColorWithId:);
+  methods[90].selector = @selector(nativeSetHintColorWithId:);
+  methods[91].selector = @selector(syncPlaceholderLabel);
+  methods[92].selector = @selector(nativeSetEnabledWithBoolean:);
+  methods[93].selector = @selector(setEnabledWithId:);
+  methods[94].selector = @selector(becomeFirstResponder);
+  methods[95].selector = @selector(setTextWithId:withId:);
+  methods[96].selector = @selector(getText);
+  methods[97].selector = @selector(setPlaceholderWithId:withId:);
+  methods[98].selector = @selector(getPlaceholder);
+  methods[99].selector = @selector(setTextColorWithId:withId:);
+  methods[100].selector = @selector(getTextColor);
+  methods[101].selector = @selector(setAdjustsFontSizeToFitWidthWithId:withId:);
+  methods[102].selector = @selector(getAdjustsFontSizeToFitWidth);
+  methods[103].selector = @selector(setMinimumFontSizeWithId:withId:);
+  methods[104].selector = @selector(getMinimumFontSize);
+  methods[105].selector = @selector(getIsEditing);
+  methods[106].selector = @selector(setClearsOnBeginEditingWithId:withId:);
+  methods[107].selector = @selector(getClearsOnBeginEditing);
+  methods[108].selector = @selector(setClearsOnInsertionWithId:withId:);
+  methods[109].selector = @selector(getClearsOnInsertion);
+  methods[110].selector = @selector(setAllowsEditingTextAttributesWithId:withId:);
+  methods[111].selector = @selector(getAllowsEditingTextAttributes);
+  methods[112].selector = @selector(setBackgroundWithId:withId:);
+  methods[113].selector = @selector(getBackground);
+  methods[114].selector = @selector(setDisabledBackgroundWithId:withId:);
+  methods[115].selector = @selector(getDisabledBackground);
+  methods[116].selector = @selector(asNativeWidget);
+  methods[117].selector = @selector(checkIosVersionWithNSString:);
+  methods[118].selector = @selector(setIdWithNSString:);
+  methods[119].selector = @selector(setVisibleWithBoolean:);
+  methods[120].selector = @selector(requestLayout);
+  methods[121].selector = @selector(invalidate);
+  methods[122].selector = @selector(getPluginWithNSString:);
+  methods[123].selector = @selector(getBean);
+  methods[124].selector = @selector(getBuilder);
+  methods[125].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[126].selector = @selector(nativeCreateView);
+  methods[127].selector = @selector(setEntriesWithId:);
+  methods[128].selector = @selector(updateText);
+  methods[129].selector = @selector(getSelectedText);
+  methods[130].selector = @selector(setOnMultiItemSelectedListenerWithASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener:);
+  methods[131].selector = @selector(setSelectionWithId:);
+  methods[132].selector = @selector(reloadAllComponents);
+  methods[133].selector = @selector(addItemToParentWithInt:withNSString:withASLoopParam:);
+  methods[134].selector = @selector(getMyText);
+  methods[135].selector = @selector(setTextColorLinkWithADColorStateList:);
+  methods[136].selector = @selector(getSelectedItemPositions);
+  methods[137].selector = @selector(isViewVisible);
+  methods[138].selector = @selector(focus);
+  methods[139].selector = @selector(setErrorWithId:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 92, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 93, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 93, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 94, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADSpinner;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "modelOptionTextPath_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "modelOptionValuePath_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 94, -1 },
-    { "values_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 95, -1 },
+    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 95, -1 },
+    { "values_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 96, -1 },
     { "tmpSelectedValues_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 96, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 97, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 97, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 98, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASMultiSelectionSpinnerImpl_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_CENTER", "I", .constantValue.asInt = ASMultiSelectionSpinnerImpl_TEXT_ALIGN_CENTER, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_LEFT", "I", .constantValue.asInt = ASMultiSelectionSpinnerImpl_TEXT_ALIGN_LEFT, 0x1a, -1, -1, -1, -1 },
@@ -1994,12 +1998,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "drawableTint_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "builder_", "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bean_", "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "entries_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 95, -1 },
-    { "selectedItem_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 98, -1 },
+    { "entries_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 96, -1 },
+    { "selectedItem_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 99, -1 },
     { "onMultiItemSelectedListener_", "LASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "setModelOptionTextPath", "LNSObject;", "setModelOptionValuePath", "getOptionValueFromLoopParam", "LASLoopParam;LNSString;", "setGravity", "onRtlPropertiesChanged", "I", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "setValues", "setSelectedValues", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "showError", "setHintTextFormat", "measureHeight", "setHintColor", "nativeSetHintColor", "nativeSetEnabled", "Z", "setEnabled", "setText", "LNSObject;LNSObject;", "setPlaceholder", "setAdjustsFontSizeToFitWidth", "setMinimumFontSize", "setClearsOnBeginEditing", "setClearsOnInsertion", "setAllowsEditingTextAttributes", "setBackground", "setDisabledBackground", "checkIosVersion", "setId", "setVisible", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setEntries", "setOnMultiItemSelectedListener", "LASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener;", "setSelection", "addItemToParent", "ILNSString;LASLoopParam;", "setTextColorLink", "LADColorStateList;", "()Ljava/util/List<Ljava/lang/Integer;>;", "setError", &ASMultiSelectionSpinnerImpl_LOCAL_NAME, &ASMultiSelectionSpinnerImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/List<Ljava/lang/String;>;", &ASMultiSelectionSpinnerImpl_ITALIC_FONT_TRAIT, &ASMultiSelectionSpinnerImpl_BOLD_FONT_TRAIT, "Ljava/util/List<Ljava/lang/Integer;>;", "LASMultiSelectionSpinnerImpl_DrawableTintMode;LASMultiSelectionSpinnerImpl_Font;LASMultiSelectionSpinnerImpl_TextStyle;LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt;LASMultiSelectionSpinnerImpl_MultiSelectionSpinner;LASMultiSelectionSpinnerImpl_OnMultiItemSelectedListener;LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerBean;" };
-  static const J2ObjcClassInfo _ASMultiSelectionSpinnerImpl = { "MultiSelectionSpinnerImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 139, 21, -1, 99, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "setModelOptionTextPath", "LNSObject;", "setModelOptionValuePath", "getOptionValueFromLoopParam", "LASLoopParam;LNSString;", "setGravity", "onRtlPropertiesChanged", "I", "setDrawableIconSize", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "setValues", "setSelectedValues", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "showError", "setHintTextFormat", "measureHeight", "setHintColor", "nativeSetHintColor", "nativeSetEnabled", "Z", "setEnabled", "setText", "LNSObject;LNSObject;", "setPlaceholder", "setAdjustsFontSizeToFitWidth", "setMinimumFontSize", "setClearsOnBeginEditing", "setClearsOnInsertion", "setAllowsEditingTextAttributes", "setBackground", "setDisabledBackground", "checkIosVersion", "setId", "setVisible", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setEntries", "setOnMultiItemSelectedListener", "LASMultiSelectionSpinnerImpl_MultiSelectionSpinner_OnMultiItemSelectedListener;", "setSelection", "addItemToParent", "ILNSString;LASLoopParam;", "setTextColorLink", "LADColorStateList;", "()Ljava/util/List<Ljava/lang/Integer;>;", "setError", &ASMultiSelectionSpinnerImpl_LOCAL_NAME, &ASMultiSelectionSpinnerImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/List<Ljava/lang/String;>;", &ASMultiSelectionSpinnerImpl_ITALIC_FONT_TRAIT, &ASMultiSelectionSpinnerImpl_BOLD_FONT_TRAIT, "Ljava/util/List<Ljava/lang/Integer;>;", "LASMultiSelectionSpinnerImpl_DrawableTintMode;LASMultiSelectionSpinnerImpl_Font;LASMultiSelectionSpinnerImpl_TextStyle;LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerExt;LASMultiSelectionSpinnerImpl_MultiSelectionSpinner;LASMultiSelectionSpinnerImpl_OnMultiItemSelectedListener;LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerBean;" };
+  static const J2ObjcClassInfo _ASMultiSelectionSpinnerImpl = { "MultiSelectionSpinnerImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 140, 21, -1, 100, -1, -1, -1 };
   return &_ASMultiSelectionSpinnerImpl;
 }
 
@@ -2186,6 +2190,13 @@ id ASMultiSelectionSpinnerImpl_getGravity(ASMultiSelectionSpinnerImpl *self) {
   }
   jint gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
+}
+
+void ASMultiSelectionSpinnerImpl_setDrawableIconSizeWithId_(ASMultiSelectionSpinnerImpl *self, id objValue) {
+  [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
 }
 
 void ASMultiSelectionSpinnerImpl_setTypeFaceWithId_withNSString_(ASMultiSelectionSpinnerImpl *self, id objValue, NSString *strValue) {
@@ -3042,7 +3053,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_TextStyle)
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  if (![this$0_ isWidgetDisposed]) {
+    ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  }
 }
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout {
@@ -3981,26 +3994,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_OnMultiItemSelected
   return self;
 }
 
-- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawableStartWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawableRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableRight"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -4068,6 +4063,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_OnMultiItemSelected
 
 - (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawableTintModeWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTintMode"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableIconSize"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -4344,38 +4348,37 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_OnMultiItemSelected
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 26, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 27, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 28, 4, -1, -1, -1, -1 },
+    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 29, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 30, 4, -1, -1, -1, -1 },
-    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 31, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 32, 4, -1, -1, -1, -1 },
-    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 33, 4, -1, -1, -1, -1 },
-    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 34, 2, -1, -1, -1, -1 },
+    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 33, 2, -1, -1, -1, -1 },
+    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 34, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 35, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 36, 4, -1, -1, -1, -1 },
+    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 37, 4, -1, -1, -1, -1 },
+    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 38, 2, -1, -1, -1, -1 },
+    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 39, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 38, 4, -1, -1, -1, -1 },
-    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 39, 2, -1, -1, -1, -1 },
-    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 40, 4, -1, -1, -1, -1 },
-    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 41, 42, -1, -1, -1, -1 },
+    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 40, 41, -1, -1, -1, -1 },
+    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 42, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 43, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 44, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 45, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 46, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 47, 4, -1, -1, -1, -1 },
+    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 48, 4, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 49, 4, -1, -1, -1, -1 },
-    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 50, 4, -1, -1, -1, -1 },
-    { NULL, "LASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;", 0x1, 51, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -4438,48 +4441,47 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_OnMultiItemSelected
   methods[55].selector = @selector(setPaddingTopWithNSString:);
   methods[56].selector = @selector(setPaddingHorizontalWithNSString:);
   methods[57].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[58].selector = @selector(setDrawableLeftWithNSString:);
-  methods[59].selector = @selector(setDrawableStartWithNSString:);
-  methods[60].selector = @selector(setDrawableRightWithNSString:);
-  methods[61].selector = @selector(setDrawableEndWithNSString:);
-  methods[62].selector = @selector(setDrawableTopWithNSString:);
-  methods[63].selector = @selector(setDrawableBottomWithNSString:);
-  methods[64].selector = @selector(tryGetDrawablePadding);
-  methods[65].selector = @selector(getDrawablePadding);
-  methods[66].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[67].selector = @selector(setDrawableTintWithNSString:);
-  methods[68].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[69].selector = @selector(setEditableWithBoolean:);
-  methods[70].selector = @selector(setTypefaceWithNSString:);
-  methods[71].selector = @selector(setTextStyleWithNSString:);
-  methods[72].selector = @selector(setFontFamilyWithNSString:);
-  methods[73].selector = @selector(tryGetTextColor);
-  methods[74].selector = @selector(getTextColor);
-  methods[75].selector = @selector(setTextColorWithNSString:);
-  methods[76].selector = @selector(setEnabledWithBoolean:);
-  methods[77].selector = @selector(setValuesWithNSString:);
-  methods[78].selector = @selector(tryGetSelectedValues);
-  methods[79].selector = @selector(getSelectedValues);
-  methods[80].selector = @selector(setSelectedValuesWithId:);
-  methods[81].selector = @selector(setHintTextFormatWithNSString:);
-  methods[82].selector = @selector(setEntriesWithNSString:);
-  methods[83].selector = @selector(setSelectionWithNSString:);
-  methods[84].selector = @selector(setModelOptionTextPathWithNSString:);
-  methods[85].selector = @selector(setOnItemSelectedWithNSString:);
-  methods[86].selector = @selector(setModelOptionValuePathWithNSString:);
-  methods[87].selector = @selector(tryGetGravity);
-  methods[88].selector = @selector(getGravity);
-  methods[89].selector = @selector(setGravityWithNSString:);
-  methods[90].selector = @selector(tryGetTextSize);
-  methods[91].selector = @selector(getTextSize);
-  methods[92].selector = @selector(setTextSizeWithNSString:);
-  methods[93].selector = @selector(setTextColorHintWithNSString:);
+  methods[58].selector = @selector(setDrawableStartWithNSString:);
+  methods[59].selector = @selector(setDrawableEndWithNSString:);
+  methods[60].selector = @selector(setDrawableTopWithNSString:);
+  methods[61].selector = @selector(setDrawableBottomWithNSString:);
+  methods[62].selector = @selector(tryGetDrawablePadding);
+  methods[63].selector = @selector(getDrawablePadding);
+  methods[64].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[65].selector = @selector(setDrawableTintWithNSString:);
+  methods[66].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[67].selector = @selector(setDrawableIconSizeWithNSString:);
+  methods[68].selector = @selector(setEditableWithBoolean:);
+  methods[69].selector = @selector(setTypefaceWithNSString:);
+  methods[70].selector = @selector(setTextStyleWithNSString:);
+  methods[71].selector = @selector(setFontFamilyWithNSString:);
+  methods[72].selector = @selector(tryGetTextColor);
+  methods[73].selector = @selector(getTextColor);
+  methods[74].selector = @selector(setTextColorWithNSString:);
+  methods[75].selector = @selector(setEnabledWithBoolean:);
+  methods[76].selector = @selector(setValuesWithNSString:);
+  methods[77].selector = @selector(tryGetSelectedValues);
+  methods[78].selector = @selector(getSelectedValues);
+  methods[79].selector = @selector(setSelectedValuesWithId:);
+  methods[80].selector = @selector(setHintTextFormatWithNSString:);
+  methods[81].selector = @selector(setEntriesWithNSString:);
+  methods[82].selector = @selector(setSelectionWithNSString:);
+  methods[83].selector = @selector(setModelOptionTextPathWithNSString:);
+  methods[84].selector = @selector(setOnItemSelectedWithNSString:);
+  methods[85].selector = @selector(setModelOptionValuePathWithNSString:);
+  methods[86].selector = @selector(tryGetGravity);
+  methods[87].selector = @selector(getGravity);
+  methods[88].selector = @selector(setGravityWithNSString:);
+  methods[89].selector = @selector(tryGetTextSize);
+  methods[90].selector = @selector(getTextSize);
+  methods[91].selector = @selector(setTextSizeWithNSString:);
+  methods[92].selector = @selector(setTextColorHintWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASMultiSelectionSpinnerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASMultiSelectionSpinnerImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosPlaceholder", "setHint", "setIosTextColor", "setIosAdjustsFontSizeToFitWidth", "setIosMinimumFontSize", "F", "setIosClearsOnBeginEditing", "setIosClearsOnInsertion", "setIosAllowsEditingTextAttributes", "setIosBackground", "setIosDisabledBackground", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setEditable", "setTypeface", "setTextStyle", "setFontFamily", "setTextColor", "setEnabled", "setValues", "setSelectedValues", "LNSObject;", "setHintTextFormat", "setEntries", "setSelection", "setModelOptionTextPath", "setOnItemSelected", "setModelOptionValuePath", "setGravity", "setTextSize", "setTextColorHint", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/MultiSelectionSpinnerImpl$MultiSelectionSpinnerCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder = { "MultiSelectionSpinnerCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 94, 1, 0, -1, -1, 52, -1 };
+  static const void *ptrTable[] = { "LASMultiSelectionSpinnerImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosPlaceholder", "setHint", "setIosTextColor", "setIosAdjustsFontSizeToFitWidth", "setIosMinimumFontSize", "F", "setIosClearsOnBeginEditing", "setIosClearsOnInsertion", "setIosAllowsEditingTextAttributes", "setIosBackground", "setIosDisabledBackground", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setDrawableStart", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setDrawableIconSize", "setEditable", "setTypeface", "setTextStyle", "setFontFamily", "setTextColor", "setEnabled", "setValues", "setSelectedValues", "LNSObject;", "setHintTextFormat", "setEntries", "setSelection", "setModelOptionTextPath", "setOnItemSelected", "setModelOptionValuePath", "setGravity", "setTextSize", "setTextColorHint", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/MultiSelectionSpinnerImpl$MultiSelectionSpinnerCommandBuilder;>;" };
+  static const J2ObjcClassInfo _ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder = { "MultiSelectionSpinnerCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 93, 1, 0, -1, -1, 51, -1 };
   return &_ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder;
 }
 
@@ -4659,16 +4661,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_MultiSelectionSpinn
   (void) [((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingVerticalWithNSString:value])) executeWithBoolean:true];
 }
 
-- (void)setDrawableLeftWithNSString:(NSString *)value {
-  (void) [((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableLeftWithNSString:value])) executeWithBoolean:true];
-}
-
 - (void)setDrawableStartWithNSString:(NSString *)value {
   (void) [((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableRightWithNSString:(NSString *)value {
-  (void) [((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableRightWithNSString:value])) executeWithBoolean:true];
 }
 
 - (void)setDrawableEndWithNSString:(NSString *)value {
@@ -4697,6 +4691,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_MultiSelectionSpinn
 
 - (void)setDrawableTintModeWithNSString:(NSString *)value {
   (void) [((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTintModeWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableIconSizeWithNSString:(NSString *)value {
+  (void) [((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([((ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableIconSizeWithNSString:value])) executeWithBoolean:true];
 }
 
 - (void)setEditableWithBoolean:(jboolean)value {
@@ -4828,33 +4826,32 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_MultiSelectionSpinn
     { NULL, "V", 0x1, 25, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 26, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 27, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 28, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 29, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 30, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 31, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 32, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 33, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 32, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 33, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 34, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 35, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 36, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 37, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 38, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 37, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 38, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 39, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 41, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 39, 40, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 41, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 42, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 43, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 44, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 45, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 46, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 47, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 48, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 49, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 50, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -4898,43 +4895,42 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASMultiSelectionSpinnerImpl_MultiSelectionSpinn
   methods[36].selector = @selector(setPaddingTopWithNSString:);
   methods[37].selector = @selector(setPaddingHorizontalWithNSString:);
   methods[38].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[39].selector = @selector(setDrawableLeftWithNSString:);
-  methods[40].selector = @selector(setDrawableStartWithNSString:);
-  methods[41].selector = @selector(setDrawableRightWithNSString:);
-  methods[42].selector = @selector(setDrawableEndWithNSString:);
-  methods[43].selector = @selector(setDrawableTopWithNSString:);
-  methods[44].selector = @selector(setDrawableBottomWithNSString:);
-  methods[45].selector = @selector(getDrawablePadding);
-  methods[46].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[47].selector = @selector(setDrawableTintWithNSString:);
-  methods[48].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[49].selector = @selector(setEditableWithBoolean:);
-  methods[50].selector = @selector(setTypefaceWithNSString:);
-  methods[51].selector = @selector(setTextStyleWithNSString:);
-  methods[52].selector = @selector(setFontFamilyWithNSString:);
-  methods[53].selector = @selector(getTextColor);
-  methods[54].selector = @selector(setTextColorWithNSString:);
-  methods[55].selector = @selector(setEnabledWithBoolean:);
-  methods[56].selector = @selector(setValuesWithNSString:);
-  methods[57].selector = @selector(getSelectedValues);
-  methods[58].selector = @selector(setSelectedValuesWithId:);
-  methods[59].selector = @selector(setHintTextFormatWithNSString:);
-  methods[60].selector = @selector(setEntriesWithNSString:);
-  methods[61].selector = @selector(setSelectionWithNSString:);
-  methods[62].selector = @selector(setModelOptionTextPathWithNSString:);
-  methods[63].selector = @selector(setOnItemSelectedWithNSString:);
-  methods[64].selector = @selector(setModelOptionValuePathWithNSString:);
-  methods[65].selector = @selector(getGravity);
-  methods[66].selector = @selector(setGravityWithNSString:);
-  methods[67].selector = @selector(getTextSize);
-  methods[68].selector = @selector(setTextSizeWithNSString:);
-  methods[69].selector = @selector(setTextColorHintWithNSString:);
+  methods[39].selector = @selector(setDrawableStartWithNSString:);
+  methods[40].selector = @selector(setDrawableEndWithNSString:);
+  methods[41].selector = @selector(setDrawableTopWithNSString:);
+  methods[42].selector = @selector(setDrawableBottomWithNSString:);
+  methods[43].selector = @selector(getDrawablePadding);
+  methods[44].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[45].selector = @selector(setDrawableTintWithNSString:);
+  methods[46].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[47].selector = @selector(setDrawableIconSizeWithNSString:);
+  methods[48].selector = @selector(setEditableWithBoolean:);
+  methods[49].selector = @selector(setTypefaceWithNSString:);
+  methods[50].selector = @selector(setTextStyleWithNSString:);
+  methods[51].selector = @selector(setFontFamilyWithNSString:);
+  methods[52].selector = @selector(getTextColor);
+  methods[53].selector = @selector(setTextColorWithNSString:);
+  methods[54].selector = @selector(setEnabledWithBoolean:);
+  methods[55].selector = @selector(setValuesWithNSString:);
+  methods[56].selector = @selector(getSelectedValues);
+  methods[57].selector = @selector(setSelectedValuesWithId:);
+  methods[58].selector = @selector(setHintTextFormatWithNSString:);
+  methods[59].selector = @selector(setEntriesWithNSString:);
+  methods[60].selector = @selector(setSelectionWithNSString:);
+  methods[61].selector = @selector(setModelOptionTextPathWithNSString:);
+  methods[62].selector = @selector(setOnItemSelectedWithNSString:);
+  methods[63].selector = @selector(setModelOptionValuePathWithNSString:);
+  methods[64].selector = @selector(getGravity);
+  methods[65].selector = @selector(setGravityWithNSString:);
+  methods[66].selector = @selector(getTextSize);
+  methods[67].selector = @selector(setTextSizeWithNSString:);
+  methods[68].selector = @selector(setTextColorHintWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASMultiSelectionSpinnerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASMultiSelectionSpinnerImpl;", "setIosText", "LNSString;", "setIosPlaceholder", "setHint", "setIosTextColor", "setIosAdjustsFontSizeToFitWidth", "Z", "setIosMinimumFontSize", "F", "setIosClearsOnBeginEditing", "setIosClearsOnInsertion", "setIosAllowsEditingTextAttributes", "setIosBackground", "setIosDisabledBackground", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setEditable", "setTypeface", "setTextStyle", "setFontFamily", "setTextColor", "setEnabled", "setValues", "setSelectedValues", "LNSObject;", "setHintTextFormat", "setEntries", "setSelection", "setModelOptionTextPath", "setOnItemSelected", "setModelOptionValuePath", "setGravity", "setTextSize", "setTextColorHint" };
-  static const J2ObjcClassInfo _ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerBean = { "MultiSelectionSpinnerBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 70, 1, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASMultiSelectionSpinnerImpl;", "setIosText", "LNSString;", "setIosPlaceholder", "setHint", "setIosTextColor", "setIosAdjustsFontSizeToFitWidth", "Z", "setIosMinimumFontSize", "F", "setIosClearsOnBeginEditing", "setIosClearsOnInsertion", "setIosAllowsEditingTextAttributes", "setIosBackground", "setIosDisabledBackground", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setDrawableStart", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setDrawableIconSize", "setEditable", "setTypeface", "setTextStyle", "setFontFamily", "setTextColor", "setEnabled", "setValues", "setSelectedValues", "LNSObject;", "setHintTextFormat", "setEntries", "setSelection", "setModelOptionTextPath", "setOnItemSelected", "setModelOptionValuePath", "setGravity", "setTextSize", "setTextColorHint" };
+  static const J2ObjcClassInfo _ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerBean = { "MultiSelectionSpinnerBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 69, 1, 0, -1, -1, -1, -1 };
   return &_ASMultiSelectionSpinnerImpl_MultiSelectionSpinnerBean;
 }
 

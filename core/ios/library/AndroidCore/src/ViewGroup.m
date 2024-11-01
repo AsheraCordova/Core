@@ -1407,6 +1407,7 @@ void ADViewGroup_addViewInnerWithADView_withInt_withADViewGroup_LayoutParams_wit
   }
   if ([((ADView *) nil_chk(child)) getParent] != nil) {
     if ([child getParent] == self) {
+      JreStrongAssign(&child->mLayoutParams_, params);
       return;
     }
     @throw create_JavaLangIllegalStateException_initWithNSString_(@"The specified child already has a parent. You must call removeView() on the child's parent first.");

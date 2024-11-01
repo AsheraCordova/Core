@@ -24,6 +24,7 @@ public class ConverterCordovaPlugin extends CordovaPlugin {
 		ConverterFactory.register("colorint", new ColorIntConverter());
 		ConverterFactory.registerCommandConverter(new ImageRepeatCommandConverter("imageRepeat"));
 		ConverterFactory.registerCommandConverter(new AutoLinkifyCommandConverter("autoLink"));
+		ConverterFactory.registerCommandConverter(new DrawableiconSizeConverter("drawableIconSize"));
 	}
 
 }

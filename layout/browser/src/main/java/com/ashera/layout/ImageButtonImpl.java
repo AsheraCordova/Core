@@ -219,7 +219,9 @@ public class ImageButtonImpl extends BaseWidget implements IsImage{
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ImageButtonImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ImageButtonImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -232,9 +234,10 @@ public class ImageButtonImpl extends BaseWidget implements IsImage{
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(ImageButtonImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -342,6 +345,7 @@ public class ImageButtonImpl extends BaseWidget implements IsImage{
         	ViewImpl.stateNo(ImageButtonImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ImageButtonExt.class;

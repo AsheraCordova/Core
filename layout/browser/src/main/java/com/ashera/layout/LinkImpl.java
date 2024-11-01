@@ -199,8 +199,6 @@ public class LinkImpl extends BaseWidget {
 		ConverterFactory.register("com.ashera.layout.Link.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("com.ashera.layout.Link.textStyle").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableEnd").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -251,6 +249,7 @@ public class LinkImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lineSpacingMultiplier").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 	}
 	
 	public LinkImpl() {
@@ -356,7 +355,9 @@ public class LinkImpl extends BaseWidget {
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(LinkImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(LinkImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -369,9 +370,10 @@ public class LinkImpl extends BaseWidget {
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(LinkImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -515,6 +517,7 @@ public class LinkImpl extends BaseWidget {
         	ViewImpl.stateNo(LinkImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return LinkExt.class;
@@ -726,26 +729,6 @@ public class LinkImpl extends BaseWidget {
 
 
 		setFontFamily(objValue, strValue);
-
-
-
-			}
-			break;
-			case "drawableLeft": {
-				
-
-
-		 setDrawableLeft(objValue); 
-
-
-
-			}
-			break;
-			case "drawableRight": {
-				
-
-
-		 setDrawableRight(objValue); 
 
 
 
@@ -1201,6 +1184,16 @@ public class LinkImpl extends BaseWidget {
 
 			}
 			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -1425,6 +1418,15 @@ return getLineSpacingMultiplier();				}
 		}
 	}
 
+	
+
+
+	private void setDrawableIconSize(Object objValue) {
+		applyAttributeCommand("drawableStart", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableEnd", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableTop", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableBottom", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+	}
 	
 
 
@@ -1976,36 +1978,54 @@ return getLineSpacingMultiplier();				}
     private HTMLElement drawableRight;
     private HTMLElement drawableRightWrapper;
 	private void setDrawableBottom(Object objValue) {
-		if (drawableBottom == null) {
-			this.drawableBottomWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableBottom = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableBottom.getStyle().setProperty("width", "inherit");
-			this.drawableBottom.getStyle().setProperty("height", "inherit");
-			drawableBottomWrapper.appendChild(drawableBottom);
-			hTMLElement.appendChild(drawableBottomWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setBottomDrawable(drawable);
-			updateImageSrc(drawable, drawableBottom);
+			if (drawable.hasDrawable()) {
+				if (drawableBottom == null) {
+					this.drawableBottomWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableBottom = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableBottom.getStyle().setProperty("width", "inherit");
+					this.drawableBottom.getStyle().setProperty("height", "inherit");
+					drawableBottomWrapper.appendChild(drawableBottom);
+					hTMLElement.appendChild(drawableBottomWrapper);
+				}
+				measurableView.setBottomDrawable(drawable);
+				updateImageSrc(drawable, drawableBottom);
+			} else {
+				measurableView.setBottomDrawable(null);
+				if (this.drawableBottomWrapper != null) {
+					hTMLElement.removeChild(this.drawableBottomWrapper);
+					this.drawableBottomWrapper = null;
+					this.drawableBottom = null;
+				}
+			}
 		}
 	}
 
 	private void setDrawableTop(Object objValue) {
-		if (drawableTop == null) {
-			this.drawableTopWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableTop = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableTop.getStyle().setProperty("width", "inherit");
-			this.drawableTop.getStyle().setProperty("height", "inherit");
-			drawableTopWrapper.appendChild(drawableTop);
-			hTMLElement.appendChild(drawableTopWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setTopDrawable(drawable);
-			updateImageSrc(drawable, drawableTop);
+			if (drawable.hasDrawable()) {
+				if (drawableTop == null) {
+					this.drawableTopWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableTop = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableTop.getStyle().setProperty("width", "inherit");
+					this.drawableTop.getStyle().setProperty("height", "inherit");
+					drawableTopWrapper.appendChild(drawableTop);
+					hTMLElement.appendChild(drawableTopWrapper);
+				}
+	
+	
+				measurableView.setTopDrawable(drawable);
+				updateImageSrc(drawable, drawableTop);
+			} else {
+				measurableView.setTopDrawable(null);
+				if (this.drawableTopWrapper != null) {
+					hTMLElement.removeChild(this.drawableTopWrapper);
+					this.drawableTopWrapper = null;
+					this.drawableTop = null;
+				}
+			}
 		}
 	}
 
@@ -2033,38 +2053,56 @@ return getLineSpacingMultiplier();				}
 	}
 
 	private void setDrawableRightInternal(Object objValue) {
-		if (drawableRight == null) {
-			// create bottom
-			this.drawableRightWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableRight = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableRight.getStyle().setProperty("width", "inherit");
-			this.drawableRight.getStyle().setProperty("height", "inherit");
-			drawableRightWrapper.appendChild(drawableRight);
-			hTMLElement.appendChild(drawableRightWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setRightDrawable(drawable);
-			updateImageSrc(drawable, drawableRight);
+			if (drawable.hasDrawable()) {
+				if (drawableRight == null) {
+					// create bottom
+					this.drawableRightWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableRight = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableRight.getStyle().setProperty("width", "inherit");
+					this.drawableRight.getStyle().setProperty("height", "inherit");
+					drawableRightWrapper.appendChild(drawableRight);
+					hTMLElement.appendChild(drawableRightWrapper);
+				}
+	
+				measurableView.setRightDrawable(drawable);
+				updateImageSrc(drawable, drawableRight);
+			} else {
+				measurableView.setRightDrawable(null);
+				if (this.drawableRightWrapper != null) {
+					hTMLElement.removeChild(this.drawableRightWrapper);
+					this.drawableRightWrapper = null;
+					this.drawableRight = null;
+				}
+			}
 		}
 	}
 
 	private void setDrawableLeftInternal(Object objValue) {
-		if (drawableLeft == null) {
-			// create bottom
-			this.drawableLeftWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableLeft = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableLeft.getStyle().setProperty("width", "inherit");
-			this.drawableLeft.getStyle().setProperty("height", "inherit");
-			drawableLeftWrapper.appendChild(drawableLeft);
-			hTMLElement.appendChild(drawableLeftWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setLeftDrawable(drawable);
-			updateImageSrc(drawable, drawableLeft);
+			
+			if (drawable.hasDrawable()) {
+				if (drawableLeft == null) {
+					// create bottom
+					this.drawableLeftWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableLeft = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableLeft.getStyle().setProperty("width", "inherit");
+					this.drawableLeft.getStyle().setProperty("height", "inherit");
+					drawableLeftWrapper.appendChild(drawableLeft);
+					hTMLElement.appendChild(drawableLeftWrapper);
+				}
+				measurableView.setLeftDrawable(drawable);
+				updateImageSrc(drawable, drawableLeft);
+			} else {
+				measurableView.setLeftDrawable(null);
+				if (this.drawableLeftWrapper != null) {
+					hTMLElement.removeChild(this.drawableLeftWrapper);
+					this.drawableLeftWrapper = null;
+					this.drawableLeft = null;
+				}
+			}
 		}
 	}
 
@@ -2483,6 +2521,10 @@ return getLineSpacingMultiplier();				}
     private void nativeCreateLabel(Map<String, Object> params) {
     	escapeHtml = true;
     	registerForAttributeCommandChain("text");
+    	registerForAttributeCommandChain("drawableStart");
+		registerForAttributeCommandChain("drawableTop");
+		registerForAttributeCommandChain("drawableBottom");
+		registerForAttributeCommandChain("drawableEnd");
     	initHtml(params);
 		nativeCreateLabel("div");
     }
@@ -3064,22 +3106,6 @@ public LinkCommandBuilder setTextStyle(String value) {
 return this;}
 public LinkCommandBuilder setFontFamily(String value) {
 	Map<String, Object> attrs = initCommand("fontFamily");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public LinkCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public LinkCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
 	attrs.put("type", "attribute");
 	attrs.put("setter", true);
 	attrs.put("orderSet", ++orderSet);
@@ -3721,6 +3747,14 @@ public LinkCommandBuilder setTextAppearance(String value) {
 
 	attrs.put("value", value);
 return this;}
+public LinkCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class LinkBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public LinkBean() {
@@ -3842,14 +3876,6 @@ public void setTextStyle(String value) {
 
 public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
-}
-
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
 }
 
 public void setDrawableStart(String value) {
@@ -4105,6 +4131,10 @@ public void setTextFormat(String value) {
 
 public void setTextAppearance(String value) {
 	getBuilder().reset().setTextAppearance(value).execute(true);
+}
+
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
 }
 
 }

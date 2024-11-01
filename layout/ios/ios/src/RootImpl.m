@@ -1428,7 +1428,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  if (![this$0_ isWidgetDisposed]) {
+    ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  }
 }
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout {
@@ -1440,7 +1442,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRootImpl_RemoveRule)
     template_ = (id<ASIWidget>) cast_check([this$0_ quickConvertWithId:layout withNSString:@"template"], ASIWidget_class_());
     (void) [((id<JavaUtilMap>) nil_chk(templates_)) putWithId:layout withId:template_];
   }
-  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:[this$0_ getParent]];
+  id<ASIWidget> widget = [((id<ASIWidget>) nil_chk(template_)) loadLazyWidgetsWithASHasWidgets:this$0_];
   return (ADView *) cast_chk([((id<ASIWidget>) nil_chk(widget)) asWidget], [ADView class]);
 }
 

@@ -31,6 +31,7 @@
     { NULL, "LNSObject;", 0x401, 20, 21, -1, 22, -1, -1 },
     { NULL, "LJavaUtilMap;", 0x401, -1, -1, -1, 23, -1, -1 },
     { NULL, "LNSObject;", 0x401, 24, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x401, 25, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -51,9 +52,10 @@
   methods[13].selector = @selector(unmarshalWithNSString:withIOSClass:);
   methods[14].selector = @selector(getJSONCompatMap);
   methods[15].selector = @selector(getJSONSafeObjWithId:);
+  methods[16].selector = @selector(isNullWithId:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "getMap", "LNSObject;", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getNativeMap", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "putJSONSafeObjectIntoMap", "LJavaUtilMap;LNSString;LNSObject;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/Object;)V", "getArray", "getList", "(Ljava/lang/Object;)Ljava/util/List<Ljava/lang/Object;>;", "isBoolean", "getBoolean", "getString", "getInt", "getFloat", "getDouble", "marshal", "toJsonTree", "unmarshal", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getJSONSafeObj" };
-  static const J2ObjcClassInfo _ASJSONAdapter = { "JSONAdapter", "com.ashera.jsonadapter", ptrTable, methods, NULL, 7, 0x609, 16, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "getMap", "LNSObject;", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getNativeMap", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "putJSONSafeObjectIntoMap", "LJavaUtilMap;LNSString;LNSObject;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/Object;)V", "getArray", "getList", "(Ljava/lang/Object;)Ljava/util/List<Ljava/lang/Object;>;", "isBoolean", "getBoolean", "getString", "getInt", "getFloat", "getDouble", "marshal", "toJsonTree", "unmarshal", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getJSONSafeObj", "isNull" };
+  static const J2ObjcClassInfo _ASJSONAdapter = { "JSONAdapter", "com.ashera.jsonadapter", ptrTable, methods, NULL, 7, 0x609, 17, 0, -1, -1, -1, -1, -1 };
   return &_ASJSONAdapter;
 }
 

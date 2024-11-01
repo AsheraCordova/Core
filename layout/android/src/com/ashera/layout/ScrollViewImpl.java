@@ -109,7 +109,7 @@ Context context = (Context) fragment.getRootActivity();
 	}
 
 	@Override
-	public boolean remove(IWidget w) {		
+	public boolean remove(IWidget w) {
 		boolean remove = super.remove(w);
 		scrollView.removeView((View) w.asWidget());
 		return remove;
@@ -359,7 +359,9 @@ return layoutParams.gravity;			}
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ScrollViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ScrollViewImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -497,6 +499,7 @@ return layoutParams.gravity;			}
         	ViewImpl.stateNo(ScrollViewImpl.this);
         }
      
+	
 	}
 	@Override
 	public Class getViewClass() {

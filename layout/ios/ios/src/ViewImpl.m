@@ -5563,9 +5563,8 @@ id<JavaUtilList> ASViewImpl_drawOverlayWithASIWidget_withJavaUtilList_(id<ASIWid
         }
         [drawable setMeasureTextHelperWithADDrawable_MeasureTextHelper:new_ASViewImpl_2_initWithASIWidget_(w)];
         ADRect *bounds = [drawable getBounds];
-        [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out))) printlnWithNSString:JreStrcat("ICIC@", [((ADRect *) nil_chk(bounds)) width], ' ', [bounds height], ' ', drawable)];
         ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
-        [((ADView *) nil_chk(view)) setLeftWithInt:bounds->left_];
+        [((ADView *) nil_chk(view)) setLeftWithInt:((ADRect *) nil_chk(bounds))->left_];
         [view setRightWithInt:bounds->right_];
         [view setTopWithInt:bounds->top_];
         [view setBottomWithInt:bounds->bottom_];

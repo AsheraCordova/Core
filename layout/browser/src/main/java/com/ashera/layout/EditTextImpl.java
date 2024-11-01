@@ -209,8 +209,6 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
 		ConverterFactory.register("EditText.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("EditText.textStyle").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableEnd").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -242,6 +240,7 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lineSpacingExtra").withType("dimensionfloat").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lineSpacingMultiplier").withType("float").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHighlight").withType("color"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("password").withType("boolean"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAllCaps").withType("boolean").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("selectAllOnFocus").withType("boolean"));
@@ -367,7 +366,9 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(EditTextImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(EditTextImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -380,9 +381,10 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(EditTextImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -522,6 +524,7 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
         	ViewImpl.stateNo(EditTextImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return EditTextExt.class;
@@ -733,26 +736,6 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
 
 
 		setFontFamily(objValue, strValue);
-
-
-
-			}
-			break;
-			case "drawableLeft": {
-				
-
-
-		 setDrawableLeft(objValue); 
-
-
-
-			}
-			break;
-			case "drawableRight": {
-				
-
-
-		 setDrawableRight(objValue); 
 
 
 
@@ -1058,6 +1041,16 @@ public class EditTextImpl extends BaseWidget implements com.ashera.validations.F
 
 			}
 			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
+
+
+
+			}
+			break;
 			case "password": {
 				
 
@@ -1358,36 +1351,54 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     private HTMLElement drawableRight;
     private HTMLElement drawableRightWrapper;
 	private void setDrawableBottom(Object objValue) {
-		if (drawableBottom == null) {
-			this.drawableBottomWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableBottom = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableBottom.getStyle().setProperty("width", "inherit");
-			this.drawableBottom.getStyle().setProperty("height", "inherit");
-			drawableBottomWrapper.appendChild(drawableBottom);
-			hTMLElement.appendChild(drawableBottomWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setBottomDrawable(drawable);
-			updateImageSrc(drawable, drawableBottom);
+			if (drawable.hasDrawable()) {
+				if (drawableBottom == null) {
+					this.drawableBottomWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableBottom = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableBottom.getStyle().setProperty("width", "inherit");
+					this.drawableBottom.getStyle().setProperty("height", "inherit");
+					drawableBottomWrapper.appendChild(drawableBottom);
+					hTMLElement.appendChild(drawableBottomWrapper);
+				}
+				measurableView.setBottomDrawable(drawable);
+				updateImageSrc(drawable, drawableBottom);
+			} else {
+				measurableView.setBottomDrawable(null);
+				if (this.drawableBottomWrapper != null) {
+					hTMLElement.removeChild(this.drawableBottomWrapper);
+					this.drawableBottomWrapper = null;
+					this.drawableBottom = null;
+				}
+			}
 		}
 	}
 
 	private void setDrawableTop(Object objValue) {
-		if (drawableTop == null) {
-			this.drawableTopWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableTop = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableTop.getStyle().setProperty("width", "inherit");
-			this.drawableTop.getStyle().setProperty("height", "inherit");
-			drawableTopWrapper.appendChild(drawableTop);
-			hTMLElement.appendChild(drawableTopWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setTopDrawable(drawable);
-			updateImageSrc(drawable, drawableTop);
+			if (drawable.hasDrawable()) {
+				if (drawableTop == null) {
+					this.drawableTopWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableTop = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableTop.getStyle().setProperty("width", "inherit");
+					this.drawableTop.getStyle().setProperty("height", "inherit");
+					drawableTopWrapper.appendChild(drawableTop);
+					hTMLElement.appendChild(drawableTopWrapper);
+				}
+	
+	
+				measurableView.setTopDrawable(drawable);
+				updateImageSrc(drawable, drawableTop);
+			} else {
+				measurableView.setTopDrawable(null);
+				if (this.drawableTopWrapper != null) {
+					hTMLElement.removeChild(this.drawableTopWrapper);
+					this.drawableTopWrapper = null;
+					this.drawableTop = null;
+				}
+			}
 		}
 	}
 
@@ -1415,38 +1426,56 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	}
 
 	private void setDrawableRightInternal(Object objValue) {
-		if (drawableRight == null) {
-			// create bottom
-			this.drawableRightWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableRight = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableRight.getStyle().setProperty("width", "inherit");
-			this.drawableRight.getStyle().setProperty("height", "inherit");
-			drawableRightWrapper.appendChild(drawableRight);
-			hTMLElement.appendChild(drawableRightWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setRightDrawable(drawable);
-			updateImageSrc(drawable, drawableRight);
+			if (drawable.hasDrawable()) {
+				if (drawableRight == null) {
+					// create bottom
+					this.drawableRightWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableRight = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableRight.getStyle().setProperty("width", "inherit");
+					this.drawableRight.getStyle().setProperty("height", "inherit");
+					drawableRightWrapper.appendChild(drawableRight);
+					hTMLElement.appendChild(drawableRightWrapper);
+				}
+	
+				measurableView.setRightDrawable(drawable);
+				updateImageSrc(drawable, drawableRight);
+			} else {
+				measurableView.setRightDrawable(null);
+				if (this.drawableRightWrapper != null) {
+					hTMLElement.removeChild(this.drawableRightWrapper);
+					this.drawableRightWrapper = null;
+					this.drawableRight = null;
+				}
+			}
 		}
 	}
 
 	private void setDrawableLeftInternal(Object objValue) {
-		if (drawableLeft == null) {
-			// create bottom
-			this.drawableLeftWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableLeft = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableLeft.getStyle().setProperty("width", "inherit");
-			this.drawableLeft.getStyle().setProperty("height", "inherit");
-			drawableLeftWrapper.appendChild(drawableLeft);
-			hTMLElement.appendChild(drawableLeftWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setLeftDrawable(drawable);
-			updateImageSrc(drawable, drawableLeft);
+			
+			if (drawable.hasDrawable()) {
+				if (drawableLeft == null) {
+					// create bottom
+					this.drawableLeftWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableLeft = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableLeft.getStyle().setProperty("width", "inherit");
+					this.drawableLeft.getStyle().setProperty("height", "inherit");
+					drawableLeftWrapper.appendChild(drawableLeft);
+					hTMLElement.appendChild(drawableLeftWrapper);
+				}
+				measurableView.setLeftDrawable(drawable);
+				updateImageSrc(drawable, drawableLeft);
+			} else {
+				measurableView.setLeftDrawable(null);
+				if (this.drawableLeftWrapper != null) {
+					hTMLElement.removeChild(this.drawableLeftWrapper);
+					this.drawableLeftWrapper = null;
+					this.drawableLeft = null;
+				}
+			}
 		}
 	}
 
@@ -2085,6 +2114,15 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 		}
 	}
 
+	
+
+
+	private void setDrawableIconSize(Object objValue) {
+		applyAttributeCommand("drawableStart", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableEnd", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableTop", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableBottom", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+	}
 	
 
 
@@ -2974,22 +3012,6 @@ public EditTextCommandBuilder setFontFamily(String value) {
 
 	attrs.put("value", value);
 return this;}
-public EditTextCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public EditTextCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public EditTextCommandBuilder setDrawableStart(String value) {
 	Map<String, Object> attrs = initCommand("drawableStart");
 	attrs.put("type", "attribute");
@@ -3428,6 +3450,14 @@ public EditTextCommandBuilder setTextColorHighlight(String value) {
 
 	attrs.put("value", value);
 return this;}
+public EditTextCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 public EditTextCommandBuilder setPassword(boolean value) {
 	Map<String, Object> attrs = initCommand("password");
 	attrs.put("type", "attribute");
@@ -3731,14 +3761,6 @@ public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
 }
 
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
-}
-
 public void setDrawableStart(String value) {
 	getBuilder().reset().setDrawableStart(value).execute(true);
 }
@@ -3913,6 +3935,10 @@ public void setTextColorHighlight(String value) {
 	getBuilder().reset().setTextColorHighlight(value).execute(true);
 }
 
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
+}
+
 public void setPassword(boolean value) {
 	getBuilder().reset().setPassword(value).execute(true);
 }
@@ -4016,6 +4042,10 @@ public void setSetFocus(boolean value) {
 		hTMLElement.appendChild(input);
 		
 		registerForAttributeCommandChain("hint");
+    	registerForAttributeCommandChain("drawableStart");
+		registerForAttributeCommandChain("drawableTop");
+		registerForAttributeCommandChain("drawableBottom");
+		registerForAttributeCommandChain("drawableEnd");
 	}
 	//end - other
 	

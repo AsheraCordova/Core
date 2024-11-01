@@ -843,11 +843,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_PostMeasureHandler)
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1516,11 +1514,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASRadioButtonImpl_RadioButtonCommandBuilder)
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

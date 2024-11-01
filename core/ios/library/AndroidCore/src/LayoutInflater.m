@@ -6,6 +6,7 @@
 #include "Context.h"
 #include "J2ObjC_source.h"
 #include "LayoutInflater.h"
+#include "PluginInvoker.h"
 #include "View.h"
 #include "ViewGroup.h"
 
@@ -29,11 +30,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
+- (ADView *)inflateWithNSString:(NSString *)layout
+                withADViewGroup:(ADViewGroup *)parent
+                    withBoolean:(jboolean)b {
+  return [((ADViewGroup *) nil_chk(parent)) inflateViewWithNSString:layout];
+}
+
++ (void)recurseSetWithADViewGroup:(ADViewGroup *)parent
+       withADView_OnClickListener:(id<ADView_OnClickListener>)onClickListener {
+  ADLayoutInflater_recurseSetWithADViewGroup_withADView_OnClickListener_(parent, onClickListener);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADLayoutInflater;", 0x9, 0, 1, -1, -1, -1, -1 },
     { NULL, "LADView;", 0x1, 2, 3, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x1, 2, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 5, 6, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -41,9 +55,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(fromWithADContext:);
   methods[2].selector = @selector(inflateWithInt:withADViewGroup:withBoolean:);
+  methods[3].selector = @selector(inflateWithNSString:withADViewGroup:withBoolean:);
+  methods[4].selector = @selector(recurseSetWithADViewGroup:withADView_OnClickListener:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "from", "LADContext;", "inflate", "ILADViewGroup;Z" };
-  static const J2ObjcClassInfo _ADLayoutInflater = { "LayoutInflater", "r.android.view", ptrTable, methods, NULL, 7, 0x1, 3, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "from", "LADContext;", "inflate", "ILADViewGroup;Z", "LNSString;LADViewGroup;Z", "recurseSet", "LADViewGroup;LADView_OnClickListener;" };
+  static const J2ObjcClassInfo _ADLayoutInflater = { "LayoutInflater", "r.android.view", ptrTable, methods, NULL, 7, 0x1, 5, 0, -1, -1, -1, -1, -1 };
   return &_ADLayoutInflater;
 }
 
@@ -63,7 +79,20 @@ ADLayoutInflater *create_ADLayoutInflater_init() {
 
 ADLayoutInflater *ADLayoutInflater_fromWithADContext_(ADContext *context) {
   ADLayoutInflater_initialize();
-  return nil;
+  return create_ADLayoutInflater_init();
+}
+
+void ADLayoutInflater_recurseSetWithADViewGroup_withADView_OnClickListener_(ADViewGroup *parent, id<ADView_OnClickListener> onClickListener) {
+  ADLayoutInflater_initialize();
+  if ([((NSString *) nil_chk(ASPluginInvoker_getOS())) java_equalsIgnoreCase:@"swt"]) {
+    for (jint i = 0; i < [((ADViewGroup *) nil_chk(parent)) getChildCount]; i++) {
+      ADView *child = JreRetainedLocalValue([parent getChildAtWithInt:i]);
+      [((ADView *) nil_chk(child)) setMyAttributeWithNSString:@"onClick" withId:onClickListener];
+      if ([child isKindOfClass:[ADViewGroup class]]) {
+        ADLayoutInflater_recurseSetWithADViewGroup_withADView_OnClickListener_((ADViewGroup *) child, onClickListener);
+      }
+    }
+  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLayoutInflater)

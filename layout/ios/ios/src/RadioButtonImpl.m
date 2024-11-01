@@ -312,6 +312,8 @@
 
 - (id)getGravity;
 
+- (void)setDrawableIconSizeWithId:(id)objValue;
+
 - (id)getMinHeight;
 
 - (id)getMinWidth;
@@ -651,6 +653,8 @@ __attribute__((unused)) static void ASRadioButtonImpl_setGravityWithId_(ASRadioB
 __attribute__((unused)) static void ASRadioButtonImpl_updateTextAlignment(ASRadioButtonImpl *self);
 
 __attribute__((unused)) static id ASRadioButtonImpl_getGravity(ASRadioButtonImpl *self);
+
+__attribute__((unused)) static void ASRadioButtonImpl_setDrawableIconSizeWithId_(ASRadioButtonImpl *self, id objValue);
 
 __attribute__((unused)) static id ASRadioButtonImpl_getMinHeight(ASRadioButtonImpl *self);
 
@@ -1091,9 +1095,7 @@ NSString *ASRadioButtonImpl_GROUP_NAME = @"RadioButton";
   ASConverterFactory_register__WithNSString_withASIConverter_(@"RadioButton.textStyle", new_ASRadioButtonImpl_TextStyle_init());
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textStyle"])) withTypeWithNSString:@"RadioButton.textStyle"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"fontFamily"])) withTypeWithNSString:@"font"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableLeft"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableStart"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableRight"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableEnd"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTop"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableBottom"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
@@ -1107,6 +1109,7 @@ NSString *ASRadioButtonImpl_GROUP_NAME = @"RadioButton";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textColor"])) withTypeWithNSString:@"colorstate"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textFormat"])) withTypeWithNSString:@"resourcestring"])) withOrderWithInt:-1]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textAppearance"])) withTypeWithNSString:@"string"])) withStylePriorityWithJavaLangInteger:JavaLangInteger_valueOfWithInt_(1)]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableIconSize"])) withTypeWithNSString:@"dimension"])) withOrderWithInt:-1])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerConstructorAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"html"])) withTypeWithNSString:@"boolean"]);
 }
 
@@ -1155,7 +1158,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
   ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"textColorHighlight", @"iosHighlightedTextColor", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"checked", @"onCheckedChange", @"button", @"buttonTint", @"buttonTintMode", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"ellipsize", @"marqueeRepeatLimit", @"justificationMode", @"shadowDx", @"shadowDy", @"singleLine", @"editable", @"textAllCaps", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"scrollHorizontally", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor", @"textFormat", @"textAppearance" }, 71)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"textColorHighlight", @"iosHighlightedTextColor", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"checked", @"onCheckedChange", @"button", @"buttonTint", @"buttonTintMode", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"ellipsize", @"marqueeRepeatLimit", @"justificationMode", @"shadowDx", @"shadowDy", @"singleLine", @"editable", @"textAllCaps", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"drawableStart", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"scrollHorizontally", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor", @"textFormat", @"textAppearance", @"drawableIconSize" }, 70)) {
     case 0:
     {
       [self setTextWithId:nativeWidget withId:objValue];
@@ -1426,77 +1429,72 @@ J2OBJC_IGNORE_DESIGNATED_END
     break;
     case 56:
     {
-      ASRadioButtonImpl_setDrawableLeftWithNSString_withId_(self, @"drawableLeft", objValue);
+      ASRadioButtonImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
     }
     break;
     case 57:
     {
-      ASRadioButtonImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
+      ASRadioButtonImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
     }
     break;
     case 58:
     {
-      ASRadioButtonImpl_setDrawableRightWithNSString_withId_(self, @"drawableRight", objValue);
+      ASRadioButtonImpl_setDrawableTopWithId_(self, objValue);
     }
     break;
     case 59:
     {
-      ASRadioButtonImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
+      ASRadioButtonImpl_setDrawableBottomWithId_(self, objValue);
     }
     break;
     case 60:
     {
-      ASRadioButtonImpl_setDrawableTopWithId_(self, objValue);
+      ASRadioButtonImpl_setDrawablePaddingWithId_(self, objValue);
     }
     break;
     case 61:
     {
-      ASRadioButtonImpl_setDrawableBottomWithId_(self, objValue);
+      ASRadioButtonImpl_setDrawableTintWithId_(self, objValue);
     }
     break;
     case 62:
     {
-      ASRadioButtonImpl_setDrawablePaddingWithId_(self, objValue);
+      ASRadioButtonImpl_setDrawableTintModeWithId_(self, objValue);
     }
     break;
     case 63:
     {
-      ASRadioButtonImpl_setDrawableTintWithId_(self, objValue);
+      ASRadioButtonImpl_setScrollHorizontallyWithId_(self, objValue);
     }
     break;
     case 64:
     {
-      ASRadioButtonImpl_setDrawableTintModeWithId_(self, objValue);
+      ASRadioButtonImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
     }
     break;
     case 65:
     {
-      ASRadioButtonImpl_setScrollHorizontallyWithId_(self, objValue);
+      ASRadioButtonImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
     }
     break;
     case 66:
     {
-      ASRadioButtonImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
+      ASRadioButtonImpl_setTextColorWithId_(self, objValue);
     }
     break;
     case 67:
     {
-      ASRadioButtonImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
+      ASRadioButtonImpl_setTextFormatWithId_(self, objValue);
     }
     break;
     case 68:
     {
-      ASRadioButtonImpl_setTextColorWithId_(self, objValue);
+      ASViewImpl_setStyleWithASIWidget_withId_(self, objValue);
     }
     break;
     case 69:
     {
-      ASRadioButtonImpl_setTextFormatWithId_(self, objValue);
-    }
-    break;
-    case 70:
-    {
-      ASViewImpl_setStyleWithASIWidget_withId_(self, objValue);
+      ASRadioButtonImpl_setDrawableIconSizeWithId_(self, objValue);
     }
     break;
     default:
@@ -2194,6 +2192,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
+- (void)setDrawableIconSizeWithId:(id)objValue {
+  ASRadioButtonImpl_setDrawableIconSizeWithId_(self, objValue);
+}
+
 - (id)getMinHeight {
   return ASRadioButtonImpl_getMinHeight(self);
 }
@@ -2735,15 +2737,15 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 75, 28, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 76, 16, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 77, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 78, 16, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 79, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 80, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 81, 16, -1, -1, -1, -1 },
@@ -2751,85 +2753,86 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 83, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 84, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 85, 16, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 86, 16, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 87, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 88, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 88, 89, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 90, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 91, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 89, 90, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 91, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 92, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 93, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 94, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 95, 11, -1, 12, -1, -1 },
-    { NULL, "V", 0x2, 96, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 95, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 96, 11, -1, 12, -1, -1 },
     { NULL, "V", 0x2, 97, 30, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 98, 16, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 98, 30, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 99, 16, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 100, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 101, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 101, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 102, 16, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 103, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 104, 16, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 105, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 106, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 107, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 108, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 108, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 109, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 110, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 109, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 110, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 111, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 58, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 58, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 112, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 113, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 113, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 114, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 114, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 115, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 115, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 116, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 116, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 117, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 117, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 118, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 118, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 119, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 119, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 120, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 120, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 121, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 121, 111, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 122, 112, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 122, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 123, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 124, 125, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 123, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 124, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 125, 126, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 126, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 127, 1, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 66, 125, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 66, 126, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 127, 30, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 128, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 128, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 129, 16, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -2957,108 +2960,109 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[117].selector = @selector(updateTextAlignment);
   methods[118].selector = @selector(getGravity);
   methods[119].selector = @selector(onRtlPropertiesChangedWithInt:);
-  methods[120].selector = @selector(getMinHeight);
-  methods[121].selector = @selector(getMinWidth);
-  methods[122].selector = @selector(setEmsWithId:);
-  methods[123].selector = @selector(getMaxEms);
-  methods[124].selector = @selector(getMinEms);
-  methods[125].selector = @selector(setMinEmsWithId:);
-  methods[126].selector = @selector(getMinLines);
-  methods[127].selector = @selector(getMaxLines);
-  methods[128].selector = @selector(setMaxEmsWithId:);
-  methods[129].selector = @selector(setWidthWithId:);
-  methods[130].selector = @selector(setHeightWithId:);
-  methods[131].selector = @selector(setMaxLinesWithId:);
-  methods[132].selector = @selector(setLinesWithId:);
-  methods[133].selector = @selector(setMinLinesWithId:);
-  methods[134].selector = @selector(setMaxHeightWithId:);
-  methods[135].selector = @selector(setMaxWidthWithId:);
-  methods[136].selector = @selector(getMaxWidth);
-  methods[137].selector = @selector(getMaxHeight);
-  methods[138].selector = @selector(setMinHeightWithId:);
-  methods[139].selector = @selector(setMinWidthWithId:);
-  methods[140].selector = @selector(getWidth);
-  methods[141].selector = @selector(getHeight);
-  methods[142].selector = @selector(getAutoSizeTextTypeWithADTextView:);
-  methods[143].selector = @selector(setAutoSizeTextTypeInternalWithInt:);
-  methods[144].selector = @selector(setAutoSizePresetSizesWithId:);
-  methods[145].selector = @selector(addAutoResizeListener);
-  methods[146].selector = @selector(removeResizeListener);
-  methods[147].selector = @selector(setMaxLengthWithId:);
-  methods[148].selector = @selector(setMyTextWithId:);
-  methods[149].selector = @selector(setTextAllCapsWithId:);
-  methods[150].selector = @selector(initHtmlWithJavaUtilMap:);
-  methods[151].selector = @selector(setTypeFaceWithId:withNSString:);
-  methods[152].selector = @selector(setFontFamilyWithId:withNSString:);
-  methods[153].selector = @selector(setTextStyleWithId:);
-  methods[154].selector = @selector(calcNumberOfWhiteSpaces);
-  methods[155].selector = @selector(cancelTimer);
-  methods[156].selector = @selector(startTimer);
-  methods[157].selector = @selector(getMarqueeRepeatLimit);
-  methods[158].selector = @selector(setMarqueeRepeatLimitWithId:);
-  methods[159].selector = @selector(startOrStopMarqueeWithId:);
-  methods[160].selector = @selector(getLabelWidth);
-  methods[161].selector = @selector(isLabelMeasured);
-  methods[162].selector = @selector(setPasswordWithId:);
-  methods[163].selector = @selector(setFirstBaselineToTopHeightWithId:);
-  methods[164].selector = @selector(getIncludeFontPadding);
-  methods[165].selector = @selector(getFirstBaselineToTopHeight);
-  methods[166].selector = @selector(setLastBaselineToBottomHeightWithId:);
-  methods[167].selector = @selector(getLastBaselineToBottomHeight);
-  methods[168].selector = @selector(setAutoSizeStepGranularityWithId:);
-  methods[169].selector = @selector(setAutoMinTextSizeWithId:);
-  methods[170].selector = @selector(setAutoMaxTextSizeWithId:);
-  methods[171].selector = @selector(setAutoSizeTextTypeWithId:);
-  methods[172].selector = @selector(getAutoSizeStepGranularity);
-  methods[173].selector = @selector(getAutoMinTextSize);
-  methods[174].selector = @selector(getAutoMaxTextSize);
-  methods[175].selector = @selector(getAutoSizeTextType);
-  methods[176].selector = @selector(setErrorMessageWithNSString:);
-  methods[177].selector = @selector(setTextFormatWithId:);
-  methods[178].selector = @selector(setTextWithId:withId:);
-  methods[179].selector = @selector(getText);
-  methods[180].selector = @selector(setTextColorWithId:withId:);
-  methods[181].selector = @selector(getTextColor);
-  methods[182].selector = @selector(setIsEnabledWithId:withId:);
-  methods[183].selector = @selector(getIsEnabled);
-  methods[184].selector = @selector(setAdjustsFontSizeToFitWidthWithId:withId:);
-  methods[185].selector = @selector(getAdjustsFontSizeToFitWidth);
-  methods[186].selector = @selector(setAllowsDefaultTighteningForTruncationWithId:withId:);
-  methods[187].selector = @selector(getAllowsDefaultTighteningForTruncation);
-  methods[188].selector = @selector(setMinimumScaleFactorWithId:withId:);
-  methods[189].selector = @selector(getMinimumScaleFactor);
-  methods[190].selector = @selector(setNumberOfLinesWithId:withId:);
-  methods[191].selector = @selector(getNumberOfLines);
-  methods[192].selector = @selector(setHighlightedTextColorWithId:withId:);
-  methods[193].selector = @selector(getHighlightedTextColor);
-  methods[194].selector = @selector(setIsHighlightedWithId:withId:);
-  methods[195].selector = @selector(getIsHighlighted);
-  methods[196].selector = @selector(setShadowColorWithId:withId:);
-  methods[197].selector = @selector(getShadowColor);
-  methods[198].selector = @selector(setPreferredMaxLayoutWidthWithId:withId:);
-  methods[199].selector = @selector(getPreferredMaxLayoutWidth);
-  methods[200].selector = @selector(setIsUserInteractionEnabledWithId:withId:);
-  methods[201].selector = @selector(getIsUserInteractionEnabled);
-  methods[202].selector = @selector(checkIosVersionWithNSString:);
-  methods[203].selector = @selector(setIdWithNSString:);
-  methods[204].selector = @selector(setVisibleWithBoolean:);
-  methods[205].selector = @selector(requestLayout);
-  methods[206].selector = @selector(invalidate);
-  methods[207].selector = @selector(getPluginWithNSString:);
-  methods[208].selector = @selector(getBean);
-  methods[209].selector = @selector(getBuilder);
-  methods[210].selector = @selector(allowUnCheck);
-  methods[211].selector = @selector(setCheckedWithBoolean:);
-  methods[212].selector = @selector(isChecked);
-  methods[213].selector = @selector(addCheckedListenerWithId:withNSString:);
-  methods[214].selector = @selector(setErrorWithId:);
-  methods[215].selector = @selector(getTextEntered);
-  methods[216].selector = @selector(isViewVisible);
-  methods[217].selector = @selector(focus);
+  methods[120].selector = @selector(setDrawableIconSizeWithId:);
+  methods[121].selector = @selector(getMinHeight);
+  methods[122].selector = @selector(getMinWidth);
+  methods[123].selector = @selector(setEmsWithId:);
+  methods[124].selector = @selector(getMaxEms);
+  methods[125].selector = @selector(getMinEms);
+  methods[126].selector = @selector(setMinEmsWithId:);
+  methods[127].selector = @selector(getMinLines);
+  methods[128].selector = @selector(getMaxLines);
+  methods[129].selector = @selector(setMaxEmsWithId:);
+  methods[130].selector = @selector(setWidthWithId:);
+  methods[131].selector = @selector(setHeightWithId:);
+  methods[132].selector = @selector(setMaxLinesWithId:);
+  methods[133].selector = @selector(setLinesWithId:);
+  methods[134].selector = @selector(setMinLinesWithId:);
+  methods[135].selector = @selector(setMaxHeightWithId:);
+  methods[136].selector = @selector(setMaxWidthWithId:);
+  methods[137].selector = @selector(getMaxWidth);
+  methods[138].selector = @selector(getMaxHeight);
+  methods[139].selector = @selector(setMinHeightWithId:);
+  methods[140].selector = @selector(setMinWidthWithId:);
+  methods[141].selector = @selector(getWidth);
+  methods[142].selector = @selector(getHeight);
+  methods[143].selector = @selector(getAutoSizeTextTypeWithADTextView:);
+  methods[144].selector = @selector(setAutoSizeTextTypeInternalWithInt:);
+  methods[145].selector = @selector(setAutoSizePresetSizesWithId:);
+  methods[146].selector = @selector(addAutoResizeListener);
+  methods[147].selector = @selector(removeResizeListener);
+  methods[148].selector = @selector(setMaxLengthWithId:);
+  methods[149].selector = @selector(setMyTextWithId:);
+  methods[150].selector = @selector(setTextAllCapsWithId:);
+  methods[151].selector = @selector(initHtmlWithJavaUtilMap:);
+  methods[152].selector = @selector(setTypeFaceWithId:withNSString:);
+  methods[153].selector = @selector(setFontFamilyWithId:withNSString:);
+  methods[154].selector = @selector(setTextStyleWithId:);
+  methods[155].selector = @selector(calcNumberOfWhiteSpaces);
+  methods[156].selector = @selector(cancelTimer);
+  methods[157].selector = @selector(startTimer);
+  methods[158].selector = @selector(getMarqueeRepeatLimit);
+  methods[159].selector = @selector(setMarqueeRepeatLimitWithId:);
+  methods[160].selector = @selector(startOrStopMarqueeWithId:);
+  methods[161].selector = @selector(getLabelWidth);
+  methods[162].selector = @selector(isLabelMeasured);
+  methods[163].selector = @selector(setPasswordWithId:);
+  methods[164].selector = @selector(setFirstBaselineToTopHeightWithId:);
+  methods[165].selector = @selector(getIncludeFontPadding);
+  methods[166].selector = @selector(getFirstBaselineToTopHeight);
+  methods[167].selector = @selector(setLastBaselineToBottomHeightWithId:);
+  methods[168].selector = @selector(getLastBaselineToBottomHeight);
+  methods[169].selector = @selector(setAutoSizeStepGranularityWithId:);
+  methods[170].selector = @selector(setAutoMinTextSizeWithId:);
+  methods[171].selector = @selector(setAutoMaxTextSizeWithId:);
+  methods[172].selector = @selector(setAutoSizeTextTypeWithId:);
+  methods[173].selector = @selector(getAutoSizeStepGranularity);
+  methods[174].selector = @selector(getAutoMinTextSize);
+  methods[175].selector = @selector(getAutoMaxTextSize);
+  methods[176].selector = @selector(getAutoSizeTextType);
+  methods[177].selector = @selector(setErrorMessageWithNSString:);
+  methods[178].selector = @selector(setTextFormatWithId:);
+  methods[179].selector = @selector(setTextWithId:withId:);
+  methods[180].selector = @selector(getText);
+  methods[181].selector = @selector(setTextColorWithId:withId:);
+  methods[182].selector = @selector(getTextColor);
+  methods[183].selector = @selector(setIsEnabledWithId:withId:);
+  methods[184].selector = @selector(getIsEnabled);
+  methods[185].selector = @selector(setAdjustsFontSizeToFitWidthWithId:withId:);
+  methods[186].selector = @selector(getAdjustsFontSizeToFitWidth);
+  methods[187].selector = @selector(setAllowsDefaultTighteningForTruncationWithId:withId:);
+  methods[188].selector = @selector(getAllowsDefaultTighteningForTruncation);
+  methods[189].selector = @selector(setMinimumScaleFactorWithId:withId:);
+  methods[190].selector = @selector(getMinimumScaleFactor);
+  methods[191].selector = @selector(setNumberOfLinesWithId:withId:);
+  methods[192].selector = @selector(getNumberOfLines);
+  methods[193].selector = @selector(setHighlightedTextColorWithId:withId:);
+  methods[194].selector = @selector(getHighlightedTextColor);
+  methods[195].selector = @selector(setIsHighlightedWithId:withId:);
+  methods[196].selector = @selector(getIsHighlighted);
+  methods[197].selector = @selector(setShadowColorWithId:withId:);
+  methods[198].selector = @selector(getShadowColor);
+  methods[199].selector = @selector(setPreferredMaxLayoutWidthWithId:withId:);
+  methods[200].selector = @selector(getPreferredMaxLayoutWidth);
+  methods[201].selector = @selector(setIsUserInteractionEnabledWithId:withId:);
+  methods[202].selector = @selector(getIsUserInteractionEnabled);
+  methods[203].selector = @selector(checkIosVersionWithNSString:);
+  methods[204].selector = @selector(setIdWithNSString:);
+  methods[205].selector = @selector(setVisibleWithBoolean:);
+  methods[206].selector = @selector(requestLayout);
+  methods[207].selector = @selector(invalidate);
+  methods[208].selector = @selector(getPluginWithNSString:);
+  methods[209].selector = @selector(getBean);
+  methods[210].selector = @selector(getBuilder);
+  methods[211].selector = @selector(allowUnCheck);
+  methods[212].selector = @selector(setCheckedWithBoolean:);
+  methods[213].selector = @selector(isChecked);
+  methods[214].selector = @selector(addCheckedListenerWithId:withNSString:);
+  methods[215].selector = @selector(setErrorWithId:);
+  methods[216].selector = @selector(getTextEntered);
+  methods[217].selector = @selector(isViewVisible);
+  methods[218].selector = @selector(focus);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 129, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 130, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 130, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 131, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADRadioButton;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "canvas_", "LADCanvas;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -3066,8 +3070,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "TEXT_ALIGN_LEFT", "I", .constantValue.asInt = ASRadioButtonImpl_TEXT_ALIGN_LEFT, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_RIGHT", "I", .constantValue.asInt = ASRadioButtonImpl_TEXT_ALIGN_RIGHT, 0x1a, -1, -1, -1, -1 },
     { "ellipsize_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 131, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 132, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 132, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 133, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASRadioButtonImpl_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
     { "drawableTint_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "timer_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -3077,8 +3081,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "POST_MEASURE_EVENT_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
     { "html_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "escapeHtml_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 133, -1 },
-    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 134, -1 },
+    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 134, -1 },
+    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 135, -1 },
     { "marqueeTask_", "LASRadioButtonImpl_MarqueeTask;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeRepeatLimit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeCommandConverter_", "LASMarqueeCommandConverter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -3088,8 +3092,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "builder_", "LASRadioButtonImpl_RadioButtonCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bean_", "LASRadioButtonImpl_RadioButtonBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "LNSObject;", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "I", "setEllipsize", "LNSObject;LNSString;", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setSingleLine", "setEnabled", "toUpperCase", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setScrollHorizontally", "executeOnMainThread", "LJavaLangRunnable;", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "setHintColor", "setTextColorLink", "LADColorStateList;", "setButton", "setOnChecked", "setChecked", "postSetAttribute", "createLabel", "LJavaUtilMap;LADTextView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/TextView;)V", "setButtonTint", "setButtonTintMode", "showError", "setGravity", "onRtlPropertiesChanged", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "getAutoSizeTextType", "LADTextView;", "setAutoSizeTextTypeInternal", "setAutoSizePresetSizes", "setMaxLength", "setMyText", "setTextAllCaps", "initHtml", "setTypeFace", "setFontFamily", "setTextStyle", "setMarqueeRepeatLimit", "startOrStopMarquee", "setPassword", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setAutoSizeStepGranularity", "setAutoMinTextSize", "setAutoMaxTextSize", "setAutoSizeTextType", "setErrorMessage", "setTextFormat", "setText", "LNSObject;LNSObject;", "setIsEnabled", "setAdjustsFontSizeToFitWidth", "setAllowsDefaultTighteningForTruncation", "setMinimumScaleFactor", "setNumberOfLines", "setHighlightedTextColor", "setIsHighlighted", "setShadowColor", "setPreferredMaxLayoutWidth", "setIsUserInteractionEnabled", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "addCheckedListener", "setError", &ASRadioButtonImpl_LOCAL_NAME, &ASRadioButtonImpl_GROUP_NAME, &ASRadioButtonImpl_ITALIC_FONT_TRAIT, &ASRadioButtonImpl_BOLD_FONT_TRAIT, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "LASRadioButtonImpl_ButtonTinttMode;LASRadioButtonImpl_Ellipsize;LASRadioButtonImpl_MarqueeRepeatLimit;LASRadioButtonImpl_JustificationMode;LASRadioButtonImpl_Font;LASRadioButtonImpl_TextStyle;LASRadioButtonImpl_DrawableTintMode;LASRadioButtonImpl_RadioButtonExt;LASRadioButtonImpl_DellocHandler;LASRadioButtonImpl_StateToggler;LASRadioButtonImpl_MyCanvas;LASRadioButtonImpl_PostMeasureHandler;LASRadioButtonImpl_MarqueeTask;LASRadioButtonImpl_OnCheckedChangeListener;LASRadioButtonImpl_RadioButtonCommandBuilder;LASRadioButtonImpl_RadioButtonBean;" };
-  static const J2ObjcClassInfo _ASRadioButtonImpl = { "RadioButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 218, 30, -1, 135, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "LNSObject;", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "I", "setEllipsize", "LNSObject;LNSString;", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setSingleLine", "setEnabled", "toUpperCase", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setScrollHorizontally", "executeOnMainThread", "LJavaLangRunnable;", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "setHintColor", "setTextColorLink", "LADColorStateList;", "setButton", "setOnChecked", "setChecked", "postSetAttribute", "createLabel", "LJavaUtilMap;LADTextView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/TextView;)V", "setButtonTint", "setButtonTintMode", "showError", "setGravity", "onRtlPropertiesChanged", "setDrawableIconSize", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "getAutoSizeTextType", "LADTextView;", "setAutoSizeTextTypeInternal", "setAutoSizePresetSizes", "setMaxLength", "setMyText", "setTextAllCaps", "initHtml", "setTypeFace", "setFontFamily", "setTextStyle", "setMarqueeRepeatLimit", "startOrStopMarquee", "setPassword", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setAutoSizeStepGranularity", "setAutoMinTextSize", "setAutoMaxTextSize", "setAutoSizeTextType", "setErrorMessage", "setTextFormat", "setText", "LNSObject;LNSObject;", "setIsEnabled", "setAdjustsFontSizeToFitWidth", "setAllowsDefaultTighteningForTruncation", "setMinimumScaleFactor", "setNumberOfLines", "setHighlightedTextColor", "setIsHighlighted", "setShadowColor", "setPreferredMaxLayoutWidth", "setIsUserInteractionEnabled", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "addCheckedListener", "setError", &ASRadioButtonImpl_LOCAL_NAME, &ASRadioButtonImpl_GROUP_NAME, &ASRadioButtonImpl_ITALIC_FONT_TRAIT, &ASRadioButtonImpl_BOLD_FONT_TRAIT, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "LASRadioButtonImpl_ButtonTinttMode;LASRadioButtonImpl_Ellipsize;LASRadioButtonImpl_MarqueeRepeatLimit;LASRadioButtonImpl_JustificationMode;LASRadioButtonImpl_Font;LASRadioButtonImpl_TextStyle;LASRadioButtonImpl_DrawableTintMode;LASRadioButtonImpl_RadioButtonExt;LASRadioButtonImpl_DellocHandler;LASRadioButtonImpl_StateToggler;LASRadioButtonImpl_MyCanvas;LASRadioButtonImpl_PostMeasureHandler;LASRadioButtonImpl_MarqueeTask;LASRadioButtonImpl_OnCheckedChangeListener;LASRadioButtonImpl_RadioButtonCommandBuilder;LASRadioButtonImpl_RadioButtonBean;" };
+  static const J2ObjcClassInfo _ASRadioButtonImpl = { "RadioButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 219, 30, -1, 136, -1, -1, -1 };
   return &_ASRadioButtonImpl;
 }
 
@@ -3839,6 +3843,13 @@ id ASRadioButtonImpl_getGravity(ASRadioButtonImpl *self) {
   }
   jint gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
+}
+
+void ASRadioButtonImpl_setDrawableIconSizeWithId_(ASRadioButtonImpl *self, id objValue) {
+  [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
 }
 
 id ASRadioButtonImpl_getMinHeight(ASRadioButtonImpl *self) {
@@ -4731,7 +4742,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_DrawableTintMode)
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  if (![this$0_ isWidgetDisposed]) {
+    ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  }
 }
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout {
@@ -6536,26 +6549,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_OnCheckedChangeListener)
   return self;
 }
 
-- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
 - (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDrawableStartWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDrawableRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableRight"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -6723,6 +6718,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_OnCheckedChangeListener)
   return self;
 }
 
+- (ASRadioButtonImpl_RadioButtonCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableIconSize"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
@@ -6869,25 +6873,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_OnCheckedChangeListener)
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 63, 4, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 64, 4, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 65, 4, -1, -1, -1, -1 },
-    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 66, 4, -1, -1, -1, -1 },
-    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 67, 4, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 66, 4, -1, -1, -1, -1 },
+    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 67, 4, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 68, 4, -1, -1, -1, -1 },
-    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 69, 4, -1, -1, -1, -1 },
+    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 69, 2, -1, -1, -1, -1 },
+    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 70, 4, -1, -1, -1, -1 },
-    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 71, 2, -1, -1, -1, -1 },
+    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 71, 4, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 72, 4, -1, -1, -1, -1 },
-    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 73, 4, -1, -1, -1, -1 },
-    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 74, 4, -1, -1, -1, -1 },
     { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 75, 4, -1, -1, -1, -1 },
-    { NULL, "LASRadioButtonImpl_RadioButtonCommandBuilder;", 0x1, 76, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -7032,35 +7035,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_OnCheckedChangeListener)
   methods[137].selector = @selector(setTypefaceWithNSString:);
   methods[138].selector = @selector(setTextStyleWithNSString:);
   methods[139].selector = @selector(setFontFamilyWithNSString:);
-  methods[140].selector = @selector(setDrawableLeftWithNSString:);
-  methods[141].selector = @selector(setDrawableStartWithNSString:);
-  methods[142].selector = @selector(setDrawableRightWithNSString:);
-  methods[143].selector = @selector(setDrawableEndWithNSString:);
-  methods[144].selector = @selector(setDrawableTopWithNSString:);
-  methods[145].selector = @selector(setDrawableBottomWithNSString:);
-  methods[146].selector = @selector(tryGetDrawablePadding);
-  methods[147].selector = @selector(getDrawablePadding);
-  methods[148].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[149].selector = @selector(setDrawableTintWithNSString:);
-  methods[150].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[151].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[152].selector = @selector(tryGetFirstBaselineToTopHeight);
-  methods[153].selector = @selector(getFirstBaselineToTopHeight);
-  methods[154].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[155].selector = @selector(tryGetLastBaselineToBottomHeight);
-  methods[156].selector = @selector(getLastBaselineToBottomHeight);
-  methods[157].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[158].selector = @selector(tryGetTextColor);
-  methods[159].selector = @selector(getTextColor);
-  methods[160].selector = @selector(setTextColorWithNSString:);
-  methods[161].selector = @selector(setTextFormatWithNSString:);
-  methods[162].selector = @selector(setTextAppearanceWithNSString:);
+  methods[140].selector = @selector(setDrawableStartWithNSString:);
+  methods[141].selector = @selector(setDrawableEndWithNSString:);
+  methods[142].selector = @selector(setDrawableTopWithNSString:);
+  methods[143].selector = @selector(setDrawableBottomWithNSString:);
+  methods[144].selector = @selector(tryGetDrawablePadding);
+  methods[145].selector = @selector(getDrawablePadding);
+  methods[146].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[147].selector = @selector(setDrawableTintWithNSString:);
+  methods[148].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[149].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[150].selector = @selector(tryGetFirstBaselineToTopHeight);
+  methods[151].selector = @selector(getFirstBaselineToTopHeight);
+  methods[152].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[153].selector = @selector(tryGetLastBaselineToBottomHeight);
+  methods[154].selector = @selector(getLastBaselineToBottomHeight);
+  methods[155].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[156].selector = @selector(tryGetTextColor);
+  methods[157].selector = @selector(getTextColor);
+  methods[158].selector = @selector(setTextColorWithNSString:);
+  methods[159].selector = @selector(setTextFormatWithNSString:);
+  methods[160].selector = @selector(setTextAppearanceWithNSString:);
+  methods[161].selector = @selector(setDrawableIconSizeWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASRadioButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASRadioButtonImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setChecked", "setOnCheckedChange", "setButton", "setButtonTint", "setButtonTintMode", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "setTextAppearance", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/RadioButtonImpl$RadioButtonCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASRadioButtonImpl_RadioButtonCommandBuilder = { "RadioButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 163, 1, 0, -1, -1, 77, -1 };
+  static const void *ptrTable[] = { "LASRadioButtonImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setChecked", "setOnCheckedChange", "setButton", "setButtonTint", "setButtonTintMode", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableStart", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "setTextAppearance", "setDrawableIconSize", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/RadioButtonImpl$RadioButtonCommandBuilder;>;" };
+  static const J2ObjcClassInfo _ASRadioButtonImpl_RadioButtonCommandBuilder = { "RadioButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 162, 1, 0, -1, -1, 76, -1 };
   return &_ASRadioButtonImpl_RadioButtonCommandBuilder;
 }
 
@@ -7476,16 +7478,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_RadioButtonCommandBuilder)
   (void) [((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFontFamilyWithNSString:value])) executeWithBoolean:true];
 }
 
-- (void)setDrawableLeftWithNSString:(NSString *)value {
-  (void) [((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableLeftWithNSString:value])) executeWithBoolean:true];
-}
-
 - (void)setDrawableStartWithNSString:(NSString *)value {
   (void) [((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableRightWithNSString:(NSString *)value {
-  (void) [((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableRightWithNSString:value])) executeWithBoolean:true];
 }
 
 - (void)setDrawableEndWithNSString:(NSString *)value {
@@ -7550,6 +7544,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_RadioButtonCommandBuilder)
 
 - (void)setTextAppearanceWithNSString:(NSString *)value {
   (void) [((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextAppearanceWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableIconSizeWithNSString:(NSString *)value {
+  (void) [((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([((ASRadioButtonImpl_RadioButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableIconSizeWithNSString:value])) executeWithBoolean:true];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -7656,21 +7654,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_RadioButtonCommandBuilder)
     { NULL, "V", 0x1, 62, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 63, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 64, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 65, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 66, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 67, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 68, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 68, 5, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 69, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 70, 5, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 70, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 71, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 72, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 73, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 74, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 75, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -7773,31 +7770,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioButtonImpl_RadioButtonCommandBuilder)
   methods[95].selector = @selector(setTypefaceWithNSString:);
   methods[96].selector = @selector(setTextStyleWithNSString:);
   methods[97].selector = @selector(setFontFamilyWithNSString:);
-  methods[98].selector = @selector(setDrawableLeftWithNSString:);
-  methods[99].selector = @selector(setDrawableStartWithNSString:);
-  methods[100].selector = @selector(setDrawableRightWithNSString:);
-  methods[101].selector = @selector(setDrawableEndWithNSString:);
-  methods[102].selector = @selector(setDrawableTopWithNSString:);
-  methods[103].selector = @selector(setDrawableBottomWithNSString:);
-  methods[104].selector = @selector(getDrawablePadding);
-  methods[105].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[106].selector = @selector(setDrawableTintWithNSString:);
-  methods[107].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[108].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[109].selector = @selector(getFirstBaselineToTopHeight);
-  methods[110].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[111].selector = @selector(getLastBaselineToBottomHeight);
-  methods[112].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[113].selector = @selector(getTextColor);
-  methods[114].selector = @selector(setTextColorWithNSString:);
-  methods[115].selector = @selector(setTextFormatWithNSString:);
-  methods[116].selector = @selector(setTextAppearanceWithNSString:);
+  methods[98].selector = @selector(setDrawableStartWithNSString:);
+  methods[99].selector = @selector(setDrawableEndWithNSString:);
+  methods[100].selector = @selector(setDrawableTopWithNSString:);
+  methods[101].selector = @selector(setDrawableBottomWithNSString:);
+  methods[102].selector = @selector(getDrawablePadding);
+  methods[103].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[104].selector = @selector(setDrawableTintWithNSString:);
+  methods[105].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[106].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[107].selector = @selector(getFirstBaselineToTopHeight);
+  methods[108].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[109].selector = @selector(getLastBaselineToBottomHeight);
+  methods[110].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[111].selector = @selector(getTextColor);
+  methods[112].selector = @selector(setTextColorWithNSString:);
+  methods[113].selector = @selector(setTextFormatWithNSString:);
+  methods[114].selector = @selector(setTextAppearanceWithNSString:);
+  methods[115].selector = @selector(setDrawableIconSizeWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASRadioButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASRadioButtonImpl;", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "Z", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setChecked", "setOnCheckedChange", "setButton", "setButtonTint", "setButtonTintMode", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "setTextAppearance" };
-  static const J2ObjcClassInfo _ASRadioButtonImpl_RadioButtonBean = { "RadioButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 117, 1, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASRadioButtonImpl;", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "Z", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setChecked", "setOnCheckedChange", "setButton", "setButtonTint", "setButtonTintMode", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableStart", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "setTextAppearance", "setDrawableIconSize" };
+  static const J2ObjcClassInfo _ASRadioButtonImpl_RadioButtonBean = { "RadioButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 116, 1, 0, -1, -1, -1, -1 };
   return &_ASRadioButtonImpl_RadioButtonBean;
 }
 

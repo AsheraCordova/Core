@@ -104,9 +104,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASModelImpl)
 #define INCLUDE_ADView 1
 #include "View.h"
 
+#define RESTRICT_IViewStub 1
+#define INCLUDE_ASIViewStub 1
+#include "IViewStub.h"
+
 @class ASModelImpl;
 
-@interface ASModelImpl_ViewExt : ADView
+@interface ASModelImpl_ViewExt : ADView < ASIViewStub >
 
 #pragma mark Public
 

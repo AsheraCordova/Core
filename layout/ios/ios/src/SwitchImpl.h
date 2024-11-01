@@ -825,11 +825,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_PostMeasureHandler)
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASSwitchImpl_SwitchCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASSwitchImpl_SwitchCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASSwitchImpl_SwitchCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1544,11 +1542,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASSwitchImpl_SwitchCommandBuilder)
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

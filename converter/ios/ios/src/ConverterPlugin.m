@@ -18,6 +18,7 @@
 #include "DrawImageCommandConverter.h"
 #include "DrawImageOrColorCommandConverter.h"
 #include "DrawableConverter.h"
+#include "DrawableiconSizeConverter.h"
 #include "FontConverter.h"
 #include "IOSPrimitiveArray.h"
 #include "ImageConverter.h"
@@ -194,6 +195,7 @@ void ASConverterPlugin_initPlugin() {
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASDrawForegroundCommandConverter_initWithNSString_(@"drawForeground"));
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASDrawDrawableCommandConverter_initWithNSString_(@"drawDrawableIcon"));
   ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASTransformCommandConverter_initWithNSString_(@"transform"));
+  ASConverterFactory_registerCommandConverterWithASAttributeCommand_(new_ASDrawableiconSizeConverter_initWithNSString_(@"drawableIconSize"));
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASConverterPlugin)

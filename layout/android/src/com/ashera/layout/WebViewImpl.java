@@ -216,7 +216,9 @@ public class WebViewImpl extends BaseWidget {
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(WebViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(WebViewImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -354,6 +356,7 @@ public class WebViewImpl extends BaseWidget {
         	ViewImpl.stateNo(WebViewImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return WebViewExt.class;

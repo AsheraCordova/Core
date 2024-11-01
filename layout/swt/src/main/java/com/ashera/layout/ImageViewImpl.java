@@ -224,7 +224,9 @@ public class ImageViewImpl extends BaseWidget implements IsImage, IHasMultiNativ
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ImageViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ImageViewImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -237,9 +239,10 @@ public class ImageViewImpl extends BaseWidget implements IsImage, IHasMultiNativ
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(ImageViewImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -304,7 +307,10 @@ public class ImageViewImpl extends BaseWidget implements IsImage, IHasMultiNativ
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
-            ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
+            org.eclipse.swt.widgets.Control control = ((org.eclipse.swt.widgets.Control)asNativeWidget());
+            if (!control.isDisposed()) {
+            	control.setVisible(View.VISIBLE == visibility);
+            }
             
         }
         
@@ -348,6 +354,7 @@ public class ImageViewImpl extends BaseWidget implements IsImage, IHasMultiNativ
         	ViewImpl.stateNo(ImageViewImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ImageViewExt.class;

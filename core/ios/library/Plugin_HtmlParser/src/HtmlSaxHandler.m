@@ -77,7 +77,8 @@
                        withASHasWidgets:(id<ASHasWidgets>)parent
                            withNSString:(NSString *)tagName
                            withNSString:(NSString *)localName
-                withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts;
+                withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts
+                            withBoolean:(jboolean)isTemplate;
 
 @end
 
@@ -103,7 +104,7 @@ __attribute__((unused)) static NSString *ASHtmlSaxHandler_getAttrKeyWithoutNameS
 
 __attribute__((unused)) static NSString *ASHtmlSaxHandler_getValueWithNSString_withOrgXmlSaxAttributes_(ASHtmlSaxHandler *self, NSString *key, id<OrgXmlSaxAttributes> attributes);
 
-__attribute__((unused)) static void ASHtmlSaxHandler_populateAttributesWithASIWidget_withASHasWidgets_withNSString_withNSString_withOrgXmlSaxAttributes_(ASHtmlSaxHandler *self, id<ASIWidget> widget, id<ASHasWidgets> parent, NSString *tagName, NSString *localName, id<OrgXmlSaxAttributes> atts);
+__attribute__((unused)) static void ASHtmlSaxHandler_populateAttributesWithASIWidget_withASHasWidgets_withNSString_withNSString_withOrgXmlSaxAttributes_withBoolean_(ASHtmlSaxHandler *self, id<ASIWidget> widget, id<ASHasWidgets> parent, NSString *tagName, NSString *localName, id<OrgXmlSaxAttributes> atts, jboolean isTemplate);
 
 @interface ASHtmlSaxHandler_1 : NSObject < CSSCssResult > {
  @public
@@ -247,7 +248,7 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
   }
   JreStrongAssign(&self->widget_, ASWidgetFactory_getWithNSString_withBoolean_(localName, isTemplate_));
   id<JavaUtilMap> params = ASHtmlSaxHandler_getParamsWithOrgXmlSaxAttributes_withNSString_(self, atts, localName);
-  [self startCreateWidgetWithNSString:localName withASIWidget:widget_ withNSString:tagName withNSString:ASHtmlSaxHandler_getValueWithNSString_withOrgXmlSaxAttributes_(self, @"android:id", atts) withInt:-1 withOrgXmlSaxAttributes:atts withASWidgetAttributeMap:nil withJavaUtilMap:params];
+  [self startCreateWidgetWithNSString:localName withASIWidget:widget_ withNSString:tagName withNSString:ASHtmlSaxHandler_getValueWithNSString_withOrgXmlSaxAttributes_(self, @"android:id", atts) withInt:-1 withOrgXmlSaxAttributes:atts withASWidgetAttributeMap:nil withJavaUtilMap:params withJavaUtilMap:nil];
 }
 
 - (id<JavaUtilMap>)getParamsWithOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts
@@ -266,7 +267,8 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
                                        withInt:(jint)index
                        withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts
                       withASWidgetAttributeMap:(ASWidgetAttributeMap *)widgetAttributeMap
-                               withJavaUtilMap:(id<JavaUtilMap>)params {
+                               withJavaUtilMap:(id<JavaUtilMap>)params
+                               withJavaUtilMap:(id<JavaUtilMap>)unresolvedAttributes {
   if ([((NSString *) nil_chk(localName)) java_equalsIgnoreCase:@"Inline"]) {
     NSString *type = ASHtmlSaxHandler_getValueWithNSString_withOrgXmlSaxAttributes_(self, @"type", atts);
     if ([((NSString *) nil_chk(type)) isEqual:@"resource"]) {
@@ -338,10 +340,19 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
     [widget setIdWithNSString:id_];
     [widget setComponentIdWithNSString:componentId_];
     if (widgetAttributeMap == nil) {
-      ASHtmlSaxHandler_populateAttributesWithASIWidget_withASHasWidgets_withNSString_withNSString_withOrgXmlSaxAttributes_(self, widget, parent, tagName, localName, atts);
+      ASHtmlSaxHandler_populateAttributesWithASIWidget_withASHasWidgets_withNSString_withNSString_withOrgXmlSaxAttributes_withBoolean_(self, widget, parent, tagName, localName, atts, isTemplate_);
     }
     else {
       [((id<ASIWidget>) nil_chk(self->widget_)) updateWidgetMapWithASWidgetAttributeMap:widgetAttributeMap];
+      if (unresolvedAttributes != nil) {
+        for (NSString * __strong key in nil_chk([unresolvedAttributes keySet])) {
+          ASWidgetAttribute *attribute = [widget getAttributeWithASHasWidgets:parent withNSString:localName withNSString:key];
+          if (attribute != nil) {
+            ASWidgetAttributeValue *attributeValue = create_ASWidgetAttributeValue_initWithNSString_([unresolvedAttributes getWithId:key]);
+            [widget updateWidgetMapWithASWidgetAttribute:attribute withASWidgetAttributeValue:attributeValue];
+          }
+        }
+      }
     }
     if (parent != nil) {
       if ([widget asWidget] != nil) {
@@ -368,8 +379,9 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
                        withASHasWidgets:(id<ASHasWidgets>)parent
                            withNSString:(NSString *)tagName
                            withNSString:(NSString *)localName
-                withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts {
-  ASHtmlSaxHandler_populateAttributesWithASIWidget_withASHasWidgets_withNSString_withNSString_withOrgXmlSaxAttributes_(self, widget, parent, tagName, localName, atts);
+                withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts
+                            withBoolean:(jboolean)isTemplate {
+  ASHtmlSaxHandler_populateAttributesWithASIWidget_withASHasWidgets_withNSString_withNSString_withOrgXmlSaxAttributes_withBoolean_(self, widget, parent, tagName, localName, atts, isTemplate);
 }
 
 - (void)endElementWithNSString:(NSString *)uri
@@ -470,9 +482,9 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
   methods[11].selector = @selector(startElementWithNSString:withNSString:withNSString:withOrgXmlSaxAttributes:);
   methods[12].selector = @selector(getParamsWithOrgXmlSaxAttributes:withNSString:);
   methods[13].selector = @selector(getAttrKeyWithoutNameSpaceWithNSString:);
-  methods[14].selector = @selector(startCreateWidgetWithNSString:withASIWidget:withNSString:withNSString:withInt:withOrgXmlSaxAttributes:withASWidgetAttributeMap:withJavaUtilMap:);
+  methods[14].selector = @selector(startCreateWidgetWithNSString:withASIWidget:withNSString:withNSString:withInt:withOrgXmlSaxAttributes:withASWidgetAttributeMap:withJavaUtilMap:withJavaUtilMap:);
   methods[15].selector = @selector(getValueWithNSString:withOrgXmlSaxAttributes:);
-  methods[16].selector = @selector(populateAttributesWithASIWidget:withASHasWidgets:withNSString:withNSString:withOrgXmlSaxAttributes:);
+  methods[16].selector = @selector(populateAttributesWithASIWidget:withASHasWidgets:withNSString:withNSString:withOrgXmlSaxAttributes:withBoolean:);
   methods[17].selector = @selector(endElementWithNSString:withNSString:withNSString:);
   methods[18].selector = @selector(endCreateWidgetWithNSString:);
   methods[19].selector = @selector(getRoot);
@@ -496,7 +508,7 @@ __attribute__((unused)) static ASHtmlSaxHandler_1 *create_ASHtmlSaxHandler_1_ini
     { "text_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "componentId_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASIFragment;Z", "LASIFragment;LNSString;Z", "LOrgXmlSaxSAXException;", "endPrefixMapping", "LNSString;", "ignorableWhitespace", "[CII", "processingInstruction", "LNSString;LNSString;", "setDocumentLocator", "LOrgXmlSaxLocator;", "skippedEntity", "startPrefixMapping", "characters", "startElement", "LNSString;LNSString;LNSString;LOrgXmlSaxAttributes;", "getParams", "LOrgXmlSaxAttributes;LNSString;", "(Lorg/xml/sax/Attributes;Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getAttrKeyWithoutNameSpace", "startCreateWidget", "LNSString;LASIWidget;LNSString;LNSString;ILOrgXmlSaxAttributes;LASWidgetAttributeMap;LJavaUtilMap;", "(Ljava/lang/String;Lcom/ashera/widget/IWidget;Ljava/lang/String;Ljava/lang/String;ILorg/xml/sax/Attributes;Lcom/ashera/widget/WidgetAttributeMap;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Lcom/ashera/widget/IWidget;", "getValue", "LNSString;LOrgXmlSaxAttributes;", "populateAttributes", "LASIWidget;LASHasWidgets;LNSString;LNSString;LOrgXmlSaxAttributes;", "endElement", "LNSString;LNSString;LNSString;", "endCreateWidget", "initRoot", "LASHasWidgets;", "addToCurrentParent", "LASIWidget;", "Ljava/util/Stack<Lcom/ashera/widget/HasWidgets;>;", "Ljava/util/Stack<Ljava/lang/Boolean;>;", "Ljava/util/Stack<Lcom/ashera/widget/IWidget;>;", &ASHtmlSaxHandler_languageProperties };
+  static const void *ptrTable[] = { "LASIFragment;Z", "LASIFragment;LNSString;Z", "LOrgXmlSaxSAXException;", "endPrefixMapping", "LNSString;", "ignorableWhitespace", "[CII", "processingInstruction", "LNSString;LNSString;", "setDocumentLocator", "LOrgXmlSaxLocator;", "skippedEntity", "startPrefixMapping", "characters", "startElement", "LNSString;LNSString;LNSString;LOrgXmlSaxAttributes;", "getParams", "LOrgXmlSaxAttributes;LNSString;", "(Lorg/xml/sax/Attributes;Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getAttrKeyWithoutNameSpace", "startCreateWidget", "LNSString;LASIWidget;LNSString;LNSString;ILOrgXmlSaxAttributes;LASWidgetAttributeMap;LJavaUtilMap;LJavaUtilMap;", "(Ljava/lang/String;Lcom/ashera/widget/IWidget;Ljava/lang/String;Ljava/lang/String;ILorg/xml/sax/Attributes;Lcom/ashera/widget/WidgetAttributeMap;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Lcom/ashera/widget/IWidget;", "getValue", "LNSString;LOrgXmlSaxAttributes;", "populateAttributes", "LASIWidget;LASHasWidgets;LNSString;LNSString;LOrgXmlSaxAttributes;Z", "endElement", "LNSString;LNSString;LNSString;", "endCreateWidget", "initRoot", "LASHasWidgets;", "addToCurrentParent", "LASIWidget;", "Ljava/util/Stack<Lcom/ashera/widget/HasWidgets;>;", "Ljava/util/Stack<Ljava/lang/Boolean;>;", "Ljava/util/Stack<Lcom/ashera/widget/IWidget;>;", &ASHtmlSaxHandler_languageProperties };
   static const J2ObjcClassInfo _ASHtmlSaxHandler = { "HtmlSaxHandler", "com.ashera.parser.html", ptrTable, methods, fields, 7, 0x1, 22, 15, -1, -1, -1, -1, -1 };
   return &_ASHtmlSaxHandler;
 }
@@ -592,7 +604,7 @@ NSString *ASHtmlSaxHandler_getValueWithNSString_withOrgXmlSaxAttributes_(ASHtmlS
   return [attributes getValueWithNSString:key];
 }
 
-void ASHtmlSaxHandler_populateAttributesWithASIWidget_withASHasWidgets_withNSString_withNSString_withOrgXmlSaxAttributes_(ASHtmlSaxHandler *self, id<ASIWidget> widget, id<ASHasWidgets> parent, NSString *tagName, NSString *localName, id<OrgXmlSaxAttributes> atts) {
+void ASHtmlSaxHandler_populateAttributesWithASIWidget_withASHasWidgets_withNSString_withNSString_withOrgXmlSaxAttributes_withBoolean_(ASHtmlSaxHandler *self, id<ASIWidget> widget, id<ASHasWidgets> parent, NSString *tagName, NSString *localName, id<OrgXmlSaxAttributes> atts, jboolean isTemplate) {
   if (!self->isAndroid_) {
     [((id<ASIWidget>) nil_chk(widget)) applyThemeStyleWithNSString:[widget getGroupName]];
   }
@@ -607,10 +619,18 @@ void ASHtmlSaxHandler_populateAttributesWithASIWidget_withASHasWidgets_withNSStr
   }
   for (jint i = 0; i < [((id<OrgXmlSaxAttributes>) nil_chk(atts)) getLength]; i++) {
     NSString *key = JreRetainedLocalValue([atts getLocalNameWithInt:i]);
-    ASWidgetAttribute *attribute = [((id<ASIWidget>) nil_chk(widget)) getAttributeWithASHasWidgets:parent withNSString:localName withNSString:key];
-    if (attribute != nil) {
-      ASWidgetAttributeValue *attributeValue = create_ASWidgetAttributeValue_initWithNSString_([atts getValueWithInt:i]);
-      [widget updateWidgetMapWithASWidgetAttribute:attribute withASWidgetAttributeValue:attributeValue];
+    if ([((NSString *) nil_chk(key)) java_hasPrefix:@"layout_"] && isTemplate) {
+      [((id<ASIWidget>) nil_chk(widget)) addUnResolvedAttributeWithNSString:key withNSString:[atts getValueWithInt:i]];
+    }
+    else {
+      ASWidgetAttribute *attribute = [((id<ASIWidget>) nil_chk(widget)) getAttributeWithASHasWidgets:parent withNSString:localName withNSString:key];
+      if (attribute != nil) {
+        ASWidgetAttributeValue *attributeValue = create_ASWidgetAttributeValue_initWithNSString_([atts getValueWithInt:i]);
+        [widget updateWidgetMapWithASWidgetAttribute:attribute withASWidgetAttributeValue:attributeValue];
+      }
+      else {
+        [widget addUnResolvedAttributeWithNSString:key withNSString:[atts getValueWithInt:i]];
+      }
     }
   }
 }
@@ -658,7 +678,7 @@ withCSSCssTree_Attribute:(CSSCssTree_Attribute *)value {
     { "val$parent_", "LASHasWidgets;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
     { "val$localName_", "LNSString;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASIWidget;LASHasWidgets;LNSString;", "put", "LNSString;LCSSCssTree_Attribute;", "LASHtmlSaxHandler;", "populateAttributesWithASIWidget:withASHasWidgets:withNSString:withNSString:withOrgXmlSaxAttributes:" };
+  static const void *ptrTable[] = { "LASIWidget;LASHasWidgets;LNSString;", "put", "LNSString;LCSSCssTree_Attribute;", "LASHtmlSaxHandler;", "populateAttributesWithASIWidget:withASHasWidgets:withNSString:withNSString:withOrgXmlSaxAttributes:withBoolean:" };
   static const J2ObjcClassInfo _ASHtmlSaxHandler_1 = { "", "com.ashera.parser.html", ptrTable, methods, fields, 7, 0x8010, 2, 3, 3, -1, 4, -1, -1 };
   return &_ASHtmlSaxHandler_1;
 }

@@ -136,6 +136,9 @@ export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "textFormat" }))
 	textFormat!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableIconSize" }))
+	drawableIconSize!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "onCheckedChange" }))
 	onCheckedChange!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -183,9 +186,6 @@ export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "paddingVertical" }))
 	paddingVertical!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "drawableLeft" }))
-	drawableLeft!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "drawableStart" }))
 	drawableStart!:CommandAttr<string>| undefined;
@@ -265,6 +265,7 @@ export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
 		this.firstBaselineToTopHeight = undefined;
 		this.lastBaselineToBottomHeight = undefined;
 		this.textFormat = undefined;
+		this.drawableIconSize = undefined;
 		this.onCheckedChange = undefined;
 		this.checked = undefined;
 		this.textOn = undefined;
@@ -281,7 +282,6 @@ export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
 		this.paddingTop = undefined;
 		this.paddingHorizontal = undefined;
 		this.paddingVertical = undefined;
-		this.drawableLeft = undefined;
 		this.drawableStart = undefined;
 		this.enabled = undefined;
 		this.editable = undefined;
@@ -478,6 +478,20 @@ export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
 		this.textFormat.setValue(value);
 		this.orderSet++;
 		this.textFormat.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableIconSize(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableIconSize == null || this.drawableIconSize == undefined) {
+			this.drawableIconSize = new CommandAttr<string>();
+		}
+		
+		this.drawableIconSize.setSetter(true);
+		this.drawableIconSize.setValue(value);
+		this.orderSet++;
+		this.drawableIconSize.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -918,20 +932,6 @@ export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
 		this.paddingVertical.setValue(value);
 		this.orderSet++;
 		this.paddingVertical.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableLeft(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableLeft == null || this.drawableLeft == undefined) {
-			this.drawableLeft = new CommandAttr<string>();
-		}
-		
-		this.drawableLeft.setSetter(true);
-		this.drawableLeft.setValue(value);
-		this.orderSet++;
-		this.drawableLeft.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

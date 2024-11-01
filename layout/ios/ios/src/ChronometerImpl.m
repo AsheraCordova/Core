@@ -135,6 +135,8 @@
 
 - (id)getGravity;
 
+- (void)setDrawableIconSizeWithId:(id)objValue;
+
 - (id)getMinHeight;
 
 - (id)getMinWidth;
@@ -485,6 +487,8 @@ __attribute__((unused)) static void ASChronometerImpl_setGravityWithId_(ASChrono
 __attribute__((unused)) static void ASChronometerImpl_updateTextAlignment(ASChronometerImpl *self);
 
 __attribute__((unused)) static id ASChronometerImpl_getGravity(ASChronometerImpl *self);
+
+__attribute__((unused)) static void ASChronometerImpl_setDrawableIconSizeWithId_(ASChronometerImpl *self, id objValue);
 
 __attribute__((unused)) static id ASChronometerImpl_getMinHeight(ASChronometerImpl *self);
 
@@ -1009,9 +1013,7 @@ NSString *ASChronometerImpl_GROUP_NAME = @"Chronometer";
   ASConverterFactory_register__WithNSString_withASIConverter_(@"Chronometer.textStyle", new_ASChronometerImpl_TextStyle_init());
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textStyle"])) withTypeWithNSString:@"Chronometer.textStyle"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"fontFamily"])) withTypeWithNSString:@"font"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableLeft"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableStart"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableRight"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableEnd"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTop"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableBottom"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
@@ -1024,6 +1026,7 @@ NSString *ASChronometerImpl_GROUP_NAME = @"Chronometer";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"lastBaselineToBottomHeight"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textColor"])) withTypeWithNSString:@"colorstate"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textAppearance"])) withTypeWithNSString:@"string"])) withStylePriorityWithJavaLangInteger:JavaLangInteger_valueOfWithInt_(1)]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableIconSize"])) withTypeWithNSString:@"dimension"])) withOrderWithInt:-1])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerConstructorAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"html"])) withTypeWithNSString:@"boolean"]);
 }
 
@@ -1073,7 +1076,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
   ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"textColorHighlight", @"iosHighlightedTextColor", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"startStop", @"countDown", @"format", @"onChronometerTick", @"baseElapsedTimeInMillis", @"stopWhenReached", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"shadowDx", @"shadowDy", @"singleLine", @"textAllCaps", @"typeface", @"textStyle", @"fontFamily", @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"scrollHorizontally", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor", @"textAppearance" }, 66)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"textColorHighlight", @"iosHighlightedTextColor", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"startStop", @"countDown", @"format", @"onChronometerTick", @"baseElapsedTimeInMillis", @"stopWhenReached", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"shadowDx", @"shadowDy", @"singleLine", @"textAllCaps", @"typeface", @"textStyle", @"fontFamily", @"drawableStart", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"scrollHorizontally", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor", @"textAppearance", @"drawableIconSize" }, 65)) {
     case 0:
     {
       [self setTextWithId:nativeWidget withId:objValue];
@@ -1324,72 +1327,67 @@ J2OBJC_IGNORE_DESIGNATED_END
     break;
     case 52:
     {
-      ASChronometerImpl_setDrawableLeftWithNSString_withId_(self, @"drawableLeft", objValue);
+      ASChronometerImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
     }
     break;
     case 53:
     {
-      ASChronometerImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
+      ASChronometerImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
     }
     break;
     case 54:
     {
-      ASChronometerImpl_setDrawableRightWithNSString_withId_(self, @"drawableRight", objValue);
+      ASChronometerImpl_setDrawableTopWithId_(self, objValue);
     }
     break;
     case 55:
     {
-      ASChronometerImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
+      ASChronometerImpl_setDrawableBottomWithId_(self, objValue);
     }
     break;
     case 56:
     {
-      ASChronometerImpl_setDrawableTopWithId_(self, objValue);
+      ASChronometerImpl_setDrawablePaddingWithId_(self, objValue);
     }
     break;
     case 57:
     {
-      ASChronometerImpl_setDrawableBottomWithId_(self, objValue);
+      ASChronometerImpl_setDrawableTintWithId_(self, objValue);
     }
     break;
     case 58:
     {
-      ASChronometerImpl_setDrawablePaddingWithId_(self, objValue);
+      ASChronometerImpl_setDrawableTintModeWithId_(self, objValue);
     }
     break;
     case 59:
     {
-      ASChronometerImpl_setDrawableTintWithId_(self, objValue);
+      ASChronometerImpl_setScrollHorizontallyWithId_(self, objValue);
     }
     break;
     case 60:
     {
-      ASChronometerImpl_setDrawableTintModeWithId_(self, objValue);
+      ASChronometerImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
     }
     break;
     case 61:
     {
-      ASChronometerImpl_setScrollHorizontallyWithId_(self, objValue);
+      ASChronometerImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
     }
     break;
     case 62:
     {
-      ASChronometerImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
+      ASChronometerImpl_setTextColorWithId_(self, objValue);
     }
     break;
     case 63:
     {
-      ASChronometerImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
+      ASViewImpl_setStyleWithASIWidget_withId_(self, objValue);
     }
     break;
     case 64:
     {
-      ASChronometerImpl_setTextColorWithId_(self, objValue);
-    }
-    break;
-    case 65:
-    {
-      ASViewImpl_setStyleWithASIWidget_withId_(self, objValue);
+      ASChronometerImpl_setDrawableIconSizeWithId_(self, objValue);
     }
     break;
     default:
@@ -1612,6 +1610,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   if ([((ADChronometer *) nil_chk(measurableView_)) getRawTextAlignment] != 0 || [((ADChronometer *) nil_chk(measurableView_)) getRawLayoutDirection] != 0) {
     ASChronometerImpl_updateTextAlignment(self);
   }
+}
+
+- (void)setDrawableIconSizeWithId:(id)objValue {
+  ASChronometerImpl_setDrawableIconSizeWithId_(self, objValue);
 }
 
 - (id)getMinHeight {
@@ -2442,15 +2444,15 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 18, 19, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 20, 11, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 21, 11, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 22, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 23, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 24, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 25, 11, -1, -1, -1, -1 },
@@ -2458,69 +2460,70 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 27, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 28, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 29, 11, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 30, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 31, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 32, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 32, 33, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 34, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 35, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 33, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 35, 19, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 36, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 37, 38, -1, 39, -1, -1 },
-    { NULL, "V", 0x2, 40, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 37, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 38, 39, -1, 40, -1, -1 },
     { NULL, "V", 0x2, 41, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 42, 43, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 44, 43, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 45, 11, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 42, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 43, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 45, 44, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 46, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 47, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 48, 11, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 48, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 49, 11, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 50, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 51, 11, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 52, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 53, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 54, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 55, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 55, 38, -1, 39, -1, -1 },
-    { NULL, "V", 0x2, 56, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 57, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 58, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 56, 39, -1, 40, -1, -1 },
+    { NULL, "V", 0x2, 57, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 58, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 59, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 59, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 60, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 61, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 62, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 63, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 64, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 64, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 65, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 66, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 67, 11, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 68, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 69, 19, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 69, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 70, 19, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
@@ -2539,90 +2542,90 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 70, 43, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 71, 44, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 71, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 72, 43, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 73, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 72, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 73, 44, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 74, 19, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 74, 75, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 76, 75, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 75, 76, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 77, 76, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 77, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 78, 11, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x9, 79, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 79, 11, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 80, 1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 80, 81, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 82, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 83, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 81, 82, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 83, 19, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 84, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 85, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 86, 87, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 88, 87, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 89, 87, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 90, 87, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 91, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 86, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 87, 88, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 89, 88, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 90, 88, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 91, 88, -1, -1, -1, -1 },
     { NULL, "I", 0x102, 92, 11, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 93, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 93, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 94, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 95, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 96, 11, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 96, 97, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 98, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 97, 98, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 99, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 99, 100, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 101, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 100, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 102, 19, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 102, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 104, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 103, 104, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 105, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 98, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 99, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 106, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 107, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 107, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 108, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 108, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 109, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 109, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 110, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 110, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 111, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 111, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 112, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 112, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 113, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 113, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 114, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 114, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 115, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 115, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 116, 106, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 116, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 117, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 118, 119, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 117, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 118, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 119, 120, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 120, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 121, 1, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 121, 122, -1, 123, -1, -1 },
-    { NULL, "V", 0x2, 124, 122, -1, 123, -1, -1 },
+    { NULL, "V", 0x102, 122, 123, -1, 124, -1, -1 },
+    { NULL, "V", 0x2, 125, 123, -1, 124, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
@@ -2653,193 +2656,194 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[21].selector = @selector(updateTextAlignment);
   methods[22].selector = @selector(getGravity);
   methods[23].selector = @selector(onRtlPropertiesChangedWithInt:);
-  methods[24].selector = @selector(getMinHeight);
-  methods[25].selector = @selector(getMinWidth);
-  methods[26].selector = @selector(setEmsWithId:);
-  methods[27].selector = @selector(getMaxEms);
-  methods[28].selector = @selector(getMinEms);
-  methods[29].selector = @selector(setMinEmsWithId:);
-  methods[30].selector = @selector(getMinLines);
-  methods[31].selector = @selector(getMaxLines);
-  methods[32].selector = @selector(setMaxEmsWithId:);
-  methods[33].selector = @selector(setWidthWithId:);
-  methods[34].selector = @selector(setHeightWithId:);
-  methods[35].selector = @selector(setMaxLinesWithId:);
-  methods[36].selector = @selector(setLinesWithId:);
-  methods[37].selector = @selector(setMinLinesWithId:);
-  methods[38].selector = @selector(setMaxHeightWithId:);
-  methods[39].selector = @selector(setMaxWidthWithId:);
-  methods[40].selector = @selector(getMaxWidth);
-  methods[41].selector = @selector(getMaxHeight);
-  methods[42].selector = @selector(setMinHeightWithId:);
-  methods[43].selector = @selector(setMinWidthWithId:);
-  methods[44].selector = @selector(getWidth);
-  methods[45].selector = @selector(getHeight);
-  methods[46].selector = @selector(getAutoSizeTextTypeWithADTextView:);
-  methods[47].selector = @selector(setAutoSizeTextTypeInternalWithInt:);
-  methods[48].selector = @selector(setAutoSizePresetSizesWithId:);
-  methods[49].selector = @selector(addAutoResizeListener);
-  methods[50].selector = @selector(removeResizeListener);
-  methods[51].selector = @selector(setMaxLengthWithId:);
-  methods[52].selector = @selector(initHtmlWithJavaUtilMap:);
-  methods[53].selector = @selector(setMyTextWithId:);
-  methods[54].selector = @selector(setTextAllCapsWithId:);
-  methods[55].selector = @selector(setTypeFaceWithId:withNSString:);
-  methods[56].selector = @selector(setFontFamilyWithId:withNSString:);
-  methods[57].selector = @selector(setTextStyleWithId:);
-  methods[58].selector = @selector(calcNumberOfWhiteSpaces);
-  methods[59].selector = @selector(cancelTimer);
-  methods[60].selector = @selector(startTimer);
-  methods[61].selector = @selector(getMarqueeRepeatLimit);
-  methods[62].selector = @selector(setMarqueeRepeatLimitWithId:);
-  methods[63].selector = @selector(startOrStopMarqueeWithId:);
-  methods[64].selector = @selector(getLabelWidth);
-  methods[65].selector = @selector(isLabelMeasured);
-  methods[66].selector = @selector(setPasswordWithId:);
-  methods[67].selector = @selector(setFirstBaselineToTopHeightWithId:);
-  methods[68].selector = @selector(getIncludeFontPadding);
-  methods[69].selector = @selector(getFirstBaselineToTopHeight);
-  methods[70].selector = @selector(setLastBaselineToBottomHeightWithId:);
-  methods[71].selector = @selector(getLastBaselineToBottomHeight);
-  methods[72].selector = @selector(setAutoSizeStepGranularityWithId:);
-  methods[73].selector = @selector(setAutoMinTextSizeWithId:);
-  methods[74].selector = @selector(setAutoMaxTextSizeWithId:);
-  methods[75].selector = @selector(setAutoSizeTextTypeWithId:);
-  methods[76].selector = @selector(getAutoSizeStepGranularity);
-  methods[77].selector = @selector(getAutoMinTextSize);
-  methods[78].selector = @selector(getAutoMaxTextSize);
-  methods[79].selector = @selector(getAutoSizeTextType);
-  methods[80].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[81].selector = @selector(handleHtmlTextWithNSString:);
-  methods[82].selector = @selector(nativeSetTextWithNSString:);
-  methods[83].selector = @selector(nativeSetHtmlTextWithId:);
-  methods[84].selector = @selector(getMyText);
-  methods[85].selector = @selector(setPaddingWithId:);
-  methods[86].selector = @selector(setPaddingBottomWithId:);
-  methods[87].selector = @selector(setPaddingTopWithId:);
-  methods[88].selector = @selector(setPaddingLeftWithId:);
-  methods[89].selector = @selector(setPaddingRightWithId:);
-  methods[90].selector = @selector(getPaddingTop);
-  methods[91].selector = @selector(getPaddingEnd);
-  methods[92].selector = @selector(getPaddingStart);
-  methods[93].selector = @selector(getPaddingLeft);
-  methods[94].selector = @selector(getPaddingRight);
-  methods[95].selector = @selector(getPaddingBottom);
-  methods[96].selector = @selector(setPaddingVerticalWithId:);
-  methods[97].selector = @selector(setPaddingHorizontalWithId:);
-  methods[98].selector = @selector(setPaddingEndWithId:);
-  methods[99].selector = @selector(setPaddingStartWithId:);
-  methods[100].selector = @selector(getTextSize);
-  methods[101].selector = @selector(setMyTextSizeWithId:);
-  methods[102].selector = @selector(nativeSetTextSizeWithInt:);
-  methods[103].selector = @selector(setVerticalAligmentCenter);
-  methods[104].selector = @selector(setVerticalAligmentBottom);
-  methods[105].selector = @selector(setVerticalAligmentTop);
-  methods[106].selector = @selector(setHorizontalAligmentCenter);
-  methods[107].selector = @selector(setHorizontalAligmentRight);
-  methods[108].selector = @selector(setHorizontalAligmentRightInternal);
-  methods[109].selector = @selector(setHorizontalAligmentLeft);
-  methods[110].selector = @selector(setHorizontalAligmentLeftInternal);
-  methods[111].selector = @selector(getTextAlignment);
-  methods[112].selector = @selector(nativeSetVerticalAligmentBottom);
-  methods[113].selector = @selector(nativeSetVerticalAligmentTop);
-  methods[114].selector = @selector(nativeSetVerticalAligmentCenter);
-  methods[115].selector = @selector(addMinMaxListener);
-  methods[116].selector = @selector(getBorderPadding);
-  methods[117].selector = @selector(getLineHeightPadding);
-  methods[118].selector = @selector(getLineHeight);
-  methods[119].selector = @selector(getBorderWidth);
-  methods[120].selector = @selector(getEllipsize);
-  methods[121].selector = @selector(setEllipsizeWithId:withNSString:);
-  methods[122].selector = @selector(nativeGetLinBreakMode);
-  methods[123].selector = @selector(nativeSetLineBreakModeWithInt:);
-  methods[124].selector = @selector(setJustificationModeWithId:withNSString:);
-  methods[125].selector = @selector(nativeSetTextAligmentWithInt:);
-  methods[126].selector = @selector(getJustificationMode);
-  methods[127].selector = @selector(nativeGetTextAligment);
-  methods[128].selector = @selector(setShadowDyWithJavaLangFloat:withNSString:);
-  methods[129].selector = @selector(setShadowDxWithJavaLangFloat:withNSString:);
-  methods[130].selector = @selector(getShadowDy);
-  methods[131].selector = @selector(getShadowDx);
-  methods[132].selector = @selector(setSingleLineWithId:);
-  methods[133].selector = @selector(getSingleLine);
-  methods[134].selector = @selector(setEnabledWithId:);
-  methods[135].selector = @selector(toUpperCaseWithNSString:);
-  methods[136].selector = @selector(nativeGetFontSize);
-  methods[137].selector = @selector(nativeGetFontStyle);
-  methods[138].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
-  methods[139].selector = @selector(nativeSetFontStyleWithInt:);
-  methods[140].selector = @selector(setDrawablePaddingWithId:);
-  methods[141].selector = @selector(setDrawableBottomWithId:);
-  methods[142].selector = @selector(setDrawableTopWithId:);
-  methods[143].selector = @selector(setDrawableRightWithNSString:withId:);
-  methods[144].selector = @selector(setDrawableRightInternalWithNSString:withId:);
-  methods[145].selector = @selector(setDrawableLeftWithNSString:withId:);
-  methods[146].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
-  methods[147].selector = @selector(getImageHeightWithId:);
-  methods[148].selector = @selector(getImageWidthWithId:);
-  methods[149].selector = @selector(getDrawablePadding);
-  methods[150].selector = @selector(setDrawableTintModeWithId:);
-  methods[151].selector = @selector(setDrawableTintWithId:);
-  methods[152].selector = @selector(updatePadding);
-  methods[153].selector = @selector(setScrollHorizontallyWithId:);
-  methods[154].selector = @selector(canMarquee);
-  methods[155].selector = @selector(cancelNativeTimer);
-  methods[156].selector = @selector(isDisposed);
-  methods[157].selector = @selector(addDeallocHandler);
-  methods[158].selector = @selector(schedule);
-  methods[159].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
-  methods[160].selector = @selector(setTextColorWithId:);
-  methods[161].selector = @selector(getTextColorState);
-  methods[162].selector = @selector(drawableStateChanged);
-  methods[163].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
-  methods[164].selector = @selector(setHintColorWithInt:);
-  methods[165].selector = @selector(syncPlaceholderLabel);
-  methods[166].selector = @selector(getBaseLine);
-  methods[167].selector = @selector(nativeGetBaseLine);
-  methods[168].selector = @selector(getFont);
-  methods[169].selector = @selector(setTextColorLinkWithADColorStateList:);
-  methods[170].selector = @selector(setTextWithId:withId:);
-  methods[171].selector = @selector(getText);
-  methods[172].selector = @selector(setTextColorWithId:withId:);
-  methods[173].selector = @selector(getTextColor);
-  methods[174].selector = @selector(setIsEnabledWithId:withId:);
-  methods[175].selector = @selector(getIsEnabled);
-  methods[176].selector = @selector(setAdjustsFontSizeToFitWidthWithId:withId:);
-  methods[177].selector = @selector(getAdjustsFontSizeToFitWidth);
-  methods[178].selector = @selector(setAllowsDefaultTighteningForTruncationWithId:withId:);
-  methods[179].selector = @selector(getAllowsDefaultTighteningForTruncation);
-  methods[180].selector = @selector(setMinimumScaleFactorWithId:withId:);
-  methods[181].selector = @selector(getMinimumScaleFactor);
-  methods[182].selector = @selector(setNumberOfLinesWithId:withId:);
-  methods[183].selector = @selector(getNumberOfLines);
-  methods[184].selector = @selector(setHighlightedTextColorWithId:withId:);
-  methods[185].selector = @selector(getHighlightedTextColor);
-  methods[186].selector = @selector(setIsHighlightedWithId:withId:);
-  methods[187].selector = @selector(getIsHighlighted);
-  methods[188].selector = @selector(setShadowColorWithId:withId:);
-  methods[189].selector = @selector(getShadowColor);
-  methods[190].selector = @selector(setPreferredMaxLayoutWidthWithId:withId:);
-  methods[191].selector = @selector(getPreferredMaxLayoutWidth);
-  methods[192].selector = @selector(setIsUserInteractionEnabledWithId:withId:);
-  methods[193].selector = @selector(getIsUserInteractionEnabled);
-  methods[194].selector = @selector(asNativeWidget);
-  methods[195].selector = @selector(checkIosVersionWithNSString:);
-  methods[196].selector = @selector(setIdWithNSString:);
-  methods[197].selector = @selector(setVisibleWithBoolean:);
-  methods[198].selector = @selector(requestLayout);
-  methods[199].selector = @selector(invalidate);
-  methods[200].selector = @selector(getPluginWithNSString:);
-  methods[201].selector = @selector(getBean);
-  methods[202].selector = @selector(getBuilder);
-  methods[203].selector = @selector(createChronoLabelWithJavaUtilMap:withADTextView:);
-  methods[204].selector = @selector(createLabelWithJavaUtilMap:withADTextView:);
-  methods[205].selector = @selector(stopOnDispose);
-  methods[206].selector = @selector(releaseResource);
+  methods[24].selector = @selector(setDrawableIconSizeWithId:);
+  methods[25].selector = @selector(getMinHeight);
+  methods[26].selector = @selector(getMinWidth);
+  methods[27].selector = @selector(setEmsWithId:);
+  methods[28].selector = @selector(getMaxEms);
+  methods[29].selector = @selector(getMinEms);
+  methods[30].selector = @selector(setMinEmsWithId:);
+  methods[31].selector = @selector(getMinLines);
+  methods[32].selector = @selector(getMaxLines);
+  methods[33].selector = @selector(setMaxEmsWithId:);
+  methods[34].selector = @selector(setWidthWithId:);
+  methods[35].selector = @selector(setHeightWithId:);
+  methods[36].selector = @selector(setMaxLinesWithId:);
+  methods[37].selector = @selector(setLinesWithId:);
+  methods[38].selector = @selector(setMinLinesWithId:);
+  methods[39].selector = @selector(setMaxHeightWithId:);
+  methods[40].selector = @selector(setMaxWidthWithId:);
+  methods[41].selector = @selector(getMaxWidth);
+  methods[42].selector = @selector(getMaxHeight);
+  methods[43].selector = @selector(setMinHeightWithId:);
+  methods[44].selector = @selector(setMinWidthWithId:);
+  methods[45].selector = @selector(getWidth);
+  methods[46].selector = @selector(getHeight);
+  methods[47].selector = @selector(getAutoSizeTextTypeWithADTextView:);
+  methods[48].selector = @selector(setAutoSizeTextTypeInternalWithInt:);
+  methods[49].selector = @selector(setAutoSizePresetSizesWithId:);
+  methods[50].selector = @selector(addAutoResizeListener);
+  methods[51].selector = @selector(removeResizeListener);
+  methods[52].selector = @selector(setMaxLengthWithId:);
+  methods[53].selector = @selector(initHtmlWithJavaUtilMap:);
+  methods[54].selector = @selector(setMyTextWithId:);
+  methods[55].selector = @selector(setTextAllCapsWithId:);
+  methods[56].selector = @selector(setTypeFaceWithId:withNSString:);
+  methods[57].selector = @selector(setFontFamilyWithId:withNSString:);
+  methods[58].selector = @selector(setTextStyleWithId:);
+  methods[59].selector = @selector(calcNumberOfWhiteSpaces);
+  methods[60].selector = @selector(cancelTimer);
+  methods[61].selector = @selector(startTimer);
+  methods[62].selector = @selector(getMarqueeRepeatLimit);
+  methods[63].selector = @selector(setMarqueeRepeatLimitWithId:);
+  methods[64].selector = @selector(startOrStopMarqueeWithId:);
+  methods[65].selector = @selector(getLabelWidth);
+  methods[66].selector = @selector(isLabelMeasured);
+  methods[67].selector = @selector(setPasswordWithId:);
+  methods[68].selector = @selector(setFirstBaselineToTopHeightWithId:);
+  methods[69].selector = @selector(getIncludeFontPadding);
+  methods[70].selector = @selector(getFirstBaselineToTopHeight);
+  methods[71].selector = @selector(setLastBaselineToBottomHeightWithId:);
+  methods[72].selector = @selector(getLastBaselineToBottomHeight);
+  methods[73].selector = @selector(setAutoSizeStepGranularityWithId:);
+  methods[74].selector = @selector(setAutoMinTextSizeWithId:);
+  methods[75].selector = @selector(setAutoMaxTextSizeWithId:);
+  methods[76].selector = @selector(setAutoSizeTextTypeWithId:);
+  methods[77].selector = @selector(getAutoSizeStepGranularity);
+  methods[78].selector = @selector(getAutoMinTextSize);
+  methods[79].selector = @selector(getAutoMaxTextSize);
+  methods[80].selector = @selector(getAutoSizeTextType);
+  methods[81].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[82].selector = @selector(handleHtmlTextWithNSString:);
+  methods[83].selector = @selector(nativeSetTextWithNSString:);
+  methods[84].selector = @selector(nativeSetHtmlTextWithId:);
+  methods[85].selector = @selector(getMyText);
+  methods[86].selector = @selector(setPaddingWithId:);
+  methods[87].selector = @selector(setPaddingBottomWithId:);
+  methods[88].selector = @selector(setPaddingTopWithId:);
+  methods[89].selector = @selector(setPaddingLeftWithId:);
+  methods[90].selector = @selector(setPaddingRightWithId:);
+  methods[91].selector = @selector(getPaddingTop);
+  methods[92].selector = @selector(getPaddingEnd);
+  methods[93].selector = @selector(getPaddingStart);
+  methods[94].selector = @selector(getPaddingLeft);
+  methods[95].selector = @selector(getPaddingRight);
+  methods[96].selector = @selector(getPaddingBottom);
+  methods[97].selector = @selector(setPaddingVerticalWithId:);
+  methods[98].selector = @selector(setPaddingHorizontalWithId:);
+  methods[99].selector = @selector(setPaddingEndWithId:);
+  methods[100].selector = @selector(setPaddingStartWithId:);
+  methods[101].selector = @selector(getTextSize);
+  methods[102].selector = @selector(setMyTextSizeWithId:);
+  methods[103].selector = @selector(nativeSetTextSizeWithInt:);
+  methods[104].selector = @selector(setVerticalAligmentCenter);
+  methods[105].selector = @selector(setVerticalAligmentBottom);
+  methods[106].selector = @selector(setVerticalAligmentTop);
+  methods[107].selector = @selector(setHorizontalAligmentCenter);
+  methods[108].selector = @selector(setHorizontalAligmentRight);
+  methods[109].selector = @selector(setHorizontalAligmentRightInternal);
+  methods[110].selector = @selector(setHorizontalAligmentLeft);
+  methods[111].selector = @selector(setHorizontalAligmentLeftInternal);
+  methods[112].selector = @selector(getTextAlignment);
+  methods[113].selector = @selector(nativeSetVerticalAligmentBottom);
+  methods[114].selector = @selector(nativeSetVerticalAligmentTop);
+  methods[115].selector = @selector(nativeSetVerticalAligmentCenter);
+  methods[116].selector = @selector(addMinMaxListener);
+  methods[117].selector = @selector(getBorderPadding);
+  methods[118].selector = @selector(getLineHeightPadding);
+  methods[119].selector = @selector(getLineHeight);
+  methods[120].selector = @selector(getBorderWidth);
+  methods[121].selector = @selector(getEllipsize);
+  methods[122].selector = @selector(setEllipsizeWithId:withNSString:);
+  methods[123].selector = @selector(nativeGetLinBreakMode);
+  methods[124].selector = @selector(nativeSetLineBreakModeWithInt:);
+  methods[125].selector = @selector(setJustificationModeWithId:withNSString:);
+  methods[126].selector = @selector(nativeSetTextAligmentWithInt:);
+  methods[127].selector = @selector(getJustificationMode);
+  methods[128].selector = @selector(nativeGetTextAligment);
+  methods[129].selector = @selector(setShadowDyWithJavaLangFloat:withNSString:);
+  methods[130].selector = @selector(setShadowDxWithJavaLangFloat:withNSString:);
+  methods[131].selector = @selector(getShadowDy);
+  methods[132].selector = @selector(getShadowDx);
+  methods[133].selector = @selector(setSingleLineWithId:);
+  methods[134].selector = @selector(getSingleLine);
+  methods[135].selector = @selector(setEnabledWithId:);
+  methods[136].selector = @selector(toUpperCaseWithNSString:);
+  methods[137].selector = @selector(nativeGetFontSize);
+  methods[138].selector = @selector(nativeGetFontStyle);
+  methods[139].selector = @selector(nativeSetCustomFontWithInt:withASFontDescriptor:);
+  methods[140].selector = @selector(nativeSetFontStyleWithInt:);
+  methods[141].selector = @selector(setDrawablePaddingWithId:);
+  methods[142].selector = @selector(setDrawableBottomWithId:);
+  methods[143].selector = @selector(setDrawableTopWithId:);
+  methods[144].selector = @selector(setDrawableRightWithNSString:withId:);
+  methods[145].selector = @selector(setDrawableRightInternalWithNSString:withId:);
+  methods[146].selector = @selector(setDrawableLeftWithNSString:withId:);
+  methods[147].selector = @selector(setDrawableLeftInternalWithNSString:withId:);
+  methods[148].selector = @selector(getImageHeightWithId:);
+  methods[149].selector = @selector(getImageWidthWithId:);
+  methods[150].selector = @selector(getDrawablePadding);
+  methods[151].selector = @selector(setDrawableTintModeWithId:);
+  methods[152].selector = @selector(setDrawableTintWithId:);
+  methods[153].selector = @selector(updatePadding);
+  methods[154].selector = @selector(setScrollHorizontallyWithId:);
+  methods[155].selector = @selector(canMarquee);
+  methods[156].selector = @selector(cancelNativeTimer);
+  methods[157].selector = @selector(isDisposed);
+  methods[158].selector = @selector(addDeallocHandler);
+  methods[159].selector = @selector(schedule);
+  methods[160].selector = @selector(executeOnMainThreadWithJavaLangRunnable:);
+  methods[161].selector = @selector(setTextColorWithId:);
+  methods[162].selector = @selector(getTextColorState);
+  methods[163].selector = @selector(drawableStateChanged);
+  methods[164].selector = @selector(drawableStateChangeWithNSString:withADDrawable:);
+  methods[165].selector = @selector(setHintColorWithInt:);
+  methods[166].selector = @selector(syncPlaceholderLabel);
+  methods[167].selector = @selector(getBaseLine);
+  methods[168].selector = @selector(nativeGetBaseLine);
+  methods[169].selector = @selector(getFont);
+  methods[170].selector = @selector(setTextColorLinkWithADColorStateList:);
+  methods[171].selector = @selector(setTextWithId:withId:);
+  methods[172].selector = @selector(getText);
+  methods[173].selector = @selector(setTextColorWithId:withId:);
+  methods[174].selector = @selector(getTextColor);
+  methods[175].selector = @selector(setIsEnabledWithId:withId:);
+  methods[176].selector = @selector(getIsEnabled);
+  methods[177].selector = @selector(setAdjustsFontSizeToFitWidthWithId:withId:);
+  methods[178].selector = @selector(getAdjustsFontSizeToFitWidth);
+  methods[179].selector = @selector(setAllowsDefaultTighteningForTruncationWithId:withId:);
+  methods[180].selector = @selector(getAllowsDefaultTighteningForTruncation);
+  methods[181].selector = @selector(setMinimumScaleFactorWithId:withId:);
+  methods[182].selector = @selector(getMinimumScaleFactor);
+  methods[183].selector = @selector(setNumberOfLinesWithId:withId:);
+  methods[184].selector = @selector(getNumberOfLines);
+  methods[185].selector = @selector(setHighlightedTextColorWithId:withId:);
+  methods[186].selector = @selector(getHighlightedTextColor);
+  methods[187].selector = @selector(setIsHighlightedWithId:withId:);
+  methods[188].selector = @selector(getIsHighlighted);
+  methods[189].selector = @selector(setShadowColorWithId:withId:);
+  methods[190].selector = @selector(getShadowColor);
+  methods[191].selector = @selector(setPreferredMaxLayoutWidthWithId:withId:);
+  methods[192].selector = @selector(getPreferredMaxLayoutWidth);
+  methods[193].selector = @selector(setIsUserInteractionEnabledWithId:withId:);
+  methods[194].selector = @selector(getIsUserInteractionEnabled);
+  methods[195].selector = @selector(asNativeWidget);
+  methods[196].selector = @selector(checkIosVersionWithNSString:);
+  methods[197].selector = @selector(setIdWithNSString:);
+  methods[198].selector = @selector(setVisibleWithBoolean:);
+  methods[199].selector = @selector(requestLayout);
+  methods[200].selector = @selector(invalidate);
+  methods[201].selector = @selector(getPluginWithNSString:);
+  methods[202].selector = @selector(getBean);
+  methods[203].selector = @selector(getBuilder);
+  methods[204].selector = @selector(createChronoLabelWithJavaUtilMap:withADTextView:);
+  methods[205].selector = @selector(createLabelWithJavaUtilMap:withADTextView:);
+  methods[206].selector = @selector(stopOnDispose);
+  methods[207].selector = @selector(releaseResource);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 125, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 126, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 126, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 127, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADChronometer;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "DELLOC_EVENT_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2848,8 +2852,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "POST_MEASURE_EVENT_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
     { "html_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "escapeHtml_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 127, -1 },
-    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 128, -1 },
+    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 128, -1 },
+    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 129, -1 },
     { "marqueeTask_", "LASChronometerImpl_MarqueeTask;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeRepeatLimit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeCommandConverter_", "LASMarqueeCommandConverter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2860,8 +2864,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "TEXT_ALIGN_LEFT", "I", .constantValue.asInt = ASChronometerImpl_TEXT_ALIGN_LEFT, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_RIGHT", "I", .constantValue.asInt = ASChronometerImpl_TEXT_ALIGN_RIGHT, 0x1a, -1, -1, -1, -1 },
     { "ellipsize_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 129, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 130, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 130, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 131, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASChronometerImpl_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
     { "drawableTint_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "timer_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2870,8 +2874,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "builder_", "LASChronometerImpl_ChronometerCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "bean_", "LASChronometerImpl_ChronometerBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setCountDown", "LNSObject;", "setOnChronometerTick", "startStop", "setFormat", "setBaseElapsedTime", "setStopWhenReached", "setGravity", "onRtlPropertiesChanged", "I", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "getAutoSizeTextType", "LADTextView;", "setAutoSizeTextTypeInternal", "setAutoSizePresetSizes", "setMaxLength", "initHtml", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setMyText", "setTextAllCaps", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "setMarqueeRepeatLimit", "startOrStopMarquee", "setPassword", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setAutoSizeStepGranularity", "setAutoMinTextSize", "setAutoMaxTextSize", "setAutoSizeTextType", "nativeCreate", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "setEllipsize", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setSingleLine", "setEnabled", "toUpperCase", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setScrollHorizontally", "executeOnMainThread", "LJavaLangRunnable;", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "setHintColor", "setTextColorLink", "LADColorStateList;", "setText", "LNSObject;LNSObject;", "setIsEnabled", "setAdjustsFontSizeToFitWidth", "setAllowsDefaultTighteningForTruncation", "setMinimumScaleFactor", "setNumberOfLines", "setHighlightedTextColor", "setIsHighlighted", "setShadowColor", "setPreferredMaxLayoutWidth", "setIsUserInteractionEnabled", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "createChronoLabel", "LJavaUtilMap;LADTextView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/TextView;)V", "createLabel", &ASChronometerImpl_LOCAL_NAME, &ASChronometerImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", &ASChronometerImpl_ITALIC_FONT_TRAIT, &ASChronometerImpl_BOLD_FONT_TRAIT, "LASChronometerImpl_DallocHandler;LASChronometerImpl_Font;LASChronometerImpl_TextStyle;LASChronometerImpl_DrawableTintMode;LASChronometerImpl_ChronometerExt;LASChronometerImpl_PostMeasureHandler;LASChronometerImpl_MarqueeTask;LASChronometerImpl_DellocHandler;LASChronometerImpl_OnChronometerTickListener;LASChronometerImpl_ChronometerCommandBuilder;LASChronometerImpl_ChronometerBean;" };
-  static const J2ObjcClassInfo _ASChronometerImpl = { "ChronometerImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 207, 31, -1, 131, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setCountDown", "LNSObject;", "setOnChronometerTick", "startStop", "setFormat", "setBaseElapsedTime", "setStopWhenReached", "setGravity", "onRtlPropertiesChanged", "I", "setDrawableIconSize", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "getAutoSizeTextType", "LADTextView;", "setAutoSizeTextTypeInternal", "setAutoSizePresetSizes", "setMaxLength", "initHtml", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setMyText", "setTextAllCaps", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "setMarqueeRepeatLimit", "startOrStopMarquee", "setPassword", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setAutoSizeStepGranularity", "setAutoMinTextSize", "setAutoMaxTextSize", "setAutoSizeTextType", "nativeCreate", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "setEllipsize", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setSingleLine", "setEnabled", "toUpperCase", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setScrollHorizontally", "executeOnMainThread", "LJavaLangRunnable;", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "setHintColor", "setTextColorLink", "LADColorStateList;", "setText", "LNSObject;LNSObject;", "setIsEnabled", "setAdjustsFontSizeToFitWidth", "setAllowsDefaultTighteningForTruncation", "setMinimumScaleFactor", "setNumberOfLines", "setHighlightedTextColor", "setIsHighlighted", "setShadowColor", "setPreferredMaxLayoutWidth", "setIsUserInteractionEnabled", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "createChronoLabel", "LJavaUtilMap;LADTextView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/TextView;)V", "createLabel", &ASChronometerImpl_LOCAL_NAME, &ASChronometerImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", &ASChronometerImpl_ITALIC_FONT_TRAIT, &ASChronometerImpl_BOLD_FONT_TRAIT, "LASChronometerImpl_DallocHandler;LASChronometerImpl_Font;LASChronometerImpl_TextStyle;LASChronometerImpl_DrawableTintMode;LASChronometerImpl_ChronometerExt;LASChronometerImpl_PostMeasureHandler;LASChronometerImpl_MarqueeTask;LASChronometerImpl_DellocHandler;LASChronometerImpl_OnChronometerTickListener;LASChronometerImpl_ChronometerCommandBuilder;LASChronometerImpl_ChronometerBean;" };
+  static const J2ObjcClassInfo _ASChronometerImpl = { "ChronometerImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 208, 31, -1, 132, -1, -1, -1 };
   return &_ASChronometerImpl;
 }
 
@@ -3102,6 +3106,13 @@ id ASChronometerImpl_getGravity(ASChronometerImpl *self) {
   }
   jint gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
+}
+
+void ASChronometerImpl_setDrawableIconSizeWithId_(ASChronometerImpl *self, id objValue) {
+  [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
 }
 
 id ASChronometerImpl_getMinHeight(ASChronometerImpl *self) {
@@ -4308,7 +4319,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_DrawableTintMode)
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  if (![this$0_ isWidgetDisposed]) {
+    ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  }
 }
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout {
@@ -5908,26 +5921,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_OnChronometerTickListener)
   return self;
 }
 
-- (ASChronometerImpl_ChronometerCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
 - (ASChronometerImpl_ChronometerCommandBuilder *)setDrawableStartWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASChronometerImpl_ChronometerCommandBuilder *)setDrawableRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableRight"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -6086,6 +6081,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_OnChronometerTickListener)
   return self;
 }
 
+- (ASChronometerImpl_ChronometerCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableIconSize"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
@@ -6218,24 +6222,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_OnChronometerTickListener)
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 59, 4, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 60, 4, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 61, 4, -1, -1, -1, -1 },
-    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 62, 4, -1, -1, -1, -1 },
-    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 63, 4, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 62, 4, -1, -1, -1, -1 },
+    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 63, 4, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 64, 4, -1, -1, -1, -1 },
-    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 65, 4, -1, -1, -1, -1 },
+    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 65, 2, -1, -1, -1, -1 },
+    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 66, 4, -1, -1, -1, -1 },
-    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 67, 2, -1, -1, -1, -1 },
+    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 67, 4, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 68, 4, -1, -1, -1, -1 },
-    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 69, 4, -1, -1, -1, -1 },
-    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 70, 4, -1, -1, -1, -1 },
-    { NULL, "LASChronometerImpl_ChronometerCommandBuilder;", 0x1, 71, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -6366,34 +6369,33 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_OnChronometerTickListener)
   methods[123].selector = @selector(setTypefaceWithNSString:);
   methods[124].selector = @selector(setTextStyleWithNSString:);
   methods[125].selector = @selector(setFontFamilyWithNSString:);
-  methods[126].selector = @selector(setDrawableLeftWithNSString:);
-  methods[127].selector = @selector(setDrawableStartWithNSString:);
-  methods[128].selector = @selector(setDrawableRightWithNSString:);
-  methods[129].selector = @selector(setDrawableEndWithNSString:);
-  methods[130].selector = @selector(setDrawableTopWithNSString:);
-  methods[131].selector = @selector(setDrawableBottomWithNSString:);
-  methods[132].selector = @selector(tryGetDrawablePadding);
-  methods[133].selector = @selector(getDrawablePadding);
-  methods[134].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[135].selector = @selector(setDrawableTintWithNSString:);
-  methods[136].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[137].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[138].selector = @selector(tryGetFirstBaselineToTopHeight);
-  methods[139].selector = @selector(getFirstBaselineToTopHeight);
-  methods[140].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[141].selector = @selector(tryGetLastBaselineToBottomHeight);
-  methods[142].selector = @selector(getLastBaselineToBottomHeight);
-  methods[143].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[144].selector = @selector(tryGetTextColor);
-  methods[145].selector = @selector(getTextColor);
-  methods[146].selector = @selector(setTextColorWithNSString:);
-  methods[147].selector = @selector(setTextAppearanceWithNSString:);
+  methods[126].selector = @selector(setDrawableStartWithNSString:);
+  methods[127].selector = @selector(setDrawableEndWithNSString:);
+  methods[128].selector = @selector(setDrawableTopWithNSString:);
+  methods[129].selector = @selector(setDrawableBottomWithNSString:);
+  methods[130].selector = @selector(tryGetDrawablePadding);
+  methods[131].selector = @selector(getDrawablePadding);
+  methods[132].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[133].selector = @selector(setDrawableTintWithNSString:);
+  methods[134].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[135].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[136].selector = @selector(tryGetFirstBaselineToTopHeight);
+  methods[137].selector = @selector(getFirstBaselineToTopHeight);
+  methods[138].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[139].selector = @selector(tryGetLastBaselineToBottomHeight);
+  methods[140].selector = @selector(getLastBaselineToBottomHeight);
+  methods[141].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[142].selector = @selector(tryGetTextColor);
+  methods[143].selector = @selector(getTextColor);
+  methods[144].selector = @selector(setTextColorWithNSString:);
+  methods[145].selector = @selector(setTextAppearanceWithNSString:);
+  methods[146].selector = @selector(setDrawableIconSizeWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASChronometerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASChronometerImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setStartStop", "setCountDown", "setFormat", "setOnChronometerTick", "setBaseElapsedTimeInMillis", "setStopWhenReached", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setShadowDx", "setShadowDy", "setSingleLine", "setTextAllCaps", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextAppearance", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ChronometerImpl$ChronometerCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASChronometerImpl_ChronometerCommandBuilder = { "ChronometerCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 148, 1, 0, -1, -1, 72, -1 };
+  static const void *ptrTable[] = { "LASChronometerImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setStartStop", "setCountDown", "setFormat", "setOnChronometerTick", "setBaseElapsedTimeInMillis", "setStopWhenReached", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setShadowDx", "setShadowDy", "setSingleLine", "setTextAllCaps", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableStart", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextAppearance", "setDrawableIconSize", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ChronometerImpl$ChronometerCommandBuilder;>;" };
+  static const J2ObjcClassInfo _ASChronometerImpl_ChronometerCommandBuilder = { "ChronometerCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 147, 1, 0, -1, -1, 71, -1 };
   return &_ASChronometerImpl_ChronometerCommandBuilder;
 }
 
@@ -6773,16 +6775,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_ChronometerCommandBuilder)
   (void) [((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFontFamilyWithNSString:value])) executeWithBoolean:true];
 }
 
-- (void)setDrawableLeftWithNSString:(NSString *)value {
-  (void) [((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableLeftWithNSString:value])) executeWithBoolean:true];
-}
-
 - (void)setDrawableStartWithNSString:(NSString *)value {
   (void) [((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableRightWithNSString:(NSString *)value {
-  (void) [((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableRightWithNSString:value])) executeWithBoolean:true];
 }
 
 - (void)setDrawableEndWithNSString:(NSString *)value {
@@ -6843,6 +6837,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_ChronometerCommandBuilder)
 
 - (void)setTextAppearanceWithNSString:(NSString *)value {
   (void) [((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextAppearanceWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableIconSizeWithNSString:(NSString *)value {
+  (void) [((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([((ASChronometerImpl_ChronometerCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableIconSizeWithNSString:value])) executeWithBoolean:true];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -6940,20 +6938,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_ChronometerCommandBuilder)
     { NULL, "V", 0x1, 58, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 59, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 60, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 61, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 62, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 63, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 64, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 64, 5, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 65, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 66, 5, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 66, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 67, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 68, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 69, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 70, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -7047,30 +7044,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASChronometerImpl_ChronometerCommandBuilder)
   methods[86].selector = @selector(setTypefaceWithNSString:);
   methods[87].selector = @selector(setTextStyleWithNSString:);
   methods[88].selector = @selector(setFontFamilyWithNSString:);
-  methods[89].selector = @selector(setDrawableLeftWithNSString:);
-  methods[90].selector = @selector(setDrawableStartWithNSString:);
-  methods[91].selector = @selector(setDrawableRightWithNSString:);
-  methods[92].selector = @selector(setDrawableEndWithNSString:);
-  methods[93].selector = @selector(setDrawableTopWithNSString:);
-  methods[94].selector = @selector(setDrawableBottomWithNSString:);
-  methods[95].selector = @selector(getDrawablePadding);
-  methods[96].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[97].selector = @selector(setDrawableTintWithNSString:);
-  methods[98].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[99].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[100].selector = @selector(getFirstBaselineToTopHeight);
-  methods[101].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[102].selector = @selector(getLastBaselineToBottomHeight);
-  methods[103].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[104].selector = @selector(getTextColor);
-  methods[105].selector = @selector(setTextColorWithNSString:);
-  methods[106].selector = @selector(setTextAppearanceWithNSString:);
+  methods[89].selector = @selector(setDrawableStartWithNSString:);
+  methods[90].selector = @selector(setDrawableEndWithNSString:);
+  methods[91].selector = @selector(setDrawableTopWithNSString:);
+  methods[92].selector = @selector(setDrawableBottomWithNSString:);
+  methods[93].selector = @selector(getDrawablePadding);
+  methods[94].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[95].selector = @selector(setDrawableTintWithNSString:);
+  methods[96].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[97].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[98].selector = @selector(getFirstBaselineToTopHeight);
+  methods[99].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[100].selector = @selector(getLastBaselineToBottomHeight);
+  methods[101].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[102].selector = @selector(getTextColor);
+  methods[103].selector = @selector(setTextColorWithNSString:);
+  methods[104].selector = @selector(setTextAppearanceWithNSString:);
+  methods[105].selector = @selector(setDrawableIconSizeWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASChronometerImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASChronometerImpl;", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "Z", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setStartStop", "setCountDown", "setFormat", "setOnChronometerTick", "setBaseElapsedTimeInMillis", "setStopWhenReached", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setShadowDx", "setShadowDy", "setSingleLine", "setTextAllCaps", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextAppearance" };
-  static const J2ObjcClassInfo _ASChronometerImpl_ChronometerBean = { "ChronometerBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 107, 1, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASChronometerImpl;", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "Z", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setStartStop", "setCountDown", "setFormat", "setOnChronometerTick", "setBaseElapsedTimeInMillis", "setStopWhenReached", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setShadowDx", "setShadowDy", "setSingleLine", "setTextAllCaps", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableStart", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextAppearance", "setDrawableIconSize" };
+  static const J2ObjcClassInfo _ASChronometerImpl_ChronometerBean = { "ChronometerBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 106, 1, 0, -1, -1, -1, -1 };
   return &_ASChronometerImpl_ChronometerBean;
 }
 

@@ -42,6 +42,7 @@
 #include "WebViewImpl.h"
 #include "WidgetFactory.h"
 #include "fragmentImpl.h"
+#include "mergeImpl.h"
 
 
 @implementation ASLayoutPlugin
@@ -114,6 +115,7 @@ void ASLayoutPlugin_initPlugin() {
   ASWidgetFactory_register__WithASIWidget_(new_ASRadioButtonImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASToggleButtonImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASViewOverlayImpl_init());
+  ASWidgetFactory_register__WithASIWidget_(new_ASmergeImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASfragmentImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASSpinnerImpl_init());
   ASWidgetFactory_register__WithASIWidget_(new_ASMultiSelectionSpinnerImpl_init());

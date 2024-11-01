@@ -390,7 +390,9 @@ Context context = (Context) fragment.getRootActivity();
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ListViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ListViewImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -528,6 +530,7 @@ Context context = (Context) fragment.getRootActivity();
         	ViewImpl.stateNo(ListViewImpl.this);
         }
      
+	
 	}
 	@Override
 	public Class getViewClass() {

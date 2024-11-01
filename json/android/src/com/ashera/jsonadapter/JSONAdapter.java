@@ -20,4 +20,5 @@ public interface JSONAdapter {
 	public <T> T unmarshal(String json, Class<T> clazz);
 	public Map<String, Object> getJSONCompatMap();
 	Object getJSONSafeObj(Object obj);
+	boolean isNull(Object obj);
 }

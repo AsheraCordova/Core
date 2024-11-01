@@ -66,6 +66,9 @@
 
 - (void)addForegroundIfNeeded;
 
+- (void)addUnResolvedAttributeWithNSString:(NSString *)key
+                              withNSString:(NSString *)value;
+
 - (void)afterParentInit;
 
 - (void)applyAttributeCommandWithNSString:(NSString *)sourceName
@@ -94,8 +97,6 @@
                       withInt:(jint)viewtype;
 
 - (id)createWrapperViewHolderWithInt:(jint)viewType;
-
-- (jboolean)disableRemoveAttributeCommandFromChain;
 
 - (void)drawableStateChanged;
 
@@ -216,6 +217,8 @@
 - (id<ASHasWidgets>)getParent;
 
 - (id<ASIFragment>)getRootFragment;
+
+- (id<JavaUtilMap>)getUnResolvedAttributes;
 
 - (id)getUserDataWithNSString:(NSString *)key;
 

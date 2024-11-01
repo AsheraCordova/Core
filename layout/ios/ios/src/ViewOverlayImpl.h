@@ -104,9 +104,13 @@ J2OBJC_TYPE_LITERAL_HEADER(ASViewOverlayImpl)
 #define INCLUDE_ADView 1
 #include "View.h"
 
+#define RESTRICT_IViewStub 1
+#define INCLUDE_ASIViewStub 1
+#include "IViewStub.h"
+
 @class ASViewOverlayImpl;
 
-@interface ASViewOverlayImpl_ViewExt : ADView
+@interface ASViewOverlayImpl_ViewExt : ADView < ASIViewStub >
 
 #pragma mark Public
 

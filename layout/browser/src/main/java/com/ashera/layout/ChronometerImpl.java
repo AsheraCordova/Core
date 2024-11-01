@@ -151,8 +151,6 @@ public class ChronometerImpl extends BaseWidget {
 		ConverterFactory.register("Chronometer.textStyle", new TextStyle());
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textStyle").withType("Chronometer.textStyle").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("fontFamily").withType("font").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableLeft").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableRight").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableStart").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableEnd").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableTop").withType("drawable").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
@@ -184,6 +182,7 @@ public class ChronometerImpl extends BaseWidget {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("lineHeight").withType("dimensionfloat").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorHighlight").withType("color"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("html").withType("boolean"));
 	}
 	
@@ -290,7 +289,9 @@ public class ChronometerImpl extends BaseWidget {
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ChronometerImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ChronometerImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -303,9 +304,10 @@ public class ChronometerImpl extends BaseWidget {
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(ChronometerImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -449,6 +451,7 @@ public class ChronometerImpl extends BaseWidget {
         	ViewImpl.stateNo(ChronometerImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ChronometerExt.class;
@@ -721,26 +724,6 @@ public class ChronometerImpl extends BaseWidget {
 
 
 		setFontFamily(objValue, strValue);
-
-
-
-			}
-			break;
-			case "drawableLeft": {
-				
-
-
-		 setDrawableLeft(objValue); 
-
-
-
-			}
-			break;
-			case "drawableRight": {
-				
-
-
-		 setDrawableRight(objValue); 
 
 
 
@@ -1046,6 +1029,16 @@ public class ChronometerImpl extends BaseWidget {
 
 			}
 			break;
+			case "drawableIconSize": {
+				
+
+
+		setDrawableIconSize(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -1166,36 +1159,54 @@ return getTextColorHighlight();				}
     private HTMLElement drawableRight;
     private HTMLElement drawableRightWrapper;
 	private void setDrawableBottom(Object objValue) {
-		if (drawableBottom == null) {
-			this.drawableBottomWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableBottom = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableBottom.getStyle().setProperty("width", "inherit");
-			this.drawableBottom.getStyle().setProperty("height", "inherit");
-			drawableBottomWrapper.appendChild(drawableBottom);
-			hTMLElement.appendChild(drawableBottomWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setBottomDrawable(drawable);
-			updateImageSrc(drawable, drawableBottom);
+			if (drawable.hasDrawable()) {
+				if (drawableBottom == null) {
+					this.drawableBottomWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableBottom = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableBottom.getStyle().setProperty("width", "inherit");
+					this.drawableBottom.getStyle().setProperty("height", "inherit");
+					drawableBottomWrapper.appendChild(drawableBottom);
+					hTMLElement.appendChild(drawableBottomWrapper);
+				}
+				measurableView.setBottomDrawable(drawable);
+				updateImageSrc(drawable, drawableBottom);
+			} else {
+				measurableView.setBottomDrawable(null);
+				if (this.drawableBottomWrapper != null) {
+					hTMLElement.removeChild(this.drawableBottomWrapper);
+					this.drawableBottomWrapper = null;
+					this.drawableBottom = null;
+				}
+			}
 		}
 	}
 
 	private void setDrawableTop(Object objValue) {
-		if (drawableTop == null) {
-			this.drawableTopWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableTop = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableTop.getStyle().setProperty("width", "inherit");
-			this.drawableTop.getStyle().setProperty("height", "inherit");
-			drawableTopWrapper.appendChild(drawableTop);
-			hTMLElement.appendChild(drawableTopWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setTopDrawable(drawable);
-			updateImageSrc(drawable, drawableTop);
+			if (drawable.hasDrawable()) {
+				if (drawableTop == null) {
+					this.drawableTopWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableTop = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableTop.getStyle().setProperty("width", "inherit");
+					this.drawableTop.getStyle().setProperty("height", "inherit");
+					drawableTopWrapper.appendChild(drawableTop);
+					hTMLElement.appendChild(drawableTopWrapper);
+				}
+	
+	
+				measurableView.setTopDrawable(drawable);
+				updateImageSrc(drawable, drawableTop);
+			} else {
+				measurableView.setTopDrawable(null);
+				if (this.drawableTopWrapper != null) {
+					hTMLElement.removeChild(this.drawableTopWrapper);
+					this.drawableTopWrapper = null;
+					this.drawableTop = null;
+				}
+			}
 		}
 	}
 
@@ -1223,38 +1234,56 @@ return getTextColorHighlight();				}
 	}
 
 	private void setDrawableRightInternal(Object objValue) {
-		if (drawableRight == null) {
-			// create bottom
-			this.drawableRightWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableRight = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableRight.getStyle().setProperty("width", "inherit");
-			this.drawableRight.getStyle().setProperty("height", "inherit");
-			drawableRightWrapper.appendChild(drawableRight);
-			hTMLElement.appendChild(drawableRightWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setRightDrawable(drawable);
-			updateImageSrc(drawable, drawableRight);
+			if (drawable.hasDrawable()) {
+				if (drawableRight == null) {
+					// create bottom
+					this.drawableRightWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableRight = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableRight.getStyle().setProperty("width", "inherit");
+					this.drawableRight.getStyle().setProperty("height", "inherit");
+					drawableRightWrapper.appendChild(drawableRight);
+					hTMLElement.appendChild(drawableRightWrapper);
+				}
+	
+				measurableView.setRightDrawable(drawable);
+				updateImageSrc(drawable, drawableRight);
+			} else {
+				measurableView.setRightDrawable(null);
+				if (this.drawableRightWrapper != null) {
+					hTMLElement.removeChild(this.drawableRightWrapper);
+					this.drawableRightWrapper = null;
+					this.drawableRight = null;
+				}
+			}
 		}
 	}
 
 	private void setDrawableLeftInternal(Object objValue) {
-		if (drawableLeft == null) {
-			// create bottom
-			this.drawableLeftWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
-			this.drawableLeft = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
-			this.drawableLeft.getStyle().setProperty("width", "inherit");
-			this.drawableLeft.getStyle().setProperty("height", "inherit");
-			drawableLeftWrapper.appendChild(drawableLeft);
-			hTMLElement.appendChild(drawableLeftWrapper);
-		}
-
 		if (objValue instanceof r.android.graphics.drawable.Drawable) {
 			r.android.graphics.drawable.Drawable drawable = (r.android.graphics.drawable.Drawable) objValue;
-			measurableView.setLeftDrawable(drawable);
-			updateImageSrc(drawable, drawableLeft);
+			
+			if (drawable.hasDrawable()) {
+				if (drawableLeft == null) {
+					// create bottom
+					this.drawableLeftWrapper = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");
+					this.drawableLeft = org.teavm.jso.dom.html.HTMLDocument.current().createElement("img");
+					this.drawableLeft.getStyle().setProperty("width", "inherit");
+					this.drawableLeft.getStyle().setProperty("height", "inherit");
+					drawableLeftWrapper.appendChild(drawableLeft);
+					hTMLElement.appendChild(drawableLeftWrapper);
+				}
+				measurableView.setLeftDrawable(drawable);
+				updateImageSrc(drawable, drawableLeft);
+			} else {
+				measurableView.setLeftDrawable(null);
+				if (this.drawableLeftWrapper != null) {
+					hTMLElement.removeChild(this.drawableLeftWrapper);
+					this.drawableLeftWrapper = null;
+					this.drawableLeft = null;
+				}
+			}
 		}
 	}
 
@@ -1673,6 +1702,10 @@ return getTextColorHighlight();				}
     private void nativeCreateLabel(Map<String, Object> params) {
     	escapeHtml = true;
     	registerForAttributeCommandChain("text");
+    	registerForAttributeCommandChain("drawableStart");
+		registerForAttributeCommandChain("drawableTop");
+		registerForAttributeCommandChain("drawableBottom");
+		registerForAttributeCommandChain("drawableEnd");
     	initHtml(params);
 		nativeCreateLabel("div");
     }
@@ -2076,6 +2109,15 @@ return getTextColorHighlight();				}
 		}
 	}
 
+	
+
+
+	private void setDrawableIconSize(Object objValue) {
+		applyAttributeCommand("drawableStart", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableEnd", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableTop", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+		applyAttributeCommand("drawableBottom", "drawableIconSize", new String[] {"drawableIconSize"}, true, objValue);
+	}
 	
 
 
@@ -2765,22 +2807,6 @@ public ChronometerCommandBuilder setFontFamily(String value) {
 
 	attrs.put("value", value);
 return this;}
-public ChronometerCommandBuilder setDrawableLeft(String value) {
-	Map<String, Object> attrs = initCommand("drawableLeft");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ChronometerCommandBuilder setDrawableRight(String value) {
-	Map<String, Object> attrs = initCommand("drawableRight");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
 public ChronometerCommandBuilder setDrawableStart(String value) {
 	Map<String, Object> attrs = initCommand("drawableStart");
 	attrs.put("type", "attribute");
@@ -3208,6 +3234,14 @@ public ChronometerCommandBuilder setTextAppearance(String value) {
 
 	attrs.put("value", value);
 return this;}
+public ChronometerCommandBuilder setDrawableIconSize(String value) {
+	Map<String, Object> attrs = initCommand("drawableIconSize");
+	attrs.put("type", "attribute");
+	attrs.put("setter", true);
+	attrs.put("orderSet", ++orderSet);
+
+	attrs.put("value", value);
+return this;}
 }
 public class ChronometerBean extends com.ashera.layout.ViewImpl.ViewBean{
 		public ChronometerBean() {
@@ -3353,14 +3387,6 @@ public void setTextStyle(String value) {
 
 public void setFontFamily(String value) {
 	getBuilder().reset().setFontFamily(value).execute(true);
-}
-
-public void setDrawableLeft(String value) {
-	getBuilder().reset().setDrawableLeft(value).execute(true);
-}
-
-public void setDrawableRight(String value) {
-	getBuilder().reset().setDrawableRight(value).execute(true);
 }
 
 public void setDrawableStart(String value) {
@@ -3532,6 +3558,10 @@ public void setTextColorHighlight(String value) {
 
 public void setTextAppearance(String value) {
 	getBuilder().reset().setTextAppearance(value).execute(true);
+}
+
+public void setDrawableIconSize(String value) {
+	getBuilder().reset().setDrawableIconSize(value).execute(true);
 }
 
 }

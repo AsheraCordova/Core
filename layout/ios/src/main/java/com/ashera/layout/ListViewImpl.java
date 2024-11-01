@@ -406,7 +406,9 @@ public class ListViewImpl extends BaseHasWidgets {
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ListViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ListViewImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -419,9 +421,10 @@ public class ListViewImpl extends BaseHasWidgets {
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
-    		IWidget widget = template.loadLazyWidgets(ListViewImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+    		
+    		IWidget widget = template.loadLazyWidgets(ListViewImpl.this);
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -543,6 +546,7 @@ public class ListViewImpl extends BaseHasWidgets {
 			super.endViewTransition(view);
 			runBufferedRunnables();
 		}
+	
 	}
 	@Override
 	public Class getViewClass() {

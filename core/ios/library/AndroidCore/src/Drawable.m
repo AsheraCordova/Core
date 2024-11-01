@@ -12,6 +12,7 @@
 #include "Insets.h"
 #include "J2ObjC_source.h"
 #include "Rect.h"
+#include "java/lang/Integer.h"
 #include "java/util/Arrays.h"
 #include "java/util/List.h"
 
@@ -27,6 +28,8 @@
   NSString *tintMode_;
   id<ADDrawable_MeasureTextHelper> measureTextHelper_;
   jboolean useGC_;
+  jboolean recycleable_;
+  id<ADDrawable_AttributeChangeListener> attributeChangeListener_;
   __unsafe_unretained id<ASIWidget> overlay_;
   jint minimumHeight_;
 }
@@ -39,6 +42,11 @@ J2OBJC_FIELD_SETTER(ADDrawable, drawable_, id)
 J2OBJC_FIELD_SETTER(ADDrawable, tintColor_, id)
 J2OBJC_FIELD_SETTER(ADDrawable, tintMode_, NSString *)
 J2OBJC_FIELD_SETTER(ADDrawable, measureTextHelper_, id<ADDrawable_MeasureTextHelper>)
+J2OBJC_FIELD_SETTER(ADDrawable, attributeChangeListener_, id<ADDrawable_AttributeChangeListener>)
+
+@interface ADDrawable_AttributeChangeListener : NSObject
+
+@end
 
 @interface ADDrawable_MeasureTextHelper : NSObject
 
@@ -57,6 +65,10 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
+
+- (void)setAttributeChangeListenerWithADDrawable_AttributeChangeListener:(id<ADDrawable_AttributeChangeListener>)attributeChangeListener {
+  JreStrongAssign(&self->attributeChangeListener_, attributeChangeListener);
+}
 
 - (void)setOverlayWithASIWidget:(id<ASIWidget>)overlay {
   self->overlay_ = overlay;
@@ -122,6 +134,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)onBoundsChangeWithADRect:(ADRect *)bounds {
+  if (self->attributeChangeListener_ != nil) {
+    [self->attributeChangeListener_ onAttributeChangeWithNSString:@"bounds" withId:bounds];
+  }
 }
 
 - (jint)getTop {
@@ -280,6 +295,24 @@ J2OBJC_IGNORE_DESIGNATED_END
   return measureTextHelper_;
 }
 
+- (jboolean)isRecycleable {
+  return recycleable_;
+}
+
+- (void)setRecycleableWithBoolean:(jboolean)recycleable {
+  self->recycleable_ = recycleable;
+}
+
+- (jboolean)hasDrawable {
+  return drawable_ != nil && ![drawable_ isEqual:@"@null"];
+}
+
+- (void)setAlphaWithInt:(jint)alpha {
+  if (self->attributeChangeListener_ != nil) {
+    [self->attributeChangeListener_ onAttributeChangeWithNSString:@"alpha" withId:JavaLangInteger_valueOfWithInt_(alpha)];
+  }
+}
+
 - (void)__javaClone:(ADDrawable *)original {
   [super __javaClone:original];
   [overlay_ release];
@@ -292,6 +325,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   RELEASE_(tintColor_);
   RELEASE_(tintMode_);
   RELEASE_(measureTextHelper_);
+  RELEASE_(attributeChangeListener_);
   [super dealloc];
 }
 
@@ -300,106 +334,116 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 9, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 10, 5, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
     { NULL, "LADRect;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 11, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x4, 12, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x4, 14, 12, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 7, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 14, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 15, 9, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 16, 17, -1, -1, -1, -1 },
     { NULL, "[I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 19, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 20, 10, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 22, 12, -1, -1, -1, -1 },
     { NULL, "LADInsets;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 22, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 23, 24, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 25, 9, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x4, 24, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 7, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 26, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 16, 9, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 25, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 27, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 27, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 29, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "[LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "[LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 28, 5, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 29, 30, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 30, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 31, 32, -1, -1, -1, -1 },
     { NULL, "LADDrawable_MeasureTextHelper;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 33, 5, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 34, 19, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
-  methods[1].selector = @selector(setOverlayWithASIWidget:);
-  methods[2].selector = @selector(setUseGCWithBoolean:);
-  methods[3].selector = @selector(getTintMode);
-  methods[4].selector = @selector(setTintModeWithNSString:);
-  methods[5].selector = @selector(getTintColor);
-  methods[6].selector = @selector(setTintColorWithId:);
-  methods[7].selector = @selector(isRedraw);
-  methods[8].selector = @selector(setRedrawWithBoolean:);
-  methods[9].selector = @selector(setBoundsWithADRect:);
-  methods[10].selector = @selector(getBounds);
-  methods[11].selector = @selector(setBoundsWithInt:withInt:withInt:withInt:);
-  methods[12].selector = @selector(invalidateSelf);
-  methods[13].selector = @selector(onBoundsChangeWithADRect:);
-  methods[14].selector = @selector(getTop);
-  methods[15].selector = @selector(getLeft);
-  methods[16].selector = @selector(getRight);
-  methods[17].selector = @selector(getBottom);
-  methods[18].selector = @selector(getDrawable);
-  methods[19].selector = @selector(setDrawableWithId:);
-  methods[20].selector = @selector(setStateWithIntArray:);
-  methods[21].selector = @selector(getState);
-  methods[22].selector = @selector(setMinimumWidthWithInt:);
-  methods[23].selector = @selector(setMinimumHeightWithInt:);
-  methods[24].selector = @selector(setLayoutDirectionWithInt:);
-  methods[25].selector = @selector(getMinimumHeight);
-  methods[26].selector = @selector(getMinimumWidth);
-  methods[27].selector = @selector(isProjected);
-  methods[28].selector = @selector(getPaddingWithADRect:);
-  methods[29].selector = @selector(getOpticalInsets);
-  methods[30].selector = @selector(setVisibleWithBoolean:withBoolean:);
-  methods[31].selector = @selector(setCallbackWithId:);
-  methods[32].selector = @selector(isStateful);
-  methods[33].selector = @selector(onStateChangeWithIntArray:);
-  methods[34].selector = @selector(setStateWithId:);
-  methods[35].selector = @selector(getIntrinsicWidth);
-  methods[36].selector = @selector(getIntrinsicHeight);
-  methods[37].selector = @selector(drawWithADCanvas:);
-  methods[38].selector = @selector(setHotspotBoundsWithInt:withInt:withInt:withInt:);
-  methods[39].selector = @selector(jumpToCurrentState);
-  methods[40].selector = @selector(getSimulatedWidgetGroupName);
-  methods[41].selector = @selector(getSimulatedWidgetLocalName);
-  methods[42].selector = @selector(getSimulatedWidgetAttrs);
-  methods[43].selector = @selector(getViewAttrs);
-  methods[44].selector = @selector(getAttributeWithNSString:);
-  methods[45].selector = @selector(setMeasureTextHelperWithADDrawable_MeasureTextHelper:);
-  methods[46].selector = @selector(getMeasureTextHelper);
+  methods[1].selector = @selector(setAttributeChangeListenerWithADDrawable_AttributeChangeListener:);
+  methods[2].selector = @selector(setOverlayWithASIWidget:);
+  methods[3].selector = @selector(setUseGCWithBoolean:);
+  methods[4].selector = @selector(getTintMode);
+  methods[5].selector = @selector(setTintModeWithNSString:);
+  methods[6].selector = @selector(getTintColor);
+  methods[7].selector = @selector(setTintColorWithId:);
+  methods[8].selector = @selector(isRedraw);
+  methods[9].selector = @selector(setRedrawWithBoolean:);
+  methods[10].selector = @selector(setBoundsWithADRect:);
+  methods[11].selector = @selector(getBounds);
+  methods[12].selector = @selector(setBoundsWithInt:withInt:withInt:withInt:);
+  methods[13].selector = @selector(invalidateSelf);
+  methods[14].selector = @selector(onBoundsChangeWithADRect:);
+  methods[15].selector = @selector(getTop);
+  methods[16].selector = @selector(getLeft);
+  methods[17].selector = @selector(getRight);
+  methods[18].selector = @selector(getBottom);
+  methods[19].selector = @selector(getDrawable);
+  methods[20].selector = @selector(setDrawableWithId:);
+  methods[21].selector = @selector(setStateWithIntArray:);
+  methods[22].selector = @selector(getState);
+  methods[23].selector = @selector(setMinimumWidthWithInt:);
+  methods[24].selector = @selector(setMinimumHeightWithInt:);
+  methods[25].selector = @selector(setLayoutDirectionWithInt:);
+  methods[26].selector = @selector(getMinimumHeight);
+  methods[27].selector = @selector(getMinimumWidth);
+  methods[28].selector = @selector(isProjected);
+  methods[29].selector = @selector(getPaddingWithADRect:);
+  methods[30].selector = @selector(getOpticalInsets);
+  methods[31].selector = @selector(setVisibleWithBoolean:withBoolean:);
+  methods[32].selector = @selector(setCallbackWithId:);
+  methods[33].selector = @selector(isStateful);
+  methods[34].selector = @selector(onStateChangeWithIntArray:);
+  methods[35].selector = @selector(setStateWithId:);
+  methods[36].selector = @selector(getIntrinsicWidth);
+  methods[37].selector = @selector(getIntrinsicHeight);
+  methods[38].selector = @selector(drawWithADCanvas:);
+  methods[39].selector = @selector(setHotspotBoundsWithInt:withInt:withInt:withInt:);
+  methods[40].selector = @selector(jumpToCurrentState);
+  methods[41].selector = @selector(getSimulatedWidgetGroupName);
+  methods[42].selector = @selector(getSimulatedWidgetLocalName);
+  methods[43].selector = @selector(getSimulatedWidgetAttrs);
+  methods[44].selector = @selector(getViewAttrs);
+  methods[45].selector = @selector(getAttributeWithNSString:);
+  methods[46].selector = @selector(setMeasureTextHelperWithADDrawable_MeasureTextHelper:);
+  methods[47].selector = @selector(getMeasureTextHelper);
+  methods[48].selector = @selector(isRecycleable);
+  methods[49].selector = @selector(setRecycleableWithBoolean:);
+  methods[50].selector = @selector(hasDrawable);
+  methods[51].selector = @selector(setAlphaWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "ZERO_BOUNDS_RECT", "LADRect;", .constantValue.asLong = 0, 0x1c, -1, 31, -1, -1 },
+    { "ZERO_BOUNDS_RECT", "LADRect;", .constantValue.asLong = 0, 0x1c, -1, 35, -1, -1 },
     { "mBounds_", "LADRect;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "WILD_CARD", "[I", .constantValue.asLong = 0, 0x19, -1, 32, -1, -1 },
+    { "WILD_CARD", "[I", .constantValue.asLong = 0, 0x19, -1, 36, -1, -1 },
     { "mStateSet_", "[I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "minimumWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "drawable_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -408,11 +452,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "tintMode_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "measureTextHelper_", "LADDrawable_MeasureTextHelper;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "useGC_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "recycleable_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "attributeChangeListener_", "LADDrawable_AttributeChangeListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "overlay_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "minimumHeight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setOverlay", "LASIWidget;", "setUseGC", "Z", "setTintMode", "LNSString;", "setTintColor", "LNSObject;", "setRedraw", "setBounds", "LADRect;", "IIII", "onBoundsChange", "setDrawable", "setState", "[I", "setMinimumWidth", "I", "setMinimumHeight", "setLayoutDirection", "getPadding", "setVisible", "ZZ", "setCallback", "onStateChange", "draw", "LADCanvas;", "setHotspotBounds", "getAttribute", "setMeasureTextHelper", "LADDrawable_MeasureTextHelper;", &ADDrawable_ZERO_BOUNDS_RECT, &ADDrawable_WILD_CARD };
-  static const J2ObjcClassInfo _ADDrawable = { "Drawable", "r.android.graphics.drawable", ptrTable, methods, fields, 7, 0x1, 47, 13, -1, 30, -1, -1, -1 };
+  static const void *ptrTable[] = { "setAttributeChangeListener", "LADDrawable_AttributeChangeListener;", "setOverlay", "LASIWidget;", "setUseGC", "Z", "setTintMode", "LNSString;", "setTintColor", "LNSObject;", "setRedraw", "setBounds", "LADRect;", "IIII", "onBoundsChange", "setDrawable", "setState", "[I", "setMinimumWidth", "I", "setMinimumHeight", "setLayoutDirection", "getPadding", "setVisible", "ZZ", "setCallback", "onStateChange", "draw", "LADCanvas;", "setHotspotBounds", "getAttribute", "setMeasureTextHelper", "LADDrawable_MeasureTextHelper;", "setRecycleable", "setAlpha", &ADDrawable_ZERO_BOUNDS_RECT, &ADDrawable_WILD_CARD, "LADDrawable_AttributeChangeListener;LADDrawable_MeasureTextHelper;" };
+  static const J2ObjcClassInfo _ADDrawable = { "Drawable", "r.android.graphics.drawable", ptrTable, methods, fields, 7, 0x1, 52, 15, -1, 37, -1, -1, -1 };
   return &_ADDrawable;
 }
 
@@ -441,6 +487,26 @@ ADDrawable *create_ADDrawable_init() {
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADDrawable)
+
+@implementation ADDrawable_AttributeChangeListener
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, "V", 0x401, 0, 1, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(onAttributeChangeWithNSString:withId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "onAttributeChange", "LNSString;LNSObject;", "LADDrawable;" };
+  static const J2ObjcClassInfo _ADDrawable_AttributeChangeListener = { "AttributeChangeListener", "r.android.graphics.drawable", ptrTable, methods, NULL, 7, 0x609, 1, 0, 2, -1, -1, -1, -1 };
+  return &_ADDrawable_AttributeChangeListener;
+}
+
+@end
+
+J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ADDrawable_AttributeChangeListener)
 
 @implementation ADDrawable_MeasureTextHelper
 

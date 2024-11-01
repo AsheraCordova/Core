@@ -31,6 +31,9 @@
                                      withADView:(ADView *)anchor
                               withADFrameLayout:(ADFrameLayout *)customBadgeParent;
 
++ (void)detachBadgeDrawableWithADXBadgeDrawable:(ADXBadgeDrawable *)badgeDrawable
+                                     withADView:(ADView *)anchor;
+
 + (void)setBadgeDrawableBoundsWithADXBadgeDrawable:(ADXBadgeDrawable *)badgeDrawable
                                         withADView:(ADView *)anchor
                                  withADFrameLayout:(ADFrameLayout *)compatBadgeParent;
@@ -58,6 +61,8 @@ FOUNDATION_EXPORT ADXBadgeUtils *create_ADXBadgeUtils_init(void);
 FOUNDATION_EXPORT void ADXBadgeUtils_updateBadgeBoundsWithADRect_withFloat_withFloat_withFloat_withFloat_(ADRect *rect, jfloat centerX, jfloat centerY, jfloat halfWidth, jfloat halfHeight);
 
 FOUNDATION_EXPORT void ADXBadgeUtils_attachBadgeDrawableWithADXBadgeDrawable_withADView_withADFrameLayout_(ADXBadgeDrawable *badgeDrawable, ADView *anchor, ADFrameLayout *customBadgeParent);
+
+FOUNDATION_EXPORT void ADXBadgeUtils_detachBadgeDrawableWithADXBadgeDrawable_withADView_(ADXBadgeDrawable *badgeDrawable, ADView *anchor);
 
 FOUNDATION_EXPORT void ADXBadgeUtils_setBadgeDrawableBoundsWithADXBadgeDrawable_withADView_withADFrameLayout_(ADXBadgeDrawable *badgeDrawable, ADView *anchor, ADFrameLayout *compatBadgeParent);
 

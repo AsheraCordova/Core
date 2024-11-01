@@ -545,6 +545,8 @@
      <source-file src="core/ios/library/widget_library/src/ITarget.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/ITemplate.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/ITemplate.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/widget_library/src/IViewStub.h" target-dir="CorePlugin/widget_library/src"/>
+     <source-file src="core/ios/library/widget_library/src/IViewStub.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/IWidget.h" target-dir="CorePlugin/widget_library/src"/>
      <source-file src="core/ios/library/widget_library/src/IWidget.m" target-dir="CorePlugin/widget_library/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/widget_library/src/IWidgetLifeCycleListener.h" target-dir="CorePlugin/widget_library/src"/>
@@ -1026,6 +1028,8 @@
      <source-file src="core/ios/library/AndroidCore/src/StateListDrawable.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/StateSet.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/StateSet.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/SubMenu.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/SubMenu.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/SuppressLint.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/SuppressLint.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/SwipeHelper.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1192,8 +1196,8 @@
      <source-file src="core/ios/library/AndroidJMaterial/src/BadgeState.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidJMaterial/src/BadgeUtils.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
      <source-file src="core/ios/library/AndroidJMaterial/src/BadgeUtils.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
-     <header-file src="core/ios/library/AndroidJMaterial/src/HideBottomViewOnScrollBehavior.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
-     <source-file src="core/ios/library/AndroidJMaterial/src/HideBottomViewOnScrollBehavior.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidJMaterial/src/MaterialAnimationUtils.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="core/ios/library/AndroidJMaterial/src/MaterialAnimationUtils.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
      <!-- AndroidJMaterial end -->
      
   
@@ -1221,6 +1225,8 @@
      <source-file src="converter/ios/ios/src/ConverterPlugin.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="converter/ios/ios/src/DrawableConverter.h" target-dir="ConverterPlugin/ios/src"/>
      <source-file src="converter/ios/ios/src/DrawableConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="converter/ios/ios/src/DrawableiconSizeConverter.h" target-dir="ConverterPlugin/ios/src"/>
+     <source-file src="converter/ios/ios/src/DrawableiconSizeConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="converter/ios/ios/src/DrawDrawableCommandConverter.h" target-dir="ConverterPlugin/ios/src"/>
      <source-file src="converter/ios/ios/src/DrawDrawableCommandConverter.m" target-dir="ConverterPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="converter/ios/ios/src/DrawForegroundCommandConverter.h" target-dir="ConverterPlugin/ios/src"/>
@@ -1397,6 +1403,7 @@
      <source-file src="layout/ios/tsc/src/ios/widget/LinearLayoutImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/LinkImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ListViewImpl.ts" target-dir="tsc/src/ios/widget"/>
+     <source-file src="layout/ios/tsc/src/ios/widget/mergeImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/ModelImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/ios/widget"/>
      <source-file src="layout/ios/tsc/src/ios/widget/PopupWindowImpl.ts" target-dir="tsc/src/ios/widget"/>
@@ -1455,6 +1462,8 @@
      <source-file src="layout/ios/ios/src/LinkImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ListViewImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/ListViewImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
+     <header-file src="layout/ios/ios/src/mergeImpl.h" target-dir="LayoutPlugin/ios/src"/>
+     <source-file src="layout/ios/ios/src/mergeImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/ModelImpl.h" target-dir="LayoutPlugin/ios/src"/>
      <source-file src="layout/ios/ios/src/ModelImpl.m" target-dir="LayoutPlugin/ios/src" compiler-flags="-fobjc-arc-exceptions"/>
      <header-file src="layout/ios/ios/src/MultiSelectionSpinnerImpl.h" target-dir="LayoutPlugin/ios/src"/>
@@ -1608,6 +1617,7 @@
      <source-file src="layout/browser/tsc/src/web/widget/LinearLayoutImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/LinkImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/ListViewImpl.ts" target-dir="tsc/src/web/widget"/>
+     <source-file src="layout/browser/tsc/src/web/widget/mergeImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/ModelImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/web/widget"/>
      <source-file src="layout/browser/tsc/src/web/widget/PopupWindowImpl.ts" target-dir="tsc/src/web/widget"/>
@@ -1690,6 +1700,7 @@
      <source-file src="layout/swt/tsc/src/swt/widget/LinearLayoutImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/LinkImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/ListViewImpl.ts" target-dir="tsc/src/swt/widget"/>
+     <source-file src="layout/swt/tsc/src/swt/widget/mergeImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/ModelImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/MultiSelectionSpinnerImpl.ts" target-dir="tsc/src/swt/widget"/>
      <source-file src="layout/swt/tsc/src/swt/widget/PopupWindowImpl.ts" target-dir="tsc/src/swt/widget"/>

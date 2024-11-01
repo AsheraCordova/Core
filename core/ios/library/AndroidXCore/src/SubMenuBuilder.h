@@ -20,21 +20,50 @@
 #define INCLUDE_ADXMenuBuilder 1
 #include "MenuBuilder.h"
 
-@interface ADXSubMenuBuilder : ADXMenuBuilder
+#define RESTRICT_SubMenu 1
+#define INCLUDE_ADSubMenu 1
+#include "SubMenu.h"
+
+@class ADContext;
+@class ADXMenuItemImpl;
+@protocol ADMenuItem;
+@protocol ADXMenuBuilder_Callback;
+@protocol JavaLangCharSequence;
+
+@interface ADXSubMenuBuilder : ADXMenuBuilder < ADSubMenu >
 
 #pragma mark Public
 
-- (instancetype)init;
+- (instancetype)initWithADContext:(ADContext *)context
+               withADXMenuBuilder:(ADXMenuBuilder *)parentMenu
+              withADXMenuItemImpl:(ADXMenuItemImpl *)item;
+
+- (id<ADMenuItem>)getItem;
+
+- (void)setCallbackWithADXMenuBuilder_Callback:(id<ADXMenuBuilder_Callback>)callback;
+
+- (id<ADSubMenu>)setHeaderTitleWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
+
+- (id<ADSubMenu>)setHeaderTitleWithInt:(jint)titleRes;
+
+#pragma mark Package-Private
+
+- (jboolean)dispatchMenuItemSelectedWithADXMenuBuilder:(ADXMenuBuilder *)menu
+                                        withADMenuItem:(id<ADMenuItem>)item;
+
+// Disallowed inherited constructors, do not use.
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADXSubMenuBuilder)
 
-FOUNDATION_EXPORT void ADXSubMenuBuilder_init(ADXSubMenuBuilder *self);
+FOUNDATION_EXPORT void ADXSubMenuBuilder_initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_(ADXSubMenuBuilder *self, ADContext *context, ADXMenuBuilder *parentMenu, ADXMenuItemImpl *item);
 
-FOUNDATION_EXPORT ADXSubMenuBuilder *new_ADXSubMenuBuilder_init(void) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT ADXSubMenuBuilder *new_ADXSubMenuBuilder_initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_(ADContext *context, ADXMenuBuilder *parentMenu, ADXMenuItemImpl *item) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT ADXSubMenuBuilder *create_ADXSubMenuBuilder_init(void);
+FOUNDATION_EXPORT ADXSubMenuBuilder *create_ADXSubMenuBuilder_initWithADContext_withADXMenuBuilder_withADXMenuItemImpl_(ADContext *context, ADXMenuBuilder *parentMenu, ADXMenuItemImpl *item);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXSubMenuBuilder)
 

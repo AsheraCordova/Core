@@ -658,11 +658,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonExt)
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableEndWithNSString:(NSString *)value;
 
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value;
+- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableRightWithNSString:(NSString *)value;
 
 - (ASToggleButtonImpl_ToggleButtonCommandBuilder *)setDrawableStartWithNSString:(NSString *)value;
 
@@ -1255,11 +1253,9 @@ J2OBJC_TYPE_LITERAL_HEADER(ASToggleButtonImpl_ToggleButtonCommandBuilder)
 
 - (void)setDrawableEndWithNSString:(NSString *)value;
 
-- (void)setDrawableLeftWithNSString:(NSString *)value;
+- (void)setDrawableIconSizeWithNSString:(NSString *)value;
 
 - (void)setDrawablePaddingWithNSString:(NSString *)value;
-
-- (void)setDrawableRightWithNSString:(NSString *)value;
 
 - (void)setDrawableStartWithNSString:(NSString *)value;
 

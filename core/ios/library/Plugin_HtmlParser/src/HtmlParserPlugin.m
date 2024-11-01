@@ -114,7 +114,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<ASIWidget>)handlerStartWithId:(id)handler
                       withASIWidget:(id<ASIWidget>)widget
                             withInt:(jint)index {
-  return [((ASHtmlSaxHandler *) nil_chk(((ASHtmlSaxHandler *) cast_chk(handler, [ASHtmlSaxHandler class])))) startCreateWidgetWithNSString:[((id<ASIWidget>) nil_chk(widget)) getLocalName] withASIWidget:nil withNSString:nil withNSString:[widget getId] withInt:index withOrgXmlSaxAttributes:nil withASWidgetAttributeMap:[widget getAttributes] withJavaUtilMap:[widget getParams]];
+  return [((ASHtmlSaxHandler *) nil_chk(((ASHtmlSaxHandler *) cast_chk(handler, [ASHtmlSaxHandler class])))) startCreateWidgetWithNSString:[((id<ASIWidget>) nil_chk(widget)) getLocalName] withASIWidget:nil withNSString:nil withNSString:[widget getId] withInt:index withOrgXmlSaxAttributes:nil withASWidgetAttributeMap:[widget getAttributes] withJavaUtilMap:[widget getParams] withJavaUtilMap:[widget getUnResolvedAttributes]];
 }
 
 - (void)handlerEndWithId:(id)handler

@@ -221,7 +221,9 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ImageViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ImageViewImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -234,9 +236,10 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(ImageViewImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -344,6 +347,7 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.widget.IsIma
         	ViewImpl.stateNo(ImageViewImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ImageViewExt.class;

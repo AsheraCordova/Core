@@ -281,7 +281,9 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ImageViewImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ImageViewImpl.this);
+        	}
         }
         
     	public void setState0(float value) {
@@ -419,6 +421,7 @@ public class ImageViewImpl extends BaseWidget implements com.ashera.image.ITarge
         	ViewImpl.stateNo(ImageViewImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ImageViewExt.class;

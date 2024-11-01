@@ -74,6 +74,8 @@
 
 - (JavaUtilArrayList *)getVisibleItems;
 
+- (jboolean)hasVisibleItems;
+
 - (void)onItemsChangedWithBoolean:(jboolean)structureChanged;
 
 - (jboolean)performItemActionWithADMenuItem:(id<ADMenuItem>)item
@@ -96,6 +98,10 @@
                              withInt:(jint)id_
                              withInt:(jint)categoryOrder
             withJavaLangCharSequence:(id<JavaLangCharSequence>)title;
+
+- (ADXMenuBuilder *)setHeaderTitleIntWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
+
+- (ADXMenuBuilder *)setHeaderTitleIntWithInt:(jint)titleRes;
 
 #pragma mark Package-Private
 

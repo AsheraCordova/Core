@@ -36,15 +36,14 @@
 
 - (void)requestLayout;
 
+- (void)scrollToWithInt:(jint)x
+                withInt:(jint)y;
+
 - (void)setFillViewportWithBoolean:(jboolean)fillViewport;
 
 #pragma mark Protected
 
 - (jint)computeHorizontalScrollRange;
-
-- (void)measureChildWithADView:(ADView *)child
-                       withInt:(jint)parentWidthMeasureSpec
-                       withInt:(jint)parentHeightMeasureSpec;
 
 - (void)measureChildWithMarginsWithADView:(ADView *)child
                                   withInt:(jint)parentWidthMeasureSpec

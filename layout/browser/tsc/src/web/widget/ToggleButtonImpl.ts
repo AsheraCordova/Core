@@ -140,7 +140,6 @@ export class TextStyleTransformer implements ITranform {
 
 
 
-
 // end - imports
 import {ViewImpl} from './ViewImpl';
 export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
@@ -217,12 +216,6 @@ export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "fontFamily" }))
 	fontFamily!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "drawableLeft" }))
-	drawableLeft!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "drawableRight" }))
-	drawableRight!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "drawableStart" }))
 	drawableStart!:CommandAttr<string>| undefined;
@@ -343,6 +336,9 @@ export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "textAppearance" }))
 	textAppearance!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableIconSize" }))
+	drawableIconSize!:CommandAttr<string>| undefined;
 
 	@decorate(Exclude())
 	protected thisPointer: T;	
@@ -372,8 +368,6 @@ export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
 		this.typeface = undefined;
 		this.textStyle = undefined;
 		this.fontFamily = undefined;
-		this.drawableLeft = undefined;
-		this.drawableRight = undefined;
 		this.drawableStart = undefined;
 		this.drawableEnd = undefined;
 		this.drawableTop = undefined;
@@ -414,6 +408,7 @@ export abstract class ToggleButtonImpl<T> extends ViewImpl<T>{
 		this.textColorLink = undefined;
 		this.textFormat = undefined;
 		this.textAppearance = undefined;
+		this.drawableIconSize = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -1046,34 +1041,6 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.fontFamily.setValue(value);
 		this.orderSet++;
 		this.fontFamily.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableLeft(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableLeft == null || this.drawableLeft == undefined) {
-			this.drawableLeft = new CommandAttr<string>();
-		}
-		
-		this.drawableLeft.setSetter(true);
-		this.drawableLeft.setValue(value);
-		this.orderSet++;
-		this.drawableLeft.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableRight(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableRight == null || this.drawableRight == undefined) {
-			this.drawableRight = new CommandAttr<string>();
-		}
-		
-		this.drawableRight.setSetter(true);
-		this.drawableRight.setValue(value);
-		this.orderSet++;
-		this.drawableRight.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -2030,6 +1997,20 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.textAppearance.setValue(value);
 		this.orderSet++;
 		this.textAppearance.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableIconSize(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableIconSize == null || this.drawableIconSize == undefined) {
+			this.drawableIconSize = new CommandAttr<string>();
+		}
+		
+		this.drawableIconSize.setSetter(true);
+		this.drawableIconSize.setValue(value);
+		this.orderSet++;
+		this.drawableIconSize.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

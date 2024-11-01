@@ -48,6 +48,10 @@ inline jint ADColor_get_WHITE(void);
 #define ADColor_WHITE -1
 J2OBJC_STATIC_FIELD_CONSTANT(ADColor, WHITE, jint)
 
+inline jint ADColor_get_TRANSPARENT(void);
+#define ADColor_TRANSPARENT 0
+J2OBJC_STATIC_FIELD_CONSTANT(ADColor, TRANSPARENT, jint)
+
 FOUNDATION_EXPORT void ADColor_init(ADColor *self);
 
 FOUNDATION_EXPORT ADColor *new_ADColor_init(void) NS_RETURNS_RETAINED;

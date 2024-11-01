@@ -191,7 +191,9 @@ public class ProgressBarImpl extends BaseWidget {
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ProgressBarImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ProgressBarImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -204,9 +206,10 @@ public class ProgressBarImpl extends BaseWidget {
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(ProgressBarImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -323,6 +326,7 @@ public class ProgressBarImpl extends BaseWidget {
         	ViewImpl.stateNo(ProgressBarImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ProgressBarExt.class;

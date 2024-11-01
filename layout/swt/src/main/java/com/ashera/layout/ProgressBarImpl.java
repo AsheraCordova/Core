@@ -193,7 +193,9 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
         @Override
         public void drawableStateChanged() {
         	super.drawableStateChanged();
-        	ViewImpl.drawableStateChanged(ProgressBarImpl.this);
+        	if (!isWidgetDisposed()) {
+        		ViewImpl.drawableStateChanged(ProgressBarImpl.this);
+        	}
         }
         private Map<String, IWidget> templates;
     	@Override
@@ -206,9 +208,10 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
     			template = (IWidget) quickConvert(layout, "template");
     			templates.put(layout, template);
     		}
+    		
     		IWidget widget = template.loadLazyWidgets(ProgressBarImpl.this.getParent());
-    		return (View) widget.asWidget();
-    	}        
+			return (View) widget.asWidget();
+    	}   
         
     	@Override
 		public void remeasure() {
@@ -273,7 +276,10 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
         @Override
         public void setVisibility(int visibility) {
             super.setVisibility(visibility);
-            ((org.eclipse.swt.widgets.Control)asNativeWidget()).setVisible(View.VISIBLE == visibility);
+            org.eclipse.swt.widgets.Control control = ((org.eclipse.swt.widgets.Control)asNativeWidget());
+            if (!control.isDisposed()) {
+            	control.setVisible(View.VISIBLE == visibility);
+            }
             
         }
         @Override
@@ -326,6 +332,7 @@ public class ProgressBarImpl extends BaseWidget implements ICustomMeasureHeight,
         	ViewImpl.stateNo(ProgressBarImpl.this);
         }
      
+	
 	}	@Override
 	public Class getViewClass() {
 		return ProgressBarExt.class;

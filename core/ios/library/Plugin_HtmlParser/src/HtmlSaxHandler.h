@@ -78,7 +78,8 @@
                                        withInt:(jint)index
                        withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)atts
                       withASWidgetAttributeMap:(ASWidgetAttributeMap *)widgetAttributeMap
-                               withJavaUtilMap:(id<JavaUtilMap>)params;
+                               withJavaUtilMap:(id<JavaUtilMap>)params
+                               withJavaUtilMap:(id<JavaUtilMap>)unresolvedAttributes;
 
 - (void)startDocument;
 

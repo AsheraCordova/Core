@@ -127,7 +127,6 @@ export class TextStyleTransformer implements ITranform {
 
 
 
-
 export class NumericTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -231,12 +230,6 @@ export abstract class TextAreaImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "fontFamily" }))
 	fontFamily!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "drawableLeft" }))
-	drawableLeft!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "drawableRight" }))
-	drawableRight!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "drawableStart" }))
 	drawableStart!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -333,6 +326,9 @@ export abstract class TextAreaImpl<T> extends ViewImpl<T>{
 	@decorate(Expose({ name: "textColorHighlight" }))
 	textColorHighlight!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "drawableIconSize" }))
+	drawableIconSize!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "textAllCaps" }))
 	textAllCaps!:CommandAttr<boolean>| undefined;
 	@decorate(Type(() => CommandAttr))
@@ -399,8 +395,6 @@ export abstract class TextAreaImpl<T> extends ViewImpl<T>{
 		this.typeface = undefined;
 		this.textStyle = undefined;
 		this.fontFamily = undefined;
-		this.drawableLeft = undefined;
-		this.drawableRight = undefined;
 		this.drawableStart = undefined;
 		this.drawableEnd = undefined;
 		this.drawableTop = undefined;
@@ -433,6 +427,7 @@ export abstract class TextAreaImpl<T> extends ViewImpl<T>{
 		this.lineSpacingExtra = undefined;
 		this.lineSpacingMultiplier = undefined;
 		this.textColorHighlight = undefined;
+		this.drawableIconSize = undefined;
 		this.textAllCaps = undefined;
 		this.selectAllOnFocus_ = undefined;
 		this.selectAll_ = undefined;
@@ -969,34 +964,6 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.fontFamily.setValue(value);
 		this.orderSet++;
 		this.fontFamily.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableLeft(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableLeft == null || this.drawableLeft == undefined) {
-			this.drawableLeft = new CommandAttr<string>();
-		}
-		
-		this.drawableLeft.setSetter(true);
-		this.drawableLeft.setValue(value);
-		this.orderSet++;
-		this.drawableLeft.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public setDrawableRight(value : string) : T {
-		this.resetIfRequired();
-		if (this.drawableRight == null || this.drawableRight == undefined) {
-			this.drawableRight = new CommandAttr<string>();
-		}
-		
-		this.drawableRight.setSetter(true);
-		this.drawableRight.setValue(value);
-		this.orderSet++;
-		this.drawableRight.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -1769,6 +1736,20 @@ this.textStyle.setTransformer('textStyle');		return this.thisPointer;
 		this.textColorHighlight.setValue(value);
 		this.orderSet++;
 		this.textColorHighlight.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setDrawableIconSize(value : string) : T {
+		this.resetIfRequired();
+		if (this.drawableIconSize == null || this.drawableIconSize == undefined) {
+			this.drawableIconSize = new CommandAttr<string>();
+		}
+		
+		this.drawableIconSize.setSetter(true);
+		this.drawableIconSize.setValue(value);
+		this.orderSet++;
+		this.drawableIconSize.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

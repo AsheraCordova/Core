@@ -285,6 +285,8 @@
 
 - (id)getGravity;
 
+- (void)setDrawableIconSizeWithId:(id)objValue;
+
 - (id)getMinHeight;
 
 - (id)getMinWidth;
@@ -632,6 +634,8 @@ __attribute__((unused)) static void ASSwitchImpl_setGravityWithId_(ASSwitchImpl 
 __attribute__((unused)) static void ASSwitchImpl_updateTextAlignment(ASSwitchImpl *self);
 
 __attribute__((unused)) static id ASSwitchImpl_getGravity(ASSwitchImpl *self);
+
+__attribute__((unused)) static void ASSwitchImpl_setDrawableIconSizeWithId_(ASSwitchImpl *self, id objValue);
 
 __attribute__((unused)) static id ASSwitchImpl_getMinHeight(ASSwitchImpl *self);
 
@@ -1076,9 +1080,7 @@ NSString *ASSwitchImpl_GROUP_NAME = @"Switch";
   ASConverterFactory_register__WithNSString_withASIConverter_(@"Switch.textStyle", new_ASSwitchImpl_TextStyle_init());
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textStyle"])) withTypeWithNSString:@"Switch.textStyle"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"fontFamily"])) withTypeWithNSString:@"font"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableLeft"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableStart"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableRight"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableEnd"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableTop"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableBottom"])) withTypeWithNSString:@"drawable"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT_N_INVALIDATE]);
@@ -1092,6 +1094,7 @@ NSString *ASSwitchImpl_GROUP_NAME = @"Switch";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textColor"])) withTypeWithNSString:@"colorstate"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textFormat"])) withTypeWithNSString:@"resourcestring"])) withOrderWithInt:-1]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textAppearance"])) withTypeWithNSString:@"string"])) withStylePriorityWithJavaLangInteger:JavaLangInteger_valueOfWithInt_(1)]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableIconSize"])) withTypeWithNSString:@"dimension"])) withOrderWithInt:-1])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerConstructorAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"html"])) withTypeWithNSString:@"boolean"]);
 }
 
@@ -1140,7 +1143,7 @@ J2OBJC_IGNORE_DESIGNATED_END
                 withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   id nativeWidget = [self asNativeWidget];
   ASViewImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(self, key, strValue, objValue, decorator);
-  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"textColorHighlight", @"iosHighlightedTextColor", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"iosIsOn", @"iosOnTintColor", @"iosThumbTintColor", @"iosOnImage", @"iosOffImage", @"onCheckedChange", @"checked", @"switchPadding", @"switchMinWidth", @"trackTint", @"thumbTint", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"ellipsize", @"startOrStopMarquee", @"marqueeRepeatLimit", @"justificationMode", @"shadowDx", @"shadowDy", @"singleLine", @"editable", @"textAllCaps", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"drawableLeft", @"drawableStart", @"drawableRight", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"scrollHorizontally", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor", @"textFormat", @"textAppearance" }, 78)) {
+  switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosText", @"iosTextColor", @"enabled", @"iosIsEnabled", @"iosAdjustsFontSizeToFitWidth", @"iosAllowsDefaultTighteningForTruncation", @"iosMinimumScaleFactor", @"iosNumberOfLines", @"textColorHighlight", @"iosHighlightedTextColor", @"iosIsHighlighted", @"shadowColor", @"iosShadowColor", @"iosPreferredMaxLayoutWidth", @"iosIsUserInteractionEnabled", @"iosIsOn", @"iosOnTintColor", @"iosThumbTintColor", @"iosOnImage", @"iosOffImage", @"onCheckedChange", @"checked", @"switchPadding", @"switchMinWidth", @"trackTint", @"thumbTint", @"text", @"gravity", @"textSize", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"minLines", @"lines", @"maxLines", @"minWidth", @"minHeight", @"maxWidth", @"maxHeight", @"height", @"width", @"maxEms", @"minEms", @"ems", @"ellipsize", @"startOrStopMarquee", @"marqueeRepeatLimit", @"justificationMode", @"shadowDx", @"shadowDy", @"singleLine", @"editable", @"textAllCaps", @"maxLength", @"typeface", @"textStyle", @"fontFamily", @"drawableStart", @"drawableEnd", @"drawableTop", @"drawableBottom", @"drawablePadding", @"drawableTint", @"drawableTintMode", @"scrollHorizontally", @"firstBaselineToTopHeight", @"lastBaselineToBottomHeight", @"textColor", @"textFormat", @"textAppearance", @"drawableIconSize" }, 77)) {
     case 0:
     {
       [self setTextWithId:nativeWidget withId:objValue];
@@ -1446,77 +1449,72 @@ J2OBJC_IGNORE_DESIGNATED_END
     break;
     case 63:
     {
-      ASSwitchImpl_setDrawableLeftWithNSString_withId_(self, @"drawableLeft", objValue);
+      ASSwitchImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
     }
     break;
     case 64:
     {
-      ASSwitchImpl_setDrawableLeftWithNSString_withId_(self, @"drawableStart", objValue);
+      ASSwitchImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
     }
     break;
     case 65:
     {
-      ASSwitchImpl_setDrawableRightWithNSString_withId_(self, @"drawableRight", objValue);
+      ASSwitchImpl_setDrawableTopWithId_(self, objValue);
     }
     break;
     case 66:
     {
-      ASSwitchImpl_setDrawableRightWithNSString_withId_(self, @"drawableEnd", objValue);
+      ASSwitchImpl_setDrawableBottomWithId_(self, objValue);
     }
     break;
     case 67:
     {
-      ASSwitchImpl_setDrawableTopWithId_(self, objValue);
+      ASSwitchImpl_setDrawablePaddingWithId_(self, objValue);
     }
     break;
     case 68:
     {
-      ASSwitchImpl_setDrawableBottomWithId_(self, objValue);
+      ASSwitchImpl_setDrawableTintWithId_(self, objValue);
     }
     break;
     case 69:
     {
-      ASSwitchImpl_setDrawablePaddingWithId_(self, objValue);
+      ASSwitchImpl_setDrawableTintModeWithId_(self, objValue);
     }
     break;
     case 70:
     {
-      ASSwitchImpl_setDrawableTintWithId_(self, objValue);
+      ASSwitchImpl_setScrollHorizontallyWithId_(self, objValue);
     }
     break;
     case 71:
     {
-      ASSwitchImpl_setDrawableTintModeWithId_(self, objValue);
+      ASSwitchImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
     }
     break;
     case 72:
     {
-      ASSwitchImpl_setScrollHorizontallyWithId_(self, objValue);
+      ASSwitchImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
     }
     break;
     case 73:
     {
-      ASSwitchImpl_setFirstBaselineToTopHeightWithId_(self, objValue);
+      ASSwitchImpl_setTextColorWithId_(self, objValue);
     }
     break;
     case 74:
     {
-      ASSwitchImpl_setLastBaselineToBottomHeightWithId_(self, objValue);
+      ASSwitchImpl_setTextFormatWithId_(self, objValue);
     }
     break;
     case 75:
     {
-      ASSwitchImpl_setTextColorWithId_(self, objValue);
+      ASViewImpl_setStyleWithASIWidget_withId_(self, objValue);
     }
     break;
     case 76:
     {
-      ASSwitchImpl_setTextFormatWithId_(self, objValue);
-    }
-    break;
-    case 77:
-    {
-      ASViewImpl_setStyleWithASIWidget_withId_(self, objValue);
+      ASSwitchImpl_setDrawableIconSizeWithId_(self, objValue);
     }
     break;
     default:
@@ -2164,6 +2162,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
+- (void)setDrawableIconSizeWithId:(id)objValue {
+  ASSwitchImpl_setDrawableIconSizeWithId_(self, objValue);
+}
+
 - (id)getMinHeight {
   return ASSwitchImpl_getMinHeight(self);
 }
@@ -2789,15 +2791,15 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 65, 28, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 66, 16, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 67, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 68, 16, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 69, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 70, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 71, 16, -1, -1, -1, -1 },
@@ -2805,105 +2807,106 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, 73, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 74, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 75, 16, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 76, 16, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 77, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 78, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 78, 79, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 80, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 81, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 79, 80, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 81, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 82, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 83, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 84, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 85, 11, -1, 12, -1, -1 },
-    { NULL, "V", 0x2, 86, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 85, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 86, 11, -1, 12, -1, -1 },
     { NULL, "V", 0x2, 87, 30, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 88, 16, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 88, 30, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 89, 16, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 90, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 91, 16, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 91, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 92, 16, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 93, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 94, 16, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 95, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 96, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 97, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 98, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 98, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 99, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 100, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 99, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 100, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 101, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 58, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 58, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 102, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 103, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 103, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 104, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 104, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 105, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 105, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 106, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 106, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 107, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 107, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 108, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 108, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 109, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 109, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 110, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 110, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 111, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 111, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 112, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 112, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 113, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 113, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 114, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 114, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 115, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 115, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 116, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 116, 101, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 117, 102, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x101, 117, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 118, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 119, 120, -1, -1, -1, -1 },
+    { NULL, "Z", 0x101, 118, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 119, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 120, 121, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 121, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 122, 1, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchBean;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 122, 123, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 124, 125, -1, 126, -1, -1 },
+    { NULL, "V", 0x1, 123, 124, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 125, 126, -1, 127, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x101, 127, 16, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 124, 11, -1, 12, -1, -1 },
-    { NULL, "V", 0x102, 128, 11, -1, 12, -1, -1 },
+    { NULL, "I", 0x101, 128, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 125, 11, -1, 12, -1, -1 },
+    { NULL, "V", 0x102, 129, 11, -1, 12, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 129, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 130, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 130, 7, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 131, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 132, 16, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 133, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 134, 16, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
@@ -3017,137 +3020,138 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[102].selector = @selector(updateTextAlignment);
   methods[103].selector = @selector(getGravity);
   methods[104].selector = @selector(onRtlPropertiesChangedWithInt:);
-  methods[105].selector = @selector(getMinHeight);
-  methods[106].selector = @selector(getMinWidth);
-  methods[107].selector = @selector(setEmsWithId:);
-  methods[108].selector = @selector(getMaxEms);
-  methods[109].selector = @selector(getMinEms);
-  methods[110].selector = @selector(setMinEmsWithId:);
-  methods[111].selector = @selector(getMinLines);
-  methods[112].selector = @selector(getMaxLines);
-  methods[113].selector = @selector(setMaxEmsWithId:);
-  methods[114].selector = @selector(setWidthWithId:);
-  methods[115].selector = @selector(setHeightWithId:);
-  methods[116].selector = @selector(setMaxLinesWithId:);
-  methods[117].selector = @selector(setLinesWithId:);
-  methods[118].selector = @selector(setMinLinesWithId:);
-  methods[119].selector = @selector(setMaxHeightWithId:);
-  methods[120].selector = @selector(setMaxWidthWithId:);
-  methods[121].selector = @selector(getMaxWidth);
-  methods[122].selector = @selector(getMaxHeight);
-  methods[123].selector = @selector(setMinHeightWithId:);
-  methods[124].selector = @selector(setMinWidthWithId:);
-  methods[125].selector = @selector(getWidth);
-  methods[126].selector = @selector(getHeight);
-  methods[127].selector = @selector(getAutoSizeTextTypeWithADTextView:);
-  methods[128].selector = @selector(setAutoSizeTextTypeInternalWithInt:);
-  methods[129].selector = @selector(setAutoSizePresetSizesWithId:);
-  methods[130].selector = @selector(addAutoResizeListener);
-  methods[131].selector = @selector(removeResizeListener);
-  methods[132].selector = @selector(setMaxLengthWithId:);
-  methods[133].selector = @selector(setMyTextWithId:);
-  methods[134].selector = @selector(setTextAllCapsWithId:);
-  methods[135].selector = @selector(initHtmlWithJavaUtilMap:);
-  methods[136].selector = @selector(setTypeFaceWithId:withNSString:);
-  methods[137].selector = @selector(setFontFamilyWithId:withNSString:);
-  methods[138].selector = @selector(setTextStyleWithId:);
-  methods[139].selector = @selector(calcNumberOfWhiteSpaces);
-  methods[140].selector = @selector(cancelTimer);
-  methods[141].selector = @selector(startTimer);
-  methods[142].selector = @selector(getMarqueeRepeatLimit);
-  methods[143].selector = @selector(setMarqueeRepeatLimitWithId:);
-  methods[144].selector = @selector(startOrStopMarqueeWithId:);
-  methods[145].selector = @selector(getLabelWidth);
-  methods[146].selector = @selector(isLabelMeasured);
-  methods[147].selector = @selector(setPasswordWithId:);
-  methods[148].selector = @selector(setFirstBaselineToTopHeightWithId:);
-  methods[149].selector = @selector(getIncludeFontPadding);
-  methods[150].selector = @selector(getFirstBaselineToTopHeight);
-  methods[151].selector = @selector(setLastBaselineToBottomHeightWithId:);
-  methods[152].selector = @selector(getLastBaselineToBottomHeight);
-  methods[153].selector = @selector(setAutoSizeStepGranularityWithId:);
-  methods[154].selector = @selector(setAutoMinTextSizeWithId:);
-  methods[155].selector = @selector(setAutoMaxTextSizeWithId:);
-  methods[156].selector = @selector(setAutoSizeTextTypeWithId:);
-  methods[157].selector = @selector(getAutoSizeStepGranularity);
-  methods[158].selector = @selector(getAutoMinTextSize);
-  methods[159].selector = @selector(getAutoMaxTextSize);
-  methods[160].selector = @selector(getAutoSizeTextType);
-  methods[161].selector = @selector(setErrorMessageWithNSString:);
-  methods[162].selector = @selector(setTextFormatWithId:);
-  methods[163].selector = @selector(setTextWithId:withId:);
-  methods[164].selector = @selector(getText);
-  methods[165].selector = @selector(setTextColorWithId:withId:);
-  methods[166].selector = @selector(getTextColor);
-  methods[167].selector = @selector(setIsEnabledWithId:withId:);
-  methods[168].selector = @selector(getIsEnabled);
-  methods[169].selector = @selector(setAdjustsFontSizeToFitWidthWithId:withId:);
-  methods[170].selector = @selector(getAdjustsFontSizeToFitWidth);
-  methods[171].selector = @selector(setAllowsDefaultTighteningForTruncationWithId:withId:);
-  methods[172].selector = @selector(getAllowsDefaultTighteningForTruncation);
-  methods[173].selector = @selector(setMinimumScaleFactorWithId:withId:);
-  methods[174].selector = @selector(getMinimumScaleFactor);
-  methods[175].selector = @selector(setNumberOfLinesWithId:withId:);
-  methods[176].selector = @selector(getNumberOfLines);
-  methods[177].selector = @selector(setHighlightedTextColorWithId:withId:);
-  methods[178].selector = @selector(getHighlightedTextColor);
-  methods[179].selector = @selector(setIsHighlightedWithId:withId:);
-  methods[180].selector = @selector(getIsHighlighted);
-  methods[181].selector = @selector(setShadowColorWithId:withId:);
-  methods[182].selector = @selector(getShadowColor);
-  methods[183].selector = @selector(setPreferredMaxLayoutWidthWithId:withId:);
-  methods[184].selector = @selector(getPreferredMaxLayoutWidth);
-  methods[185].selector = @selector(setIsUserInteractionEnabledWithId:withId:);
-  methods[186].selector = @selector(getIsUserInteractionEnabled);
-  methods[187].selector = @selector(setIsOnWithId:withId:);
-  methods[188].selector = @selector(getIsOn);
-  methods[189].selector = @selector(setOnTintColorWithId:withId:);
-  methods[190].selector = @selector(getOnTintColor);
-  methods[191].selector = @selector(setThumbTintColorWithId:withId:);
-  methods[192].selector = @selector(getThumbTintColor);
-  methods[193].selector = @selector(setOnImageWithId:withId:);
-  methods[194].selector = @selector(getOnImage);
-  methods[195].selector = @selector(setOffImageWithId:withId:);
-  methods[196].selector = @selector(getOffImage);
-  methods[197].selector = @selector(asNativeWidget);
-  methods[198].selector = @selector(checkIosVersionWithNSString:);
-  methods[199].selector = @selector(setIdWithNSString:);
-  methods[200].selector = @selector(setVisibleWithBoolean:);
-  methods[201].selector = @selector(requestLayout);
-  methods[202].selector = @selector(invalidate);
-  methods[203].selector = @selector(getPluginWithNSString:);
-  methods[204].selector = @selector(getBean);
-  methods[205].selector = @selector(getBuilder);
-  methods[206].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
-  methods[207].selector = @selector(createLabelWithJavaUtilMap:withADTextView:);
-  methods[208].selector = @selector(updateIntrinsicBounds);
-  methods[209].selector = @selector(getSwitchButtonHeight);
-  methods[210].selector = @selector(getSwitchButtonWidth);
-  methods[211].selector = @selector(nativeMeasureSwitchHeightWithId:);
-  methods[212].selector = @selector(createLabelWithJavaUtilMap:);
-  methods[213].selector = @selector(createSwitchWithJavaUtilMap:);
-  methods[214].selector = @selector(drawableStateChangedAdditionalAttrs);
-  methods[215].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[216].selector = @selector(setThumbTintWithId:);
-  methods[217].selector = @selector(setTrackTintWithId:);
-  methods[218].selector = @selector(setCheckedWithId:);
-  methods[219].selector = @selector(setOnCheckedWithId:);
-  methods[220].selector = @selector(getThumbTint);
-  methods[221].selector = @selector(getTrackTint);
-  methods[222].selector = @selector(getChecked);
-  methods[223].selector = @selector(measureWidth);
+  methods[105].selector = @selector(setDrawableIconSizeWithId:);
+  methods[106].selector = @selector(getMinHeight);
+  methods[107].selector = @selector(getMinWidth);
+  methods[108].selector = @selector(setEmsWithId:);
+  methods[109].selector = @selector(getMaxEms);
+  methods[110].selector = @selector(getMinEms);
+  methods[111].selector = @selector(setMinEmsWithId:);
+  methods[112].selector = @selector(getMinLines);
+  methods[113].selector = @selector(getMaxLines);
+  methods[114].selector = @selector(setMaxEmsWithId:);
+  methods[115].selector = @selector(setWidthWithId:);
+  methods[116].selector = @selector(setHeightWithId:);
+  methods[117].selector = @selector(setMaxLinesWithId:);
+  methods[118].selector = @selector(setLinesWithId:);
+  methods[119].selector = @selector(setMinLinesWithId:);
+  methods[120].selector = @selector(setMaxHeightWithId:);
+  methods[121].selector = @selector(setMaxWidthWithId:);
+  methods[122].selector = @selector(getMaxWidth);
+  methods[123].selector = @selector(getMaxHeight);
+  methods[124].selector = @selector(setMinHeightWithId:);
+  methods[125].selector = @selector(setMinWidthWithId:);
+  methods[126].selector = @selector(getWidth);
+  methods[127].selector = @selector(getHeight);
+  methods[128].selector = @selector(getAutoSizeTextTypeWithADTextView:);
+  methods[129].selector = @selector(setAutoSizeTextTypeInternalWithInt:);
+  methods[130].selector = @selector(setAutoSizePresetSizesWithId:);
+  methods[131].selector = @selector(addAutoResizeListener);
+  methods[132].selector = @selector(removeResizeListener);
+  methods[133].selector = @selector(setMaxLengthWithId:);
+  methods[134].selector = @selector(setMyTextWithId:);
+  methods[135].selector = @selector(setTextAllCapsWithId:);
+  methods[136].selector = @selector(initHtmlWithJavaUtilMap:);
+  methods[137].selector = @selector(setTypeFaceWithId:withNSString:);
+  methods[138].selector = @selector(setFontFamilyWithId:withNSString:);
+  methods[139].selector = @selector(setTextStyleWithId:);
+  methods[140].selector = @selector(calcNumberOfWhiteSpaces);
+  methods[141].selector = @selector(cancelTimer);
+  methods[142].selector = @selector(startTimer);
+  methods[143].selector = @selector(getMarqueeRepeatLimit);
+  methods[144].selector = @selector(setMarqueeRepeatLimitWithId:);
+  methods[145].selector = @selector(startOrStopMarqueeWithId:);
+  methods[146].selector = @selector(getLabelWidth);
+  methods[147].selector = @selector(isLabelMeasured);
+  methods[148].selector = @selector(setPasswordWithId:);
+  methods[149].selector = @selector(setFirstBaselineToTopHeightWithId:);
+  methods[150].selector = @selector(getIncludeFontPadding);
+  methods[151].selector = @selector(getFirstBaselineToTopHeight);
+  methods[152].selector = @selector(setLastBaselineToBottomHeightWithId:);
+  methods[153].selector = @selector(getLastBaselineToBottomHeight);
+  methods[154].selector = @selector(setAutoSizeStepGranularityWithId:);
+  methods[155].selector = @selector(setAutoMinTextSizeWithId:);
+  methods[156].selector = @selector(setAutoMaxTextSizeWithId:);
+  methods[157].selector = @selector(setAutoSizeTextTypeWithId:);
+  methods[158].selector = @selector(getAutoSizeStepGranularity);
+  methods[159].selector = @selector(getAutoMinTextSize);
+  methods[160].selector = @selector(getAutoMaxTextSize);
+  methods[161].selector = @selector(getAutoSizeTextType);
+  methods[162].selector = @selector(setErrorMessageWithNSString:);
+  methods[163].selector = @selector(setTextFormatWithId:);
+  methods[164].selector = @selector(setTextWithId:withId:);
+  methods[165].selector = @selector(getText);
+  methods[166].selector = @selector(setTextColorWithId:withId:);
+  methods[167].selector = @selector(getTextColor);
+  methods[168].selector = @selector(setIsEnabledWithId:withId:);
+  methods[169].selector = @selector(getIsEnabled);
+  methods[170].selector = @selector(setAdjustsFontSizeToFitWidthWithId:withId:);
+  methods[171].selector = @selector(getAdjustsFontSizeToFitWidth);
+  methods[172].selector = @selector(setAllowsDefaultTighteningForTruncationWithId:withId:);
+  methods[173].selector = @selector(getAllowsDefaultTighteningForTruncation);
+  methods[174].selector = @selector(setMinimumScaleFactorWithId:withId:);
+  methods[175].selector = @selector(getMinimumScaleFactor);
+  methods[176].selector = @selector(setNumberOfLinesWithId:withId:);
+  methods[177].selector = @selector(getNumberOfLines);
+  methods[178].selector = @selector(setHighlightedTextColorWithId:withId:);
+  methods[179].selector = @selector(getHighlightedTextColor);
+  methods[180].selector = @selector(setIsHighlightedWithId:withId:);
+  methods[181].selector = @selector(getIsHighlighted);
+  methods[182].selector = @selector(setShadowColorWithId:withId:);
+  methods[183].selector = @selector(getShadowColor);
+  methods[184].selector = @selector(setPreferredMaxLayoutWidthWithId:withId:);
+  methods[185].selector = @selector(getPreferredMaxLayoutWidth);
+  methods[186].selector = @selector(setIsUserInteractionEnabledWithId:withId:);
+  methods[187].selector = @selector(getIsUserInteractionEnabled);
+  methods[188].selector = @selector(setIsOnWithId:withId:);
+  methods[189].selector = @selector(getIsOn);
+  methods[190].selector = @selector(setOnTintColorWithId:withId:);
+  methods[191].selector = @selector(getOnTintColor);
+  methods[192].selector = @selector(setThumbTintColorWithId:withId:);
+  methods[193].selector = @selector(getThumbTintColor);
+  methods[194].selector = @selector(setOnImageWithId:withId:);
+  methods[195].selector = @selector(getOnImage);
+  methods[196].selector = @selector(setOffImageWithId:withId:);
+  methods[197].selector = @selector(getOffImage);
+  methods[198].selector = @selector(asNativeWidget);
+  methods[199].selector = @selector(checkIosVersionWithNSString:);
+  methods[200].selector = @selector(setIdWithNSString:);
+  methods[201].selector = @selector(setVisibleWithBoolean:);
+  methods[202].selector = @selector(requestLayout);
+  methods[203].selector = @selector(invalidate);
+  methods[204].selector = @selector(getPluginWithNSString:);
+  methods[205].selector = @selector(getBean);
+  methods[206].selector = @selector(getBuilder);
+  methods[207].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[208].selector = @selector(createLabelWithJavaUtilMap:withADTextView:);
+  methods[209].selector = @selector(updateIntrinsicBounds);
+  methods[210].selector = @selector(getSwitchButtonHeight);
+  methods[211].selector = @selector(getSwitchButtonWidth);
+  methods[212].selector = @selector(nativeMeasureSwitchHeightWithId:);
+  methods[213].selector = @selector(createLabelWithJavaUtilMap:);
+  methods[214].selector = @selector(createSwitchWithJavaUtilMap:);
+  methods[215].selector = @selector(drawableStateChangedAdditionalAttrs);
+  methods[216].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[217].selector = @selector(setThumbTintWithId:);
+  methods[218].selector = @selector(setTrackTintWithId:);
+  methods[219].selector = @selector(setCheckedWithId:);
+  methods[220].selector = @selector(setOnCheckedWithId:);
+  methods[221].selector = @selector(getThumbTint);
+  methods[222].selector = @selector(getTrackTint);
+  methods[223].selector = @selector(getChecked);
+  methods[224].selector = @selector(measureWidth);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 134, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 135, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 135, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 136, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADSwitch;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "TEXT_ALIGN_CENTER", "I", .constantValue.asInt = ASSwitchImpl_TEXT_ALIGN_CENTER, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_LEFT", "I", .constantValue.asInt = ASSwitchImpl_TEXT_ALIGN_LEFT, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_RIGHT", "I", .constantValue.asInt = ASSwitchImpl_TEXT_ALIGN_RIGHT, 0x1a, -1, -1, -1, -1 },
     { "ellipsize_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 136, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 137, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 137, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 138, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASSwitchImpl_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
     { "drawableTint_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "timer_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -3157,8 +3161,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "POST_MEASURE_EVENT_", "LNSString;", .constantValue.asLong = 0, 0x12, -1, -1, -1, -1 },
     { "html_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "escapeHtml_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 138, -1 },
-    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 139, -1 },
+    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 139, -1 },
+    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 140, -1 },
     { "marqueeTask_", "LASSwitchImpl_MarqueeTask;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeRepeatLimit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeCommandConverter_", "LASMarqueeCommandConverter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -3169,8 +3173,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "bean_", "LASSwitchImpl_SwitchBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "switchButton_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "LNSObject;", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "I", "setEllipsize", "LNSObject;LNSString;", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setSingleLine", "setEnabled", "toUpperCase", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setScrollHorizontally", "executeOnMainThread", "LJavaLangRunnable;", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "setHintColor", "setTextColorLink", "LADColorStateList;", "setGravity", "onRtlPropertiesChanged", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "getAutoSizeTextType", "LADTextView;", "setAutoSizeTextTypeInternal", "setAutoSizePresetSizes", "setMaxLength", "setMyText", "setTextAllCaps", "initHtml", "setTypeFace", "setFontFamily", "setTextStyle", "setMarqueeRepeatLimit", "startOrStopMarquee", "setPassword", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setAutoSizeStepGranularity", "setAutoMinTextSize", "setAutoMaxTextSize", "setAutoSizeTextType", "setErrorMessage", "setTextFormat", "setText", "LNSObject;LNSObject;", "setIsEnabled", "setAdjustsFontSizeToFitWidth", "setAllowsDefaultTighteningForTruncation", "setMinimumScaleFactor", "setNumberOfLines", "setHighlightedTextColor", "setIsHighlighted", "setShadowColor", "setPreferredMaxLayoutWidth", "setIsUserInteractionEnabled", "setIsOn", "setOnTintColor", "setThumbTintColor", "setOnImage", "setOffImage", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeMakeFrameForChildWidget", "IIII", "createLabel", "LJavaUtilMap;LADTextView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/TextView;)V", "nativeMeasureSwitchHeight", "createSwitch", "postSetAttribute", "setThumbTint", "setTrackTint", "setChecked", "setOnChecked", &ASSwitchImpl_LOCAL_NAME, &ASSwitchImpl_GROUP_NAME, &ASSwitchImpl_ITALIC_FONT_TRAIT, &ASSwitchImpl_BOLD_FONT_TRAIT, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "LASSwitchImpl_Ellipsize;LASSwitchImpl_MarqueeRepeatLimit;LASSwitchImpl_JustificationMode;LASSwitchImpl_Font;LASSwitchImpl_TextStyle;LASSwitchImpl_DrawableTintMode;LASSwitchImpl_SwitchExt;LASSwitchImpl_DellocHandler;LASSwitchImpl_PostMeasureHandler;LASSwitchImpl_MarqueeTask;LASSwitchImpl_OnCheckedChangeListener;LASSwitchImpl_SwitchCommandBuilder;LASSwitchImpl_SwitchBean;LASSwitchImpl_StateToggler;" };
-  static const J2ObjcClassInfo _ASSwitchImpl = { "SwitchImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 224, 30, -1, 140, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "handleHtmlText", "nativeSetText", "nativeSetHtmlText", "LNSObject;", "setPadding", "setPaddingBottom", "setPaddingTop", "setPaddingLeft", "setPaddingRight", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setMyTextSize", "nativeSetTextSize", "I", "setEllipsize", "LNSObject;LNSString;", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "setSingleLine", "setEnabled", "toUpperCase", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "setScrollHorizontally", "executeOnMainThread", "LJavaLangRunnable;", "setTextColor", "drawableStateChange", "LNSString;LADDrawable;", "setHintColor", "setTextColorLink", "LADColorStateList;", "setGravity", "onRtlPropertiesChanged", "setDrawableIconSize", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "getAutoSizeTextType", "LADTextView;", "setAutoSizeTextTypeInternal", "setAutoSizePresetSizes", "setMaxLength", "setMyText", "setTextAllCaps", "initHtml", "setTypeFace", "setFontFamily", "setTextStyle", "setMarqueeRepeatLimit", "startOrStopMarquee", "setPassword", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setAutoSizeStepGranularity", "setAutoMinTextSize", "setAutoMaxTextSize", "setAutoSizeTextType", "setErrorMessage", "setTextFormat", "setText", "LNSObject;LNSObject;", "setIsEnabled", "setAdjustsFontSizeToFitWidth", "setAllowsDefaultTighteningForTruncation", "setMinimumScaleFactor", "setNumberOfLines", "setHighlightedTextColor", "setIsHighlighted", "setShadowColor", "setPreferredMaxLayoutWidth", "setIsUserInteractionEnabled", "setIsOn", "setOnTintColor", "setThumbTintColor", "setOnImage", "setOffImage", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeMakeFrameForChildWidget", "IIII", "createLabel", "LJavaUtilMap;LADTextView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/TextView;)V", "nativeMeasureSwitchHeight", "createSwitch", "postSetAttribute", "setThumbTint", "setTrackTint", "setChecked", "setOnChecked", &ASSwitchImpl_LOCAL_NAME, &ASSwitchImpl_GROUP_NAME, &ASSwitchImpl_ITALIC_FONT_TRAIT, &ASSwitchImpl_BOLD_FONT_TRAIT, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "LASSwitchImpl_Ellipsize;LASSwitchImpl_MarqueeRepeatLimit;LASSwitchImpl_JustificationMode;LASSwitchImpl_Font;LASSwitchImpl_TextStyle;LASSwitchImpl_DrawableTintMode;LASSwitchImpl_SwitchExt;LASSwitchImpl_DellocHandler;LASSwitchImpl_PostMeasureHandler;LASSwitchImpl_MarqueeTask;LASSwitchImpl_OnCheckedChangeListener;LASSwitchImpl_SwitchCommandBuilder;LASSwitchImpl_SwitchBean;LASSwitchImpl_StateToggler;" };
+  static const J2ObjcClassInfo _ASSwitchImpl = { "SwitchImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 225, 30, -1, 141, -1, -1, -1 };
   return &_ASSwitchImpl;
 }
 
@@ -3848,6 +3852,13 @@ id ASSwitchImpl_getGravity(ASSwitchImpl *self) {
   }
   jint gravity = gravitHorizontal | gravityVertical;
   return JavaLangInteger_valueOfWithInt_(gravity);
+}
+
+void ASSwitchImpl_setDrawableIconSizeWithId_(ASSwitchImpl *self, id objValue) {
+  [self applyAttributeCommandWithNSString:@"drawableStart" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableEnd" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableTop" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
+  [self applyAttributeCommandWithNSString:@"drawableBottom" withNSString:@"drawableIconSize" withNSStringArray:[IOSObjectArray newArrayWithObjects:(id[]){ @"drawableIconSize" } count:1 type:NSString_class_()] withBoolean:true withNSObjectArray:[IOSObjectArray newArrayWithObjects:(id[]){ objValue } count:1 type:NSObject_class_()]];
 }
 
 id ASSwitchImpl_getMinHeight(ASSwitchImpl *self) {
@@ -4771,7 +4782,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSwitchImpl_DrawableTintMode)
 
 - (void)drawableStateChanged {
   [super drawableStateChanged];
-  ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  if (![this$0_ isWidgetDisposed]) {
+    ASViewImpl_drawableStateChangedWithASIWidget_(this$0_);
+  }
 }
 
 - (ADView *)inflateViewWithNSString:(NSString *)layout {
@@ -6634,26 +6647,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSwitchImpl_OnCheckedChangeListener)
   return self;
 }
 
-- (ASSwitchImpl_SwitchCommandBuilder *)setDrawableLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
 - (ASSwitchImpl_SwitchCommandBuilder *)setDrawableStartWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASSwitchImpl_SwitchCommandBuilder *)setDrawableRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableRight"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -6814,6 +6809,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSwitchImpl_OnCheckedChangeListener)
 
 - (ASSwitchImpl_SwitchCommandBuilder *)setTextAppearanceWithNSString:(NSString *)value {
   id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textAppearance"];
+  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
+  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
+  (void) [attrs putWithId:@"value" withId:value];
+  return self;
+}
+
+- (ASSwitchImpl_SwitchCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value {
+  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableIconSize"];
   (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
   (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
   (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
@@ -6990,25 +6994,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSwitchImpl_OnCheckedChangeListener)
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 70, 4, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 71, 4, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 72, 4, -1, -1, -1, -1 },
-    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 73, 4, -1, -1, -1, -1 },
-    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 74, 4, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 73, 4, -1, -1, -1, -1 },
+    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 74, 4, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 75, 4, -1, -1, -1, -1 },
-    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 76, 4, -1, -1, -1, -1 },
+    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 76, 2, -1, -1, -1, -1 },
+    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 77, 4, -1, -1, -1, -1 },
-    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 78, 2, -1, -1, -1, -1 },
+    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 78, 4, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 79, 4, -1, -1, -1, -1 },
-    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 80, 4, -1, -1, -1, -1 },
-    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 81, 4, -1, -1, -1, -1 },
     { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 82, 4, -1, -1, -1, -1 },
-    { NULL, "LASSwitchImpl_SwitchCommandBuilder;", 0x1, 83, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -7176,35 +7179,34 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSwitchImpl_OnCheckedChangeListener)
   methods[160].selector = @selector(setTypefaceWithNSString:);
   methods[161].selector = @selector(setTextStyleWithNSString:);
   methods[162].selector = @selector(setFontFamilyWithNSString:);
-  methods[163].selector = @selector(setDrawableLeftWithNSString:);
-  methods[164].selector = @selector(setDrawableStartWithNSString:);
-  methods[165].selector = @selector(setDrawableRightWithNSString:);
-  methods[166].selector = @selector(setDrawableEndWithNSString:);
-  methods[167].selector = @selector(setDrawableTopWithNSString:);
-  methods[168].selector = @selector(setDrawableBottomWithNSString:);
-  methods[169].selector = @selector(tryGetDrawablePadding);
-  methods[170].selector = @selector(getDrawablePadding);
-  methods[171].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[172].selector = @selector(setDrawableTintWithNSString:);
-  methods[173].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[174].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[175].selector = @selector(tryGetFirstBaselineToTopHeight);
-  methods[176].selector = @selector(getFirstBaselineToTopHeight);
-  methods[177].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[178].selector = @selector(tryGetLastBaselineToBottomHeight);
-  methods[179].selector = @selector(getLastBaselineToBottomHeight);
-  methods[180].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[181].selector = @selector(tryGetTextColor);
-  methods[182].selector = @selector(getTextColor);
-  methods[183].selector = @selector(setTextColorWithNSString:);
-  methods[184].selector = @selector(setTextFormatWithNSString:);
-  methods[185].selector = @selector(setTextAppearanceWithNSString:);
+  methods[163].selector = @selector(setDrawableStartWithNSString:);
+  methods[164].selector = @selector(setDrawableEndWithNSString:);
+  methods[165].selector = @selector(setDrawableTopWithNSString:);
+  methods[166].selector = @selector(setDrawableBottomWithNSString:);
+  methods[167].selector = @selector(tryGetDrawablePadding);
+  methods[168].selector = @selector(getDrawablePadding);
+  methods[169].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[170].selector = @selector(setDrawableTintWithNSString:);
+  methods[171].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[172].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[173].selector = @selector(tryGetFirstBaselineToTopHeight);
+  methods[174].selector = @selector(getFirstBaselineToTopHeight);
+  methods[175].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[176].selector = @selector(tryGetLastBaselineToBottomHeight);
+  methods[177].selector = @selector(getLastBaselineToBottomHeight);
+  methods[178].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[179].selector = @selector(tryGetTextColor);
+  methods[180].selector = @selector(getTextColor);
+  methods[181].selector = @selector(setTextColorWithNSString:);
+  methods[182].selector = @selector(setTextFormatWithNSString:);
+  methods[183].selector = @selector(setTextAppearanceWithNSString:);
+  methods[184].selector = @selector(setDrawableIconSizeWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASSwitchImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASSwitchImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setIosIsOn", "setIosOnTintColor", "setIosThumbTintColor", "setIosOnImage", "setIosOffImage", "setOnCheckedChange", "setChecked", "setSwitchPadding", "setSwitchMinWidth", "setTrackTint", "setThumbTint", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setStartOrStopMarquee", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "setTextAppearance", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/SwitchImpl$SwitchCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASSwitchImpl_SwitchCommandBuilder = { "SwitchCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 186, 1, 0, -1, -1, 84, -1 };
+  static const void *ptrTable[] = { "LASSwitchImpl;", "execute", "Z", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setIosIsOn", "setIosOnTintColor", "setIosThumbTintColor", "setIosOnImage", "setIosOffImage", "setOnCheckedChange", "setChecked", "setSwitchPadding", "setSwitchMinWidth", "setTrackTint", "setThumbTint", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setStartOrStopMarquee", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableStart", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "setTextAppearance", "setDrawableIconSize", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/SwitchImpl$SwitchCommandBuilder;>;" };
+  static const J2ObjcClassInfo _ASSwitchImpl_SwitchCommandBuilder = { "SwitchCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 185, 1, 0, -1, -1, 83, -1 };
   return &_ASSwitchImpl_SwitchCommandBuilder;
 }
 
@@ -7680,16 +7682,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSwitchImpl_SwitchCommandBuilder)
   (void) [((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFontFamilyWithNSString:value])) executeWithBoolean:true];
 }
 
-- (void)setDrawableLeftWithNSString:(NSString *)value {
-  (void) [((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableLeftWithNSString:value])) executeWithBoolean:true];
-}
-
 - (void)setDrawableStartWithNSString:(NSString *)value {
   (void) [((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableRightWithNSString:(NSString *)value {
-  (void) [((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableRightWithNSString:value])) executeWithBoolean:true];
 }
 
 - (void)setDrawableEndWithNSString:(NSString *)value {
@@ -7754,6 +7748,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSwitchImpl_SwitchCommandBuilder)
 
 - (void)setTextAppearanceWithNSString:(NSString *)value {
   (void) [((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextAppearanceWithNSString:value])) executeWithBoolean:true];
+}
+
+- (void)setDrawableIconSizeWithNSString:(NSString *)value {
+  (void) [((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([((ASSwitchImpl_SwitchCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableIconSizeWithNSString:value])) executeWithBoolean:true];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -7875,21 +7873,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSwitchImpl_SwitchCommandBuilder)
     { NULL, "V", 0x1, 69, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 70, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 71, 2, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 72, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 73, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 74, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 75, 2, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 75, 5, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 76, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 77, 5, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 77, 2, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 78, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 79, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 80, 2, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 81, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 82, 2, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -8007,31 +8004,30 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASSwitchImpl_SwitchCommandBuilder)
   methods[110].selector = @selector(setTypefaceWithNSString:);
   methods[111].selector = @selector(setTextStyleWithNSString:);
   methods[112].selector = @selector(setFontFamilyWithNSString:);
-  methods[113].selector = @selector(setDrawableLeftWithNSString:);
-  methods[114].selector = @selector(setDrawableStartWithNSString:);
-  methods[115].selector = @selector(setDrawableRightWithNSString:);
-  methods[116].selector = @selector(setDrawableEndWithNSString:);
-  methods[117].selector = @selector(setDrawableTopWithNSString:);
-  methods[118].selector = @selector(setDrawableBottomWithNSString:);
-  methods[119].selector = @selector(getDrawablePadding);
-  methods[120].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[121].selector = @selector(setDrawableTintWithNSString:);
-  methods[122].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[123].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[124].selector = @selector(getFirstBaselineToTopHeight);
-  methods[125].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[126].selector = @selector(getLastBaselineToBottomHeight);
-  methods[127].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[128].selector = @selector(getTextColor);
-  methods[129].selector = @selector(setTextColorWithNSString:);
-  methods[130].selector = @selector(setTextFormatWithNSString:);
-  methods[131].selector = @selector(setTextAppearanceWithNSString:);
+  methods[113].selector = @selector(setDrawableStartWithNSString:);
+  methods[114].selector = @selector(setDrawableEndWithNSString:);
+  methods[115].selector = @selector(setDrawableTopWithNSString:);
+  methods[116].selector = @selector(setDrawableBottomWithNSString:);
+  methods[117].selector = @selector(getDrawablePadding);
+  methods[118].selector = @selector(setDrawablePaddingWithNSString:);
+  methods[119].selector = @selector(setDrawableTintWithNSString:);
+  methods[120].selector = @selector(setDrawableTintModeWithNSString:);
+  methods[121].selector = @selector(setScrollHorizontallyWithBoolean:);
+  methods[122].selector = @selector(getFirstBaselineToTopHeight);
+  methods[123].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
+  methods[124].selector = @selector(getLastBaselineToBottomHeight);
+  methods[125].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
+  methods[126].selector = @selector(getTextColor);
+  methods[127].selector = @selector(setTextColorWithNSString:);
+  methods[128].selector = @selector(setTextFormatWithNSString:);
+  methods[129].selector = @selector(setTextAppearanceWithNSString:);
+  methods[130].selector = @selector(setDrawableIconSizeWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", "LASSwitchImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "LASSwitchImpl;", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "Z", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setIosIsOn", "setIosOnTintColor", "setIosThumbTintColor", "setIosOnImage", "setIosOffImage", "setOnCheckedChange", "setChecked", "setSwitchPadding", "setSwitchMinWidth", "setTrackTint", "setThumbTint", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setStartOrStopMarquee", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableLeft", "setDrawableStart", "setDrawableRight", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "setTextAppearance" };
-  static const J2ObjcClassInfo _ASSwitchImpl_SwitchBean = { "SwitchBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 132, 1, 0, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "LASSwitchImpl;", "setIosText", "LNSString;", "setIosTextColor", "setIosIsEnabled", "Z", "setEnabled", "setIosAdjustsFontSizeToFitWidth", "setIosAllowsDefaultTighteningForTruncation", "setIosMinimumScaleFactor", "F", "setIosNumberOfLines", "I", "setIosHighlightedTextColor", "setTextColorHighlight", "setIosIsHighlighted", "setIosShadowColor", "setShadowColor", "setIosPreferredMaxLayoutWidth", "setIosIsUserInteractionEnabled", "setIosIsOn", "setIosOnTintColor", "setIosThumbTintColor", "setIosOnImage", "setIosOffImage", "setOnCheckedChange", "setChecked", "setSwitchPadding", "setSwitchMinWidth", "setTrackTint", "setThumbTint", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setMinLines", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setEllipsize", "setStartOrStopMarquee", "setMarqueeRepeatLimit", "setJustificationMode", "setShadowDx", "setShadowDy", "setSingleLine", "setEditable", "setTextAllCaps", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setDrawableStart", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setScrollHorizontally", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setTextColor", "setTextFormat", "setTextAppearance", "setDrawableIconSize" };
+  static const J2ObjcClassInfo _ASSwitchImpl_SwitchBean = { "SwitchBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 131, 1, 0, -1, -1, -1, -1 };
   return &_ASSwitchImpl_SwitchBean;
 }
 
