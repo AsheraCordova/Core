@@ -259,7 +259,7 @@ public class CheckBoxImpl extends BaseWidget implements com.ashera.validations.F
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("autoLink").withType("CheckBox.autoLink").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textColorLink").withType("colorstate").withOrder(-100));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textFormat").withType("resourcestring").withOrder(-1));
-		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withStylePriority(1));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("textAppearance").withType("string").withUiFlag(UPDATE_UI_REQUEST_LAYOUT).withStylePriority(1));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("drawableIconSize").withType("dimension").withOrder(-1).withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 	WidgetFactory.registerConstructorAttribute(localName, new WidgetAttribute.Builder().withName("html").withType("boolean"));
 	}
@@ -2856,7 +2856,9 @@ public void onCheckedChanged (CompoundButton buttonView,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;

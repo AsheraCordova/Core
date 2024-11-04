@@ -2087,7 +2087,9 @@ public void afterTextChanged (Editable s){
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -2125,7 +2127,9 @@ public void beforeTextChanged (CharSequence s,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -2163,7 +2167,9 @@ public void onTextChanged (CharSequence s,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -2285,7 +2291,9 @@ public void onCheckedChanged (CompoundButton buttonView,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;

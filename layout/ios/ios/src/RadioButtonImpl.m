@@ -1108,7 +1108,7 @@ NSString *ASRadioButtonImpl_GROUP_NAME = @"RadioButton";
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"lastBaselineToBottomHeight"])) withTypeWithNSString:@"dimension"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textColor"])) withTypeWithNSString:@"colorstate"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textFormat"])) withTypeWithNSString:@"resourcestring"])) withOrderWithInt:-1]);
-  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textAppearance"])) withTypeWithNSString:@"string"])) withStylePriorityWithJavaLangInteger:JavaLangInteger_valueOfWithInt_(1)]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"textAppearance"])) withTypeWithNSString:@"string"])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT])) withStylePriorityWithJavaLangInteger:JavaLangInteger_valueOfWithInt_(1)]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"drawableIconSize"])) withTypeWithNSString:@"dimension"])) withOrderWithInt:-1])) withUiFlagWithInt:ASIWidget_UPDATE_UI_REQUEST_LAYOUT]);
   ASWidgetFactory_registerConstructorAttributeWithNSString_withASWidgetAttribute_Builder_(localName_, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"html"])) withTypeWithNSString:@"boolean"]);
 }
@@ -5412,7 +5412,9 @@ ASRadioButtonImpl_MarqueeTask_$Lambda$1 *create_ASRadioButtonImpl_MarqueeTask_$L
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;

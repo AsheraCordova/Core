@@ -8420,7 +8420,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;
@@ -8465,7 +8467,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;
@@ -8510,7 +8514,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;
@@ -8555,7 +8561,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;
@@ -8702,7 +8710,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimatorListener)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;
@@ -8832,7 +8842,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnClickListener)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return result;
@@ -8963,7 +8975,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnTouchListener)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return result;
@@ -9093,7 +9107,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnLongClickListener)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return result;
@@ -9226,7 +9242,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnDragListener)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return result;
@@ -9359,7 +9377,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnKeyListener)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return result;

@@ -1880,7 +1880,9 @@ public void onAnimationStart(r.android.animation.Animator animation){
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -1936,7 +1938,9 @@ public java.util.Map<String, Object> getOnAnimationStartEventObj(r.android.anima
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -1992,7 +1996,9 @@ public java.util.Map<String, Object> getOnAnimationEndEventObj(r.android.animati
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -2048,7 +2054,9 @@ public java.util.Map<String, Object> getOnAnimationCancelEventObj(r.android.anim
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -2117,7 +2125,9 @@ public void onClick (View v){
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -2187,7 +2197,9 @@ public void onFocusChange (View v,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -2261,7 +2273,9 @@ public boolean onLongClick (View v){
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return result;
@@ -2336,7 +2350,9 @@ public boolean onKey (View v,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return result;
@@ -2411,7 +2427,9 @@ public boolean onContextClick (View v){
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return result;
@@ -2485,7 +2503,9 @@ public boolean onHover (View v,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return result;
@@ -2560,7 +2580,9 @@ public boolean onDrag (View v,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return result;
@@ -2635,7 +2657,9 @@ public boolean onTouch (View v,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return result;
@@ -2709,7 +2733,9 @@ public boolean onSwiped(String direction){
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return result;

@@ -1354,10 +1354,18 @@ public void setProgressBackgroundTint(String value) {
 	]-*/;
 	private void setMin(Object objValue) {
 		this.min = (int) objValue;
+		
+		if (isInitialised()) {
+			incrementProgressBy(0);
+		}
 	}
 	
 	private void setMax(Object objValue) {
 		this.max = (int) objValue;
+		
+		if (isInitialised()) {
+			incrementProgressBy(0);
+		}
 	}
 	
 	private void nativeCreate(Map<String, Object> params) {

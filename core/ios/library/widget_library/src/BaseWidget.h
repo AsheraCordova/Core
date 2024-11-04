@@ -242,6 +242,11 @@
 
 + (id)invokePrivateMethodUsingReflectionWithId:(id)obj
                                   withNSString:(NSString *)methodName
+                             withIOSClassArray:(IOSObjectArray *)classArray
+                             withNSObjectArray:(IOSObjectArray *)params;
+
++ (id)invokePrivateMethodUsingReflectionWithId:(id)obj
+                                  withNSString:(NSString *)methodName
                              withNSObjectArray:(IOSObjectArray *)params;
 
 - (jboolean)isAfterParentInitRequired;
@@ -453,6 +458,8 @@ J2OBJC_FIELD_SETTER(ASBaseWidget, methodListeners_, id<JavaUtilMap>)
 FOUNDATION_EXPORT void ASBaseWidget_initWithNSString_withNSString_(ASBaseWidget *self, NSString *groupName, NSString *localName);
 
 FOUNDATION_EXPORT id ASBaseWidget_invokePrivateMethodUsingReflectionWithId_withNSString_withNSObjectArray_(id obj, NSString *methodName, IOSObjectArray *params);
+
+FOUNDATION_EXPORT id ASBaseWidget_invokePrivateMethodUsingReflectionWithId_withNSString_withIOSClassArray_withNSObjectArray_(id obj, NSString *methodName, IOSObjectArray *classArray, IOSObjectArray *params);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASBaseWidget)
 

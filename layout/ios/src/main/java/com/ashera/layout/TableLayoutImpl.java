@@ -681,7 +681,9 @@ public void onChildViewAdded (View parent,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -717,7 +719,9 @@ public void onChildViewRemoved (View parent,
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;

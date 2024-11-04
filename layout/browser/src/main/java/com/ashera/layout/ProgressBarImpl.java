@@ -1008,6 +1008,7 @@ public void setProgressBackgroundTint(String value) {
 		} else {
 			this.progressBar = org.teavm.jso.dom.html.HTMLDocument.current().createElement("progress");
 			progressBar.getStyle().setProperty("width", "100%");
+			progressBar.getStyle().setProperty("border-width", "revert");
 			progressBar.setAttribute("max", "100");
 			progressBar.setAttribute("value", "0");
 			hTMLElement.appendChild(progressBar);
@@ -1032,6 +1033,10 @@ public void setProgressBackgroundTint(String value) {
 	
 	private void setMin(Object objValue) {
 		min = (int) objValue;
+		
+		if (isInitialised()) {
+			incrementProgressBy(0);
+		}
 	}
 	
 	private void setMax(Object objValue) {

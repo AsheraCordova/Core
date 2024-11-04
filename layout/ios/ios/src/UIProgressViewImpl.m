@@ -1150,10 +1150,16 @@ id ASUIProgressViewImpl_nativeCreateViewWithInt_(ASUIProgressViewImpl *self, jin
 
 void ASUIProgressViewImpl_setMinWithId_(ASUIProgressViewImpl *self, id objValue) {
   self->min_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  if ([self isInitialised]) {
+    ASUIProgressViewImpl_incrementProgressByWithId_(self, JavaLangInteger_valueOfWithInt_(0));
+  }
 }
 
 void ASUIProgressViewImpl_setMaxWithId_(ASUIProgressViewImpl *self, id objValue) {
   self->max_ = [((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue];
+  if ([self isInitialised]) {
+    ASUIProgressViewImpl_incrementProgressByWithId_(self, JavaLangInteger_valueOfWithInt_(0));
+  }
 }
 
 void ASUIProgressViewImpl_nativeCreateWithJavaUtilMap_(ASUIProgressViewImpl *self, id<JavaUtilMap> params) {

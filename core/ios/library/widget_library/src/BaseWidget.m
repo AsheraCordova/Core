@@ -1522,6 +1522,13 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   return ASBaseWidget_invokePrivateMethodUsingReflectionWithId_withNSString_withNSObjectArray_(obj, methodName, params);
 }
 
++ (id)invokePrivateMethodUsingReflectionWithId:(id)obj
+                                  withNSString:(NSString *)methodName
+                             withIOSClassArray:(IOSObjectArray *)classArray
+                             withNSObjectArray:(IOSObjectArray *)params {
+  return ASBaseWidget_invokePrivateMethodUsingReflectionWithId_withNSString_withIOSClassArray_withNSObjectArray_(obj, methodName, classArray, params);
+}
+
 - (id)createWrapperViewHolderWithInt:(jint)viewType {
   return nil;
 }
@@ -1898,39 +1905,40 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
     { NULL, "Z", 0x1, 142, 143, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 144, 30, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x89, 145, 146, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 147, 3, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 148, 149, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x89, 145, 147, -1, 148, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 149, 3, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 150, 151, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 150, 151, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 152, 153, -1, 154, -1, -1 },
-    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 155, -1, -1 },
-    { NULL, "V", 0x1, 156, 157, -1, 158, -1, -1 },
-    { NULL, "V", 0x1, 159, 23, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x1, 160, 161, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x1, 160, 65, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x1, 160, 100, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 162, 163, -1, 164, -1, -1 },
-    { NULL, "LASIWidget;", 0x2, 165, 166, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 152, 153, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 154, 155, -1, 156, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 157, -1, -1 },
+    { NULL, "V", 0x1, 158, 159, -1, 160, -1, -1 },
+    { NULL, "V", 0x1, 161, 23, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x1, 162, 163, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x1, 162, 65, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x1, 162, 100, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 164, 165, -1, 166, -1, -1 },
+    { NULL, "LASIWidget;", 0x2, 167, 168, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 167, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 168, 169, -1, 170, -1, -1 },
-    { NULL, "V", 0x1, 171, 169, -1, 170, -1, -1 },
-    { NULL, "LNSString;", 0x1, 172, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 169, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 170, 171, -1, 172, -1, -1 },
+    { NULL, "V", 0x1, 173, 171, -1, 172, -1, -1 },
+    { NULL, "LNSString;", 0x1, 174, 23, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 173, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 175, 23, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 174, 23, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x81, 175, 138, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 176, 23, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x81, 177, 138, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIFragment;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 176, -1, -1 },
-    { NULL, "V", 0x1, 177, 13, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 178, -1, -1 },
+    { NULL, "V", 0x1, 179, 13, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -2068,65 +2076,66 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   methods[130].selector = @selector(setFieldUsingReflectionWithId:withNSString:withId:);
   methods[131].selector = @selector(getFieldValueUsingReflectionWithId:withNSString:);
   methods[132].selector = @selector(invokePrivateMethodUsingReflectionWithId:withNSString:withNSObjectArray:);
-  methods[133].selector = @selector(createWrapperViewHolderWithInt:);
-  methods[134].selector = @selector(createWrapperViewWithId:withInt:);
-  methods[135].selector = @selector(addForegroundIfNeeded);
-  methods[136].selector = @selector(getForeground);
-  methods[137].selector = @selector(isAfterParentInitRequired);
-  methods[138].selector = @selector(afterParentInit);
-  methods[139].selector = @selector(drawableStateChanged);
-  methods[140].selector = @selector(getGroupName);
-  methods[141].selector = @selector(setDrawableBoundsWithInt:withInt:withInt:withInt:);
-  methods[142].selector = @selector(setEventBubblersWithJavaUtilCollection:);
-  methods[143].selector = @selector(getEventBubblers);
-  methods[144].selector = @selector(applyThemeConstructorArgsStyleWithNSString:withJavaUtilMap:);
-  methods[145].selector = @selector(applyThemeStyleWithNSString:);
-  methods[146].selector = @selector(loadLazyWidgetsWithASHasWidgets:withInt:withNSString:withASLoopParam:);
-  methods[147].selector = @selector(loadLazyWidgetsWithASHasWidgets:);
-  methods[148].selector = @selector(loadLazyWidgetsWithASLoopParam:);
-  methods[149].selector = @selector(loadAndAddWidgetsWithJavaUtilIterator:withASIWidget:withId:withNSString:withASLoopParam:);
-  methods[150].selector = @selector(loadWidgetWithASIWidget:withASIWidget:withId:withNSString:withASLoopParam:withInt:);
-  methods[151].selector = @selector(getValidationErrorDisplayType);
-  methods[152].selector = @selector(setValidationErrorDisplayTypeWithInt:);
-  methods[153].selector = @selector(setCustomErrorMessageKeysWithJavaUtilList:);
-  methods[154].selector = @selector(setCustomErrorMessageValuesWithJavaUtilList:);
-  methods[155].selector = @selector(getCustomMessageWithNSString:);
-  methods[156].selector = @selector(getFormGroupId);
-  methods[157].selector = @selector(getErrorStyle);
-  methods[158].selector = @selector(setErrorStyleWithNSString:);
-  methods[159].selector = @selector(getNormalStyle);
-  methods[160].selector = @selector(setNormalStyleWithNSString:);
-  methods[161].selector = @selector(invokeMethodWithNSString:withNSObjectArray:);
-  methods[162].selector = @selector(isWidgetDisposed);
-  methods[163].selector = @selector(getRootFragment);
-  methods[164].selector = @selector(getUnResolvedAttributes);
-  methods[165].selector = @selector(addUnResolvedAttributeWithNSString:withNSString:);
+  methods[133].selector = @selector(invokePrivateMethodUsingReflectionWithId:withNSString:withIOSClassArray:withNSObjectArray:);
+  methods[134].selector = @selector(createWrapperViewHolderWithInt:);
+  methods[135].selector = @selector(createWrapperViewWithId:withInt:);
+  methods[136].selector = @selector(addForegroundIfNeeded);
+  methods[137].selector = @selector(getForeground);
+  methods[138].selector = @selector(isAfterParentInitRequired);
+  methods[139].selector = @selector(afterParentInit);
+  methods[140].selector = @selector(drawableStateChanged);
+  methods[141].selector = @selector(getGroupName);
+  methods[142].selector = @selector(setDrawableBoundsWithInt:withInt:withInt:withInt:);
+  methods[143].selector = @selector(setEventBubblersWithJavaUtilCollection:);
+  methods[144].selector = @selector(getEventBubblers);
+  methods[145].selector = @selector(applyThemeConstructorArgsStyleWithNSString:withJavaUtilMap:);
+  methods[146].selector = @selector(applyThemeStyleWithNSString:);
+  methods[147].selector = @selector(loadLazyWidgetsWithASHasWidgets:withInt:withNSString:withASLoopParam:);
+  methods[148].selector = @selector(loadLazyWidgetsWithASHasWidgets:);
+  methods[149].selector = @selector(loadLazyWidgetsWithASLoopParam:);
+  methods[150].selector = @selector(loadAndAddWidgetsWithJavaUtilIterator:withASIWidget:withId:withNSString:withASLoopParam:);
+  methods[151].selector = @selector(loadWidgetWithASIWidget:withASIWidget:withId:withNSString:withASLoopParam:withInt:);
+  methods[152].selector = @selector(getValidationErrorDisplayType);
+  methods[153].selector = @selector(setValidationErrorDisplayTypeWithInt:);
+  methods[154].selector = @selector(setCustomErrorMessageKeysWithJavaUtilList:);
+  methods[155].selector = @selector(setCustomErrorMessageValuesWithJavaUtilList:);
+  methods[156].selector = @selector(getCustomMessageWithNSString:);
+  methods[157].selector = @selector(getFormGroupId);
+  methods[158].selector = @selector(getErrorStyle);
+  methods[159].selector = @selector(setErrorStyleWithNSString:);
+  methods[160].selector = @selector(getNormalStyle);
+  methods[161].selector = @selector(setNormalStyleWithNSString:);
+  methods[162].selector = @selector(invokeMethodWithNSString:withNSObjectArray:);
+  methods[163].selector = @selector(isWidgetDisposed);
+  methods[164].selector = @selector(getRootFragment);
+  methods[165].selector = @selector(getUnResolvedAttributes);
+  methods[166].selector = @selector(addUnResolvedAttributeWithNSString:withNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "parent_", "LASHasWidgets;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "attributes_", "LASWidgetAttributeMap;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "params_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 178, -1 },
-    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 178, -1 },
-    { "tmpCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 178, -1 },
+    { "params_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 180, -1 },
+    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 180, -1 },
+    { "tmpCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 180, -1 },
     { "listener_", "LASIWidgetLifeCycleListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "localName_", "LNSString;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "groupName_", "LNSString;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "eventBus_", "LASEventBus;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "cachedDecorators_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 179, -1 },
-    { "id__", "LNSString;", .constantValue.asLong = 0, 0x2, 180, -1, -1, -1 },
+    { "cachedDecorators_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 181, -1 },
+    { "id__", "LNSString;", .constantValue.asLong = 0, 0x2, 182, -1, -1, -1 },
     { "behaviorGroupId_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "eventBusHandlers_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 181, -1 },
+    { "eventBusHandlers_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 183, -1 },
     { "initialised_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "fragment_", "LASIFragment;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "attributeCommandChainMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 182, -1 },
-    { "updateAttributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 183, -1 },
-    { "attributeCommandMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 184, -1 },
-    { "commandPhases_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 185, -1 },
-    { "bufferedAttributes_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 186, -1 },
-    { "methodListeners_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 187, -1 },
+    { "attributeCommandChainMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 184, -1 },
+    { "updateAttributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 185, -1 },
+    { "attributeCommandMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 186, -1 },
+    { "commandPhases_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 187, -1 },
+    { "bufferedAttributes_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 188, -1 },
+    { "methodListeners_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 189, -1 },
     { "onMethodCalled_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "zIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "eventBubblers_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 188, -1 },
+    { "eventBubblers_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 190, -1 },
     { "componentId_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "animator_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "modelParam_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2142,12 +2151,12 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
     { "errorStyle_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "normalStyle_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "validationErrorDisplayType_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "customErrorMessageKeys_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 189, -1 },
-    { "customErrorMessageValues_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 189, -1 },
-    { "unresolvedAttributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 190, -1 },
+    { "customErrorMessageKeys_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 191, -1 },
+    { "customErrorMessageValues_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 191, -1 },
+    { "unresolvedAttributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 192, -1 },
   };
-  static const void *ptrTable[] = { "setAnimator", "LNSObject;", "setZIndex", "I", "registerForAttributeCommandChainWithPhase", "LNSString;[LNSString;", "registerForAttributeCommandChain", "[LNSString;", "applyAttributeCommand", "LNSString;LNSString;[LNSString;Z[LNSObject;", "reapplyAttributeCommand", "LNSString;LNSString;LNSString;[LNSObject;", "rerunCommandOnSource", "LNSString;LNSString;", "getAttributeCommandValue", "LNSString;LNSString;LNSString;", "getAttributeCommand", "LNSString;LNSString;[LNSObject;", "addAttributeCommandToChain", "LNSString;[LNSString;LASAttributeCommand;", "applyStyleToWidget", "LNSString;LNSString;LASAttributeCommandChain;", "getAttributeCommandChain", "LNSString;", "removeAttributeCommandFromChain", "unwrap", "setId", "setBehaviorGroupId", "setComponentId", "quickConvert", "LNSObject;LNSString;", "LNSObject;LNSString;LNSString;LNSString;", "LASWidgetAttribute;LNSObject;", "setAttribute", "LNSString;LNSObject;Z", "LASWidgetAttribute;LNSObject;Z", "LASWidgetAttribute;LASIWidget;LNSObject;LNSString;", "LASWidgetAttribute;LASIWidget;LNSObject;LNSString;Z", "applyStyleToWidgetWithoutBuffering", "handleArrayType", "LASWidgetAttribute;LNSString;LNSObject;", "LNSObject;LNSString;LNSString;", "getDependentAttributesMap", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getConvertedValue", "getDecorator", "LASWidgetAttribute;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "getUserData", "storeUserData", "LNSString;LNSObject;", "storeInTempCache", "getFromTempCache", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setParams", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttributeValue", "LNSString;LASWidgetAttributeMap;", "LASWidgetAttribute;LASWidgetAttributeMap;", "setParent", "LASHasWidgets;", "stripOS", "getAttribute", "LASHasWidgets;LNSString;LNSString;", "checkIfAttributeMatches", "LASWidgetAttributeValue;", "convertToIntFromDp", "updateWidgetMap", "LASWidgetAttributeMap;", "updateMeasuredDimension", "II", "LASWidgetAttribute;LJavaUtilList;", "(Lcom/ashera/widget/WidgetAttribute;Ljava/util/List<Lcom/ashera/widget/WidgetAttributeValue;>;)V", "LASWidgetAttribute;LASWidgetAttributeValue;", "executeCommand", "LASIWidget;LJavaUtilList;LASIWidget_CommandCallBack;I", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "handlePath", "LJavaUtilMap;LASIWidget;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget;I)V", "LJavaUtilMap;LASIWidget_CommandCallBack;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "LNSString;Z", "requestLayoutNInvalidateIfRequired", "compareByValue", "LJavaUtilMap;LNSString;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I", "getAttributeValueFromWidget", "LASWidgetAttribute;LASIWidget;Z", "setListener", "LASIWidgetLifeCycleListener;", "findWidgetById", "setInvalidateOnFrameChange", "Z", "setLoopParam", "LASLoopParam;", "setModelIdPath", "setModelUiToPojoEventIds", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelPojoToUiParams", "setModelUiToPojo", "removeObjectListeners", "LASIWidget;", "()Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;", "setVisible", "updateModelToEventMap", "LJavaUtilMap;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;)V", "LJavaUtilMap;LNSString;LASLoopParam;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Lcom/ashera/model/LoopParam;)V", "syncModelFromUiToPojo", "getModelByPath", "updateModelByPath", "LNSString;LNSObject;LNSObject;", "storeModelToScope", "LNSString;LASModelScope;LNSObject;", "LNSString;LASModelScope;LNSObject;LASLoopParam;", "getModelFromScope", "LNSString;LASModelScope;", "LNSString;LASModelScope;LASLoopParam;", "changeModelDataType", "LASModelDataType;LNSObject;", "updateModelData", "findNearestView", "getBoolean", "hasFeature", "runAttributeCommands", "LNSObject;LNSString;LNSString;[LNSObject;", "addDecorator", "LASILifeCycleDecorator;", "executeMethodListeners", "LNSString;[LNSObject;", "hasMethodListener", "LNSString;LJavaLangRunnable;[LNSObject;", "setOnMethodCalled", "setFieldUsingReflection", "LNSObject;LNSString;LNSObject;", "getFieldValueUsingReflection", "invokePrivateMethodUsingReflection", "LNSObject;LNSString;[LNSObject;", "createWrapperViewHolder", "createWrapperView", "LNSObject;I", "setDrawableBounds", "IIII", "setEventBubblers", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/Integer;>;)V", "()Ljava/util/Set<Ljava/lang/Integer;>;", "applyThemeConstructorArgsStyle", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "applyThemeStyle", "loadLazyWidgets", "LASHasWidgets;ILNSString;LASLoopParam;", "loadAndAddWidgets", "LJavaUtilIterator;LASIWidget;LNSObject;LNSString;LASLoopParam;", "(Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;Lcom/ashera/widget/IWidget;Ljava/lang/Object;Ljava/lang/String;Lcom/ashera/model/LoopParam;)V", "loadWidget", "LASIWidget;LASIWidget;LNSObject;LNSString;LASLoopParam;I", "setValidationErrorDisplayType", "setCustomErrorMessageKeys", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/String;>;)V", "setCustomErrorMessageValues", "getCustomMessage", "setErrorStyle", "setNormalStyle", "invokeMethod", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "addUnResolvedAttribute", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/ILifeCycleDecorator;>;", "id", "Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/AttributeCommandChain;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Ljava/lang/String;>;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/AttributeCommand;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Ljava/lang/String;>;>;", "Ljava/util/List<Lcom/ashera/widget/BaseWidget$EventHolder;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Lcom/ashera/widget/ILifeCycleDecorator;>;>;", "Ljava/util/Set<Ljava/lang/Integer;>;", "Ljava/util/List<Ljava/lang/String;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "LASBaseWidget_LazyBaseWidget;LASBaseWidget_EventHolder;" };
-  static const J2ObjcClassInfo _ASBaseWidget = { "BaseWidget", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 166, 42, -1, 191, -1, -1, -1 };
+  static const void *ptrTable[] = { "setAnimator", "LNSObject;", "setZIndex", "I", "registerForAttributeCommandChainWithPhase", "LNSString;[LNSString;", "registerForAttributeCommandChain", "[LNSString;", "applyAttributeCommand", "LNSString;LNSString;[LNSString;Z[LNSObject;", "reapplyAttributeCommand", "LNSString;LNSString;LNSString;[LNSObject;", "rerunCommandOnSource", "LNSString;LNSString;", "getAttributeCommandValue", "LNSString;LNSString;LNSString;", "getAttributeCommand", "LNSString;LNSString;[LNSObject;", "addAttributeCommandToChain", "LNSString;[LNSString;LASAttributeCommand;", "applyStyleToWidget", "LNSString;LNSString;LASAttributeCommandChain;", "getAttributeCommandChain", "LNSString;", "removeAttributeCommandFromChain", "unwrap", "setId", "setBehaviorGroupId", "setComponentId", "quickConvert", "LNSObject;LNSString;", "LNSObject;LNSString;LNSString;LNSString;", "LASWidgetAttribute;LNSObject;", "setAttribute", "LNSString;LNSObject;Z", "LASWidgetAttribute;LNSObject;Z", "LASWidgetAttribute;LASIWidget;LNSObject;LNSString;", "LASWidgetAttribute;LASIWidget;LNSObject;LNSString;Z", "applyStyleToWidgetWithoutBuffering", "handleArrayType", "LASWidgetAttribute;LNSString;LNSObject;", "LNSObject;LNSString;LNSString;", "getDependentAttributesMap", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getConvertedValue", "getDecorator", "LASWidgetAttribute;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "getUserData", "storeUserData", "LNSString;LNSObject;", "storeInTempCache", "getFromTempCache", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setParams", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttributeValue", "LNSString;LASWidgetAttributeMap;", "LASWidgetAttribute;LASWidgetAttributeMap;", "setParent", "LASHasWidgets;", "stripOS", "getAttribute", "LASHasWidgets;LNSString;LNSString;", "checkIfAttributeMatches", "LASWidgetAttributeValue;", "convertToIntFromDp", "updateWidgetMap", "LASWidgetAttributeMap;", "updateMeasuredDimension", "II", "LASWidgetAttribute;LJavaUtilList;", "(Lcom/ashera/widget/WidgetAttribute;Ljava/util/List<Lcom/ashera/widget/WidgetAttributeValue;>;)V", "LASWidgetAttribute;LASWidgetAttributeValue;", "executeCommand", "LASIWidget;LJavaUtilList;LASIWidget_CommandCallBack;I", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "handlePath", "LJavaUtilMap;LASIWidget;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget;I)V", "LJavaUtilMap;LASIWidget_CommandCallBack;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "LNSString;Z", "requestLayoutNInvalidateIfRequired", "compareByValue", "LJavaUtilMap;LNSString;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I", "getAttributeValueFromWidget", "LASWidgetAttribute;LASIWidget;Z", "setListener", "LASIWidgetLifeCycleListener;", "findWidgetById", "setInvalidateOnFrameChange", "Z", "setLoopParam", "LASLoopParam;", "setModelIdPath", "setModelUiToPojoEventIds", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelPojoToUiParams", "setModelUiToPojo", "removeObjectListeners", "LASIWidget;", "()Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;", "setVisible", "updateModelToEventMap", "LJavaUtilMap;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;)V", "LJavaUtilMap;LNSString;LASLoopParam;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Lcom/ashera/model/LoopParam;)V", "syncModelFromUiToPojo", "getModelByPath", "updateModelByPath", "LNSString;LNSObject;LNSObject;", "storeModelToScope", "LNSString;LASModelScope;LNSObject;", "LNSString;LASModelScope;LNSObject;LASLoopParam;", "getModelFromScope", "LNSString;LASModelScope;", "LNSString;LASModelScope;LASLoopParam;", "changeModelDataType", "LASModelDataType;LNSObject;", "updateModelData", "findNearestView", "getBoolean", "hasFeature", "runAttributeCommands", "LNSObject;LNSString;LNSString;[LNSObject;", "addDecorator", "LASILifeCycleDecorator;", "executeMethodListeners", "LNSString;[LNSObject;", "hasMethodListener", "LNSString;LJavaLangRunnable;[LNSObject;", "setOnMethodCalled", "setFieldUsingReflection", "LNSObject;LNSString;LNSObject;", "getFieldValueUsingReflection", "invokePrivateMethodUsingReflection", "LNSObject;LNSString;[LNSObject;", "LNSObject;LNSString;[LIOSClass;[LNSObject;", "(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class<*>;[Ljava/lang/Object;)Ljava/lang/Object;", "createWrapperViewHolder", "createWrapperView", "LNSObject;I", "setDrawableBounds", "IIII", "setEventBubblers", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/Integer;>;)V", "()Ljava/util/Set<Ljava/lang/Integer;>;", "applyThemeConstructorArgsStyle", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "applyThemeStyle", "loadLazyWidgets", "LASHasWidgets;ILNSString;LASLoopParam;", "loadAndAddWidgets", "LJavaUtilIterator;LASIWidget;LNSObject;LNSString;LASLoopParam;", "(Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;Lcom/ashera/widget/IWidget;Ljava/lang/Object;Ljava/lang/String;Lcom/ashera/model/LoopParam;)V", "loadWidget", "LASIWidget;LASIWidget;LNSObject;LNSString;LASLoopParam;I", "setValidationErrorDisplayType", "setCustomErrorMessageKeys", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/String;>;)V", "setCustomErrorMessageValues", "getCustomMessage", "setErrorStyle", "setNormalStyle", "invokeMethod", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "addUnResolvedAttribute", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/ILifeCycleDecorator;>;", "id", "Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/AttributeCommandChain;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Ljava/lang/String;>;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/AttributeCommand;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Ljava/lang/String;>;>;", "Ljava/util/List<Lcom/ashera/widget/BaseWidget$EventHolder;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Lcom/ashera/widget/ILifeCycleDecorator;>;>;", "Ljava/util/Set<Ljava/lang/Integer;>;", "Ljava/util/List<Ljava/lang/String;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "LASBaseWidget_LazyBaseWidget;LASBaseWidget_EventHolder;" };
+  static const J2ObjcClassInfo _ASBaseWidget = { "BaseWidget", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 167, 42, -1, 193, -1, -1, -1 };
   return &_ASBaseWidget;
 }
 
@@ -2523,12 +2532,18 @@ void ASBaseWidget_handleModelUiToPojo(ASBaseWidget *self) {
 id ASBaseWidget_invokePrivateMethodUsingReflectionWithId_withNSString_withNSObjectArray_(id obj, NSString *methodName, IOSObjectArray *params) {
   ASBaseWidget_initialize();
   jint paramCount = ((IOSObjectArray *) nil_chk(params))->size_;
-  JavaLangReflectMethod *method = nil;
-  id requiredObj = nil;
   IOSObjectArray *classArray = [IOSObjectArray arrayWithLength:paramCount type:IOSClass_class_()];
   for (jint i = 0; i < paramCount; i++) {
     IOSObjectArray_Set(classArray, i, [nil_chk(IOSObjectArray_Get(params, i)) java_getClass]);
   }
+  id requiredObj = ASBaseWidget_invokePrivateMethodUsingReflectionWithId_withNSString_withIOSClassArray_withNSObjectArray_(obj, methodName, classArray, params);
+  return requiredObj;
+}
+
+id ASBaseWidget_invokePrivateMethodUsingReflectionWithId_withNSString_withIOSClassArray_withNSObjectArray_(id obj, NSString *methodName, IOSObjectArray *classArray, IOSObjectArray *params) {
+  ASBaseWidget_initialize();
+  JavaLangReflectMethod *method = nil;
+  id requiredObj = nil;
   IOSClass *superClass = [nil_chk(obj) java_getClass];
   @try {
     while (method == nil && superClass != nil) {

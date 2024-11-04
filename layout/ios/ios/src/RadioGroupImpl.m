@@ -1863,7 +1863,9 @@ ASRadioGroupImpl_CanvasImpl_$Lambda$1 *create_ASRadioGroupImpl_CanvasImpl_$Lambd
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;
@@ -1894,7 +1896,9 @@ ASRadioGroupImpl_CanvasImpl_$Lambda$1 *create_ASRadioGroupImpl_CanvasImpl_$Lambd
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;
@@ -2041,7 +2045,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASRadioGroupImpl_OnHierarchyChangeListener)
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;

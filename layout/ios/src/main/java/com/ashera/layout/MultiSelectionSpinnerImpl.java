@@ -1950,7 +1950,9 @@ public void onItemSelected(View view, List<Integer> positions){
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;
@@ -2007,7 +2009,9 @@ public java.util.Map<String, Object> getOnItemSelectedEventObj(View view,List<In
 		}
 		if (strValue != null && !strValue.isEmpty() && !strValue.trim().startsWith("+")) {
 		    com.ashera.core.IActivity activity = (com.ashera.core.IActivity)w.getFragment().getRootActivity();
-		    activity.sendEventMessage(obj);
+		    if (activity != null) {
+		    	activity.sendEventMessage(obj);
+		    }
 		}
 	}
     return;

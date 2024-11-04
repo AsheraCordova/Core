@@ -3390,7 +3390,9 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASSpinnerImpl_AdapterView_OnItemSelectedLis
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;
@@ -3443,7 +3445,9 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(ASSpinnerImpl_AdapterView_OnItemSelectedLis
     }
     if (strValue_ != nil && ![strValue_ java_isEmpty] && ![((NSString *) nil_chk([((NSString *) nil_chk(strValue_)) java_trim])) java_hasPrefix:@"+"]) {
       id<ASIActivity> activity = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getRootActivity];
-      [((id<ASIActivity>) nil_chk(activity)) sendEventMessageWithJavaUtilMap:obj];
+      if (activity != nil) {
+        [activity sendEventMessageWithJavaUtilMap:obj];
+      }
     }
   }
   return;
