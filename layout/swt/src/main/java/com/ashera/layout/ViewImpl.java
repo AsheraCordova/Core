@@ -4722,10 +4722,14 @@ break;}
 	}
 
 	private static void setCornerRadius(Control control, float radius) {
+		// corner radius based on region cannot be used on linux hence disabling it
+		if (com.ashera.common.OperatingSystem.isLinux()) {
+			return;
+		}
 		int width = control.getBounds().width;
 		int height = control.getBounds().height;
 		// Apply the region to the composite
-		if (width > 0 && height > 0) {
+		if (width > 0 && height > 0 && radius > 0) {
 			Region region = createRoundedRectangle(0, 0, width, height, (int) radius);
 			control.setRegion(region);
 			region.dispose();
