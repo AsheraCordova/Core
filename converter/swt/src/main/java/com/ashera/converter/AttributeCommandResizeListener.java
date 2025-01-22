@@ -33,13 +33,13 @@ public class AttributeCommandResizeListener implements Listener {
 			
 			if (attributeCommandChain != null) {
 				Object value = attributeCommandChain.getValue(widget, widget.asNativeWidget(), "predraw");
-				this.valueSetter.setValueOnControl(nativeWidget, value);
+				this.valueSetter.setValueOnControl(widget, nativeWidget, value);
 			}
 		}
 	}
 	
 	public static interface ValueSetter {
-		void setValueOnControl(Object nativeWidget, Object value);
+		void setValueOnControl(IWidget w, Object nativeWidget, Object value);
 	}
 	
 	public static AttributeCommandResizeListener addResizeListenerToControl(IWidget widget, Object nativeWidget, String attribute, ValueSetter valueSetter) {

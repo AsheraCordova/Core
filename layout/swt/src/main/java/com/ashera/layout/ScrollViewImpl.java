@@ -73,6 +73,7 @@ public class ScrollViewImpl extends BaseHasWidgets {
 		
 		
 		ViewGroupImpl.registerCommandConveter(this);
+
 	}
 
 	@Override
@@ -460,7 +461,7 @@ return layoutParams.gravity;			}
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-				ViewGroupImpl.setAttribute(this, key, strValue, objValue, decorator);
+				ViewGroupImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		Object nativeWidget = asNativeWidget();
 		switch (key.getAttributeName()) {
 			case "foregroundGravity": {
@@ -669,211 +670,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(View v,int scroll
 		return getStyle("swtStyle", initStyle, params, fragment);
 	}
 
-	
-private ScrollViewCommandBuilder builder;
-private ScrollViewBean bean;
-public Object getPlugin(String plugin) {
-	return WidgetFactory.getAttributable(plugin).newInstance(this);
-}
-public ScrollViewBean getBean() {
-	if (bean == null) {
-		bean = new ScrollViewBean();
-	}
-	return bean;
-}
-public ScrollViewCommandBuilder getBuilder() {
-	if (builder == null) {
-		builder = new ScrollViewCommandBuilder();
-	}
-	return builder;
-}
-
-
-public  class ScrollViewCommandBuilder extends com.ashera.layout.ViewGroupImpl.ViewGroupCommandBuilder <ScrollViewCommandBuilder> {
-    public ScrollViewCommandBuilder() {
-	}
-	
-	public ScrollViewCommandBuilder execute(boolean setter) {
-		if (setter) {
-			executeCommand(command, null, IWidget.COMMAND_EXEC_SETTER_METHOD);
-			getFragment().remeasure();
-		}
-		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
-return this;	}
-
-public ScrollViewCommandBuilder setForegroundGravity(String value) {
-	Map<String, Object> attrs = initCommand("foregroundGravity");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ScrollViewCommandBuilder tryGetMeasureAllChildren() {
-	Map<String, Object> attrs = initCommand("measureAllChildren");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object isMeasureAllChildren() {
-	Map<String, Object> attrs = initCommand("measureAllChildren");
-	return attrs.get("commandReturnValue");
-}
-public ScrollViewCommandBuilder setMeasureAllChildren(boolean value) {
-	Map<String, Object> attrs = initCommand("measureAllChildren");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ScrollViewCommandBuilder tryGetFillViewport() {
-	Map<String, Object> attrs = initCommand("fillViewport");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object isFillViewport() {
-	Map<String, Object> attrs = initCommand("fillViewport");
-	return attrs.get("commandReturnValue");
-}
-public ScrollViewCommandBuilder setFillViewport(boolean value) {
-	Map<String, Object> attrs = initCommand("fillViewport");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ScrollViewCommandBuilder tryGetScrollY() {
-	Map<String, Object> attrs = initCommand("scrollY");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getScrollY() {
-	Map<String, Object> attrs = initCommand("scrollY");
-	return attrs.get("commandReturnValue");
-}
-public ScrollViewCommandBuilder setScrollY(String value) {
-	Map<String, Object> attrs = initCommand("scrollY");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-public ScrollViewCommandBuilder setOnScrollChange(String value) {
-	Map<String, Object> attrs = initCommand("onScrollChange");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-}
-public class ScrollViewBean extends com.ashera.layout.ViewGroupImpl.ViewGroupBean{
-		public ScrollViewBean() {
-			super(ScrollViewImpl.this);
-		}
-public void setForegroundGravity(String value) {
-	getBuilder().reset().setForegroundGravity(value).execute(true);
-}
-
-public Object isMeasureAllChildren() {
-	return getBuilder().reset().tryGetMeasureAllChildren().execute(false).isMeasureAllChildren(); 
-}
-public void setMeasureAllChildren(boolean value) {
-	getBuilder().reset().setMeasureAllChildren(value).execute(true);
-}
-
-public Object isFillViewport() {
-	return getBuilder().reset().tryGetFillViewport().execute(false).isFillViewport(); 
-}
-public void setFillViewport(boolean value) {
-	getBuilder().reset().setFillViewport(value).execute(true);
-}
-
-public Object getScrollY() {
-	return getBuilder().reset().tryGetScrollY().execute(false).getScrollY(); 
-}
-public void setScrollY(String value) {
-	getBuilder().reset().setScrollY(value).execute(true);
-}
-
-public void setOnScrollChange(String value) {
-	getBuilder().reset().setOnScrollChange(value).execute(true);
-}
-
-}
-
-
-private ScrollViewCommandParamsBuilder paramsBuilder;
-private ScrollViewParamsBean paramsBean;
-
-public ScrollViewParamsBean getParamsBean() {
-	if (paramsBean == null) {
-		paramsBean = new ScrollViewParamsBean();
-	}
-	return paramsBean;
-}
-public ScrollViewCommandParamsBuilder getParamsBuilder() {
-	if (paramsBuilder == null) {
-		paramsBuilder = new ScrollViewCommandParamsBuilder();
-	}
-	return paramsBuilder;
-}
-
-
-
-public class ScrollViewParamsBean extends com.ashera.layout.ViewGroupImpl.ViewGroupParamsBean{
-public Object getLayoutGravity(IWidget w) {
-	java.util.Map<String, Object> layoutParams = new java.util.HashMap<String, Object>();
-	java.util.Map<String, Object> command = getParamsBuilder().reset().tryGetLayoutGravity().getCommand();
-	
-	layoutParams.put("layoutParams", command);
-	w.executeCommand(layoutParams, null, COMMAND_EXEC_GETTER_METHOD); 
-	return getParamsBuilder().getLayoutGravity();
-}
-public void setLayoutGravity(IWidget w, String value) {
-	java.util.Map<String, Object> layoutParams = new java.util.HashMap<String, Object>();
-	layoutParams.put("layoutParams", getParamsBuilder().reset().setLayoutGravity(value).getCommand());
-	w.executeCommand(layoutParams, null, COMMAND_EXEC_SETTER_METHOD);
-	w.getFragment().remeasure();
-}
-
-}
-
-
-
-
-
-public class ScrollViewCommandParamsBuilder extends com.ashera.layout.ViewGroupImpl.ViewGroupCommandParamsBuilder<ScrollViewCommandParamsBuilder>{
-public ScrollViewCommandParamsBuilder tryGetLayoutGravity() {
-	Map<String, Object> attrs = initCommand("layout_gravity");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return this;}
-
-public Object getLayoutGravity() {
-	Map<String, Object> attrs = initCommand("layout_gravity");
-	return attrs.get("commandReturnValue");
-}
-public ScrollViewCommandParamsBuilder setLayoutGravity(String value) {
-	Map<String, Object> attrs = initCommand("layout_gravity");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-}
-
-	//end - body
+		//end - body
 	//start - scrollview
 	@Override
 	public void initialized() {

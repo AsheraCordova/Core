@@ -9,7 +9,6 @@
 #include "EventExpressionParser.h"
 #include "HasWidgets.h"
 #include "IActivity.h"
-#include "IAttributable.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
 #include "IListener.h"
@@ -29,7 +28,6 @@
 #include "WebViewImpl.h"
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
-#include "java/lang/Boolean.h"
 #include "java/lang/Exception.h"
 #include "java/lang/Integer.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -53,16 +51,12 @@
 @protocol JavaUtilMap;
 
 
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-
 @interface ASWebViewImpl () {
  @public
   id<ASWebViewImpl_Loader_WebViewLoadingListener> webviewLoadingListener_;
   id<ASWebViewImpl_Loader_WebViewLoadedListener> webviewLoadedListener_;
   id<ASWebViewImpl_Loader_WebViewErrorListener> webviewErrorListener_;
   jboolean pageFinished_;
-  ASWebViewImpl_WebViewCommandBuilder *builder_;
-  ASWebViewImpl_WebViewBean *bean_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -87,8 +81,6 @@
 J2OBJC_FIELD_SETTER(ASWebViewImpl, webviewLoadingListener_, id<ASWebViewImpl_Loader_WebViewLoadingListener>)
 J2OBJC_FIELD_SETTER(ASWebViewImpl, webviewLoadedListener_, id<ASWebViewImpl_Loader_WebViewLoadedListener>)
 J2OBJC_FIELD_SETTER(ASWebViewImpl, webviewErrorListener_, id<ASWebViewImpl_Loader_WebViewErrorListener>)
-J2OBJC_FIELD_SETTER(ASWebViewImpl, builder_, ASWebViewImpl_WebViewCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASWebViewImpl, bean_, ASWebViewImpl_WebViewBean *)
 
 __attribute__((unused)) static void ASWebViewImpl_setWidgetOnNativeClass(ASWebViewImpl *self);
 
@@ -270,20 +262,6 @@ __attribute__((unused)) static ASWebViewImpl_WebViewErrorListener *create_ASWebV
 
 J2OBJC_TYPE_LITERAL_HEADER(ASWebViewImpl_WebViewErrorListener)
 
-@interface ASWebViewImpl_WebViewCommandBuilder () {
- @public
-  ASWebViewImpl *this$0_;
-}
-
-@end
-
-@interface ASWebViewImpl_WebViewBean () {
- @public
-  ASWebViewImpl *this$0_;
-}
-
-@end
-
 NSString *ASWebViewImpl_LOCAL_NAME = @"WebView";
 NSString *ASWebViewImpl_GROUP_NAME = @"WebView";
 
@@ -442,24 +420,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASWebViewImpl_WebViewBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASWebViewImpl_WebViewBean_initWithASWebViewImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASWebViewImpl_WebViewCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASWebViewImpl_WebViewCommandBuilder_initWithASWebViewImpl_(self);
-  }
-  return builder_;
-}
-
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
   signal_catch_init();
   signal_try(1) {
@@ -515,11 +475,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 23, 24, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 25, 1, -1, -1, -1, -1 },
-    { NULL, "LASWebViewImpl_WebViewBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASWebViewImpl_WebViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 26, 27, -1, 28, -1, -1 },
-    { NULL, "V", 0x102, 29, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 25, 26, -1, 27, -1, -1 },
+    { NULL, "V", 0x102, 28, 29, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -547,26 +504,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[20].selector = @selector(setVisibleWithBoolean:);
   methods[21].selector = @selector(requestLayout);
   methods[22].selector = @selector(invalidate);
-  methods[23].selector = @selector(getPluginWithNSString:);
-  methods[24].selector = @selector(getBean);
-  methods[25].selector = @selector(getBuilder);
-  methods[26].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[27].selector = @selector(loadUrlWithId:);
+  methods[23].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[24].selector = @selector(loadUrlWithId:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 32, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 30, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADWebView;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "webviewLoadingListener_", "LASWebViewImpl_Loader_WebViewLoadingListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "webviewLoadedListener_", "LASWebViewImpl_Loader_WebViewLoadedListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "webviewErrorListener_", "LASWebViewImpl_Loader_WebViewErrorListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "pageFinished_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "builder_", "LASWebViewImpl_WebViewCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASWebViewImpl_WebViewBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setWebViewLoadedListener", "LASWebViewImpl_WebViewLoadedListener;", "setWebViewErrorListener", "LASWebViewImpl_WebViewErrorListener;", "setWebViewLoadingListener", "LASWebViewImpl_WebViewLoadingListener;", "onPageFinished", "LADView;", "onPageStarted", "onReceivedError", "LADView;LNSString;", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "loadUrl", "LNSObject;", &ASWebViewImpl_LOCAL_NAME, &ASWebViewImpl_GROUP_NAME, "LASWebViewImpl_WebViewExt;LASWebViewImpl_Loader;LASWebViewImpl_WebViewLoadingListener;LASWebViewImpl_WebViewLoadedListener;LASWebViewImpl_WebViewErrorListener;LASWebViewImpl_WebViewCommandBuilder;LASWebViewImpl_WebViewBean;" };
-  static const J2ObjcClassInfo _ASWebViewImpl = { "WebViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 28, 10, -1, 33, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setWebViewLoadedListener", "LASWebViewImpl_WebViewLoadedListener;", "setWebViewErrorListener", "LASWebViewImpl_WebViewErrorListener;", "setWebViewLoadingListener", "LASWebViewImpl_WebViewLoadingListener;", "onPageFinished", "LADView;", "onPageStarted", "onReceivedError", "LADView;LNSString;", "checkIosVersion", "setId", "setVisible", "Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "loadUrl", "LNSObject;", &ASWebViewImpl_LOCAL_NAME, &ASWebViewImpl_GROUP_NAME, "LASWebViewImpl_WebViewExt;LASWebViewImpl_Loader;LASWebViewImpl_WebViewLoadingListener;LASWebViewImpl_WebViewLoadedListener;LASWebViewImpl_WebViewErrorListener;" };
+  static const J2ObjcClassInfo _ASWebViewImpl = { "WebViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 25, 8, -1, 32, -1, -1, -1 };
   return &_ASWebViewImpl;
 }
 
@@ -1492,164 +1444,3 @@ ASWebViewImpl_WebViewErrorListener *create_ASWebViewImpl_WebViewErrorListener_in
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewErrorListener)
-
-@implementation ASWebViewImpl_WebViewCommandBuilder
-
-- (instancetype)initWithASWebViewImpl:(ASWebViewImpl *)outer$ {
-  ASWebViewImpl_WebViewCommandBuilder_initWithASWebViewImpl_(self, outer$);
-  return self;
-}
-
-- (ASWebViewImpl_WebViewCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASWebViewImpl_WebViewCommandBuilder *)setOnPageStartedWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onPageStarted"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASWebViewImpl_WebViewCommandBuilder *)setOnPageFinishedWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onPageFinished"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASWebViewImpl_WebViewCommandBuilder *)setOnReceivedErrorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onReceivedError"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASWebViewImpl_WebViewCommandBuilder *)loadUrlWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"loadUrl"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASWebViewImpl_WebViewCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASWebViewImpl_WebViewCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASWebViewImpl_WebViewCommandBuilder;", 0x1, 5, 4, -1, -1, -1, -1 },
-    { NULL, "LASWebViewImpl_WebViewCommandBuilder;", 0x1, 6, 4, -1, -1, -1, -1 },
-    { NULL, "LASWebViewImpl_WebViewCommandBuilder;", 0x1, 7, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASWebViewImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setOnPageStartedWithNSString:);
-  methods[3].selector = @selector(setOnPageFinishedWithNSString:);
-  methods[4].selector = @selector(setOnReceivedErrorWithNSString:);
-  methods[5].selector = @selector(loadUrlWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASWebViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASWebViewImpl;", "execute", "Z", "setOnPageStarted", "LNSString;", "setOnPageFinished", "setOnReceivedError", "loadUrl", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/WebViewImpl$WebViewCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASWebViewImpl_WebViewCommandBuilder = { "WebViewCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 6, 1, 0, -1, -1, 8, -1 };
-  return &_ASWebViewImpl_WebViewCommandBuilder;
-}
-
-@end
-
-void ASWebViewImpl_WebViewCommandBuilder_initWithASWebViewImpl_(ASWebViewImpl_WebViewCommandBuilder *self, ASWebViewImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewImpl_ViewCommandBuilder_init(self);
-}
-
-ASWebViewImpl_WebViewCommandBuilder *new_ASWebViewImpl_WebViewCommandBuilder_initWithASWebViewImpl_(ASWebViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASWebViewImpl_WebViewCommandBuilder, initWithASWebViewImpl_, outer$)
-}
-
-ASWebViewImpl_WebViewCommandBuilder *create_ASWebViewImpl_WebViewCommandBuilder_initWithASWebViewImpl_(ASWebViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASWebViewImpl_WebViewCommandBuilder, initWithASWebViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewCommandBuilder)
-
-@implementation ASWebViewImpl_WebViewBean
-
-- (instancetype)initWithASWebViewImpl:(ASWebViewImpl *)outer$ {
-  ASWebViewImpl_WebViewBean_initWithASWebViewImpl_(self, outer$);
-  return self;
-}
-
-- (void)setOnPageStartedWithNSString:(NSString *)value {
-  (void) [((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnPageStartedWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnPageFinishedWithNSString:(NSString *)value {
-  (void) [((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnPageFinishedWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnReceivedErrorWithNSString:(NSString *)value {
-  (void) [((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnReceivedErrorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)loadUrlWithNSString:(NSString *)value {
-  (void) [((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([((ASWebViewImpl_WebViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) loadUrlWithNSString:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASWebViewImpl:);
-  methods[1].selector = @selector(setOnPageStartedWithNSString:);
-  methods[2].selector = @selector(setOnPageFinishedWithNSString:);
-  methods[3].selector = @selector(setOnReceivedErrorWithNSString:);
-  methods[4].selector = @selector(loadUrlWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASWebViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASWebViewImpl;", "setOnPageStarted", "LNSString;", "setOnPageFinished", "setOnReceivedError", "loadUrl" };
-  static const J2ObjcClassInfo _ASWebViewImpl_WebViewBean = { "WebViewBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 5, 1, 0, -1, -1, -1, -1 };
-  return &_ASWebViewImpl_WebViewBean;
-}
-
-@end
-
-void ASWebViewImpl_WebViewBean_initWithASWebViewImpl_(ASWebViewImpl_WebViewBean *self, ASWebViewImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewImpl_ViewBean_initWithASIWidget_(self, outer$);
-}
-
-ASWebViewImpl_WebViewBean *new_ASWebViewImpl_WebViewBean_initWithASWebViewImpl_(ASWebViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASWebViewImpl_WebViewBean, initWithASWebViewImpl_, outer$)
-}
-
-ASWebViewImpl_WebViewBean *create_ASWebViewImpl_WebViewBean_initWithASWebViewImpl_(ASWebViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASWebViewImpl_WebViewBean, initWithASWebViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWebViewImpl_WebViewBean)

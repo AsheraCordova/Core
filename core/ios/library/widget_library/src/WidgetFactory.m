@@ -18,6 +18,7 @@
 #include "WidgetFactory.h"
 #include "java/lang/Integer.h"
 #include "java/util/ArrayList.h"
+#include "java/util/Collection.h"
 #include "java/util/Comparator.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
@@ -237,6 +238,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASWidgetFactory_registerAttributableForWithNSString_withASIAttributable_(localName, attributable);
 }
 
++ (id<JavaUtilCollection>)getAttributesWithNSString:(NSString *)localName {
+  return ASWidgetFactory_getAttributesWithNSString_(localName);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -263,6 +268,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x9, 35, 36, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x9, 37, 3, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 38, 39, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilCollection;", 0x9, 40, 3, -1, 41, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -291,21 +297,22 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[21].selector = @selector(registerBehaviorWithNSString:withASIBehavior:);
   methods[22].selector = @selector(getBehaviorWithNSString:);
   methods[23].selector = @selector(registerAttributableForWithNSString:withASIAttributable:);
+  methods[24].selector = @selector(getAttributesWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "attributeMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 40, 41, -1 },
-    { "styleAttributes", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 42, 43, -1 },
-    { "constructorAttributeMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 44, 41, -1 },
-    { "registrationMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 45, 46, -1 },
-    { "decoratorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 47, 48, -1 },
-    { "lifeCycleDecoratorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 49, 50, -1 },
-    { "behaviorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 51, 52, -1 },
-    { "attributableForMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 53, 54, -1 },
-    { "attributableMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 55, 56, -1 },
-    { "compositeDecorator", "LASICompositeDecorator;", .constantValue.asLong = 0, 0xa, -1, 57, -1, -1 },
+    { "attributeMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 42, 43, -1 },
+    { "styleAttributes", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 44, 45, -1 },
+    { "constructorAttributeMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 46, 43, -1 },
+    { "registrationMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 47, 48, -1 },
+    { "decoratorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 49, 50, -1 },
+    { "lifeCycleDecoratorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 51, 52, -1 },
+    { "behaviorMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 53, 54, -1 },
+    { "attributableForMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 55, 56, -1 },
+    { "attributableMap", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 57, 58, -1 },
+    { "compositeDecorator", "LASICompositeDecorator;", .constantValue.asLong = 0, 0xa, -1, 59, -1, -1 },
   };
-  static const void *ptrTable[] = { "createWidget", "LNSString;LNSString;LASHasWidgets;Z", "getConstructorAttributes", "LNSString;", "(Ljava/lang/String;)Ljava/util/Set<Ljava/lang/String;>;", "registerConstructorAttribute", "LNSString;LASWidgetAttribute_Builder;", "register", "LASICompositeDecorator;", "getAttributable", "getAttributables", "[LNSString;", "([Ljava/lang/String;)Ljava/util/List<Lcom/ashera/widget/IAttributable;>;", "get", "LNSString;Z", "getDecorator", "LASICompositeDecorator;LASIWidget;LNSString;", "loadWidget", "LASIWidget;LASWidgetAttributeMap;LASIFragment;LJavaUtilMap;", "(Lcom/ashera/widget/IWidget;Lcom/ashera/widget/WidgetAttributeMap;Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "LASIWidget;", "registerDecorator", "LASIDecorator;", "isAttributeLoaded", "registerAttribute", "LNSString;LASWidgetAttribute;", "updateStyleAttrs", "getStyleAttributes", "(Ljava/lang/String;)Ljava/util/Set<Lcom/ashera/widget/WidgetAttribute;>;", "getAttribute", "LNSString;LNSString;", "getLifeCycleDecor", "LNSString;LASIWidget;", "registerLifeCycleDecorator", "LNSString;LASILifeCycleDecorator;", "registerBehavior", "LNSString;LASIBehavior;", "getBehavior", "registerAttributableFor", "LNSString;LASIAttributable;", &ASWidgetFactory_attributeMap, "Ljava/util/Map<Ljava/lang/String;Ljava/util/TreeMap<Ljava/lang/String;Lcom/ashera/widget/WidgetAttribute;>;>;", &ASWidgetFactory_styleAttributes, "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Lcom/ashera/widget/WidgetAttribute;>;>;", &ASWidgetFactory_constructorAttributeMap, &ASWidgetFactory_registrationMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;", &ASWidgetFactory_decoratorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IDecorator;>;", &ASWidgetFactory_lifeCycleDecoratorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/ILifeCycleDecorator;>;", &ASWidgetFactory_behaviorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IBehavior;>;", &ASWidgetFactory_attributableForMap, "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Lcom/ashera/widget/IAttributable;>;>;", &ASWidgetFactory_attributableMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IAttributable;>;", &ASWidgetFactory_compositeDecorator };
-  static const J2ObjcClassInfo _ASWidgetFactory = { "WidgetFactory", "com.ashera.widget", ptrTable, methods, fields, 7, 0x1, 24, 10, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "createWidget", "LNSString;LNSString;LASHasWidgets;Z", "getConstructorAttributes", "LNSString;", "(Ljava/lang/String;)Ljava/util/Set<Ljava/lang/String;>;", "registerConstructorAttribute", "LNSString;LASWidgetAttribute_Builder;", "register", "LASICompositeDecorator;", "getAttributable", "getAttributables", "[LNSString;", "([Ljava/lang/String;)Ljava/util/List<Lcom/ashera/widget/IAttributable;>;", "get", "LNSString;Z", "getDecorator", "LASICompositeDecorator;LASIWidget;LNSString;", "loadWidget", "LASIWidget;LASWidgetAttributeMap;LASIFragment;LJavaUtilMap;", "(Lcom/ashera/widget/IWidget;Lcom/ashera/widget/WidgetAttributeMap;Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "LASIWidget;", "registerDecorator", "LASIDecorator;", "isAttributeLoaded", "registerAttribute", "LNSString;LASWidgetAttribute;", "updateStyleAttrs", "getStyleAttributes", "(Ljava/lang/String;)Ljava/util/Set<Lcom/ashera/widget/WidgetAttribute;>;", "getAttribute", "LNSString;LNSString;", "getLifeCycleDecor", "LNSString;LASIWidget;", "registerLifeCycleDecorator", "LNSString;LASILifeCycleDecorator;", "registerBehavior", "LNSString;LASIBehavior;", "getBehavior", "registerAttributableFor", "LNSString;LASIAttributable;", "getAttributes", "(Ljava/lang/String;)Ljava/util/Collection<Lcom/ashera/widget/WidgetAttribute;>;", &ASWidgetFactory_attributeMap, "Ljava/util/Map<Ljava/lang/String;Ljava/util/TreeMap<Ljava/lang/String;Lcom/ashera/widget/WidgetAttribute;>;>;", &ASWidgetFactory_styleAttributes, "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Lcom/ashera/widget/WidgetAttribute;>;>;", &ASWidgetFactory_constructorAttributeMap, &ASWidgetFactory_registrationMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IWidget;>;", &ASWidgetFactory_decoratorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IDecorator;>;", &ASWidgetFactory_lifeCycleDecoratorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/ILifeCycleDecorator;>;", &ASWidgetFactory_behaviorMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IBehavior;>;", &ASWidgetFactory_attributableForMap, "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Lcom/ashera/widget/IAttributable;>;>;", &ASWidgetFactory_attributableMap, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/IAttributable;>;", &ASWidgetFactory_compositeDecorator };
+  static const J2ObjcClassInfo _ASWidgetFactory = { "WidgetFactory", "com.ashera.widget", ptrTable, methods, fields, 7, 0x1, 25, 10, -1, -1, -1, -1, -1 };
   return &_ASWidgetFactory;
 }
 
@@ -543,6 +550,11 @@ void ASWidgetFactory_registerAttributableForWithNSString_withASIAttributable_(NS
   }
   [((id<JavaUtilMap>) nil_chk(ASWidgetFactory_attributableMap)) putWithId:[((id<ASIAttributable>) nil_chk(attributable)) getLocalName] withId:attributable];
   [((id<JavaUtilList>) nil_chk([((id<JavaUtilMap>) nil_chk(ASWidgetFactory_attributableForMap)) getWithId:localName])) addWithId:attributable];
+}
+
+id<JavaUtilCollection> ASWidgetFactory_getAttributesWithNSString_(NSString *localName) {
+  ASWidgetFactory_initialize();
+  return [((JavaUtilTreeMap *) nil_chk([((id<JavaUtilMap>) nil_chk(ASWidgetFactory_attributeMap)) getWithId:localName])) values];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASWidgetFactory)

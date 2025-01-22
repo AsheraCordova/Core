@@ -12,7 +12,6 @@
 #include "HorizontalScrollView.h"
 #include "HorizontalScrollViewImpl.h"
 #include "IActivity.h"
-#include "IAttributable.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
 #include "IListener.h"
@@ -54,17 +53,12 @@
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASHorizontalScrollViewImpl () {
  @public
   id uiView_;
   ADHorizontalScrollView *horizontalScrollView_;
   id<ADView_OnScrollChangeListener> listener_HorizontalScrollViewImpl_;
-  ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *builder_;
-  ASHorizontalScrollViewImpl_HorizontalScrollViewBean *bean_;
-  ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *paramsBuilder_;
-  ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean *paramsBean_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -92,10 +86,6 @@
 J2OBJC_FIELD_SETTER(ASHorizontalScrollViewImpl, uiView_, id)
 J2OBJC_FIELD_SETTER(ASHorizontalScrollViewImpl, horizontalScrollView_, ADHorizontalScrollView *)
 J2OBJC_FIELD_SETTER(ASHorizontalScrollViewImpl, listener_HorizontalScrollViewImpl_, id<ADView_OnScrollChangeListener>)
-J2OBJC_FIELD_SETTER(ASHorizontalScrollViewImpl, builder_, ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASHorizontalScrollViewImpl, bean_, ASHorizontalScrollViewImpl_HorizontalScrollViewBean *)
-J2OBJC_FIELD_SETTER(ASHorizontalScrollViewImpl, paramsBuilder_, ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *)
-J2OBJC_FIELD_SETTER(ASHorizontalScrollViewImpl, paramsBean_, ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean *)
 
 __attribute__((unused)) static void ASHorizontalScrollViewImpl_setWidgetOnNativeClass(ASHorizontalScrollViewImpl *self);
 
@@ -196,27 +186,6 @@ __attribute__((unused)) static ASHorizontalScrollViewImpl_OnScrollChangeListener
 __attribute__((unused)) static ASHorizontalScrollViewImpl_OnScrollChangeListener *create_ASHorizontalScrollViewImpl_OnScrollChangeListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASHorizontalScrollViewImpl_OnScrollChangeListener)
-
-@interface ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder () {
- @public
-  ASHorizontalScrollViewImpl *this$0_;
-}
-
-@end
-
-@interface ASHorizontalScrollViewImpl_HorizontalScrollViewBean () {
- @public
-  ASHorizontalScrollViewImpl *this$0_;
-}
-
-@end
-
-@interface ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean () {
- @public
-  ASHorizontalScrollViewImpl *this$0_;
-}
-
-@end
 
 @interface ASHorizontalScrollViewImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
@@ -532,38 +501,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASHorizontalScrollViewImpl_HorizontalScrollViewBean_initWithASHorizontalScrollViewImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder_initWithASHorizontalScrollViewImpl_(self);
-  }
-  return builder_;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean *)getParamsBean {
-  if (paramsBean_ == nil) {
-    paramsBean_ = new_ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean_initWithASHorizontalScrollViewImpl_(self);
-  }
-  return paramsBean_;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *)getParamsBuilder {
-  if (paramsBuilder_ == nil) {
-    paramsBuilder_ = new_ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder_initWithASHorizontalScrollViewImpl_(self);
-  }
-  return paramsBuilder_;
-}
-
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params {
   ASHorizontalScrollViewImpl_nativeCreateWithJavaUtilMap_(self, params);
 }
@@ -615,12 +552,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x102, 34, 35, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 36, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 37, 35, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 38, 1, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 39, 40, -1, 41, -1, -1 },
+    { NULL, "V", 0x2, 38, 39, -1, 40, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -662,27 +594,18 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[33].selector = @selector(nativeSetPreventAutoScrollWithBoolean:);
   methods[34].selector = @selector(setIdWithNSString:);
   methods[35].selector = @selector(setVisibleWithBoolean:);
-  methods[36].selector = @selector(getPluginWithNSString:);
-  methods[37].selector = @selector(getBean);
-  methods[38].selector = @selector(getBuilder);
-  methods[39].selector = @selector(getParamsBean);
-  methods[40].selector = @selector(getParamsBuilder);
-  methods[41].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[42].selector = @selector(nativeHscrollViewCreate);
+  methods[36].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[37].selector = @selector(nativeHscrollViewCreate);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 42, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 43, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 41, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 42, -1, -1 },
     { "horizontalScrollView_", "LADHorizontalScrollView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "listener_HorizontalScrollViewImpl_", "LADView_OnScrollChangeListener;", .constantValue.asLong = 0, 0x2, 44, -1, -1, -1 },
-    { "builder_", "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASHorizontalScrollViewImpl_HorizontalScrollViewBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBuilder_", "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBean_", "LASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+    { "listener_HorizontalScrollViewImpl_", "LADView_OnScrollChangeListener;", .constantValue.asLong = 0, 0x2, 43, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setScrollX", "LNSObject;", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setOnScroll", "setPreventAutoScroll", "nativeSetPreventAutoScroll", "Z", "setId", "setVisible", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", &ASHorizontalScrollViewImpl_LOCAL_NAME, &ASHorizontalScrollViewImpl_GROUP_NAME, "listener", "LASHorizontalScrollViewImpl_HorizontalScrollViewExt;LASHorizontalScrollViewImpl_MyUIScrollViewDelegate;LASHorizontalScrollViewImpl_OnScrollChangeListener;LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;LASHorizontalScrollViewImpl_HorizontalScrollViewBean;LASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean;LASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;" };
-  static const J2ObjcClassInfo _ASHorizontalScrollViewImpl = { "HorizontalScrollViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 43, 9, -1, 45, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setScrollX", "LNSObject;", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setOnScroll", "setPreventAutoScroll", "nativeSetPreventAutoScroll", "Z", "setId", "setVisible", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", &ASHorizontalScrollViewImpl_LOCAL_NAME, &ASHorizontalScrollViewImpl_GROUP_NAME, "listener", "LASHorizontalScrollViewImpl_HorizontalScrollViewExt;LASHorizontalScrollViewImpl_MyUIScrollViewDelegate;LASHorizontalScrollViewImpl_OnScrollChangeListener;" };
+  static const J2ObjcClassInfo _ASHorizontalScrollViewImpl = { "HorizontalScrollViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 38, 5, -1, 44, -1, -1, -1 };
   return &_ASHorizontalScrollViewImpl;
 }
 
@@ -1362,396 +1285,6 @@ ASHorizontalScrollViewImpl_OnScrollChangeListener *create_ASHorizontalScrollView
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHorizontalScrollViewImpl_OnScrollChangeListener)
-
-@implementation ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder
-
-- (instancetype)initWithASHorizontalScrollViewImpl:(ASHorizontalScrollViewImpl *)outer$ {
-  ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder_initWithASHorizontalScrollViewImpl_(self, outer$);
-  return self;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setForegroundGravityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundGravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetMeasureAllChildren {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"measureAllChildren"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isMeasureAllChildren {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"measureAllChildren"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setMeasureAllChildrenWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"measureAllChildren"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetFillViewport {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"fillViewport"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isFillViewport {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"fillViewport"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setFillViewportWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"fillViewport"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)tryGetScrollX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scrollX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getScrollX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scrollX"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setScrollXWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scrollX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setOnScrollChangeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onScrollChange"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *)setIosPreventAutoScrollWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosPreventAutoScroll"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, 5, 2, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, 7, 4, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, 8, 4, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;", 0x1, 9, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASHorizontalScrollViewImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setForegroundGravityWithNSString:);
-  methods[3].selector = @selector(tryGetMeasureAllChildren);
-  methods[4].selector = @selector(isMeasureAllChildren);
-  methods[5].selector = @selector(setMeasureAllChildrenWithBoolean:);
-  methods[6].selector = @selector(tryGetFillViewport);
-  methods[7].selector = @selector(isFillViewport);
-  methods[8].selector = @selector(setFillViewportWithBoolean:);
-  methods[9].selector = @selector(tryGetScrollX);
-  methods[10].selector = @selector(getScrollX);
-  methods[11].selector = @selector(setScrollXWithNSString:);
-  methods[12].selector = @selector(setOnScrollChangeWithNSString:);
-  methods[13].selector = @selector(setIosPreventAutoScrollWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASHorizontalScrollViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASHorizontalScrollViewImpl;", "execute", "Z", "setForegroundGravity", "LNSString;", "setMeasureAllChildren", "setFillViewport", "setScrollX", "setOnScrollChange", "setIosPreventAutoScroll", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandBuilder<Lcom/ashera/layout/HorizontalScrollViewImpl$HorizontalScrollViewCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder = { "HorizontalScrollViewCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 14, 1, 0, -1, -1, 10, -1 };
-  return &_ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder;
-}
-
-@end
-
-void ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *self, ASHorizontalScrollViewImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupCommandBuilder_init(self);
-}
-
-ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *new_ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder, initWithASHorizontalScrollViewImpl_, outer$)
-}
-
-ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *create_ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder, initWithASHorizontalScrollViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder)
-
-@implementation ASHorizontalScrollViewImpl_HorizontalScrollViewBean
-
-- (instancetype)initWithASHorizontalScrollViewImpl:(ASHorizontalScrollViewImpl *)outer$ {
-  ASHorizontalScrollViewImpl_HorizontalScrollViewBean_initWithASHorizontalScrollViewImpl_(self, outer$);
-  return self;
-}
-
-- (void)setForegroundGravityWithNSString:(NSString *)value {
-  (void) [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setForegroundGravityWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isMeasureAllChildren {
-  return [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMeasureAllChildren])) executeWithBoolean:false])) isMeasureAllChildren];
-}
-
-- (void)setMeasureAllChildrenWithBoolean:(jboolean)value {
-  (void) [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMeasureAllChildrenWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isFillViewport {
-  return [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetFillViewport])) executeWithBoolean:false])) isFillViewport];
-}
-
-- (void)setFillViewportWithBoolean:(jboolean)value {
-  (void) [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFillViewportWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getScrollX {
-  return [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetScrollX])) executeWithBoolean:false])) getScrollX];
-}
-
-- (void)setScrollXWithNSString:(NSString *)value {
-  (void) [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setScrollXWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnScrollChangeWithNSString:(NSString *)value {
-  (void) [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnScrollChangeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosPreventAutoScrollWithBoolean:(jboolean)value {
-  (void) [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosPreventAutoScrollWithBoolean:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASHorizontalScrollViewImpl:);
-  methods[1].selector = @selector(setForegroundGravityWithNSString:);
-  methods[2].selector = @selector(isMeasureAllChildren);
-  methods[3].selector = @selector(setMeasureAllChildrenWithBoolean:);
-  methods[4].selector = @selector(isFillViewport);
-  methods[5].selector = @selector(setFillViewportWithBoolean:);
-  methods[6].selector = @selector(getScrollX);
-  methods[7].selector = @selector(setScrollXWithNSString:);
-  methods[8].selector = @selector(setOnScrollChangeWithNSString:);
-  methods[9].selector = @selector(setIosPreventAutoScrollWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASHorizontalScrollViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASHorizontalScrollViewImpl;", "setForegroundGravity", "LNSString;", "setMeasureAllChildren", "Z", "setFillViewport", "setScrollX", "setOnScrollChange", "setIosPreventAutoScroll" };
-  static const J2ObjcClassInfo _ASHorizontalScrollViewImpl_HorizontalScrollViewBean = { "HorizontalScrollViewBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 10, 1, 0, -1, -1, -1, -1 };
-  return &_ASHorizontalScrollViewImpl_HorizontalScrollViewBean;
-}
-
-@end
-
-void ASHorizontalScrollViewImpl_HorizontalScrollViewBean_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl_HorizontalScrollViewBean *self, ASHorizontalScrollViewImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(self, outer$);
-}
-
-ASHorizontalScrollViewImpl_HorizontalScrollViewBean *new_ASHorizontalScrollViewImpl_HorizontalScrollViewBean_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASHorizontalScrollViewImpl_HorizontalScrollViewBean, initWithASHorizontalScrollViewImpl_, outer$)
-}
-
-ASHorizontalScrollViewImpl_HorizontalScrollViewBean *create_ASHorizontalScrollViewImpl_HorizontalScrollViewBean_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASHorizontalScrollViewImpl_HorizontalScrollViewBean, initWithASHorizontalScrollViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHorizontalScrollViewImpl_HorizontalScrollViewBean)
-
-@implementation ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean
-
-- (instancetype)initWithASHorizontalScrollViewImpl:(ASHorizontalScrollViewImpl *)outer$ {
-  ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean_initWithASHorizontalScrollViewImpl_(self, outer$);
-  return self;
-}
-
-- (id)getLayoutGravityWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) tryGetLayoutGravity])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) getLayoutGravity];
-}
-
-- (void)setLayoutGravityWithASIWidget:(id<ASIWidget>)w
-                         withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *) nil_chk([((ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) setLayoutGravityWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASHorizontalScrollViewImpl:);
-  methods[1].selector = @selector(getLayoutGravityWithASIWidget:);
-  methods[2].selector = @selector(setLayoutGravityWithASIWidget:withNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASHorizontalScrollViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASHorizontalScrollViewImpl;", "getLayoutGravity", "LASIWidget;", "setLayoutGravity", "LASIWidget;LNSString;" };
-  static const J2ObjcClassInfo _ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean = { "HorizontalScrollViewParamsBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 3, 1, 0, -1, -1, -1, -1 };
-  return &_ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean;
-}
-
-@end
-
-void ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean *self, ASHorizontalScrollViewImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupParamsBean_init(self);
-}
-
-ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean *new_ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean, initWithASHorizontalScrollViewImpl_, outer$)
-}
-
-ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean *create_ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean, initWithASHorizontalScrollViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHorizontalScrollViewImpl_HorizontalScrollViewParamsBean)
-
-@implementation ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder
-
-- (instancetype)initWithASHorizontalScrollViewImpl:(ASHorizontalScrollViewImpl *)outer$ {
-  ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder_initWithASHorizontalScrollViewImpl_(self, outer$);
-  return self;
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *)tryGetLayoutGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *)setLayoutGravityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASHorizontalScrollViewImpl:);
-  methods[1].selector = @selector(tryGetLayoutGravity);
-  methods[2].selector = @selector(getLayoutGravity);
-  methods[3].selector = @selector(setLayoutGravityWithNSString:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASHorizontalScrollViewImpl;", "setLayoutGravity", "LNSString;", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandParamsBuilder<Lcom/ashera/layout/HorizontalScrollViewImpl$HorizontalScrollViewCommandParamsBuilder;>;" };
-  static const J2ObjcClassInfo _ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder = { "HorizontalScrollViewCommandParamsBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 4, 0, 0, -1, -1, 3, -1 };
-  return &_ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder;
-}
-
-@end
-
-void ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *self, ASHorizontalScrollViewImpl *outer$) {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(self);
-}
-
-ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *new_ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder, initWithASHorizontalScrollViewImpl_, outer$)
-}
-
-ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder *create_ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder_initWithASHorizontalScrollViewImpl_(ASHorizontalScrollViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder, initWithASHorizontalScrollViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASHorizontalScrollViewImpl_HorizontalScrollViewCommandParamsBuilder)
 
 @implementation ASHorizontalScrollViewImpl_$Lambda$1
 

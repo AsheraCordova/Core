@@ -7,7 +7,6 @@
 #include "FrameLayout.h"
 #include "FrameLayoutImpl.h"
 #include "HasWidgets.h"
-#include "IAttributable.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
 #include "IOSClass.h"
@@ -43,16 +42,11 @@
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASFrameLayoutImpl () {
  @public
   id uiView_;
   ADFrameLayout *frameLayout_;
-  ASFrameLayoutImpl_FrameLayoutCommandBuilder *builder_;
-  ASFrameLayoutImpl_FrameLayoutBean *bean_;
-  ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *paramsBuilder_;
-  ASFrameLayoutImpl_FrameLayoutParamsBean *paramsBean_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -67,10 +61,6 @@
 
 J2OBJC_FIELD_SETTER(ASFrameLayoutImpl, uiView_, id)
 J2OBJC_FIELD_SETTER(ASFrameLayoutImpl, frameLayout_, ADFrameLayout *)
-J2OBJC_FIELD_SETTER(ASFrameLayoutImpl, builder_, ASFrameLayoutImpl_FrameLayoutCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASFrameLayoutImpl, bean_, ASFrameLayoutImpl_FrameLayoutBean *)
-J2OBJC_FIELD_SETTER(ASFrameLayoutImpl, paramsBuilder_, ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *)
-J2OBJC_FIELD_SETTER(ASFrameLayoutImpl, paramsBean_, ASFrameLayoutImpl_FrameLayoutParamsBean *)
 
 __attribute__((unused)) static void ASFrameLayoutImpl_setWidgetOnNativeClass(ASFrameLayoutImpl *self);
 
@@ -97,27 +87,6 @@ J2OBJC_FIELD_SETTER(ASFrameLayoutImpl_FrameLayoutExt, measureFinished_, ASMeasur
 J2OBJC_FIELD_SETTER(ASFrameLayoutImpl_FrameLayoutExt, onLayoutEvent_, ASOnLayoutEvent *)
 J2OBJC_FIELD_SETTER(ASFrameLayoutImpl_FrameLayoutExt, overlays_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASFrameLayoutImpl_FrameLayoutExt, templates_, id<JavaUtilMap>)
-
-@interface ASFrameLayoutImpl_FrameLayoutCommandBuilder () {
- @public
-  ASFrameLayoutImpl *this$0_;
-}
-
-@end
-
-@interface ASFrameLayoutImpl_FrameLayoutBean () {
- @public
-  ASFrameLayoutImpl *this$0_;
-}
-
-@end
-
-@interface ASFrameLayoutImpl_FrameLayoutParamsBean () {
- @public
-  ASFrameLayoutImpl *this$0_;
-}
-
-@end
 
 @interface ASFrameLayoutImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
@@ -361,38 +330,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASFrameLayoutImpl_FrameLayoutBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASFrameLayoutImpl_FrameLayoutBean_initWithASFrameLayoutImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASFrameLayoutImpl_FrameLayoutCommandBuilder_initWithASFrameLayoutImpl_(self);
-  }
-  return builder_;
-}
-
-- (ASFrameLayoutImpl_FrameLayoutParamsBean *)getParamsBean {
-  if (paramsBean_ == nil) {
-    paramsBean_ = new_ASFrameLayoutImpl_FrameLayoutParamsBean_initWithASFrameLayoutImpl_(self);
-  }
-  return paramsBean_;
-}
-
-- (ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *)getParamsBuilder {
-  if (paramsBuilder_ == nil) {
-    paramsBuilder_ = new_ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder_initWithASFrameLayoutImpl_(self);
-  }
-  return paramsBuilder_;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
@@ -421,11 +358,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 27, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 28, 29, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 30, 1, -1, -1, -1, -1 },
-    { NULL, "LASFrameLayoutImpl_FrameLayoutBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASFrameLayoutImpl_FrameLayoutCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASFrameLayoutImpl_FrameLayoutParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASFrameLayoutImpl_FrameLayoutCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -456,24 +388,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[23].selector = @selector(invalidate);
   methods[24].selector = @selector(setIdWithNSString:);
   methods[25].selector = @selector(setVisibleWithBoolean:);
-  methods[26].selector = @selector(getPluginWithNSString:);
-  methods[27].selector = @selector(getBean);
-  methods[28].selector = @selector(getBuilder);
-  methods[29].selector = @selector(getParamsBean);
-  methods[30].selector = @selector(getParamsBuilder);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 32, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 30, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
     { "frameLayout_", "LADFrameLayout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "builder_", "LASFrameLayoutImpl_FrameLayoutCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASFrameLayoutImpl_FrameLayoutBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBuilder_", "LASFrameLayoutImpl_FrameLayoutCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBean_", "LASFrameLayoutImpl_FrameLayoutParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setId", "setVisible", "Z", "getPlugin", &ASFrameLayoutImpl_LOCAL_NAME, &ASFrameLayoutImpl_GROUP_NAME, "LASFrameLayoutImpl_FrameLayoutExt;LASFrameLayoutImpl_FrameLayoutCommandBuilder;LASFrameLayoutImpl_FrameLayoutBean;LASFrameLayoutImpl_FrameLayoutParamsBean;LASFrameLayoutImpl_FrameLayoutCommandParamsBuilder;" };
-  static const J2ObjcClassInfo _ASFrameLayoutImpl = { "FrameLayoutImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 31, 8, -1, 33, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setId", "setVisible", "Z", &ASFrameLayoutImpl_LOCAL_NAME, &ASFrameLayoutImpl_GROUP_NAME, "LASFrameLayoutImpl_FrameLayoutExt;" };
+  static const J2ObjcClassInfo _ASFrameLayoutImpl = { "FrameLayoutImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 26, 4, -1, 32, -1, -1, -1 };
   return &_ASFrameLayoutImpl;
 }
 
@@ -907,282 +830,6 @@ ASFrameLayoutImpl_FrameLayoutExt *create_ASFrameLayoutImpl_FrameLayoutExt_initWi
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFrameLayoutImpl_FrameLayoutExt)
-
-@implementation ASFrameLayoutImpl_FrameLayoutCommandBuilder
-
-- (instancetype)initWithASFrameLayoutImpl:(ASFrameLayoutImpl *)outer$ {
-  ASFrameLayoutImpl_FrameLayoutCommandBuilder_initWithASFrameLayoutImpl_(self, outer$);
-  return self;
-}
-
-- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setForegroundGravityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundGravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)tryGetMeasureAllChildren {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"measureAllChildren"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isMeasureAllChildren {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"measureAllChildren"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASFrameLayoutImpl_FrameLayoutCommandBuilder *)setMeasureAllChildrenWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"measureAllChildren"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASFrameLayoutImpl_FrameLayoutCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASFrameLayoutImpl_FrameLayoutCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASFrameLayoutImpl_FrameLayoutCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASFrameLayoutImpl_FrameLayoutCommandBuilder;", 0x1, 5, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASFrameLayoutImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setForegroundGravityWithNSString:);
-  methods[3].selector = @selector(tryGetMeasureAllChildren);
-  methods[4].selector = @selector(isMeasureAllChildren);
-  methods[5].selector = @selector(setMeasureAllChildrenWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASFrameLayoutImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASFrameLayoutImpl;", "execute", "Z", "setForegroundGravity", "LNSString;", "setMeasureAllChildren", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandBuilder<Lcom/ashera/layout/FrameLayoutImpl$FrameLayoutCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASFrameLayoutImpl_FrameLayoutCommandBuilder = { "FrameLayoutCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 6, 1, 0, -1, -1, 6, -1 };
-  return &_ASFrameLayoutImpl_FrameLayoutCommandBuilder;
-}
-
-@end
-
-void ASFrameLayoutImpl_FrameLayoutCommandBuilder_initWithASFrameLayoutImpl_(ASFrameLayoutImpl_FrameLayoutCommandBuilder *self, ASFrameLayoutImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupCommandBuilder_init(self);
-}
-
-ASFrameLayoutImpl_FrameLayoutCommandBuilder *new_ASFrameLayoutImpl_FrameLayoutCommandBuilder_initWithASFrameLayoutImpl_(ASFrameLayoutImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASFrameLayoutImpl_FrameLayoutCommandBuilder, initWithASFrameLayoutImpl_, outer$)
-}
-
-ASFrameLayoutImpl_FrameLayoutCommandBuilder *create_ASFrameLayoutImpl_FrameLayoutCommandBuilder_initWithASFrameLayoutImpl_(ASFrameLayoutImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASFrameLayoutImpl_FrameLayoutCommandBuilder, initWithASFrameLayoutImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFrameLayoutImpl_FrameLayoutCommandBuilder)
-
-@implementation ASFrameLayoutImpl_FrameLayoutBean
-
-- (instancetype)initWithASFrameLayoutImpl:(ASFrameLayoutImpl *)outer$ {
-  ASFrameLayoutImpl_FrameLayoutBean_initWithASFrameLayoutImpl_(self, outer$);
-  return self;
-}
-
-- (void)setForegroundGravityWithNSString:(NSString *)value {
-  (void) [((ASFrameLayoutImpl_FrameLayoutCommandBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setForegroundGravityWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isMeasureAllChildren {
-  return [((ASFrameLayoutImpl_FrameLayoutCommandBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMeasureAllChildren])) executeWithBoolean:false])) isMeasureAllChildren];
-}
-
-- (void)setMeasureAllChildrenWithBoolean:(jboolean)value {
-  (void) [((ASFrameLayoutImpl_FrameLayoutCommandBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMeasureAllChildrenWithBoolean:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASFrameLayoutImpl:);
-  methods[1].selector = @selector(setForegroundGravityWithNSString:);
-  methods[2].selector = @selector(isMeasureAllChildren);
-  methods[3].selector = @selector(setMeasureAllChildrenWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASFrameLayoutImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASFrameLayoutImpl;", "setForegroundGravity", "LNSString;", "setMeasureAllChildren", "Z" };
-  static const J2ObjcClassInfo _ASFrameLayoutImpl_FrameLayoutBean = { "FrameLayoutBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 4, 1, 0, -1, -1, -1, -1 };
-  return &_ASFrameLayoutImpl_FrameLayoutBean;
-}
-
-@end
-
-void ASFrameLayoutImpl_FrameLayoutBean_initWithASFrameLayoutImpl_(ASFrameLayoutImpl_FrameLayoutBean *self, ASFrameLayoutImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(self, outer$);
-}
-
-ASFrameLayoutImpl_FrameLayoutBean *new_ASFrameLayoutImpl_FrameLayoutBean_initWithASFrameLayoutImpl_(ASFrameLayoutImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASFrameLayoutImpl_FrameLayoutBean, initWithASFrameLayoutImpl_, outer$)
-}
-
-ASFrameLayoutImpl_FrameLayoutBean *create_ASFrameLayoutImpl_FrameLayoutBean_initWithASFrameLayoutImpl_(ASFrameLayoutImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASFrameLayoutImpl_FrameLayoutBean, initWithASFrameLayoutImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFrameLayoutImpl_FrameLayoutBean)
-
-@implementation ASFrameLayoutImpl_FrameLayoutParamsBean
-
-- (instancetype)initWithASFrameLayoutImpl:(ASFrameLayoutImpl *)outer$ {
-  ASFrameLayoutImpl_FrameLayoutParamsBean_initWithASFrameLayoutImpl_(self, outer$);
-  return self;
-}
-
-- (id)getLayoutGravityWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) tryGetLayoutGravity])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) getLayoutGravity];
-}
-
-- (void)setLayoutGravityWithASIWidget:(id<ASIWidget>)w
-                         withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *) nil_chk([((ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) setLayoutGravityWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASFrameLayoutImpl:);
-  methods[1].selector = @selector(getLayoutGravityWithASIWidget:);
-  methods[2].selector = @selector(setLayoutGravityWithASIWidget:withNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASFrameLayoutImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASFrameLayoutImpl;", "getLayoutGravity", "LASIWidget;", "setLayoutGravity", "LASIWidget;LNSString;" };
-  static const J2ObjcClassInfo _ASFrameLayoutImpl_FrameLayoutParamsBean = { "FrameLayoutParamsBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 3, 1, 0, -1, -1, -1, -1 };
-  return &_ASFrameLayoutImpl_FrameLayoutParamsBean;
-}
-
-@end
-
-void ASFrameLayoutImpl_FrameLayoutParamsBean_initWithASFrameLayoutImpl_(ASFrameLayoutImpl_FrameLayoutParamsBean *self, ASFrameLayoutImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupParamsBean_init(self);
-}
-
-ASFrameLayoutImpl_FrameLayoutParamsBean *new_ASFrameLayoutImpl_FrameLayoutParamsBean_initWithASFrameLayoutImpl_(ASFrameLayoutImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASFrameLayoutImpl_FrameLayoutParamsBean, initWithASFrameLayoutImpl_, outer$)
-}
-
-ASFrameLayoutImpl_FrameLayoutParamsBean *create_ASFrameLayoutImpl_FrameLayoutParamsBean_initWithASFrameLayoutImpl_(ASFrameLayoutImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASFrameLayoutImpl_FrameLayoutParamsBean, initWithASFrameLayoutImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFrameLayoutImpl_FrameLayoutParamsBean)
-
-@implementation ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder
-
-- (instancetype)initWithASFrameLayoutImpl:(ASFrameLayoutImpl *)outer$ {
-  ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder_initWithASFrameLayoutImpl_(self, outer$);
-  return self;
-}
-
-- (ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *)tryGetLayoutGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *)setLayoutGravityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASFrameLayoutImpl_FrameLayoutCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASFrameLayoutImpl_FrameLayoutCommandParamsBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASFrameLayoutImpl:);
-  methods[1].selector = @selector(tryGetLayoutGravity);
-  methods[2].selector = @selector(getLayoutGravity);
-  methods[3].selector = @selector(setLayoutGravityWithNSString:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASFrameLayoutImpl;", "setLayoutGravity", "LNSString;", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandParamsBuilder<Lcom/ashera/layout/FrameLayoutImpl$FrameLayoutCommandParamsBuilder;>;" };
-  static const J2ObjcClassInfo _ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder = { "FrameLayoutCommandParamsBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 4, 0, 0, -1, -1, 3, -1 };
-  return &_ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder;
-}
-
-@end
-
-void ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder_initWithASFrameLayoutImpl_(ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *self, ASFrameLayoutImpl *outer$) {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(self);
-}
-
-ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *new_ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder_initWithASFrameLayoutImpl_(ASFrameLayoutImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder, initWithASFrameLayoutImpl_, outer$)
-}
-
-ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder *create_ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder_initWithASFrameLayoutImpl_(ASFrameLayoutImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder, initWithASFrameLayoutImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFrameLayoutImpl_FrameLayoutCommandParamsBuilder)
 
 @implementation ASFrameLayoutImpl_$Lambda$1
 

@@ -74,6 +74,7 @@ public class mergeImpl extends BaseHasWidgets {
 		
 		ViewGroupImpl.registerCommandConveter(this);
 		setWidgetOnNativeClass();
+		
 	}
 	private native void setWidgetOnNativeClass() /*-[
 		((ASUIView*) [self asNativeWidget]).widget = self;
@@ -449,7 +450,7 @@ public class mergeImpl extends BaseHasWidgets {
 	@SuppressLint("NewApi")
 	@Override
 	public void setAttribute(WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-				ViewGroupImpl.setAttribute(this, key, strValue, objValue, decorator);
+				ViewGroupImpl.setAttribute(this,  key, strValue, objValue, decorator);
 		Object nativeWidget = asNativeWidget();
 
 	}
@@ -500,75 +501,7 @@ public class mergeImpl extends BaseHasWidgets {
         ((View)asWidget()).setVisibility(b ? View.VISIBLE : View.GONE);
     }
 
-	
-private mergeCommandBuilder builder;
-private mergeBean bean;
-public Object getPlugin(String plugin) {
-	return WidgetFactory.getAttributable(plugin).newInstance(this);
-}
-public mergeBean getBean() {
-	if (bean == null) {
-		bean = new mergeBean();
-	}
-	return bean;
-}
-public mergeCommandBuilder getBuilder() {
-	if (builder == null) {
-		builder = new mergeCommandBuilder();
-	}
-	return builder;
-}
-
-
-public  class mergeCommandBuilder extends com.ashera.layout.ViewGroupImpl.ViewGroupCommandBuilder <mergeCommandBuilder> {
-    public mergeCommandBuilder() {
-	}
-	
-	public mergeCommandBuilder execute(boolean setter) {
-		if (setter) {
-			executeCommand(command, null, IWidget.COMMAND_EXEC_SETTER_METHOD);
-			getFragment().remeasure();
-		}
-		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
-return this;	}
-
-}
-public class mergeBean extends com.ashera.layout.ViewGroupImpl.ViewGroupBean{
-		public mergeBean() {
-			super(mergeImpl.this);
-		}
-}
-
-
-private mergeCommandParamsBuilder paramsBuilder;
-private mergeParamsBean paramsBean;
-
-public mergeParamsBean getParamsBean() {
-	if (paramsBean == null) {
-		paramsBean = new mergeParamsBean();
-	}
-	return paramsBean;
-}
-public mergeCommandParamsBuilder getParamsBuilder() {
-	if (paramsBuilder == null) {
-		paramsBuilder = new mergeCommandParamsBuilder();
-	}
-	return paramsBuilder;
-}
-
-
-
-public class mergeParamsBean extends com.ashera.layout.ViewGroupImpl.ViewGroupParamsBean{
-}
-
-
-
-
-
-public class mergeCommandParamsBuilder extends com.ashera.layout.ViewGroupImpl.ViewGroupCommandParamsBuilder<mergeCommandParamsBuilder>{
-}
-
-	//end - body
+		//end - body
 @Override
 public Object asNativeWidget() {
 	return uiView;

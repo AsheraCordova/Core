@@ -12,7 +12,6 @@
 #include "ConverterFactory.h"
 #include "Drawable.h"
 #include "HasWidgets.h"
-#include "IAttributable.h"
 #include "IFragment.h"
 #include "IImageDownloader.h"
 #include "ILifeCycleDecorator.h"
@@ -52,15 +51,11 @@
 @protocol JavaUtilMap;
 
 
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-
 @interface ASImageButtonImpl () {
  @public
   ADDrawable *imageFromUrlPlaceHolder_;
   jboolean measureCalled_;
   ADDrawable *imageFromUrlError_;
-  ASImageButtonImpl_ImageButtonCommandBuilder *builder_;
-  ASImageButtonImpl_ImageButtonBean *bean_;
   id tintColor_;
 }
 
@@ -156,8 +151,6 @@
 
 J2OBJC_FIELD_SETTER(ASImageButtonImpl, imageFromUrlPlaceHolder_, ADDrawable *)
 J2OBJC_FIELD_SETTER(ASImageButtonImpl, imageFromUrlError_, ADDrawable *)
-J2OBJC_FIELD_SETTER(ASImageButtonImpl, builder_, ASImageButtonImpl_ImageButtonCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASImageButtonImpl, bean_, ASImageButtonImpl_ImageButtonBean *)
 J2OBJC_FIELD_SETTER(ASImageButtonImpl, tintColor_, id)
 
 inline id<JavaUtilMap> ASImageButtonImpl_get_scaleTypeToContentModeMapping(void);
@@ -273,20 +266,6 @@ J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, measureFinished_, ASMeasur
 J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, onLayoutEvent_, ASOnLayoutEvent *)
 J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, overlays_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASImageButtonImpl_ImageButtonExt, templates_, id<JavaUtilMap>)
-
-@interface ASImageButtonImpl_ImageButtonCommandBuilder () {
- @public
-  ASImageButtonImpl *this$0_;
-}
-
-@end
-
-@interface ASImageButtonImpl_ImageButtonBean () {
- @public
-  ASImageButtonImpl *this$0_;
-}
-
-@end
 
 J2OBJC_INITIALIZED_DEFN(ASImageButtonImpl)
 
@@ -806,24 +785,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASImageButtonImpl_ImageButtonBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASImageButtonImpl_ImageButtonBean_initWithASImageButtonImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASImageButtonImpl_ImageButtonCommandBuilder_initWithASImageButtonImpl_(self);
-  }
-  return builder_;
-}
-
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params {
   ASImageButtonImpl_nativeCreateWithJavaUtilMap_(self, params);
 }
@@ -936,20 +897,17 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 46, 47, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 48, 1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 49, 50, -1, 51, -1, -1 },
+    { NULL, "V", 0x2, 48, 49, -1, 50, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 52, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 51, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 53, 54, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 55, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 56, 54, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 57, 40, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 52, 53, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 54, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 55, 53, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 56, 40, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1018,36 +976,31 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[61].selector = @selector(setVisibleWithBoolean:);
   methods[62].selector = @selector(requestLayout);
   methods[63].selector = @selector(invalidate);
-  methods[64].selector = @selector(getPluginWithNSString:);
-  methods[65].selector = @selector(getBean);
-  methods[66].selector = @selector(getBuilder);
-  methods[67].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[68].selector = @selector(createButton);
-  methods[69].selector = @selector(asNativeWidget);
-  methods[70].selector = @selector(isViewWrapped);
-  methods[71].selector = @selector(setTintColorWithId:);
-  methods[72].selector = @selector(getTintColor);
-  methods[73].selector = @selector(getImageNative);
-  methods[74].selector = @selector(setImageNativeWithId:withId:);
-  methods[75].selector = @selector(setImageNativeSimpleWithId:);
-  methods[76].selector = @selector(setImageNativeWithTemplateWithId:withId:);
-  methods[77].selector = @selector(nativeSetContentModeWithInt:);
+  methods[64].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[65].selector = @selector(createButton);
+  methods[66].selector = @selector(asNativeWidget);
+  methods[67].selector = @selector(isViewWrapped);
+  methods[68].selector = @selector(setTintColorWithId:);
+  methods[69].selector = @selector(getTintColor);
+  methods[70].selector = @selector(getImageNative);
+  methods[71].selector = @selector(setImageNativeWithId:withId:);
+  methods[72].selector = @selector(setImageNativeSimpleWithId:);
+  methods[73].selector = @selector(setImageNativeWithTemplateWithId:withId:);
+  methods[74].selector = @selector(nativeSetContentModeWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 58, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 59, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 57, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 58, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADImageView;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "scaleTypeToContentModeMapping", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 60, 61, -1 },
+    { "scaleTypeToContentModeMapping", "LJavaUtilMap;", .constantValue.asLong = 0, 0xa, -1, 59, 60, -1 },
     { "imageFromUrlPlaceHolder_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "measureCalled_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "imageFromUrlError_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "builder_", "LASImageButtonImpl_ImageButtonCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASImageButtonImpl_ImageButtonBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "tintColor_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setScaleType", "LNSString;LNSObject;", "setImage", "LNSObject;", "getImageHeight", "getImageWidth", "setImageFromUrlError", "setImageFromUrlPlaceHolder", "setImageFromUrl", "onBitmapFailed", "onPrepareLoad", "onBitmapLoaded", "postOnMeasure", "II", "setBaseLine", "setBaselineAlignBottom", "setCropToPadding", "setMaxWidth", "setMaxHeight", "setAdjustViewBounds", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "I", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setTintColor", "setImageNative", "LNSObject;LNSObject;", "setImageNativeSimple", "setImageNativeWithTemplate", "nativeSetContentMode", &ASImageButtonImpl_LOCAL_NAME, &ASImageButtonImpl_GROUP_NAME, &ASImageButtonImpl_scaleTypeToContentModeMapping, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageButtonImpl_ScaleType;LASImageButtonImpl_ImageButtonExt;LASImageButtonImpl_ImageButtonCommandBuilder;LASImageButtonImpl_ImageButtonBean;" };
-  static const J2ObjcClassInfo _ASImageButtonImpl = { "ImageButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 78, 11, -1, 62, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setScaleType", "LNSString;LNSObject;", "setImage", "LNSObject;", "getImageHeight", "getImageWidth", "setImageFromUrlError", "setImageFromUrlPlaceHolder", "setImageFromUrl", "onBitmapFailed", "onPrepareLoad", "onBitmapLoaded", "postOnMeasure", "II", "setBaseLine", "setBaselineAlignBottom", "setCropToPadding", "setMaxWidth", "setMaxHeight", "setAdjustViewBounds", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "I", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "checkIosVersion", "setId", "setVisible", "Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setTintColor", "setImageNative", "LNSObject;LNSObject;", "setImageNativeSimple", "setImageNativeWithTemplate", "nativeSetContentMode", &ASImageButtonImpl_LOCAL_NAME, &ASImageButtonImpl_GROUP_NAME, &ASImageButtonImpl_scaleTypeToContentModeMapping, "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Integer;>;", "LASImageButtonImpl_ScaleType;LASImageButtonImpl_ImageButtonExt;" };
+  static const J2ObjcClassInfo _ASImageButtonImpl = { "ImageButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 75, 9, -1, 61, -1, -1, -1 };
   return &_ASImageButtonImpl;
 }
 
@@ -1718,758 +1671,3 @@ ASImageButtonImpl_ImageButtonExt *create_ASImageButtonImpl_ImageButtonExt_initWi
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ImageButtonExt)
-
-@implementation ASImageButtonImpl_ImageButtonCommandBuilder
-
-- (instancetype)initWithASImageButtonImpl:(ASImageButtonImpl *)outer$ {
-  ASImageButtonImpl_ImageButtonCommandBuilder_initWithASImageButtonImpl_(self, outer$);
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetSrc {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"src"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getSrc {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"src"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setSrcWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"src"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetScaleType {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scaleType"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getScaleType {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scaleType"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setScaleTypeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scaleType"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetAdjustViewBounds {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"adjustViewBounds"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isAdjustViewBounds {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"adjustViewBounds"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setAdjustViewBoundsWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"adjustViewBounds"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetMaxHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setMaxHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetMaxWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setMaxWidthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setImageFromUrlWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"imageFromUrl"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setImageFromUrlPlaceHolderWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"imageFromUrlPlaceHolder"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setImageFromUrlErrorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"imageFromUrlError"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"padding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetPaddingBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingBottom"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingBottomWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetPaddingRight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingRight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingRight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingRight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingRight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetPaddingLeft {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingLeft {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingLeft"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetPaddingStart {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingStart {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingStart"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingStartWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetPaddingEnd {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingEnd {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingEnd"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingEndWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetPaddingTop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingTop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingTop"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingTopWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingHorizontalWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingHorizontal"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingVertical"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetBaseline {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"baseline"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getBaseline {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"baseline"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setBaselineWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"baseline"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetBaselineAlignBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"baselineAlignBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isBaselineAlignBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"baselineAlignBottom"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setBaselineAlignBottomWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"baselineAlignBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)tryGetTint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"tint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"tint"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASImageButtonImpl_ImageButtonCommandBuilder *)setTintWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"tint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 5, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 7, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 8, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 9, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 10, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 11, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 12, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 13, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 14, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 15, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 16, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 17, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 18, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 19, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 20, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 21, 4, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 22, 2, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASImageButtonImpl_ImageButtonCommandBuilder;", 0x1, 23, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASImageButtonImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(tryGetSrc);
-  methods[3].selector = @selector(getSrc);
-  methods[4].selector = @selector(setSrcWithNSString:);
-  methods[5].selector = @selector(tryGetScaleType);
-  methods[6].selector = @selector(getScaleType);
-  methods[7].selector = @selector(setScaleTypeWithNSString:);
-  methods[8].selector = @selector(tryGetAdjustViewBounds);
-  methods[9].selector = @selector(isAdjustViewBounds);
-  methods[10].selector = @selector(setAdjustViewBoundsWithBoolean:);
-  methods[11].selector = @selector(tryGetMaxHeight);
-  methods[12].selector = @selector(getMaxHeight);
-  methods[13].selector = @selector(setMaxHeightWithNSString:);
-  methods[14].selector = @selector(tryGetMaxWidth);
-  methods[15].selector = @selector(getMaxWidth);
-  methods[16].selector = @selector(setMaxWidthWithNSString:);
-  methods[17].selector = @selector(setImageFromUrlWithNSString:);
-  methods[18].selector = @selector(setImageFromUrlPlaceHolderWithNSString:);
-  methods[19].selector = @selector(setImageFromUrlErrorWithNSString:);
-  methods[20].selector = @selector(setPaddingWithNSString:);
-  methods[21].selector = @selector(tryGetPaddingBottom);
-  methods[22].selector = @selector(getPaddingBottom);
-  methods[23].selector = @selector(setPaddingBottomWithNSString:);
-  methods[24].selector = @selector(tryGetPaddingRight);
-  methods[25].selector = @selector(getPaddingRight);
-  methods[26].selector = @selector(setPaddingRightWithNSString:);
-  methods[27].selector = @selector(tryGetPaddingLeft);
-  methods[28].selector = @selector(getPaddingLeft);
-  methods[29].selector = @selector(setPaddingLeftWithNSString:);
-  methods[30].selector = @selector(tryGetPaddingStart);
-  methods[31].selector = @selector(getPaddingStart);
-  methods[32].selector = @selector(setPaddingStartWithNSString:);
-  methods[33].selector = @selector(tryGetPaddingEnd);
-  methods[34].selector = @selector(getPaddingEnd);
-  methods[35].selector = @selector(setPaddingEndWithNSString:);
-  methods[36].selector = @selector(tryGetPaddingTop);
-  methods[37].selector = @selector(getPaddingTop);
-  methods[38].selector = @selector(setPaddingTopWithNSString:);
-  methods[39].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[40].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[41].selector = @selector(tryGetBaseline);
-  methods[42].selector = @selector(getBaseline);
-  methods[43].selector = @selector(setBaselineWithNSString:);
-  methods[44].selector = @selector(tryGetBaselineAlignBottom);
-  methods[45].selector = @selector(isBaselineAlignBottom);
-  methods[46].selector = @selector(setBaselineAlignBottomWithBoolean:);
-  methods[47].selector = @selector(tryGetTint);
-  methods[48].selector = @selector(getTint);
-  methods[49].selector = @selector(setTintWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASImageButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASImageButtonImpl;", "execute", "Z", "setSrc", "LNSString;", "setScaleType", "setAdjustViewBounds", "setMaxHeight", "setMaxWidth", "setImageFromUrl", "setImageFromUrlPlaceHolder", "setImageFromUrlError", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setBaseline", "setBaselineAlignBottom", "setTint", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ImageButtonImpl$ImageButtonCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASImageButtonImpl_ImageButtonCommandBuilder = { "ImageButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 50, 1, 0, -1, -1, 24, -1 };
-  return &_ASImageButtonImpl_ImageButtonCommandBuilder;
-}
-
-@end
-
-void ASImageButtonImpl_ImageButtonCommandBuilder_initWithASImageButtonImpl_(ASImageButtonImpl_ImageButtonCommandBuilder *self, ASImageButtonImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewImpl_ViewCommandBuilder_init(self);
-}
-
-ASImageButtonImpl_ImageButtonCommandBuilder *new_ASImageButtonImpl_ImageButtonCommandBuilder_initWithASImageButtonImpl_(ASImageButtonImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASImageButtonImpl_ImageButtonCommandBuilder, initWithASImageButtonImpl_, outer$)
-}
-
-ASImageButtonImpl_ImageButtonCommandBuilder *create_ASImageButtonImpl_ImageButtonCommandBuilder_initWithASImageButtonImpl_(ASImageButtonImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASImageButtonImpl_ImageButtonCommandBuilder, initWithASImageButtonImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ImageButtonCommandBuilder)
-
-@implementation ASImageButtonImpl_ImageButtonBean
-
-- (instancetype)initWithASImageButtonImpl:(ASImageButtonImpl *)outer$ {
-  ASImageButtonImpl_ImageButtonBean_initWithASImageButtonImpl_(self, outer$);
-  return self;
-}
-
-- (id)getSrc {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetSrc])) executeWithBoolean:false])) getSrc];
-}
-
-- (void)setSrcWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setSrcWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getScaleType {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetScaleType])) executeWithBoolean:false])) getScaleType];
-}
-
-- (void)setScaleTypeWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setScaleTypeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isAdjustViewBounds {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetAdjustViewBounds])) executeWithBoolean:false])) isAdjustViewBounds];
-}
-
-- (void)setAdjustViewBoundsWithBoolean:(jboolean)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setAdjustViewBoundsWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxHeight {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxHeight])) executeWithBoolean:false])) getMaxHeight];
-}
-
-- (void)setMaxHeightWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxWidth {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxWidth])) executeWithBoolean:false])) getMaxWidth];
-}
-
-- (void)setMaxWidthWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxWidthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setImageFromUrlWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setImageFromUrlWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setImageFromUrlPlaceHolderWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setImageFromUrlPlaceHolderWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setImageFromUrlErrorWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setImageFromUrlErrorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setPaddingWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingBottom {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingBottom])) executeWithBoolean:false])) getPaddingBottom];
-}
-
-- (void)setPaddingBottomWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingBottomWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingRight {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingRight])) executeWithBoolean:false])) getPaddingRight];
-}
-
-- (void)setPaddingRightWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingRightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingLeft {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingLeft])) executeWithBoolean:false])) getPaddingLeft];
-}
-
-- (void)setPaddingLeftWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingLeftWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingStart {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingStart])) executeWithBoolean:false])) getPaddingStart];
-}
-
-- (void)setPaddingStartWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingEnd {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingEnd])) executeWithBoolean:false])) getPaddingEnd];
-}
-
-- (void)setPaddingEndWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingEndWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingTop {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingTop])) executeWithBoolean:false])) getPaddingTop];
-}
-
-- (void)setPaddingTopWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingTopWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setPaddingHorizontalWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingHorizontalWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setPaddingVerticalWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingVerticalWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getBaseline {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetBaseline])) executeWithBoolean:false])) getBaseline];
-}
-
-- (void)setBaselineWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setBaselineWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isBaselineAlignBottom {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetBaselineAlignBottom])) executeWithBoolean:false])) isBaselineAlignBottom];
-}
-
-- (void)setBaselineAlignBottomWithBoolean:(jboolean)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setBaselineAlignBottomWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getTint {
-  return [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetTint])) executeWithBoolean:false])) getTint];
-}
-
-- (void)setTintWithNSString:(NSString *)value {
-  (void) [((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([((ASImageButtonImpl_ImageButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTintWithNSString:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 12, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASImageButtonImpl:);
-  methods[1].selector = @selector(getSrc);
-  methods[2].selector = @selector(setSrcWithNSString:);
-  methods[3].selector = @selector(getScaleType);
-  methods[4].selector = @selector(setScaleTypeWithNSString:);
-  methods[5].selector = @selector(isAdjustViewBounds);
-  methods[6].selector = @selector(setAdjustViewBoundsWithBoolean:);
-  methods[7].selector = @selector(getMaxHeight);
-  methods[8].selector = @selector(setMaxHeightWithNSString:);
-  methods[9].selector = @selector(getMaxWidth);
-  methods[10].selector = @selector(setMaxWidthWithNSString:);
-  methods[11].selector = @selector(setImageFromUrlWithNSString:);
-  methods[12].selector = @selector(setImageFromUrlPlaceHolderWithNSString:);
-  methods[13].selector = @selector(setImageFromUrlErrorWithNSString:);
-  methods[14].selector = @selector(setPaddingWithNSString:);
-  methods[15].selector = @selector(getPaddingBottom);
-  methods[16].selector = @selector(setPaddingBottomWithNSString:);
-  methods[17].selector = @selector(getPaddingRight);
-  methods[18].selector = @selector(setPaddingRightWithNSString:);
-  methods[19].selector = @selector(getPaddingLeft);
-  methods[20].selector = @selector(setPaddingLeftWithNSString:);
-  methods[21].selector = @selector(getPaddingStart);
-  methods[22].selector = @selector(setPaddingStartWithNSString:);
-  methods[23].selector = @selector(getPaddingEnd);
-  methods[24].selector = @selector(setPaddingEndWithNSString:);
-  methods[25].selector = @selector(getPaddingTop);
-  methods[26].selector = @selector(setPaddingTopWithNSString:);
-  methods[27].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[28].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[29].selector = @selector(getBaseline);
-  methods[30].selector = @selector(setBaselineWithNSString:);
-  methods[31].selector = @selector(isBaselineAlignBottom);
-  methods[32].selector = @selector(setBaselineAlignBottomWithBoolean:);
-  methods[33].selector = @selector(getTint);
-  methods[34].selector = @selector(setTintWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASImageButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASImageButtonImpl;", "setSrc", "LNSString;", "setScaleType", "setAdjustViewBounds", "Z", "setMaxHeight", "setMaxWidth", "setImageFromUrl", "setImageFromUrlPlaceHolder", "setImageFromUrlError", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setBaseline", "setBaselineAlignBottom", "setTint" };
-  static const J2ObjcClassInfo _ASImageButtonImpl_ImageButtonBean = { "ImageButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 35, 1, 0, -1, -1, -1, -1 };
-  return &_ASImageButtonImpl_ImageButtonBean;
-}
-
-@end
-
-void ASImageButtonImpl_ImageButtonBean_initWithASImageButtonImpl_(ASImageButtonImpl_ImageButtonBean *self, ASImageButtonImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewImpl_ViewBean_initWithASIWidget_(self, outer$);
-}
-
-ASImageButtonImpl_ImageButtonBean *new_ASImageButtonImpl_ImageButtonBean_initWithASImageButtonImpl_(ASImageButtonImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASImageButtonImpl_ImageButtonBean, initWithASImageButtonImpl_, outer$)
-}
-
-ASImageButtonImpl_ImageButtonBean *create_ASImageButtonImpl_ImageButtonBean_initWithASImageButtonImpl_(ASImageButtonImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASImageButtonImpl_ImageButtonBean, initWithASImageButtonImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASImageButtonImpl_ImageButtonBean)

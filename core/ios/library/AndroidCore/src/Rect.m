@@ -98,6 +98,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   return [sb description];
 }
 
+- (void)insetWithADRect:(ADRect *)insets {
+  left_ += ((ADRect *) nil_chk(insets))->left_;
+  top_ += insets->top_;
+  right_ -= insets->right_;
+  bottom_ -= insets->bottom_;
+}
+
+- (void)insetWithInt:(jint)dx
+             withInt:(jint)dy {
+  left_ += dx;
+  top_ += dy;
+  right_ -= dx;
+  bottom_ -= dy;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -114,6 +129,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x1, 5, 4, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, 6, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 4, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -132,6 +149,8 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[11].selector = @selector(containsWithInt:withInt:);
   methods[12].selector = @selector(toShortString);
   methods[13].selector = @selector(toShortStringWithJavaLangStringBuilder:);
+  methods[14].selector = @selector(insetWithADRect:);
+  methods[15].selector = @selector(insetWithInt:withInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "left_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
@@ -139,8 +158,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "right_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
     { "bottom_", "I", .constantValue.asLong = 0, 0x1, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "IIII", "LADRect;", "set", "offset", "II", "contains", "toShortString", "LJavaLangStringBuilder;" };
-  static const J2ObjcClassInfo _ADRect = { "Rect", "r.android.graphics", ptrTable, methods, fields, 7, 0x11, 14, 4, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "IIII", "LADRect;", "set", "offset", "II", "contains", "toShortString", "LJavaLangStringBuilder;", "inset" };
+  static const J2ObjcClassInfo _ADRect = { "Rect", "r.android.graphics", ptrTable, methods, fields, 7, 0x11, 16, 4, -1, -1, -1, -1, -1 };
   return &_ADRect;
 }
 

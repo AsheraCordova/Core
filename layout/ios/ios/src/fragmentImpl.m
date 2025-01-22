@@ -11,7 +11,6 @@
 #include "FrameLayout.h"
 #include "GenericFragment.h"
 #include "HasWidgets.h"
-#include "IAttributable.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
 #include "IOSClass.h"
@@ -54,7 +53,6 @@ static void (*ASfragmentImpl_super$_addWithASIWidget_withInt_)(id, SEL, id, jint
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASfragmentImpl () {
  @public
@@ -65,10 +63,6 @@ static void (*ASfragmentImpl_super$_addWithASIWidget_withInt_)(id, SEL, id, jint
   NSString *navGraph_;
   NSString *tag_;
   ASUINavigatorImpl *navigator_;
-  ASfragmentImpl_fragmentCommandBuilder *builder_;
-  ASfragmentImpl_fragmentBean *bean_;
-  ASfragmentImpl_fragmentCommandParamsBuilder *paramsBuilder_;
-  ASfragmentImpl_fragmentParamsBean *paramsBean_;
   id navController_;
 }
 
@@ -147,10 +141,6 @@ J2OBJC_FIELD_SETTER(ASfragmentImpl, name_, NSString *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, navGraph_, NSString *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, tag_, NSString *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, navigator_, ASUINavigatorImpl *)
-J2OBJC_FIELD_SETTER(ASfragmentImpl, builder_, ASfragmentImpl_fragmentCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASfragmentImpl, bean_, ASfragmentImpl_fragmentBean *)
-J2OBJC_FIELD_SETTER(ASfragmentImpl, paramsBuilder_, ASfragmentImpl_fragmentCommandParamsBuilder *)
-J2OBJC_FIELD_SETTER(ASfragmentImpl, paramsBean_, ASfragmentImpl_fragmentParamsBean *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl, navController_, id)
 
 __attribute__((unused)) static void ASfragmentImpl_setWidgetOnNativeClass(ASfragmentImpl *self);
@@ -224,20 +214,6 @@ J2OBJC_FIELD_SETTER(ASfragmentImpl_fragmentExt, measureFinished_, ASMeasureEvent
 J2OBJC_FIELD_SETTER(ASfragmentImpl_fragmentExt, onLayoutEvent_, ASOnLayoutEvent *)
 J2OBJC_FIELD_SETTER(ASfragmentImpl_fragmentExt, overlays_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASfragmentImpl_fragmentExt, templates_, id<JavaUtilMap>)
-
-@interface ASfragmentImpl_fragmentCommandBuilder () {
- @public
-  ASfragmentImpl *this$0_;
-}
-
-@end
-
-@interface ASfragmentImpl_fragmentBean () {
- @public
-  ASfragmentImpl *this$0_;
-}
-
-@end
 
 @interface ASfragmentImpl_MyFragmentFactory : ASUINavigatorImpl_FragmentFactory {
  @public
@@ -786,38 +762,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASfragmentImpl_fragmentBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASfragmentImpl_fragmentBean_initWithASfragmentImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASfragmentImpl_fragmentCommandBuilder_initWithASfragmentImpl_(self);
-  }
-  return builder_;
-}
-
-- (ASfragmentImpl_fragmentParamsBean *)getParamsBean {
-  if (paramsBean_ == nil) {
-    paramsBean_ = new_ASfragmentImpl_fragmentParamsBean_initWithASfragmentImpl_(self);
-  }
-  return paramsBean_;
-}
-
-- (ASfragmentImpl_fragmentCommandParamsBuilder *)getParamsBuilder {
-  if (paramsBuilder_ == nil) {
-    paramsBuilder_ = new_ASfragmentImpl_fragmentCommandParamsBuilder_initWithASfragmentImpl_(self);
-  }
-  return paramsBuilder_;
-}
-
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params {
   ASfragmentImpl_nativeCreateWithJavaUtilMap_(self, params);
 }
@@ -907,16 +851,11 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 43, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 44, 39, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 45, 1, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 46, 47, -1, 48, -1, -1 },
+    { NULL, "V", 0x2, 45, 46, -1, 47, -1, -1 },
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 49, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 50, 51, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 52, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0x101, 48, 31, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 49, 50, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 51, 25, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -969,36 +908,27 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[44].selector = @selector(closeDialog);
   methods[45].selector = @selector(setIdWithNSString:);
   methods[46].selector = @selector(setVisibleWithBoolean:);
-  methods[47].selector = @selector(getPluginWithNSString:);
-  methods[48].selector = @selector(getBean);
-  methods[49].selector = @selector(getBuilder);
-  methods[50].selector = @selector(getParamsBean);
-  methods[51].selector = @selector(getParamsBuilder);
-  methods[52].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[53].selector = @selector(createView);
-  methods[54].selector = @selector(addChildViewControllerWithId:withId:);
-  methods[55].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
-  methods[56].selector = @selector(getViewWithId:);
-  methods[57].selector = @selector(remeasureIfRequired);
+  methods[47].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[48].selector = @selector(createView);
+  methods[49].selector = @selector(addChildViewControllerWithId:withId:);
+  methods[50].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[51].selector = @selector(getViewWithId:);
+  methods[52].selector = @selector(remeasureIfRequired);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 53, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 54, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 52, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 53, -1, -1 },
     { "frameLayout_", "LADFrameLayout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "layout_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "name_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "navGraph_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "tag_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "navigator_", "LASUINavigatorImpl;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "builder_", "LASfragmentImpl_fragmentCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASfragmentImpl_fragmentBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBuilder_", "LASfragmentImpl_fragmentCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBean_", "LASfragmentImpl_fragmentParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "navController_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setTemplate", "LNSObject;", "setName", "setNavGraph", "replace", "setTag", "navigate", "LNSObject;LNSObject;", "checkIfDialog", "popBackStackTo", "navigateWithPopBackStackTo", "LNSObject;LNSObject;LNSObject;LNSObject;", "navigateAsTop", "navigateWithPopBackStack", "addOrReplaceFragment", "Z", "LNSString;ZLNSString;LNSString;LNSString;", "createOrReplaceFragment", "LNSString;ZLNSString;", "setId", "setVisible", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addChildViewController", "nativeMakeFrameForChildWidget", "IIII", "getView", &ASfragmentImpl_LOCAL_NAME, &ASfragmentImpl_GROUP_NAME, "LASfragmentImpl_fragmentExt;LASfragmentImpl_fragmentCommandBuilder;LASfragmentImpl_fragmentBean;LASfragmentImpl_fragmentParamsBean;LASfragmentImpl_fragmentCommandParamsBuilder;LASfragmentImpl_MyFragmentFactory;LASfragmentImpl_MyGenericFragment;" };
-  static const J2ObjcClassInfo _ASfragmentImpl = { "fragmentImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 58, 14, -1, 55, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setTemplate", "LNSObject;", "setName", "setNavGraph", "replace", "setTag", "navigate", "LNSObject;LNSObject;", "checkIfDialog", "popBackStackTo", "navigateWithPopBackStackTo", "LNSObject;LNSObject;LNSObject;LNSObject;", "navigateAsTop", "navigateWithPopBackStack", "addOrReplaceFragment", "Z", "LNSString;ZLNSString;LNSString;LNSString;", "createOrReplaceFragment", "LNSString;ZLNSString;", "setId", "setVisible", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addChildViewController", "nativeMakeFrameForChildWidget", "IIII", "getView", &ASfragmentImpl_LOCAL_NAME, &ASfragmentImpl_GROUP_NAME, "LASfragmentImpl_fragmentExt;LASfragmentImpl_MyFragmentFactory;LASfragmentImpl_MyGenericFragment;" };
+  static const J2ObjcClassInfo _ASfragmentImpl = { "fragmentImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 53, 10, -1, 54, -1, -1, -1 };
   return &_ASfragmentImpl;
 }
 
@@ -1598,390 +1528,6 @@ ASfragmentImpl_fragmentExt *create_ASfragmentImpl_fragmentExt_initWithASfragment
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl_fragmentExt)
-
-@implementation ASfragmentImpl_fragmentCommandBuilder
-
-- (instancetype)initWithASfragmentImpl:(ASfragmentImpl *)outer$ {
-  ASfragmentImpl_fragmentCommandBuilder_initWithASfragmentImpl_(self, outer$);
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)setNameWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"name"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)setLayoutWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)setNavGraphWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"navGraph"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)setTagWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"tag"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)replaceWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"replace"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)navigateWithNSString:(NSString *)actionId
-                                                         withId:(id)scopeObjects {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"navigate"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  id<JavaUtilMap> wrapper = new_JavaUtilHashMap_init();
-  (void) [wrapper putWithId:@"actionId" withId:actionId];
-  (void) [wrapper putWithId:@"scopeObjects" withId:scopeObjects];
-  (void) [attrs putWithId:@"value" withId:wrapper];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)popBackStack {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"popBackStack"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)navigateWithPopBackStackWithNSString:(NSString *)actionId
-                                                                         withId:(id)scopeObjects {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"navigateWithPopBackStack"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  id<JavaUtilMap> wrapper = new_JavaUtilHashMap_init();
-  (void) [wrapper putWithId:@"actionId" withId:actionId];
-  (void) [wrapper putWithId:@"scopeObjects" withId:scopeObjects];
-  (void) [attrs putWithId:@"value" withId:wrapper];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)navigateAsTopWithNSString:(NSString *)actionId
-                                                              withId:(id)scopeObjects {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"navigateAsTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  id<JavaUtilMap> wrapper = new_JavaUtilHashMap_init();
-  (void) [wrapper putWithId:@"actionId" withId:actionId];
-  (void) [wrapper putWithId:@"scopeObjects" withId:scopeObjects];
-  (void) [attrs putWithId:@"value" withId:wrapper];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)navigateWithPopBackStackToWithNSString:(NSString *)actionId
-                                                                     withNSString:(NSString *)destinationId
-                                                                      withBoolean:(jboolean)inclusive
-                                                                           withId:(id)scopeObjects {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"navigateWithPopBackStackTo"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  id<JavaUtilMap> wrapper = new_JavaUtilHashMap_init();
-  (void) [wrapper putWithId:@"actionId" withId:actionId];
-  (void) [wrapper putWithId:@"destinationId" withId:destinationId];
-  (void) [wrapper putWithId:@"inclusive" withId:JavaLangBoolean_valueOfWithBoolean_(inclusive)];
-  (void) [wrapper putWithId:@"scopeObjects" withId:scopeObjects];
-  (void) [attrs putWithId:@"value" withId:wrapper];
-  return self;
-}
-
-- (ASfragmentImpl_fragmentCommandBuilder *)popBackStackToWithNSString:(NSString *)destinationId
-                                                          withBoolean:(jboolean)inclusive {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"popBackStackTo"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  id<JavaUtilMap> wrapper = new_JavaUtilHashMap_init();
-  (void) [wrapper putWithId:@"destinationId" withId:destinationId];
-  (void) [wrapper putWithId:@"inclusive" withId:JavaLangBoolean_valueOfWithBoolean_(inclusive)];
-  (void) [attrs putWithId:@"value" withId:wrapper];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 5, 4, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 6, 4, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 7, 4, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 8, 4, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 9, 10, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 11, 10, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 12, 10, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 13, 14, -1, -1, -1, -1 },
-    { NULL, "LASfragmentImpl_fragmentCommandBuilder;", 0x1, 15, 16, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASfragmentImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setNameWithNSString:);
-  methods[3].selector = @selector(setLayoutWithNSString:);
-  methods[4].selector = @selector(setNavGraphWithNSString:);
-  methods[5].selector = @selector(setTagWithNSString:);
-  methods[6].selector = @selector(replaceWithNSString:);
-  methods[7].selector = @selector(navigateWithNSString:withId:);
-  methods[8].selector = @selector(popBackStack);
-  methods[9].selector = @selector(navigateWithPopBackStackWithNSString:withId:);
-  methods[10].selector = @selector(navigateAsTopWithNSString:withId:);
-  methods[11].selector = @selector(navigateWithPopBackStackToWithNSString:withNSString:withBoolean:withId:);
-  methods[12].selector = @selector(popBackStackToWithNSString:withBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASfragmentImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASfragmentImpl;", "execute", "Z", "setName", "LNSString;", "setLayout", "setNavGraph", "setTag", "replace", "navigate", "LNSString;LNSObject;", "navigateWithPopBackStack", "navigateAsTop", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLNSObject;", "popBackStackTo", "LNSString;Z", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandBuilder<Lcom/ashera/layout/fragmentImpl$fragmentCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASfragmentImpl_fragmentCommandBuilder = { "fragmentCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 13, 1, 0, -1, -1, 17, -1 };
-  return &_ASfragmentImpl_fragmentCommandBuilder;
-}
-
-@end
-
-void ASfragmentImpl_fragmentCommandBuilder_initWithASfragmentImpl_(ASfragmentImpl_fragmentCommandBuilder *self, ASfragmentImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupCommandBuilder_init(self);
-}
-
-ASfragmentImpl_fragmentCommandBuilder *new_ASfragmentImpl_fragmentCommandBuilder_initWithASfragmentImpl_(ASfragmentImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASfragmentImpl_fragmentCommandBuilder, initWithASfragmentImpl_, outer$)
-}
-
-ASfragmentImpl_fragmentCommandBuilder *create_ASfragmentImpl_fragmentCommandBuilder_initWithASfragmentImpl_(ASfragmentImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASfragmentImpl_fragmentCommandBuilder, initWithASfragmentImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl_fragmentCommandBuilder)
-
-@implementation ASfragmentImpl_fragmentBean
-
-- (instancetype)initWithASfragmentImpl:(ASfragmentImpl *)outer$ {
-  ASfragmentImpl_fragmentBean_initWithASfragmentImpl_(self, outer$);
-  return self;
-}
-
-- (void)setNameWithNSString:(NSString *)value {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setNameWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setLayoutWithNSString:(NSString *)value {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setLayoutWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setNavGraphWithNSString:(NSString *)value {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setNavGraphWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setTagWithNSString:(NSString *)value {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTagWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)replaceWithNSString:(NSString *)value {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) replaceWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)navigateWithNSString:(NSString *)actionId
-                      withId:(id)scopeObjects {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) navigateWithNSString:actionId withId:scopeObjects])) executeWithBoolean:true];
-}
-
-- (void)popBackStack {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) popBackStack])) executeWithBoolean:true];
-}
-
-- (void)navigateWithPopBackStackWithNSString:(NSString *)actionId
-                                      withId:(id)scopeObjects {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) navigateWithPopBackStackWithNSString:actionId withId:scopeObjects])) executeWithBoolean:true];
-}
-
-- (void)navigateAsTopWithNSString:(NSString *)actionId
-                           withId:(id)scopeObjects {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) navigateAsTopWithNSString:actionId withId:scopeObjects])) executeWithBoolean:true];
-}
-
-- (void)navigateWithPopBackStackToWithNSString:(NSString *)actionId
-                                  withNSString:(NSString *)destinationId
-                                   withBoolean:(jboolean)inclusive
-                                        withId:(id)scopeObjects {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) navigateWithPopBackStackToWithNSString:actionId withNSString:destinationId withBoolean:inclusive withId:scopeObjects])) executeWithBoolean:true];
-}
-
-- (void)popBackStackToWithNSString:(NSString *)destinationId
-                       withBoolean:(jboolean)inclusive {
-  (void) [((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([((ASfragmentImpl_fragmentCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) popBackStackToWithNSString:destinationId withBoolean:inclusive])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 8, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 14, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASfragmentImpl:);
-  methods[1].selector = @selector(setNameWithNSString:);
-  methods[2].selector = @selector(setLayoutWithNSString:);
-  methods[3].selector = @selector(setNavGraphWithNSString:);
-  methods[4].selector = @selector(setTagWithNSString:);
-  methods[5].selector = @selector(replaceWithNSString:);
-  methods[6].selector = @selector(navigateWithNSString:withId:);
-  methods[7].selector = @selector(popBackStack);
-  methods[8].selector = @selector(navigateWithPopBackStackWithNSString:withId:);
-  methods[9].selector = @selector(navigateAsTopWithNSString:withId:);
-  methods[10].selector = @selector(navigateWithPopBackStackToWithNSString:withNSString:withBoolean:withId:);
-  methods[11].selector = @selector(popBackStackToWithNSString:withBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASfragmentImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASfragmentImpl;", "setName", "LNSString;", "setLayout", "setNavGraph", "setTag", "replace", "navigate", "LNSString;LNSObject;", "navigateWithPopBackStack", "navigateAsTop", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLNSObject;", "popBackStackTo", "LNSString;Z" };
-  static const J2ObjcClassInfo _ASfragmentImpl_fragmentBean = { "fragmentBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 12, 1, 0, -1, -1, -1, -1 };
-  return &_ASfragmentImpl_fragmentBean;
-}
-
-@end
-
-void ASfragmentImpl_fragmentBean_initWithASfragmentImpl_(ASfragmentImpl_fragmentBean *self, ASfragmentImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(self, outer$);
-}
-
-ASfragmentImpl_fragmentBean *new_ASfragmentImpl_fragmentBean_initWithASfragmentImpl_(ASfragmentImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASfragmentImpl_fragmentBean, initWithASfragmentImpl_, outer$)
-}
-
-ASfragmentImpl_fragmentBean *create_ASfragmentImpl_fragmentBean_initWithASfragmentImpl_(ASfragmentImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASfragmentImpl_fragmentBean, initWithASfragmentImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl_fragmentBean)
-
-@implementation ASfragmentImpl_fragmentParamsBean
-
-- (instancetype)initWithASfragmentImpl:(ASfragmentImpl *)outer$ {
-  ASfragmentImpl_fragmentParamsBean_initWithASfragmentImpl_(self, outer$);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASfragmentImpl:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASfragmentImpl;" };
-  static const J2ObjcClassInfo _ASfragmentImpl_fragmentParamsBean = { "fragmentParamsBean", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 1, 0, 0, -1, -1, -1, -1 };
-  return &_ASfragmentImpl_fragmentParamsBean;
-}
-
-@end
-
-void ASfragmentImpl_fragmentParamsBean_initWithASfragmentImpl_(ASfragmentImpl_fragmentParamsBean *self, ASfragmentImpl *outer$) {
-  ASViewGroupImpl_ViewGroupParamsBean_init(self);
-}
-
-ASfragmentImpl_fragmentParamsBean *new_ASfragmentImpl_fragmentParamsBean_initWithASfragmentImpl_(ASfragmentImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASfragmentImpl_fragmentParamsBean, initWithASfragmentImpl_, outer$)
-}
-
-ASfragmentImpl_fragmentParamsBean *create_ASfragmentImpl_fragmentParamsBean_initWithASfragmentImpl_(ASfragmentImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASfragmentImpl_fragmentParamsBean, initWithASfragmentImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl_fragmentParamsBean)
-
-@implementation ASfragmentImpl_fragmentCommandParamsBuilder
-
-- (instancetype)initWithASfragmentImpl:(ASfragmentImpl *)outer$ {
-  ASfragmentImpl_fragmentCommandParamsBuilder_initWithASfragmentImpl_(self, outer$);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASfragmentImpl:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASfragmentImpl;", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandParamsBuilder<Lcom/ashera/layout/fragmentImpl$fragmentCommandParamsBuilder;>;" };
-  static const J2ObjcClassInfo _ASfragmentImpl_fragmentCommandParamsBuilder = { "fragmentCommandParamsBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 1, 0, 0, -1, -1, 1, -1 };
-  return &_ASfragmentImpl_fragmentCommandParamsBuilder;
-}
-
-@end
-
-void ASfragmentImpl_fragmentCommandParamsBuilder_initWithASfragmentImpl_(ASfragmentImpl_fragmentCommandParamsBuilder *self, ASfragmentImpl *outer$) {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(self);
-}
-
-ASfragmentImpl_fragmentCommandParamsBuilder *new_ASfragmentImpl_fragmentCommandParamsBuilder_initWithASfragmentImpl_(ASfragmentImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASfragmentImpl_fragmentCommandParamsBuilder, initWithASfragmentImpl_, outer$)
-}
-
-ASfragmentImpl_fragmentCommandParamsBuilder *create_ASfragmentImpl_fragmentCommandParamsBuilder_initWithASfragmentImpl_(ASfragmentImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASfragmentImpl_fragmentCommandParamsBuilder, initWithASfragmentImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASfragmentImpl_fragmentCommandParamsBuilder)
 
 @implementation ASfragmentImpl_MyFragmentFactory
 

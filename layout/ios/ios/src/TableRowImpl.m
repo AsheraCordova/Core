@@ -9,7 +9,6 @@
 #include "EventExpressionParser.h"
 #include "HasWidgets.h"
 #include "IActivity.h"
-#include "IAttributable.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
 #include "IListener.h"
@@ -32,7 +31,6 @@
 #include "ViewImpl.h"
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
-#include "java/lang/Boolean.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Runnable.h"
@@ -50,16 +48,11 @@
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASTableRowImpl () {
  @public
   id uiView_;
   ADTableRow *tableRow_;
-  ASTableRowImpl_TableRowCommandBuilder *builder_;
-  ASTableRowImpl_TableRowBean *bean_;
-  ASTableRowImpl_TableRowCommandParamsBuilder *paramsBuilder_;
-  ASTableRowImpl_TableRowParamsBean *paramsBean_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -74,10 +67,6 @@
 
 J2OBJC_FIELD_SETTER(ASTableRowImpl, uiView_, id)
 J2OBJC_FIELD_SETTER(ASTableRowImpl, tableRow_, ADTableRow *)
-J2OBJC_FIELD_SETTER(ASTableRowImpl, builder_, ASTableRowImpl_TableRowCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASTableRowImpl, bean_, ASTableRowImpl_TableRowBean *)
-J2OBJC_FIELD_SETTER(ASTableRowImpl, paramsBuilder_, ASTableRowImpl_TableRowCommandParamsBuilder *)
-J2OBJC_FIELD_SETTER(ASTableRowImpl, paramsBean_, ASTableRowImpl_TableRowParamsBean *)
 
 __attribute__((unused)) static void ASTableRowImpl_setWidgetOnNativeClass(ASTableRowImpl *self);
 
@@ -156,27 +145,6 @@ __attribute__((unused)) static ASTableRowImpl_OnHierarchyChangeListener *new_AST
 __attribute__((unused)) static ASTableRowImpl_OnHierarchyChangeListener *create_ASTableRowImpl_OnHierarchyChangeListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASTableRowImpl_OnHierarchyChangeListener)
-
-@interface ASTableRowImpl_TableRowCommandBuilder () {
- @public
-  ASTableRowImpl *this$0_;
-}
-
-@end
-
-@interface ASTableRowImpl_TableRowBean () {
- @public
-  ASTableRowImpl *this$0_;
-}
-
-@end
-
-@interface ASTableRowImpl_TableRowParamsBean () {
- @public
-  ASTableRowImpl *this$0_;
-}
-
-@end
 
 @interface ASTableRowImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
@@ -454,38 +422,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASTableRowImpl_TableRowBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASTableRowImpl_TableRowBean_initWithASTableRowImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASTableRowImpl_TableRowCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASTableRowImpl_TableRowCommandBuilder_initWithASTableRowImpl_(self);
-  }
-  return builder_;
-}
-
-- (ASTableRowImpl_TableRowParamsBean *)getParamsBean {
-  if (paramsBean_ == nil) {
-    paramsBean_ = new_ASTableRowImpl_TableRowParamsBean_initWithASTableRowImpl_(self);
-  }
-  return paramsBean_;
-}
-
-- (ASTableRowImpl_TableRowCommandParamsBuilder *)getParamsBuilder {
-  if (paramsBuilder_ == nil) {
-    paramsBuilder_ = new_ASTableRowImpl_TableRowCommandParamsBuilder_initWithASTableRowImpl_(self);
-  }
-  return paramsBuilder_;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
@@ -514,11 +450,6 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 27, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 28, 29, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 30, 1, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -549,24 +480,15 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[23].selector = @selector(invalidate);
   methods[24].selector = @selector(setIdWithNSString:);
   methods[25].selector = @selector(setVisibleWithBoolean:);
-  methods[26].selector = @selector(getPluginWithNSString:);
-  methods[27].selector = @selector(getBean);
-  methods[28].selector = @selector(getBuilder);
-  methods[29].selector = @selector(getParamsBean);
-  methods[30].selector = @selector(getParamsBuilder);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 32, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 30, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
     { "tableRow_", "LADTableRow;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "builder_", "LASTableRowImpl_TableRowCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASTableRowImpl_TableRowBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBuilder_", "LASTableRowImpl_TableRowCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBean_", "LASTableRowImpl_TableRowParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setId", "setVisible", "Z", "getPlugin", &ASTableRowImpl_LOCAL_NAME, &ASTableRowImpl_GROUP_NAME, "LASTableRowImpl_TableRowExt;LASTableRowImpl_OnHierarchyChangeListener;LASTableRowImpl_TableRowCommandBuilder;LASTableRowImpl_TableRowBean;LASTableRowImpl_TableRowParamsBean;LASTableRowImpl_TableRowCommandParamsBuilder;" };
-  static const J2ObjcClassInfo _ASTableRowImpl = { "TableRowImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 31, 8, -1, 33, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setId", "setVisible", "Z", &ASTableRowImpl_LOCAL_NAME, &ASTableRowImpl_GROUP_NAME, "LASTableRowImpl_TableRowExt;LASTableRowImpl_OnHierarchyChangeListener;" };
+  static const J2ObjcClassInfo _ASTableRowImpl = { "TableRowImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 26, 4, -1, 32, -1, -1, -1 };
   return &_ASTableRowImpl;
 }
 
@@ -1182,449 +1104,6 @@ ASTableRowImpl_OnHierarchyChangeListener *create_ASTableRowImpl_OnHierarchyChang
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTableRowImpl_OnHierarchyChangeListener)
-
-@implementation ASTableRowImpl_TableRowCommandBuilder
-
-- (instancetype)initWithASTableRowImpl:(ASTableRowImpl *)outer$ {
-  ASTableRowImpl_TableRowCommandBuilder_initWithASTableRowImpl_(self, outer$);
-  return self;
-}
-
-- (ASTableRowImpl_TableRowCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASTableRowImpl_TableRowCommandBuilder *)tryGetGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"gravity"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASTableRowImpl_TableRowCommandBuilder *)setGravityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASTableRowImpl_TableRowCommandBuilder *)tryGetWeightSum {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"weightSum"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getWeightSum {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"weightSum"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASTableRowImpl_TableRowCommandBuilder *)setWeightSumWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"weightSum"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandBuilder;", 0x1, 5, 6, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASTableRowImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(tryGetGravity);
-  methods[3].selector = @selector(getGravity);
-  methods[4].selector = @selector(setGravityWithNSString:);
-  methods[5].selector = @selector(tryGetWeightSum);
-  methods[6].selector = @selector(getWeightSum);
-  methods[7].selector = @selector(setWeightSumWithFloat:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASTableRowImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASTableRowImpl;", "execute", "Z", "setGravity", "LNSString;", "setWeightSum", "F", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandBuilder<Lcom/ashera/layout/TableRowImpl$TableRowCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASTableRowImpl_TableRowCommandBuilder = { "TableRowCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 8, 1, 0, -1, -1, 7, -1 };
-  return &_ASTableRowImpl_TableRowCommandBuilder;
-}
-
-@end
-
-void ASTableRowImpl_TableRowCommandBuilder_initWithASTableRowImpl_(ASTableRowImpl_TableRowCommandBuilder *self, ASTableRowImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupCommandBuilder_init(self);
-}
-
-ASTableRowImpl_TableRowCommandBuilder *new_ASTableRowImpl_TableRowCommandBuilder_initWithASTableRowImpl_(ASTableRowImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASTableRowImpl_TableRowCommandBuilder, initWithASTableRowImpl_, outer$)
-}
-
-ASTableRowImpl_TableRowCommandBuilder *create_ASTableRowImpl_TableRowCommandBuilder_initWithASTableRowImpl_(ASTableRowImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASTableRowImpl_TableRowCommandBuilder, initWithASTableRowImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTableRowImpl_TableRowCommandBuilder)
-
-@implementation ASTableRowImpl_TableRowBean
-
-- (instancetype)initWithASTableRowImpl:(ASTableRowImpl *)outer$ {
-  ASTableRowImpl_TableRowBean_initWithASTableRowImpl_(self, outer$);
-  return self;
-}
-
-- (id)getGravity {
-  return [((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetGravity])) executeWithBoolean:false])) getGravity];
-}
-
-- (void)setGravityWithNSString:(NSString *)value {
-  (void) [((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setGravityWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getWeightSum {
-  return [((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetWeightSum])) executeWithBoolean:false])) getWeightSum];
-}
-
-- (void)setWeightSumWithFloat:(jfloat)value {
-  (void) [((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setWeightSumWithFloat:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASTableRowImpl:);
-  methods[1].selector = @selector(getGravity);
-  methods[2].selector = @selector(setGravityWithNSString:);
-  methods[3].selector = @selector(getWeightSum);
-  methods[4].selector = @selector(setWeightSumWithFloat:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASTableRowImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASTableRowImpl;", "setGravity", "LNSString;", "setWeightSum", "F" };
-  static const J2ObjcClassInfo _ASTableRowImpl_TableRowBean = { "TableRowBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 5, 1, 0, -1, -1, -1, -1 };
-  return &_ASTableRowImpl_TableRowBean;
-}
-
-@end
-
-void ASTableRowImpl_TableRowBean_initWithASTableRowImpl_(ASTableRowImpl_TableRowBean *self, ASTableRowImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(self, outer$);
-}
-
-ASTableRowImpl_TableRowBean *new_ASTableRowImpl_TableRowBean_initWithASTableRowImpl_(ASTableRowImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASTableRowImpl_TableRowBean, initWithASTableRowImpl_, outer$)
-}
-
-ASTableRowImpl_TableRowBean *create_ASTableRowImpl_TableRowBean_initWithASTableRowImpl_(ASTableRowImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASTableRowImpl_TableRowBean, initWithASTableRowImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTableRowImpl_TableRowBean)
-
-@implementation ASTableRowImpl_TableRowParamsBean
-
-- (instancetype)initWithASTableRowImpl:(ASTableRowImpl *)outer$ {
-  ASTableRowImpl_TableRowParamsBean_initWithASTableRowImpl_(self, outer$);
-  return self;
-}
-
-- (id)getLayoutGravityWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) tryGetLayoutGravity])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) getLayoutGravity];
-}
-
-- (void)setLayoutGravityWithASIWidget:(id<ASIWidget>)w
-                         withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) setLayoutGravityWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (id)getLayoutWeightWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) tryGetLayoutWeight])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) getLayoutWeight];
-}
-
-- (void)setLayoutWeightWithASIWidget:(id<ASIWidget>)w
-                           withFloat:(jfloat)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) setLayoutWeightWithFloat:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (id)getLayoutColumnWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) tryGetLayoutColumn])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) getLayoutColumn];
-}
-
-- (void)setLayoutColumnWithASIWidget:(id<ASIWidget>)w
-                             withInt:(jint)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) setLayoutColumnWithInt:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (id)getLayoutSpanWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) tryGetLayoutSpan])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) getLayoutSpan];
-}
-
-- (void)setLayoutSpanWithASIWidget:(id<ASIWidget>)w
-                           withInt:(jint)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([((ASTableRowImpl_TableRowCommandParamsBuilder *) nil_chk([this$0_ getParamsBuilder])) reset])) setLayoutSpanWithInt:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 5, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 7, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 8, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 10, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 11, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 12, 10, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASTableRowImpl:);
-  methods[1].selector = @selector(getLayoutGravityWithASIWidget:);
-  methods[2].selector = @selector(setLayoutGravityWithASIWidget:withNSString:);
-  methods[3].selector = @selector(getLayoutWeightWithASIWidget:);
-  methods[4].selector = @selector(setLayoutWeightWithASIWidget:withFloat:);
-  methods[5].selector = @selector(getLayoutColumnWithASIWidget:);
-  methods[6].selector = @selector(setLayoutColumnWithASIWidget:withInt:);
-  methods[7].selector = @selector(getLayoutSpanWithASIWidget:);
-  methods[8].selector = @selector(setLayoutSpanWithASIWidget:withInt:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASTableRowImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASTableRowImpl;", "getLayoutGravity", "LASIWidget;", "setLayoutGravity", "LASIWidget;LNSString;", "getLayoutWeight", "setLayoutWeight", "LASIWidget;F", "getLayoutColumn", "setLayoutColumn", "LASIWidget;I", "getLayoutSpan", "setLayoutSpan" };
-  static const J2ObjcClassInfo _ASTableRowImpl_TableRowParamsBean = { "TableRowParamsBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 9, 1, 0, -1, -1, -1, -1 };
-  return &_ASTableRowImpl_TableRowParamsBean;
-}
-
-@end
-
-void ASTableRowImpl_TableRowParamsBean_initWithASTableRowImpl_(ASTableRowImpl_TableRowParamsBean *self, ASTableRowImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupParamsBean_init(self);
-}
-
-ASTableRowImpl_TableRowParamsBean *new_ASTableRowImpl_TableRowParamsBean_initWithASTableRowImpl_(ASTableRowImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASTableRowImpl_TableRowParamsBean, initWithASTableRowImpl_, outer$)
-}
-
-ASTableRowImpl_TableRowParamsBean *create_ASTableRowImpl_TableRowParamsBean_initWithASTableRowImpl_(ASTableRowImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASTableRowImpl_TableRowParamsBean, initWithASTableRowImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTableRowImpl_TableRowParamsBean)
-
-@implementation ASTableRowImpl_TableRowCommandParamsBuilder
-
-- (instancetype)initWithASTableRowImpl:(ASTableRowImpl *)outer$ {
-  ASTableRowImpl_TableRowCommandParamsBuilder_initWithASTableRowImpl_(self, outer$);
-  return self;
-}
-
-- (ASTableRowImpl_TableRowCommandParamsBuilder *)tryGetLayoutGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASTableRowImpl_TableRowCommandParamsBuilder *)setLayoutGravityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASTableRowImpl_TableRowCommandParamsBuilder *)tryGetLayoutWeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_weight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutWeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_weight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASTableRowImpl_TableRowCommandParamsBuilder *)setLayoutWeightWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_weight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASTableRowImpl_TableRowCommandParamsBuilder *)tryGetLayoutColumn {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_column"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutColumn {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_column"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASTableRowImpl_TableRowCommandParamsBuilder *)setLayoutColumnWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_column"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASTableRowImpl_TableRowCommandParamsBuilder *)tryGetLayoutSpan {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_span"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutSpan {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_span"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASTableRowImpl_TableRowCommandParamsBuilder *)setLayoutSpanWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_span"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandParamsBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandParamsBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandParamsBuilder;", 0x1, 5, 6, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASTableRowImpl_TableRowCommandParamsBuilder;", 0x1, 7, 6, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASTableRowImpl:);
-  methods[1].selector = @selector(tryGetLayoutGravity);
-  methods[2].selector = @selector(getLayoutGravity);
-  methods[3].selector = @selector(setLayoutGravityWithNSString:);
-  methods[4].selector = @selector(tryGetLayoutWeight);
-  methods[5].selector = @selector(getLayoutWeight);
-  methods[6].selector = @selector(setLayoutWeightWithFloat:);
-  methods[7].selector = @selector(tryGetLayoutColumn);
-  methods[8].selector = @selector(getLayoutColumn);
-  methods[9].selector = @selector(setLayoutColumnWithInt:);
-  methods[10].selector = @selector(tryGetLayoutSpan);
-  methods[11].selector = @selector(getLayoutSpan);
-  methods[12].selector = @selector(setLayoutSpanWithInt:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASTableRowImpl;", "setLayoutGravity", "LNSString;", "setLayoutWeight", "F", "setLayoutColumn", "I", "setLayoutSpan", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandParamsBuilder<Lcom/ashera/layout/TableRowImpl$TableRowCommandParamsBuilder;>;" };
-  static const J2ObjcClassInfo _ASTableRowImpl_TableRowCommandParamsBuilder = { "TableRowCommandParamsBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 13, 0, 0, -1, -1, 8, -1 };
-  return &_ASTableRowImpl_TableRowCommandParamsBuilder;
-}
-
-@end
-
-void ASTableRowImpl_TableRowCommandParamsBuilder_initWithASTableRowImpl_(ASTableRowImpl_TableRowCommandParamsBuilder *self, ASTableRowImpl *outer$) {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(self);
-}
-
-ASTableRowImpl_TableRowCommandParamsBuilder *new_ASTableRowImpl_TableRowCommandParamsBuilder_initWithASTableRowImpl_(ASTableRowImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASTableRowImpl_TableRowCommandParamsBuilder, initWithASTableRowImpl_, outer$)
-}
-
-ASTableRowImpl_TableRowCommandParamsBuilder *create_ASTableRowImpl_TableRowCommandParamsBuilder_initWithASTableRowImpl_(ASTableRowImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASTableRowImpl_TableRowCommandParamsBuilder, initWithASTableRowImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASTableRowImpl_TableRowCommandParamsBuilder)
 
 @implementation ASTableRowImpl_$Lambda$1
 

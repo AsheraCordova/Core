@@ -22,7 +22,6 @@
 #include "Handler.h"
 #include "HasWidgets.h"
 #include "IActivity.h"
-#include "IAttributable.h"
 #include "IFilter.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
@@ -54,7 +53,6 @@
 #include "java/lang/CharSequence.h"
 #include "java/lang/Double.h"
 #include "java/lang/Enum.h"
-#include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
@@ -73,6 +71,7 @@
 #include "CustomUITableViewCell.h"
 #include "ASUITableView.h"
 #include "ASUILongTapGestureRecognizer.h"
+#include "java/lang/Float.h"
 
 @class ASListViewImpl_FilterStatus;
 @class ASListViewImpl_ListAdapter_ArrayFilter;
@@ -82,7 +81,6 @@
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASListViewImpl () {
  @public
@@ -96,10 +94,6 @@
   ADHandler *handler_;
   NSString *filterId_;
   IOSObjectArray *filterItemPaths_;
-  ASListViewImpl_ListViewCommandBuilder *builder_;
-  ASListViewImpl_ListViewBean *bean_;
-  ASListViewImpl_ListViewCommandParamsBuilder *paramsBuilder_;
-  ASListViewImpl_ListViewParamsBean *paramsBean_;
   id<ASHasWidgets> headerTemplate_;
   id<ASHasWidgets> footerTemplate_;
   jboolean autoLayout_;
@@ -300,10 +294,6 @@ J2OBJC_FIELD_SETTER(ASListViewImpl, query_, NSString *)
 J2OBJC_FIELD_SETTER(ASListViewImpl, handler_, ADHandler *)
 J2OBJC_FIELD_SETTER(ASListViewImpl, filterId_, NSString *)
 J2OBJC_FIELD_SETTER(ASListViewImpl, filterItemPaths_, IOSObjectArray *)
-J2OBJC_FIELD_SETTER(ASListViewImpl, builder_, ASListViewImpl_ListViewCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASListViewImpl, bean_, ASListViewImpl_ListViewBean *)
-J2OBJC_FIELD_SETTER(ASListViewImpl, paramsBuilder_, ASListViewImpl_ListViewCommandParamsBuilder *)
-J2OBJC_FIELD_SETTER(ASListViewImpl, paramsBean_, ASListViewImpl_ListViewParamsBean *)
 J2OBJC_FIELD_SETTER(ASListViewImpl, headerTemplate_, id<ASHasWidgets>)
 J2OBJC_FIELD_SETTER(ASListViewImpl, footerTemplate_, id<ASHasWidgets>)
 J2OBJC_FIELD_SETTER(ASListViewImpl, onItemClick_, id)
@@ -751,20 +741,6 @@ __attribute__((unused)) static ASListViewImpl_OnScrollListener *new_ASListViewIm
 __attribute__((unused)) static ASListViewImpl_OnScrollListener *create_ASListViewImpl_OnScrollListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASListViewImpl_OnScrollListener)
-
-@interface ASListViewImpl_ListViewCommandBuilder () {
- @public
-  ASListViewImpl *this$0_;
-}
-
-@end
-
-@interface ASListViewImpl_ListViewBean () {
- @public
-  ASListViewImpl *this$0_;
-}
-
-@end
 
 @interface ASListViewImpl_PostMeasureEventHandler () {
  @public
@@ -1877,38 +1853,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASListViewImpl_ListViewBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASListViewImpl_ListViewBean_initWithASListViewImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASListViewImpl_ListViewCommandBuilder_initWithASListViewImpl_(self);
-  }
-  return builder_;
-}
-
-- (ASListViewImpl_ListViewParamsBean *)getParamsBean {
-  if (paramsBean_ == nil) {
-    paramsBean_ = new_ASListViewImpl_ListViewParamsBean_initWithASListViewImpl_(self);
-  }
-  return paramsBean_;
-}
-
-- (ASListViewImpl_ListViewCommandParamsBuilder *)getParamsBuilder {
-  if (paramsBuilder_ == nil) {
-    paramsBuilder_ = new_ASListViewImpl_ListViewCommandParamsBuilder_initWithASListViewImpl_(self);
-  }
-  return paramsBuilder_;
-}
-
 - (void)addFooterTemplateWithId:(id)objValue {
   ASListViewImpl_addFooterTemplateWithId_(self, objValue);
 }
@@ -2365,75 +2309,70 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0x101, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 76, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 77, 78, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 79, 1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 79, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 80, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 81, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 82, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 83, 30, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 84, 30, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 85, 86, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 87, 40, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 88, 30, -1, -1, -1, -1 },
-    { NULL, "I", 0x1, 89, 30, -1, -1, -1, -1 },
-    { NULL, "LADView;", 0x2, 90, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 91, 92, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 93, 94, -1, 95, -1, -1 },
+    { NULL, "V", 0x1, 81, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 82, 30, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 83, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 84, 85, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 86, 40, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 87, 30, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, 88, 30, -1, -1, -1, -1 },
+    { NULL, "LADView;", 0x2, 89, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 90, 91, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 92, 93, -1, 94, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 95, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 96, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 97, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 98, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 99, 50, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x102, 100, 28, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 101, 1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 102, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 104, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 105, 50, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 97, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 98, 50, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x102, 99, 28, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 100, 1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 101, 102, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 103, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 104, 50, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 106, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 107, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 105, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 106, 30, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 108, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 107, 28, -1, -1, -1, -1 },
     { NULL, "Z", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 109, 78, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 108, 78, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 110, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 111, 30, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 112, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 113, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 114, 115, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 116, 50, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 117, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 118, 78, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 109, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 110, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 111, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 112, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 113, 114, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 115, 50, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 116, 102, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 117, 78, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 119, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 118, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 120, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 119, 18, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 120, 28, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 121, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 122, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 123, 18, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 124, 20, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 125, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 122, 18, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 123, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 124, 28, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 126, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 127, 30, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 128, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 129, 30, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 130, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 131, 30, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 132, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 133, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 125, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 126, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 127, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 128, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 129, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 130, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 131, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 132, 30, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 134, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 133, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
   };
@@ -2545,82 +2484,77 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[102].selector = @selector(getIsPrefetchingEnabled);
   methods[103].selector = @selector(setIdWithNSString:);
   methods[104].selector = @selector(setVisibleWithBoolean:);
-  methods[105].selector = @selector(getPluginWithNSString:);
-  methods[106].selector = @selector(getBean);
-  methods[107].selector = @selector(getBuilder);
-  methods[108].selector = @selector(getParamsBean);
-  methods[109].selector = @selector(getParamsBuilder);
-  methods[110].selector = @selector(addFooterTemplateWithId:);
-  methods[111].selector = @selector(addHeaderTemplateWithId:);
-  methods[112].selector = @selector(setOnItemClickWithId:);
-  methods[113].selector = @selector(handleItemClickWithInt:);
-  methods[114].selector = @selector(getCellWithInt:);
-  methods[115].selector = @selector(setCellDividerInsetsWithInt:withId:);
-  methods[116].selector = @selector(nativeSetSeparatorCellInsetRightWithId:withInt:);
-  methods[117].selector = @selector(createCellWithInt:);
-  methods[118].selector = @selector(calculateHeightOfRowWithInt:);
-  methods[119].selector = @selector(updateLayoutWithASIWidget:withInt:);
-  methods[120].selector = @selector(setCustomDividerAttributesWithASIWidget:withBoolean:);
-  methods[121].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[122].selector = @selector(createTableView);
-  methods[123].selector = @selector(addHeaderWidgetWithId:);
-  methods[124].selector = @selector(addFooterWidgetWithId:);
-  methods[125].selector = @selector(updateTableSelection);
-  methods[126].selector = @selector(nativeGetWidth);
-  methods[127].selector = @selector(getCellContentViewWithId:);
-  methods[128].selector = @selector(setDataWithId:withId:);
-  methods[129].selector = @selector(getDataWithId:);
-  methods[130].selector = @selector(getReusableCellWithNSString:);
-  methods[131].selector = @selector(newCellWithNSString:withId:);
-  methods[132].selector = @selector(setSelectionStyleOnCellWithId:);
-  methods[133].selector = @selector(addSubViewWithId:withId:);
-  methods[134].selector = @selector(updateTable);
-  methods[135].selector = @selector(reloadTable);
-  methods[136].selector = @selector(setSeparatorStyleWithId:);
-  methods[137].selector = @selector(nativeSetSeparatorStyleWithInt:);
-  methods[138].selector = @selector(getStackFromBottom);
-  methods[139].selector = @selector(isStackFromBottom);
-  methods[140].selector = @selector(setStackFromBottomWithId:);
-  methods[141].selector = @selector(nativeGetStackFromBottom);
-  methods[142].selector = @selector(nativeSetStackFromBottomWithBoolean:);
-  methods[143].selector = @selector(nativesetStackFromBottom);
-  methods[144].selector = @selector(nativesetStackFromTop);
-  methods[145].selector = @selector(setOnItemLongClickWithId:);
-  methods[146].selector = @selector(longPressWithInt:);
-  methods[147].selector = @selector(nativeAddLongClickListenerWithId:);
-  methods[148].selector = @selector(setSelectedBackgroundViewWithId:);
-  methods[149].selector = @selector(setDrawableBoundsWithId:withADDrawable:);
-  methods[150].selector = @selector(nativeSelectedBackgroundViewWithId:withId:);
-  methods[151].selector = @selector(setListSelectorWithNSString:withId:);
-  methods[152].selector = @selector(nativesetTrackSelectedCellWithBoolean:);
-  methods[153].selector = @selector(getListSelector);
-  methods[154].selector = @selector(setSelectionStyleWithId:);
-  methods[155].selector = @selector(drawableStateChanged);
-  methods[156].selector = @selector(getCurrentSelectedCell);
-  methods[157].selector = @selector(setOnScrollWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[158].selector = @selector(setHeaderDividersEnabledWithId:);
-  methods[159].selector = @selector(setFooterDividersEnabledWithId:);
-  methods[160].selector = @selector(setDividerWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[161].selector = @selector(getDividerWithASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[162].selector = @selector(setDividerHeightWithId:);
-  methods[163].selector = @selector(getDividerHeight);
-  methods[164].selector = @selector(setSeparatorInsetRightWithId:);
-  methods[165].selector = @selector(nativeSetSeparatorInsetRightWithInt:);
-  methods[166].selector = @selector(setSeparatorInsetLeftWithId:);
-  methods[167].selector = @selector(nativeSetSeparatorInsetLeftWithInt:);
-  methods[168].selector = @selector(setSeparatorInsetBottomWithId:);
-  methods[169].selector = @selector(nativeSetSeparatorInsetBottomWithInt:);
-  methods[170].selector = @selector(setSeparatorInsetTopWithId:);
-  methods[171].selector = @selector(nativeSetSeparatorInsetTopWithInt:);
-  methods[172].selector = @selector(nativeRequestLayout);
-  methods[173].selector = @selector(getData);
-  methods[174].selector = @selector(postFilter);
-  methods[175].selector = @selector(preFilter);
+  methods[105].selector = @selector(addFooterTemplateWithId:);
+  methods[106].selector = @selector(addHeaderTemplateWithId:);
+  methods[107].selector = @selector(setOnItemClickWithId:);
+  methods[108].selector = @selector(handleItemClickWithInt:);
+  methods[109].selector = @selector(getCellWithInt:);
+  methods[110].selector = @selector(setCellDividerInsetsWithInt:withId:);
+  methods[111].selector = @selector(nativeSetSeparatorCellInsetRightWithId:withInt:);
+  methods[112].selector = @selector(createCellWithInt:);
+  methods[113].selector = @selector(calculateHeightOfRowWithInt:);
+  methods[114].selector = @selector(updateLayoutWithASIWidget:withInt:);
+  methods[115].selector = @selector(setCustomDividerAttributesWithASIWidget:withBoolean:);
+  methods[116].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[117].selector = @selector(createTableView);
+  methods[118].selector = @selector(addHeaderWidgetWithId:);
+  methods[119].selector = @selector(addFooterWidgetWithId:);
+  methods[120].selector = @selector(updateTableSelection);
+  methods[121].selector = @selector(nativeGetWidth);
+  methods[122].selector = @selector(getCellContentViewWithId:);
+  methods[123].selector = @selector(setDataWithId:withId:);
+  methods[124].selector = @selector(getDataWithId:);
+  methods[125].selector = @selector(getReusableCellWithNSString:);
+  methods[126].selector = @selector(newCellWithNSString:withId:);
+  methods[127].selector = @selector(setSelectionStyleOnCellWithId:);
+  methods[128].selector = @selector(addSubViewWithId:withId:);
+  methods[129].selector = @selector(updateTable);
+  methods[130].selector = @selector(reloadTable);
+  methods[131].selector = @selector(setSeparatorStyleWithId:);
+  methods[132].selector = @selector(nativeSetSeparatorStyleWithInt:);
+  methods[133].selector = @selector(getStackFromBottom);
+  methods[134].selector = @selector(isStackFromBottom);
+  methods[135].selector = @selector(setStackFromBottomWithId:);
+  methods[136].selector = @selector(nativeGetStackFromBottom);
+  methods[137].selector = @selector(nativeSetStackFromBottomWithBoolean:);
+  methods[138].selector = @selector(nativesetStackFromBottom);
+  methods[139].selector = @selector(nativesetStackFromTop);
+  methods[140].selector = @selector(setOnItemLongClickWithId:);
+  methods[141].selector = @selector(longPressWithInt:);
+  methods[142].selector = @selector(nativeAddLongClickListenerWithId:);
+  methods[143].selector = @selector(setSelectedBackgroundViewWithId:);
+  methods[144].selector = @selector(setDrawableBoundsWithId:withADDrawable:);
+  methods[145].selector = @selector(nativeSelectedBackgroundViewWithId:withId:);
+  methods[146].selector = @selector(setListSelectorWithNSString:withId:);
+  methods[147].selector = @selector(nativesetTrackSelectedCellWithBoolean:);
+  methods[148].selector = @selector(getListSelector);
+  methods[149].selector = @selector(setSelectionStyleWithId:);
+  methods[150].selector = @selector(drawableStateChanged);
+  methods[151].selector = @selector(getCurrentSelectedCell);
+  methods[152].selector = @selector(setOnScrollWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[153].selector = @selector(setHeaderDividersEnabledWithId:);
+  methods[154].selector = @selector(setFooterDividersEnabledWithId:);
+  methods[155].selector = @selector(setDividerWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[156].selector = @selector(getDividerWithASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[157].selector = @selector(setDividerHeightWithId:);
+  methods[158].selector = @selector(getDividerHeight);
+  methods[159].selector = @selector(setSeparatorInsetRightWithId:);
+  methods[160].selector = @selector(nativeSetSeparatorInsetRightWithInt:);
+  methods[161].selector = @selector(setSeparatorInsetLeftWithId:);
+  methods[162].selector = @selector(nativeSetSeparatorInsetLeftWithInt:);
+  methods[163].selector = @selector(setSeparatorInsetBottomWithId:);
+  methods[164].selector = @selector(nativeSetSeparatorInsetBottomWithInt:);
+  methods[165].selector = @selector(setSeparatorInsetTopWithId:);
+  methods[166].selector = @selector(nativeSetSeparatorInsetTopWithInt:);
+  methods[167].selector = @selector(nativeRequestLayout);
+  methods[168].selector = @selector(getData);
+  methods[169].selector = @selector(postFilter);
+  methods[170].selector = @selector(preFilter);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 135, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 136, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 134, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 135, -1, -1 },
     { "listView_", "LADListView;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "disableUpdate_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "listAdapter_", "LASListViewImpl_ListAdapter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2630,18 +2564,14 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "handler_", "LADHandler;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "filterId_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "filterItemPaths_", "[LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "builder_", "LASListViewImpl_ListViewCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASListViewImpl_ListViewBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBuilder_", "LASListViewImpl_ListViewCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBean_", "LASListViewImpl_ListViewParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "headerTemplate_", "LASHasWidgets;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "footerTemplate_", "LASHasWidgets;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "autoLayout_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "onItemClick_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "heightCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 137, -1 },
+    { "heightCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 136, -1 },
     { "header_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "footer_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "simpleTableIdentifier", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 138, -1, -1 },
+    { "simpleTableIdentifier", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 137, -1, -1 },
     { "onItemLongClickListener_", "LADAdapterView_OnItemLongClickListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "listSelector_", "LADDrawable;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "cellSelectionStyle_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2653,8 +2583,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "separatorInsetRight_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "reloadTableAfterPostMeasure_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "nativeRemoveView", "LASIWidget;", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "updateModelToEventMap", "LJavaUtilMap;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;)V", "addObject", "LASLoopParam;LNSString;ILNSString;", "addAllModel", "LNSObject;", "remove", "I", "addCheckItemInfo", "LJavaUtilMap;LADAdapterView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/AdapterView<*>;)V", "filter", "setFilterDelay", "setFilterId", "setFilterItemPath", "setScrollX", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setChoiceMode", "updatePosition", "LJavaUtilMap;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;I)I", "setRowHeight", "LNSObject;LNSObject;", "setEstimatedRowHeight", "setCellLayoutMarginsFollowReadableWidth", "setInsetsContentViewsToSafeArea", "setSectionHeaderHeight", "setSectionFooterHeight", "setEstimatedSectionHeaderHeight", "setEstimatedSectionFooterHeight", "setSectionHeaderTopPadding", "setSeparatorColor", "setAllowsSelection", "setAllowsMultipleSelection", "setAllowsSelectionDuringEditing", "setAllowsMultipleSelectionDuringEditing", "setSelectionFollowsFocus", "setSectionIndexMinimumDisplayRowCount", "setSectionIndexColor", "setSectionIndexBackgroundColor", "setSectionIndexTrackingBackgroundColor", "setDragInteractionEnabled", "setIsEditing", "setRemembersLastFocusedIndexPath", "setAllowsFocus", "setAllowsFocusDuringEditing", "setFillerRowHeight", "setIsPrefetchingEnabled", "setId", "setVisible", "Z", "getPlugin", "addFooterTemplate", "addHeaderTemplate", "setOnItemClick", "handleItemClick", "getCell", "setCellDividerInsets", "ILNSObject;", "nativeSetSeparatorCellInsetRight", "createCell", "calculateHeightOfRow", "updateLayout", "setCustomDividerAttributes", "LASIWidget;Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addHeaderWidget", "addFooterWidget", "getCellContentView", "setData", "getData", "getReusableCell", "newCell", "LNSString;LNSObject;", "setSelectionStyleOnCell", "addSubView", "setSeparatorStyle", "nativeSetSeparatorStyle", "setStackFromBottom", "nativeSetStackFromBottom", "setOnItemLongClick", "longPress", "nativeAddLongClickListener", "setSelectedBackgroundView", "setDrawableBounds", "LNSObject;LADDrawable;", "nativeSelectedBackgroundView", "setListSelector", "nativesetTrackSelectedCell", "setSelectionStyle", "setOnScroll", "setHeaderDividersEnabled", "setFooterDividersEnabled", "setDivider", "getDivider", "setDividerHeight", "setSeparatorInsetRight", "nativeSetSeparatorInsetRight", "setSeparatorInsetLeft", "nativeSetSeparatorInsetLeft", "setSeparatorInsetBottom", "nativeSetSeparatorInsetBottom", "setSeparatorInsetTop", "nativeSetSeparatorInsetTop", "()Ljava/util/List<Lcom/ashera/model/LoopParam;>;", &ASListViewImpl_LOCAL_NAME, &ASListViewImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;", &ASListViewImpl_simpleTableIdentifier, "LASListViewImpl_ChoiceMode;LASListViewImpl_IosSeparatorStyle;LASListViewImpl_IosCellSelectionStyle;LASListViewImpl_ListViewExt;LASListViewImpl_ListAdapter;LASListViewImpl_FilterStatus;LASListViewImpl_OnItemClickListener;LASListViewImpl_OnItemLongClickListener;LASListViewImpl_OnScrollListener;LASListViewImpl_ListViewCommandBuilder;LASListViewImpl_ListViewBean;LASListViewImpl_ListViewParamsBean;LASListViewImpl_ListViewCommandParamsBuilder;LASListViewImpl_PostMeasureEventHandler;" };
-  static const J2ObjcClassInfo _ASListViewImpl = { "ListViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 176, 34, -1, 139, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "nativeRemoveView", "LASIWidget;", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "updateModelToEventMap", "LJavaUtilMap;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;)V", "addObject", "LASLoopParam;LNSString;ILNSString;", "addAllModel", "LNSObject;", "remove", "I", "addCheckItemInfo", "LJavaUtilMap;LADAdapterView;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/AdapterView<*>;)V", "filter", "setFilterDelay", "setFilterId", "setFilterItemPath", "setScrollX", "nativeSetScrollX", "LNSObject;I", "setScrollY", "nativeSetScrollY", "nativeGetScrollX", "nativeGetScrollY", "setChoiceMode", "updatePosition", "LJavaUtilMap;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;I)I", "setRowHeight", "LNSObject;LNSObject;", "setEstimatedRowHeight", "setCellLayoutMarginsFollowReadableWidth", "setInsetsContentViewsToSafeArea", "setSectionHeaderHeight", "setSectionFooterHeight", "setEstimatedSectionHeaderHeight", "setEstimatedSectionFooterHeight", "setSectionHeaderTopPadding", "setSeparatorColor", "setAllowsSelection", "setAllowsMultipleSelection", "setAllowsSelectionDuringEditing", "setAllowsMultipleSelectionDuringEditing", "setSelectionFollowsFocus", "setSectionIndexMinimumDisplayRowCount", "setSectionIndexColor", "setSectionIndexBackgroundColor", "setSectionIndexTrackingBackgroundColor", "setDragInteractionEnabled", "setIsEditing", "setRemembersLastFocusedIndexPath", "setAllowsFocus", "setAllowsFocusDuringEditing", "setFillerRowHeight", "setIsPrefetchingEnabled", "setId", "setVisible", "Z", "addFooterTemplate", "addHeaderTemplate", "setOnItemClick", "handleItemClick", "getCell", "setCellDividerInsets", "ILNSObject;", "nativeSetSeparatorCellInsetRight", "createCell", "calculateHeightOfRow", "updateLayout", "setCustomDividerAttributes", "LASIWidget;Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "addHeaderWidget", "addFooterWidget", "getCellContentView", "setData", "getData", "getReusableCell", "newCell", "LNSString;LNSObject;", "setSelectionStyleOnCell", "addSubView", "setSeparatorStyle", "nativeSetSeparatorStyle", "setStackFromBottom", "nativeSetStackFromBottom", "setOnItemLongClick", "longPress", "nativeAddLongClickListener", "setSelectedBackgroundView", "setDrawableBounds", "LNSObject;LADDrawable;", "nativeSelectedBackgroundView", "setListSelector", "nativesetTrackSelectedCell", "setSelectionStyle", "setOnScroll", "setHeaderDividersEnabled", "setFooterDividersEnabled", "setDivider", "getDivider", "setDividerHeight", "setSeparatorInsetRight", "nativeSetSeparatorInsetRight", "setSeparatorInsetLeft", "nativeSetSeparatorInsetLeft", "setSeparatorInsetBottom", "nativeSetSeparatorInsetBottom", "setSeparatorInsetTop", "nativeSetSeparatorInsetTop", "()Ljava/util/List<Lcom/ashera/model/LoopParam;>;", &ASListViewImpl_LOCAL_NAME, &ASListViewImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;", &ASListViewImpl_simpleTableIdentifier, "LASListViewImpl_ChoiceMode;LASListViewImpl_IosSeparatorStyle;LASListViewImpl_IosCellSelectionStyle;LASListViewImpl_ListViewExt;LASListViewImpl_ListAdapter;LASListViewImpl_FilterStatus;LASListViewImpl_OnItemClickListener;LASListViewImpl_OnItemLongClickListener;LASListViewImpl_OnScrollListener;LASListViewImpl_PostMeasureEventHandler;" };
+  static const J2ObjcClassInfo _ASListViewImpl = { "ListViewImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 171, 30, -1, 138, -1, -1, -1 };
   return &_ASListViewImpl;
 }
 
@@ -4553,1874 +4483,6 @@ ASListViewImpl_OnScrollListener *create_ASListViewImpl_OnScrollListener_initWith
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_OnScrollListener)
-
-@implementation ASListViewImpl_ListViewCommandBuilder
-
-- (instancetype)initWithASListViewImpl:(ASListViewImpl *)outer$ {
-  ASListViewImpl_ListViewCommandBuilder_initWithASListViewImpl_(self, outer$);
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosRowHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosRowHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosRowHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosRowHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosRowHeightWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosRowHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosEstimatedRowHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosEstimatedRowHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosEstimatedRowHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosEstimatedRowHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosEstimatedRowHeightWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosEstimatedRowHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosCellLayoutMarginsFollowReadableWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosCellLayoutMarginsFollowReadableWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosCellLayoutMarginsFollowReadableWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosCellLayoutMarginsFollowReadableWidth"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosCellLayoutMarginsFollowReadableWidthWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosCellLayoutMarginsFollowReadableWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosInsetsContentViewsToSafeArea {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosInsetsContentViewsToSafeArea"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosInsetsContentViewsToSafeArea {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosInsetsContentViewsToSafeArea"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosInsetsContentViewsToSafeAreaWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosInsetsContentViewsToSafeArea"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosSectionHeaderHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionHeaderHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosSectionHeaderHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionHeaderHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSectionHeaderHeightWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionHeaderHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosSectionFooterHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionFooterHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosSectionFooterHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionFooterHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSectionFooterHeightWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionFooterHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosEstimatedSectionHeaderHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosEstimatedSectionHeaderHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosEstimatedSectionHeaderHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosEstimatedSectionHeaderHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosEstimatedSectionHeaderHeightWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosEstimatedSectionHeaderHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosEstimatedSectionFooterHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosEstimatedSectionFooterHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosEstimatedSectionFooterHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosEstimatedSectionFooterHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosEstimatedSectionFooterHeightWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosEstimatedSectionFooterHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosSectionHeaderTopPadding {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionHeaderTopPadding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosSectionHeaderTopPadding {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionHeaderTopPadding"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSectionHeaderTopPaddingWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionHeaderTopPadding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosSeparatorColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSeparatorColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosSeparatorColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSeparatorColor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSeparatorColorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSeparatorColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosNumberOfSections {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosNumberOfSections"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosNumberOfSections {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosNumberOfSections"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosAllowsSelection {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsSelection"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosAllowsSelection {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsSelection"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosAllowsSelectionWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsSelection"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosAllowsMultipleSelection {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsMultipleSelection"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosAllowsMultipleSelection {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsMultipleSelection"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosAllowsMultipleSelectionWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsMultipleSelection"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosAllowsSelectionDuringEditing {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsSelectionDuringEditing"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosAllowsSelectionDuringEditing {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsSelectionDuringEditing"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosAllowsSelectionDuringEditingWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsSelectionDuringEditing"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosAllowsMultipleSelectionDuringEditing {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsMultipleSelectionDuringEditing"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosAllowsMultipleSelectionDuringEditing {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsMultipleSelectionDuringEditing"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosAllowsMultipleSelectionDuringEditingWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsMultipleSelectionDuringEditing"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosSelectionFollowsFocus {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSelectionFollowsFocus"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosSelectionFollowsFocus {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSelectionFollowsFocus"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSelectionFollowsFocusWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSelectionFollowsFocus"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosSectionIndexMinimumDisplayRowCount {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexMinimumDisplayRowCount"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosSectionIndexMinimumDisplayRowCount {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexMinimumDisplayRowCount"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSectionIndexMinimumDisplayRowCountWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexMinimumDisplayRowCount"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosSectionIndexColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosSectionIndexColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexColor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSectionIndexColorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosSectionIndexBackgroundColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexBackgroundColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosSectionIndexBackgroundColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexBackgroundColor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSectionIndexBackgroundColorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexBackgroundColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosSectionIndexTrackingBackgroundColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexTrackingBackgroundColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosSectionIndexTrackingBackgroundColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexTrackingBackgroundColor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSectionIndexTrackingBackgroundColorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSectionIndexTrackingBackgroundColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosHasUncommittedUpdates {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHasUncommittedUpdates"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosHasUncommittedUpdates {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHasUncommittedUpdates"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosHasActiveDrag {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHasActiveDrag"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosHasActiveDrag {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHasActiveDrag"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosDragInteractionEnabled {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosDragInteractionEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosDragInteractionEnabled {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosDragInteractionEnabled"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosDragInteractionEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosDragInteractionEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosHasActiveDrop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHasActiveDrop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosHasActiveDrop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosHasActiveDrop"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosIsEditing {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsEditing"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosIsEditing {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsEditing"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosIsEditingWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsEditing"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosRemembersLastFocusedIndexPath {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosRemembersLastFocusedIndexPath"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosRemembersLastFocusedIndexPath {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosRemembersLastFocusedIndexPath"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosRemembersLastFocusedIndexPathWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosRemembersLastFocusedIndexPath"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosAllowsFocus {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsFocus"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosAllowsFocus {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsFocus"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosAllowsFocusWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsFocus"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosAllowsFocusDuringEditing {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsFocusDuringEditing"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosAllowsFocusDuringEditing {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsFocusDuringEditing"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosAllowsFocusDuringEditingWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAllowsFocusDuringEditing"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosFillerRowHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosFillerRowHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosFillerRowHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosFillerRowHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosFillerRowHeightWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosFillerRowHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetIosIsPrefetchingEnabled {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsPrefetchingEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosIsPrefetchingEnabled {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsPrefetchingEnabled"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosIsPrefetchingEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsPrefetchingEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setOnItemClickWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onItemClick"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setOnItemLongClickWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onItemLongClick"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setOnScrollChangeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onScrollChange"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setListheaderWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"listheader"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setListfooterWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"listfooter"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetScrollX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scrollX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getScrollX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scrollX"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setScrollXWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scrollX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetScrollY {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scrollY"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getScrollY {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scrollY"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setScrollYWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scrollY"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetChoiceMode {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"choiceMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getChoiceMode {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"choiceMode"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setChoiceModeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"choiceMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetStackFromBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"stackFromBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isStackFromBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"stackFromBottom"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setStackFromBottomWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"stackFromBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetListSelector {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"listSelector"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getListSelector {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"listSelector"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setListSelectorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"listSelector"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSeparatorStyleWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSeparatorStyle"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosCellSelectionStyleWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosCellSelectionStyle"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSeparatorInsetTopWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSeparatorInsetTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSeparatorInsetBottomWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSeparatorInsetBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSeparatorInsetLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSeparatorInsetLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setIosSeparatorInsetRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosSeparatorInsetRight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetDivider {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"divider"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getDivider {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"divider"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setDividerWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"divider"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)tryGetDividerHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"dividerHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getDividerHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"dividerHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setDividerHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"dividerHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setFooterDividersEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"footerDividersEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setHeaderDividersEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"headerDividersEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)filterWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"filter"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setFilterDelayWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"filterDelay"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setFilterIdWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"filterId"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASListViewImpl_ListViewCommandBuilder *)setFilterItemPathWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"filterItemPath"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 5, 4, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 7, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 8, 4, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 9, 4, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 10, 4, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 11, 4, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 12, 4, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 13, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 15, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 16, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 17, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 18, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 19, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 20, 21, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 22, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 23, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 24, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 25, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 26, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 27, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 28, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 29, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 30, 4, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 31, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 32, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 33, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 34, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 35, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 36, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 37, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 38, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 39, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 40, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 41, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 42, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 43, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 44, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 45, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 46, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 47, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 48, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 49, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 50, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 51, 2, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 52, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 53, 21, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 54, 14, -1, -1, -1, -1 },
-    { NULL, "LASListViewImpl_ListViewCommandBuilder;", 0x1, 55, 14, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASListViewImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(tryGetIosRowHeight);
-  methods[3].selector = @selector(getIosRowHeight);
-  methods[4].selector = @selector(setIosRowHeightWithFloat:);
-  methods[5].selector = @selector(tryGetIosEstimatedRowHeight);
-  methods[6].selector = @selector(getIosEstimatedRowHeight);
-  methods[7].selector = @selector(setIosEstimatedRowHeightWithFloat:);
-  methods[8].selector = @selector(tryGetIosCellLayoutMarginsFollowReadableWidth);
-  methods[9].selector = @selector(isIosCellLayoutMarginsFollowReadableWidth);
-  methods[10].selector = @selector(setIosCellLayoutMarginsFollowReadableWidthWithBoolean:);
-  methods[11].selector = @selector(tryGetIosInsetsContentViewsToSafeArea);
-  methods[12].selector = @selector(isIosInsetsContentViewsToSafeArea);
-  methods[13].selector = @selector(setIosInsetsContentViewsToSafeAreaWithBoolean:);
-  methods[14].selector = @selector(tryGetIosSectionHeaderHeight);
-  methods[15].selector = @selector(getIosSectionHeaderHeight);
-  methods[16].selector = @selector(setIosSectionHeaderHeightWithFloat:);
-  methods[17].selector = @selector(tryGetIosSectionFooterHeight);
-  methods[18].selector = @selector(getIosSectionFooterHeight);
-  methods[19].selector = @selector(setIosSectionFooterHeightWithFloat:);
-  methods[20].selector = @selector(tryGetIosEstimatedSectionHeaderHeight);
-  methods[21].selector = @selector(getIosEstimatedSectionHeaderHeight);
-  methods[22].selector = @selector(setIosEstimatedSectionHeaderHeightWithFloat:);
-  methods[23].selector = @selector(tryGetIosEstimatedSectionFooterHeight);
-  methods[24].selector = @selector(getIosEstimatedSectionFooterHeight);
-  methods[25].selector = @selector(setIosEstimatedSectionFooterHeightWithFloat:);
-  methods[26].selector = @selector(tryGetIosSectionHeaderTopPadding);
-  methods[27].selector = @selector(getIosSectionHeaderTopPadding);
-  methods[28].selector = @selector(setIosSectionHeaderTopPaddingWithFloat:);
-  methods[29].selector = @selector(tryGetIosSeparatorColor);
-  methods[30].selector = @selector(getIosSeparatorColor);
-  methods[31].selector = @selector(setIosSeparatorColorWithNSString:);
-  methods[32].selector = @selector(tryGetIosNumberOfSections);
-  methods[33].selector = @selector(getIosNumberOfSections);
-  methods[34].selector = @selector(tryGetIosAllowsSelection);
-  methods[35].selector = @selector(isIosAllowsSelection);
-  methods[36].selector = @selector(setIosAllowsSelectionWithBoolean:);
-  methods[37].selector = @selector(tryGetIosAllowsMultipleSelection);
-  methods[38].selector = @selector(isIosAllowsMultipleSelection);
-  methods[39].selector = @selector(setIosAllowsMultipleSelectionWithBoolean:);
-  methods[40].selector = @selector(tryGetIosAllowsSelectionDuringEditing);
-  methods[41].selector = @selector(isIosAllowsSelectionDuringEditing);
-  methods[42].selector = @selector(setIosAllowsSelectionDuringEditingWithBoolean:);
-  methods[43].selector = @selector(tryGetIosAllowsMultipleSelectionDuringEditing);
-  methods[44].selector = @selector(isIosAllowsMultipleSelectionDuringEditing);
-  methods[45].selector = @selector(setIosAllowsMultipleSelectionDuringEditingWithBoolean:);
-  methods[46].selector = @selector(tryGetIosSelectionFollowsFocus);
-  methods[47].selector = @selector(isIosSelectionFollowsFocus);
-  methods[48].selector = @selector(setIosSelectionFollowsFocusWithBoolean:);
-  methods[49].selector = @selector(tryGetIosSectionIndexMinimumDisplayRowCount);
-  methods[50].selector = @selector(getIosSectionIndexMinimumDisplayRowCount);
-  methods[51].selector = @selector(setIosSectionIndexMinimumDisplayRowCountWithInt:);
-  methods[52].selector = @selector(tryGetIosSectionIndexColor);
-  methods[53].selector = @selector(getIosSectionIndexColor);
-  methods[54].selector = @selector(setIosSectionIndexColorWithNSString:);
-  methods[55].selector = @selector(tryGetIosSectionIndexBackgroundColor);
-  methods[56].selector = @selector(getIosSectionIndexBackgroundColor);
-  methods[57].selector = @selector(setIosSectionIndexBackgroundColorWithNSString:);
-  methods[58].selector = @selector(tryGetIosSectionIndexTrackingBackgroundColor);
-  methods[59].selector = @selector(getIosSectionIndexTrackingBackgroundColor);
-  methods[60].selector = @selector(setIosSectionIndexTrackingBackgroundColorWithNSString:);
-  methods[61].selector = @selector(tryGetIosHasUncommittedUpdates);
-  methods[62].selector = @selector(isIosHasUncommittedUpdates);
-  methods[63].selector = @selector(tryGetIosHasActiveDrag);
-  methods[64].selector = @selector(isIosHasActiveDrag);
-  methods[65].selector = @selector(tryGetIosDragInteractionEnabled);
-  methods[66].selector = @selector(isIosDragInteractionEnabled);
-  methods[67].selector = @selector(setIosDragInteractionEnabledWithBoolean:);
-  methods[68].selector = @selector(tryGetIosHasActiveDrop);
-  methods[69].selector = @selector(isIosHasActiveDrop);
-  methods[70].selector = @selector(tryGetIosIsEditing);
-  methods[71].selector = @selector(isIosIsEditing);
-  methods[72].selector = @selector(setIosIsEditingWithBoolean:);
-  methods[73].selector = @selector(tryGetIosRemembersLastFocusedIndexPath);
-  methods[74].selector = @selector(isIosRemembersLastFocusedIndexPath);
-  methods[75].selector = @selector(setIosRemembersLastFocusedIndexPathWithBoolean:);
-  methods[76].selector = @selector(tryGetIosAllowsFocus);
-  methods[77].selector = @selector(isIosAllowsFocus);
-  methods[78].selector = @selector(setIosAllowsFocusWithBoolean:);
-  methods[79].selector = @selector(tryGetIosAllowsFocusDuringEditing);
-  methods[80].selector = @selector(isIosAllowsFocusDuringEditing);
-  methods[81].selector = @selector(setIosAllowsFocusDuringEditingWithBoolean:);
-  methods[82].selector = @selector(tryGetIosFillerRowHeight);
-  methods[83].selector = @selector(getIosFillerRowHeight);
-  methods[84].selector = @selector(setIosFillerRowHeightWithFloat:);
-  methods[85].selector = @selector(tryGetIosIsPrefetchingEnabled);
-  methods[86].selector = @selector(isIosIsPrefetchingEnabled);
-  methods[87].selector = @selector(setIosIsPrefetchingEnabledWithBoolean:);
-  methods[88].selector = @selector(setOnItemClickWithNSString:);
-  methods[89].selector = @selector(setOnItemLongClickWithNSString:);
-  methods[90].selector = @selector(setOnScrollChangeWithNSString:);
-  methods[91].selector = @selector(setListheaderWithNSString:);
-  methods[92].selector = @selector(setListfooterWithNSString:);
-  methods[93].selector = @selector(tryGetScrollX);
-  methods[94].selector = @selector(getScrollX);
-  methods[95].selector = @selector(setScrollXWithNSString:);
-  methods[96].selector = @selector(tryGetScrollY);
-  methods[97].selector = @selector(getScrollY);
-  methods[98].selector = @selector(setScrollYWithNSString:);
-  methods[99].selector = @selector(tryGetChoiceMode);
-  methods[100].selector = @selector(getChoiceMode);
-  methods[101].selector = @selector(setChoiceModeWithNSString:);
-  methods[102].selector = @selector(tryGetStackFromBottom);
-  methods[103].selector = @selector(isStackFromBottom);
-  methods[104].selector = @selector(setStackFromBottomWithBoolean:);
-  methods[105].selector = @selector(tryGetListSelector);
-  methods[106].selector = @selector(getListSelector);
-  methods[107].selector = @selector(setListSelectorWithNSString:);
-  methods[108].selector = @selector(setIosSeparatorStyleWithNSString:);
-  methods[109].selector = @selector(setIosCellSelectionStyleWithNSString:);
-  methods[110].selector = @selector(setIosSeparatorInsetTopWithNSString:);
-  methods[111].selector = @selector(setIosSeparatorInsetBottomWithNSString:);
-  methods[112].selector = @selector(setIosSeparatorInsetLeftWithNSString:);
-  methods[113].selector = @selector(setIosSeparatorInsetRightWithNSString:);
-  methods[114].selector = @selector(tryGetDivider);
-  methods[115].selector = @selector(getDivider);
-  methods[116].selector = @selector(setDividerWithNSString:);
-  methods[117].selector = @selector(tryGetDividerHeight);
-  methods[118].selector = @selector(getDividerHeight);
-  methods[119].selector = @selector(setDividerHeightWithNSString:);
-  methods[120].selector = @selector(setFooterDividersEnabledWithBoolean:);
-  methods[121].selector = @selector(setHeaderDividersEnabledWithBoolean:);
-  methods[122].selector = @selector(filterWithNSString:);
-  methods[123].selector = @selector(setFilterDelayWithInt:);
-  methods[124].selector = @selector(setFilterIdWithNSString:);
-  methods[125].selector = @selector(setFilterItemPathWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASListViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASListViewImpl;", "execute", "Z", "setIosRowHeight", "F", "setIosEstimatedRowHeight", "setIosCellLayoutMarginsFollowReadableWidth", "setIosInsetsContentViewsToSafeArea", "setIosSectionHeaderHeight", "setIosSectionFooterHeight", "setIosEstimatedSectionHeaderHeight", "setIosEstimatedSectionFooterHeight", "setIosSectionHeaderTopPadding", "setIosSeparatorColor", "LNSString;", "setIosAllowsSelection", "setIosAllowsMultipleSelection", "setIosAllowsSelectionDuringEditing", "setIosAllowsMultipleSelectionDuringEditing", "setIosSelectionFollowsFocus", "setIosSectionIndexMinimumDisplayRowCount", "I", "setIosSectionIndexColor", "setIosSectionIndexBackgroundColor", "setIosSectionIndexTrackingBackgroundColor", "setIosDragInteractionEnabled", "setIosIsEditing", "setIosRemembersLastFocusedIndexPath", "setIosAllowsFocus", "setIosAllowsFocusDuringEditing", "setIosFillerRowHeight", "setIosIsPrefetchingEnabled", "setOnItemClick", "setOnItemLongClick", "setOnScrollChange", "setListheader", "setListfooter", "setScrollX", "setScrollY", "setChoiceMode", "setStackFromBottom", "setListSelector", "setIosSeparatorStyle", "setIosCellSelectionStyle", "setIosSeparatorInsetTop", "setIosSeparatorInsetBottom", "setIosSeparatorInsetLeft", "setIosSeparatorInsetRight", "setDivider", "setDividerHeight", "setFooterDividersEnabled", "setHeaderDividersEnabled", "filter", "setFilterDelay", "setFilterId", "setFilterItemPath", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandBuilder<Lcom/ashera/layout/ListViewImpl$ListViewCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASListViewImpl_ListViewCommandBuilder = { "ListViewCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 126, 1, 0, -1, -1, 56, -1 };
-  return &_ASListViewImpl_ListViewCommandBuilder;
-}
-
-@end
-
-void ASListViewImpl_ListViewCommandBuilder_initWithASListViewImpl_(ASListViewImpl_ListViewCommandBuilder *self, ASListViewImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupCommandBuilder_init(self);
-}
-
-ASListViewImpl_ListViewCommandBuilder *new_ASListViewImpl_ListViewCommandBuilder_initWithASListViewImpl_(ASListViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASListViewImpl_ListViewCommandBuilder, initWithASListViewImpl_, outer$)
-}
-
-ASListViewImpl_ListViewCommandBuilder *create_ASListViewImpl_ListViewCommandBuilder_initWithASListViewImpl_(ASListViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASListViewImpl_ListViewCommandBuilder, initWithASListViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_ListViewCommandBuilder)
-
-@implementation ASListViewImpl_ListViewBean
-
-- (instancetype)initWithASListViewImpl:(ASListViewImpl *)outer$ {
-  ASListViewImpl_ListViewBean_initWithASListViewImpl_(self, outer$);
-  return self;
-}
-
-- (id)getIosRowHeight {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosRowHeight])) executeWithBoolean:false])) getIosRowHeight];
-}
-
-- (void)setIosRowHeightWithFloat:(jfloat)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosRowHeightWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getIosEstimatedRowHeight {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosEstimatedRowHeight])) executeWithBoolean:false])) getIosEstimatedRowHeight];
-}
-
-- (void)setIosEstimatedRowHeightWithFloat:(jfloat)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosEstimatedRowHeightWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)isIosCellLayoutMarginsFollowReadableWidth {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosCellLayoutMarginsFollowReadableWidth])) executeWithBoolean:false])) isIosCellLayoutMarginsFollowReadableWidth];
-}
-
-- (void)setIosCellLayoutMarginsFollowReadableWidthWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosCellLayoutMarginsFollowReadableWidthWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosInsetsContentViewsToSafeArea {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosInsetsContentViewsToSafeArea])) executeWithBoolean:false])) isIosInsetsContentViewsToSafeArea];
-}
-
-- (void)setIosInsetsContentViewsToSafeAreaWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosInsetsContentViewsToSafeAreaWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getIosSectionHeaderHeight {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosSectionHeaderHeight])) executeWithBoolean:false])) getIosSectionHeaderHeight];
-}
-
-- (void)setIosSectionHeaderHeightWithFloat:(jfloat)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSectionHeaderHeightWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getIosSectionFooterHeight {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosSectionFooterHeight])) executeWithBoolean:false])) getIosSectionFooterHeight];
-}
-
-- (void)setIosSectionFooterHeightWithFloat:(jfloat)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSectionFooterHeightWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getIosEstimatedSectionHeaderHeight {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosEstimatedSectionHeaderHeight])) executeWithBoolean:false])) getIosEstimatedSectionHeaderHeight];
-}
-
-- (void)setIosEstimatedSectionHeaderHeightWithFloat:(jfloat)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosEstimatedSectionHeaderHeightWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getIosEstimatedSectionFooterHeight {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosEstimatedSectionFooterHeight])) executeWithBoolean:false])) getIosEstimatedSectionFooterHeight];
-}
-
-- (void)setIosEstimatedSectionFooterHeightWithFloat:(jfloat)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosEstimatedSectionFooterHeightWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getIosSectionHeaderTopPadding {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosSectionHeaderTopPadding])) executeWithBoolean:false])) getIosSectionHeaderTopPadding];
-}
-
-- (void)setIosSectionHeaderTopPaddingWithFloat:(jfloat)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSectionHeaderTopPaddingWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getIosSeparatorColor {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosSeparatorColor])) executeWithBoolean:false])) getIosSeparatorColor];
-}
-
-- (void)setIosSeparatorColorWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSeparatorColorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getIosNumberOfSections {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosNumberOfSections])) executeWithBoolean:false])) getIosNumberOfSections];
-}
-
-- (id)isIosAllowsSelection {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosAllowsSelection])) executeWithBoolean:false])) isIosAllowsSelection];
-}
-
-- (void)setIosAllowsSelectionWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosAllowsSelectionWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosAllowsMultipleSelection {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosAllowsMultipleSelection])) executeWithBoolean:false])) isIosAllowsMultipleSelection];
-}
-
-- (void)setIosAllowsMultipleSelectionWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosAllowsMultipleSelectionWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosAllowsSelectionDuringEditing {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosAllowsSelectionDuringEditing])) executeWithBoolean:false])) isIosAllowsSelectionDuringEditing];
-}
-
-- (void)setIosAllowsSelectionDuringEditingWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosAllowsSelectionDuringEditingWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosAllowsMultipleSelectionDuringEditing {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosAllowsMultipleSelectionDuringEditing])) executeWithBoolean:false])) isIosAllowsMultipleSelectionDuringEditing];
-}
-
-- (void)setIosAllowsMultipleSelectionDuringEditingWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosAllowsMultipleSelectionDuringEditingWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosSelectionFollowsFocus {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosSelectionFollowsFocus])) executeWithBoolean:false])) isIosSelectionFollowsFocus];
-}
-
-- (void)setIosSelectionFollowsFocusWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSelectionFollowsFocusWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getIosSectionIndexMinimumDisplayRowCount {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosSectionIndexMinimumDisplayRowCount])) executeWithBoolean:false])) getIosSectionIndexMinimumDisplayRowCount];
-}
-
-- (void)setIosSectionIndexMinimumDisplayRowCountWithInt:(jint)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSectionIndexMinimumDisplayRowCountWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getIosSectionIndexColor {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosSectionIndexColor])) executeWithBoolean:false])) getIosSectionIndexColor];
-}
-
-- (void)setIosSectionIndexColorWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSectionIndexColorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getIosSectionIndexBackgroundColor {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosSectionIndexBackgroundColor])) executeWithBoolean:false])) getIosSectionIndexBackgroundColor];
-}
-
-- (void)setIosSectionIndexBackgroundColorWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSectionIndexBackgroundColorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getIosSectionIndexTrackingBackgroundColor {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosSectionIndexTrackingBackgroundColor])) executeWithBoolean:false])) getIosSectionIndexTrackingBackgroundColor];
-}
-
-- (void)setIosSectionIndexTrackingBackgroundColorWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSectionIndexTrackingBackgroundColorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isIosHasUncommittedUpdates {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosHasUncommittedUpdates])) executeWithBoolean:false])) isIosHasUncommittedUpdates];
-}
-
-- (id)isIosHasActiveDrag {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosHasActiveDrag])) executeWithBoolean:false])) isIosHasActiveDrag];
-}
-
-- (id)isIosDragInteractionEnabled {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosDragInteractionEnabled])) executeWithBoolean:false])) isIosDragInteractionEnabled];
-}
-
-- (void)setIosDragInteractionEnabledWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosDragInteractionEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosHasActiveDrop {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosHasActiveDrop])) executeWithBoolean:false])) isIosHasActiveDrop];
-}
-
-- (id)isIosIsEditing {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosIsEditing])) executeWithBoolean:false])) isIosIsEditing];
-}
-
-- (void)setIosIsEditingWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosIsEditingWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosRemembersLastFocusedIndexPath {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosRemembersLastFocusedIndexPath])) executeWithBoolean:false])) isIosRemembersLastFocusedIndexPath];
-}
-
-- (void)setIosRemembersLastFocusedIndexPathWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosRemembersLastFocusedIndexPathWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosAllowsFocus {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosAllowsFocus])) executeWithBoolean:false])) isIosAllowsFocus];
-}
-
-- (void)setIosAllowsFocusWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosAllowsFocusWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosAllowsFocusDuringEditing {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosAllowsFocusDuringEditing])) executeWithBoolean:false])) isIosAllowsFocusDuringEditing];
-}
-
-- (void)setIosAllowsFocusDuringEditingWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosAllowsFocusDuringEditingWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getIosFillerRowHeight {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosFillerRowHeight])) executeWithBoolean:false])) getIosFillerRowHeight];
-}
-
-- (void)setIosFillerRowHeightWithFloat:(jfloat)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosFillerRowHeightWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)isIosIsPrefetchingEnabled {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetIosIsPrefetchingEnabled])) executeWithBoolean:false])) isIosIsPrefetchingEnabled];
-}
-
-- (void)setIosIsPrefetchingEnabledWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosIsPrefetchingEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setOnItemClickWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnItemClickWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnItemLongClickWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnItemLongClickWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnScrollChangeWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setOnScrollChangeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setListheaderWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setListheaderWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setListfooterWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setListfooterWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getScrollX {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetScrollX])) executeWithBoolean:false])) getScrollX];
-}
-
-- (void)setScrollXWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setScrollXWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getScrollY {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetScrollY])) executeWithBoolean:false])) getScrollY];
-}
-
-- (void)setScrollYWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setScrollYWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getChoiceMode {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetChoiceMode])) executeWithBoolean:false])) getChoiceMode];
-}
-
-- (void)setChoiceModeWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setChoiceModeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isStackFromBottom {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetStackFromBottom])) executeWithBoolean:false])) isStackFromBottom];
-}
-
-- (void)setStackFromBottomWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setStackFromBottomWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getListSelector {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetListSelector])) executeWithBoolean:false])) getListSelector];
-}
-
-- (void)setListSelectorWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setListSelectorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosSeparatorStyleWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSeparatorStyleWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosCellSelectionStyleWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosCellSelectionStyleWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosSeparatorInsetTopWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSeparatorInsetTopWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosSeparatorInsetBottomWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSeparatorInsetBottomWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosSeparatorInsetLeftWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSeparatorInsetLeftWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosSeparatorInsetRightWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setIosSeparatorInsetRightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getDivider {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetDivider])) executeWithBoolean:false])) getDivider];
-}
-
-- (void)setDividerWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDividerWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getDividerHeight {
-  return [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetDividerHeight])) executeWithBoolean:false])) getDividerHeight];
-}
-
-- (void)setDividerHeightWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDividerHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setFooterDividersEnabledWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFooterDividersEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setHeaderDividersEnabledWithBoolean:(jboolean)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setHeaderDividersEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)filterWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) filterWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setFilterDelayWithInt:(jint)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFilterDelayWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setFilterIdWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFilterIdWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setFilterItemPathWithNSString:(NSString *)value {
-  (void) [((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([((ASListViewImpl_ListViewCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFilterItemPathWithNSString:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 20, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 24, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 25, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 26, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 27, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 28, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 29, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 30, 5, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 31, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 32, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 33, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 34, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 35, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 36, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 37, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 38, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 39, 5, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 41, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 42, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 43, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 44, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 45, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 46, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 47, 13, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 48, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 49, 5, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 50, 5, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 51, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 52, 20, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 53, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 54, 13, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASListViewImpl:);
-  methods[1].selector = @selector(getIosRowHeight);
-  methods[2].selector = @selector(setIosRowHeightWithFloat:);
-  methods[3].selector = @selector(getIosEstimatedRowHeight);
-  methods[4].selector = @selector(setIosEstimatedRowHeightWithFloat:);
-  methods[5].selector = @selector(isIosCellLayoutMarginsFollowReadableWidth);
-  methods[6].selector = @selector(setIosCellLayoutMarginsFollowReadableWidthWithBoolean:);
-  methods[7].selector = @selector(isIosInsetsContentViewsToSafeArea);
-  methods[8].selector = @selector(setIosInsetsContentViewsToSafeAreaWithBoolean:);
-  methods[9].selector = @selector(getIosSectionHeaderHeight);
-  methods[10].selector = @selector(setIosSectionHeaderHeightWithFloat:);
-  methods[11].selector = @selector(getIosSectionFooterHeight);
-  methods[12].selector = @selector(setIosSectionFooterHeightWithFloat:);
-  methods[13].selector = @selector(getIosEstimatedSectionHeaderHeight);
-  methods[14].selector = @selector(setIosEstimatedSectionHeaderHeightWithFloat:);
-  methods[15].selector = @selector(getIosEstimatedSectionFooterHeight);
-  methods[16].selector = @selector(setIosEstimatedSectionFooterHeightWithFloat:);
-  methods[17].selector = @selector(getIosSectionHeaderTopPadding);
-  methods[18].selector = @selector(setIosSectionHeaderTopPaddingWithFloat:);
-  methods[19].selector = @selector(getIosSeparatorColor);
-  methods[20].selector = @selector(setIosSeparatorColorWithNSString:);
-  methods[21].selector = @selector(getIosNumberOfSections);
-  methods[22].selector = @selector(isIosAllowsSelection);
-  methods[23].selector = @selector(setIosAllowsSelectionWithBoolean:);
-  methods[24].selector = @selector(isIosAllowsMultipleSelection);
-  methods[25].selector = @selector(setIosAllowsMultipleSelectionWithBoolean:);
-  methods[26].selector = @selector(isIosAllowsSelectionDuringEditing);
-  methods[27].selector = @selector(setIosAllowsSelectionDuringEditingWithBoolean:);
-  methods[28].selector = @selector(isIosAllowsMultipleSelectionDuringEditing);
-  methods[29].selector = @selector(setIosAllowsMultipleSelectionDuringEditingWithBoolean:);
-  methods[30].selector = @selector(isIosSelectionFollowsFocus);
-  methods[31].selector = @selector(setIosSelectionFollowsFocusWithBoolean:);
-  methods[32].selector = @selector(getIosSectionIndexMinimumDisplayRowCount);
-  methods[33].selector = @selector(setIosSectionIndexMinimumDisplayRowCountWithInt:);
-  methods[34].selector = @selector(getIosSectionIndexColor);
-  methods[35].selector = @selector(setIosSectionIndexColorWithNSString:);
-  methods[36].selector = @selector(getIosSectionIndexBackgroundColor);
-  methods[37].selector = @selector(setIosSectionIndexBackgroundColorWithNSString:);
-  methods[38].selector = @selector(getIosSectionIndexTrackingBackgroundColor);
-  methods[39].selector = @selector(setIosSectionIndexTrackingBackgroundColorWithNSString:);
-  methods[40].selector = @selector(isIosHasUncommittedUpdates);
-  methods[41].selector = @selector(isIosHasActiveDrag);
-  methods[42].selector = @selector(isIosDragInteractionEnabled);
-  methods[43].selector = @selector(setIosDragInteractionEnabledWithBoolean:);
-  methods[44].selector = @selector(isIosHasActiveDrop);
-  methods[45].selector = @selector(isIosIsEditing);
-  methods[46].selector = @selector(setIosIsEditingWithBoolean:);
-  methods[47].selector = @selector(isIosRemembersLastFocusedIndexPath);
-  methods[48].selector = @selector(setIosRemembersLastFocusedIndexPathWithBoolean:);
-  methods[49].selector = @selector(isIosAllowsFocus);
-  methods[50].selector = @selector(setIosAllowsFocusWithBoolean:);
-  methods[51].selector = @selector(isIosAllowsFocusDuringEditing);
-  methods[52].selector = @selector(setIosAllowsFocusDuringEditingWithBoolean:);
-  methods[53].selector = @selector(getIosFillerRowHeight);
-  methods[54].selector = @selector(setIosFillerRowHeightWithFloat:);
-  methods[55].selector = @selector(isIosIsPrefetchingEnabled);
-  methods[56].selector = @selector(setIosIsPrefetchingEnabledWithBoolean:);
-  methods[57].selector = @selector(setOnItemClickWithNSString:);
-  methods[58].selector = @selector(setOnItemLongClickWithNSString:);
-  methods[59].selector = @selector(setOnScrollChangeWithNSString:);
-  methods[60].selector = @selector(setListheaderWithNSString:);
-  methods[61].selector = @selector(setListfooterWithNSString:);
-  methods[62].selector = @selector(getScrollX);
-  methods[63].selector = @selector(setScrollXWithNSString:);
-  methods[64].selector = @selector(getScrollY);
-  methods[65].selector = @selector(setScrollYWithNSString:);
-  methods[66].selector = @selector(getChoiceMode);
-  methods[67].selector = @selector(setChoiceModeWithNSString:);
-  methods[68].selector = @selector(isStackFromBottom);
-  methods[69].selector = @selector(setStackFromBottomWithBoolean:);
-  methods[70].selector = @selector(getListSelector);
-  methods[71].selector = @selector(setListSelectorWithNSString:);
-  methods[72].selector = @selector(setIosSeparatorStyleWithNSString:);
-  methods[73].selector = @selector(setIosCellSelectionStyleWithNSString:);
-  methods[74].selector = @selector(setIosSeparatorInsetTopWithNSString:);
-  methods[75].selector = @selector(setIosSeparatorInsetBottomWithNSString:);
-  methods[76].selector = @selector(setIosSeparatorInsetLeftWithNSString:);
-  methods[77].selector = @selector(setIosSeparatorInsetRightWithNSString:);
-  methods[78].selector = @selector(getDivider);
-  methods[79].selector = @selector(setDividerWithNSString:);
-  methods[80].selector = @selector(getDividerHeight);
-  methods[81].selector = @selector(setDividerHeightWithNSString:);
-  methods[82].selector = @selector(setFooterDividersEnabledWithBoolean:);
-  methods[83].selector = @selector(setHeaderDividersEnabledWithBoolean:);
-  methods[84].selector = @selector(filterWithNSString:);
-  methods[85].selector = @selector(setFilterDelayWithInt:);
-  methods[86].selector = @selector(setFilterIdWithNSString:);
-  methods[87].selector = @selector(setFilterItemPathWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASListViewImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASListViewImpl;", "setIosRowHeight", "F", "setIosEstimatedRowHeight", "setIosCellLayoutMarginsFollowReadableWidth", "Z", "setIosInsetsContentViewsToSafeArea", "setIosSectionHeaderHeight", "setIosSectionFooterHeight", "setIosEstimatedSectionHeaderHeight", "setIosEstimatedSectionFooterHeight", "setIosSectionHeaderTopPadding", "setIosSeparatorColor", "LNSString;", "setIosAllowsSelection", "setIosAllowsMultipleSelection", "setIosAllowsSelectionDuringEditing", "setIosAllowsMultipleSelectionDuringEditing", "setIosSelectionFollowsFocus", "setIosSectionIndexMinimumDisplayRowCount", "I", "setIosSectionIndexColor", "setIosSectionIndexBackgroundColor", "setIosSectionIndexTrackingBackgroundColor", "setIosDragInteractionEnabled", "setIosIsEditing", "setIosRemembersLastFocusedIndexPath", "setIosAllowsFocus", "setIosAllowsFocusDuringEditing", "setIosFillerRowHeight", "setIosIsPrefetchingEnabled", "setOnItemClick", "setOnItemLongClick", "setOnScrollChange", "setListheader", "setListfooter", "setScrollX", "setScrollY", "setChoiceMode", "setStackFromBottom", "setListSelector", "setIosSeparatorStyle", "setIosCellSelectionStyle", "setIosSeparatorInsetTop", "setIosSeparatorInsetBottom", "setIosSeparatorInsetLeft", "setIosSeparatorInsetRight", "setDivider", "setDividerHeight", "setFooterDividersEnabled", "setHeaderDividersEnabled", "filter", "setFilterDelay", "setFilterId", "setFilterItemPath" };
-  static const J2ObjcClassInfo _ASListViewImpl_ListViewBean = { "ListViewBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 88, 1, 0, -1, -1, -1, -1 };
-  return &_ASListViewImpl_ListViewBean;
-}
-
-@end
-
-void ASListViewImpl_ListViewBean_initWithASListViewImpl_(ASListViewImpl_ListViewBean *self, ASListViewImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(self, outer$);
-}
-
-ASListViewImpl_ListViewBean *new_ASListViewImpl_ListViewBean_initWithASListViewImpl_(ASListViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASListViewImpl_ListViewBean, initWithASListViewImpl_, outer$)
-}
-
-ASListViewImpl_ListViewBean *create_ASListViewImpl_ListViewBean_initWithASListViewImpl_(ASListViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASListViewImpl_ListViewBean, initWithASListViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_ListViewBean)
-
-@implementation ASListViewImpl_ListViewParamsBean
-
-- (instancetype)initWithASListViewImpl:(ASListViewImpl *)outer$ {
-  ASListViewImpl_ListViewParamsBean_initWithASListViewImpl_(self, outer$);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASListViewImpl:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASListViewImpl;" };
-  static const J2ObjcClassInfo _ASListViewImpl_ListViewParamsBean = { "ListViewParamsBean", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 1, 0, 0, -1, -1, -1, -1 };
-  return &_ASListViewImpl_ListViewParamsBean;
-}
-
-@end
-
-void ASListViewImpl_ListViewParamsBean_initWithASListViewImpl_(ASListViewImpl_ListViewParamsBean *self, ASListViewImpl *outer$) {
-  ASViewGroupImpl_ViewGroupParamsBean_init(self);
-}
-
-ASListViewImpl_ListViewParamsBean *new_ASListViewImpl_ListViewParamsBean_initWithASListViewImpl_(ASListViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASListViewImpl_ListViewParamsBean, initWithASListViewImpl_, outer$)
-}
-
-ASListViewImpl_ListViewParamsBean *create_ASListViewImpl_ListViewParamsBean_initWithASListViewImpl_(ASListViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASListViewImpl_ListViewParamsBean, initWithASListViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_ListViewParamsBean)
-
-@implementation ASListViewImpl_ListViewCommandParamsBuilder
-
-- (instancetype)initWithASListViewImpl:(ASListViewImpl *)outer$ {
-  ASListViewImpl_ListViewCommandParamsBuilder_initWithASListViewImpl_(self, outer$);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASListViewImpl:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASListViewImpl;", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandParamsBuilder<Lcom/ashera/layout/ListViewImpl$ListViewCommandParamsBuilder;>;" };
-  static const J2ObjcClassInfo _ASListViewImpl_ListViewCommandParamsBuilder = { "ListViewCommandParamsBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 1, 0, 0, -1, -1, 1, -1 };
-  return &_ASListViewImpl_ListViewCommandParamsBuilder;
-}
-
-@end
-
-void ASListViewImpl_ListViewCommandParamsBuilder_initWithASListViewImpl_(ASListViewImpl_ListViewCommandParamsBuilder *self, ASListViewImpl *outer$) {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(self);
-}
-
-ASListViewImpl_ListViewCommandParamsBuilder *new_ASListViewImpl_ListViewCommandParamsBuilder_initWithASListViewImpl_(ASListViewImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASListViewImpl_ListViewCommandParamsBuilder, initWithASListViewImpl_, outer$)
-}
-
-ASListViewImpl_ListViewCommandParamsBuilder *create_ASListViewImpl_ListViewCommandParamsBuilder_initWithASListViewImpl_(ASListViewImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASListViewImpl_ListViewCommandParamsBuilder, initWithASListViewImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASListViewImpl_ListViewCommandParamsBuilder)
 
 @implementation ASListViewImpl_PostMeasureEventHandler
 

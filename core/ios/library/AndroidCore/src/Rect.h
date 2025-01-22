@@ -84,6 +84,25 @@
  */
 - (jint)height;
 
+/*!
+ @brief Inset the rectangle by (dx,dy).If dx is positive, then the sides are
+  moved inwards, making the rectangle narrower.
+ If dx is negative, then the
+  sides are moved outwards, making the rectangle wider. The same holds true
+  for dy and the top and bottom.
+ @param dx The amount to add(subtract) from the rectangle's left(right)
+ @param dy The amount to add(subtract) from the rectangle's top(bottom)
+ */
+- (void)insetWithInt:(jint)dx
+             withInt:(jint)dy;
+
+/*!
+ @brief Insets the rectangle on all sides specified by the dimensions of the <code>insets</code>
+  rectangle.
+ @param insets The rectangle specifying the insets on all side.
+ */
+- (void)insetWithADRect:(ADRect *)insets;
+
 - (jboolean)isEmpty;
 
 /*!

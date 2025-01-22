@@ -6,7 +6,6 @@
 #include "BaseWidget.h"
 #include "FrameLayout.h"
 #include "HasWidgets.h"
-#include "IAttributable.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
 #include "IOSClass.h"
@@ -23,7 +22,6 @@
 #include "ViewOnlyImpl.h"
 #include "WidgetAttribute.h"
 #include "WidgetFactory.h"
-#include "java/lang/Boolean.h"
 #include "java/lang/Integer.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/HashMap.h"
@@ -42,22 +40,13 @@
 @protocol JavaUtilMap;
 
 
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-
-@interface ASViewOnlyImpl () {
- @public
-  ASViewOnlyImpl_ViewOnlyCommandBuilder *builder_;
-  ASViewOnlyImpl_ViewOnlyBean *bean_;
-}
+@interface ASViewOnlyImpl ()
 
 - (void)setWidgetOnNativeClass;
 
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params;
 
 @end
-
-J2OBJC_FIELD_SETTER(ASViewOnlyImpl, builder_, ASViewOnlyImpl_ViewOnlyCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASViewOnlyImpl, bean_, ASViewOnlyImpl_ViewOnlyBean *)
 
 __attribute__((unused)) static void ASViewOnlyImpl_setWidgetOnNativeClass(ASViewOnlyImpl *self);
 
@@ -80,20 +69,6 @@ J2OBJC_FIELD_SETTER(ASViewOnlyImpl_ViewOnlyExt, measureFinished_, ASMeasureEvent
 J2OBJC_FIELD_SETTER(ASViewOnlyImpl_ViewOnlyExt, onLayoutEvent_, ASOnLayoutEvent *)
 J2OBJC_FIELD_SETTER(ASViewOnlyImpl_ViewOnlyExt, overlays_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASViewOnlyImpl_ViewOnlyExt, templates_, id<JavaUtilMap>)
-
-@interface ASViewOnlyImpl_ViewOnlyCommandBuilder () {
- @public
-  ASViewOnlyImpl *this$0_;
-}
-
-@end
-
-@interface ASViewOnlyImpl_ViewOnlyBean () {
- @public
-  ASViewOnlyImpl *this$0_;
-}
-
-@end
 
 NSString *ASViewOnlyImpl_LOCAL_NAME = @"View";
 NSString *ASViewOnlyImpl_GROUP_NAME = @"View";
@@ -209,24 +184,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASViewOnlyImpl_ViewOnlyBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASViewOnlyImpl_ViewOnlyBean_initWithASViewOnlyImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASViewOnlyImpl_ViewOnlyCommandBuilder_initWithASViewOnlyImpl_(self);
-  }
-  return builder_;
-}
-
 - (void)createViewWithJavaUtilMap:(id<JavaUtilMap>)params {
   ASUIView* uiView = [ASUIView new];
   uiView.backgroundColor = [UIColor clearColor];
@@ -256,11 +213,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 14, 1, -1, -1, -1, -1 },
-    { NULL, "LASViewOnlyImpl_ViewOnlyBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASViewOnlyImpl_ViewOnlyCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x101, 15, 16, -1, 17, -1, -1 },
-    { NULL, "V", 0x2, 18, 16, -1, 17, -1, -1 },
+    { NULL, "V", 0x101, 14, 15, -1, 16, -1, -1 },
+    { NULL, "V", 0x2, 17, 15, -1, 16, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -282,22 +236,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[14].selector = @selector(setVisibleWithBoolean:);
   methods[15].selector = @selector(requestLayout);
   methods[16].selector = @selector(invalidate);
-  methods[17].selector = @selector(getPluginWithNSString:);
-  methods[18].selector = @selector(getBean);
-  methods[19].selector = @selector(getBuilder);
-  methods[20].selector = @selector(createViewWithJavaUtilMap:);
-  methods[21].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[17].selector = @selector(createViewWithJavaUtilMap:);
+  methods[18].selector = @selector(nativeCreateWithJavaUtilMap:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 19, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 20, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 18, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 19, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADFrameLayout;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "builder_", "LASViewOnlyImpl_ViewOnlyCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASViewOnlyImpl_ViewOnlyBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "createView", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "nativeCreate", &ASViewOnlyImpl_LOCAL_NAME, &ASViewOnlyImpl_GROUP_NAME, "LASViewOnlyImpl_ViewOnlyExt;LASViewOnlyImpl_ViewOnlyCommandBuilder;LASViewOnlyImpl_ViewOnlyBean;" };
-  static const J2ObjcClassInfo _ASViewOnlyImpl = { "ViewOnlyImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 22, 6, -1, 21, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setId", "setVisible", "Z", "createView", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "nativeCreate", &ASViewOnlyImpl_LOCAL_NAME, &ASViewOnlyImpl_GROUP_NAME, "LASViewOnlyImpl_ViewOnlyExt;" };
+  static const J2ObjcClassInfo _ASViewOnlyImpl = { "ViewOnlyImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 19, 4, -1, 20, -1, -1, -1 };
   return &_ASViewOnlyImpl;
 }
 
@@ -701,113 +650,3 @@ ASViewOnlyImpl_ViewOnlyExt *create_ASViewOnlyImpl_ViewOnlyExt_initWithASViewOnly
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewOnlyImpl_ViewOnlyExt)
-
-@implementation ASViewOnlyImpl_ViewOnlyCommandBuilder
-
-- (instancetype)initWithASViewOnlyImpl:(ASViewOnlyImpl *)outer$ {
-  ASViewOnlyImpl_ViewOnlyCommandBuilder_initWithASViewOnlyImpl_(self, outer$);
-  return self;
-}
-
-- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASViewOnlyImpl_ViewOnlyCommandBuilder *)setAttributeUnderTestWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"attributeUnderTest"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASViewOnlyImpl_ViewOnlyCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASViewOnlyImpl_ViewOnlyCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASViewOnlyImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setAttributeUnderTestWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASViewOnlyImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASViewOnlyImpl;", "execute", "Z", "setAttributeUnderTest", "LNSString;", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ViewOnlyImpl$ViewOnlyCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASViewOnlyImpl_ViewOnlyCommandBuilder = { "ViewOnlyCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 3, 1, 0, -1, -1, 5, -1 };
-  return &_ASViewOnlyImpl_ViewOnlyCommandBuilder;
-}
-
-@end
-
-void ASViewOnlyImpl_ViewOnlyCommandBuilder_initWithASViewOnlyImpl_(ASViewOnlyImpl_ViewOnlyCommandBuilder *self, ASViewOnlyImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewImpl_ViewCommandBuilder_init(self);
-}
-
-ASViewOnlyImpl_ViewOnlyCommandBuilder *new_ASViewOnlyImpl_ViewOnlyCommandBuilder_initWithASViewOnlyImpl_(ASViewOnlyImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASViewOnlyImpl_ViewOnlyCommandBuilder, initWithASViewOnlyImpl_, outer$)
-}
-
-ASViewOnlyImpl_ViewOnlyCommandBuilder *create_ASViewOnlyImpl_ViewOnlyCommandBuilder_initWithASViewOnlyImpl_(ASViewOnlyImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASViewOnlyImpl_ViewOnlyCommandBuilder, initWithASViewOnlyImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewOnlyImpl_ViewOnlyCommandBuilder)
-
-@implementation ASViewOnlyImpl_ViewOnlyBean
-
-- (instancetype)initWithASViewOnlyImpl:(ASViewOnlyImpl *)outer$ {
-  ASViewOnlyImpl_ViewOnlyBean_initWithASViewOnlyImpl_(self, outer$);
-  return self;
-}
-
-- (void)setAttributeUnderTestWithNSString:(NSString *)value {
-  (void) [((ASViewOnlyImpl_ViewOnlyCommandBuilder *) nil_chk([((ASViewOnlyImpl_ViewOnlyCommandBuilder *) nil_chk([((ASViewOnlyImpl_ViewOnlyCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setAttributeUnderTestWithNSString:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASViewOnlyImpl:);
-  methods[1].selector = @selector(setAttributeUnderTestWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASViewOnlyImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASViewOnlyImpl;", "setAttributeUnderTest", "LNSString;" };
-  static const J2ObjcClassInfo _ASViewOnlyImpl_ViewOnlyBean = { "ViewOnlyBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 2, 1, 0, -1, -1, -1, -1 };
-  return &_ASViewOnlyImpl_ViewOnlyBean;
-}
-
-@end
-
-void ASViewOnlyImpl_ViewOnlyBean_initWithASViewOnlyImpl_(ASViewOnlyImpl_ViewOnlyBean *self, ASViewOnlyImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewImpl_ViewBean_initWithASIWidget_(self, outer$);
-}
-
-ASViewOnlyImpl_ViewOnlyBean *new_ASViewOnlyImpl_ViewOnlyBean_initWithASViewOnlyImpl_(ASViewOnlyImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASViewOnlyImpl_ViewOnlyBean, initWithASViewOnlyImpl_, outer$)
-}
-
-ASViewOnlyImpl_ViewOnlyBean *create_ASViewOnlyImpl_ViewOnlyBean_initWithASViewOnlyImpl_(ASViewOnlyImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASViewOnlyImpl_ViewOnlyBean, initWithASViewOnlyImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewOnlyImpl_ViewOnlyBean)

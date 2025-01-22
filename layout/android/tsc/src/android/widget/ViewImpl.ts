@@ -219,8 +219,6 @@ export class ImportantForAutofillTransformer implements ITranform {
 
 
 
-
-
 export class ScrollIndicatorsTransformer implements ITranform {
     transform(value: any, obj: any, type: number) : any{
         if (type == 1) {
@@ -438,6 +436,9 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
+
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -569,12 +570,6 @@ export abstract class ViewImpl<T> {
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "nextFocusUp" }))
 	nextFocusUp!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "outlineAmbientShadowColor" }))
-	outlineAmbientShadowColor!:CommandAttr<string>| undefined;
-	@decorate(Type(() => CommandAttr))
-	@decorate(Expose({ name: "outlineSpotShadowColor" }))
-	outlineSpotShadowColor!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "rotation" }))
 	rotation!:CommandAttr<number>| undefined;
@@ -884,6 +879,15 @@ export abstract class ViewImpl<T> {
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "bottom" }))
 	bottom!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "outlineAmbientShadowColor" }))
+	outlineAmbientShadowColor!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "outlineSpotShadowColor" }))
+	outlineSpotShadowColor!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "cornerRadius" }))
+	cornerRadius!:CommandAttr<string>| undefined;
 
 	@decorate(Exclude())
 	protected thisPointer: T;	
@@ -942,8 +946,6 @@ export abstract class ViewImpl<T> {
 		this.nextFocusLeft = undefined;
 		this.nextFocusRight = undefined;
 		this.nextFocusUp = undefined;
-		this.outlineAmbientShadowColor = undefined;
-		this.outlineSpotShadowColor = undefined;
 		this.rotation = undefined;
 		this.rotationX = undefined;
 		this.rotationY = undefined;
@@ -1047,6 +1049,9 @@ export abstract class ViewImpl<T> {
 		this.right = undefined;
 		this.top = undefined;
 		this.bottom = undefined;
+		this.outlineAmbientShadowColor = undefined;
+		this.outlineSpotShadowColor = undefined;
+		this.cornerRadius = undefined;
 		this.orderGet = 0;
 		this.orderSet = 0;
 		this.flush = false;
@@ -2315,70 +2320,6 @@ this.importantForAutofill.setTransformer('importantForAutofill');		return this.t
 		this.nextFocusUp.setValue(value);
 		this.orderSet++;
 		this.nextFocusUp.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetOutlineAmbientShadowColor() : T {
-		this.resetIfRequired();
-		if (this.outlineAmbientShadowColor == null || this.outlineAmbientShadowColor == undefined) {
-			this.outlineAmbientShadowColor = new CommandAttr<string>()
-		}
-		
-		this.outlineAmbientShadowColor.setGetter(true);
-		this.orderGet++;
-		this.outlineAmbientShadowColor.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getOutlineAmbientShadowColor() : string {
-		if (this.outlineAmbientShadowColor == null || this.outlineAmbientShadowColor == undefined) {
-			this.outlineAmbientShadowColor = new CommandAttr<string>();
-		}
-		return this.outlineAmbientShadowColor.getCommandReturnValue();
-	}
-	public setOutlineAmbientShadowColor(value : string) : T {
-		this.resetIfRequired();
-		if (this.outlineAmbientShadowColor == null || this.outlineAmbientShadowColor == undefined) {
-			this.outlineAmbientShadowColor = new CommandAttr<string>();
-		}
-		
-		this.outlineAmbientShadowColor.setSetter(true);
-		this.outlineAmbientShadowColor.setValue(value);
-		this.orderSet++;
-		this.outlineAmbientShadowColor.setOrderSet(this.orderSet);
-		return this.thisPointer;
-	}
-		
-
-	public tryGetOutlineSpotShadowColor() : T {
-		this.resetIfRequired();
-		if (this.outlineSpotShadowColor == null || this.outlineSpotShadowColor == undefined) {
-			this.outlineSpotShadowColor = new CommandAttr<string>()
-		}
-		
-		this.outlineSpotShadowColor.setGetter(true);
-		this.orderGet++;
-		this.outlineSpotShadowColor.setOrderGet(this.orderGet);
-		return this.thisPointer;
-	}
-	
-	public getOutlineSpotShadowColor() : string {
-		if (this.outlineSpotShadowColor == null || this.outlineSpotShadowColor == undefined) {
-			this.outlineSpotShadowColor = new CommandAttr<string>();
-		}
-		return this.outlineSpotShadowColor.getCommandReturnValue();
-	}
-	public setOutlineSpotShadowColor(value : string) : T {
-		this.resetIfRequired();
-		if (this.outlineSpotShadowColor == null || this.outlineSpotShadowColor == undefined) {
-			this.outlineSpotShadowColor = new CommandAttr<string>();
-		}
-		
-		this.outlineSpotShadowColor.setSetter(true);
-		this.outlineSpotShadowColor.setValue(value);
-		this.orderSet++;
-		this.outlineSpotShadowColor.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		
@@ -4723,6 +4664,48 @@ this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		retur
 		this.bottom.setValue(value);
 		this.orderSet++;
 		this.bottom.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOutlineAmbientShadowColor(value : string) : T {
+		this.resetIfRequired();
+		if (this.outlineAmbientShadowColor == null || this.outlineAmbientShadowColor == undefined) {
+			this.outlineAmbientShadowColor = new CommandAttr<string>();
+		}
+		
+		this.outlineAmbientShadowColor.setSetter(true);
+		this.outlineAmbientShadowColor.setValue(value);
+		this.orderSet++;
+		this.outlineAmbientShadowColor.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOutlineSpotShadowColor(value : string) : T {
+		this.resetIfRequired();
+		if (this.outlineSpotShadowColor == null || this.outlineSpotShadowColor == undefined) {
+			this.outlineSpotShadowColor = new CommandAttr<string>();
+		}
+		
+		this.outlineSpotShadowColor.setSetter(true);
+		this.outlineSpotShadowColor.setValue(value);
+		this.orderSet++;
+		this.outlineSpotShadowColor.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setCornerRadius(value : string) : T {
+		this.resetIfRequired();
+		if (this.cornerRadius == null || this.cornerRadius == undefined) {
+			this.cornerRadius = new CommandAttr<string>();
+		}
+		
+		this.cornerRadius.setSetter(true);
+		this.cornerRadius.setValue(value);
+		this.orderSet++;
+		this.cornerRadius.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

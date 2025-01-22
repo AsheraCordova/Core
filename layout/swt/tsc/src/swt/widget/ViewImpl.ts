@@ -187,6 +187,7 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -299,6 +300,9 @@ export abstract class ViewImpl<T> {
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "onAnimationRepeat" }))
 	onAnimationRepeat!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "cornerRadius" }))
+	cornerRadius!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "modelSyncEvents" }))
 	modelSyncEvents!:CommandAttr<string>| undefined;
@@ -508,6 +512,7 @@ export abstract class ViewImpl<T> {
 		this.onAnimationEnd = undefined;
 		this.onAnimationCancel = undefined;
 		this.onAnimationRepeat = undefined;
+		this.cornerRadius = undefined;
 		this.modelSyncEvents = undefined;
 		this.outsideTouchable = undefined;
 		this.modelParam = undefined;
@@ -1322,6 +1327,20 @@ this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		retur
 		this.onAnimationRepeat.setValue(value);
 		this.orderSet++;
 		this.onAnimationRepeat.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setCornerRadius(value : string) : T {
+		this.resetIfRequired();
+		if (this.cornerRadius == null || this.cornerRadius == undefined) {
+			this.cornerRadius = new CommandAttr<string>();
+		}
+		
+		this.cornerRadius.setSetter(true);
+		this.cornerRadius.setValue(value);
+		this.orderSet++;
+		this.cornerRadius.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

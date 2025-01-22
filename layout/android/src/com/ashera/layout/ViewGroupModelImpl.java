@@ -12,6 +12,7 @@ import android.annotation.SuppressLint;
 
 import com.ashera.widget.*;
 import com.ashera.converter.*;
+import com.ashera.layout.ViewGroupModelImpl;
 
 import static com.ashera.widget.IWidget.*;
 //end - imports
@@ -33,14 +34,36 @@ public class ViewGroupModelImpl {
 		
 	}
 	
+	public static void setAttribute(IWidget w, SimpleWrapableView wrapperView,
+			WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
+		ViewImpl.setAttribute(w, wrapperView, key, strValue, objValue, decorator);
+		if (wrapperView.isViewWrapped() && key.getSimpleWrapableViewStrategy() != 0) {
+			if ((key.getSimpleWrapableViewStrategy() & IWidget.APPLY_TO_VIEW_WRAPPER) != 0) {
+				setMyAttribute(w, wrapperView.getWrappedView(), key, strValue, objValue, decorator);
+			}
+			
+			if ((key.getSimpleWrapableViewStrategy() & IWidget.APPLY_TO_VIEW_HOLDER) != 0) {
+				setMyAttribute(w, wrapperView.getWrapperViewHolder(), key, strValue, objValue, decorator);
+			}
+			
+			if (((key.getSimpleWrapableViewStrategy() & IWidget.APPLY_TO_FOREGROUND) != 0) && wrapperView.getForeground() != null) {
+				setMyAttribute(w, wrapperView.getForeground(), key, strValue, objValue, decorator);
+			}
+		} else {
+			setMyAttribute(w, w.asNativeWidget(), key, strValue, objValue, decorator);
+		}
+	}
+	
 	@SuppressLint("NewApi")
 	public static void setAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
-		//ViewGroup viewGroup = ((ViewGroup) w.asWidget());
 		ViewImpl.setAttribute(w, key, strValue, objValue, decorator);
 		setMyAttribute(w, key, strValue, objValue, decorator);
 	}
 	
 	private static void setMyAttribute(IWidget w, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
+		setMyAttribute(w, w.asNativeWidget(), key, strValue, objValue, decorator);
+	}
+	private static void setMyAttribute(IWidget w, Object nativeWidget, WidgetAttribute key, String strValue, Object objValue, ILifeCycleDecorator decorator) {
 		//ViewGroup viewGroup = ((ViewGroup) w.asWidget());
 
 		switch (key.getAttributeName()) {
@@ -182,170 +205,6 @@ return getModelDescPath(w);			}
 		}
 		return false;
 	}
-
-	
-
-
-public static abstract class ViewGroupModelCommandBuilder<T> extends com.ashera.layout.ViewImpl.ViewCommandBuilder<T> {
-    public ViewGroupModelCommandBuilder() {
-	}
-	
-
-public T addModel(Object value) {
-	Map<String, Object> attrs = initCommand("addModel");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T addAllModel(Object value) {
-	Map<String, Object> attrs = initCommand("addAllModel");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T addModelByIndex(Object value,Object index) {
-	Map<String, Object> attrs = initCommand("addModelByIndex");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	Map<String, Object> wrapper = new HashMap<>();
-	wrapper.put("index", index);
-	wrapper.put("data", value);
-	attrs.put("value", wrapper);
-return (T) this;}
-public T removeModelAtIndex(int value) {
-	Map<String, Object> attrs = initCommand("removeModelAtIndex");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T removeModelById(String value) {
-	Map<String, Object> attrs = initCommand("removeModelById");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T setModelFor(String value) {
-	Map<String, Object> attrs = initCommand("modelFor");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T tryGetModelIdPath() {
-	Map<String, Object> attrs = initCommand("modelIdPath");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return (T) this;}
-
-public Object getModelIdPath() {
-	Map<String, Object> attrs = initCommand("modelIdPath");
-	return attrs.get("commandReturnValue");
-}
-public T setModelIdPath(String value) {
-	Map<String, Object> attrs = initCommand("modelIdPath");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-public T tryGetModelDescPath() {
-	Map<String, Object> attrs = initCommand("modelDescPath");
-	attrs.put("type", "attribute");
-	attrs.put("getter", true);
-	attrs.put("orderGet", ++orderGet);
-return (T) this;}
-
-public Object getModelDescPath() {
-	Map<String, Object> attrs = initCommand("modelDescPath");
-	return attrs.get("commandReturnValue");
-}
-public T setModelDescPath(String value) {
-	Map<String, Object> attrs = initCommand("modelDescPath");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return (T) this;}
-}
-static class ViewGroupModelCommandBuilderInternal extends ViewGroupModelCommandBuilder<ViewGroupModelCommandBuilderInternal> {
-	private IWidget widget;
-	public ViewGroupModelCommandBuilderInternal(IWidget widget) {
-		this.widget = widget;
-	}
-	@Override
-	protected ViewGroupModelCommandBuilderInternal execute(boolean setter) {
-		if (setter) {
-			widget.executeCommand(command, null, IWidget.COMMAND_EXEC_SETTER_METHOD);
-			widget.getFragment().remeasure();
-		}
-		widget.executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
-
-		return this;
-	}
-}
-public static class ViewGroupModelBean extends com.ashera.layout.ViewImpl.ViewBean{
-	private ViewGroupModelCommandBuilderInternal commandBuilder;
-	public ViewGroupModelBean(IWidget widget) {
-		super(widget);
-		commandBuilder = new ViewGroupModelCommandBuilderInternal(widget);
-	}
-	private ViewGroupModelCommandBuilderInternal getBuilder() {
-		return commandBuilder;
-	}
-public void addModel(Object value) {
-	getBuilder().reset().addModel(value).execute(true);
-}
-
-public void addAllModel(Object value) {
-	getBuilder().reset().addAllModel(value).execute(true);
-}
-
-public void addModelByIndex(Object value,Object index) {
-	getBuilder().reset().addModelByIndex(value,index).execute(true);
-}
-
-public void removeModelAtIndex(int value) {
-	getBuilder().reset().removeModelAtIndex(value).execute(true);
-}
-
-public void removeModelById(String value) {
-	getBuilder().reset().removeModelById(value).execute(true);
-}
-
-public void setModelFor(String value) {
-	getBuilder().reset().setModelFor(value).execute(true);
-}
-
-public Object getModelIdPath() {
-	return getBuilder().reset().tryGetModelIdPath().execute(false).getModelIdPath(); 
-}
-public void setModelIdPath(String value) {
-	getBuilder().reset().setModelIdPath(value).execute(true);
-}
-
-public Object getModelDescPath() {
-	return getBuilder().reset().tryGetModelDescPath().execute(false).getModelDescPath(); 
-}
-public void setModelDescPath(String value) {
-	getBuilder().reset().setModelDescPath(value).execute(true);
-}
-
-}
-
 
 	// end - body
 	//start - viewcode

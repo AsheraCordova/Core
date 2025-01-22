@@ -23,7 +23,6 @@
 #include "GravityConverter.h"
 #include "HasWidgets.h"
 #include "IActivity.h"
-#include "IAttributable.h"
 #include "IConverter.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
@@ -73,7 +72,6 @@
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASButtonImpl () {
  @public
@@ -89,8 +87,6 @@
   id timer_;
   jboolean isDisposed_;
   ASButtonImpl_DellocHandler *dellocHandler_;
-  ASButtonImpl_ButtonCommandBuilder *builder_;
-  ASButtonImpl_ButtonBean *bean_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -380,8 +376,6 @@ J2OBJC_FIELD_SETTER(ASButtonImpl, drawableTint_, ADColorStateList *)
 J2OBJC_FIELD_SETTER(ASButtonImpl, ellipsize_, NSString *)
 J2OBJC_FIELD_SETTER(ASButtonImpl, timer_, id)
 J2OBJC_FIELD_SETTER(ASButtonImpl, dellocHandler_, ASButtonImpl_DellocHandler *)
-J2OBJC_FIELD_SETTER(ASButtonImpl, builder_, ASButtonImpl_ButtonCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASButtonImpl, bean_, ASButtonImpl_ButtonBean *)
 
 inline jint ASButtonImpl_get_ITALIC_FONT_TRAIT(void);
 inline jint ASButtonImpl_set_ITALIC_FONT_TRAIT(jint value);
@@ -806,20 +800,6 @@ __attribute__((unused)) static ASButtonImpl_DellocHandler *new_ASButtonImpl_Dell
 __attribute__((unused)) static ASButtonImpl_DellocHandler *create_ASButtonImpl_DellocHandler_initWithASButtonImpl_withNSString_(ASButtonImpl *outer$, NSString *type);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASButtonImpl_DellocHandler)
-
-@interface ASButtonImpl_ButtonCommandBuilder () {
- @public
-  ASButtonImpl *this$0_;
-}
-
-@end
-
-@interface ASButtonImpl_ButtonBean () {
- @public
-  ASButtonImpl *this$0_;
-}
-
-@end
 
 J2OBJC_INITIALIZED_DEFN(ASButtonImpl)
 
@@ -1726,24 +1706,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASButtonImpl_ButtonBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASButtonImpl_ButtonBean_initWithASButtonImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASButtonImpl_ButtonCommandBuilder_initWithASButtonImpl_(self);
-  }
-  return builder_;
-}
-
 - (void)nativeCreateWithJavaUtilMap:(id<JavaUtilMap>)params {
   ASButtonImpl_nativeCreateWithJavaUtilMap_(self, params);
 }
@@ -2127,15 +2089,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 67, 68, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 69, 1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 70, 36, -1, 37, -1, -1 },
-    { NULL, "V", 0x102, 71, 36, -1, 37, -1, -1 },
-    { NULL, "I", 0x1, 72, 13, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 73, 74, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 75, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 76, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 69, 36, -1, 37, -1, -1 },
+    { NULL, "V", 0x102, 70, 36, -1, 37, -1, -1 },
+    { NULL, "I", 0x1, 71, 13, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 72, 73, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 74, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 75, 28, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x102, -1, -1, -1, -1, -1, -1 },
@@ -2149,52 +2108,52 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 76, 11, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 77, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 78, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 79, 11, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 80, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 80, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 81, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 82, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 83, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 84, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 85, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 85, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 86, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 87, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 88, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 89, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 90, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 43, 91, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 89, 7, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 43, 90, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 92, 93, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 91, 92, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 94, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 95, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 96, 68, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 93, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 94, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 95, 68, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "I", 0x102, 97, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 98, 74, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 99, 13, -1, -1, -1, -1 },
+    { NULL, "I", 0x102, 96, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 97, 73, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 98, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 100, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 101, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 99, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 100, 13, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "LJavaLangInteger;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 102, 11, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 101, 11, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 103, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 104, 105, -1, -1, -1, -1 },
-    { NULL, "V", 0x102, 106, 105, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 102, 28, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 103, 104, -1, -1, -1, -1 },
+    { NULL, "V", 0x102, 105, 104, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x102, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 107, 108, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 106, 107, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -2299,103 +2258,98 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[97].selector = @selector(setVisibleWithBoolean:);
   methods[98].selector = @selector(requestLayout);
   methods[99].selector = @selector(invalidate);
-  methods[100].selector = @selector(getPluginWithNSString:);
-  methods[101].selector = @selector(getBean);
-  methods[102].selector = @selector(getBuilder);
-  methods[103].selector = @selector(nativeCreateWithJavaUtilMap:);
-  methods[104].selector = @selector(createNativeWidgetWithJavaUtilMap:);
-  methods[105].selector = @selector(measureHeightWithInt:);
-  methods[106].selector = @selector(nativeMeasureHeightButtonWithId:withInt:);
-  methods[107].selector = @selector(setMyTextWithId:);
-  methods[108].selector = @selector(nativeSetTextWithId:withNSString:);
-  methods[109].selector = @selector(getMyText);
-  methods[110].selector = @selector(getTitleLabel);
-  methods[111].selector = @selector(setHorizontalAligmentCenter);
-  methods[112].selector = @selector(setHorizontalAligmentRight);
-  methods[113].selector = @selector(setHorizontalAligmentLeft);
-  methods[114].selector = @selector(setVerticalAligmentCenter);
-  methods[115].selector = @selector(nativeSetVerticalAligmentBottom);
-  methods[116].selector = @selector(nativeSetVerticalAligmentTop);
-  methods[117].selector = @selector(nativeSetVerticalAligmentCenter);
-  methods[118].selector = @selector(setVerticalAligmentBottom);
-  methods[119].selector = @selector(setVerticalAligmentTop);
-  methods[120].selector = @selector(getTextAlignment);
-  methods[121].selector = @selector(getPaddingLeft);
-  methods[122].selector = @selector(setPaddingLeftWithId:);
-  methods[123].selector = @selector(getPaddingRight);
-  methods[124].selector = @selector(setPaddingRightWithId:);
-  methods[125].selector = @selector(getPaddingTop);
-  methods[126].selector = @selector(setPaddingTopWithId:);
-  methods[127].selector = @selector(getPaddingBottom);
-  methods[128].selector = @selector(getPaddingEnd);
-  methods[129].selector = @selector(getPaddingStart);
-  methods[130].selector = @selector(setPaddingBottomWithId:);
-  methods[131].selector = @selector(setPaddingVerticalWithId:);
-  methods[132].selector = @selector(setPaddingHorizontalWithId:);
-  methods[133].selector = @selector(setPaddingEndWithId:);
-  methods[134].selector = @selector(setPaddingStartWithId:);
-  methods[135].selector = @selector(setPaddingWithId:);
-  methods[136].selector = @selector(updatePadding);
-  methods[137].selector = @selector(nativeSetPaddingBottomWithInt:);
-  methods[138].selector = @selector(nativeSetPaddingLeftWithInt:);
-  methods[139].selector = @selector(nativeSetPaddingRightWithInt:);
-  methods[140].selector = @selector(nativeSetPaddingTopWithInt:);
-  methods[141].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[142].selector = @selector(setTextColorWithId:withId:);
-  methods[143].selector = @selector(addMinMaxListener);
-  methods[144].selector = @selector(setTextColorLinkWithADColorStateList:);
-  methods[145].selector = @selector(syncPlaceholderLabel);
-  methods[146].selector = @selector(setHintColorWithInt:);
-  methods[147].selector = @selector(setEnabledWithId:);
-  methods[148].selector = @selector(nativeSetEnabledWithBoolean:);
-  methods[149].selector = @selector(measureWidth);
-  methods[150].selector = @selector(nativeMeasureWidthButtonWithId:);
-  methods[151].selector = @selector(setNumberOfLinesWithId:withInt:);
-  methods[152].selector = @selector(nativeSetLineBreakModeWithInt:);
-  methods[153].selector = @selector(nativeGetLinBreakMode);
-  methods[154].selector = @selector(getSingleLine);
-  methods[155].selector = @selector(getFont);
-  methods[156].selector = @selector(setJustificationModeWithId:withNSString:);
-  methods[157].selector = @selector(nativeSetTextAligmentWithInt:);
-  methods[158].selector = @selector(getJustificationMode);
-  methods[159].selector = @selector(nativeGetTextAligment);
-  methods[160].selector = @selector(setScrollHorizontallyWithId:);
-  methods[161].selector = @selector(getShadowColor);
-  methods[162].selector = @selector(setShadowColorWithId:withNSString:);
-  methods[163].selector = @selector(setShadowDyWithJavaLangFloat:withNSString:);
-  methods[164].selector = @selector(setShadowDxWithJavaLangFloat:withNSString:);
-  methods[165].selector = @selector(getShadowDy);
-  methods[166].selector = @selector(getShadowDx);
-  methods[167].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
+  methods[100].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[101].selector = @selector(createNativeWidgetWithJavaUtilMap:);
+  methods[102].selector = @selector(measureHeightWithInt:);
+  methods[103].selector = @selector(nativeMeasureHeightButtonWithId:withInt:);
+  methods[104].selector = @selector(setMyTextWithId:);
+  methods[105].selector = @selector(nativeSetTextWithId:withNSString:);
+  methods[106].selector = @selector(getMyText);
+  methods[107].selector = @selector(getTitleLabel);
+  methods[108].selector = @selector(setHorizontalAligmentCenter);
+  methods[109].selector = @selector(setHorizontalAligmentRight);
+  methods[110].selector = @selector(setHorizontalAligmentLeft);
+  methods[111].selector = @selector(setVerticalAligmentCenter);
+  methods[112].selector = @selector(nativeSetVerticalAligmentBottom);
+  methods[113].selector = @selector(nativeSetVerticalAligmentTop);
+  methods[114].selector = @selector(nativeSetVerticalAligmentCenter);
+  methods[115].selector = @selector(setVerticalAligmentBottom);
+  methods[116].selector = @selector(setVerticalAligmentTop);
+  methods[117].selector = @selector(getTextAlignment);
+  methods[118].selector = @selector(getPaddingLeft);
+  methods[119].selector = @selector(setPaddingLeftWithId:);
+  methods[120].selector = @selector(getPaddingRight);
+  methods[121].selector = @selector(setPaddingRightWithId:);
+  methods[122].selector = @selector(getPaddingTop);
+  methods[123].selector = @selector(setPaddingTopWithId:);
+  methods[124].selector = @selector(getPaddingBottom);
+  methods[125].selector = @selector(getPaddingEnd);
+  methods[126].selector = @selector(getPaddingStart);
+  methods[127].selector = @selector(setPaddingBottomWithId:);
+  methods[128].selector = @selector(setPaddingVerticalWithId:);
+  methods[129].selector = @selector(setPaddingHorizontalWithId:);
+  methods[130].selector = @selector(setPaddingEndWithId:);
+  methods[131].selector = @selector(setPaddingStartWithId:);
+  methods[132].selector = @selector(setPaddingWithId:);
+  methods[133].selector = @selector(updatePadding);
+  methods[134].selector = @selector(nativeSetPaddingBottomWithInt:);
+  methods[135].selector = @selector(nativeSetPaddingLeftWithInt:);
+  methods[136].selector = @selector(nativeSetPaddingRightWithInt:);
+  methods[137].selector = @selector(nativeSetPaddingTopWithInt:);
+  methods[138].selector = @selector(postSetAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[139].selector = @selector(setTextColorWithId:withId:);
+  methods[140].selector = @selector(addMinMaxListener);
+  methods[141].selector = @selector(setTextColorLinkWithADColorStateList:);
+  methods[142].selector = @selector(syncPlaceholderLabel);
+  methods[143].selector = @selector(setHintColorWithInt:);
+  methods[144].selector = @selector(setEnabledWithId:);
+  methods[145].selector = @selector(nativeSetEnabledWithBoolean:);
+  methods[146].selector = @selector(measureWidth);
+  methods[147].selector = @selector(nativeMeasureWidthButtonWithId:);
+  methods[148].selector = @selector(setNumberOfLinesWithId:withInt:);
+  methods[149].selector = @selector(nativeSetLineBreakModeWithInt:);
+  methods[150].selector = @selector(nativeGetLinBreakMode);
+  methods[151].selector = @selector(getSingleLine);
+  methods[152].selector = @selector(getFont);
+  methods[153].selector = @selector(setJustificationModeWithId:withNSString:);
+  methods[154].selector = @selector(nativeSetTextAligmentWithInt:);
+  methods[155].selector = @selector(getJustificationMode);
+  methods[156].selector = @selector(nativeGetTextAligment);
+  methods[157].selector = @selector(setScrollHorizontallyWithId:);
+  methods[158].selector = @selector(getShadowColor);
+  methods[159].selector = @selector(setShadowColorWithId:withNSString:);
+  methods[160].selector = @selector(setShadowDyWithJavaLangFloat:withNSString:);
+  methods[161].selector = @selector(setShadowDxWithJavaLangFloat:withNSString:);
+  methods[162].selector = @selector(getShadowDy);
+  methods[163].selector = @selector(getShadowDx);
+  methods[164].selector = @selector(nativeMakeFrameForChildWidgetWithInt:withInt:withInt:withInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 109, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 110, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 108, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 109, -1, -1 },
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "measurableView_", "LADButton;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 111, -1 },
+    { "fontDescriptors_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 110, -1 },
     { "html_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "escapeHtml_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 112, -1 },
+    { "htmlConfig_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 111, -1 },
     { "marqueeTask_", "LASButtonImpl_MarqueeTask;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeRepeatLimit_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marqueeCommandConverter_", "LASMarqueeCommandConverter;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "drawableTint_", "LADColorStateList;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 113, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 114, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 112, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 113, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASButtonImpl_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
     { "ellipsize_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "timer_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "isDisposed_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "dellocHandler_", "LASButtonImpl_DellocHandler;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "builder_", "LASButtonImpl_ButtonCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASButtonImpl_ButtonBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "TEXT_ALIGN_CENTER", "I", .constantValue.asInt = ASButtonImpl_TEXT_ALIGN_CENTER, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_LEFT", "I", .constantValue.asInt = ASButtonImpl_TEXT_ALIGN_LEFT, 0x1a, -1, -1, -1, -1 },
     { "TEXT_ALIGN_RIGHT", "I", .constantValue.asInt = ASButtonImpl_TEXT_ALIGN_RIGHT, 0x1a, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setGravity", "LNSObject;", "onRtlPropertiesChanged", "I", "setDrawableIconSize", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "setMaxLength", "setTextAllCaps", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "initHtml", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setMarqueeRepeatLimit", "startOrStopMarquee", "setTextFormat", "setMyTextSize", "nativeSetTextSize", "setTextColor", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "drawableStateChange", "LNSString;LADDrawable;", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setSingleLine", "setEllipsize", "executeOnMainThread", "LJavaLangRunnable;", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "createNativeWidget", "measureHeight", "nativeMeasureHeightButton", "LNSObject;I", "setMyText", "nativeSetText", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "postSetAttribute", "LNSObject;LNSObject;", "setTextColorLink", "LADColorStateList;", "setHintColor", "setEnabled", "nativeSetEnabled", "nativeMeasureWidthButton", "setNumberOfLines", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setScrollHorizontally", "setShadowColor", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "nativeMakeFrameForChildWidget", "IIII", &ASButtonImpl_LOCAL_NAME, &ASButtonImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASButtonImpl_ITALIC_FONT_TRAIT, &ASButtonImpl_BOLD_FONT_TRAIT, "LASButtonImpl_DrawableTintMode;LASButtonImpl_MarqueeRepeatLimit;LASButtonImpl_Font;LASButtonImpl_TextStyle;LASButtonImpl_Ellipsize;LASButtonImpl_JustificationMode;LASButtonImpl_ButtonExt;LASButtonImpl_MarqueeTask;LASButtonImpl_DellocHandler;LASButtonImpl_ButtonCommandBuilder;LASButtonImpl_ButtonBean;" };
-  static const J2ObjcClassInfo _ASButtonImpl = { "ButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 168, 24, -1, 115, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "setGravity", "LNSObject;", "onRtlPropertiesChanged", "I", "setDrawableIconSize", "setEms", "setMinEms", "setMaxEms", "setWidth", "setHeight", "setMaxLines", "setLines", "setMinLines", "setMaxHeight", "setMaxWidth", "setMinHeight", "setMinWidth", "setTypeFace", "LNSObject;LNSString;", "setFontFamily", "setTextStyle", "setMaxLength", "setTextAllCaps", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "initHtml", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "setMarqueeRepeatLimit", "startOrStopMarquee", "setTextFormat", "setMyTextSize", "nativeSetTextSize", "setTextColor", "setDrawablePadding", "setDrawableBottom", "setDrawableTop", "setDrawableRight", "LNSString;LNSObject;", "setDrawableRightInternal", "setDrawableLeft", "setDrawableLeftInternal", "getImageHeight", "getImageWidth", "setDrawableTintMode", "setDrawableTint", "drawableStateChange", "LNSString;LADDrawable;", "nativeSetCustomFont", "ILASFontDescriptor;", "nativeSetFontStyle", "setSingleLine", "setEllipsize", "executeOnMainThread", "LJavaLangRunnable;", "checkIosVersion", "setId", "setVisible", "Z", "nativeCreate", "createNativeWidget", "measureHeight", "nativeMeasureHeightButton", "LNSObject;I", "setMyText", "nativeSetText", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "setPaddingVertical", "setPaddingHorizontal", "setPaddingEnd", "setPaddingStart", "setPadding", "nativeSetPaddingBottom", "nativeSetPaddingLeft", "nativeSetPaddingRight", "nativeSetPaddingTop", "postSetAttribute", "LNSObject;LNSObject;", "setTextColorLink", "LADColorStateList;", "setHintColor", "setEnabled", "nativeSetEnabled", "nativeMeasureWidthButton", "setNumberOfLines", "nativeSetLineBreakMode", "setJustificationMode", "nativeSetTextAligment", "setScrollHorizontally", "setShadowColor", "setShadowDy", "LJavaLangFloat;LNSString;", "setShadowDx", "nativeMakeFrameForChildWidget", "IIII", &ASButtonImpl_LOCAL_NAME, &ASButtonImpl_GROUP_NAME, "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", &ASButtonImpl_ITALIC_FONT_TRAIT, &ASButtonImpl_BOLD_FONT_TRAIT, "LASButtonImpl_DrawableTintMode;LASButtonImpl_MarqueeRepeatLimit;LASButtonImpl_Font;LASButtonImpl_TextStyle;LASButtonImpl_Ellipsize;LASButtonImpl_JustificationMode;LASButtonImpl_ButtonExt;LASButtonImpl_MarqueeTask;LASButtonImpl_DellocHandler;" };
+  static const J2ObjcClassInfo _ASButtonImpl = { "ButtonImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 165, 22, -1, 114, -1, -1, -1 };
   return &_ASButtonImpl;
 }
 
@@ -4299,1630 +4253,3 @@ ASButtonImpl_DellocHandler *create_ASButtonImpl_DellocHandler_initWithASButtonIm
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_DellocHandler)
-
-@implementation ASButtonImpl_ButtonCommandBuilder
-
-- (instancetype)initWithASButtonImpl:(ASButtonImpl *)outer$ {
-  ASButtonImpl_ButtonCommandBuilder_initWithASButtonImpl_(self, outer$);
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableStartWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableEndWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableTopWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableBottomWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetDrawablePadding {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawablePadding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getDrawablePadding {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawablePadding"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawablePaddingWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawablePadding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableTintWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableTintModeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableTintMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setDrawableIconSizeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"drawableIconSize"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetMinLines {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minLines"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMinLines {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minLines"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setMinLinesWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minLines"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setLinesWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"lines"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetMaxLines {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLines"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxLines {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLines"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setMaxLinesWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLines"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetMinWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMinWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setMinWidthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetMinHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMinHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setMinHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetMaxWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setMaxWidthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetMaxHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setMaxHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"height"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"height"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"height"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"width"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"width"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setWidthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"width"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetMaxEms {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxEms"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxEms {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxEms"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setMaxEmsWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxEms"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetMinEms {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minEms"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMinEms {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minEms"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setMinEmsWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minEms"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setEmsWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"ems"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetMarqueeRepeatLimit {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"marqueeRepeatLimit"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMarqueeRepeatLimit {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"marqueeRepeatLimit"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setMarqueeRepeatLimitWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"marqueeRepeatLimit"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setEditableWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"editable"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setMaxLengthWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxLength"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setTypefaceWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"typeface"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setTextStyleWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textStyle"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setFontFamilyWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"fontFamily"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setTextFormatWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textFormat"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"enabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetText {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"text"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getText {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"text"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setTextWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"text"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"gravity"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setGravityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"gravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetTextSize {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textSize"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTextSize {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textSize"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setTextSizeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textSize"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setPaddingWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"padding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetPaddingBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingBottom"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setPaddingBottomWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetPaddingRight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingRight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingRight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingRight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setPaddingRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingRight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetPaddingLeft {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingLeft {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingLeft"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setPaddingLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetPaddingStart {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingStart {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingStart"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setPaddingStartWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetPaddingEnd {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingEnd {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingEnd"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setPaddingEndWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetPaddingTop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingTop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingTop"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setPaddingTopWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setPaddingHorizontalWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingHorizontal"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setPaddingVerticalWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingVertical"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetTextColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTextColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textColor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setTextColorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setTextAllCapsWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textAllCaps"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setSingleLineWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"singleLine"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetEllipsize {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"ellipsize"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getEllipsize {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"ellipsize"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setEllipsizeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"ellipsize"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetFirstBaselineToTopHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"firstBaselineToTopHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getFirstBaselineToTopHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"firstBaselineToTopHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setFirstBaselineToTopHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"firstBaselineToTopHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetLastBaselineToBottomHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"lastBaselineToBottomHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLastBaselineToBottomHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"lastBaselineToBottomHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setLastBaselineToBottomHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"lastBaselineToBottomHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetJustificationMode {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"justificationMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getJustificationMode {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"justificationMode"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setJustificationModeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"justificationMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setScrollHorizontallyWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scrollHorizontally"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetShadowDx {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"shadowDx"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getShadowDx {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"shadowDx"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setShadowDxWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"shadowDx"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetShadowDy {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"shadowDy"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getShadowDy {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"shadowDy"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setShadowDyWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"shadowDy"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)tryGetShadowColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"shadowColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getShadowColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"shadowColor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (ASButtonImpl_ButtonCommandBuilder *)setShadowColorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"shadowColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 5, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 6, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 7, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 8, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 9, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 10, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 11, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 12, 13, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 14, 13, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 15, 13, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 16, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 17, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 18, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 19, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 20, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 21, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 22, 13, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 23, 13, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 24, 13, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 25, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 26, 2, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 27, 13, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 28, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 29, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 30, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 31, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 32, 2, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 33, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 34, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 35, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 36, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 37, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 38, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 39, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 40, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 41, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 42, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 43, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 44, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 45, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 46, 2, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 47, 2, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 48, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 49, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 50, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 51, 4, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 52, 2, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 53, 54, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 55, 54, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASButtonImpl_ButtonCommandBuilder;", 0x1, 56, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASButtonImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  methods[2].selector = @selector(setDrawableStartWithNSString:);
-  methods[3].selector = @selector(setDrawableEndWithNSString:);
-  methods[4].selector = @selector(setDrawableTopWithNSString:);
-  methods[5].selector = @selector(setDrawableBottomWithNSString:);
-  methods[6].selector = @selector(tryGetDrawablePadding);
-  methods[7].selector = @selector(getDrawablePadding);
-  methods[8].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[9].selector = @selector(setDrawableTintWithNSString:);
-  methods[10].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[11].selector = @selector(setDrawableIconSizeWithNSString:);
-  methods[12].selector = @selector(tryGetMinLines);
-  methods[13].selector = @selector(getMinLines);
-  methods[14].selector = @selector(setMinLinesWithInt:);
-  methods[15].selector = @selector(setLinesWithInt:);
-  methods[16].selector = @selector(tryGetMaxLines);
-  methods[17].selector = @selector(getMaxLines);
-  methods[18].selector = @selector(setMaxLinesWithInt:);
-  methods[19].selector = @selector(tryGetMinWidth);
-  methods[20].selector = @selector(getMinWidth);
-  methods[21].selector = @selector(setMinWidthWithNSString:);
-  methods[22].selector = @selector(tryGetMinHeight);
-  methods[23].selector = @selector(getMinHeight);
-  methods[24].selector = @selector(setMinHeightWithNSString:);
-  methods[25].selector = @selector(tryGetMaxWidth);
-  methods[26].selector = @selector(getMaxWidth);
-  methods[27].selector = @selector(setMaxWidthWithNSString:);
-  methods[28].selector = @selector(tryGetMaxHeight);
-  methods[29].selector = @selector(getMaxHeight);
-  methods[30].selector = @selector(setMaxHeightWithNSString:);
-  methods[31].selector = @selector(tryGetHeight);
-  methods[32].selector = @selector(getHeight);
-  methods[33].selector = @selector(setHeightWithNSString:);
-  methods[34].selector = @selector(tryGetWidth);
-  methods[35].selector = @selector(getWidth);
-  methods[36].selector = @selector(setWidthWithNSString:);
-  methods[37].selector = @selector(tryGetMaxEms);
-  methods[38].selector = @selector(getMaxEms);
-  methods[39].selector = @selector(setMaxEmsWithInt:);
-  methods[40].selector = @selector(tryGetMinEms);
-  methods[41].selector = @selector(getMinEms);
-  methods[42].selector = @selector(setMinEmsWithInt:);
-  methods[43].selector = @selector(setEmsWithInt:);
-  methods[44].selector = @selector(tryGetMarqueeRepeatLimit);
-  methods[45].selector = @selector(getMarqueeRepeatLimit);
-  methods[46].selector = @selector(setMarqueeRepeatLimitWithNSString:);
-  methods[47].selector = @selector(setEditableWithBoolean:);
-  methods[48].selector = @selector(setMaxLengthWithInt:);
-  methods[49].selector = @selector(setTypefaceWithNSString:);
-  methods[50].selector = @selector(setTextStyleWithNSString:);
-  methods[51].selector = @selector(setFontFamilyWithNSString:);
-  methods[52].selector = @selector(setTextFormatWithNSString:);
-  methods[53].selector = @selector(setEnabledWithBoolean:);
-  methods[54].selector = @selector(tryGetText);
-  methods[55].selector = @selector(getText);
-  methods[56].selector = @selector(setTextWithNSString:);
-  methods[57].selector = @selector(tryGetGravity);
-  methods[58].selector = @selector(getGravity);
-  methods[59].selector = @selector(setGravityWithNSString:);
-  methods[60].selector = @selector(tryGetTextSize);
-  methods[61].selector = @selector(getTextSize);
-  methods[62].selector = @selector(setTextSizeWithNSString:);
-  methods[63].selector = @selector(setPaddingWithNSString:);
-  methods[64].selector = @selector(tryGetPaddingBottom);
-  methods[65].selector = @selector(getPaddingBottom);
-  methods[66].selector = @selector(setPaddingBottomWithNSString:);
-  methods[67].selector = @selector(tryGetPaddingRight);
-  methods[68].selector = @selector(getPaddingRight);
-  methods[69].selector = @selector(setPaddingRightWithNSString:);
-  methods[70].selector = @selector(tryGetPaddingLeft);
-  methods[71].selector = @selector(getPaddingLeft);
-  methods[72].selector = @selector(setPaddingLeftWithNSString:);
-  methods[73].selector = @selector(tryGetPaddingStart);
-  methods[74].selector = @selector(getPaddingStart);
-  methods[75].selector = @selector(setPaddingStartWithNSString:);
-  methods[76].selector = @selector(tryGetPaddingEnd);
-  methods[77].selector = @selector(getPaddingEnd);
-  methods[78].selector = @selector(setPaddingEndWithNSString:);
-  methods[79].selector = @selector(tryGetPaddingTop);
-  methods[80].selector = @selector(getPaddingTop);
-  methods[81].selector = @selector(setPaddingTopWithNSString:);
-  methods[82].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[83].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[84].selector = @selector(tryGetTextColor);
-  methods[85].selector = @selector(getTextColor);
-  methods[86].selector = @selector(setTextColorWithNSString:);
-  methods[87].selector = @selector(setTextAllCapsWithBoolean:);
-  methods[88].selector = @selector(setSingleLineWithBoolean:);
-  methods[89].selector = @selector(tryGetEllipsize);
-  methods[90].selector = @selector(getEllipsize);
-  methods[91].selector = @selector(setEllipsizeWithNSString:);
-  methods[92].selector = @selector(tryGetFirstBaselineToTopHeight);
-  methods[93].selector = @selector(getFirstBaselineToTopHeight);
-  methods[94].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[95].selector = @selector(tryGetLastBaselineToBottomHeight);
-  methods[96].selector = @selector(getLastBaselineToBottomHeight);
-  methods[97].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[98].selector = @selector(tryGetJustificationMode);
-  methods[99].selector = @selector(getJustificationMode);
-  methods[100].selector = @selector(setJustificationModeWithNSString:);
-  methods[101].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[102].selector = @selector(tryGetShadowDx);
-  methods[103].selector = @selector(getShadowDx);
-  methods[104].selector = @selector(setShadowDxWithFloat:);
-  methods[105].selector = @selector(tryGetShadowDy);
-  methods[106].selector = @selector(getShadowDy);
-  methods[107].selector = @selector(setShadowDyWithFloat:);
-  methods[108].selector = @selector(tryGetShadowColor);
-  methods[109].selector = @selector(getShadowColor);
-  methods[110].selector = @selector(setShadowColorWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASButtonImpl;", "execute", "Z", "setDrawableStart", "LNSString;", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setDrawableIconSize", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ButtonImpl$ButtonCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASButtonImpl_ButtonCommandBuilder = { "ButtonCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 111, 1, 0, -1, -1, 57, -1 };
-  return &_ASButtonImpl_ButtonCommandBuilder;
-}
-
-@end
-
-void ASButtonImpl_ButtonCommandBuilder_initWithASButtonImpl_(ASButtonImpl_ButtonCommandBuilder *self, ASButtonImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewImpl_ViewCommandBuilder_init(self);
-}
-
-ASButtonImpl_ButtonCommandBuilder *new_ASButtonImpl_ButtonCommandBuilder_initWithASButtonImpl_(ASButtonImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASButtonImpl_ButtonCommandBuilder, initWithASButtonImpl_, outer$)
-}
-
-ASButtonImpl_ButtonCommandBuilder *create_ASButtonImpl_ButtonCommandBuilder_initWithASButtonImpl_(ASButtonImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASButtonImpl_ButtonCommandBuilder, initWithASButtonImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_ButtonCommandBuilder)
-
-@implementation ASButtonImpl_ButtonBean
-
-- (instancetype)initWithASButtonImpl:(ASButtonImpl *)outer$ {
-  ASButtonImpl_ButtonBean_initWithASButtonImpl_(self, outer$);
-  return self;
-}
-
-- (void)setDrawableStartWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableEndWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableEndWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableTopWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTopWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableBottomWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableBottomWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getDrawablePadding {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetDrawablePadding])) executeWithBoolean:false])) getDrawablePadding];
-}
-
-- (void)setDrawablePaddingWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawablePaddingWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableTintWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTintWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableTintModeWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableTintModeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setDrawableIconSizeWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setDrawableIconSizeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMinLines {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinLines])) executeWithBoolean:false])) getMinLines];
-}
-
-- (void)setMinLinesWithInt:(jint)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinLinesWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setLinesWithInt:(jint)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setLinesWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxLines {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxLines])) executeWithBoolean:false])) getMaxLines];
-}
-
-- (void)setMaxLinesWithInt:(jint)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxLinesWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getMinWidth {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinWidth])) executeWithBoolean:false])) getMinWidth];
-}
-
-- (void)setMinWidthWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinWidthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMinHeight {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinHeight])) executeWithBoolean:false])) getMinHeight];
-}
-
-- (void)setMinHeightWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxWidth {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxWidth])) executeWithBoolean:false])) getMaxWidth];
-}
-
-- (void)setMaxWidthWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxWidthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxHeight {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxHeight])) executeWithBoolean:false])) getMaxHeight];
-}
-
-- (void)setMaxHeightWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getHeight {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetHeight])) executeWithBoolean:false])) getHeight];
-}
-
-- (void)setHeightWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getWidth {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetWidth])) executeWithBoolean:false])) getWidth];
-}
-
-- (void)setWidthWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setWidthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxEms {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMaxEms])) executeWithBoolean:false])) getMaxEms];
-}
-
-- (void)setMaxEmsWithInt:(jint)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxEmsWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getMinEms {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMinEms])) executeWithBoolean:false])) getMinEms];
-}
-
-- (void)setMinEmsWithInt:(jint)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMinEmsWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setEmsWithInt:(jint)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setEmsWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)getMarqueeRepeatLimit {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetMarqueeRepeatLimit])) executeWithBoolean:false])) getMarqueeRepeatLimit];
-}
-
-- (void)setMarqueeRepeatLimitWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMarqueeRepeatLimitWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setEditableWithBoolean:(jboolean)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setEditableWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setMaxLengthWithInt:(jint)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setMaxLengthWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setTypefaceWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTypefaceWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setTextStyleWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextStyleWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setFontFamilyWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFontFamilyWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setTextFormatWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextFormatWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setEnabledWithBoolean:(jboolean)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getText {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetText])) executeWithBoolean:false])) getText];
-}
-
-- (void)setTextWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getGravity {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetGravity])) executeWithBoolean:false])) getGravity];
-}
-
-- (void)setGravityWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setGravityWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getTextSize {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetTextSize])) executeWithBoolean:false])) getTextSize];
-}
-
-- (void)setTextSizeWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextSizeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setPaddingWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingBottom {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingBottom])) executeWithBoolean:false])) getPaddingBottom];
-}
-
-- (void)setPaddingBottomWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingBottomWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingRight {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingRight])) executeWithBoolean:false])) getPaddingRight];
-}
-
-- (void)setPaddingRightWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingRightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingLeft {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingLeft])) executeWithBoolean:false])) getPaddingLeft];
-}
-
-- (void)setPaddingLeftWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingLeftWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingStart {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingStart])) executeWithBoolean:false])) getPaddingStart];
-}
-
-- (void)setPaddingStartWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingEnd {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingEnd])) executeWithBoolean:false])) getPaddingEnd];
-}
-
-- (void)setPaddingEndWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingEndWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingTop {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetPaddingTop])) executeWithBoolean:false])) getPaddingTop];
-}
-
-- (void)setPaddingTopWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingTopWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setPaddingHorizontalWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingHorizontalWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setPaddingVerticalWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setPaddingVerticalWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getTextColor {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetTextColor])) executeWithBoolean:false])) getTextColor];
-}
-
-- (void)setTextColorWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextColorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setTextAllCapsWithBoolean:(jboolean)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setTextAllCapsWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setSingleLineWithBoolean:(jboolean)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setSingleLineWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getEllipsize {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetEllipsize])) executeWithBoolean:false])) getEllipsize];
-}
-
-- (void)setEllipsizeWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setEllipsizeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getFirstBaselineToTopHeight {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetFirstBaselineToTopHeight])) executeWithBoolean:false])) getFirstBaselineToTopHeight];
-}
-
-- (void)setFirstBaselineToTopHeightWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setFirstBaselineToTopHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getLastBaselineToBottomHeight {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetLastBaselineToBottomHeight])) executeWithBoolean:false])) getLastBaselineToBottomHeight];
-}
-
-- (void)setLastBaselineToBottomHeightWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setLastBaselineToBottomHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getJustificationMode {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetJustificationMode])) executeWithBoolean:false])) getJustificationMode];
-}
-
-- (void)setJustificationModeWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setJustificationModeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setScrollHorizontallyWithBoolean:(jboolean)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setScrollHorizontallyWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getShadowDx {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetShadowDx])) executeWithBoolean:false])) getShadowDx];
-}
-
-- (void)setShadowDxWithFloat:(jfloat)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setShadowDxWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getShadowDy {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetShadowDy])) executeWithBoolean:false])) getShadowDy];
-}
-
-- (void)setShadowDyWithFloat:(jfloat)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setShadowDyWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getShadowColor {
-  return [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) tryGetShadowColor])) executeWithBoolean:false])) getShadowColor];
-}
-
-- (void)setShadowColorWithNSString:(NSString *)value {
-  (void) [((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([((ASButtonImpl_ButtonCommandBuilder *) nil_chk([this$0_ getBuilder])) reset])) setShadowColorWithNSString:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 4, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 6, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 12, 11, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 11, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 11, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 11, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 24, 25, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 26, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 27, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 28, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 29, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 30, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 31, 25, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 32, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 33, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 34, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 35, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 36, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 37, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 38, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 39, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 41, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 42, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 43, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 44, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 45, 25, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 46, 25, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 47, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 48, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 49, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 50, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 51, 25, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 52, 53, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 54, 53, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 55, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASButtonImpl:);
-  methods[1].selector = @selector(setDrawableStartWithNSString:);
-  methods[2].selector = @selector(setDrawableEndWithNSString:);
-  methods[3].selector = @selector(setDrawableTopWithNSString:);
-  methods[4].selector = @selector(setDrawableBottomWithNSString:);
-  methods[5].selector = @selector(getDrawablePadding);
-  methods[6].selector = @selector(setDrawablePaddingWithNSString:);
-  methods[7].selector = @selector(setDrawableTintWithNSString:);
-  methods[8].selector = @selector(setDrawableTintModeWithNSString:);
-  methods[9].selector = @selector(setDrawableIconSizeWithNSString:);
-  methods[10].selector = @selector(getMinLines);
-  methods[11].selector = @selector(setMinLinesWithInt:);
-  methods[12].selector = @selector(setLinesWithInt:);
-  methods[13].selector = @selector(getMaxLines);
-  methods[14].selector = @selector(setMaxLinesWithInt:);
-  methods[15].selector = @selector(getMinWidth);
-  methods[16].selector = @selector(setMinWidthWithNSString:);
-  methods[17].selector = @selector(getMinHeight);
-  methods[18].selector = @selector(setMinHeightWithNSString:);
-  methods[19].selector = @selector(getMaxWidth);
-  methods[20].selector = @selector(setMaxWidthWithNSString:);
-  methods[21].selector = @selector(getMaxHeight);
-  methods[22].selector = @selector(setMaxHeightWithNSString:);
-  methods[23].selector = @selector(getHeight);
-  methods[24].selector = @selector(setHeightWithNSString:);
-  methods[25].selector = @selector(getWidth);
-  methods[26].selector = @selector(setWidthWithNSString:);
-  methods[27].selector = @selector(getMaxEms);
-  methods[28].selector = @selector(setMaxEmsWithInt:);
-  methods[29].selector = @selector(getMinEms);
-  methods[30].selector = @selector(setMinEmsWithInt:);
-  methods[31].selector = @selector(setEmsWithInt:);
-  methods[32].selector = @selector(getMarqueeRepeatLimit);
-  methods[33].selector = @selector(setMarqueeRepeatLimitWithNSString:);
-  methods[34].selector = @selector(setEditableWithBoolean:);
-  methods[35].selector = @selector(setMaxLengthWithInt:);
-  methods[36].selector = @selector(setTypefaceWithNSString:);
-  methods[37].selector = @selector(setTextStyleWithNSString:);
-  methods[38].selector = @selector(setFontFamilyWithNSString:);
-  methods[39].selector = @selector(setTextFormatWithNSString:);
-  methods[40].selector = @selector(setEnabledWithBoolean:);
-  methods[41].selector = @selector(getText);
-  methods[42].selector = @selector(setTextWithNSString:);
-  methods[43].selector = @selector(getGravity);
-  methods[44].selector = @selector(setGravityWithNSString:);
-  methods[45].selector = @selector(getTextSize);
-  methods[46].selector = @selector(setTextSizeWithNSString:);
-  methods[47].selector = @selector(setPaddingWithNSString:);
-  methods[48].selector = @selector(getPaddingBottom);
-  methods[49].selector = @selector(setPaddingBottomWithNSString:);
-  methods[50].selector = @selector(getPaddingRight);
-  methods[51].selector = @selector(setPaddingRightWithNSString:);
-  methods[52].selector = @selector(getPaddingLeft);
-  methods[53].selector = @selector(setPaddingLeftWithNSString:);
-  methods[54].selector = @selector(getPaddingStart);
-  methods[55].selector = @selector(setPaddingStartWithNSString:);
-  methods[56].selector = @selector(getPaddingEnd);
-  methods[57].selector = @selector(setPaddingEndWithNSString:);
-  methods[58].selector = @selector(getPaddingTop);
-  methods[59].selector = @selector(setPaddingTopWithNSString:);
-  methods[60].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[61].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[62].selector = @selector(getTextColor);
-  methods[63].selector = @selector(setTextColorWithNSString:);
-  methods[64].selector = @selector(setTextAllCapsWithBoolean:);
-  methods[65].selector = @selector(setSingleLineWithBoolean:);
-  methods[66].selector = @selector(getEllipsize);
-  methods[67].selector = @selector(setEllipsizeWithNSString:);
-  methods[68].selector = @selector(getFirstBaselineToTopHeight);
-  methods[69].selector = @selector(setFirstBaselineToTopHeightWithNSString:);
-  methods[70].selector = @selector(getLastBaselineToBottomHeight);
-  methods[71].selector = @selector(setLastBaselineToBottomHeightWithNSString:);
-  methods[72].selector = @selector(getJustificationMode);
-  methods[73].selector = @selector(setJustificationModeWithNSString:);
-  methods[74].selector = @selector(setScrollHorizontallyWithBoolean:);
-  methods[75].selector = @selector(getShadowDx);
-  methods[76].selector = @selector(setShadowDxWithFloat:);
-  methods[77].selector = @selector(getShadowDy);
-  methods[78].selector = @selector(setShadowDyWithFloat:);
-  methods[79].selector = @selector(getShadowColor);
-  methods[80].selector = @selector(setShadowColorWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASButtonImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASButtonImpl;", "setDrawableStart", "LNSString;", "setDrawableEnd", "setDrawableTop", "setDrawableBottom", "setDrawablePadding", "setDrawableTint", "setDrawableTintMode", "setDrawableIconSize", "setMinLines", "I", "setLines", "setMaxLines", "setMinWidth", "setMinHeight", "setMaxWidth", "setMaxHeight", "setHeight", "setWidth", "setMaxEms", "setMinEms", "setEms", "setMarqueeRepeatLimit", "setEditable", "Z", "setMaxLength", "setTypeface", "setTextStyle", "setFontFamily", "setTextFormat", "setEnabled", "setText", "setGravity", "setTextSize", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setTextColor", "setTextAllCaps", "setSingleLine", "setEllipsize", "setFirstBaselineToTopHeight", "setLastBaselineToBottomHeight", "setJustificationMode", "setScrollHorizontally", "setShadowDx", "F", "setShadowDy", "setShadowColor" };
-  static const J2ObjcClassInfo _ASButtonImpl_ButtonBean = { "ButtonBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 81, 1, 0, -1, -1, -1, -1 };
-  return &_ASButtonImpl_ButtonBean;
-}
-
-@end
-
-void ASButtonImpl_ButtonBean_initWithASButtonImpl_(ASButtonImpl_ButtonBean *self, ASButtonImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewImpl_ViewBean_initWithASIWidget_(self, outer$);
-}
-
-ASButtonImpl_ButtonBean *new_ASButtonImpl_ButtonBean_initWithASButtonImpl_(ASButtonImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASButtonImpl_ButtonBean, initWithASButtonImpl_, outer$)
-}
-
-ASButtonImpl_ButtonBean *create_ASButtonImpl_ButtonBean_initWithASButtonImpl_(ASButtonImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASButtonImpl_ButtonBean, initWithASButtonImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASButtonImpl_ButtonBean)

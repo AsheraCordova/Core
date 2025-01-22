@@ -6,7 +6,6 @@
 #include "BaseHasWidgets.h"
 #include "FrameLayout.h"
 #include "HasWidgets.h"
-#include "IAttributable.h"
 #include "IFragment.h"
 #include "ILifeCycleDecorator.h"
 #include "IOSClass.h"
@@ -24,7 +23,6 @@
 #include "ViewGroupImpl.h"
 #include "ViewImpl.h"
 #include "WidgetAttribute.h"
-#include "WidgetFactory.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Runnable.h"
 #include "java/lang/UnsupportedOperationException.h"
@@ -42,16 +40,11 @@
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASmergeImpl () {
  @public
   id uiView_;
   ADFrameLayout *frameLayout_;
-  ASmergeImpl_mergeCommandBuilder *builder_;
-  ASmergeImpl_mergeBean *bean_;
-  ASmergeImpl_mergeCommandParamsBuilder *paramsBuilder_;
-  ASmergeImpl_mergeParamsBean *paramsBean_;
 }
 
 - (void)setWidgetOnNativeClass;
@@ -68,10 +61,6 @@
 
 J2OBJC_FIELD_SETTER(ASmergeImpl, uiView_, id)
 J2OBJC_FIELD_SETTER(ASmergeImpl, frameLayout_, ADFrameLayout *)
-J2OBJC_FIELD_SETTER(ASmergeImpl, builder_, ASmergeImpl_mergeCommandBuilder *)
-J2OBJC_FIELD_SETTER(ASmergeImpl, bean_, ASmergeImpl_mergeBean *)
-J2OBJC_FIELD_SETTER(ASmergeImpl, paramsBuilder_, ASmergeImpl_mergeCommandParamsBuilder *)
-J2OBJC_FIELD_SETTER(ASmergeImpl, paramsBean_, ASmergeImpl_mergeParamsBean *)
 
 __attribute__((unused)) static void ASmergeImpl_setWidgetOnNativeClass(ASmergeImpl *self);
 
@@ -100,13 +89,6 @@ J2OBJC_FIELD_SETTER(ASmergeImpl_mergeExt, measureFinished_, ASMeasureEvent *)
 J2OBJC_FIELD_SETTER(ASmergeImpl_mergeExt, onLayoutEvent_, ASOnLayoutEvent *)
 J2OBJC_FIELD_SETTER(ASmergeImpl_mergeExt, overlays_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(ASmergeImpl_mergeExt, templates_, id<JavaUtilMap>)
-
-@interface ASmergeImpl_mergeCommandBuilder () {
- @public
-  ASmergeImpl *this$0_;
-}
-
-@end
 
 @interface ASmergeImpl_$Lambda$1 : NSObject < JavaLangRunnable > {
  @public
@@ -306,38 +288,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   [((ADView *) nil_chk(((ADView *) cast_chk([self asWidget], [ADView class])))) setVisibilityWithInt:b ? ADView_VISIBLE : ADView_GONE];
 }
 
-- (id)getPluginWithNSString:(NSString *)plugin {
-  return [((id<ASIAttributable>) nil_chk(ASWidgetFactory_getAttributableWithNSString_(plugin))) newInstanceWithASIWidget:self];
-}
-
-- (ASmergeImpl_mergeBean *)getBean {
-  if (bean_ == nil) {
-    bean_ = new_ASmergeImpl_mergeBean_initWithASmergeImpl_(self);
-  }
-  return bean_;
-}
-
-- (ASmergeImpl_mergeCommandBuilder *)getBuilder {
-  if (builder_ == nil) {
-    builder_ = new_ASmergeImpl_mergeCommandBuilder_initWithASmergeImpl_(self);
-  }
-  return builder_;
-}
-
-- (ASmergeImpl_mergeParamsBean *)getParamsBean {
-  if (paramsBean_ == nil) {
-    paramsBean_ = new_ASmergeImpl_mergeParamsBean_initWithASmergeImpl_(self);
-  }
-  return paramsBean_;
-}
-
-- (ASmergeImpl_mergeCommandParamsBuilder *)getParamsBuilder {
-  if (paramsBuilder_ == nil) {
-    paramsBuilder_ = new_ASmergeImpl_mergeCommandParamsBuilder_initWithASmergeImpl_(self);
-  }
-  return paramsBuilder_;
-}
-
 - (id)asNativeWidget {
   return uiView_;
 }
@@ -372,13 +322,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 24, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 25, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 27, 1, -1, -1, -1, -1 },
-    { NULL, "LASmergeImpl_mergeBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASmergeImpl_mergeCommandBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASmergeImpl_mergeParamsBean;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASmergeImpl_mergeCommandParamsBuilder;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 28, 29, -1, 30, -1, -1 },
+    { NULL, "V", 0x2, 27, 28, -1, 29, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -407,26 +352,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[21].selector = @selector(invalidate);
   methods[22].selector = @selector(setIdWithNSString:);
   methods[23].selector = @selector(setVisibleWithBoolean:);
-  methods[24].selector = @selector(getPluginWithNSString:);
-  methods[25].selector = @selector(getBean);
-  methods[26].selector = @selector(getBuilder);
-  methods[27].selector = @selector(getParamsBean);
-  methods[28].selector = @selector(getParamsBuilder);
-  methods[29].selector = @selector(asNativeWidget);
-  methods[30].selector = @selector(nativeCreateWithJavaUtilMap:);
+  methods[24].selector = @selector(asNativeWidget);
+  methods[25].selector = @selector(nativeCreateWithJavaUtilMap:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "uiView_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
-    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 32, -1, -1 },
+    { "LOCAL_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 30, -1, -1 },
+    { "GROUP_NAME", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
     { "frameLayout_", "LADFrameLayout;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "builder_", "LASmergeImpl_mergeCommandBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "bean_", "LASmergeImpl_mergeBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBuilder_", "LASmergeImpl_mergeCommandParamsBuilder;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "paramsBean_", "LASmergeImpl_mergeParamsBean;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setId", "setVisible", "Z", "getPlugin", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", &ASmergeImpl_LOCAL_NAME, &ASmergeImpl_GROUP_NAME, "LASmergeImpl_mergeExt;LASmergeImpl_mergeCommandBuilder;LASmergeImpl_mergeBean;LASmergeImpl_mergeParamsBean;LASmergeImpl_mergeCommandParamsBuilder;" };
-  static const J2ObjcClassInfo _ASmergeImpl = { "mergeImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 31, 8, -1, 33, -1, -1, -1 };
+  static const void *ptrTable[] = { "loadAttributes", "LNSString;", "LNSString;LNSString;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "remove", "LASIWidget;", "I", "nativeRemoveView", "add", "LASIWidget;I", "createLayoutParams", "LADView;", "getLayoutParams", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setAttribute", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setId", "setVisible", "Z", "nativeCreate", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", &ASmergeImpl_LOCAL_NAME, &ASmergeImpl_GROUP_NAME, "LASmergeImpl_mergeExt;" };
+  static const J2ObjcClassInfo _ASmergeImpl = { "mergeImpl", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 26, 4, -1, 32, -1, -1, -1 };
   return &_ASmergeImpl;
 }
 
@@ -863,169 +799,6 @@ ASmergeImpl_mergeExt *create_ASmergeImpl_mergeExt_initWithASmergeImpl_(ASmergeIm
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASmergeImpl_mergeExt)
-
-@implementation ASmergeImpl_mergeCommandBuilder
-
-- (instancetype)initWithASmergeImpl:(ASmergeImpl *)outer$ {
-  ASmergeImpl_mergeCommandBuilder_initWithASmergeImpl_(self, outer$);
-  return self;
-}
-
-- (ASmergeImpl_mergeCommandBuilder *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([this$0_ getFragment])) remeasure];
-  }
-  [this$0_ executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASmergeImpl_mergeCommandBuilder;", 0x1, 1, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASmergeImpl:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", "LASmergeImpl;", .constantValue.asLong = 0, 0x1012, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASmergeImpl;", "execute", "Z", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandBuilder<Lcom/ashera/layout/mergeImpl$mergeCommandBuilder;>;" };
-  static const J2ObjcClassInfo _ASmergeImpl_mergeCommandBuilder = { "mergeCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x1, 2, 1, 0, -1, -1, 3, -1 };
-  return &_ASmergeImpl_mergeCommandBuilder;
-}
-
-@end
-
-void ASmergeImpl_mergeCommandBuilder_initWithASmergeImpl_(ASmergeImpl_mergeCommandBuilder *self, ASmergeImpl *outer$) {
-  self->this$0_ = outer$;
-  ASViewGroupImpl_ViewGroupCommandBuilder_init(self);
-}
-
-ASmergeImpl_mergeCommandBuilder *new_ASmergeImpl_mergeCommandBuilder_initWithASmergeImpl_(ASmergeImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASmergeImpl_mergeCommandBuilder, initWithASmergeImpl_, outer$)
-}
-
-ASmergeImpl_mergeCommandBuilder *create_ASmergeImpl_mergeCommandBuilder_initWithASmergeImpl_(ASmergeImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASmergeImpl_mergeCommandBuilder, initWithASmergeImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASmergeImpl_mergeCommandBuilder)
-
-@implementation ASmergeImpl_mergeBean
-
-- (instancetype)initWithASmergeImpl:(ASmergeImpl *)outer$ {
-  ASmergeImpl_mergeBean_initWithASmergeImpl_(self, outer$);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASmergeImpl:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASmergeImpl;" };
-  static const J2ObjcClassInfo _ASmergeImpl_mergeBean = { "mergeBean", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 1, 0, 0, -1, -1, -1, -1 };
-  return &_ASmergeImpl_mergeBean;
-}
-
-@end
-
-void ASmergeImpl_mergeBean_initWithASmergeImpl_(ASmergeImpl_mergeBean *self, ASmergeImpl *outer$) {
-  ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(self, outer$);
-}
-
-ASmergeImpl_mergeBean *new_ASmergeImpl_mergeBean_initWithASmergeImpl_(ASmergeImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASmergeImpl_mergeBean, initWithASmergeImpl_, outer$)
-}
-
-ASmergeImpl_mergeBean *create_ASmergeImpl_mergeBean_initWithASmergeImpl_(ASmergeImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASmergeImpl_mergeBean, initWithASmergeImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASmergeImpl_mergeBean)
-
-@implementation ASmergeImpl_mergeParamsBean
-
-- (instancetype)initWithASmergeImpl:(ASmergeImpl *)outer$ {
-  ASmergeImpl_mergeParamsBean_initWithASmergeImpl_(self, outer$);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASmergeImpl:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASmergeImpl;" };
-  static const J2ObjcClassInfo _ASmergeImpl_mergeParamsBean = { "mergeParamsBean", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 1, 0, 0, -1, -1, -1, -1 };
-  return &_ASmergeImpl_mergeParamsBean;
-}
-
-@end
-
-void ASmergeImpl_mergeParamsBean_initWithASmergeImpl_(ASmergeImpl_mergeParamsBean *self, ASmergeImpl *outer$) {
-  ASViewGroupImpl_ViewGroupParamsBean_init(self);
-}
-
-ASmergeImpl_mergeParamsBean *new_ASmergeImpl_mergeParamsBean_initWithASmergeImpl_(ASmergeImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASmergeImpl_mergeParamsBean, initWithASmergeImpl_, outer$)
-}
-
-ASmergeImpl_mergeParamsBean *create_ASmergeImpl_mergeParamsBean_initWithASmergeImpl_(ASmergeImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASmergeImpl_mergeParamsBean, initWithASmergeImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASmergeImpl_mergeParamsBean)
-
-@implementation ASmergeImpl_mergeCommandParamsBuilder
-
-- (instancetype)initWithASmergeImpl:(ASmergeImpl *)outer$ {
-  ASmergeImpl_mergeCommandParamsBuilder_initWithASmergeImpl_(self, outer$);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASmergeImpl:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASmergeImpl;", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandParamsBuilder<Lcom/ashera/layout/mergeImpl$mergeCommandParamsBuilder;>;" };
-  static const J2ObjcClassInfo _ASmergeImpl_mergeCommandParamsBuilder = { "mergeCommandParamsBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 1, 0, 0, -1, -1, 1, -1 };
-  return &_ASmergeImpl_mergeCommandParamsBuilder;
-}
-
-@end
-
-void ASmergeImpl_mergeCommandParamsBuilder_initWithASmergeImpl_(ASmergeImpl_mergeCommandParamsBuilder *self, ASmergeImpl *outer$) {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(self);
-}
-
-ASmergeImpl_mergeCommandParamsBuilder *new_ASmergeImpl_mergeCommandParamsBuilder_initWithASmergeImpl_(ASmergeImpl *outer$) {
-  J2OBJC_NEW_IMPL(ASmergeImpl_mergeCommandParamsBuilder, initWithASmergeImpl_, outer$)
-}
-
-ASmergeImpl_mergeCommandParamsBuilder *create_ASmergeImpl_mergeCommandParamsBuilder_initWithASmergeImpl_(ASmergeImpl *outer$) {
-  J2OBJC_CREATE_IMPL(ASmergeImpl_mergeCommandParamsBuilder, initWithASmergeImpl_, outer$)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASmergeImpl_mergeCommandParamsBuilder)
 
 @implementation ASmergeImpl_$Lambda$1
 

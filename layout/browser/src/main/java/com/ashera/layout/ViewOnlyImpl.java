@@ -398,60 +398,9 @@ public class ViewOnlyImpl extends BaseWidget {
 
     	}
     }
-	
-private ViewOnlyCommandBuilder builder;
-private ViewOnlyBean bean;
-public Object getPlugin(String plugin) {
-	return WidgetFactory.getAttributable(plugin).newInstance(this);
-}
-public ViewOnlyBean getBean() {
-	if (bean == null) {
-		bean = new ViewOnlyBean();
-	}
-	return bean;
-}
-public ViewOnlyCommandBuilder getBuilder() {
-	if (builder == null) {
-		builder = new ViewOnlyCommandBuilder();
-	}
-	return builder;
-}
-
-
-public  class ViewOnlyCommandBuilder extends com.ashera.layout.ViewImpl.ViewCommandBuilder <ViewOnlyCommandBuilder> {
-    public ViewOnlyCommandBuilder() {
-	}
-	
-	public ViewOnlyCommandBuilder execute(boolean setter) {
-		if (setter) {
-			executeCommand(command, null, IWidget.COMMAND_EXEC_SETTER_METHOD);
-			getFragment().remeasure();
-		}
-		executeCommand(command, null, IWidget.COMMAND_EXEC_GETTER_METHOD);
-return this;	}
-
-public ViewOnlyCommandBuilder setAttributeUnderTest(String value) {
-	Map<String, Object> attrs = initCommand("attributeUnderTest");
-	attrs.put("type", "attribute");
-	attrs.put("setter", true);
-	attrs.put("orderSet", ++orderSet);
-
-	attrs.put("value", value);
-return this;}
-}
-public class ViewOnlyBean extends com.ashera.layout.ViewImpl.ViewBean{
-		public ViewOnlyBean() {
-			super(ViewOnlyImpl.this);
-		}
-public void setAttributeUnderTest(String value) {
-	getBuilder().reset().setAttributeUnderTest(value).execute(true);
-}
-
-}
-
 
 	
-	//end - body
+		//end - body
 
 	private void nativeCreate(Map<String, Object> params) {
 		hTMLElement = org.teavm.jso.dom.html.HTMLDocument.current().createElement("div");

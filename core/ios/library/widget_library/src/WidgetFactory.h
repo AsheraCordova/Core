@@ -28,6 +28,7 @@
 @protocol ASIFragment;
 @protocol ASILifeCycleDecorator;
 @protocol ASIWidget;
+@protocol JavaUtilCollection;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
@@ -52,6 +53,8 @@
 
 + (ASWidgetAttribute *)getAttributeWithNSString:(NSString *)localname
                                    withNSString:(NSString *)attributeName;
+
++ (id<JavaUtilCollection>)getAttributesWithNSString:(NSString *)localName;
 
 + (id)getBehaviorWithNSString:(NSString *)behavior;
 
@@ -152,6 +155,8 @@ FOUNDATION_EXPORT void ASWidgetFactory_registerBehaviorWithNSString_withASIBehav
 FOUNDATION_EXPORT id ASWidgetFactory_getBehaviorWithNSString_(NSString *behavior);
 
 FOUNDATION_EXPORT void ASWidgetFactory_registerAttributableForWithNSString_withASIAttributable_(NSString *localName, id<ASIAttributable> attributable);
+
+FOUNDATION_EXPORT id<JavaUtilCollection> ASWidgetFactory_getAttributesWithNSString_(NSString *localName);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASWidgetFactory)
 

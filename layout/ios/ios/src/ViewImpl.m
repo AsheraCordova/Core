@@ -115,7 +115,6 @@
 
 
 #pragma clang diagnostic ignored "-Wprotocol"
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
 
 @interface ASViewImpl ()
 
@@ -320,8 +319,7 @@
 
 + (void)setBackgroundWithASIWidget:(id<ASIWidget>)w
                             withId:(id)nativeView
-                            withId:(id)objValue
-                       withBoolean:(jboolean)stateChange;
+                            withId:(id)objValue;
 
 + (void)updateWidthAndHeightWithASIWidget:(id<ASIWidget>)w
                   withADStateListDrawable:(ADStateListDrawable *)background
@@ -496,6 +494,22 @@
 + (void)setOnSwipeListenerWithASIWidget:(id<ASIWidget>)w
         withASSwipeHelper_SwipeListener:(id<ASSwipeHelper_SwipeListener>)swipeListener;
 
++ (void)setOutlineSpotShadowColorWithASIWidget:(id<ASIWidget>)w
+                                        withId:(id)objValue;
+
++ (void)setOutlineAmbientShadowColorWithASIWidget:(id<ASIWidget>)w
+                                           withId:(id)objValue;
+
++ (void)setShadowColorWithId:(id)view
+                      withId:(id)color;
+
++ (void)setCornerRadiusWithASIWidget:(id<ASIWidget>)w
+                              withId:(id)nativeWidget
+                              withId:(id)objValue;
+
++ (void)setCornerRadiusOnViewWithId:(id)view
+                          withFloat:(jfloat)radius;
+
 @end
 
 __attribute__((unused)) static void ASViewImpl_init(ASViewImpl *self);
@@ -634,7 +648,7 @@ __attribute__((unused)) static void ASViewImpl_setAnimatorXmlWithASIWidget_withI
 
 __attribute__((unused)) static void ASViewImpl_setBgOnControlWithASIWidget_withId_withId_(id<ASIWidget> w, id uiview, id objValue);
 
-__attribute__((unused)) static void ASViewImpl_setBackgroundWithASIWidget_withId_withId_withBoolean_(id<ASIWidget> w, id nativeView, id objValue, jboolean stateChange);
+__attribute__((unused)) static void ASViewImpl_setBackgroundWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeView, id objValue);
 
 __attribute__((unused)) static void ASViewImpl_updateWidthAndHeightWithASIWidget_withADStateListDrawable_withId_withNSString_withNSString_(id<ASIWidget> w, ADStateListDrawable *background, id value, NSString *type, NSString *conveterType);
 
@@ -757,6 +771,16 @@ __attribute__((unused)) static void ASViewImpl_setNativeIdWithASIWidget_withNSSt
 __attribute__((unused)) static void ASViewImpl_setOutsideTouchableWithASIWidget_withNSString_withId_withADView_(id<ASIWidget> w, NSString *strValue, id objValue, ADView *view);
 
 __attribute__((unused)) static void ASViewImpl_setOnSwipeListenerWithASIWidget_withASSwipeHelper_SwipeListener_(id<ASIWidget> w, id<ASSwipeHelper_SwipeListener> swipeListener);
+
+__attribute__((unused)) static void ASViewImpl_setOutlineSpotShadowColorWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+
+__attribute__((unused)) static void ASViewImpl_setOutlineAmbientShadowColorWithASIWidget_withId_(id<ASIWidget> w, id objValue);
+
+__attribute__((unused)) static void ASViewImpl_setShadowColorWithId_withId_(id view, id color);
+
+__attribute__((unused)) static void ASViewImpl_setCornerRadiusWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue);
+
+__attribute__((unused)) static void ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(id view, jfloat radius);
 
 @interface ASViewImpl_IosAccessibilityTraits () {
  @public
@@ -1513,28 +1537,6 @@ __attribute__((unused)) static ASViewImpl_SwipeListener *new_ASViewImpl_SwipeLis
 __attribute__((unused)) static ASViewImpl_SwipeListener *create_ASViewImpl_SwipeListener_initWithASIWidget_withNSString_withNSString_(id<ASIWidget> w, NSString *strValue, NSString *action);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_SwipeListener)
-
-@interface ASViewImpl_ViewCommandBuilderInternal () {
- @public
-  id<ASIWidget> widget_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(ASViewImpl_ViewCommandBuilderInternal, widget_, id<ASIWidget>)
-
-@interface ASViewImpl_ViewBean () {
- @public
-  ASViewImpl_ViewCommandBuilderInternal *commandBuilder_;
-}
-
-- (ASViewImpl_ViewCommandBuilderInternal *)getBuilder;
-
-@end
-
-J2OBJC_FIELD_SETTER(ASViewImpl_ViewBean, commandBuilder_, ASViewImpl_ViewCommandBuilderInternal *)
-
-__attribute__((unused)) static ASViewImpl_ViewCommandBuilderInternal *ASViewImpl_ViewBean_getBuilder(ASViewImpl_ViewBean *self);
 
 @interface ASViewImpl_UIControlEventTouchDelegate () {
  @public
@@ -2536,16 +2538,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)setBackgroundWithASIWidget:(id<ASIWidget>)w
-                            withId:(id)nativeWidget
-                            withId:(id)objValue {
-  ASViewImpl_setBackgroundWithASIWidget_withId_withId_(w, nativeWidget, objValue);
-}
-
-+ (void)setBackgroundWithASIWidget:(id<ASIWidget>)w
                             withId:(id)nativeView
-                            withId:(id)objValue
-                       withBoolean:(jboolean)stateChange {
-  ASViewImpl_setBackgroundWithASIWidget_withId_withId_withBoolean_(w, nativeView, objValue, stateChange);
+                            withId:(id)objValue {
+  ASViewImpl_setBackgroundWithASIWidget_withId_withId_(w, nativeView, objValue);
 }
 
 + (void)updateWidthAndHeightWithASIWidget:(id<ASIWidget>)w
@@ -2984,6 +2979,32 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASViewImpl_translateWithAnimationWithId_withInt_withInt_withInt_withASViewImpl_AnimationCallBack_(objview, x, y, animationDurationInMs, callBack);
 }
 
++ (void)setOutlineSpotShadowColorWithASIWidget:(id<ASIWidget>)w
+                                        withId:(id)objValue {
+  ASViewImpl_setOutlineSpotShadowColorWithASIWidget_withId_(w, objValue);
+}
+
++ (void)setOutlineAmbientShadowColorWithASIWidget:(id<ASIWidget>)w
+                                           withId:(id)objValue {
+  ASViewImpl_setOutlineAmbientShadowColorWithASIWidget_withId_(w, objValue);
+}
+
++ (void)setShadowColorWithId:(id)view
+                      withId:(id)color {
+  ASViewImpl_setShadowColorWithId_withId_(view, color);
+}
+
++ (void)setCornerRadiusWithASIWidget:(id<ASIWidget>)w
+                              withId:(id)nativeWidget
+                              withId:(id)objValue {
+  ASViewImpl_setCornerRadiusWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+}
+
++ (void)setCornerRadiusOnViewWithId:(id)view
+                          withFloat:(jfloat)radius {
+  ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(view, radius);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
@@ -3162,38 +3183,38 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x9, 203, 26, -1, -1, -1, -1 },
     { NULL, "Z", 0x109, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 204, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 205, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 205, 206, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 207, 208, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 209, 210, -1, -1, -1, -1 },
-    { NULL, "Z", 0x109, 211, 103, -1, -1, -1, -1 },
-    { NULL, "Z", 0xa, 212, 103, -1, -1, -1, -1 },
-    { NULL, "Z", 0x109, 213, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 205, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 206, 207, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 208, 209, -1, -1, -1, -1 },
+    { NULL, "Z", 0x109, 210, 103, -1, -1, -1, -1 },
+    { NULL, "Z", 0xa, 211, 103, -1, -1, -1, -1 },
+    { NULL, "Z", 0x109, 212, 103, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 213, 103, -1, -1, -1, -1 },
     { NULL, "I", 0x109, 214, 103, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 215, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 215, 142, -1, -1, -1, -1 },
     { NULL, "V", 0x10a, 216, 142, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 217, 142, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 218, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 218, 219, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 220, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 217, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 217, 218, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 219, 26, -1, -1, -1, -1 },
     { NULL, "Z", 0xa, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x9, 221, 26, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 220, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 221, 32, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 222, 32, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 223, 32, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 224, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 225, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 225, 34, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 226, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 227, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 228, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 229, 230, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 227, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 228, 229, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 116, 103, -1, -1, -1, -1 },
-    { NULL, "Z", 0x10a, 231, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 232, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 233, 230, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 234, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 234, 235, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 236, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 237, 26, -1, -1, -1, -1 },
+    { NULL, "Z", 0x10a, 230, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 231, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 232, 229, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 233, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 233, 234, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 235, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 236, 26, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 237, 32, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 238, 32, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 239, 32, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 240, 32, -1, -1, -1, -1 },
@@ -3202,7 +3223,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0xa, 243, 32, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 244, 32, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 245, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 246, 32, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 246, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 247, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 248, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 249, 26, -1, -1, -1, -1 },
@@ -3216,44 +3237,48 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSObject;", 0xa, 257, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 258, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 259, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 260, 26, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 117, 32, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 118, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 260, 103, -1, -1, -1, -1 },
     { NULL, "V", 0x109, 261, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 262, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 263, 142, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x109, 264, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 262, 142, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 263, 103, -1, -1, -1, -1 },
     { NULL, "Z", 0xa, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 265, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 266, 83, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 264, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 265, 83, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 266, 34, -1, -1, -1, -1 },
     { NULL, "V", 0xa, 267, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 268, 34, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 268, 26, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0xa, 269, 26, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 270, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 271, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 272, 142, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 273, 274, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 275, 142, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 276, 142, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 277, 142, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 278, 274, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 279, 142, -1, -1, -1, -1 },
-    { NULL, "V", 0x10a, 280, 230, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 281, 282, -1, 283, -1, -1 },
-    { NULL, "V", 0x109, 281, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 284, 83, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 270, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 271, 142, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 272, 273, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 274, 142, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 275, 142, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 276, 142, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 277, 273, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 278, 142, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 279, 229, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 280, 281, -1, 282, -1, -1 },
+    { NULL, "V", 0x109, 280, 103, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 283, 83, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 284, 103, -1, -1, -1, -1 },
     { NULL, "I", 0x109, 285, 103, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 286, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 287, 24, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 288, 103, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 289, 290, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 291, 292, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 293, 294, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 293, 295, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 286, 24, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 287, 103, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 288, 289, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 290, 291, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 292, 293, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 292, 294, -1, -1, -1, -1 },
+    { NULL, "I", 0x109, 295, 103, -1, -1, -1, -1 },
     { NULL, "I", 0x109, 296, 103, -1, -1, -1, -1 },
-    { NULL, "I", 0x109, 297, 103, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 298, 290, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 299, 300, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 297, 289, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 298, 299, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 300, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 301, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 302, 142, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 303, 34, -1, -1, -1, -1 },
+    { NULL, "V", 0x10a, 304, 273, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -3435,100 +3460,104 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[174].selector = @selector(isRTLLayout);
   methods[175].selector = @selector(setBgOnControlWithASIWidget:withId:withId:);
   methods[176].selector = @selector(setBackgroundWithASIWidget:withId:withId:);
-  methods[177].selector = @selector(setBackgroundWithASIWidget:withId:withId:withBoolean:);
-  methods[178].selector = @selector(updateWidthAndHeightWithASIWidget:withADStateListDrawable:withId:withNSString:withNSString:);
-  methods[179].selector = @selector(setBgDrawabeOnViewWithInt:withInt:withADView:);
-  methods[180].selector = @selector(isColorWithId:);
-  methods[181].selector = @selector(isResizableImageWithId:);
-  methods[182].selector = @selector(isImageWithId:);
-  methods[183].selector = @selector(getImageWidthWithId:);
-  methods[184].selector = @selector(getImageHeightWithId:);
-  methods[185].selector = @selector(clearBgColorWithId:withId:);
-  methods[186].selector = @selector(nativeSetBgColorWithId:withId:);
-  methods[187].selector = @selector(setOnClickWithASIWidget:withId:withId:);
-  methods[188].selector = @selector(setOnClickWithASIWidget:withNSString:withId:withADView_OnClickListener:);
-  methods[189].selector = @selector(registerCommandConveterWithASIWidget:);
-  methods[190].selector = @selector(isNativeRtlSupported);
-  methods[191].selector = @selector(getParentWithASIWidget:);
-  methods[192].selector = @selector(setBackgroundTintModeWithASIWidget:withId:);
-  methods[193].selector = @selector(setBackgroundTintWithASIWidget:withId:);
-  methods[194].selector = @selector(setForegroundTintModeWithASIWidget:withId:);
-  methods[195].selector = @selector(setForegroundTintWithASIWidget:withId:);
-  methods[196].selector = @selector(setForegroundWithASIWidget:withId:withId:);
-  methods[197].selector = @selector(setFgOnControlWithASIWidget:withId:withId:);
-  methods[198].selector = @selector(setVisibilityWithASIWidget:withId:withId:);
-  methods[199].selector = @selector(nativeSetVisibilityWithId:withBoolean:);
-  methods[200].selector = @selector(getClickableWithId:);
-  methods[201].selector = @selector(nativeGetClickableWithId:);
-  methods[202].selector = @selector(setClickableWithASIWidget:withId:withId:);
-  methods[203].selector = @selector(nativeSetClickableWithId:withBoolean:);
-  methods[204].selector = @selector(setOnLongClickWithASIWidget:withId:withId:);
-  methods[205].selector = @selector(setOnLongClickWithASIWidget:withId:withADView_OnLongClickListener:);
-  methods[206].selector = @selector(setTranslationXWithASIWidget:withId:);
-  methods[207].selector = @selector(relayoutWithASIWidget:);
-  methods[208].selector = @selector(setTranslationYWithASIWidget:withId:);
-  methods[209].selector = @selector(setTranslationZWithASIWidget:withId:);
-  methods[210].selector = @selector(setTransformPivotYWithASIWidget:withId:);
-  methods[211].selector = @selector(setTransformPivotXWithASIWidget:withId:);
-  methods[212].selector = @selector(setScaleYWithASIWidget:withId:);
-  methods[213].selector = @selector(setScaleXWithASIWidget:withId:);
-  methods[214].selector = @selector(setRotationYWithASIWidget:withId:);
-  methods[215].selector = @selector(setRotationXWithASIWidget:withId:);
-  methods[216].selector = @selector(setRotationWithASIWidget:withId:);
-  methods[217].selector = @selector(getTranslationXWithASIWidget:);
-  methods[218].selector = @selector(getTransformPivotYWithASIWidget:);
-  methods[219].selector = @selector(getTransformPivotXWithASIWidget:);
-  methods[220].selector = @selector(getScaleYWithASIWidget:);
-  methods[221].selector = @selector(getScaleXWithASIWidget:);
-  methods[222].selector = @selector(getRotationYWithASIWidget:);
-  methods[223].selector = @selector(getRotationXWithASIWidget:);
-  methods[224].selector = @selector(getRotationWithASIWidget:);
-  methods[225].selector = @selector(getTranslationZWithASIWidget:);
-  methods[226].selector = @selector(getTranslationYWithASIWidget:);
-  methods[227].selector = @selector(getForegroundTintWithASIWidget:);
-  methods[228].selector = @selector(getForegroundTintModeWithASIWidget:);
-  methods[229].selector = @selector(getBackgroundTintModeWithASIWidget:);
-  methods[230].selector = @selector(getBackgroundTintWithASIWidget:);
-  methods[231].selector = @selector(requestLayoutWithASIWidget:withId:);
-  methods[232].selector = @selector(invalidateWithASIWidget:withId:);
-  methods[233].selector = @selector(nativeRequestLayoutWithId:);
-  methods[234].selector = @selector(nativeInvalidateWithId:);
-  methods[235].selector = @selector(setKeepScreenOnWithId:withId:);
-  methods[236].selector = @selector(getKeepScreenOnWithId:);
-  methods[237].selector = @selector(isMirrorSupported);
-  methods[238].selector = @selector(setOnTouchWithASIWidget:withId:withId:);
-  methods[239].selector = @selector(startDragWithASIWidget:withNSString:);
-  methods[240].selector = @selector(setOnDragWithASIWidget:withId:withId:);
-  methods[241].selector = @selector(setAsDragSourceWithASIWidget:withId:withId:);
-  methods[242].selector = @selector(getForegroundWithASIWidget:);
-  methods[243].selector = @selector(getBackgroundWithASIWidget:);
-  methods[244].selector = @selector(setOnKeyWithASIWidget:withId:);
-  methods[245].selector = @selector(setLayerCornerRadiusWithId:withId:);
-  methods[246].selector = @selector(nativeSetLayerCornerRadiusWithId:withFloat:);
-  methods[247].selector = @selector(setLayerBorderColorWithId:withId:);
-  methods[248].selector = @selector(nativeLayerBorderColorWithId:withId:);
-  methods[249].selector = @selector(setLayerBorderWidthWithId:withId:);
-  methods[250].selector = @selector(nativeLayerBorderWidthWithId:withFloat:);
-  methods[251].selector = @selector(setLayerMasksToBoundsWithId:withId:);
-  methods[252].selector = @selector(nativeLayerBMasksToBoundsWithId:withBoolean:);
-  methods[253].selector = @selector(nativeBringToFrontWithJavaUtilList:);
-  methods[254].selector = @selector(nativeBringToFrontWithId:);
-  methods[255].selector = @selector(setNativeIdWithASIWidget:withNSString:);
-  methods[256].selector = @selector(getLocationXOnScreenWithId:);
-  methods[257].selector = @selector(getLocationYOnScreenWithId:);
-  methods[258].selector = @selector(setOutsideTouchableWithASIWidget:withNSString:withId:withADView:);
-  methods[259].selector = @selector(nativeMeasureWidthWithId:);
-  methods[260].selector = @selector(nativeMeasureHeightWithId:withInt:);
-  methods[261].selector = @selector(setOnSwipeListenerWithASIWidget:withASSwipeHelper_SwipeListener:);
-  methods[262].selector = @selector(addPanListenerWithASIWidget:withId:withASViewImpl_PanCallBack:);
-  methods[263].selector = @selector(addPanListenerWithASIWidget:withId:withId:withASViewImpl_PanCallBack:);
-  methods[264].selector = @selector(getXWithId:);
-  methods[265].selector = @selector(getYWithId:);
-  methods[266].selector = @selector(updateBoundsXWithId:withInt:);
-  methods[267].selector = @selector(translateWithAnimationWithId:withInt:withInt:withInt:withASViewImpl_AnimationCallBack:);
+  methods[177].selector = @selector(updateWidthAndHeightWithASIWidget:withADStateListDrawable:withId:withNSString:withNSString:);
+  methods[178].selector = @selector(setBgDrawabeOnViewWithInt:withInt:withADView:);
+  methods[179].selector = @selector(isColorWithId:);
+  methods[180].selector = @selector(isResizableImageWithId:);
+  methods[181].selector = @selector(isImageWithId:);
+  methods[182].selector = @selector(getImageWidthWithId:);
+  methods[183].selector = @selector(getImageHeightWithId:);
+  methods[184].selector = @selector(clearBgColorWithId:withId:);
+  methods[185].selector = @selector(nativeSetBgColorWithId:withId:);
+  methods[186].selector = @selector(setOnClickWithASIWidget:withId:withId:);
+  methods[187].selector = @selector(setOnClickWithASIWidget:withNSString:withId:withADView_OnClickListener:);
+  methods[188].selector = @selector(registerCommandConveterWithASIWidget:);
+  methods[189].selector = @selector(isNativeRtlSupported);
+  methods[190].selector = @selector(getParentWithASIWidget:);
+  methods[191].selector = @selector(setBackgroundTintModeWithASIWidget:withId:);
+  methods[192].selector = @selector(setBackgroundTintWithASIWidget:withId:);
+  methods[193].selector = @selector(setForegroundTintModeWithASIWidget:withId:);
+  methods[194].selector = @selector(setForegroundTintWithASIWidget:withId:);
+  methods[195].selector = @selector(setForegroundWithASIWidget:withId:withId:);
+  methods[196].selector = @selector(setFgOnControlWithASIWidget:withId:withId:);
+  methods[197].selector = @selector(setVisibilityWithASIWidget:withId:withId:);
+  methods[198].selector = @selector(nativeSetVisibilityWithId:withBoolean:);
+  methods[199].selector = @selector(getClickableWithId:);
+  methods[200].selector = @selector(nativeGetClickableWithId:);
+  methods[201].selector = @selector(setClickableWithASIWidget:withId:withId:);
+  methods[202].selector = @selector(nativeSetClickableWithId:withBoolean:);
+  methods[203].selector = @selector(setOnLongClickWithASIWidget:withId:withId:);
+  methods[204].selector = @selector(setOnLongClickWithASIWidget:withId:withADView_OnLongClickListener:);
+  methods[205].selector = @selector(setTranslationXWithASIWidget:withId:);
+  methods[206].selector = @selector(relayoutWithASIWidget:);
+  methods[207].selector = @selector(setTranslationYWithASIWidget:withId:);
+  methods[208].selector = @selector(setTranslationZWithASIWidget:withId:);
+  methods[209].selector = @selector(setTransformPivotYWithASIWidget:withId:);
+  methods[210].selector = @selector(setTransformPivotXWithASIWidget:withId:);
+  methods[211].selector = @selector(setScaleYWithASIWidget:withId:);
+  methods[212].selector = @selector(setScaleXWithASIWidget:withId:);
+  methods[213].selector = @selector(setRotationYWithASIWidget:withId:);
+  methods[214].selector = @selector(setRotationXWithASIWidget:withId:);
+  methods[215].selector = @selector(setRotationWithASIWidget:withId:);
+  methods[216].selector = @selector(getTranslationXWithASIWidget:);
+  methods[217].selector = @selector(getTransformPivotYWithASIWidget:);
+  methods[218].selector = @selector(getTransformPivotXWithASIWidget:);
+  methods[219].selector = @selector(getScaleYWithASIWidget:);
+  methods[220].selector = @selector(getScaleXWithASIWidget:);
+  methods[221].selector = @selector(getRotationYWithASIWidget:);
+  methods[222].selector = @selector(getRotationXWithASIWidget:);
+  methods[223].selector = @selector(getRotationWithASIWidget:);
+  methods[224].selector = @selector(getTranslationZWithASIWidget:);
+  methods[225].selector = @selector(getTranslationYWithASIWidget:);
+  methods[226].selector = @selector(getForegroundTintWithASIWidget:);
+  methods[227].selector = @selector(getForegroundTintModeWithASIWidget:);
+  methods[228].selector = @selector(getBackgroundTintModeWithASIWidget:);
+  methods[229].selector = @selector(getBackgroundTintWithASIWidget:);
+  methods[230].selector = @selector(requestLayoutWithASIWidget:withId:);
+  methods[231].selector = @selector(invalidateWithASIWidget:withId:);
+  methods[232].selector = @selector(nativeRequestLayoutWithId:);
+  methods[233].selector = @selector(nativeInvalidateWithId:);
+  methods[234].selector = @selector(setKeepScreenOnWithId:withId:);
+  methods[235].selector = @selector(getKeepScreenOnWithId:);
+  methods[236].selector = @selector(isMirrorSupported);
+  methods[237].selector = @selector(setOnTouchWithASIWidget:withId:withId:);
+  methods[238].selector = @selector(startDragWithASIWidget:withNSString:);
+  methods[239].selector = @selector(setOnDragWithASIWidget:withId:withId:);
+  methods[240].selector = @selector(setAsDragSourceWithASIWidget:withId:withId:);
+  methods[241].selector = @selector(getForegroundWithASIWidget:);
+  methods[242].selector = @selector(getBackgroundWithASIWidget:);
+  methods[243].selector = @selector(setOnKeyWithASIWidget:withId:);
+  methods[244].selector = @selector(setLayerCornerRadiusWithId:withId:);
+  methods[245].selector = @selector(nativeSetLayerCornerRadiusWithId:withFloat:);
+  methods[246].selector = @selector(setLayerBorderColorWithId:withId:);
+  methods[247].selector = @selector(nativeLayerBorderColorWithId:withId:);
+  methods[248].selector = @selector(setLayerBorderWidthWithId:withId:);
+  methods[249].selector = @selector(nativeLayerBorderWidthWithId:withFloat:);
+  methods[250].selector = @selector(setLayerMasksToBoundsWithId:withId:);
+  methods[251].selector = @selector(nativeLayerBMasksToBoundsWithId:withBoolean:);
+  methods[252].selector = @selector(nativeBringToFrontWithJavaUtilList:);
+  methods[253].selector = @selector(nativeBringToFrontWithId:);
+  methods[254].selector = @selector(setNativeIdWithASIWidget:withNSString:);
+  methods[255].selector = @selector(getLocationXOnScreenWithId:);
+  methods[256].selector = @selector(getLocationYOnScreenWithId:);
+  methods[257].selector = @selector(setOutsideTouchableWithASIWidget:withNSString:withId:withADView:);
+  methods[258].selector = @selector(nativeMeasureWidthWithId:);
+  methods[259].selector = @selector(nativeMeasureHeightWithId:withInt:);
+  methods[260].selector = @selector(setOnSwipeListenerWithASIWidget:withASSwipeHelper_SwipeListener:);
+  methods[261].selector = @selector(addPanListenerWithASIWidget:withId:withASViewImpl_PanCallBack:);
+  methods[262].selector = @selector(addPanListenerWithASIWidget:withId:withId:withASViewImpl_PanCallBack:);
+  methods[263].selector = @selector(getXWithId:);
+  methods[264].selector = @selector(getYWithId:);
+  methods[265].selector = @selector(updateBoundsXWithId:withInt:);
+  methods[266].selector = @selector(translateWithAnimationWithId:withInt:withInt:withInt:withASViewImpl_AnimationCallBack:);
+  methods[267].selector = @selector(setOutlineSpotShadowColorWithASIWidget:withId:);
+  methods[268].selector = @selector(setOutlineAmbientShadowColorWithASIWidget:withId:);
+  methods[269].selector = @selector(setShadowColorWithId:withId:);
+  methods[270].selector = @selector(setCornerRadiusWithASIWidget:withId:withId:);
+  methods[271].selector = @selector(setCornerRadiusOnViewWithId:withFloat:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LASSimpleWrapableView;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setPadding", "LNSObject;LADView;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "getPaddingTop", "LASIWidget;LADView;", "getPaddingBottom", "getPaddingLeft", "getPaddingRight", "setPaddingHorizontal", "setPaddingVertical", "setId", "LASIWidget;LNSString;LNSObject;LADView;", "getModelSyncEvents", "LASIWidget;", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "notifyDataSetChanged", "LASIWidget;LNSObject;", "updateModelData", "LASIWidget;LNSObject;LNSObject;", "getModelUiToPojo", "getModelPojoToUi", "getModelParam", "setModelPojoToUiParams", "refreshUiFromModel", "LASIWidget;LNSObject;Z", "setModelUiToPojoEventIds", "setZIndex", "setMaxHeight", "setMaxWidth", "getMaxWidth", "getMaxHeight", "setSelected", "getSelected", "setInvalidateOnFrameChange", "setBackgroundRepeat", "setForegroundRepeat", "addEventInfo", "LJavaUtilMap;LADMotionEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MotionEvent;)V", "LJavaUtilMap;LADKeyEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/KeyEvent;)V", "LJavaUtilMap;LADView_DragEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/View$DragEvent;)V", "LJavaUtilMap;LADChronometer;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/Chronometer;Lcom/ashera/core/IFragment;)V", "validateForm", "getValidateFormResult", "setValidation", "getForms", "(Lcom/ashera/widget/IWidget;)Ljava/util/List<Lcom/ashera/validations/Form;>;", "setType", "LASIWidget;LNSString;LNSObject;", "setPattern", "setMax", "setMin", "setMaxlength", "setMinlength", "setRequired", "addValidator", "LASIWidget;LNSString;[LNSString;", "setCustomErrorMessageKeys", "setCustomErrorMessageValues", "setValidationErrorDisplay", "setErrorStyle", "LASIWidget;LADView;LNSObject;", "setStyle", "setMessageOnLabel", "LASIWidget;LNSString;", "state", "LASIWidget;I", "setState", "LASIWidget;ILNSObject;", "stateYes", "stateNo", "setAnimatorListener", "LASIWidget;LADAnimator_AnimatorListener;", "endAnimator", "startAnimator", "setLayoutDirection", "getLayoutDirection", "setTextAlignment", "setTextDirection", "getTextAlignment", "getTextDirection", "isRTLLayoutDirection", "drawableStateChanged", "getColor", "LNSObject;", "setDrawableBounds", "LASIWidget;IIII", "redrawDrawables", "setMinHeight", "setMinWidth", "getMinHeight", "getMinWidth", "getVisibility", "setLongClickable", "getLongClickable", "setDuplicateParentState", "getDuplicateParentState", "getClickable", "requestLayout", "invalidate", "getClipData", "LADView_DragEvent;", "getDrawable", "LADColorStateList;", "setElevation", "getValue", "LNSString;LOrgXmlSaxAttributes;", "setBottom", "setTop", "setRight", "setLeft", "getBottom", "getTop", "getRight", "getLeft", "drawOverlay", "LASIWidget;LJavaUtilList;", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Lcom/ashera/widget/IWidget;>;)Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "setAnimatorXml", "getInterpolator", "LJavaUtilMap;LADMenuItem;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MenuItem;)V", "setBackgroundColor", "LNSObject;LNSObject;", "getBackgroundColor", "setIsHidden", "getIsHidden", "setAlpha", "getAlpha", "setIsOpaque", "getIsOpaque", "setTintColor", "getTintColor", "setClipsToBounds", "getClipsToBounds", "setClearsContextBeforeDrawing", "getClearsContextBeforeDrawing", "setIsUserInteractionEnabled", "getIsUserInteractionEnabled", "setIsMultipleTouchEnabled", "getIsMultipleTouchEnabled", "setIsExclusiveTouch", "getIsExclusiveTouch", "setPreservesSuperviewLayoutMargins", "getPreservesSuperviewLayoutMargins", "setInsetsLayoutMarginsFromSafeArea", "getInsetsLayoutMarginsFromSafeArea", "setAutoresizesSubviews", "getAutoresizesSubviews", "setTranslatesAutoresizingMaskIntoConstraints", "getTranslatesAutoresizingMaskIntoConstraints", "setContentScaleFactor", "getContentScaleFactor", "getIsFocused", "setRestorationIdentifier", "getRestorationIdentifier", "setTag", "getTag", "setAccessibilityIgnoresInvertColors", "getAccessibilityIgnoresInvertColors", "setLargeContentImage", "getLargeContentImage", "setLargeContentTitle", "getLargeContentTitle", "setScalesLargeContentImage", "getScalesLargeContentImage", "setShowsLargeContentViewer", "getShowsLargeContentViewer", "setIsAccessibilityElement", "getIsAccessibilityElement", "setAccessibilityLabel", "getAccessibilityLabel", "setAccessibilityHint", "getAccessibilityHint", "setAccessibilityValue", "getAccessibilityValue", "setAccessibilityTraits", "getAccessibilityTraits", "nativeMakeFrame", "LNSObject;IIIII", "updateBounds", "LNSObject;IIII", "getFirstChildOrSelf", "nativeMakeFrameForHorizontalScrollView", "isRTLLayout", "setBgOnControl", "setBackground", "LASIWidget;LNSObject;LNSObject;Z", "updateWidthAndHeight", "LASIWidget;LADStateListDrawable;LNSObject;LNSString;LNSString;", "setBgDrawabeOnView", "IILADView;", "isColor", "isResizableImage", "isImage", "getImageWidth", "getImageHeight", "clearBgColor", "nativeSetBgColor", "setOnClick", "LASIWidget;LNSString;LNSObject;LADView_OnClickListener;", "registerCommandConveter", "getParent", "setBackgroundTintMode", "setBackgroundTint", "setForegroundTintMode", "setForegroundTint", "setForeground", "setFgOnControl", "setVisibility", "nativeSetVisibility", "LNSObject;Z", "nativeGetClickable", "setClickable", "nativeSetClickable", "setOnLongClick", "LASIWidget;LNSObject;LADView_OnLongClickListener;", "setTranslationX", "relayout", "setTranslationY", "setTranslationZ", "setTransformPivotY", "setTransformPivotX", "setScaleY", "setScaleX", "setRotationY", "setRotationX", "setRotation", "getTranslationX", "getTransformPivotY", "getTransformPivotX", "getScaleY", "getScaleX", "getRotationY", "getRotationX", "getRotation", "getTranslationZ", "getTranslationY", "getForegroundTint", "getForegroundTintMode", "getBackgroundTintMode", "getBackgroundTint", "nativeRequestLayout", "nativeInvalidate", "setKeepScreenOn", "getKeepScreenOn", "setOnTouch", "startDrag", "setOnDrag", "setAsDragSource", "getForeground", "getBackground", "setOnKey", "setLayerCornerRadius", "nativeSetLayerCornerRadius", "LNSObject;F", "setLayerBorderColor", "nativeLayerBorderColor", "setLayerBorderWidth", "nativeLayerBorderWidth", "setLayerMasksToBounds", "nativeLayerBMasksToBounds", "nativeBringToFront", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/widget/IWidget;>;)V", "setNativeId", "getLocationXOnScreen", "getLocationYOnScreen", "setOutsideTouchable", "nativeMeasureWidth", "nativeMeasureHeight", "LNSObject;I", "setOnSwipeListener", "LASIWidget;LASSwipeHelper_SwipeListener;", "addPanListener", "LASIWidget;LNSObject;LASViewImpl_PanCallBack;", "LASIWidget;LNSObject;LNSObject;LASViewImpl_PanCallBack;", "getX", "getY", "updateBoundsX", "translateWithAnimation", "LNSObject;IIILASViewImpl_AnimationCallBack;", "LASViewImpl_IosAccessibilityTraits;LASViewImpl_Vtype;LASViewImpl_ValidationErrorDisplay;LASViewImpl_BackgroundRepeat;LASViewImpl_BackgroundTintMode;LASViewImpl_ForegroundRepeat;LASViewImpl_ForegroundTintMode;LASViewImpl_Visibility;LASViewImpl_LayoutDirection;LASViewImpl_TextDirection;LASViewImpl_TextAlignment;LASViewImpl_AddRemoveCallBack;LASViewImpl_PanCallBack;LASViewImpl_AnimationCallBack;LASViewImpl_AnimationContentHandler;LASViewImpl_AnimatorListener;LASViewImpl_OnClickListener;LASViewImpl_OnTouchListener;LASViewImpl_OnLongClickListener;LASViewImpl_OnDragListener;LASViewImpl_OnKeyListener;LASViewImpl_SwipeListener;LASViewImpl_ViewCommandBuilder;LASViewImpl_ViewCommandBuilderInternal;LASViewImpl_ViewBean;LASViewImpl_UIControlEventTouchDelegate;LASViewImpl_UILongTapGestureRecognizerDelegate;LASViewImpl_UITapGestureRecognizerDelegate;LASViewImpl_UIDragInteractionDelegate;LASViewImpl_UIDropInteractionDelegate;LASViewImpl_UISwipeGestureRecognizerDelegate;LASViewImpl_PanGestureRecognizer;LASViewImpl_AnimationUtils;" };
-  static const J2ObjcClassInfo _ASViewImpl = { "ViewImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 268, 0, -1, 301, -1, -1, -1 };
+  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LASSimpleWrapableView;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setPadding", "LNSObject;LADView;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "getPaddingTop", "LASIWidget;LADView;", "getPaddingBottom", "getPaddingLeft", "getPaddingRight", "setPaddingHorizontal", "setPaddingVertical", "setId", "LASIWidget;LNSString;LNSObject;LADView;", "getModelSyncEvents", "LASIWidget;", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "notifyDataSetChanged", "LASIWidget;LNSObject;", "updateModelData", "LASIWidget;LNSObject;LNSObject;", "getModelUiToPojo", "getModelPojoToUi", "getModelParam", "setModelPojoToUiParams", "refreshUiFromModel", "LASIWidget;LNSObject;Z", "setModelUiToPojoEventIds", "setZIndex", "setMaxHeight", "setMaxWidth", "getMaxWidth", "getMaxHeight", "setSelected", "getSelected", "setInvalidateOnFrameChange", "setBackgroundRepeat", "setForegroundRepeat", "addEventInfo", "LJavaUtilMap;LADMotionEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MotionEvent;)V", "LJavaUtilMap;LADKeyEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/KeyEvent;)V", "LJavaUtilMap;LADView_DragEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/View$DragEvent;)V", "LJavaUtilMap;LADChronometer;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/Chronometer;Lcom/ashera/core/IFragment;)V", "validateForm", "getValidateFormResult", "setValidation", "getForms", "(Lcom/ashera/widget/IWidget;)Ljava/util/List<Lcom/ashera/validations/Form;>;", "setType", "LASIWidget;LNSString;LNSObject;", "setPattern", "setMax", "setMin", "setMaxlength", "setMinlength", "setRequired", "addValidator", "LASIWidget;LNSString;[LNSString;", "setCustomErrorMessageKeys", "setCustomErrorMessageValues", "setValidationErrorDisplay", "setErrorStyle", "LASIWidget;LADView;LNSObject;", "setStyle", "setMessageOnLabel", "LASIWidget;LNSString;", "state", "LASIWidget;I", "setState", "LASIWidget;ILNSObject;", "stateYes", "stateNo", "setAnimatorListener", "LASIWidget;LADAnimator_AnimatorListener;", "endAnimator", "startAnimator", "setLayoutDirection", "getLayoutDirection", "setTextAlignment", "setTextDirection", "getTextAlignment", "getTextDirection", "isRTLLayoutDirection", "drawableStateChanged", "getColor", "LNSObject;", "setDrawableBounds", "LASIWidget;IIII", "redrawDrawables", "setMinHeight", "setMinWidth", "getMinHeight", "getMinWidth", "getVisibility", "setLongClickable", "getLongClickable", "setDuplicateParentState", "getDuplicateParentState", "getClickable", "requestLayout", "invalidate", "getClipData", "LADView_DragEvent;", "getDrawable", "LADColorStateList;", "setElevation", "getValue", "LNSString;LOrgXmlSaxAttributes;", "setBottom", "setTop", "setRight", "setLeft", "getBottom", "getTop", "getRight", "getLeft", "drawOverlay", "LASIWidget;LJavaUtilList;", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Lcom/ashera/widget/IWidget;>;)Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "setAnimatorXml", "getInterpolator", "LJavaUtilMap;LADMenuItem;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MenuItem;)V", "setBackgroundColor", "LNSObject;LNSObject;", "getBackgroundColor", "setIsHidden", "getIsHidden", "setAlpha", "getAlpha", "setIsOpaque", "getIsOpaque", "setTintColor", "getTintColor", "setClipsToBounds", "getClipsToBounds", "setClearsContextBeforeDrawing", "getClearsContextBeforeDrawing", "setIsUserInteractionEnabled", "getIsUserInteractionEnabled", "setIsMultipleTouchEnabled", "getIsMultipleTouchEnabled", "setIsExclusiveTouch", "getIsExclusiveTouch", "setPreservesSuperviewLayoutMargins", "getPreservesSuperviewLayoutMargins", "setInsetsLayoutMarginsFromSafeArea", "getInsetsLayoutMarginsFromSafeArea", "setAutoresizesSubviews", "getAutoresizesSubviews", "setTranslatesAutoresizingMaskIntoConstraints", "getTranslatesAutoresizingMaskIntoConstraints", "setContentScaleFactor", "getContentScaleFactor", "getIsFocused", "setRestorationIdentifier", "getRestorationIdentifier", "setTag", "getTag", "setAccessibilityIgnoresInvertColors", "getAccessibilityIgnoresInvertColors", "setLargeContentImage", "getLargeContentImage", "setLargeContentTitle", "getLargeContentTitle", "setScalesLargeContentImage", "getScalesLargeContentImage", "setShowsLargeContentViewer", "getShowsLargeContentViewer", "setIsAccessibilityElement", "getIsAccessibilityElement", "setAccessibilityLabel", "getAccessibilityLabel", "setAccessibilityHint", "getAccessibilityHint", "setAccessibilityValue", "getAccessibilityValue", "setAccessibilityTraits", "getAccessibilityTraits", "nativeMakeFrame", "LNSObject;IIIII", "updateBounds", "LNSObject;IIII", "getFirstChildOrSelf", "nativeMakeFrameForHorizontalScrollView", "isRTLLayout", "setBgOnControl", "setBackground", "updateWidthAndHeight", "LASIWidget;LADStateListDrawable;LNSObject;LNSString;LNSString;", "setBgDrawabeOnView", "IILADView;", "isColor", "isResizableImage", "isImage", "getImageWidth", "getImageHeight", "clearBgColor", "nativeSetBgColor", "setOnClick", "LASIWidget;LNSString;LNSObject;LADView_OnClickListener;", "registerCommandConveter", "getParent", "setBackgroundTintMode", "setBackgroundTint", "setForegroundTintMode", "setForegroundTint", "setForeground", "setFgOnControl", "setVisibility", "nativeSetVisibility", "LNSObject;Z", "nativeGetClickable", "setClickable", "nativeSetClickable", "setOnLongClick", "LASIWidget;LNSObject;LADView_OnLongClickListener;", "setTranslationX", "relayout", "setTranslationY", "setTranslationZ", "setTransformPivotY", "setTransformPivotX", "setScaleY", "setScaleX", "setRotationY", "setRotationX", "setRotation", "getTranslationX", "getTransformPivotY", "getTransformPivotX", "getScaleY", "getScaleX", "getRotationY", "getRotationX", "getRotation", "getTranslationZ", "getTranslationY", "getForegroundTint", "getForegroundTintMode", "getBackgroundTintMode", "getBackgroundTint", "nativeRequestLayout", "nativeInvalidate", "setKeepScreenOn", "getKeepScreenOn", "setOnTouch", "startDrag", "setOnDrag", "setAsDragSource", "getForeground", "getBackground", "setOnKey", "setLayerCornerRadius", "nativeSetLayerCornerRadius", "LNSObject;F", "setLayerBorderColor", "nativeLayerBorderColor", "setLayerBorderWidth", "nativeLayerBorderWidth", "setLayerMasksToBounds", "nativeLayerBMasksToBounds", "nativeBringToFront", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/widget/IWidget;>;)V", "setNativeId", "getLocationXOnScreen", "getLocationYOnScreen", "setOutsideTouchable", "nativeMeasureWidth", "nativeMeasureHeight", "LNSObject;I", "setOnSwipeListener", "LASIWidget;LASSwipeHelper_SwipeListener;", "addPanListener", "LASIWidget;LNSObject;LASViewImpl_PanCallBack;", "LASIWidget;LNSObject;LNSObject;LASViewImpl_PanCallBack;", "getX", "getY", "updateBoundsX", "translateWithAnimation", "LNSObject;IIILASViewImpl_AnimationCallBack;", "setOutlineSpotShadowColor", "setOutlineAmbientShadowColor", "setShadowColor", "setCornerRadius", "setCornerRadiusOnView", "LASViewImpl_IosAccessibilityTraits;LASViewImpl_Vtype;LASViewImpl_ValidationErrorDisplay;LASViewImpl_BackgroundRepeat;LASViewImpl_BackgroundTintMode;LASViewImpl_ForegroundRepeat;LASViewImpl_ForegroundTintMode;LASViewImpl_Visibility;LASViewImpl_LayoutDirection;LASViewImpl_TextDirection;LASViewImpl_TextAlignment;LASViewImpl_AddRemoveCallBack;LASViewImpl_PanCallBack;LASViewImpl_AnimationCallBack;LASViewImpl_AnimationContentHandler;LASViewImpl_AnimatorListener;LASViewImpl_OnClickListener;LASViewImpl_OnTouchListener;LASViewImpl_OnLongClickListener;LASViewImpl_OnDragListener;LASViewImpl_OnKeyListener;LASViewImpl_SwipeListener;LASViewImpl_UIControlEventTouchDelegate;LASViewImpl_UILongTapGestureRecognizerDelegate;LASViewImpl_UITapGestureRecognizerDelegate;LASViewImpl_UIDragInteractionDelegate;LASViewImpl_UIDropInteractionDelegate;LASViewImpl_UISwipeGestureRecognizerDelegate;LASViewImpl_PanGestureRecognizer;LASViewImpl_AnimationUtils;" };
+  static const J2ObjcClassInfo _ASViewImpl = { "ViewImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 272, 0, -1, 305, -1, -1, -1 };
   return &_ASViewImpl;
 }
 
@@ -3597,6 +3626,9 @@ void ASViewImpl_register__WithNSString_(NSString *localName) {
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"customErrorMessageValues"])) withTypeWithNSString:@"array"])) withArrayTypeWithNSString:@"resourcestring"])) withOrderWithInt:-1]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"customErrorMessageKeys"])) withTypeWithNSString:@"array"])) withArrayTypeWithNSString:@"resourcestring"])) withOrderWithInt:-1]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"invalidateOnFrameChange"])) withTypeWithNSString:@"boolean"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"outlineAmbientShadowColor"])) withTypeWithNSString:@"color"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"outlineSpotShadowColor"])) withTypeWithNSString:@"color"]);
+  ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"cornerRadius"])) withTypeWithNSString:@"dimensionfloat"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"animatorXml"])) withTypeWithNSString:@"string"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"startAnimator"])) withTypeWithNSString:@"nil"]);
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"endAnimator"])) withTypeWithNSString:@"nil"]);
@@ -3718,7 +3750,7 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
   ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
   {
     id<JavaUtilList> attributables;
-    switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosBackgroundColor", @"iosIsHidden", @"iosAlpha", @"iosIsOpaque", @"iosTintColor", @"iosClipsToBounds", @"iosClearsContextBeforeDrawing", @"iosIsUserInteractionEnabled", @"iosIsMultipleTouchEnabled", @"iosIsExclusiveTouch", @"iosPreservesSuperviewLayoutMargins", @"iosInsetsLayoutMarginsFromSafeArea", @"iosAutoresizesSubviews", @"iosTranslatesAutoresizingMaskIntoConstraints", @"iosContentScaleFactor", @"iosRestorationIdentifier", @"iosTag", @"iosAccessibilityIgnoresInvertColors", @"iosLargeContentImage", @"iosLargeContentTitle", @"iosScalesLargeContentImage", @"iosShowsLargeContentViewer", @"focusable", @"iosIsAccessibilityElement", @"iosAccessibilityLabel", @"contentDescription", @"iosAccessibilityHint", @"iosAccessibilityValue", @"iosAccessibilityTraits", @"selected", @"style", @"errorStyle", @"validateForm", @"validation", @"v_required", @"v_minlength", @"v_maxlength", @"v_min", @"v_max", @"v_pattern", @"v_type", @"validationErrorDisplayType", @"customErrorMessageValues", @"customErrorMessageKeys", @"invalidateOnFrameChange", @"animatorXml", @"startAnimator", @"endAnimator", @"onAnimationStart", @"onAnimationEnd", @"onAnimationCancel", @"onAnimationRepeat", @"left", @"right", @"top", @"bottom", @"id", @"modelSyncEvents", @"modelParam", @"modelPojoToUi", @"modelUiToPojo", @"modelPojoToUiParams", @"refreshUiFromModel", @"modelUiToPojoEventIds", @"updateModelData", @"notifyDataSetChanged", @"background", @"backgroundRepeat", @"onClick", @"onTouch", @"minWidth", @"minHeight", @"attributeUnderTest", @"backgroundTint", @"backgroundTintMode", @"foreground", @"foregroundRepeat", @"foregroundTint", @"foregroundTintMode", @"visibility", @"alpha", @"onLongClick", @"longClickable", @"clickable", @"translationX", @"translationY", @"translationZ", @"rotation", @"rotationX", @"rotationY", @"scaleX", @"scaleY", @"transformPivotX", @"transformPivotY", @"invalidate", @"requestLayout", @"keepScreenOn", @"layoutDirection", @"textDirection", @"textAlignment", @"onDrag", @"asDragSource", @"enabled", @"duplicateParentState", @"foregroundGravity", @"onKey", @"iosLayerBorderWidth", @"iosLayerBorderColor", @"iosLayerCornerRadius", @"iosLayerMasksToBounds", @"zIndex", @"elevation", @"maxWidth", @"maxHeight", @"onSwiped", @"outsideTouchable" }, 116)) {
+    switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"iosBackgroundColor", @"iosIsHidden", @"iosAlpha", @"iosIsOpaque", @"iosTintColor", @"iosClipsToBounds", @"iosClearsContextBeforeDrawing", @"iosIsUserInteractionEnabled", @"iosIsMultipleTouchEnabled", @"iosIsExclusiveTouch", @"iosPreservesSuperviewLayoutMargins", @"iosInsetsLayoutMarginsFromSafeArea", @"iosAutoresizesSubviews", @"iosTranslatesAutoresizingMaskIntoConstraints", @"iosContentScaleFactor", @"iosRestorationIdentifier", @"iosTag", @"iosAccessibilityIgnoresInvertColors", @"iosLargeContentImage", @"iosLargeContentTitle", @"iosScalesLargeContentImage", @"iosShowsLargeContentViewer", @"focusable", @"iosIsAccessibilityElement", @"iosAccessibilityLabel", @"contentDescription", @"iosAccessibilityHint", @"iosAccessibilityValue", @"iosAccessibilityTraits", @"selected", @"style", @"errorStyle", @"validateForm", @"validation", @"v_required", @"v_minlength", @"v_maxlength", @"v_min", @"v_max", @"v_pattern", @"v_type", @"validationErrorDisplayType", @"customErrorMessageValues", @"customErrorMessageKeys", @"invalidateOnFrameChange", @"outlineAmbientShadowColor", @"outlineSpotShadowColor", @"cornerRadius", @"animatorXml", @"startAnimator", @"endAnimator", @"onAnimationStart", @"onAnimationEnd", @"onAnimationCancel", @"onAnimationRepeat", @"left", @"right", @"top", @"bottom", @"id", @"modelSyncEvents", @"modelParam", @"modelPojoToUi", @"modelUiToPojo", @"modelPojoToUiParams", @"refreshUiFromModel", @"modelUiToPojoEventIds", @"updateModelData", @"notifyDataSetChanged", @"background", @"backgroundRepeat", @"onClick", @"onTouch", @"minWidth", @"minHeight", @"attributeUnderTest", @"backgroundTint", @"backgroundTintMode", @"foreground", @"foregroundRepeat", @"foregroundTint", @"foregroundTintMode", @"visibility", @"alpha", @"onLongClick", @"longClickable", @"clickable", @"translationX", @"translationY", @"translationZ", @"rotation", @"rotationX", @"rotationY", @"scaleX", @"scaleY", @"transformPivotX", @"transformPivotY", @"invalidate", @"requestLayout", @"keepScreenOn", @"layoutDirection", @"textDirection", @"textAlignment", @"onDrag", @"asDragSource", @"enabled", @"duplicateParentState", @"foregroundGravity", @"onKey", @"iosLayerBorderWidth", @"iosLayerBorderColor", @"iosLayerCornerRadius", @"iosLayerMasksToBounds", @"zIndex", @"elevation", @"maxWidth", @"maxHeight", @"onSwiped", @"outsideTouchable" }, 119)) {
       case 0:
       {
         ASViewImpl_setBackgroundColorWithId_withId_(nativeWidget, objValue);
@@ -3946,20 +3978,35 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
       break;
       case 45:
       {
-        ASViewImpl_setAnimatorXmlWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setOutlineAmbientShadowColorWithASIWidget_withId_(w, objValue);
       }
       break;
       case 46:
       {
-        ASViewImpl_startAnimatorWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setOutlineSpotShadowColorWithASIWidget_withId_(w, objValue);
       }
       break;
       case 47:
       {
-        ASViewImpl_endAnimatorWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setCornerRadiusWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 48:
+      {
+        ASViewImpl_setAnimatorXmlWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 49:
+      {
+        ASViewImpl_startAnimatorWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 50:
+      {
+        ASViewImpl_endAnimatorWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 51:
       {
         if ([objValue isKindOfClass:[NSString class]]) {
           ASViewImpl_setAnimatorListenerWithASIWidget_withADAnimator_AnimatorListener_(w, new_ASViewImpl_AnimatorListener_initWithASIWidget_withNSString_withNSString_(w, strValue, @"onAnimationStart"));
@@ -3969,7 +4016,7 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
         }
       }
       break;
-      case 49:
+      case 52:
       {
         if ([objValue isKindOfClass:[NSString class]]) {
           ASViewImpl_setAnimatorListenerWithASIWidget_withADAnimator_AnimatorListener_(w, new_ASViewImpl_AnimatorListener_initWithASIWidget_withNSString_withNSString_(w, strValue, @"onAnimationEnd"));
@@ -3979,7 +4026,7 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
         }
       }
       break;
-      case 50:
+      case 53:
       {
         if ([objValue isKindOfClass:[NSString class]]) {
           ASViewImpl_setAnimatorListenerWithASIWidget_withADAnimator_AnimatorListener_(w, new_ASViewImpl_AnimatorListener_initWithASIWidget_withNSString_withNSString_(w, strValue, @"onAnimationCancel"));
@@ -3989,7 +4036,7 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
         }
       }
       break;
-      case 51:
+      case 54:
       {
         if ([objValue isKindOfClass:[NSString class]]) {
           ASViewImpl_setAnimatorListenerWithASIWidget_withADAnimator_AnimatorListener_(w, new_ASViewImpl_AnimatorListener_initWithASIWidget_withNSString_withNSString_(w, strValue, @"onAnimationRepeat"));
@@ -3999,67 +4046,67 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
         }
       }
       break;
-      case 52:
+      case 55:
       {
         ASViewImpl_setLeftWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 53:
+      case 56:
       {
         ASViewImpl_setRightWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 54:
+      case 57:
       {
         ASViewImpl_setTopWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 55:
+      case 58:
       {
         ASViewImpl_setBottomWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 56:
+      case 59:
       {
         ASViewImpl_setIdWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
-      case 57:
+      case 60:
       {
         ASViewImpl_setModelSyncEventsWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
-      case 58:
+      case 61:
       {
         ASViewImpl_setModelParamWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
-      case 59:
+      case 62:
       {
         ASViewImpl_setModelPojoToUiWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
-      case 60:
+      case 63:
       {
         ASViewImpl_setModelUiToPojoWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
-      case 61:
+      case 64:
       {
         ASViewImpl_setModelPojoToUiParamsWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 62:
+      case 65:
       {
         ASViewImpl_refreshUiFromModelWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 63:
+      case 66:
       {
         ASViewImpl_setModelUiToPojoEventIdsWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 64:
+      case 67:
       {
         if ([JavaUtilMap_class_() isInstance:objValue]) {
           id<JavaUtilMap> data = ((id<JavaUtilMap>) cast_check(objValue, JavaUtilMap_class_()));
@@ -4078,251 +4125,251 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
         }
       }
       break;
-      case 65:
+      case 68:
       {
         ASViewImpl_notifyDataSetChangedWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 66:
+      case 69:
       {
         ASViewImpl_setBackgroundWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
-      case 67:
+      case 70:
       {
         ASViewImpl_setBackgroundRepeatWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
-      case 68:
+      case 71:
       {
         ASViewImpl_setOnClickWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
-      case 69:
+      case 72:
       {
         ASViewImpl_setOnTouchWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
-      case 70:
+      case 73:
       {
         ASViewImpl_setMinWidthWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 71:
+      case 74:
       {
         ASViewImpl_setMinHeightWithASIWidget_withId_(w, objValue);
       }
       break;
-      case 72:
-      {
-      }
-      break;
-      case 73:
-      {
-        ASViewImpl_setBackgroundTintWithASIWidget_withId_(w, objValue);
-      }
-      break;
-      case 74:
-      {
-        ASViewImpl_setBackgroundTintModeWithASIWidget_withId_(w, objValue);
-      }
-      break;
       case 75:
       {
-        ASViewImpl_setForegroundWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 76:
       {
-        ASViewImpl_setForegroundRepeatWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
+        ASViewImpl_setBackgroundTintWithASIWidget_withId_(w, objValue);
       }
       break;
       case 77:
       {
-        ASViewImpl_setForegroundTintWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setBackgroundTintModeWithASIWidget_withId_(w, objValue);
       }
       break;
       case 78:
       {
-        ASViewImpl_setForegroundTintModeWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setForegroundWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 79:
       {
-        ASViewImpl_setVisibilityWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+        ASViewImpl_setForegroundRepeatWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
       break;
       case 80:
       {
-        ASViewImpl_setAlphaWithId_withId_(nativeWidget, objValue);
+        ASViewImpl_setForegroundTintWithASIWidget_withId_(w, objValue);
       }
       break;
       case 81:
       {
-        ASViewImpl_setOnLongClickWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+        ASViewImpl_setForegroundTintModeWithASIWidget_withId_(w, objValue);
       }
       break;
       case 82:
       {
-        ASViewImpl_setLongClickableWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setVisibilityWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 83:
       {
-        ASViewImpl_setClickableWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+        ASViewImpl_setAlphaWithId_withId_(nativeWidget, objValue);
       }
       break;
       case 84:
       {
-        ASViewImpl_setTranslationXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setOnLongClickWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 85:
       {
-        ASViewImpl_setTranslationYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setLongClickableWithASIWidget_withId_(w, objValue);
       }
       break;
       case 86:
       {
-        ASViewImpl_setTranslationZWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setClickableWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 87:
       {
-        ASViewImpl_setRotationWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTranslationXWithASIWidget_withId_(w, objValue);
       }
       break;
       case 88:
       {
-        ASViewImpl_setRotationXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTranslationYWithASIWidget_withId_(w, objValue);
       }
       break;
       case 89:
       {
-        ASViewImpl_setRotationYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setTranslationZWithASIWidget_withId_(w, objValue);
       }
       break;
       case 90:
       {
-        ASViewImpl_setScaleXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setRotationWithASIWidget_withId_(w, objValue);
       }
       break;
       case 91:
       {
-        ASViewImpl_setScaleYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setRotationXWithASIWidget_withId_(w, objValue);
       }
       break;
       case 92:
       {
-        ASViewImpl_setTransformPivotXWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setRotationYWithASIWidget_withId_(w, objValue);
       }
       break;
       case 93:
       {
-        ASViewImpl_setTransformPivotYWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setScaleXWithASIWidget_withId_(w, objValue);
       }
       break;
       case 94:
       {
-        ASViewImpl_invalidateWithASIWidget_(w);
+        ASViewImpl_setScaleYWithASIWidget_withId_(w, objValue);
       }
       break;
       case 95:
       {
-        ASViewImpl_requestLayoutWithASIWidget_(w);
+        ASViewImpl_setTransformPivotXWithASIWidget_withId_(w, objValue);
       }
       break;
       case 96:
       {
-        ASViewImpl_setKeepScreenOnWithId_withId_(w, objValue);
+        ASViewImpl_setTransformPivotYWithASIWidget_withId_(w, objValue);
       }
       break;
       case 97:
       {
-        ASViewImpl_setLayoutDirectionWithASIWidget_withId_(w, objValue);
+        ASViewImpl_invalidateWithASIWidget_(w);
       }
       break;
       case 98:
       {
-        ASViewImpl_setTextDirectionWithASIWidget_withId_(w, objValue);
+        ASViewImpl_requestLayoutWithASIWidget_(w);
       }
       break;
       case 99:
       {
-        ASViewImpl_setTextAlignmentWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setKeepScreenOnWithId_withId_(w, objValue);
       }
       break;
       case 100:
       {
-        ASViewImpl_setOnDragWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+        ASViewImpl_setLayoutDirectionWithASIWidget_withId_(w, objValue);
       }
       break;
       case 101:
       {
-        ASViewImpl_setAsDragSourceWithASIWidget_withId_withId_(w, nativeWidget, objValue);
+        ASViewImpl_setTextDirectionWithASIWidget_withId_(w, objValue);
       }
       break;
       case 102:
       {
-        [((ADView *) nil_chk(view)) setEnabledWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+        ASViewImpl_setTextAlignmentWithASIWidget_withId_(w, objValue);
       }
       break;
       case 103:
       {
-        [((ADView *) nil_chk(view)) setDuplicateParentStateEnabledWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
+        ASViewImpl_setOnDragWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 104:
       {
-        [((ADView *) nil_chk(view)) setForegroundGravityWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
+        ASViewImpl_setAsDragSourceWithASIWidget_withId_withId_(w, nativeWidget, objValue);
       }
       break;
       case 105:
       {
-        ASViewImpl_setOnKeyWithASIWidget_withId_(w, objValue);
+        [((ADView *) nil_chk(view)) setEnabledWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
       }
       break;
       case 106:
       {
-        ASViewImpl_setLayerBorderWidthWithId_withId_(nativeWidget, objValue);
+        [((ADView *) nil_chk(view)) setDuplicateParentStateEnabledWithBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(objValue, [JavaLangBoolean class]))) booleanValue]];
       }
       break;
       case 107:
       {
-        ASViewImpl_setLayerBorderColorWithId_withId_(nativeWidget, objValue);
+        [((ADView *) nil_chk(view)) setForegroundGravityWithInt:[((JavaLangInteger *) nil_chk((JavaLangInteger *) cast_chk(objValue, [JavaLangInteger class]))) intValue]];
       }
       break;
       case 108:
       {
-        ASViewImpl_setLayerCornerRadiusWithId_withId_(nativeWidget, objValue);
+        ASViewImpl_setOnKeyWithASIWidget_withId_(w, objValue);
       }
       break;
       case 109:
       {
-        ASViewImpl_setLayerMasksToBoundsWithId_withId_(nativeWidget, objValue);
+        ASViewImpl_setLayerBorderWidthWithId_withId_(nativeWidget, objValue);
       }
       break;
       case 110:
       {
-        ASViewImpl_setZIndexWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setLayerBorderColorWithId_withId_(nativeWidget, objValue);
       }
       break;
       case 111:
       {
-        ASViewImpl_setElevationWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setLayerCornerRadiusWithId_withId_(nativeWidget, objValue);
       }
       break;
       case 112:
       {
-        ASViewImpl_setMaxWidthWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setLayerMasksToBoundsWithId_withId_(nativeWidget, objValue);
       }
       break;
       case 113:
       {
-        ASViewImpl_setMaxHeightWithASIWidget_withId_(w, objValue);
+        ASViewImpl_setZIndexWithASIWidget_withId_(w, objValue);
       }
       break;
       case 114:
+      {
+        ASViewImpl_setElevationWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 115:
+      {
+        ASViewImpl_setMaxWidthWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 116:
+      {
+        ASViewImpl_setMaxHeightWithASIWidget_withId_(w, objValue);
+      }
+      break;
+      case 117:
       {
         if ([objValue isKindOfClass:[NSString class]]) {
           ASViewImpl_setOnSwipeListenerWithASIWidget_withASSwipeHelper_SwipeListener_(w, new_ASViewImpl_SwipeListener_initWithASIWidget_withNSString_withNSString_(w, strValue, @"onSwiped"));
@@ -4332,7 +4379,7 @@ void ASViewImpl_setAttributeWithASIWidget_withId_withASWidgetAttribute_withNSStr
         }
       }
       break;
-      case 115:
+      case 118:
       {
         ASViewImpl_setOutsideTouchableWithASIWidget_withNSString_withId_withADView_(w, strValue, objValue, view);
       }
@@ -5306,15 +5353,16 @@ jboolean ASViewImpl_isRTLLayoutDirectionWithASIWidget_(id<ASIWidget> widget) {
 
 void ASViewImpl_drawableStateChangedWithASIWidget_(id<ASIWidget> w) {
   ASViewImpl_initialize();
-  [((id<ASIWidget>) nil_chk(w)) drawableStateChanged];
+  [((id<ASIWidget>) nil_chk(w)) storeInTempCacheWithNSString:@"stateChange" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
+  [w drawableStateChanged];
   ADView *view = (ADView *) cast_chk([w asWidget], [ADView class]);
   ADDrawable *background = [((ADView *) nil_chk(view)) getBackground];
   if (background != nil && [background isStateful] && [background setStateWithIntArray:[view getDrawableState]]) {
-    ASViewImpl_setBackgroundWithASIWidget_withId_withId_withBoolean_(w, [w asNativeWidget], background, true);
+    [w setAttributeWithNSString:@"background" withId:background withBoolean:true];
   }
   ADDrawable *foreground = [view getForeground];
   if (foreground != nil && [foreground isStateful] && [foreground setStateWithIntArray:[view getDrawableState]]) {
-    ASViewImpl_setForegroundWithASIWidget_withId_withId_(w, [w asNativeWidget], foreground);
+    [w setAttributeWithNSString:@"foreground" withId:foreground withBoolean:true];
   }
   if ([view getBackgroundTintList] != nil && [((ADColorStateList *) nil_chk([view getBackgroundTintList])) isStateful]) {
     ASViewImpl_setBackgroundTintWithASIWidget_withId_(w, [view getBackgroundTintList]);
@@ -5324,6 +5372,7 @@ void ASViewImpl_drawableStateChangedWithASIWidget_(id<ASIWidget> w) {
     ASViewImpl_setForegroundTintWithASIWidget_withId_(w, [view getForegroundTintList]);
     [w invalidate];
   }
+  [w storeInTempCacheWithNSString:@"stateChange" withId:nil];
 }
 
 id ASViewImpl_getColorWithId_(id objValue) {
@@ -5957,6 +6006,9 @@ jboolean ASViewImpl_isRTLLayout() {
 
 void ASViewImpl_setBgOnControlWithASIWidget_withId_withId_(id<ASIWidget> w, id uiview, id objValue) {
   ASViewImpl_initialize();
+  if ([objValue isKindOfClass:[ADColorStateList class]]) {
+    objValue = JavaLangInteger_valueOfWithInt_([((ADColorStateList *) nil_chk(((ADColorStateList *) objValue))) getColorForStateWithIntArray:[((ADView *) nil_chk(((ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class])))) getDrawableState] withInt:ADColor_TRANSPARENT]);
+  }
   if (ASViewImpl_isColorWithId_(objValue) || [objValue isKindOfClass:[JavaLangInteger class]]) {
     if ([objValue isKindOfClass:[JavaLangInteger class]]) {
       objValue = ASViewImpl_getColorWithId_(objValue);
@@ -5977,12 +6029,7 @@ void ASViewImpl_setBgOnControlWithASIWidget_withId_withId_(id<ASIWidget> w, id u
   }
 }
 
-void ASViewImpl_setBackgroundWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
-  ASViewImpl_initialize();
-  ASViewImpl_setBackgroundWithASIWidget_withId_withId_withBoolean_(w, [((id<ASIWidget>) nil_chk(w)) asNativeWidget], objValue, false);
-}
-
-void ASViewImpl_setBackgroundWithASIWidget_withId_withId_withBoolean_(id<ASIWidget> w, id nativeView, id objValue, jboolean stateChange) {
+void ASViewImpl_setBackgroundWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeView, id objValue) {
   ASViewImpl_initialize();
   if ([objValue isKindOfClass:[ADDrawable class]]) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADView class]);
@@ -6590,6 +6637,33 @@ void ASViewImpl_updateBoundsXWithId_withInt_(id objview, jint x) {
 void ASViewImpl_translateWithAnimationWithId_withInt_withInt_withInt_withASViewImpl_AnimationCallBack_(id objview, jint x, jint y, jint animationDurationInMs, id<ASViewImpl_AnimationCallBack> callBack) {
   ASViewImpl_initialize();
   ASViewImpl_AnimationUtils_nativeAnimateWithInt_withInt_withInt_(new_ASViewImpl_AnimationUtils_initWithId_withASViewImpl_AnimationCallBack_(objview, callBack), x, y, animationDurationInMs);
+}
+
+void ASViewImpl_setOutlineSpotShadowColorWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+  ASViewImpl_initialize();
+  ASViewImpl_setShadowColorWithId_withId_([((id<ASIWidget>) nil_chk(w)) asNativeWidget], objValue);
+}
+
+void ASViewImpl_setOutlineAmbientShadowColorWithASIWidget_withId_(id<ASIWidget> w, id objValue) {
+  ASViewImpl_initialize();
+  ASViewImpl_setShadowColorWithId_withId_([((id<ASIWidget>) nil_chk(w)) asNativeWidget], objValue);
+}
+
+void ASViewImpl_setShadowColorWithId_withId_(id view, id color) {
+  ASViewImpl_initialize();
+  ((UIView*)view).layer.shadowColor = ((UIColor*)color).CGColor;
+}
+
+void ASViewImpl_setCornerRadiusWithASIWidget_withId_withId_(id<ASIWidget> w, id nativeWidget, id objValue) {
+  ASViewImpl_initialize();
+  jfloat radius = [((NSNumber *) nil_chk(((NSNumber *) cast_chk(objValue, [NSNumber class])))) floatValue];
+  ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(nativeWidget, radius);
+}
+
+void ASViewImpl_setCornerRadiusOnViewWithId_withFloat_(id view, jfloat radius) {
+  ASViewImpl_initialize();
+  ((UIView*)view).layer.cornerRadius = radius;
+  ((UIView*)view).clipsToBounds = YES;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl)
@@ -9461,3791 +9535,6 @@ ASViewImpl_SwipeListener *create_ASViewImpl_SwipeListener_initWithASIWidget_with
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_SwipeListener)
-
-@implementation ASViewImpl_ViewCommandBuilder
-
-- (id)executeWithBoolean:(jboolean)set {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (id)reset {
-  orderGet_ = 0;
-  orderSet_ = 0;
-  command_ = new_JavaUtilHashMap_init();
-  return self;
-}
-
-- (id<JavaUtilMap>)initCommandWithNSString:(NSString *)attributeName {
-  id<JavaUtilMap> attrs = (id<JavaUtilMap>) cast_check([((id<JavaUtilMap>) nil_chk(command_)) getWithId:attributeName], JavaUtilMap_class_());
-  if (attrs == nil) {
-    attrs = new_JavaUtilHashMap_init();
-    (void) [((id<JavaUtilMap>) nil_chk(command_)) putWithId:attributeName withId:attrs];
-  }
-  return attrs;
-}
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  ASViewImpl_ViewCommandBuilder_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-- (id)tryGetIosBackgroundColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosBackgroundColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosBackgroundColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosBackgroundColor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosBackgroundColorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosBackgroundColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetIosIsHidden {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsHidden"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosIsHidden {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsHidden"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosIsHiddenWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsHidden"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosAlpha {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAlpha"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosAlpha {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAlpha"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosAlphaWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAlpha"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (id)tryGetIosIsOpaque {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsOpaque"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosIsOpaque {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsOpaque"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosIsOpaqueWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsOpaque"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosTintColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosTintColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosTintColor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosTintColor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosTintColorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosTintColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetIosClipsToBounds {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosClipsToBounds"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosClipsToBounds {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosClipsToBounds"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosClipsToBoundsWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosClipsToBounds"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosClearsContextBeforeDrawing {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosClearsContextBeforeDrawing"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosClearsContextBeforeDrawing {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosClearsContextBeforeDrawing"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosClearsContextBeforeDrawingWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosClearsContextBeforeDrawing"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosIsUserInteractionEnabled {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsUserInteractionEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosIsUserInteractionEnabled {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsUserInteractionEnabled"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosIsUserInteractionEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsUserInteractionEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosIsMultipleTouchEnabled {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsMultipleTouchEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosIsMultipleTouchEnabled {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsMultipleTouchEnabled"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosIsMultipleTouchEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsMultipleTouchEnabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosIsExclusiveTouch {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsExclusiveTouch"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosIsExclusiveTouch {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsExclusiveTouch"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosIsExclusiveTouchWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsExclusiveTouch"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosPreservesSuperviewLayoutMargins {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosPreservesSuperviewLayoutMargins"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosPreservesSuperviewLayoutMargins {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosPreservesSuperviewLayoutMargins"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosPreservesSuperviewLayoutMarginsWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosPreservesSuperviewLayoutMargins"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosInsetsLayoutMarginsFromSafeArea {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosInsetsLayoutMarginsFromSafeArea"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosInsetsLayoutMarginsFromSafeArea {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosInsetsLayoutMarginsFromSafeArea"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosInsetsLayoutMarginsFromSafeAreaWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosInsetsLayoutMarginsFromSafeArea"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosAutoresizesSubviews {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAutoresizesSubviews"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosAutoresizesSubviews {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAutoresizesSubviews"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosAutoresizesSubviewsWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAutoresizesSubviews"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosTranslatesAutoresizingMaskIntoConstraints {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosTranslatesAutoresizingMaskIntoConstraints"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosTranslatesAutoresizingMaskIntoConstraints {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosTranslatesAutoresizingMaskIntoConstraints"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosTranslatesAutoresizingMaskIntoConstraintsWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosTranslatesAutoresizingMaskIntoConstraints"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosContentScaleFactor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosContentScaleFactor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosContentScaleFactor {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosContentScaleFactor"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosContentScaleFactorWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosContentScaleFactor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (id)tryGetIosIsFocused {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsFocused"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosIsFocused {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsFocused"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)tryGetIosRestorationIdentifier {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosRestorationIdentifier"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosRestorationIdentifier {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosRestorationIdentifier"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosRestorationIdentifierWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosRestorationIdentifier"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetIosTag {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosTag"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosTag {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosTag"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosTagWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosTag"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (id)tryGetIosAccessibilityIgnoresInvertColors {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityIgnoresInvertColors"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosAccessibilityIgnoresInvertColors {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityIgnoresInvertColors"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosAccessibilityIgnoresInvertColorsWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityIgnoresInvertColors"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosLargeContentImage {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosLargeContentImage"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosLargeContentImage {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosLargeContentImage"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosLargeContentImageWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosLargeContentImage"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetIosLargeContentTitle {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosLargeContentTitle"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosLargeContentTitle {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosLargeContentTitle"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosLargeContentTitleWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosLargeContentTitle"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetIosScalesLargeContentImage {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosScalesLargeContentImage"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosScalesLargeContentImage {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosScalesLargeContentImage"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosScalesLargeContentImageWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosScalesLargeContentImage"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosShowsLargeContentViewer {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosShowsLargeContentViewer"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosShowsLargeContentViewer {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosShowsLargeContentViewer"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosShowsLargeContentViewerWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosShowsLargeContentViewer"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosIsAccessibilityElement {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsAccessibilityElement"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isIosIsAccessibilityElement {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsAccessibilityElement"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosIsAccessibilityElementWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsAccessibilityElement"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetFocusable {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsAccessibilityElement"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getFocusable {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosIsAccessibilityElement"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setFocusableWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"focusable"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetIosAccessibilityLabel {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityLabel"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosAccessibilityLabel {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityLabel"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosAccessibilityLabelWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityLabel"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetIosAccessibilityHint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityHint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosAccessibilityHint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityHint"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosAccessibilityHintWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityHint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetContentDescription {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityHint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getContentDescription {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityHint"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setContentDescriptionWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"contentDescription"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetIosAccessibilityValue {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityValue"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosAccessibilityValue {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityValue"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosAccessibilityValueWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityValue"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetIosAccessibilityTraits {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityTraits"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getIosAccessibilityTraits {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityTraits"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIosAccessibilityTraitsWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosAccessibilityTraits"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetSelected {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"selected"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isSelected {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"selected"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setSelectedWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"selected"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)setStyleWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"style"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setErrorStyleWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"errorStyle"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetValidateForm {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"validateForm_"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getValidateForm {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"validateForm_"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)validateFormWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"validateForm"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setValidationWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"validation"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setV_requiredWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"v_required"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setV_minlengthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"v_minlength"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setV_maxlengthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"v_maxlength"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setV_minWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"v_min"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setV_maxWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"v_max"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setV_patternWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"v_pattern"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setV_typeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"v_type"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setValidationErrorDisplayTypeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"validationErrorDisplayType"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setCustomErrorMessageValuesWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"customErrorMessageValues"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setCustomErrorMessageKeysWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"customErrorMessageKeys"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setInvalidateOnFrameChangeWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"invalidateOnFrameChange"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)animatorXmlWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"animatorXml"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)startAnimator {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"startAnimator"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  return self;
-}
-
-- (id)endAnimator {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"endAnimator"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  return self;
-}
-
-- (id)setOnAnimationStartWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onAnimationStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setOnAnimationEndWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onAnimationEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setOnAnimationCancelWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onAnimationCancel"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setOnAnimationRepeatWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onAnimationRepeat"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetLeft {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"left"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLeft {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"left"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"left"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetRight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"right"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getRight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"right"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"right"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetTop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"top"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"top"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setTopWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"top"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"bottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"bottom"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setBottomWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"bottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetId {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"id"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getId {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"id"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setIdWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"id"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetModelSyncEvents {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelSyncEvents"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getModelSyncEvents {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelSyncEvents"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setModelSyncEventsWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelSyncEvents"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetModelParam {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelParam"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getModelParam {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelParam"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setModelParamWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelParam"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetModelPojoToUi {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelPojoToUi"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getModelPojoToUi {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelPojoToUi"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setModelPojoToUiWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelPojoToUi"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetModelUiToPojo {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelUiToPojo"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getModelUiToPojo {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelUiToPojo"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setModelUiToPojoWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelUiToPojo"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setModelPojoToUiParamsWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelPojoToUiParams"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)refreshUiFromModelWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"refreshUiFromModel"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setModelUiToPojoEventIdsWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"modelUiToPojoEventIds"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)updateModelDataWithNSString:(NSString *)expression
-                           withId:(id)payload {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"updateModelData"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  id<JavaUtilMap> wrapper = new_JavaUtilHashMap_init();
-  (void) [wrapper putWithId:@"expression" withId:expression];
-  (void) [wrapper putWithId:@"payload" withId:payload];
-  (void) [attrs putWithId:@"value" withId:wrapper];
-  return self;
-}
-
-- (id)notifyDataSetChangedWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"notifyDataSetChanged"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetBackground {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"background"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getBackground {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"background"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setBackgroundWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"background"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setBackgroundRepeatWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"backgroundRepeat"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setOnClickWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onClick"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setOnTouchWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onTouch"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetMinWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMinWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setMinWidthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetMinHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMinHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setMinHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"minHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setAttributeUnderTestWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"attributeUnderTest"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetBackgroundTint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"backgroundTint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getBackgroundTint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"backgroundTint"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setBackgroundTintWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"backgroundTint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetBackgroundTintMode {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"backgroundTintMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getBackgroundTintMode {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"backgroundTintMode"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setBackgroundTintModeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"backgroundTintMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetForeground {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foreground"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getForeground {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foreground"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setForegroundWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foreground"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setForegroundRepeatWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundRepeat"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetForegroundTint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundTint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getForegroundTint {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundTint"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setForegroundTintWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundTint"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetForegroundTintMode {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundTintMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getForegroundTintMode {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundTintMode"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setForegroundTintModeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundTintMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetVisibility {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"visibility"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getVisibility {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"visibility"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setVisibilityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"visibility"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetAlpha {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"alpha"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getAlpha {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"alpha"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setAlphaWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"alpha"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (id)setOnLongClickWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onLongClick"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetLongClickable {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"longClickable"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isLongClickable {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"longClickable"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setLongClickableWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"longClickable"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetClickable {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"clickable"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isClickable {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"clickable"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setClickableWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"clickable"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetTranslationX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"translationX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTranslationX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"translationX"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setTranslationXWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"translationX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetTranslationY {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"translationY"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTranslationY {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"translationY"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setTranslationYWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"translationY"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetTranslationZ {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"translationZ"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTranslationZ {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"translationZ"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setTranslationZWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"translationZ"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetRotation {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"rotation"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getRotation {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"rotation"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setRotationWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"rotation"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (id)tryGetRotationX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"rotationX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getRotationX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"rotationX"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setRotationXWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"rotationX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (id)tryGetRotationY {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"rotationY"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getRotationY {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"rotationY"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setRotationYWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"rotationY"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (id)tryGetScaleX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scaleX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getScaleX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scaleX"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setScaleXWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scaleX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (id)tryGetScaleY {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scaleY"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getScaleY {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scaleY"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setScaleYWithFloat:(jfloat)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"scaleY"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangFloat_valueOfWithFloat_(value)];
-  return self;
-}
-
-- (id)tryGetTransformPivotX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"transformPivotX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTransformPivotX {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"transformPivotX"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setTransformPivotXWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"transformPivotX"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetTransformPivotY {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"transformPivotY"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTransformPivotY {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"transformPivotY"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setTransformPivotYWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"transformPivotY"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)invalidate {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"invalidate"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  return self;
-}
-
-- (id)requestLayout {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"requestLayout"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  return self;
-}
-
-- (id)tryGetKeepScreenOn {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"keepScreenOn"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isKeepScreenOn {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"keepScreenOn"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setKeepScreenOnWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"keepScreenOn"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetLayoutDirection {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layoutDirection"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutDirection {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layoutDirection"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setLayoutDirectionWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layoutDirection"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetTextDirection {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textDirection"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTextDirection {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textDirection"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setTextDirectionWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textDirection"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetTextAlignment {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textAlignment"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getTextAlignment {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textAlignment"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setTextAlignmentWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"textAlignment"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setOnDragWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onDrag"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setAsDragSourceWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"asDragSource"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetEnabled {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"enabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isEnabled {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"enabled"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setEnabledWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"enabled"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetDuplicateParentState {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"duplicateParentState"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isDuplicateParentState {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"duplicateParentState"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setDuplicateParentStateWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"duplicateParentState"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetForegroundGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundGravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getForegroundGravity {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundGravity"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setForegroundGravityWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"foregroundGravity"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setOnKeyWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onKey"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setIosLayerBorderWidthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosLayerBorderWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setIosLayerBorderColorWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosLayerBorderColor"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setIosLayerCornerRadiusWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosLayerCornerRadius"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setIosLayerMasksToBoundsWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"iosLayerMasksToBounds"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)setZIndexWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"zIndex"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (id)setElevationWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"elevation"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetMaxWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxWidth {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setMaxWidthWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxWidth"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetMaxHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getMaxHeight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setMaxHeightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"maxHeight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setOnSwipedWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onSwiped"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setOutsideTouchableWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"outsideTouchable"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, "LNSObject;", 0x404, 0, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x1, 4, 5, -1, 6, -1, -1 },
-    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 7, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 9, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 10, 11, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 13, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 14, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 15, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 16, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 17, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 18, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 19, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 20, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 21, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 22, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 23, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 24, 11, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 25, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 26, 27, -1, 28, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 29, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 30, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 31, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 32, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 33, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 34, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 35, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 36, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 37, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 38, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 39, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 40, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 41, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 42, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 43, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 44, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 45, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 46, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 47, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 48, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 49, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 50, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 51, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 52, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 53, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 54, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 55, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 56, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 57, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 58, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 59, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 60, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 61, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 62, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 63, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 64, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 65, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 66, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 67, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 68, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 69, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 70, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 71, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 72, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 73, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 74, 75, -1, 76, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 77, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 78, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 79, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 80, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 81, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 82, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 83, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 84, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 85, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 86, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 87, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 88, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 89, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 90, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 91, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 92, 11, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 93, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 94, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 95, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 96, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 97, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 98, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 99, 11, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 100, 11, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 101, 11, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 102, 11, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 103, 11, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 104, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 105, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 106, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 107, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 108, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 109, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 110, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 111, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 112, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 113, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 114, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 115, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 116, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 117, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 118, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 119, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 120, 27, -1, 28, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 121, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 122, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 3, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 123, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 124, 5, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 125, 1, -1, 2, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(executeWithBoolean:);
-  methods[1].selector = @selector(reset);
-  methods[2].selector = @selector(initCommandWithNSString:);
-  methods[3].selector = @selector(init);
-  methods[4].selector = @selector(tryGetIosBackgroundColor);
-  methods[5].selector = @selector(getIosBackgroundColor);
-  methods[6].selector = @selector(setIosBackgroundColorWithNSString:);
-  methods[7].selector = @selector(tryGetIosIsHidden);
-  methods[8].selector = @selector(isIosIsHidden);
-  methods[9].selector = @selector(setIosIsHiddenWithBoolean:);
-  methods[10].selector = @selector(tryGetIosAlpha);
-  methods[11].selector = @selector(getIosAlpha);
-  methods[12].selector = @selector(setIosAlphaWithFloat:);
-  methods[13].selector = @selector(tryGetIosIsOpaque);
-  methods[14].selector = @selector(isIosIsOpaque);
-  methods[15].selector = @selector(setIosIsOpaqueWithBoolean:);
-  methods[16].selector = @selector(tryGetIosTintColor);
-  methods[17].selector = @selector(getIosTintColor);
-  methods[18].selector = @selector(setIosTintColorWithNSString:);
-  methods[19].selector = @selector(tryGetIosClipsToBounds);
-  methods[20].selector = @selector(isIosClipsToBounds);
-  methods[21].selector = @selector(setIosClipsToBoundsWithBoolean:);
-  methods[22].selector = @selector(tryGetIosClearsContextBeforeDrawing);
-  methods[23].selector = @selector(isIosClearsContextBeforeDrawing);
-  methods[24].selector = @selector(setIosClearsContextBeforeDrawingWithBoolean:);
-  methods[25].selector = @selector(tryGetIosIsUserInteractionEnabled);
-  methods[26].selector = @selector(isIosIsUserInteractionEnabled);
-  methods[27].selector = @selector(setIosIsUserInteractionEnabledWithBoolean:);
-  methods[28].selector = @selector(tryGetIosIsMultipleTouchEnabled);
-  methods[29].selector = @selector(isIosIsMultipleTouchEnabled);
-  methods[30].selector = @selector(setIosIsMultipleTouchEnabledWithBoolean:);
-  methods[31].selector = @selector(tryGetIosIsExclusiveTouch);
-  methods[32].selector = @selector(isIosIsExclusiveTouch);
-  methods[33].selector = @selector(setIosIsExclusiveTouchWithBoolean:);
-  methods[34].selector = @selector(tryGetIosPreservesSuperviewLayoutMargins);
-  methods[35].selector = @selector(isIosPreservesSuperviewLayoutMargins);
-  methods[36].selector = @selector(setIosPreservesSuperviewLayoutMarginsWithBoolean:);
-  methods[37].selector = @selector(tryGetIosInsetsLayoutMarginsFromSafeArea);
-  methods[38].selector = @selector(isIosInsetsLayoutMarginsFromSafeArea);
-  methods[39].selector = @selector(setIosInsetsLayoutMarginsFromSafeAreaWithBoolean:);
-  methods[40].selector = @selector(tryGetIosAutoresizesSubviews);
-  methods[41].selector = @selector(isIosAutoresizesSubviews);
-  methods[42].selector = @selector(setIosAutoresizesSubviewsWithBoolean:);
-  methods[43].selector = @selector(tryGetIosTranslatesAutoresizingMaskIntoConstraints);
-  methods[44].selector = @selector(isIosTranslatesAutoresizingMaskIntoConstraints);
-  methods[45].selector = @selector(setIosTranslatesAutoresizingMaskIntoConstraintsWithBoolean:);
-  methods[46].selector = @selector(tryGetIosContentScaleFactor);
-  methods[47].selector = @selector(getIosContentScaleFactor);
-  methods[48].selector = @selector(setIosContentScaleFactorWithFloat:);
-  methods[49].selector = @selector(tryGetIosIsFocused);
-  methods[50].selector = @selector(isIosIsFocused);
-  methods[51].selector = @selector(tryGetIosRestorationIdentifier);
-  methods[52].selector = @selector(getIosRestorationIdentifier);
-  methods[53].selector = @selector(setIosRestorationIdentifierWithNSString:);
-  methods[54].selector = @selector(tryGetIosTag);
-  methods[55].selector = @selector(getIosTag);
-  methods[56].selector = @selector(setIosTagWithInt:);
-  methods[57].selector = @selector(tryGetIosAccessibilityIgnoresInvertColors);
-  methods[58].selector = @selector(isIosAccessibilityIgnoresInvertColors);
-  methods[59].selector = @selector(setIosAccessibilityIgnoresInvertColorsWithBoolean:);
-  methods[60].selector = @selector(tryGetIosLargeContentImage);
-  methods[61].selector = @selector(getIosLargeContentImage);
-  methods[62].selector = @selector(setIosLargeContentImageWithNSString:);
-  methods[63].selector = @selector(tryGetIosLargeContentTitle);
-  methods[64].selector = @selector(getIosLargeContentTitle);
-  methods[65].selector = @selector(setIosLargeContentTitleWithNSString:);
-  methods[66].selector = @selector(tryGetIosScalesLargeContentImage);
-  methods[67].selector = @selector(isIosScalesLargeContentImage);
-  methods[68].selector = @selector(setIosScalesLargeContentImageWithBoolean:);
-  methods[69].selector = @selector(tryGetIosShowsLargeContentViewer);
-  methods[70].selector = @selector(isIosShowsLargeContentViewer);
-  methods[71].selector = @selector(setIosShowsLargeContentViewerWithBoolean:);
-  methods[72].selector = @selector(tryGetIosIsAccessibilityElement);
-  methods[73].selector = @selector(isIosIsAccessibilityElement);
-  methods[74].selector = @selector(setIosIsAccessibilityElementWithBoolean:);
-  methods[75].selector = @selector(tryGetFocusable);
-  methods[76].selector = @selector(getFocusable);
-  methods[77].selector = @selector(setFocusableWithBoolean:);
-  methods[78].selector = @selector(tryGetIosAccessibilityLabel);
-  methods[79].selector = @selector(getIosAccessibilityLabel);
-  methods[80].selector = @selector(setIosAccessibilityLabelWithNSString:);
-  methods[81].selector = @selector(tryGetIosAccessibilityHint);
-  methods[82].selector = @selector(getIosAccessibilityHint);
-  methods[83].selector = @selector(setIosAccessibilityHintWithNSString:);
-  methods[84].selector = @selector(tryGetContentDescription);
-  methods[85].selector = @selector(getContentDescription);
-  methods[86].selector = @selector(setContentDescriptionWithNSString:);
-  methods[87].selector = @selector(tryGetIosAccessibilityValue);
-  methods[88].selector = @selector(getIosAccessibilityValue);
-  methods[89].selector = @selector(setIosAccessibilityValueWithNSString:);
-  methods[90].selector = @selector(tryGetIosAccessibilityTraits);
-  methods[91].selector = @selector(getIosAccessibilityTraits);
-  methods[92].selector = @selector(setIosAccessibilityTraitsWithNSString:);
-  methods[93].selector = @selector(tryGetSelected);
-  methods[94].selector = @selector(isSelected);
-  methods[95].selector = @selector(setSelectedWithBoolean:);
-  methods[96].selector = @selector(setStyleWithNSString:);
-  methods[97].selector = @selector(setErrorStyleWithNSString:);
-  methods[98].selector = @selector(tryGetValidateForm);
-  methods[99].selector = @selector(getValidateForm);
-  methods[100].selector = @selector(validateFormWithNSString:);
-  methods[101].selector = @selector(setValidationWithNSString:);
-  methods[102].selector = @selector(setV_requiredWithNSString:);
-  methods[103].selector = @selector(setV_minlengthWithNSString:);
-  methods[104].selector = @selector(setV_maxlengthWithNSString:);
-  methods[105].selector = @selector(setV_minWithNSString:);
-  methods[106].selector = @selector(setV_maxWithNSString:);
-  methods[107].selector = @selector(setV_patternWithNSString:);
-  methods[108].selector = @selector(setV_typeWithNSString:);
-  methods[109].selector = @selector(setValidationErrorDisplayTypeWithNSString:);
-  methods[110].selector = @selector(setCustomErrorMessageValuesWithNSString:);
-  methods[111].selector = @selector(setCustomErrorMessageKeysWithNSString:);
-  methods[112].selector = @selector(setInvalidateOnFrameChangeWithBoolean:);
-  methods[113].selector = @selector(animatorXmlWithNSString:);
-  methods[114].selector = @selector(startAnimator);
-  methods[115].selector = @selector(endAnimator);
-  methods[116].selector = @selector(setOnAnimationStartWithNSString:);
-  methods[117].selector = @selector(setOnAnimationEndWithNSString:);
-  methods[118].selector = @selector(setOnAnimationCancelWithNSString:);
-  methods[119].selector = @selector(setOnAnimationRepeatWithNSString:);
-  methods[120].selector = @selector(tryGetLeft);
-  methods[121].selector = @selector(getLeft);
-  methods[122].selector = @selector(setLeftWithNSString:);
-  methods[123].selector = @selector(tryGetRight);
-  methods[124].selector = @selector(getRight);
-  methods[125].selector = @selector(setRightWithNSString:);
-  methods[126].selector = @selector(tryGetTop);
-  methods[127].selector = @selector(getTop);
-  methods[128].selector = @selector(setTopWithNSString:);
-  methods[129].selector = @selector(tryGetBottom);
-  methods[130].selector = @selector(getBottom);
-  methods[131].selector = @selector(setBottomWithNSString:);
-  methods[132].selector = @selector(tryGetId);
-  methods[133].selector = @selector(getId);
-  methods[134].selector = @selector(setIdWithNSString:);
-  methods[135].selector = @selector(tryGetModelSyncEvents);
-  methods[136].selector = @selector(getModelSyncEvents);
-  methods[137].selector = @selector(setModelSyncEventsWithNSString:);
-  methods[138].selector = @selector(tryGetModelParam);
-  methods[139].selector = @selector(getModelParam);
-  methods[140].selector = @selector(setModelParamWithNSString:);
-  methods[141].selector = @selector(tryGetModelPojoToUi);
-  methods[142].selector = @selector(getModelPojoToUi);
-  methods[143].selector = @selector(setModelPojoToUiWithNSString:);
-  methods[144].selector = @selector(tryGetModelUiToPojo);
-  methods[145].selector = @selector(getModelUiToPojo);
-  methods[146].selector = @selector(setModelUiToPojoWithNSString:);
-  methods[147].selector = @selector(setModelPojoToUiParamsWithNSString:);
-  methods[148].selector = @selector(refreshUiFromModelWithNSString:);
-  methods[149].selector = @selector(setModelUiToPojoEventIdsWithNSString:);
-  methods[150].selector = @selector(updateModelDataWithNSString:withId:);
-  methods[151].selector = @selector(notifyDataSetChangedWithBoolean:);
-  methods[152].selector = @selector(tryGetBackground);
-  methods[153].selector = @selector(getBackground);
-  methods[154].selector = @selector(setBackgroundWithNSString:);
-  methods[155].selector = @selector(setBackgroundRepeatWithNSString:);
-  methods[156].selector = @selector(setOnClickWithNSString:);
-  methods[157].selector = @selector(setOnTouchWithNSString:);
-  methods[158].selector = @selector(tryGetMinWidth);
-  methods[159].selector = @selector(getMinWidth);
-  methods[160].selector = @selector(setMinWidthWithNSString:);
-  methods[161].selector = @selector(tryGetMinHeight);
-  methods[162].selector = @selector(getMinHeight);
-  methods[163].selector = @selector(setMinHeightWithNSString:);
-  methods[164].selector = @selector(setAttributeUnderTestWithNSString:);
-  methods[165].selector = @selector(tryGetBackgroundTint);
-  methods[166].selector = @selector(getBackgroundTint);
-  methods[167].selector = @selector(setBackgroundTintWithNSString:);
-  methods[168].selector = @selector(tryGetBackgroundTintMode);
-  methods[169].selector = @selector(getBackgroundTintMode);
-  methods[170].selector = @selector(setBackgroundTintModeWithNSString:);
-  methods[171].selector = @selector(tryGetForeground);
-  methods[172].selector = @selector(getForeground);
-  methods[173].selector = @selector(setForegroundWithNSString:);
-  methods[174].selector = @selector(setForegroundRepeatWithNSString:);
-  methods[175].selector = @selector(tryGetForegroundTint);
-  methods[176].selector = @selector(getForegroundTint);
-  methods[177].selector = @selector(setForegroundTintWithNSString:);
-  methods[178].selector = @selector(tryGetForegroundTintMode);
-  methods[179].selector = @selector(getForegroundTintMode);
-  methods[180].selector = @selector(setForegroundTintModeWithNSString:);
-  methods[181].selector = @selector(tryGetVisibility);
-  methods[182].selector = @selector(getVisibility);
-  methods[183].selector = @selector(setVisibilityWithNSString:);
-  methods[184].selector = @selector(tryGetAlpha);
-  methods[185].selector = @selector(getAlpha);
-  methods[186].selector = @selector(setAlphaWithFloat:);
-  methods[187].selector = @selector(setOnLongClickWithNSString:);
-  methods[188].selector = @selector(tryGetLongClickable);
-  methods[189].selector = @selector(isLongClickable);
-  methods[190].selector = @selector(setLongClickableWithBoolean:);
-  methods[191].selector = @selector(tryGetClickable);
-  methods[192].selector = @selector(isClickable);
-  methods[193].selector = @selector(setClickableWithBoolean:);
-  methods[194].selector = @selector(tryGetTranslationX);
-  methods[195].selector = @selector(getTranslationX);
-  methods[196].selector = @selector(setTranslationXWithNSString:);
-  methods[197].selector = @selector(tryGetTranslationY);
-  methods[198].selector = @selector(getTranslationY);
-  methods[199].selector = @selector(setTranslationYWithNSString:);
-  methods[200].selector = @selector(tryGetTranslationZ);
-  methods[201].selector = @selector(getTranslationZ);
-  methods[202].selector = @selector(setTranslationZWithNSString:);
-  methods[203].selector = @selector(tryGetRotation);
-  methods[204].selector = @selector(getRotation);
-  methods[205].selector = @selector(setRotationWithFloat:);
-  methods[206].selector = @selector(tryGetRotationX);
-  methods[207].selector = @selector(getRotationX);
-  methods[208].selector = @selector(setRotationXWithFloat:);
-  methods[209].selector = @selector(tryGetRotationY);
-  methods[210].selector = @selector(getRotationY);
-  methods[211].selector = @selector(setRotationYWithFloat:);
-  methods[212].selector = @selector(tryGetScaleX);
-  methods[213].selector = @selector(getScaleX);
-  methods[214].selector = @selector(setScaleXWithFloat:);
-  methods[215].selector = @selector(tryGetScaleY);
-  methods[216].selector = @selector(getScaleY);
-  methods[217].selector = @selector(setScaleYWithFloat:);
-  methods[218].selector = @selector(tryGetTransformPivotX);
-  methods[219].selector = @selector(getTransformPivotX);
-  methods[220].selector = @selector(setTransformPivotXWithNSString:);
-  methods[221].selector = @selector(tryGetTransformPivotY);
-  methods[222].selector = @selector(getTransformPivotY);
-  methods[223].selector = @selector(setTransformPivotYWithNSString:);
-  methods[224].selector = @selector(invalidate);
-  methods[225].selector = @selector(requestLayout);
-  methods[226].selector = @selector(tryGetKeepScreenOn);
-  methods[227].selector = @selector(isKeepScreenOn);
-  methods[228].selector = @selector(setKeepScreenOnWithBoolean:);
-  methods[229].selector = @selector(tryGetLayoutDirection);
-  methods[230].selector = @selector(getLayoutDirection);
-  methods[231].selector = @selector(setLayoutDirectionWithNSString:);
-  methods[232].selector = @selector(tryGetTextDirection);
-  methods[233].selector = @selector(getTextDirection);
-  methods[234].selector = @selector(setTextDirectionWithNSString:);
-  methods[235].selector = @selector(tryGetTextAlignment);
-  methods[236].selector = @selector(getTextAlignment);
-  methods[237].selector = @selector(setTextAlignmentWithNSString:);
-  methods[238].selector = @selector(setOnDragWithNSString:);
-  methods[239].selector = @selector(setAsDragSourceWithNSString:);
-  methods[240].selector = @selector(tryGetEnabled);
-  methods[241].selector = @selector(isEnabled);
-  methods[242].selector = @selector(setEnabledWithBoolean:);
-  methods[243].selector = @selector(tryGetDuplicateParentState);
-  methods[244].selector = @selector(isDuplicateParentState);
-  methods[245].selector = @selector(setDuplicateParentStateWithBoolean:);
-  methods[246].selector = @selector(tryGetForegroundGravity);
-  methods[247].selector = @selector(getForegroundGravity);
-  methods[248].selector = @selector(setForegroundGravityWithNSString:);
-  methods[249].selector = @selector(setOnKeyWithNSString:);
-  methods[250].selector = @selector(setIosLayerBorderWidthWithNSString:);
-  methods[251].selector = @selector(setIosLayerBorderColorWithNSString:);
-  methods[252].selector = @selector(setIosLayerCornerRadiusWithNSString:);
-  methods[253].selector = @selector(setIosLayerMasksToBoundsWithBoolean:);
-  methods[254].selector = @selector(setZIndexWithInt:);
-  methods[255].selector = @selector(setElevationWithNSString:);
-  methods[256].selector = @selector(tryGetMaxWidth);
-  methods[257].selector = @selector(getMaxWidth);
-  methods[258].selector = @selector(setMaxWidthWithNSString:);
-  methods[259].selector = @selector(tryGetMaxHeight);
-  methods[260].selector = @selector(getMaxHeight);
-  methods[261].selector = @selector(setMaxHeightWithNSString:);
-  methods[262].selector = @selector(setOnSwipedWithNSString:);
-  methods[263].selector = @selector(setOutsideTouchableWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "command_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 126, -1 },
-    { "orderGet_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "orderSet_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "execute", "Z", "(Z)TT;", "()TT;", "initCommand", "LNSString;", "(Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setIosBackgroundColor", "(Ljava/lang/String;)TT;", "setIosIsHidden", "setIosAlpha", "F", "(F)TT;", "setIosIsOpaque", "setIosTintColor", "setIosClipsToBounds", "setIosClearsContextBeforeDrawing", "setIosIsUserInteractionEnabled", "setIosIsMultipleTouchEnabled", "setIosIsExclusiveTouch", "setIosPreservesSuperviewLayoutMargins", "setIosInsetsLayoutMarginsFromSafeArea", "setIosAutoresizesSubviews", "setIosTranslatesAutoresizingMaskIntoConstraints", "setIosContentScaleFactor", "setIosRestorationIdentifier", "setIosTag", "I", "(I)TT;", "setIosAccessibilityIgnoresInvertColors", "setIosLargeContentImage", "setIosLargeContentTitle", "setIosScalesLargeContentImage", "setIosShowsLargeContentViewer", "setIosIsAccessibilityElement", "setFocusable", "setIosAccessibilityLabel", "setIosAccessibilityHint", "setContentDescription", "setIosAccessibilityValue", "setIosAccessibilityTraits", "setSelected", "setStyle", "setErrorStyle", "validateForm", "setValidation", "setV_required", "setV_minlength", "setV_maxlength", "setV_min", "setV_max", "setV_pattern", "setV_type", "setValidationErrorDisplayType", "setCustomErrorMessageValues", "setCustomErrorMessageKeys", "setInvalidateOnFrameChange", "animatorXml", "setOnAnimationStart", "setOnAnimationEnd", "setOnAnimationCancel", "setOnAnimationRepeat", "setLeft", "setRight", "setTop", "setBottom", "setId", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "setModelPojoToUiParams", "refreshUiFromModel", "setModelUiToPojoEventIds", "updateModelData", "LNSString;LNSObject;", "(Ljava/lang/String;Ljava/lang/Object;)TT;", "notifyDataSetChanged", "setBackground", "setBackgroundRepeat", "setOnClick", "setOnTouch", "setMinWidth", "setMinHeight", "setAttributeUnderTest", "setBackgroundTint", "setBackgroundTintMode", "setForeground", "setForegroundRepeat", "setForegroundTint", "setForegroundTintMode", "setVisibility", "setAlpha", "setOnLongClick", "setLongClickable", "setClickable", "setTranslationX", "setTranslationY", "setTranslationZ", "setRotation", "setRotationX", "setRotationY", "setScaleX", "setScaleY", "setTransformPivotX", "setTransformPivotY", "setKeepScreenOn", "setLayoutDirection", "setTextDirection", "setTextAlignment", "setOnDrag", "setAsDragSource", "setEnabled", "setDuplicateParentState", "setForegroundGravity", "setOnKey", "setIosLayerBorderWidth", "setIosLayerBorderColor", "setIosLayerCornerRadius", "setIosLayerMasksToBounds", "setZIndex", "setElevation", "setMaxWidth", "setMaxHeight", "setOnSwiped", "setOutsideTouchable", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "LASViewImpl;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
-  static const J2ObjcClassInfo _ASViewImpl_ViewCommandBuilder = { "ViewCommandBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x409, 264, 3, 127, -1, -1, 128, -1 };
-  return &_ASViewImpl_ViewCommandBuilder;
-}
-
-@end
-
-void ASViewImpl_ViewCommandBuilder_init(ASViewImpl_ViewCommandBuilder *self) {
-  NSObject_init(self);
-  self->command_ = new_JavaUtilHashMap_init();
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_ViewCommandBuilder)
-
-@implementation ASViewImpl_ViewCommandBuilderInternal
-
-- (instancetype)initWithASIWidget:(id<ASIWidget>)widget {
-  ASViewImpl_ViewCommandBuilderInternal_initWithASIWidget_(self, widget);
-  return self;
-}
-
-- (ASViewImpl_ViewCommandBuilderInternal *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [((id<ASIWidget>) nil_chk(widget_)) executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(widget_)) getFragment])) remeasure];
-  }
-  [((id<ASIWidget>) nil_chk(widget_)) executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASViewImpl_ViewCommandBuilderInternal;", 0x4, 1, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASIWidget:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "widget_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASIWidget;", "execute", "Z", "LASViewImpl;", "Lcom/ashera/layout/ViewImpl$ViewCommandBuilder<Lcom/ashera/layout/ViewImpl$ViewCommandBuilderInternal;>;" };
-  static const J2ObjcClassInfo _ASViewImpl_ViewCommandBuilderInternal = { "ViewCommandBuilderInternal", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8, 2, 1, 3, -1, -1, 4, -1 };
-  return &_ASViewImpl_ViewCommandBuilderInternal;
-}
-
-@end
-
-void ASViewImpl_ViewCommandBuilderInternal_initWithASIWidget_(ASViewImpl_ViewCommandBuilderInternal *self, id<ASIWidget> widget) {
-  ASViewImpl_ViewCommandBuilder_init(self);
-  self->widget_ = widget;
-}
-
-ASViewImpl_ViewCommandBuilderInternal *new_ASViewImpl_ViewCommandBuilderInternal_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_NEW_IMPL(ASViewImpl_ViewCommandBuilderInternal, initWithASIWidget_, widget)
-}
-
-ASViewImpl_ViewCommandBuilderInternal *create_ASViewImpl_ViewCommandBuilderInternal_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_CREATE_IMPL(ASViewImpl_ViewCommandBuilderInternal, initWithASIWidget_, widget)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_ViewCommandBuilderInternal)
-
-@implementation ASViewImpl_ViewBean
-
-- (instancetype)initWithASIWidget:(id<ASIWidget>)widget {
-  ASViewImpl_ViewBean_initWithASIWidget_(self, widget);
-  return self;
-}
-
-- (ASViewImpl_ViewCommandBuilderInternal *)getBuilder {
-  return ASViewImpl_ViewBean_getBuilder(self);
-}
-
-- (id)getIosBackgroundColor {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosBackgroundColor])) executeWithBoolean:false])) getIosBackgroundColor];
-}
-
-- (void)setIosBackgroundColorWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosBackgroundColorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isIosIsHidden {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosIsHidden])) executeWithBoolean:false])) isIosIsHidden];
-}
-
-- (void)setIosIsHiddenWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosIsHiddenWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getIosAlpha {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosAlpha])) executeWithBoolean:false])) getIosAlpha];
-}
-
-- (void)setIosAlphaWithFloat:(jfloat)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosAlphaWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)isIosIsOpaque {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosIsOpaque])) executeWithBoolean:false])) isIosIsOpaque];
-}
-
-- (void)setIosIsOpaqueWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosIsOpaqueWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getIosTintColor {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosTintColor])) executeWithBoolean:false])) getIosTintColor];
-}
-
-- (void)setIosTintColorWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosTintColorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isIosClipsToBounds {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosClipsToBounds])) executeWithBoolean:false])) isIosClipsToBounds];
-}
-
-- (void)setIosClipsToBoundsWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosClipsToBoundsWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosClearsContextBeforeDrawing {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosClearsContextBeforeDrawing])) executeWithBoolean:false])) isIosClearsContextBeforeDrawing];
-}
-
-- (void)setIosClearsContextBeforeDrawingWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosClearsContextBeforeDrawingWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosIsUserInteractionEnabled {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosIsUserInteractionEnabled])) executeWithBoolean:false])) isIosIsUserInteractionEnabled];
-}
-
-- (void)setIosIsUserInteractionEnabledWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosIsUserInteractionEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosIsMultipleTouchEnabled {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosIsMultipleTouchEnabled])) executeWithBoolean:false])) isIosIsMultipleTouchEnabled];
-}
-
-- (void)setIosIsMultipleTouchEnabledWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosIsMultipleTouchEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosIsExclusiveTouch {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosIsExclusiveTouch])) executeWithBoolean:false])) isIosIsExclusiveTouch];
-}
-
-- (void)setIosIsExclusiveTouchWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosIsExclusiveTouchWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosPreservesSuperviewLayoutMargins {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosPreservesSuperviewLayoutMargins])) executeWithBoolean:false])) isIosPreservesSuperviewLayoutMargins];
-}
-
-- (void)setIosPreservesSuperviewLayoutMarginsWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosPreservesSuperviewLayoutMarginsWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosInsetsLayoutMarginsFromSafeArea {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosInsetsLayoutMarginsFromSafeArea])) executeWithBoolean:false])) isIosInsetsLayoutMarginsFromSafeArea];
-}
-
-- (void)setIosInsetsLayoutMarginsFromSafeAreaWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosInsetsLayoutMarginsFromSafeAreaWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosAutoresizesSubviews {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosAutoresizesSubviews])) executeWithBoolean:false])) isIosAutoresizesSubviews];
-}
-
-- (void)setIosAutoresizesSubviewsWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosAutoresizesSubviewsWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosTranslatesAutoresizingMaskIntoConstraints {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosTranslatesAutoresizingMaskIntoConstraints])) executeWithBoolean:false])) isIosTranslatesAutoresizingMaskIntoConstraints];
-}
-
-- (void)setIosTranslatesAutoresizingMaskIntoConstraintsWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosTranslatesAutoresizingMaskIntoConstraintsWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getIosContentScaleFactor {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosContentScaleFactor])) executeWithBoolean:false])) getIosContentScaleFactor];
-}
-
-- (void)setIosContentScaleFactorWithFloat:(jfloat)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosContentScaleFactorWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)isIosIsFocused {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosIsFocused])) executeWithBoolean:false])) isIosIsFocused];
-}
-
-- (id)getIosRestorationIdentifier {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosRestorationIdentifier])) executeWithBoolean:false])) getIosRestorationIdentifier];
-}
-
-- (void)setIosRestorationIdentifierWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosRestorationIdentifierWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getIosTag {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosTag])) executeWithBoolean:false])) getIosTag];
-}
-
-- (void)setIosTagWithInt:(jint)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosTagWithInt:value])) executeWithBoolean:true];
-}
-
-- (id)isIosAccessibilityIgnoresInvertColors {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosAccessibilityIgnoresInvertColors])) executeWithBoolean:false])) isIosAccessibilityIgnoresInvertColors];
-}
-
-- (void)setIosAccessibilityIgnoresInvertColorsWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosAccessibilityIgnoresInvertColorsWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getIosLargeContentImage {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosLargeContentImage])) executeWithBoolean:false])) getIosLargeContentImage];
-}
-
-- (void)setIosLargeContentImageWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosLargeContentImageWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getIosLargeContentTitle {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosLargeContentTitle])) executeWithBoolean:false])) getIosLargeContentTitle];
-}
-
-- (void)setIosLargeContentTitleWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosLargeContentTitleWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isIosScalesLargeContentImage {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosScalesLargeContentImage])) executeWithBoolean:false])) isIosScalesLargeContentImage];
-}
-
-- (void)setIosScalesLargeContentImageWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosScalesLargeContentImageWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosShowsLargeContentViewer {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosShowsLargeContentViewer])) executeWithBoolean:false])) isIosShowsLargeContentViewer];
-}
-
-- (void)setIosShowsLargeContentViewerWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosShowsLargeContentViewerWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isIosIsAccessibilityElement {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosIsAccessibilityElement])) executeWithBoolean:false])) isIosIsAccessibilityElement];
-}
-
-- (void)setIosIsAccessibilityElementWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosIsAccessibilityElementWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getFocusable {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetFocusable])) executeWithBoolean:false])) getFocusable];
-}
-
-- (void)setFocusableWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setFocusableWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getIosAccessibilityLabel {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosAccessibilityLabel])) executeWithBoolean:false])) getIosAccessibilityLabel];
-}
-
-- (void)setIosAccessibilityLabelWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosAccessibilityLabelWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getIosAccessibilityHint {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosAccessibilityHint])) executeWithBoolean:false])) getIosAccessibilityHint];
-}
-
-- (void)setIosAccessibilityHintWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosAccessibilityHintWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getContentDescription {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetContentDescription])) executeWithBoolean:false])) getContentDescription];
-}
-
-- (void)setContentDescriptionWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setContentDescriptionWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getIosAccessibilityValue {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosAccessibilityValue])) executeWithBoolean:false])) getIosAccessibilityValue];
-}
-
-- (void)setIosAccessibilityValueWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosAccessibilityValueWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getIosAccessibilityTraits {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetIosAccessibilityTraits])) executeWithBoolean:false])) getIosAccessibilityTraits];
-}
-
-- (void)setIosAccessibilityTraitsWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosAccessibilityTraitsWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isSelected {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetSelected])) executeWithBoolean:false])) isSelected];
-}
-
-- (void)setSelectedWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setSelectedWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setStyleWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setStyleWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setErrorStyleWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setErrorStyleWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getValidateForm {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetValidateForm])) executeWithBoolean:false])) getValidateForm];
-}
-
-- (void)validateFormWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) validateFormWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setValidationWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setValidationWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setV_requiredWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setV_requiredWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setV_minlengthWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setV_minlengthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setV_maxlengthWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setV_maxlengthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setV_minWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setV_minWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setV_maxWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setV_maxWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setV_patternWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setV_patternWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setV_typeWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setV_typeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setValidationErrorDisplayTypeWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setValidationErrorDisplayTypeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setCustomErrorMessageValuesWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setCustomErrorMessageValuesWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setCustomErrorMessageKeysWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setCustomErrorMessageKeysWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setInvalidateOnFrameChangeWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setInvalidateOnFrameChangeWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)animatorXmlWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) animatorXmlWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)startAnimator {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) startAnimator])) executeWithBoolean:true];
-}
-
-- (void)endAnimator {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) endAnimator])) executeWithBoolean:true];
-}
-
-- (void)setOnAnimationStartWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnAnimationStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnAnimationEndWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnAnimationEndWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnAnimationCancelWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnAnimationCancelWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnAnimationRepeatWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnAnimationRepeatWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getLeft {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetLeft])) executeWithBoolean:false])) getLeft];
-}
-
-- (void)setLeftWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setLeftWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getRight {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetRight])) executeWithBoolean:false])) getRight];
-}
-
-- (void)setRightWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setRightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getTop {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetTop])) executeWithBoolean:false])) getTop];
-}
-
-- (void)setTopWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setTopWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getBottom {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetBottom])) executeWithBoolean:false])) getBottom];
-}
-
-- (void)setBottomWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setBottomWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getModelSyncEvents {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetModelSyncEvents])) executeWithBoolean:false])) getModelSyncEvents];
-}
-
-- (void)setModelSyncEventsWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setModelSyncEventsWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getModelParam {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetModelParam])) executeWithBoolean:false])) getModelParam];
-}
-
-- (void)setModelParamWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setModelParamWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getModelPojoToUi {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetModelPojoToUi])) executeWithBoolean:false])) getModelPojoToUi];
-}
-
-- (void)setModelPojoToUiWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setModelPojoToUiWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getModelUiToPojo {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetModelUiToPojo])) executeWithBoolean:false])) getModelUiToPojo];
-}
-
-- (void)setModelUiToPojoWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setModelUiToPojoWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setModelPojoToUiParamsWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setModelPojoToUiParamsWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)refreshUiFromModelWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) refreshUiFromModelWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setModelUiToPojoEventIdsWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setModelUiToPojoEventIdsWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)updateModelDataWithNSString:(NSString *)expression
-                             withId:(id)payload {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) updateModelDataWithNSString:expression withId:payload])) executeWithBoolean:true];
-}
-
-- (void)notifyDataSetChangedWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) notifyDataSetChangedWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getBackground {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetBackground])) executeWithBoolean:false])) getBackground];
-}
-
-- (void)setBackgroundWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setBackgroundWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setBackgroundRepeatWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setBackgroundRepeatWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnClickWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnClickWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnTouchWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnTouchWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMinWidth {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetMinWidth])) executeWithBoolean:false])) getMinWidth];
-}
-
-- (void)setMinWidthWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setMinWidthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMinHeight {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetMinHeight])) executeWithBoolean:false])) getMinHeight];
-}
-
-- (void)setMinHeightWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setMinHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setAttributeUnderTestWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setAttributeUnderTestWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getBackgroundTint {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetBackgroundTint])) executeWithBoolean:false])) getBackgroundTint];
-}
-
-- (void)setBackgroundTintWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setBackgroundTintWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getBackgroundTintMode {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetBackgroundTintMode])) executeWithBoolean:false])) getBackgroundTintMode];
-}
-
-- (void)setBackgroundTintModeWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setBackgroundTintModeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getForeground {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetForeground])) executeWithBoolean:false])) getForeground];
-}
-
-- (void)setForegroundWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setForegroundWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setForegroundRepeatWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setForegroundRepeatWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getForegroundTint {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetForegroundTint])) executeWithBoolean:false])) getForegroundTint];
-}
-
-- (void)setForegroundTintWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setForegroundTintWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getForegroundTintMode {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetForegroundTintMode])) executeWithBoolean:false])) getForegroundTintMode];
-}
-
-- (void)setForegroundTintModeWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setForegroundTintModeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getVisibility {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetVisibility])) executeWithBoolean:false])) getVisibility];
-}
-
-- (void)setVisibilityWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setVisibilityWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getAlpha {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetAlpha])) executeWithBoolean:false])) getAlpha];
-}
-
-- (void)setAlphaWithFloat:(jfloat)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setAlphaWithFloat:value])) executeWithBoolean:true];
-}
-
-- (void)setOnLongClickWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnLongClickWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isLongClickable {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetLongClickable])) executeWithBoolean:false])) isLongClickable];
-}
-
-- (void)setLongClickableWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setLongClickableWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isClickable {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetClickable])) executeWithBoolean:false])) isClickable];
-}
-
-- (void)setClickableWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setClickableWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getTranslationX {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetTranslationX])) executeWithBoolean:false])) getTranslationX];
-}
-
-- (void)setTranslationXWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setTranslationXWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getTranslationY {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetTranslationY])) executeWithBoolean:false])) getTranslationY];
-}
-
-- (void)setTranslationYWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setTranslationYWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getTranslationZ {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetTranslationZ])) executeWithBoolean:false])) getTranslationZ];
-}
-
-- (void)setTranslationZWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setTranslationZWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getRotation {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetRotation])) executeWithBoolean:false])) getRotation];
-}
-
-- (void)setRotationWithFloat:(jfloat)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setRotationWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getRotationX {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetRotationX])) executeWithBoolean:false])) getRotationX];
-}
-
-- (void)setRotationXWithFloat:(jfloat)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setRotationXWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getRotationY {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetRotationY])) executeWithBoolean:false])) getRotationY];
-}
-
-- (void)setRotationYWithFloat:(jfloat)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setRotationYWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getScaleX {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetScaleX])) executeWithBoolean:false])) getScaleX];
-}
-
-- (void)setScaleXWithFloat:(jfloat)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setScaleXWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getScaleY {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetScaleY])) executeWithBoolean:false])) getScaleY];
-}
-
-- (void)setScaleYWithFloat:(jfloat)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setScaleYWithFloat:value])) executeWithBoolean:true];
-}
-
-- (id)getTransformPivotX {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetTransformPivotX])) executeWithBoolean:false])) getTransformPivotX];
-}
-
-- (void)setTransformPivotXWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setTransformPivotXWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getTransformPivotY {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetTransformPivotY])) executeWithBoolean:false])) getTransformPivotY];
-}
-
-- (void)setTransformPivotYWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setTransformPivotYWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)invalidate {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) invalidate])) executeWithBoolean:true];
-}
-
-- (void)requestLayout {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) requestLayout])) executeWithBoolean:true];
-}
-
-- (id)isKeepScreenOn {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetKeepScreenOn])) executeWithBoolean:false])) isKeepScreenOn];
-}
-
-- (void)setKeepScreenOnWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setKeepScreenOnWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getLayoutDirection {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetLayoutDirection])) executeWithBoolean:false])) getLayoutDirection];
-}
-
-- (void)setLayoutDirectionWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setLayoutDirectionWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getTextDirection {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetTextDirection])) executeWithBoolean:false])) getTextDirection];
-}
-
-- (void)setTextDirectionWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setTextDirectionWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getTextAlignment {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetTextAlignment])) executeWithBoolean:false])) getTextAlignment];
-}
-
-- (void)setTextAlignmentWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setTextAlignmentWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnDragWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnDragWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setAsDragSourceWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setAsDragSourceWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isEnabled {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetEnabled])) executeWithBoolean:false])) isEnabled];
-}
-
-- (void)setEnabledWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setEnabledWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isDuplicateParentState {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetDuplicateParentState])) executeWithBoolean:false])) isDuplicateParentState];
-}
-
-- (void)setDuplicateParentStateWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setDuplicateParentStateWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getForegroundGravity {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetForegroundGravity])) executeWithBoolean:false])) getForegroundGravity];
-}
-
-- (void)setForegroundGravityWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setForegroundGravityWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnKeyWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnKeyWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosLayerBorderWidthWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosLayerBorderWidthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosLayerBorderColorWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosLayerBorderColorWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosLayerCornerRadiusWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosLayerCornerRadiusWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setIosLayerMasksToBoundsWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setIosLayerMasksToBoundsWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setZIndexWithInt:(jint)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setZIndexWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setElevationWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setElevationWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxWidth {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetMaxWidth])) executeWithBoolean:false])) getMaxWidth];
-}
-
-- (void)setMaxWidthWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setMaxWidthWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getMaxHeight {
-  return [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) tryGetMaxHeight])) executeWithBoolean:false])) getMaxHeight];
-}
-
-- (void)setMaxHeightWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setMaxHeightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnSwipedWithNSString:(NSString *)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOnSwipedWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOutsideTouchableWithBoolean:(jboolean)value {
-  (void) [((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk([((ASViewImpl_ViewCommandBuilderInternal *) nil_chk(ASViewImpl_ViewBean_getBuilder(self))) reset])) setOutsideTouchableWithBoolean:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASViewImpl_ViewCommandBuilderInternal;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 12, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 6, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 21, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 24, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 25, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 26, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 27, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 28, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 29, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 30, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 31, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 32, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 33, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 34, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 35, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 36, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 37, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 38, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 39, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 40, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 41, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 42, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 43, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 44, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 45, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 46, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 47, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 48, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 49, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 50, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 51, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 52, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 53, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 54, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 55, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 56, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 57, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 58, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 59, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 60, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 61, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 62, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 63, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 64, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 65, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 66, 67, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 68, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 69, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 70, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 71, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 72, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 73, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 74, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 75, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 76, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 77, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 78, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 79, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 80, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 81, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 82, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 83, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 84, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 85, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 86, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 87, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 88, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 89, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 90, 6, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 91, 6, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 92, 6, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 93, 6, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 94, 6, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 95, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 96, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 97, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 98, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 99, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 100, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 101, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 102, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 103, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 104, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 105, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 106, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 107, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 108, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 109, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 110, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 111, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 112, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 113, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 114, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 115, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 116, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASIWidget:);
-  methods[1].selector = @selector(getBuilder);
-  methods[2].selector = @selector(getIosBackgroundColor);
-  methods[3].selector = @selector(setIosBackgroundColorWithNSString:);
-  methods[4].selector = @selector(isIosIsHidden);
-  methods[5].selector = @selector(setIosIsHiddenWithBoolean:);
-  methods[6].selector = @selector(getIosAlpha);
-  methods[7].selector = @selector(setIosAlphaWithFloat:);
-  methods[8].selector = @selector(isIosIsOpaque);
-  methods[9].selector = @selector(setIosIsOpaqueWithBoolean:);
-  methods[10].selector = @selector(getIosTintColor);
-  methods[11].selector = @selector(setIosTintColorWithNSString:);
-  methods[12].selector = @selector(isIosClipsToBounds);
-  methods[13].selector = @selector(setIosClipsToBoundsWithBoolean:);
-  methods[14].selector = @selector(isIosClearsContextBeforeDrawing);
-  methods[15].selector = @selector(setIosClearsContextBeforeDrawingWithBoolean:);
-  methods[16].selector = @selector(isIosIsUserInteractionEnabled);
-  methods[17].selector = @selector(setIosIsUserInteractionEnabledWithBoolean:);
-  methods[18].selector = @selector(isIosIsMultipleTouchEnabled);
-  methods[19].selector = @selector(setIosIsMultipleTouchEnabledWithBoolean:);
-  methods[20].selector = @selector(isIosIsExclusiveTouch);
-  methods[21].selector = @selector(setIosIsExclusiveTouchWithBoolean:);
-  methods[22].selector = @selector(isIosPreservesSuperviewLayoutMargins);
-  methods[23].selector = @selector(setIosPreservesSuperviewLayoutMarginsWithBoolean:);
-  methods[24].selector = @selector(isIosInsetsLayoutMarginsFromSafeArea);
-  methods[25].selector = @selector(setIosInsetsLayoutMarginsFromSafeAreaWithBoolean:);
-  methods[26].selector = @selector(isIosAutoresizesSubviews);
-  methods[27].selector = @selector(setIosAutoresizesSubviewsWithBoolean:);
-  methods[28].selector = @selector(isIosTranslatesAutoresizingMaskIntoConstraints);
-  methods[29].selector = @selector(setIosTranslatesAutoresizingMaskIntoConstraintsWithBoolean:);
-  methods[30].selector = @selector(getIosContentScaleFactor);
-  methods[31].selector = @selector(setIosContentScaleFactorWithFloat:);
-  methods[32].selector = @selector(isIosIsFocused);
-  methods[33].selector = @selector(getIosRestorationIdentifier);
-  methods[34].selector = @selector(setIosRestorationIdentifierWithNSString:);
-  methods[35].selector = @selector(getIosTag);
-  methods[36].selector = @selector(setIosTagWithInt:);
-  methods[37].selector = @selector(isIosAccessibilityIgnoresInvertColors);
-  methods[38].selector = @selector(setIosAccessibilityIgnoresInvertColorsWithBoolean:);
-  methods[39].selector = @selector(getIosLargeContentImage);
-  methods[40].selector = @selector(setIosLargeContentImageWithNSString:);
-  methods[41].selector = @selector(getIosLargeContentTitle);
-  methods[42].selector = @selector(setIosLargeContentTitleWithNSString:);
-  methods[43].selector = @selector(isIosScalesLargeContentImage);
-  methods[44].selector = @selector(setIosScalesLargeContentImageWithBoolean:);
-  methods[45].selector = @selector(isIosShowsLargeContentViewer);
-  methods[46].selector = @selector(setIosShowsLargeContentViewerWithBoolean:);
-  methods[47].selector = @selector(isIosIsAccessibilityElement);
-  methods[48].selector = @selector(setIosIsAccessibilityElementWithBoolean:);
-  methods[49].selector = @selector(getFocusable);
-  methods[50].selector = @selector(setFocusableWithBoolean:);
-  methods[51].selector = @selector(getIosAccessibilityLabel);
-  methods[52].selector = @selector(setIosAccessibilityLabelWithNSString:);
-  methods[53].selector = @selector(getIosAccessibilityHint);
-  methods[54].selector = @selector(setIosAccessibilityHintWithNSString:);
-  methods[55].selector = @selector(getContentDescription);
-  methods[56].selector = @selector(setContentDescriptionWithNSString:);
-  methods[57].selector = @selector(getIosAccessibilityValue);
-  methods[58].selector = @selector(setIosAccessibilityValueWithNSString:);
-  methods[59].selector = @selector(getIosAccessibilityTraits);
-  methods[60].selector = @selector(setIosAccessibilityTraitsWithNSString:);
-  methods[61].selector = @selector(isSelected);
-  methods[62].selector = @selector(setSelectedWithBoolean:);
-  methods[63].selector = @selector(setStyleWithNSString:);
-  methods[64].selector = @selector(setErrorStyleWithNSString:);
-  methods[65].selector = @selector(getValidateForm);
-  methods[66].selector = @selector(validateFormWithNSString:);
-  methods[67].selector = @selector(setValidationWithNSString:);
-  methods[68].selector = @selector(setV_requiredWithNSString:);
-  methods[69].selector = @selector(setV_minlengthWithNSString:);
-  methods[70].selector = @selector(setV_maxlengthWithNSString:);
-  methods[71].selector = @selector(setV_minWithNSString:);
-  methods[72].selector = @selector(setV_maxWithNSString:);
-  methods[73].selector = @selector(setV_patternWithNSString:);
-  methods[74].selector = @selector(setV_typeWithNSString:);
-  methods[75].selector = @selector(setValidationErrorDisplayTypeWithNSString:);
-  methods[76].selector = @selector(setCustomErrorMessageValuesWithNSString:);
-  methods[77].selector = @selector(setCustomErrorMessageKeysWithNSString:);
-  methods[78].selector = @selector(setInvalidateOnFrameChangeWithBoolean:);
-  methods[79].selector = @selector(animatorXmlWithNSString:);
-  methods[80].selector = @selector(startAnimator);
-  methods[81].selector = @selector(endAnimator);
-  methods[82].selector = @selector(setOnAnimationStartWithNSString:);
-  methods[83].selector = @selector(setOnAnimationEndWithNSString:);
-  methods[84].selector = @selector(setOnAnimationCancelWithNSString:);
-  methods[85].selector = @selector(setOnAnimationRepeatWithNSString:);
-  methods[86].selector = @selector(getLeft);
-  methods[87].selector = @selector(setLeftWithNSString:);
-  methods[88].selector = @selector(getRight);
-  methods[89].selector = @selector(setRightWithNSString:);
-  methods[90].selector = @selector(getTop);
-  methods[91].selector = @selector(setTopWithNSString:);
-  methods[92].selector = @selector(getBottom);
-  methods[93].selector = @selector(setBottomWithNSString:);
-  methods[94].selector = @selector(getModelSyncEvents);
-  methods[95].selector = @selector(setModelSyncEventsWithNSString:);
-  methods[96].selector = @selector(getModelParam);
-  methods[97].selector = @selector(setModelParamWithNSString:);
-  methods[98].selector = @selector(getModelPojoToUi);
-  methods[99].selector = @selector(setModelPojoToUiWithNSString:);
-  methods[100].selector = @selector(getModelUiToPojo);
-  methods[101].selector = @selector(setModelUiToPojoWithNSString:);
-  methods[102].selector = @selector(setModelPojoToUiParamsWithNSString:);
-  methods[103].selector = @selector(refreshUiFromModelWithNSString:);
-  methods[104].selector = @selector(setModelUiToPojoEventIdsWithNSString:);
-  methods[105].selector = @selector(updateModelDataWithNSString:withId:);
-  methods[106].selector = @selector(notifyDataSetChangedWithBoolean:);
-  methods[107].selector = @selector(getBackground);
-  methods[108].selector = @selector(setBackgroundWithNSString:);
-  methods[109].selector = @selector(setBackgroundRepeatWithNSString:);
-  methods[110].selector = @selector(setOnClickWithNSString:);
-  methods[111].selector = @selector(setOnTouchWithNSString:);
-  methods[112].selector = @selector(getMinWidth);
-  methods[113].selector = @selector(setMinWidthWithNSString:);
-  methods[114].selector = @selector(getMinHeight);
-  methods[115].selector = @selector(setMinHeightWithNSString:);
-  methods[116].selector = @selector(setAttributeUnderTestWithNSString:);
-  methods[117].selector = @selector(getBackgroundTint);
-  methods[118].selector = @selector(setBackgroundTintWithNSString:);
-  methods[119].selector = @selector(getBackgroundTintMode);
-  methods[120].selector = @selector(setBackgroundTintModeWithNSString:);
-  methods[121].selector = @selector(getForeground);
-  methods[122].selector = @selector(setForegroundWithNSString:);
-  methods[123].selector = @selector(setForegroundRepeatWithNSString:);
-  methods[124].selector = @selector(getForegroundTint);
-  methods[125].selector = @selector(setForegroundTintWithNSString:);
-  methods[126].selector = @selector(getForegroundTintMode);
-  methods[127].selector = @selector(setForegroundTintModeWithNSString:);
-  methods[128].selector = @selector(getVisibility);
-  methods[129].selector = @selector(setVisibilityWithNSString:);
-  methods[130].selector = @selector(getAlpha);
-  methods[131].selector = @selector(setAlphaWithFloat:);
-  methods[132].selector = @selector(setOnLongClickWithNSString:);
-  methods[133].selector = @selector(isLongClickable);
-  methods[134].selector = @selector(setLongClickableWithBoolean:);
-  methods[135].selector = @selector(isClickable);
-  methods[136].selector = @selector(setClickableWithBoolean:);
-  methods[137].selector = @selector(getTranslationX);
-  methods[138].selector = @selector(setTranslationXWithNSString:);
-  methods[139].selector = @selector(getTranslationY);
-  methods[140].selector = @selector(setTranslationYWithNSString:);
-  methods[141].selector = @selector(getTranslationZ);
-  methods[142].selector = @selector(setTranslationZWithNSString:);
-  methods[143].selector = @selector(getRotation);
-  methods[144].selector = @selector(setRotationWithFloat:);
-  methods[145].selector = @selector(getRotationX);
-  methods[146].selector = @selector(setRotationXWithFloat:);
-  methods[147].selector = @selector(getRotationY);
-  methods[148].selector = @selector(setRotationYWithFloat:);
-  methods[149].selector = @selector(getScaleX);
-  methods[150].selector = @selector(setScaleXWithFloat:);
-  methods[151].selector = @selector(getScaleY);
-  methods[152].selector = @selector(setScaleYWithFloat:);
-  methods[153].selector = @selector(getTransformPivotX);
-  methods[154].selector = @selector(setTransformPivotXWithNSString:);
-  methods[155].selector = @selector(getTransformPivotY);
-  methods[156].selector = @selector(setTransformPivotYWithNSString:);
-  methods[157].selector = @selector(invalidate);
-  methods[158].selector = @selector(requestLayout);
-  methods[159].selector = @selector(isKeepScreenOn);
-  methods[160].selector = @selector(setKeepScreenOnWithBoolean:);
-  methods[161].selector = @selector(getLayoutDirection);
-  methods[162].selector = @selector(setLayoutDirectionWithNSString:);
-  methods[163].selector = @selector(getTextDirection);
-  methods[164].selector = @selector(setTextDirectionWithNSString:);
-  methods[165].selector = @selector(getTextAlignment);
-  methods[166].selector = @selector(setTextAlignmentWithNSString:);
-  methods[167].selector = @selector(setOnDragWithNSString:);
-  methods[168].selector = @selector(setAsDragSourceWithNSString:);
-  methods[169].selector = @selector(isEnabled);
-  methods[170].selector = @selector(setEnabledWithBoolean:);
-  methods[171].selector = @selector(isDuplicateParentState);
-  methods[172].selector = @selector(setDuplicateParentStateWithBoolean:);
-  methods[173].selector = @selector(getForegroundGravity);
-  methods[174].selector = @selector(setForegroundGravityWithNSString:);
-  methods[175].selector = @selector(setOnKeyWithNSString:);
-  methods[176].selector = @selector(setIosLayerBorderWidthWithNSString:);
-  methods[177].selector = @selector(setIosLayerBorderColorWithNSString:);
-  methods[178].selector = @selector(setIosLayerCornerRadiusWithNSString:);
-  methods[179].selector = @selector(setIosLayerMasksToBoundsWithBoolean:);
-  methods[180].selector = @selector(setZIndexWithInt:);
-  methods[181].selector = @selector(setElevationWithNSString:);
-  methods[182].selector = @selector(getMaxWidth);
-  methods[183].selector = @selector(setMaxWidthWithNSString:);
-  methods[184].selector = @selector(getMaxHeight);
-  methods[185].selector = @selector(setMaxHeightWithNSString:);
-  methods[186].selector = @selector(setOnSwipedWithNSString:);
-  methods[187].selector = @selector(setOutsideTouchableWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "commandBuilder_", "LASViewImpl_ViewCommandBuilderInternal;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASIWidget;", "setIosBackgroundColor", "LNSString;", "setIosIsHidden", "Z", "setIosAlpha", "F", "setIosIsOpaque", "setIosTintColor", "setIosClipsToBounds", "setIosClearsContextBeforeDrawing", "setIosIsUserInteractionEnabled", "setIosIsMultipleTouchEnabled", "setIosIsExclusiveTouch", "setIosPreservesSuperviewLayoutMargins", "setIosInsetsLayoutMarginsFromSafeArea", "setIosAutoresizesSubviews", "setIosTranslatesAutoresizingMaskIntoConstraints", "setIosContentScaleFactor", "setIosRestorationIdentifier", "setIosTag", "I", "setIosAccessibilityIgnoresInvertColors", "setIosLargeContentImage", "setIosLargeContentTitle", "setIosScalesLargeContentImage", "setIosShowsLargeContentViewer", "setIosIsAccessibilityElement", "setFocusable", "setIosAccessibilityLabel", "setIosAccessibilityHint", "setContentDescription", "setIosAccessibilityValue", "setIosAccessibilityTraits", "setSelected", "setStyle", "setErrorStyle", "validateForm", "setValidation", "setV_required", "setV_minlength", "setV_maxlength", "setV_min", "setV_max", "setV_pattern", "setV_type", "setValidationErrorDisplayType", "setCustomErrorMessageValues", "setCustomErrorMessageKeys", "setInvalidateOnFrameChange", "animatorXml", "setOnAnimationStart", "setOnAnimationEnd", "setOnAnimationCancel", "setOnAnimationRepeat", "setLeft", "setRight", "setTop", "setBottom", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "setModelPojoToUiParams", "refreshUiFromModel", "setModelUiToPojoEventIds", "updateModelData", "LNSString;LNSObject;", "notifyDataSetChanged", "setBackground", "setBackgroundRepeat", "setOnClick", "setOnTouch", "setMinWidth", "setMinHeight", "setAttributeUnderTest", "setBackgroundTint", "setBackgroundTintMode", "setForeground", "setForegroundRepeat", "setForegroundTint", "setForegroundTintMode", "setVisibility", "setAlpha", "setOnLongClick", "setLongClickable", "setClickable", "setTranslationX", "setTranslationY", "setTranslationZ", "setRotation", "setRotationX", "setRotationY", "setScaleX", "setScaleY", "setTransformPivotX", "setTransformPivotY", "setKeepScreenOn", "setLayoutDirection", "setTextDirection", "setTextAlignment", "setOnDrag", "setAsDragSource", "setEnabled", "setDuplicateParentState", "setForegroundGravity", "setOnKey", "setIosLayerBorderWidth", "setIosLayerBorderColor", "setIosLayerCornerRadius", "setIosLayerMasksToBounds", "setZIndex", "setElevation", "setMaxWidth", "setMaxHeight", "setOnSwiped", "setOutsideTouchable", "LASViewImpl;" };
-  static const J2ObjcClassInfo _ASViewImpl_ViewBean = { "ViewBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x9, 188, 1, 117, -1, -1, -1, -1 };
-  return &_ASViewImpl_ViewBean;
-}
-
-@end
-
-void ASViewImpl_ViewBean_initWithASIWidget_(ASViewImpl_ViewBean *self, id<ASIWidget> widget) {
-  NSObject_init(self);
-  self->commandBuilder_ = new_ASViewImpl_ViewCommandBuilderInternal_initWithASIWidget_(widget);
-}
-
-ASViewImpl_ViewBean *new_ASViewImpl_ViewBean_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_NEW_IMPL(ASViewImpl_ViewBean, initWithASIWidget_, widget)
-}
-
-ASViewImpl_ViewBean *create_ASViewImpl_ViewBean_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_CREATE_IMPL(ASViewImpl_ViewBean, initWithASIWidget_, widget)
-}
-
-ASViewImpl_ViewCommandBuilderInternal *ASViewImpl_ViewBean_getBuilder(ASViewImpl_ViewBean *self) {
-  return self->commandBuilder_;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_ViewBean)
 
 @implementation ASViewImpl_UIControlEventTouchDelegate
 

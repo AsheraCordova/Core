@@ -244,6 +244,9 @@ export class ValidationErrorDisplayTransformer implements ITranform {
 
 
 
+
+
+
 import {ViewGroup_LayoutParams} from './ViewGroupImpl';
 // end - imports
 export abstract class ViewImpl<T> {
@@ -383,6 +386,15 @@ export abstract class ViewImpl<T> {
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "invalidateOnFrameChange" }))
 	invalidateOnFrameChange!:CommandAttr<boolean>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "outlineAmbientShadowColor" }))
+	outlineAmbientShadowColor!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "outlineSpotShadowColor" }))
+	outlineSpotShadowColor!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "cornerRadius" }))
+	cornerRadius!:CommandAttr<string>| undefined;
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "animatorXml" }))
 	animatorXml_!:CommandAttr<string>| undefined;
@@ -655,6 +667,9 @@ export abstract class ViewImpl<T> {
 		this.customErrorMessageValues = undefined;
 		this.customErrorMessageKeys = undefined;
 		this.invalidateOnFrameChange = undefined;
+		this.outlineAmbientShadowColor = undefined;
+		this.outlineSpotShadowColor = undefined;
+		this.cornerRadius = undefined;
 		this.animatorXml_ = undefined;
 		this.startAnimator_ = undefined;
 		this.endAnimator_ = undefined;
@@ -1958,6 +1973,48 @@ this.validationErrorDisplayType.setTransformer('validationErrorDisplay');		retur
 		this.invalidateOnFrameChange.setValue(value);
 		this.orderSet++;
 		this.invalidateOnFrameChange.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOutlineAmbientShadowColor(value : string) : T {
+		this.resetIfRequired();
+		if (this.outlineAmbientShadowColor == null || this.outlineAmbientShadowColor == undefined) {
+			this.outlineAmbientShadowColor = new CommandAttr<string>();
+		}
+		
+		this.outlineAmbientShadowColor.setSetter(true);
+		this.outlineAmbientShadowColor.setValue(value);
+		this.orderSet++;
+		this.outlineAmbientShadowColor.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setOutlineSpotShadowColor(value : string) : T {
+		this.resetIfRequired();
+		if (this.outlineSpotShadowColor == null || this.outlineSpotShadowColor == undefined) {
+			this.outlineSpotShadowColor = new CommandAttr<string>();
+		}
+		
+		this.outlineSpotShadowColor.setSetter(true);
+		this.outlineSpotShadowColor.setValue(value);
+		this.orderSet++;
+		this.outlineSpotShadowColor.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setCornerRadius(value : string) : T {
+		this.resetIfRequired();
+		if (this.cornerRadius == null || this.cornerRadius == undefined) {
+			this.cornerRadius = new CommandAttr<string>();
+		}
+		
+		this.cornerRadius.setSetter(true);
+		this.cornerRadius.setValue(value);
+		this.orderSet++;
+		this.cornerRadius.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

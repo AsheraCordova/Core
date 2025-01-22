@@ -23,6 +23,7 @@
 #include "LayoutTransition.h"
 #include "PluginInvoker.h"
 #include "Rect.h"
+#include "SimpleWrapableView.h"
 #include "View.h"
 #include "ViewGroup.h"
 #include "ViewGroupImpl.h"
@@ -38,13 +39,18 @@
 @protocol JavaUtilMap;
 
 
-#pragma clang diagnostic ignored "-Wincomplete-implementation"
-
 @interface ASViewGroupImpl ()
 
 - (instancetype)init;
 
 + (void)setMyAttributeWithASIWidget:(id<ASIWidget>)w
+              withASWidgetAttribute:(ASWidgetAttribute *)key
+                       withNSString:(NSString *)strValue
+                             withId:(id)objValue
+          withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator;
+
++ (void)setMyAttributeWithASIWidget:(id<ASIWidget>)w
+                             withId:(id)nativeWidget
               withASWidgetAttribute:(ASWidgetAttribute *)key
                        withNSString:(NSString *)strValue
                              withId:(id)objValue
@@ -139,6 +145,8 @@ __attribute__((unused)) static ASViewGroupImpl *new_ASViewGroupImpl_init(void) N
 __attribute__((unused)) static ASViewGroupImpl *create_ASViewGroupImpl_init(void);
 
 __attribute__((unused)) static void ASViewGroupImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
+
+__attribute__((unused)) static void ASViewGroupImpl_setMyAttributeWithASIWidget_withId_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, id nativeWidget, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator);
 
 __attribute__((unused)) static void ASViewGroupImpl_setVerticalMarginWithId_withId_withASIWidget_(id objValue, id layoutParams, id<ASIWidget> w);
 
@@ -266,41 +274,6 @@ __attribute__((unused)) static ASViewGroupImpl_OnHierarchyChangeListener *create
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewGroupImpl_OnHierarchyChangeListener)
 
-@interface ASViewGroupImpl_ViewGroupCommandBuilderInternal () {
- @public
-  id<ASIWidget> widget_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(ASViewGroupImpl_ViewGroupCommandBuilderInternal, widget_, id<ASIWidget>)
-
-@interface ASViewGroupImpl_ViewGroupBean () {
- @public
-  ASViewGroupImpl_ViewGroupCommandBuilderInternal *commandBuilder_ViewGroupBean_;
-}
-
-- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)getBuilder;
-
-@end
-
-J2OBJC_FIELD_SETTER(ASViewGroupImpl_ViewGroupBean, commandBuilder_ViewGroupBean_, ASViewGroupImpl_ViewGroupCommandBuilderInternal *)
-
-__attribute__((unused)) static ASViewGroupImpl_ViewGroupCommandBuilderInternal *ASViewGroupImpl_ViewGroupBean_getBuilder(ASViewGroupImpl_ViewGroupBean *self);
-
-@interface ASViewGroupImpl_ViewGroupParamsBean () {
- @public
-  ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *commandBuilder_;
-}
-
-- (ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *)getParamsBuilder;
-
-@end
-
-J2OBJC_FIELD_SETTER(ASViewGroupImpl_ViewGroupParamsBean, commandBuilder_, ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *)
-
-__attribute__((unused)) static ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(ASViewGroupImpl_ViewGroupParamsBean *self);
-
 @interface ASViewGroupImpl_ClipPaddingMaskCommand ()
 
 - (void)createMaskLayerWithASIWidget:(id<ASIWidget>)w;
@@ -331,6 +304,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (void)setAttributeWithASIWidget:(id<ASIWidget>)w
+         withASSimpleWrapableView:(ASSimpleWrapableView *)wrapperView
+            withASWidgetAttribute:(ASWidgetAttribute *)key
+                     withNSString:(NSString *)strValue
+                           withId:(id)objValue
+        withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
+  ASViewGroupImpl_setAttributeWithASIWidget_withASSimpleWrapableView_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, wrapperView, key, strValue, objValue, decorator);
+}
+
++ (void)setAttributeWithASIWidget:(id<ASIWidget>)w
             withASWidgetAttribute:(ASWidgetAttribute *)key
                      withNSString:(NSString *)strValue
                            withId:(id)objValue
@@ -344,6 +326,15 @@ J2OBJC_IGNORE_DESIGNATED_END
                              withId:(id)objValue
           withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
   ASViewGroupImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
+}
+
++ (void)setMyAttributeWithASIWidget:(id<ASIWidget>)w
+                             withId:(id)nativeWidget
+              withASWidgetAttribute:(ASWidgetAttribute *)key
+                       withNSString:(NSString *)strValue
+                             withId:(id)objValue
+          withASILifeCycleDecorator:(id<ASILifeCycleDecorator>)decorator {
+  ASViewGroupImpl_setMyAttributeWithASIWidget_withId_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, nativeWidget, key, strValue, objValue, decorator);
 }
 
 + (void)setChildAttributeWithASIWidget:(id<ASIWidget>)w
@@ -566,104 +557,108 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 0, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 2, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 4, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 5, 6, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x9, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 2, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 5, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 7, 8, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x9, 9, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 11, 12, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 11, 12, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 13, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 15, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 16, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 17, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 18, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 19, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 20, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 21, 12, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 22, 23, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 24, 23, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 25, 23, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 26, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 27, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 29, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 30, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 32, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 33, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 34, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 35, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 36, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 37, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 38, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 39, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 40, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 41, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 42, 28, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 43, 28, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 44, 45, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 46, 45, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 47, 45, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0xa, 48, 45, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 49, 50, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 51, 50, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 52, 53, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 54, 45, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 55, 56, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 57, 45, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 58, 59, -1, -1, -1, -1 },
-    { NULL, "V", 0x109, 60, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 15, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 17, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 18, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 19, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 20, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 21, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 22, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 23, 14, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 24, 25, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 26, 25, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 27, 25, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 28, 25, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 29, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 31, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 32, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 34, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 35, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 36, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 37, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 38, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 39, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 40, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 41, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 42, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 43, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 44, 30, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 45, 30, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 46, 47, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 48, 47, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 49, 47, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0xa, 50, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 51, 52, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 53, 52, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 54, 55, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 56, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 57, 58, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 59, 47, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 60, 61, -1, -1, -1, -1 },
+    { NULL, "V", 0x109, 62, 16, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(register__WithNSString:);
-  methods[2].selector = @selector(setAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[3].selector = @selector(setMyAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[4].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withId:withId:);
-  methods[5].selector = @selector(getAttributeWithASIWidget:withASWidgetAttribute:withASILifeCycleDecorator:);
-  methods[6].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
-  methods[7].selector = @selector(setMarginWithId:withId:withASIWidget:);
-  methods[8].selector = @selector(setBottomMarginWithId:withId:);
-  methods[9].selector = @selector(setTopMarginWithId:withId:);
-  methods[10].selector = @selector(setVerticalMarginWithId:withId:withASIWidget:);
-  methods[11].selector = @selector(setLeftMarginWithId:withId:withASIWidget:);
-  methods[12].selector = @selector(setRightMarginWithId:withId:withASIWidget:);
-  methods[13].selector = @selector(setHorizontalMarginWithId:withId:withASIWidget:);
-  methods[14].selector = @selector(setEndMarginWithId:withId:withASIWidget:);
-  methods[15].selector = @selector(setStartMarginWithId:withId:withASIWidget:);
-  methods[16].selector = @selector(getRightMarginWithADView:);
-  methods[17].selector = @selector(getLeftMarginWithADView:);
-  methods[18].selector = @selector(getTopMarginWithADView:);
-  methods[19].selector = @selector(getBottomMarginWithADView:);
-  methods[20].selector = @selector(addTemplateWithASIWidget:withId:);
-  methods[21].selector = @selector(setChildWithASIWidget:withId:);
-  methods[22].selector = @selector(animateLayoutChangesWithId:withADViewGroup:);
-  methods[23].selector = @selector(setAnimateParentHierarchyWithId:withADViewGroup:);
-  methods[24].selector = @selector(setLayoutTransitionDurationWithId:withADViewGroup:);
-  methods[25].selector = @selector(setLayoutTransitionWithId:withADViewGroup:);
-  methods[26].selector = @selector(setPaddingVerticalWithASIWidget:withId:);
-  methods[27].selector = @selector(setPaddingHorizontalWithASIWidget:withId:);
-  methods[28].selector = @selector(setPaddingTopWithASIWidget:withId:);
-  methods[29].selector = @selector(setPaddingEndWithASIWidget:withId:);
-  methods[30].selector = @selector(setPaddingStartWithASIWidget:withId:);
-  methods[31].selector = @selector(setPaddingLeftWithASIWidget:withId:);
-  methods[32].selector = @selector(setPaddingRightWithASIWidget:withId:);
-  methods[33].selector = @selector(setPaddingBottomWithASIWidget:withId:);
-  methods[34].selector = @selector(setPaddingWithASIWidget:withId:);
-  methods[35].selector = @selector(getPaddingTopWithASIWidget:);
-  methods[36].selector = @selector(getPaddingLeftWithASIWidget:);
-  methods[37].selector = @selector(getPaddingRightWithASIWidget:);
-  methods[38].selector = @selector(getPaddingBottomWithASIWidget:);
-  methods[39].selector = @selector(setOnChildViewRemovedWithADViewGroup:withASIWidget:withId:);
-  methods[40].selector = @selector(setOnChildViewAddedWithADViewGroup:withASIWidget:withId:);
-  methods[41].selector = @selector(isAttributeSupportedWithASWidgetAttribute:);
-  methods[42].selector = @selector(registerCommandConveterWithASIWidget:);
-  methods[43].selector = @selector(applyClipToPaddingCommandWithASIWidget:withBoolean:);
-  methods[44].selector = @selector(nativeRemoveViewWithASIWidget:);
-  methods[45].selector = @selector(removeViewWithId:);
-  methods[46].selector = @selector(nativeAddViewWithId:withId:);
+  methods[2].selector = @selector(setAttributeWithASIWidget:withASSimpleWrapableView:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[3].selector = @selector(setAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[4].selector = @selector(setMyAttributeWithASIWidget:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[5].selector = @selector(setMyAttributeWithASIWidget:withId:withASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[6].selector = @selector(setChildAttributeWithASIWidget:withASWidgetAttribute:withId:withId:);
+  methods[7].selector = @selector(getAttributeWithASIWidget:withASWidgetAttribute:withASILifeCycleDecorator:);
+  methods[8].selector = @selector(getChildAttributeWithASIWidget:withASWidgetAttribute:);
+  methods[9].selector = @selector(setMarginWithId:withId:withASIWidget:);
+  methods[10].selector = @selector(setBottomMarginWithId:withId:);
+  methods[11].selector = @selector(setTopMarginWithId:withId:);
+  methods[12].selector = @selector(setVerticalMarginWithId:withId:withASIWidget:);
+  methods[13].selector = @selector(setLeftMarginWithId:withId:withASIWidget:);
+  methods[14].selector = @selector(setRightMarginWithId:withId:withASIWidget:);
+  methods[15].selector = @selector(setHorizontalMarginWithId:withId:withASIWidget:);
+  methods[16].selector = @selector(setEndMarginWithId:withId:withASIWidget:);
+  methods[17].selector = @selector(setStartMarginWithId:withId:withASIWidget:);
+  methods[18].selector = @selector(getRightMarginWithADView:);
+  methods[19].selector = @selector(getLeftMarginWithADView:);
+  methods[20].selector = @selector(getTopMarginWithADView:);
+  methods[21].selector = @selector(getBottomMarginWithADView:);
+  methods[22].selector = @selector(addTemplateWithASIWidget:withId:);
+  methods[23].selector = @selector(setChildWithASIWidget:withId:);
+  methods[24].selector = @selector(animateLayoutChangesWithId:withADViewGroup:);
+  methods[25].selector = @selector(setAnimateParentHierarchyWithId:withADViewGroup:);
+  methods[26].selector = @selector(setLayoutTransitionDurationWithId:withADViewGroup:);
+  methods[27].selector = @selector(setLayoutTransitionWithId:withADViewGroup:);
+  methods[28].selector = @selector(setPaddingVerticalWithASIWidget:withId:);
+  methods[29].selector = @selector(setPaddingHorizontalWithASIWidget:withId:);
+  methods[30].selector = @selector(setPaddingTopWithASIWidget:withId:);
+  methods[31].selector = @selector(setPaddingEndWithASIWidget:withId:);
+  methods[32].selector = @selector(setPaddingStartWithASIWidget:withId:);
+  methods[33].selector = @selector(setPaddingLeftWithASIWidget:withId:);
+  methods[34].selector = @selector(setPaddingRightWithASIWidget:withId:);
+  methods[35].selector = @selector(setPaddingBottomWithASIWidget:withId:);
+  methods[36].selector = @selector(setPaddingWithASIWidget:withId:);
+  methods[37].selector = @selector(getPaddingTopWithASIWidget:);
+  methods[38].selector = @selector(getPaddingLeftWithASIWidget:);
+  methods[39].selector = @selector(getPaddingRightWithASIWidget:);
+  methods[40].selector = @selector(getPaddingBottomWithASIWidget:);
+  methods[41].selector = @selector(setOnChildViewRemovedWithADViewGroup:withASIWidget:withId:);
+  methods[42].selector = @selector(setOnChildViewAddedWithADViewGroup:withASIWidget:withId:);
+  methods[43].selector = @selector(isAttributeSupportedWithASWidgetAttribute:);
+  methods[44].selector = @selector(registerCommandConveterWithASIWidget:);
+  methods[45].selector = @selector(applyClipToPaddingCommandWithASIWidget:withBoolean:);
+  methods[46].selector = @selector(nativeRemoveViewWithASIWidget:);
+  methods[47].selector = @selector(removeViewWithId:);
+  methods[48].selector = @selector(nativeAddViewWithId:withId:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "setMyAttribute", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSObject;LNSObject;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setMargin", "LNSObject;LNSObject;LASIWidget;", "setBottomMargin", "LNSObject;LNSObject;", "setTopMargin", "setVerticalMargin", "setLeftMargin", "setRightMargin", "setHorizontalMargin", "setEndMargin", "setStartMargin", "getRightMargin", "LADView;", "getLeftMargin", "getTopMargin", "getBottomMargin", "addTemplate", "LASIWidget;LNSObject;", "setChild", "animateLayoutChanges", "LNSObject;LADViewGroup;", "setAnimateParentHierarchy", "setLayoutTransitionDuration", "setLayoutTransition", "setPaddingVertical", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "getPaddingTop", "LASIWidget;", "getPaddingLeft", "getPaddingRight", "getPaddingBottom", "setOnChildViewRemoved", "LADViewGroup;LASIWidget;LNSObject;", "setOnChildViewAdded", "isAttributeSupported", "LASWidgetAttribute;", "registerCommandConveter", "applyClipToPaddingCommand", "LASIWidget;Z", "nativeRemoveView", "removeView", "LNSObject;", "nativeAddView", "LASViewGroupImpl_LayoutTransition;LASViewGroupImpl_LayoutMode;LASViewGroupImpl_OnHierarchyChangeListener;LASViewGroupImpl_ViewGroupCommandBuilder;LASViewGroupImpl_ViewGroupCommandBuilderInternal;LASViewGroupImpl_ViewGroupBean;LASViewGroupImpl_ViewGroupParamsBean;LASViewGroupImpl_ViewGroupCommandParamsBuilderInternal;LASViewGroupImpl_ViewGroupCommandParamsBuilder;LASViewGroupImpl_ClipPaddingMaskCommand;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl = { "ViewGroupImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 47, 0, -1, 61, -1, -1, -1 };
+  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASSimpleWrapableView;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "setMyAttribute", "LASIWidget;LNSObject;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "setChildAttribute", "LASIWidget;LASWidgetAttribute;LNSObject;LNSObject;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "getChildAttribute", "LASIWidget;LASWidgetAttribute;", "setMargin", "LNSObject;LNSObject;LASIWidget;", "setBottomMargin", "LNSObject;LNSObject;", "setTopMargin", "setVerticalMargin", "setLeftMargin", "setRightMargin", "setHorizontalMargin", "setEndMargin", "setStartMargin", "getRightMargin", "LADView;", "getLeftMargin", "getTopMargin", "getBottomMargin", "addTemplate", "LASIWidget;LNSObject;", "setChild", "animateLayoutChanges", "LNSObject;LADViewGroup;", "setAnimateParentHierarchy", "setLayoutTransitionDuration", "setLayoutTransition", "setPaddingVertical", "setPaddingHorizontal", "setPaddingTop", "setPaddingEnd", "setPaddingStart", "setPaddingLeft", "setPaddingRight", "setPaddingBottom", "setPadding", "getPaddingTop", "LASIWidget;", "getPaddingLeft", "getPaddingRight", "getPaddingBottom", "setOnChildViewRemoved", "LADViewGroup;LASIWidget;LNSObject;", "setOnChildViewAdded", "isAttributeSupported", "LASWidgetAttribute;", "registerCommandConveter", "applyClipToPaddingCommand", "LASIWidget;Z", "nativeRemoveView", "removeView", "LNSObject;", "nativeAddView", "LASViewGroupImpl_LayoutTransition;LASViewGroupImpl_LayoutMode;LASViewGroupImpl_OnHierarchyChangeListener;LASViewGroupImpl_ClipPaddingMaskCommand;" };
+  static const J2ObjcClassInfo _ASViewGroupImpl = { "ViewGroupImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 49, 0, -1, 63, -1, -1, -1 };
   return &_ASViewGroupImpl;
 }
 
@@ -720,14 +715,37 @@ void ASViewGroupImpl_register__WithNSString_(NSString *localName) {
   ASWidgetFactory_registerAttributeWithNSString_withASWidgetAttribute_Builder_(localName, [((ASWidgetAttribute_Builder *) nil_chk([((ASWidgetAttribute_Builder *) nil_chk([new_ASWidgetAttribute_Builder_init() withNameWithNSString:@"layout_height"])) withTypeWithNSString:@"dimension"])) forChild]);
 }
 
+void ASViewGroupImpl_setAttributeWithASIWidget_withASSimpleWrapableView_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASSimpleWrapableView *wrapperView, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator) {
+  ASViewGroupImpl_initialize();
+  ASViewGroupModelImpl_setAttributeWithASIWidget_withASSimpleWrapableView_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, wrapperView, key, strValue, objValue, decorator);
+  if ([((ASSimpleWrapableView *) nil_chk(wrapperView)) isViewWrapped] && [((ASWidgetAttribute *) nil_chk(key)) getSimpleWrapableViewStrategy] != 0) {
+    if (([((ASWidgetAttribute *) nil_chk(key)) getSimpleWrapableViewStrategy] & ASIWidget_APPLY_TO_VIEW_WRAPPER) != 0) {
+      ASViewGroupImpl_setMyAttributeWithASIWidget_withId_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, [wrapperView getWrappedView], key, strValue, objValue, decorator);
+    }
+    if (([key getSimpleWrapableViewStrategy] & ASIWidget_APPLY_TO_VIEW_HOLDER) != 0) {
+      ASViewGroupImpl_setMyAttributeWithASIWidget_withId_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, [wrapperView getWrapperViewHolder], key, strValue, objValue, decorator);
+    }
+    if ((([key getSimpleWrapableViewStrategy] & ASIWidget_APPLY_TO_FOREGROUND) != 0) && [wrapperView getForeground] != nil) {
+      ASViewGroupImpl_setMyAttributeWithASIWidget_withId_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, [wrapperView getForeground], key, strValue, objValue, decorator);
+    }
+  }
+  else {
+    ASViewGroupImpl_setMyAttributeWithASIWidget_withId_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, [((id<ASIWidget>) nil_chk(w)) asNativeWidget], key, strValue, objValue, decorator);
+  }
+}
+
 void ASViewGroupImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator) {
   ASViewGroupImpl_initialize();
-  ADViewGroup *viewGroup = ((ADViewGroup *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADViewGroup class]));
   ASViewGroupModelImpl_setAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
   ASViewGroupImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, key, strValue, objValue, decorator);
 }
 
 void ASViewGroupImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator) {
+  ASViewGroupImpl_initialize();
+  ASViewGroupImpl_setMyAttributeWithASIWidget_withId_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(w, [((id<ASIWidget>) nil_chk(w)) asNativeWidget], key, strValue, objValue, decorator);
+}
+
+void ASViewGroupImpl_setMyAttributeWithASIWidget_withId_withASWidgetAttribute_withNSString_withId_withASILifeCycleDecorator_(id<ASIWidget> w, id nativeWidget, ASWidgetAttribute *key, NSString *strValue, id objValue, id<ASILifeCycleDecorator> decorator) {
   ASViewGroupImpl_initialize();
   ADViewGroup *viewGroup = ((ADViewGroup *) cast_chk([((id<ASIWidget>) nil_chk(w)) asWidget], [ADViewGroup class]));
   switch (JreIndexOfStr([((ASWidgetAttribute *) nil_chk(key)) getAttributeName], (id[]){ @"animateLayoutChanges", @"layoutTransition", @"layoutTransitionDuration", @"animateParentHierarchy", @"listitem", @"padding", @"paddingBottom", @"paddingRight", @"paddingLeft", @"paddingStart", @"paddingEnd", @"paddingTop", @"paddingHorizontal", @"paddingVertical", @"addStatesFromChildren", @"onChildViewAdded", @"clipChildren", @"clipToPadding", @"layoutMode", @"onChildViewRemoved", @"childXml" }, 21)) {
@@ -813,7 +831,7 @@ void ASViewGroupImpl_setMyAttributeWithASIWidget_withASWidgetAttribute_withNSStr
     break;
     case 16:
     {
-      ASViewImpl_setClipsToBoundsWithId_withId_([w asNativeWidget], objValue);
+      ASViewImpl_setClipsToBoundsWithId_withId_(nativeWidget, objValue);
     }
     break;
     case 17:
@@ -1670,1241 +1688,6 @@ ASViewGroupImpl_OnHierarchyChangeListener *create_ASViewGroupImpl_OnHierarchyCha
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_OnHierarchyChangeListener)
-
-@implementation ASViewGroupImpl_ViewGroupCommandBuilder
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  ASViewGroupImpl_ViewGroupCommandBuilder_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-- (id)setAnimateLayoutChangesWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"animateLayoutChanges"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)setLayoutTransitionWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layoutTransition"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setLayoutTransitionDurationWithInt:(jint)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layoutTransitionDuration"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangInteger_valueOfWithInt_(value)];
-  return self;
-}
-
-- (id)setAnimateParentHierarchyWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"animateParentHierarchy"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)setListitemWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"listitem"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setPaddingWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"padding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetPaddingBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingBottom"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setPaddingBottomWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetPaddingRight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingRight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingRight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingRight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setPaddingRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingRight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetPaddingLeft {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingLeft {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingLeft"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setPaddingLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetPaddingStart {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingStart {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingStart"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setPaddingStartWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetPaddingEnd {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingEnd {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingEnd"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setPaddingEndWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetPaddingTop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getPaddingTop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingTop"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setPaddingTopWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setPaddingHorizontalWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingHorizontal"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setPaddingVerticalWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"paddingVertical"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetAddStatesFromChildren {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"addStatesFromChildren"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isAddStatesFromChildren {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"addStatesFromChildren"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setAddStatesFromChildrenWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"addStatesFromChildren"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)setOnChildViewAddedWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onChildViewAdded"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetClipChildren {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"clipChildren"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isClipChildren {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"clipChildren"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setClipChildrenWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"clipChildren"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetClipToPadding {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"clipToPadding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)isClipToPadding {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"clipToPadding"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setClipToPaddingWithBoolean:(jboolean)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"clipToPadding"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:JavaLangBoolean_valueOfWithBoolean_(value)];
-  return self;
-}
-
-- (id)tryGetLayoutMode {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layoutMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutMode {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layoutMode"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setLayoutModeWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layoutMode"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setOnChildViewRemovedWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"onChildViewRemoved"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setChildXmlWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"childXml"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 0, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 3, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 6, 7, -1, 8, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 9, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 10, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 11, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 13, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 14, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 15, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 16, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 17, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 18, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 19, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 20, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 21, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 22, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 23, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 24, 1, -1, 2, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 12, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 25, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 26, 4, -1, 5, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 27, 4, -1, 5, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(init);
-  methods[1].selector = @selector(setAnimateLayoutChangesWithBoolean:);
-  methods[2].selector = @selector(setLayoutTransitionWithNSString:);
-  methods[3].selector = @selector(setLayoutTransitionDurationWithInt:);
-  methods[4].selector = @selector(setAnimateParentHierarchyWithBoolean:);
-  methods[5].selector = @selector(setListitemWithNSString:);
-  methods[6].selector = @selector(setPaddingWithNSString:);
-  methods[7].selector = @selector(tryGetPaddingBottom);
-  methods[8].selector = @selector(getPaddingBottom);
-  methods[9].selector = @selector(setPaddingBottomWithNSString:);
-  methods[10].selector = @selector(tryGetPaddingRight);
-  methods[11].selector = @selector(getPaddingRight);
-  methods[12].selector = @selector(setPaddingRightWithNSString:);
-  methods[13].selector = @selector(tryGetPaddingLeft);
-  methods[14].selector = @selector(getPaddingLeft);
-  methods[15].selector = @selector(setPaddingLeftWithNSString:);
-  methods[16].selector = @selector(tryGetPaddingStart);
-  methods[17].selector = @selector(getPaddingStart);
-  methods[18].selector = @selector(setPaddingStartWithNSString:);
-  methods[19].selector = @selector(tryGetPaddingEnd);
-  methods[20].selector = @selector(getPaddingEnd);
-  methods[21].selector = @selector(setPaddingEndWithNSString:);
-  methods[22].selector = @selector(tryGetPaddingTop);
-  methods[23].selector = @selector(getPaddingTop);
-  methods[24].selector = @selector(setPaddingTopWithNSString:);
-  methods[25].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[26].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[27].selector = @selector(tryGetAddStatesFromChildren);
-  methods[28].selector = @selector(isAddStatesFromChildren);
-  methods[29].selector = @selector(setAddStatesFromChildrenWithBoolean:);
-  methods[30].selector = @selector(setOnChildViewAddedWithNSString:);
-  methods[31].selector = @selector(tryGetClipChildren);
-  methods[32].selector = @selector(isClipChildren);
-  methods[33].selector = @selector(setClipChildrenWithBoolean:);
-  methods[34].selector = @selector(tryGetClipToPadding);
-  methods[35].selector = @selector(isClipToPadding);
-  methods[36].selector = @selector(setClipToPaddingWithBoolean:);
-  methods[37].selector = @selector(tryGetLayoutMode);
-  methods[38].selector = @selector(getLayoutMode);
-  methods[39].selector = @selector(setLayoutModeWithNSString:);
-  methods[40].selector = @selector(setOnChildViewRemovedWithNSString:);
-  methods[41].selector = @selector(setChildXmlWithNSString:);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "setAnimateLayoutChanges", "Z", "(Z)TT;", "setLayoutTransition", "LNSString;", "(Ljava/lang/String;)TT;", "setLayoutTransitionDuration", "I", "(I)TT;", "setAnimateParentHierarchy", "setListitem", "setPadding", "()TT;", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setAddStatesFromChildren", "setOnChildViewAdded", "setClipChildren", "setClipToPadding", "setLayoutMode", "setOnChildViewRemoved", "setChildXml", "LASViewGroupImpl;", "<T:Ljava/lang/Object;>Lcom/ashera/layout/ViewGroupModelImpl$ViewGroupModelCommandBuilder<TT;>;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl_ViewGroupCommandBuilder = { "ViewGroupCommandBuilder", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x409, 42, 0, 28, -1, -1, 29, -1 };
-  return &_ASViewGroupImpl_ViewGroupCommandBuilder;
-}
-
-@end
-
-void ASViewGroupImpl_ViewGroupCommandBuilder_init(ASViewGroupImpl_ViewGroupCommandBuilder *self) {
-  ASViewGroupModelImpl_ViewGroupModelCommandBuilder_init(self);
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_ViewGroupCommandBuilder)
-
-@implementation ASViewGroupImpl_ViewGroupCommandBuilderInternal
-
-- (instancetype)initWithASIWidget:(id<ASIWidget>)widget {
-  ASViewGroupImpl_ViewGroupCommandBuilderInternal_initWithASIWidget_(self, widget);
-  return self;
-}
-
-- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)executeWithBoolean:(jboolean)setter {
-  if (setter) {
-    [((id<ASIWidget>) nil_chk(widget_)) executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-    [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(widget_)) getFragment])) remeasure];
-  }
-  [((id<ASIWidget>) nil_chk(widget_)) executeCommandWithJavaUtilMap:command_ withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASViewGroupImpl_ViewGroupCommandBuilderInternal;", 0x4, 1, 2, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASIWidget:);
-  methods[1].selector = @selector(executeWithBoolean:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "widget_", "LASIWidget;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASIWidget;", "execute", "Z", "LASViewGroupImpl;", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandBuilder<Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandBuilderInternal;>;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl_ViewGroupCommandBuilderInternal = { "ViewGroupCommandBuilderInternal", "com.ashera.layout", ptrTable, methods, fields, 7, 0x8, 2, 1, 3, -1, -1, 4, -1 };
-  return &_ASViewGroupImpl_ViewGroupCommandBuilderInternal;
-}
-
-@end
-
-void ASViewGroupImpl_ViewGroupCommandBuilderInternal_initWithASIWidget_(ASViewGroupImpl_ViewGroupCommandBuilderInternal *self, id<ASIWidget> widget) {
-  ASViewGroupImpl_ViewGroupCommandBuilder_init(self);
-  self->widget_ = widget;
-}
-
-ASViewGroupImpl_ViewGroupCommandBuilderInternal *new_ASViewGroupImpl_ViewGroupCommandBuilderInternal_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_NEW_IMPL(ASViewGroupImpl_ViewGroupCommandBuilderInternal, initWithASIWidget_, widget)
-}
-
-ASViewGroupImpl_ViewGroupCommandBuilderInternal *create_ASViewGroupImpl_ViewGroupCommandBuilderInternal_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_CREATE_IMPL(ASViewGroupImpl_ViewGroupCommandBuilderInternal, initWithASIWidget_, widget)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_ViewGroupCommandBuilderInternal)
-
-@implementation ASViewGroupImpl_ViewGroupBean
-
-- (instancetype)initWithASIWidget:(id<ASIWidget>)widget {
-  ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(self, widget);
-  return self;
-}
-
-- (ASViewGroupImpl_ViewGroupCommandBuilderInternal *)getBuilder {
-  return ASViewGroupImpl_ViewGroupBean_getBuilder(self);
-}
-
-- (void)setAnimateLayoutChangesWithBoolean:(jboolean)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setAnimateLayoutChangesWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setLayoutTransitionWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setLayoutTransitionWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setLayoutTransitionDurationWithInt:(jint)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setLayoutTransitionDurationWithInt:value])) executeWithBoolean:true];
-}
-
-- (void)setAnimateParentHierarchyWithBoolean:(jboolean)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setAnimateParentHierarchyWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setListitemWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setListitemWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setPaddingWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setPaddingWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingBottom {
-  return [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) tryGetPaddingBottom])) executeWithBoolean:false])) getPaddingBottom];
-}
-
-- (void)setPaddingBottomWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setPaddingBottomWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingRight {
-  return [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) tryGetPaddingRight])) executeWithBoolean:false])) getPaddingRight];
-}
-
-- (void)setPaddingRightWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setPaddingRightWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingLeft {
-  return [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) tryGetPaddingLeft])) executeWithBoolean:false])) getPaddingLeft];
-}
-
-- (void)setPaddingLeftWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setPaddingLeftWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingStart {
-  return [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) tryGetPaddingStart])) executeWithBoolean:false])) getPaddingStart];
-}
-
-- (void)setPaddingStartWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setPaddingStartWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingEnd {
-  return [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) tryGetPaddingEnd])) executeWithBoolean:false])) getPaddingEnd];
-}
-
-- (void)setPaddingEndWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setPaddingEndWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)getPaddingTop {
-  return [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) tryGetPaddingTop])) executeWithBoolean:false])) getPaddingTop];
-}
-
-- (void)setPaddingTopWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setPaddingTopWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setPaddingHorizontalWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setPaddingHorizontalWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setPaddingVerticalWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setPaddingVerticalWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isAddStatesFromChildren {
-  return [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) tryGetAddStatesFromChildren])) executeWithBoolean:false])) isAddStatesFromChildren];
-}
-
-- (void)setAddStatesFromChildrenWithBoolean:(jboolean)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setAddStatesFromChildrenWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (void)setOnChildViewAddedWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setOnChildViewAddedWithNSString:value])) executeWithBoolean:true];
-}
-
-- (id)isClipChildren {
-  return [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) tryGetClipChildren])) executeWithBoolean:false])) isClipChildren];
-}
-
-- (void)setClipChildrenWithBoolean:(jboolean)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setClipChildrenWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)isClipToPadding {
-  return [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) tryGetClipToPadding])) executeWithBoolean:false])) isClipToPadding];
-}
-
-- (void)setClipToPaddingWithBoolean:(jboolean)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setClipToPaddingWithBoolean:value])) executeWithBoolean:true];
-}
-
-- (id)getLayoutMode {
-  return [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) tryGetLayoutMode])) executeWithBoolean:false])) getLayoutMode];
-}
-
-- (void)setLayoutModeWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setLayoutModeWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setOnChildViewRemovedWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setOnChildViewRemovedWithNSString:value])) executeWithBoolean:true];
-}
-
-- (void)setChildXmlWithNSString:(NSString *)value {
-  (void) [((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupBean_getBuilder(self))) reset])) setChildXmlWithNSString:value])) executeWithBoolean:true];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, 0, -1, -1, -1, -1 },
-    { NULL, "LASViewGroupImpl_ViewGroupCommandBuilderInternal;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 1, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 3, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 8, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 12, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 17, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 18, 2, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 19, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 21, 2, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 22, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 24, 4, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(initWithASIWidget:);
-  methods[1].selector = @selector(getBuilder);
-  methods[2].selector = @selector(setAnimateLayoutChangesWithBoolean:);
-  methods[3].selector = @selector(setLayoutTransitionWithNSString:);
-  methods[4].selector = @selector(setLayoutTransitionDurationWithInt:);
-  methods[5].selector = @selector(setAnimateParentHierarchyWithBoolean:);
-  methods[6].selector = @selector(setListitemWithNSString:);
-  methods[7].selector = @selector(setPaddingWithNSString:);
-  methods[8].selector = @selector(getPaddingBottom);
-  methods[9].selector = @selector(setPaddingBottomWithNSString:);
-  methods[10].selector = @selector(getPaddingRight);
-  methods[11].selector = @selector(setPaddingRightWithNSString:);
-  methods[12].selector = @selector(getPaddingLeft);
-  methods[13].selector = @selector(setPaddingLeftWithNSString:);
-  methods[14].selector = @selector(getPaddingStart);
-  methods[15].selector = @selector(setPaddingStartWithNSString:);
-  methods[16].selector = @selector(getPaddingEnd);
-  methods[17].selector = @selector(setPaddingEndWithNSString:);
-  methods[18].selector = @selector(getPaddingTop);
-  methods[19].selector = @selector(setPaddingTopWithNSString:);
-  methods[20].selector = @selector(setPaddingHorizontalWithNSString:);
-  methods[21].selector = @selector(setPaddingVerticalWithNSString:);
-  methods[22].selector = @selector(isAddStatesFromChildren);
-  methods[23].selector = @selector(setAddStatesFromChildrenWithBoolean:);
-  methods[24].selector = @selector(setOnChildViewAddedWithNSString:);
-  methods[25].selector = @selector(isClipChildren);
-  methods[26].selector = @selector(setClipChildrenWithBoolean:);
-  methods[27].selector = @selector(isClipToPadding);
-  methods[28].selector = @selector(setClipToPaddingWithBoolean:);
-  methods[29].selector = @selector(getLayoutMode);
-  methods[30].selector = @selector(setLayoutModeWithNSString:);
-  methods[31].selector = @selector(setOnChildViewRemovedWithNSString:);
-  methods[32].selector = @selector(setChildXmlWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "commandBuilder_ViewGroupBean_", "LASViewGroupImpl_ViewGroupCommandBuilderInternal;", .constantValue.asLong = 0, 0x2, 25, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "LASIWidget;", "setAnimateLayoutChanges", "Z", "setLayoutTransition", "LNSString;", "setLayoutTransitionDuration", "I", "setAnimateParentHierarchy", "setListitem", "setPadding", "setPaddingBottom", "setPaddingRight", "setPaddingLeft", "setPaddingStart", "setPaddingEnd", "setPaddingTop", "setPaddingHorizontal", "setPaddingVertical", "setAddStatesFromChildren", "setOnChildViewAdded", "setClipChildren", "setClipToPadding", "setLayoutMode", "setOnChildViewRemoved", "setChildXml", "commandBuilder", "LASViewGroupImpl;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl_ViewGroupBean = { "ViewGroupBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x9, 33, 1, 26, -1, -1, -1, -1 };
-  return &_ASViewGroupImpl_ViewGroupBean;
-}
-
-@end
-
-void ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(ASViewGroupImpl_ViewGroupBean *self, id<ASIWidget> widget) {
-  ASViewGroupModelImpl_ViewGroupModelBean_initWithASIWidget_(self, widget);
-  self->commandBuilder_ViewGroupBean_ = new_ASViewGroupImpl_ViewGroupCommandBuilderInternal_initWithASIWidget_(widget);
-}
-
-ASViewGroupImpl_ViewGroupBean *new_ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_NEW_IMPL(ASViewGroupImpl_ViewGroupBean, initWithASIWidget_, widget)
-}
-
-ASViewGroupImpl_ViewGroupBean *create_ASViewGroupImpl_ViewGroupBean_initWithASIWidget_(id<ASIWidget> widget) {
-  J2OBJC_CREATE_IMPL(ASViewGroupImpl_ViewGroupBean, initWithASIWidget_, widget)
-}
-
-ASViewGroupImpl_ViewGroupCommandBuilderInternal *ASViewGroupImpl_ViewGroupBean_getBuilder(ASViewGroupImpl_ViewGroupBean *self) {
-  return self->commandBuilder_ViewGroupBean_;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_ViewGroupBean)
-
-@implementation ASViewGroupImpl_ViewGroupParamsBean
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  ASViewGroupImpl_ViewGroupParamsBean_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-- (ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *)getParamsBuilder {
-  return ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self);
-}
-
-- (id)getLayoutMarginBottomWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) tryGetLayoutMarginBottom])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) getLayoutMarginBottom];
-}
-
-- (void)setLayoutMarginBottomWithASIWidget:(id<ASIWidget>)w
-                              withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) setLayoutMarginBottomWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (id)getLayoutMarginTopWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) tryGetLayoutMarginTop])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) getLayoutMarginTop];
-}
-
-- (void)setLayoutMarginTopWithASIWidget:(id<ASIWidget>)w
-                           withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) setLayoutMarginTopWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (id)getLayoutMarginStartWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) tryGetLayoutMarginStart])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) getLayoutMarginStart];
-}
-
-- (void)setLayoutMarginStartWithASIWidget:(id<ASIWidget>)w
-                             withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) setLayoutMarginStartWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (id)getLayoutMarginEndWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) tryGetLayoutMarginEnd])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) getLayoutMarginEnd];
-}
-
-- (void)setLayoutMarginEndWithASIWidget:(id<ASIWidget>)w
-                           withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) setLayoutMarginEndWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (id)getLayoutMarginLeftWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) tryGetLayoutMarginLeft])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) getLayoutMarginLeft];
-}
-
-- (void)setLayoutMarginLeftWithASIWidget:(id<ASIWidget>)w
-                            withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) setLayoutMarginLeftWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (id)getLayoutMarginRightWithASIWidget:(id<ASIWidget>)w {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  id<JavaUtilMap> command = [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) tryGetLayoutMarginRight])) getCommand];
-  (void) [layoutParams putWithId:@"layoutParams" withId:command];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_GETTER_METHOD];
-  return [((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) getLayoutMarginRight];
-}
-
-- (void)setLayoutMarginRightWithASIWidget:(id<ASIWidget>)w
-                             withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) setLayoutMarginRightWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (void)setLayoutMarginWithASIWidget:(id<ASIWidget>)w
-                        withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) setLayoutMarginWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (void)setLayoutMarginHorizontalWithASIWidget:(id<ASIWidget>)w
-                                  withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) setLayoutMarginHorizontalWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-- (void)setLayoutMarginVerticalWithASIWidget:(id<ASIWidget>)w
-                                withNSString:(NSString *)value {
-  id<JavaUtilMap> layoutParams = new_JavaUtilHashMap_init();
-  (void) [layoutParams putWithId:@"layoutParams" withId:[((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk([((ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *) nil_chk(ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(self))) reset])) setLayoutMarginVerticalWithNSString:value])) getCommand]];
-  [((id<ASIWidget>) nil_chk(w)) executeCommandWithJavaUtilMap:layoutParams withASIWidget_CommandCallBack:nil withInt:ASIWidget_COMMAND_EXEC_SETTER_METHOD];
-  [((id<ASIFragment>) nil_chk([w getFragment])) remeasure];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASViewGroupImpl_ViewGroupCommandParamsBuilderInternal;", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 0, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 2, 3, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 4, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 5, 3, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 6, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 7, 3, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 8, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 9, 3, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 10, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 11, 3, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 12, 1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 13, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 15, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 16, 3, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(init);
-  methods[1].selector = @selector(getParamsBuilder);
-  methods[2].selector = @selector(getLayoutMarginBottomWithASIWidget:);
-  methods[3].selector = @selector(setLayoutMarginBottomWithASIWidget:withNSString:);
-  methods[4].selector = @selector(getLayoutMarginTopWithASIWidget:);
-  methods[5].selector = @selector(setLayoutMarginTopWithASIWidget:withNSString:);
-  methods[6].selector = @selector(getLayoutMarginStartWithASIWidget:);
-  methods[7].selector = @selector(setLayoutMarginStartWithASIWidget:withNSString:);
-  methods[8].selector = @selector(getLayoutMarginEndWithASIWidget:);
-  methods[9].selector = @selector(setLayoutMarginEndWithASIWidget:withNSString:);
-  methods[10].selector = @selector(getLayoutMarginLeftWithASIWidget:);
-  methods[11].selector = @selector(setLayoutMarginLeftWithASIWidget:withNSString:);
-  methods[12].selector = @selector(getLayoutMarginRightWithASIWidget:);
-  methods[13].selector = @selector(setLayoutMarginRightWithASIWidget:withNSString:);
-  methods[14].selector = @selector(setLayoutMarginWithASIWidget:withNSString:);
-  methods[15].selector = @selector(setLayoutMarginHorizontalWithASIWidget:withNSString:);
-  methods[16].selector = @selector(setLayoutMarginVerticalWithASIWidget:withNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "commandBuilder_", "LASViewGroupImpl_ViewGroupCommandParamsBuilderInternal;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "getLayoutMarginBottom", "LASIWidget;", "setLayoutMarginBottom", "LASIWidget;LNSString;", "getLayoutMarginTop", "setLayoutMarginTop", "getLayoutMarginStart", "setLayoutMarginStart", "getLayoutMarginEnd", "setLayoutMarginEnd", "getLayoutMarginLeft", "setLayoutMarginLeft", "getLayoutMarginRight", "setLayoutMarginRight", "setLayoutMargin", "setLayoutMarginHorizontal", "setLayoutMarginVertical", "LASViewGroupImpl;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl_ViewGroupParamsBean = { "ViewGroupParamsBean", "com.ashera.layout", ptrTable, methods, fields, 7, 0x9, 17, 1, 17, -1, -1, -1, -1 };
-  return &_ASViewGroupImpl_ViewGroupParamsBean;
-}
-
-@end
-
-void ASViewGroupImpl_ViewGroupParamsBean_init(ASViewGroupImpl_ViewGroupParamsBean *self) {
-  NSObject_init(self);
-  self->commandBuilder_ = new_ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal_init();
-}
-
-ASViewGroupImpl_ViewGroupParamsBean *new_ASViewGroupImpl_ViewGroupParamsBean_init() {
-  J2OBJC_NEW_IMPL(ASViewGroupImpl_ViewGroupParamsBean, init)
-}
-
-ASViewGroupImpl_ViewGroupParamsBean *create_ASViewGroupImpl_ViewGroupParamsBean_init() {
-  J2OBJC_CREATE_IMPL(ASViewGroupImpl_ViewGroupParamsBean, init)
-}
-
-ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *ASViewGroupImpl_ViewGroupParamsBean_getParamsBuilder(ASViewGroupImpl_ViewGroupParamsBean *self) {
-  return self->commandBuilder_;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_ViewGroupParamsBean)
-
-@implementation ASViewGroupImpl_ViewGroupCommandParamsBuilder
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-- (id<JavaUtilMap>)getCommand {
-  return command_;
-}
-
-- (id)reset {
-  orderGet_ = 0;
-  orderSet_ = 0;
-  command_ = new_JavaUtilHashMap_init();
-  return self;
-}
-
-- (id<JavaUtilMap>)initCommandWithNSString:(NSString *)attributeName {
-  id<JavaUtilMap> attrs = (id<JavaUtilMap>) cast_check([((id<JavaUtilMap>) nil_chk(command_)) getWithId:attributeName], JavaUtilMap_class_());
-  if (attrs == nil) {
-    attrs = new_JavaUtilHashMap_init();
-    (void) [((id<JavaUtilMap>) nil_chk(command_)) putWithId:attributeName withId:attrs];
-  }
-  return attrs;
-}
-
-- (id)tryGetLayoutMarginBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutMarginBottom {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginBottom"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setLayoutMarginBottomWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginBottom"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetLayoutMarginTop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutMarginTop {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginTop"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setLayoutMarginTopWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginTop"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetLayoutMarginStart {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutMarginStart {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginStart"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setLayoutMarginStartWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginStart"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetLayoutMarginEnd {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutMarginEnd {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginEnd"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setLayoutMarginEndWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginEnd"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetLayoutMarginLeft {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutMarginLeft {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginLeft"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setLayoutMarginLeftWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginLeft"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)tryGetLayoutMarginRight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginRight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"getter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderGet" withId:JavaLangInteger_valueOfWithInt_(++orderGet_)];
-  return self;
-}
-
-- (id)getLayoutMarginRight {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginRight"];
-  return [((id<JavaUtilMap>) nil_chk(attrs)) getWithId:@"commandReturnValue"];
-}
-
-- (id)setLayoutMarginRightWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginRight"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setLayoutMarginWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_margin"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setLayoutMarginHorizontalWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginHorizontal"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-- (id)setLayoutMarginVerticalWithNSString:(NSString *)value {
-  id<JavaUtilMap> attrs = [self initCommandWithNSString:@"layout_marginVertical"];
-  (void) [((id<JavaUtilMap>) nil_chk(attrs)) putWithId:@"type" withId:@"attribute"];
-  (void) [attrs putWithId:@"setter" withId:JavaLangBoolean_valueOfWithBoolean_(true)];
-  (void) [attrs putWithId:@"orderSet" withId:JavaLangInteger_valueOfWithInt_(++orderSet_)];
-  (void) [attrs putWithId:@"value" withId:value];
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 0, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x1, 2, 3, -1, 4, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 5, 3, -1, 6, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 7, 3, -1, 6, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 8, 3, -1, 6, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 9, 3, -1, 6, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 10, 3, -1, 6, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, 1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 11, 3, -1, 6, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 12, 3, -1, 6, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 13, 3, -1, 6, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 14, 3, -1, 6, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(init);
-  methods[1].selector = @selector(getCommand);
-  methods[2].selector = @selector(reset);
-  methods[3].selector = @selector(initCommandWithNSString:);
-  methods[4].selector = @selector(tryGetLayoutMarginBottom);
-  methods[5].selector = @selector(getLayoutMarginBottom);
-  methods[6].selector = @selector(setLayoutMarginBottomWithNSString:);
-  methods[7].selector = @selector(tryGetLayoutMarginTop);
-  methods[8].selector = @selector(getLayoutMarginTop);
-  methods[9].selector = @selector(setLayoutMarginTopWithNSString:);
-  methods[10].selector = @selector(tryGetLayoutMarginStart);
-  methods[11].selector = @selector(getLayoutMarginStart);
-  methods[12].selector = @selector(setLayoutMarginStartWithNSString:);
-  methods[13].selector = @selector(tryGetLayoutMarginEnd);
-  methods[14].selector = @selector(getLayoutMarginEnd);
-  methods[15].selector = @selector(setLayoutMarginEndWithNSString:);
-  methods[16].selector = @selector(tryGetLayoutMarginLeft);
-  methods[17].selector = @selector(getLayoutMarginLeft);
-  methods[18].selector = @selector(setLayoutMarginLeftWithNSString:);
-  methods[19].selector = @selector(tryGetLayoutMarginRight);
-  methods[20].selector = @selector(getLayoutMarginRight);
-  methods[21].selector = @selector(setLayoutMarginRightWithNSString:);
-  methods[22].selector = @selector(setLayoutMarginWithNSString:);
-  methods[23].selector = @selector(setLayoutMarginHorizontalWithNSString:);
-  methods[24].selector = @selector(setLayoutMarginVerticalWithNSString:);
-  #pragma clang diagnostic pop
-  static const J2ObjcFieldInfo fields[] = {
-    { "command_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 15, -1 },
-    { "orderGet_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "orderSet_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-  };
-  static const void *ptrTable[] = { "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "()TT;", "initCommand", "LNSString;", "(Ljava/lang/String;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setLayoutMarginBottom", "(Ljava/lang/String;)TT;", "setLayoutMarginTop", "setLayoutMarginStart", "setLayoutMarginEnd", "setLayoutMarginLeft", "setLayoutMarginRight", "setLayoutMargin", "setLayoutMarginHorizontal", "setLayoutMarginVertical", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "LASViewGroupImpl;", "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl_ViewGroupCommandParamsBuilder = { "ViewGroupCommandParamsBuilder", "com.ashera.layout", ptrTable, methods, fields, 7, 0x9, 25, 3, 16, -1, -1, 17, -1 };
-  return &_ASViewGroupImpl_ViewGroupCommandParamsBuilder;
-}
-
-@end
-
-void ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(ASViewGroupImpl_ViewGroupCommandParamsBuilder *self) {
-  NSObject_init(self);
-  self->command_ = new_JavaUtilHashMap_init();
-}
-
-ASViewGroupImpl_ViewGroupCommandParamsBuilder *new_ASViewGroupImpl_ViewGroupCommandParamsBuilder_init() {
-  J2OBJC_NEW_IMPL(ASViewGroupImpl_ViewGroupCommandParamsBuilder, init)
-}
-
-ASViewGroupImpl_ViewGroupCommandParamsBuilder *create_ASViewGroupImpl_ViewGroupCommandParamsBuilder_init() {
-  J2OBJC_CREATE_IMPL(ASViewGroupImpl_ViewGroupCommandParamsBuilder, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_ViewGroupCommandParamsBuilder)
-
-@implementation ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal
-
-J2OBJC_IGNORE_DESIGNATED_BEGIN
-- (instancetype)init {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal_init(self);
-  return self;
-}
-J2OBJC_IGNORE_DESIGNATED_END
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static J2ObjcMethodInfo methods[] = {
-    { NULL, NULL, 0x0, -1, -1, -1, -1, -1, -1 },
-  };
-  #pragma clang diagnostic push
-  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
-  #pragma clang diagnostic ignored "-Wundeclared-selector"
-  methods[0].selector = @selector(init);
-  #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "LASViewGroupImpl;", "Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandParamsBuilder<Lcom/ashera/layout/ViewGroupImpl$ViewGroupCommandParamsBuilderInternal;>;" };
-  static const J2ObjcClassInfo _ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal = { "ViewGroupCommandParamsBuilderInternal", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x8, 1, 0, 0, -1, -1, 1, -1 };
-  return &_ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal;
-}
-
-@end
-
-void ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal_init(ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *self) {
-  ASViewGroupImpl_ViewGroupCommandParamsBuilder_init(self);
-}
-
-ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *new_ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal_init() {
-  J2OBJC_NEW_IMPL(ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal, init)
-}
-
-ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal *create_ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal_init() {
-  J2OBJC_CREATE_IMPL(ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal, init)
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewGroupImpl_ViewGroupCommandParamsBuilderInternal)
 
 @implementation ASViewGroupImpl_ClipPaddingMaskCommand
 
