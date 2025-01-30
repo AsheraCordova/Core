@@ -1,4 +1,11 @@
 # Core
+
+To install the plugin use:
+
+```
+cordova plugin add https://github.com/AsheraCordova/Core.git
+```
+
 Core project which adds native support for cordova project.
 
 The project provides the following functionality
@@ -76,12 +83,6 @@ https://asheracordova.github.io/doc/com/ashera/layout/MultiSelectionSpinner.html
 
 https://asheracordova.github.io/doc/android/webkit/WebView.html
 
-To install the plugin use:
-
-```
-cordova plugin add https://github.com/AsheraCordova/Core.git
-```
-
 ## Validation support
 
 Ashera provides support for validations by extending the view to add (v_*) attributes. 
@@ -146,6 +147,7 @@ validationErrorDisplayType | See above section.
 validation		| Validation on the configured on widget using (v_*) attributed or using the validation attribute. This is comma separated string. e.g. validation="required,date(dd/mm/YYYY)"
 
 The following table lists the validators available:
+
 Name                	| Description
 -------------       	| -------------
 alphabet  		| Text matching regex [a-zA-Z]*
@@ -198,6 +200,7 @@ Expression statement is written to identity, move, store objects from ui to obje
 **var - e.g let x = . from y->view into session as map**
 
 The above statement stores a intermediate variable x into session as map
+
 Name                	| Description
 -------------       	| -------------
 modelPojoToUi | e.g text=abcd from x->view Set text attribute on widget to abcd attribute from object x stored in scope view. 
