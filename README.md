@@ -14,7 +14,7 @@ https://asheracordova.github.io/doc/android/view/package-summary.html
 
 https://asheracordova.github.io/doc/android/widget/package-summary.html
 
-## Features
+## About
 Core project which adds native support for cordova project.
 
 The project provides the following functionality
