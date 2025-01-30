@@ -1,20 +1,4 @@
 # Core
-
-## Installation
-To install the plugin use:
-
-```
-cordova plugin add https://github.com/AsheraCordova/Core.git
-```
-## Important Links:
-
-https://asheracordova.github.io/
-
-https://asheracordova.github.io/doc/android/view/package-summary.html
-
-https://asheracordova.github.io/doc/android/widget/package-summary.html
-
-## Functionalities
 Core project which adds native support for cordova project.
 
 The project provides the following functionality
@@ -42,6 +26,20 @@ Windows       | SWT
 Mac           | SWT
 Linux         | SWT
 Browser	      | Teavm
+
+## Installation
+To install the plugin use:
+
+```
+cordova plugin add https://github.com/AsheraCordova/Core.git
+```
+## Important Links:
+
+https://asheracordova.github.io/
+
+https://asheracordova.github.io/doc/android/view/package-summary.html
+
+https://asheracordova.github.io/doc/android/widget/package-summary.html
 
 ## Layouts
 * View
