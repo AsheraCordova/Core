@@ -1,11 +1,20 @@
 # Core
 
+## Installation
 To install the plugin use:
 
 ```
 cordova plugin add https://github.com/AsheraCordova/Core.git
 ```
+## Important Links:
 
+https://asheracordova.github.io/
+
+https://asheracordova.github.io/doc/android/view/package-summary.html
+
+https://asheracordova.github.io/doc/android/widget/package-summary.html
+
+## Features
 Core project which adds native support for cordova project.
 
 The project provides the following functionality
@@ -66,22 +75,6 @@ Browser	      | Teavm
 * ListView
 * fragment
 * ViewOverlay
-
-Important Links:
-
-https://asheracordova.github.io/
-
-https://asheracordova.github.io/doc/android/view/package-summary.html
-
-https://asheracordova.github.io/doc/android/widget/package-summary.html
-
-https://asheracordova.github.io/doc/com/ashera/layout/Link.html
-
-https://asheracordova.github.io/doc/com/ashera/Model.html
-
-https://asheracordova.github.io/doc/com/ashera/layout/MultiSelectionSpinner.html
-
-https://asheracordova.github.io/doc/android/webkit/WebView.html
 
 ## Validation support
 
