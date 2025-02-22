@@ -54,6 +54,10 @@
                      withADKeyEvent:(ADKeyEvent *)event;
 
 + (void)addEventInfoWithJavaUtilMap:(id<JavaUtilMap>)obj
+                   withJavaUtilList:(id<JavaUtilList>)checkedIds
+                    withASIFragment:(id<ASIFragment>)fragment;
+
++ (void)addEventInfoWithJavaUtilMap:(id<JavaUtilMap>)obj
                      withADMenuItem:(id<ADMenuItem>)item;
 
 + (void)addEventInfoWithJavaUtilMap:(id<JavaUtilMap>)obj
@@ -504,6 +508,8 @@ FOUNDATION_EXPORT void ASViewImpl_addEventInfoWithJavaUtilMap_withADKeyEvent_(id
 FOUNDATION_EXPORT void ASViewImpl_addEventInfoWithJavaUtilMap_withADView_DragEvent_(id<JavaUtilMap> obj, ADView_DragEvent *event);
 
 FOUNDATION_EXPORT void ASViewImpl_addEventInfoWithJavaUtilMap_withADChronometer_withASIFragment_(id<JavaUtilMap> obj, ADChronometer *chronometer, id<ASIFragment> fragment);
+
+FOUNDATION_EXPORT void ASViewImpl_addEventInfoWithJavaUtilMap_withJavaUtilList_withASIFragment_(id<JavaUtilMap> obj, id<JavaUtilList> checkedIds, id<ASIFragment> fragment);
 
 FOUNDATION_EXPORT id<JavaUtilList> ASViewImpl_getFormsWithASIWidget_(id<ASIWidget> w);
 

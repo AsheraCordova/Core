@@ -250,6 +250,9 @@
 
 - (id<JavaUtilMap>)getUnResolvedAttributes;
 
+- (id)quickConvertBackWithId:(id)objValue
+                withNSString:(NSString *)type;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASIWidget)

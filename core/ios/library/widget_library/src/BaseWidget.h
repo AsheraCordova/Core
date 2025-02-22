@@ -278,6 +278,9 @@
             withNSString:(NSString *)arrayType
             withNSString:(NSString *)finalArrayType;
 
+- (id)quickConvertBackWithId:(id)objValue
+                withNSString:(NSString *)type;
+
 - (void)reapplyAttributeCommandWithNSString:(NSString *)sourceName
                                withNSString:(NSString *)commandName
                                withNSString:(NSString *)phase

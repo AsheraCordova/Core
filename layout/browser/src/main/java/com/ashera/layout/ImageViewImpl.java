@@ -949,7 +949,10 @@ return getScaleType();				}
 			} else {
 				hTMLElement.setAttribute("src", (String) drawable);
 			}
-			
+		}
+		
+		if ("@null".equals(objValue) || drawable == null) {
+			hTMLElement.removeAttribute("src");
 		}
 	}
 	

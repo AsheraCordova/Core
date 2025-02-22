@@ -2479,6 +2479,14 @@ break;}
 	public static void addEventInfo(Map<String, Object> obj, r.android.widget.Chronometer chronometer, com.ashera.core.IFragment fragment) {
 		obj.put("text", chronometer.getText());
 	}
+	public static void addEventInfo(Map<String, Object> obj, java.util.List<Integer> checkedIds, com.ashera.core.IFragment fragment) {
+		java.util.List<Object> ids = new java.util.ArrayList<>();
+		for (int id : checkedIds) {
+			ids.add(fragment.getRootWidget().quickConvertBack(id, "id"));	
+		}
+		
+		obj.put("checkedIds", PluginInvoker.getJSONSafeObj(ids));
+	}
 	
 
 
@@ -3827,7 +3835,9 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		} else {
 			onClickListener = (View.OnClickListener) objValue;
 		}
-		setOnClick(w, nativeWidget, onClickListener);		
+		if (onClickListener != null) {
+			setOnClick(w, nativeWidget, onClickListener);
+		}
 	}
 
 	public static void setOnClick(IWidget w, Object nativeWidget, View.OnClickListener onClickListener) {

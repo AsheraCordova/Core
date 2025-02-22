@@ -455,6 +455,8 @@
      <source-file src="library/AndroidCore/src/CallSuper.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/Canvas.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="library/AndroidCore/src/Canvas.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidCore/src/Checkable.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="library/AndroidCore/src/Checkable.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/CheckBox.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="library/AndroidCore/src/CheckBox.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/Choreographer.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -921,8 +923,18 @@
      <source-file src="library/AndroidJMaterial/src/BadgeState.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidJMaterial/src/BadgeUtils.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
      <source-file src="library/AndroidJMaterial/src/BadgeUtils.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidJMaterial/src/CheckableGroup.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="library/AndroidJMaterial/src/CheckableGroup.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidJMaterial/src/Chip.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="library/AndroidJMaterial/src/Chip.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidJMaterial/src/ChipGroup.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="library/AndroidJMaterial/src/ChipGroup.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidJMaterial/src/FlowLayout.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="library/AndroidJMaterial/src/FlowLayout.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidJMaterial/src/MaterialAnimationUtils.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
      <source-file src="library/AndroidJMaterial/src/MaterialAnimationUtils.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidJMaterial/src/MaterialCheckable.h" target-dir="CorePlugin/AndroidJMaterial/src"/>
+     <source-file src="library/AndroidJMaterial/src/MaterialCheckable.m" target-dir="CorePlugin/AndroidJMaterial/src" compiler-flags="-fno-objc-arc"/>
      <!-- AndroidJMaterial end -->
      
   </platform>

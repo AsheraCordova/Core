@@ -178,6 +178,10 @@
                                          withASIWidget:(id<ASIWidget>)childWidget
                                            withBoolean:(jboolean)skipConvert;
 
+- (id)handleArrayTypeForGetWithId:(id)objValue
+                     withNSString:(NSString *)arrayType
+                     withNSString:(NSString *)finalArrayType;
+
 - (void)syncPojoToUi;
 
 - (void)storeModelToScopeFromModelParam;
@@ -258,6 +262,8 @@ __attribute__((unused)) static void ASBaseWidget_handlePathWithJavaUtilMap_withA
 __attribute__((unused)) static jint ASBaseWidget_compareByValueWithJavaUtilMap_withNSString_withNSString_withNSString_(ASBaseWidget *self, id<JavaUtilMap> payLoad, NSString *a, NSString *b, NSString *orderKey);
 
 __attribute__((unused)) static id ASBaseWidget_getAttributeValueFromWidgetWithASWidgetAttribute_withASIWidget_withBoolean_(ASBaseWidget *self, ASWidgetAttribute *widgetAttribute, id<ASIWidget> childWidget, jboolean skipConvert);
+
+__attribute__((unused)) static id ASBaseWidget_handleArrayTypeForGetWithId_withNSString_withNSString_(ASBaseWidget *self, id objValue, NSString *arrayType, NSString *finalArrayType);
 
 __attribute__((unused)) static void ASBaseWidget_syncPojoToUi(ASBaseWidget *self);
 
@@ -580,6 +586,19 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   if (converter != nil && objValue != nil) {
     id<JavaUtilMap> dependentAttributesMap = JreRetainedLocalValue([self getDependentAttributesMapWithASIConverter:converter]);
     convertedValue = ASPluginInvoker_convertFromWithASIConverter_withJavaUtilMap_withId_withASIFragment_(converter, dependentAttributesMap, objValue, fragment_);
+  }
+  return convertedValue;
+}
+
+- (id)quickConvertBackWithId:(id)objValue
+                withNSString:(NSString *)type {
+  id<ASIConverter> converter = ASPluginInvoker_getConverterWithNSString_(type);
+  if (objValue != nil && ASPluginInvoker_isNullWithId_(objValue)) {
+    objValue = nil;
+  }
+  id convertedValue = JreRetainedLocalValue(objValue);
+  if (converter != nil && objValue != nil) {
+    convertedValue = ASPluginInvoker_convertToWithASIConverter_withId_withASIFragment_(converter, objValue, fragment_);
   }
   return convertedValue;
 }
@@ -1031,6 +1050,12 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
                                          withASIWidget:(id<ASIWidget>)childWidget
                                            withBoolean:(jboolean)skipConvert {
   return ASBaseWidget_getAttributeValueFromWidgetWithASWidgetAttribute_withASIWidget_withBoolean_(self, widgetAttribute, childWidget, skipConvert);
+}
+
+- (id)handleArrayTypeForGetWithId:(id)objValue
+                     withNSString:(NSString *)arrayType
+                     withNSString:(NSString *)finalArrayType {
+  return ASBaseWidget_handleArrayTypeForGetWithId_withNSString_withNSString_(self, objValue, arrayType, finalArrayType);
 }
 
 - (id<ASIWidgetLifeCycleListener>)getListener {
@@ -1803,142 +1828,144 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 29, 30, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 29, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 20, 32, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 33, 34, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 33, 35, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 20, 36, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 31, 30, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 29, 32, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 20, 33, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 34, 35, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 34, 36, -1, -1, -1, -1 },
     { NULL, "V", 0x2, 20, 37, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 20, 38, -1, -1, -1, -1 },
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 38, 37, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 39, 40, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 39, 41, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x4, 42, 43, -1, 44, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 45, 23, -1, -1, -1, -1 },
-    { NULL, "LASILifeCycleDecorator;", 0x2, 46, 47, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 48, 49, -1, 50, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 51, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 52, 53, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 54, 53, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 55, 23, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 56, -1, -1 },
-    { NULL, "V", 0x1, 57, 58, -1, 59, -1, -1 },
-    { NULL, "V", 0x401, 33, 60, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, 61, 23, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, 61, 62, -1, -1, -1, -1 },
-    { NULL, "LASWidgetAttributeValue;", 0x1, 61, 63, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 39, 38, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 40, 41, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 40, 42, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x4, 43, 44, -1, 45, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 46, 23, -1, -1, -1, -1 },
+    { NULL, "LASILifeCycleDecorator;", 0x2, 47, 48, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 49, 50, -1, 51, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 52, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 53, 54, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 55, 54, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 56, 23, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 57, -1, -1 },
+    { NULL, "V", 0x1, 58, 59, -1, 60, -1, -1 },
+    { NULL, "V", 0x401, 34, 61, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 62, 23, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 62, 63, -1, -1, -1, -1 },
+    { NULL, "LASWidgetAttributeValue;", 0x1, 62, 64, -1, -1, -1, -1 },
     { NULL, "LASHasWidgets;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 64, 65, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 65, 66, -1, -1, -1, -1 },
     { NULL, "LASWidgetAttributeMap;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x2, 66, 23, -1, -1, -1, -1 },
-    { NULL, "LASWidgetAttribute;", 0x1, 67, 68, -1, -1, -1, -1 },
-    { NULL, "Z", 0x4, 69, 70, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 71, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 72, 73, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 74, 75, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 72, 76, -1, 77, -1, -1 },
-    { NULL, "V", 0x1, 72, 78, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 79, 80, -1, 81, -1, -1 },
-    { NULL, "V", 0x2, 82, 83, -1, 84, -1, -1 },
-    { NULL, "V", 0x1, 79, 85, -1, 86, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 67, 87, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 88, 3, -1, -1, -1, -1 },
-    { NULL, "I", 0x2, 89, 90, -1, 91, -1, -1 },
-    { NULL, "LNSObject;", 0x2, 92, 93, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x2, 67, 23, -1, -1, -1, -1 },
+    { NULL, "LASWidgetAttribute;", 0x1, 68, 69, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 70, 71, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 72, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 73, 74, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 75, 76, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 73, 77, -1, 78, -1, -1 },
+    { NULL, "V", 0x1, 73, 79, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 80, 81, -1, 82, -1, -1 },
+    { NULL, "V", 0x2, 83, 84, -1, 85, -1, -1 },
+    { NULL, "V", 0x1, 80, 86, -1, 87, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 68, 88, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 89, 3, -1, -1, -1, -1 },
+    { NULL, "I", 0x2, 90, 91, -1, 92, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 93, 94, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x2, 95, 42, -1, -1, -1, -1 },
     { NULL, "LASIWidgetLifeCycleListener;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 94, 95, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 96, 97, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x1, 96, 23, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x1, 98, 23, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 97, 98, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 99, 100, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASLoopParam;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 99, 100, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 101, 102, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 13, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 101, 23, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 102, 23, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 103, 23, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 104, 23, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 105, 23, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 106, 23, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 107, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 108, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 109, 23, -1, -1, -1, -1 },
     { NULL, "Z", 0x4, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 108, 109, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 110, -1, -1 },
+    { NULL, "V", 0x1, 110, 111, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 112, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 111, 98, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 113, 100, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 112, 113, -1, 114, -1, -1 },
-    { NULL, "V", 0x1, 112, 115, -1, 116, -1, -1 },
-    { NULL, "V", 0x1, 117, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 114, 115, -1, 116, -1, -1 },
+    { NULL, "V", 0x1, 114, 117, -1, 118, -1, -1 },
+    { NULL, "V", 0x1, 119, 23, -1, -1, -1, -1 },
     { NULL, "V", 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 118, 53, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 119, 120, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 120, 54, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 121, 122, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 121, 123, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 124, 125, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 124, 126, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 127, 128, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 123, 124, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 123, 125, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 126, 127, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 126, 128, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 129, 130, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 129, 53, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x1, 130, 23, -1, -1, -1, -1 },
-    { NULL, "Z", 0x4, 131, 1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 132, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x81, 133, 134, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 135, 136, -1, -1, -1, -1 },
-    { NULL, "V", 0x81, 137, 138, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 139, 23, -1, -1, -1, -1 },
-    { NULL, "V", 0x81, 137, 140, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 141, 98, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 142, 143, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 144, 30, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x89, 145, 146, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x89, 145, 147, -1, 148, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 149, 3, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x1, 150, 151, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 131, 54, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x1, 132, 23, -1, -1, -1, -1 },
+    { NULL, "Z", 0x4, 133, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 134, 13, -1, -1, -1, -1 },
+    { NULL, "V", 0x81, 135, 136, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 137, 138, -1, -1, -1, -1 },
+    { NULL, "V", 0x81, 139, 140, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 141, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x81, 139, 142, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 143, 100, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 144, 145, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 146, 30, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x89, 147, 148, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x89, 147, 149, -1, 150, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 151, 3, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 152, 153, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 152, 153, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 154, 155, -1, 156, -1, -1 },
-    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 157, -1, -1 },
-    { NULL, "V", 0x1, 158, 159, -1, 160, -1, -1 },
-    { NULL, "V", 0x1, 161, 23, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x1, 162, 163, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x1, 162, 65, -1, -1, -1, -1 },
-    { NULL, "LASIWidget;", 0x1, 162, 100, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 164, 165, -1, 166, -1, -1 },
-    { NULL, "LASIWidget;", 0x2, 167, 168, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 154, 155, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 156, 157, -1, 158, -1, -1 },
+    { NULL, "LJavaUtilSet;", 0x1, -1, -1, -1, 159, -1, -1 },
+    { NULL, "V", 0x1, 160, 161, -1, 162, -1, -1 },
+    { NULL, "V", 0x1, 163, 23, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x1, 164, 165, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x1, 164, 66, -1, -1, -1, -1 },
+    { NULL, "LASIWidget;", 0x1, 164, 102, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 166, 167, -1, 168, -1, -1 },
+    { NULL, "LASIWidget;", 0x2, 169, 170, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 169, 3, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 170, 171, -1, 172, -1, -1 },
-    { NULL, "V", 0x1, 173, 171, -1, 172, -1, -1 },
-    { NULL, "LNSString;", 0x1, 174, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 171, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 172, 173, -1, 174, -1, -1 },
+    { NULL, "V", 0x1, 175, 173, -1, 174, -1, -1 },
+    { NULL, "LNSString;", 0x1, 176, 23, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 175, 23, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 177, 23, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 176, 23, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x81, 177, 138, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 178, 23, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x81, 179, 140, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LASIFragment;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 178, -1, -1 },
-    { NULL, "V", 0x1, 179, 13, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 180, -1, -1 },
+    { NULL, "V", 0x1, 181, 13, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1974,168 +2001,170 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
   methods[28].selector = @selector(initialized);
   methods[29].selector = @selector(applyStyleToWidgets);
   methods[30].selector = @selector(quickConvertWithId:withNSString:);
-  methods[31].selector = @selector(quickConvertWithId:withNSString:withNSString:withNSString:);
-  methods[32].selector = @selector(applyStyleToWidgetWithASWidgetAttribute:withId:);
-  methods[33].selector = @selector(setAttributeWithNSString:withId:withBoolean:);
-  methods[34].selector = @selector(setAttributeWithASWidgetAttribute:withId:withBoolean:);
-  methods[35].selector = @selector(applyStyleToWidgetWithASWidgetAttribute:withASIWidget:withId:withNSString:);
-  methods[36].selector = @selector(applyStyleToWidgetWithASWidgetAttribute:withASIWidget:withId:withNSString:withBoolean:);
-  methods[37].selector = @selector(attributeBuffered);
-  methods[38].selector = @selector(applyStyleToWidgetWithoutBufferingWithASWidgetAttribute:withASIWidget:withId:withNSString:withBoolean:);
-  methods[39].selector = @selector(handleArrayTypeWithASWidgetAttribute:withNSString:withId:);
-  methods[40].selector = @selector(handleArrayTypeWithId:withNSString:withNSString:);
-  methods[41].selector = @selector(getDependentAttributesMapWithASIConverter:);
-  methods[42].selector = @selector(getConvertedValueWithNSString:);
-  methods[43].selector = @selector(getDecoratorWithASWidgetAttribute:);
-  methods[44].selector = @selector(createWithASIFragment:withJavaUtilMap:);
-  methods[45].selector = @selector(getUserDataWithNSString:);
-  methods[46].selector = @selector(storeUserDataWithNSString:withId:);
-  methods[47].selector = @selector(storeInTempCacheWithNSString:withId:);
-  methods[48].selector = @selector(getFromTempCacheWithNSString:);
-  methods[49].selector = @selector(getParams);
-  methods[50].selector = @selector(setParamsWithJavaUtilMap:);
-  methods[51].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
-  methods[52].selector = @selector(getAttributeValueWithNSString:);
-  methods[53].selector = @selector(getAttributeValueWithNSString:withASWidgetAttributeMap:);
-  methods[54].selector = @selector(getAttributeValueWithASWidgetAttribute:withASWidgetAttributeMap:);
-  methods[55].selector = @selector(getParent);
-  methods[56].selector = @selector(setParentWithASHasWidgets:);
-  methods[57].selector = @selector(getAttributes);
-  methods[58].selector = @selector(getLocalName);
-  methods[59].selector = @selector(stripOSWithNSString:);
-  methods[60].selector = @selector(getAttributeWithASHasWidgets:withNSString:withNSString:);
-  methods[61].selector = @selector(checkIfAttributeMatchesWithASWidgetAttributeValue:);
-  methods[62].selector = @selector(convertToIntFromDpWithNSString:);
-  methods[63].selector = @selector(updateWidgetMapWithASWidgetAttributeMap:);
-  methods[64].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
-  methods[65].selector = @selector(updateWidgetMapWithASWidgetAttribute:withJavaUtilList:);
-  methods[66].selector = @selector(updateWidgetMapWithASWidgetAttribute:withASWidgetAttributeValue:);
-  methods[67].selector = @selector(executeCommandWithASIWidget:withJavaUtilList:withASIWidget_CommandCallBack:withInt:);
-  methods[68].selector = @selector(handlePathWithJavaUtilMap:withASIWidget:withInt:);
-  methods[69].selector = @selector(executeCommandWithJavaUtilMap:withASIWidget_CommandCallBack:withInt:);
-  methods[70].selector = @selector(getAttributeWithNSString:withBoolean:);
-  methods[71].selector = @selector(requestLayoutNInvalidateIfRequiredWithInt:);
-  methods[72].selector = @selector(compareByValueWithJavaUtilMap:withNSString:withNSString:withNSString:);
-  methods[73].selector = @selector(getAttributeValueFromWidgetWithASWidgetAttribute:withASIWidget:withBoolean:);
-  methods[74].selector = @selector(getListener);
-  methods[75].selector = @selector(setListenerWithASIWidgetLifeCycleListener:);
-  methods[76].selector = @selector(restoreToDefaultState);
-  methods[77].selector = @selector(findWidgetByIdWithNSString:);
-  methods[78].selector = @selector(isInvalidateOnFrameChange);
-  methods[79].selector = @selector(setInvalidateOnFrameChangeWithBoolean:);
-  methods[80].selector = @selector(getModelPojoToUiParams);
-  methods[81].selector = @selector(getModelPojoToUi);
-  methods[82].selector = @selector(getModelUiToPojo);
-  methods[83].selector = @selector(getModelParam);
-  methods[84].selector = @selector(getLoopParam);
-  methods[85].selector = @selector(setLoopParamWithASLoopParam:);
-  methods[86].selector = @selector(initWithNSString:withNSString:);
-  methods[87].selector = @selector(getModelIdPath);
-  methods[88].selector = @selector(setModelIdPathWithNSString:);
-  methods[89].selector = @selector(getModelSyncEvents);
-  methods[90].selector = @selector(getModelUiToPojoEventIds);
-  methods[91].selector = @selector(setModelUiToPojoEventIdsWithNSString:);
-  methods[92].selector = @selector(setModelSyncEventsWithNSString:);
-  methods[93].selector = @selector(setModelParamWithNSString:);
-  methods[94].selector = @selector(setModelPojoToUiWithNSString:);
-  methods[95].selector = @selector(setModelPojoToUiParamsWithNSString:);
-  methods[96].selector = @selector(setModelUiToPojoWithNSString:);
-  methods[97].selector = @selector(applyModelAttributes);
-  methods[98].selector = @selector(removeObjectListenersWithASIWidget:);
-  methods[99].selector = @selector(getEventBusHandlers);
-  methods[100].selector = @selector(applyModelToWidget);
-  methods[101].selector = @selector(syncPojoToUi);
-  methods[102].selector = @selector(storeModelToScopeFromModelParam);
-  methods[103].selector = @selector(requestLayout);
-  methods[104].selector = @selector(invalidate);
-  methods[105].selector = @selector(setVisibleWithBoolean:);
-  methods[106].selector = @selector(isInitialised);
-  methods[107].selector = @selector(getBaseLine);
-  methods[108].selector = @selector(updateModelToEventMapWithJavaUtilMap:withNSString:withNSString:);
-  methods[109].selector = @selector(updateModelToEventMapWithJavaUtilMap:withNSString:withASLoopParam:);
-  methods[110].selector = @selector(syncModelFromUiToPojoWithNSString:);
-  methods[111].selector = @selector(handleModelUiToPojo);
-  methods[112].selector = @selector(getModelByPathWithNSString:withId:);
-  methods[113].selector = @selector(updateModelByPathWithNSString:withId:withId:);
-  methods[114].selector = @selector(storeModelToScopeWithNSString:withASModelScope:withId:);
-  methods[115].selector = @selector(storeModelToScopeWithNSString:withASModelScope:withId:withASLoopParam:);
-  methods[116].selector = @selector(getModelFromScopeWithNSString:withASModelScope:);
-  methods[117].selector = @selector(getModelFromScopeWithNSString:withASModelScope:withASLoopParam:);
-  methods[118].selector = @selector(changeModelDataTypeWithASModelDataType:withId:);
-  methods[119].selector = @selector(notifyDataSetChanged);
-  methods[120].selector = @selector(updateModelDataWithNSString:withId:);
-  methods[121].selector = @selector(findNearestViewWithNSString:);
-  methods[122].selector = @selector(getBooleanWithId:);
-  methods[123].selector = @selector(hasFeatureWithNSString:withNSString:);
-  methods[124].selector = @selector(runAttributeCommandsWithId:withNSString:withNSString:withNSObjectArray:);
-  methods[125].selector = @selector(addDecoratorWithASILifeCycleDecorator:);
-  methods[126].selector = @selector(executeMethodListenersWithNSString:withNSObjectArray:);
-  methods[127].selector = @selector(hasMethodListenerWithNSString:);
-  methods[128].selector = @selector(executeMethodListenersWithNSString:withJavaLangRunnable:withNSObjectArray:);
-  methods[129].selector = @selector(setOnMethodCalledWithBoolean:);
-  methods[130].selector = @selector(setFieldUsingReflectionWithId:withNSString:withId:);
-  methods[131].selector = @selector(getFieldValueUsingReflectionWithId:withNSString:);
-  methods[132].selector = @selector(invokePrivateMethodUsingReflectionWithId:withNSString:withNSObjectArray:);
-  methods[133].selector = @selector(invokePrivateMethodUsingReflectionWithId:withNSString:withIOSClassArray:withNSObjectArray:);
-  methods[134].selector = @selector(createWrapperViewHolderWithInt:);
-  methods[135].selector = @selector(createWrapperViewWithId:withInt:);
-  methods[136].selector = @selector(addForegroundIfNeeded);
-  methods[137].selector = @selector(getForeground);
-  methods[138].selector = @selector(isAfterParentInitRequired);
-  methods[139].selector = @selector(afterParentInit);
-  methods[140].selector = @selector(drawableStateChanged);
-  methods[141].selector = @selector(getGroupName);
-  methods[142].selector = @selector(setDrawableBoundsWithInt:withInt:withInt:withInt:);
-  methods[143].selector = @selector(setEventBubblersWithJavaUtilCollection:);
-  methods[144].selector = @selector(getEventBubblers);
-  methods[145].selector = @selector(applyThemeConstructorArgsStyleWithNSString:withJavaUtilMap:);
-  methods[146].selector = @selector(applyThemeStyleWithNSString:);
-  methods[147].selector = @selector(loadLazyWidgetsWithASHasWidgets:withInt:withNSString:withASLoopParam:);
-  methods[148].selector = @selector(loadLazyWidgetsWithASHasWidgets:);
-  methods[149].selector = @selector(loadLazyWidgetsWithASLoopParam:);
-  methods[150].selector = @selector(loadAndAddWidgetsWithJavaUtilIterator:withASIWidget:withId:withNSString:withASLoopParam:);
-  methods[151].selector = @selector(loadWidgetWithASIWidget:withASIWidget:withId:withNSString:withASLoopParam:withInt:);
-  methods[152].selector = @selector(getValidationErrorDisplayType);
-  methods[153].selector = @selector(setValidationErrorDisplayTypeWithInt:);
-  methods[154].selector = @selector(setCustomErrorMessageKeysWithJavaUtilList:);
-  methods[155].selector = @selector(setCustomErrorMessageValuesWithJavaUtilList:);
-  methods[156].selector = @selector(getCustomMessageWithNSString:);
-  methods[157].selector = @selector(getFormGroupId);
-  methods[158].selector = @selector(getErrorStyle);
-  methods[159].selector = @selector(setErrorStyleWithNSString:);
-  methods[160].selector = @selector(getNormalStyle);
-  methods[161].selector = @selector(setNormalStyleWithNSString:);
-  methods[162].selector = @selector(invokeMethodWithNSString:withNSObjectArray:);
-  methods[163].selector = @selector(isWidgetDisposed);
-  methods[164].selector = @selector(getRootFragment);
-  methods[165].selector = @selector(getUnResolvedAttributes);
-  methods[166].selector = @selector(addUnResolvedAttributeWithNSString:withNSString:);
+  methods[31].selector = @selector(quickConvertBackWithId:withNSString:);
+  methods[32].selector = @selector(quickConvertWithId:withNSString:withNSString:withNSString:);
+  methods[33].selector = @selector(applyStyleToWidgetWithASWidgetAttribute:withId:);
+  methods[34].selector = @selector(setAttributeWithNSString:withId:withBoolean:);
+  methods[35].selector = @selector(setAttributeWithASWidgetAttribute:withId:withBoolean:);
+  methods[36].selector = @selector(applyStyleToWidgetWithASWidgetAttribute:withASIWidget:withId:withNSString:);
+  methods[37].selector = @selector(applyStyleToWidgetWithASWidgetAttribute:withASIWidget:withId:withNSString:withBoolean:);
+  methods[38].selector = @selector(attributeBuffered);
+  methods[39].selector = @selector(applyStyleToWidgetWithoutBufferingWithASWidgetAttribute:withASIWidget:withId:withNSString:withBoolean:);
+  methods[40].selector = @selector(handleArrayTypeWithASWidgetAttribute:withNSString:withId:);
+  methods[41].selector = @selector(handleArrayTypeWithId:withNSString:withNSString:);
+  methods[42].selector = @selector(getDependentAttributesMapWithASIConverter:);
+  methods[43].selector = @selector(getConvertedValueWithNSString:);
+  methods[44].selector = @selector(getDecoratorWithASWidgetAttribute:);
+  methods[45].selector = @selector(createWithASIFragment:withJavaUtilMap:);
+  methods[46].selector = @selector(getUserDataWithNSString:);
+  methods[47].selector = @selector(storeUserDataWithNSString:withId:);
+  methods[48].selector = @selector(storeInTempCacheWithNSString:withId:);
+  methods[49].selector = @selector(getFromTempCacheWithNSString:);
+  methods[50].selector = @selector(getParams);
+  methods[51].selector = @selector(setParamsWithJavaUtilMap:);
+  methods[52].selector = @selector(setAttributeWithASWidgetAttribute:withNSString:withId:withASILifeCycleDecorator:);
+  methods[53].selector = @selector(getAttributeValueWithNSString:);
+  methods[54].selector = @selector(getAttributeValueWithNSString:withASWidgetAttributeMap:);
+  methods[55].selector = @selector(getAttributeValueWithASWidgetAttribute:withASWidgetAttributeMap:);
+  methods[56].selector = @selector(getParent);
+  methods[57].selector = @selector(setParentWithASHasWidgets:);
+  methods[58].selector = @selector(getAttributes);
+  methods[59].selector = @selector(getLocalName);
+  methods[60].selector = @selector(stripOSWithNSString:);
+  methods[61].selector = @selector(getAttributeWithASHasWidgets:withNSString:withNSString:);
+  methods[62].selector = @selector(checkIfAttributeMatchesWithASWidgetAttributeValue:);
+  methods[63].selector = @selector(convertToIntFromDpWithNSString:);
+  methods[64].selector = @selector(updateWidgetMapWithASWidgetAttributeMap:);
+  methods[65].selector = @selector(updateMeasuredDimensionWithInt:withInt:);
+  methods[66].selector = @selector(updateWidgetMapWithASWidgetAttribute:withJavaUtilList:);
+  methods[67].selector = @selector(updateWidgetMapWithASWidgetAttribute:withASWidgetAttributeValue:);
+  methods[68].selector = @selector(executeCommandWithASIWidget:withJavaUtilList:withASIWidget_CommandCallBack:withInt:);
+  methods[69].selector = @selector(handlePathWithJavaUtilMap:withASIWidget:withInt:);
+  methods[70].selector = @selector(executeCommandWithJavaUtilMap:withASIWidget_CommandCallBack:withInt:);
+  methods[71].selector = @selector(getAttributeWithNSString:withBoolean:);
+  methods[72].selector = @selector(requestLayoutNInvalidateIfRequiredWithInt:);
+  methods[73].selector = @selector(compareByValueWithJavaUtilMap:withNSString:withNSString:withNSString:);
+  methods[74].selector = @selector(getAttributeValueFromWidgetWithASWidgetAttribute:withASIWidget:withBoolean:);
+  methods[75].selector = @selector(handleArrayTypeForGetWithId:withNSString:withNSString:);
+  methods[76].selector = @selector(getListener);
+  methods[77].selector = @selector(setListenerWithASIWidgetLifeCycleListener:);
+  methods[78].selector = @selector(restoreToDefaultState);
+  methods[79].selector = @selector(findWidgetByIdWithNSString:);
+  methods[80].selector = @selector(isInvalidateOnFrameChange);
+  methods[81].selector = @selector(setInvalidateOnFrameChangeWithBoolean:);
+  methods[82].selector = @selector(getModelPojoToUiParams);
+  methods[83].selector = @selector(getModelPojoToUi);
+  methods[84].selector = @selector(getModelUiToPojo);
+  methods[85].selector = @selector(getModelParam);
+  methods[86].selector = @selector(getLoopParam);
+  methods[87].selector = @selector(setLoopParamWithASLoopParam:);
+  methods[88].selector = @selector(initWithNSString:withNSString:);
+  methods[89].selector = @selector(getModelIdPath);
+  methods[90].selector = @selector(setModelIdPathWithNSString:);
+  methods[91].selector = @selector(getModelSyncEvents);
+  methods[92].selector = @selector(getModelUiToPojoEventIds);
+  methods[93].selector = @selector(setModelUiToPojoEventIdsWithNSString:);
+  methods[94].selector = @selector(setModelSyncEventsWithNSString:);
+  methods[95].selector = @selector(setModelParamWithNSString:);
+  methods[96].selector = @selector(setModelPojoToUiWithNSString:);
+  methods[97].selector = @selector(setModelPojoToUiParamsWithNSString:);
+  methods[98].selector = @selector(setModelUiToPojoWithNSString:);
+  methods[99].selector = @selector(applyModelAttributes);
+  methods[100].selector = @selector(removeObjectListenersWithASIWidget:);
+  methods[101].selector = @selector(getEventBusHandlers);
+  methods[102].selector = @selector(applyModelToWidget);
+  methods[103].selector = @selector(syncPojoToUi);
+  methods[104].selector = @selector(storeModelToScopeFromModelParam);
+  methods[105].selector = @selector(requestLayout);
+  methods[106].selector = @selector(invalidate);
+  methods[107].selector = @selector(setVisibleWithBoolean:);
+  methods[108].selector = @selector(isInitialised);
+  methods[109].selector = @selector(getBaseLine);
+  methods[110].selector = @selector(updateModelToEventMapWithJavaUtilMap:withNSString:withNSString:);
+  methods[111].selector = @selector(updateModelToEventMapWithJavaUtilMap:withNSString:withASLoopParam:);
+  methods[112].selector = @selector(syncModelFromUiToPojoWithNSString:);
+  methods[113].selector = @selector(handleModelUiToPojo);
+  methods[114].selector = @selector(getModelByPathWithNSString:withId:);
+  methods[115].selector = @selector(updateModelByPathWithNSString:withId:withId:);
+  methods[116].selector = @selector(storeModelToScopeWithNSString:withASModelScope:withId:);
+  methods[117].selector = @selector(storeModelToScopeWithNSString:withASModelScope:withId:withASLoopParam:);
+  methods[118].selector = @selector(getModelFromScopeWithNSString:withASModelScope:);
+  methods[119].selector = @selector(getModelFromScopeWithNSString:withASModelScope:withASLoopParam:);
+  methods[120].selector = @selector(changeModelDataTypeWithASModelDataType:withId:);
+  methods[121].selector = @selector(notifyDataSetChanged);
+  methods[122].selector = @selector(updateModelDataWithNSString:withId:);
+  methods[123].selector = @selector(findNearestViewWithNSString:);
+  methods[124].selector = @selector(getBooleanWithId:);
+  methods[125].selector = @selector(hasFeatureWithNSString:withNSString:);
+  methods[126].selector = @selector(runAttributeCommandsWithId:withNSString:withNSString:withNSObjectArray:);
+  methods[127].selector = @selector(addDecoratorWithASILifeCycleDecorator:);
+  methods[128].selector = @selector(executeMethodListenersWithNSString:withNSObjectArray:);
+  methods[129].selector = @selector(hasMethodListenerWithNSString:);
+  methods[130].selector = @selector(executeMethodListenersWithNSString:withJavaLangRunnable:withNSObjectArray:);
+  methods[131].selector = @selector(setOnMethodCalledWithBoolean:);
+  methods[132].selector = @selector(setFieldUsingReflectionWithId:withNSString:withId:);
+  methods[133].selector = @selector(getFieldValueUsingReflectionWithId:withNSString:);
+  methods[134].selector = @selector(invokePrivateMethodUsingReflectionWithId:withNSString:withNSObjectArray:);
+  methods[135].selector = @selector(invokePrivateMethodUsingReflectionWithId:withNSString:withIOSClassArray:withNSObjectArray:);
+  methods[136].selector = @selector(createWrapperViewHolderWithInt:);
+  methods[137].selector = @selector(createWrapperViewWithId:withInt:);
+  methods[138].selector = @selector(addForegroundIfNeeded);
+  methods[139].selector = @selector(getForeground);
+  methods[140].selector = @selector(isAfterParentInitRequired);
+  methods[141].selector = @selector(afterParentInit);
+  methods[142].selector = @selector(drawableStateChanged);
+  methods[143].selector = @selector(getGroupName);
+  methods[144].selector = @selector(setDrawableBoundsWithInt:withInt:withInt:withInt:);
+  methods[145].selector = @selector(setEventBubblersWithJavaUtilCollection:);
+  methods[146].selector = @selector(getEventBubblers);
+  methods[147].selector = @selector(applyThemeConstructorArgsStyleWithNSString:withJavaUtilMap:);
+  methods[148].selector = @selector(applyThemeStyleWithNSString:);
+  methods[149].selector = @selector(loadLazyWidgetsWithASHasWidgets:withInt:withNSString:withASLoopParam:);
+  methods[150].selector = @selector(loadLazyWidgetsWithASHasWidgets:);
+  methods[151].selector = @selector(loadLazyWidgetsWithASLoopParam:);
+  methods[152].selector = @selector(loadAndAddWidgetsWithJavaUtilIterator:withASIWidget:withId:withNSString:withASLoopParam:);
+  methods[153].selector = @selector(loadWidgetWithASIWidget:withASIWidget:withId:withNSString:withASLoopParam:withInt:);
+  methods[154].selector = @selector(getValidationErrorDisplayType);
+  methods[155].selector = @selector(setValidationErrorDisplayTypeWithInt:);
+  methods[156].selector = @selector(setCustomErrorMessageKeysWithJavaUtilList:);
+  methods[157].selector = @selector(setCustomErrorMessageValuesWithJavaUtilList:);
+  methods[158].selector = @selector(getCustomMessageWithNSString:);
+  methods[159].selector = @selector(getFormGroupId);
+  methods[160].selector = @selector(getErrorStyle);
+  methods[161].selector = @selector(setErrorStyleWithNSString:);
+  methods[162].selector = @selector(getNormalStyle);
+  methods[163].selector = @selector(setNormalStyleWithNSString:);
+  methods[164].selector = @selector(invokeMethodWithNSString:withNSObjectArray:);
+  methods[165].selector = @selector(isWidgetDisposed);
+  methods[166].selector = @selector(getRootFragment);
+  methods[167].selector = @selector(getUnResolvedAttributes);
+  methods[168].selector = @selector(addUnResolvedAttributeWithNSString:withNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "parent_", "LASHasWidgets;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "attributes_", "LASWidgetAttributeMap;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "params_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 180, -1 },
-    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 180, -1 },
-    { "tmpCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 180, -1 },
+    { "params_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 182, -1 },
+    { "userData_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 182, -1 },
+    { "tmpCache_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 182, -1 },
     { "listener_", "LASIWidgetLifeCycleListener;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "localName_", "LNSString;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "groupName_", "LNSString;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "eventBus_", "LASEventBus;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "cachedDecorators_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 181, -1 },
-    { "id__", "LNSString;", .constantValue.asLong = 0, 0x2, 182, -1, -1, -1 },
+    { "cachedDecorators_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 183, -1 },
+    { "id__", "LNSString;", .constantValue.asLong = 0, 0x2, 184, -1, -1, -1 },
     { "behaviorGroupId_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "eventBusHandlers_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 183, -1 },
+    { "eventBusHandlers_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 185, -1 },
     { "initialised_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "fragment_", "LASIFragment;", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
-    { "attributeCommandChainMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 184, -1 },
-    { "updateAttributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 185, -1 },
-    { "attributeCommandMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 186, -1 },
-    { "commandPhases_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 187, -1 },
-    { "bufferedAttributes_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 188, -1 },
-    { "methodListeners_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 189, -1 },
+    { "attributeCommandChainMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 186, -1 },
+    { "updateAttributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 187, -1 },
+    { "attributeCommandMap_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 188, -1 },
+    { "commandPhases_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 189, -1 },
+    { "bufferedAttributes_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 190, -1 },
+    { "methodListeners_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x4, -1, -1, 191, -1 },
     { "onMethodCalled_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "zIndex_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "eventBubblers_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 190, -1 },
+    { "eventBubblers_", "LJavaUtilSet;", .constantValue.asLong = 0, 0x2, -1, -1, 192, -1 },
     { "componentId_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "animator_", "LNSObject;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "modelParam_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -2151,12 +2180,12 @@ __attribute__((unused)) static ASBaseWidget_$Lambda$2 *create_ASBaseWidget_$Lamb
     { "errorStyle_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "normalStyle_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "validationErrorDisplayType_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "customErrorMessageKeys_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 191, -1 },
-    { "customErrorMessageValues_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 191, -1 },
-    { "unresolvedAttributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 192, -1 },
+    { "customErrorMessageKeys_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 193, -1 },
+    { "customErrorMessageValues_", "LJavaUtilList;", .constantValue.asLong = 0, 0x2, -1, -1, 193, -1 },
+    { "unresolvedAttributes_", "LJavaUtilMap;", .constantValue.asLong = 0, 0x2, -1, -1, 194, -1 },
   };
-  static const void *ptrTable[] = { "setAnimator", "LNSObject;", "setZIndex", "I", "registerForAttributeCommandChainWithPhase", "LNSString;[LNSString;", "registerForAttributeCommandChain", "[LNSString;", "applyAttributeCommand", "LNSString;LNSString;[LNSString;Z[LNSObject;", "reapplyAttributeCommand", "LNSString;LNSString;LNSString;[LNSObject;", "rerunCommandOnSource", "LNSString;LNSString;", "getAttributeCommandValue", "LNSString;LNSString;LNSString;", "getAttributeCommand", "LNSString;LNSString;[LNSObject;", "addAttributeCommandToChain", "LNSString;[LNSString;LASAttributeCommand;", "applyStyleToWidget", "LNSString;LNSString;LASAttributeCommandChain;", "getAttributeCommandChain", "LNSString;", "removeAttributeCommandFromChain", "unwrap", "setId", "setBehaviorGroupId", "setComponentId", "quickConvert", "LNSObject;LNSString;", "LNSObject;LNSString;LNSString;LNSString;", "LASWidgetAttribute;LNSObject;", "setAttribute", "LNSString;LNSObject;Z", "LASWidgetAttribute;LNSObject;Z", "LASWidgetAttribute;LASIWidget;LNSObject;LNSString;", "LASWidgetAttribute;LASIWidget;LNSObject;LNSString;Z", "applyStyleToWidgetWithoutBuffering", "handleArrayType", "LASWidgetAttribute;LNSString;LNSObject;", "LNSObject;LNSString;LNSString;", "getDependentAttributesMap", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getConvertedValue", "getDecorator", "LASWidgetAttribute;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "getUserData", "storeUserData", "LNSString;LNSObject;", "storeInTempCache", "getFromTempCache", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setParams", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttributeValue", "LNSString;LASWidgetAttributeMap;", "LASWidgetAttribute;LASWidgetAttributeMap;", "setParent", "LASHasWidgets;", "stripOS", "getAttribute", "LASHasWidgets;LNSString;LNSString;", "checkIfAttributeMatches", "LASWidgetAttributeValue;", "convertToIntFromDp", "updateWidgetMap", "LASWidgetAttributeMap;", "updateMeasuredDimension", "II", "LASWidgetAttribute;LJavaUtilList;", "(Lcom/ashera/widget/WidgetAttribute;Ljava/util/List<Lcom/ashera/widget/WidgetAttributeValue;>;)V", "LASWidgetAttribute;LASWidgetAttributeValue;", "executeCommand", "LASIWidget;LJavaUtilList;LASIWidget_CommandCallBack;I", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "handlePath", "LJavaUtilMap;LASIWidget;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget;I)V", "LJavaUtilMap;LASIWidget_CommandCallBack;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "LNSString;Z", "requestLayoutNInvalidateIfRequired", "compareByValue", "LJavaUtilMap;LNSString;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I", "getAttributeValueFromWidget", "LASWidgetAttribute;LASIWidget;Z", "setListener", "LASIWidgetLifeCycleListener;", "findWidgetById", "setInvalidateOnFrameChange", "Z", "setLoopParam", "LASLoopParam;", "setModelIdPath", "setModelUiToPojoEventIds", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelPojoToUiParams", "setModelUiToPojo", "removeObjectListeners", "LASIWidget;", "()Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;", "setVisible", "updateModelToEventMap", "LJavaUtilMap;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;)V", "LJavaUtilMap;LNSString;LASLoopParam;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Lcom/ashera/model/LoopParam;)V", "syncModelFromUiToPojo", "getModelByPath", "updateModelByPath", "LNSString;LNSObject;LNSObject;", "storeModelToScope", "LNSString;LASModelScope;LNSObject;", "LNSString;LASModelScope;LNSObject;LASLoopParam;", "getModelFromScope", "LNSString;LASModelScope;", "LNSString;LASModelScope;LASLoopParam;", "changeModelDataType", "LASModelDataType;LNSObject;", "updateModelData", "findNearestView", "getBoolean", "hasFeature", "runAttributeCommands", "LNSObject;LNSString;LNSString;[LNSObject;", "addDecorator", "LASILifeCycleDecorator;", "executeMethodListeners", "LNSString;[LNSObject;", "hasMethodListener", "LNSString;LJavaLangRunnable;[LNSObject;", "setOnMethodCalled", "setFieldUsingReflection", "LNSObject;LNSString;LNSObject;", "getFieldValueUsingReflection", "invokePrivateMethodUsingReflection", "LNSObject;LNSString;[LNSObject;", "LNSObject;LNSString;[LIOSClass;[LNSObject;", "(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class<*>;[Ljava/lang/Object;)Ljava/lang/Object;", "createWrapperViewHolder", "createWrapperView", "LNSObject;I", "setDrawableBounds", "IIII", "setEventBubblers", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/Integer;>;)V", "()Ljava/util/Set<Ljava/lang/Integer;>;", "applyThemeConstructorArgsStyle", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "applyThemeStyle", "loadLazyWidgets", "LASHasWidgets;ILNSString;LASLoopParam;", "loadAndAddWidgets", "LJavaUtilIterator;LASIWidget;LNSObject;LNSString;LASLoopParam;", "(Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;Lcom/ashera/widget/IWidget;Ljava/lang/Object;Ljava/lang/String;Lcom/ashera/model/LoopParam;)V", "loadWidget", "LASIWidget;LASIWidget;LNSObject;LNSString;LASLoopParam;I", "setValidationErrorDisplayType", "setCustomErrorMessageKeys", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/String;>;)V", "setCustomErrorMessageValues", "getCustomMessage", "setErrorStyle", "setNormalStyle", "invokeMethod", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "addUnResolvedAttribute", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/ILifeCycleDecorator;>;", "id", "Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/AttributeCommandChain;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Ljava/lang/String;>;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/AttributeCommand;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Ljava/lang/String;>;>;", "Ljava/util/List<Lcom/ashera/widget/BaseWidget$EventHolder;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Lcom/ashera/widget/ILifeCycleDecorator;>;>;", "Ljava/util/Set<Ljava/lang/Integer;>;", "Ljava/util/List<Ljava/lang/String;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "LASBaseWidget_LazyBaseWidget;LASBaseWidget_EventHolder;" };
-  static const J2ObjcClassInfo _ASBaseWidget = { "BaseWidget", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 167, 42, -1, 193, -1, -1, -1 };
+  static const void *ptrTable[] = { "setAnimator", "LNSObject;", "setZIndex", "I", "registerForAttributeCommandChainWithPhase", "LNSString;[LNSString;", "registerForAttributeCommandChain", "[LNSString;", "applyAttributeCommand", "LNSString;LNSString;[LNSString;Z[LNSObject;", "reapplyAttributeCommand", "LNSString;LNSString;LNSString;[LNSObject;", "rerunCommandOnSource", "LNSString;LNSString;", "getAttributeCommandValue", "LNSString;LNSString;LNSString;", "getAttributeCommand", "LNSString;LNSString;[LNSObject;", "addAttributeCommandToChain", "LNSString;[LNSString;LASAttributeCommand;", "applyStyleToWidget", "LNSString;LNSString;LASAttributeCommandChain;", "getAttributeCommandChain", "LNSString;", "removeAttributeCommandFromChain", "unwrap", "setId", "setBehaviorGroupId", "setComponentId", "quickConvert", "LNSObject;LNSString;", "quickConvertBack", "LNSObject;LNSString;LNSString;LNSString;", "LASWidgetAttribute;LNSObject;", "setAttribute", "LNSString;LNSObject;Z", "LASWidgetAttribute;LNSObject;Z", "LASWidgetAttribute;LASIWidget;LNSObject;LNSString;", "LASWidgetAttribute;LASIWidget;LNSObject;LNSString;Z", "applyStyleToWidgetWithoutBuffering", "handleArrayType", "LASWidgetAttribute;LNSString;LNSObject;", "LNSObject;LNSString;LNSString;", "getDependentAttributesMap", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getConvertedValue", "getDecorator", "LASWidgetAttribute;", "create", "LASIFragment;LJavaUtilMap;", "(Lcom/ashera/core/IFragment;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "getUserData", "storeUserData", "LNSString;LNSObject;", "storeInTempCache", "getFromTempCache", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "setParams", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttributeValue", "LNSString;LASWidgetAttributeMap;", "LASWidgetAttribute;LASWidgetAttributeMap;", "setParent", "LASHasWidgets;", "stripOS", "getAttribute", "LASHasWidgets;LNSString;LNSString;", "checkIfAttributeMatches", "LASWidgetAttributeValue;", "convertToIntFromDp", "updateWidgetMap", "LASWidgetAttributeMap;", "updateMeasuredDimension", "II", "LASWidgetAttribute;LJavaUtilList;", "(Lcom/ashera/widget/WidgetAttribute;Ljava/util/List<Lcom/ashera/widget/WidgetAttributeValue;>;)V", "LASWidgetAttribute;LASWidgetAttributeValue;", "executeCommand", "LASIWidget;LJavaUtilList;LASIWidget_CommandCallBack;I", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "handlePath", "LJavaUtilMap;LASIWidget;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget;I)V", "LJavaUtilMap;LASIWidget_CommandCallBack;I", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/widget/IWidget$CommandCallBack;I)V", "LNSString;Z", "requestLayoutNInvalidateIfRequired", "compareByValue", "LJavaUtilMap;LNSString;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I", "getAttributeValueFromWidget", "LASWidgetAttribute;LASIWidget;Z", "handleArrayTypeForGet", "setListener", "LASIWidgetLifeCycleListener;", "findWidgetById", "setInvalidateOnFrameChange", "Z", "setLoopParam", "LASLoopParam;", "setModelIdPath", "setModelUiToPojoEventIds", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelPojoToUiParams", "setModelUiToPojo", "removeObjectListeners", "LASIWidget;", "()Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;", "setVisible", "updateModelToEventMap", "LJavaUtilMap;LNSString;LNSString;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/String;)V", "LJavaUtilMap;LNSString;LASLoopParam;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Lcom/ashera/model/LoopParam;)V", "syncModelFromUiToPojo", "getModelByPath", "updateModelByPath", "LNSString;LNSObject;LNSObject;", "storeModelToScope", "LNSString;LASModelScope;LNSObject;", "LNSString;LASModelScope;LNSObject;LASLoopParam;", "getModelFromScope", "LNSString;LASModelScope;", "LNSString;LASModelScope;LASLoopParam;", "changeModelDataType", "LASModelDataType;LNSObject;", "updateModelData", "findNearestView", "getBoolean", "hasFeature", "runAttributeCommands", "LNSObject;LNSString;LNSString;[LNSObject;", "addDecorator", "LASILifeCycleDecorator;", "executeMethodListeners", "LNSString;[LNSObject;", "hasMethodListener", "LNSString;LJavaLangRunnable;[LNSObject;", "setOnMethodCalled", "setFieldUsingReflection", "LNSObject;LNSString;LNSObject;", "getFieldValueUsingReflection", "invokePrivateMethodUsingReflection", "LNSObject;LNSString;[LNSObject;", "LNSObject;LNSString;[LIOSClass;[LNSObject;", "(Ljava/lang/Object;Ljava/lang/String;[Ljava/lang/Class<*>;[Ljava/lang/Object;)Ljava/lang/Object;", "createWrapperViewHolder", "createWrapperView", "LNSObject;I", "setDrawableBounds", "IIII", "setEventBubblers", "LJavaUtilCollection;", "(Ljava/util/Collection<Ljava/lang/Integer;>;)V", "()Ljava/util/Set<Ljava/lang/Integer;>;", "applyThemeConstructorArgsStyle", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V", "applyThemeStyle", "loadLazyWidgets", "LASHasWidgets;ILNSString;LASLoopParam;", "loadAndAddWidgets", "LJavaUtilIterator;LASIWidget;LNSObject;LNSString;LASLoopParam;", "(Ljava/util/Iterator<Lcom/ashera/widget/IWidget;>;Lcom/ashera/widget/IWidget;Ljava/lang/Object;Ljava/lang/String;Lcom/ashera/model/LoopParam;)V", "loadWidget", "LASIWidget;LASIWidget;LNSObject;LNSString;LASLoopParam;I", "setValidationErrorDisplayType", "setCustomErrorMessageKeys", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/String;>;)V", "setCustomErrorMessageValues", "getCustomMessage", "setErrorStyle", "setNormalStyle", "invokeMethod", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "addUnResolvedAttribute", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/ILifeCycleDecorator;>;", "id", "Ljava/util/List<Lcom/ashera/widget/bus/EventBusHandler;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/AttributeCommandChain;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Ljava/lang/String;>;>;", "Ljava/util/Map<Ljava/lang/String;Lcom/ashera/widget/AttributeCommand;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Ljava/lang/String;>;>;", "Ljava/util/List<Lcom/ashera/widget/BaseWidget$EventHolder;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/util/List<Lcom/ashera/widget/ILifeCycleDecorator;>;>;", "Ljava/util/Set<Ljava/lang/Integer;>;", "Ljava/util/List<Ljava/lang/String;>;", "Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "LASBaseWidget_LazyBaseWidget;LASBaseWidget_EventHolder;" };
+  static const J2ObjcClassInfo _ASBaseWidget = { "BaseWidget", "com.ashera.widget", ptrTable, methods, fields, 7, 0x401, 169, 42, -1, 195, -1, -1, -1 };
   return &_ASBaseWidget;
 }
 
@@ -2253,7 +2282,7 @@ void ASBaseWidget_applyStyleToWidgetWithoutBufferingWithASWidgetAttribute_withAS
         }
       }
     }
-    if (convertedValue != nil) {
+    if (convertedValue != nil || [@"nil" isEqual:type]) {
       id<ASILifeCycleDecorator> lifeCycleDecorator = ASBaseWidget_getDecoratorWithASWidgetAttribute_(self, widgetAttribute);
       if (lifeCycleDecorator != nil) {
         [lifeCycleDecorator setAttributeWithASWidgetAttribute:widgetAttribute withNSString:strValue withId:convertedValue];
@@ -2450,8 +2479,27 @@ id ASBaseWidget_getAttributeValueFromWidgetWithASWidgetAttribute_withASIWidget_w
   if (!skipConvert) {
     id<ASIConverter> converter = ASPluginInvoker_getConverterWithNSString_([((ASWidgetAttribute *) nil_chk(widgetAttribute)) getAttributeType]);
     if (converter != nil && objValue != nil) {
+      objValue = ASBaseWidget_handleArrayTypeForGetWithId_withNSString_withNSString_(self, objValue, [widgetAttribute getArrayType], [widgetAttribute getArrayListToFinalType]);
       objValue = ASPluginInvoker_convertToWithASIConverter_withId_withASIFragment_(converter, objValue, self->fragment_);
     }
+  }
+  return objValue;
+}
+
+id ASBaseWidget_handleArrayTypeForGetWithId_withNSString_withNSString_(ASBaseWidget *self, id objValue, NSString *arrayType, NSString *finalArrayType) {
+  if (arrayType != nil) {
+    if (finalArrayType != nil && !([JavaUtilList_class_() isInstance:objValue])) {
+      id<ASIConverter> converter = ASPluginInvoker_getConverterWithNSString_(finalArrayType);
+      objValue = [((id<ASIConverter>) nil_chk(converter)) convertToWithId:objValue withASIFragment:self->fragment_];
+    }
+    id<ASIConverter> converter = ASPluginInvoker_getConverterWithNSString_(arrayType);
+    id<JavaUtilList> values = (id<JavaUtilList>) cast_check(objValue, JavaUtilList_class_());
+    IOSObjectArray *finalValues = [IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(values)) size] type:NSString_class_()];
+    for (jint i = 0; i < [values size]; i++) {
+      id value = JreRetainedLocalValue([values getWithInt:i]);
+      IOSObjectArray_Set(finalValues, i, (NSString *) cast_chk([((id<ASIConverter>) nil_chk(converter)) convertToWithId:value withASIFragment:self->fragment_], [NSString class]));
+    }
+    objValue = finalValues;
   }
   return objValue;
 }

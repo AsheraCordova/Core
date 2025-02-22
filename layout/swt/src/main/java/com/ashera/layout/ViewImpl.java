@@ -1560,6 +1560,14 @@ return getBottom(w);			}
 	public static void addEventInfo(Map<String, Object> obj, r.android.widget.Chronometer chronometer, com.ashera.core.IFragment fragment) {
 		obj.put("text", chronometer.getText());
 	}
+	public static void addEventInfo(Map<String, Object> obj, java.util.List<Integer> checkedIds, com.ashera.core.IFragment fragment) {
+		java.util.List<Object> ids = new java.util.ArrayList<>();
+		for (int id : checkedIds) {
+			ids.add(fragment.getRootWidget().quickConvertBack(id, "id"));	
+		}
+		
+		obj.put("checkedIds", PluginInvoker.getJSONSafeObj(ids));
+	}
 	
 
 
@@ -3296,7 +3304,9 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 			onClickListener = (View.OnClickListener) objValue;
 		}
 		String id = org.eclipse.swt.SWT.MouseUp + "";
-		setOnClick(w, id, onClickListener);
+		if (onClickListener != null) {
+			setOnClick(w, id, onClickListener);
+		}
     }
 
 	public static void setOnClick(IWidget w, String id, View.OnClickListener onClickListener) {

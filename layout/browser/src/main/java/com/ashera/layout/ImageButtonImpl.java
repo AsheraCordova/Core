@@ -779,7 +779,10 @@ return getScaleType();				}
 			} else {
 				image.setAttribute("src", (String) drawable);
 			}
-			
+		}
+		
+		if ("@null".equals(objValue) || drawable == null) {
+			image.removeAttribute("src");
 		}
 	}
 	

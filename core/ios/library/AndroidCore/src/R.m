@@ -48,6 +48,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADR)
 
 jint ADR_id_view_transition = 1000;
 jint ADR_id_mtrl_view_tag_bottom_padding = 999;
+jint ADR_id_row_index_key = 1001;
 
 @implementation ADR_id
 
@@ -71,9 +72,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "content", "I", .constantValue.asInt = ADR_id_content, 0x19, -1, -1, -1, -1 },
     { "view_transition", "I", .constantValue.asLong = 0, 0x9, -1, 0, -1, -1 },
     { "mtrl_view_tag_bottom_padding", "I", .constantValue.asLong = 0, 0x9, -1, 1, -1, -1 },
+    { "row_index_key", "I", .constantValue.asLong = 0, 0x9, -1, 2, -1, -1 },
   };
-  static const void *ptrTable[] = { &ADR_id_view_transition, &ADR_id_mtrl_view_tag_bottom_padding, "LADR;" };
-  static const J2ObjcClassInfo _ADR_id = { "id", "r.android", ptrTable, methods, fields, 7, 0x9, 1, 3, 2, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { &ADR_id_view_transition, &ADR_id_mtrl_view_tag_bottom_padding, &ADR_id_row_index_key, "LADR;" };
+  static const J2ObjcClassInfo _ADR_id = { "id", "r.android", ptrTable, methods, fields, 7, 0x9, 1, 4, 3, -1, -1, -1, -1 };
   return &_ADR_id;
 }
 

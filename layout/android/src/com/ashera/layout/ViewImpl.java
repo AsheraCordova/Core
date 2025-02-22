@@ -4075,6 +4075,14 @@ public java.util.Map<String, Object> getOnAnimationRepeatEventObj(android.animat
 	public static void addEventInfo(Map<String, Object> obj, android.widget.Chronometer chronometer, com.ashera.core.IFragment fragment) {
 		obj.put("text", chronometer.getText());
 	}
+	public static void addEventInfo(Map<String, Object> obj, java.util.List<Integer> checkedIds, com.ashera.core.IFragment fragment) {
+		java.util.List<Object> ids = new java.util.ArrayList<>();
+		for (int id : checkedIds) {
+			ids.add(fragment.getRootWidget().quickConvertBack(id, "id"));	
+		}
+		
+		obj.put("checkedIds", PluginInvoker.getJSONSafeObj(ids));
+	}
 	//end - eventInfo
 
 	
@@ -4673,5 +4681,6 @@ public java.util.Map<String, Object> getOnAnimationRepeatEventObj(android.animat
 			outline.setRoundRect((int) (0 - moffsetLeft), (int) (0 - moffsetTop), (int) (view.getMeasuredWidth() + moffsetRight), (int) (view.getMeasuredHeight() + moffsetBottom), mRadius);
 			outline.setAlpha(1f);
 		}
-	};
+	}
+
 }

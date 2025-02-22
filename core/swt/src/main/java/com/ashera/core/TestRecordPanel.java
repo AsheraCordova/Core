@@ -2,6 +2,7 @@ package com.ashera.core;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
@@ -24,8 +25,11 @@ public class TestRecordPanel implements com.ashera.plugin.IPlugin {
     enum TestcaseValue {
         pass, fail, unknown, quirk, child, notsure, notsupported
     }
+    
+    private String items[] = { "android", "ios", "swt", "web"};
     private String attributeName;
     private Button saveButton;
+    private Button applyToAll;
     private Group attrInfo;
     private Gson gson = new Gson();
     private TestCase testCaseDto = new TestCase();
@@ -65,26 +69,10 @@ public class TestRecordPanel implements com.ashera.plugin.IPlugin {
     	this.widgetUnderTest = widgetUnderTest;
         this.attributeName = attributeName;
         saveButton.setEnabled(widgetUnderTest != null);
-        attrInfo.setText(enviromentUnderTest.getText() + " - " + attributeName);
-        File myFile = new File("../../../../../../core-widget_library/code_generator/testcasedata/" + widgetUnderTest + enviromentUnderTest.getText() + ".json");
-        
-        myFile.getParentFile().mkdir();
-        if (jsonFile == null || !jsonFile.getAbsolutePath().toString().equals(myFile.getAbsolutePath().toString())) {
-            jsonFile = myFile;
-            try {
-                if (jsonFile.exists()) {
-                    testCaseDto = gson.fromJson(new java.io.FileReader(jsonFile), TestCase.class);
-                    if (testCaseDto == null) {
-                        testCaseDto = new TestCase();
-                    }
-                } else {
-                    testCaseDto = new TestCase();
-                    jsonFile.createNewFile();
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
+        applyToAll.setEnabled(widgetUnderTest != null);
+        String env = enviromentUnderTest.getText();
+		attrInfo.setText(env + " - " + attributeName);
+        createJsonFileIfRequired(widgetUnderTest, env);
         
         HashMap<String, String> testCaseData = testCaseDto.getTestCaseData();
         String testcaseStatus = testCaseData.get(attributeName);
@@ -123,6 +111,29 @@ public class TestRecordPanel implements com.ashera.plugin.IPlugin {
         }
 
     }
+	private File createJsonFileIfRequired(String widgetUnderTest, String env) {
+		File myFile = new File("../../../../../../core-widget_library/code_generator/testcasedata/" + widgetUnderTest + env + ".json");
+        
+        myFile.getParentFile().mkdir();
+        if (jsonFile == null || !jsonFile.getAbsolutePath().toString().equals(myFile.getAbsolutePath().toString())) {
+            jsonFile = myFile;
+            try {
+                if (jsonFile.exists()) {
+                    testCaseDto = gson.fromJson(new java.io.FileReader(jsonFile), TestCase.class);
+                    if (testCaseDto == null) {
+                        testCaseDto = new TestCase();
+                    }
+                } else {
+                    testCaseDto = new TestCase();
+                    jsonFile.createNewFile();
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        
+        return myFile;
+	}
     public Shell createPanel(Shell shell, MainActivity mainActivity) {
         Shell controlPanel = new Shell(shell, SWT.CLOSE);
         controlPanel.setData(this);
@@ -143,7 +154,7 @@ public class TestRecordPanel implements com.ashera.plugin.IPlugin {
         
         this.enviromentUnderTest = new Combo(attrInfo, SWT.READ_ONLY);
         enviromentUnderTest.setBounds(50, 50, 150, 65);
-        String items[] = { "android", "ios", "swt", "web"};
+        
         enviromentUnderTest.setItems(items);
         enviromentUnderTest.setText(PreferenceWrapper.getEnvUnderTest());
         enviromentUnderTest.addModifyListener(new org.eclipse.swt.events.ModifyListener() {
@@ -192,44 +203,63 @@ public class TestRecordPanel implements com.ashera.plugin.IPlugin {
         saveButton.addListener(SWT.MouseDown, new Listener() {
             @Override
             public void handleEvent(Event arg0) {
-                TestcaseValue selection = TestcaseValue.unknown;
-                if (pass.getSelection()) {
-                    selection = TestcaseValue.pass;
-                }
-                
-                if (passwithQuirk.getSelection()) {
-                    selection = TestcaseValue.quirk;
-                }
-                
-                if (fail.getSelection()) {
-                    selection = TestcaseValue.fail;
-                }
-                
-                if (implementedByChildWidget.getSelection()) {
-                    selection = TestcaseValue.child;
-                }
-                
-                if (notsure.getSelection()) {
-                    selection = TestcaseValue.notsure;
-                }
-                
-                if (notsupported.getSelection()) {
-                    selection = TestcaseValue.notsupported;
-                }
-                
-                String desc = descText.getText();
-                HashMap<String, String> testCaseData = testCaseDto.getTestCaseData();
-                testCaseData.put(attributeName, selection.toString());
-                testCaseData.put(attributeName + "Desc", desc);
-                System.out.println(jsonFile.getAbsolutePath());
-                try (java.io.FileWriter f = new java.io.FileWriter(jsonFile)) {
-                    f.write(gson.toJson(testCaseDto));
-                } catch (Exception e) {
-                    throw new RuntimeException(e);                    
-                }
-            }           
+                updateStatusOfTestCase(jsonFile);
+            }
+        });
+        
+        this.applyToAll = new Button(attrInfo, SWT.PUSH | SWT.FILL);
+        applyToAll.setText("Apply To All");
+        applyToAll.setEnabled(false);
+        
+        applyToAll.addListener(SWT.MouseDown, new Listener() {
+            @Override
+            public void handleEvent(Event arg0) {
+                for (String env : items) {
+					File file = createJsonFileIfRequired(widgetUnderTest, env);
+					updateStatusOfTestCase(file);
+				}
+            }
         });
         controlPanel.pack();
         return controlPanel;
     }
+    
+    private void updateStatusOfTestCase(File envFile) {
+		TestcaseValue selection = TestcaseValue.unknown;
+        if (pass.getSelection()) {
+            selection = TestcaseValue.pass;
+        }
+        
+        if (passwithQuirk.getSelection()) {
+            selection = TestcaseValue.quirk;
+        }
+        
+        if (fail.getSelection()) {
+            selection = TestcaseValue.fail;
+        }
+        
+        if (implementedByChildWidget.getSelection()) {
+            selection = TestcaseValue.child;
+        }
+        
+        if (notsure.getSelection()) {
+            selection = TestcaseValue.notsure;
+        }
+        
+        if (notsupported.getSelection()) {
+            selection = TestcaseValue.notsupported;
+        }
+        
+        String desc = descText.getText();
+        HashMap<String, String> testCaseData = testCaseDto.getTestCaseData();
+        testCaseData.put(attributeName, selection.toString());
+        testCaseData.put(attributeName + "Desc", desc);
+        
+		System.out.println(envFile.getAbsolutePath());
+        try (java.io.FileWriter f = new java.io.FileWriter(envFile)) {
+            f.write(gson.toJson(testCaseDto));
+        } catch (Exception e) {
+            throw new RuntimeException(e);                    
+        }
+	}    
 }
