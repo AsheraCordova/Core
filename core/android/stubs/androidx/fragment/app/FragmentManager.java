@@ -2,8 +2,6 @@ package androidx.fragment.app;
 
 import java.util.List;
 
-import com.ashera.core.MyDialog;
-
 public class FragmentManager {
 
 	public FragmentTransaction beginTransaction() {
