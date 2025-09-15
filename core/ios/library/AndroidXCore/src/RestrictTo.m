@@ -7,15 +7,11 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "RestrictTo.h"
-#include "java/lang/Deprecated.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/lang/annotation/Annotation.h"
 
 
 __attribute__((unused)) static void ADXRestrictTo_Scope_initWithNSString_withInt_(ADXRestrictTo_Scope *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static IOSObjectArray *ADXRestrictTo_Scope__Annotations$0(void);
 
 @implementation ADXRestrictTo
 
@@ -102,12 +98,12 @@ ADXRestrictTo_Scope *ADXRestrictTo_Scope_values_[6];
     { "LIBRARY", "LADXRestrictTo_Scope;", .constantValue.asLong = 0, 0x4019, -1, 2, -1, -1 },
     { "LIBRARY_GROUP", "LADXRestrictTo_Scope;", .constantValue.asLong = 0, 0x4019, -1, 3, -1, -1 },
     { "LIBRARY_GROUP_PREFIX", "LADXRestrictTo_Scope;", .constantValue.asLong = 0, 0x4019, -1, 4, -1, -1 },
-    { "GROUP_ID", "LADXRestrictTo_Scope;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, 6 },
-    { "TESTS", "LADXRestrictTo_Scope;", .constantValue.asLong = 0, 0x4019, -1, 7, -1, -1 },
-    { "SUBCLASSES", "LADXRestrictTo_Scope;", .constantValue.asLong = 0, 0x4019, -1, 8, -1, -1 },
+    { "GROUP_ID", "LADXRestrictTo_Scope;", .constantValue.asLong = 0, 0x4019, -1, 5, -1, -1 },
+    { "TESTS", "LADXRestrictTo_Scope;", .constantValue.asLong = 0, 0x4019, -1, 6, -1, -1 },
+    { "SUBCLASSES", "LADXRestrictTo_Scope;", .constantValue.asLong = 0, 0x4019, -1, 7, -1, -1 },
   };
-  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(ADXRestrictTo_Scope, LIBRARY), &JreEnum(ADXRestrictTo_Scope, LIBRARY_GROUP), &JreEnum(ADXRestrictTo_Scope, LIBRARY_GROUP_PREFIX), &JreEnum(ADXRestrictTo_Scope, GROUP_ID), (void *)&ADXRestrictTo_Scope__Annotations$0, &JreEnum(ADXRestrictTo_Scope, TESTS), &JreEnum(ADXRestrictTo_Scope, SUBCLASSES), "LADXRestrictTo;", "Ljava/lang/Enum<Landroidx/annotation/RestrictTo$Scope;>;" };
-  static const J2ObjcClassInfo _ADXRestrictTo_Scope = { "Scope", "androidx.annotation", ptrTable, methods, fields, 7, 0x4019, 2, 6, 9, -1, -1, 10, -1 };
+  static const void *ptrTable[] = { "valueOf", "LNSString;", &JreEnum(ADXRestrictTo_Scope, LIBRARY), &JreEnum(ADXRestrictTo_Scope, LIBRARY_GROUP), &JreEnum(ADXRestrictTo_Scope, LIBRARY_GROUP_PREFIX), &JreEnum(ADXRestrictTo_Scope, GROUP_ID), &JreEnum(ADXRestrictTo_Scope, TESTS), &JreEnum(ADXRestrictTo_Scope, SUBCLASSES), "LADXRestrictTo;", "Ljava/lang/Enum<Landroidx/annotation/RestrictTo$Scope;>;" };
+  static const J2ObjcClassInfo _ADXRestrictTo_Scope = { "Scope", "androidx.annotation", ptrTable, methods, fields, 7, 0x4019, 2, 6, 8, -1, -1, 9, -1 };
   return &_ADXRestrictTo_Scope;
 }
 
@@ -154,10 +150,6 @@ ADXRestrictTo_Scope *ADXRestrictTo_Scope_fromOrdinal(NSUInteger ordinal) {
     return nil;
   }
   return ADXRestrictTo_Scope_values_[ordinal];
-}
-
-IOSObjectArray *ADXRestrictTo_Scope__Annotations$0() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXRestrictTo_Scope)

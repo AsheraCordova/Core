@@ -146,6 +146,9 @@
  */
 - (jint)getBeginLine;
 
+/*!
+ - seealso: #getEndColumn
+ */
 - (jint)getColumn;
 
 /*!
@@ -163,6 +166,9 @@
  */
 - (NSString *)GetImage;
 
+/*!
+ - seealso: #getEndLine
+ */
 - (jint)getLine;
 
 /*!

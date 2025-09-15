@@ -3,8 +3,6 @@
 //  source: D:\Java\git\core-widget_library\css_parser\src\com\ashera\css\JavaCharStream.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "JavaCharStream.h"
@@ -12,16 +10,10 @@
 #include "java/io/InputStream.h"
 #include "java/io/InputStreamReader.h"
 #include "java/io/Reader.h"
-#include "java/lang/Deprecated.h"
 #include "java/lang/Error.h"
 #include "java/lang/System.h"
 #include "java/lang/Throwable.h"
-#include "java/lang/annotation/Annotation.h"
 
-
-__attribute__((unused)) static IOSObjectArray *CSSJavaCharStream__Annotations$0(void);
-
-__attribute__((unused)) static IOSObjectArray *CSSJavaCharStream__Annotations$1(void);
 
 @implementation CSSJavaCharStream
 
@@ -463,37 +455,37 @@ __attribute__((unused)) static IOSObjectArray *CSSJavaCharStream__Annotations$1(
     { NULL, "V", 0x4, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x4, 7, 1, -1, -1, -1, -1 },
     { NULL, "C", 0x1, -1, -1, 2, -1, -1, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, 8, -1 },
-    { NULL, "I", 0x1, -1, -1, -1, -1, 9, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 10, 4, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "I", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 8, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 9, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 10, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 11, -1, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, 12, -1, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 11, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 12, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 13, -1, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, 15, 16, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 11, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 13, 14, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 15, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 16, 14, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 17, -1, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, 18, 16, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 18, 14, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 19, -1, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, 20, 16, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, 21, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 15, 16, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 18, 16, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 20, 16, -1, -1, -1 },
-    { NULL, "V", 0x1, 14, 21, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 13, 14, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 16, 14, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 17, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 18, 14, -1, -1, -1 },
+    { NULL, "V", 0x1, 12, 19, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "[C", 0x1, 22, 4, -1, -1, -1, -1 },
+    { NULL, "[C", 0x1, 20, 4, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 23, 24, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 21, 22, -1, -1, -1, -1 },
     { NULL, "Z", 0x0, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x0, 25, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x0, 23, 6, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -561,7 +553,7 @@ __attribute__((unused)) static IOSObjectArray *CSSJavaCharStream__Annotations$1(
     { "tabSize_", "I", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
     { "trackLineColumn_", "Z", .constantValue.asLong = 0, 0x4, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "hexval", "C", "LJavaIoIOException;", "setTabSize", "I", "ExpandBuff", "Z", "UpdateLineColumn", (void *)&CSSJavaCharStream__Annotations$0, (void *)&CSSJavaCharStream__Annotations$1, "backup", "LJavaIoReader;III", "LJavaIoReader;II", "LJavaIoReader;", "ReInit", "LJavaIoInputStream;LNSString;III", "LJavaIoUnsupportedEncodingException;", "LJavaIoInputStream;III", "LJavaIoInputStream;LNSString;II", "LJavaIoInputStream;II", "LJavaIoInputStream;LNSString;", "LJavaIoInputStream;", "GetSuffix", "adjustBeginLineColumn", "II", "setTrackLineColumn" };
+  static const void *ptrTable[] = { "hexval", "C", "LJavaIoIOException;", "setTabSize", "I", "ExpandBuff", "Z", "UpdateLineColumn", "backup", "LJavaIoReader;III", "LJavaIoReader;II", "LJavaIoReader;", "ReInit", "LJavaIoInputStream;LNSString;III", "LJavaIoUnsupportedEncodingException;", "LJavaIoInputStream;III", "LJavaIoInputStream;LNSString;II", "LJavaIoInputStream;II", "LJavaIoInputStream;LNSString;", "LJavaIoInputStream;", "GetSuffix", "adjustBeginLineColumn", "II", "setTrackLineColumn" };
   static const J2ObjcClassInfo _CSSJavaCharStream = { "JavaCharStream", "com.ashera.css", ptrTable, methods, fields, 7, 0x0, 41, 19, -1, -1, -1, -1, -1 };
   return &_CSSJavaCharStream;
 }
@@ -737,14 +729,6 @@ CSSJavaCharStream *new_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream
 
 CSSJavaCharStream *create_CSSJavaCharStream_initPackagePrivateWithJavaIoInputStream_(JavaIoInputStream *dstream) {
   J2OBJC_CREATE_IMPL(CSSJavaCharStream, initPackagePrivateWithJavaIoInputStream_, dstream)
-}
-
-IOSObjectArray *CSSJavaCharStream__Annotations$0() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-IOSObjectArray *CSSJavaCharStream__Annotations$1() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(CSSJavaCharStream)

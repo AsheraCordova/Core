@@ -3,14 +3,10 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\os\Looper.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Looper.h"
 #include "MessageQueue.h"
-#include "java/lang/Deprecated.h"
 #include "java/lang/Thread.h"
-#include "java/lang/annotation/Annotation.h"
 
 
 @interface ADLooper ()
@@ -29,8 +25,6 @@ __attribute__((unused)) static void ADLooper_initWithBoolean_(ADLooper *self, jb
 __attribute__((unused)) static ADLooper *new_ADLooper_initWithBoolean_(jboolean quitAllowed) NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static ADLooper *create_ADLooper_initWithBoolean_(jboolean quitAllowed);
-
-__attribute__((unused)) static IOSObjectArray *ADLooper__Annotations$0(void);
 
 J2OBJC_INITIALIZED_DEFN(ADLooper)
 
@@ -93,12 +87,12 @@ J2OBJC_INITIALIZED_DEFN(ADLooper)
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x9, -1, -1, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, -1, -1, -1, -1, 0, -1 },
+    { NULL, "V", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADLooper;", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADLooper;", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADMessageQueue;", 0x9, -1, -1, -1, -1, -1, -1 },
-    { NULL, NULL, 0x2, -1, 1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x2, -1, 0, -1, -1, -1, -1 },
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
@@ -122,10 +116,10 @@ J2OBJC_INITIALIZED_DEFN(ADLooper)
   methods[11].selector = @selector(getThread);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "sMainLooper", "LADLooper;", .constantValue.asLong = 0, 0xa, -1, 2, -1, -1 },
+    { "sMainLooper", "LADLooper;", .constantValue.asLong = 0, 0xa, -1, 1, -1, -1 },
     { "mQueue_", "LADMessageQueue;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { (void *)&ADLooper__Annotations$0, "Z", &ADLooper_sMainLooper };
+  static const void *ptrTable[] = { "Z", &ADLooper_sMainLooper };
   static const J2ObjcClassInfo _ADLooper = { "Looper", "r.android.os", ptrTable, methods, fields, 7, 0x11, 12, 2, -1, -1, -1, -1, -1 };
   return &_ADLooper;
 }
@@ -179,10 +173,6 @@ ADLooper *new_ADLooper_initWithBoolean_(jboolean quitAllowed) {
 
 ADLooper *create_ADLooper_initWithBoolean_(jboolean quitAllowed) {
   J2OBJC_CREATE_IMPL(ADLooper, initWithBoolean_, quitAllowed)
-}
-
-IOSObjectArray *ADLooper__Annotations$0() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLooper)
