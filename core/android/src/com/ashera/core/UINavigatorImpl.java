@@ -8,10 +8,7 @@ import com.ashera.converter.CommonConverters;
 import com.ashera.converter.ConverterFactory;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavBackStackEntry;
@@ -19,10 +16,23 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 
+import org.apache.cordova.CordovaActivity;
+
 public class UINavigatorImpl {
 	private NavHostFragment navHostFragment;
+	private String rootDirectory;
+	private String namespace;
+	private boolean childNavHost;
+	public UINavigatorImpl(NavHostFragment navHostFragment, String rootDirectory, String namespace, boolean childNavHost) {
+		this.navHostFragment = navHostFragment;
+		this.rootDirectory = rootDirectory;
+		this.namespace = namespace;
+		this.childNavHost = childNavHost;
+	}
 	public UINavigatorImpl(NavHostFragment navHostFragment) {
 		this.navHostFragment = navHostFragment;
+		this.rootDirectory = null;
+		this.namespace = null;
 	}
 	public UINavigatorImpl() {
 	}
@@ -63,12 +73,22 @@ public class UINavigatorImpl {
 			        	}
 			        }
 				}
-				
+
 				MyDialog.updatedBundle(bundle, width, height, backdropColor, windowCloseOnTouchOutside, style);
+
+				if (childNavHost) {
+					MyDialog myDialog = new MyDialog();
+					bundle.putString("rootDirectory", rootDirectory);
+					myDialog.setArguments(bundle);
+					bundle.putInt("navHostFragmentId", navHostFragment.getId());
+					bundle.putString("namespace", namespace);
+					myDialog.show(((CordovaActivity) fragment.getRootActivity()).getSupportFragmentManager(), resId);
+					return;
+				}
 			}
 	
 			FragmentActivity fragmentActivity = (FragmentActivity) activity;
-			int navigationId = fragmentActivity.getResources().getIdentifier(resId, "id",fragmentActivity.getPackageName());
+			int navigationId = getNavigationId(resId, fragment, fragmentActivity);
 			NavController navController = NavHostFragment.findNavController(getNavhostFragment(fragment));			
 			NavOptions.Builder navOptions = new NavOptions.Builder();
 			
@@ -79,7 +99,7 @@ public class UINavigatorImpl {
 					navOptions.setPopUpTo(destinationResId, true);
 				}
 			} else if (destinationId != null) {
-				int destinationResId = fragmentActivity.getResources().getIdentifier(destinationId, "id",fragmentActivity.getPackageName());
+				int destinationResId = getNavigationId(destinationId, fragment, fragmentActivity);
 				navOptions.setPopUpTo(destinationResId, inclusive);
 			} else if (inclusive) {
 				int destinationResId = navController.getCurrentDestination().getId();
@@ -89,19 +109,17 @@ public class UINavigatorImpl {
 			navController.navigate(navigationId, bundle, navOptions.build());
 		}
 	}
+	private int getNavigationId(String resId, IFragment fragment, FragmentActivity fragmentActivity) {		
+		int navigationId = 0;
+		if (rootDirectory == null) {
+			navigationId = fragmentActivity.getResources().getIdentifier(resId, "id",fragmentActivity.getPackageName());
+		} else {
+			navigationId = (Integer) fragment.getRootWidget().quickConvert("@+id/" + resId, "id");
+		}
+		return navigationId;
+	}
 	private Fragment getNavhostFragment(IFragment fragment) {
 		return this.navHostFragment != null ? this.navHostFragment : (Fragment) fragment;
-	}
-
-	private void hideKeyboard(Activity activity) {
-	    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-	    //Find the currently focused view, so we can grab the correct window token from it.
-	    View view = activity.getCurrentFocus();
-	    //If no view currently has focus, create a new one, just so we can grab a window token from it
-	    if (view == null) {
-	        view = new View(activity);
-	    }
-	    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 
 	public void closeDialog(IFragment fragment) {
@@ -115,7 +133,8 @@ public class UINavigatorImpl {
 	public void popBackStack(IFragment fragment, String destinationId, boolean inclusive) {
 		IActivity activity = fragment.getRootActivity();
 		FragmentActivity fragmentActivity = (FragmentActivity) activity;
-		int navigationId = fragmentActivity.getResources().getIdentifier(destinationId, "id",fragmentActivity.getPackageName());		
+		
+		int navigationId = getNavigationId(destinationId, fragment, fragmentActivity);
 		NavHostFragment.findNavController(getNavhostFragment(fragment)).popBackStack(navigationId, inclusive);
 	}
 
@@ -140,5 +159,9 @@ public class UINavigatorImpl {
 			separator = "#";
 		}
 		return fileName;
+	}
+	public void closeDialog(String tag, IFragment fragment) {
+		tag = tag.replace("@id/", "").replace("@+id/", "");
+		((MyDialog) ((CordovaActivity) fragment.getRootActivity()).getSupportFragmentManager().findFragmentByTag(tag)).dismiss();
 	}
 }

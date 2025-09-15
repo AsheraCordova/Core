@@ -5,6 +5,8 @@
 
 #include "Environment.h"
 #include "J2ObjC_source.h"
+#include "PluginInvoker.h"
+#include "java/io/File.h"
 
 
 NSString *ADEnvironment_MEDIA_MOUNTED = @"MEDIA_MOUNTED";
@@ -22,22 +24,40 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ADEnvironment_getExternalStorageState();
 }
 
++ (JavaIoFile *)getExternalStorageDirectory {
+  return ADEnvironment_getExternalStorageDirectory();
+}
+
++ (jboolean)isExternalStorageEmulated {
+  return ADEnvironment_isExternalStorageEmulated();
+}
+
++ (id)getLegacyExternalStorageDirectory {
+  return ADEnvironment_getLegacyExternalStorageDirectory();
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaIoFile;", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(getExternalStorageState);
+  methods[2].selector = @selector(getExternalStorageDirectory);
+  methods[3].selector = @selector(isExternalStorageEmulated);
+  methods[4].selector = @selector(getLegacyExternalStorageDirectory);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "MEDIA_MOUNTED", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 0, -1, -1 },
   };
   static const void *ptrTable[] = { &ADEnvironment_MEDIA_MOUNTED };
-  static const J2ObjcClassInfo _ADEnvironment = { "Environment", "r.android.os", ptrTable, methods, fields, 7, 0x1, 2, 1, -1, -1, -1, -1, -1 };
+  static const J2ObjcClassInfo _ADEnvironment = { "Environment", "r.android.os", ptrTable, methods, fields, 7, 0x1, 5, 1, -1, -1, -1, -1, -1 };
   return &_ADEnvironment;
 }
 
@@ -58,6 +78,21 @@ ADEnvironment *create_ADEnvironment_init() {
 NSString *ADEnvironment_getExternalStorageState() {
   ADEnvironment_initialize();
   return ADEnvironment_MEDIA_MOUNTED;
+}
+
+JavaIoFile *ADEnvironment_getExternalStorageDirectory() {
+  ADEnvironment_initialize();
+  return ASPluginInvoker_getExternalFilesDirWithId_(nil);
+}
+
+jboolean ADEnvironment_isExternalStorageEmulated() {
+  ADEnvironment_initialize();
+  return false;
+}
+
+id ADEnvironment_getLegacyExternalStorageDirectory() {
+  ADEnvironment_initialize();
+  return nil;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADEnvironment)

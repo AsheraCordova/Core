@@ -52,6 +52,9 @@ public class fragmentImpl extends BaseHasWidgets {
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("navigateAsTop").withType("object"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("navigateWithPopBackStackTo").withType("object"));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("popBackStackTo").withType("object"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("closeDialog").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("rootDirectory").withType("string"));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("namespace").withType("string"));
 	
 	}
 	
@@ -696,6 +699,33 @@ if (objValue instanceof java.util.List) {
 }
 			}
 			break;
+			case "closeDialog": {
+
+
+		 closeDialog(objValue);
+
+
+
+			}
+			break;
+			case "rootDirectory": {
+
+
+		setRootDirectory(objValue);
+
+
+
+			}
+			break;
+			case "namespace": {
+
+
+		setNamespace(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
@@ -756,6 +786,15 @@ private String layout;
 private String name;
 private String navGraph;
 private String tag;
+private String rootDirectory;
+private String namespace;
+
+private void setNamespace(Object namespace) {
+	this.namespace = (String) namespace;
+}
+private void setRootDirectory(Object rootDirectory) {
+	this.rootDirectory = (String) rootDirectory;
+}
 private void setTemplate(Object objValue) {
 	this.layout = (String) objValue;
 	
@@ -789,7 +828,6 @@ public void initialized() {
 
 private void navigate(Object actionId, Object scopeObjects) {
 	if (isValidFragment()) {
-		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, null, false, false, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -797,11 +835,6 @@ private void navigate(Object actionId, Object scopeObjects) {
 	
 }
 
-private void checkIfDialog(Object actionId) {
-	if (((String)actionId).startsWith("dialog#")) {
-		throw new RuntimeException("Dialog is not supported. Use navigator.navigate(...).");
-	}
-}
 
 private void popBackStack() {
 	if (isValidFragment()) {
@@ -823,7 +856,6 @@ private void popBackStackTo(Object destinationId, Object inclusive) {
 private void navigateWithPopBackStackTo(Object actionId, Object destinationId, Object inclusive,
 		Object scopeObjects) {
 	if (isValidFragment()) {
-		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, (String) destinationId, (boolean)inclusive, false, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -834,7 +866,6 @@ private void navigateWithPopBackStackTo(Object actionId, Object destinationId, O
 
 private void navigateAsTop(Object actionId, Object scopeObjects) {
 	if (isValidFragment()) {
-		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, null, false, true, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -844,7 +875,6 @@ private void navigateAsTop(Object actionId, Object scopeObjects) {
 
 private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 	if (isValidFragment()) {
-		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, null, true, false, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -861,19 +891,31 @@ private void addOrReplaceFragment(boolean add) {
 				myfragment = new com.ashera.core.GenericFragment();
 				String mylayout = this.layout;
 				if (mylayout.startsWith("@layout")) {
-					mylayout = mylayout.substring(1) + ".xml";
+					mylayout = mylayout.replace("@", "") + ".xml";
 				}
 				android.os.Bundle bundle = com.ashera.core.GenericFragment.getInitialBundle(getId(), mylayout, null);
 				myfragment.setArguments(bundle);
 			}
 			break;
 			case "androidx.navigation.fragment.NavHostFragment":
+				if (rootDirectory == null && fragment.getRootDirectory() != null) {
+					rootDirectory = fragment.getRootDirectory();
+					namespace = fragment.getNamespace();
+				}
 				if (navGraph != null) {
 					String navGraphId = navGraph.replace("@+id/", "").replace("@id/", "");
 
-					Context context = ((androidx.fragment.app.Fragment) fragment).getContext();
-					myfragment = androidx.navigation.fragment.NavHostFragment.create(context.getResources().getIdentifier(
-							navGraphId, "id", context.getPackageName()));
+					if (rootDirectory == null) {
+						Context context = ((androidx.fragment.app.Fragment) fragment).getContext();
+						myfragment = androidx.navigation.fragment.NavHostFragment.create(context.getResources().getIdentifier(
+								navGraphId, "id", context.getPackageName()));
+					} else {
+						myfragment = new com.ashera.core.MyNavHostFragment();
+						myfragment.setArguments(new android.os.Bundle());
+						myfragment.getArguments().putString("fileName", "res/" + navGraph.replaceAll("@", "") + ".xml");
+						myfragment.getArguments().putString("rootDirectory", rootDirectory);
+						myfragment.getArguments().putString("namespace", namespace);
+					}
 				}
 				break;
 		default:
@@ -906,7 +948,7 @@ private boolean isValidFragment() {
 
 
 private com.ashera.core.UINavigatorImpl getNavigator() {
-	com.ashera.core.UINavigatorImpl navigator = new com.ashera.core.UINavigatorImpl((androidx.navigation.fragment.NavHostFragment) myfragment);
+	com.ashera.core.UINavigatorImpl navigator = new com.ashera.core.UINavigatorImpl((androidx.navigation.fragment.NavHostFragment) myfragment, this.rootDirectory, this.namespace, true);
 	return navigator;
 }
 
@@ -936,11 +978,11 @@ private void makeCurrentFragmentActive() {
 }
 
 
-private void closeDialog() {
+private void closeDialog(Object objValue) {
 	if (isValidFragment()) {
-		getNavigator().closeDialog(fragment);
+		getNavigator().closeDialog((String) objValue, fragment);
 		makeCurrentFragmentActive();
-	}
-	
+	}	
 }
+
 }

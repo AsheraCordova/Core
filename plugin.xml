@@ -42,6 +42,7 @@
      <source-file src="core/android/src/com/ashera/core/ICore.java" target-dir="src/com/ashera/core"/>
      <source-file src="core/android/src/com/ashera/core/MainActivity.java" target-dir="src/com/ashera/core"/>
      <source-file src="core/android/src/com/ashera/core/MyDialog.java" target-dir="src/com/ashera/core"/>
+     <source-file src="core/android/src/com/ashera/core/MyNavHostFragment.java" target-dir="src/com/ashera/core"/>
      <source-file src="core/android/src/com/ashera/core/UINavigatorImpl.java" target-dir="src/com/ashera/core"/>
      <!-- src end -->
       <!-- start res -->
@@ -106,6 +107,7 @@
      <source-file src="core/android/tsc/src/app/LocaleManager.ts" target-dir="tsc/src/app"/>
      <source-file src="core/android/tsc/src/app/MotionEvent.ts" target-dir="tsc/src/app"/>
      <source-file src="core/android/tsc/src/app/ScopedObject.ts" target-dir="tsc/src/app"/>
+     <source-file src="core/android/tsc/src/ChildApp.ts" target-dir="tsc/src"/>
      <source-file src="core/android/tsc/src/ErrorDetailFragment.ts" target-dir="tsc/src"/>
      <source-file src="core/android/tsc/src/ErrorFragment.ts" target-dir="tsc/src"/>
      <source-file src="core/android/tsc/src/FragmentFactory.ts" target-dir="tsc/src"/>
@@ -163,12 +165,16 @@
      <source-file src="converter/android/src/com/ashera/converter/ColorConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/ColorImageConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/ColorStateConverter.java" target-dir="src/com/ashera/converter"/>
+     <source-file src="converter/android/src/com/ashera/converter/ColorStateListFactory.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/ConverterCordovaPlugin.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/ConverterPlugin.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/Divider.java" target-dir="src/com/ashera/converter"/>
+     <source-file src="converter/android/src/com/ashera/converter/DrawableFactory.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/DrawableImageConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/FontConverter.java" target-dir="src/com/ashera/converter"/>
+     <source-file src="converter/android/src/com/ashera/converter/GrowingArrayUtils.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/ImageRepeatCommandConverter.java" target-dir="src/com/ashera/converter"/>
+     <source-file src="converter/android/src/com/ashera/converter/MathUtils.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/StyleConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="converter/android/src/com/ashera/converter/XmlResourceConverter.java" target-dir="src/com/ashera/converter"/>
      <!-- src end -->
@@ -391,6 +397,8 @@
      <!-- start Plugin_HtmlParser -->
      <header-file src="core/ios/library/Plugin_HtmlParser/src/Html.h" target-dir="CorePlugin/Plugin_HtmlParser/src"/>
      <source-file src="core/ios/library/Plugin_HtmlParser/src/Html.m" target-dir="CorePlugin/Plugin_HtmlParser/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/Plugin_HtmlParser/src/Html2JsonSaxHandler.h" target-dir="CorePlugin/Plugin_HtmlParser/src"/>
+     <source-file src="core/ios/library/Plugin_HtmlParser/src/Html2JsonSaxHandler.m" target-dir="CorePlugin/Plugin_HtmlParser/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/Plugin_HtmlParser/src/HtmlParserPlugin.h" target-dir="CorePlugin/Plugin_HtmlParser/src"/>
      <source-file src="core/ios/library/Plugin_HtmlParser/src/HtmlParserPlugin.m" target-dir="CorePlugin/Plugin_HtmlParser/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/Plugin_HtmlParser/src/HtmlSaxHandler.h" target-dir="CorePlugin/Plugin_HtmlParser/src"/>
@@ -1078,6 +1086,8 @@
      <source-file src="core/ios/library/AndroidCore/src/UnsupportedAppUsage.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/Uri.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/Uri.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidCore/src/UriCodec.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="core/ios/library/AndroidCore/src/UriCodec.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ValueAnimator.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="core/ios/library/AndroidCore/src/ValueAnimator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidCore/src/ValueCallback.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -1173,6 +1183,8 @@
      <source-file src="core/ios/library/AndroidXCore/src/SimpleArrayMap.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/SubMenuBuilder.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/SubMenuBuilder.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="core/ios/library/AndroidXCore/src/SupportMenu.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="core/ios/library/AndroidXCore/src/SupportMenu.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/SupportMenuItem.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="core/ios/library/AndroidXCore/src/SupportMenuItem.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="core/ios/library/AndroidXCore/src/TraceCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>

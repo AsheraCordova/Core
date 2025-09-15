@@ -20,6 +20,10 @@ public class ColorStateConverter implements IConverter<ColorStateList, String>{
 		}
 		String color = ResourceBundleUtils.getString("color/color", "color", value, fragment);
 		if (color.startsWith("{")) {
+			if (fragment.getRootDirectory() != null) {
+				Map<String, Object> colorMap = com.ashera.widget.PluginInvoker.unmarshal(color, Map.class);
+	        	return ColorStateListFactory.getColor(colorMap, fragment);
+			}
 			Context context = (Context) fragment.getRootActivity();
 			return androidx.core.content.ContextCompat.getColorStateList(context, context.getResources().getIdentifier(value, "color", context.getPackageName()));
 		}

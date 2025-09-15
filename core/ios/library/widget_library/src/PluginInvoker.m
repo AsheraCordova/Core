@@ -212,6 +212,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASPluginInvoker_addToCurrentParentWithId_withASIWidget_(handler, widget);
 }
 
++ (NSString *)xml2jsonWithNSString:(NSString *)xml
+                   withASIFragment:(id<ASIFragment>)fragment {
+  return ASPluginInvoker_xml2jsonWithNSString_withASIFragment_(xml, fragment);
+}
+
 + (NSString *)getAssetModeWithASIFragment:(id<ASIFragment>)fragment {
   return ASPluginInvoker_getAssetModeWithASIFragment_(fragment);
 }
@@ -320,6 +325,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(runnable, delay);
 }
 
++ (NSString *)resolveCDVFileLocationWithNSString:(NSString *)cdvUrl
+                                 withASIFragment:(id<ASIFragment>)fragment {
+  return ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(cdvUrl, fragment);
+}
+
++ (NSString *)readCdvDataAsStringWithNSString:(NSString *)directoryName
+                                 withNSString:(NSString *)fileName
+                              withASIFragment:(id<ASIFragment>)fragment {
+  return ASPluginInvoker_readCdvDataAsStringWithNSString_withNSString_withASIFragment_(directoryName, fileName, fragment);
+}
+
 + (void)registerFontWithNSString:(NSString *)fontFamily
                     withNSString:(NSString *)src
                     withNSString:(NSString *)fontStyle
@@ -368,31 +384,34 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x9, 56, 57, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 58, 57, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x9, 59, 60, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x9, 61, 60, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 61, 62, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 63, 62, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x9, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x9, 62, 63, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 64, 60, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "I", 0x9, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x9, 64, 65, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 66, 67, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 68, 69, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 70, 71, -1, 72, -1, -1 },
-    { NULL, "LASFontMetricsDescriptor;", 0x9, 73, 17, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x9, 74, 6, -1, -1, -1, -1 },
-    { NULL, "LASAttributedString;", 0x9, 75, 76, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 65, 66, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 67, 68, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 69, 70, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 71, 72, -1, 73, -1, -1 },
+    { NULL, "LASFontMetricsDescriptor;", 0x9, 74, 17, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 75, 6, -1, -1, -1, -1 },
+    { NULL, "LASAttributedString;", 0x9, 76, 77, -1, -1, -1, -1 },
     { NULL, "F", 0x9, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSString;", 0x9, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LJavaIoFile;", 0x9, 77, 17, -1, -1, -1, -1 },
-    { NULL, "I", 0x9, 78, 17, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x9, 79, 80, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 81, 82, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 83, 84, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 85, 86, -1, 87, -1, -1 },
+    { NULL, "LJavaIoFile;", 0x9, 78, 17, -1, -1, -1, -1 },
+    { NULL, "I", 0x9, 79, 17, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x9, 80, 81, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 82, 83, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 84, 85, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 86, 60, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 87, 88, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 89, 90, -1, 91, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -434,35 +453,38 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[34].selector = @selector(handlerStartWithId:withASIWidget:withInt:);
   methods[35].selector = @selector(handlerEndWithId:withASIWidget:);
   methods[36].selector = @selector(addToCurrentParentWithId:withASIWidget:);
-  methods[37].selector = @selector(getAssetModeWithASIFragment:);
-  methods[38].selector = @selector(getDevServerIpWithASIFragment:);
-  methods[39].selector = @selector(getOrientation);
-  methods[40].selector = @selector(getScreenWidth);
-  methods[41].selector = @selector(getScreenHeight);
-  methods[42].selector = @selector(getScreenWidthDp);
-  methods[43].selector = @selector(getScreenHeightDp);
-  methods[44].selector = @selector(getOS);
-  methods[45].selector = @selector(getFileAssetWithNSString:withASIFragment:);
-  methods[46].selector = @selector(getDensityName);
-  methods[47].selector = @selector(getDensity);
-  methods[48].selector = @selector(postDelayedWithJavaLangRunnable:withInt:);
-  methods[49].selector = @selector(removeCallbacksWithId:withJavaLangRunnable:);
-  methods[50].selector = @selector(putObjectToBundleWithId:withNSString:withId:);
-  methods[51].selector = @selector(releaseNativeResourcesWithJavaUtilList:);
-  methods[52].selector = @selector(getFontMetricsWithId:);
-  methods[53].selector = @selector(createDrawableWithNSString:);
-  methods[54].selector = @selector(createAttributedStringWithASIFragment:withNSString:);
-  methods[55].selector = @selector(getDisplayMetricDensity);
-  methods[56].selector = @selector(getAttributedBulletHtml);
-  methods[57].selector = @selector(getExternalFilesDirWithId:);
-  methods[58].selector = @selector(getMaxMemoryWithId:);
-  methods[59].selector = @selector(decodeBitmapStreamWithJavaIoInputStream:withId:);
-  methods[60].selector = @selector(runOnMainThreadWithJavaLangRunnable:);
-  methods[61].selector = @selector(enqueueTaskForEventLoopWithJavaLangRunnable:withLong:);
-  methods[62].selector = @selector(registerFontWithNSString:withNSString:withNSString:withNSString:withJavaUtilMap:);
+  methods[37].selector = @selector(xml2jsonWithNSString:withASIFragment:);
+  methods[38].selector = @selector(getAssetModeWithASIFragment:);
+  methods[39].selector = @selector(getDevServerIpWithASIFragment:);
+  methods[40].selector = @selector(getOrientation);
+  methods[41].selector = @selector(getScreenWidth);
+  methods[42].selector = @selector(getScreenHeight);
+  methods[43].selector = @selector(getScreenWidthDp);
+  methods[44].selector = @selector(getScreenHeightDp);
+  methods[45].selector = @selector(getOS);
+  methods[46].selector = @selector(getFileAssetWithNSString:withASIFragment:);
+  methods[47].selector = @selector(getDensityName);
+  methods[48].selector = @selector(getDensity);
+  methods[49].selector = @selector(postDelayedWithJavaLangRunnable:withInt:);
+  methods[50].selector = @selector(removeCallbacksWithId:withJavaLangRunnable:);
+  methods[51].selector = @selector(putObjectToBundleWithId:withNSString:withId:);
+  methods[52].selector = @selector(releaseNativeResourcesWithJavaUtilList:);
+  methods[53].selector = @selector(getFontMetricsWithId:);
+  methods[54].selector = @selector(createDrawableWithNSString:);
+  methods[55].selector = @selector(createAttributedStringWithASIFragment:withNSString:);
+  methods[56].selector = @selector(getDisplayMetricDensity);
+  methods[57].selector = @selector(getAttributedBulletHtml);
+  methods[58].selector = @selector(getExternalFilesDirWithId:);
+  methods[59].selector = @selector(getMaxMemoryWithId:);
+  methods[60].selector = @selector(decodeBitmapStreamWithJavaIoInputStream:withId:);
+  methods[61].selector = @selector(runOnMainThreadWithJavaLangRunnable:);
+  methods[62].selector = @selector(enqueueTaskForEventLoopWithJavaLangRunnable:withLong:);
+  methods[63].selector = @selector(resolveCDVFileLocationWithNSString:withASIFragment:);
+  methods[64].selector = @selector(readCdvDataAsStringWithNSString:withNSString:withASIFragment:);
+  methods[65].selector = @selector(registerFontWithNSString:withNSString:withNSString:withNSString:withJavaUtilMap:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "convertFrom", "LASIConverter;LJavaUtilMap;LNSObject;LASIFragment;", "(Lcom/ashera/converter/IConverter;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/Object;Lcom/ashera/core/IFragment;)Ljava/lang/Object;", "convertTo", "LASIConverter;LNSObject;LASIFragment;", "getConverter", "LNSString;", "getDependentAttributes", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/List<Ljava/lang/String;>;", "getColor", "convertDpToPixel", "convertSpToPixel", "convertPixelToDp", "LNSObject;Z", "convertPixelToSp", "getMap", "LNSObject;", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getNativeMap", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "putJSONSafeObjectIntoMap", "LJavaUtilMap;LNSString;LNSObject;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/Object;)V", "getArray", "getList", "(Ljava/lang/Object;)Ljava/util/List<Ljava/lang/Object;>;", "isBoolean", "getBoolean", "getString", "getInt", "getFloat", "getDouble", "marshal", "toJsonTree", "unmarshal", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getJSONSafeObj", "isNull", "navigate", "LNSString;LNSString;LNSObject;LASIFragment;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseFragment", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "postDelayed", "LJavaLangRunnable;I", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "enqueueTaskForEventLoop", "LJavaLangRunnable;J", "registerFont", "LNSString;LNSString;LNSString;LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V" };
-  static const J2ObjcClassInfo _ASPluginInvoker = { "PluginInvoker", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x1, 63, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "convertFrom", "LASIConverter;LJavaUtilMap;LNSObject;LASIFragment;", "(Lcom/ashera/converter/IConverter;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/Object;Lcom/ashera/core/IFragment;)Ljava/lang/Object;", "convertTo", "LASIConverter;LNSObject;LASIFragment;", "getConverter", "LNSString;", "getDependentAttributes", "LASIConverter;", "(Lcom/ashera/converter/IConverter;)Ljava/util/List<Ljava/lang/String;>;", "getColor", "convertDpToPixel", "convertSpToPixel", "convertPixelToDp", "LNSObject;Z", "convertPixelToSp", "getMap", "LNSObject;", "(Ljava/lang/Object;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getNativeMap", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)Ljava/lang/Object;", "putJSONSafeObjectIntoMap", "LJavaUtilMap;LNSString;LNSObject;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/lang/String;Ljava/lang/Object;)V", "getArray", "getList", "(Ljava/lang/Object;)Ljava/util/List<Ljava/lang/Object;>;", "isBoolean", "getBoolean", "getString", "getInt", "getFloat", "getDouble", "marshal", "toJsonTree", "unmarshal", "LNSString;LIOSClass;", "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;", "getJSONSafeObj", "isNull", "navigate", "LNSString;LNSString;LNSObject;LASIFragment;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseFragment", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "xml2json", "LNSString;LASIFragment;", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "postDelayed", "LJavaLangRunnable;I", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "enqueueTaskForEventLoop", "LJavaLangRunnable;J", "resolveCDVFileLocation", "readCdvDataAsString", "LNSString;LNSString;LASIFragment;", "registerFont", "LNSString;LNSString;LNSString;LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;)V" };
+  static const J2ObjcClassInfo _ASPluginInvoker = { "PluginInvoker", "com.ashera.widget", ptrTable, methods, NULL, 7, 0x1, 66, 0, -1, -1, -1, -1, -1 };
   return &_ASPluginInvoker;
 }
 
@@ -696,6 +718,12 @@ void ASPluginInvoker_addToCurrentParentWithId_withASIWidget_(id handler, id<ASIW
   [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"addToCurrentParent" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ handler, widget } count:2 type:NSObject_class_()]];
 }
 
+NSString *ASPluginInvoker_xml2jsonWithNSString_withASIFragment_(NSString *xml, id<ASIFragment> fragment) {
+  ASPluginInvoker_initialize();
+  id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"htmlparser");
+  return (NSString *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"xml2json" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ xml, fragment } count:2 type:NSObject_class_()]], [NSString class]);
+}
+
 NSString *ASPluginInvoker_getAssetModeWithASIFragment_(id<ASIFragment> fragment) {
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
@@ -844,6 +872,18 @@ void ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(id<Ja
   ASPluginInvoker_initialize();
   id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
   [((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"enqueueTaskForEventLoop" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ runnable, JavaLangLong_valueOfWithLong_(delay) } count:2 type:NSObject_class_()]];
+}
+
+NSString *ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(NSString *cdvUrl, id<ASIFragment> fragment) {
+  ASPluginInvoker_initialize();
+  id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
+  return (NSString *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"resolveCDVFileLocation" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ cdvUrl, fragment } count:2 type:NSObject_class_()]], [NSString class]);
+}
+
+NSString *ASPluginInvoker_readCdvDataAsStringWithNSString_withNSString_withASIFragment_(NSString *directoryName, NSString *fileName, id<ASIFragment> fragment) {
+  ASPluginInvoker_initialize();
+  id<ASIPlugin> plugin = ASPluginManager_getWithNSString_(@"core");
+  return (NSString *) cast_chk([((id<ASIPlugin>) nil_chk(plugin)) invokeWithNSString:@"readCdvDataAsString" withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ directoryName, fileName, fragment } count:3 type:NSObject_class_()]], [NSString class]);
 }
 
 void ASPluginInvoker_registerFontWithNSString_withNSString_withNSString_withNSString_withJavaUtilMap_(NSString *fontFamily, NSString *src, NSString *fontStyle, NSString *fontWeight, id<JavaUtilMap> metadata) {

@@ -2428,11 +2428,15 @@ void ASBaseWidget_handlePathWithJavaUtilMap_withASIWidget_withInt_(ASBaseWidget 
   id<JavaUtilList> pathWidgets = create_JavaUtilArrayList_init();
   for (id __strong pathObj in nil_chk(paths)) {
     NSString *path = ASPluginInvoker_getStringWithId_(pathObj);
-    if ([((NSString *) nil_chk(path)) java_hasPrefix:@"@+id/"]) {
+    if ([((NSString *) nil_chk(path)) isEqual:@"rootFragment"]) {
+      widget = [((id<ASIFragment>) nil_chk([((id<ASIFragment>) nil_chk(self->fragment_)) getRootFragment])) getRootWidget];
+      [pathWidgets addWithId:widget];
+    }
+    else if ([path java_hasPrefix:@"@+id/"]) {
       widget = [((id<ASIWidget>) nil_chk(widget)) findWidgetByIdWithNSString:path];
       [pathWidgets addWithId:widget];
     }
-    if ([path java_hasPrefix:@"@+pos/"]) {
+    else if ([path java_hasPrefix:@"@+pos/"]) {
       if ([ASHasWidgets_class_() isInstance:widget]) {
         widget = [((id<ASHasWidgets>) nil_chk(((id<ASHasWidgets>) cast_check(widget, ASHasWidgets_class_())))) getWithInt:[((JavaLangInteger *) nil_chk(ASPluginInvoker_getIntWithId_([path java_substring:[@"@+pos/" java_length]]))) intValue]];
         [pathWidgets addWithId:widget];

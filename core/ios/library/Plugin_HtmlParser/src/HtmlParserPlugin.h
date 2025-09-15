@@ -77,6 +77,9 @@
                             withASHasWidgets:(id<ASHasWidgets>)parent
                              withASIFragment:(id<ASIFragment>)fragment;
 
+- (NSString *)xml2jsonWithNSString:(NSString *)xml
+                   withASIFragment:(id<ASIFragment>)fragment;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASHtmlParserPlugin)

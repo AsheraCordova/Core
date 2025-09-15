@@ -12,7 +12,9 @@ import com.ashera.core.IFragment;
 import com.ashera.model.FontDescriptor;
 import com.ashera.utils.FileUtils;
 //end - imports
-
+/*-[
+#import <CoreText/CoreText.h>
+]-*/
 public class FontConverter  implements IConverter<Map<String, FontDescriptor>, String> {
     private static final String BASE_DIRECTORY = "font/";
 	private static final String MONOSPACE_FONT = "Droid Sans Mono";
@@ -31,74 +33,90 @@ public class FontConverter  implements IConverter<Map<String, FontDescriptor>, S
 	]-*/;
 	//start - body
 	@Override
-    public Map<String, FontDescriptor> convertFrom(String value,  Map<String, Object> dependentAttributesMap, IFragment fragment) {
-        if (fragment.getFromTempCache(value) != null) {
-            return (Map<String, FontDescriptor>) fragment.getFromTempCache(value);
-        }
-        Map<String, FontDescriptor> fontDescriptors = new HashMap<String, FontDescriptor>();
+	public Map<String, FontDescriptor> convertFrom(String value, Map<String, Object> dependentAttributesMap,
+			IFragment fragment) {
+		if (fragment.getFromTempCache(value) != null) {
+			return (Map<String, FontDescriptor>) fragment.getFromTempCache(value);
+		}
+		Map<String, FontDescriptor> fontDescriptors = new HashMap<String, FontDescriptor>();
 
-        switch (value) {
-        case "normal": {
-            fontDescriptors.put("normal_400", new FontDescriptor(NORMAL_FONT, NORMAL_FONT_TRAIT));
-            fontDescriptors.put("normal_700", new FontDescriptor(NORMAL_FONT, BOLD_FONT_TRAIT));
-            fontDescriptors.put("italic_400", new FontDescriptor(NORMAL_FONT, ITALIC_FONT_TRAIT));
-            fontDescriptors.put("italic_700", new FontDescriptor(NORMAL_FONT, ITALIC_FONT_TRAIT |  BOLD_FONT_TRAIT));
-            break;
-        }
-        case "sans":
-            fontDescriptors.put("normal_400", new FontDescriptor(SANS_FONT, NORMAL_FONT_TRAIT));
-            fontDescriptors.put("normal_700", new FontDescriptor(SANS_FONT, BOLD_FONT_TRAIT));
-            fontDescriptors.put("italic_400", new FontDescriptor(SANS_FONT, ITALIC_FONT_TRAIT));
-            fontDescriptors.put("italic_700", new FontDescriptor(SANS_FONT, ITALIC_FONT_TRAIT |  BOLD_FONT_TRAIT));
-            break;
-        case "serif":
-            fontDescriptors.put("normal_400", new FontDescriptor(SERIF_FONT, NORMAL_FONT_TRAIT));
-            fontDescriptors.put("normal_700", new FontDescriptor(SERIF_FONT, BOLD_FONT_TRAIT));
-            fontDescriptors.put("italic_400", new FontDescriptor(SERIF_FONT, ITALIC_FONT_TRAIT));
-            fontDescriptors.put("italic_700", new FontDescriptor(SERIF_FONT, ITALIC_FONT_TRAIT |  BOLD_FONT_TRAIT));
-            break;
-        case "monospace":
-            fontDescriptors.put("normal_400", new FontDescriptor(MONOSPACE_FONT, NORMAL_FONT_TRAIT));
-            fontDescriptors.put("normal_700", new FontDescriptor(MONOSPACE_FONT, BOLD_FONT_TRAIT));
-            fontDescriptors.put("italic_400", new FontDescriptor(MONOSPACE_FONT, ITALIC_FONT_TRAIT));
-            fontDescriptors.put("italic_700", new FontDescriptor(MONOSPACE_FONT, ITALIC_FONT_TRAIT |  BOLD_FONT_TRAIT));
-            break;
-        default:
-            // handle custom font
-            if (value.startsWith("@font")) {
-                Pattern pattern = Pattern.compile("@([a-z0-9\\-]+)\\/([a-z0-9\\-]+)");  
-                Matcher matcher = pattern.matcher(value);  
-                boolean matches = matcher.matches();   
-                
-                if (matches) {
-                    java.util.Properties bundle = readProps(matcher.group(2));
-                    Set<Object> fonts = bundle.keySet();
-                    for (Object font : fonts) {
-                    	String fontKey = getFontKey(font.toString());
-                    	if (fontKey != null) {
-                    		fontDescriptors.put(fontKey, new FontDescriptor(bundle.getProperty(font.toString()), NORMAL_FONT_TRAIT));
-                    	}
-                    }
-                    
-                }
-            }
-        }
-        fragment.storeInTempCache(value, fontDescriptors);
-        return fontDescriptors;
-    }
+		switch (value) {
+		case "normal": {
+			fontDescriptors.put("normal_400", new FontDescriptor(NORMAL_FONT, NORMAL_FONT_TRAIT));
+			fontDescriptors.put("normal_700", new FontDescriptor(NORMAL_FONT, BOLD_FONT_TRAIT));
+			fontDescriptors.put("italic_400", new FontDescriptor(NORMAL_FONT, ITALIC_FONT_TRAIT));
+			fontDescriptors.put("italic_700", new FontDescriptor(NORMAL_FONT, ITALIC_FONT_TRAIT | BOLD_FONT_TRAIT));
+			break;
+		}
+		case "sans":
+			fontDescriptors.put("normal_400", new FontDescriptor(SANS_FONT, NORMAL_FONT_TRAIT));
+			fontDescriptors.put("normal_700", new FontDescriptor(SANS_FONT, BOLD_FONT_TRAIT));
+			fontDescriptors.put("italic_400", new FontDescriptor(SANS_FONT, ITALIC_FONT_TRAIT));
+			fontDescriptors.put("italic_700", new FontDescriptor(SANS_FONT, ITALIC_FONT_TRAIT | BOLD_FONT_TRAIT));
+			break;
+		case "serif":
+			fontDescriptors.put("normal_400", new FontDescriptor(SERIF_FONT, NORMAL_FONT_TRAIT));
+			fontDescriptors.put("normal_700", new FontDescriptor(SERIF_FONT, BOLD_FONT_TRAIT));
+			fontDescriptors.put("italic_400", new FontDescriptor(SERIF_FONT, ITALIC_FONT_TRAIT));
+			fontDescriptors.put("italic_700", new FontDescriptor(SERIF_FONT, ITALIC_FONT_TRAIT | BOLD_FONT_TRAIT));
+			break;
+		case "monospace":
+			fontDescriptors.put("normal_400", new FontDescriptor(MONOSPACE_FONT, NORMAL_FONT_TRAIT));
+			fontDescriptors.put("normal_700", new FontDescriptor(MONOSPACE_FONT, BOLD_FONT_TRAIT));
+			fontDescriptors.put("italic_400", new FontDescriptor(MONOSPACE_FONT, ITALIC_FONT_TRAIT));
+			fontDescriptors.put("italic_700", new FontDescriptor(MONOSPACE_FONT, ITALIC_FONT_TRAIT | BOLD_FONT_TRAIT));
+			break;
+		default:
+			// handle custom font
+			if (value.startsWith("@font")) {
+				Pattern pattern = Pattern.compile("@([a-z0-9\\-]+)\\/([a-z0-9\\-]+)");
+				Matcher matcher = pattern.matcher(value);
+				boolean matches = matcher.matches();
+
+				if (matches) {
+					java.util.Properties bundle = readProps(matcher.group(2));
+					Set<Object> fonts = bundle.keySet();
+					for (Object font : fonts) {
+						String fontKey = getFontKey(font.toString());
+						if (fontKey != null) {
+							fontDescriptors.put(fontKey,
+									new FontDescriptor(bundle.getProperty(font.toString()), NORMAL_FONT_TRAIT));
+						}
+					}
+
+				}
+			} else if (value.startsWith("cordova.file.")) {
+				String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(value, fragment);
+				if (cordovaFileUri != null) {
+					loadFont(cordovaFileUri, fontDescriptors);
+				}
+			}
+		}
+		fragment.storeInTempCache(value, fontDescriptors);
+		return fontDescriptors;
+	}
 
 	@Override
-    public String convertTo(Map<String, FontDescriptor> value, IFragment fragment) {
-        return "";
-    }
+	public String convertTo(Map<String, FontDescriptor> value, IFragment fragment) {
+		return "";
+	}
 
-    @Override
-    public java.util.List<String> getDependentAttributes() {
-        return null;
-    }
-    //end - body
-    private Properties readProps(String name) {
-		return FileUtils.loadPropertiesFromClassPath(BASE_DIRECTORY + "font_" + name + ".properties");
+	@Override
+	public java.util.List<String> getDependentAttributes() {
+		return null;
+	}
+	// end - body
+    private Properties readProps(String name, IFragment fragment) {
+    	String fileName = BASE_DIRECTORY + "font_" + name + ".properties";
+    	if (fragment.getRootDirectory() == null) {
+    		return FileUtils.loadPropertiesFromClassPath(fileName);
+    	} else {
+    		String rootDir = FileUtils.getSlashAppendedDirectoryName(fragment.getRootDirectory() );
+			String fileStr = com.ashera.widget.PluginInvoker.readCdvDataAsString(rootDir, "resources/" + fileName, fragment);
+			return com.ashera.utils.ResourceBundleUtils.readStringAsProperties(fileStr);
+    	}
+	
+		
 	}
     
 	private String getFontKey(String key) {
@@ -107,4 +125,27 @@ public class FontConverter  implements IConverter<Map<String, FontDescriptor>, S
 		}
 		return null;
 	}
+	
+	
+	
+	private void loadFont(String cordovaFileUri, Map<String, FontDescriptor> fontDescriptors) {
+		String fontName = navtiveGetFont(cordovaFileUri);
+		fontDescriptors.put("normal_400", new FontDescriptor(fontName, NORMAL_FONT_TRAIT));
+	}	
+
+	private native String navtiveGetFont(String fontFilePath) /*-[
+		NSData *inData = [NSData dataWithContentsOfFile:fontFilePath];
+	    CFErrorRef error;
+	    CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)inData);
+	    CGFontRef font = CGFontCreateWithDataProvider(provider);
+	    NSString *fontName = (__bridge NSString *)CGFontCopyPostScriptName(font);
+	    if (!CTFontManagerRegisterGraphicsFont(font, &error)) {
+	        CFStringRef errorDescription = CFErrorCopyDescription(error);
+	        NSLog(@"Failed to load font: %@", errorDescription);
+	        CFRelease(errorDescription);
+	    }
+	    CFRelease(font);
+	    CFRelease(provider);
+	    return fontName;
+    ]-*/;
 }

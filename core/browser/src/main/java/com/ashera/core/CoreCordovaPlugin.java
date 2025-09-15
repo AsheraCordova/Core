@@ -1,5 +1,6 @@
 package com.ashera.core;
 
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -59,18 +60,35 @@ public class CoreCordovaPlugin extends CordovaPlugin {
         		final String commandName = command.getString(0);
         		
         		switch (commandName) {
+        			case "readCdvDataAsString": {
+        				final String url = command.getString(1);
+        				String js = CorePlugin.readCdvDataAsString(url, cordova.getActivity());
+        				String encode = Base64.getEncoder().encodeToString(js.getBytes());
+						callbackContext.success(encode);
+        				break;
+        			}
 					case "loadLocale": {
 						Map<String, Object> resultMap = PluginInvoker.getJSONCompatMap();
 						
 						final JSONArray keys = command.getJSONArray(1);
+						String rootDir= null;
+						if (command.length() > 2 && !command.isNull(2)) {
+							rootDir = command.getString(2);
+						}
 						// load all locale keys for javascript
 			            if (keys.length() > 0) {
 							Map<String, Object> localeMap = PluginInvoker.getJSONCompatMap();
 							for (int j = 0; j < keys.length(); j++) {
 								String key = keys.getString(j);
-								String value = com.ashera.utils.ResourceBundleUtils.getString("values/strings", "string", key,
-										activity.getActiveRootFragment());
-								localeMap.put(key, value);
+								if (rootDir == null) {
+									String value = com.ashera.utils.ResourceBundleUtils.getString("values/strings", "string", key,
+											activity.getActiveRootFragment());
+									localeMap.put(key, value);
+								} else {
+									String value = com.ashera.utils.ResourceBundleUtils.getString("values/strings", "string", key, rootDir,
+											activity.getActiveRootFragment());
+									localeMap.put(key, value);
+								}
 							}		
 							resultMap.put(commandName, localeMap);
 			            }

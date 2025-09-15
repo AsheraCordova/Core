@@ -40,6 +40,8 @@ public class GenericFragment extends Fragment implements IFragment{
 	private IActivity activity;
 	private String id;
 	private String fileName;
+	private String rootDirectory;
+	private String namespace;
 	private Object view;
 	private EventBus eventBus = new EventBus();
 	private Map<String, Object> userData;
@@ -182,6 +184,10 @@ public class GenericFragment extends Fragment implements IFragment{
 		this.id = UUID.randomUUID().toString();
 		Bundle args = getArguments();
 		this.fileName = args.getString("fileName");
+		this.rootDirectory = args.getString("rootDirectory");
+		this.namespace = args.getString("namespace");
+
+		inheritRootDirectoryAndNamespace();
 		int scopedObjectCount = args.getInt("count");
 
 		for (int i = 0; i < scopedObjectCount; i++) {
@@ -203,8 +209,23 @@ public class GenericFragment extends Fragment implements IFragment{
 			parent.getEventBus().addEventBus(eventBus);
 			parent = parent.getParent();
 		}
-		sendLifeCycleEvent("onAttach", getEventData("onAttach"), null);
+		sendLifeCycleEvent("onAttach", getEventData("onAttach"), null, null);
 
+	}
+
+	private void inheritRootDirectoryAndNamespace() {
+		if (this.rootDirectory == null) {
+			Fragment parentFragment = getParentFragment();
+			while (parentFragment != null) {
+				if (parentFragment instanceof IFragment) {
+					this.rootDirectory = ((IFragment) parentFragment).getRootDirectory();
+					this.namespace = ((IFragment) parentFragment).getNamespace();
+					break;
+				}
+
+				parentFragment = parentFragment.getParentFragment();
+			}
+		}
 	}
 
 	// This event fires 2nd, before views are created for the fragment
@@ -219,7 +240,7 @@ public class GenericFragment extends Fragment implements IFragment{
 	@Override
 	public void onCreate() {
 		readFileInDevMode();
-		sendLifeCycleEvent("onCreate", getEventData("onCreate"), null);
+		sendLifeCycleEvent("onCreate", getEventData("onCreate"), null, null);
 	}
 
 
@@ -272,7 +293,7 @@ public class GenericFragment extends Fragment implements IFragment{
 			remeasureOnResume = false;
 		}
 		isPaused = false;
-		sendLifeCycleEvent("onResume", getEventData("onResume"), null);
+		sendLifeCycleEvent("onResume", getEventData("onResume"), null, null);
 	}
 
 	private String getEventData(String key) {
@@ -314,7 +335,7 @@ public class GenericFragment extends Fragment implements IFragment{
 				view = widget.asNativeWidget();
 
 				String javascript = getInlineResource("javascript");
-				sendLifeCycleEvent("onCreateView", null, javascript);
+				sendLifeCycleEvent("onCreateView", null, javascript, null);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);
@@ -330,7 +351,7 @@ public class GenericFragment extends Fragment implements IFragment{
 	public void onPause() {
 		super.onPause();
 		isPaused = true;
-		sendLifeCycleEvent("onPause", getEventData("onPause"), null);
+		sendLifeCycleEvent("onPause", getEventData("onPause"), null, null);
 	}
 
 	// This event is triggered soon after onCreateView().
@@ -346,7 +367,7 @@ public class GenericFragment extends Fragment implements IFragment{
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		sendLifeCycleEvent("onDetach", getEventData("onDetach"), null);
+		sendLifeCycleEvent("onDetach", getEventData("onDetach"), null, null);
 		activity = null;
 
 	}
@@ -360,13 +381,13 @@ public class GenericFragment extends Fragment implements IFragment{
 			parent = parent.getParent();
 		}
 
-		sendLifeCycleEvent("onDestroy", getEventData("onDestroy"), null);
+		sendLifeCycleEvent("onDestroy", getEventData("onDestroy"), null, null);
 		clear();
 	}
 
 	@Override
-	public void onCloseDialog() {
-		sendLifeCycleEvent("onCloseDialog", getEventData("onCloseDialog"), null);
+	public void onCloseDialog(Map<String, String> eventData) {
+		sendLifeCycleEvent("onCloseDialog", getEventData("onCloseDialog"), null, eventData);
 	}
 
 	// This method is called after the parent Activity's onCreate() method has completed.
@@ -377,13 +398,18 @@ public class GenericFragment extends Fragment implements IFragment{
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	private void sendLifeCycleEvent(String action, String eventExpression, String javascript) {
+	private void sendLifeCycleEvent(String action, String eventExpression, String javascript, Map<String, String> extraData) {
 		if (activity != null) {
 			Map<String, Object> dataMap = com.ashera.widget.PluginInvoker.getJSONCompatMap();
 			dataMap.put("action", "nativeevent");
 			dataMap.put("event", action);
+			dataMap.put("namespace", namespace);
 			dataMap.put("actionUrl", getActionUrl());
 			dataMap.put("fragmentId", id);
+			
+			if (extraData != null) {
+				dataMap.putAll(extraData);
+			}
 	
 			ArrayList<String> parentFragments = new ArrayList<String>();
 	
@@ -651,4 +677,14 @@ public class GenericFragment extends Fragment implements IFragment{
 		}
 		return rootFragment;
 	}
+
+	@Override
+	public String getRootDirectory() {
+		return rootDirectory;
+	}
+	@Override
+	public String getNamespace() {
+		return namespace;
+	}
+
 }

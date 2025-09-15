@@ -16,17 +16,22 @@
 #if !defined (ADXMenuBuilder_) && (INCLUDE_ALL_MenuBuilder || defined(INCLUDE_ADXMenuBuilder))
 #define ADXMenuBuilder_
 
+#define RESTRICT_SupportMenu 1
+#define INCLUDE_ADXSupportMenu 1
+#include "SupportMenu.h"
+
 @class ADContext;
 @class ADDrawable;
 @class ADView;
 @class ADXMenuItemImpl;
 @class JavaUtilArrayList;
 @protocol ADMenuItem;
+@protocol ADSubMenu;
 @protocol ADXMenuBuilder_Callback;
 @protocol ADXMenuPresenter;
 @protocol JavaLangCharSequence;
 
-@interface ADXMenuBuilder : NSObject {
+@interface ADXMenuBuilder : NSObject < ADXSupportMenu > {
  @public
   id<JavaLangCharSequence> mHeaderTitle_;
   ADDrawable *mHeaderIcon_;
@@ -55,6 +60,20 @@
 
 - (void)addMenuPresenterWithADXMenuPresenter:(id<ADXMenuPresenter>)presenter
                                withADContext:(ADContext *)menuContext;
+
+- (id<ADSubMenu>)addSubMenuWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
+
+- (id<ADSubMenu>)addSubMenuWithInt:(jint)titleRes;
+
+- (id<ADSubMenu>)addSubMenuWithInt:(jint)group
+                           withInt:(jint)id_
+                           withInt:(jint)categoryOrder
+          withJavaLangCharSequence:(id<JavaLangCharSequence>)title;
+
+- (id<ADSubMenu>)addSubMenuWithInt:(jint)group
+                           withInt:(jint)id_
+                           withInt:(jint)categoryOrder
+                           withInt:(jint)title;
 
 - (void)clear;
 

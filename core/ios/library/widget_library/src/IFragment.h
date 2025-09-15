@@ -23,6 +23,7 @@
 @protocol ASIWidget;
 @protocol CSSStyleSheet;
 @protocol JavaUtilList;
+@protocol JavaUtilMap;
 
 @protocol ASIFragment < JavaObject >
 
@@ -42,7 +43,7 @@
 
 - (void)onPause;
 
-- (void)onCloseDialog;
+- (void)onCloseDialogWithJavaUtilMap:(id<JavaUtilMap>)eventData;
 
 - (id)onCreateViewWithBoolean:(jboolean)measure;
 
@@ -122,6 +123,10 @@
 - (id<ASIFragment>)getParent;
 
 - (NSString *)getUId;
+
+- (NSString *)getRootDirectory;
+
+- (NSString *)getNamespace;
 
 @end
 

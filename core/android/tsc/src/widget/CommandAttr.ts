@@ -1,5 +1,4 @@
 import {Transform, Type} from "class-transformer";
-import 'babel-polyfill';
 import {TransformerFactory} from "./TransformerFactory";
 
 export default class CommandAttr<T> {

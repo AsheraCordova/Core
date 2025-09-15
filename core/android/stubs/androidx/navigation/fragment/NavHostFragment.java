@@ -14,5 +14,16 @@ public class NavHostFragment extends Fragment{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+
+	public NavController getNavController() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

@@ -2494,14 +2494,18 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     }
 	//end - code3
     //start - nativefont
+    private FontData[] getFontData() {
+    	FontData[] fontData = this.newFont == null ? text.getFont().getFontData() : this.newFont.getFontData();
+    	return fontData;
+    }
 	private int nativeGetFontSize() {
-		FontData[] fontData = text.getFont().getFontData();
+		FontData[] fontData = getFontData();
         int height = fontData[0].getHeight();
 		return height;
 	}
 
 	private int nativeGetFontStyle() {
-		FontData[] fontData = text.getFont().getFontData();
+		FontData[] fontData = getFontData();
         int style = fontData[0].getStyle();
 		return style;
 	}
@@ -2512,7 +2516,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
 	}
 
 	private void nativeSetFontStyle(int style) {
-		FontData[] fontData = text.getFont().getFontData();
+		FontData[] fontData = getFontData();
 		for(int i = 0; i < fontData.length; ++i) {
 		    fontData[i].setStyle(style);
 		}
@@ -2528,7 +2532,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     }
 
     private void setMyTextSize(Object objValue) {
-        FontData[] fontData = text.getFont().getFontData();
+        FontData[] fontData = getFontData();
         for(int i = 0; i < fontData.length; ++i) {
             float fontSize = ((float) objValue) * getFragment().getRootActivity().getScaleFactor();
 			fontData[i].setHeight((int) fontSize);
@@ -2540,7 +2544,7 @@ return this.textWatchers == null ? null:this.textWatchers.get(key.getAttributeNa
     
 	
 	private Object getTextSize() {
-		return text.getFont().getFontData()[0].getHeight();
+		return getFontData()[0].getHeight();
 	}
     //end - nativefont
     
@@ -2952,6 +2956,7 @@ public java.util.Map<String, Object> getOnDismissEventObj( ) {
     obj.put("eventType", "dismiss");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3103,6 +3108,7 @@ public java.util.Map<String, Object> getOnTextChangeEventObj(CharSequence s,int 
     obj.put("eventType", "textchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3129,6 +3135,7 @@ public java.util.Map<String, Object> getOnbeforeTextChangeEventObj(CharSequence 
     obj.put("eventType", "beforetextchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3155,6 +3162,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
     obj.put("eventType", "aftertextchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());

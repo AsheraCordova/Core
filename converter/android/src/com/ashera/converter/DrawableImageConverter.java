@@ -20,9 +20,10 @@ public class DrawableImageConverter extends ColorImageConverter{
 			drawable = new ColorDrawable(android.graphics.Color.parseColor((String) objValue));
 		} else if (objValue instanceof  Integer) {
 			drawable = ContextCompat.getDrawable(context, (Integer)objValue);
-		}
-		else if (objValue instanceof android.graphics.Bitmap) {
+		} else if (objValue instanceof android.graphics.Bitmap) {
 			drawable = new android.graphics.drawable.BitmapDrawable(context.getResources(), (android.graphics.Bitmap) objValue);		
+		} else if (objValue instanceof android.graphics.drawable.Drawable) {
+			drawable = (android.graphics.drawable.Drawable) objValue;
 		}
 		return drawable;
 	}

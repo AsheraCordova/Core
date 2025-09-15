@@ -108,6 +108,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
++ (jboolean)isAccessUriModeWithInt:(jint)flags {
+  return ADIntent_isAccessUriModeWithInt_(flags);
+}
+
 - (void)dealloc {
   RELEASE_(mExtras_);
   [super dealloc];
@@ -130,6 +134,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 13, 4, -1, -1, -1, -1 },
     { NULL, "LADUri;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADIntent_ClipData;", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 14, 0, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -149,24 +154,25 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[12].selector = @selector(setTypeWithNSString:);
   methods[13].selector = @selector(getData);
   methods[14].selector = @selector(getClipData);
+  methods[15].selector = @selector(isAccessUriModeWithInt:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "ACTION_VIEW", "I", .constantValue.asInt = ADIntent_ACTION_VIEW, 0x19, -1, -1, -1, -1 },
     { "CATEGORY_BROWSABLE", "I", .constantValue.asInt = ADIntent_CATEGORY_BROWSABLE, 0x19, -1, -1, -1, -1 },
     { "ACTION_GET_CONTENT", "I", .constantValue.asInt = ADIntent_ACTION_GET_CONTENT, 0x19, -1, -1, -1, -1 },
     { "CATEGORY_OPENABLE", "I", .constantValue.asInt = ADIntent_CATEGORY_OPENABLE, 0x19, -1, -1, -1, -1 },
-    { "ACTION_CONFIGURATION_CHANGED", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 14, -1, -1 },
+    { "ACTION_CONFIGURATION_CHANGED", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 15, -1, -1 },
     { "FLAG_GRANT_READ_URI_PERMISSION", "I", .constantValue.asInt = ADIntent_FLAG_GRANT_READ_URI_PERMISSION, 0x19, -1, -1, -1, -1 },
     { "FLAG_GRANT_WRITE_URI_PERMISSION", "I", .constantValue.asInt = ADIntent_FLAG_GRANT_WRITE_URI_PERMISSION, 0x19, -1, -1, -1, -1 },
     { "FLAG_FROM_BACKGROUND", "I", .constantValue.asInt = ADIntent_FLAG_FROM_BACKGROUND, 0x19, -1, -1, -1, -1 },
     { "FLAG_GRANT_PERSISTABLE_URI_PERMISSION", "I", .constantValue.asInt = ADIntent_FLAG_GRANT_PERSISTABLE_URI_PERMISSION, 0x19, -1, -1, -1, -1 },
     { "FLAG_GRANT_PREFIX_URI_PERMISSION", "I", .constantValue.asInt = ADIntent_FLAG_GRANT_PREFIX_URI_PERMISSION, 0x19, -1, -1, -1, -1 },
-    { "EXTRA_ALLOW_MULTIPLE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 15, -1, -1 },
-    { "EXTRA_MIME_TYPES", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 16, -1, -1 },
-    { "mExtras_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 17, -1 },
+    { "EXTRA_ALLOW_MULTIPLE", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 16, -1, -1 },
+    { "EXTRA_MIME_TYPES", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 17, -1, -1 },
+    { "mExtras_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x2, -1, -1, 18, -1 },
   };
-  static const void *ptrTable[] = { "I", "putExtra", "LNSString;LNSObject;", "getSerializableExtra", "LNSString;", "getExtra", "getStringExtra", "hasExtra", "addCategory", "setDataAndType", "LADUri;LNSString;", "setData", "LADUri;", "setType", &ADIntent_ACTION_CONFIGURATION_CHANGED, &ADIntent_EXTRA_ALLOW_MULTIPLE, &ADIntent_EXTRA_MIME_TYPES, "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Object;>;", "LADIntent_ClipData;LADIntent_Item;" };
-  static const J2ObjcClassInfo _ADIntent = { "Intent", "r.android.content", ptrTable, methods, fields, 7, 0x1, 15, 13, -1, 18, -1, -1, -1 };
+  static const void *ptrTable[] = { "I", "putExtra", "LNSString;LNSObject;", "getSerializableExtra", "LNSString;", "getExtra", "getStringExtra", "hasExtra", "addCategory", "setDataAndType", "LADUri;LNSString;", "setData", "LADUri;", "setType", "isAccessUriMode", &ADIntent_ACTION_CONFIGURATION_CHANGED, &ADIntent_EXTRA_ALLOW_MULTIPLE, &ADIntent_EXTRA_MIME_TYPES, "Ljava/util/HashMap<Ljava/lang/String;Ljava/lang/Object;>;", "LADIntent_ClipData;LADIntent_Item;" };
+  static const J2ObjcClassInfo _ADIntent = { "Intent", "r.android.content", ptrTable, methods, fields, 7, 0x1, 16, 13, -1, 19, -1, -1, -1 };
   return &_ADIntent;
 }
 
@@ -194,6 +200,11 @@ ADIntent *new_ADIntent_init() {
 
 ADIntent *create_ADIntent_init() {
   J2OBJC_CREATE_IMPL(ADIntent, init)
+}
+
+jboolean ADIntent_isAccessUriModeWithInt_(jint flags) {
+  ADIntent_initialize();
+  return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADIntent)

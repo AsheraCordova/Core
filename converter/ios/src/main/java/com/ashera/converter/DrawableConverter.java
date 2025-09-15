@@ -13,7 +13,8 @@ public class DrawableConverter extends ColorImageConverter {
 			return null;
 		}
 		if (value.equals("@null") || value.startsWith("@drawable")
-				|| value.startsWith("#") || value.startsWith("@color/") || value.startsWith("data:image/png;base64,")) {
+				|| value.startsWith("#") || value.startsWith("@color/") || value.startsWith("data:image/png;base64,")
+				|| value.startsWith("cordova.file.")) {
 			Object objValue = super.convertFrom(value, dependentAttributesMap, fragment);
 			if (value.equals("@null")) {
 				Drawable drawable = new Drawable();

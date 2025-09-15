@@ -38,7 +38,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   if (value == nil) {
     return nil;
   }
-  if ([value isEqual:@"@null"] || [value java_hasPrefix:@"@drawable"] || [value java_hasPrefix:@"#"] || [value java_hasPrefix:@"@color/"] || [value java_hasPrefix:@"data:image/png;base64,"]) {
+  if ([value isEqual:@"@null"] || [value java_hasPrefix:@"@drawable"] || [value java_hasPrefix:@"#"] || [value java_hasPrefix:@"@color/"] || [value java_hasPrefix:@"data:image/png;base64,"] || [value java_hasPrefix:@"cordova.file."]) {
     id objValue = [super convertFromWithId:value withJavaUtilMap:dependentAttributesMap withASIFragment:fragment];
     if ([value isEqual:@"@null"]) {
       ADDrawable *drawable = new_ADDrawable_init();

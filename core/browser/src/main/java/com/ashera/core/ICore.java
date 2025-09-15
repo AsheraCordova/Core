@@ -33,4 +33,6 @@ interface ICore {
 	Object decodeBitmapStream(InputStream stream, Object options);
 	void runOnMainThread(Runnable runnable);
 	void enqueueTaskForEventLoop(Runnable runnable, long delay);
+	String resolveCDVFileLocation(String cdvUrl, IFragment fragment);
+	String readCdvDataAsString(String directoryName, String fileName, IFragment fragment);
 }

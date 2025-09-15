@@ -3,14 +3,10 @@
 //  source: D:\Java\git\core-javafx-widget\SWTAndroid\src\main\java\r\android\util\Patterns.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Patterns.h"
 #include "java/lang/Character.h"
-#include "java/lang/Deprecated.h"
 #include "java/lang/StringBuilder.h"
-#include "java/lang/annotation/Annotation.h"
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
 
@@ -172,16 +168,6 @@ __attribute__((unused)) static ADPatterns *new_ADPatterns_init(void) NS_RETURNS_
 
 __attribute__((unused)) static ADPatterns *create_ADPatterns_init(void);
 
-__attribute__((unused)) static IOSObjectArray *ADPatterns__Annotations$0(void);
-
-__attribute__((unused)) static IOSObjectArray *ADPatterns__Annotations$1(void);
-
-__attribute__((unused)) static IOSObjectArray *ADPatterns__Annotations$2(void);
-
-__attribute__((unused)) static IOSObjectArray *ADPatterns__Annotations$3(void);
-
-__attribute__((unused)) static IOSObjectArray *ADPatterns__Annotations$4(void);
-
 J2OBJC_INITIALIZED_DEFN(ADPatterns)
 
 NSString *ADPatterns_TOP_LEVEL_DOMAIN_STR = @"((aero|arpa|asia|a[cdefgilmnoqrstuwxz])|(biz|b[abdefghijmnorstvwyz])|(cat|com|coop|c[acdfghiklmnoruvxyz])|d[ejkmoz]|(edu|e[cegrstu])|f[ijkmor]|(gov|g[abdefghilmnpqrstuwy])|h[kmnrtu]|(info|int|i[delmnoqrst])|(jobs|j[emop])|k[eghimnprwyz]|l[abcikrstuvy]|(mil|mobi|museum|m[acdeghklmnopqrstuvwxyz])|(name|net|n[acefgilopruz])|(org|om)|(pro|p[aefghklmnrstwy])|qa|r[eosuw]|s[abcdeghijklmnortuvyz]|(tel|travel|t[cdfghjklmnoprtvwz])|u[agksyz]|v[aceginu]|w[fs]|(\u03b4\u03bf\u03ba\u03b9\u03bc\u03ae|\u0438\u0441\u043f\u044b\u0442\u0430\u043d\u0438\u0435|\u0440\u0444|\u0441\u0440\u0431|\u05d8\u05e2\u05e1\u05d8|\u0622\u0632\u0645\u0627\u06cc\u0634\u06cc|\u0625\u062e\u062a\u0628\u0627\u0631|\u0627\u0644\u0627\u0631\u062f\u0646|\u0627\u0644\u062c\u0632\u0627\u0626\u0631|\u0627\u0644\u0633\u0639\u0648\u062f\u064a\u0629|\u0627\u0644\u0645\u063a\u0631\u0628|\u0627\u0645\u0627\u0631\u0627\u062a|\u0628\u06be\u0627\u0631\u062a|\u062a\u0648\u0646\u0633|\u0633\u0648\u0631\u064a\u0629|\u0641\u0644\u0633\u0637\u064a\u0646|\u0642\u0637\u0631|\u0645\u0635\u0631|\u092a\u0930\u0940\u0915\u094d\u0937\u093e|\u092d\u093e\u0930\u0924|\u09ad\u09be\u09b0\u09a4|\u0a2d\u0a3e\u0a30\u0a24|\u0aad\u0abe\u0ab0\u0aa4|\u0b87\u0ba8\u0bcd\u0ba4\u0bbf\u0baf\u0bbe|\u0b87\u0bb2\u0b99\u0bcd\u0b95\u0bc8|\u0b9a\u0bbf\u0b99\u0bcd\u0b95\u0baa\u0bcd\u0baa\u0bc2\u0bb0\u0bcd|\u0baa\u0bb0\u0bbf\u0b9f\u0bcd\u0b9a\u0bc8|\u0c2d\u0c3e\u0c30\u0c24\u0c4d|\u0dbd\u0d82\u0d9a\u0dcf|\u0e44\u0e17\u0e22|\u30c6\u30b9\u30c8|\u4e2d\u56fd|\u4e2d\u570b|\u53f0\u6e7e|\u53f0\u7063|\u65b0\u52a0\u5761|\u6d4b\u8bd5|\u6e2c\u8a66|\u9999\u6e2f|\ud14c\uc2a4\ud2b8|\ud55c\uad6d|xn\\-\\-0zwm56d|xn\\-\\-11b5bs3a9aj6g|xn\\-\\-3e0b707e|xn\\-\\-45brj9c|xn\\-\\-80akhbyknj4f|xn\\-\\-90a3ac|xn\\-\\-9t4b11yi5a|xn\\-\\-clchc0ea0b2g2a9gcd|xn\\-\\-deba0ad|xn\\-\\-fiqs8s|xn\\-\\-fiqz9s|xn\\-\\-fpcrj9c3d|xn\\-\\-fzc2c9e2c|xn\\-\\-g6w251d|xn\\-\\-gecrj9c|xn\\-\\-h2brj9c|xn\\-\\-hgbk6aj7f53bba|xn\\-\\-hlcj6aya9esc7a|xn\\-\\-j6w193g|xn\\-\\-jxalpdlp|xn\\-\\-kgbechtv|xn\\-\\-kprw13d|xn\\-\\-kpry57d|xn\\-\\-lgbbat1ad8j|xn\\-\\-mgbaam7a8h|xn\\-\\-mgbayh7gpa|xn\\-\\-mgbbh1a71e|xn\\-\\-mgbc0a9azcg|xn\\-\\-mgberp4a5d4ar|xn\\-\\-o3cw4h|xn\\-\\-ogbpf8fl|xn\\-\\-p1ai|xn\\-\\-pgbs0dh|xn\\-\\-s9brj9c|xn\\-\\-wgbh1c|xn\\-\\-wgbl6a|xn\\-\\-xkc2al3hye2a|xn\\-\\-xkc2dl3a5ee0h|xn\\-\\-yfro4i67o|xn\\-\\-ygbi2ammx|xn\\-\\-zckzah|xxx)|y[et]|z[amw])";
@@ -228,43 +214,43 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[2].selector = @selector(init);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "TOP_LEVEL_DOMAIN_STR", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 3, -1, 4 },
-    { "TOP_LEVEL_DOMAIN", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 5, -1, 6 },
-    { "TOP_LEVEL_DOMAIN_STR_FOR_WEB_URL", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 7, -1, 8 },
-    { "IANA_TOP_LEVEL_DOMAINS", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 9, -1, -1 },
-    { "GOOD_IRI_CHAR", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 10, -1, 11 },
-    { "IP_ADDRESS_STRING", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
-    { "IP_ADDRESS", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 13, -1, 14 },
-    { "UCS_CHAR", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 15, -1, -1 },
-    { "LABEL_CHAR", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 16, -1, -1 },
-    { "TLD_CHAR", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 17, -1, -1 },
-    { "IRI_LABEL", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 18, -1, -1 },
-    { "PUNYCODE_TLD", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 19, -1, -1 },
-    { "TLD", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 20, -1, -1 },
-    { "HOST_NAME", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 21, -1, -1 },
-    { "DOMAIN_NAME_STR", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 22, -1, -1 },
-    { "DOMAIN_NAME", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 23, -1, -1 },
-    { "PROTOCOL", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 24, -1, -1 },
-    { "WORD_BOUNDARY", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 25, -1, -1 },
-    { "USER_INFO", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 26, -1, -1 },
-    { "PORT_NUMBER", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 27, -1, -1 },
-    { "PATH_AND_QUERY", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 28, -1, -1 },
-    { "WEB_URL", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 29, -1, -1 },
-    { "STRICT_TLD", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 30, -1, -1 },
-    { "STRICT_HOST_NAME", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 31, -1, -1 },
-    { "STRICT_DOMAIN_NAME", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 32, -1, -1 },
-    { "RELAXED_DOMAIN_NAME", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 33, -1, -1 },
-    { "WEB_URL_WITHOUT_PROTOCOL", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 34, -1, -1 },
-    { "WEB_URL_WITH_PROTOCOL", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 35, -1, -1 },
-    { "AUTOLINK_WEB_URL", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 36, -1, -1 },
-    { "EMAIL_CHAR", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 37, -1, -1 },
-    { "EMAIL_ADDRESS_LOCAL_PART", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 38, -1, -1 },
-    { "EMAIL_ADDRESS_DOMAIN", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 39, -1, -1 },
-    { "AUTOLINK_EMAIL_ADDRESS", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 40, -1, -1 },
-    { "EMAIL_ADDRESS", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 41, -1, -1 },
-    { "PHONE", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 42, -1, -1 },
+    { "TOP_LEVEL_DOMAIN_STR", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 3, -1, -1 },
+    { "TOP_LEVEL_DOMAIN", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 4, -1, -1 },
+    { "TOP_LEVEL_DOMAIN_STR_FOR_WEB_URL", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 5, -1, -1 },
+    { "IANA_TOP_LEVEL_DOMAINS", "LNSString;", .constantValue.asLong = 0, 0x18, -1, 6, -1, -1 },
+    { "GOOD_IRI_CHAR", "LNSString;", .constantValue.asLong = 0, 0x19, -1, 7, -1, -1 },
+    { "IP_ADDRESS_STRING", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 8, -1, -1 },
+    { "IP_ADDRESS", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 9, -1, -1 },
+    { "UCS_CHAR", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 10, -1, -1 },
+    { "LABEL_CHAR", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 11, -1, -1 },
+    { "TLD_CHAR", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
+    { "IRI_LABEL", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 13, -1, -1 },
+    { "PUNYCODE_TLD", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 14, -1, -1 },
+    { "TLD", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 15, -1, -1 },
+    { "HOST_NAME", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 16, -1, -1 },
+    { "DOMAIN_NAME_STR", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 17, -1, -1 },
+    { "DOMAIN_NAME", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 18, -1, -1 },
+    { "PROTOCOL", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 19, -1, -1 },
+    { "WORD_BOUNDARY", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 20, -1, -1 },
+    { "USER_INFO", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 21, -1, -1 },
+    { "PORT_NUMBER", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 22, -1, -1 },
+    { "PATH_AND_QUERY", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 23, -1, -1 },
+    { "WEB_URL", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 24, -1, -1 },
+    { "STRICT_TLD", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 25, -1, -1 },
+    { "STRICT_HOST_NAME", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 26, -1, -1 },
+    { "STRICT_DOMAIN_NAME", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 27, -1, -1 },
+    { "RELAXED_DOMAIN_NAME", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 28, -1, -1 },
+    { "WEB_URL_WITHOUT_PROTOCOL", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 29, -1, -1 },
+    { "WEB_URL_WITH_PROTOCOL", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 30, -1, -1 },
+    { "AUTOLINK_WEB_URL", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 31, -1, -1 },
+    { "EMAIL_CHAR", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 32, -1, -1 },
+    { "EMAIL_ADDRESS_LOCAL_PART", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 33, -1, -1 },
+    { "EMAIL_ADDRESS_DOMAIN", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 34, -1, -1 },
+    { "AUTOLINK_EMAIL_ADDRESS", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 35, -1, -1 },
+    { "EMAIL_ADDRESS", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 36, -1, -1 },
+    { "PHONE", "LJavaUtilRegexPattern;", .constantValue.asLong = 0, 0x19, -1, 37, -1, -1 },
   };
-  static const void *ptrTable[] = { "concatGroups", "LJavaUtilRegexMatcher;", "digitsAndPlusOnly", &ADPatterns_TOP_LEVEL_DOMAIN_STR, (void *)&ADPatterns__Annotations$0, &ADPatterns_TOP_LEVEL_DOMAIN, (void *)&ADPatterns__Annotations$1, &ADPatterns_TOP_LEVEL_DOMAIN_STR_FOR_WEB_URL, (void *)&ADPatterns__Annotations$2, &ADPatterns_IANA_TOP_LEVEL_DOMAINS, &ADPatterns_GOOD_IRI_CHAR, (void *)&ADPatterns__Annotations$3, &ADPatterns_IP_ADDRESS_STRING, &ADPatterns_IP_ADDRESS, (void *)&ADPatterns__Annotations$4, &ADPatterns_UCS_CHAR, &ADPatterns_LABEL_CHAR, &ADPatterns_TLD_CHAR, &ADPatterns_IRI_LABEL, &ADPatterns_PUNYCODE_TLD, &ADPatterns_TLD, &ADPatterns_HOST_NAME, &ADPatterns_DOMAIN_NAME_STR, &ADPatterns_DOMAIN_NAME, &ADPatterns_PROTOCOL, &ADPatterns_WORD_BOUNDARY, &ADPatterns_USER_INFO, &ADPatterns_PORT_NUMBER, &ADPatterns_PATH_AND_QUERY, &ADPatterns_WEB_URL, &ADPatterns_STRICT_TLD, &ADPatterns_STRICT_HOST_NAME, &ADPatterns_STRICT_DOMAIN_NAME, &ADPatterns_RELAXED_DOMAIN_NAME, &ADPatterns_WEB_URL_WITHOUT_PROTOCOL, &ADPatterns_WEB_URL_WITH_PROTOCOL, &ADPatterns_AUTOLINK_WEB_URL, &ADPatterns_EMAIL_CHAR, &ADPatterns_EMAIL_ADDRESS_LOCAL_PART, &ADPatterns_EMAIL_ADDRESS_DOMAIN, &ADPatterns_AUTOLINK_EMAIL_ADDRESS, &ADPatterns_EMAIL_ADDRESS, &ADPatterns_PHONE };
+  static const void *ptrTable[] = { "concatGroups", "LJavaUtilRegexMatcher;", "digitsAndPlusOnly", &ADPatterns_TOP_LEVEL_DOMAIN_STR, &ADPatterns_TOP_LEVEL_DOMAIN, &ADPatterns_TOP_LEVEL_DOMAIN_STR_FOR_WEB_URL, &ADPatterns_IANA_TOP_LEVEL_DOMAINS, &ADPatterns_GOOD_IRI_CHAR, &ADPatterns_IP_ADDRESS_STRING, &ADPatterns_IP_ADDRESS, &ADPatterns_UCS_CHAR, &ADPatterns_LABEL_CHAR, &ADPatterns_TLD_CHAR, &ADPatterns_IRI_LABEL, &ADPatterns_PUNYCODE_TLD, &ADPatterns_TLD, &ADPatterns_HOST_NAME, &ADPatterns_DOMAIN_NAME_STR, &ADPatterns_DOMAIN_NAME, &ADPatterns_PROTOCOL, &ADPatterns_WORD_BOUNDARY, &ADPatterns_USER_INFO, &ADPatterns_PORT_NUMBER, &ADPatterns_PATH_AND_QUERY, &ADPatterns_WEB_URL, &ADPatterns_STRICT_TLD, &ADPatterns_STRICT_HOST_NAME, &ADPatterns_STRICT_DOMAIN_NAME, &ADPatterns_RELAXED_DOMAIN_NAME, &ADPatterns_WEB_URL_WITHOUT_PROTOCOL, &ADPatterns_WEB_URL_WITH_PROTOCOL, &ADPatterns_AUTOLINK_WEB_URL, &ADPatterns_EMAIL_CHAR, &ADPatterns_EMAIL_ADDRESS_LOCAL_PART, &ADPatterns_EMAIL_ADDRESS_DOMAIN, &ADPatterns_AUTOLINK_EMAIL_ADDRESS, &ADPatterns_EMAIL_ADDRESS, &ADPatterns_PHONE };
   static const J2ObjcClassInfo _ADPatterns = { "Patterns", "r.android.util", ptrTable, methods, fields, 7, 0x1, 3, 35, -1, -1, -1, -1, -1 };
   return &_ADPatterns;
 }
@@ -337,26 +323,6 @@ ADPatterns *new_ADPatterns_init() {
 
 ADPatterns *create_ADPatterns_init() {
   J2OBJC_CREATE_IMPL(ADPatterns, init)
-}
-
-IOSObjectArray *ADPatterns__Annotations$0() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-IOSObjectArray *ADPatterns__Annotations$1() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-IOSObjectArray *ADPatterns__Annotations$2() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-IOSObjectArray *ADPatterns__Annotations$3() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-IOSObjectArray *ADPatterns__Annotations$4() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADPatterns)

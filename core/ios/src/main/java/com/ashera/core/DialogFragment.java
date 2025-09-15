@@ -47,6 +47,9 @@ public class DialogFragment extends GenericFragment{
 
 	public void remeasure() {
 		IRoot root = (IRoot) super.getRootWidget();
+		if(root == null) {
+			return;
+		}
 		if (maxWidth == -1) {
 			maxWidth = (int) (marginPercent * com.ashera.widget.PluginInvoker.getScreenWidth());
 		}
@@ -77,5 +80,10 @@ public class DialogFragment extends GenericFragment{
 		super.setFrame(0, 0, width, height);
 		super.remeasure();
 	}
-
+	
+	public java.util.Map<String, String> onCloseDialogEventData() {
+		java.util.Map<String, String> eventData = new java.util.HashMap<>();
+		eventData.put("dialogClosed", getActionUrl());
+		return eventData;
+	}
 }

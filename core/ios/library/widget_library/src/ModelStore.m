@@ -99,8 +99,18 @@ void ASModelStore_storeModelToScopeWithNSString_withASModelScope_withId_withASIF
       break;
       case ASModelScope_Enum_parentview:
       currentFragment = JreRetainedLocalValue([((id<ASIWidget>) nil_chk(widget)) getFragment]);
-      while ([((id<ASIFragment>) nil_chk(currentFragment)) getParent] != nil) {
-        currentFragment = [currentFragment getParent];
+      if ([((id<ASIFragment>) nil_chk(currentFragment)) getRootDirectory] == nil) {
+        while ([((id<ASIFragment>) nil_chk(currentFragment)) getParent] != nil) {
+          currentFragment = [currentFragment getParent];
+        }
+      }
+      else {
+        while ([((id<ASIFragment>) nil_chk(currentFragment)) getParent] != nil) {
+          if ([((id<ASIFragment>) nil_chk([currentFragment getParent])) getRootDirectory] == nil) {
+            break;
+          }
+          currentFragment = [currentFragment getParent];
+        }
       }
       [currentFragment storeUserDataWithNSString:varName withId:objValue];
       break;
@@ -152,8 +162,18 @@ id ASModelStore_getModelFromScopeWithNSString_withASModelScope_withASIFragment_w
       break;
       case ASModelScope_Enum_parentview:
       currentFragment = JreRetainedLocalValue([((id<ASIWidget>) nil_chk(widget)) getFragment]);
-      while ([((id<ASIFragment>) nil_chk(currentFragment)) getParent] != nil) {
-        currentFragment = [currentFragment getParent];
+      if ([((id<ASIFragment>) nil_chk(currentFragment)) getRootDirectory] == nil) {
+        while ([((id<ASIFragment>) nil_chk(currentFragment)) getParent] != nil) {
+          currentFragment = [currentFragment getParent];
+        }
+      }
+      else {
+        while ([((id<ASIFragment>) nil_chk(currentFragment)) getParent] != nil) {
+          if ([((id<ASIFragment>) nil_chk([currentFragment getParent])) getRootDirectory] == nil) {
+            break;
+          }
+          currentFragment = [currentFragment getParent];
+        }
       }
       obj = [currentFragment getUserDataWithNSString:varName];
       break;

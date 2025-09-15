@@ -32,6 +32,7 @@
     { NULL, "Z", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "LADSubMenu;", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 9, 10, -1, -1, -1, -1 },
+    { NULL, "LADMenuItem;", 0x401, 11, 12, -1, -1, -1, -1 },
     { NULL, "LADView;", 0x401, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -53,7 +54,8 @@
   methods[13].selector = @selector(hasSubMenu);
   methods[14].selector = @selector(getSubMenu);
   methods[15].selector = @selector(setShowAsActionWithInt:);
-  methods[16].selector = @selector(getActionView);
+  methods[16].selector = @selector(setActionViewWithADView:);
+  methods[17].selector = @selector(getActionView);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "SHOW_AS_ACTION_NEVER", "I", .constantValue.asInt = ADMenuItem_SHOW_AS_ACTION_NEVER, 0x19, -1, -1, -1, -1 },
@@ -62,8 +64,8 @@
     { "SHOW_AS_ACTION_WITH_TEXT", "I", .constantValue.asInt = ADMenuItem_SHOW_AS_ACTION_WITH_TEXT, 0x19, -1, -1, -1, -1 },
     { "SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW", "I", .constantValue.asInt = ADMenuItem_SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setIcon", "LADDrawable;", "setIconTintList", "LADColorStateList;", "setCheckable", "Z", "setChecked", "setVisible", "setEnabled", "setShowAsAction", "I" };
-  static const J2ObjcClassInfo _ADMenuItem = { "MenuItem", "r.android.view", ptrTable, methods, fields, 7, 0x609, 17, 5, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setIcon", "LADDrawable;", "setIconTintList", "LADColorStateList;", "setCheckable", "Z", "setChecked", "setVisible", "setEnabled", "setShowAsAction", "I", "setActionView", "LADView;" };
+  static const J2ObjcClassInfo _ADMenuItem = { "MenuItem", "r.android.view", ptrTable, methods, fields, 7, 0x609, 18, 5, -1, -1, -1, -1, -1 };
   return &_ADMenuItem;
 }
 

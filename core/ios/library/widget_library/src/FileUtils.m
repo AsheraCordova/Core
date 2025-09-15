@@ -99,6 +99,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   return ASFileUtils_loadPropertiesFromClassPathWithNSString_(fileName);
 }
 
++ (JavaUtilProperties *)loadPropertiesWithNSString:(NSString *)fileContent {
+  return ASFileUtils_loadPropertiesWithNSString_(fileContent);
+}
+
 + (JavaUtilProperties *)getFileAsPropertiesWithNSString:(NSString *)fileName {
   return ASFileUtils_getFileAsPropertiesWithNSString_(fileName);
 }
@@ -109,6 +113,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (IOSByteArray *)readAllBytesWithJavaIoInputStream:(JavaIoInputStream *)inputStream {
   return ASFileUtils_readAllBytesWithJavaIoInputStream_(inputStream);
+}
+
++ (NSString *)getSlashAppendedDirectoryNameWithNSString:(NSString *)directoryName {
+  return ASFileUtils_getSlashAppendedDirectoryNameWithNSString_(directoryName);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -124,8 +132,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSString;", 0xa, 10, 13, 12, -1, -1, -1 },
     { NULL, "LJavaUtilProperties;", 0x9, 14, 1, -1, -1, -1, -1 },
     { NULL, "LJavaUtilProperties;", 0x9, 15, 1, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x9, 16, 1, -1, 17, -1, -1 },
-    { NULL, "[B", 0x9, 18, 19, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilProperties;", 0x9, 16, 1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x9, 17, 1, -1, 18, -1, -1 },
+    { NULL, "[B", 0x9, 19, 20, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 21, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -140,15 +150,17 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[7].selector = @selector(readFileToStringWithJavaIoFile:);
   methods[8].selector = @selector(readFileToStringWithJavaIoReader:);
   methods[9].selector = @selector(loadPropertiesFromClassPathWithNSString:);
-  methods[10].selector = @selector(getFileAsPropertiesWithNSString:);
-  methods[11].selector = @selector(getFilenamesForDirnameFromCPWithNSString:);
-  methods[12].selector = @selector(readAllBytesWithJavaIoInputStream:);
+  methods[10].selector = @selector(loadPropertiesWithNSString:);
+  methods[11].selector = @selector(getFileAsPropertiesWithNSString:);
+  methods[12].selector = @selector(getFilenamesForDirnameFromCPWithNSString:);
+  methods[13].selector = @selector(readAllBytesWithJavaIoInputStream:);
+  methods[14].selector = @selector(getSlashAppendedDirectoryNameWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "DEFAULT_BUFFER_SIZE", "I", .constantValue.asInt = ASFileUtils_DEFAULT_BUFFER_SIZE, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "readStringFromURL", "LNSString;", "getFileFromClassPath", "getInputStreamFromClassPath", "getFilePathFromClassPath", "convertInputStreamToString", "LNSString;LJavaIoInputStream;", "readFilesContent", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "readFileToString", "LJavaIoFile;", "LJavaIoIOException;", "LJavaIoReader;", "loadPropertiesFromClassPath", "getFileAsProperties", "getFilenamesForDirnameFromCP", "(Ljava/lang/String;)Ljava/util/List<Ljava/io/File;>;", "readAllBytes", "LJavaIoInputStream;" };
-  static const J2ObjcClassInfo _ASFileUtils = { "FileUtils", "com.ashera.utils", ptrTable, methods, fields, 7, 0x1, 13, 1, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "readStringFromURL", "LNSString;", "getFileFromClassPath", "getInputStreamFromClassPath", "getFilePathFromClassPath", "convertInputStreamToString", "LNSString;LJavaIoInputStream;", "readFilesContent", "LJavaUtilMap;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;)Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;", "readFileToString", "LJavaIoFile;", "LJavaIoIOException;", "LJavaIoReader;", "loadPropertiesFromClassPath", "loadProperties", "getFileAsProperties", "getFilenamesForDirnameFromCP", "(Ljava/lang/String;)Ljava/util/List<Ljava/io/File;>;", "readAllBytes", "LJavaIoInputStream;", "getSlashAppendedDirectoryName" };
+  static const J2ObjcClassInfo _ASFileUtils = { "FileUtils", "com.ashera.utils", ptrTable, methods, fields, 7, 0x1, 15, 1, -1, -1, -1, -1, -1 };
   return &_ASFileUtils;
 }
 
@@ -266,12 +278,23 @@ NSString *ASFileUtils_readFileToStringWithJavaIoReader_(JavaIoReader *input) {
 
 JavaUtilProperties *ASFileUtils_loadPropertiesFromClassPathWithNSString_(NSString *fileName) {
   ASFileUtils_initialize();
-  JavaUtilProperties *properties = create_JavaUtilProperties_init();
-  JavaIoStringReader *stringReader = nil;
   @try {
     NSString *fileContent = ASFileUtils_readFileToStringWithJavaIoReader_(create_JavaIoInputStreamReader_initWithJavaIoInputStream_(ASFileUtils_getInputStreamFromClassPathWithNSString_(fileName)));
+    return ASFileUtils_loadPropertiesWithNSString_(fileContent);
+  }
+  @catch (JavaIoIOException *e) {
+    @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
+  }
+}
+
+JavaUtilProperties *ASFileUtils_loadPropertiesWithNSString_(NSString *fileContent) {
+  ASFileUtils_initialize();
+  JavaIoStringReader *stringReader = nil;
+  @try {
     stringReader = create_JavaIoStringReader_initWithNSString_(fileContent);
+    JavaUtilProperties *properties = create_JavaUtilProperties_init();
     [properties load__WithJavaIoReader:stringReader];
+    return properties;
   }
   @catch (JavaIoIOException *e) {
     @throw create_JavaLangRuntimeException_initWithJavaLangThrowable_(e);
@@ -281,7 +304,6 @@ JavaUtilProperties *ASFileUtils_loadPropertiesFromClassPathWithNSString_(NSStrin
       [stringReader close];
     }
   }
-  return properties;
 }
 
 JavaUtilProperties *ASFileUtils_getFileAsPropertiesWithNSString_(NSString *fileName) {
@@ -382,6 +404,11 @@ IOSByteArray *ASFileUtils_readAllBytesWithJavaIoInputStream_(JavaIoInputStream *
     @catch (JavaIoIOException *e) {
     }
   }
+}
+
+NSString *ASFileUtils_getSlashAppendedDirectoryNameWithNSString_(NSString *directoryName) {
+  ASFileUtils_initialize();
+  return [((NSString *) nil_chk(directoryName)) java_hasSuffix:@"/"] ? directoryName : JreStrcat("$C", directoryName, '/');
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFileUtils)

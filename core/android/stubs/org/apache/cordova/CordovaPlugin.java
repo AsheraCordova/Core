@@ -5,6 +5,7 @@ import org.json.JSONException;
 
 public class CordovaPlugin {
 	public CordovaInterface cordova;
+	public CordovaWebView webView;
 	public void initialize(CordovaInterface cordova, CordovaWebView webView) {
 		
 	}

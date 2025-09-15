@@ -16,13 +16,21 @@
 #if !defined (ADEnvironment_) && (INCLUDE_ALL_Environment || defined(INCLUDE_ADEnvironment))
 #define ADEnvironment_
 
+@class JavaIoFile;
+
 @interface ADEnvironment : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
++ (JavaIoFile *)getExternalStorageDirectory;
+
 + (NSString *)getExternalStorageState;
+
++ (id)getLegacyExternalStorageDirectory;
+
++ (jboolean)isExternalStorageEmulated;
 
 @end
 
@@ -40,6 +48,12 @@ FOUNDATION_EXPORT ADEnvironment *new_ADEnvironment_init(void) NS_RETURNS_RETAINE
 FOUNDATION_EXPORT ADEnvironment *create_ADEnvironment_init(void);
 
 FOUNDATION_EXPORT NSString *ADEnvironment_getExternalStorageState(void);
+
+FOUNDATION_EXPORT JavaIoFile *ADEnvironment_getExternalStorageDirectory(void);
+
+FOUNDATION_EXPORT jboolean ADEnvironment_isExternalStorageEmulated(void);
+
+FOUNDATION_EXPORT id ADEnvironment_getLegacyExternalStorageDirectory(void);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADEnvironment)
 

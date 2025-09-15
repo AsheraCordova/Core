@@ -63,15 +63,23 @@ public class FontConverter implements IConverter<Map<String, FontDescriptor>, St
                 boolean matches = matcher.matches();   
                 
                 if (matches) {
-                    java.util.Properties bundle = readProps(matcher.group(2));
+                    java.util.Properties bundle = readProps(matcher.group(2), fragment);
                     Set<Object> fonts = bundle.keySet();
                     for (Object font : fonts) {
-                    	String fontKey = getFontKey(font.toString());
+                    	String fontKey = getFontKey(font.toString(), fragment);
                     	if (fontKey != null) {
-                    		fontDescriptors.put(fontKey, new FontDescriptor(bundle.getProperty(font.toString()), NORMAL_FONT_TRAIT));
+                    		String fontName = getFontName(bundle.getProperty(font.toString()), fragment);
+							fontDescriptors.put(fontKey, new FontDescriptor(fontName, NORMAL_FONT_TRAIT));
                     	}
                     }
                     
+                }
+            } else if (value.startsWith("cordova.file.")) {
+            	String fileName = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(value, fragment);
+            	String fontName = getFontName(fileName, null);
+            	
+                if (fontName != null) {
+                	fontDescriptors.put("normal_400", new FontDescriptor(fontName, NORMAL_FONT_TRAIT));
                 }
             }
         }
@@ -90,11 +98,39 @@ public class FontConverter implements IConverter<Map<String, FontDescriptor>, St
     }
     //end - body
 
-    private Properties readProps(String name) {
-		return FileUtils.loadPropertiesFromClassPath("font/font_" + name + ".properties");
+    
+    private Properties readProps(String name, IFragment fragment) {
+    	String fileName = "font/font_" + name + ".properties";
+    	if (fragment.getRootDirectory() == null) {
+			return FileUtils.loadPropertiesFromClassPath(fileName);
+    	} else {
+    		String rootDir = FileUtils.getSlashAppendedDirectoryName(fragment.getRootDirectory() );
+			String fileStr = com.ashera.widget.PluginInvoker.readCdvDataAsString(rootDir, "resources/" + fileName, fragment);
+			return com.ashera.utils.ResourceBundleUtils.readStringAsProperties(fileStr);
+    	}
 	}
     
-	private String getFontKey(String font) {
+	
+	
+    public String getFontName(String value, IFragment fragment) {
+    	if (fragment == null || fragment.getRootDirectory() != null) {
+    		int index = value.lastIndexOf("/");
+			if (index != -1) {
+    			value = value.substring(index + 1);
+    		}
+    		return value.replaceAll("/", "_").replaceAll(" ", "_").replaceAll("\\.", "_");
+    	} 
+    	return value;
+	}
+	private String getFontKey(String font, IFragment fragment) {
+		if (fragment.getRootDirectory() != null) {
+			if (font.endsWith("_android")) {
+				return font.replace("_android", "");
+			} else {
+				return null;
+			}
+		}
+		
 		if (font.endsWith("400") || font.endsWith("700")) {
 			return font;
 		}

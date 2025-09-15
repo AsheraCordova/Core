@@ -11,6 +11,10 @@ public class UINavigatorImpl {
 	public UINavigatorImpl(com.ashera.core.FragmentManager manager) {
 		this.manager = manager;
 	}
+	public com.ashera.core.FragmentManager getManager() {
+		return manager;
+	}
+
 	public void navigate(String actionId, List<Map<String, Object>> scopedObjects,  IFragment fragment) {
 		com.ashera.core.FragmentManager manager = getManager(fragment);
 		manager.navigate(actionId, scopedObjects, fragment);

@@ -123,13 +123,21 @@ public class BaseCordovaActivity extends org.apache.cordova.CordovaActivity impl
     @Override
     public IFragment getActiveRootFragment() {
         IFragment activeFragment = null;
-        for (Fragment fragment : ((FragmentManager) getSupportFragmentManager ()).getFragments()) {
+        List<Fragment> allfragments = ((FragmentManager) getSupportFragmentManager()).getFragments();
+        for (int i = allfragments.size() - 1; i >=0 ; i--) {
+            Fragment fragment = allfragments.get(i);
+
+            if (fragment instanceof  MyDialog && fragment.isVisible()) {
+                activeFragment = (MyDialog) fragment;
+                break;
+            }
             if (fragment instanceof NavHostFragment) {
                 List fragments = fragment.getChildFragmentManager().getFragments();
                 activeFragment = (IFragment) fragments.get(fragments.size() - 1);
                 break;
             }
         }
+
         return activeFragment;
     }
 

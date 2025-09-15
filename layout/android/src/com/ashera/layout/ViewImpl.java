@@ -1,4 +1,5 @@
 package com.ashera.layout;
+import java.lang.reflect.Method;
 //start - imports
 import java.util.*;
 
@@ -2306,6 +2307,661 @@ return getBottom(w);			}
 		return null;
 	}
 	
+
+	private static void setAnimatorXmlExternal(IWidget w, Object objValue) {
+ 		String value = (String) objValue;
+ 		if (value.startsWith("@animator/")) {
+ 			String html = w.getFragment().getInlineResource(value);
+ 			if (html == null) {
+ 				html = PluginInvoker.getFileAsset("res/" + (value).replace("@", "") + ".xml", w.getFragment());
+ 			}
+ 			AnimationContentHandler handler = new AnimationContentHandler(w);
+			com.ashera.parser.html.HtmlParser.parse(handler, html);
+ 			android.animation.Animator animator = handler.getAnimatorSet();
+ 			animator.setTarget((View) w.asWidget());
+			w.getFragment().addDisposable(animator); 				
+ 			w.setAnimator(animator); 		
+ 		}
+	}
+	
+	public static android.view.animation.Interpolator getInterpolator(IWidget w, Object objValue) {
+		String value = (String) objValue;
+		String html = w.getFragment().getInlineResource(value);
+		if (html == null) {
+			html = PluginInvoker.getFileAsset("res/" + (value).replace("@", "") + ".xml", w.getFragment());
+		}
+		AnimationContentHandler handler = new AnimationContentHandler(w);
+		com.ashera.parser.html.HtmlParser.parse(handler, html);
+		return handler.timeInterpolator;
+	}
+	
+	private static class AnimationContentHandler extends com.ashera.parser.html.ContentHandlerAdapter {
+    private final class CustomTypeConverterX
+			extends android.animation.TypeConverter<android.graphics.PointF, Float> {
+		private CustomTypeConverterX(Class<android.graphics.PointF> fromClass, Class<Float> toClass) {
+			super(fromClass, toClass);
+		}
+
+		@Override
+		public Float convert(android.graphics.PointF value) {
+		    return value.x;
+		}
+	}
+    
+    private final class CustomTypeConverterY
+			extends android.animation.TypeConverter<android.graphics.PointF, Float> {
+		private CustomTypeConverterY(Class<android.graphics.PointF> fromClass, Class<Float> toClass) {
+			super(fromClass, toClass);
+		}
+
+		@Override
+		public Float convert(android.graphics.PointF value) {
+		    return value.y;
+		}
+	}
+
+		private static final int VALUE_TYPE_FLOAT       = 0;
+	    private static final int VALUE_TYPE_INT         = 1;
+	    private static final int VALUE_TYPE_PATH        = 2;
+	    private static final int VALUE_TYPE_COLOR       = 3;
+	    private static final int VALUE_TYPE_UNDEFINED   = 4;
+		private int valueType = VALUE_TYPE_UNDEFINED;
+		
+		private static final int TOGETHER = 0;
+	    private static final int SEQUENTIALLY = 1;
+	    private String valueTo;
+	    private String valueFrom;
+	    private java.util.Stack<Integer> sequenceOrderings = new java.util.Stack<>();
+	    private int sequenceOrdering;
+		private final IWidget w;
+		private java.util.Stack<ArrayList<android.animation.Animator>> childAnimators = new java.util.Stack<>();
+		private java.util.Stack<android.animation.AnimatorSet> animatorSets = new java.util.Stack<>();
+		private android.animation.AnimatorSet animatorSet;
+		private float arg0;
+		private float arg1;
+		private float extraTension;
+		private float cycles;
+		private android.view.animation.Interpolator timeInterpolator;
+		private String pathData;
+		private String propertyYName;
+		private String propertyXName;
+
+
+		private void setFactor(IWidget w, String value) {
+			this.arg0 = (float) w.quickConvert(value, "float");
+		}
+
+		private void setTension(IWidget w, String value) {
+			this.arg0 = (float) w.quickConvert(value, "float");
+		}
+
+		private void setExtraTension(IWidget w, String value) {
+			this.arg1 = (float) w.quickConvert(value, "float");
+		}
+
+		private void setCycles(IWidget w, String value) {
+			this.arg0 = (float) w.quickConvert(value, "float");
+		}
+
+		public android.animation.AnimatorSet getAnimatorSet() {
+			return animatorSet;
+		}
+
+		private AnimationContentHandler(IWidget w) {
+			this.w = w;
+		}
+
+		@Override
+		public void startElement(String uri, String localName, String qName, org.xml.sax.Attributes atts) throws org.xml.sax.SAXException {
+			switch (localName) {
+				case "set": {
+					android.animation.AnimatorSet animatorSet = new android.animation.AnimatorSet();
+					if (this.animatorSet == null) {
+						this.animatorSet = animatorSet;
+					}
+					parseAnimatorSet(w, animatorSet, atts);
+					animatorSets.push(animatorSet);
+					childAnimators.push(new ArrayList<>());
+					sequenceOrderings.push(this.sequenceOrdering);
+				}
+				break;
+				
+				case "objectAnimator": {
+					
+					ArrayList<android.animation.Animator> childAnims = childAnimators.peek();
+					android.animation.ObjectAnimator objectAnimator = new android.animation.ObjectAnimator();
+					parseAnimator(w, objectAnimator, atts);
+
+					if (valueType == VALUE_TYPE_UNDEFINED) {
+			            valueType = inferValueTypeFromValues(w, valueFrom, valueTo);
+			        }
+			        android.animation.PropertyValuesHolder pvh = getPVH(w, valueType, valueFrom, valueTo, "");
+			        if (pvh != null) {
+			        	objectAnimator.setValues(pvh);
+			        }
+			        
+					parsePropertyAnimator(w, objectAnimator, atts);
+					
+
+			        // Path can be involved in an ObjectAnimator in the following 3 ways:
+			        // 1) Path morphing: the property to be animated is pathData, and valueFrom and valueTo
+			        //    are both of pathType. valueType = pathType needs to be explicitly defined.
+			        // 2) A property in X or Y dimension can be animated along a path: the property needs to be
+			        //    defined in propertyXName or propertyYName attribute, the path will be defined in the
+			        //    pathData attribute. valueFrom and valueTo will not be necessary for this animation.
+			        // 3) PathInterpolator can also define a path (in pathData) for its interpolation curve.
+			        // Here we are dealing with case 2:
+			        if (pathData != null) {
+			            setUpPath(objectAnimator);
+			        }
+			        
+					childAnims.add(objectAnimator);
+				}
+				break;
+				
+				case "accelerateInterpolator": {
+					parseAccelerateInterpolator(w, atts);
+					timeInterpolator = new android.view.animation.AccelerateInterpolator(arg0);
+				}
+				break;
+				case "decelerateInterpolator": {
+					parseDecelerateInterpolator(w, atts);
+					timeInterpolator = new android.view.animation.DecelerateInterpolator(arg0);
+				}
+				break;
+				case "cycleInterpolator": {
+					parseCycleInterpolator(w, atts);
+					timeInterpolator = new android.view.animation.CycleInterpolator(arg0);
+				}
+				break;
+				case "anticipateInterpolator": {
+					parseAnticipateInterpolator(w, atts);
+					timeInterpolator = new android.view.animation.AnticipateInterpolator(arg0);
+				}
+				break;
+				case "overshootInterpolator": {
+					parseOvershootInterpolator(w, atts);
+					timeInterpolator = new android.view.animation.OvershootInterpolator(arg0);
+				}
+				break;
+				case "anticipateOvershootInterpolator": {
+					parseAnticipateOvershootInterpolator(w, atts);
+					if (arg1 != 0) {
+						timeInterpolator = new android.view.animation.AnticipateOvershootInterpolator(arg0 * arg1);
+					} else {
+						timeInterpolator = new android.view.animation.AnticipateOvershootInterpolator(arg0);
+					}
+				}
+				break;
+			}
+			
+		}
+
+		private void setUpPath(android.animation.ObjectAnimator objectAnimator) {
+			if (valueType == VALUE_TYPE_PATH || valueType == VALUE_TYPE_UNDEFINED) {
+			    // When pathData is defined, we are in case #2 mentioned above. ValueType can only
+			    // be float type, or int type. Otherwise we fallback to default type.
+			    valueType = VALUE_TYPE_FLOAT;
+			}
+			if (propertyXName == null && propertyYName == null) {
+			    throw new RuntimeException(" propertyXName or propertyYName is needed for PathData");
+			} else {
+			    android.graphics.Path path = androidx.core.graphics.PathParser.createPathFromPathData(pathData);
+				android.animation.PropertyValuesHolder x = null;
+				android.animation.PropertyValuesHolder y = null;
+				if (propertyXName != null) {
+					x  = android.animation.PropertyValuesHolder.ofObject(new CustomProperty(w.asWidget().getClass(), propertyXName),  new CustomTypeConverterX(android.graphics.PointF.class, Float.class), path);
+				}
+				if (propertyYName != null) {
+					y = android.animation.PropertyValuesHolder.ofObject(new CustomProperty(w.asWidget().getClass(), propertyYName),  new CustomTypeConverterY(android.graphics.PointF.class, Float.class), path);
+				}
+			    
+			    if (x == null) {
+			    	objectAnimator.setValues(y);
+			    } else if (y == null) {
+			    	objectAnimator.setValues(x);
+			    } else {
+			    	objectAnimator.setValues(x, y);
+			    }
+			}
+		}
+
+		@Override
+		public void endElement(String uri, String localName, String qName) throws org.xml.sax.SAXException {
+			switch (localName) {
+				case "set": {
+					ArrayList<android.animation.Animator> childAnims = childAnimators.pop();
+					android.animation.AnimatorSet animatorSet = animatorSets.pop();
+					int sequenceOrdering = sequenceOrderings.pop();
+					if (animatorSet != null && childAnims != null) {
+				        android.animation.Animator[] animsArray = new android.animation.Animator[childAnims.size()];
+				        int index = 0;
+				        for (android.animation.Animator a : childAnims) {
+				            animsArray[index++] = a;
+				        }
+				        if (sequenceOrdering == TOGETHER) {
+				        	animatorSet.playTogether(animsArray);
+				        } else {
+				        	animatorSet.playSequentially(animsArray);
+				        }
+				    }
+				}
+				break;
+				case "anticipateOvershootInterpolator":
+				case "overshootInterpolator":
+				case "anticipateInterpolator":
+				case "cycleInterpolator":
+				case "decelerateInterpolator":
+				case "accelerateInterpolator": {
+					arg0 = 0;
+					arg1 = 0;
+				}
+				break;
+			}
+		}
+
+		@Override
+		public void characters(char[] ch, int start, int length) throws org.xml.sax.SAXException {
+		}
+
+		private void setStartOffset(IWidget w, android.animation.ValueAnimator animator, String value) {
+			animator.setStartDelay((int) w.quickConvert(value, "int"));
+		}
+
+		private void setValueType(IWidget w, android.animation.ValueAnimator animator, String value) {
+			this.valueType = getValueType(value);
+
+		}
+
+		private void setValueTo(IWidget w, android.animation.ValueAnimator animator, String value) {
+			this.valueTo = value;
+
+		}
+
+		private void setValueFrom(IWidget w, android.animation.ValueAnimator animator, String value) {
+			this.valueFrom = value;
+
+		}
+
+		private void setInterpolator(IWidget w, android.animation.ValueAnimator animator, String value) {
+ 			String html = w.getFragment().getInlineResource(value);
+ 			if (html == null) {
+ 				html = PluginInvoker.getFileAsset("res/" + (value).replace("@", "") + ".xml", w.getFragment());
+ 			}
+ 			timeInterpolator = null;
+			com.ashera.parser.html.HtmlParser.parse(this, html);
+			animator.setInterpolator(timeInterpolator);
+		}
+
+		private void setPathData(IWidget w, android.animation.ObjectAnimator animator, String value) {
+			this.pathData = value;
+		}
+
+		private void setPropertyYName(IWidget w, android.animation.ObjectAnimator animator, String value) {
+			this.propertyYName = value;
+		}
+
+		private void setPropertyXName(IWidget w, android.animation.ObjectAnimator animator, String value) {
+			this.propertyXName = value;
+		}
+
+		private void setOrdering(IWidget w, android.animation.AnimatorSet animatorSet, String value) {
+			sequenceOrdering = getOrdering(value);
+		}
+
+		private static int inferValueTypeFromValues(IWidget w, String valueFromId, String valueToId) {
+			boolean hasFrom = (valueFromId != null);
+			boolean hasTo = (valueToId != null);
+
+			int valueType;
+			// Check whether it's color type. If not, fall back to default type (i.e. float
+			// type)
+			if ((hasFrom && isColor(valueFromId)) || (hasTo && isColor(valueToId))) {
+				valueType = VALUE_TYPE_COLOR;
+			} else {
+				valueType = VALUE_TYPE_FLOAT;
+			}
+			return valueType;
+		}
+
+		private static android.animation.PropertyValuesHolder getPVH(IWidget w, int valueType, String valueFromId,
+				String valueToId, String propertyName) {
+
+			boolean hasFrom = (valueFromId != null);
+			boolean hasTo = (valueToId != null);
+
+			if (valueType == VALUE_TYPE_UNDEFINED) {
+				// Check whether it's color type. If not, fall back to default type (i.e. float
+				// type)
+				if ((hasFrom && isColor(valueFromId)) || (hasTo && isColor(valueToId))) {
+					valueType = VALUE_TYPE_COLOR;
+				} else {
+					valueType = VALUE_TYPE_FLOAT;
+				}
+			}
+
+			boolean getFloats = (valueType == VALUE_TYPE_FLOAT);
+
+			android.animation.PropertyValuesHolder returnValue = null;
+
+			if (valueType == VALUE_TYPE_PATH) {
+
+			} else {
+				android.animation.TypeEvaluator evaluator = null;
+				// Integer and float value types are handled here.
+				if (valueType == VALUE_TYPE_COLOR) {
+					// special case for colors: ignore valueType and get ints
+					evaluator = new android.animation.ArgbEvaluator();
+				}
+				if (getFloats) {
+					float valueFrom;
+					float valueTo;
+					if (hasFrom) {
+						if (isDimen(valueFromId)) {
+							valueFrom = (float) w.quickConvert(valueFromId, "dimensionfloat");
+						} else {
+							valueFrom = (float) w.quickConvert(valueFromId, "float");
+						}
+						if (hasTo) {
+							if (isDimen(valueToId)) {
+								valueTo = (float) w.quickConvert(valueToId, "dimensionfloat");
+							} else {
+								valueTo = (float) w.quickConvert(valueToId, "float");
+							}
+							returnValue = android.animation.PropertyValuesHolder.ofFloat(propertyName, valueFrom,
+									valueTo);
+						} else {
+							returnValue = android.animation.PropertyValuesHolder.ofFloat(propertyName, valueFrom);
+						}
+					} else {
+						if (isDimen(valueToId)) {
+							valueTo = (float) w.quickConvert(valueToId, "dimensionfloat");
+						} else {
+							valueTo = (float) w.quickConvert(valueToId, "float");
+						}
+						returnValue = android.animation.PropertyValuesHolder.ofFloat(propertyName, valueTo);
+					}
+				} else {
+					int valueFrom;
+					int valueTo;
+					if (hasFrom) {
+						if (isDimen(valueFromId)) {
+							valueFrom = (int) w.quickConvert(valueFromId, "dimension");
+						} else if (isColor(valueFromId)) {
+							valueFrom = android.graphics.Color.parseColor(valueFromId);
+						} else {
+							valueFrom = (int) w.quickConvert(valueFromId, "int");
+						}
+						if (hasTo) {
+							if (isDimen(valueToId)) {
+								valueTo = (int) w.quickConvert(valueToId, "dimension");
+							} else if (isColor(valueToId)) {
+								valueTo = android.graphics.Color.parseColor(valueToId);
+							} else {
+								valueTo = (int) w.quickConvert(valueToId, "int");
+							}
+							returnValue = android.animation.PropertyValuesHolder.ofInt(propertyName, valueFrom,
+									valueTo);
+						} else {
+							returnValue = android.animation.PropertyValuesHolder.ofInt(propertyName, valueFrom);
+						}
+					} else {
+						if (hasTo) {
+							if (isDimen(valueToId)) {
+								valueTo = (int) w.quickConvert(valueToId, "dimension");
+							} else if (isColor(valueToId)) {
+								valueTo = android.graphics.Color.parseColor(valueToId);
+							} else {
+								valueTo = (int) w.quickConvert(valueToId, "int");
+							}
+							returnValue = android.animation.PropertyValuesHolder.ofInt(propertyName, valueTo);
+						}
+					}
+				}
+				if (returnValue != null && evaluator != null) {
+					returnValue.setEvaluator(evaluator);
+				}
+			}
+
+			return returnValue;
+		}
+
+		private static boolean isColor(String val) {
+			return val.startsWith("#") || val.startsWith("@color/");
+		}
+
+		private static boolean isDimen(String val) {
+			return val.endsWith("dp") || val.endsWith("sp");
+		}
+
+//start - Animator
+private void parseAnimator(IWidget w,  android.animation.ValueAnimator animator,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "interpolator":
+setInterpolator(w, animator, value);
+break;
+case "duration":
+setDuration(w, animator, value);
+break;
+case "startOffset":
+setStartOffset(w, animator, value);
+break;
+case "repeatCount":
+setRepeatCount(w, animator, value);
+break;
+case "repeatMode":
+setRepeatMode(w, animator, value);
+break;
+case "valueFrom":
+setValueFrom(w, animator, value);
+break;
+case "valueTo":
+setValueTo(w, animator, value);
+break;
+case "valueType":
+setValueType(w, animator, value);
+break;}
+}
+}
+
+private void setDuration(IWidget w,  android.animation.ValueAnimator animator, String strValue) {
+animator.setDuration((int) w.quickConvert(strValue, "int"));
+}
+
+private int getRepeatCount(String value, IWidget w) {
+	switch (value) {
+case "infinite":
+		return -1;
+default:
+		break;
+}
+	return (int) w.quickConvert(value, "int");
+}
+
+private void setRepeatCount(IWidget w,  android.animation.ValueAnimator animator, String strValue) {
+animator.setRepeatCount(getRepeatCount(strValue, w));
+}
+
+private int getRepeatMode(String value) {
+	switch (value) {
+case "restart":
+		return 1;
+case "reverse":
+		return 2;
+default:
+		break;
+}
+	return 0;
+}
+
+private void setRepeatMode(IWidget w,  android.animation.ValueAnimator animator, String strValue) {
+animator.setRepeatMode(getRepeatMode(strValue));
+}
+
+private int getValueType(String value) {
+	switch (value) {
+case "floatType":
+		return 0;
+case "intType":
+		return 1;
+case "pathType":
+		return 2;
+case "colorType":
+		return 3;
+default:
+		break;
+}
+	return 0;
+}
+
+//end - Animator	
+	
+//start - PropertyAnimator
+private void parsePropertyAnimator(IWidget w,  android.animation.ObjectAnimator animator,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "propertyName":
+setPropertyName(w, animator, value);
+break;
+case "propertyXName":
+setPropertyXName(w, animator, value);
+break;
+case "propertyYName":
+setPropertyYName(w, animator, value);
+break;
+case "pathData":
+setPathData(w, animator, value);
+break;}
+}
+}
+
+private void setPropertyName(IWidget w,  android.animation.ObjectAnimator animator, String strValue) {
+animator.setPropertyName((String) w.quickConvert(strValue, "resourcestring"));
+}
+
+//end - PropertyAnimator
+
+
+	//start - AnimatorSet
+private void parseAnimatorSet(IWidget w,  android.animation.AnimatorSet animatorSet,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "ordering":
+setOrdering(w, animatorSet, value);
+break;}
+}
+}
+
+private int getOrdering(String value) {
+	switch (value) {
+case "together":
+		return 0;
+case "sequentially":
+		return 1;
+default:
+		break;
+}
+	return 0;
+}
+
+//end - AnimatorSet
+//start - AccelerateInterpolator
+private void parseAccelerateInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "factor":
+setFactor(w, value);
+break;}
+}
+}
+
+//end - AccelerateInterpolator
+//start - DecelerateInterpolator
+private void parseDecelerateInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "factor":
+setFactor(w, value);
+break;}
+}
+}
+
+//end - DecelerateInterpolator
+
+//start - CycleInterpolator
+private void parseCycleInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "cycles":
+setCycles(w, value);
+break;}
+}
+}
+
+//end - CycleInterpolator
+
+//start - AnticipateInterpolator
+private void parseAnticipateInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "tension":
+setTension(w, value);
+break;}
+}
+}
+
+//end - AnticipateInterpolator
+
+//start - OvershootInterpolator
+private void parseOvershootInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "tension":
+setTension(w, value);
+break;}
+}
+}
+
+//end - OvershootInterpolator
+
+
+//start - AnticipateOvershootInterpolator
+private void parseAnticipateOvershootInterpolator(IWidget w,  org.xml.sax.Attributes atts) {
+for (int i = 0; i < atts.getLength(); i++) {
+					String name = atts.getLocalName(i);
+					String value = ViewImpl.getValue(name, atts);
+					switch (atts.getLocalName(i)) {
+case "tension":
+setTension(w, value);
+break;
+case "extraTension":
+setExtraTension(w, value);
+break;}
+}
+}
+
+//end - AnticipateOvershootInterpolator
+
+	}
+	
+
 	@SuppressLint("NewApi")
 private static class OnApplyWindowInsetsListener implements View.OnApplyWindowInsetsListener, com.ashera.widget.IListener{
 private IWidget w; private View view; private String strValue; private String action;
@@ -2365,6 +3021,7 @@ public java.util.Map<String, Object> getOnApplyWindowInsetsEventObj(View v,Windo
     obj.put("eventType", "applywindowinsets");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2441,6 +3098,7 @@ public java.util.Map<String, Object> getOnCapturedPointerEventObj(View view,Moti
     obj.put("eventType", "capturedpointer");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2513,6 +3171,7 @@ public java.util.Map<String, Object> getOnClickEventObj(View v) {
     obj.put("eventType", "click");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2588,6 +3247,7 @@ public java.util.Map<String, Object> getOnContextClickEventObj(View v) {
     obj.put("eventType", "contextclick");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2661,6 +3321,7 @@ public java.util.Map<String, Object> getOnCreateContextMenuEventObj(ContextMenu 
     obj.put("eventType", "createcontextmenu");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2737,6 +3398,7 @@ public java.util.Map<String, Object> getOnDragEventObj(View v,DragEvent event) {
     obj.put("eventType", "drag");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2810,6 +3472,7 @@ public java.util.Map<String, Object> getOnFocusChangeEventObj(View v,boolean has
     obj.put("eventType", "focuschange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2887,6 +3550,7 @@ public java.util.Map<String, Object> getOnGenericMotionEventObj(View v,MotionEve
     obj.put("eventType", "genericmotion");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2964,6 +3628,7 @@ public java.util.Map<String, Object> getOnHoverEventObj(View v,MotionEvent event
     obj.put("eventType", "hover");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3042,6 +3707,7 @@ public java.util.Map<String, Object> getOnKeyEventObj(View v,int keyCode,KeyEven
     obj.put("eventType", "key");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3119,6 +3785,7 @@ public java.util.Map<String, Object> getOnLongClickEventObj(View v) {
     obj.put("eventType", "longclick");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3194,6 +3861,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(View v,int scroll
     obj.put("eventType", "scrollchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3269,6 +3937,7 @@ public java.util.Map<String, Object> getOnSystemUiVisibilityChangeEventObj(int v
     obj.put("eventType", "systemuivisibilitychange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3346,6 +4015,7 @@ public java.util.Map<String, Object> getOnTouchEventObj(View v,MotionEvent event
     obj.put("eventType", "touch");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3422,6 +4092,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
     obj.put("eventType", "swiped");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3494,6 +4165,7 @@ public java.util.Map<String, Object> getOnAnimationStartEventObj(android.animati
     obj.put("eventType", "animationstart");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3552,6 +4224,7 @@ public java.util.Map<String, Object> getOnAnimationEndEventObj(android.animation
     obj.put("eventType", "animationend");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3610,6 +4283,7 @@ public java.util.Map<String, Object> getOnAnimationCancelEventObj(android.animat
     obj.put("eventType", "animationcancel");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3668,6 +4342,7 @@ public java.util.Map<String, Object> getOnAnimationRepeatEventObj(android.animat
     obj.put("eventType", "animationrepeat");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -4150,7 +4825,11 @@ public java.util.Map<String, Object> getOnAnimationRepeatEventObj(android.animat
 	public static void addEventInfo(Map<String, Object> obj, MenuItem item, com.ashera.core.IFragment fragment) {
 		Context context = (Context) fragment.getRootActivity();
 		if (item.getItemId() != View.NO_ID) {
-			obj.put("itemId", "@+id/" + context.getResources().getResourceEntryName(item.getItemId()));
+			if (fragment.getRootDirectory() == null) {
+				obj.put("itemId", "@+id/" + context.getResources().getResourceEntryName(item.getItemId()));
+			} else {
+				obj.put("itemId", fragment.getRootWidget().quickConvertBack(item.getItemId(), "id"));
+			}
 		}
 		
 		if (item.getActionView() != null && item.getActionView().getTag() != null) {
@@ -4571,21 +5250,28 @@ public java.util.Map<String, Object> getOnAnimationRepeatEventObj(android.animat
 
  	private static void setAnimatorXml(IWidget w, Object objValue) {
  		String value = (String) objValue;
- 		if (value.startsWith("@animator/")) {
-	 		String key1 = value.replaceFirst("@animator/", "");
-			Context context = (Context) w.getFragment().getRootActivity();
-			int identifier = context.getResources().getIdentifier(key1, "animator", context.getPackageName());
-			android.animation.Animator animator = android.animation.AnimatorInflater.loadAnimator(context, identifier);
-			animator.setTarget((View) w.asWidget());
-			w.setAnimator(animator);
- 		}
- 		
- 		if (value.startsWith("@anim/")) {
-	 		String key1 = value.replaceFirst("@anim/", "");
-			Context context = (Context) w.getFragment().getRootActivity();
-			int identifier = context.getResources().getIdentifier(key1, "anim", context.getPackageName());
-			android.view.animation.Animation animation = android.view.animation.AnimationUtils.loadAnimation(context, identifier);
-			((View) w.asWidget()).startAnimation(animation);
+ 		com.ashera.core.IFragment fragment = w.getFragment();
+ 		String inlineResource = fragment.getInlineResource(value);
+
+ 		if (fragment.getRootDirectory() == null && inlineResource == null) {
+	 		if (value.startsWith("@animator/")) {
+		 		String key1 = value.replaceFirst("@animator/", "");
+				Context context = (Context) fragment.getRootActivity();
+				int identifier = context.getResources().getIdentifier(key1, "animator", context.getPackageName());
+				android.animation.Animator animator = android.animation.AnimatorInflater.loadAnimator(context, identifier);
+				animator.setTarget((View) w.asWidget());
+				w.setAnimator(animator);
+	 		}
+	 		
+	 		if (value.startsWith("@anim/")) {
+		 		String key1 = value.replaceFirst("@anim/", "");
+				Context context = (Context) fragment.getRootActivity();
+				int identifier = context.getResources().getIdentifier(key1, "anim", context.getPackageName());
+				android.view.animation.Animation animation = android.view.animation.AnimationUtils.loadAnimation(context, identifier);
+				((View) w.asWidget()).startAnimation(animation);
+	 		}
+ 		} else {
+ 			setAnimatorXmlExternal(w, objValue);
  		}
  	}
  	
@@ -4681,6 +5367,81 @@ public java.util.Map<String, Object> getOnAnimationRepeatEventObj(android.animat
 			outline.setRoundRect((int) (0 - moffsetLeft), (int) (0 - moffsetTop), (int) (view.getMeasuredWidth() + moffsetRight), (int) (view.getMeasuredHeight() + moffsetBottom), mRadius);
 			outline.setAlpha(1f);
 		}
+	}
+
+	public static String getValue(String key, org.xml.sax.Attributes attributes) {
+		String os = PluginInvoker.getOS().toLowerCase();
+		if (attributes.getValue(key + "-" + os) != null) {
+			return attributes.getValue(key + "-" + os);
+		}
+		
+		return attributes.getValue(key);
+	}
+	
+	private static class CustomProperty<T, V> extends android.util.Property<Object, Object> {
+
+	    private static final String PREFIX_GET = "get";
+	    private static final String PREFIX_IS = "is";
+	    private static final String PREFIX_SET = "set";
+	    private Method mSetter;
+	    private java.lang.reflect.Field mField;
+
+	    /**
+	     * For given property name 'name', look for getName/isName method or 'name' field.
+	     * Also look for setName method (optional - could be readonly). Failing method getters and
+	     * field results in throwing NoSuchPropertyException.
+	     *
+	     * @param propertyHolder The class on which the methods or field are found
+	     * @param name The name of the property, where this name is capitalized and appended to
+	     * "get" and "is to search for the appropriate methods. If the get/is methods are not found,
+	     * the constructor will search for a field with that exact name.
+	     */
+	    public CustomProperty(Class<Object> valueType, String name) {
+	         // TODO: cache reflection info for each new class/name pair
+	        super(valueType, name);
+	        char firstLetter = Character.toUpperCase(name.charAt(0));
+	        String theRest = name.substring(1);
+	        String capitalizedName = firstLetter + theRest;
+
+	        String setterName = PREFIX_SET + capitalizedName;
+	        try {
+	            mSetter = valueType.getMethod(setterName, float.class);
+	        } catch (NoSuchMethodException ignored) {
+	            // Okay to not have a setter - just a readonly property
+	        }
+	    }
+
+	    @Override
+	    public void set(Object object, Object value) {
+	        if (mSetter != null) {
+	            try {
+	                mSetter.invoke(object, value);
+	            } catch (Exception e) {
+	            	 throw new RuntimeException(e.getCause());
+	            } 
+	        } else if (mField != null) {
+	            try {
+	                mField.set(object, value);
+	            } catch (IllegalAccessException e) {
+	                throw new AssertionError();
+	            }
+	        } else {
+	            throw new UnsupportedOperationException("Property " + getName() +" is read-only");
+	        }
+	    }
+
+	    @Override
+	    public V get(Object object) {
+	        return null;
+	    }
+
+	    /**
+	     * Returns false if there is no setter or public field underlying this Property.
+	     */
+	    @Override
+	    public boolean isReadOnly() {
+	        return (mSetter == null && mField == null);
+	    }
 	}
 
 }

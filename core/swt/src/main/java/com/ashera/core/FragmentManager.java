@@ -11,7 +11,6 @@ import org.eclipse.swt.custom.StackLayout;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
@@ -19,11 +18,14 @@ import org.eclipse.swt.widgets.Shell;
 import com.ashera.converter.CommonConverters;
 import com.ashera.converter.ConverterFactory;
 
+import r.android.os.Bundle;
+
 public class FragmentManager {
 	private StackLayout stackLayout;
 	private Composite rootComposite;
 	private static final com.ashera.common.ShellManager SHELL_MANAGER = com.ashera.common.ShellManager.getInstance();
 	private java.util.Stack<Control> nativeWidgetStack = new java.util.Stack<>();
+
 	public FragmentManager(StackLayout stackLayout, Composite rootComposite, IActivity activity) {
 		this.rootComposite = rootComposite;
 		this.stackLayout = stackLayout;
@@ -156,11 +158,22 @@ public class FragmentManager {
 	}
 
 	//start - navigator
+	private String namespace;
+	private String rootDirectory;
 	private List<GenericFragment> fragments = new ArrayList<>();
-	private Map<String, DialogFragment> dialogFragments = new LinkedHashMap<>();
+	private static Map<String, DialogFragment> dialogFragments = new LinkedHashMap<>();
 	private IActivity activity;
 	private FragmentFactory fragmentFactory;
 	private boolean remeasure = true;
+	
+	
+	public void setNamespace(String namespace) {
+		this.namespace = namespace;
+	}
+
+	public void setRootDirectory(String rootDirectory) {
+		this.rootDirectory = rootDirectory;
+	}
 	
 	private void popBackStack(String destinationId, boolean inclusive, int indexFromEnd)
 			throws DestinatinNotFoundException {
@@ -361,7 +374,10 @@ public class FragmentManager {
 	
 	private void onCreate(String resId, String fileName, List<Map<String, Object>> scopedObjects,
 			GenericFragment genericFragment) {
-		genericFragment.setArguments(GenericFragment.getInitialBundle(resId, fileName, scopedObjects));
+		Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, scopedObjects);
+		bundle.putString("rootDirectory", rootDirectory);
+		bundle.putString("namespace", namespace);
+		genericFragment.setArguments(bundle);
 		genericFragment.onAttach(activity);
 		genericFragment.onCreate();
 	}
@@ -392,7 +408,9 @@ public class FragmentManager {
 		if (dialogFragment.isFullScreen()) {
 			fragment.onResume();
 		}
-		fragment.onCloseDialog();
+		java.util.Map<String, String> eventData = new java.util.HashMap<>();
+		eventData.put("dialogClosed", dialogFragment.getActionUrl());
+		fragment.onCloseDialog(eventData);
 	}
 
 	private int getPopCounter(String destinationId, boolean inclusive, int indexFromEnd)
@@ -443,8 +461,10 @@ public class FragmentManager {
 				public void remeasure() {
 					super.remeasure();
 					if (!isMeasuring()) {
-						// update size of dialog
-						fragmentManager.updateSizeIfRequired(this);
+						if (getRootWidget() != null) {
+							// update size of dialog
+							fragmentManager.updateSizeIfRequired(this);
+						}
 					}
 					
 				}

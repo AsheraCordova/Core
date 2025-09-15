@@ -14,6 +14,8 @@
 #include "View.h"
 #include "ViewGroup.h"
 #include "java/lang/Float.h"
+#include "java/util/HashMap.h"
+#include "java/util/Map.h"
 
 
 @interface ASDialogFragment () {
@@ -64,6 +66,9 @@ J2OBJC_FIELD_SETTER(ASDialogFragment, dialog_, id)
 
 - (void)remeasure {
   id<ASIRoot> root = (id<ASIRoot>) cast_check([super getRootWidget], ASIRoot_class_());
+  if (root == nil) {
+    return;
+  }
   if (maxWidth_ == -1) {
     maxWidth_ = JreFpToInt((marginPercent_ * ASPluginInvoker_getScreenWidth()));
   }
@@ -75,14 +80,14 @@ J2OBJC_FIELD_SETTER(ASDialogFragment, dialog_, id)
     width = maxWidth_;
   }
   else if (layoutWidth_ == ADViewGroup_LayoutParams_WRAP_CONTENT) {
-    [((id<ASIMaxDimension>) nil_chk(((id<ASIMaxDimension>) cast_check([((id<ASIWidget>) nil_chk(((id<ASIWidget>) cast_check(root, ASIWidget_class_())))) asWidget], ASIMaxDimension_class_())))) setMaxWidthWithInt:maxWidth_];
+    [((id<ASIMaxDimension>) nil_chk(((id<ASIMaxDimension>) cast_check([((id<ASIWidget>) cast_check(root, ASIWidget_class_())) asWidget], ASIMaxDimension_class_())))) setMaxWidthWithInt:maxWidth_];
   }
   jint height = layoutHeight_;
   if (layoutHeight_ == ADViewGroup_LayoutParams_MATCH_PARENT) {
     height = maxHeight_;
   }
   else if (layoutHeight_ == ADViewGroup_LayoutParams_WRAP_CONTENT) {
-    [((id<ASIMaxDimension>) nil_chk(((id<ASIMaxDimension>) cast_check([((id<ASIWidget>) nil_chk(((id<ASIWidget>) cast_check(root, ASIWidget_class_())))) asWidget], ASIMaxDimension_class_())))) setMaxHeightWithInt:maxHeight_];
+    [((id<ASIMaxDimension>) nil_chk(((id<ASIMaxDimension>) cast_check([((id<ASIWidget>) cast_check(root, ASIWidget_class_())) asWidget], ASIMaxDimension_class_())))) setMaxHeightWithInt:maxHeight_];
   }
   if (forceLayout_) {
     ADView *view = (ADView *) cast_chk([((id<ASIWidget>) nil_chk([self getRootWidget])) asWidget], [ADView class]);
@@ -93,6 +98,12 @@ J2OBJC_FIELD_SETTER(ASDialogFragment, dialog_, id)
   [super remeasure];
 }
 
+- (id<JavaUtilMap>)onCloseDialogEventData {
+  id<JavaUtilMap> eventData = new_JavaUtilHashMap_init();
+  (void) [eventData putWithId:@"dialogClosed" withId:[self getActionUrl]];
+  return eventData;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
@@ -101,6 +112,7 @@ J2OBJC_FIELD_SETTER(ASDialogFragment, dialog_, id)
     { NULL, "Z", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilMap;", 0x1, -1, -1, -1, 4, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -111,6 +123,7 @@ J2OBJC_FIELD_SETTER(ASDialogFragment, dialog_, id)
   methods[3].selector = @selector(isFullScreen);
   methods[4].selector = @selector(getParentForRootWidget);
   methods[5].selector = @selector(remeasure);
+  methods[6].selector = @selector(onCloseDialogEventData);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "layoutWidth_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -121,8 +134,8 @@ J2OBJC_FIELD_SETTER(ASDialogFragment, dialog_, id)
     { "forceLayout_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "marginPercent_", "F", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setMaxHeight", "I", "setMaxWidth", "LNSObject;IILJavaLangFloat;" };
-  static const J2ObjcClassInfo _ASDialogFragment = { "DialogFragment", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 6, 7, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setMaxHeight", "I", "setMaxWidth", "LNSObject;IILJavaLangFloat;", "()Ljava/util/Map<Ljava/lang/String;Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _ASDialogFragment = { "DialogFragment", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 7, 7, -1, -1, -1, -1, -1 };
   return &_ASDialogFragment;
 }
 

@@ -16,6 +16,7 @@
 #if !defined (ASResourceBundleUtils_) && (INCLUDE_ALL_ResourceBundleUtils || defined(INCLUDE_ASResourceBundleUtils))
 #define ASResourceBundleUtils_
 
+@class JavaUtilProperties;
 @protocol ASIFragment;
 
 @interface ASResourceBundleUtils : NSObject
@@ -33,6 +34,14 @@
                        withNSString:(NSString *)resourceOrText
                     withASIFragment:(id<ASIFragment>)fragment;
 
++ (NSString *)getStringWithNSString:(NSString *)bundle
+                       withNSString:(NSString *)prefix
+                       withNSString:(NSString *)resourceOrText
+                       withNSString:(NSString *)rootDirectory
+                    withASIFragment:(id<ASIFragment>)fragment;
+
++ (JavaUtilProperties *)readStringAsPropertiesWithNSString:(NSString *)propertyData;
+
 @end
 
 J2OBJC_STATIC_INIT(ASResourceBundleUtils)
@@ -45,11 +54,53 @@ FOUNDATION_EXPORT ASResourceBundleUtils *create_ASResourceBundleUtils_init(void)
 
 FOUNDATION_EXPORT NSString *ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(NSString *bundle, NSString *prefix, NSString *resourceOrText, id<ASIFragment> fragment);
 
+FOUNDATION_EXPORT NSString *ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withNSString_withASIFragment_(NSString *bundle, NSString *prefix, NSString *resourceOrText, NSString *rootDirectory, id<ASIFragment> fragment);
+
 FOUNDATION_EXPORT NSString *ASResourceBundleUtils_getStringWithNSString_withNSString_withASIFragment_(NSString *bundle, NSString *key, id<ASIFragment> fragment);
+
+FOUNDATION_EXPORT JavaUtilProperties *ASResourceBundleUtils_readStringAsPropertiesWithNSString_(NSString *propertyData);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASResourceBundleUtils)
 
 @compatibility_alias ComAsheraUtilsResourceBundleUtils ASResourceBundleUtils;
+
+#endif
+
+#if !defined (ASResourceBundleUtils_GetPropertiesTemplate_) && (INCLUDE_ALL_ResourceBundleUtils || defined(INCLUDE_ASResourceBundleUtils_GetPropertiesTemplate))
+#define ASResourceBundleUtils_GetPropertiesTemplate_
+
+@protocol ASIFragment;
+
+@interface ASResourceBundleUtils_GetPropertiesTemplate : NSObject
+
+#pragma mark Public
+
+- (instancetype)init;
+
+- (id)loadProperties;
+
+#pragma mark Protected
+
+- (jboolean)containsKeyWithId:(id)properties
+                 withNSString:(NSString *)key;
+
+- (NSString *)getPropertyWithId:(id)properties
+                   withNSString:(NSString *)key;
+
+#pragma mark Package-Private
+
+- (NSString *)getValueWithNSString:(NSString *)bundle
+                      withNSString:(NSString *)prefix
+                      withNSString:(NSString *)resourceOrText
+                   withASIFragment:(id<ASIFragment>)fragment;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASResourceBundleUtils_GetPropertiesTemplate)
+
+FOUNDATION_EXPORT void ASResourceBundleUtils_GetPropertiesTemplate_init(ASResourceBundleUtils_GetPropertiesTemplate *self);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASResourceBundleUtils_GetPropertiesTemplate)
 
 #endif
 

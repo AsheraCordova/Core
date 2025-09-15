@@ -4,4 +4,5 @@ export interface Event {
 	eventType: string;
 	event: string;
 	parentFragments: string;
+	dialogClosed: string;
 }

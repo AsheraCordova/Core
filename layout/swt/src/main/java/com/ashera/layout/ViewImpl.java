@@ -1912,6 +1912,7 @@ public java.util.Map<String, Object> getOnAnimationStartEventObj(r.android.anima
     obj.put("eventType", "animationstart");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -1970,6 +1971,7 @@ public java.util.Map<String, Object> getOnAnimationEndEventObj(r.android.animati
     obj.put("eventType", "animationend");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2028,6 +2030,7 @@ public java.util.Map<String, Object> getOnAnimationCancelEventObj(r.android.anim
     obj.put("eventType", "animationcancel");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2086,6 +2089,7 @@ public java.util.Map<String, Object> getOnAnimationRepeatEventObj(r.android.anim
     obj.put("eventType", "animationrepeat");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2157,6 +2161,7 @@ public java.util.Map<String, Object> getOnClickEventObj(View v) {
     obj.put("eventType", "click");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2229,6 +2234,7 @@ public java.util.Map<String, Object> getOnFocusChangeEventObj(View v,boolean has
     obj.put("eventType", "focuschange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2305,6 +2311,7 @@ public java.util.Map<String, Object> getOnLongClickEventObj(View v) {
     obj.put("eventType", "longclick");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2382,6 +2389,7 @@ public java.util.Map<String, Object> getOnKeyEventObj(View v,int keyCode,KeyEven
     obj.put("eventType", "key");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2459,6 +2467,7 @@ public java.util.Map<String, Object> getOnContextClickEventObj(View v) {
     obj.put("eventType", "contextclick");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2535,6 +2544,7 @@ public java.util.Map<String, Object> getOnHoverEventObj(View v,MotionEvent event
     obj.put("eventType", "hover");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2612,6 +2622,7 @@ public java.util.Map<String, Object> getOnDragEventObj(View v,DragEvent event) {
     obj.put("eventType", "drag");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2689,6 +2700,7 @@ public java.util.Map<String, Object> getOnTouchEventObj(View v,MotionEvent event
     obj.put("eventType", "touch");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2765,6 +2777,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
     obj.put("eventType", "swiped");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -3993,7 +4006,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
  		if (value.startsWith("@animator/")) {
  			String html = w.getFragment().getInlineResource(value);
  			if (html == null) {
- 				html = PluginInvoker.getFileAsset("res/" + (value).substring(1) + ".xml", w.getFragment());
+ 				html = PluginInvoker.getFileAsset("res/" + (value).replace("@", "") + ".xml", w.getFragment());
  			}
  			AnimationContentHandler handler = new AnimationContentHandler(w);
 			com.ashera.parser.html.HtmlParser.parse(handler, html);
@@ -4008,16 +4021,39 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		String value = (String) objValue;
 		String html = w.getFragment().getInlineResource(value);
 		if (html == null) {
-			html = PluginInvoker.getFileAsset("res/" + (value).substring(1) + ".xml", w.getFragment());
+			html = PluginInvoker.getFileAsset("res/" + (value).replace("@", "") + ".xml", w.getFragment());
 		}
 		AnimationContentHandler handler = new AnimationContentHandler(w);
 		com.ashera.parser.html.HtmlParser.parse(handler, html);
 		return handler.timeInterpolator;
 	}
-
 	
 	private static class AnimationContentHandler extends com.ashera.parser.html.ContentHandlerAdapter {
-	    private static final int VALUE_TYPE_FLOAT       = 0;
+    private final class CustomTypeConverterX
+			extends r.android.animation.TypeConverter<r.android.graphics.PointF, Float> {
+		private CustomTypeConverterX(Class<r.android.graphics.PointF> fromClass, Class<Float> toClass) {
+			super(fromClass, toClass);
+		}
+
+		@Override
+		public Float convert(r.android.graphics.PointF value) {
+		    return value.x;
+		}
+	}
+    
+    private final class CustomTypeConverterY
+			extends r.android.animation.TypeConverter<r.android.graphics.PointF, Float> {
+		private CustomTypeConverterY(Class<r.android.graphics.PointF> fromClass, Class<Float> toClass) {
+			super(fromClass, toClass);
+		}
+
+		@Override
+		public Float convert(r.android.graphics.PointF value) {
+		    return value.y;
+		}
+	}
+
+		private static final int VALUE_TYPE_FLOAT       = 0;
 	    private static final int VALUE_TYPE_INT         = 1;
 	    private static final int VALUE_TYPE_PATH        = 2;
 	    private static final int VALUE_TYPE_COLOR       = 3;
@@ -4163,27 +4199,16 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 			if (propertyXName == null && propertyYName == null) {
 			    throw new RuntimeException(" propertyXName or propertyYName is needed for PathData");
 			} else {
-				int pixelSize = 1;
 			    r.android.graphics.Path path = r.android.graphics.Path.createPathFromPathData(pathData);
-			    float error = 0.5f * pixelSize; // max half a pixel error
-			    r.android.animation.PathKeyframes keyframeSet = r.android.animation.KeyframeSet.ofPath(path, error);
-			    r.android.animation.IKeyframes xKeyframes;
-			    r.android.animation.IKeyframes yKeyframes;
-			    if (valueType == VALUE_TYPE_FLOAT) {
-			        xKeyframes = keyframeSet.createXFloatKeyframes();
-			        yKeyframes = keyframeSet.createYFloatKeyframes();
-			    } else {
-			        xKeyframes = keyframeSet.createXIntKeyframes();
-			        yKeyframes = keyframeSet.createYIntKeyframes();
-			    }
-			    r.android.animation.PropertyValuesHolder x = null;
-			    r.android.animation.PropertyValuesHolder y = null;
-			    if (propertyXName != null) {
-			        x = r.android.animation.PropertyValuesHolder.ofKeyframes(propertyXName, xKeyframes);
-			    }
-			    if (propertyYName != null) {
-			        y = r.android.animation.PropertyValuesHolder.ofKeyframes(propertyYName, yKeyframes);
-			    }
+				r.android.animation.PropertyValuesHolder x = null;
+				r.android.animation.PropertyValuesHolder y = null;
+				if (propertyXName != null) {
+					x  = r.android.animation.PropertyValuesHolder.ofObject(new CustomProperty(w.asWidget().getClass(), propertyXName),  new CustomTypeConverterX(r.android.graphics.PointF.class, Float.class), path);
+				}
+				if (propertyYName != null) {
+					y = r.android.animation.PropertyValuesHolder.ofObject(new CustomProperty(w.asWidget().getClass(), propertyYName),  new CustomTypeConverterY(r.android.graphics.PointF.class, Float.class), path);
+				}
+			    
 			    if (x == null) {
 			    	objectAnimator.setValues(y);
 			    } else if (y == null) {
@@ -4254,7 +4279,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 		private void setInterpolator(IWidget w, r.android.animation.ValueAnimator animator, String value) {
  			String html = w.getFragment().getInlineResource(value);
  			if (html == null) {
- 				html = PluginInvoker.getFileAsset("res/" + (value).substring(1) + ".xml", w.getFragment());
+ 				html = PluginInvoker.getFileAsset("res/" + (value).replace("@", "") + ".xml", w.getFragment());
  			}
  			timeInterpolator = null;
 			com.ashera.parser.html.HtmlParser.parse(this, html);
@@ -4319,7 +4344,7 @@ public java.util.Map<String, Object> getOnSwipedEventObj(String direction) {
 				// Integer and float value types are handled here.
 				if (valueType == VALUE_TYPE_COLOR) {
 					// special case for colors: ignore valueType and get ints
-					evaluator = r.android.animation.ArgbEvaluator.getInstance();
+					evaluator = new r.android.animation.ArgbEvaluator();
 				}
 				if (getFloats) {
 					float valueFrom;
@@ -4778,4 +4803,30 @@ break;}
             polygon[8 * r - 2 * i - 1] = offsetY - y;
         }
         return polygon;
-    }}
+    }
+	
+
+
+	//start - customproperty
+	private static class CustomProperty<T, V> extends r.android.util.Property<Object, Object> {
+		private String name;
+		public CustomProperty(Class<Object> type, String name) {
+			super(type, name);
+			this.name = name;
+		}
+
+		@Override
+		public V get(Object object) {
+			return null;
+		}
+		
+		@Override
+		public void set(Object object, Object value) {
+			if (object instanceof r.android.view.View) {
+				((r.android.view.View) object).setMyAttribute(name, value);
+			}
+		}
+		
+	}
+	//end - customproperty
+}

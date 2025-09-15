@@ -36,6 +36,10 @@
 
 - (void)writeIntWithInt:(jint)x;
 
+- (NSString *)readString8;
+
+- (void)writeString8WithNSString:(NSString *)scheme;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ADParcel)

@@ -15,6 +15,8 @@ import com.ashera.converter.CommonConverters;
 import com.ashera.converter.ConverterFactory;
 import com.ashera.core.FragmentManager.FragmentFactory;
 
+import r.android.os.Bundle;
+
 public class FragmentManager {
     public interface Detail extends org.teavm.jso.JSObject {
     	@org.teavm.jso.JSProperty
@@ -98,18 +100,26 @@ public class FragmentManager {
 		}
 		return currentActiveRoot;
 	}
+	
+    @org.teavm.jso.JSBody(params = { "element" }, script = "return element.parentElement;")
+    private static native HTMLElement getParentElement(org.teavm.jso.dom.html.HTMLElement element);
+
 
 	private HTMLElement updateLeftAndTop(DialogFragment genericFragment, int screenWidth, int screenHeight) {
 		HTMLElement root = getRoot(genericFragment);
 		root.getStyle().setProperty("position", "relative");
-		HTMLElement rootWrapper = org.teavm.jso.browser.Window.current().getDocument().createElement("div");
+		HTMLElement rootWrapper = getParentElement(root);
+		if (rootWrapper == null) {
+			rootWrapper = org.teavm.jso.browser.Window.current().getDocument().createElement("div");
+			rootWrapper.appendChild(root);
+		}
 		rootWrapper.getStyle().setProperty("position", "absolute");
 		rootWrapper.getStyle().setProperty("width", "max-content");
 		rootWrapper.getStyle().setProperty("height", "max-content");
 		r.android.view.View view = (r.android.view.View)genericFragment.getRootWidget().asWidget();
 		rootWrapper.getStyle().setProperty("left", (screenWidth - view.getMeasuredWidth()) /2 + "");
 		rootWrapper.getStyle().setProperty("top", (screenHeight - view.getMeasuredHeight()) /2 + "");
-		rootWrapper.appendChild(root);
+		
 		return rootWrapper;
 	}
 
@@ -298,11 +308,22 @@ public class FragmentManager {
 	@org.teavm.jso.JSBody(params = {}, script = "return window.shadowRoot;")
     private static native HTMLElement getShadowRoot();
 	//start - navigator
+	private String namespace;
+	private String rootDirectory;
 	private List<GenericFragment> fragments = new ArrayList<>();
-	private Map<String, DialogFragment> dialogFragments = new LinkedHashMap<>();
+	private static Map<String, DialogFragment> dialogFragments = new LinkedHashMap<>();
 	private IActivity activity;
 	private FragmentFactory fragmentFactory;
 	private boolean remeasure = true;
+	
+	
+	public void setNamespace(String namespace) {
+		this.namespace = namespace;
+	}
+
+	public void setRootDirectory(String rootDirectory) {
+		this.rootDirectory = rootDirectory;
+	}
 	
 	private void popBackStack(String destinationId, boolean inclusive, int indexFromEnd)
 			throws DestinatinNotFoundException {
@@ -503,7 +524,10 @@ public class FragmentManager {
 	
 	private void onCreate(String resId, String fileName, List<Map<String, Object>> scopedObjects,
 			GenericFragment genericFragment) {
-		genericFragment.setArguments(GenericFragment.getInitialBundle(resId, fileName, scopedObjects));
+		Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, scopedObjects);
+		bundle.putString("rootDirectory", rootDirectory);
+		bundle.putString("namespace", namespace);
+		genericFragment.setArguments(bundle);
 		genericFragment.onAttach(activity);
 		genericFragment.onCreate();
 	}
@@ -534,7 +558,9 @@ public class FragmentManager {
 		if (dialogFragment.isFullScreen()) {
 			fragment.onResume();
 		}
-		fragment.onCloseDialog();
+		java.util.Map<String, String> eventData = new java.util.HashMap<>();
+		eventData.put("dialogClosed", dialogFragment.getActionUrl());
+		fragment.onCloseDialog(eventData);
 	}
 
 	private int getPopCounter(String destinationId, boolean inclusive, int indexFromEnd)
@@ -585,8 +611,10 @@ public class FragmentManager {
 				public void remeasure() {
 					super.remeasure();
 					if (!isMeasuring()) {
-						// update size of dialog
-						fragmentManager.updateSizeIfRequired(this);
+						if (getRootWidget() != null) {
+							// update size of dialog
+							fragmentManager.updateSizeIfRequired(this);
+						}
 					}
 					
 				}

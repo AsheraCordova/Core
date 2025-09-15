@@ -35,7 +35,6 @@
 #include "IActivity.h"
 #include "IAttributable.h"
 #include "IFragment.h"
-#include "IKeyframes.h"
 #include "ILifeCycleDecorator.h"
 #include "IListener.h"
 #include "IMaxDimension.h"
@@ -47,15 +46,15 @@
 #include "Interpolator.h"
 #include "J2ObjC_source.h"
 #include "KeyEvent.h"
-#include "KeyframeSet.h"
 #include "LayoutNativeVars.h"
 #include "MenuItem.h"
 #include "MotionEvent.h"
 #include "ObjectAnimator.h"
 #include "OvershootInterpolator.h"
 #include "Path.h"
-#include "PathKeyframes.h"
 #include "PluginInvoker.h"
+#include "PointF.h"
+#include "Property.h"
 #include "PropertyValuesHolder.h"
 #include "Rect.h"
 #include "SimpleWrapableView.h"
@@ -63,6 +62,7 @@
 #include "StringUtils.h"
 #include "StyleSheet.h"
 #include "SwipeHelper.h"
+#include "TypeConverter.h"
 #include "TypeEvaluator.h"
 #include "Validation.h"
 #include "ValidationErrorLabel.h"
@@ -103,6 +103,7 @@
 #include "ASUISwipeGestureRecognizer.h"
 #include "ASUILongTapGestureRecognizer.h"
 
+@class JavaLangFloat;
 @class JavaUtilStack;
 @protocol JavaUtilComparator;
 @protocol JavaUtilFunctionFunction;
@@ -1209,6 +1210,73 @@ __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_parseOver
 __attribute__((unused)) static void ASViewImpl_AnimationContentHandler_parseAnticipateOvershootInterpolatorWithASIWidget_withOrgXmlSaxAttributes_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, id<OrgXmlSaxAttributes> atts);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationContentHandler)
+
+@interface ASViewImpl_AnimationContentHandler_CustomTypeConverterX : ADTypeConverter
+
+- (instancetype)initWithASViewImpl_AnimationContentHandler:(ASViewImpl_AnimationContentHandler *)outer$
+                                              withIOSClass:(IOSClass *)fromClass
+                                              withIOSClass:(IOSClass *)toClass;
+
+- (JavaLangFloat *)convertWithId:(ADPointF *)value;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_AnimationContentHandler_CustomTypeConverterX)
+
+__attribute__((unused)) static void ASViewImpl_AnimationContentHandler_CustomTypeConverterX_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler_CustomTypeConverterX *self, ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass);
+
+__attribute__((unused)) static ASViewImpl_AnimationContentHandler_CustomTypeConverterX *new_ASViewImpl_AnimationContentHandler_CustomTypeConverterX_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASViewImpl_AnimationContentHandler_CustomTypeConverterX *create_ASViewImpl_AnimationContentHandler_CustomTypeConverterX_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationContentHandler_CustomTypeConverterX)
+
+@interface ASViewImpl_AnimationContentHandler_CustomTypeConverterY : ADTypeConverter
+
+- (instancetype)initWithASViewImpl_AnimationContentHandler:(ASViewImpl_AnimationContentHandler *)outer$
+                                              withIOSClass:(IOSClass *)fromClass
+                                              withIOSClass:(IOSClass *)toClass;
+
+- (JavaLangFloat *)convertWithId:(ADPointF *)value;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_AnimationContentHandler_CustomTypeConverterY)
+
+__attribute__((unused)) static void ASViewImpl_AnimationContentHandler_CustomTypeConverterY_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler_CustomTypeConverterY *self, ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass);
+
+__attribute__((unused)) static ASViewImpl_AnimationContentHandler_CustomTypeConverterY *new_ASViewImpl_AnimationContentHandler_CustomTypeConverterY_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASViewImpl_AnimationContentHandler_CustomTypeConverterY *create_ASViewImpl_AnimationContentHandler_CustomTypeConverterY_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_AnimationContentHandler_CustomTypeConverterY)
+
+@interface ASViewImpl_CustomProperty : ADProperty {
+ @public
+  NSString *name_;
+}
+
+- (instancetype)initWithIOSClass:(IOSClass *)type
+                    withNSString:(NSString *)name;
+
+- (id)getWithId:(id)object;
+
+- (void)setWithId:(id)object
+           withId:(id)value;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(ASViewImpl_CustomProperty)
+
+J2OBJC_FIELD_SETTER(ASViewImpl_CustomProperty, name_, NSString *)
+
+__attribute__((unused)) static void ASViewImpl_CustomProperty_initWithIOSClass_withNSString_(ASViewImpl_CustomProperty *self, IOSClass *type, NSString *name);
+
+__attribute__((unused)) static ASViewImpl_CustomProperty *new_ASViewImpl_CustomProperty_initWithIOSClass_withNSString_(IOSClass *type, NSString *name) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static ASViewImpl_CustomProperty *create_ASViewImpl_CustomProperty_initWithIOSClass_withNSString_(IOSClass *type, NSString *name);
+
+J2OBJC_TYPE_LITERAL_HEADER(ASViewImpl_CustomProperty)
 
 @interface ASViewImpl_AnimatorListener : NSObject < ADAnimator_AnimatorListener, ASIListener > {
  @public
@@ -3564,7 +3632,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[271].selector = @selector(setCornerRadiusWithASIWidget:withId:withId:);
   methods[272].selector = @selector(setCornerRadiusOnViewWithId:withFloat:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LASSimpleWrapableView;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setPadding", "LNSObject;LADView;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "getPaddingTop", "LASIWidget;LADView;", "getPaddingBottom", "getPaddingLeft", "getPaddingRight", "setPaddingHorizontal", "setPaddingVertical", "setId", "LASIWidget;LNSString;LNSObject;LADView;", "getModelSyncEvents", "LASIWidget;", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "notifyDataSetChanged", "LASIWidget;LNSObject;", "updateModelData", "LASIWidget;LNSObject;LNSObject;", "getModelUiToPojo", "getModelPojoToUi", "getModelParam", "setModelPojoToUiParams", "refreshUiFromModel", "LASIWidget;LNSObject;Z", "setModelUiToPojoEventIds", "setZIndex", "setMaxHeight", "setMaxWidth", "getMaxWidth", "getMaxHeight", "setSelected", "getSelected", "setInvalidateOnFrameChange", "setBackgroundRepeat", "setForegroundRepeat", "addEventInfo", "LJavaUtilMap;LADMotionEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MotionEvent;)V", "LJavaUtilMap;LADKeyEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/KeyEvent;)V", "LJavaUtilMap;LADView_DragEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/View$DragEvent;)V", "LJavaUtilMap;LADChronometer;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/Chronometer;Lcom/ashera/core/IFragment;)V", "LJavaUtilMap;LJavaUtilList;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/util/List<Ljava/lang/Integer;>;Lcom/ashera/core/IFragment;)V", "validateForm", "getValidateFormResult", "setValidation", "getForms", "(Lcom/ashera/widget/IWidget;)Ljava/util/List<Lcom/ashera/validations/Form;>;", "setType", "LASIWidget;LNSString;LNSObject;", "setPattern", "setMax", "setMin", "setMaxlength", "setMinlength", "setRequired", "addValidator", "LASIWidget;LNSString;[LNSString;", "setCustomErrorMessageKeys", "setCustomErrorMessageValues", "setValidationErrorDisplay", "setErrorStyle", "LASIWidget;LADView;LNSObject;", "setStyle", "setMessageOnLabel", "LASIWidget;LNSString;", "state", "LASIWidget;I", "setState", "LASIWidget;ILNSObject;", "stateYes", "stateNo", "setAnimatorListener", "LASIWidget;LADAnimator_AnimatorListener;", "endAnimator", "startAnimator", "setLayoutDirection", "getLayoutDirection", "setTextAlignment", "setTextDirection", "getTextAlignment", "getTextDirection", "isRTLLayoutDirection", "drawableStateChanged", "getColor", "LNSObject;", "setDrawableBounds", "LASIWidget;IIII", "redrawDrawables", "setMinHeight", "setMinWidth", "getMinHeight", "getMinWidth", "getVisibility", "setLongClickable", "getLongClickable", "setDuplicateParentState", "getDuplicateParentState", "getClickable", "requestLayout", "invalidate", "getClipData", "LADView_DragEvent;", "getDrawable", "LADColorStateList;", "setElevation", "getValue", "LNSString;LOrgXmlSaxAttributes;", "setBottom", "setTop", "setRight", "setLeft", "getBottom", "getTop", "getRight", "getLeft", "drawOverlay", "LASIWidget;LJavaUtilList;", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Lcom/ashera/widget/IWidget;>;)Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "setAnimatorXml", "getInterpolator", "LJavaUtilMap;LADMenuItem;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MenuItem;)V", "setBackgroundColor", "LNSObject;LNSObject;", "getBackgroundColor", "setIsHidden", "getIsHidden", "setAlpha", "getAlpha", "setIsOpaque", "getIsOpaque", "setTintColor", "getTintColor", "setClipsToBounds", "getClipsToBounds", "setClearsContextBeforeDrawing", "getClearsContextBeforeDrawing", "setIsUserInteractionEnabled", "getIsUserInteractionEnabled", "setIsMultipleTouchEnabled", "getIsMultipleTouchEnabled", "setIsExclusiveTouch", "getIsExclusiveTouch", "setPreservesSuperviewLayoutMargins", "getPreservesSuperviewLayoutMargins", "setInsetsLayoutMarginsFromSafeArea", "getInsetsLayoutMarginsFromSafeArea", "setAutoresizesSubviews", "getAutoresizesSubviews", "setTranslatesAutoresizingMaskIntoConstraints", "getTranslatesAutoresizingMaskIntoConstraints", "setContentScaleFactor", "getContentScaleFactor", "getIsFocused", "setRestorationIdentifier", "getRestorationIdentifier", "setTag", "getTag", "setAccessibilityIgnoresInvertColors", "getAccessibilityIgnoresInvertColors", "setLargeContentImage", "getLargeContentImage", "setLargeContentTitle", "getLargeContentTitle", "setScalesLargeContentImage", "getScalesLargeContentImage", "setShowsLargeContentViewer", "getShowsLargeContentViewer", "setIsAccessibilityElement", "getIsAccessibilityElement", "setAccessibilityLabel", "getAccessibilityLabel", "setAccessibilityHint", "getAccessibilityHint", "setAccessibilityValue", "getAccessibilityValue", "setAccessibilityTraits", "getAccessibilityTraits", "nativeMakeFrame", "LNSObject;IIIII", "updateBounds", "LNSObject;IIII", "getFirstChildOrSelf", "nativeMakeFrameForHorizontalScrollView", "isRTLLayout", "setBgOnControl", "setBackground", "updateWidthAndHeight", "LASIWidget;LADStateListDrawable;LNSObject;LNSString;LNSString;", "setBgDrawabeOnView", "IILADView;", "isColor", "isResizableImage", "isImage", "getImageWidth", "getImageHeight", "clearBgColor", "nativeSetBgColor", "setOnClick", "LASIWidget;LNSString;LNSObject;LADView_OnClickListener;", "registerCommandConveter", "getParent", "setBackgroundTintMode", "setBackgroundTint", "setForegroundTintMode", "setForegroundTint", "setForeground", "setFgOnControl", "setVisibility", "nativeSetVisibility", "LNSObject;Z", "nativeGetClickable", "setClickable", "nativeSetClickable", "setOnLongClick", "LASIWidget;LNSObject;LADView_OnLongClickListener;", "setTranslationX", "relayout", "setTranslationY", "setTranslationZ", "setTransformPivotY", "setTransformPivotX", "setScaleY", "setScaleX", "setRotationY", "setRotationX", "setRotation", "getTranslationX", "getTransformPivotY", "getTransformPivotX", "getScaleY", "getScaleX", "getRotationY", "getRotationX", "getRotation", "getTranslationZ", "getTranslationY", "getForegroundTint", "getForegroundTintMode", "getBackgroundTintMode", "getBackgroundTint", "nativeRequestLayout", "nativeInvalidate", "setKeepScreenOn", "getKeepScreenOn", "setOnTouch", "startDrag", "setOnDrag", "setAsDragSource", "getForeground", "getBackground", "setOnKey", "setLayerCornerRadius", "nativeSetLayerCornerRadius", "LNSObject;F", "setLayerBorderColor", "nativeLayerBorderColor", "setLayerBorderWidth", "nativeLayerBorderWidth", "setLayerMasksToBounds", "nativeLayerBMasksToBounds", "nativeBringToFront", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/widget/IWidget;>;)V", "setNativeId", "getLocationXOnScreen", "getLocationYOnScreen", "setOutsideTouchable", "nativeMeasureWidth", "nativeMeasureHeight", "LNSObject;I", "setOnSwipeListener", "LASIWidget;LASSwipeHelper_SwipeListener;", "addPanListener", "LASIWidget;LNSObject;LASViewImpl_PanCallBack;", "LASIWidget;LNSObject;LNSObject;LASViewImpl_PanCallBack;", "getX", "getY", "updateBoundsX", "translateWithAnimation", "LNSObject;IIILASViewImpl_AnimationCallBack;", "setOutlineSpotShadowColor", "setOutlineAmbientShadowColor", "setShadowColor", "setCornerRadius", "setCornerRadiusOnView", "LASViewImpl_IosAccessibilityTraits;LASViewImpl_Vtype;LASViewImpl_ValidationErrorDisplay;LASViewImpl_BackgroundRepeat;LASViewImpl_BackgroundTintMode;LASViewImpl_ForegroundRepeat;LASViewImpl_ForegroundTintMode;LASViewImpl_Visibility;LASViewImpl_LayoutDirection;LASViewImpl_TextDirection;LASViewImpl_TextAlignment;LASViewImpl_AddRemoveCallBack;LASViewImpl_PanCallBack;LASViewImpl_AnimationCallBack;LASViewImpl_AnimationContentHandler;LASViewImpl_AnimatorListener;LASViewImpl_OnClickListener;LASViewImpl_OnTouchListener;LASViewImpl_OnLongClickListener;LASViewImpl_OnDragListener;LASViewImpl_OnKeyListener;LASViewImpl_SwipeListener;LASViewImpl_UIControlEventTouchDelegate;LASViewImpl_UILongTapGestureRecognizerDelegate;LASViewImpl_UITapGestureRecognizerDelegate;LASViewImpl_UIDragInteractionDelegate;LASViewImpl_UIDropInteractionDelegate;LASViewImpl_UISwipeGestureRecognizerDelegate;LASViewImpl_PanGestureRecognizer;LASViewImpl_AnimationUtils;" };
+  static const void *ptrTable[] = { "register", "LNSString;", "setAttribute", "LASIWidget;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LASSimpleWrapableView;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LNSString;LNSObject;LASILifeCycleDecorator;", "getAttribute", "LASIWidget;LASWidgetAttribute;LASILifeCycleDecorator;", "LASIWidget;LNSObject;LASWidgetAttribute;LASILifeCycleDecorator;", "checkIosVersion", "setPadding", "LNSObject;LADView;", "setPaddingLeft", "setPaddingRight", "setPaddingTop", "setPaddingBottom", "getPaddingTop", "LASIWidget;LADView;", "getPaddingBottom", "getPaddingLeft", "getPaddingRight", "setPaddingHorizontal", "setPaddingVertical", "setId", "LASIWidget;LNSString;LNSObject;LADView;", "getModelSyncEvents", "LASIWidget;", "setModelSyncEvents", "setModelParam", "setModelPojoToUi", "setModelUiToPojo", "notifyDataSetChanged", "LASIWidget;LNSObject;", "updateModelData", "LASIWidget;LNSObject;LNSObject;", "getModelUiToPojo", "getModelPojoToUi", "getModelParam", "setModelPojoToUiParams", "refreshUiFromModel", "LASIWidget;LNSObject;Z", "setModelUiToPojoEventIds", "setZIndex", "setMaxHeight", "setMaxWidth", "getMaxWidth", "getMaxHeight", "setSelected", "getSelected", "setInvalidateOnFrameChange", "setBackgroundRepeat", "setForegroundRepeat", "addEventInfo", "LJavaUtilMap;LADMotionEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MotionEvent;)V", "LJavaUtilMap;LADKeyEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/KeyEvent;)V", "LJavaUtilMap;LADView_DragEvent;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/View$DragEvent;)V", "LJavaUtilMap;LADChronometer;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/widget/Chronometer;Lcom/ashera/core/IFragment;)V", "LJavaUtilMap;LJavaUtilList;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Ljava/util/List<Ljava/lang/Integer;>;Lcom/ashera/core/IFragment;)V", "validateForm", "getValidateFormResult", "setValidation", "getForms", "(Lcom/ashera/widget/IWidget;)Ljava/util/List<Lcom/ashera/validations/Form;>;", "setType", "LASIWidget;LNSString;LNSObject;", "setPattern", "setMax", "setMin", "setMaxlength", "setMinlength", "setRequired", "addValidator", "LASIWidget;LNSString;[LNSString;", "setCustomErrorMessageKeys", "setCustomErrorMessageValues", "setValidationErrorDisplay", "setErrorStyle", "LASIWidget;LADView;LNSObject;", "setStyle", "setMessageOnLabel", "LASIWidget;LNSString;", "state", "LASIWidget;I", "setState", "LASIWidget;ILNSObject;", "stateYes", "stateNo", "setAnimatorListener", "LASIWidget;LADAnimator_AnimatorListener;", "endAnimator", "startAnimator", "setLayoutDirection", "getLayoutDirection", "setTextAlignment", "setTextDirection", "getTextAlignment", "getTextDirection", "isRTLLayoutDirection", "drawableStateChanged", "getColor", "LNSObject;", "setDrawableBounds", "LASIWidget;IIII", "redrawDrawables", "setMinHeight", "setMinWidth", "getMinHeight", "getMinWidth", "getVisibility", "setLongClickable", "getLongClickable", "setDuplicateParentState", "getDuplicateParentState", "getClickable", "requestLayout", "invalidate", "getClipData", "LADView_DragEvent;", "getDrawable", "LADColorStateList;", "setElevation", "getValue", "LNSString;LOrgXmlSaxAttributes;", "setBottom", "setTop", "setRight", "setLeft", "getBottom", "getTop", "getRight", "getLeft", "drawOverlay", "LASIWidget;LJavaUtilList;", "(Lcom/ashera/widget/IWidget;Ljava/util/List<Lcom/ashera/widget/IWidget;>;)Ljava/util/List<Lcom/ashera/widget/IWidget;>;", "setAnimatorXml", "getInterpolator", "LJavaUtilMap;LADMenuItem;", "(Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lr/android/view/MenuItem;)V", "setBackgroundColor", "LNSObject;LNSObject;", "getBackgroundColor", "setIsHidden", "getIsHidden", "setAlpha", "getAlpha", "setIsOpaque", "getIsOpaque", "setTintColor", "getTintColor", "setClipsToBounds", "getClipsToBounds", "setClearsContextBeforeDrawing", "getClearsContextBeforeDrawing", "setIsUserInteractionEnabled", "getIsUserInteractionEnabled", "setIsMultipleTouchEnabled", "getIsMultipleTouchEnabled", "setIsExclusiveTouch", "getIsExclusiveTouch", "setPreservesSuperviewLayoutMargins", "getPreservesSuperviewLayoutMargins", "setInsetsLayoutMarginsFromSafeArea", "getInsetsLayoutMarginsFromSafeArea", "setAutoresizesSubviews", "getAutoresizesSubviews", "setTranslatesAutoresizingMaskIntoConstraints", "getTranslatesAutoresizingMaskIntoConstraints", "setContentScaleFactor", "getContentScaleFactor", "getIsFocused", "setRestorationIdentifier", "getRestorationIdentifier", "setTag", "getTag", "setAccessibilityIgnoresInvertColors", "getAccessibilityIgnoresInvertColors", "setLargeContentImage", "getLargeContentImage", "setLargeContentTitle", "getLargeContentTitle", "setScalesLargeContentImage", "getScalesLargeContentImage", "setShowsLargeContentViewer", "getShowsLargeContentViewer", "setIsAccessibilityElement", "getIsAccessibilityElement", "setAccessibilityLabel", "getAccessibilityLabel", "setAccessibilityHint", "getAccessibilityHint", "setAccessibilityValue", "getAccessibilityValue", "setAccessibilityTraits", "getAccessibilityTraits", "nativeMakeFrame", "LNSObject;IIIII", "updateBounds", "LNSObject;IIII", "getFirstChildOrSelf", "nativeMakeFrameForHorizontalScrollView", "isRTLLayout", "setBgOnControl", "setBackground", "updateWidthAndHeight", "LASIWidget;LADStateListDrawable;LNSObject;LNSString;LNSString;", "setBgDrawabeOnView", "IILADView;", "isColor", "isResizableImage", "isImage", "getImageWidth", "getImageHeight", "clearBgColor", "nativeSetBgColor", "setOnClick", "LASIWidget;LNSString;LNSObject;LADView_OnClickListener;", "registerCommandConveter", "getParent", "setBackgroundTintMode", "setBackgroundTint", "setForegroundTintMode", "setForegroundTint", "setForeground", "setFgOnControl", "setVisibility", "nativeSetVisibility", "LNSObject;Z", "nativeGetClickable", "setClickable", "nativeSetClickable", "setOnLongClick", "LASIWidget;LNSObject;LADView_OnLongClickListener;", "setTranslationX", "relayout", "setTranslationY", "setTranslationZ", "setTransformPivotY", "setTransformPivotX", "setScaleY", "setScaleX", "setRotationY", "setRotationX", "setRotation", "getTranslationX", "getTransformPivotY", "getTransformPivotX", "getScaleY", "getScaleX", "getRotationY", "getRotationX", "getRotation", "getTranslationZ", "getTranslationY", "getForegroundTint", "getForegroundTintMode", "getBackgroundTintMode", "getBackgroundTint", "nativeRequestLayout", "nativeInvalidate", "setKeepScreenOn", "getKeepScreenOn", "setOnTouch", "startDrag", "setOnDrag", "setAsDragSource", "getForeground", "getBackground", "setOnKey", "setLayerCornerRadius", "nativeSetLayerCornerRadius", "LNSObject;F", "setLayerBorderColor", "nativeLayerBorderColor", "setLayerBorderWidth", "nativeLayerBorderWidth", "setLayerMasksToBounds", "nativeLayerBMasksToBounds", "nativeBringToFront", "LJavaUtilList;", "(Ljava/util/List<Lcom/ashera/widget/IWidget;>;)V", "setNativeId", "getLocationXOnScreen", "getLocationYOnScreen", "setOutsideTouchable", "nativeMeasureWidth", "nativeMeasureHeight", "LNSObject;I", "setOnSwipeListener", "LASIWidget;LASSwipeHelper_SwipeListener;", "addPanListener", "LASIWidget;LNSObject;LASViewImpl_PanCallBack;", "LASIWidget;LNSObject;LNSObject;LASViewImpl_PanCallBack;", "getX", "getY", "updateBoundsX", "translateWithAnimation", "LNSObject;IIILASViewImpl_AnimationCallBack;", "setOutlineSpotShadowColor", "setOutlineAmbientShadowColor", "setShadowColor", "setCornerRadius", "setCornerRadiusOnView", "LASViewImpl_IosAccessibilityTraits;LASViewImpl_Vtype;LASViewImpl_ValidationErrorDisplay;LASViewImpl_BackgroundRepeat;LASViewImpl_BackgroundTintMode;LASViewImpl_ForegroundRepeat;LASViewImpl_ForegroundTintMode;LASViewImpl_Visibility;LASViewImpl_LayoutDirection;LASViewImpl_TextDirection;LASViewImpl_TextAlignment;LASViewImpl_AddRemoveCallBack;LASViewImpl_PanCallBack;LASViewImpl_AnimationCallBack;LASViewImpl_AnimationContentHandler;LASViewImpl_CustomProperty;LASViewImpl_AnimatorListener;LASViewImpl_OnClickListener;LASViewImpl_OnTouchListener;LASViewImpl_OnLongClickListener;LASViewImpl_OnDragListener;LASViewImpl_OnKeyListener;LASViewImpl_SwipeListener;LASViewImpl_UIControlEventTouchDelegate;LASViewImpl_UILongTapGestureRecognizerDelegate;LASViewImpl_UITapGestureRecognizerDelegate;LASViewImpl_UIDragInteractionDelegate;LASViewImpl_UIDropInteractionDelegate;LASViewImpl_UISwipeGestureRecognizerDelegate;LASViewImpl_PanGestureRecognizer;LASViewImpl_AnimationUtils;" };
   static const J2ObjcClassInfo _ASViewImpl = { "ViewImpl", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x1, 273, 0, -1, 307, -1, -1, -1 };
   return &_ASViewImpl;
 }
@@ -5673,7 +5741,7 @@ void ASViewImpl_setAnimatorXmlWithASIWidget_withId_(id<ASIWidget> w, id objValue
   if ([((NSString *) nil_chk(value)) java_hasPrefix:@"@animator/"]) {
     NSString *html = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w)) getFragment])) getInlineResourceWithNSString:value];
     if (html == nil) {
-      html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", [(value) java_substring:1], @".xml"), [w getFragment]);
+      html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", [(value) java_replace:@"@" withSequence:@""], @".xml"), [w getFragment]);
     }
     ASViewImpl_AnimationContentHandler *handler = new_ASViewImpl_AnimationContentHandler_initWithASIWidget_(w);
     ASHtmlParser_parseWithOrgXmlSaxContentHandler_withNSString_(handler, html);
@@ -5689,7 +5757,7 @@ id<ADInterpolator> ASViewImpl_getInterpolatorWithASIWidget_withId_(id<ASIWidget>
   NSString *value = (NSString *) cast_chk(objValue, [NSString class]);
   NSString *html = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w)) getFragment])) getInlineResourceWithNSString:value];
   if (html == nil) {
-    html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", [((NSString *) nil_chk((value))) java_substring:1], @".xml"), [w getFragment]);
+    html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", [((NSString *) nil_chk((value))) java_replace:@"@" withSequence:@""], @".xml"), [w getFragment]);
   }
   ASViewImpl_AnimationContentHandler *handler = new_ASViewImpl_AnimationContentHandler_initWithASIWidget_(w);
   ASHtmlParser_parseWithOrgXmlSaxContentHandler_withNSString_(handler, html);
@@ -8009,8 +8077,8 @@ ASViewImpl_2 *create_ASViewImpl_2_initWithASIWidget_(id<ASIWidget> capture$0) {
     { "propertyYName_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "propertyXName_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setFactor", "LASIWidget;LNSString;", "setTension", "setExtraTension", "setCycles", "LASIWidget;", "startElement", "LNSString;LNSString;LNSString;LOrgXmlSaxAttributes;", "LOrgXmlSaxSAXException;", "setUpPath", "LADObjectAnimator;", "endElement", "LNSString;LNSString;LNSString;", "characters", "[CII", "setStartOffset", "LASIWidget;LADValueAnimator;LNSString;", "setValueType", "setValueTo", "setValueFrom", "setInterpolator", "setPathData", "LASIWidget;LADObjectAnimator;LNSString;", "setPropertyYName", "setPropertyXName", "setOrdering", "LASIWidget;LADAnimatorSet;LNSString;", "inferValueTypeFromValues", "LASIWidget;LNSString;LNSString;", "getPVH", "LASIWidget;ILNSString;LNSString;LNSString;", "isColor", "LNSString;", "isDimen", "parseAnimator", "LASIWidget;LADValueAnimator;LOrgXmlSaxAttributes;", "setDuration", "getRepeatCount", "LNSString;LASIWidget;", "setRepeatCount", "getRepeatMode", "setRepeatMode", "getValueType", "parsePropertyAnimator", "LASIWidget;LADObjectAnimator;LOrgXmlSaxAttributes;", "setPropertyName", "parseAnimatorSet", "LASIWidget;LADAnimatorSet;LOrgXmlSaxAttributes;", "getOrdering", "parseAccelerateInterpolator", "LASIWidget;LOrgXmlSaxAttributes;", "parseDecelerateInterpolator", "parseCycleInterpolator", "parseAnticipateInterpolator", "parseOvershootInterpolator", "parseAnticipateOvershootInterpolator", "Ljava/util/Stack<Ljava/lang/Integer;>;", "Ljava/util/Stack<Ljava/util/ArrayList<Lr/android/animation/Animator;>;>;", "Ljava/util/Stack<Lr/android/animation/AnimatorSet;>;", "LASViewImpl;" };
-  static const J2ObjcClassInfo _ASViewImpl_AnimationContentHandler = { "AnimationContentHandler", "com.ashera.layout", ptrTable, methods, fields, 7, 0xa, 40, 24, 59, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "setFactor", "LASIWidget;LNSString;", "setTension", "setExtraTension", "setCycles", "LASIWidget;", "startElement", "LNSString;LNSString;LNSString;LOrgXmlSaxAttributes;", "LOrgXmlSaxSAXException;", "setUpPath", "LADObjectAnimator;", "endElement", "LNSString;LNSString;LNSString;", "characters", "[CII", "setStartOffset", "LASIWidget;LADValueAnimator;LNSString;", "setValueType", "setValueTo", "setValueFrom", "setInterpolator", "setPathData", "LASIWidget;LADObjectAnimator;LNSString;", "setPropertyYName", "setPropertyXName", "setOrdering", "LASIWidget;LADAnimatorSet;LNSString;", "inferValueTypeFromValues", "LASIWidget;LNSString;LNSString;", "getPVH", "LASIWidget;ILNSString;LNSString;LNSString;", "isColor", "LNSString;", "isDimen", "parseAnimator", "LASIWidget;LADValueAnimator;LOrgXmlSaxAttributes;", "setDuration", "getRepeatCount", "LNSString;LASIWidget;", "setRepeatCount", "getRepeatMode", "setRepeatMode", "getValueType", "parsePropertyAnimator", "LASIWidget;LADObjectAnimator;LOrgXmlSaxAttributes;", "setPropertyName", "parseAnimatorSet", "LASIWidget;LADAnimatorSet;LOrgXmlSaxAttributes;", "getOrdering", "parseAccelerateInterpolator", "LASIWidget;LOrgXmlSaxAttributes;", "parseDecelerateInterpolator", "parseCycleInterpolator", "parseAnticipateInterpolator", "parseOvershootInterpolator", "parseAnticipateOvershootInterpolator", "Ljava/util/Stack<Ljava/lang/Integer;>;", "Ljava/util/Stack<Ljava/util/ArrayList<Lr/android/animation/Animator;>;>;", "Ljava/util/Stack<Lr/android/animation/AnimatorSet;>;", "LASViewImpl;", "LASViewImpl_AnimationContentHandler_CustomTypeConverterX;LASViewImpl_AnimationContentHandler_CustomTypeConverterY;" };
+  static const J2ObjcClassInfo _ASViewImpl_AnimationContentHandler = { "AnimationContentHandler", "com.ashera.layout", ptrTable, methods, fields, 7, 0xa, 40, 24, 59, 60, -1, -1, -1 };
   return &_ASViewImpl_AnimationContentHandler;
 }
 
@@ -8057,27 +8125,14 @@ void ASViewImpl_AnimationContentHandler_setUpPathWithADObjectAnimator_(ASViewImp
     @throw new_JavaLangRuntimeException_initWithNSString_(@" propertyXName or propertyYName is needed for PathData");
   }
   else {
-    jint pixelSize = 1;
     ADPath *path = ADPath_createPathFromPathDataWithNSString_(self->pathData_);
-    jfloat error = 0.5f * pixelSize;
-    ADPathKeyframes *keyframeSet = ADKeyframeSet_ofPathWithADPath_withFloat_(path, error);
-    id<ADIKeyframes> xKeyframes;
-    id<ADIKeyframes> yKeyframes;
-    if (self->valueType_ == ASViewImpl_AnimationContentHandler_VALUE_TYPE_FLOAT) {
-      xKeyframes = [((ADPathKeyframes *) nil_chk(keyframeSet)) createXFloatKeyframes];
-      yKeyframes = [keyframeSet createYFloatKeyframes];
-    }
-    else {
-      xKeyframes = [((ADPathKeyframes *) nil_chk(keyframeSet)) createXIntKeyframes];
-      yKeyframes = [keyframeSet createYIntKeyframes];
-    }
     ADPropertyValuesHolder *x = nil;
     ADPropertyValuesHolder *y = nil;
     if (self->propertyXName_ != nil) {
-      x = ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(self->propertyXName_, xKeyframes);
+      x = ADPropertyValuesHolder_ofObjectWithADProperty_withADTypeConverter_withADPath_(new_ASViewImpl_CustomProperty_initWithIOSClass_withNSString_([nil_chk([((id<ASIWidget>) nil_chk(self->w_)) asWidget]) java_getClass], self->propertyXName_), new_ASViewImpl_AnimationContentHandler_CustomTypeConverterX_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(self, ADPointF_class_(), JavaLangFloat_class_()), path);
     }
     if (self->propertyYName_ != nil) {
-      y = ADPropertyValuesHolder_ofKeyframesWithNSString_withADIKeyframes_(self->propertyYName_, yKeyframes);
+      y = ADPropertyValuesHolder_ofObjectWithADProperty_withADTypeConverter_withADPath_(new_ASViewImpl_CustomProperty_initWithIOSClass_withNSString_([nil_chk([((id<ASIWidget>) nil_chk(self->w_)) asWidget]) java_getClass], self->propertyYName_), new_ASViewImpl_AnimationContentHandler_CustomTypeConverterY_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(self, ADPointF_class_(), JavaLangFloat_class_()), path);
     }
     if (x == nil) {
       [((ADObjectAnimator *) nil_chk(objectAnimator)) setValuesWithADPropertyValuesHolderArray:[IOSObjectArray newArrayWithObjects:(id[]){ y } count:1 type:ADPropertyValuesHolder_class_()]];
@@ -8110,7 +8165,7 @@ void ASViewImpl_AnimationContentHandler_setValueFromWithASIWidget_withADValueAni
 void ASViewImpl_AnimationContentHandler_setInterpolatorWithASIWidget_withADValueAnimator_withNSString_(ASViewImpl_AnimationContentHandler *self, id<ASIWidget> w, ADValueAnimator *animator, NSString *value) {
   NSString *html = [((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w)) getFragment])) getInlineResourceWithNSString:value];
   if (html == nil) {
-    html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", [((NSString *) nil_chk((value))) java_substring:1], @".xml"), [w getFragment]);
+    html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", [((NSString *) nil_chk((value))) java_replace:@"@" withSequence:@""], @".xml"), [w getFragment]);
   }
   self->timeInterpolator_ = nil;
   ASHtmlParser_parseWithOrgXmlSaxContentHandler_withNSString_(self, html);
@@ -8166,7 +8221,7 @@ ADPropertyValuesHolder *ASViewImpl_AnimationContentHandler_getPVHWithASIWidget_w
   else {
     id<ADTypeEvaluator> evaluator = nil;
     if (valueType == ASViewImpl_AnimationContentHandler_VALUE_TYPE_COLOR) {
-      evaluator = ADArgbEvaluator_getInstance();
+      evaluator = new_ADArgbEvaluator_init();
     }
     if (getFloats) {
       jfloat valueFrom;
@@ -8471,6 +8526,153 @@ void ASViewImpl_AnimationContentHandler_parseAnticipateOvershootInterpolatorWith
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler)
 
+@implementation ASViewImpl_AnimationContentHandler_CustomTypeConverterX
+
+- (instancetype)initWithASViewImpl_AnimationContentHandler:(ASViewImpl_AnimationContentHandler *)outer$
+                                              withIOSClass:(IOSClass *)fromClass
+                                              withIOSClass:(IOSClass *)toClass {
+  ASViewImpl_AnimationContentHandler_CustomTypeConverterX_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(self, outer$, fromClass, toClass);
+  return self;
+}
+
+- (JavaLangFloat *)convertWithId:(ADPointF *)value {
+  return JavaLangFloat_valueOfWithFloat_(((ADPointF *) nil_chk(value))->x_);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LJavaLangFloat;", 0x1, 2, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithASViewImpl_AnimationContentHandler:withIOSClass:withIOSClass:);
+  methods[1].selector = @selector(convertWithId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LASViewImpl_AnimationContentHandler;LIOSClass;LIOSClass;", "(Ljava/lang/Class<Lr/android/graphics/PointF;>;Ljava/lang/Class<Ljava/lang/Float;>;)V", "convert", "LADPointF;", "LASViewImpl_AnimationContentHandler;", "Lr/android/animation/TypeConverter<Lr/android/graphics/PointF;Ljava/lang/Float;>;" };
+  static const J2ObjcClassInfo _ASViewImpl_AnimationContentHandler_CustomTypeConverterX = { "CustomTypeConverterX", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x12, 2, 0, 4, -1, -1, 5, -1 };
+  return &_ASViewImpl_AnimationContentHandler_CustomTypeConverterX;
+}
+
+@end
+
+void ASViewImpl_AnimationContentHandler_CustomTypeConverterX_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler_CustomTypeConverterX *self, ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass) {
+  ADTypeConverter_initWithIOSClass_withIOSClass_(self, fromClass, toClass);
+}
+
+ASViewImpl_AnimationContentHandler_CustomTypeConverterX *new_ASViewImpl_AnimationContentHandler_CustomTypeConverterX_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass) {
+  J2OBJC_NEW_IMPL(ASViewImpl_AnimationContentHandler_CustomTypeConverterX, initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_, outer$, fromClass, toClass)
+}
+
+ASViewImpl_AnimationContentHandler_CustomTypeConverterX *create_ASViewImpl_AnimationContentHandler_CustomTypeConverterX_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass) {
+  J2OBJC_CREATE_IMPL(ASViewImpl_AnimationContentHandler_CustomTypeConverterX, initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_, outer$, fromClass, toClass)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler_CustomTypeConverterX)
+
+@implementation ASViewImpl_AnimationContentHandler_CustomTypeConverterY
+
+- (instancetype)initWithASViewImpl_AnimationContentHandler:(ASViewImpl_AnimationContentHandler *)outer$
+                                              withIOSClass:(IOSClass *)fromClass
+                                              withIOSClass:(IOSClass *)toClass {
+  ASViewImpl_AnimationContentHandler_CustomTypeConverterY_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(self, outer$, fromClass, toClass);
+  return self;
+}
+
+- (JavaLangFloat *)convertWithId:(ADPointF *)value {
+  return JavaLangFloat_valueOfWithFloat_(((ADPointF *) nil_chk(value))->y_);
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x2, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LJavaLangFloat;", 0x1, 2, 3, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithASViewImpl_AnimationContentHandler:withIOSClass:withIOSClass:);
+  methods[1].selector = @selector(convertWithId:);
+  #pragma clang diagnostic pop
+  static const void *ptrTable[] = { "LASViewImpl_AnimationContentHandler;LIOSClass;LIOSClass;", "(Ljava/lang/Class<Lr/android/graphics/PointF;>;Ljava/lang/Class<Ljava/lang/Float;>;)V", "convert", "LADPointF;", "LASViewImpl_AnimationContentHandler;", "Lr/android/animation/TypeConverter<Lr/android/graphics/PointF;Ljava/lang/Float;>;" };
+  static const J2ObjcClassInfo _ASViewImpl_AnimationContentHandler_CustomTypeConverterY = { "CustomTypeConverterY", "com.ashera.layout", ptrTable, methods, NULL, 7, 0x12, 2, 0, 4, -1, -1, 5, -1 };
+  return &_ASViewImpl_AnimationContentHandler_CustomTypeConverterY;
+}
+
+@end
+
+void ASViewImpl_AnimationContentHandler_CustomTypeConverterY_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler_CustomTypeConverterY *self, ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass) {
+  ADTypeConverter_initWithIOSClass_withIOSClass_(self, fromClass, toClass);
+}
+
+ASViewImpl_AnimationContentHandler_CustomTypeConverterY *new_ASViewImpl_AnimationContentHandler_CustomTypeConverterY_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass) {
+  J2OBJC_NEW_IMPL(ASViewImpl_AnimationContentHandler_CustomTypeConverterY, initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_, outer$, fromClass, toClass)
+}
+
+ASViewImpl_AnimationContentHandler_CustomTypeConverterY *create_ASViewImpl_AnimationContentHandler_CustomTypeConverterY_initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_(ASViewImpl_AnimationContentHandler *outer$, IOSClass *fromClass, IOSClass *toClass) {
+  J2OBJC_CREATE_IMPL(ASViewImpl_AnimationContentHandler_CustomTypeConverterY, initWithASViewImpl_AnimationContentHandler_withIOSClass_withIOSClass_, outer$, fromClass, toClass)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler_CustomTypeConverterY)
+
+@implementation ASViewImpl_CustomProperty
+
+- (instancetype)initWithIOSClass:(IOSClass *)type
+                    withNSString:(NSString *)name {
+  ASViewImpl_CustomProperty_initWithIOSClass_withNSString_(self, type, name);
+  return self;
+}
+
+- (id)getWithId:(id)object {
+  return nil;
+}
+
+- (void)setWithId:(id)object
+           withId:(id)value {
+  if ([object isKindOfClass:[ADView class]]) {
+    [((ADView *) nil_chk(((ADView *) object))) setMyAttributeWithNSString:name_ withId:value];
+  }
+}
+
++ (const J2ObjcClassInfo *)__metadata {
+  static J2ObjcMethodInfo methods[] = {
+    { NULL, NULL, 0x1, -1, 0, -1, 1, -1, -1 },
+    { NULL, "LNSObject;", 0x1, 2, 3, -1, 4, -1, -1 },
+    { NULL, "V", 0x1, 5, 6, -1, -1, -1, -1 },
+  };
+  #pragma clang diagnostic push
+  #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
+  #pragma clang diagnostic ignored "-Wundeclared-selector"
+  methods[0].selector = @selector(initWithIOSClass:withNSString:);
+  methods[1].selector = @selector(getWithId:);
+  methods[2].selector = @selector(setWithId:withId:);
+  #pragma clang diagnostic pop
+  static const J2ObjcFieldInfo fields[] = {
+    { "name_", "LNSString;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
+  };
+  static const void *ptrTable[] = { "LIOSClass;LNSString;", "(Ljava/lang/Class<Ljava/lang/Object;>;Ljava/lang/String;)V", "get", "LNSObject;", "(Ljava/lang/Object;)TV;", "set", "LNSObject;LNSObject;", "LASViewImpl;", "<T:Ljava/lang/Object;V:Ljava/lang/Object;>Lr/android/util/Property<Ljava/lang/Object;Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _ASViewImpl_CustomProperty = { "CustomProperty", "com.ashera.layout", ptrTable, methods, fields, 7, 0xa, 3, 1, 7, -1, -1, 8, -1 };
+  return &_ASViewImpl_CustomProperty;
+}
+
+@end
+
+void ASViewImpl_CustomProperty_initWithIOSClass_withNSString_(ASViewImpl_CustomProperty *self, IOSClass *type, NSString *name) {
+  ADProperty_initWithIOSClass_withNSString_(self, type, name);
+  self->name_ = name;
+}
+
+ASViewImpl_CustomProperty *new_ASViewImpl_CustomProperty_initWithIOSClass_withNSString_(IOSClass *type, NSString *name) {
+  J2OBJC_NEW_IMPL(ASViewImpl_CustomProperty, initWithIOSClass_withNSString_, type, name)
+}
+
+ASViewImpl_CustomProperty *create_ASViewImpl_CustomProperty_initWithIOSClass_withNSString_(IOSClass *type, NSString *name) {
+  J2OBJC_CREATE_IMPL(ASViewImpl_CustomProperty, initWithIOSClass_withNSString_, type, name)
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_CustomProperty)
+
 @implementation ASViewImpl_AnimatorListener
 
 - (NSString *)getAction {
@@ -8528,6 +8730,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler)
   (void) [obj putWithId:@"eventType" withId:@"animationstart"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  (void) [obj putWithId:@"namespace" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getNamespace]];
   if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
     (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
   }
@@ -8575,6 +8778,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler)
   (void) [obj putWithId:@"eventType" withId:@"animationend"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  (void) [obj putWithId:@"namespace" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getNamespace]];
   if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
     (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
   }
@@ -8622,6 +8826,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler)
   (void) [obj putWithId:@"eventType" withId:@"animationcancel"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  (void) [obj putWithId:@"namespace" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getNamespace]];
   if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
     (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
   }
@@ -8669,6 +8874,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimationContentHandler)
   (void) [obj putWithId:@"eventType" withId:@"animationrepeat"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  (void) [obj putWithId:@"namespace" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getNamespace]];
   if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
     (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
   }
@@ -8818,6 +9024,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_AnimatorListener)
   (void) [obj putWithId:@"eventType" withId:@"click"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  (void) [obj putWithId:@"namespace" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getNamespace]];
   if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
     (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
   }
@@ -8951,6 +9158,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnClickListener)
   (void) [obj putWithId:@"eventType" withId:@"touch"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  (void) [obj putWithId:@"namespace" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getNamespace]];
   if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
     (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
   }
@@ -9083,6 +9291,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnTouchListener)
   (void) [obj putWithId:@"eventType" withId:@"longclick"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  (void) [obj putWithId:@"namespace" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getNamespace]];
   if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
     (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
   }
@@ -9216,6 +9425,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnLongClickListener)
   (void) [obj putWithId:@"eventType" withId:@"drag"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  (void) [obj putWithId:@"namespace" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getNamespace]];
   if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
     (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
   }
@@ -9352,6 +9562,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnDragListener)
   (void) [obj putWithId:@"eventType" withId:@"key"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  (void) [obj putWithId:@"namespace" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getNamespace]];
   if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
     (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
   }
@@ -9485,6 +9696,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASViewImpl_OnKeyListener)
   (void) [obj putWithId:@"eventType" withId:@"swiped"];
   (void) [obj putWithId:@"fragmentId" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getFragmentId]];
   (void) [obj putWithId:@"actionUrl" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getActionUrl]];
+  (void) [obj putWithId:@"namespace" withId:[((id<ASIFragment>) nil_chk([((id<ASIWidget>) nil_chk(w_)) getFragment])) getNamespace]];
   if ([((id<ASIWidget>) nil_chk(w_)) getComponentId] != nil) {
     (void) [obj putWithId:@"componentId" withId:[((id<ASIWidget>) nil_chk(w_)) getComponentId]];
   }

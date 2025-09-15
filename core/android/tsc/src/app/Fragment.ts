@@ -1,7 +1,6 @@
 import "reflect-metadata";
 declare var navigationManager :any;
 declare var coreManager :any;
-import 'babel-polyfill';
 import IWidget from '../widget/IWidget';
 import {plainToClass, serialize} from "class-transformer";
 import { View } from  '../android/widget/ViewImpl';
@@ -106,6 +105,14 @@ export class Fragment {
 		return new Promise<string>((resolve, reject) => {
             coreManager.getOs((result:string) => {
                 resolve(result);
+            });
+        });
+    }
+
+    public async readCdvDataAsString(cdvUri:string) {
+        return new Promise<string>((resolve, reject) => {
+            coreManager.executeSimpleCommand([["readCdvDataAsString", cdvUri]], function (result: any) {
+                resolve(window.atob(result));
             });
         });
     }

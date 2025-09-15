@@ -1,19 +1,17 @@
 package com.ashera.core;
 
+import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.fragment.NavHostFragment;
-
-import java.util.List;
 
 public class MyDialog extends GenericDialogFragment {
 	public MyDialog() {
@@ -67,7 +65,7 @@ public class MyDialog extends GenericDialogFragment {
 
 	private ViewGroup getRoot() {
 		ViewGroup root = null;
-		NavHostFragment navHostFragment = (NavHostFragment) getParentFragment();
+		NavHostFragment navHostFragment = getNavHostFragment();
 		List fragmentList = navHostFragment.getChildFragmentManager().getFragments();
 		for (int i=fragmentList.size() - 1; i >= 0; i--) {
 			Fragment fragment = (Fragment) fragmentList.get(i);
@@ -79,6 +77,17 @@ public class MyDialog extends GenericDialogFragment {
 			}
 		}
 		return root;
+	}
+
+	private NavHostFragment getNavHostFragment() {
+		if (getArguments().containsKey("navHostFragmentId")) {
+			Fragment f = findFragmentByIdRecursive(requireActivity().getSupportFragmentManager(), getArguments().getInt("navHostFragmentId"));
+			if (f != null) {
+				return (NavHostFragment) f;
+			}
+		}
+
+		return (NavHostFragment) getParentFragment();
 	}
 
 	@Override
@@ -99,27 +108,53 @@ public class MyDialog extends GenericDialogFragment {
 		Object prevFragment = getPrevFragment();
 		if (prevFragment instanceof GenericFragment) {
 			ViewGroup root = getRoot();
-			View view = root.findViewById(Integer.MAX_VALUE);
-			if (view != null) {
-				root.removeView(view);
+			if (root != null) {
+				View view = root.findViewById(Integer.MAX_VALUE);
+				if (view != null) {
+					root.removeView(view);
+				}
 			}
 		}
 	}
 
 	private Object getPrevFragment() {
-		NavHostFragment navHostFragment = (NavHostFragment) getParentFragment();
+		NavHostFragment navHostFragment = getNavHostFragment();
 		List fragments = navHostFragment.getChildFragmentManager().getFragments();
 		Object prevFragment = fragments.get(fragments.size() - 1);
 		return prevFragment;
 	}
-	
+
+
+	public static Fragment findFragmentByIdRecursive(
+			FragmentManager fragmentManager,
+			int targetFragmentId
+	) {
+		// Try to find directly in this FragmentManager
+		Fragment fragment = fragmentManager.findFragmentById(targetFragmentId);
+		if (fragment != null) return fragment;
+
+		// Otherwise, check all fragments and recurse into their child managers
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for (Fragment f : fragments) {
+			if (f != null) {
+				Fragment result = findFragmentByIdRecursive(f.getChildFragmentManager(), targetFragmentId);
+				if (result != null) return result;
+			}
+		}
+
+		// Not found
+		return null;
+	}
+
 	@Override
 	public void onDetach() {
 		super.onDetach();
 		
 		Object prevFragment = getPrevFragment();
 		if (prevFragment instanceof IFragment) {
-			((IFragment) prevFragment).onCloseDialog();
+			java.util.Map<String, String> eventData = new java.util.HashMap<>();
+			eventData.put("dialogClosed", getActionUrl());
+			((IFragment) prevFragment).onCloseDialog(eventData);
 		}
 	}
 }

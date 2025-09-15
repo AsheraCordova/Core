@@ -1494,14 +1494,18 @@ return getLastBaselineToBottomHeight();				}
     }
 	//end - code3
     //start - nativefont
+    private FontData[] getFontData() {
+    	FontData[] fontData = this.newFont == null ? label.getFont().getFontData() : this.newFont.getFontData();
+    	return fontData;
+    }
 	private int nativeGetFontSize() {
-		FontData[] fontData = label.getFont().getFontData();
+		FontData[] fontData = getFontData();
         int height = fontData[0].getHeight();
 		return height;
 	}
 
 	private int nativeGetFontStyle() {
-		FontData[] fontData = label.getFont().getFontData();
+		FontData[] fontData = getFontData();
         int style = fontData[0].getStyle();
 		return style;
 	}
@@ -1512,7 +1516,7 @@ return getLastBaselineToBottomHeight();				}
 	}
 
 	private void nativeSetFontStyle(int style) {
-		FontData[] fontData = label.getFont().getFontData();
+		FontData[] fontData = getFontData();
 		for(int i = 0; i < fontData.length; ++i) {
 		    fontData[i].setStyle(style);
 		}
@@ -1528,7 +1532,7 @@ return getLastBaselineToBottomHeight();				}
     }
 
     private void setMyTextSize(Object objValue) {
-        FontData[] fontData = label.getFont().getFontData();
+        FontData[] fontData = getFontData();
         for(int i = 0; i < fontData.length; ++i) {
             float fontSize = ((float) objValue) * getFragment().getRootActivity().getScaleFactor();
 			fontData[i].setHeight((int) fontSize);
@@ -1540,7 +1544,7 @@ return getLastBaselineToBottomHeight();				}
     
 	
 	private Object getTextSize() {
-		return label.getFont().getFontData()[0].getHeight();
+		return getFontData()[0].getHeight();
 	}
     //end - nativefont
     
@@ -2500,6 +2504,7 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
     obj.put("eventType", "checkedchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());

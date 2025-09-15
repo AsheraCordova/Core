@@ -190,6 +190,10 @@
                    withNSString:(NSString *)key
                          withId:(id)data;
 
++ (NSString *)readCdvDataAsStringWithNSString:(NSString *)directoryName
+                                 withNSString:(NSString *)fileName
+                              withASIFragment:(id<ASIFragment>)fragment;
+
 + (void)registerFontWithNSString:(NSString *)fontFamily
                     withNSString:(NSString *)src
                     withNSString:(NSString *)fontStyle
@@ -201,12 +205,18 @@
 + (void)removeCallbacksWithId:(id)handler
          withJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable;
 
++ (NSString *)resolveCDVFileLocationWithNSString:(NSString *)cdvUrl
+                                 withASIFragment:(id<ASIFragment>)fragment;
+
 + (void)runOnMainThreadWithJavaLangRunnable:(id<JavaLangRunnable>)runnable;
 
 + (id)toJsonTreeWithId:(id)object;
 
 + (id)unmarshalWithNSString:(NSString *)json
                withIOSClass:(IOSClass *)clazz;
+
++ (NSString *)xml2jsonWithNSString:(NSString *)xml
+                   withASIFragment:(id<ASIFragment>)fragment;
 
 @end
 
@@ -290,6 +300,8 @@ FOUNDATION_EXPORT void ASPluginInvoker_handlerEndWithId_withASIWidget_(id handle
 
 FOUNDATION_EXPORT void ASPluginInvoker_addToCurrentParentWithId_withASIWidget_(id handler, id<ASIWidget> widget);
 
+FOUNDATION_EXPORT NSString *ASPluginInvoker_xml2jsonWithNSString_withASIFragment_(NSString *xml, id<ASIFragment> fragment);
+
 FOUNDATION_EXPORT NSString *ASPluginInvoker_getAssetModeWithASIFragment_(id<ASIFragment> fragment);
 
 FOUNDATION_EXPORT NSString *ASPluginInvoker_getDevServerIpWithASIFragment_(id<ASIFragment> fragment);
@@ -339,6 +351,10 @@ FOUNDATION_EXPORT id ASPluginInvoker_decodeBitmapStreamWithJavaIoInputStream_wit
 FOUNDATION_EXPORT void ASPluginInvoker_runOnMainThreadWithJavaLangRunnable_(id<JavaLangRunnable> runnable);
 
 FOUNDATION_EXPORT void ASPluginInvoker_enqueueTaskForEventLoopWithJavaLangRunnable_withLong_(id<JavaLangRunnable> runnable, jlong delay);
+
+FOUNDATION_EXPORT NSString *ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(NSString *cdvUrl, id<ASIFragment> fragment);
+
+FOUNDATION_EXPORT NSString *ASPluginInvoker_readCdvDataAsStringWithNSString_withNSString_withASIFragment_(NSString *directoryName, NSString *fileName, id<ASIFragment> fragment);
 
 FOUNDATION_EXPORT void ASPluginInvoker_registerFontWithNSString_withNSString_withNSString_withNSString_withJavaUtilMap_(NSString *fontFamily, NSString *src, NSString *fontStyle, NSString *fontWeight, id<JavaUtilMap> metadata);
 

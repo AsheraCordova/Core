@@ -4,6 +4,7 @@
 //
 
 #include "HasWidgets.h"
+#include "Html2JsonSaxHandler.h"
 #include "HtmlParser.h"
 #include "HtmlParserPlugin.h"
 #include "HtmlSaxHandler.h"
@@ -31,7 +32,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)invokeWithNSString:(NSString *)name
        withNSObjectArray:(IOSObjectArray *)args {
-  switch (JreIndexOfStr(name, (id[]){ @"parse", @"parseWithParent", @"parseFile", @"parseFragment", @"parseInclude", @"getHandler", @"handlerStart", @"handlerEnd", @"addToCurrentParent" }, 9)) {
+  switch (JreIndexOfStr(name, (id[]){ @"parse", @"parseWithParent", @"parseFile", @"parseFragment", @"parseInclude", @"getHandler", @"handlerStart", @"handlerEnd", @"addToCurrentParent", @"xml2json" }, 10)) {
     case 0:
     return [self parseWithNSString:(NSString *) cast_chk(IOSObjectArray_Get(nil_chk(args), 0), [NSString class]) withBoolean:[((JavaLangBoolean *) nil_chk((JavaLangBoolean *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangBoolean class]))) booleanValue] withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 2), ASIFragment_class_())];
     case 1:
@@ -53,6 +54,8 @@ J2OBJC_IGNORE_DESIGNATED_END
     case 8:
     [self addToCurrentParentWithId:IOSObjectArray_Get(nil_chk(args), 0) withASIWidget:(id<ASIWidget>) cast_check(IOSObjectArray_Get(args, 1), ASIWidget_class_())];
     return nil;
+    case 9:
+    return [self xml2jsonWithNSString:(NSString *) cast_chk(IOSObjectArray_Get(nil_chk(args), 0), [NSString class]) withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 1), ASIFragment_class_())];
     default:
     break;
   }
@@ -84,7 +87,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<ASIWidget>)parseFileWithNSString:(NSString *)fileName
                            withBoolean:(jboolean)template_
                        withASIFragment:(id<ASIFragment>)fragment {
-  NSString *html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", @"www/", fileName), fragment);
+  NSString *html;
+  if ([((id<ASIFragment>) nil_chk(fragment)) getRootDirectory] != nil) {
+    html = ASPluginInvoker_readCdvDataAsStringWithNSString_withNSString_withASIFragment_([fragment getRootDirectory], JreStrcat("$$", @"www/", fileName), fragment);
+  }
+  else {
+    html = ASPluginInvoker_getFileAssetWithNSString_withASIFragment_(JreStrcat("$$", @"www/", fileName), fragment);
+  }
   return [self parseWithNSString:html withBoolean:template_ withASIFragment:fragment];
 }
 
@@ -146,6 +155,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   ASHtmlParser_parseWithOrgXmlSaxContentHandler_withNSString_(handler, html);
 }
 
+- (NSString *)xml2jsonWithNSString:(NSString *)xml
+                   withASIFragment:(id<ASIFragment>)fragment {
+  ASHtml2JsonSaxHandler *handler = create_ASHtml2JsonSaxHandler_init();
+  ASHtmlParser_parseWithOrgXmlSaxContentHandler_withNSString_(handler, xml);
+  return [handler toJson];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -160,6 +176,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 12, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 14, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 15, 16, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 17, 18, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -176,9 +193,10 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[9].selector = @selector(handlerEndWithId:withASIWidget:);
   methods[10].selector = @selector(addToCurrentParentWithId:withASIWidget:);
   methods[11].selector = @selector(parseIncludeWithASHasWidgets:withNSString:withNSString:withBoolean:withASIFragment:);
+  methods[12].selector = @selector(xml2jsonWithNSString:withASIFragment:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseFragment", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;" };
-  static const J2ObjcClassInfo _ASHtmlParserPlugin = { "HtmlParserPlugin", "com.ashera.parser.html", ptrTable, methods, NULL, 7, 0x1, 12, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseFragment", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;", "xml2json", "LNSString;LASIFragment;" };
+  static const J2ObjcClassInfo _ASHtmlParserPlugin = { "HtmlParserPlugin", "com.ashera.parser.html", ptrTable, methods, NULL, 7, 0x1, 13, 0, -1, -1, -1, -1, -1 };
   return &_ASHtmlParserPlugin;
 }
 

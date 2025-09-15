@@ -22,6 +22,8 @@
     { NULL, "V", 0x401, 6, 7, -1, -1, -1, -1 },
     { NULL, "I", 0x401, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 8, 9, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, -1, -1, -1, -1, -1, -1 },
+    { NULL, "V", 0x401, 10, 11, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -33,9 +35,11 @@
   methods[4].selector = @selector(writeListWithJavaUtilList:);
   methods[5].selector = @selector(readInt);
   methods[6].selector = @selector(writeIntWithInt:);
+  methods[7].selector = @selector(readString8);
+  methods[8].selector = @selector(writeString8WithNSString:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "writeFloat", "F", "readIntArray", "[I", "readArrayList", "LJavaLangClassLoader;", "writeList", "LJavaUtilList;", "writeInt", "I" };
-  static const J2ObjcClassInfo _ADParcel = { "Parcel", "r.android.os", ptrTable, methods, NULL, 7, 0x609, 7, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "writeFloat", "F", "readIntArray", "[I", "readArrayList", "LJavaLangClassLoader;", "writeList", "LJavaUtilList;", "writeInt", "I", "writeString8", "LNSString;" };
+  static const J2ObjcClassInfo _ADParcel = { "Parcel", "r.android.os", ptrTable, methods, NULL, 7, 0x609, 9, 0, -1, -1, -1, -1, -1 };
   return &_ADParcel;
 }
 

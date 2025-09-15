@@ -12,7 +12,8 @@ import r.android.graphics.drawable.StateListDrawable;
 public class DrawableConverter extends ColorImageConverter {
     @Override
     public Object convertFrom(String value,  Map<String, Object> dependentAttributesMap, IFragment fragment) {
-       if (value == null || value.equals("@null") || value.startsWith("@drawable") || value.startsWith("#") || value.startsWith("@color/") || value.startsWith("data:image/png;base64,")) {
+       if (value == null || value.equals("@null") || value.startsWith("@drawable") || value.startsWith("#") || value.startsWith("@color/") || value.startsWith("data:image/png;base64,")
+    		   || value.startsWith("cordova.file.")) {
     	   Object objValue = super.convertFrom(value, dependentAttributesMap, fragment);
     	   
     	   if ("@null".equals(value)) {

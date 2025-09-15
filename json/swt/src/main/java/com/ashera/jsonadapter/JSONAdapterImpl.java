@@ -60,6 +60,9 @@ public class JSONAdapterImpl implements JSONAdapter, IPlugin {
 	//start - web
 	@Override
 	public Map<String, Object> getMap(Object payLoad) {
+		if ("emptymap".equals(payLoad)) {
+			return new java.util.HashMap<>();
+		}
 		if (payLoad instanceof Map) {
 			return (Map<String, Object>) payLoad;
 		}

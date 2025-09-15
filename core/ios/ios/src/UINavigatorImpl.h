@@ -77,6 +77,10 @@
                        withNSString:(NSString *)destinationId
                         withBoolean:(jboolean)inclusive;
 
+- (void)setNamespaceWithNSString:(NSString *)namespace_;
+
+- (void)setRootDirectoryWithNSString:(NSString *)rootDirectory;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASUINavigatorImpl)

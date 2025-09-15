@@ -11,8 +11,8 @@ export default class LocaleManager {
 	}
 
 
-	public init(callBack:any) {
-		coreManager.executeSimpleCommand([["loadLocale", this.keys]], function (obj: any) {
+	public init(callBack:any, rootDirectory?: string) {
+		coreManager.executeSimpleCommand([["loadLocale", this.keys, rootDirectory]], function (obj: any) {
 			LocaleManager.localeMap = JSON.parse(obj)["loadLocale"];
 			if (callBack) {
 				callBack();

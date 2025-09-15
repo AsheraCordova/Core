@@ -116,6 +116,8 @@
      <!-- start Plugin_HtmlParser -->
      <header-file src="library/Plugin_HtmlParser/src/Html.h" target-dir="CorePlugin/Plugin_HtmlParser/src"/>
      <source-file src="library/Plugin_HtmlParser/src/Html.m" target-dir="CorePlugin/Plugin_HtmlParser/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/Plugin_HtmlParser/src/Html2JsonSaxHandler.h" target-dir="CorePlugin/Plugin_HtmlParser/src"/>
+     <source-file src="library/Plugin_HtmlParser/src/Html2JsonSaxHandler.m" target-dir="CorePlugin/Plugin_HtmlParser/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_HtmlParser/src/HtmlParserPlugin.h" target-dir="CorePlugin/Plugin_HtmlParser/src"/>
      <source-file src="library/Plugin_HtmlParser/src/HtmlParserPlugin.m" target-dir="CorePlugin/Plugin_HtmlParser/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/Plugin_HtmlParser/src/HtmlSaxHandler.h" target-dir="CorePlugin/Plugin_HtmlParser/src"/>
@@ -803,6 +805,8 @@
      <source-file src="library/AndroidCore/src/UnsupportedAppUsage.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/Uri.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="library/AndroidCore/src/Uri.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidCore/src/UriCodec.h" target-dir="CorePlugin/AndroidCore/src"/>
+     <source-file src="library/AndroidCore/src/UriCodec.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/ValueAnimator.h" target-dir="CorePlugin/AndroidCore/src"/>
      <source-file src="library/AndroidCore/src/ValueAnimator.m" target-dir="CorePlugin/AndroidCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidCore/src/ValueCallback.h" target-dir="CorePlugin/AndroidCore/src"/>
@@ -898,6 +902,8 @@
      <source-file src="library/AndroidXCore/src/SimpleArrayMap.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/SubMenuBuilder.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/SubMenuBuilder.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
+     <header-file src="library/AndroidXCore/src/SupportMenu.h" target-dir="CorePlugin/AndroidXCore/src"/>
+     <source-file src="library/AndroidXCore/src/SupportMenu.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/SupportMenuItem.h" target-dir="CorePlugin/AndroidXCore/src"/>
      <source-file src="library/AndroidXCore/src/SupportMenuItem.m" target-dir="CorePlugin/AndroidXCore/src" compiler-flags="-fno-objc-arc"/>
      <header-file src="library/AndroidXCore/src/TraceCompat.h" target-dir="CorePlugin/AndroidXCore/src"/>

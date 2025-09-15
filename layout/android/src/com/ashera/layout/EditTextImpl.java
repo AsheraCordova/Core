@@ -2150,6 +2150,7 @@ public java.util.Map<String, Object> getOnTextChangeEventObj(CharSequence s,int 
     obj.put("eventType", "textchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2176,6 +2177,7 @@ public java.util.Map<String, Object> getOnbeforeTextChangeEventObj(CharSequence 
     obj.put("eventType", "beforetextchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2202,6 +2204,7 @@ public java.util.Map<String, Object> getOnafterTextChangeEventObj(Editable s) {
     obj.put("eventType", "aftertextchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -2279,6 +2282,7 @@ public java.util.Map<String, Object> getOnEditorActionEventObj(TextView v,int ac
     obj.put("eventType", "editoraction");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());

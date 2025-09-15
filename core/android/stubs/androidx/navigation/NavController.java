@@ -37,4 +37,15 @@ public class NavController {
 		
 	}
 
+	public NavigatorProvider getNavigatorProvider() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setGraph(NavGraph navGraph) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

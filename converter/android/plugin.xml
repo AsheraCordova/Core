@@ -23,12 +23,16 @@
      <source-file src="src/com/ashera/converter/ColorConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="src/com/ashera/converter/ColorImageConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="src/com/ashera/converter/ColorStateConverter.java" target-dir="src/com/ashera/converter"/>
+     <source-file src="src/com/ashera/converter/ColorStateListFactory.java" target-dir="src/com/ashera/converter"/>
      <source-file src="src/com/ashera/converter/ConverterCordovaPlugin.java" target-dir="src/com/ashera/converter"/>
      <source-file src="src/com/ashera/converter/ConverterPlugin.java" target-dir="src/com/ashera/converter"/>
      <source-file src="src/com/ashera/converter/Divider.java" target-dir="src/com/ashera/converter"/>
+     <source-file src="src/com/ashera/converter/DrawableFactory.java" target-dir="src/com/ashera/converter"/>
      <source-file src="src/com/ashera/converter/DrawableImageConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="src/com/ashera/converter/FontConverter.java" target-dir="src/com/ashera/converter"/>
+     <source-file src="src/com/ashera/converter/GrowingArrayUtils.java" target-dir="src/com/ashera/converter"/>
      <source-file src="src/com/ashera/converter/ImageRepeatCommandConverter.java" target-dir="src/com/ashera/converter"/>
+     <source-file src="src/com/ashera/converter/MathUtils.java" target-dir="src/com/ashera/converter"/>
      <source-file src="src/com/ashera/converter/StyleConverter.java" target-dir="src/com/ashera/converter"/>
      <source-file src="src/com/ashera/converter/XmlResourceConverter.java" target-dir="src/com/ashera/converter"/>
      <!-- src end -->

@@ -67,4 +67,15 @@ public class Fragment {
     public void onStart() {
     	
     }
+    
+
+    public FragmentActivity requireActivity() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isVisible() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

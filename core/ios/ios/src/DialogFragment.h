@@ -21,6 +21,7 @@
 #include "GenericFragment.h"
 
 @class JavaLangFloat;
+@protocol JavaUtilMap;
 
 @interface ASDialogFragment : ASGenericFragment
 
@@ -34,6 +35,8 @@
 - (id)getParentForRootWidget;
 
 - (jboolean)isFullScreen;
+
+- (id<JavaUtilMap>)onCloseDialogEventData;
 
 - (void)remeasure;
 

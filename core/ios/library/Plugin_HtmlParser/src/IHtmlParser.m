@@ -24,6 +24,7 @@
     { NULL, "LASIWidget;", 0x401, 10, 11, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 12, 13, -1, -1, -1, -1 },
     { NULL, "V", 0x401, 14, 13, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x401, 15, 16, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -37,9 +38,10 @@
   methods[6].selector = @selector(handlerStartWithId:withASIWidget:withInt:);
   methods[7].selector = @selector(handlerEndWithId:withASIWidget:);
   methods[8].selector = @selector(addToCurrentParentWithId:withASIWidget:);
+  methods[9].selector = @selector(xml2jsonWithNSString:withASIFragment:);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseFragment", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent" };
-  static const J2ObjcClassInfo _ASIHtmlParser = { "IHtmlParser", "com.ashera.parser.html", ptrTable, methods, NULL, 7, 0x609, 9, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "parse", "LNSString;ZLASIFragment;", "parseWithParent", "LNSString;ZLASHasWidgets;LASIFragment;", "parseFile", "parseFragment", "parseInclude", "LASHasWidgets;LNSString;LNSString;ZLASIFragment;", "getHandler", "LASHasWidgets;ILASIFragment;", "handlerStart", "LNSObject;LASIWidget;I", "handlerEnd", "LNSObject;LASIWidget;", "addToCurrentParent", "xml2json", "LNSString;LASIFragment;" };
+  static const J2ObjcClassInfo _ASIHtmlParser = { "IHtmlParser", "com.ashera.parser.html", ptrTable, methods, NULL, 7, 0x609, 10, 0, -1, -1, -1, -1, -1 };
   return &_ASIHtmlParser;
 }
 

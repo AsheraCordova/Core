@@ -3,6 +3,7 @@
 //  source: D:\Java\git\core-ios-widgets\IOSCorePlugin\src\main\java\com\ashera\core\CorePlugin.java
 //
 
+#include "Activity.h"
 #include "Animator.h"
 #include "AttributedString.h"
 #include "AttributedStringImpl.h"
@@ -34,8 +35,11 @@
 #include "java/lang/RuntimeException.h"
 #include "java/lang/System.h"
 #include "java/util/ArrayList.h"
+#include "java/util/Base64.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
+#include "java/util/regex/Matcher.h"
+#include "java/util/regex/Pattern.h"
 
 #import <sys/utsname.h>
 
@@ -67,6 +71,12 @@
 - (NSString *)nativeGetExternalFilesDir;
 
 - (void)nativeRunOnMainThreadWithJavaLangRunnable:(id<JavaLangRunnable>)runnable;
+
++ (NSString *)resolveCDVFileLocationWithNSString:(NSString *)cdvUrl;
+
++ (NSString *)navtiveGetDirectoryWithInt:(jint)type;
+
++ (NSString *)readCdvDataAsStringWithNSString:(NSString *)cdvUrl;
 
 @end
 
@@ -104,6 +114,12 @@ __attribute__((unused)) static NSString *ASCorePlugin_getDeviceName(ASCorePlugin
 __attribute__((unused)) static NSString *ASCorePlugin_nativeGetExternalFilesDir(ASCorePlugin *self);
 
 __attribute__((unused)) static void ASCorePlugin_nativeRunOnMainThreadWithJavaLangRunnable_(ASCorePlugin *self, id<JavaLangRunnable> runnable);
+
+__attribute__((unused)) static NSString *ASCorePlugin_resolveCDVFileLocationWithNSString_(NSString *cdvUrl);
+
+__attribute__((unused)) static NSString *ASCorePlugin_navtiveGetDirectoryWithInt_(jint type);
+
+__attribute__((unused)) static NSString *ASCorePlugin_readCdvDataAsStringWithNSString_(NSString *cdvUrl);
 
 @interface ASCorePlugin_MyBitmap : NSObject < ADBitmap > {
  @public
@@ -183,7 +199,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)invokeWithNSString:(NSString *)name
        withNSObjectArray:(IOSObjectArray *)args {
-  switch (JreIndexOfStr(name, (id[]){ @"getAssetMode", @"getDevServerIp", @"getOrientation", @"getScreenWidth", @"getScreenHeight", @"getScreenWidthDp", @"getScreenHeightDp", @"getOS", @"getFileAsset", @"getDensityName", @"getDensity", @"postDelayed", @"removeCallbacks", @"putObjectToBundle", @"releaseNativeResources", @"getFontMetrics", @"createDrawable", @"createAttributedString", @"getDisplayMetricDensity", @"getAttributedBulletHtml", @"getExternalFilesDir", @"getMaxMemory", @"decodeBitmapStream", @"runOnMainThread", @"enqueueTaskForEventLoop" }, 25)) {
+  switch (JreIndexOfStr(name, (id[]){ @"getAssetMode", @"getDevServerIp", @"getOrientation", @"getScreenWidth", @"getScreenHeight", @"getScreenWidthDp", @"getScreenHeightDp", @"getOS", @"getFileAsset", @"getDensityName", @"getDensity", @"postDelayed", @"removeCallbacks", @"putObjectToBundle", @"releaseNativeResources", @"getFontMetrics", @"createDrawable", @"createAttributedString", @"getDisplayMetricDensity", @"getAttributedBulletHtml", @"getExternalFilesDir", @"getMaxMemory", @"decodeBitmapStream", @"runOnMainThread", @"enqueueTaskForEventLoop", @"resolveCDVFileLocation", @"readCdvDataAsString" }, 27)) {
     case 0:
     return [self getAssetModeWithASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), ASIFragment_class_())];
     case 1:
@@ -239,6 +255,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     case 24:
     [self enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>) cast_check(IOSObjectArray_Get(nil_chk(args), 0), JavaLangRunnable_class_()) withLong:[((JavaLangLong *) nil_chk((JavaLangLong *) cast_chk(IOSObjectArray_Get(args, 1), [JavaLangLong class]))) longLongValue]];
     return nil;
+    case 25:
+    return [self resolveCDVFileLocationWithNSString:(NSString *) cast_chk(IOSObjectArray_Get(nil_chk(args), 0), [NSString class]) withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 1), ASIFragment_class_())];
+    case 26:
+    return [self readCdvDataAsStringWithNSString:(NSString *) cast_chk(IOSObjectArray_Get(nil_chk(args), 0), [NSString class]) withNSString:(NSString *) cast_chk(IOSObjectArray_Get(args, 1), [NSString class]) withASIFragment:(id<ASIFragment>) cast_check(IOSObjectArray_Get(args, 2), ASIFragment_class_())];
     default:
     break;
   }
@@ -306,7 +326,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)getFileAssetWithNSString:(NSString *)path
                        withASIFragment:(id<ASIFragment>)fragment {
-  return ASCorePlugin_getFileAssetWithNSString_(path);
+  if ([((id<ASIFragment>) nil_chk(fragment)) getRootDirectory] != nil) {
+    return [self readCdvDataAsStringWithNSString:[fragment getRootDirectory] withNSString:path withASIFragment:fragment];
+  }
+  else {
+    return ASCorePlugin_getFileAssetWithNSString_(path);
+  }
 }
 
 + (NSString *)getFileAssetWithNSString:(NSString *)path {
@@ -519,6 +544,43 @@ J2OBJC_IGNORE_DESIGNATED_END
   }
 }
 
+- (NSString *)resolveCDVFileLocationWithNSString:(NSString *)cdvUrl
+                                 withASIFragment:(id<ASIFragment>)fragment {
+  return ASCorePlugin_resolveCDVFileLocationWithNSString_(cdvUrl);
+}
+
++ (NSString *)resolveCDVFileLocationWithNSString:(NSString *)cdvUrl {
+  return ASCorePlugin_resolveCDVFileLocationWithNSString_(cdvUrl);
+}
+
++ (NSString *)navtiveGetDirectoryWithInt:(jint)type {
+  return ASCorePlugin_navtiveGetDirectoryWithInt_(type);
+}
+
+- (NSString *)readCdvDataAsStringWithNSString:(NSString *)directoryName
+                                 withNSString:(NSString *)fileName
+                              withASIFragment:(id<ASIFragment>)fragment {
+  NSString *rootDirectory = directoryName;
+  if (directoryName == nil) {
+    rootDirectory = [((id<ASIFragment>) nil_chk(fragment)) getRootDirectory];
+  }
+  NSString *cdvUrl = JreStrcat("$$", ASFileUtils_getSlashAppendedDirectoryNameWithNSString_(rootDirectory), fileName);
+  return ASCorePlugin_readCdvDataAsStringWithNSString_(cdvUrl);
+}
+
++ (NSString *)readCdvDataAsStringWithNSString:(NSString *)cdvUrl
+                               withADActivity:(ADActivity *)activity {
+  return ASCorePlugin_readCdvDataAsStringWithNSString_withADActivity_(cdvUrl, activity);
+}
+
++ (NSString *)readCdvDataAsStringWithNSString:(NSString *)cdvUrl {
+  return ASCorePlugin_readCdvDataAsStringWithNSString_(cdvUrl);
+}
+
++ (NSString *)getFileContentWithNSString:(NSString *)path {
+  return ASCorePlugin_getFileContentWithNSString_(path);
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
@@ -574,6 +636,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "V", 0x1, 46, 47, -1, -1, -1, -1 },
     { NULL, "V", 0x102, 48, 47, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 49, 50, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 51, 6, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0xa, 51, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x10a, 52, 53, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 54, 55, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x9, 54, 56, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0xa, 54, 7, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x109, 57, 7, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -631,14 +700,21 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[50].selector = @selector(runOnMainThreadWithJavaLangRunnable:);
   methods[51].selector = @selector(nativeRunOnMainThreadWithJavaLangRunnable:);
   methods[52].selector = @selector(enqueueTaskForEventLoopWithJavaLangRunnable:withLong:);
+  methods[53].selector = @selector(resolveCDVFileLocationWithNSString:withASIFragment:);
+  methods[54].selector = @selector(resolveCDVFileLocationWithNSString:);
+  methods[55].selector = @selector(navtiveGetDirectoryWithInt:);
+  methods[56].selector = @selector(readCdvDataAsStringWithNSString:withNSString:withASIFragment:);
+  methods[57].selector = @selector(readCdvDataAsStringWithNSString:withADActivity:);
+  methods[58].selector = @selector(readCdvDataAsStringWithNSString:);
+  methods[59].selector = @selector(getFileContentWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "PLUGIN_NAME_CORE", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 51, -1, -1 },
-    { "density", "I", .constantValue.asLong = 0, 0xa, -1, 52, -1, -1 },
-    { "navigator", "LASUINavigatorImpl;", .constantValue.asLong = 0, 0xa, -1, 53, -1, -1 },
+    { "PLUGIN_NAME_CORE", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 58, -1, -1 },
+    { "density", "I", .constantValue.asLong = 0, 0xa, -1, 59, -1, -1 },
+    { "navigator", "LASUINavigatorImpl;", .constantValue.asLong = 0, 0xa, -1, 60, -1, -1 },
   };
-  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "LNSString;", "postDelayed", "LJavaLangRunnable;I", "scheduledTimerWithTimeInterval", "LJavaLangRunnable;F", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "invalidateTimer", "LNSObject;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "getMaxAscent", "getAscent", "getDescent", "getMaxDescent", "getLeading", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "navigateAsTop", "LNSString;LNSObject;LASIFragment;", "navigate", "getScopedObjectArray", "(Ljava/lang/Object;)Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLNSObject;LASIFragment;", "navigateWithPopBackStack", "popBackStack", "LASIFragment;LNSString;Z", "executeSimpleCommand", "LNSObject;LASIFragment;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "nativeRunOnMainThread", "enqueueTaskForEventLoop", "LJavaLangRunnable;J", &ASCorePlugin_PLUGIN_NAME_CORE, &ASCorePlugin_density, &ASCorePlugin_navigator, "LASCorePlugin_MyBitmap;" };
-  static const J2ObjcClassInfo _ASCorePlugin = { "CorePlugin", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 53, 3, -1, 54, -1, -1, -1 };
+  static const void *ptrTable[] = { "invoke", "LNSString;[LNSObject;", "getAssetMode", "LASIFragment;", "getDevServerIp", "getFileAsset", "LNSString;LASIFragment;", "LNSString;", "postDelayed", "LJavaLangRunnable;I", "scheduledTimerWithTimeInterval", "LJavaLangRunnable;F", "removeCallbacks", "LNSObject;LJavaLangRunnable;", "invalidateTimer", "LNSObject;", "putObjectToBundle", "LNSObject;LNSString;LNSObject;", "releaseNativeResources", "LJavaUtilList;", "(Ljava/util/List<Ljava/lang/Object;>;)V", "getFontMetrics", "getMaxAscent", "getAscent", "getDescent", "getMaxDescent", "getLeading", "createDrawable", "createAttributedString", "LASIFragment;LNSString;", "navigateAsTop", "LNSString;LNSObject;LASIFragment;", "navigate", "getScopedObjectArray", "(Ljava/lang/Object;)Ljava/util/List<Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;>;", "navigateWithPopBackStackTo", "LNSString;LNSString;ZLNSObject;LASIFragment;", "navigateWithPopBackStack", "popBackStack", "LASIFragment;LNSString;Z", "executeSimpleCommand", "LNSObject;LASIFragment;", "getExternalFilesDir", "getMaxMemory", "decodeBitmapStream", "LJavaIoInputStream;LNSObject;", "runOnMainThread", "LJavaLangRunnable;", "nativeRunOnMainThread", "enqueueTaskForEventLoop", "LJavaLangRunnable;J", "resolveCDVFileLocation", "navtiveGetDirectory", "I", "readCdvDataAsString", "LNSString;LNSString;LASIFragment;", "LNSString;LADActivity;", "getFileContent", &ASCorePlugin_PLUGIN_NAME_CORE, &ASCorePlugin_density, &ASCorePlugin_navigator, "LASCorePlugin_MyBitmap;" };
+  static const J2ObjcClassInfo _ASCorePlugin = { "CorePlugin", "com.ashera.core", ptrTable, methods, fields, 7, 0x1, 60, 3, -1, 61, -1, -1, -1 };
   return &_ASCorePlugin;
 }
 
@@ -796,15 +872,33 @@ NSString *ASCorePlugin_executeSimpleCommandWithId_withASIFragment_(id commands, 
       NSString *commandName = ASPluginInvoker_getStringWithId_(IOSObjectArray_Get(nil_chk(commandArr), 0));
       {
         IOSObjectArray *keys;
-        switch (JreIndexOfStr(commandName, (id[]){ @"loadLocale" }, 1)) {
+        NSString *rootDir;
+        switch (JreIndexOfStr(commandName, (id[]){ @"readCdvDataAsString", @"loadLocale" }, 2)) {
           case 0:
+          {
+            NSString *url = ASPluginInvoker_getStringWithId_(IOSObjectArray_Get(commandArr, 1));
+            NSString *js = ASCorePlugin_readCdvDataAsStringWithNSString_(url);
+            NSString *encode = [((JavaUtilBase64_Encoder *) nil_chk(JavaUtilBase64_getEncoder())) encodeToStringWithByteArray:[((NSString *) nil_chk(js)) java_getBytes]];
+            return encode;
+          }
+          case 1:
           keys = ASPluginInvoker_getArrayWithId_(IOSObjectArray_Get(commandArr, 1));
+          rootDir = nil;
+          if (commandArr->size_ > 2 && !ASPluginInvoker_isNullWithId_(IOSObjectArray_Get(commandArr, 2))) {
+            rootDir = ASPluginInvoker_getStringWithId_(IOSObjectArray_Get(commandArr, 2));
+          }
           if (keys != nil && keys->size_ > 0) {
             id<JavaUtilMap> localeMap = ASPluginInvoker_getJSONCompatMap();
             for (jint j = 0; j < keys->size_; j++) {
               NSString *key = ASPluginInvoker_getStringWithId_(IOSObjectArray_Get(keys, j));
-              NSString *value = ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", key, fragment);
-              (void) [((id<JavaUtilMap>) nil_chk(localeMap)) putWithId:key withId:value];
+              if (rootDir == nil) {
+                NSString *value = ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", key, fragment);
+                (void) [((id<JavaUtilMap>) nil_chk(localeMap)) putWithId:key withId:value];
+              }
+              else {
+                NSString *value = ASResourceBundleUtils_getStringWithNSString_withNSString_withNSString_withNSString_withASIFragment_(@"values/strings", @"string", key, rootDir, fragment);
+                (void) [((id<JavaUtilMap>) nil_chk(localeMap)) putWithId:key withId:value];
+              }
             }
             ASPluginInvoker_putJSONSafeObjectIntoMapWithJavaUtilMap_withNSString_withId_(resultMap, commandName, localeMap);
           }
@@ -828,6 +922,114 @@ void ASCorePlugin_nativeRunOnMainThreadWithJavaLangRunnable_(ASCorePlugin *self,
   dispatch_async(dispatch_get_main_queue(), ^{
     [runnable run];
   });
+}
+
+NSString *ASCorePlugin_resolveCDVFileLocationWithNSString_(NSString *cdvUrl) {
+  ASCorePlugin_initialize();
+  JavaUtilRegexPattern *pattern = JavaUtilRegexPattern_compileWithNSString_(@"cordova\\.file\\.([a-zA-Z_\\-]+)\\/(.*)");
+  JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(pattern)) matcherWithJavaLangCharSequence:cdvUrl];
+  jboolean matches = [((JavaUtilRegexMatcher *) nil_chk(matcher)) matches];
+  if (matches) {
+    NSString *fileName = [matcher groupWithInt:2];
+    NSString *directoryName = [matcher groupWithInt:1];
+    switch (JreIndexOfStr(directoryName, (id[]){ @"persistent", @"temporary", @"cacheDirectory", @"dataDirectory", @"applicationDirectory", @"applicationStorageDirectory", @"tempDirectory", @"documentsDirectory", @"syncedDataDirectory" }, 9)) {
+      case 0:
+      directoryName = ASCorePlugin_navtiveGetDirectoryWithInt_(5);
+      break;
+      case 1:
+      directoryName = ASCorePlugin_navtiveGetDirectoryWithInt_(3);
+      break;
+      case 2:
+      directoryName = ASCorePlugin_navtiveGetDirectoryWithInt_(3);
+      break;
+      case 3:
+      directoryName = ASCorePlugin_navtiveGetDirectoryWithInt_(0);
+      break;
+      case 4:
+      directoryName = ASCorePlugin_navtiveGetDirectoryWithInt_(1);
+      break;
+      case 5:
+      directoryName = ASCorePlugin_navtiveGetDirectoryWithInt_(2);
+      break;
+      case 6:
+      directoryName = ASCorePlugin_navtiveGetDirectoryWithInt_(4);
+      break;
+      case 7:
+      directoryName = ASCorePlugin_navtiveGetDirectoryWithInt_(5);
+      break;
+      case 8:
+      directoryName = ASCorePlugin_navtiveGetDirectoryWithInt_(6);
+      break;
+      default:
+      break;
+    }
+    return JreStrcat("$$", ASFileUtils_getSlashAppendedDirectoryNameWithNSString_(directoryName), fileName);
+  }
+  return nil;
+}
+
+NSString *ASCorePlugin_navtiveGetDirectoryWithInt_(jint type) {
+  ASCorePlugin_initialize();
+  NSString* libPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
+  NSString* libPathSync = [libPath stringByAppendingPathComponent:@"Cloud"];
+  NSString* libPathNoSync = [libPath stringByAppendingPathComponent:@"NoCloud"];
+  NSString* docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+  NSString* storagePath = [libPath stringByDeletingLastPathComponent];
+  NSString* cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+  
+  // Create the directories if necessary.
+  [[NSFileManager defaultManager] createDirectoryAtPath:libPathSync withIntermediateDirectories:YES attributes:nil error:nil];
+  [[NSFileManager defaultManager] createDirectoryAtPath:libPathNoSync withIntermediateDirectories:YES attributes:nil error:nil];
+  // Mark NoSync as non-iCloud.
+  [[NSURL fileURLWithPath:libPathNoSync] setResourceValue: [NSNumber numberWithBool: YES]
+  forKey: NSURLIsExcludedFromBackupKey error:nil];
+  
+  if (type == 0) {
+    return [[NSURL fileURLWithPath:libPathNoSync] path];
+  }
+  if (type == 1) {
+    return [[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]] path];
+  }
+  
+  if (type == 2) {
+    return [[NSURL fileURLWithPath:storagePath] path];
+  }
+  
+  if (type == 3) {
+    return [[NSURL fileURLWithPath:cachePath] path];
+  }
+  
+  if (type == 4) {
+    return [[NSURL fileURLWithPath:NSTemporaryDirectory()] path];
+  }
+  
+  if (type == 5) {
+    return [[NSURL fileURLWithPath:docPath] path];
+  }
+  
+  if (type == 6) {
+    return [[NSURL fileURLWithPath:libPathSync] path];
+  }
+  
+  return @"";
+}
+
+NSString *ASCorePlugin_readCdvDataAsStringWithNSString_withADActivity_(NSString *cdvUrl, ADActivity *activity) {
+  ASCorePlugin_initialize();
+  return ASCorePlugin_readCdvDataAsStringWithNSString_(cdvUrl);
+}
+
+NSString *ASCorePlugin_readCdvDataAsStringWithNSString_(NSString *cdvUrl) {
+  ASCorePlugin_initialize();
+  NSString *location = ASCorePlugin_resolveCDVFileLocationWithNSString_(cdvUrl);
+  return ASCorePlugin_getFileContentWithNSString_(location);
+}
+
+NSString *ASCorePlugin_getFileContentWithNSString_(NSString *path) {
+  ASCorePlugin_initialize();
+  NSError* error = nil;
+  NSString *res = [NSString stringWithContentsOfFile: path encoding:NSUTF8StringEncoding error: &error];
+  return res;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASCorePlugin)

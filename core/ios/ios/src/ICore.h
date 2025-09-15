@@ -84,6 +84,13 @@
 - (void)enqueueTaskForEventLoopWithJavaLangRunnable:(id<JavaLangRunnable>)runnable
                                            withLong:(jlong)delay;
 
+- (NSString *)resolveCDVFileLocationWithNSString:(NSString *)cdvUrl
+                                 withASIFragment:(id<ASIFragment>)fragment;
+
+- (NSString *)readCdvDataAsStringWithNSString:(NSString *)directoryName
+                                 withNSString:(NSString *)fileName
+                              withASIFragment:(id<ASIFragment>)fragment;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASICore)

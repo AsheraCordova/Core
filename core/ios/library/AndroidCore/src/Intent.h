@@ -47,6 +47,8 @@
 
 - (jboolean)hasExtraWithNSString:(NSString *)extraState;
 
++ (jboolean)isAccessUriModeWithInt:(jint)flags;
+
 - (ADIntent *)putExtraWithNSString:(NSString *)name
                             withId:(id)value;
 
@@ -166,6 +168,8 @@ FOUNDATION_EXPORT void ADIntent_init(ADIntent *self);
 FOUNDATION_EXPORT ADIntent *new_ADIntent_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ADIntent *create_ADIntent_init(void);
+
+FOUNDATION_EXPORT jboolean ADIntent_isAccessUriModeWithInt_(jint flags);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADIntent)
 

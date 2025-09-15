@@ -3,6 +3,7 @@
     <xsl:template match="/">
         <xsl:for-each select="font-family/font">
             <xsl:value-of select="@android:fontStyle" />_<xsl:value-of select="@android:fontWeight" />=<xsl:value-of select="@name" /><xsl:text>&#xa;</xsl:text>
+            <xsl:value-of select="@android:fontStyle" />_<xsl:value-of select="@android:fontWeight" />_android=<xsl:value-of select="@filename" /><xsl:text>&#xa;</xsl:text>
             <xsl:if test="@name-ios != ''">
             	<xsl:value-of select="@android:fontStyle" />_<xsl:value-of select="@android:fontWeight" />_ios=<xsl:value-of select="@name-ios" /><xsl:text>&#xa;</xsl:text>
             </xsl:if>

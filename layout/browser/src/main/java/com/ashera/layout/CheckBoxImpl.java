@@ -2870,6 +2870,7 @@ public java.util.Map<String, Object> getOnCheckedChangeEventObj(CompoundButton b
     obj.put("eventType", "checkedchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());

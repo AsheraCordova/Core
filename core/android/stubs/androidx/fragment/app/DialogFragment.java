@@ -43,4 +43,9 @@ public class DialogFragment extends Fragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		return null;
 	}
+
+	public void dismiss() {
+		// TODO Auto-generated method stub
+		
+	}
 }

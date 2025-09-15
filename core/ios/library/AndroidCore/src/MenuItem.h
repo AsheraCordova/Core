@@ -56,6 +56,8 @@
 
 - (void)setShowAsActionWithInt:(jint)actionEnum;
 
+- (id<ADMenuItem>)setActionViewWithADView:(ADView *)view;
+
 - (ADView *)getActionView;
 
 @end

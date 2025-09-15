@@ -10,6 +10,8 @@
 #include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
+#include "PluginInvoker.h"
+#include "ResourceBundleUtils.h"
 #include "java/util/HashMap.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
@@ -18,16 +20,25 @@
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
 
+#import <CoreText/CoreText.h>
+
 @class JavaUtilProperties;
+@protocol JavaUtilMap;
 
 
 @interface ASFontConverter ()
 
 + (void)nativeSetVars;
 
-- (JavaUtilProperties *)readPropsWithNSString:(NSString *)name;
+- (JavaUtilProperties *)readPropsWithNSString:(NSString *)name
+                              withASIFragment:(id<ASIFragment>)fragment;
 
 - (NSString *)getFontKeyWithNSString:(NSString *)key;
+
+- (void)loadFontWithNSString:(NSString *)cordovaFileUri
+             withJavaUtilMap:(id<JavaUtilMap>)fontDescriptors;
+
+- (NSString *)navtiveGetFontWithNSString:(NSString *)fontFilePath;
 
 @end
 
@@ -69,9 +80,13 @@ J2OBJC_STATIC_FIELD_CONSTANT(ASFontConverter, NORMAL_FONT_TRAIT, jint)
 
 __attribute__((unused)) static void ASFontConverter_nativeSetVars(void);
 
-__attribute__((unused)) static JavaUtilProperties *ASFontConverter_readPropsWithNSString_(ASFontConverter *self, NSString *name);
+__attribute__((unused)) static JavaUtilProperties *ASFontConverter_readPropsWithNSString_withASIFragment_(ASFontConverter *self, NSString *name, id<ASIFragment> fragment);
 
 __attribute__((unused)) static NSString *ASFontConverter_getFontKeyWithNSString_(ASFontConverter *self, NSString *key);
+
+__attribute__((unused)) static void ASFontConverter_loadFontWithNSString_withJavaUtilMap_(ASFontConverter *self, NSString *cordovaFileUri, id<JavaUtilMap> fontDescriptors);
+
+__attribute__((unused)) static NSString *ASFontConverter_navtiveGetFontWithNSString_(ASFontConverter *self, NSString *fontFilePath);
 
 J2OBJC_INITIALIZED_DEFN(ASFontConverter)
 
@@ -128,14 +143,27 @@ J2OBJC_IGNORE_DESIGNATED_END
       JavaUtilRegexMatcher *matcher = [((JavaUtilRegexPattern *) nil_chk(pattern)) matcherWithJavaLangCharSequence:value];
       jboolean matches = [((JavaUtilRegexMatcher *) nil_chk(matcher)) matches];
       if (matches) {
-        JavaUtilProperties *bundle = ASFontConverter_readPropsWithNSString_(self, [matcher groupWithInt:2]);
+        JavaUtilProperties *bundle = ASFontConverter_readPropsWithNSString_withASIFragment_(self, [matcher groupWithInt:2], fragment);
         id<JavaUtilSet> fonts = [((JavaUtilProperties *) nil_chk(bundle)) keySet];
         for (id __strong font in nil_chk(fonts)) {
           NSString *fontKey = ASFontConverter_getFontKeyWithNSString_(self, [nil_chk(font) description]);
           if (fontKey != nil) {
+            if ([fragment getRootDirectory] != nil) {
+              NSString *fontFile = [bundle getPropertyWithNSString:[fontKey java_replace:@"_ios" withSequence:@"_android"]];
+              NSString *cordovaFileUri = ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(JreStrcat("$$$", ASFileUtils_getSlashAppendedDirectoryNameWithNSString_([fragment getRootDirectory]), @"res/font/", fontFile), fragment);
+              if (cordovaFileUri != nil) {
+                ASFontConverter_loadFontWithNSString_withJavaUtilMap_(self, cordovaFileUri, fontDescriptors);
+              }
+            }
             (void) [fontDescriptors putWithId:fontKey withId:new_ASFontDescriptor_initWithNSString_withInt_([bundle getPropertyWithNSString:[font description]], ASFontConverter_NORMAL_FONT_TRAIT)];
           }
         }
+      }
+    }
+    else if ([value java_hasPrefix:@"cordova.file."]) {
+      NSString *cordovaFileUri = ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(value, fragment);
+      if (cordovaFileUri != nil) {
+        ASFontConverter_loadFontWithNSString_withJavaUtilMap_(self, cordovaFileUri, fontDescriptors);
       }
     }
   }
@@ -152,12 +180,22 @@ J2OBJC_IGNORE_DESIGNATED_END
   return nil;
 }
 
-- (JavaUtilProperties *)readPropsWithNSString:(NSString *)name {
-  return ASFontConverter_readPropsWithNSString_(self, name);
+- (JavaUtilProperties *)readPropsWithNSString:(NSString *)name
+                              withASIFragment:(id<ASIFragment>)fragment {
+  return ASFontConverter_readPropsWithNSString_withASIFragment_(self, name, fragment);
 }
 
 - (NSString *)getFontKeyWithNSString:(NSString *)key {
   return ASFontConverter_getFontKeyWithNSString_(self, key);
+}
+
+- (void)loadFontWithNSString:(NSString *)cordovaFileUri
+             withJavaUtilMap:(id<JavaUtilMap>)fontDescriptors {
+  ASFontConverter_loadFontWithNSString_withJavaUtilMap_(self, cordovaFileUri, fontDescriptors);
+}
+
+- (NSString *)navtiveGetFontWithNSString:(NSString *)fontFilePath {
+  return ASFontConverter_navtiveGetFontWithNSString_(self, fontFilePath);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -168,7 +206,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "LNSString;", 0x1, 3, 4, -1, 5, -1, -1 },
     { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 6, -1, -1 },
     { NULL, "LJavaUtilProperties;", 0x2, 7, 8, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x2, 9, 8, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x2, 9, 10, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 11, 12, -1, 13, -1, -1 },
+    { NULL, "LNSString;", 0x102, 14, 10, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -178,21 +218,23 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[2].selector = @selector(convertFromWithId:withJavaUtilMap:withASIFragment:);
   methods[3].selector = @selector(convertToWithId:withASIFragment:);
   methods[4].selector = @selector(getDependentAttributes);
-  methods[5].selector = @selector(readPropsWithNSString:);
+  methods[5].selector = @selector(readPropsWithNSString:withASIFragment:);
   methods[6].selector = @selector(getFontKeyWithNSString:);
+  methods[7].selector = @selector(loadFontWithNSString:withJavaUtilMap:);
+  methods[8].selector = @selector(navtiveGetFontWithNSString:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "BASE_DIRECTORY", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 10, -1, -1 },
-    { "MONOSPACE_FONT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 11, -1, -1 },
-    { "SERIF_FONT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 12, -1, -1 },
-    { "NORMAL_FONT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 13, -1, -1 },
-    { "SANS_FONT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 14, -1, -1 },
-    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 15, -1, -1 },
-    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 16, -1, -1 },
+    { "BASE_DIRECTORY", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 15, -1, -1 },
+    { "MONOSPACE_FONT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 16, -1, -1 },
+    { "SERIF_FONT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 17, -1, -1 },
+    { "NORMAL_FONT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 18, -1, -1 },
+    { "SANS_FONT", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 19, -1, -1 },
+    { "ITALIC_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 20, -1, -1 },
+    { "BOLD_FONT_TRAIT", "I", .constantValue.asLong = 0, 0xa, -1, 21, -1, -1 },
     { "NORMAL_FONT_TRAIT", "I", .constantValue.asInt = ASFontConverter_NORMAL_FONT_TRAIT, 0x1a, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "convertFrom", "LNSString;LJavaUtilMap;LASIFragment;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/core/IFragment;)Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "convertTo", "LJavaUtilMap;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;Lcom/ashera/core/IFragment;)Ljava/lang/String;", "()Ljava/util/List<Ljava/lang/String;>;", "readProps", "LNSString;", "getFontKey", &ASFontConverter_BASE_DIRECTORY, &ASFontConverter_MONOSPACE_FONT, &ASFontConverter_SERIF_FONT, &ASFontConverter_NORMAL_FONT, &ASFontConverter_SANS_FONT, &ASFontConverter_ITALIC_FONT_TRAIT, &ASFontConverter_BOLD_FONT_TRAIT, "Ljava/lang/Object;Lcom/ashera/converter/IConverter<Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;Ljava/lang/String;>;" };
-  static const J2ObjcClassInfo _ASFontConverter = { "FontConverter", "com.ashera.converter", ptrTable, methods, fields, 7, 0x1, 7, 8, -1, -1, -1, 17, -1 };
+  static const void *ptrTable[] = { "convertFrom", "LNSString;LJavaUtilMap;LASIFragment;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/core/IFragment;)Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;", "convertTo", "LJavaUtilMap;LASIFragment;", "(Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;Lcom/ashera/core/IFragment;)Ljava/lang/String;", "()Ljava/util/List<Ljava/lang/String;>;", "readProps", "LNSString;LASIFragment;", "getFontKey", "LNSString;", "loadFont", "LNSString;LJavaUtilMap;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;)V", "navtiveGetFont", &ASFontConverter_BASE_DIRECTORY, &ASFontConverter_MONOSPACE_FONT, &ASFontConverter_SERIF_FONT, &ASFontConverter_NORMAL_FONT, &ASFontConverter_SANS_FONT, &ASFontConverter_ITALIC_FONT_TRAIT, &ASFontConverter_BOLD_FONT_TRAIT, "Ljava/lang/Object;Lcom/ashera/converter/IConverter<Ljava/util/Map<Ljava/lang/String;Lcom/ashera/model/FontDescriptor;>;Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _ASFontConverter = { "FontConverter", "com.ashera.converter", ptrTable, methods, fields, 7, 0x1, 9, 8, -1, -1, -1, 22, -1 };
   return &_ASFontConverter;
 }
 
@@ -225,8 +267,16 @@ void ASFontConverter_nativeSetVars() {
   ASFontConverter_BOLD_FONT_TRAIT =  (jint) UIFontDescriptorTraitBold;
 }
 
-JavaUtilProperties *ASFontConverter_readPropsWithNSString_(ASFontConverter *self, NSString *name) {
-  return ASFileUtils_loadPropertiesFromClassPathWithNSString_(JreStrcat("$$$$", ASFontConverter_BASE_DIRECTORY, @"font_", name, @".properties"));
+JavaUtilProperties *ASFontConverter_readPropsWithNSString_withASIFragment_(ASFontConverter *self, NSString *name, id<ASIFragment> fragment) {
+  NSString *fileName = JreStrcat("$$$$", ASFontConverter_BASE_DIRECTORY, @"font_", name, @".properties");
+  if ([((id<ASIFragment>) nil_chk(fragment)) getRootDirectory] == nil) {
+    return ASFileUtils_loadPropertiesFromClassPathWithNSString_(fileName);
+  }
+  else {
+    NSString *rootDir = ASFileUtils_getSlashAppendedDirectoryNameWithNSString_([fragment getRootDirectory]);
+    NSString *fileStr = ASPluginInvoker_readCdvDataAsStringWithNSString_withNSString_withASIFragment_(rootDir, JreStrcat("$$", @"resources/", fileName), fragment);
+    return ASResourceBundleUtils_readStringAsPropertiesWithNSString_(fileStr);
+  }
 }
 
 NSString *ASFontConverter_getFontKeyWithNSString_(ASFontConverter *self, NSString *key) {
@@ -234,6 +284,27 @@ NSString *ASFontConverter_getFontKeyWithNSString_(ASFontConverter *self, NSStrin
     return [key java_replaceAll:@"_ios" withReplacement:@""];
   }
   return nil;
+}
+
+void ASFontConverter_loadFontWithNSString_withJavaUtilMap_(ASFontConverter *self, NSString *cordovaFileUri, id<JavaUtilMap> fontDescriptors) {
+  NSString *fontName = ASFontConverter_navtiveGetFontWithNSString_(self, cordovaFileUri);
+  (void) [((id<JavaUtilMap>) nil_chk(fontDescriptors)) putWithId:@"normal_400" withId:new_ASFontDescriptor_initWithNSString_withInt_(fontName, ASFontConverter_NORMAL_FONT_TRAIT)];
+}
+
+NSString *ASFontConverter_navtiveGetFontWithNSString_(ASFontConverter *self, NSString *fontFilePath) {
+  NSData *inData = [NSData dataWithContentsOfFile:fontFilePath];
+  CFErrorRef error;
+  CGDataProviderRef provider = CGDataProviderCreateWithCFData((__bridge CFDataRef)inData);
+  CGFontRef font = CGFontCreateWithDataProvider(provider);
+  NSString *fontName = (__bridge NSString *)CGFontCopyPostScriptName(font);
+  if (!CTFontManagerRegisterGraphicsFont(font, &error)) {
+    CFStringRef errorDescription = CFErrorCopyDescription(error);
+    NSLog(@"Failed to load font: %@", errorDescription);
+    CFRelease(errorDescription);
+  }
+  CFRelease(font);
+  CFRelease(provider);
+  return fontName;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ASFontConverter)

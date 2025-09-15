@@ -50,6 +50,9 @@ public class fragmentImpl extends BaseHasWidgets implements com.ashera.core.IFra
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("navigateAsTop").withType("object").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("navigateWithPopBackStackTo").withType("object").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("popBackStackTo").withType("object").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("closeDialog").withType("string").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("rootDirectory").withType("string").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
+		WidgetFactory.registerAttribute(localName, new WidgetAttribute.Builder().withName("namespace").withType("string").withUiFlag(UPDATE_UI_REQUEST_LAYOUT));
 	
 	}
 	
@@ -643,10 +646,37 @@ if (objValue instanceof java.util.List) {
 }
 			}
 			break;
+			case "closeDialog": {
+
+
+		 closeDialog(objValue);
+
+
+
+			}
+			break;
+			case "rootDirectory": {
+
+
+		setRootDirectory(objValue);
+
+
+
+			}
+			break;
+			case "namespace": {
+
+
+		setNamespace(objValue);
+
+
+
+			}
+			break;
 		default:
 			break;
 		}
-		
+		postSetAttribute(key, strValue, objValue, decorator);
 	}
 	
 	@Override
@@ -688,6 +718,15 @@ private String layout;
 private String name;
 private String navGraph;
 private String tag;
+private String rootDirectory;
+private String namespace;
+
+private void setNamespace(Object namespace) {
+	this.namespace = (String) namespace;
+}
+private void setRootDirectory(Object rootDirectory) {
+	this.rootDirectory = (String) rootDirectory;
+}
 private void setTemplate(Object objValue) {
 	this.layout = (String) objValue;
 	
@@ -721,7 +760,6 @@ public void initialized() {
 
 private void navigate(Object actionId, Object scopeObjects) {
 	if (isValidFragment()) {
-		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, null, false, false, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -729,11 +767,6 @@ private void navigate(Object actionId, Object scopeObjects) {
 	
 }
 
-private void checkIfDialog(Object actionId) {
-	if (((String)actionId).startsWith("dialog#")) {
-		throw new RuntimeException("Dialog is not supported. Use navigator.navigate(...).");
-	}
-}
 
 private void popBackStack() {
 	if (isValidFragment()) {
@@ -755,7 +788,6 @@ private void popBackStackTo(Object destinationId, Object inclusive) {
 private void navigateWithPopBackStackTo(Object actionId, Object destinationId, Object inclusive,
 		Object scopeObjects) {
 	if (isValidFragment()) {
-		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, (String) destinationId, (boolean)inclusive, false, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -766,7 +798,6 @@ private void navigateWithPopBackStackTo(Object actionId, Object destinationId, O
 
 private void navigateAsTop(Object actionId, Object scopeObjects) {
 	if (isValidFragment()) {
-		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, null, false, true, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -776,7 +807,6 @@ private void navigateAsTop(Object actionId, Object scopeObjects) {
 
 private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 	if (isValidFragment()) {
-		checkIfDialog(actionId);
 		com.ashera.core.UINavigatorImpl navigator = getNavigator();
 		navigator.navigate((String) actionId, null, true, false, (List<Map<String, Object>>)scopeObjects, getFragment());
 		makeCurrentFragmentActive();
@@ -787,6 +817,18 @@ private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 
 
 	private com.ashera.core.UINavigatorImpl navigator;
+	
+	private void postSetAttribute(WidgetAttribute key, String strValue, Object objValue,
+			ILifeCycleDecorator decorator) {
+		switch (key.getAttributeName()) {
+			case "namespace":
+				navigator.getManager().setNamespace(this.namespace);
+				break;
+			case "rootDirectory":
+				navigator.getManager().setRootDirectory(this.rootDirectory);
+				break;
+		}
+	}
 	private void addOrReplaceFragment(boolean add) {
 		androidx.fragment.app.FragmentManager manager = ((androidx.fragment.app.Fragment) getFragment()).getChildFragmentManager();
 		androidx.fragment.app.FragmentTransaction transaction = manager.beginTransaction();
@@ -812,9 +854,19 @@ private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 				createOrReplaceFragment(getId(), add, layout);
 				break;
 				case "androidx.navigation.fragment.NavHostFragment":
+					if (rootDirectory == null && fragment.getRootDirectory() != null) {
+						rootDirectory = fragment.getRootDirectory();
+						namespace = fragment.getNamespace();
+					}
 					if (navGraphId != null) {
-						navGraphId = navGraph.substring(1);
-						Properties properties = com.ashera.utils.FileUtils.loadPropertiesFromClassPath(navGraphId + ".properties");
+						navGraphId = navGraph.replace("@", "");
+						Properties properties;
+						if (rootDirectory != null) {
+							properties = com.ashera.utils.FileUtils.loadProperties(PluginInvoker.readCdvDataAsString(rootDirectory, "resources/" + navGraphId + ".properties", fragment));
+						} else {
+							properties = com.ashera.utils.FileUtils.loadPropertiesFromClassPath(navGraphId + ".properties");
+						}
+						
 						String id = properties.getProperty("startDestination");
 						id = id.replace("@id/", "@+id/");
 						String mylayout = properties.getProperty(id);
@@ -833,7 +885,7 @@ private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 		if (layout != null) {
 			String mylayout = layout;
 			if (mylayout.startsWith("@layout")) {
-				mylayout = mylayout.substring(1) + ".xml";
+				mylayout = mylayout.replace("@", "") + ".xml";
 			}
 			navigator.navigate("fragment#" + id + "#" + mylayout, null, false, !add, null, getFragment());
 			makeCurrentFragmentActive();
@@ -877,6 +929,10 @@ private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 		
 	}
 	
+	private void closeDialog(Object tag) {
+		closeDialog();
+	}
+	
 
 
 	@Override
@@ -917,11 +973,19 @@ private void navigateWithPopBackStack(Object actionId, Object scopeObjects) {
 						myfragment.setParentFragment(fragmentImpl.this.getFragment());
 						return myfragment;
 					}
+					
+					@Override
+					public com.ashera.core.DialogFragment getDialogFragment(
+							com.ashera.core.FragmentManager fragmentManager, java.lang.Object dialog, int width,
+							int height, java.lang.Float marginPercent) {
+						com.ashera.core.DialogFragment dialogFragment = super.getDialogFragment(fragmentManager, dialog, width, height, marginPercent);
+						dialogFragment.setParentFragment(fragmentImpl.this.getFragment());
+						return dialogFragment;
+					}
 				});
 		navigator = new com.ashera.core.UINavigatorImpl(fragmentManager);	
 	}
 	
 	private void remeasureIfRequired() {
 	}
-
 }

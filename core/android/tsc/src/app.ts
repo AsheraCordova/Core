@@ -1,7 +1,7 @@
 declare var coreManager :any;
 declare var cordova :any;
+import 'babel-polyfill';
 import ErrorFragment from './ErrorFragment';
-import {Fragment} from './app/Fragment';
 import FragmentFactory from './FragmentFactory';
 import LocaleManager from './app/LocaleManager';
 
@@ -31,6 +31,8 @@ class App {
     }
 
      onAction(obj:any) {
+        this.logEvent(obj);
+
         if (obj.event == 'onError') {
              this.errorFragment.display(obj.data);
         } else {
@@ -40,10 +42,9 @@ class App {
      }
 
 	getCurrentView(obj:any) {
-		var currentView = this.currentViewMap.get(obj.fragmentId);
-		console.log(currentView + " " + obj.actionUrl + obj.fragmentId);
+        var currentView = this.currentViewMap.get(obj.fragmentId);
         if (!currentView) {
-            currentView = this.fragmentFactory.createNewInstance(obj.actionUrl);
+            currentView = this.fragmentFactory.createNewInstance(obj.actionUrl,  obj.namespace);
             this.currentViewMap.set(obj.fragmentId, currentView);
         }
 
@@ -51,10 +52,10 @@ class App {
 	}
 
      nativeEvent(obj:any) {
+        this.logEvent(obj);
+
         var currentView = this.getCurrentView(obj);
         
-        console.log(obj.event + " " + obj.actionUrl + obj.fragmentId);
-
         if ((currentView as any)[obj.event]) {
             (currentView as any)[obj.event](obj);
         }
@@ -67,6 +68,10 @@ class App {
             eval(obj.javascript);
         }
      }
+
+    private logEvent(obj: any) {
+        console.log(obj.event + " " + obj.actionUrl + " " + obj.fragmentId + " " + obj.namespace);
+    }
 }
 
 var app = new App();

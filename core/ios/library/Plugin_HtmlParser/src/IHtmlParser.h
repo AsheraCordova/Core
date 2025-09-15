@@ -59,6 +59,9 @@
 - (void)addToCurrentParentWithId:(id)handler
                    withASIWidget:(id<ASIWidget>)widget;
 
+- (NSString *)xml2jsonWithNSString:(NSString *)xml
+                   withASIFragment:(id<ASIFragment>)fragment;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASIHtmlParser)

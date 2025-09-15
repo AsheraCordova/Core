@@ -7,6 +7,7 @@
 #include "ColorImageConverter.h"
 #include "Drawable.h"
 #include "DrawableFactory.h"
+#include "FileUtils.h"
 #include "IFragment.h"
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
@@ -53,8 +54,20 @@ J2OBJC_IGNORE_DESIGNATED_END
   if ([value isEqual:@"@null"]) {
     return @"@null";
   }
+  if ([value java_hasPrefix:@"@"]) {
+    NSString *inlineResource = [((id<ASIFragment>) nil_chk(fragment)) getInlineResourceWithNSString:value];
+    if (inlineResource != nil) {
+      value = inlineResource;
+    }
+  }
   if ([value java_hasPrefix:@"#"] || [value java_hasPrefix:@"@color/"]) {
     return [super convertFromWithId:value withJavaUtilMap:dependentAttributesMap withASIFragment:fragment];
+  }
+  else if ([value java_hasPrefix:@"cordova.file."]) {
+    NSString *cordovaFileUri = ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(value, fragment);
+    if (cordovaFileUri != nil) {
+      return ASColorImageConverter_nativeLoadImageFromPathWithNSString_(cordovaFileUri);
+    }
   }
   else if ([value java_hasPrefix:@"@drawable/"]) {
     JavaUtilRegexPattern *pattern = JavaUtilRegexPattern_compileWithNSString_(@"@([a-z0-9_\\-]+)\\/([a-z0-9_\\-]+)");
@@ -68,18 +81,36 @@ J2OBJC_IGNORE_DESIGNATED_END
       if (fileExtension == nil) {
         fileExtension = @"png";
       }
+      NSString *inlineResource = [((id<ASIFragment>) nil_chk(fragment)) getInlineResourceWithNSString:value];
       if (fileExtension != nil && [fileExtension isEqual:@"xml"]) {
-        NSString *json = ASResourceBundleUtils_getStringWithNSString_withNSString_withASIFragment_(@"drawable/drawable", fileName, fragment);
+        NSString *json;
+        if (inlineResource == nil) {
+          json = ASResourceBundleUtils_getStringWithNSString_withNSString_withASIFragment_(@"drawable/drawable", fileName, fragment);
+        }
+        else {
+          json = ASPluginInvoker_xml2jsonWithNSString_withASIFragment_(inlineResource, fragment);
+        }
         id<JavaUtilMap> drawable = ASPluginInvoker_unmarshalWithNSString_withIOSClass_(json, JavaUtilMap_class_());
         return ASDrawableFactory_getDrawableWithNSString_withJavaUtilMap_withJavaUtilMap_withASIFragment_(@"colorimage", drawable, dependentAttributesMap, fragment);
       }
       else {
+        if (inlineResource != nil) {
+          return [self convertFromWithId:inlineResource withJavaUtilMap:dependentAttributesMap withASIFragment:fragment];
+        }
         if ([fileExtension isEqual:@"9.png"]) {
           key1 = JreStrcat("$$", key1, @"_9");
           fileExtension = @"png";
         }
-        NSString *path = JreStrcat("$C$", key1, '.', fileExtension);
-        return ASColorImageConverter_nativeLoadImageBundleWithNSString_(self, JreStrcat("$$", @"drawable-ios/", path));
+        if ([fragment getRootDirectory] != nil) {
+          NSString *cordovaFileUri = ASPluginInvoker_resolveCDVFileLocationWithNSString_withASIFragment_(JreStrcat("$$$C$", ASFileUtils_getSlashAppendedDirectoryNameWithNSString_([fragment getRootDirectory]), @"res-ios/drawable-ios/", fileName, '.', fileExtension), fragment);
+          if (cordovaFileUri != nil) {
+            return ASColorImageConverter_nativeLoadImageFromPathWithNSString_(cordovaFileUri);
+          }
+        }
+        else {
+          NSString *path = JreStrcat("$C$", key1, '.', fileExtension);
+          return ASColorImageConverter_nativeLoadImageBundleWithNSString_(self, JreStrcat("$$", @"drawable-ios/", path));
+        }
       }
     }
   }
@@ -88,6 +119,10 @@ J2OBJC_IGNORE_DESIGNATED_END
     return ASColorImageConverter_getImageFromBase64WithId_(pureBase64Encoded);
   }
   @throw new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$", @"Unable to convert path to image : ", value));
+}
+
++ (id)nativeLoadImageFromPathWithNSString:(NSString *)imagePath {
+  return ASColorImageConverter_nativeLoadImageFromPathWithNSString_(imagePath);
 }
 
 + (id)getImageFromBase64WithId:(id)strEncoded {
@@ -134,28 +169,30 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
     { NULL, "LNSObject;", 0x1, 0, 1, -1, 2, -1, -1 },
     { NULL, "LNSObject;", 0x109, 3, 4, -1, -1, -1, -1 },
-    { NULL, "LNSObject;", 0x102, 5, 6, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, 7, 8, -1, -1, -1, -1 },
-    { NULL, "Z", 0x102, 9, 4, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x102, 10, 4, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x101, 11, 4, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 12, -1, -1 },
+    { NULL, "LNSObject;", 0x109, 5, 6, -1, -1, -1, -1 },
+    { NULL, "LNSObject;", 0x102, 7, 4, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 8, 9, -1, -1, -1, -1 },
+    { NULL, "Z", 0x102, 10, 6, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x102, 11, 6, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x101, 12, 6, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 13, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
   #pragma clang diagnostic ignored "-Wundeclared-selector"
   methods[0].selector = @selector(init);
   methods[1].selector = @selector(convertFromWithId:withJavaUtilMap:withASIFragment:);
-  methods[2].selector = @selector(getImageFromBase64WithId:);
-  methods[3].selector = @selector(nativeLoadImageBundleWithNSString:);
-  methods[4].selector = @selector(convertToWithId:withASIFragment:);
-  methods[5].selector = @selector(isImageWithId:);
-  methods[6].selector = @selector(imageAsBase64WithId:);
-  methods[7].selector = @selector(colorToStringWithId:);
-  methods[8].selector = @selector(getDependentAttributes);
+  methods[2].selector = @selector(nativeLoadImageFromPathWithNSString:);
+  methods[3].selector = @selector(getImageFromBase64WithId:);
+  methods[4].selector = @selector(nativeLoadImageBundleWithNSString:);
+  methods[5].selector = @selector(convertToWithId:withASIFragment:);
+  methods[6].selector = @selector(isImageWithId:);
+  methods[7].selector = @selector(imageAsBase64WithId:);
+  methods[8].selector = @selector(colorToStringWithId:);
+  methods[9].selector = @selector(getDependentAttributes);
   #pragma clang diagnostic pop
-  static const void *ptrTable[] = { "convertFrom", "LNSString;LJavaUtilMap;LASIFragment;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/core/IFragment;)Ljava/lang/Object;", "getImageFromBase64", "LNSObject;", "nativeLoadImageBundle", "LNSString;", "convertTo", "LNSObject;LASIFragment;", "isImage", "imageAsBase64", "colorToString", "()Ljava/util/List<Ljava/lang/String;>;" };
-  static const J2ObjcClassInfo _ASColorImageConverter = { "ColorImageConverter", "com.ashera.converter", ptrTable, methods, NULL, 7, 0x1, 9, 0, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "convertFrom", "LNSString;LJavaUtilMap;LASIFragment;", "(Ljava/lang/String;Ljava/util/Map<Ljava/lang/String;Ljava/lang/Object;>;Lcom/ashera/core/IFragment;)Ljava/lang/Object;", "nativeLoadImageFromPath", "LNSString;", "getImageFromBase64", "LNSObject;", "nativeLoadImageBundle", "convertTo", "LNSObject;LASIFragment;", "isImage", "imageAsBase64", "colorToString", "()Ljava/util/List<Ljava/lang/String;>;" };
+  static const J2ObjcClassInfo _ASColorImageConverter = { "ColorImageConverter", "com.ashera.converter", ptrTable, methods, NULL, 7, 0x1, 10, 0, -1, -1, -1, -1, -1 };
   return &_ASColorImageConverter;
 }
 
@@ -171,6 +208,12 @@ ASColorImageConverter *new_ASColorImageConverter_init() {
 
 ASColorImageConverter *create_ASColorImageConverter_init() {
   J2OBJC_CREATE_IMPL(ASColorImageConverter, init)
+}
+
+id ASColorImageConverter_nativeLoadImageFromPathWithNSString_(NSString *imagePath) {
+  ASColorImageConverter_initialize();
+  return [UIImage imageWithContentsOfFile:imagePath];
+  ;
 }
 
 id ASColorImageConverter_getImageFromBase64WithId_(id strEncoded) {

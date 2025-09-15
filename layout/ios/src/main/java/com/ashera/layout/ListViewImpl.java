@@ -1717,6 +1717,7 @@ public java.util.Map<String, Object> getOnItemClickEventObj(AdapterView<?> paren
     obj.put("eventType", "itemclick");ListViewImpl.addCheckItemInfo(obj, parent);
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -1796,6 +1797,7 @@ public java.util.Map<String, Object> getOnItemLongClickEventObj(AdapterView<?> p
     obj.put("eventType", "itemlongclick");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -1909,6 +1911,7 @@ public java.util.Map<String, Object> getOnScrollStateChangeEventObj(AbsListView 
     obj.put("eventType", "scrollstatechange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -1932,6 +1935,7 @@ public java.util.Map<String, Object> getOnScrollChangeEventObj(AbsListView view,
     obj.put("eventType", "scrollchange");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());

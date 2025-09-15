@@ -81,7 +81,7 @@
 		parent = ((ASGenericFragmentController*) [mainViewController.navController.viewControllers lastObject]);		
 	}
 	
-	[((ASGenericFragmentController*) parent).rootFragment onCloseDialog];
+	[((ASGenericFragmentController*) parent).rootFragment onCloseDialogWithJavaUtilMap:[(ASDialogFragment*) self.rootFragment onCloseDialogEventData]];
 }
 
 @end

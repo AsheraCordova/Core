@@ -60,10 +60,10 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<dependency>
+		<!-- dependency>
 			<groupId>androidx.stubs</groupId>
 			<artifactId>androidx-stubs</artifactId>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 	
 	

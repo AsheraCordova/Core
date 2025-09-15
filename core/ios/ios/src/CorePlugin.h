@@ -24,6 +24,7 @@
 #define INCLUDE_ASICore 1
 #include "ICore.h"
 
+@class ADActivity;
 @class ASFontMetricsDescriptor;
 @class IOSObjectArray;
 @class JavaIoFile;
@@ -73,6 +74,8 @@
 
 - (NSString *)getFileAssetWithNSString:(NSString *)path
                        withASIFragment:(id<ASIFragment>)fragment;
+
++ (NSString *)getFileContentWithNSString:(NSString *)path;
 
 - (ASFontMetricsDescriptor *)getFontMetricsWithId:(id)font;
 
@@ -138,10 +141,20 @@
                    withNSString:(NSString *)key
                          withId:(id)data;
 
++ (NSString *)readCdvDataAsStringWithNSString:(NSString *)cdvUrl
+                               withADActivity:(ADActivity *)activity;
+
+- (NSString *)readCdvDataAsStringWithNSString:(NSString *)directoryName
+                                 withNSString:(NSString *)fileName
+                              withASIFragment:(id<ASIFragment>)fragment;
+
 - (void)releaseNativeResourcesWithJavaUtilList:(id<JavaUtilList>)objects;
 
 - (void)removeCallbacksWithId:(id)handler
          withJavaLangRunnable:(id<JavaLangRunnable>)mTickRunnable;
+
+- (NSString *)resolveCDVFileLocationWithNSString:(NSString *)cdvUrl
+                                 withASIFragment:(id<ASIFragment>)fragment;
 
 - (void)runOnMainThreadWithJavaLangRunnable:(id<JavaLangRunnable>)runnable;
 
@@ -180,6 +193,10 @@ FOUNDATION_EXPORT void ASCorePlugin_popBackStackWithASIFragment_(id<ASIFragment>
 FOUNDATION_EXPORT void ASCorePlugin_popBackStackWithASIFragment_withNSString_withBoolean_(id<ASIFragment> fragment, NSString *destinationId, jboolean inclusive);
 
 FOUNDATION_EXPORT NSString *ASCorePlugin_executeSimpleCommandWithId_withASIFragment_(id commands, id<ASIFragment> fragment);
+
+FOUNDATION_EXPORT NSString *ASCorePlugin_readCdvDataAsStringWithNSString_withADActivity_(NSString *cdvUrl, ADActivity *activity);
+
+FOUNDATION_EXPORT NSString *ASCorePlugin_getFileContentWithNSString_(NSString *path);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASCorePlugin)
 

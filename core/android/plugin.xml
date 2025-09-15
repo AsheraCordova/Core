@@ -42,6 +42,7 @@
      <source-file src="src/com/ashera/core/ICore.java" target-dir="src/com/ashera/core"/>
      <source-file src="src/com/ashera/core/MainActivity.java" target-dir="src/com/ashera/core"/>
      <source-file src="src/com/ashera/core/MyDialog.java" target-dir="src/com/ashera/core"/>
+     <source-file src="src/com/ashera/core/MyNavHostFragment.java" target-dir="src/com/ashera/core"/>
      <source-file src="src/com/ashera/core/UINavigatorImpl.java" target-dir="src/com/ashera/core"/>
      <!-- src end -->
       <!-- start res -->
@@ -106,6 +107,7 @@
      <source-file src="tsc/src/app/LocaleManager.ts" target-dir="tsc/src/app"/>
      <source-file src="tsc/src/app/MotionEvent.ts" target-dir="tsc/src/app"/>
      <source-file src="tsc/src/app/ScopedObject.ts" target-dir="tsc/src/app"/>
+     <source-file src="tsc/src/ChildApp.ts" target-dir="tsc/src"/>
      <source-file src="tsc/src/ErrorDetailFragment.ts" target-dir="tsc/src"/>
      <source-file src="tsc/src/ErrorFragment.ts" target-dir="tsc/src"/>
      <source-file src="tsc/src/FragmentFactory.ts" target-dir="tsc/src"/>

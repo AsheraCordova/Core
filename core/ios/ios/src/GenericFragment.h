@@ -88,11 +88,15 @@
 - (id<JavaUtilList>)getListenerWithASIWidget:(id<ASIWidget>)widget
                                 withIOSClass:(IOSClass *)type;
 
+- (NSString *)getNamespace;
+
 - (id<ASIFragment>)getParent;
 
 - (id)getParentForRootWidget;
 
 - (id<ASIActivity>)getRootActivity;
+
+- (NSString *)getRootDirectory;
 
 - (id<ASIFragment>)getRootFragment;
 
@@ -118,7 +122,7 @@
 
 - (void)onAttachWithASIActivity:(id<ASIActivity>)activity;
 
-- (void)onCloseDialog;
+- (void)onCloseDialogWithJavaUtilMap:(id<JavaUtilMap>)eventData;
 
 - (void)onCreate;
 

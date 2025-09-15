@@ -98,6 +98,11 @@
 			<groupId>androidx.stubs</groupId>
 			<artifactId>androidx-stubs</artifactId>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.ashera</groupId>
+			<artifactId>tagsouphtmlparser</artifactId>
+		</dependency>
 	</dependencies>
 
 	<distributionManagement>

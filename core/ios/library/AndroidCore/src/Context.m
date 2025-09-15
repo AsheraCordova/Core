@@ -19,7 +19,6 @@
 #include "WindowManager.h"
 #include "java/io/File.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/RuntimeException.h"
 
 
 J2OBJC_INITIALIZED_DEFN(ADContext)
@@ -88,7 +87,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (JavaIoFile *)getCacheDir {
-  @throw create_JavaLangRuntimeException_initWithNSString_(@"this should never be called");
+  return ASPluginInvoker_getExternalFilesDirWithId_(self);
 }
 
 - (ADPackageManager *)getPackageManager {

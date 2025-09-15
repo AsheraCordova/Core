@@ -3,10 +3,14 @@ package com.ashera.core;
 import java.io.File;
 import java.io.InputStream;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.ashera.attributedtext.AttributedString;
 import com.ashera.model.FontMetricsDescriptor;
 import com.ashera.plugin.IPlugin;
+
+import r.android.app.Activity;
 
 public class CorePlugin implements IPlugin, ICore {
 	private static final String PLUGIN_NAME_CORE = "core";
@@ -76,6 +80,10 @@ public class CorePlugin implements IPlugin, ICore {
 		case "enqueueTaskForEventLoop":
 			enqueueTaskForEventLoop((Runnable) args[0],(long) args[1]);
 			return null;
+		case "resolveCDVFileLocation":
+			return resolveCDVFileLocation((String) args[0],(IFragment) args[1]);
+		case "readCdvDataAsString":
+			return readCdvDataAsString((String) args[0],(String) args[1],(IFragment) args[2]);
 		default:
 			break;
 		}
@@ -121,8 +129,11 @@ public class CorePlugin implements IPlugin, ICore {
 
 	@Override
 	public String getFileAsset(String path, IFragment fragment) {
-		System.out.println(path);
-		return com.ashera.utils.FileUtils.getFileFromClassPath(path);
+		if (fragment.getRootDirectory() != null) {
+			return readCdvDataAsString(fragment.getRootDirectory(), path, fragment);
+		} else {
+			return com.ashera.utils.FileUtils.getFileFromClassPath(path);
+		}
 	}
 
 	@Override
@@ -243,4 +254,65 @@ public class CorePlugin implements IPlugin, ICore {
 			runnable.run();
 		}, delayInMills);		
 	}
+
+
+	@Override
+	public String resolveCDVFileLocation(String cdvUrl, IFragment fragment) {
+		return resolveCDVFileLocation(cdvUrl);
+	}
+
+	private static String resolveCDVFileLocation(String cdvUrl) {
+		Pattern pattern = Pattern.compile("cordova\\.file\\.([a-zA-Z_\\-]+)\\/(.*)");
+		Matcher matcher = pattern.matcher(cdvUrl);
+		boolean matches = matcher.matches();
+
+		if (matches) {
+			String fileName = matcher.group(2);
+			String directoryName = matcher.group(1);
+
+			switch (directoryName) {
+				case "persistent":
+					directoryName = "persistent/";
+					break;
+				case "temporary":
+					directoryName = "temporary/";
+					break;
+				case "cacheDirectory":
+					directoryName = "temporary/";
+					break;				
+				case "dataDirectory":
+					directoryName = "persistent/";
+					break;
+				default:
+					break;
+			}
+			
+			return directoryName + fileName;
+		}
+
+		return null;
+	}
+
+	@Override
+	public String readCdvDataAsString(String directoryName, String fileName, IFragment fragment) {
+		String rootDirectory = directoryName;
+		
+		if (directoryName == null) {
+			rootDirectory = fragment.getRootDirectory();
+		}
+		String cdvUrl = com.ashera.utils.FileUtils.getSlashAppendedDirectoryName(rootDirectory) + fileName;
+		return readCdvDataAsString(cdvUrl);
+	}
+
+	public static String readCdvDataAsString(String cdvUrl, Activity activity) {
+		return readCdvDataAsString(cdvUrl);
+	}
+	
+	private static String readCdvDataAsString(String cdvUrl) {
+		String location = resolveCDVFileLocation(cdvUrl);
+		return getLocalStorage(location);
+	}
+	
+    @org.teavm.jso.JSBody(params = { "key" }, script = "return localStorage.getItem(key);")
+    private static native String getLocalStorage(String key);
 }

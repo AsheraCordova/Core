@@ -1,5 +1,6 @@
 package com.ashera.converter;
 
+import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,9 +18,24 @@ public class ColorImageConverter extends ColorConverter {
     	if (value.equals("@null")) {
     		return "@null";
     	}
+    	
+        if (value.startsWith("@")) {
+        	String inlineResource = fragment.getInlineResource(value);
+        	
+        	if (inlineResource != null) {
+        		value = inlineResource; 
+        	}
+        }
+    	
 		if (value.startsWith("#") || value.startsWith("@color/")) {
             return super.convertFrom(value, dependentAttributesMap, fragment);
-		}  else if (value.startsWith("@drawable/")) {
+		}  else if (value.startsWith("cordova.file.")) {
+        	String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(value, fragment);
+        	
+            if (cordovaFileUri != null) {
+				return nativeLoadImageFromPath(cordovaFileUri);
+            }
+        }else if (value.startsWith("@drawable/")) {
             Pattern pattern = Pattern.compile("@([a-z0-9_\\-]+)\\/([a-z0-9_\\-]+)");  
             Matcher matcher = pattern.matcher(value);  
             boolean matches = matcher.matches();
@@ -34,18 +50,38 @@ public class ColorImageConverter extends ColorConverter {
 	            	fileExtension = "png";
 	            }
 	            
+	            String inlineResource = fragment.getInlineResource(value);
+	            
 	            if (fileExtension != null && fileExtension.equals("xml")) {
 	            	//create drawable based on json read
-	            	String json = com.ashera.utils.ResourceBundleUtils.getString("drawable/drawable", fileName, fragment);
+	            	String json;
+	            	if (inlineResource == null) {
+                		json = com.ashera.utils.ResourceBundleUtils.getString("drawable/drawable", fileName, fragment);
+                	} else {
+                		json = com.ashera.widget.PluginInvoker.xml2json(inlineResource, fragment);
+                	}
 	            	Map<String, Object> drawable = com.ashera.widget.PluginInvoker.unmarshal(json, Map.class);
 	            	return com.ashera.drawable.DrawableFactory.getDrawable("colorimage", drawable, dependentAttributesMap, fragment);
 	        	} else {
+	        		if (inlineResource != null) {
+            			return convertFrom(inlineResource, dependentAttributesMap, fragment);
+            		}
 	        		if (fileExtension.equals("9.png")) {
 	        			key1 = key1 + "_9";
             			fileExtension = "png";
                 	}
-	        		String path = key1 + "." + fileExtension;
-	        		return nativeLoadImageBundle("drawable-ios/" + path);
+	        		
+	        		if (fragment.getRootDirectory() != null) {
+	        			String cordovaFileUri = com.ashera.widget.PluginInvoker.resolveCDVFileLocation(com.ashera.utils.FileUtils.getSlashAppendedDirectoryName(
+	        					fragment.getRootDirectory()) + "res-ios/drawable-ios/" + fileName + "." + fileExtension, fragment);
+	                	
+	                    if (cordovaFileUri != null) {
+	        				return nativeLoadImageFromPath(cordovaFileUri);
+	                    }
+	        		} else {
+		        		String path = key1 + "." + fileExtension;
+		        		return nativeLoadImageBundle("drawable-ios/" + path);
+	        		}
 	        	}
             }
         } else if (value.startsWith("data:image/png;base64,")) {
@@ -57,6 +93,11 @@ public class ColorImageConverter extends ColorConverter {
 	}
 	
     
+	public static native Object nativeLoadImageFromPath(String imagePath) /*-[
+		return [UIImage imageWithContentsOfFile:imagePath];
+;
+	]-*/;
+
 	public static native Object getImageFromBase64(Object strEncoded) /*-[
 		NSData *dataEncoded = [[NSData alloc] initWithBase64EncodedString:strEncoded  options:0]; 
 		UIImage *image = [UIImage imageWithData:dataEncoded];

@@ -12,4 +12,9 @@ public class CallbackContext {
 		
 	}
 
+	public void success() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -6,14 +6,12 @@
 #include "Handler.h"
 #include "IMessenger.h"
 #include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "Log.h"
 #include "Looper.h"
 #include "Message.h"
 #include "MessageQueue.h"
 #include "SystemClock.h"
-#include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/InterruptedException.h"
@@ -23,7 +21,6 @@
 #include "java/lang/StringBuilder.h"
 #include "java/lang/System.h"
 #include "java/lang/Thread.h"
-#include "java/lang/annotation/Annotation.h"
 
 @protocol JavaLangRunnable;
 
@@ -73,10 +70,6 @@ __attribute__((unused)) static ADMessage *ADHandler_getPostMessageWithJavaLangRu
 __attribute__((unused)) static ADMessage *ADHandler_getPostMessageWithJavaLangRunnable_withId_(id<JavaLangRunnable> r, id token);
 
 __attribute__((unused)) static void ADHandler_handleCallbackWithADMessage_(ADMessage *message);
-
-__attribute__((unused)) static IOSObjectArray *ADHandler__Annotations$0(void);
-
-__attribute__((unused)) static IOSObjectArray *ADHandler__Annotations$1(void);
 
 @interface ADHandler_Callback : NSObject
 
@@ -454,59 +447,59 @@ J2OBJC_IGNORE_DESIGNATED_END
   static J2ObjcMethodInfo methods[] = {
     { NULL, "V", 0x1, 0, 1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 2, 1, -1, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, -1, -1, -1, 3, -1 },
-    { NULL, NULL, 0x1, -1, 4, -1, -1, 5, -1 },
+    { NULL, NULL, 0x1, -1, -1, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 3, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 4, -1, -1, -1, -1 },
+    { NULL, NULL, 0x1, -1, 5, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 6, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 7, -1, -1, -1, -1 },
     { NULL, NULL, 0x1, -1, 8, -1, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, 9, -1, -1, -1, -1 },
-    { NULL, NULL, 0x1, -1, 10, -1, -1, -1, -1 },
-    { NULL, "LADHandler;", 0x9, 11, 6, -1, -1, -1, -1 },
-    { NULL, "LADHandler;", 0x9, 11, 7, -1, -1, -1, -1 },
+    { NULL, "LADHandler;", 0x9, 9, 4, -1, -1, -1, -1 },
+    { NULL, "LADHandler;", 0x9, 9, 5, -1, -1, -1, -1 },
     { NULL, "LADHandler;", 0x9, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADHandler;", 0x9, 12, 13, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, 14, 1, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, 15, 1, -1, -1, -1, -1 },
+    { NULL, "LADHandler;", 0x9, 10, 11, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 12, 1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 13, 1, -1, -1, -1, -1 },
     { NULL, "LADMessage;", 0x11, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADMessage;", 0x11, 16, 17, -1, -1, -1, -1 },
-    { NULL, "LADMessage;", 0x11, 16, 18, -1, -1, -1, -1 },
-    { NULL, "LADMessage;", 0x11, 16, 19, -1, -1, -1, -1 },
-    { NULL, "LADMessage;", 0x11, 16, 20, -1, -1, -1, -1 },
+    { NULL, "LADMessage;", 0x11, 14, 15, -1, -1, -1, -1 },
+    { NULL, "LADMessage;", 0x11, 14, 16, -1, -1, -1, -1 },
+    { NULL, "LADMessage;", 0x11, 14, 17, -1, -1, -1, -1 },
+    { NULL, "LADMessage;", 0x11, 14, 18, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 19, 20, -1, -1, -1, -1 },
     { NULL, "Z", 0x11, 21, 22, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 23, 24, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 23, 25, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 26, 24, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 26, 27, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 26, 25, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 28, 22, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 29, 24, -1, -1, -1, -1 },
-    { NULL, "V", 0x11, 30, 22, -1, -1, -1, -1 },
-    { NULL, "V", 0x11, 30, 31, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 32, 1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 33, 17, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 34, 35, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 36, 35, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 37, 38, -1, -1, -1, -1 },
-    { NULL, "Z", 0x1, 39, 38, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 40, 1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 41, 1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x2, 42, 43, -1, -1, -1, -1 },
-    { NULL, "V", 0x11, 44, 17, -1, -1, -1, -1 },
-    { NULL, "V", 0x11, 44, 18, -1, -1, -1, -1 },
-    { NULL, "V", 0x11, 45, 18, -1, -1, -1, -1 },
-    { NULL, "V", 0x11, 46, 47, -1, -1, -1, -1 },
-    { NULL, "V", 0x11, 48, 47, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 49, 17, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 21, 23, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 24, 22, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 24, 25, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 24, 23, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 26, 20, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 27, 22, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 28, 20, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 28, 29, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 30, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 31, 15, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 32, 33, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 34, 33, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 35, 36, -1, -1, -1, -1 },
+    { NULL, "Z", 0x1, 37, 36, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 38, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 39, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x2, 40, 41, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 42, 15, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 42, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 43, 16, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 44, 45, -1, -1, -1, -1 },
+    { NULL, "V", 0x11, 46, 45, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 47, 15, -1, -1, -1, -1 },
     { NULL, "Z", 0x11, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 49, 18, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 50, 18, -1, -1, -1, -1 },
-    { NULL, "Z", 0x11, 51, 22, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 47, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 48, 16, -1, -1, -1, -1 },
+    { NULL, "Z", 0x11, 49, 20, -1, -1, -1, -1 },
     { NULL, "LADLooper;", 0x11, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LNSString;", 0x1, 52, -1, -1, -1, -1, -1 },
+    { NULL, "LNSString;", 0x1, 50, -1, -1, -1, -1, -1 },
     { NULL, "LADIMessenger;", 0x10, -1, -1, -1, -1, -1, -1 },
-    { NULL, "LADMessage;", 0xa, 53, 22, -1, -1, -1, -1 },
-    { NULL, "LADMessage;", 0xa, 53, 31, -1, -1, -1, -1 },
-    { NULL, "V", 0xa, 54, 1, -1, -1, -1, -1 },
+    { NULL, "LADMessage;", 0xa, 51, 20, -1, -1, -1, -1 },
+    { NULL, "LADMessage;", 0xa, 51, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0xa, 52, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -569,16 +562,16 @@ J2OBJC_IGNORE_DESIGNATED_END
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "FIND_POTENTIAL_LEAKS", "Z", .constantValue.asBOOL = ADHandler_FIND_POTENTIAL_LEAKS, 0x1a, -1, -1, -1, -1 },
-    { "TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 55, -1, -1 },
-    { "MAIN_THREAD_HANDLER", "LADHandler;", .constantValue.asLong = 0, 0xa, -1, 56, -1, -1 },
+    { "TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 53, -1, -1 },
+    { "MAIN_THREAD_HANDLER", "LADHandler;", .constantValue.asLong = 0, 0xa, -1, 54, -1, -1 },
     { "mLooper_", "LADLooper;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
     { "mQueue_", "LADMessageQueue;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
     { "mCallback_", "LADHandler_Callback;", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
     { "mAsynchronous_", "Z", .constantValue.asLong = 0, 0x10, -1, -1, -1, -1 },
     { "mMessenger_", "LADIMessenger;", .constantValue.asLong = 0, 0x0, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "handleMessage", "LADMessage;", "dispatchMessage", (void *)&ADHandler__Annotations$0, "LADHandler_Callback;", (void *)&ADHandler__Annotations$1, "LADLooper;", "LADLooper;LADHandler_Callback;", "Z", "LADHandler_Callback;Z", "LADLooper;LADHandler_Callback;Z", "createAsync", "mainIfNull", "LADHandler;", "getTraceName", "getMessageName", "obtainMessage", "I", "ILNSObject;", "III", "IIILNSObject;", "post", "LJavaLangRunnable;", "postAtTime", "LJavaLangRunnable;J", "LJavaLangRunnable;LNSObject;J", "postDelayed", "LJavaLangRunnable;IJ", "postAtFrontOfQueue", "runWithScissors", "removeCallbacks", "LJavaLangRunnable;LNSObject;", "sendMessage", "sendEmptyMessage", "sendEmptyMessageDelayed", "IJ", "sendEmptyMessageAtTime", "sendMessageDelayed", "LADMessage;J", "sendMessageAtTime", "sendMessageAtFrontOfQueue", "executeOrSendMessage", "enqueueMessage", "LADMessageQueue;LADMessage;J", "removeMessages", "removeEqualMessages", "removeCallbacksAndMessages", "LNSObject;", "removeCallbacksAndEqualMessages", "hasMessages", "hasEqualMessages", "hasCallbacks", "toString", "getPostMessage", "handleCallback", &ADHandler_TAG, &ADHandler_MAIN_THREAD_HANDLER, "LADHandler_Callback;LADHandler_MessengerImpl;LADHandler_BlockingRunnable;" };
-  static const J2ObjcClassInfo _ADHandler = { "Handler", "r.android.os", ptrTable, methods, fields, 7, 0x1, 55, 8, -1, 57, -1, -1, -1 };
+  static const void *ptrTable[] = { "handleMessage", "LADMessage;", "dispatchMessage", "LADHandler_Callback;", "LADLooper;", "LADLooper;LADHandler_Callback;", "Z", "LADHandler_Callback;Z", "LADLooper;LADHandler_Callback;Z", "createAsync", "mainIfNull", "LADHandler;", "getTraceName", "getMessageName", "obtainMessage", "I", "ILNSObject;", "III", "IIILNSObject;", "post", "LJavaLangRunnable;", "postAtTime", "LJavaLangRunnable;J", "LJavaLangRunnable;LNSObject;J", "postDelayed", "LJavaLangRunnable;IJ", "postAtFrontOfQueue", "runWithScissors", "removeCallbacks", "LJavaLangRunnable;LNSObject;", "sendMessage", "sendEmptyMessage", "sendEmptyMessageDelayed", "IJ", "sendEmptyMessageAtTime", "sendMessageDelayed", "LADMessage;J", "sendMessageAtTime", "sendMessageAtFrontOfQueue", "executeOrSendMessage", "enqueueMessage", "LADMessageQueue;LADMessage;J", "removeMessages", "removeEqualMessages", "removeCallbacksAndMessages", "LNSObject;", "removeCallbacksAndEqualMessages", "hasMessages", "hasEqualMessages", "hasCallbacks", "toString", "getPostMessage", "handleCallback", &ADHandler_TAG, &ADHandler_MAIN_THREAD_HANDLER, "LADHandler_Callback;LADHandler_MessengerImpl;LADHandler_BlockingRunnable;" };
+  static const J2ObjcClassInfo _ADHandler = { "Handler", "r.android.os", ptrTable, methods, fields, 7, 0x1, 55, 8, -1, 55, -1, -1, -1 };
   return &_ADHandler;
 }
 
@@ -762,14 +755,6 @@ ADMessage *ADHandler_getPostMessageWithJavaLangRunnable_withId_(id<JavaLangRunna
 void ADHandler_handleCallbackWithADMessage_(ADMessage *message) {
   ADHandler_initialize();
   [((id<JavaLangRunnable>) nil_chk(((ADMessage *) nil_chk(message))->callback_)) run];
-}
-
-IOSObjectArray *ADHandler__Annotations$0() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-IOSObjectArray *ADHandler__Annotations$1() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADHandler)

@@ -23,8 +23,6 @@
 #include "ViewGroup.h"
 #include "ViewParent.h"
 #include "ViewTreeObserver.h"
-#include "java/lang/Deprecated.h"
-#include "java/lang/annotation/Annotation.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/HashMap.h"
@@ -337,10 +335,6 @@ __attribute__((unused)) static void ADLayoutTransition_addChildWithADViewGroup_w
 __attribute__((unused)) static jboolean ADLayoutTransition_hasListeners(ADLayoutTransition *self);
 
 __attribute__((unused)) static void ADLayoutTransition_removeChildWithADViewGroup_withADView_withBoolean_(ADLayoutTransition *self, ADViewGroup *parent, ADView *child, jboolean changesLayout);
-
-__attribute__((unused)) static IOSObjectArray *ADLayoutTransition__Annotations$0(void);
-
-__attribute__((unused)) static IOSObjectArray *ADLayoutTransition__Annotations$1(void);
 
 @interface ADLayoutTransition_1 : ADAnimatorListenerAdapter {
  @public
@@ -1012,15 +1006,15 @@ J2OBJC_IGNORE_DESIGNATED_END
     { NULL, "Z", 0x2, -1, -1, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 30, 31, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 28, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 32, 26, -1, -1, 33, -1 },
+    { NULL, "V", 0x1, 32, 26, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 32, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x2, 34, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x2, 33, 29, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 33, 26, -1, -1, -1, -1 },
     { NULL, "V", 0x1, 34, 26, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 35, 26, -1, -1, 36, -1 },
-    { NULL, "V", 0x1, 35, 19, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 37, 38, -1, -1, -1, -1 },
-    { NULL, "V", 0x1, 39, 38, -1, -1, -1, -1 },
-    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 40, -1, -1 },
+    { NULL, "V", 0x1, 34, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 35, 36, -1, -1, -1, -1 },
+    { NULL, "V", 0x1, 37, 36, -1, -1, -1, -1 },
+    { NULL, "LJavaUtilList;", 0x1, -1, -1, -1, 38, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -1081,12 +1075,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "mChangingAppearingAnim_", "LADAnimator;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChangingDisappearingAnim_", "LADAnimator;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChangingAnim_", "LADAnimator;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "defaultChange", "LADObjectAnimator;", .constantValue.asLong = 0, 0xa, -1, 41, -1, -1 },
-    { "defaultChangeIn", "LADObjectAnimator;", .constantValue.asLong = 0, 0xa, -1, 42, -1, -1 },
-    { "defaultChangeOut", "LADObjectAnimator;", .constantValue.asLong = 0, 0xa, -1, 43, -1, -1 },
-    { "defaultFadeIn", "LADObjectAnimator;", .constantValue.asLong = 0, 0xa, -1, 44, -1, -1 },
-    { "defaultFadeOut", "LADObjectAnimator;", .constantValue.asLong = 0, 0xa, -1, 45, -1, -1 },
-    { "DEFAULT_DURATION", "J", .constantValue.asLong = 0, 0xa, -1, 46, -1, -1 },
+    { "defaultChange", "LADObjectAnimator;", .constantValue.asLong = 0, 0xa, -1, 39, -1, -1 },
+    { "defaultChangeIn", "LADObjectAnimator;", .constantValue.asLong = 0, 0xa, -1, 40, -1, -1 },
+    { "defaultChangeOut", "LADObjectAnimator;", .constantValue.asLong = 0, 0xa, -1, 41, -1, -1 },
+    { "defaultFadeIn", "LADObjectAnimator;", .constantValue.asLong = 0, 0xa, -1, 42, -1, -1 },
+    { "defaultFadeOut", "LADObjectAnimator;", .constantValue.asLong = 0, 0xa, -1, 43, -1, -1 },
+    { "DEFAULT_DURATION", "J", .constantValue.asLong = 0, 0xa, -1, 44, -1, -1 },
     { "mChangingAppearingDuration_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChangingDisappearingDuration_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChangingDuration_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
@@ -1100,30 +1094,30 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "mChangingAppearingStagger_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChangingDisappearingStagger_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChangingStagger_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "ACCEL_DECEL_INTERPOLATOR", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 47, -1, -1 },
-    { "DECEL_INTERPOLATOR", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 48, -1, -1 },
-    { "sAppearingInterpolator", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 49, -1, -1 },
-    { "sDisappearingInterpolator", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 50, -1, -1 },
-    { "sChangingAppearingInterpolator", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 51, -1, -1 },
-    { "sChangingDisappearingInterpolator", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 52, -1, -1 },
-    { "sChangingInterpolator", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 53, -1, -1 },
+    { "ACCEL_DECEL_INTERPOLATOR", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 45, -1, -1 },
+    { "DECEL_INTERPOLATOR", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 46, -1, -1 },
+    { "sAppearingInterpolator", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 47, -1, -1 },
+    { "sDisappearingInterpolator", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 48, -1, -1 },
+    { "sChangingAppearingInterpolator", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 49, -1, -1 },
+    { "sChangingDisappearingInterpolator", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 50, -1, -1 },
+    { "sChangingInterpolator", "LADTimeInterpolator;", .constantValue.asLong = 0, 0xa, -1, 51, -1, -1 },
     { "mAppearingInterpolator_", "LADTimeInterpolator;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mDisappearingInterpolator_", "LADTimeInterpolator;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChangingAppearingInterpolator_", "LADTimeInterpolator;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChangingDisappearingInterpolator_", "LADTimeInterpolator;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mChangingInterpolator_", "LADTimeInterpolator;", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "pendingAnimations_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 54, -1 },
-    { "currentChangingAnimations_", "LJavaUtilLinkedHashMap;", .constantValue.asLong = 0, 0x11, -1, -1, 55, -1 },
-    { "currentAppearingAnimations_", "LJavaUtilLinkedHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 55, -1 },
-    { "currentDisappearingAnimations_", "LJavaUtilLinkedHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 55, -1 },
-    { "layoutChangeListenerMap_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 56, -1 },
+    { "pendingAnimations_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 52, -1 },
+    { "currentChangingAnimations_", "LJavaUtilLinkedHashMap;", .constantValue.asLong = 0, 0x11, -1, -1, 53, -1 },
+    { "currentAppearingAnimations_", "LJavaUtilLinkedHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 53, -1 },
+    { "currentDisappearingAnimations_", "LJavaUtilLinkedHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 53, -1 },
+    { "layoutChangeListenerMap_", "LJavaUtilHashMap;", .constantValue.asLong = 0, 0x12, -1, -1, 54, -1 },
     { "staggerDelay_", "J", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
     { "mTransitionTypes_", "I", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
-    { "mListeners_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 57, -1 },
+    { "mListeners_", "LJavaUtilArrayList;", .constantValue.asLong = 0, 0x2, -1, -1, 55, -1 },
     { "mAnimateParentHierarchy_", "Z", .constantValue.asLong = 0, 0x2, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "setDuration", "J", "enableTransitionType", "I", "disableTransitionType", "isTransitionTypeEnabled", "setStartDelay", "IJ", "getStartDelay", "getDuration", "setStagger", "getStagger", "setInterpolator", "ILADTimeInterpolator;", "getInterpolator", "setAnimator", "ILADAnimator;", "getAnimator", "runChangeTransition", "LADViewGroup;LADView;I", "setAnimateParentHierarchy", "Z", "setupChangeAnimation", "LADViewGroup;ILADAnimator;JLADView;", "cancel", "runAppearingTransition", "LADViewGroup;LADView;", "runDisappearingTransition", "addChild", "LADViewGroup;LADView;Z", "layoutChange", "LADViewGroup;", "showChild", (void *)&ADLayoutTransition__Annotations$0, "removeChild", "hideChild", (void *)&ADLayoutTransition__Annotations$1, "addTransitionListener", "LADLayoutTransition_TransitionListener;", "removeTransitionListener", "()Ljava/util/List<Lr/android/animation/LayoutTransition$TransitionListener;>;", &ADLayoutTransition_defaultChange, &ADLayoutTransition_defaultChangeIn, &ADLayoutTransition_defaultChangeOut, &ADLayoutTransition_defaultFadeIn, &ADLayoutTransition_defaultFadeOut, &ADLayoutTransition_DEFAULT_DURATION, &ADLayoutTransition_ACCEL_DECEL_INTERPOLATOR, &ADLayoutTransition_DECEL_INTERPOLATOR, &ADLayoutTransition_sAppearingInterpolator, &ADLayoutTransition_sDisappearingInterpolator, &ADLayoutTransition_sChangingAppearingInterpolator, &ADLayoutTransition_sChangingDisappearingInterpolator, &ADLayoutTransition_sChangingInterpolator, "Ljava/util/HashMap<Lr/android/view/View;Lr/android/animation/Animator;>;", "Ljava/util/LinkedHashMap<Lr/android/view/View;Lr/android/animation/Animator;>;", "Ljava/util/HashMap<Lr/android/view/View;Lr/android/view/View$OnLayoutChangeListener;>;", "Ljava/util/ArrayList<Lr/android/animation/LayoutTransition$TransitionListener;>;", "LADLayoutTransition_TransitionListener;LADLayoutTransition_CleanupCallback;" };
-  static const J2ObjcClassInfo _ADLayoutTransition = { "LayoutTransition", "r.android.animation", ptrTable, methods, fields, 7, 0x1, 39, 55, -1, 58, -1, -1, -1 };
+  static const void *ptrTable[] = { "setDuration", "J", "enableTransitionType", "I", "disableTransitionType", "isTransitionTypeEnabled", "setStartDelay", "IJ", "getStartDelay", "getDuration", "setStagger", "getStagger", "setInterpolator", "ILADTimeInterpolator;", "getInterpolator", "setAnimator", "ILADAnimator;", "getAnimator", "runChangeTransition", "LADViewGroup;LADView;I", "setAnimateParentHierarchy", "Z", "setupChangeAnimation", "LADViewGroup;ILADAnimator;JLADView;", "cancel", "runAppearingTransition", "LADViewGroup;LADView;", "runDisappearingTransition", "addChild", "LADViewGroup;LADView;Z", "layoutChange", "LADViewGroup;", "showChild", "removeChild", "hideChild", "addTransitionListener", "LADLayoutTransition_TransitionListener;", "removeTransitionListener", "()Ljava/util/List<Lr/android/animation/LayoutTransition$TransitionListener;>;", &ADLayoutTransition_defaultChange, &ADLayoutTransition_defaultChangeIn, &ADLayoutTransition_defaultChangeOut, &ADLayoutTransition_defaultFadeIn, &ADLayoutTransition_defaultFadeOut, &ADLayoutTransition_DEFAULT_DURATION, &ADLayoutTransition_ACCEL_DECEL_INTERPOLATOR, &ADLayoutTransition_DECEL_INTERPOLATOR, &ADLayoutTransition_sAppearingInterpolator, &ADLayoutTransition_sDisappearingInterpolator, &ADLayoutTransition_sChangingAppearingInterpolator, &ADLayoutTransition_sChangingDisappearingInterpolator, &ADLayoutTransition_sChangingInterpolator, "Ljava/util/HashMap<Lr/android/view/View;Lr/android/animation/Animator;>;", "Ljava/util/LinkedHashMap<Lr/android/view/View;Lr/android/animation/Animator;>;", "Ljava/util/HashMap<Lr/android/view/View;Lr/android/view/View$OnLayoutChangeListener;>;", "Ljava/util/ArrayList<Lr/android/animation/LayoutTransition$TransitionListener;>;", "LADLayoutTransition_TransitionListener;LADLayoutTransition_CleanupCallback;" };
+  static const J2ObjcClassInfo _ADLayoutTransition = { "LayoutTransition", "r.android.animation", ptrTable, methods, fields, 7, 0x1, 39, 55, -1, 56, -1, -1, -1 };
   return &_ADLayoutTransition;
 }
 
@@ -1408,14 +1402,6 @@ void ADLayoutTransition_removeChildWithADViewGroup_withADView_withBoolean_(ADLay
   if ((self->mTransitionTypes_ & ADLayoutTransition_FLAG_DISAPPEARING) == ADLayoutTransition_FLAG_DISAPPEARING) {
     ADLayoutTransition_runDisappearingTransitionWithADViewGroup_withADView_(self, parent, child);
   }
-}
-
-IOSObjectArray *ADLayoutTransition__Annotations$0() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-IOSObjectArray *ADLayoutTransition__Annotations$1() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADLayoutTransition)

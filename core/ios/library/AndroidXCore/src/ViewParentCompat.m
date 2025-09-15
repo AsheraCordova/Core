@@ -5,7 +5,6 @@
 
 #include "AccessibilityEvent.h"
 #include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "Log.h"
@@ -16,8 +15,6 @@
 #include "ViewParent.h"
 #include "ViewParentCompat.h"
 #include "java/lang/AbstractMethodError.h"
-#include "java/lang/Deprecated.h"
-#include "java/lang/annotation/Annotation.h"
 
 
 @interface ADXViewParentCompat ()
@@ -44,8 +41,6 @@ __attribute__((unused)) static ADXViewParentCompat *new_ADXViewParentCompat_init
 __attribute__((unused)) static ADXViewParentCompat *create_ADXViewParentCompat_init(void);
 
 __attribute__((unused)) static IOSIntArray *ADXViewParentCompat_getTempNestedScrollConsumed(void);
-
-__attribute__((unused)) static IOSObjectArray *ADXViewParentCompat__Annotations$0(void);
 
 @interface ADXViewParentCompat_Api21Impl ()
 
@@ -191,21 +186,21 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static J2ObjcMethodInfo methods[] = {
     { NULL, NULL, 0x2, -1, -1, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 0, 1, -1, -1, 2, -1 },
-    { NULL, "Z", 0x9, 3, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 5, 4, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 6, 7, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 8, 9, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 8, 10, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 11, 12, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 3, 13, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 0, 1, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 2, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 4, 3, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 5, 6, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 7, 8, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 7, 9, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 10, 11, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 2, 12, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 4, 12, -1, -1, -1, -1 },
     { NULL, "V", 0x9, 5, 13, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 6, 14, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 8, 15, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 11, 16, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 17, 18, -1, -1, -1, -1 },
-    { NULL, "Z", 0x9, 19, 20, -1, -1, -1, -1 },
-    { NULL, "V", 0x9, 21, 4, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 7, 14, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 10, 15, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 16, 17, -1, -1, -1, -1 },
+    { NULL, "Z", 0x9, 18, 19, -1, -1, -1, -1 },
+    { NULL, "V", 0x9, 20, 3, -1, -1, -1, -1 },
     { NULL, "[I", 0xa, -1, -1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
@@ -230,11 +225,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   methods[16].selector = @selector(getTempNestedScrollConsumed);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
-    { "TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 22, -1, -1 },
-    { "sTempNestedScrollConsumed", "[I", .constantValue.asLong = 0, 0xa, -1, 23, -1, -1 },
+    { "TAG", "LNSString;", .constantValue.asLong = 0, 0x1a, -1, 21, -1, -1 },
+    { "sTempNestedScrollConsumed", "[I", .constantValue.asLong = 0, 0xa, -1, 22, -1, -1 },
   };
-  static const void *ptrTable[] = { "requestSendAccessibilityEvent", "LADViewParent;LADView;LADAccessibilityEvent;", (void *)&ADXViewParentCompat__Annotations$0, "onStartNestedScroll", "LADViewParent;LADView;LADView;I", "onNestedScrollAccepted", "onStopNestedScroll", "LADViewParent;LADView;", "onNestedScroll", "LADViewParent;LADView;IIII", "LADViewParent;LADView;IIIII", "onNestedPreScroll", "LADViewParent;LADView;II[I", "LADViewParent;LADView;LADView;II", "LADViewParent;LADView;I", "LADViewParent;LADView;IIIII[I", "LADViewParent;LADView;II[II", "onNestedFling", "LADViewParent;LADView;FFZ", "onNestedPreFling", "LADViewParent;LADView;FF", "notifySubtreeAccessibilityStateChanged", &ADXViewParentCompat_TAG, &ADXViewParentCompat_sTempNestedScrollConsumed, "LADXViewParentCompat_Api21Impl;" };
-  static const J2ObjcClassInfo _ADXViewParentCompat = { "ViewParentCompat", "androidx.core.view", ptrTable, methods, fields, 7, 0x11, 17, 2, -1, 24, -1, -1, -1 };
+  static const void *ptrTable[] = { "requestSendAccessibilityEvent", "LADViewParent;LADView;LADAccessibilityEvent;", "onStartNestedScroll", "LADViewParent;LADView;LADView;I", "onNestedScrollAccepted", "onStopNestedScroll", "LADViewParent;LADView;", "onNestedScroll", "LADViewParent;LADView;IIII", "LADViewParent;LADView;IIIII", "onNestedPreScroll", "LADViewParent;LADView;II[I", "LADViewParent;LADView;LADView;II", "LADViewParent;LADView;I", "LADViewParent;LADView;IIIII[I", "LADViewParent;LADView;II[II", "onNestedFling", "LADViewParent;LADView;FFZ", "onNestedPreFling", "LADViewParent;LADView;FF", "notifySubtreeAccessibilityStateChanged", &ADXViewParentCompat_TAG, &ADXViewParentCompat_sTempNestedScrollConsumed, "LADXViewParentCompat_Api21Impl;" };
+  static const J2ObjcClassInfo _ADXViewParentCompat = { "ViewParentCompat", "androidx.core.view", ptrTable, methods, fields, 7, 0x11, 17, 2, -1, 23, -1, -1, -1 };
   return &_ADXViewParentCompat;
 }
 
@@ -420,10 +415,6 @@ IOSIntArray *ADXViewParentCompat_getTempNestedScrollConsumed() {
     *IOSIntArray_GetRef(ADXViewParentCompat_sTempNestedScrollConsumed, 1) = 0;
   }
   return ADXViewParentCompat_sTempNestedScrollConsumed;
-}
-
-IOSObjectArray *ADXViewParentCompat__Annotations$0() {
-  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(ADXViewParentCompat)

@@ -16,9 +16,13 @@
 #if !defined (ADSubMenu_) && (INCLUDE_ALL_SubMenu || defined(INCLUDE_ADSubMenu))
 #define ADSubMenu_
 
+#define RESTRICT_Menu 1
+#define INCLUDE_ADMenu 1
+#include "Menu.h"
+
 @protocol JavaLangCharSequence;
 
-@protocol ADSubMenu < JavaObject >
+@protocol ADSubMenu < ADMenu, JavaObject >
 
 - (id<ADSubMenu>)setHeaderTitleWithInt:(jint)titleRes;
 

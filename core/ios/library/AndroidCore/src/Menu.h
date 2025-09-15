@@ -17,6 +17,7 @@
 #define ADMenu_
 
 @protocol ADMenuItem;
+@protocol ADSubMenu;
 @protocol JavaLangCharSequence;
 
 @protocol ADMenu < JavaObject >
@@ -34,6 +35,8 @@
                      withInt:(jint)itemId
                      withInt:(jint)order
                      withInt:(jint)titleRes;
+
+- (id<ADSubMenu>)addSubMenuWithJavaLangCharSequence:(id<JavaLangCharSequence>)title;
 
 @end
 

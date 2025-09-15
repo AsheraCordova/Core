@@ -2,8 +2,11 @@ package com.ashera.core;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.ashera.attributedtext.AttributedString;
 import com.ashera.model.FontMetricsDescriptor;
@@ -11,6 +14,8 @@ import com.ashera.parser.html.HtmlParserPlugin;
 import com.ashera.plugin.IPlugin;
 import com.ashera.plugin.PluginManager;
 import com.ashera.widget.PluginInvoker;
+
+import r.android.app.Activity;
 
 /*-[
 #import <sys/utsname.h>
@@ -90,6 +95,10 @@ public class CorePlugin implements IPlugin, ICore {
 		case "enqueueTaskForEventLoop":
 			enqueueTaskForEventLoop((Runnable) args[0],(long) args[1]);
 			return null;
+		case "resolveCDVFileLocation":
+			return resolveCDVFileLocation((String) args[0],(IFragment) args[1]);
+		case "readCdvDataAsString":
+			return readCdvDataAsString((String) args[0],(String) args[1],(IFragment) args[2]);
 		default:
 			break;
 		}
@@ -165,7 +174,11 @@ public class CorePlugin implements IPlugin, ICore {
 
 	@Override
 	public String getFileAsset(String path, IFragment fragment) {
-		return getFileAsset(path);
+		if (fragment.getRootDirectory() != null) {
+			return readCdvDataAsString(fragment.getRootDirectory(), path, fragment);
+		} else {
+			return getFileAsset(path);
+		}
 	}
 	
 	public static native String getFileAsset(String path) /*-[
@@ -542,17 +555,33 @@ public class CorePlugin implements IPlugin, ICore {
 			String commandName = PluginInvoker.getString(commandArr[0]);
 			
 			switch (commandName) {
+			case "readCdvDataAsString": {
+				final String url = PluginInvoker.getString(commandArr[1]);
+				String js = readCdvDataAsString(url);
+				String encode = Base64.getEncoder().encodeToString(js.getBytes());
+				return encode;
+			}
 			case "loadLocale":
 				Object[] keys = PluginInvoker.getArray(commandArr[1]);
-				
+				String rootDir= null;
+				if (commandArr.length > 2 && !PluginInvoker.isNull(commandArr[2])) {
+					rootDir = PluginInvoker.getString(commandArr[2]);
+				}
 				// load all locale keys for javascript
 		        if (keys != null && keys.length > 0) {
 					Map<String, Object> localeMap = PluginInvoker.getJSONCompatMap();
 					for (int j = 0; j < keys.length; j++) {
 						String key = PluginInvoker.getString(keys[j]);
-						String value = com.ashera.utils.ResourceBundleUtils.getString("values/strings", "string", key,
-								fragment);
-						localeMap.put(key, value);
+						
+						if (rootDir == null) {
+							String value = com.ashera.utils.ResourceBundleUtils.getString("values/strings", "string", key,
+									fragment);
+							localeMap.put(key, value);
+						} else {
+							String value = com.ashera.utils.ResourceBundleUtils.getString("values/strings", "string", key, rootDir,
+									fragment);
+							localeMap.put(key, value);
+						}
 					}		
 					
 					PluginInvoker.putJSONSafeObjectIntoMap(resultMap, commandName, localeMap);
@@ -668,5 +697,129 @@ public class CorePlugin implements IPlugin, ICore {
 			}, delayInMills);
 		}
 	}
+
+	@Override
+	public String resolveCDVFileLocation(String cdvUrl, IFragment fragment) {
+		return resolveCDVFileLocation(cdvUrl);
 	
+	}
+
+	private static String resolveCDVFileLocation(String cdvUrl) {
+		Pattern pattern = Pattern.compile("cordova\\.file\\.([a-zA-Z_\\-]+)\\/(.*)");
+		Matcher matcher = pattern.matcher(cdvUrl);
+		boolean matches = matcher.matches();
+
+		if (matches) {
+			String fileName = matcher.group(2);
+			String directoryName = matcher.group(1);
+
+			switch (directoryName) {
+			case "persistent":
+				directoryName = navtiveGetDirectory(5);
+				break;
+			case "temporary":
+				directoryName = navtiveGetDirectory(3);
+				break;
+			case "cacheDirectory":
+				directoryName = navtiveGetDirectory(3);
+				break;
+			case "dataDirectory":
+				directoryName = navtiveGetDirectory(0);
+				break;
+			case "applicationDirectory":
+				directoryName = navtiveGetDirectory(1);
+				break;
+			case "applicationStorageDirectory":
+				directoryName = navtiveGetDirectory(2);
+				break;
+			case "tempDirectory":
+				directoryName = navtiveGetDirectory(4);
+				break;
+			case "documentsDirectory":
+				directoryName = navtiveGetDirectory(5);
+				break;
+			case "syncedDataDirectory":
+				directoryName = navtiveGetDirectory(6);
+				break;
+
+			default:
+				break;
+			}
+
+			return com.ashera.utils.FileUtils.getSlashAppendedDirectoryName(directoryName) + fileName;
+		}
+		
+		return null;
+	}
+
+	private static native String navtiveGetDirectory(int type) /*-[
+	 	NSString* libPath = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES)[0];
+		NSString* libPathSync = [libPath stringByAppendingPathComponent:@"Cloud"];
+		NSString* libPathNoSync = [libPath stringByAppendingPathComponent:@"NoCloud"];
+		NSString* docPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+		NSString* storagePath = [libPath stringByDeletingLastPathComponent];
+		NSString* cachePath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0];
+	
+		// Create the directories if necessary.
+		[[NSFileManager defaultManager] createDirectoryAtPath:libPathSync withIntermediateDirectories:YES attributes:nil error:nil];
+		[[NSFileManager defaultManager] createDirectoryAtPath:libPathNoSync withIntermediateDirectories:YES attributes:nil error:nil];
+		// Mark NoSync as non-iCloud.
+		[[NSURL fileURLWithPath:libPathNoSync] setResourceValue: [NSNumber numberWithBool: YES]
+	                                                 forKey: NSURLIsExcludedFromBackupKey error:nil];
+	
+		if (type == 0) {
+			return [[NSURL fileURLWithPath:libPathNoSync] path];
+		}
+		if (type == 1) {
+			return [[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]] path];
+		}
+		
+		if (type == 2) {
+			return [[NSURL fileURLWithPath:storagePath] path];
+		}
+		
+		if (type == 3) {
+			return [[NSURL fileURLWithPath:cachePath] path];
+		}
+		
+		if (type == 4) {
+			return [[NSURL fileURLWithPath:NSTemporaryDirectory()] path];
+		}
+		
+		if (type == 5) {
+			return [[NSURL fileURLWithPath:docPath] path];
+		}
+		
+		if (type == 6) {
+			return [[NSURL fileURLWithPath:libPathSync] path];
+		}
+		
+		return @"";
+	]-*/;
+	
+	@Override
+	public String readCdvDataAsString(String directoryName, String fileName, IFragment fragment) {
+		String rootDirectory = directoryName;
+		
+		if (directoryName == null) {
+			rootDirectory = fragment.getRootDirectory();
+		}
+		String cdvUrl = com.ashera.utils.FileUtils.getSlashAppendedDirectoryName(rootDirectory) + fileName;
+		return readCdvDataAsString(cdvUrl);
+	}
+
+	public static String readCdvDataAsString(String cdvUrl, Activity activity) {
+		return readCdvDataAsString(cdvUrl);
+	}
+	
+	private static String readCdvDataAsString(String cdvUrl) {
+		String location = resolveCDVFileLocation(cdvUrl);
+		return getFileContent(location);
+	}
+	
+	public static native String getFileContent(String path) /*-[
+		NSError* error = nil;
+		NSString *res = [NSString stringWithContentsOfFile: path encoding:NSUTF8StringEncoding error: &error];
+		return res;
+	]-*/;
 }

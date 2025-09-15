@@ -539,6 +539,7 @@ public java.util.Map<String, Object> getOnChildViewRemovedEventObj(View parent,V
     obj.put("eventType", "childviewremoved");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());
@@ -561,6 +562,7 @@ public java.util.Map<String, Object> getOnChildViewAddedEventObj(View parent,Vie
     obj.put("eventType", "childviewadded");
     obj.put("fragmentId", w.getFragment().getFragmentId());
     obj.put("actionUrl", w.getFragment().getActionUrl());
+    obj.put("namespace", w.getFragment().getNamespace());
     
     if (w.getComponentId() != null) {
     	obj.put("componentId", w.getComponentId());

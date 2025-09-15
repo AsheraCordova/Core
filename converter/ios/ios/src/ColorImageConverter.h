@@ -43,6 +43,8 @@
 
 + (id)getImageFromBase64WithId:(id)strEncoded;
 
++ (id)nativeLoadImageFromPathWithNSString:(NSString *)imagePath;
+
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(ASColorImageConverter)
@@ -52,6 +54,8 @@ FOUNDATION_EXPORT void ASColorImageConverter_init(ASColorImageConverter *self);
 FOUNDATION_EXPORT ASColorImageConverter *new_ASColorImageConverter_init(void) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT ASColorImageConverter *create_ASColorImageConverter_init(void);
+
+FOUNDATION_EXPORT id ASColorImageConverter_nativeLoadImageFromPathWithNSString_(NSString *imagePath);
 
 FOUNDATION_EXPORT id ASColorImageConverter_getImageFromBase64WithId_(id strEncoded);
 

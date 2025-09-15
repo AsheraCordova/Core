@@ -40,6 +40,10 @@
 
 + (JavaIoInputStream *)getInputStreamFromClassPathWithNSString:(NSString *)fileName;
 
++ (NSString *)getSlashAppendedDirectoryNameWithNSString:(NSString *)directoryName;
+
++ (JavaUtilProperties *)loadPropertiesWithNSString:(NSString *)fileContent;
+
 + (JavaUtilProperties *)loadPropertiesFromClassPathWithNSString:(NSString *)fileName;
 
 + (IOSByteArray *)readAllBytesWithJavaIoInputStream:(JavaIoInputStream *)inputStream;
@@ -78,11 +82,15 @@ FOUNDATION_EXPORT NSString *ASFileUtils_readFileToStringWithJavaIoFile_(JavaIoFi
 
 FOUNDATION_EXPORT JavaUtilProperties *ASFileUtils_loadPropertiesFromClassPathWithNSString_(NSString *fileName);
 
+FOUNDATION_EXPORT JavaUtilProperties *ASFileUtils_loadPropertiesWithNSString_(NSString *fileContent);
+
 FOUNDATION_EXPORT JavaUtilProperties *ASFileUtils_getFileAsPropertiesWithNSString_(NSString *fileName);
 
 FOUNDATION_EXPORT id<JavaUtilList> ASFileUtils_getFilenamesForDirnameFromCPWithNSString_(NSString *directoryName);
 
 FOUNDATION_EXPORT IOSByteArray *ASFileUtils_readAllBytesWithJavaIoInputStream_(JavaIoInputStream *inputStream);
+
+FOUNDATION_EXPORT NSString *ASFileUtils_getSlashAppendedDirectoryNameWithNSString_(NSString *directoryName);
 
 J2OBJC_TYPE_LITERAL_HEADER(ASFileUtils)
 

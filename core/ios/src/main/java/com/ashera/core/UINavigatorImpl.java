@@ -7,6 +7,8 @@ import com.ashera.converter.CommonConverters;
 import com.ashera.converter.ConverterFactory;
 import com.ashera.widget.IWidget;
 
+import r.android.os.Bundle;
+
 /*-[
 #include <UIKit/UIKit.h>
 #import "ASGenericFragmentController.h"
@@ -17,6 +19,9 @@ public class UINavigatorImpl {
 	private Object navController;
 	private FragmentFactory fragmentFactory;
 	private boolean remeasure = true;
+	private String namespace;
+	private String rootDirectory;
+	private boolean childNavHost;
 
 	public UINavigatorImpl() {
 		this.fragmentFactory = new FragmentFactory();
@@ -26,6 +31,7 @@ public class UINavigatorImpl {
 		this.navController = navController;
 		this.fragmentFactory = fragmentFactory;
 		this.remeasure = remeasure;
+		this.childNavHost = true;
 	}
 
 	public void navigate(String actionId, String destinationId, boolean inclusive,
@@ -108,19 +114,29 @@ public class UINavigatorImpl {
 		        }
 			}
 			DialogFragment dialogFragment = new IosDialogFragment(null, width, height, marginPercent);
-			dialogFragment.setArguments(GenericFragment.getInitialBundle(resId, fileName, scopedObjects));
+			if (childNavHost) {
+				dialogFragment.setParentFragment(fragment);
+			}
+			dialogFragment.setArguments(getInitialBundle(scopedObjects, resId, fileName));
 			navigateToDialog(dialogFragment, backdropColor, windowCloseOnTouchOutside, backgroundDimEnabled);
 			break;
 		}
 		default: {
 			String fileName = getFileName(destinationProps, 0);
 			GenericFragment genericFragment = this.fragmentFactory.getFragment();
-			genericFragment.setArguments(GenericFragment.getInitialBundle(resId, fileName, scopedObjects));
+			genericFragment.setArguments(getInitialBundle(scopedObjects, resId, fileName));
 			navigateToController(genericFragment, finish, clear, popCount, this.remeasure);
 
 			break;
 		} 
 		}
+	}
+
+	private Bundle getInitialBundle(List<Map<String, Object>> scopedObjects, String resId, String fileName) {
+		Bundle bundle = GenericFragment.getInitialBundle(resId, fileName, scopedObjects);
+		bundle.putString("rootDirectory", rootDirectory);
+		bundle.putString("namespace", namespace);
+		return bundle;
 	}
 	
 	private String getFileName(String[] destinationProps, int noofProps) {
@@ -331,4 +347,12 @@ public class UINavigatorImpl {
 		}
 	}
 
+
+	public void setNamespace(String namespace) {
+		this.namespace = namespace;
+	}
+
+	public void setRootDirectory(String rootDirectory) {
+		this.rootDirectory = rootDirectory;
+	}
 }

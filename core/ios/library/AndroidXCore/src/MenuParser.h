@@ -16,7 +16,7 @@
 #if !defined (ADXMenuParser_) && (INCLUDE_ALL_MenuParser || defined(INCLUDE_ADXMenuParser))
 #define ADXMenuParser_
 
-@class ADXMenuBuilder;
+@protocol ADMenu;
 @protocol ASHasWidgets;
 @protocol ASIFragment;
 
@@ -27,7 +27,7 @@
 - (instancetype)init;
 
 + (void)parseMenuWithASHasWidgets:(id<ASHasWidgets>)parent
-               withADXMenuBuilder:(ADXMenuBuilder *)menu
+                       withADMenu:(id<ADMenu>)menu
                      withNSString:(NSString *)json
                   withASIFragment:(id<ASIFragment>)fragment;
 
@@ -41,7 +41,7 @@ FOUNDATION_EXPORT ADXMenuParser *new_ADXMenuParser_init(void) NS_RETURNS_RETAINE
 
 FOUNDATION_EXPORT ADXMenuParser *create_ADXMenuParser_init(void);
 
-FOUNDATION_EXPORT void ADXMenuParser_parseMenuWithASHasWidgets_withADXMenuBuilder_withNSString_withASIFragment_(id<ASHasWidgets> parent, ADXMenuBuilder *menu, NSString *json, id<ASIFragment> fragment);
+FOUNDATION_EXPORT void ADXMenuParser_parseMenuWithASHasWidgets_withADMenu_withNSString_withASIFragment_(id<ASHasWidgets> parent, id<ADMenu> menu, NSString *json, id<ASIFragment> fragment);
 
 J2OBJC_TYPE_LITERAL_HEADER(ADXMenuParser)
 

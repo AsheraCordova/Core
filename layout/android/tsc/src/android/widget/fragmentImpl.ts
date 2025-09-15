@@ -5,7 +5,6 @@ import CommandAttr from '../../widget/CommandAttr';
 import IWidget from '../../widget/IWidget';
 import ILayoutParam from '../../widget/ILayoutParam';
 import {plainToClass, Type, Exclude, Expose, Transform} from "class-transformer";
-import 'babel-polyfill';
 import {Gravity} from '../../widget/TypeConstants';
 import {ITranform, TransformerFactory} from '../../widget/TransformerFactory';
 import {Event} from '../../app/Event';
@@ -55,6 +54,9 @@ destinationId!:string;
 @decorate(Expose({ name: "inclusive" }))
 inclusive!:boolean;
 }
+
+
+
 import {ViewGroupImpl_LayoutParams} from './ViewGroupImpl';
 
 // end - imports
@@ -96,6 +98,15 @@ export abstract class fragmentImpl<T> extends ViewGroupImpl<T>{
 	@decorate(Type(() => CommandAttr))
 	@decorate(Expose({ name: "popBackStackTo" }))
 	popBackStackTo_!:CommandAttr<fragmentImpl_popBackStackTo>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "closeDialog" }))
+	closeDialog_!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "rootDirectory" }))
+	rootDirectory!:CommandAttr<string>| undefined;
+	@decorate(Type(() => CommandAttr))
+	@decorate(Expose({ name: "namespace" }))
+	namespace!:CommandAttr<string>| undefined;
 
 	@decorate(Exclude())
 	protected thisPointer: T;	
@@ -113,6 +124,9 @@ export abstract class fragmentImpl<T> extends ViewGroupImpl<T>{
 		this.navigateAsTop_ = undefined;
 		this.navigateWithPopBackStackTo_ = undefined;
 		this.popBackStackTo_ = undefined;
+		this.closeDialog_ = undefined;
+		this.rootDirectory = undefined;
+		this.namespace = undefined;
 		return this.thisPointer;
 	}
 	constructor(id: string, path: string[], event:  string) {
@@ -295,6 +309,48 @@ inclusive : boolean) : T {
 		this.popBackStackTo_.setValue(wrapper);	
 		this.orderSet++;
 		this.popBackStackTo_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public closeDialog(value : string) : T {
+		this.resetIfRequired();
+		if (this.closeDialog_ == null || this.closeDialog_ == undefined) {
+			this.closeDialog_ = new CommandAttr<string>();
+		}
+		
+		this.closeDialog_.setSetter(true);
+		this.closeDialog_.setValue(value);
+		this.orderSet++;
+		this.closeDialog_.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setRootDirectory(value : string) : T {
+		this.resetIfRequired();
+		if (this.rootDirectory == null || this.rootDirectory == undefined) {
+			this.rootDirectory = new CommandAttr<string>();
+		}
+		
+		this.rootDirectory.setSetter(true);
+		this.rootDirectory.setValue(value);
+		this.orderSet++;
+		this.rootDirectory.setOrderSet(this.orderSet);
+		return this.thisPointer;
+	}
+		
+
+	public setNamespace(value : string) : T {
+		this.resetIfRequired();
+		if (this.namespace == null || this.namespace == undefined) {
+			this.namespace = new CommandAttr<string>();
+		}
+		
+		this.namespace.setSetter(true);
+		this.namespace.setValue(value);
+		this.orderSet++;
+		this.namespace.setOrderSet(this.orderSet);
 		return this.thisPointer;
 	}
 		

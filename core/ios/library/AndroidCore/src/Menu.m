@@ -19,6 +19,7 @@
     { NULL, "LADMenuItem;", 0x401, 0, 2, -1, -1, -1, -1 },
     { NULL, "LADMenuItem;", 0x401, 0, 3, -1, -1, -1, -1 },
     { NULL, "LADMenuItem;", 0x401, 0, 4, -1, -1, -1, -1 },
+    { NULL, "LADSubMenu;", 0x401, 5, 1, -1, -1, -1, -1 },
   };
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wobjc-multiple-method-names"
@@ -27,6 +28,7 @@
   methods[1].selector = @selector(addWithInt:);
   methods[2].selector = @selector(addWithInt:withInt:withInt:withJavaLangCharSequence:);
   methods[3].selector = @selector(addWithInt:withInt:withInt:withInt:);
+  methods[4].selector = @selector(addSubMenuWithJavaLangCharSequence:);
   #pragma clang diagnostic pop
   static const J2ObjcFieldInfo fields[] = {
     { "USER_MASK", "I", .constantValue.asInt = ADMenu_USER_MASK, 0x19, -1, -1, -1, -1 },
@@ -43,8 +45,8 @@
     { "FLAG_PERFORM_NO_CLOSE", "I", .constantValue.asInt = ADMenu_FLAG_PERFORM_NO_CLOSE, 0x19, -1, -1, -1, -1 },
     { "FLAG_ALWAYS_PERFORM_CLOSE", "I", .constantValue.asInt = ADMenu_FLAG_ALWAYS_PERFORM_CLOSE, 0x19, -1, -1, -1, -1 },
   };
-  static const void *ptrTable[] = { "add", "LJavaLangCharSequence;", "I", "IIILJavaLangCharSequence;", "IIII" };
-  static const J2ObjcClassInfo _ADMenu = { "Menu", "r.android.view", ptrTable, methods, fields, 7, 0x609, 4, 13, -1, -1, -1, -1, -1 };
+  static const void *ptrTable[] = { "add", "LJavaLangCharSequence;", "I", "IIILJavaLangCharSequence;", "IIII", "addSubMenu" };
+  static const J2ObjcClassInfo _ADMenu = { "Menu", "r.android.view", ptrTable, methods, fields, 7, 0x609, 5, 13, -1, -1, -1, -1, -1 };
   return &_ADMenu;
 }
 
