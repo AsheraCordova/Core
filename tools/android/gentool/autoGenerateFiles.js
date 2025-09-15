@@ -368,10 +368,6 @@ function runXSLTOnStr(xmlString, xslPath, outputFilePath, removeDuplicateLines, 
 		text = unique.join(";\n");
 	}
 
-	if (text.trim() == '') {
-		console.log("ignoring file write" + outputFilePath);
-		return;
-	}
 	if (merge) {
 		if (fs.existsSync(outputFilePath)) {
 			let originalFile = fs.readFileSync(outputFilePath, "utf8");
@@ -379,6 +375,11 @@ function runXSLTOnStr(xmlString, xslPath, outputFilePath, removeDuplicateLines, 
 		}
 	}
 
+
+	if (text.trim() == '' && !outputFilePath.endsWith(".properties")) {
+		console.log("ignoring file write" + outputFilePath);
+		return;
+	}
 
 	fs.writeFileSync(outputFilePath, text.replace(/&amp;#xa;/gi, "\n"));
 }
