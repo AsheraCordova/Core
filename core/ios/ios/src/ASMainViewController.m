@@ -113,13 +113,17 @@
 
 - (id<ASIFragment>)getActiveRootFragment {
 	UIViewController* presentedController = self;
+	UIViewController *presentedASGenericFragmentController = nil;
 	
 	while (presentedController.presentedViewController != nil) {
 		presentedController = presentedController.presentedViewController;
+		if ([presentedController isKindOfClass:[ASGenericFragmentController class]]) {
+            presentedASGenericFragmentController = presentedController;
+        }		
 	}
 	
-	if (presentedController != self) {
-		return ((ASGenericFragmentController*) presentedController).rootFragment;
+	if (presentedASGenericFragmentController != nil) {
+		return ((ASGenericFragmentController*) presentedASGenericFragmentController).rootFragment;
 	}
     return ((ASGenericFragmentController*) [self.navController.viewControllers lastObject]).rootFragment;
 }
