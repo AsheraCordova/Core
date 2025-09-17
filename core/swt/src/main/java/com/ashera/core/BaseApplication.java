@@ -48,7 +48,7 @@ public abstract class BaseApplication  {
         }
 	    
         Browser browser = new Browser(shell, SWT.NONE);
-        browser.setBounds(0, 0, 10, 10);
+        browser.setBounds(0, 0, 0, 0);
         browser.setLayout(new AbsoluteLayout());
 
         final Composite contentPanel = new Composite(shell, SWT.NONE);
